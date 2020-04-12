@@ -1,0 +1,36 @@
+﻿<Page x:Class="KokoroUpTime.TitlePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KokoroUpTime"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="TitlePage">
+
+    <Grid>
+        <Image HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Stretch="UniformToFill" Source="/Images/background_00.png"/>
+        <Image HorizontalAlignment="Center" Height="194" Margin="0,103,0,0" VerticalAlignment="Top" Width="1500" Source="/Images/title.png"/>
+        <Image HorizontalAlignment="Left" Height="555" Margin="208,341,0,0" VerticalAlignment="Top" Width="674" Source="/Images/menu_bubble.png"/>
+        <Image HorizontalAlignment="Left" Height="305" Margin="1044,594,0,0" VerticalAlignment="Top" Width="242" Source="/Images/shiroji_02.png"/>
+        <Image HorizontalAlignment="Left" Height="230" Margin="1286,568,0,0" VerticalAlignment="Top" Width="529" Source="/Images/speech_bubble.png"/>
+        <Button Content="オプション" HorizontalAlignment="Left" Margin="176,929,0,0" VerticalAlignment="Top" Height="74" Width="178" FontSize="36" Foreground="White"/>
+        <Button Content="アイテム図鑑" HorizontalAlignment="Left" Margin="417,929,0,0" VerticalAlignment="Top" FontSize="36" Height="74" Width="256" Foreground="White"/>
+        <Button Content="第1回" HorizontalAlignment="Left" Margin="379,427,0,0" VerticalAlignment="Top" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click"/>
+        <Button Content="第2回" HorizontalAlignment="Left" Margin="379,492,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36"/>
+        <Button Content="第3回" HorizontalAlignment="Left" Margin="379,553,0,0" VerticalAlignment="Top" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF"/>
+        <Button Content="第4回" HorizontalAlignment="Left" Margin="379,620,0,0" VerticalAlignment="Top" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF"/>
+        <Button Content="第5回" HorizontalAlignment="Left" Margin="379,686,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36"/>
+        <Button Content="第6回" HorizontalAlignment="Left" Margin="379,746,0,0" VerticalAlignment="Top" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF"/>
+        <Button Content="第7回" HorizontalAlignment="Left" Margin="546,427,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36"/>
+        <Button Content="第8回" HorizontalAlignment="Left" Margin="545,492,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        <Button Content="第9回" HorizontalAlignment="Left" Margin="545,553,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36"/>
+        <Button Content="第10回" HorizontalAlignment="Left" Margin="543,621,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        <Button Content="第11回" HorizontalAlignment="Left" Margin="546,686,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36"/>
+        <Button Content="第12回" HorizontalAlignment="Left" Margin="546,746,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#FFFFE6AF" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <Button Content="こころアップタイムとは" HorizontalAlignment="Left" Margin="1403,590,0,0" VerticalAlignment="Top" FontSize="36" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        <Button Content="教室のルール" HorizontalAlignment="Left" Margin="1403,657,0,0" VerticalAlignment="Top" FontSize="36" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}"/>
+        <Button Content="その他" HorizontalAlignment="Left" Margin="1403,720,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36"/>
+
+    </Grid>
+</Page>

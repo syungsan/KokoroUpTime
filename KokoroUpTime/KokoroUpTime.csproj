@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\background_00.png" />
+    <None Remove="Images\background_01.png" />
+    <None Remove="Images\menu_bubble.png" />
+    <None Remove="Images\shiroji_01.png" />
+    <None Remove="Images\shiroji_02.png" />
+    <None Remove="Images\speech_bubble.png" />
+    <None Remove="Images\title.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\background_00.png" />
+    <Resource Include="Images\background_01.png" />
+    <Resource Include="Images\menu_bubble.png" />
+    <Resource Include="Images\shiroji_01.png" />
+    <Resource Include="Images\shiroji_02.png" />
+    <Resource Include="Images\speech_bubble.png" />
+    <Resource Include="Images\title.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Scenarios\chapter1.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
