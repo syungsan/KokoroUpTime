@@ -9,21 +9,31 @@
   <ItemGroup>
     <None Remove="Images\background_00.png" />
     <None Remove="Images\background_01.png" />
+    <None Remove="Images\big_bubble.png" />
+    <None Remove="Images\hukidashi2.png" />
     <None Remove="Images\menu_bubble.png" />
+    <None Remove="Images\moya1.png" />
+    <None Remove="Images\moya2.png" />
     <None Remove="Images\shiroji_01.png" />
     <None Remove="Images\shiroji_02.png" />
-    <None Remove="Images\speech_bubble.png" />
+    <None Remove="Images\small_bubble.png" />
     <None Remove="Images\title.png" />
+    <None Remove="Images\yazirusi.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Images\background_00.png" />
     <Resource Include="Images\background_01.png" />
+    <Resource Include="Images\big_bubble.png" />
+    <Resource Include="Images\hukidashi2.png" />
     <Resource Include="Images\menu_bubble.png" />
+    <Resource Include="Images\moya1.png" />
+    <Resource Include="Images\moya2.png" />
     <Resource Include="Images\shiroji_01.png" />
     <Resource Include="Images\shiroji_02.png" />
-    <Resource Include="Images\speech_bubble.png" />
+    <Resource Include="Images\small_bubble.png" />
     <Resource Include="Images\title.png" />
+    <Resource Include="Images\yazirusi.png" />
   </ItemGroup>
 
   <ItemGroup>

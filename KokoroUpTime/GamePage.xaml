@@ -54,5 +54,22 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
+        <Image x:Name="BigBubble" HorizontalAlignment="Center" Height="419" Margin="0,589,0,0" VerticalAlignment="Top" Width="1506" Source="/Images/big_bubble.png"/>
+        <TextBlock x:Name="BigSpeech" HorizontalAlignment="Center" Margin="0,743,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="216" Width="1340" FontSize="48"/>
+        <Button x:Name="NextMessageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Height="94" Margin="1492,902,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="NextMessageButton_Click">
+            <Image Source="Images/yazirusi.png" VerticalAlignment="Top"/>
+        </Button>
+        <Button x:Name="BackMessageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Height="94" Margin="1486,704,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" ClipToBounds="True" Click="BackMessageButton_Click">
+            <Image Source="Images/yazirusi.png" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" >
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="180.0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Button>
     </Grid>
 </Page>

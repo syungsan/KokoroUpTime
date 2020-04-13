@@ -13,7 +13,7 @@
         <Image HorizontalAlignment="Center" Height="194" Margin="0,103,0,0" VerticalAlignment="Top" Width="1500" Source="/Images/title.png"/>
         <Image HorizontalAlignment="Left" Height="555" Margin="208,341,0,0" VerticalAlignment="Top" Width="674" Source="/Images/menu_bubble.png"/>
         <Image HorizontalAlignment="Left" Height="305" Margin="1044,594,0,0" VerticalAlignment="Top" Width="242" Source="/Images/shiroji_02.png"/>
-        <Image HorizontalAlignment="Left" Height="230" Margin="1286,568,0,0" VerticalAlignment="Top" Width="529" Source="/Images/speech_bubble.png"/>
+        <Image HorizontalAlignment="Left" Height="230" Margin="1286,568,0,0" VerticalAlignment="Top" Width="529" Source="/Images/small_bubble.png"/>
         <Button Content="オプション" HorizontalAlignment="Left" Margin="176,929,0,0" VerticalAlignment="Top" Height="74" Width="178" FontSize="36" Foreground="White"/>
         <Button Content="アイテム図鑑" HorizontalAlignment="Left" Margin="417,929,0,0" VerticalAlignment="Top" FontSize="36" Height="74" Width="256" Foreground="White"/>
         <Button Content="第1回" HorizontalAlignment="Left" Margin="379,427,0,0" VerticalAlignment="Top" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click"/>

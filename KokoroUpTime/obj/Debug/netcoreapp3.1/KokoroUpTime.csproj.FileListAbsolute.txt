@@ -1,4 +1,3 @@
-D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Scenarios\chapter1.csv
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\KokoroUpTime.exe
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\KokoroUpTime.deps.json
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\KokoroUpTime.runtimeconfig.json
@@ -21,4 +20,5 @@ D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\G
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\TitlePage.g.cs
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\GamePage.baml
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\TitlePage.baml
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Scenarios\chapter1.csv
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache
