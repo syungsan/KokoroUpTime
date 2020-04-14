@@ -10,6 +10,7 @@
     <None Remove="Images\after.png" />
     <None Remove="Images\background_00.png" />
     <None Remove="Images\background_01.png" />
+    <None Remove="Images\background_02.png" />
     <None Remove="Images\background_03.png" />
     <None Remove="Images\before.png" />
     <None Remove="Images\big_bubble.png" />
@@ -30,6 +31,7 @@
     <Resource Include="Images\after.png" />
     <Resource Include="Images\background_00.png" />
     <Resource Include="Images\background_01.png" />
+    <Resource Include="Images\background_02.png" />
     <Resource Include="Images\background_03.png" />
     <Resource Include="Images\before.png" />
     <Resource Include="Images\big_bubble.png" />

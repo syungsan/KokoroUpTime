@@ -1,6 +1,6 @@
 scene,main
 bg,background_01.png
-chara,shiroji_01.png,right,bottom_up
+chara,shiroji_01.png,AppearToMainRight
 msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
 wait
 msg,はじめに、あなたの名前を教えてくれるかの？,白じい
@@ -38,5 +38,7 @@ wait
 msg,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,白じい
 tap
 scene,main
+bg,background_02.png
+chara,shiroji_01.png,AppearToMainRight
 msg,今日は、「こころあっぷタイム」に登場する３人を紹介する。,白じい
 wait

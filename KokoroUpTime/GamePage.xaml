@@ -9,95 +9,77 @@
       Title="GamePage">
 
     <Page.Resources>
-        <Storyboard x:Key="Appearance">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CharaRight" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaRight" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="698.1">
+        <Storyboard x:Key="AppearToMainRight">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainCharaRight" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="399">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseInOut"/>
+                        <BounceEase EasingMode="EaseInOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="3">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseInOut"/>
+                        <BounceEase EasingMode="EaseInOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaRight" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-12.205">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="-14.646">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainCharaRight" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CharaRight" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="AppearToBoard">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Character" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="197.027">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BoardCharacter" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="63">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BackEase EasingMode="EaseInOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="-7.261">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Character" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="-2.432">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-6">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BackEase EasingMode="EaseInOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Character" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BoardCharacter" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-15">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-9">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BoardCharacter" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LongBubble" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.00">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseInOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="1">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="1.0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseInOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Character" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Visible}"/>
-            </ObjectAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LongBubble" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:01.5000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LongBubble" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0.000">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="1.00">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
     <Grid>
@@ -112,18 +94,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -142,7 +114,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Image x:Name="BG" Grid.RowSpan="16" Grid.ColumnSpan="19"  Stretch="Fill" Source="/Images/background_01.png" Margin="0,1,0,-1"/>
-            <Image x:Name="CharaRight" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Stretch="Uniform" Grid.ColumnSpan="6" Grid.Column="13" Grid.RowSpan="12" Grid.Row="4" Margin="0,67,101,66">
+            <Image x:Name="MainCharaRight" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Stretch="Uniform" Grid.ColumnSpan="6" Grid.Column="10" Grid.RowSpan="7" Grid.Row="2" Margin="91,81,89,60">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -152,13 +124,13 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="BigBubble" Source="/Images/big_bubble.png" Grid.ColumnSpan="18" Grid.RowSpan="8" Grid.Row="8" Margin="101,67,101,0"/>
-            <TextBlock x:Name="BigSpeech" Text="TextBlock" TextWrapping="Wrap" FontSize="48" Grid.ColumnSpan="16" Grid.Column="1" Grid.RowSpan="5" Grid.Row="11" Margin="101,26,101,48"/>
-            <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="NextMessageButton_Click" Grid.ColumnSpan="3" Grid.Column="14" Grid.Row="13" Grid.RowSpan="3" Margin="80,52,21,12">
+            <Image x:Name="BigBubble" Source="/Images/big_bubble.png" Grid.ColumnSpan="14" Grid.Row="5" Margin="56,8,56,32" Grid.RowSpan="4" Grid.Column="1"/>
+            <TextBlock x:Name="BigSpeech" Text="TextBlock" TextWrapping="Wrap" FontSize="48" Grid.ColumnSpan="12" Grid.Column="2" Grid.RowSpan="3" Grid.Row="6" Margin="31,33,31,75"/>
+            <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="NextMessageButton_Click" Grid.Column="12" Grid.Row="7" Grid.ColumnSpan="2" Margin="51,81,9,49" Grid.RowSpan="2">
                 <Image Source="Images/yazirusi.png"/>
             </Button>
-            <Button x:Name="BackMessageButton" Margin="74,6,15,20" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" ClipToBounds="True" Click="BackMessageButton_Click" Grid.ColumnSpan="3" Grid.Column="14" Grid.RowSpan="2" Grid.Row="11">
-                <Image Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5" >
+            <Button x:Name="BackMessageButton" Margin="39,15,6,117" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="BackMessageButton_Click" Grid.Column="12" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                <Image Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -170,15 +142,8 @@
                 </Image>
             </Button>
         </Grid>
-        <Grid x:Name="BoardGrid">
+        <Grid x:Name="BoardGrid" Visibility="Visible">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -206,34 +171,31 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Image Grid.RowSpan="16" Grid.ColumnSpan="19" Source="/Images/background_03.png" Stretch="Fill"/>
-            <Button x:Name="BordButton" Grid.Column="2" Click="BoardButton_Click" Grid.ColumnSpan="15" Margin="45,58,45,14" Grid.RowSpan="14">
+            <Button x:Name="BordButton" Grid.Column="1" Click="BoardButton_Click" Grid.ColumnSpan="13" Margin="110,50,10,117" Grid.RowSpan="9">
                 <Image Source="/Images/blackboard.png" Stretch="Fill"/>
             </Button>
-            <TextBlock x:Name="BoardTitle" Text="教室のルール" Foreground="White" FontSize="72" TextAlignment="Left" Grid.ColumnSpan="5" Grid.Column="7" Margin="65,45,65,46" Grid.RowSpan="3" Grid.Row="2"/>
-            <TextBlock x:Name="BoardChecK1Msg" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="64" Grid.ColumnSpan="8" Grid.Column="6" Margin="54,66,0,50" Grid.RowSpan="3" Grid.Row="4"/>
-            <TextBlock x:Name="BoardChecK2Msg" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="64" Grid.ColumnSpan="8" Grid.Column="6" Margin="54,58,10,0" Grid.Row="6" Height="99" VerticalAlignment="Top" Grid.RowSpan="3"/>
-            <TextBlock x:Name="BoardChecK3Msg" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="64" Grid.ColumnSpan="8" Grid.Column="6" Margin="54,40,10,52" Grid.RowSpan="3" Grid.Row="8"/>
-            <CheckBox x:Name="BoardCheck1Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="BoardCheck1Box_Checked" Grid.ColumnSpan="2" Grid.Column="4" Margin="91,42,10,25" Grid.Row="4" Grid.RowSpan="2">
+            <TextBlock x:Name="BoardTitle" Text="教室のルール" Foreground="White" FontSize="72" TextAlignment="Left" Grid.ColumnSpan="4" Grid.Column="6" Margin="5,40,5,66" Grid.RowSpan="2" Grid.Row="1"/>
+            <TextBlock x:Name="BoardChecK1Msg" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="64" Grid.ColumnSpan="8" Grid.Column="5" Margin="69,64,115,62" Grid.Row="2" Grid.RowSpan="2"/>
+            <TextBlock x:Name="BoardChecK2Msg" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="64" Grid.ColumnSpan="7" Grid.Column="5" Margin="73,0,1,0" Grid.Row="4" Height="110" VerticalAlignment="Center"/>
+            <TextBlock x:Name="BoardChecK3Msg" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="64" Grid.ColumnSpan="7" Grid.Column="5" Margin="68,54,51,75" Grid.Row="5" Grid.RowSpan="2"/>
+            <CheckBox x:Name="BoardCheck1Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="BoardCheck1Box_Checked" Grid.Column="4" Grid.Row="2" Margin="0,48,76,34">
                 <CheckBox.RenderTransform>
                     <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
                 </CheckBox.RenderTransform>
             </CheckBox>
-            <CheckBox x:Name="BoardCheck2Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="BoardCheck2Box_Checked" Grid.ColumnSpan="2" Grid.Column="4" Margin="91,34,10,34" Grid.RowSpan="2" Grid.Row="6">
+            <CheckBox x:Name="BoardCheck2Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="BoardCheck2Box_Checked" Grid.Column="4" Grid.Row="3" Margin="0,105,75,98" Grid.RowSpan="2">
                 <CheckBox.RenderTransform>
                     <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
                 </CheckBox.RenderTransform>
             </CheckBox>
-            <CheckBox x:Name="BoardCheck3Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="BoardCheck3Box_Checked" Grid.ColumnSpan="2" Grid.Column="4" Margin="91,26,10,41" Grid.RowSpan="2" Grid.Row="8">
+            <CheckBox x:Name="BoardCheck3Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="BoardCheck3Box_Checked" Grid.Column="4" Grid.Row="5" Margin="0,36,76,51">
                 <CheckBox.RenderTransform>
                     <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
                 </CheckBox.RenderTransform>
             </CheckBox>
-            <Image x:Name="Character" Margin="0,1,10,0" VerticalAlignment="Top" Source="/Images/shiroji_02.png" RenderTransformOrigin="0.5,0.5" Stretch="Uniform" Grid.RowSpan="8" Grid.ColumnSpan="4" Grid.Column="12" Grid.Row="8">
+            <Image x:Name="BoardCharacter" Margin="81,75,9,0" VerticalAlignment="Top" Source="/Images/shiroji_02.png" RenderTransformOrigin="0.5,0.5" Stretch="Uniform" Grid.ColumnSpan="4" Grid.Column="10" Grid.Row="4" Height="489" Grid.RowSpan="5">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -243,7 +205,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Button x:Name="LongBubble" Grid.Column="1" Grid.Row="12" Grid.RowSpan="3" Grid.ColumnSpan="17" Margin="101,10,101,34" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="LongBubble_Click">
+            <Button x:Name="LongBubble" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="13" Margin="114,74,6,16" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="LongBubble_Click" Grid.RowSpan="2">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -253,16 +215,16 @@
                     </TransformGroup>
                 </Button.RenderTransform>
                 <Grid>
-                <Image Source="/Images/long_bubble.png"/>
-                <TextBlock x:Name="LongSpeech" Text="以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？" FontSize="42" Margin="48,55,-48,-55"/>
+                    <Image Source="/Images/long_bubble.png"/>
+                    <TextBlock x:Name="LongSpeech" Text="以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？" FontSize="42" Margin="31,55,37,-34"/>
                 </Grid>
             </Button>
-            
-            <Button x:Name="AfterButton" Margin="91,67,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="AfterButton_Click" Grid.RowSpan="4" Grid.ColumnSpan="4" Grid.Column="15" Grid.Row="12">
+
+            <Button x:Name="AfterButton" Margin="1,36,9,24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="AfterButton_Click" Grid.ColumnSpan="3" Grid.Column="13" Grid.Row="7" Grid.RowSpan="2">
                 <Image Source="Images/after.png"/>
             </Button>
-            <Button x:Name="BeforeButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Grid.ColumnSpan="4" Grid.Row="13" Margin="21,8,50,19" Grid.RowSpan="3">
-                <Image Source="Images/before.png"/>
+            <Button x:Name="BeforeButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Grid.ColumnSpan="3" Grid.Row="7" Margin="0,42,10,18" HorizontalAlignment="Right" Width="329" Grid.RowSpan="2">
+                <Image Source="Images/before.png" Width="336" Height="167"/>
             </Button>
         </Grid>
     </Grid>
