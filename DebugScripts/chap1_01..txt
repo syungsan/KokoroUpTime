@@ -1,0 +1,14 @@
+scene,board
+wait
+title,教室のルール
+wait
+check1msg,１．人のことを わらわない
+wait
+check2msg,２．ふざけない
+wait
+check3msg,３．はずかしがらない
+wait
+chara,shiroji_02.png
+wait
+msg,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,白じい
+tap

@@ -15,9 +15,8 @@ using CsvReadWrite;
 using System.Diagnostics;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using System.Security.Cryptography.X509Certificates;
 
-
-    
 namespace KokoroUpTime
 {
     /// <summary>
@@ -29,6 +28,10 @@ namespace KokoroUpTime
         private List<List<string>> scenarios = null;
 
         private string charactor = "";
+        private string scene = "";
+
+        bool isClickable = false;
+        int tapCount = 0;
 
         public GamePage()
         {
@@ -62,66 +65,219 @@ namespace KokoroUpTime
         {
             var tag = this.scenarios[this.scenarioCount][0];
 
-            switch (tag)
+            if (tag == "scene")
             {
-                case "bg":
+                this.HiddeAllScene();
 
-                    // 後々背景もクロスフェードなどの処理を入れる
-                    var fileName = this.scenarios[this.scenarioCount][1];
-                    this.BG.Source = new BitmapImage(new Uri($"Images/{fileName}", UriKind.Relative));
+                var _scene = this.scenarios[this.scenarioCount][1];
+                this.scene = _scene;
 
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                switch (this.scene)
+                {
+                    case "main":
 
-                    break;
+                        this.MainGrid.Visibility = Visibility.Visible;
+                        break;
 
-                case "chara":
+                    case "board":
 
-                    Storyboard sb = this.FindResource("Appearance") as Storyboard;
-                    if (sb != null)
-                    {
-                        // アニメが終わってから次の処理
-                        sb.Completed += (s, e) => {
+                        this.BoardGrid.Visibility = Visibility.Visible;
 
-                            this.scenarioCount += 1;
-                            this.ScenarioPlay();
-                        };
-                        sb.Begin(this);
-                    }
-                    break;
+                        this.BoardTitle.Text = "";
 
-                case "msg":
+                        this.BoardChecK1Msg.Text = "";
+                        this.BoardChecK2Msg.Text = "";
+                        this.BoardChecK3Msg.Text = "";
 
-                    this.BigBubble.Visibility = Visibility.Visible;
-                    this.BigSpeech.Visibility = Visibility.Visible;
+                        this.BoardCheck1Box.Visibility = Visibility.Hidden;
+                        this.BoardCheck2Box.Visibility = Visibility.Hidden;
+                        this.BoardCheck3Box.Visibility = Visibility.Hidden;
 
-                    this.NextMessageButton.Visibility = Visibility.Hidden;
-                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                        this.BoardCheck1Box.IsEnabled = false;
+                        this.BoardCheck2Box.IsEnabled = false;
+                        this.BoardCheck3Box.IsEnabled = false;
 
-                    // メッセージ表示関連
-                    DispatcherTimer msgTimer;
-                    string message = "";
-                    int word_num = 0;
+                        this.Character.Visibility = Visibility.Hidden;
+                        this.LongBubble.Visibility = Visibility.Hidden;
+                        this.LongSpeech.Text = "";
 
-                    // 後々動的パラメータに
-                    float messageSpeed = 30.0f;
+                        this.AfterButton.Visibility = Visibility.Hidden;
 
-                    this.charactor = this.scenarios[this.scenarioCount][1];
-                    var _message = this.scenarios[this.scenarioCount][2];
+                        break;
+                }
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+            }
 
-                    // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
+            if (this.scene == "main")
+            {
+                switch (tag)
+                {
+                    case "bg":
+
+                        // 後々背景もクロスフェードなどの処理を入れる
+                        var fileName = this.scenarios[this.scenarioCount][1];
+                        this.BG.Source = new BitmapImage(new Uri($"Images/{fileName}", UriKind.Relative));
+
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+
+                        break;
+
+                    case "chara":
+
+                        Storyboard sb = this.FindResource("Appearance") as Storyboard;
+                        if (sb != null)
+                        {
+                            // アニメが終わってから次の処理
+                            sb.Completed += (s, e) => {
+
+                                this.scenarioCount += 1;
+                                this.ScenarioPlay();
+                            };
+                            sb.Begin(this);
+                        }
+                        break;
+
+                    case "msg":
+
+                        this.BigBubble.Visibility = Visibility.Visible;
+                        this.BigSpeech.Visibility = Visibility.Visible;
+
+                        this.NextMessageButton.Visibility = Visibility.Hidden;
+                        this.BackMessageButton.Visibility = Visibility.Hidden;
+
+                        // メッセージ表示関連
+                        DispatcherTimer msgTimer;
+                        string message = "";
+                        int word_num = 0;
+
+                        // 後々動的パラメータに
+                        float messageSpeed = 30.0f;
+
+                        this.charactor = this.scenarios[this.scenarioCount][2];
+                        var _message = this.scenarios[this.scenarioCount][1];
+
+                        // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
+                        message = _message.Replace("鬱", "\u2028");
+
+                        // メッセージ表示処理
+                        msgTimer = new DispatcherTimer();
+                        msgTimer.Tick += ViewMsg;
+                        msgTimer.Interval = TimeSpan.FromSeconds(1.0f / messageSpeed);
+                        msgTimer.Start();
+
+                        // 一文字ずつメッセージ表示（Inner Func）
+                        void ViewMsg(object sender, EventArgs e)
+                        {
+                            this.BigSpeech.Text = message.Substring(0, word_num);
+
+                            if (word_num < message.Length)
+                            {
+                                word_num++;
+                            }
+                            else
+                            {
+                                msgTimer.Stop();
+                                msgTimer = null;
+
+                                this.scenarioCount += 1;
+                                this.ScenarioPlay();
+                            }
+                        }
+                        break;
+
+                    case "wait":
+
+                        this.NextMessageButton.Visibility = Visibility.Visible;
+
+                        if (this.scenarios[this.scenarioCount - 1] != null)
+                        {
+                            this.BackMessageButton.Visibility = Visibility.Visible;
+                        }
+                        break;
+                }
+            }
+
+            if (this.scene == "board")
+            {
+                DispatcherTimer msgTimer;
+                string message = "";
+                int word_num = 0;
+
+                float messageSpeed = 30.0f;
+
+                switch (tag)
+                {
+                    case "title":
+
+                        BoardMessage(textBlock: this.BoardTitle);
+                        break;
+
+                    case "check1msg":
+
+                        BoardMessage(textBlock: this.BoardChecK1Msg, checkBox: this.BoardCheck1Box);
+                        break;
+
+                    case "check2msg":
+
+                        BoardMessage(textBlock: this.BoardChecK2Msg, checkBox: this.BoardCheck2Box);
+                        break;
+
+                    case "check3msg":
+
+                        BoardMessage(textBlock: this.BoardChecK3Msg, checkBox: this.BoardCheck3Box);
+                        break;
+
+                    case "wait":
+                        this.isClickable = true;
+                        break;
+
+                    case "chara":
+
+                        var fileName = this.scenarios[this.scenarioCount][1];
+                        this.Character.Source = new BitmapImage(new Uri($"Images/{fileName}", UriKind.Relative));
+
+                        this.Character.Visibility = Visibility.Visible;
+                        this.LongBubble.Visibility = Visibility.Visible;
+
+                        Storyboard sb = this.FindResource("AppearToBoard") as Storyboard;
+                        if (sb != null)
+                        {
+                            sb.Completed += (s, e) => {
+
+                                this.scenarioCount += 1;
+                                this.ScenarioPlay();
+                            };
+                            sb.Begin(this);
+                        }
+                        break;
+
+                    case "msg":
+
+                        CheckBox[] _checkBoxs = new CheckBox[] { this.BoardCheck1Box, this.BoardCheck2Box, this.BoardCheck3Box };
+                        BoardMessage(textBlock: this.LongSpeech, checkBoxes: _checkBoxs);
+                        break;
+
+                    case "tap":
+
+                        this.isClickable = true;
+                        break;
+                }
+
+                void BoardMessage(TextBlock textBlock, CheckBox checkBox=null, CheckBox[] checkBoxes=null)
+                {
+                    var _message = this.scenarios[this.scenarioCount][1];
                     message = _message.Replace("鬱", "\u2028");
 
-                    // メッセージ表示処理
                     msgTimer = new DispatcherTimer();
                     msgTimer.Tick += ViewMsg;
                     msgTimer.Interval = TimeSpan.FromSeconds(1.0f / messageSpeed);
                     msgTimer.Start();
 
-                    // 一文字ずつメッセージ表示（Inner Func）
                     void ViewMsg(object sender, EventArgs e)
                     {
-                        this.BigSpeech.Text = message.Substring(0, word_num);
+                        textBlock.Text = message.Substring(0, word_num);
 
                         if (word_num < message.Length)
                         {
@@ -132,21 +288,32 @@ namespace KokoroUpTime
                             msgTimer.Stop();
                             msgTimer = null;
 
+                            if (checkBox != null)
+                            {
+                                checkBox.Visibility = Visibility.Visible;
+                            }
+                            if (checkBoxes != null)
+                            {
+                                foreach(CheckBox checkBox in checkBoxes) {
+                                    checkBox.IsEnabled = true;
+                                }
+                            }
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
                         }
                     }
-                    break;
+                }
+            }
+        }
 
-                case "wait":
+        private void BoardButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.isClickable)
+            {
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
 
-                    this.NextMessageButton.Visibility = Visibility.Visible;
-
-                    if (this.scenarios[this.scenarioCount - 1] != null)
-                    {
-                        this.BackMessageButton.Visibility = Visibility.Visible;
-                    }
-                    break;
+                this.isClickable = false;
             }
         }
 
@@ -163,6 +330,12 @@ namespace KokoroUpTime
             // 連続Backの実現にはもっと複雑な処理がいる
         }
 
+        private void HiddeAllScene()
+        {
+            this.MainGrid.Visibility = Visibility.Hidden;
+            this.BoardGrid.Visibility = Visibility.Hidden;
+        }
+
         // UTF-8からShift-JISへの変換にそなえて取り置き
         public static string ConvertEncoding(string src, System.Text.Encoding destEnc)
         {
@@ -170,6 +343,79 @@ namespace KokoroUpTime
             byte[] dest_temp = System.Text.Encoding.Convert(System.Text.Encoding.ASCII, destEnc, src_temp);
             string ret = destEnc.GetString(dest_temp);
             return ret;
+        }
+
+        private void BoardCheck1Box_Checked(object sender, RoutedEventArgs e)
+        {
+            if (this.BoardCheck1Box.IsChecked == true)
+            {
+                this.tapCount += 1;
+                this.checkAllBox();
+            }
+            else
+            {
+                this.tapCount -= 1;
+            }
+        }
+
+        private void BoardCheck2Box_Checked(object sender, RoutedEventArgs e)
+        {
+            if (this.BoardCheck2Box.IsChecked == true)
+            {
+                this.tapCount += 1;
+                this.checkAllBox();
+            }
+            else
+            {
+                this.tapCount -= 1;
+            }
+        }
+
+        private void BoardCheck3Box_Checked(object sender, RoutedEventArgs e)
+        {
+            if (this.BoardCheck3Box.IsChecked == true)
+            {
+                this.tapCount += 1;
+                this.checkAllBox();
+            }
+            else
+            {
+                this.tapCount -= 1;
+            }
+        }
+
+        private void checkAllBox()
+        {
+            if (this.tapCount >= 3)
+            {
+                this.BoardCheck1Box.IsEnabled = false;
+                this.BoardCheck2Box.IsEnabled = false;
+                this.BoardCheck3Box.IsEnabled = false;
+
+                this.AfterButton.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void AfterButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.isClickable)
+            {
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+
+                this.isClickable = false;
+            }
+        }
+
+        private void LongBubble_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.isClickable)
+            {
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+
+                this.isClickable = false;
+            }
         }
     }
 }
