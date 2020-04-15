@@ -13,13 +13,13 @@
     <None Remove="Images\background_02.png" />
     <None Remove="Images\background_03.png" />
     <None Remove="Images\before.png" />
-    <None Remove="Images\big_bubble.png" />
     <None Remove="Images\blackboard.png" />
     <None Remove="Images\hukidashi2.png" />
     <None Remove="Images\long_bubble.png" />
     <None Remove="Images\menu_bubble.png" />
     <None Remove="Images\moya1.png" />
     <None Remove="Images\moya2.png" />
+    <None Remove="Images\right_big_bubble.png" />
     <None Remove="Images\shiroji_01.png" />
     <None Remove="Images\shiroji_02.png" />
     <None Remove="Images\small_bubble.png" />
@@ -34,7 +34,7 @@
     <Resource Include="Images\background_02.png" />
     <Resource Include="Images\background_03.png" />
     <Resource Include="Images\before.png" />
-    <Resource Include="Images\big_bubble.png" />
+    <Resource Include="Images\right_big_bubble.png" />
     <Resource Include="Images\blackboard.png" />
     <Resource Include="Images\hukidashi2.png" />
     <Resource Include="Images\long_bubble.png" />

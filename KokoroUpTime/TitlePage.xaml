@@ -10,7 +10,6 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0*"/>
             <RowDefinition Height="95*"/>
             <RowDefinition Height="200*"/>
             <RowDefinition Height="44*"/>
@@ -26,10 +25,8 @@
             <RowDefinition Height="68*"/>
             <RowDefinition Height="71*"/>
             <RowDefinition Height="86*"/>
-            <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="42*"/>
             <ColumnDefinition Width="38*"/>
             <ColumnDefinition Width="20*"/>
@@ -43,30 +40,29 @@
             <ColumnDefinition Width="63*"/>
             <ColumnDefinition Width="19*"/>
             <ColumnDefinition Width="22*"/>
-            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <Image Stretch="Fill" Source="/Images/background_00.png" Grid.ColumnSpan="14" Grid.RowSpan="16" Visibility="Visible"/>
-        <Image Source="/Images/title.png" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="10"/>
-        <Image Source="/Images/menu_bubble.png" Grid.Column="2" Grid.Row="4" Grid.ColumnSpan="6" Grid.RowSpan="10"/>
-        <Image Source="/Images/shiroji_02.png" Grid.Column="9" Grid.Row="9" Grid.RowSpan="5"/>
-        <Image Source="/Images/small_bubble.png" Grid.Column="10" Grid.Row="8" Grid.ColumnSpan="3" Grid.RowSpan="5"/>
-        <Button Content="オプション" FontSize="36" Foreground="White" Grid.Column="2" Grid.Row="14"/>
-        <Button Content="アイテム図鑑" FontSize="36" Foreground="White" Grid.Column="4" Grid.Row="14" Grid.ColumnSpan="3" Height="73"/>
-        <Button Content="第1回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Grid.Column="3" Grid.Row="5"/>
-        <Button Content="第2回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="3" Grid.Row="6"/>
-        <Button Content="第3回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Grid.Column="3" Grid.Row="7" Grid.RowSpan="2"/>
-        <Button Content="第4回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Grid.Column="3" Grid.Row="9"/>
-        <Button Content="第5回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="3" Grid.Row="10"/>
-        <Button Content="第6回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Grid.Column="3" Grid.Row="11"/>
-        <Button Content="第7回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="5" Grid.Row="5"/>
-        <Button Content="第8回" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="5" Grid.Row="6"/>
-        <Button Content="第9回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="5" Grid.Row="7" Grid.RowSpan="2"/>
-        <Button Content="第10回" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="5" Grid.Row="9"/>
-        <Button Content="第11回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="5" Grid.Row="10"/>
-        <Button Content="第12回" FontSize="36" Foreground="#FFFFE6AF" Background="{x:Null}" BorderBrush="{x:Null}" Grid.Column="5" Grid.Row="11"/>
-        <Button Content="こころアップタイムとは" FontSize="36" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="11" Grid.Row="9"/>
-        <Button Content="教室のルール" FontSize="36" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}" Grid.Column="11" Grid.Row="10"/>
-        <Button Content="その他" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36" Grid.Column="11" Grid.Row="11"/>
+        <Image Stretch="Fill" Source="/Images/background_00.png" Grid.ColumnSpan="13" Grid.RowSpan="15" Visibility="Visible"/>
+        <Image Source="/Images/title.png" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="10"/>
+        <Image Source="/Images/menu_bubble.png" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="6" Grid.RowSpan="10"/>
+        <Image Source="/Images/shiroji_02.png" Grid.Column="8" Grid.Row="8" Grid.RowSpan="5"/>
+        <Image Source="/Images/small_bubble.png" Grid.Column="9" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="5"/>
+        <Button Content="オプション" FontSize="36" Foreground="White" Grid.Column="1" Grid.Row="13"/>
+        <Button Content="アイテム図鑑" FontSize="36" Foreground="White" Grid.Column="3" Grid.Row="13" Grid.ColumnSpan="3"/>
+        <Button Content="第1回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Grid.Column="2" Grid.Row="4"/>
+        <Button Content="第2回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="2" Grid.Row="5"/>
+        <Button Content="第3回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Grid.Column="2" Grid.Row="6" Grid.RowSpan="2"/>
+        <Button Content="第4回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Grid.Column="2" Grid.Row="8"/>
+        <Button Content="第5回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="2" Grid.Row="9"/>
+        <Button Content="第6回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Grid.Column="2" Grid.Row="10"/>
+        <Button Content="第7回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="4" Grid.Row="4"/>
+        <Button Content="第8回" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="4" Grid.Row="5"/>
+        <Button Content="第9回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="4" Grid.Row="6" Grid.RowSpan="2"/>
+        <Button Content="第10回" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="4" Grid.Row="8"/>
+        <Button Content="第11回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="4" Grid.Row="9"/>
+        <Button Content="第12回" FontSize="36" Foreground="#FFFFE6AF" Background="{x:Null}" BorderBrush="{x:Null}" Grid.Column="4" Grid.Row="10"/>
+        <Button Content="こころアップタイムとは" FontSize="36" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="10" Grid.Row="8"/>
+        <Button Content="教室のルール" FontSize="36" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}" Grid.Column="10" Grid.Row="9"/>
+        <Button Content="その他" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36" Grid.Column="10" Grid.Row="10"/>
 
     </Grid>
 </Page>
