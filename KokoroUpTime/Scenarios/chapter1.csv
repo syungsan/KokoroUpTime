@@ -33,7 +33,7 @@ check2msg,２．ふざけない
 wait
 check3msg,３．はずかしがらない
 wait
-chara,shiroji_02.png
+chara,shiroji_02.png,AppearToBoard
 wait
 msg,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,白じい
 tap

@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\syung\\.nuget\\packages\\": {}
+    "C:\\Users\\maglab\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+      "projectUniqueName": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
       "projectName": "KokoroUpTime",
-      "projectPath": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
-      "packagesPath": "C:\\Users\\syung\\.nuget\\packages\\",
-      "outputPath": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\obj\\",
+      "projectPath": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+      "packagesPath": "C:\\Users\\maglab\\.nuget\\packages\\",
+      "outputPath": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\syung\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\maglab\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -207,7 +207,9 @@ namespace KokoroUpTime
                         this.LongBubble.Visibility = Visibility.Visible;
 
                         var _fileName = this.scenarios[this.scenarioCount][1];
-                        SetCharactor(fileName: _fileName, image: this.BoardCharacter, storyBoardName: "AppearToBoard");
+                        var _storyBoardName = this.scenarios[this.scenarioCount][2];
+
+                        SetCharactor(fileName: _fileName, image: this.BoardCharacter, storyBoardName: _storyBoardName);
 
                         break;
 
@@ -285,6 +287,7 @@ namespace KokoroUpTime
             }
         }
 
+        // 後々以下のコールバック関数は一つにまとめる
         private void BoardButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.isClickable)
@@ -317,21 +320,6 @@ namespace KokoroUpTime
                 this.ScenarioPlay();
             }
             // 連続Backの実現にはもっと複雑な処理がいる
-        }
-
-        private void HiddeAllScene()
-        {
-            this.MainGrid.Visibility = Visibility.Hidden;
-            this.BoardGrid.Visibility = Visibility.Hidden;
-        }
-
-        // UTF-8からShift-JISへの変換にそなえて取り置き
-        public static string ConvertEncoding(string src, System.Text.Encoding destEnc)
-        {
-            byte[] src_temp = System.Text.Encoding.ASCII.GetBytes(src);
-            byte[] dest_temp = System.Text.Encoding.Convert(System.Text.Encoding.ASCII, destEnc, src_temp);
-            string ret = destEnc.GetString(dest_temp);
-            return ret;
         }
 
         private void BoardCheck1Box_Checked(object sender, RoutedEventArgs e)
@@ -405,6 +393,21 @@ namespace KokoroUpTime
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
+        }
+
+        private void HiddeAllScene()
+        {
+            this.MainGrid.Visibility = Visibility.Hidden;
+            this.BoardGrid.Visibility = Visibility.Hidden;
+        }
+
+        // UTF-8からShift-JISへの変換にそなえて取り置き
+        public static string ConvertEncoding(string src, System.Text.Encoding destEnc)
+        {
+            byte[] src_temp = System.Text.Encoding.ASCII.GetBytes(src);
+            byte[] dest_temp = System.Text.Encoding.Convert(System.Text.Encoding.ASCII, destEnc, src_temp);
+            string ret = destEnc.GetString(dest_temp);
+            return ret;
         }
     }
 }
