@@ -1,22 +1,80 @@
 scene,main
-bg,background_02.png
-hide,msg
-chara,shiroji_01.png,right,appear
-visible,msg
+bg,background_01.png,
+hide,msg_win,
+image,shiroji_01.png,down_right,appear
+msg_win,right_big_bubble.png,
 wait
-msg,今日は、「こころあっぷタイム」に登場する３人を紹介する。,right,白じい
-hide,msg
-chara,akamaru.png,left_a,appear
-msg,おれの名前は 赤丸だ。小学校6年だ。好きな食べ物はカレーとコーラだ。苦手なものは犬だ。,left_a,赤丸
+msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
 wait
-hide,chara,left_a,disappear
-chara,aosuke.png,left_b,appear
-msg,ぼくの名前は青助です。小学校6年生です。好きなものはテレビ。勉強もスポーツも あんまり得意じゃないんだ。,left_b,青助
+msg,はじめに、あなたの名前を教えてくれるかの？,白じい
 wait
-hide,chara,left_b,disappear
-chara,kimil.png,left_c,appear
-msg,わたしの名前はキミです。小学６年生です。好きなものはチョコレートです。人前で話すことがとても苦手です。,left_c,キミ
+msg,名前を入力【　　　　　　　　　　】,白じい
 wait
-hide,chara,left_c,disappear
+msg,あなたは【name】じゃな。【name】のうしろは、何かつけるかの？,白じい
+wait
+msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい
+wait
+msg,それでは【name】、　「こころあっぷタイム」とは何か説明していくぞい。,白じい
+wait
+msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
+wait
+msg,楽しくなったり、うれしくなったりするだけでなく、だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。,白じい
+wait
+msg,こども、おとな、つよい人、よわい人、大きい人、ちいさい人、どんな人でも、こまっていることがあるのじゃ。,白じい
+wait
+msg,『こころあっぷタイム』は、こまっているときに、元気になったり、リラックスできる方法を 学ぶ時間なのだ！ ,白じい
+wait
+msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
+wait
+scene,board
+wait
+title,教室のルール
+wait
+check1msg,１．人のことを わらわない
+wait
+check2msg,２．ふざけない
+wait
+check3msg,３．はずかしがらない
+wait
+image,shiroji_02.png,appear
+wait
+suggest,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,白じい
+tap
+wait
+scene,main
+bg,background_02.png,
+hide,msg_win,
+image,shiroji_01.png,down_right,appear
+msg_win,right_big_bubble.png,
+wait
+msg,今日は、「こころあっぷタイム」に登場する３人を紹介する。,白じい
+wait
+hide,msg_win,
+image,akamaru.png,small_left_a,appear
+msg_win,left_a_big_bubble.png,
+wait
+msg,おれの名前は 赤丸だ。小学校6年だ。好きな食べ物はカレーとコーラだ。苦手なものは犬だ。,赤丸
+wait
+hide,msg_win,
+hide,image,small_left_a,
+image,aosuke.png,small_left_b,appear
+msg_win,left_b_big_bubble.png,
+wait
+msg,ぼくの名前は青助です。小学校6年生です。好きなものはテレビ。勉強もスポーツも あんまり得意じゃないんだ。,青助
+wait
+hide,msg_win,
+hide,image,small_left_b,
+image,kimil.png,small_left_c,appear
+msg_win,left_c_big_bubble.png,
+msg,わたしの名前はキミです。小学６年生です。好きなものはチョコレートです。人前で話すことがとても苦手です。,キミ
+wait
+hide,msg_win,
+hide,image,small_left_c,
 next
-
+hide,image,down_right,
+image,shiroji_03.png,up_right,
+image,SS.png,info_center,
+msg_win,right_big_bubble.png,
+wait
+msg,この３人とこころあっぷタイムを進めていくぞい！さて、３人は、なにかこまっていることがあるようじゃ。どんなことで、こまっているのだろう？マンガを見ながら考えてみよう！,白じい
+next

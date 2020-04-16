@@ -35,6 +35,12 @@ namespace KokoroUpTime
         private bool isClickable = false;
         private int tapCount = 0;
 
+        // メッセージ表示関連
+        private DispatcherTimer msgTimer;
+        private int word_num;
+
+        private Dictionary<string, Image> imageObjects = null;
+
         public GamePage()
         {
             InitializeComponent();
@@ -62,9 +68,7 @@ namespace KokoroUpTime
             var tag = this.scenarios[this.scenarioCount][0];
 
             // メッセージ表示関連
-            DispatcherTimer msgTimer;
-            string message = "";
-            int word_num = 0;
+            this.word_num = 0;
 
             // 各シーンの初期化はここで
             if (tag == "scene")
@@ -81,10 +85,24 @@ namespace KokoroUpTime
                         this.MainGrid.Visibility = Visibility.Visible;
                         this.BigSpeech.Text = "";
 
-                        this.MainCharaRight.Visibility = Visibility.Hidden;
-                        this.MainCharaLeftA.Visibility = Visibility.Hidden;
-                        this.MainCharaLeftB.Visibility = Visibility.Hidden;
-                        this.MainCharaLeftC.Visibility = Visibility.Hidden;
+                        this.MainCharaDownRight.Visibility = Visibility.Hidden;
+                        this.MainCharaSmallLeftA.Visibility = Visibility.Hidden;
+                        this.MainCharaSmallLeftB.Visibility = Visibility.Hidden;
+                        this.MainCharaSmallLeftC.Visibility = Visibility.Hidden;
+                        this.MainInfoCenter.Visibility = Visibility.Hidden;
+                        this.MainCharaUpRight.Visibility = Visibility.Hidden;
+                        this.MainNextPageButton.Visibility = Visibility.Hidden;
+                        this.MainBackPageButton.Visibility = Visibility.Hidden;
+
+                        imageObjects = new Dictionary<string, Image>
+                        {
+                            ["down_right"] = this.MainCharaDownRight,
+                            ["small_left_a"] = this.MainCharaSmallLeftA,
+                            ["small_left_b"] = this.MainCharaSmallLeftB,
+                            ["small_left_c"] = this.MainCharaSmallLeftC,
+                            ["info_center"] = this.MainInfoCenter,
+                            ["up_right"] = this.MainCharaUpRight,
+                        };
 
                         break;
 
@@ -110,7 +128,7 @@ namespace KokoroUpTime
                         this.LongBubble.Visibility = Visibility.Hidden;
                         this.LongSpeech.Text = "";
 
-                        this.AfterButton.Visibility = Visibility.Hidden;
+                        this.BoardNextPageButton.Visibility = Visibility.Hidden;
 
                         break;
                 }
@@ -126,43 +144,45 @@ namespace KokoroUpTime
                     case "bg":
 
                         // 後々背景もクロスフェードなどの処理を入れる
-                        var fileName = this.scenarios[this.scenarioCount][1];
-                        this.BG.Source = new BitmapImage(new Uri($"Images/{fileName}", UriKind.Relative));
+                        var bgImage = this.scenarios[this.scenarioCount][1];
+                        this.BG.Source = new BitmapImage(new Uri($"Images/{bgImage}", UriKind.Relative));
 
                         this.scenarioCount += 1;
                         this.ScenarioPlay();
 
                         break;
 
-                    case "chara":
+                    case "image":
 
-                        var _fileName = this.scenarios[this.scenarioCount][1];
+                        this.BigSpeech.Text = "";
+
+                        var _imageFile = this.scenarios[this.scenarioCount][1];
+
                         this.position = this.scenarios[this.scenarioCount][2];
 
-                        string _storyBoardName = "";
+                        var _imageObject = this.imageObjects[this.position];
 
-                        var animeName = this.scenarios[this.scenarioCount][3];
-                        if (animeName != "")
+                        _imageObject.Visibility = Visibility.Visible;
+
+                        var _storyBoardName = this.scenarios[this.scenarioCount][3];
+                        if (_storyBoardName != "")
                         {
-                            _storyBoardName = animeName + "_main_" + this.position;
+                            _storyBoardName+= "_main_" + this.position;
                         }
-                        SetCharactor(fileName: _fileName, image: this.MainCharaRight, storyBoardName: _storyBoardName);
+                        ShowImage(imageFile: _imageFile, imageObject: _imageObject, storyBoardName: _storyBoardName);
 
                         break;
 
                     case "msg":
-
-                        this.BigBubble.Visibility = Visibility.Visible;
-                        this.BigSpeech.Visibility = Visibility.Visible;
 
                         this.BigSpeech.Text = "";
 
                         this.NextMessageButton.Visibility = Visibility.Hidden;
                         this.BackMessageButton.Visibility = Visibility.Hidden;
 
-                        this.position = this.scenarios[this.scenarioCount][2];
+                        var _message = this.scenarios[this.scenarioCount][1];
 
-                        SetMessage(textBlock: this.BigSpeech);
+                        ShowMessage(textBlock: this.BigSpeech, message: _message);
 
                         break;
 
@@ -178,34 +198,49 @@ namespace KokoroUpTime
 
                         break;
 
+                    case "msg_win":
+
+                        var showBigBuubleImage = this.scenarios[this.scenarioCount][1];
+                        this.BigBubble.Source = new BitmapImage(new Uri($"Images/{showBigBuubleImage}", UriKind.Relative));
+
+                        this.BigBubble.Visibility = Visibility.Visible;
+                        this.BigSpeech.Visibility = Visibility.Visible;
+
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+
+                        break;
+
+                    case "next":
+
+                        this.MainNextPageButton.Visibility = Visibility.Visible;
+                        this.isClickable = true;
+
+                        break;
+
                     case "hide":
 
                         // オブジェクトを消すときは後々ほとんどアニメで処理するようにする
-                        var hideObj = this.scenarios[this.scenarioCount][1];
+                        var hideTarget = this.scenarios[this.scenarioCount][1];
 
-                        switch (hideObj)
+                        switch (hideTarget)
                         {
-                            case "msg":
+                            case "msg_win":
 
-                                this.HideMessage();
+                                this.BigBubble.Visibility = Visibility.Hidden;
+                                this.BigSpeech.Visibility = Visibility.Hidden;
+                                this.NextMessageButton.Visibility = Visibility.Hidden;
+                                this.BackMessageButton.Visibility = Visibility.Hidden;
 
                                 this.scenarioCount += 1;
                                 this.ScenarioPlay();
 
                                 break;
-                        }
-                        break;
 
-                    case "visible":
+                            case "image":
 
-                        // オブジェクトを現すときは後々ほとんどアニメで処理するようにする
-                        var visbleObj = this.scenarios[this.scenarioCount][1];
-                        
-                        switch (visbleObj)
-                        {
-                            case "msg":
-
-                                this.VisibleMessage();
+                                this.position = this.scenarios[this.scenarioCount][2];
+                                this.imageObjects[this.position].Visibility = Visibility.Hidden;
 
                                 this.scenarioCount += 1;
                                 this.ScenarioPlay();
@@ -223,22 +258,22 @@ namespace KokoroUpTime
                 {
                     case "title":
 
-                        SetMessage(textBlock: this.BoardTitle);
+                        ShowMessage(textBlock: this.BoardTitle, message: this.scenarios[this.scenarioCount][1]);
                         break;
 
                     case "check1msg":
 
-                        SetMessage(textBlock: this.BoardChecK1Msg, checkBox: this.BoardCheck1Box);
+                        ShowMessage(textBlock: this.BoardChecK1Msg, message: this.scenarios[this.scenarioCount][1], checkBox: this.BoardCheck1Box);
                         break;
 
                     case "check2msg":
 
-                        SetMessage(textBlock: this.BoardChecK2Msg, checkBox: this.BoardCheck2Box);
+                        ShowMessage(textBlock: this.BoardChecK2Msg, message: this.scenarios[this.scenarioCount][1], checkBox: this.BoardCheck2Box);
                         break;
 
                     case "check3msg":
 
-                        SetMessage(textBlock: this.BoardChecK3Msg, checkBox: this.BoardCheck3Box);
+                        ShowMessage(textBlock: this.BoardChecK3Msg, message: this.scenarios[this.scenarioCount][1], checkBox: this.BoardCheck3Box);
                         break;
 
                     case "wait":
@@ -246,28 +281,26 @@ namespace KokoroUpTime
                         this.isClickable = true;
                         break;
 
-                    case "chara":;
+                    case "image":;
 
                         this.BoardCharacter.Visibility = Visibility.Visible;
                         this.LongBubble.Visibility = Visibility.Visible;
 
-                        var _fileName = this.scenarios[this.scenarioCount][1];
+                        var _imageFile = this.scenarios[this.scenarioCount][1];
 
-                        string _storyBoardName = "";
-
-                        var animeName = this.scenarios[this.scenarioCount][2];
-                        if (animeName != "")
+                        var _storyBoardName = this.scenarios[this.scenarioCount][2];
+                        if (_storyBoardName != "")
                         {
-                            _storyBoardName = animeName + "_board";
+                            _storyBoardName += "_board";
                         }
-                        SetCharactor(fileName: _fileName, image: this.MainCharaRight, storyBoardName: _storyBoardName);
+                        ShowImage(imageFile: _imageFile, imageObject: this.MainCharaDownRight, storyBoardName: _storyBoardName);
 
                         break;
 
                     case "suggest":
 
                         CheckBox[] _checkBoxs = new CheckBox[] { this.BoardCheck1Box, this.BoardCheck2Box, this.BoardCheck3Box };
-                        SetMessage(textBlock: this.LongSpeech, checkBoxes: _checkBoxs);
+                        ShowMessage(textBlock: this.LongSpeech, message: this.scenarios[this.scenarioCount][1], checkBoxes: _checkBoxs);
                         break;
 
                     case "tap":
@@ -276,91 +309,72 @@ namespace KokoroUpTime
                         break;
                 }
             }
-            void SetMessage(TextBlock textBlock, CheckBox checkBox = null, CheckBox[] checkBoxes = null)
+        }
+
+        void ShowMessage(TextBlock textBlock, string message, CheckBox checkBox = null, CheckBox[] checkBoxes = null)
+        {
+            // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
+            var _message = message.Replace("鬱", "\u2028");
+
+            // メッセージ表示処理
+            this.msgTimer = new DispatcherTimer();
+            this.msgTimer.Tick += ViewMsg;
+            this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / MESSAGE_SPEED);
+            this.msgTimer.Start();
+
+            // 一文字ずつメッセージ表示（Inner Func）
+            void ViewMsg(object sender, EventArgs e)
             {
-                var _message = this.scenarios[this.scenarioCount][1];
+                textBlock.Text = _message.Substring(0, word_num);
 
-                // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
-                message = _message.Replace("鬱", "\u2028");
-
-                // メッセージ表示処理
-                msgTimer = new DispatcherTimer();
-                msgTimer.Tick += ViewMsg;
-                msgTimer.Interval = TimeSpan.FromSeconds(1.0f / MESSAGE_SPEED);
-                msgTimer.Start();
-
-                // 一文字ずつメッセージ表示（Inner Func）
-                void ViewMsg(object sender, EventArgs e)
+                if (word_num < _message.Length)
                 {
-                    textBlock.Text = message.Substring(0, word_num);
-
-                    if (word_num < message.Length)
-                    {
-                        word_num++;
-                    }
-                    else
-                    {
-                        msgTimer.Stop();
-                        msgTimer = null;
-
-                        if (checkBox != null)
-                        {
-                            checkBox.Visibility = Visibility.Visible;
-                        }
-                        if (checkBoxes != null)
-                        {
-                            foreach (CheckBox checkBox in checkBoxes)
-                            {
-                                checkBox.IsEnabled = true;
-                            }
-                        }
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-                    }
-                }
-            }
-
-            void SetCharactor(string fileName, Image image, string storyBoardName="")
-            {
-                image.Source = new BitmapImage(new Uri($"Images/{fileName}", UriKind.Relative));
-
-                if (storyBoardName != "")
-                {
-                    Storyboard sb = this.FindResource(storyBoardName) as Storyboard;
-                    if (sb != null)
-                    {
-                        sb.Completed += (s, e) =>
-                        {
-
-                            this.scenarioCount += 1;
-                            this.ScenarioPlay();
-                        };
-                        sb.Begin(this);
-                    }
+                    word_num++;
                 }
                 else
                 {
+                    this.msgTimer.Stop();
+                    this.msgTimer = null;
+
+                    if (checkBox != null)
+                    {
+                        checkBox.Visibility = Visibility.Visible;
+                    }
+                    if (checkBoxes != null)
+                    {
+                        foreach (CheckBox checkBox in checkBoxes)
+                        {
+                            checkBox.IsEnabled = true;
+                        }
+                    }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
             }
-
         }
 
-        private void HideMessage()
+        private void ShowImage(string imageFile, Image imageObject, string storyBoardName = "")
         {
-            this.BigBubble.Visibility = Visibility.Hidden;
-            this.BigSpeech.Visibility = Visibility.Hidden;
-            this.NextMessageButton.Visibility = Visibility.Hidden;
-            this.BackMessageButton.Visibility = Visibility.Hidden;
-        }
+            imageObject.Source = new BitmapImage(new Uri($"Images/{imageFile}", UriKind.Relative));
 
-        private void VisibleMessage()
-        {
-            this.BigBubble.Visibility = Visibility.Visible;
-            this.BigSpeech.Visibility = Visibility.Visible;
-            this.NextMessageButton.Visibility = Visibility.Visible;
-            this.BackMessageButton.Visibility = Visibility.Visible;
+            if (storyBoardName != "")
+            {
+                Storyboard sb = this.FindResource(storyBoardName) as Storyboard;
+                if (sb != null)
+                {
+                    sb.Completed += (s, e) =>
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    };
+                    sb.Begin(this);
+                }
+            }
+            else
+            {
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+            }
         }
 
         // 後々以下のコールバック関数は一つにまとめる
@@ -445,12 +459,12 @@ namespace KokoroUpTime
                 this.BoardCheck2Box.IsEnabled = false;
                 this.BoardCheck3Box.IsEnabled = false;
 
-                this.AfterButton.Visibility = Visibility.Visible;
+                this.BoardNextPageButton.Visibility = Visibility.Visible;
                 this.isClickable = true;
             }
         }
 
-        private void AfterButton_Click(object sender, RoutedEventArgs e)
+        private void BoardNextPageButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.isClickable)
             {
@@ -485,6 +499,17 @@ namespace KokoroUpTime
             byte[] dest_temp = System.Text.Encoding.Convert(System.Text.Encoding.ASCII, destEnc, src_temp);
             string ret = destEnc.GetString(dest_temp);
             return ret;
+        }
+
+        private void MainNextPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.isClickable)
+            {
+                this.isClickable = false;
+
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+            }
         }
     }
 }

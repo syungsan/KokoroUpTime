@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <None Remove="Images\after.png" />
+    <None Remove="Images\akamaru.png" />
+    <None Remove="Images\aosuke.png" />
     <None Remove="Images\background_00.png" />
     <None Remove="Images\background_01.png" />
     <None Remove="Images\background_02.png" />
@@ -15,6 +17,10 @@
     <None Remove="Images\before.png" />
     <None Remove="Images\blackboard.png" />
     <None Remove="Images\hukidashi2.png" />
+    <None Remove="Images\kimil.png" />
+    <None Remove="Images\left_a_big_bubble.png" />
+    <None Remove="Images\left_b_big_bubble.png" />
+    <None Remove="Images\left_c_big_bubble.png" />
     <None Remove="Images\long_bubble.png" />
     <None Remove="Images\menu_bubble.png" />
     <None Remove="Images\moya1.png" />
@@ -22,18 +28,26 @@
     <None Remove="Images\right_big_bubble.png" />
     <None Remove="Images\shiroji_01.png" />
     <None Remove="Images\shiroji_02.png" />
+    <None Remove="Images\shiroji_03.png" />
     <None Remove="Images\small_bubble.png" />
+    <None Remove="Images\SS.png" />
     <None Remove="Images\title.png" />
     <None Remove="Images\yazirusi.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Images\after.png" />
+    <Resource Include="Images\akamaru.png" />
+    <Resource Include="Images\aosuke.png" />
     <Resource Include="Images\background_00.png" />
     <Resource Include="Images\background_01.png" />
     <Resource Include="Images\background_02.png" />
     <Resource Include="Images\background_03.png" />
     <Resource Include="Images\before.png" />
+    <Resource Include="Images\kimil.png" />
+    <Resource Include="Images\left_a_big_bubble.png" />
+    <Resource Include="Images\left_b_big_bubble.png" />
+    <Resource Include="Images\left_c_big_bubble.png" />
     <Resource Include="Images\right_big_bubble.png" />
     <Resource Include="Images\blackboard.png" />
     <Resource Include="Images\hukidashi2.png" />
@@ -43,7 +57,9 @@
     <Resource Include="Images\moya2.png" />
     <Resource Include="Images\shiroji_01.png" />
     <Resource Include="Images\shiroji_02.png" />
+    <Resource Include="Images\shiroji_03.png" />
     <Resource Include="Images\small_bubble.png" />
+    <Resource Include="Images\SS.png" />
     <Resource Include="Images\title.png" />
     <Resource Include="Images\yazirusi.png" />
   </ItemGroup>

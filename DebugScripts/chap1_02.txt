@@ -1,2 +1,37 @@
 scene,main
+bg,background_02.png,
+hide,msg_win,
+image,shiroji_01.png,down_right,appear
+msg_win,right_big_bubble.png,
+wait
 msg,今日は、「こころあっぷタイム」に登場する３人を紹介する。,白じい
+wait
+hide,msg_win,
+image,akamaru.png,small_left_a,appear
+msg_win,left_a_big_bubble.png,
+wait
+msg,おれの名前は 赤丸だ。小学校6年だ。好きな食べ物はカレーとコーラだ。苦手なものは犬だ。,赤丸
+wait
+hide,msg_win,
+hide,image,small_left_a,
+image,aosuke.png,small_left_b,appear
+msg_win,left_b_big_bubble.png,
+wait
+msg,ぼくの名前は青助です。小学校6年生です。好きなものはテレビ。勉強もスポーツも あんまり得意じゃないんだ。,青助
+wait
+hide,msg_win,
+hide,image,small_left_b,
+image,kimil.png,small_left_c,appear
+msg_win,left_c_big_bubble.png,
+msg,わたしの名前はキミです。小学６年生です。好きなものはチョコレートです。人前で話すことがとても苦手です。,キミ
+wait
+hide,msg_win,
+hide,image,small_left_c,
+next
+hide,image,down_right,
+image,shiroji_03.png,up_right,
+image,SS.png,info_center,
+msg_win,right_big_bubble.png,
+wait
+msg,この３人とこころあっぷタイムを進めていくぞい！さて、３人は、なにかこまっていることがあるようじゃ。どんなことで、こまっているのだろう？マンガを見ながら考えてみよう！,白じい
+next
