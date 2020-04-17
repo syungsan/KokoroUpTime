@@ -155,9 +155,19 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Key="flip_manga">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MangaImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MangaImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Page.Resources>
     <Grid>
-        <Grid x:Name="MainGrid" Visibility="Visible" Grid.RowSpan="4" Grid.ColumnSpan="2">
+        <Grid x:Name="MainGrid" Visibility="Hidden" Grid.RowSpan="4" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="12*"/>
                 <RowDefinition Height="35*"/>
@@ -242,7 +252,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <TextBlock x:Name="BigSpeech" Text="TextBlock" TextWrapping="Wrap" FontSize="48" Grid.Row="5" Grid.ColumnSpan="10" Grid.Column="3" Grid.RowSpan="4"/>
+            <TextBlock x:Name="BigSpeech" Text="TextBlock" TextWrapping="Wrap" FontSize="48" Grid.Row="5" Grid.ColumnSpan="10" Grid.Column="3" Grid.RowSpan="4" FontFamily="/Fonts/azuki.ttf#azuki_font"/>
             <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="NextMessageButton_Click" Grid.Row="7" Grid.Column="11" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
                 <Button.RenderTransform>
                     <TransformGroup>
@@ -274,7 +284,6 @@
                     </Image.RenderTransform>
                 </Image>
             </Button>
-
             <Button x:Name="MainNextPageButton" Grid.ColumnSpan="3" Grid.Column="12" Margin="10,0,13,0" Grid.Row="7" VerticalAlignment="Top" Height="180" Grid.RowSpan="4" Background="{x:Null}" BorderBrush="{x:Null}" Click="MainNextPageButton_Click">
                 <Image Source="/Images/after.png"/>
             </Button>
@@ -371,6 +380,34 @@
             </Button>
             <Button x:Name="BoardBackPageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Grid.Row="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1">
                 <Image Source="Images/before.png"/>
+            </Button>
+        </Grid>
+        <Grid x:Name="MangaGrid" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="27*"/>
+                <RowDefinition Height="170*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="13*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="141*"/>
+                <ColumnDefinition Width="37*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="MangaTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/manga1_title.png" Grid.ColumnSpan="3" Margin="60,0,0,0"/>
+            <Image x:Name="MangaImage" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.RowSpan="2" Source="/Images/manga1-1.png" Margin="61,0,0,0" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Button x:Name="MangaNextButton" Grid.Column="2" HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="2" VerticalAlignment="Top" Height="84" Width="372" Grid.RowSpan="2" Click="MangaNextButton_Click">
+                <Image Source="/Images/mangaya.png"/>
             </Button>
         </Grid>
     </Grid>

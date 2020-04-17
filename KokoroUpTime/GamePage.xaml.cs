@@ -82,7 +82,6 @@ namespace KokoroUpTime
                 {
                     case "main":
 
-                        this.MainGrid.Visibility = Visibility.Visible;
                         this.BigSpeech.Text = "";
 
                         this.MainCharaDownRight.Visibility = Visibility.Hidden;
@@ -104,11 +103,11 @@ namespace KokoroUpTime
                             ["up_right"] = this.MainCharaUpRight,
                         };
 
+                        this.MainGrid.Visibility = Visibility.Visible;
+
                         break;
 
                     case "board":
-
-                        this.BoardGrid.Visibility = Visibility.Visible;
 
                         this.BoardTitle.Text = "";
 
@@ -129,6 +128,18 @@ namespace KokoroUpTime
                         this.LongSpeech.Text = "";
 
                         this.BoardNextPageButton.Visibility = Visibility.Hidden;
+
+                        this.BoardGrid.Visibility = Visibility.Visible;
+
+                        break;
+
+                    case "manga":
+
+                        this.MangaTitle.Visibility = Visibility.Hidden;
+                        this.MangaImage.Visibility = Visibility.Hidden;
+                        this.MangaNextButton.Visibility = Visibility.Hidden;
+
+                        this.MangaGrid.Visibility = Visibility.Visible;
 
                         break;
                 }
@@ -169,7 +180,7 @@ namespace KokoroUpTime
                         {
                             _storyBoardName+= "_main_" + this.position;
                         }
-                        ShowImage(imageFile: _imageFile, imageObject: _imageObject, storyBoardName: _storyBoardName);
+                        this.ShowImage(imageFile: _imageFile, imageObject: _imageObject, storyBoardName: _storyBoardName);
 
                         break;
 
@@ -182,7 +193,7 @@ namespace KokoroUpTime
 
                         var _message = this.scenarios[this.scenarioCount][1];
 
-                        ShowMessage(textBlock: this.BigSpeech, message: _message);
+                        this.ShowMessage(textBlock: this.BigSpeech, message: _message);
 
                         break;
 
@@ -258,22 +269,22 @@ namespace KokoroUpTime
                 {
                     case "title":
 
-                        ShowMessage(textBlock: this.BoardTitle, message: this.scenarios[this.scenarioCount][1]);
+                        this.ShowMessage(textBlock: this.BoardTitle, message: this.scenarios[this.scenarioCount][1]);
                         break;
 
                     case "check1msg":
 
-                        ShowMessage(textBlock: this.BoardChecK1Msg, message: this.scenarios[this.scenarioCount][1], checkBox: this.BoardCheck1Box);
+                        this.ShowMessage(textBlock: this.BoardChecK1Msg, message: this.scenarios[this.scenarioCount][1], checkBox: this.BoardCheck1Box);
                         break;
 
                     case "check2msg":
 
-                        ShowMessage(textBlock: this.BoardChecK2Msg, message: this.scenarios[this.scenarioCount][1], checkBox: this.BoardCheck2Box);
+                        this.ShowMessage(textBlock: this.BoardChecK2Msg, message: this.scenarios[this.scenarioCount][1], checkBox: this.BoardCheck2Box);
                         break;
 
                     case "check3msg":
 
-                        ShowMessage(textBlock: this.BoardChecK3Msg, message: this.scenarios[this.scenarioCount][1], checkBox: this.BoardCheck3Box);
+                        this.ShowMessage(textBlock: this.BoardChecK3Msg, message: this.scenarios[this.scenarioCount][1], checkBox: this.BoardCheck3Box);
                         break;
 
                     case "wait":
@@ -281,7 +292,7 @@ namespace KokoroUpTime
                         this.isClickable = true;
                         break;
 
-                    case "image":;
+                    case "image":
 
                         this.BoardCharacter.Visibility = Visibility.Visible;
                         this.LongBubble.Visibility = Visibility.Visible;
@@ -293,19 +304,57 @@ namespace KokoroUpTime
                         {
                             _storyBoardName += "_board";
                         }
-                        ShowImage(imageFile: _imageFile, imageObject: this.MainCharaDownRight, storyBoardName: _storyBoardName);
+                        this.ShowImage(imageFile: _imageFile, imageObject: this.MainCharaDownRight, storyBoardName: _storyBoardName);
 
                         break;
 
                     case "suggest":
 
                         CheckBox[] _checkBoxs = new CheckBox[] { this.BoardCheck1Box, this.BoardCheck2Box, this.BoardCheck3Box };
-                        ShowMessage(textBlock: this.LongSpeech, message: this.scenarios[this.scenarioCount][1], checkBoxes: _checkBoxs);
+                        this.ShowMessage(textBlock: this.LongSpeech, message: this.scenarios[this.scenarioCount][1], checkBoxes: _checkBoxs);
                         break;
 
                     case "tap":
 
                         this.isClickable = false;
+                        break;
+                }
+            }
+
+            if (this.scene == "manga")
+            {
+                switch (tag)
+                {
+                    case "title":
+
+                        this.MangaTitle.Visibility = Visibility.Visible;
+
+                        var titleImage = this.scenarios[this.scenarioCount][1];
+                        this.ShowImage(imageFile: titleImage, imageObject: this.MangaTitle, "");
+
+                        break;
+
+                    case "flip":
+
+                        this.MangaImage.Visibility = Visibility.Visible;
+
+                        var mangaImage = this.scenarios[this.scenarioCount][1];
+
+                        var _storyBoardName = this.scenarios[this.scenarioCount][2];
+
+                        if (_storyBoardName != "")
+                        {
+                            _storyBoardName += "_manga";
+                        }
+                        this.ShowImage(imageFile: mangaImage, imageObject: this.MangaImage, storyBoardName: _storyBoardName);
+
+                        break;
+
+                    case "next":
+
+                        this.MangaNextButton.Visibility = Visibility.Visible;
+                        this.isClickable = true;
+
                         break;
                 }
             }
@@ -360,6 +409,7 @@ namespace KokoroUpTime
             if (storyBoardName != "")
             {
                 Storyboard sb = this.FindResource(storyBoardName) as Storyboard;
+
                 if (sb != null)
                 {
                     sb.Completed += (s, e) =>
@@ -490,6 +540,7 @@ namespace KokoroUpTime
         {
             this.MainGrid.Visibility = Visibility.Hidden;
             this.BoardGrid.Visibility = Visibility.Hidden;
+            this.MangaGrid.Visibility = Visibility.Hidden;
         }
 
         // UTF-8からShift-JISへの変換にそなえて取り置き
@@ -502,6 +553,17 @@ namespace KokoroUpTime
         }
 
         private void MainNextPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.isClickable)
+            {
+                this.isClickable = false;
+
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+            }
+        }
+
+        private void MangaNextButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.isClickable)
             {

@@ -4,69 +4,68 @@ hide,msg_win,
 image,shiroji_01.png,down_right,appear
 msg_win,right_big_bubble.png,
 wait
-msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
+msg,�t�H�b�t�H�b�t�H�I�킵�̖��O�́u�������v����I�T�݂�Ȃ́u������v�̕׋��̎菕�������Ă���B,������
 wait
-msg,はじめに、あなたの名前を教えてくれるかの？,白じい
+msg,�͂��߂ɁA���Ȃ��̖��O�������Ă���邩�́H,������
 wait
-msg,名前を入力【　　　　　　　　　　】,白じい
+msg,���O����́y�@�@�@�@�@�@�@�@�@�@�z,������
 wait
-msg,あなたは【name】じゃな。【name】のうしろは、何かつけるかの？,白じい
+msg,���Ȃ��́yname�z����ȁB�yname�z�̂�����́A�������邩�́H,������
 wait
-msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい
+msg,�yname�z�y����^�����^����z�ƌĂ�ł������́H,������
 wait
-msg,それでは【name】、　「こころあっぷタイム」とは何か説明していくぞい。,白じい
+msg,����ł́yname�z�A�@�u�����날���Ճ^�C���v�Ƃ͉����������Ă��������B,������
 wait
-msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
+msg,����ł��u������v�� �����Ă���񂶂Ⴊ�A�u������v�̕׋������邱�Ƃ� ���܂�Ȃ��̂���B,������
 wait
-msg,楽しくなったり、うれしくなったりするだけでなく、だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。,白じい
+msg,�y�����Ȃ�����A���ꂵ���Ȃ����肷�邾���łȂ��A����ɂł��A�S�z������A�߂��񂾂�A�{�����肷�邱�Ƃ�����̂���B,������
 wait
-msg,こども、おとな、つよい人、よわい人、大きい人、ちいさい人、どんな人でも、こまっていることがあるのじゃ。,白じい
+msg,���ǂ��A���ƂȁA�悢�l�A��킢�l�A�傫���l�A���������l�A�ǂ�Ȑl�ł��A���܂��Ă��邱�Ƃ�����̂���B,������
 wait
-msg,『こころあっぷタイム』は、こまっているときに、元気になったり、リラックスできる方法を 学ぶ時間なのだ！ ,白じい
+msg,�w�����날���Ճ^�C���x�́A���܂��Ă���Ƃ��ɁA���C�ɂȂ�����A�����b�N�X�ł�����@�� �w�Ԏ��ԂȂ̂��I ,������
 wait
-msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
+msg,���̋����ɂ͂R�̃��[��������̂���B�ꏏ�Ɋm�F���Ă��������B,������
 wait
 scene,board
 wait
-title,教室のルール
+title,�����̃��[��
 wait
-check1msg,１．人のことを わらわない
+check1msg,�P�D�l�̂��Ƃ� ����Ȃ�
 wait
-check2msg,２．ふざけない
+check2msg,�Q�D�ӂ����Ȃ�
 wait
-check3msg,３．はずかしがらない
+check3msg,�R�D�͂���������Ȃ�
 wait
 image,shiroji_02.png,appear
 wait
-suggest,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,白じい
+suggest,�ȏ�̃��[���͕K�����̂���I���[�����킩�����灠���^�b�v���Ă���邩�́H,������
 tap
-wait
 scene,main
 bg,background_02.png,
 hide,msg_win,
 image,shiroji_01.png,down_right,appear
 msg_win,right_big_bubble.png,
 wait
-msg,今日は、「こころあっぷタイム」に登場する３人を紹介する。,白じい
+msg,�����́A�u�����날���Ճ^�C���v�ɓo�ꂷ��R�l���Љ��B,������
 wait
 hide,msg_win,
 image,akamaru.png,small_left_a,appear
 msg_win,left_a_big_bubble.png,
 wait
-msg,おれの名前は 赤丸だ。小学校6年だ。好きな食べ物はカレーとコーラだ。苦手なものは犬だ。,赤丸
+msg,����̖��O�� �Ԋۂ��B���w�Z6�N���B�D���ȐH�ו��̓J���[�ƃR�[�����B���Ȃ��̂͌����B,�Ԋ�
 wait
 hide,msg_win,
 hide,image,small_left_a,
 image,aosuke.png,small_left_b,appear
 msg_win,left_b_big_bubble.png,
 wait
-msg,ぼくの名前は青助です。小学校6年生です。好きなものはテレビ。勉強もスポーツも あんまり得意じゃないんだ。,青助
+msg,�ڂ��̖��O�͐��ł��B���w�Z6�N���ł��B�D���Ȃ��̂̓e���r�B�׋����X�|�[�c�� ����܂蓾�ӂ���Ȃ��񂾁B,��
 wait
 hide,msg_win,
 hide,image,small_left_b,
 image,kimil.png,small_left_c,appear
 msg_win,left_c_big_bubble.png,
-msg,わたしの名前はキミです。小学６年生です。好きなものはチョコレートです。人前で話すことがとても苦手です。,キミ
+msg,�킽���̖��O�̓L�~�ł��B���w�U�N���ł��B�D���Ȃ��̂̓`���R���[�g�ł��B�l�O�Řb�����Ƃ��ƂĂ����ł��B,�L�~
 wait
 hide,msg_win,
 hide,image,small_left_c,
@@ -76,5 +75,20 @@ image,shiroji_03.png,up_right,
 image,SS.png,info_center,
 msg_win,right_big_bubble.png,
 wait
-msg,この３人とこころあっぷタイムを進めていくぞい！さて、３人は、なにかこまっていることがあるようじゃ。どんなことで、こまっているのだろう？マンガを見ながら考えてみよう！,白じい
+msg,���̂R�l�Ƃ����날���Ճ^�C����i�߂Ă��������I���āA�R�l�́A�Ȃɂ����܂��Ă��邱�Ƃ�����悤����B�ǂ�Ȃ��ƂŁA���܂��Ă���̂��낤�H�}���K�����Ȃ���l���Ă݂悤�I,������
+next
+scene,manga
+title,manga1_title.png,
+next
+flip,manga1-1.png,flip
+next
+flip,manga1-2.png,flip
+next
+flip,manga1-3.png,flip
+next
+flip,manga1-4.png,flip
+next
+flip,manga1-5.png,flip
+next
+flip,manga1-6.png,flip
 next

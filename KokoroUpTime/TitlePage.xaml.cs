@@ -11,6 +11,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.Reflection;
+
 namespace KokoroUpTime
 {
     /// <summary>
@@ -24,6 +26,18 @@ namespace KokoroUpTime
 
             // Hide host's navigation UI
             this.ShowsNavigationUI = false;
+
+            Assembly asm = Assembly.GetExecutingAssembly(); // 実行中のアセンブリを取得する。
+
+            // AssemblyNameから取得
+            AssemblyName asmName = asm.GetName();
+            string name = "AssemblyName.Name : " + asmName.Name + "\r\n";
+            string version = "AssemblyName.Version : " + asmName.Version.ToString() + "\r\n";
+            string fullname = "AssemblyName.FullName : " + asmName.FullName + "\r\n";
+            string processor = "AssemblyName.ProcessorArchitecture : " + asmName.ProcessorArchitecture + "\r\n";
+            string runtime = "Assembly.ImageRuntimeVersion : " + asm.ImageRuntimeVersion + "\r\n";
+
+            this.VersionText.Text = name + version + fullname + processor + runtime + "\r\n";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

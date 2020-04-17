@@ -63,6 +63,6 @@
         <Button Content="こころアップタイムとは" FontSize="36" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="10" Grid.Row="8"/>
         <Button Content="教室のルール" FontSize="36" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}" Grid.Column="10" Grid.Row="9"/>
         <Button Content="その他" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36" Grid.Column="10" Grid.Row="10"/>
-
+        <TextBlock x:Name="VersionText" Grid.Column="8" HorizontalAlignment="Left" Grid.Row="3" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="287" Width="770" Grid.RowSpan="5" Grid.ColumnSpan="4" Margin="10,0,0,0" FontSize="24" Foreground="#FFF0CA95" FontFamily="/Fonts/JiyunoTsubasa.ttf#JiyunoTsubasaFont"/>
     </Grid>
 </Page>

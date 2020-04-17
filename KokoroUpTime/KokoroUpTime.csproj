@@ -4,9 +4,12 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Version>0.8.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\azuki.ttf" />
+    <None Remove="Fonts\JiyunoTsubasa.ttf" />
     <None Remove="Images\after.png" />
     <None Remove="Images\akamaru.png" />
     <None Remove="Images\aosuke.png" />
@@ -22,6 +25,14 @@
     <None Remove="Images\left_b_big_bubble.png" />
     <None Remove="Images\left_c_big_bubble.png" />
     <None Remove="Images\long_bubble.png" />
+    <None Remove="Images\manga1-1.png" />
+    <None Remove="Images\manga1-2.png" />
+    <None Remove="Images\manga1-3.png" />
+    <None Remove="Images\manga1-4.png" />
+    <None Remove="Images\manga1-5.png" />
+    <None Remove="Images\manga1-6.png" />
+    <None Remove="Images\manga1_title.png" />
+    <None Remove="Images\mangaya.png" />
     <None Remove="Images\menu_bubble.png" />
     <None Remove="Images\moya1.png" />
     <None Remove="Images\moya2.png" />
@@ -36,6 +47,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Fonts\azuki.ttf" />
+    <Resource Include="Fonts\JiyunoTsubasa.ttf" />
     <Resource Include="Images\after.png" />
     <Resource Include="Images\akamaru.png" />
     <Resource Include="Images\aosuke.png" />
@@ -48,6 +61,14 @@
     <Resource Include="Images\left_a_big_bubble.png" />
     <Resource Include="Images\left_b_big_bubble.png" />
     <Resource Include="Images\left_c_big_bubble.png" />
+    <Resource Include="Images\manga1-1.png" />
+    <Resource Include="Images\manga1-2.png" />
+    <Resource Include="Images\manga1-3.png" />
+    <Resource Include="Images\manga1-4.png" />
+    <Resource Include="Images\manga1-5.png" />
+    <Resource Include="Images\manga1-6.png" />
+    <Resource Include="Images\manga1_title.png" />
+    <Resource Include="Images\mangaya.png" />
     <Resource Include="Images\right_big_bubble.png" />
     <Resource Include="Images\blackboard.png" />
     <Resource Include="Images\hukidashi2.png" />
