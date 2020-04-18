@@ -13,6 +13,7 @@ msg,あなたは【name】じゃな。【name】のうしろは、何かつけ�
 wait
 msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい
 wait
+image,shiroji_02.png,chara_down_right,
 msg,それでは【name】、　「こころあっぷタイム」とは何か説明していくぞい。,白じい
 wait
 msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
@@ -43,7 +44,7 @@ wait
 scene,main
 bg,background_02.png,
 hide,msg_win,
-image,shiroji_01.png,chara_down_right,appear
+image,shiroji_02.png,chara_down_right,appear
 msg_win,right_big_bubble.png,
 wait
 msg,今日は、「こころあっぷタイム」に登場する３人を紹介する。,白じい
@@ -117,4 +118,15 @@ image,item01_solo.png,object,
 image,item_info.png,info_plate,
 text,きもちセンサーとは…,info_title,
 text,★だれでもいろんな「きもち」になるが、「きもち」を「ことば」であらわすことは鬱　かんたんなことではないのだ。鬱鬱★きもちセンサーをつかうと、自分の「きもち」をピタリとあらわす「ことば」を鬱　選ぶことができるのじゃ！,info_sentence,
+next
+scene,main
+bg,background_05.png,
+image,challenge_time.png,session_title,
+image,white_frame.png,session_frame,
+text,チャレンジタイムとは…,session_sub_title,
+text,☆こころあっぷタイムで新しいことに挑戦してみる時間のことじゃ。,session_info
+image,shiroji_04.png,chara_up_right,
+msg_win,right_big_bubble.png,
+wait
+msg,「きもち」には、いいきもちといやなきもちだけでなく、いろいろな種類があるぞい。自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
 next

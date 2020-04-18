@@ -17,9 +17,11 @@
     <None Remove="Images\background_01.png" />
     <None Remove="Images\background_02.png" />
     <None Remove="Images\background_03.png" />
+    <None Remove="Images\background_05.png" />
     <None Remove="Images\background_mokume.png" />
     <None Remove="Images\before.png" />
     <None Remove="Images\blackboard.png" />
+    <None Remove="Images\challenge_time.png" />
     <None Remove="Images\hukidashi2.png" />
     <None Remove="Images\item01_bubble.png" />
     <None Remove="Images\item01_solo.png" />
@@ -45,9 +47,11 @@
     <None Remove="Images\shiroji_01.png" />
     <None Remove="Images\shiroji_02.png" />
     <None Remove="Images\shiroji_03.png" />
+    <None Remove="Images\shiroji_04.png" />
     <None Remove="Images\small_bubble.png" />
     <None Remove="Images\SS.png" />
     <None Remove="Images\title.png" />
+    <None Remove="Images\white_frame.png" />
     <None Remove="Images\yazirusi.png" />
   </ItemGroup>
 
@@ -61,8 +65,10 @@
     <Resource Include="Images\background_01.png" />
     <Resource Include="Images\background_02.png" />
     <Resource Include="Images\background_03.png" />
+    <Resource Include="Images\background_05.png" />
     <Resource Include="Images\background_mokume.png" />
     <Resource Include="Images\before.png" />
+    <Resource Include="Images\challenge_time.png" />
     <Resource Include="Images\item01_bubble.png" />
     <Resource Include="Images\item01_solo.png" />
     <Resource Include="Images\item_info.png" />
@@ -89,9 +95,11 @@
     <Resource Include="Images\shiroji_01.png" />
     <Resource Include="Images\shiroji_02.png" />
     <Resource Include="Images\shiroji_03.png" />
+    <Resource Include="Images\shiroji_04.png" />
     <Resource Include="Images\small_bubble.png" />
     <Resource Include="Images\SS.png" />
     <Resource Include="Images\title.png" />
+    <Resource Include="Images\white_frame.png" />
     <Resource Include="Images\yazirusi.png" />
   </ItemGroup>
 

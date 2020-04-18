@@ -108,6 +108,11 @@ namespace KokoroUpTime
                         this.MainNextMsgButton.Visibility = Visibility.Hidden;
                         this.MainBackMsgButton.Visibility = Visibility.Hidden;
 
+                        this.MainSessionTitle.Visibility = Visibility.Hidden;
+                        this.MainSessionFrame.Visibility = Visibility.Hidden;
+                        this.MainSessionSubTitle.Visibility = Visibility.Hidden;
+                        this.MainSessionInfo.Visibility = Visibility.Hidden;
+
                         this.mainImages = new Dictionary<string, Image>
                         {
                             ["chara_down_right"] = this.MainCharaDownRight,
@@ -118,11 +123,15 @@ namespace KokoroUpTime
                             ["chara_up_right"] = this.MainCharaUpRight,
                             ["item_image_center"] = this.MainItemImageCenter,
                             ["item_name_plate"] = this.MainItemNamePlate,
+                            ["session_title"] = this.MainSessionTitle,
+                            ["session_frame"] = this.MainSessionFrame,
                         };
 
                         this.mainTextBlocks = new Dictionary<string, TextBlock>
                         {
                             ["item_name_text"] = this.MainItemNameText,
+                            ["session_sub_title"] = this.MainSessionSubTitle,
+                            ["session_info"] = this.MainSessionInfo,
                         };
 
                         this.MainGrid.Visibility = Visibility.Visible;
@@ -297,7 +306,7 @@ namespace KokoroUpTime
                     case "next":
 
                         this.MainNextPageButton.Visibility = Visibility.Visible;
-                        this.ItemBackPageButton.Visibility = Visibility.Visible;
+                        this.MainBackPageButton.Visibility = Visibility.Visible;
                         this.isClickable = true;
 
                         break;
