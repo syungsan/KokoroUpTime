@@ -1,0 +1,15 @@
+scene,manga
+title,manga1_title.png,
+next
+flip,manga1-1.png,flip
+next
+flip,manga1-2.png,flip
+next
+flip,manga1-3.png,flip
+next
+flip,manga1-4.png,flip
+next
+flip,manga1-5.png,flip
+next
+flip,manga1-6.png,flip
+next

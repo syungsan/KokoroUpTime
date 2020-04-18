@@ -1,7 +1,6 @@
 scene,main
 bg,background_01.png,
-hide,msg_win,
-image,shiroji_01.png,down_right,appear
+image,shiroji_01.png,chara_down_right,appear
 msg_win,right_big_bubble.png,
 wait
 msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい

@@ -12,3 +12,4 @@ image,shiroji_02.png,appear
 wait
 suggest,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,白じい
 tap
+wait

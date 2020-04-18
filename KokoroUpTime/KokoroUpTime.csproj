@@ -17,9 +17,14 @@
     <None Remove="Images\background_01.png" />
     <None Remove="Images\background_02.png" />
     <None Remove="Images\background_03.png" />
+    <None Remove="Images\background_mokume.png" />
     <None Remove="Images\before.png" />
     <None Remove="Images\blackboard.png" />
     <None Remove="Images\hukidashi2.png" />
+    <None Remove="Images\item01_bubble.png" />
+    <None Remove="Images\item01_solo.png" />
+    <None Remove="Images\item_info.png" />
+    <None Remove="Images\item_name.png" />
     <None Remove="Images\kimil.png" />
     <None Remove="Images\left_a_big_bubble.png" />
     <None Remove="Images\left_b_big_bubble.png" />
@@ -56,7 +61,12 @@
     <Resource Include="Images\background_01.png" />
     <Resource Include="Images\background_02.png" />
     <Resource Include="Images\background_03.png" />
+    <Resource Include="Images\background_mokume.png" />
     <Resource Include="Images\before.png" />
+    <Resource Include="Images\item01_bubble.png" />
+    <Resource Include="Images\item01_solo.png" />
+    <Resource Include="Images\item_info.png" />
+    <Resource Include="Images\item_name.png" />
     <Resource Include="Images\kimil.png" />
     <Resource Include="Images\left_a_big_bubble.png" />
     <Resource Include="Images\left_b_big_bubble.png" />

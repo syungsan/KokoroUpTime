@@ -1,0 +1,26 @@
+scene,main
+bg,background_mokume.png,
+image,shiroji_01.png,chara_down_right,appear
+image,item_name.png,item_name_plate,
+text,きもちセンサー,item_name_text,
+image,item01_solo.png,item_image_center,
+msg_win,right_big_bubble.png,
+wait
+msg,わしの作った発明品をつかって、自分のきもちを 調べてみるのじゃ！,白じい
+next
+hide,msg_win,
+hide,image,chara_down_right,
+hide,image,item_image_center,
+hide,image,item_name_plate,
+hide,text,item_name_text,
+scene,item
+image,shiroji_03.png,chara,
+image,item_name.png,name_plate,
+text,きもちセンサー,name_text,
+image,item01_bubble.png,bubble,
+text,No.1,number,
+image,item01_solo.png,object,
+image,item_info.png,info_plate,
+text,きもちセンサーとは…,info_title,
+text,★だれでもいろんな「きもち」になるが、「きもち」を「ことば」であらわすことは鬱　かんたんなことではないのだ。鬱鬱★きもちセンサーをつかうと、自分の「きもち」をピタリとあらわす「ことば」を鬱　選ぶことができるのじゃ！,info_sentence,
+next

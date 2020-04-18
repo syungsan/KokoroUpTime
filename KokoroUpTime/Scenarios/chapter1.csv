@@ -1,81 +1,81 @@
 scene,main
 bg,background_01.png,
-hide,msg_win,
-image,shiroji_01.png,down_right,appear
+image,shiroji_01.png,chara_down_right,appear
 msg_win,right_big_bubble.png,
 wait
-msg,�t�H�b�t�H�b�t�H�I�킵�̖��O�́u�������v����I�T�݂�Ȃ́u������v�̕׋��̎菕�������Ă���B,������
+msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
 wait
-msg,�͂��߂ɁA���Ȃ��̖��O�������Ă���邩�́H,������
+msg,はじめに、あなたの名前を教えてくれるかの？,白じい
 wait
-msg,���O����́y�@�@�@�@�@�@�@�@�@�@�z,������
+msg,名前を入力【　　　　　　　　　　】,白じい
 wait
-msg,���Ȃ��́yname�z����ȁB�yname�z�̂�����́A�������邩�́H,������
+msg,あなたは【name】じゃな。【name】のうしろは、何かつけるかの？,白じい
 wait
-msg,�yname�z�y����^�����^����z�ƌĂ�ł������́H,������
+msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい
 wait
-msg,����ł́yname�z�A�@�u�����날���Ճ^�C���v�Ƃ͉����������Ă��������B,������
+msg,それでは【name】、　「こころあっぷタイム」とは何か説明していくぞい。,白じい
 wait
-msg,����ł��u������v�� �����Ă���񂶂Ⴊ�A�u������v�̕׋������邱�Ƃ� ���܂�Ȃ��̂���B,������
+msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
 wait
-msg,�y�����Ȃ�����A���ꂵ���Ȃ����肷�邾���łȂ��A����ɂł��A�S�z������A�߂��񂾂�A�{�����肷�邱�Ƃ�����̂���B,������
+msg,楽しくなったり、うれしくなったりするだけでなく、だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。,白じい
 wait
-msg,���ǂ��A���ƂȁA�悢�l�A��킢�l�A�傫���l�A���������l�A�ǂ�Ȑl�ł��A���܂��Ă��邱�Ƃ�����̂���B,������
+msg,こども、おとな、つよい人、よわい人、大きい人、ちいさい人、どんな人でも、こまっていることがあるのじゃ。,白じい
 wait
-msg,�w�����날���Ճ^�C���x�́A���܂��Ă���Ƃ��ɁA���C�ɂȂ�����A�����b�N�X�ł�����@�� �w�Ԏ��ԂȂ̂��I ,������
+msg,『こころあっぷタイム』は、こまっているときに、元気になったり、リラックスできる方法を 学ぶ時間なのだ！ ,白じい
 wait
-msg,���̋����ɂ͂R�̃��[��������̂���B�ꏏ�Ɋm�F���Ă��������B,������
+msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
 wait
 scene,board
 wait
-title,�����̃��[��
+title,教室のルール
 wait
-check1msg,�P�D�l�̂��Ƃ� ����Ȃ�
+check1msg,１．人のことを わらわない
 wait
-check2msg,�Q�D�ӂ����Ȃ�
+check2msg,２．ふざけない
 wait
-check3msg,�R�D�͂���������Ȃ�
+check3msg,３．はずかしがらない
 wait
 image,shiroji_02.png,appear
 wait
-suggest,�ȏ�̃��[���͕K�����̂���I���[�����킩�����灠���^�b�v���Ă���邩�́H,������
+suggest,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,白じい
 tap
+wait
 scene,main
 bg,background_02.png,
 hide,msg_win,
-image,shiroji_01.png,down_right,appear
+image,shiroji_01.png,chara_down_right,appear
 msg_win,right_big_bubble.png,
 wait
-msg,�����́A�u�����날���Ճ^�C���v�ɓo�ꂷ��R�l���Љ��B,������
+msg,今日は、「こころあっぷタイム」に登場する３人を紹介する。,白じい
 wait
 hide,msg_win,
-image,akamaru.png,small_left_a,appear
+image,akamaru.png,chara_small_left_a,appear
 msg_win,left_a_big_bubble.png,
 wait
-msg,����̖��O�� �Ԋۂ��B���w�Z6�N���B�D���ȐH�ו��̓J���[�ƃR�[�����B���Ȃ��̂͌����B,�Ԋ�
+msg,おれの名前は 赤丸だ。小学校6年だ。好きな食べ物はカレーとコーラだ。苦手なものは犬だ。,赤丸
 wait
 hide,msg_win,
-hide,image,small_left_a,
-image,aosuke.png,small_left_b,appear
+hide,image,chara_small_left_a,
+image,aosuke.png,chara_small_left_b,appear
 msg_win,left_b_big_bubble.png,
 wait
-msg,�ڂ��̖��O�͐��ł��B���w�Z6�N���ł��B�D���Ȃ��̂̓e���r�B�׋����X�|�[�c�� ����܂蓾�ӂ���Ȃ��񂾁B,��
+msg,ぼくの名前は青助です。小学校6年生です。好きなものはテレビ。勉強もスポーツも あんまり得意じゃないんだ。,青助
 wait
 hide,msg_win,
-hide,image,small_left_b,
-image,kimil.png,small_left_c,appear
+hide,image,chara_small_left_b,
+image,kimil.png,chara_small_left_c,appear
 msg_win,left_c_big_bubble.png,
-msg,�킽���̖��O�̓L�~�ł��B���w�U�N���ł��B�D���Ȃ��̂̓`���R���[�g�ł��B�l�O�Řb�����Ƃ��ƂĂ����ł��B,�L�~
+msg,わたしの名前はキミです。小学６年生です。好きなものはチョコレートです。人前で話すことがとても苦手です。,キミ
 wait
 hide,msg_win,
-hide,image,small_left_c,
+hide,image,chara_small_left_c,
 next
-hide,image,down_right,
-image,shiroji_03.png,up_right,
+hide,image,chara_down_right,
+image,shiroji_03.png,chara_up_right,
 image,SS.png,info_center,
 msg_win,right_big_bubble.png,
 wait
-msg,���̂R�l�Ƃ����날���Ճ^�C����i�߂Ă��������I���āA�R�l�́A�Ȃɂ����܂��Ă��邱�Ƃ�����悤����B�ǂ�Ȃ��ƂŁA���܂��Ă���̂��낤�H�}���K�����Ȃ���l���Ă݂悤�I,������
+msg,この３人とこころあっぷタイムを進めていくぞい！さて、３人は、なにかこまっていることがあるようじゃ。どんなことで、こまっているのだろう？マンガを見ながら考えてみよう！,白じい
 next
 scene,manga
 title,manga1_title.png,
@@ -91,4 +91,30 @@ next
 flip,manga1-5.png,flip
 next
 flip,manga1-6.png,flip
+next
+scene,main
+bg,background_mokume.png,
+image,shiroji_01.png,chara_down_right,appear
+image,item_name.png,item_name_plate,
+text,きもちセンサー,item_name_text,
+image,item01_solo.png,item_image_center,
+msg_win,right_big_bubble.png,
+wait
+msg,わしの作った発明品をつかって、自分のきもちを 調べてみるのじゃ！,白じい
+next
+hide,msg_win,
+hide,image,chara_down_right,
+hide,image,item_image_center,
+hide,image,item_name_plate,
+hide,text,item_name_text,
+scene,item
+image,shiroji_03.png,chara,
+image,item_name.png,name_plate,
+text,きもちセンサー,name_text,
+image,item01_bubble.png,bubble,
+text,No.1,number,
+image,item01_solo.png,object,
+image,item_info.png,info_plate,
+text,きもちセンサーとは…,info_title,
+text,★だれでもいろんな「きもち」になるが、「きもち」を「ことば」であらわすことは鬱　かんたんなことではないのだ。鬱鬱★きもちセンサーをつかうと、自分の「きもち」をピタリとあらわす「ことば」を鬱　選ぶことができるのじゃ！,info_sentence,
 next
