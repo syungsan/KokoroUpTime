@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>0.8.0</Version>
+    <Version>0.8.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,8 +27,12 @@
     <None Remove="Images\item01_solo.png" />
     <None Remove="Images\item_info.png" />
     <None Remove="Images\item_name.png" />
+    <None Remove="Images\kimif.png" />
     <None Remove="Images\kimil.png" />
     <None Remove="Images\left_a_big_bubble.png" />
+    <None Remove="Images\left_big_bubble_blue.png" />
+    <None Remove="Images\left_big_bubble_red.png" />
+    <None Remove="Images\left_big_bubble_yellow.png" />
     <None Remove="Images\left_b_big_bubble.png" />
     <None Remove="Images\left_c_big_bubble.png" />
     <None Remove="Images\long_bubble.png" />
@@ -73,8 +77,12 @@
     <Resource Include="Images\item01_solo.png" />
     <Resource Include="Images\item_info.png" />
     <Resource Include="Images\item_name.png" />
+    <Resource Include="Images\kimif.png" />
     <Resource Include="Images\kimil.png" />
     <Resource Include="Images\left_a_big_bubble.png" />
+    <Resource Include="Images\left_big_bubble_blue.png" />
+    <Resource Include="Images\left_big_bubble_red.png" />
+    <Resource Include="Images\left_big_bubble_yellow.png" />
     <Resource Include="Images\left_b_big_bubble.png" />
     <Resource Include="Images\left_c_big_bubble.png" />
     <Resource Include="Images\manga1-1.png" />
@@ -105,6 +113,9 @@
 
   <ItemGroup>
     <None Update="Scenarios\chapter1.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter2.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

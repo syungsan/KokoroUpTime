@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using System.Reflection;
+using System.Diagnostics;
 
 namespace KokoroUpTime
 {
@@ -38,16 +39,30 @@ namespace KokoroUpTime
             string runtime = "Assembly.ImageRuntimeVersion : " + asm.ImageRuntimeVersion + "\r\n";
 
             this.VersionText.Text = name + version + fullname + processor + runtime + "\r\n";
+
+            this.WindowTitle = asmName.Name + " Ver" + asmName.Version.ToString();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // Uriで遷移
-            NavigationService.Navigate(new Uri("GamePage.xaml", UriKind.Relative));
+            Button button = sender as Button;
 
             // Pageインスタンスを渡して遷移
-            var nextPage = new GamePage();
-            NavigationService.Navigate(nextPage);
+            GamePage nextPage = new GamePage();
+
+            string scenario = "";
+
+            for (int i = 1; i <= 12; ++i)
+            {
+                if (button.Content.ToString() == $"第{i}回")
+                {
+                    scenario = $"Scenarios/chapter{i}.csv";
+                }
+            }
+            nextPage.SetScenario(scenario);
+
+            this.NavigationService.Navigate(new Uri("GamePage.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(nextPage);
         }
     }
 }

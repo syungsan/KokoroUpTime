@@ -15,7 +15,8 @@ using CsvReadWrite;
 using System.Diagnostics;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using System.Security.Cryptography.X509Certificates;
+using System.Linq;
+using System.Security.AccessControl;
 
 namespace KokoroUpTime
 {
@@ -30,7 +31,6 @@ namespace KokoroUpTime
         private List<List<string>> scenarios = null;
 
         private string position = "";
-        private string scene = "";
 
         private bool isClickable = false;
         private int tapCount = 0;
@@ -39,11 +39,11 @@ namespace KokoroUpTime
         private DispatcherTimer msgTimer;
         private int word_num;
 
-        private Dictionary<string, Image> mainImages = null;
-        private Dictionary<string, Image> itemImages = null;
+        private Dictionary<string, Image> imageObjects = null;
+        private Dictionary<string, TextBlock> textObjects = null;
+        private Dictionary<string, Button> buttonObjects = null;
 
-        private Dictionary<string, TextBlock> mainTextBlocks = null;
-        private Dictionary<string, TextBlock> itemTextBlocks = null;
+        private CheckBox[] checkBoxs;
 
         public GamePage()
         {
@@ -52,7 +52,13 @@ namespace KokoroUpTime
             // Hide host's navigation UI
             this.ShowsNavigationUI = false;
 
-            this.scenarios = this.LoadScenario("Scenarios/chapter1.csv");
+            this.InitControls();
+        }
+
+        // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
+        public void SetScenario(string scenario)
+        {
+            this.scenarios = this.LoadScenario(scenario);
             this.ScenarioPlay();
         }
 
@@ -66,6 +72,135 @@ namespace KokoroUpTime
             return scenarios;
         }
 
+        private void ResetControls()
+        {
+            this.BG.Visibility = Visibility.Hidden;
+            this.MainMsg.Visibility = Visibility.Hidden;
+            this.CharaDownRight.Visibility = Visibility.Hidden;
+            this.CharaSmallLeftA.Visibility = Visibility.Hidden;
+            this.CharaSmallLeftB.Visibility = Visibility.Hidden;
+            this.CharaSmallLeftC.Visibility = Visibility.Hidden;
+            this.BigInfo.Visibility = Visibility.Hidden;
+            this.CharaUpRight.Visibility = Visibility.Hidden;            
+            this.MainMsgBubble.Visibility = Visibility.Hidden;
+            this.MainMsg.Visibility = Visibility.Hidden;
+            this.SessionTitle.Visibility = Visibility.Hidden;
+            this.SessionFrame.Visibility = Visibility.Hidden;
+            this.SessionSubTitle.Visibility = Visibility.Hidden;
+            this.SessionSentence.Visibility = Visibility.Hidden;
+            this.CharaSmallLeft.Visibility = Visibility.Hidden;
+
+            this.NextMsgButton.Visibility = Visibility.Hidden;
+            this.BackMsgButton.Visibility = Visibility.Hidden;
+ 
+            this.BoardButton.Visibility = Visibility.Hidden;
+            this.RuleCheck1Box.Visibility = Visibility.Hidden;
+            this.RuleCheck2Box.Visibility = Visibility.Hidden;
+            this.RuleCheck3Box.Visibility = Visibility.Hidden;
+            this.CharaBottomRight.Visibility = Visibility.Hidden;
+            this.LongMsgBubble.Visibility = Visibility.Hidden;
+            this.LongMsgImage.Visibility = Visibility.Hidden;
+            this.LongMsg.Visibility = Visibility.Hidden;
+            this.RuleTitle.Visibility = Visibility.Hidden;
+            this.RuleChecK1Msg.Visibility = Visibility.Hidden;
+            this.RuleChecK2Msg.Visibility = Visibility.Hidden;
+            this.RuleChecK3Msg.Visibility = Visibility.Hidden;
+
+            this.MangaTitle.Visibility = Visibility.Hidden;
+            this.MangaImage.Visibility = Visibility.Hidden;
+            this.MangaNextButton.Visibility = Visibility.Hidden;
+
+            this.ItemImageCenter.Visibility = Visibility.Hidden;
+            this.ItemNamePlateCenter.Visibility = Visibility.Hidden;
+            this.ItemNameTextCenter.Visibility = Visibility.Hidden;
+            this.ItemNameBubble.Visibility = Visibility.Hidden;
+            this.ItemNumber.Visibility = Visibility.Hidden;
+            this.ItemImageLeft.Visibility = Visibility.Hidden;
+            this.ItemNamePlateLeft.Visibility = Visibility.Hidden;
+            this.ItemNameTextLeft.Visibility = Visibility.Hidden;
+            this.ItemInfoPlate.Visibility = Visibility.Hidden;
+            this.CharaSmallUpRight.Visibility = Visibility.Hidden;
+            this.ItemInfoTitle.Visibility = Visibility.Hidden;
+            this.ItemInfoSentence.Visibility = Visibility.Hidden;
+
+            this.NextPageButton.Visibility = Visibility.Hidden;
+            this.BackPageButton.Visibility = Visibility.Hidden;
+
+            this.MainMsg.Text = "";
+
+            this.RuleTitle.Text = "";
+            this.RuleChecK1Msg.Text = "";
+            this.RuleChecK2Msg.Text = "";
+            this.RuleChecK3Msg.Text = "";
+            this.RuleCheck1Box.IsEnabled = false;
+            this.RuleCheck2Box.IsEnabled = false;
+            this.RuleCheck3Box.IsEnabled = false;
+            this.LongMsg.Text = "";
+
+            this.ItemNameTextLeft.Text = "";
+            this.ItemNameTextCenter.Text = "";
+            this.ItemNumber.Text = "";
+            this.ItemInfoTitle.Text = "";
+            this.ItemInfoSentence.Text = "";
+        }
+
+        private void InitControls()
+        {
+            this.imageObjects = new Dictionary<string, Image>
+            {
+                ["bg"] = this.BG,
+                ["chara_down_right"] = this.CharaDownRight,
+                ["chara_small_left_a"] = this.CharaSmallLeftA,
+                ["chara_small_left_b"] = this.CharaSmallLeftB,
+                ["chara_small_left_c"] = this.CharaSmallLeftC,
+                ["chara_small_left"] = this.CharaSmallLeft,
+                ["main_msg_bubble"] = this.MainMsgBubble,
+                ["big_info"] = this.BigInfo,
+                ["chara_up_right"] = this.CharaUpRight,
+                ["chara_bottom_right"] = this.CharaBottomRight,
+                ["manga_title"] = this.MangaTitle,
+                ["manga_image"] = this.MangaImage,
+                ["session_frame"] = this.SessionFrame,
+                ["session_title"] = this.SessionTitle,
+                ["item_image_center"] = this.ItemImageCenter,
+                ["item_image_left"] = this.ItemImageLeft,
+                ["item_name_plate_center"] = this.ItemNamePlateCenter,
+                ["item_name_bubble"] = this.ItemNameBubble,
+                ["item_name_plate_left"] = this.ItemNamePlateLeft,
+                ["item_info_plate"] = this.ItemInfoPlate,
+                ["chara_small_up_right"] = this.CharaSmallUpRight,
+                ["long_msg_image"] = this.LongMsgImage,
+            };
+
+            this.textObjects = new Dictionary<string, TextBlock>
+            {
+                ["main_msg"] = this.MainMsg,
+                ["session_sub_title"] = this.SessionSubTitle,
+                ["session_sentence"] = this.SessionSentence,
+                ["rule_title"] = this.RuleTitle,
+                ["rule_check1_msg"] = this.RuleChecK1Msg,
+                ["rule_check2_msg"] = this.RuleChecK2Msg,
+                ["rule_check3_msg"] = this.RuleChecK3Msg,
+                ["long_msg"] = this.LongMsg,
+                ["item_name_text_left"] = this.ItemNameTextLeft,
+                ["item_name_text_center"] = this.ItemNameTextCenter,
+                ["item_number"] = this.ItemNumber,
+                ["item_info_title"] = this.ItemInfoTitle,
+                ["item_info_sentence"] = this.ItemInfoSentence,
+            };
+
+            this.buttonObjects = new Dictionary<string, Button>
+            {
+                ["next_msg_button"] = this.NextMsgButton,
+                ["back_msg_button"] = this.BackMsgButton,
+                ["next_page_button"] = this.NextPageButton,
+                ["back_page_button"] = this.BackPageButton,
+                ["manga_next_button"] = this.MangaNextButton,
+                ["board_button"] = this.BoardButton,
+                ["long_msg_bubble"] = this.LongMsgBubble,
+            };
+        }
+
         // ゲーム進行の中核
         private void ScenarioPlay()
         {
@@ -76,494 +211,197 @@ namespace KokoroUpTime
             // メッセージ表示関連
             this.word_num = 0;
 
-            // 各シーンの初期化はここで
-            if (tag == "scene")
+            switch (tag)
             {
-                this.HiddeAllScene();
+                case "reset":
 
-                var _scene = this.scenarios[this.scenarioCount][1];
-                this.scene = _scene;
+                    this.ResetControls();
 
-                switch (this.scene)
-                {
-                    case "main":
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
 
-                        this.MainBigSpeech.Text = "";
+                    break;
 
-                        this.MainCharaDownRight.Visibility = Visibility.Hidden;
-                        this.MainCharaSmallLeftA.Visibility = Visibility.Hidden;
-                        this.MainCharaSmallLeftB.Visibility = Visibility.Hidden;
-                        this.MainCharaSmallLeftC.Visibility = Visibility.Hidden;
-                        this.MainInfoCenter.Visibility = Visibility.Hidden;
-                        this.MainCharaUpRight.Visibility = Visibility.Hidden;
-                        this.MainNextPageButton.Visibility = Visibility.Hidden;
-                        this.MainBackPageButton.Visibility = Visibility.Hidden;
+                case "image":
 
-                        this.MainItemImageCenter.Visibility = Visibility.Hidden;
-                        this.MainItemNamePlate.Visibility = Visibility.Hidden;
-                        this.MainItemNameText.Visibility = Visibility.Hidden;
+                    this.position = this.scenarios[this.scenarioCount][1];
 
-                        this.MainBigBubble.Visibility = Visibility.Hidden;
-                        this.MainBigSpeech.Visibility = Visibility.Hidden;
-                        this.MainNextMsgButton.Visibility = Visibility.Hidden;
-                        this.MainBackMsgButton.Visibility = Visibility.Hidden;
+                    var _imageObject = this.imageObjects[this.position];
 
-                        this.MainSessionTitle.Visibility = Visibility.Hidden;
-                        this.MainSessionFrame.Visibility = Visibility.Hidden;
-                        this.MainSessionSubTitle.Visibility = Visibility.Hidden;
-                        this.MainSessionInfo.Visibility = Visibility.Hidden;
+                    var _imageFile = this.scenarios[this.scenarioCount][2];
 
-                        this.mainImages = new Dictionary<string, Image>
-                        {
-                            ["chara_down_right"] = this.MainCharaDownRight,
-                            ["chara_small_left_a"] = this.MainCharaSmallLeftA,
-                            ["chara_small_left_b"] = this.MainCharaSmallLeftB,
-                            ["chara_small_left_c"] = this.MainCharaSmallLeftC,
-                            ["info_center"] = this.MainInfoCenter,
-                            ["chara_up_right"] = this.MainCharaUpRight,
-                            ["item_image_center"] = this.MainItemImageCenter,
-                            ["item_name_plate"] = this.MainItemNamePlate,
-                            ["session_title"] = this.MainSessionTitle,
-                            ["session_frame"] = this.MainSessionFrame,
-                        };
+                    _imageObject.Visibility = Visibility.Visible;
 
-                        this.mainTextBlocks = new Dictionary<string, TextBlock>
-                        {
-                            ["item_name_text"] = this.MainItemNameText,
-                            ["session_sub_title"] = this.MainSessionSubTitle,
-                            ["session_info"] = this.MainSessionInfo,
-                        };
+                    var _storyBoardName = this.scenarios[this.scenarioCount][3];
+                    if (_storyBoardName != "")
+                    {
+                        _storyBoardName += $"_{ this.position}";
+                    }
+                    this.ShowImage(imageFile: _imageFile, imageObject: _imageObject, storyBoardName: _storyBoardName);
 
-                        this.MainGrid.Visibility = Visibility.Visible;
+                    break;
 
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
+                case "msg":
 
-                        break;
+                    this.NextMsgButton.Visibility = Visibility.Hidden;
+                    this.BackMsgButton.Visibility = Visibility.Hidden;
 
-                    case "board":
+                    this.position = this.scenarios[this.scenarioCount][1];
 
-                        this.BoardTitle.Text = "";
+                    var _textObject = this.textObjects[this.position];
 
-                        this.BoardChecK1Msg.Text = "";
-                        this.BoardChecK2Msg.Text = "";
-                        this.BoardChecK3Msg.Text = "";
+                    var _message = this.scenarios[this.scenarioCount][2];
 
-                        this.BoardCheck1Box.Visibility = Visibility.Hidden;
-                        this.BoardCheck2Box.Visibility = Visibility.Hidden;
-                        this.BoardCheck3Box.Visibility = Visibility.Hidden;
+                    _textObject.Visibility = Visibility.Visible;
 
-                        this.BoardCheck1Box.IsEnabled = false;
-                        this.BoardCheck2Box.IsEnabled = false;
-                        this.BoardCheck3Box.IsEnabled = false;
+                    this.ShowMessage(textObject: _textObject, message: _message);
 
-                        this.BoardCharacter.Visibility = Visibility.Hidden;
-                        this.BoardLongBubble.Visibility = Visibility.Hidden;
-                        this.BoardLongSpeech.Text = "";
+                    break;
 
-                        this.BoardNextPageButton.Visibility = Visibility.Hidden;
+                case "wait":
 
-                        this.BoardGrid.Visibility = Visibility.Visible;
+                    var _msgButtonVisible = this.scenarios[this.scenarioCount][1];
 
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
+                    bool msgButtonVisible = true;
 
-                        break;
+                    if (_msgButtonVisible == "no_button")
+                    {
+                        msgButtonVisible = false;
+                    }
+                    if (msgButtonVisible)
+                    {
+                        this.NextMsgButton.Visibility = Visibility.Visible;
+                        this.BackMsgButton.Visibility = Visibility.Visible;
+                    }
+                    this.isClickable = true;
 
-                    case "manga":
+                    break;
 
-                        this.MangaTitle.Visibility = Visibility.Hidden;
-                        this.MangaImage.Visibility = Visibility.Hidden;
-                        this.MangaNextButton.Visibility = Visibility.Hidden;
+                case "next":
 
-                        this.MangaGrid.Visibility = Visibility.Visible;
+                    this.NextPageButton.Visibility = Visibility.Visible;
+                    this.BackPageButton.Visibility = Visibility.Visible;
 
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
+                    this.isClickable = true;
 
-                        break;
+                    break;
 
-                    case "item":
+                case "flip":
 
-                        this.ItemNameText.Text = "";
-                        this.ItemInfoTitle.Text = "";
-                        this.ItemInfoSentence.Text = "";
+                    this.MangaNextButton.Visibility = Visibility.Visible;
+                    this.isClickable = true;
 
-                        this.ItemNextPageButton.Visibility = Visibility.Hidden;
-                        this.ItemBackPageButton.Visibility = Visibility.Hidden;
+                    break;
 
-                        this.ItemBubble.Visibility = Visibility.Hidden;
-                        this.ItemNumber.Visibility = Visibility.Hidden;
-                        this.ItemObject.Visibility = Visibility.Hidden;
-                        this.ItemNamePlate.Visibility = Visibility.Hidden;
-                        this.ItemNameText.Visibility = Visibility.Hidden;
-                        this.ItemInfoPlate.Visibility = Visibility.Hidden;
-                        this.ItemChara.Visibility = Visibility.Hidden;
-                        this.ItemInfoTitle.Visibility = Visibility.Hidden;
-                        this.ItemInfoSentence.Visibility = Visibility.Hidden;
+                case "text":
 
-                        this.itemImages = new Dictionary<string, Image>
-                        {
-                            ["chara"] = this.ItemChara,
-                            ["name_plate"] = this.ItemNamePlate,
-                            ["object"] = this.ItemObject,
-                            ["bubble"] = this.ItemBubble,
-                            ["info_plate"] = this.ItemInfoPlate,
-                        };
+                    this.position = this.scenarios[this.scenarioCount][1];
 
-                        this.itemTextBlocks = new Dictionary<string, TextBlock>
-                        {
-                            ["name_text"] = this.ItemNameText,
-                            ["number"] = this.ItemNumber,
-                            ["info_title"] = this.ItemInfoTitle,
-                            ["info_sentence"] = this.ItemInfoSentence,
-                        };
+                    var textObject = this.textObjects[this.position];
 
-                        this.ItemGrid.Visibility = Visibility.Visible;
+                    var _text = this.scenarios[this.scenarioCount][2];
 
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
+                    var text = _text.Replace("鬱", "\u2028");
 
-                        break;
-                }
+                    textObject.Text = text;
+
+                    textObject.Visibility = Visibility.Visible;
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
+                case "button":
+
+                    this.position = this.scenarios[this.scenarioCount][1];
+
+                    var buttonObject = this.buttonObjects[this.position];
+
+                    buttonObject.Visibility = Visibility.Visible;
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
+                case "hide":
+
+                    // オブジェクトを消すときは後々ほとんどアニメで処理するようにする
+                    var hideTarget = this.scenarios[this.scenarioCount][1];
+
+                    switch (hideTarget)
+                    {
+                        case "image":
+
+                            this.position = this.scenarios[this.scenarioCount][2];
+                            this.imageObjects[this.position].Visibility = Visibility.Hidden;
+
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+
+                            break;
+
+                        case "text":
+
+                            this.position = this.scenarios[this.scenarioCount][2];
+                            this.textObjects[this.position].Visibility = Visibility.Hidden;
+                            this.textObjects[this.position].Text = "";
+
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+
+                            break;
+
+                        case "button":
+
+                            this.position = this.scenarios[this.scenarioCount][2];
+                            this.buttonObjects[this.position].Visibility = Visibility.Hidden;
+
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+
+                            break;
+                    }
+                    break;
+
+                case "rule_check":
+
+                    this.position = this.scenarios[this.scenarioCount][1];
+
+                    var _ruleObject = this.textObjects[this.position];
+
+                    var _rule = this.scenarios[this.scenarioCount][2];
+
+                    this.checkBoxs = new CheckBox[] { this.RuleCheck1Box, this.RuleCheck2Box, this.RuleCheck3Box };
+
+                    var ruleCheck = this.scenarios[this.scenarioCount][3];
+
+                    object _ruleObj;
+
+                    if (ruleCheck == "all")
+                    {
+                        _ruleObj = checkBoxs;
+                    }
+                    else
+                    {
+                        _ruleObj = checkBoxs[int.Parse(ruleCheck)];
+                    }
+                    _ruleObject.Visibility = Visibility.Visible;
+
+                    this.ShowMessage(textObject: _ruleObject, message: _rule, obj: _ruleObj);
+
+                    break;
+
+                case "wait_tap":
+
+                    this.isClickable = false;
+                    break;
             }
-
-            // Commonメインシーン
-            if (this.scene == "main")
-            {
-                switch (tag)
-                {
-                    case "bg":
-
-                        // 後々背景もクロスフェードなどの処理を入れる
-                        var bgImage = this.scenarios[this.scenarioCount][1];
-                        this.MainBG.Source = new BitmapImage(new Uri($"Images/{bgImage}", UriKind.Relative));
-
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-
-                        break;
-
-                    case "image":
-
-                        this.MainBigSpeech.Text = "";
-
-                        var _imageFile = this.scenarios[this.scenarioCount][1];
-
-                        this.position = this.scenarios[this.scenarioCount][2];
-
-                        var _imageObject = this.mainImages[this.position];
-
-                        _imageObject.Visibility = Visibility.Visible;
-
-                        var _storyBoardName = this.scenarios[this.scenarioCount][3];
-                        if (_storyBoardName != "")
-                        {
-                            _storyBoardName+= "_main_" + this.position;
-                        }
-                        this.ShowImage(imageFile: _imageFile, imageObject: _imageObject, storyBoardName: _storyBoardName);
-
-                        break;
-
-                    case "msg":
-
-                        this.MainBigSpeech.Text = "";
-
-                        this.MainNextMsgButton.Visibility = Visibility.Hidden;
-                        this.MainBackMsgButton.Visibility = Visibility.Hidden;
-
-                        var _message = this.scenarios[this.scenarioCount][1];
-
-                        this.ShowMessage(textBlock: this.MainBigSpeech, message: _message);
-
-                        break;
-
-                    case "wait":
-
-                        this.MainNextMsgButton.Visibility = Visibility.Visible;
-
-                        if (this.scenarios[this.scenarioCount - 1] != null)
-                        {
-                            this.MainBackMsgButton.Visibility = Visibility.Visible;
-                        }
-                        this.isClickable = true;
-
-                        break;
-
-                    case "msg_win":
-
-                        var showBigBubbleImage = this.scenarios[this.scenarioCount][1];
-                        this.MainBigBubble.Source = new BitmapImage(new Uri($"Images/{showBigBubbleImage}", UriKind.Relative));
-
-                        this.MainBigBubble.Visibility = Visibility.Visible;
-                        this.MainBigSpeech.Visibility = Visibility.Visible;
-
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-
-                        break;
-
-                    case "next":
-
-                        this.MainNextPageButton.Visibility = Visibility.Visible;
-                        this.MainBackPageButton.Visibility = Visibility.Visible;
-                        this.isClickable = true;
-
-                        break;
-
-                    case "text":
-
-                        this.position = this.scenarios[this.scenarioCount][2];
-
-                        var textObject = this.mainTextBlocks[this.position];
-
-                        var _text = this.scenarios[this.scenarioCount][1];
-
-                        textObject.Text = _text;
-
-                        textObject.Visibility = Visibility.Visible;
-
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-
-                        break;
-
-                    case "hide":
-
-                        // オブジェクトを消すときは後々ほとんどアニメで処理するようにする
-                        var hideTarget = this.scenarios[this.scenarioCount][1];
-
-                        switch (hideTarget)
-                        {
-                            case "msg_win":
-
-                                this.MainBigBubble.Visibility = Visibility.Hidden;
-                                this.MainBigSpeech.Visibility = Visibility.Hidden;
-                                this.MainNextMsgButton.Visibility = Visibility.Hidden;
-                                this.MainBackMsgButton.Visibility = Visibility.Hidden;
-
-                                this.scenarioCount += 1;
-                                this.ScenarioPlay();
-
-                                break;
-
-                            case "image":
-
-                                this.position = this.scenarios[this.scenarioCount][2];
-                                this.mainImages[this.position].Visibility = Visibility.Hidden;
-
-                                this.scenarioCount += 1;
-                                this.ScenarioPlay();
-
-                                break;
-
-                            case "text":
-
-                                this.position = this.scenarios[this.scenarioCount][2];
-                                this.mainTextBlocks[this.position].Visibility = Visibility.Hidden;
-                                this.mainTextBlocks[this.position].Text = "";
-
-                                this.scenarioCount += 1;
-                                this.ScenarioPlay();
-
-                                break;
-                        }
-                        break;
-                }
-            }
-
-            // 黒板チェックシーン
-            if (this.scene == "board")
-            {
-                switch (tag)
-                {
-                    case "title":
-
-                        this.ShowMessage(textBlock: this.BoardTitle, message: this.scenarios[this.scenarioCount][1]);
-                        break;
-
-                    case "check1msg":
-
-                        this.ShowMessage(textBlock: this.BoardChecK1Msg, message: this.scenarios[this.scenarioCount][1], checkBox: this.BoardCheck1Box);
-                        break;
-
-                    case "check2msg":
-
-                        this.ShowMessage(textBlock: this.BoardChecK2Msg, message: this.scenarios[this.scenarioCount][1], checkBox: this.BoardCheck2Box);
-                        break;
-
-                    case "check3msg":
-
-                        this.ShowMessage(textBlock: this.BoardChecK3Msg, message: this.scenarios[this.scenarioCount][1], checkBox: this.BoardCheck3Box);
-                        break;
-
-                    case "wait":
-
-                        this.isClickable = true;
-                        break;
-
-                    case "image":
-
-                        this.BoardCharacter.Visibility = Visibility.Visible;
-                        this.BoardLongBubble.Visibility = Visibility.Visible;
-
-                        var _imageFile = this.scenarios[this.scenarioCount][1];
-
-                        var _storyBoardName = this.scenarios[this.scenarioCount][2];
-                        if (_storyBoardName != "")
-                        {
-                            _storyBoardName += "_board";
-                        }
-                        this.ShowImage(imageFile: _imageFile, imageObject: this.MainCharaDownRight, storyBoardName: _storyBoardName);
-
-                        break;
-
-                    case "suggest":
-
-                        CheckBox[] _checkBoxs = new CheckBox[] { this.BoardCheck1Box, this.BoardCheck2Box, this.BoardCheck3Box };
-                        this.ShowMessage(textBlock: this.BoardLongSpeech, message: this.scenarios[this.scenarioCount][1], checkBoxes: _checkBoxs);
-                        break;
-
-                    case "tap":
-
-                        this.isClickable = false;
-                        break;
-                }
-            }
-
-            if (this.scene == "manga")
-            {
-                switch (tag)
-                {
-                    case "title":
-
-                        this.MangaTitle.Visibility = Visibility.Visible;
-
-                        var titleImage = this.scenarios[this.scenarioCount][1];
-                        this.ShowImage(imageFile: titleImage, imageObject: this.MangaTitle, "");
-
-                        break;
-
-                    case "flip":
-
-                        this.MangaImage.Visibility = Visibility.Visible;
-
-                        var mangaImage = this.scenarios[this.scenarioCount][1];
-
-                        var _storyBoardName = this.scenarios[this.scenarioCount][2];
-
-                        if (_storyBoardName != "")
-                        {
-                            _storyBoardName += "_manga";
-                        }
-
-                        this.ShowImage(imageFile: mangaImage, imageObject: this.MangaImage, storyBoardName: _storyBoardName);
-
-                        break;
-
-                    case "next":
-
-                        this.MangaNextButton.Visibility = Visibility.Visible;
-                        this.isClickable = true;
-
-                        break;
-                }
-            }
-
-            if (this.scene == "item")
-            {
-                
-                switch (tag)
-                {
-                    case "bg":
-
-                        var bgImage = this.scenarios[this.scenarioCount][1];
-                        this.ItemBG.Source = new BitmapImage(new Uri($"Images/{bgImage}", UriKind.Relative));
-
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-
-                        break;
-
-                    case "image":
-
-                        var _imageFile = this.scenarios[this.scenarioCount][1];
-
-                        this.position = this.scenarios[this.scenarioCount][2];
-
-                        var _imageObject = this.itemImages[this.position];
-
-                        _imageObject.Visibility = Visibility.Visible;
-
-                        var _storyBoardName = this.scenarios[this.scenarioCount][3];
-                        if (_storyBoardName != "")
-                        {
-                            _storyBoardName += "_item_" + this.position;
-                        }
-                        this.ShowImage(imageFile: _imageFile, imageObject: _imageObject, storyBoardName: _storyBoardName);
-
-                        break;
-
-                    case "text":
-
-                        this.position = this.scenarios[this.scenarioCount][2];
-
-                        var textObject = this.itemTextBlocks[this.position];
-
-                        var _text = this.scenarios[this.scenarioCount][1];
-
-                        var text = _text.Replace("鬱", "\u2028");
-
-                        textObject.Text = text;
-
-                        textObject.Visibility = Visibility.Visible;
-
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-
-                        break;
-
-                    case "next":
-
-                        this.ItemNextPageButton.Visibility = Visibility.Visible;
-                        this.ItemBackPageButton.Visibility = Visibility.Visible;
-                        this.isClickable = true;
-
-                        break;
-
-                    case "item_hide":
-
-                        var hideTarget = this.scenarios[this.scenarioCount][1];
-
-                        switch (hideTarget)
-                        {
-                            case "image":
-
-                                this.position = this.scenarios[this.scenarioCount][2];
-                                this.itemImages[this.position].Visibility = Visibility.Hidden;
-
-                                this.scenarioCount += 1;
-                                this.ScenarioPlay();
-
-                                break;
-
-                            case "text":
-
-                                this.position = this.scenarios[this.scenarioCount][2];
-                                this.itemTextBlocks[this.position].Visibility = Visibility.Hidden;
-                                this.itemTextBlocks[this.position].Text = "";
-
-                                this.scenarioCount += 1;
-                                this.ScenarioPlay();
-
-                                break;
-                        }
-                        break;
-                }
-            }
+            
         }
 
-        void ShowMessage(TextBlock textBlock, string message, CheckBox checkBox = null, CheckBox[] checkBoxes = null)
+        void ShowMessage(TextBlock textObject, string message, object obj=null)
         {
             // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
             var _message = message.Replace("鬱", "\u2028");
@@ -577,7 +415,7 @@ namespace KokoroUpTime
             // 一文字ずつメッセージ表示（Inner Func）
             void ViewMsg(object sender, EventArgs e)
             {
-                textBlock.Text = _message.Substring(0, word_num);
+                textObject.Text = _message.Substring(0, word_num);
 
                 if (word_num < _message.Length)
                 {
@@ -588,16 +426,9 @@ namespace KokoroUpTime
                     this.msgTimer.Stop();
                     this.msgTimer = null;
 
-                    if (checkBox != null)
+                    if (obj != null)
                     {
-                        checkBox.Visibility = Visibility.Visible;
-                    }
-                    if (checkBoxes != null)
-                    {
-                        foreach (CheckBox checkBox in checkBoxes)
-                        {
-                            checkBox.IsEnabled = true;
-                        }
+                        this.MessageCallBack(obj);
                     }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -607,8 +438,10 @@ namespace KokoroUpTime
 
         private void ShowImage(string imageFile, Image imageObject, string storyBoardName = "")
         {
-            imageObject.Source = new BitmapImage(new Uri($"Images/{imageFile}", UriKind.Relative));
-
+            if (imageFile != "")
+            {
+                imageObject.Source = new BitmapImage(new Uri($"Images/{imageFile}", UriKind.Relative));
+            }
             if (storyBoardName != "")
             {
                 Storyboard sb = this.FindResource(storyBoardName) as Storyboard;
@@ -638,72 +471,74 @@ namespace KokoroUpTime
             }
         }
 
+        private void MessageCallBack(object obj)
+        {
+            switch (obj)
+            {
+                case CheckBox checkBox:
+
+                    checkBox.Visibility = Visibility.Visible;
+
+                    break;
+
+                case CheckBox[] checkBoxs:
+
+                    foreach (CheckBox checkBox in checkBoxs) {
+                        checkBox.IsEnabled = true;
+                    }
+                    break;
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (this.isClickable)
             {
                 this.isClickable = false;
 
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
-        }
+                Button button = sender as Button;
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.isClickable)
-            {
-                this.isClickable = false;
-
-                // this.scenarioCount -= 1;
-                // this.ScenarioPlay();
+                if (!button.Name.Contains("Back"))
+                {
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+                else
+                {
+                    // 連続Backの実現にはもっと複雑な処理がいる
+                    this.scenarioCount -= 1;
+                    this.ScenarioPlay();
+                }
             }
-            // 連続Backの実現にはもっと複雑な処理がいる
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = sender as CheckBox;
 
-            if (checkBox.IsChecked == true)
+            if (this.checkBoxs.Contains(checkBox))
             {
                 this.tapCount += 1;
-                this.checkAllBox();
+
+                if (this.tapCount >= this.checkBoxs.Length)
+                {
+                    foreach (CheckBox _checkBox in this.checkBoxs)
+                    {
+                        _checkBox.IsEnabled = false;
+                    }
+                    this.isClickable = true;
+                }
             }
-            else
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+
+            if (this.checkBoxs.Contains(checkBox))
             {
                 this.tapCount -= 1;
             }
-        }
-
-        private void checkAllBox()
-        {
-            if (this.tapCount >= 3)
-            {
-                this.BoardCheck1Box.IsEnabled = false;
-                this.BoardCheck2Box.IsEnabled = false;
-                this.BoardCheck3Box.IsEnabled = false;
-
-                this.BoardNextPageButton.Visibility = Visibility.Visible;
-                this.isClickable = true;
-            }
-        }
-
-        private void HiddeAllScene()
-        {
-            this.MainGrid.Visibility = Visibility.Hidden;
-            this.BoardGrid.Visibility = Visibility.Hidden;
-            this.MangaGrid.Visibility = Visibility.Hidden;
-            this.ItemGrid.Visibility = Visibility.Hidden;
-        }
-
-        // UTF-8からShift-JISへの変換にそなえて取り置き
-        public static string ConvertEncoding(string src, System.Text.Encoding destEnc)
-        {
-            byte[] src_temp = System.Text.Encoding.ASCII.GetBytes(src);
-            byte[] dest_temp = System.Text.Encoding.Convert(System.Text.Encoding.ASCII, destEnc, src_temp);
-            string ret = destEnc.GetString(dest_temp);
-            return ret;
         }
     }
 }

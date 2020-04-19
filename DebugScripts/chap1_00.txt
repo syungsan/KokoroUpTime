@@ -1,27 +1,28 @@
-scene,main
-bg,background_01.png,
-image,shiroji_01.png,chara_down_right,appear
-msg_win,right_big_bubble.png,
-wait
-msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
-wait
-msg,はじめに、あなたの名前を教えてくれるかの？,白じい
-wait
-msg,名前を入力【　　　　　　　　　　】,白じい
-wait
-msg,あなたは【name】じゃな。【name】のうしろは、何かつけるかの？,白じい
-wait
-msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい
-wait
-msg,それでは【name】、　「こころあっぷタイム」とは何か説明していくぞい。,白じい
-wait
-msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
-wait
-msg,楽しくなったり、うれしくなったりするだけでなく、だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。,白じい
-wait
-msg,こども、おとな、つよい人、よわい人、大きい人、ちいさい人、どんな人でも、こまっていることがあるのじゃ。,白じい
-wait
-msg,『こころあっぷタイム』は、こまっているときに、元気になったり、リラックスできる方法を 学ぶ時間なのだ！ ,白じい
-wait
-msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
-wait
+reset
+image,bg,background_01.png,
+image,chara_down_right,shiroji_01.png,appear_up
+image,main_msg_bubble,right_big_bubble.png,
+wait,
+msg,main_msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
+wait,
+msg,main_msg,はじめに、あなたの名前を教えてくれるかの？,白じい
+wait,
+msg,main_msg,名前を入力【　　　　　　　　　　】,白じい
+wait,
+msg,main_msg,あなたは【name】じゃな。【name】のうしろは、何かつけるかの？,白じい
+wait,
+msg,main_msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい
+wait,
+image,chara_down_right,shiroji_02.png,
+msg,main_msg,それでは【name】、　「こころあっぷタイム」とは何か説明していくぞい。,白じい
+wait,
+msg,main_msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
+wait,
+msg,main_msg,楽しくなったり、うれしくなったりするだけでなく、だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。,白じい
+wait,
+msg,main_msg,こども、おとな、つよい人、よわい人、大きい人、ちいさい人、どんな人でも、こまっていることがあるのじゃ。,白じい
+wait,
+msg,main_msg,『こころあっぷタイム』は、こまっているときに、元気になったり、リラックスできる方法を 学ぶ時間なのだ！ ,白じい
+wait,
+msg,main_msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
+wait,

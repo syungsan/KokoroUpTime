@@ -49,17 +49,17 @@
         <Button Content="オプション" FontSize="36" Foreground="White" Grid.Column="1" Grid.Row="13"/>
         <Button Content="アイテム図鑑" FontSize="36" Foreground="White" Grid.Column="3" Grid.Row="13" Grid.ColumnSpan="3"/>
         <Button Content="第1回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Grid.Column="2" Grid.Row="4"/>
-        <Button Content="第2回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="2" Grid.Row="5"/>
-        <Button Content="第3回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Grid.Column="2" Grid.Row="6" Grid.RowSpan="2"/>
-        <Button Content="第4回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Grid.Column="2" Grid.Row="8"/>
-        <Button Content="第5回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="2" Grid.Row="9"/>
-        <Button Content="第6回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Grid.Column="2" Grid.Row="10"/>
-        <Button Content="第7回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="4" Grid.Row="4"/>
-        <Button Content="第8回" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="4" Grid.Row="5"/>
-        <Button Content="第9回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="4" Grid.Row="6" Grid.RowSpan="2"/>
-        <Button Content="第10回" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="4" Grid.Row="8"/>
-        <Button Content="第11回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Grid.Column="4" Grid.Row="9"/>
-        <Button Content="第12回" FontSize="36" Foreground="#FFFFE6AF" Background="{x:Null}" BorderBrush="{x:Null}" Grid.Column="4" Grid.Row="10"/>
+        <Button Content="第2回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Grid.Column="2" Grid.Row="5"/>
+        <Button Content="第3回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Grid.Column="2" Grid.Row="6" Grid.RowSpan="2"/>
+        <Button Content="第4回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Grid.Column="2" Grid.Row="8"/>
+        <Button Content="第5回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Grid.Column="2" Grid.Row="9"/>
+        <Button Content="第6回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Grid.Column="2" Grid.Row="10"/>
+        <Button Content="第7回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Grid.Column="4" Grid.Row="4"/>
+        <Button Content="第8回" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click" Grid.Column="4" Grid.Row="5"/>
+        <Button Content="第9回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Grid.Column="4" Grid.Row="6" Grid.RowSpan="2"/>
+        <Button Content="第10回" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click" Grid.Column="4" Grid.Row="8"/>
+        <Button Content="第11回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Grid.Column="4" Grid.Row="9"/>
+        <Button Content="第12回" FontSize="36" Foreground="#FFFFE6AF" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.Column="4" Grid.Row="10"/>
         <Button Content="こころアップタイムとは" FontSize="36" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="10" Grid.Row="8"/>
         <Button Content="教室のルール" FontSize="36" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}" Grid.Column="10" Grid.Row="9"/>
         <Button Content="その他" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36" Grid.Column="10" Grid.Row="10"/>

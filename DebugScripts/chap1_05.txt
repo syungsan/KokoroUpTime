@@ -1,11 +1,11 @@
-scene,main
-bg,background_05.png,
-image,challenge_time.png,session_title,
-image,white_frame.png,session_frame,
-text,チャレンジタイムとは…,session_sub_title,
-text,☆こころあっぷタイムで新しいことに挑戦してみる時間のことじゃ。,session_info
-image,shiroji_04.png,chara_up_right,
-msg_win,right_big_bubble.png,
-wait
-msg,「きもち」には、いいきもちといやなきもちだけでなく、いろいろな種類があるぞい。自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
+reset
+image,bg,background_05.png,
+image,session_title,challenge_time.png,
+image,session_frame,,
+text,session_sub_title,チャレンジタイムとは…,
+text,session_sentence,☆こころあっぷタイムで新しいことに挑戦してみる時間のことじゃ。,
+image,chara_up_right,shiroji_04.png,
+image,main_msg_bubble,right_big_bubble.png,
+wait,
+msg,main_msg,「きもち」には、いいきもちといやなきもちだけでなく、いろいろな種類があるぞい。自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
 next
