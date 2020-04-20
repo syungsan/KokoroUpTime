@@ -99,8 +99,8 @@ namespace KokoroUpTime
             this.RuleCheck3Box.Visibility = Visibility.Hidden;
             this.CharaBottomRight.Visibility = Visibility.Hidden;
             this.LongMsgBubble.Visibility = Visibility.Hidden;
-            this.LongMsgImage.Visibility = Visibility.Hidden;
-            this.LongMsg.Visibility = Visibility.Hidden;
+            // this.LongMsgImage.Visibility = Visibility.Hidden;
+            // this.LongMsg.Visibility = Visibility.Hidden;
             this.RuleTitle.Visibility = Visibility.Hidden;
             this.RuleChecK1Msg.Visibility = Visibility.Hidden;
             this.RuleChecK2Msg.Visibility = Visibility.Hidden;
@@ -226,19 +226,68 @@ namespace KokoroUpTime
 
                     this.position = this.scenarios[this.scenarioCount][1];
 
-                    var _imageObject = this.imageObjects[this.position];
+                    var imageObject = this.imageObjects[this.position];
 
-                    var _imageFile = this.scenarios[this.scenarioCount][2];
+                    string imageFile;
 
-                    _imageObject.Visibility = Visibility.Visible;
-
-                    var _storyBoardName = this.scenarios[this.scenarioCount][3];
-                    if (_storyBoardName != "")
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
-                        _storyBoardName += $"_{ this.position}";
-                    }
-                    this.ShowImage(imageFile: _imageFile, imageObject: _imageObject, storyBoardName: _storyBoardName);
+                        imageFile = this.scenarios[this.scenarioCount][2];
 
+                        imageObject.Source = new BitmapImage(new Uri($"Images/{imageFile}", UriKind.Relative));
+                    }
+                    imageObject.Visibility = Visibility.Visible;
+
+                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
+                    {
+                        var imageStoryBoard = this.scenarios[this.scenarioCount][3];
+
+                        imageStoryBoard += $"_{this.position}";
+
+                        this.ShowAnime(storyBoard: imageStoryBoard);
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
+                    break;
+
+                case "button":
+
+                    this.position = this.scenarios[this.scenarioCount][1];
+
+                    var buttonObject = this.buttonObjects[this.position];
+
+                    Image buttonImageObject = null;
+
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    {
+                        this.position = this.scenarios[this.scenarioCount][2];
+
+                        buttonImageObject = this.imageObjects[this.position];
+                    }
+                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
+                    {
+                        var buttonImageFile = this.scenarios[this.scenarioCount][3];
+
+                        buttonImageObject.Source = new BitmapImage(new Uri($"Images/{buttonImageFile}", UriKind.Relative));
+                    }
+                    buttonObject.Visibility = Visibility.Visible;
+
+                    if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
+                    {
+                        var buttonStoryBoard = this.scenarios[this.scenarioCount][4];
+
+                        buttonStoryBoard += $"_{this.position}";
+
+                        this.ShowAnime(storyBoard: buttonStoryBoard);
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
                     break;
 
                 case "msg":
@@ -260,14 +309,18 @@ namespace KokoroUpTime
 
                 case "wait":
 
-                    var _msgButtonVisible = this.scenarios[this.scenarioCount][1];
-
                     bool msgButtonVisible = true;
 
-                    if (_msgButtonVisible == "no_button")
+                    if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
                     {
-                        msgButtonVisible = false;
+                        var _msgButtonVisible = this.scenarios[this.scenarioCount][1];
+
+                        if (_msgButtonVisible == "no_button")
+                        {
+                            msgButtonVisible = false;
+                        }
                     }
+
                     if (msgButtonVisible)
                     {
                         this.NextMsgButton.Visibility = Visibility.Visible;
@@ -306,19 +359,6 @@ namespace KokoroUpTime
                     textObject.Text = text;
 
                     textObject.Visibility = Visibility.Visible;
-
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-
-                    break;
-
-                case "button":
-
-                    this.position = this.scenarios[this.scenarioCount][1];
-
-                    var buttonObject = this.buttonObjects[this.position];
-
-                    buttonObject.Visibility = Visibility.Visible;
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -365,31 +405,31 @@ namespace KokoroUpTime
                     }
                     break;
 
-                case "rule_check":
+                case "rule":
 
                     this.position = this.scenarios[this.scenarioCount][1];
 
-                    var _ruleObject = this.textObjects[this.position];
+                    var ruleObject = this.textObjects[this.position];
 
-                    var _rule = this.scenarios[this.scenarioCount][2];
+                    var rule = this.scenarios[this.scenarioCount][2];
 
                     this.checkBoxs = new CheckBox[] { this.RuleCheck1Box, this.RuleCheck2Box, this.RuleCheck3Box };
 
-                    var ruleCheck = this.scenarios[this.scenarioCount][3];
+                    var checkNum = this.scenarios[this.scenarioCount][3];
 
-                    object _ruleObj;
+                    object _obj;
 
-                    if (ruleCheck == "all")
+                    if (checkNum == "all")
                     {
-                        _ruleObj = checkBoxs;
+                        _obj = checkBoxs;
                     }
                     else
                     {
-                        _ruleObj = checkBoxs[int.Parse(ruleCheck)];
+                        _obj = checkBoxs[int.Parse(checkNum)];
                     }
-                    _ruleObject.Visibility = Visibility.Visible;
+                    ruleObject.Visibility = Visibility.Visible;
 
-                    this.ShowMessage(textObject: _ruleObject, message: _rule, obj: _ruleObj);
+                    this.ShowMessage(textObject: ruleObject, message: rule, obj: _obj);
 
                     break;
 
@@ -398,7 +438,6 @@ namespace KokoroUpTime
                     this.isClickable = false;
                     break;
             }
-            
         }
 
         void ShowMessage(TextBlock textObject, string message, object obj=null)
@@ -436,38 +475,26 @@ namespace KokoroUpTime
             }
         }
 
-        private void ShowImage(string imageFile, Image imageObject, string storyBoardName = "")
+        private void ShowAnime(string storyBoard)
         {
-            if (imageFile != "")
-            {
-                imageObject.Source = new BitmapImage(new Uri($"Images/{imageFile}", UriKind.Relative));
-            }
-            if (storyBoardName != "")
-            {
-                Storyboard sb = this.FindResource(storyBoardName) as Storyboard;
+            Storyboard sb = this.FindResource(storyBoard) as Storyboard;
 
-                if (sb != null)
+            if (sb != null)
+            {
+                // 二重終了防止策
+                bool isDuplicate = false;
+
+                sb.Completed += (s, e) =>
                 {
-                    // 二重終了防止策
-                    bool isDuplicate = false;
-
-                    sb.Completed += (s, e) =>
+                    if (!isDuplicate)
                     {
-                        if (!isDuplicate)
-                        {
-                            this.scenarioCount += 1;
-                            this.ScenarioPlay();
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
 
-                            isDuplicate = true;
-                        }
-                    };
-                    sb.Begin(this);
-                }
-            }
-            else
-            {
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
+                        isDuplicate = true;
+                    }
+                };
+                sb.Begin(this);
             }
         }
 

@@ -5,7 +5,6 @@ D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Release\netcoreapp3.1
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Release\netcoreapp3.1\KokoroUpTime.runtimeconfig.dev.json
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Release\netcoreapp3.1\KokoroUpTime.dll
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Release\netcoreapp3.1\KokoroUpTime.pdb
-D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1\GamePage.g.cs
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1\MainWindow.g.cs
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1\TitlePage.g.cs
@@ -22,3 +21,5 @@ D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1\KokoroUpTime.dll
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1\KokoroUpTime.pdb
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1\KokoroUpTime.genruntimeconfig.cache
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Release\netcoreapp3.1\Scenarios\chapter2.csv
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache

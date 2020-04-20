@@ -12,7 +12,6 @@ using System.Windows.Shapes;
 
 using System.Windows.Navigation;
 
-
 namespace KokoroUpTime
 {
     /// <summary>

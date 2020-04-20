@@ -60,22 +60,6 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LongMsgBubble" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.00">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="1.0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LongMsgBubble" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:01" Value="{x:Static Visibility.Visible}"/>
-            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="appear_up_chara_small_left_a">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaSmallLeftA" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
@@ -161,9 +145,15 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Key="appear_wide_long_msg_bubble">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LongMsgBubble" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Page.Resources>
     <Grid>
-        <Grid x:Name="MainGrid" Visibility="Visible" Grid.RowSpan="4" Grid.ColumnSpan="2">
+        <Grid x:Name="MainGrid" Visibility="Visible" Grid.RowSpan="4" Grid.ColumnSpan="2" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="12*"/>
                 <RowDefinition Height="25*"/>
@@ -269,7 +259,7 @@
             <TextBlock x:Name="SessionSentence" Grid.Column="2" HorizontalAlignment="Left" Margin="0,40,0,0" Grid.Row="4" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="6" Height="168" Width="745" FontSize="48" d:IsHidden="True"/>
             <Image x:Name="SessionTitle" Height="88" Width="788" Source="/Images/challenge_time.png" Grid.ColumnSpan="7" Grid.Column="1" Margin="21,15,21,22" Grid.Row="1" d:IsHidden="True"/>
         </Grid>
-        <Grid x:Name="RuleGrid" Grid.ColumnSpan="2" Grid.RowSpan="4" Visibility="Visible" d:IsHidden="True">
+        <Grid x:Name="RuleGrid" Grid.ColumnSpan="2" Grid.RowSpan="4" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="43*"/>
                 <ColumnDefinition Width="227*"/>
@@ -343,8 +333,26 @@
                     </TransformGroup>
                 </Button.RenderTransform>
                 <Grid>
-                    <Image x:Name="LongMsgImage" Source="/Images/long_bubble.png"/>
-                    <TextBlock x:Name="LongMsg" Text="TextBlock" FontSize="42" Margin="31,55,37,10"/>
+                    <Image x:Name="LongMsgImage" Source="/Images/long_bubble.png" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock x:Name="LongMsg" Text="TextBlock" FontSize="42" Margin="31,55,37,10" RenderTransformOrigin="0.5,0.5">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
                 </Grid>
             </Button>
         </Grid>
