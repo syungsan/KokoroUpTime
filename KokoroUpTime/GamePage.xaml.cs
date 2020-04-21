@@ -534,7 +534,7 @@ namespace KokoroUpTime
                     this.ScenarioPlay();
                     // 連続Backの実現にはもっと複雑な処理がいる
                 }
-                else if (button.Name == "NextMsgButton" || button.Name == "NextPageButton" || button.Name == "BoardButton" || button.Name == "LongMsgBubble")
+                else if (button.Name == "NextMsgButton" || button.Name == "NextPageButton" || button.Name == "BoardButton" || button.Name == "LongMsgBubble" || button.Name == "MangaNextButton")
                 {
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
