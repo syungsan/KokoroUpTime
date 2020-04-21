@@ -128,6 +128,7 @@ image,item_image_left,item01_solo.png
 image,item_info_plate
 text,item_info_title,きもちセンサーとは…
 text,item_info_sentence,★だれでもいろんな「きもち」になるが、「きもち」を「ことば」であらわすことは鬱　かんたんなことではないのだ。鬱鬱★きもちセンサーをつかうと、自分の「きもち」をピタリとあらわす「ことば」を鬱　選ぶことができるのじゃ！
+sound,nc211089.wav
 next
 reset
 image,bg,background_05.png

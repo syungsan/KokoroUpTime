@@ -61,8 +61,29 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Fonts\azuki.ttf" />
-    <Resource Include="Fonts\JiyunoTsubasa.ttf" />
+    <COMReference Include="WMPLib.dll">
+      <Guid>6bf52a50-394a-11d3-b153-00c04f79faa6</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>false</Isolated>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Ink">
+      <HintPath>C:\Program Files\Common Files\microsoft shared\ink\Microsoft.Ink.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\azuki.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\JiyunoTsubasa.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\after.png" />
     <Resource Include="Images\akamaru.png" />
     <Resource Include="Images\aosuke.png" />
@@ -73,8 +94,10 @@
     <Resource Include="Images\background_05.png" />
     <Resource Include="Images\background_mokume.png" />
     <Resource Include="Images\before.png" />
+    <Resource Include="Images\blackboard.png" />
     <Resource Include="Images\challenge_time.png" />
     <Resource Include="Images\gray_frame.png" />
+    <Resource Include="Images\hukidashi2.png" />
     <Resource Include="Images\item01_bubble.png" />
     <Resource Include="Images\item01_solo.png" />
     <Resource Include="Images\item_info.png" />
@@ -87,6 +110,7 @@
     <Resource Include="Images\left_big_bubble_yellow.png" />
     <Resource Include="Images\left_b_big_bubble.png" />
     <Resource Include="Images\left_c_big_bubble.png" />
+    <Resource Include="Images\long_bubble.png" />
     <Resource Include="Images\manga1-1.png" />
     <Resource Include="Images\manga1-2.png" />
     <Resource Include="Images\manga1-3.png" />
@@ -95,13 +119,10 @@
     <Resource Include="Images\manga1-6.png" />
     <Resource Include="Images\manga1_title.png" />
     <Resource Include="Images\mangaya.png" />
-    <Resource Include="Images\right_big_bubble.png" />
-    <Resource Include="Images\blackboard.png" />
-    <Resource Include="Images\hukidashi2.png" />
-    <Resource Include="Images\long_bubble.png" />
     <Resource Include="Images\menu_bubble.png" />
     <Resource Include="Images\moya1.png" />
     <Resource Include="Images\moya2.png" />
+    <Resource Include="Images\right_big_bubble.png" />
     <Resource Include="Images\shiroji_01.png" />
     <Resource Include="Images\shiroji_02.png" />
     <Resource Include="Images\shiroji_03.png" />
@@ -118,6 +139,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter2.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\nc211089.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

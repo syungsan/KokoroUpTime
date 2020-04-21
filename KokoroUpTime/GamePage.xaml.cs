@@ -17,6 +17,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using System.Linq;
 using System.Security.AccessControl;
+using WMPLib;
+
 
 namespace KokoroUpTime
 {
@@ -45,6 +47,11 @@ namespace KokoroUpTime
 
         private CheckBox[] checkBoxs;
 
+        // メディアプレーヤークラスのインスタンスを作成する
+        WindowsMediaPlayer mediaPlayer = new WindowsMediaPlayer();
+
+        string startupPath;
+
         public GamePage()
         {
             InitializeComponent();
@@ -56,6 +63,10 @@ namespace KokoroUpTime
 
             this.CoverLayer.Visibility = Visibility.Hidden;
             this.ExitGrid.Visibility = Visibility.Hidden;
+
+            string exePath = Environment.GetCommandLineArgs()[0];
+            string exeFullPath = System.IO.Path.GetFullPath(exePath);
+            this.startupPath = System.IO.Path.GetDirectoryName(exeFullPath);
         }
 
         // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
@@ -440,6 +451,28 @@ namespace KokoroUpTime
 
                     this.isClickable = false;
                     break;
+
+                case "sound":
+
+                    var _soundFile = this.scenarios[this.scenarioCount][1];
+
+                    bool _isLoop = false;
+
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    {
+                        var loopStr = this.scenarios[this.scenarioCount][2];
+
+                        if (loopStr == "loop")
+                        {
+                            _isLoop = true;
+                        }
+                    }
+                    this.SoundPlay(soundFile: _soundFile, isLoop: _isLoop);
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
             }
         }
 
@@ -584,6 +617,23 @@ namespace KokoroUpTime
             {
                 this.tapCount -= 1;
             }
+        }
+
+        private void SoundPlay(string soundFile, bool isLoop=false)
+        {
+            // ループ再生を指定
+            // mediaPlayer.settings.setMode("loop", isLoop);
+
+            Debug.Print(soundFile);
+
+            // 通常は自動再生にファイルを指定すればループ再生がはじまる
+            mediaPlayer.URL = $@"{this.startupPath}/Sounds/{soundFile}";
+
+            mediaPlayer.controls.play(); // 再生
+            
+            // mediaPlayer.controls.stop(); // 停止(再生中停止すればplay()で頭から再生)
+            // mediaPlayer.controls.pause();// ポーズ(play()で再開)
+            // mediaPlayer.settings.volume = 10; // 0から100
         }
     }
 }

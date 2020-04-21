@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/background_00.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/menu_bubble.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shiroji_02.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/speech_bubble.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/title.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("fonts/azuki.ttf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("fonts/jiyunotsubasa.ttf")]
 
 
