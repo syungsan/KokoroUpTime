@@ -259,7 +259,7 @@
             <TextBlock x:Name="SessionSentence" Grid.Column="2" HorizontalAlignment="Left" Margin="0,40,0,0" Grid.Row="4" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="6" Height="168" Width="745" FontSize="48" d:IsHidden="True"/>
             <Image x:Name="SessionTitle" Height="88" Width="788" Source="/Images/challenge_time.png" Grid.ColumnSpan="7" Grid.Column="1" Margin="21,15,21,22" Grid.Row="1" d:IsHidden="True"/>
         </Grid>
-        <Grid x:Name="RuleGrid" Grid.ColumnSpan="2" Grid.RowSpan="4" Visibility="Visible">
+        <Grid x:Name="RuleGrid" Grid.ColumnSpan="2" Grid.RowSpan="4" Visibility="Visible" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="43*"/>
                 <ColumnDefinition Width="227*"/>
@@ -422,12 +422,54 @@
             <TextBlock x:Name="ItemInfoTitle" HorizontalAlignment="Left" Margin="38,40,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="60" Width="555" FontSize="48" FontWeight="Bold" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="3"/>
             <TextBlock x:Name="ItemInfoSentence" HorizontalAlignment="Left" Margin="42,120,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="327" Width="1083" FontSize="36" Grid.Row="6" Grid.ColumnSpan="6" Grid.Column="4" Grid.RowSpan="2"/>
             <TextBlock x:Name="ItemNumber" HorizontalAlignment="Left" Margin="160,121,0,0" Grid.Row="2" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Grid.RowSpan="3" Foreground="#FFEEEE1E" Grid.Column="1" Grid.ColumnSpan="2"/>
-            <Button x:Name="NextPageButton" Grid.Column="9" Margin="10,16,13,0" Grid.Row="8" VerticalAlignment="Top" Height="149" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        </Grid>
+        <Grid x:Name="SystemGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="12*"/>
+                <RowDefinition Height="31*"/>
+                <RowDefinition Height="135*"/>
+                <RowDefinition Height="33*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45*"/>
+                <ColumnDefinition Width="276*"/>
+                <ColumnDefinition Width="175*"/>
+                <ColumnDefinition Width="927*"/>
+                <ColumnDefinition Width="175*"/>
+                <ColumnDefinition Width="226*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="45*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="NextPageButton" Margin="0,2,4,0" VerticalAlignment="Top" Height="149" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="2">
                 <Image Source="/Images/after.png" Height="149"/>
             </Button>
-            <Button x:Name="BackPageButton" HorizontalAlignment="Center" Margin="0,8,0,0" Grid.Row="8" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Margin="33,2,0,0" Grid.ColumnSpan="2" Grid.Row="3">
                 <Image Source="/Images/before.png"/>
             </Button>
+            <Button x:Name="ExitButton" Content="おわる" Grid.Column="6" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="80" FontSize="24" Click="Button_Click" Grid.ColumnSpan="2" Margin="8,0,0,0"/>
+            <Image x:Name="CoverLayer" Grid.ColumnSpan="8" HorizontalAlignment="Center" Height="1080" Grid.RowSpan="5" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
+            <Grid x:Name="ExitGrid" Grid.Column="3" Margin="8,9,8,10" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="86*"/>
+                    <ColumnDefinition Width="367*"/>
+                    <ColumnDefinition Width="398*"/>
+                    <ColumnDefinition Width="86*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48*"/>
+                    <RowDefinition Height="65*"/>
+                    <RowDefinition Height="215*"/>
+                </Grid.RowDefinitions>
+                <Image HorizontalAlignment="Left" Height="636" VerticalAlignment="Top" Width="884" Source="/Images/white_frame.png" Stretch="Fill" Grid.RowSpan="3" Margin="14,10,0,0" Grid.ColumnSpan="4"/>
+                <Label Content="ほんとうにアプリをしゅうりょうしますか？" HorizontalAlignment="Left" Margin="3,12,0,0" VerticalAlignment="Top" Height="100" Width="728" FontSize="48" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1"/>
+                <Button x:Name="ExitYesButton" HorizontalAlignment="Left" Margin="33,47,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.Row="2" Grid.ColumnSpan="3">
+                    <Image Source="/Images/moya1.png"/>
+                </Button>
+                <Button x:Name="ExitNoButton" HorizontalAlignment="Left" Margin="2,47,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2">
+                    <Image Source="/Images/moya2.png"/>
+                </Button>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

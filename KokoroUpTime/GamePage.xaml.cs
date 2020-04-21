@@ -53,6 +53,9 @@ namespace KokoroUpTime
             this.ShowsNavigationUI = false;
 
             this.InitControls();
+
+            this.CoverLayer.Visibility = Visibility.Hidden;
+            this.ExitGrid.Visibility = Visibility.Hidden;
         }
 
         // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
@@ -519,23 +522,38 @@ namespace KokoroUpTime
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Button button = sender as Button;
+
             if (this.isClickable)
             {
                 this.isClickable = false;
 
-                Button button = sender as Button;
-
-                if (!button.Name.Contains("Back"))
+                if (button.Name.Contains("Back"))
+                {
+                    this.scenarioCount -= 1;
+                    this.ScenarioPlay();
+                    // 連続Backの実現にはもっと複雑な処理がいる
+                }
+                else if (button.Name == "NextMsgButton" || button.Name == "NextPageButton" || button.Name == "BoardButton" || button.Name == "LongMsgBubble")
                 {
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
-                else
-                {
-                    // 連続Backの実現にはもっと複雑な処理がいる
-                    this.scenarioCount -= 1;
-                    this.ScenarioPlay();
-                }
+            }
+
+            if (button.Name == "ExitButton")
+            {
+                this.CoverLayer.Visibility = Visibility.Visible;
+                this.ExitGrid.Visibility = Visibility.Visible;
+            }
+            else if (button.Name == "ExitYesButton")
+            {
+                Application.Current.Shutdown();
+            }
+            else if (button.Name == "ExitNoButton")
+            {
+                this.ExitGrid.Visibility = Visibility.Hidden;
+                this.CoverLayer.Visibility = Visibility.Hidden;
             }
         }
 

@@ -22,6 +22,7 @@
     <None Remove="Images\before.png" />
     <None Remove="Images\blackboard.png" />
     <None Remove="Images\challenge_time.png" />
+    <None Remove="Images\gray_frame.png" />
     <None Remove="Images\hukidashi2.png" />
     <None Remove="Images\item01_bubble.png" />
     <None Remove="Images\item01_solo.png" />
@@ -73,6 +74,7 @@
     <Resource Include="Images\background_mokume.png" />
     <Resource Include="Images\before.png" />
     <Resource Include="Images\challenge_time.png" />
+    <Resource Include="Images\gray_frame.png" />
     <Resource Include="Images\item01_bubble.png" />
     <Resource Include="Images\item01_solo.png" />
     <Resource Include="Images\item_info.png" />
