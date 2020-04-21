@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "KokoroUpTime/0.8.0.1": {
+      "KokoroUpTime/0.8.0.2": {
         "dependencies": {
           "Microsoft.Ink": "6.1.0.0",
           "Interop.WMPLib": "1.0.0.0"
@@ -34,7 +34,7 @@
     }
   },
   "libraries": {
-    "KokoroUpTime/0.8.0.1": {
+    "KokoroUpTime/0.8.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

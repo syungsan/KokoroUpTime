@@ -50,8 +50,6 @@ namespace KokoroUpTime
         // メディアプレーヤークラスのインスタンスを作成する
         WindowsMediaPlayer mediaPlayer = new WindowsMediaPlayer();
 
-        string startupPath;
-
         public GamePage()
         {
             InitializeComponent();
@@ -63,10 +61,6 @@ namespace KokoroUpTime
 
             this.CoverLayer.Visibility = Visibility.Hidden;
             this.ExitGrid.Visibility = Visibility.Hidden;
-
-            string exePath = Environment.GetCommandLineArgs()[0];
-            string exeFullPath = System.IO.Path.GetFullPath(exePath);
-            this.startupPath = System.IO.Path.GetDirectoryName(exeFullPath);
         }
 
         // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
@@ -621,13 +615,17 @@ namespace KokoroUpTime
 
         private void SoundPlay(string soundFile, bool isLoop=false)
         {
+            string exePath = Environment.GetCommandLineArgs()[0];
+            string exeFullPath = System.IO.Path.GetFullPath(exePath);
+            string startupPath = System.IO.Path.GetDirectoryName(exeFullPath);
+
             // ループ再生を指定
             // mediaPlayer.settings.setMode("loop", isLoop);
 
             Debug.Print(soundFile);
 
             // 通常は自動再生にファイルを指定すればループ再生がはじまる
-            mediaPlayer.URL = $@"{this.startupPath}/Sounds/{soundFile}";
+            mediaPlayer.URL = $@"{startupPath}/Sounds/{soundFile}";
 
             mediaPlayer.controls.play(); // 再生
             

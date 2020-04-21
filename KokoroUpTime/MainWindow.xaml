@@ -5,5 +5,5 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KokoroUpTime"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920" Source="/TitlePage.xaml">
+        Title="MainWindow" Height="1080" Width="1920" Source="/TitlePage.xaml" Icon="/Images/small_icon.png">
 </NavigationWindow>

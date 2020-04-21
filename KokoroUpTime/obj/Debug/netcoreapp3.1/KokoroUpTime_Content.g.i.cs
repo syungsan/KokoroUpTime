@@ -8,7 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("fonts/azuki.ttf")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("fonts/jiyunotsubasa.ttf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/long_bubble.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/manga1-1.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/manga1-2.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/manga1-3.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/manga1-4.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/manga1-5.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/manga1-6.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/manga1_title.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/mangaya.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/menu_bubble.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/moya1.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/moya2.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/right_big_bubble.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shiroji_01.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shiroji_02.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shiroji_03.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shiroji_04.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/small_bubble.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/ss.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/title.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/white_frame.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/yazirusi.png")]
 
 
