@@ -14,21 +14,27 @@
     <None Remove="Fonts\JiyunoTsubasa.ttf" />
     <None Remove="Images\after.png" />
     <None Remove="Images\akamaru.png" />
+    <None Remove="Images\akamaru3.png" />
     <None Remove="Images\aosuke.png" />
+    <None Remove="Images\aosuke1.png" />
     <None Remove="Images\background_00.png" />
     <None Remove="Images\background_01.png" />
     <None Remove="Images\background_02.png" />
     <None Remove="Images\background_03.png" />
     <None Remove="Images\background_05.png" />
     <None Remove="Images\background_mokume.png" />
+    <None Remove="Images\badWordsFrame.png" />
     <None Remove="Images\before.png" />
     <None Remove="Images\blackboard.png" />
     <None Remove="Images\challenge_time.png" />
+    <None Remove="Images\goodWordsFrame.png" />
     <None Remove="Images\gray_frame.png" />
     <None Remove="Images\hukidashi2.png" />
     <None Remove="Images\icon.png" />
-    <None Remove="Images\item01_bubble.png" />
     <None Remove="Images\item01_solo.png" />
+    <None Remove="Images\item02_solo.png" />
+    <None Remove="Images\item03_solo.png" />
+    <None Remove="Images\item_bubble.png" />
     <None Remove="Images\item_info.png" />
     <None Remove="Images\item_name.png" />
     <None Remove="Images\kimif.png" />
@@ -60,6 +66,7 @@
     <None Remove="Images\small_icon.png" />
     <None Remove="Images\SS.png" />
     <None Remove="Images\title.png" />
+    <None Remove="Images\water_frame.png" />
     <None Remove="Images\white_frame.png" />
     <None Remove="Images\yazirusi.png" />
   </ItemGroup>
@@ -86,20 +93,26 @@
     <Resource Include="Fonts\JiyunoTsubasa.ttf" />
     <Resource Include="Images\after.png" />
     <Resource Include="Images\akamaru.png" />
+    <Resource Include="Images\akamaru3.png" />
     <Resource Include="Images\aosuke.png" />
+    <Resource Include="Images\aosuke1.png" />
     <Resource Include="Images\background_00.png" />
     <Resource Include="Images\background_01.png" />
     <Resource Include="Images\background_02.png" />
     <Resource Include="Images\background_03.png" />
     <Resource Include="Images\background_05.png" />
     <Resource Include="Images\background_mokume.png" />
+    <Resource Include="Images\badWordsFrame.png" />
     <Resource Include="Images\before.png" />
     <Resource Include="Images\blackboard.png" />
     <Resource Include="Images\challenge_time.png" />
+    <Resource Include="Images\goodWordsFrame.png" />
     <Resource Include="Images\gray_frame.png" />
     <Resource Include="Images\hukidashi2.png" />
-    <Resource Include="Images\item01_bubble.png" />
+    <Resource Include="Images\item03_solo.png" />
+    <Resource Include="Images\item_bubble.png" />
     <Resource Include="Images\item01_solo.png" />
+    <Resource Include="Images\item02_solo.png" />
     <Resource Include="Images\item_info.png" />
     <Resource Include="Images\item_name.png" />
     <Resource Include="Images\kimif.png" />
@@ -131,6 +144,7 @@
     <Resource Include="Images\small_icon.png" />
     <Resource Include="Images\SS.png" />
     <Resource Include="Images\title.png" />
+    <Resource Include="Images\water_frame.png" />
     <Resource Include="Images\white_frame.png" />
     <Resource Include="Images\yazirusi.png" />
   </ItemGroup>
@@ -143,10 +157,28 @@
     <None Update="Scenarios\chapter1.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Scenarios\chapter4.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter3.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Scenarios\chapter2.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Sounds\Correct.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\Incorrect.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\Intermediate.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Sounds\nc211089.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\None.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -122,7 +122,7 @@ image,bg,background_mokume.png
 image,chara_small_up_right,shiroji_03.png
 image,item_name_plate_center,item_name.png
 text,item_name_text_center,きもちセンサー
-image,item_name_bubble,item01_bubble.png
+image,item_name_bubble,item_bubble.png
 text,item_number,No.1
 image,item_image_left,item01_solo.png
 image,item_info_plate
@@ -140,4 +140,9 @@ image,chara_up_right,shiroji_04.png
 image,main_msg_bubble,right_big_bubble.png
 wait
 msg,main_msg,「きもち」には、いいきもちといやなきもちだけでなく、いろいろな種類があるぞい。自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
+next
+reset
+image,bg,water_frame.png
+grid,good_words_frame
+grid,bad_words_frame
 next

@@ -18,7 +18,7 @@ using System.Windows.Threading;
 using System.Linq;
 using System.Security.AccessControl;
 using WMPLib;
-
+using System.Windows.Ink;
 
 namespace KokoroUpTime
 {
@@ -44,11 +44,13 @@ namespace KokoroUpTime
         private Dictionary<string, Image> imageObjects = null;
         private Dictionary<string, TextBlock> textObjects = null;
         private Dictionary<string, Button> buttonObjects = null;
+        private Dictionary<string, Grid> gridObjects = null;
 
         private CheckBox[] checkBoxs;
 
-        // メディアプレーヤークラスのインスタンスを作成する
-        WindowsMediaPlayer mediaPlayer = new WindowsMediaPlayer();
+        private WindowsMediaPlayer mediaPlayer;
+
+        private WavesPlayer wavesPlayer;
 
         public GamePage()
         {
@@ -61,6 +63,15 @@ namespace KokoroUpTime
 
             this.CoverLayer.Visibility = Visibility.Hidden;
             this.ExitGrid.Visibility = Visibility.Hidden;
+
+            // メディアプレーヤークラスのインスタンスを作成する
+            this.mediaPlayer = new WindowsMediaPlayer();
+
+            var sounds = Enum.GetNames(typeof(AnswerResult))
+               .ToDictionary(n => n, n => string.Format(@"Sounds\{0}.wav", n));
+
+            wavesPlayer = new WavesPlayer(sounds);
+            wavesPlayer.LoadAsync();
         }
 
         // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
@@ -85,6 +96,7 @@ namespace KokoroUpTime
             this.BG.Visibility = Visibility.Hidden;
             this.MainMsg.Visibility = Visibility.Hidden;
             this.CharaDownRight.Visibility = Visibility.Hidden;
+            this.CharaDownLeft.Visibility = Visibility.Hidden;
             this.CharaSmallLeftA.Visibility = Visibility.Hidden;
             this.CharaSmallLeftB.Visibility = Visibility.Hidden;
             this.CharaSmallLeftC.Visibility = Visibility.Hidden;
@@ -131,6 +143,9 @@ namespace KokoroUpTime
             this.ItemInfoTitle.Visibility = Visibility.Hidden;
             this.ItemInfoSentence.Visibility = Visibility.Hidden;
 
+            this.GoodWordsFrame.Visibility = Visibility.Hidden;
+            this.BadWordsFrame.Visibility = Visibility.Hidden;
+
             this.NextPageButton.Visibility = Visibility.Hidden;
             this.BackPageButton.Visibility = Visibility.Hidden;
 
@@ -158,6 +173,7 @@ namespace KokoroUpTime
             {
                 ["bg"] = this.BG,
                 ["chara_down_right"] = this.CharaDownRight,
+                ["chara_down_left"] = this.CharaDownLeft,
                 ["chara_small_left_a"] = this.CharaSmallLeftA,
                 ["chara_small_left_b"] = this.CharaSmallLeftB,
                 ["chara_small_left_c"] = this.CharaSmallLeftC,
@@ -207,6 +223,12 @@ namespace KokoroUpTime
                 ["board_button"] = this.BoardButton,
                 ["long_msg_bubble"] = this.LongMsgBubble,
             };
+
+            this.gridObjects = new Dictionary<string, Grid>
+            {
+                ["good_words_frame"] = this.GoodWordsFrame,
+                ["bad_words_frame"] = this.BadWordsFrame,
+            };
         }
 
         // ゲーム進行の中核
@@ -224,6 +246,19 @@ namespace KokoroUpTime
                 case "reset":
 
                     this.ResetControls();
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
+                case "grid":
+
+                    this.position = this.scenarios[this.scenarioCount][1];
+
+                    var gridObject = this.gridObjects[this.position];
+
+                    gridObject.Visibility = Visibility.Visible;
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -620,9 +655,7 @@ namespace KokoroUpTime
             string startupPath = System.IO.Path.GetDirectoryName(exeFullPath);
 
             // ループ再生を指定
-            // mediaPlayer.settings.setMode("loop", isLoop);
-
-            Debug.Print(soundFile);
+            mediaPlayer.settings.setMode("loop", isLoop);
 
             // 通常は自動再生にファイルを指定すればループ再生がはじまる
             mediaPlayer.URL = $@"{startupPath}/Sounds/{soundFile}";
@@ -632,6 +665,84 @@ namespace KokoroUpTime
             // mediaPlayer.controls.stop(); // 停止(再生中停止すればplay()で頭から再生)
             // mediaPlayer.controls.pause();// ポーズ(play()で再開)
             // mediaPlayer.settings.volume = 10; // 0から100
+        }
+
+        void GestureCanvas_Loaded(object sender, RoutedEventArgs e)
+        {
+            var gestureCanvas = (InkCanvas)sender;
+
+            gestureCanvas.SetEnabledGestures(new[]
+            {
+                ApplicationGesture.Circle,
+                ApplicationGesture.DoubleCircle,
+                ApplicationGesture.Triangle,
+                ApplicationGesture.Check,
+                ApplicationGesture.ArrowDown,
+                ApplicationGesture.ChevronDown,
+                ApplicationGesture.DownUp,
+                ApplicationGesture.Up,
+                ApplicationGesture.Down,
+                ApplicationGesture.Left,
+                ApplicationGesture.Right,
+                ApplicationGesture.Curlicue,
+                ApplicationGesture.DoubleCurlicue,
+            });
+        }
+
+        void GestureCanvas_Gesture(object sender, InkCanvasGestureEventArgs e)
+        {
+            // 信頼性 (RecognitionConfidence) を無視したほうが、Circle と Triangle の認識率は上がるようです。
+            var gestureResult = e.GetGestureRecognitionResults()
+                .FirstOrDefault(r => r.ApplicationGesture != ApplicationGesture.NoGesture);
+
+            if (gestureResult == null)
+            {
+                wavesPlayer.Play(AnswerResult.None.ToString());
+                return;
+            }
+
+            AnswerResult answerResult;
+
+            switch (gestureResult.ApplicationGesture)
+            {
+                case ApplicationGesture.Circle:
+                case ApplicationGesture.DoubleCircle:
+                    answerResult = AnswerResult.Correct;
+                    break;
+                case ApplicationGesture.Triangle:
+                    answerResult = AnswerResult.Intermediate;
+                    break;
+                case ApplicationGesture.Check:
+                case ApplicationGesture.ArrowDown:
+                case ApplicationGesture.ChevronDown:
+                case ApplicationGesture.DownUp:
+                case ApplicationGesture.Up:
+                case ApplicationGesture.Down:
+                case ApplicationGesture.Left:
+                case ApplicationGesture.Right:
+                case ApplicationGesture.Curlicue:
+                case ApplicationGesture.DoubleCurlicue:
+                    answerResult = AnswerResult.Incorrect;
+                    break;
+
+                default:
+                    throw new InvalidOperationException();
+            }
+
+            wavesPlayer.Play(answerResult.ToString());
+
+            var gestureCanvas = (InkCanvas)sender;
+
+            gestureCanvas.Strokes.Clear();
+            gestureCanvas.Strokes.Add(e.Strokes);
+        }
+
+        public enum AnswerResult
+        {
+            None,
+            Incorrect,
+            Intermediate,
+            Correct,
         }
     }
 }

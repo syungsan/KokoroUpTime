@@ -1,0 +1,2 @@
+reset
+image,bg,water_frame.png
