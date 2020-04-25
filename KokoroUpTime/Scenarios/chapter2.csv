@@ -1,6 +1,6 @@
 ﻿reset
 image,bg,background_02.png
-image,chara_small_left,kimif.png
+image,chara_small_left,kimi_small_01.png
 image,main_msg_bubble,left_big_bubble_yellow.png
 wait
 msg,main_msg,前のこころあっぷタイムでは、きもちセンサーをつかってみんなでいっしょに勉強したね,キミ
@@ -13,7 +13,7 @@ hide,image,chara_small_left
 image,item_image_center,item01_solo.png
 next
 hide,image,item_image_center
-image,chara_down_right,shiroji_01.png,appear_up
+image,chara_stand_right,shiroji_01.png,appear_up
 image,main_msg_bubble,right_big_bubble.png
 wait
 msg,main_msg,きもちセンサーをつかってどんなことができるようになったかおぼえておるかな？フォッ、フォッ、フォッ！,白じい

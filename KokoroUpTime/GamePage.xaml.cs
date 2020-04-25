@@ -95,13 +95,12 @@ namespace KokoroUpTime
         {
             this.BG.Visibility = Visibility.Hidden;
             this.MainMsg.Visibility = Visibility.Hidden;
-            this.CharaDownRight.Visibility = Visibility.Hidden;
-            this.CharaDownLeft.Visibility = Visibility.Hidden;
+            this.CharaStandRight.Visibility = Visibility.Hidden;
+            this.CharaStandLeft.Visibility = Visibility.Hidden;
             this.CharaSmallLeftA.Visibility = Visibility.Hidden;
             this.CharaSmallLeftB.Visibility = Visibility.Hidden;
             this.CharaSmallLeftC.Visibility = Visibility.Hidden;
-            this.BigInfo.Visibility = Visibility.Hidden;
-            this.CharaUpRight.Visibility = Visibility.Hidden;            
+            this.BigInfo.Visibility = Visibility.Hidden;        
             this.MainMsgBubble.Visibility = Visibility.Hidden;
             this.MainMsg.Visibility = Visibility.Hidden;
             this.SessionTitle.Visibility = Visibility.Hidden;
@@ -117,7 +116,7 @@ namespace KokoroUpTime
             this.RuleCheck1Box.Visibility = Visibility.Hidden;
             this.RuleCheck2Box.Visibility = Visibility.Hidden;
             this.RuleCheck3Box.Visibility = Visibility.Hidden;
-            this.CharaBottomRight.Visibility = Visibility.Hidden;
+            this.CharaStandSmallDownRight.Visibility = Visibility.Hidden;
             this.LongMsgBubble.Visibility = Visibility.Hidden;
             // this.LongMsgImage.Visibility = Visibility.Hidden;
             // this.LongMsg.Visibility = Visibility.Hidden;
@@ -139,7 +138,7 @@ namespace KokoroUpTime
             this.ItemNamePlateLeft.Visibility = Visibility.Hidden;
             this.ItemNameTextLeft.Visibility = Visibility.Hidden;
             this.ItemInfoPlate.Visibility = Visibility.Hidden;
-            this.CharaSmallUpRight.Visibility = Visibility.Hidden;
+            this.CharaStandSmallUpRight.Visibility = Visibility.Hidden;
             this.ItemInfoTitle.Visibility = Visibility.Hidden;
             this.ItemInfoSentence.Visibility = Visibility.Hidden;
 
@@ -172,16 +171,15 @@ namespace KokoroUpTime
             this.imageObjects = new Dictionary<string, Image>
             {
                 ["bg"] = this.BG,
-                ["chara_down_right"] = this.CharaDownRight,
-                ["chara_down_left"] = this.CharaDownLeft,
+                ["chara_stand_right"] = this.CharaStandRight,
+                ["chara_stand_left"] = this.CharaStandLeft,
                 ["chara_small_left_a"] = this.CharaSmallLeftA,
                 ["chara_small_left_b"] = this.CharaSmallLeftB,
                 ["chara_small_left_c"] = this.CharaSmallLeftC,
                 ["chara_small_left"] = this.CharaSmallLeft,
                 ["main_msg_bubble"] = this.MainMsgBubble,
                 ["big_info"] = this.BigInfo,
-                ["chara_up_right"] = this.CharaUpRight,
-                ["chara_bottom_right"] = this.CharaBottomRight,
+                ["chara_stand_small_right"] = this.CharaStandSmallDownRight,
                 ["manga_title"] = this.MangaTitle,
                 ["manga_image"] = this.MangaImage,
                 ["session_frame"] = this.SessionFrame,
@@ -192,7 +190,7 @@ namespace KokoroUpTime
                 ["item_name_bubble"] = this.ItemNameBubble,
                 ["item_name_plate_left"] = this.ItemNamePlateLeft,
                 ["item_info_plate"] = this.ItemInfoPlate,
-                ["chara_small_up_right"] = this.CharaSmallUpRight,
+                ["chara_stand_small_up_right"] = this.CharaStandSmallUpRight,
                 ["long_msg_image"] = this.LongMsgImage,
             };
 
