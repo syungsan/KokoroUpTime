@@ -145,6 +145,9 @@ namespace KokoroUpTime
             this.GoodWordsFrame.Visibility = Visibility.Hidden;
             this.BadWordsFrame.Visibility = Visibility.Hidden;
 
+            // this.FeelingGrid.Visibility = Visibility.Hidden;
+            this.GaugeGrid.Visibility = Visibility.Hidden;
+
             this.NextPageButton.Visibility = Visibility.Hidden;
             this.BackPageButton.Visibility = Visibility.Hidden;
 
@@ -192,6 +195,8 @@ namespace KokoroUpTime
                 ["item_info_plate"] = this.ItemInfoPlate,
                 ["chara_stand_small_up_right"] = this.CharaStandSmallUpRight,
                 ["long_msg_image"] = this.LongMsgImage,
+                ["heart_image"] = this.HeartImage,
+                ["needle_image"] = this.NeedleImage,
             };
 
             this.textObjects = new Dictionary<string, TextBlock>
@@ -226,6 +231,8 @@ namespace KokoroUpTime
             {
                 ["good_words_frame"] = this.GoodWordsFrame,
                 ["bad_words_frame"] = this.BadWordsFrame,
+                // ["feeling_grid"] = this.FeelingGrid,
+                ["gauge_grid"] = this.GaugeGrid,
             };
         }
 
@@ -443,6 +450,16 @@ namespace KokoroUpTime
                             this.ScenarioPlay();
 
                             break;
+
+                        case "grid":
+
+                            this.position = this.scenarios[this.scenarioCount][2];
+                            this.gridObjects[this.position].Visibility = Visibility.Hidden;
+
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+
+                            break;
                     }
                     break;
 
@@ -496,6 +513,53 @@ namespace KokoroUpTime
                     }
                     this.SoundPlay(soundFile: _soundFile, isLoop: _isLoop);
 
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
+                case "gauge":
+
+                    var kindOfFeeling = this.scenarios[this.scenarioCount][1];
+
+                    // 後々これを計算で得る
+                    var feelings = new Dictionary<string, float>() { { "good", 60.0f }, { "bad", 80.0f } };
+
+                    var gaugeRotation = new RotateTransform();
+
+                    gaugeRotation.CenterX = 0.0;
+                    gaugeRotation.CenterY = this.NeedleImage.Height * 0.8f;
+                    gaugeRotation.Angle = -40.0f;
+
+                    this.NeedleImage.RenderTransform = gaugeRotation;
+
+                    var feeling = feelings[kindOfFeeling] / 2.0f;
+
+                    this.FeelingScaleText.Text = feeling.ToString();
+
+                    GaugeUpdate(targetAngle: feeling);
+
+                    void GaugeUpdate(float targetAngle)
+                    {
+                        var timer = new DispatcherTimer();
+
+                        timer.Interval = TimeSpan.FromSeconds(0.01f);
+
+                        timer.Tick += (sender, e) =>
+                        {
+                            if (gaugeRotation.Angle < targetAngle)
+                            {
+                                gaugeRotation.Angle += 1.0f;
+
+                                this.NeedleImage.RenderTransform = gaugeRotation;
+                            }
+                            else
+                            {
+                                timer.Stop();
+                            }
+                        };
+                        timer.Start();
+                    }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 

@@ -1,6 +1,6 @@
 reset
 image,bg,background_01.png
-image,chara_down_right,shiroji_01.png,appear_up
+image,chara_stand_right,shiroji_01.png,appear_up
 image,main_msg_bubble,right_big_bubble.png
 wait
 msg,main_msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
@@ -13,7 +13,7 @@ msg,main_msg,あなたは【name】じゃな。【name】のうしろは、何�
 wait
 msg,main_msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい
 wait
-image,chara_down_right,shiroji_02.png
+image,chara_stand_right,shiroji_02.png
 msg,main_msg,それでは【name】、　「こころあっぷタイム」とは何か説明していくぞい。,白じい
 wait
 msg,main_msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
@@ -38,7 +38,7 @@ rule,rule_check2_msg,２．ふざけない,1
 wait,no_button
 rule,rule_check3_msg,３．はずかしがらない,2
 wait,no_button
-image,chara_bottom_right,shiroji_02.png,appear_up
+image,chara_stand_small_right,shiroji_02.png,appear_up
 button,long_msg_bubble,,,appear_wide
 wait,no_button
 rule,long_msg,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,all,白じい
@@ -46,7 +46,7 @@ wait_tap
 next
 reset
 image,bg,background_02.png
-image,chara_down_right,shiroji_02.png,appear_up
+image,chara_stand_right,shiroji_02.png,appear_up
 image,main_msg_bubble,right_big_bubble.png
 wait
 msg,main_msg,今日は、「こころあっぷタイム」に登場する３人を紹介する。,白じい
@@ -55,7 +55,7 @@ hide,text,main_msg
 hide,button,next_msg_button
 hide,button,back_msg_button
 hide,image,main_msg_bubble
-image,chara_small_left_a,akamaru.png,appear_up
+image,chara_small_left_a,akamaru_small_04.png,appear_up
 image,main_msg_bubble,left_a_big_bubble.png
 wait
 msg,main_msg,おれの名前は 赤丸だ。小学校6年だ。好きな食べ物はカレーとコーラだ。苦手なものは犬だ。,赤丸
@@ -65,7 +65,7 @@ hide,button,next_msg_button
 hide,button,back_msg_button
 hide,image,main_msg_bubble
 hide,image,chara_small_left_a
-image,chara_small_left_b,aosuke.png,appear_up
+image,chara_small_left_b,aosuke_small_01.png,appear_up
 image,main_msg_bubble,left_b_big_bubble.png
 wait
 msg,main_msg,ぼくの名前は青助です。小学校6年生です。好きなものはテレビ。勉強もスポーツも あんまり得意じゃないんだ。,青助
@@ -75,7 +75,7 @@ hide,button,next_msg_button
 hide,button,back_msg_button
 hide,image,main_msg_bubble
 hide,image,chara_small_left_b
-image,chara_small_left_c,kimil.png,appear_up
+image,chara_small_left_c,kimi_small_02.png,appear_up
 image,main_msg_bubble,left_c_big_bubble.png
 msg,main_msg,わたしの名前はキミです。小学６年生です。好きなものはチョコレートです。人前で話すことがとても苦手です。,キミ
 wait
@@ -85,8 +85,8 @@ hide,button,back_msg_button
 hide,image,main_msg_bubble
 hide,image,chara_small_left_c
 next
-hide,image,chara_down_right
-image,chara_up_right,shiroji_03.png
+hide,image,chara_stand_right
+image,chara_stand_right,shiroji_03.png
 image,big_info,SS.png
 image,main_msg_bubble,right_big_bubble.png
 wait
@@ -109,7 +109,7 @@ hide,button,manga_next_button
 next
 reset
 image,bg,background_mokume.png
-image,chara_down_right,shiroji_01.png,appear_up
+image,chara_stand_right,shiroji_01.png,appear_up
 image,item_name_plate_left
 text,item_name_text_left,きもちセンサー
 image,item_image_center,item01_solo.png
@@ -119,10 +119,10 @@ msg,main_msg,わしの作った発明品をつかって、自分のきもちを 
 next
 reset
 image,bg,background_mokume.png
-image,chara_small_up_right,shiroji_03.png
+image,chara_stand_small_up_right,shiroji_03.png
 image,item_name_plate_center,item_name.png
 text,item_name_text_center,きもちセンサー
-image,item_name_bubble,item01_bubble.png
+image,item_name_bubble,item_bubble.png
 text,item_number,No.1
 image,item_image_left,item01_solo.png
 image,item_info_plate
@@ -136,8 +136,19 @@ image,session_title,challenge_time.png
 image,session_frame
 text,session_sub_title,チャレンジタイムとは…
 text,session_sentence,☆こころあっぷタイムで新しいことに挑戦してみる時間のことじゃ。
-image,chara_up_right,shiroji_04.png
+image,chara_stand_right,shiroji_04.png
 image,main_msg_bubble,right_big_bubble.png
 wait
 msg,main_msg,「きもち」には、いいきもちといやなきもちだけでなく、いろいろな種類があるぞい。自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
+next
+reset
+image,bg,water_frame.png
+grid,good_words_frame
+grid,bad_words_frame
+next
+hide,grid,good_words_frame
+hide,grid,bad_words_frame
+grid,gauge_grid
+image,heart_image,heart_red.png
+image,needle_image,red_needle.png
 next
