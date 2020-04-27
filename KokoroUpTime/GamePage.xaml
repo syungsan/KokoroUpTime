@@ -151,6 +151,22 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Key="slide_music_info_grid">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MusicInfoGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="520"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="520">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Page.Resources>
     <Grid>
         <Grid x:Name="MainGrid" Visibility="Visible" Grid.RowSpan="4" Grid.ColumnSpan="2">
@@ -572,84 +588,84 @@
                 <StackPanel Grid.Row="1" Grid.RowSpan="12">
                     <InkCanvas x:Name="BadCanvas_1" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
-                            <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                            <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
                         <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
                         <Label Content="心配" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
                     <InkCanvas x:Name="BadCanvas_2" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
-                            <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                            <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
                         <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
                         <Label Content="こまった" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
                     <InkCanvas x:Name="BadCanvas_3" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
-                            <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                            <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
                         <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
                         <Label Content="不安" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
                     <InkCanvas x:Name="BadCanvas_4" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
-                            <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                            <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
                         <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
                         <Label Content="こわい" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
                     <InkCanvas x:Name="BadCanvas_5" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
-                            <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                            <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
                         <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
                         <Label Content="おちこみ" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
                     <InkCanvas x:Name="BadCanvas_6" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
-                            <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                            <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
                         <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
                         <Label Content="がっかり" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
                     <InkCanvas x:Name="BadCanvas_7" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
-                            <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                            <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
                         <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
                         <Label Content="いかり" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
                     <InkCanvas x:Name="BadCanvas_8" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
-                            <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                            <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
                         <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
                         <Label Content="イライラ" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
                     <InkCanvas x:Name="BadCanvas_9" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
-                            <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                            <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
                         <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
                         <Label Content="はずかしい" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
                     <InkCanvas x:Name="BadCanvas_10" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
-                            <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                            <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
                         <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
                         <Label Content="ふまん" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
                     <InkCanvas x:Name="BadCanvas_11" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
-                            <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                            <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
                         <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
                         <Label Content="かなしい" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
                     <InkCanvas x:Name="BadCanvas_12" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
-                            <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                            <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
                         <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
                         <Label Content="おびえる" FontSize="36" Margin="100,8,0,0"/>
@@ -681,29 +697,30 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="12*"/>
                 <RowDefinition Height="31*"/>
-                <RowDefinition Height="135*"/>
+                <RowDefinition Height="22*"/>
+                <RowDefinition Height="113*"/>
                 <RowDefinition Height="33*"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="45*"/>
-                <ColumnDefinition Width="276*"/>
-                <ColumnDefinition Width="174*"/>
-                <ColumnDefinition Width="924*"/>
-                <ColumnDefinition Width="174*"/>
-                <ColumnDefinition Width="226*"/>
+                <ColumnDefinition Width="277*"/>
+                <ColumnDefinition Width="175*"/>
+                <ColumnDefinition Width="926*"/>
+                <ColumnDefinition Width="175*"/>
+                <ColumnDefinition Width="227*"/>
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="45*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="NextPageButton" Margin="0,2,4,0" VerticalAlignment="Top" Height="149" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="2">
+            <Button x:Name="NextPageButton" Margin="0,2,4,0" VerticalAlignment="Top" Height="149" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="2">
                 <Image Source="/Images/after.png" Height="149"/>
             </Button>
-            <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Margin="33,2,0,0" Grid.ColumnSpan="2" Grid.Row="3">
+            <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Margin="33,2,0,0" Grid.ColumnSpan="2" Grid.Row="4">
                 <Image Source="/Images/before.png"/>
             </Button>
             <Button x:Name="ExitButton" Content="おわる" Grid.Column="6" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="80" FontSize="24" Click="Button_Click" Grid.ColumnSpan="2" Margin="8,0,0,0"/>
-            <Image x:Name="CoverLayer" Grid.ColumnSpan="8" HorizontalAlignment="Left" Height="1080" Grid.RowSpan="5" VerticalAlignment="Top" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
-            <Grid x:Name="ExitGrid" Grid.Column="3" Grid.Row="2">
+            <Image x:Name="CoverLayer" HorizontalAlignment="Left" Height="1080" Grid.RowSpan="6" VerticalAlignment="Top" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" Margin="20,0,0,0" Grid.ColumnSpan="8"/>
+            <Grid x:Name="ExitGrid" Grid.Column="3" Grid.Row="2" Grid.RowSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80*"/>
                     <ColumnDefinition Width="336*"/>
@@ -723,6 +740,21 @@
                 <Button x:Name="ExitNoButton" HorizontalAlignment="Left" Margin="2,47,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2">
                     <Image Source="/Images/moya2.png"/>
                 </Button>
+            </Grid>
+            <Grid x:Name="MusicInfoGrid" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Image Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/frame_46-1.png"/>
+                <Label Content="BGM♪" HorizontalAlignment="Left" Margin="173,18,0,0" VerticalAlignment="Top" Height="70" Width="149" Foreground="White" FontSize="36" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker"/>
+                <Label Content="作曲・編曲" HorizontalAlignment="Center" Margin="0,129,0,0" VerticalAlignment="Top" Height="70" Width="184" Foreground="White" FontSize="36" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker"/>
+                <TextBlock x:Name="MusicTitle" HorizontalAlignment="Left" Margin="45,64,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Foreground="White" Width="355" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker"/>
+                <TextBlock x:Name="Composer" HorizontalAlignment="Left" Margin="105,172,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Foreground="White" Width="227" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker"/>
             </Grid>
         </Grid>
     </Grid>

@@ -6,6 +6,6 @@ text,session_sub_title,チャレンジタイムとは…,
 text,session_sentence,☆こころあっぷタイムで新しいことに挑戦してみる時間のことじゃ。,
 image,chara_up_right,shiroji_04.png,
 image,main_msg_bubble,right_big_bubble.png,
-wait,
+wait
 msg,main_msg,「きもち」には、いいきもちといやなきもちだけでなく、いろいろな種類があるぞい。自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
 next

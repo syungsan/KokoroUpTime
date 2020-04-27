@@ -148,6 +148,8 @@ namespace KokoroUpTime
             // this.FeelingGrid.Visibility = Visibility.Hidden;
             this.GaugeGrid.Visibility = Visibility.Hidden;
 
+            this.MusicInfoGrid.Visibility = Visibility.Hidden;
+
             this.NextPageButton.Visibility = Visibility.Hidden;
             this.BackPageButton.Visibility = Visibility.Hidden;
 
@@ -214,6 +216,8 @@ namespace KokoroUpTime
                 ["item_number"] = this.ItemNumber,
                 ["item_info_title"] = this.ItemInfoTitle,
                 ["item_info_sentence"] = this.ItemInfoSentence,
+                ["music_title"] = this.MusicTitle,
+                ["composer"] = this.Composer,
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -233,6 +237,7 @@ namespace KokoroUpTime
                 ["bad_words_frame"] = this.BadWordsFrame,
                 // ["feeling_grid"] = this.FeelingGrid,
                 ["gauge_grid"] = this.GaugeGrid,
+                ["music_info_grid"] = this.MusicInfoGrid,
             };
         }
 
@@ -265,8 +270,19 @@ namespace KokoroUpTime
 
                     gridObject.Visibility = Visibility.Visible;
 
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    {
+                        var gridStoryBoard = this.scenarios[this.scenarioCount][2];
+
+                        gridStoryBoard += $"_{this.position}";
+
+                        this.ShowAnime(storyBoard: gridStoryBoard);
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
 
                     break;
 
@@ -315,6 +331,7 @@ namespace KokoroUpTime
 
                         buttonImageObject = this.imageObjects[this.position];
                     }
+                    // 後々これいらんImageタグでセットできる
                     if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
                     {
                         var buttonImageFile = this.scenarios[this.scenarioCount][3];

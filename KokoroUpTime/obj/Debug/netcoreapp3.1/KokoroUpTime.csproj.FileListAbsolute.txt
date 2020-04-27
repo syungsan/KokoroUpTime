@@ -31,7 +31,6 @@ D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\K
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\KokoroUpTime.runtimeconfig.dev.json
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\KokoroUpTime.dll
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\KokoroUpTime.pdb
-D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Microsoft.Ink.dll
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Interop.WMPLib.dll
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Interop.WMPLib.dll
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csproj.ResolveComReference.cache
@@ -48,7 +47,6 @@ D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\K
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csproj.CoreCompileInputs.cache
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.AssemblyInfoInputs.cache
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.AssemblyInfo.cs
-D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csproj.CopyComplete
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.dll
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.pdb
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.genruntimeconfig.cache
