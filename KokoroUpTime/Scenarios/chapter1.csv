@@ -2,7 +2,9 @@ reset
 image,bg,background_01.png
 image,chara_stand_right,shiroji_01.png,appear_up
 image,main_msg_bubble,right_big_bubble.png
-text,music_title,教室大パニック
+bgm,set,放課後♪TeaTime.mp3,loop,50
+bgm,play
+text,music_title,放課後♪ティータイム
 text,composer,しゅんじ～
 grid,music_info_grid,slide
 wait
@@ -131,8 +133,10 @@ image,item_image_left,item01_solo.png
 image,item_info_plate
 text,item_info_title,きもちセンサーとは…
 text,item_info_sentence,★だれでもいろんな「きもち」になるが、「きもち」を「ことば」であらわすことは鬱　かんたんなことではないのだ。鬱鬱★きもちセンサーをつかうと、自分の「きもち」をピタリとあらわす「ことば」を鬱　選ぶことができるのじゃ！
-sound,nc211089.wav
+bgm,pause
+se,play,nc211089.wav
 next
+bgm,play
 reset
 image,bg,background_05.png
 image,session_title,challenge_time.png

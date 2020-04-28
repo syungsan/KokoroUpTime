@@ -19,6 +19,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using WMPLib;
 using System.Windows.Ink;
+using System.Media;
 
 namespace KokoroUpTime
 {
@@ -50,7 +51,7 @@ namespace KokoroUpTime
 
         private WindowsMediaPlayer mediaPlayer;
 
-        private WavesPlayer wavesPlayer;
+        private SoundPlayer sePlayer = null;
 
         public GamePage()
         {
@@ -66,12 +67,6 @@ namespace KokoroUpTime
 
             // メディアプレーヤークラスのインスタンスを作成する
             this.mediaPlayer = new WindowsMediaPlayer();
-
-            var sounds = Enum.GetNames(typeof(AnswerResult))
-               .ToDictionary(n => n, n => string.Format(@"Sounds\{0}.wav", n));
-
-            wavesPlayer = new WavesPlayer(sounds);
-            wavesPlayer.LoadAsync();
         }
 
         // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
@@ -513,23 +508,82 @@ namespace KokoroUpTime
                     this.isClickable = false;
                     break;
 
-                case "sound":
+                case "bgm":
 
-                    var _soundFile = this.scenarios[this.scenarioCount][1];
+                    var bgmStatus = this.scenarios[this.scenarioCount][1];
 
-                    bool _isLoop = false;
-
-                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    switch (bgmStatus)
                     {
-                        var loopStr = this.scenarios[this.scenarioCount][2];
+                        case "set":
 
-                        if (loopStr == "loop")
-                        {
-                            _isLoop = true;
-                        }
+                            var bgmFile = this.scenarios[this.scenarioCount][2];
+
+                            bool _isLoop = false;
+
+                            if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
+                            {
+                                var loopStr = this.scenarios[this.scenarioCount][3];
+
+                                if (loopStr == "loop")
+                                {
+                                    _isLoop = true;
+                                }
+                            }
+
+                            int bgmVolume = 100;
+
+                            if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
+                            {
+                                bgmVolume = int.Parse(this.scenarios[this.scenarioCount][4]);
+                            }
+
+                            this.SetBGM(soundFile: bgmFile, isLoop: _isLoop, volume: bgmVolume);
+
+                            break;
+
+                        case "play":
+
+                            this.PlayBGM();
+                            break;
+
+                        case "stop":
+
+                            this.StopBGM();
+                            break;
+
+                        case "pause":
+
+                            this.PauseBGM();
+                            break;
                     }
-                    this.SoundPlay(soundFile: _soundFile, isLoop: _isLoop);
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
 
+                    break;
+
+                case "se":
+
+                    var seStatus = this.scenarios[this.scenarioCount][1];
+
+                    switch (seStatus)
+                    {
+                        case "play":
+
+                            var seFile = this.scenarios[this.scenarioCount][2];
+
+                            string exePath = Environment.GetCommandLineArgs()[0];
+                            string exeFullPath = System.IO.Path.GetFullPath(exePath);
+                            string startupPath = System.IO.Path.GetDirectoryName(exeFullPath);
+
+                            this.PlaySE(soundFile: $@"{startupPath}/Sounds/{seFile}");
+
+                            break;
+
+                        case "stop":
+
+                            this.StopSE();
+                            break;
+                    }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
@@ -542,11 +596,12 @@ namespace KokoroUpTime
                     // 後々これを計算で得る
                     var feelings = new Dictionary<string, float>() { { "good", 60.0f }, { "bad", 80.0f } };
 
-                    var gaugeRotation = new RotateTransform();
-
-                    gaugeRotation.CenterX = 0.0;
-                    gaugeRotation.CenterY = this.NeedleImage.Height * 0.8f;
-                    gaugeRotation.Angle = -40.0f;
+                    var gaugeRotation = new RotateTransform
+                    {
+                        CenterX = 0.0,
+                        CenterY = this.NeedleImage.Height * 0.8f,
+                        Angle = -40.0f
+                    };
 
                     this.NeedleImage.RenderTransform = gaugeRotation;
 
@@ -573,6 +628,7 @@ namespace KokoroUpTime
                             else
                             {
                                 timer.Stop();
+                                timer = null;
                             }
                         };
                         timer.Start();
@@ -727,23 +783,50 @@ namespace KokoroUpTime
             }
         }
 
-        private void SoundPlay(string soundFile, bool isLoop=false)
+        private void SetBGM(string soundFile, bool isLoop, int volume)
         {
             string exePath = Environment.GetCommandLineArgs()[0];
             string exeFullPath = System.IO.Path.GetFullPath(exePath);
             string startupPath = System.IO.Path.GetDirectoryName(exeFullPath);
 
             // ループ再生を指定
-            mediaPlayer.settings.setMode("loop", isLoop);
+            this.mediaPlayer.settings.setMode("loop", isLoop);
 
             // 通常は自動再生にファイルを指定すればループ再生がはじまる
-            mediaPlayer.URL = $@"{startupPath}/Sounds/{soundFile}";
+            this.mediaPlayer.URL = $@"{startupPath}/Sounds/{soundFile}";
 
-            mediaPlayer.controls.play(); // 再生
-            
-            // mediaPlayer.controls.stop(); // 停止(再生中停止すればplay()で頭から再生)
-            // mediaPlayer.controls.pause();// ポーズ(play()で再開)
-            // mediaPlayer.settings.volume = 10; // 0から100
+            this.mediaPlayer.settings.volume = volume; // 0から100
+        }
+
+        private void PlayBGM()
+        {
+            this.mediaPlayer.controls.play(); // 再生
+        }
+
+        private void StopBGM()
+        {
+            this.mediaPlayer.controls.stop(); // 停止(再生中停止すればplayBGM()で頭から再生)
+        }
+
+        private void PauseBGM()
+        {
+            mediaPlayer.controls.pause(); // ポーズ(playBGM()で再開)
+        }
+
+        private void StopSE()
+        {
+            if (sePlayer != null)
+            {
+                sePlayer.Stop();
+                sePlayer.Dispose();
+                sePlayer = null;
+            }
+        }
+
+        private void PlaySE(string soundFile)
+        {
+            sePlayer = new SoundPlayer(soundFile);
+            sePlayer.Play();
         }
 
         void GestureCanvas_Loaded(object sender, RoutedEventArgs e)
@@ -774,9 +857,13 @@ namespace KokoroUpTime
             var gestureResult = e.GetGestureRecognitionResults()
                 .FirstOrDefault(r => r.ApplicationGesture != ApplicationGesture.NoGesture);
 
+            string exePath = Environment.GetCommandLineArgs()[0];
+            string exeFullPath = System.IO.Path.GetFullPath(exePath);
+            string startupPath = System.IO.Path.GetDirectoryName(exeFullPath);
+
             if (gestureResult == null)
             {
-                wavesPlayer.Play(AnswerResult.None.ToString());
+                PlaySE($@"{startupPath}/Sounds/None.wav");
                 return;
             }
 
@@ -808,7 +895,7 @@ namespace KokoroUpTime
                     throw new InvalidOperationException();
             }
 
-            wavesPlayer.Play(answerResult.ToString());
+            PlaySE($@"{startupPath}/Sounds/{answerResult}.wav");
 
             var gestureCanvas = (InkCanvas)sender;
 
