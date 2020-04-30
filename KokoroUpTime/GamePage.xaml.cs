@@ -53,6 +53,8 @@ namespace KokoroUpTime
 
         private SoundPlayer sePlayer = null;
 
+        private int feelingSize = 0;
+
         public GamePage()
         {
             InitializeComponent();
@@ -67,6 +69,10 @@ namespace KokoroUpTime
 
             // メディアプレーヤークラスのインスタンスを作成する
             this.mediaPlayer = new WindowsMediaPlayer();
+
+            this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
+            this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
+            this.MouseMove += new MouseEventHandler(OnMouseMove);
         }
 
         // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
@@ -591,6 +597,7 @@ namespace KokoroUpTime
 
                 case "gauge":
 
+                    /*
                     var kindOfFeeling = this.scenarios[this.scenarioCount][1];
 
                     // 後々これを計算で得る
@@ -633,6 +640,10 @@ namespace KokoroUpTime
                         };
                         timer.Start();
                     }
+                    */
+                    this.Angle = 0.0f;
+                    this.FeelingScaleText.Text = "50";
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
@@ -903,12 +914,74 @@ namespace KokoroUpTime
             gestureCanvas.Strokes.Add(e.Strokes);
         }
 
-        public enum AnswerResult
+        private enum AnswerResult
         {
             None,
             Incorrect,
             Intermediate,
             Correct,
+        }
+
+        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(GamePage), new UIPropertyMetadata(0.0));
+
+        private double Angle
+        {
+            get { return (double)GetValue(AngleProperty); }
+            set { SetValue(AngleProperty, value); }
+        }
+
+        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.Capture(this);
+
+            this.CalcAngle();
+
+            this.FeelingScaleText.Text = this.feelingSize.ToString();
+        }
+
+        private void OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.Capture(null);
+        }
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (Mouse.Captured == this)
+            {
+                this.CalcAngle();
+
+                this.FeelingScaleText.Text = this.feelingSize.ToString();
+            }
+        }
+
+        private void CalcAngle()
+        {
+            Point currentLocation = Mouse.GetPosition(this);
+
+            Point knobCenter = new Point(this.ActualWidth * 0.5, this.ActualHeight * 0.8);
+
+            double radians = Math.Atan((currentLocation.Y - knobCenter.Y) / (currentLocation.X - knobCenter.X));
+
+            this.Angle = radians * 180 / Math.PI + 90;
+
+            this.feelingSize = (int)(this.Angle + 50.0f);
+
+            if (currentLocation.X - knobCenter.X < 0)
+            {
+                this.Angle += 180;
+
+                this.feelingSize = (int)(this.Angle - 310.0f);
+            }
+            if (this.feelingSize <= 0)
+            {
+                this.feelingSize = 0;
+                this.Angle = (double)this.feelingSize - 50.0f;
+            }
+            if (this.feelingSize >= 100)
+            {
+                this.feelingSize = 100;
+                this.Angle = (double)this.feelingSize + 310.0f;
+            }
         }
     }
 }

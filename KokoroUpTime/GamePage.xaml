@@ -169,7 +169,7 @@
         </Storyboard>
     </Page.Resources>
     <Grid>
-        <Grid x:Name="MainGrid" Visibility="Visible" Grid.RowSpan="4" Grid.ColumnSpan="2">
+        <Grid x:Name="MainGrid" Visibility="Visible" Grid.RowSpan="4" Grid.ColumnSpan="2" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="33*"/>
                 <RowDefinition Height="90*"/>
@@ -272,7 +272,7 @@
                 </Image>
             </Button>
         </Grid>
-        <Grid x:Name="SessionGrid">
+        <Grid x:Name="SessionGrid" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="12*"/>
                 <RowDefinition Height="33*"/>
@@ -292,7 +292,7 @@
             <TextBlock x:Name="SessionSentence" HorizontalAlignment="Left" Margin="75,125,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="168" Width="745" FontSize="48" Grid.Column="1" Grid.Row="2"/>
             <Image x:Name="SessionTitle" Source="/Images/challenge_time.png" Margin="21,15,11,62" Grid.Column="1" Grid.Row="1"/>
         </Grid>
-        <Grid x:Name="RuleGrid" Grid.ColumnSpan="2" Grid.RowSpan="4" Visibility="Visible">
+        <Grid x:Name="RuleGrid" Grid.ColumnSpan="2" Grid.RowSpan="4" Visibility="Visible" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="43*"/>
                 <ColumnDefinition Width="240*"/>
@@ -389,7 +389,7 @@
                 </Grid>
             </Button>
         </Grid>
-        <Grid x:Name="MangaGrid" Visibility="Visible">
+        <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="27*"/>
                 <RowDefinition Height="170*"/>
@@ -417,7 +417,7 @@
                 <Image Source="/Images/mangaya.png"/>
             </Button>
         </Grid>
-        <Grid x:Name="ItemGrid" Visibility="Visible">
+        <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30*"/>
                 <ColumnDefinition Width="83*"/>
@@ -451,7 +451,7 @@
             <TextBlock x:Name="ItemInfoSentence" HorizontalAlignment="Left" Margin="42,120,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="327" Width="1083" FontSize="36" Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="3" Grid.RowSpan="2"/>
             <TextBlock x:Name="ItemNumber" HorizontalAlignment="Left" Margin="157,149,0,0" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Grid.RowSpan="2" Foreground="#FFEEEE1E" Grid.Column="1"/>
         </Grid>
-        <Grid x:Name="FeelingGrid" Margin="0,0,0,17">
+        <Grid x:Name="FeelingGrid" Margin="0,0,0,17" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="474*"/>
                 <ColumnDefinition Width="449*"/>
@@ -690,10 +690,14 @@
             </Grid.ColumnDefinitions>
             <Image x:Name="FeelingScaleView" HorizontalAlignment="Left" Height="374" Margin="4,0,0,0" VerticalAlignment="Top" Width="931" Source="/Images/mind_scale.png" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3"/>
             <Image x:Name="HeartImage" HorizontalAlignment="Left" Height="506" Margin="10,32,0,0" VerticalAlignment="Top" Width="595" Source="/Images/heart_red.png" Grid.Column="2" Grid.Row="2"/>
-            <Image x:Name="NeedleImage" HorizontalAlignment="Left" Height="349" Margin="288,136,0,0" VerticalAlignment="Top" Width="41" Source="/Images/red_needle.png" Grid.Column="2" Grid.Row="2"/>
+            <Image x:Name="NeedleImage" Height="349" Width="41" Source="/Images/red_needle.png" Grid.Column="2" Grid.Row="2" RenderTransformOrigin="0.5,0.8" Margin="288,140,296,61">
+                <Image.RenderTransform>
+                    <RotateTransform Angle="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GamePage}}, Path=Angle}"/>
+                </Image.RenderTransform>
+            </Image>
             <TextBlock x:Name="FeelingScaleText" Grid.Column="2" HorizontalAlignment="Left" Margin="176,105,0,0" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="135" Width="270" FontWeight="Bold" FontSize="94" TextAlignment="Center"/>
         </Grid>
-        <Grid x:Name="SystemGrid">
+        <Grid x:Name="SystemGrid" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="12*"/>
                 <RowDefinition Height="31*"/>
