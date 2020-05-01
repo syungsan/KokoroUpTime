@@ -39,6 +39,7 @@
     <None Remove="Images\background_mokume.png" />
     <None Remove="Images\badWordsFrame.png" />
     <None Remove="Images\before.png" />
+    <None Remove="Images\big_heart.png" />
     <None Remove="Images\blackboard.png" />
     <None Remove="Images\blue_needle.png" />
     <None Remove="Images\challenge_time.png" />
@@ -136,6 +137,7 @@
     <Resource Include="Images\background_mokume.png" />
     <Resource Include="Images\badWordsFrame.png" />
     <Resource Include="Images\before.png" />
+    <Resource Include="Images\big_heart.png" />
     <Resource Include="Images\blackboard.png" />
     <Resource Include="Images\blue_needle.png" />
     <Resource Include="Images\challenge_time.png" />

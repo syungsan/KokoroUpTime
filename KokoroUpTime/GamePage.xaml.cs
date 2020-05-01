@@ -149,6 +149,9 @@ namespace KokoroUpTime
             // this.FeelingGrid.Visibility = Visibility.Hidden;
             this.GaugeGrid.Visibility = Visibility.Hidden;
 
+            this.CharaLeftComment.Visibility = Visibility.Hidden;
+            this.CharaLeftSymbol.Visibility = Visibility.Hidden;
+
             this.MusicInfoGrid.Visibility = Visibility.Hidden;
 
             this.NextPageButton.Visibility = Visibility.Hidden;
@@ -200,6 +203,7 @@ namespace KokoroUpTime
                 ["long_msg_image"] = this.LongMsgImage,
                 ["heart_image"] = this.HeartImage,
                 ["needle_image"] = this.NeedleImage,
+                ["chara_left_symbol"] = this.CharaLeftSymbol,
             };
 
             this.textObjects = new Dictionary<string, TextBlock>
@@ -219,6 +223,7 @@ namespace KokoroUpTime
                 ["item_info_sentence"] = this.ItemInfoSentence,
                 ["music_title"] = this.MusicTitle,
                 ["composer"] = this.Composer,
+                ["chara_left_comment"] = this.CharaLeftComment,
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -271,20 +276,26 @@ namespace KokoroUpTime
 
                     gridObject.Visibility = Visibility.Visible;
 
+                    string gridIsSync = "sync";
+
+                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
+                    {
+                        gridIsSync = this.scenarios[this.scenarioCount][3];
+                    }
+
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
                         var gridStoryBoard = this.scenarios[this.scenarioCount][2];
 
                         gridStoryBoard += $"_{this.position}";
 
-                        this.ShowAnime(storyBoard: gridStoryBoard);
+                        this.ShowAnime(storyBoard: gridStoryBoard, isSync: gridIsSync);
                     }
                     else
                     {
                         this.scenarioCount += 1;
                         this.ScenarioPlay();
                     }
-
                     break;
 
                 case "image":
@@ -303,13 +314,20 @@ namespace KokoroUpTime
                     }
                     imageObject.Visibility = Visibility.Visible;
 
+                    string imageIsSync = "sync";
+
+                    if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
+                    {
+                       imageIsSync = this.scenarios[this.scenarioCount][4];
+                    }
+
                     if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
                     {
                         var imageStoryBoard = this.scenarios[this.scenarioCount][3];
 
                         imageStoryBoard += $"_{this.position}";
 
-                        this.ShowAnime(storyBoard: imageStoryBoard);
+                        this.ShowAnime(storyBoard: imageStoryBoard, isSync: imageIsSync);
                     }
                     else
                     {
@@ -341,13 +359,20 @@ namespace KokoroUpTime
                     }
                     buttonObject.Visibility = Visibility.Visible;
 
+                    string buttonIsSync = "sync";
+
+                    if (this.scenarios[this.scenarioCount].Count > 5 && this.scenarios[this.scenarioCount][5] != "")
+                    {
+                        buttonIsSync = this.scenarios[this.scenarioCount][5];
+                    }
+
                     if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
                     {
                         var buttonStoryBoard = this.scenarios[this.scenarioCount][4];
 
                         buttonStoryBoard += $"_{this.position}";
 
-                        this.ShowAnime(storyBoard: buttonStoryBoard);
+                        this.ShowAnime(storyBoard: buttonStoryBoard, isSync: buttonIsSync);
                     }
                     else
                     {
@@ -424,11 +449,46 @@ namespace KokoroUpTime
 
                     textObject.Text = text;
 
+                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
+                    {
+                        var textColor = this.scenarios[this.scenarioCount][3];
+
+                        SolidColorBrush textColorBrush = new SolidColorBrush(Colors.Black);
+
+                        switch (textColor)
+                        {
+                            case "white":
+                                textColorBrush = new SolidColorBrush(Colors.White);
+                                break;
+
+                            case "red":
+                                textColorBrush = new SolidColorBrush(Colors.Red);
+                                break;
+                        }
+                        textObject.Foreground = textColorBrush;
+                    }
                     textObject.Visibility = Visibility.Visible;
 
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    string textIsSync = "sync";
 
+                    if (this.scenarios[this.scenarioCount].Count > 5 && this.scenarios[this.scenarioCount][5] != "")
+                    {
+                        textIsSync = this.scenarios[this.scenarioCount][5];
+                    }
+
+                    if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
+                    {
+                        var textStoryBoard = this.scenarios[this.scenarioCount][4];
+
+                        textStoryBoard += $"_{this.position}";
+
+                        this.ShowAnime(storyBoard: textStoryBoard, isSync: textIsSync);
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
                     break;
 
                 case "hide":
@@ -686,7 +746,7 @@ namespace KokoroUpTime
             }
         }
 
-        private void ShowAnime(string storyBoard)
+        private void ShowAnime(string storyBoard, string isSync)
         {
             Storyboard sb = this.FindResource(storyBoard) as Storyboard;
 
@@ -695,8 +755,24 @@ namespace KokoroUpTime
                 // 二重終了防止策
                 bool isDuplicate = false;
 
-                sb.Completed += (s, e) =>
+                if (isSync == "sync")
                 {
+                    sb.Completed += (s, e) =>
+                    {
+                        if (!isDuplicate)
+                        {
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+
+                            isDuplicate = true;
+                        }
+                    };
+                    sb.Begin(this);
+                }
+                else if (isSync == "no_sync")
+                {
+                    sb.Begin(this);
+
                     if (!isDuplicate)
                     {
                         this.scenarioCount += 1;
@@ -704,8 +780,7 @@ namespace KokoroUpTime
 
                         isDuplicate = true;
                     }
-                };
-                sb.Begin(this);
+                }
             }
         }
 

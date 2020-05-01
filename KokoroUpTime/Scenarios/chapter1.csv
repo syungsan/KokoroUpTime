@@ -184,4 +184,7 @@ image,chara_stand_left,kimi_stand_01.png
 image,main_msg_bubble,right_big_bubble.png
 wait
 msg,main_msg,それでは、キミちゃん！意見を言ってくれるかな？,先生
-next
+image,chara_left_symbol,big_heart.png,pomp,no_sync
+text,chara_left_comment,ドキ!!,red,rotation,no_sync
+image,chara_stand_left,kimi_stand_01.png,pomp
+wait

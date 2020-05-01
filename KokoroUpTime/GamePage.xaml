@@ -167,12 +167,122 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Key="rotation_chara_left_comment">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaLeftComment" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="360.0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="pomp_chara_left_symbol">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaLeftSymbol" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.0000000" Value="1.0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaLeftSymbol" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.0000000" Value="1.0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="pomp_chara_stand_left">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaStandLeft" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="1.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="1.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaStandLeft" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="1.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="1.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaStandLeft" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Page.Resources>
     <Grid>
-        <Grid x:Name="MainGrid" Visibility="Visible" Grid.RowSpan="4" Grid.ColumnSpan="2" d:IsHidden="True">
+        <Grid x:Name="MainGrid" Visibility="Visible" Grid.RowSpan="4" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="33*"/>
-                <RowDefinition Height="90*"/>
+                <RowDefinition Height="12*"/>
+                <RowDefinition Height="21*"/>
+                <RowDefinition Height="14*"/>
+                <RowDefinition Height="76*"/>
                 <RowDefinition Height="25*"/>
                 <RowDefinition Height="29*"/>
                 <RowDefinition Height="18*"/>
@@ -193,8 +303,8 @@
                 <ColumnDefinition Width="240*"/>
                 <ColumnDefinition Width="185*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="BG"  Stretch="Fill" Source="/Images/background_01.png" Grid.RowSpan="7" Grid.ColumnSpan="12"/>
-            <Image x:Name="CharaStandRight" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="600" Height="942" Margin="36,12,59,21" Grid.Column="9" Grid.RowSpan="5" Grid.ColumnSpan="3">
+            <Image x:Name="BG"  Stretch="Fill" Source="/Images/background_01.png" Grid.RowSpan="9" Grid.ColumnSpan="12"/>
+            <Image x:Name="CharaStandRight" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="600" Height="942" Margin="36,12,59,21" Grid.Column="9" Grid.RowSpan="7" Grid.ColumnSpan="3">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -204,7 +314,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CharaStandLeft" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_02.png" Width="600" Height="942" Margin="60,12,20,21" Grid.RowSpan="5" Grid.ColumnSpan="5">
+            <Image x:Name="CharaStandLeft" RenderTransformOrigin="0.5,0.5" Source="/Images/kimi_stand_01.png" Width="600" Height="942" Margin="60,12,20,21" Grid.RowSpan="7" Grid.ColumnSpan="5">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -214,7 +324,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CharaSmallLeftA" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/akamaru_small_04.png" Margin="53,14,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="2" Grid.Row="1">
+            <Image x:Name="CharaSmallLeftA" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/akamaru_small_04.png" Margin="53,14,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="3" Grid.Column="2" Grid.Row="2">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -224,7 +334,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CharaSmallLeftB" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/aosuke_small_01.png" Margin="14,15,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="3" Grid.Row="1">
+            <Image x:Name="CharaSmallLeftB" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/aosuke_small_01.png" Margin="14,15,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="3" Grid.Column="3" Grid.Row="2">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -234,7 +344,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CharaSmallLeftC" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/kimi_small_02.png" RenderTransformOrigin="0.5,0.5" Margin="10,16,0,0" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="4" Grid.Row="1">
+            <Image x:Name="CharaSmallLeftC" HorizontalAlignment="Center" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/kimi_small_02.png" RenderTransformOrigin="0.5,0.5" Margin="0,16,0,0" Grid.ColumnSpan="4" Grid.RowSpan="3" Grid.Column="4" Grid.Row="2">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -244,8 +354,8 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CharaSmallLeft" HorizontalAlignment="Left" Height="556" Margin="15,11,0,0" VerticalAlignment="Top" Width="516" Source="/Images/kimi_small_01.png" Grid.RowSpan="2" Grid.ColumnSpan="4" Grid.Row="1" Grid.Column="1"/>
-            <Image x:Name="MainMsgBubble" Source="/Images/right_big_bubble.png" RenderTransformOrigin="0.5,0.5" Margin="5,15,15,0" Grid.RowSpan="4" Grid.ColumnSpan="9" Grid.Row="2" Grid.Column="2">
+            <Image x:Name="CharaSmallLeft" HorizontalAlignment="Left" Height="556" Margin="15,11,0,0" VerticalAlignment="Top" Width="516" Source="/Images/kimi_small_01.png" Grid.RowSpan="3" Grid.ColumnSpan="4" Grid.Row="2" Grid.Column="1"/>
+            <Image x:Name="MainMsgBubble" Source="/Images/right_big_bubble.png" RenderTransformOrigin="0.5,0.5" Margin="5,15,15,0" Grid.RowSpan="4" Grid.ColumnSpan="9" Grid.Row="4" Grid.Column="2">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -255,11 +365,11 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <TextBlock x:Name="MainMsg" Text="TextBlock" TextWrapping="Wrap" FontSize="48" FontFamily="/Fonts/azuki.ttf#azuki_font" Margin="80,25,90,25" Grid.ColumnSpan="9" Grid.RowSpan="3" Grid.Row="3" Grid.Column="2"/>
-            <Button x:Name="NextMsgButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" RenderTransformOrigin="0.5,0.5" Margin="20,57,51,28" Grid.Column="10" Grid.RowSpan="2" Grid.Row="4">
+            <TextBlock x:Name="MainMsg" Text="TextBlock" TextWrapping="Wrap" FontSize="48" FontFamily="/Fonts/azuki.ttf#azuki_font" Margin="80,25,90,25" Grid.ColumnSpan="9" Grid.RowSpan="3" Grid.Row="5" Grid.Column="2"/>
+            <Button x:Name="NextMsgButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" RenderTransformOrigin="0.5,0.5" Margin="20,57,51,28" Grid.Column="10" Grid.RowSpan="2" Grid.Row="6">
                 <Image Source="/Images/yazirusi.png"/>
             </Button>
-            <Button x:Name="BackMsgButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" RenderTransformOrigin="0.5,0.5" Margin="20,22,51,43" Grid.Column="10" Grid.Row="3">
+            <Button x:Name="BackMsgButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" RenderTransformOrigin="0.5,0.5" Margin="20,22,51,43" Grid.Column="10" Grid.Row="5">
                 <Image Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -271,8 +381,28 @@
                     </Image.RenderTransform>
                 </Image>
             </Button>
+            <Image x:Name="CharaLeftSymbol" Grid.Column="3" HorizontalAlignment="Left" Height="140" Margin="7,5,0,0" VerticalAlignment="Top" Width="188" Source="/Images/big_heart.png" Grid.RowSpan="2" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <TextBlock x:Name="CharaLeftComment" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="80" Grid.RowSpan="2" Grid.ColumnSpan="3" Width="368" Grid.Row="1" Margin="17,31,0,0" TextAlignment="Center" FontWeight="Bold" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
         </Grid>
-        <Grid x:Name="SessionGrid" d:IsHidden="True">
+        <Grid x:Name="SessionGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="12*"/>
                 <RowDefinition Height="33*"/>
@@ -292,7 +422,7 @@
             <TextBlock x:Name="SessionSentence" HorizontalAlignment="Left" Margin="75,125,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="168" Width="745" FontSize="48" Grid.Column="1" Grid.Row="2"/>
             <Image x:Name="SessionTitle" Source="/Images/challenge_time.png" Margin="21,15,11,62" Grid.Column="1" Grid.Row="1"/>
         </Grid>
-        <Grid x:Name="RuleGrid" Grid.ColumnSpan="2" Grid.RowSpan="4" Visibility="Visible" d:IsHidden="True">
+        <Grid x:Name="RuleGrid" Grid.ColumnSpan="2" Grid.RowSpan="4" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="43*"/>
                 <ColumnDefinition Width="240*"/>
@@ -389,7 +519,7 @@
                 </Grid>
             </Button>
         </Grid>
-        <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
+        <Grid x:Name="MangaGrid" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition Height="27*"/>
                 <RowDefinition Height="170*"/>
@@ -417,7 +547,7 @@
                 <Image Source="/Images/mangaya.png"/>
             </Button>
         </Grid>
-        <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
+        <Grid x:Name="ItemGrid" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30*"/>
                 <ColumnDefinition Width="83*"/>
@@ -451,7 +581,7 @@
             <TextBlock x:Name="ItemInfoSentence" HorizontalAlignment="Left" Margin="42,120,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="327" Width="1083" FontSize="36" Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="3" Grid.RowSpan="2"/>
             <TextBlock x:Name="ItemNumber" HorizontalAlignment="Left" Margin="157,149,0,0" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Grid.RowSpan="2" Foreground="#FFEEEE1E" Grid.Column="1"/>
         </Grid>
-        <Grid x:Name="FeelingGrid" Margin="0,0,0,17" d:IsHidden="True">
+        <Grid x:Name="FeelingGrid" Margin="0,0,0,17">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="474*"/>
                 <ColumnDefinition Width="449*"/>
@@ -697,7 +827,7 @@
             </Image>
             <TextBlock x:Name="FeelingScaleText" Grid.Column="2" HorizontalAlignment="Left" Margin="176,105,0,0" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="135" Width="270" FontWeight="Bold" FontSize="94" TextAlignment="Center"/>
         </Grid>
-        <Grid x:Name="SystemGrid" d:IsHidden="True">
+        <Grid x:Name="SystemGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="12*"/>
                 <RowDefinition Height="31*"/>
