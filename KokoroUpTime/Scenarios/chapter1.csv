@@ -2,11 +2,11 @@ reset
 image,bg,background_01.png
 image,chara_stand_right,shiroji_01.png,appear_up
 image,main_msg_bubble,right_big_bubble.png
-bgm,set,放課後♪TeaTime.mp3,loop,50
+bgm,set,もくもくStudy♪.mp3,loop,50
 bgm,play
-text,music_title,放課後♪ティータイム
+text,music_title,もくもくStudy♪
 text,composer,しゅんじ～
-grid,music_info_grid,slide
+grid,music_info_grid,slide,no_sync
 wait
 msg,main_msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
 wait
@@ -145,6 +145,11 @@ text,session_sub_title,チャレンジタイムとは…
 text,session_sentence,☆こころあっぷタイムで新しいことに挑戦してみる時間のことじゃ。
 image,chara_stand_right,shiroji_04.png
 image,main_msg_bubble,right_big_bubble.png
+bgm,set,放課後♪TeaTime.mp3,loop,50
+bgm,play
+text,music_title,放課後♪ティータイム
+text,composer,しゅんじ～
+grid,music_info_grid,slide,no_sync
 wait
 msg,main_msg,「きもち」には、いいきもちといやなきもちだけでなく、いろいろな種類があるぞい。自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
 next
