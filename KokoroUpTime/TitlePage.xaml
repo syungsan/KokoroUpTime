@@ -46,7 +46,7 @@
         <Image Source="/Images/menu_bubble.png" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="6" Grid.RowSpan="10"/>
         <Image Source="/Images/shiroji_02.png" Grid.Column="8" Grid.Row="8" Grid.RowSpan="5"/>
         <Image Source="/Images/small_bubble.png" Grid.Column="9" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="5"/>
-        <Button Content="オプション" FontSize="36" Foreground="White" Grid.Column="1" Grid.Row="13"/>
+        <Button Content="オプション" FontSize="36" Foreground="White" Grid.Column="1" Grid.Row="13" Click="Button_Click"/>
         <Button Content="アイテム図鑑" FontSize="36" Foreground="White" Grid.Column="3" Grid.Row="13" Grid.ColumnSpan="3"/>
         <Button Content="第1回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Grid.Column="2" Grid.Row="4"/>
         <Button Content="第2回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Grid.Column="2" Grid.Row="5"/>

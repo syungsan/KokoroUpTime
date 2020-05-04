@@ -50,13 +50,13 @@ namespace KokoroUpTime
         {
             Button button = sender as Button;
 
-            // Pageインスタンスを渡して遷移
-            GamePage nextPage = new GamePage();
-
-            string scenario = "";
-
             for (int i = 1; i <= 12; ++i)
             {
+                // Pageインスタンスを渡して遷移
+                GamePage nextPage = new GamePage();
+
+                string scenario;
+
                 if (button.Content.ToString() == $"第{i}回")
                 {
                     scenario = $"Scenarios/chapter{i}.csv";
@@ -68,11 +68,21 @@ namespace KokoroUpTime
                     this.NavigationService.Navigate(nextPage);
                 }
             }
+
             if (button.Content.ToString() == "Full/Win")
             {
                 Window _mainWindow = Application.Current.MainWindow;
 
                 this.Maximize(mainWindow: _mainWindow);
+            }
+
+            if (button.Content.ToString() == "オプション")
+            {
+                OptionPage nextPage = new OptionPage();
+
+                this.NavigationService.Navigate(new Uri("OptionPage.xaml", UriKind.Relative));
+
+                this.NavigationService.Navigate(nextPage);
             }
         }
 
