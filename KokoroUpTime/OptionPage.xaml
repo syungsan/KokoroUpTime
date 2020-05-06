@@ -29,7 +29,7 @@
         <Image Height="1080" Width="1920" Source="/Images/background_option.png" Stretch="Fill" Grid.ColumnSpan="4" Grid.RowSpan="9"/>
         <Label Content="オプション" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="94" FontWeight="Bold" Foreground="White" Grid.Column="2" Grid.Row="1"/>
         <Label Content="効果音♪" HorizontalAlignment="Left" Margin="16,5,0,16" FontSize="82" FontWeight="Bold" Grid.Row="3" Grid.Column="1"/>
-        <Label Content="BGM音♪" HorizontalAlignment="Left" Margin="16,5,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold" Grid.Row="4" Grid.Column="1"/>
+        <Label Content="BGM♪" HorizontalAlignment="Left" Margin="16,5,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold" Grid.Row="4" Grid.Column="1"/>
         <Label Content="文字の速さ" HorizontalAlignment="Left" Margin="16,7,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold" Grid.Row="5" Grid.Column="1"/>
         <Label Content="ふりがな" HorizontalAlignment="Left" Margin="16,4,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold" Grid.Row="6" Grid.Column="1"/>
         <Button Content="ON" HorizontalAlignment="Left" Margin="27,3,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" Grid.Column="2" Grid.Row="3" BorderBrush="{x:Null}"/>

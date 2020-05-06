@@ -98,6 +98,11 @@ wait
 msg,main_msg,この３人とこころあっぷタイムを進めていくぞい！さて、３人は、なにかこまっていることがあるようじゃ。どんなことで、こまっているのだろう？マンガを見ながら考えてみよう！,白じい
 next
 reset
+bgm,set,manga.mp3,loop,50
+bgm,play
+text,music_title,まんが
+text,composer,しゅんじ～
+grid,music_info_grid,slide,no_sync
 image,manga_title,manga1_title.png
 image,manga_image,manga1-1.png,flip
 flip
