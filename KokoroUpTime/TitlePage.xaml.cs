@@ -35,6 +35,7 @@ namespace KokoroUpTime
 
             // AssemblyNameから取得
             AssemblyName asmName = asm.GetName();
+
             string name = "AssemblyName.Name : " + asmName.Name + "\r\n";
             string version = "AssemblyName.Version : " + asmName.Version.ToString() + "\r\n";
             string fullname = "AssemblyName.FullName : " + asmName.FullName + "\r\n";
@@ -42,7 +43,6 @@ namespace KokoroUpTime
             string runtime = "Assembly.ImageRuntimeVersion : " + asm.ImageRuntimeVersion + "\r\n";
 
             this.VersionText.Text = name + version + fullname + processor + runtime + "\r\n";
-
             this.WindowTitle = asmName.Name + " Ver" + asmName.Version.ToString();
         }
 
@@ -50,39 +50,43 @@ namespace KokoroUpTime
         {
             Button button = sender as Button;
 
-            for (int i = 1; i <= 12; ++i)
-            {
-                // Pageインスタンスを渡して遷移
-                GamePage nextPage = new GamePage();
-
-                string scenario;
-
-                if (button.Content.ToString() == $"第{i}回")
-                {
-                    scenario = $"Scenarios/chapter{i}.csv";
-
-                    nextPage.SetScenario(scenario);
-
-                    this.NavigationService.Navigate(new Uri("GamePage.xaml", UriKind.Relative));
-
-                    this.NavigationService.Navigate(nextPage);
-                }
-            }
-
             if (button.Content.ToString() == "Full/Win")
             {
                 Window _mainWindow = Application.Current.MainWindow;
 
                 this.Maximize(mainWindow: _mainWindow);
             }
-
-            if (button.Content.ToString() == "オプション")
+            else if (button.Content.ToString() == "オプション")
             {
                 OptionPage nextPage = new OptionPage();
 
                 this.NavigationService.Navigate(new Uri("OptionPage.xaml", UriKind.Relative));
 
                 this.NavigationService.Navigate(nextPage);
+            }
+            else
+            {
+                for (int i = 1; i <= 12; ++i)
+                {
+                    // Pageインスタンスを渡して遷移
+                    GamePage nextPage = new GamePage();
+
+                    string scenario;
+
+                    if (button.Content.ToString() == $"第{i}回")
+                    {
+                        scenario = $"Scenarios/chapter{i}.csv";
+
+                        nextPage.SetScenario(scenario);
+
+                        this.NavigationService.Navigate(new Uri("GamePage.xaml", UriKind.Relative));
+
+                        this.NavigationService.Navigate(nextPage);
+
+                        break;
+                    }
+                }
+
             }
         }
 

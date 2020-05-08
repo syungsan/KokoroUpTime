@@ -277,311 +277,7 @@
         </Storyboard>
     </Page.Resources>
     <Grid>
-        <Grid x:Name="MainGrid" Visibility="Visible" Grid.RowSpan="4" Grid.ColumnSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="12*"/>
-                <RowDefinition Height="21*"/>
-                <RowDefinition Height="14*"/>
-                <RowDefinition Height="76*"/>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="29*"/>
-                <RowDefinition Height="18*"/>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="6*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="125*"/>
-                <ColumnDefinition Width="75*"/>
-                <ColumnDefinition Width="195*"/>
-                <ColumnDefinition Width="210*"/>
-                <ColumnDefinition Width="75*"/>
-                <ColumnDefinition Width="100*"/>
-                <ColumnDefinition Width="147*"/>
-                <ColumnDefinition Width="213*"/>
-                <ColumnDefinition Width="85*"/>
-                <ColumnDefinition Width="270*"/>
-                <ColumnDefinition Width="240*"/>
-                <ColumnDefinition Width="185*"/>
-            </Grid.ColumnDefinitions>
-            <Image x:Name="BG"  Stretch="Fill" Source="/Images/background_01.png" Grid.RowSpan="9" Grid.ColumnSpan="12"/>
-            <Image x:Name="CharaStandRight" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="600" Height="942" Margin="36,12,59,21" Grid.Column="9" Grid.RowSpan="7" Grid.ColumnSpan="3">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Image x:Name="CharaStandLeft" RenderTransformOrigin="0.5,0.5" Source="/Images/kimi_stand_01.png" Width="600" Height="942" Margin="60,12,20,21" Grid.RowSpan="7" Grid.ColumnSpan="5">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Image x:Name="CharaSmallLeftA" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/akamaru_small_04.png" Margin="53,14,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="3" Grid.Column="2" Grid.Row="2">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Image x:Name="CharaSmallLeftB" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/aosuke_small_01.png" Margin="14,15,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="3" Grid.Column="3" Grid.Row="2">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Image x:Name="CharaSmallLeftC" HorizontalAlignment="Center" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/kimi_small_02.png" RenderTransformOrigin="0.5,0.5" Margin="0,16,0,0" Grid.ColumnSpan="4" Grid.RowSpan="3" Grid.Column="4" Grid.Row="2">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Image x:Name="CharaSmallLeft" HorizontalAlignment="Left" Height="556" Margin="15,11,0,0" VerticalAlignment="Top" Width="516" Source="/Images/kimi_small_01.png" Grid.RowSpan="3" Grid.ColumnSpan="4" Grid.Row="2" Grid.Column="1"/>
-            <Image x:Name="MainMsgBubble" Source="/Images/right_big_bubble.png" RenderTransformOrigin="0.5,0.5" Margin="5,15,15,0" Grid.RowSpan="4" Grid.ColumnSpan="9" Grid.Row="4" Grid.Column="2">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <TextBlock x:Name="MainMsg" Text="TextBlock" TextWrapping="Wrap" FontSize="48" FontFamily="/Fonts/azuki.ttf#azuki_font" Margin="80,25,90,25" Grid.ColumnSpan="9" Grid.RowSpan="3" Grid.Row="5" Grid.Column="2"/>
-            <Button x:Name="NextMsgButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" RenderTransformOrigin="0.5,0.5" Margin="20,57,51,28" Grid.Column="10" Grid.RowSpan="2" Grid.Row="6">
-                <Image Source="/Images/yazirusi.png"/>
-            </Button>
-            <Button x:Name="BackMsgButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" RenderTransformOrigin="0.5,0.5" Margin="20,22,51,43" Grid.Column="10" Grid.Row="5">
-                <Image Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="180.0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-            </Button>
-            <Image x:Name="CharaLeftSymbol" Grid.Column="3" HorizontalAlignment="Left" Height="140" Margin="7,5,0,0" VerticalAlignment="Top" Width="188" Source="/Images/big_heart.png" Grid.RowSpan="2" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <TextBlock x:Name="CharaLeftComment" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="80" Grid.RowSpan="2" Grid.ColumnSpan="3" Width="368" Grid.Row="1" Margin="17,31,0,0" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" FontWeight="Bold">
-                <TextBlock.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </TextBlock.RenderTransform>
-            </TextBlock>
-        </Grid>
-        <Grid x:Name="SessionGrid">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="12*"/>
-                <RowDefinition Height="33*"/>
-                <RowDefinition Height="71*"/>
-                <RowDefinition Height="29*"/>
-                <RowDefinition Height="71*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="41*"/>
-                <ColumnDefinition Width="164*"/>
-                <ColumnDefinition Width="41*"/>
-                <ColumnDefinition Width="138*"/>
-            </Grid.ColumnDefinitions>
-            <Image x:Name="BigInfo" HorizontalAlignment="Left" Height="652" Margin="6,5,0,0" VerticalAlignment="Top" Width="1006" Source="/Images/SS.png" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3"/>
-            <Image x:Name="SessionFrame" HorizontalAlignment="Left" Height="328" Margin="6,11,0,0" VerticalAlignment="Top" Width="1010" Source="/Images/white_frame.png" Stretch="Fill" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"/>
-            <TextBlock x:Name="SessionSubTitle" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" Width="745" FontSize="48" FontWeight="Bold" Margin="75,20,0,0" Grid.Column="1" Grid.Row="2"/>
-            <TextBlock x:Name="SessionSentence" HorizontalAlignment="Left" Margin="75,125,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="168" Width="745" FontSize="48" Grid.Column="1" Grid.Row="2"/>
-            <Image x:Name="SessionTitle" Source="/Images/challenge_time.png" Margin="21,15,11,62" Grid.Column="1" Grid.Row="1"/>
-        </Grid>
-        <Grid x:Name="RuleGrid" Grid.ColumnSpan="2" Grid.RowSpan="4" Visibility="Visible">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="43*"/>
-                <ColumnDefinition Width="240*"/>
-                <ColumnDefinition Width="58*"/>
-                <ColumnDefinition Width="43*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="41*"/>
-                <RowDefinition Height="189*"/>
-                <RowDefinition Height="660*"/>
-                <RowDefinition Height="85*"/>
-                <RowDefinition Height="70*"/>
-                <RowDefinition Height="35*"/>
-            </Grid.RowDefinitions>
-            <Button x:Name="BoardButton" Click="Button_Click" Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Grid.Row="1" Grid.RowSpan="3" Margin="0,0,0,17" Grid.ColumnSpan="2">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="54*"/>
-                        <ColumnDefinition Width="41*"/>
-                        <ColumnDefinition Width="107*"/>
-                        <ColumnDefinition Width="38*"/>
-                        <ColumnDefinition Width="46*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="77*"/>
-                        <RowDefinition Height="145*"/>
-                        <RowDefinition Height="175*"/>
-                        <RowDefinition Height="175*"/>
-                        <RowDefinition Height="175*"/>
-                        <RowDefinition Height="130*"/>
-                    </Grid.RowDefinitions>
-                    <Image Source="/Images/blackboard.png" Grid.RowSpan="6" Grid.ColumnSpan="5" Stretch="Fill" />
-                    <TextBlock x:Name="RuleTitle" Text="教室のルール" Foreground="White" FontSize="72" Grid.Column="2" Margin="0,10,0,0" Grid.Row="1"/>
-                    <TextBlock x:Name="RuleChecK1Msg" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="64" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,18,0,5"/>
-                    <TextBlock x:Name="RuleChecK2Msg" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="64" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,21,0,10"/>
-                    <TextBlock x:Name="RuleChecK3Msg" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="64" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,21,0,10"/>
-                    <CheckBox x:Name="RuleCheck1Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Grid.Row="2" Grid.Column="1" Margin="0,10,180,145">
-                        <CheckBox.RenderTransform>
-                            <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
-                        </CheckBox.RenderTransform>
-                    </CheckBox>
-                    <CheckBox x:Name="RuleCheck2Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Grid.Row="3" Grid.Column="1" Margin="0,10,180,145">
-                        <CheckBox.RenderTransform>
-                            <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
-                        </CheckBox.RenderTransform>
-                    </CheckBox>
-                    <CheckBox x:Name="RuleCheck3Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Grid.Row="4" Grid.Column="1" Margin="0,0,180,153">
-                        <CheckBox.RenderTransform>
-                            <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
-                        </CheckBox.RenderTransform>
-                    </CheckBox>
-                </Grid>
-            </Button>
-            <Image x:Name="CharaStandSmallDownRight" Source="/Images/shiroji_02.png" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="10,14,6,13" Grid.Row="2">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Button x:Name="LongMsgBubble" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,4,0,10">
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.RenderTransform>
-                <Grid Width="1479">
-                    <Image x:Name="LongMsgImage" Source="/Images/long_bubble.png" RenderTransformOrigin="0.5,0.5" Margin="0,-26,0,0">
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <TextBlock x:Name="LongMsg" Text="TextBlock" FontSize="42" Margin="31,28,37,31" RenderTransformOrigin="0.5,0.5">
-                        <TextBlock.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </TextBlock.RenderTransform>
-                    </TextBlock>
-                </Grid>
-            </Button>
-        </Grid>
-        <Grid x:Name="MangaGrid" Visibility="Visible">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="27*"/>
-                <RowDefinition Height="170*"/>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="13*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="11*"/>
-                <ColumnDefinition Width="285*"/>
-                <ColumnDefinition Width="74*"/>
-                <ColumnDefinition Width="14*"/>
-            </Grid.ColumnDefinitions>
-            <Image x:Name="MangaTitle" HorizontalAlignment="Left" VerticalAlignment="Center" Source="/Images/manga1_title.png" Grid.ColumnSpan="2" Margin="5,0,0,0" Grid.Column="1"/>
-            <Image x:Name="MangaImage" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.RowSpan="2" Source="/Images/manga1-1.png" Margin="6,0,0,0" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Button x:Name="MangaNextButton" Grid.Column="2" HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="2" VerticalAlignment="Top" Height="84" Width="372" Grid.RowSpan="2" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}">
-                <Image Source="/Images/mangaya.png"/>
-            </Button>
-        </Grid>
-        <Grid x:Name="ItemGrid" Visibility="Visible">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="83*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="27*"/>
-                <ColumnDefinition Width="74*"/>
-                <ColumnDefinition Width="23*"/>
-                <ColumnDefinition Width="41*"/>
-                <ColumnDefinition Width="69*"/>
-                <ColumnDefinition Width="17*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="39*"/>
-                <RowDefinition Height="39*"/>
-                <RowDefinition Height="73*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="25*"/>
-            </Grid.RowDefinitions>
-            <Image x:Name="ItemImageCenter" HorizontalAlignment="Center" Height="512" VerticalAlignment="Top" Width="363" Source="/Images/item01_solo.png" Grid.Row="2" Grid.Column="4" Grid.RowSpan="2" Margin="0,21,0,0"/>
-            <Image x:Name="ItemNamePlateLeft" HorizontalAlignment="Left" Height="195" VerticalAlignment="Top" Width="610" Source="/Images/item_name.png" Grid.ColumnSpan="3" Margin="26,2,0,0" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1"/>
-            <TextBlock x:Name="ItemNameTextLeft" HorizontalAlignment="Left" Margin="70,41,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Grid.Row="1" Grid.ColumnSpan="3" Width="483" TextAlignment="Center" Grid.Column="1"/>
-            <Image x:Name="ItemNameBubble" HorizontalAlignment="Left" Height="240" Margin="45,39,0,0" VerticalAlignment="Top" Width="446" Source="/Images/item_bubble.png" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <Image x:Name="ItemImageLeft" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Grid.Row="2" Margin="37,135,0,0" Grid.RowSpan="3" Grid.Column="1"/>
-            <Image x:Name="ItemNamePlateCenter" HorizontalAlignment="Left" Height="185" VerticalAlignment="Top" Width="606" Source="/Images/item_name.png" Grid.Row="2" Visibility="Visible" Grid.Column="3" Margin="12,0,0,0" Grid.ColumnSpan="3"/>
-            <TextBlock x:Name="ItemNameTextCenter" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Grid.Row="2" Margin="42,37,0,0" Height="98" Grid.Column="3" Width="483" TextAlignment="Center" Grid.ColumnSpan="3"/>
-            <Image x:Name="ItemInfoPlate" HorizontalAlignment="Left" Height="470" Margin="6,15,0,0" VerticalAlignment="Top" Width="1175" Source="/Images/item_info.png" Visibility="Visible" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="6" Grid.Column="3"/>
-            <Image x:Name="CharaStandSmallUpRight" HorizontalAlignment="Center" Width="277" Height="433" VerticalAlignment="Top" Source="/Images/shiroji_03.png" Grid.Column="7" Grid.RowSpan="3"/>
-            <TextBlock x:Name="ItemInfoTitle" HorizontalAlignment="Left" Margin="38,40,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="60" Width="555" FontSize="48" FontWeight="Bold" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3"/>
-            <TextBlock x:Name="ItemInfoSentence" HorizontalAlignment="Left" Margin="42,120,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="327" Width="1083" FontSize="36" Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="3" Grid.RowSpan="2"/>
-            <TextBlock x:Name="ItemNumber" HorizontalAlignment="Left" Margin="157,149,0,0" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Grid.RowSpan="2" Foreground="#FFEEEE1E" Grid.Column="1"/>
-        </Grid>
-        <Grid x:Name="FeelingGrid" Margin="0,0,0,17">
+        <Grid x:Name="BaseGrid" Margin="0,0,0,17" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="474*"/>
                 <ColumnDefinition Width="449*"/>
@@ -594,7 +290,9 @@
                 <RowDefinition Height="1020*"/>
                 <RowDefinition Height="20*"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="GoodWordsFrame" HorizontalAlignment="Left" Height="1008" Margin="10,0,0,0" VerticalAlignment="Center" Width="434" Grid.Row="1" Grid.Column="1">
+            <Image x:Name="BG"  Stretch="Fill" Source="/Images/background_01.png" Grid.RowSpan="3" Grid.ColumnSpan="5" Margin="0,0,0,-17" d:IsHidden="True"/>
+
+            <Grid x:Name="GoodWordsFrame" HorizontalAlignment="Left" Height="1008" Margin="10,0,0,0" VerticalAlignment="Center" Width="434" Grid.Row="1" Grid.Column="1" d:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="119*"/>
                     <RowDefinition Height="73*"/>
@@ -698,7 +396,7 @@
                     </InkCanvas>
                 </StackPanel>
             </Grid>
-            <Grid x:Name="BadWordsFrame" HorizontalAlignment="Left" Height="1008" VerticalAlignment="Center" Width="434" Margin="73,0,0,0" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2">
+            <Grid x:Name="BadWordsFrame" HorizontalAlignment="Left" Height="1008" VerticalAlignment="Center" Width="434" Margin="73,0,0,0" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" d:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="119*"/>
                     <RowDefinition Height="73*"/>
@@ -804,7 +502,314 @@
             </Grid>
 
         </Grid>
-        <Grid x:Name="GaugeGrid">
+        <Grid x:Name="MainGrid" Visibility="Visible" Grid.RowSpan="4" Grid.ColumnSpan="2" d:IsHidden="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="12*"/>
+                <RowDefinition Height="21*"/>
+                <RowDefinition Height="14*"/>
+                <RowDefinition Height="76*"/>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="29*"/>
+                <RowDefinition Height="18*"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="6*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="128*"/>
+                <ColumnDefinition Width="77*"/>
+                <ColumnDefinition Width="200*"/>
+                <ColumnDefinition Width="149*"/>
+                <ColumnDefinition Width="67*"/>
+                <ColumnDefinition Width="77*"/>
+                <ColumnDefinition Width="103*"/>
+                <ColumnDefinition Width="151*"/>
+                <ColumnDefinition Width="219*"/>
+                <ColumnDefinition Width="87*"/>
+                <ColumnDefinition Width="122*"/>
+                <ColumnDefinition Width="155*"/>
+                <ColumnDefinition Width="190*"/>
+                <ColumnDefinition Width="195*"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="CharaStandRight" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="600" Height="942" Margin="36,12,26,21" Grid.Column="10" Grid.RowSpan="7" Grid.ColumnSpan="4">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="CharaStandLeft" RenderTransformOrigin="0.5,0.5" Source="/Images/kimi_stand_01.png" Width="600" Height="942" Margin="69,12,29,21" Grid.RowSpan="7" Grid.ColumnSpan="6">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="CharaSmallLeftA" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/akamaru_small_04.png" Margin="53,14,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="5" Grid.RowSpan="3" Grid.Column="2" Grid.Row="2" d:IsHidden="True">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="CharaSmallLeftB" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/aosuke_small_01.png" Margin="14,15,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="5" Grid.RowSpan="3" Grid.Column="3" Grid.Row="2" d:IsHidden="True">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="CharaSmallLeftC" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/kimi_small_02.png" RenderTransformOrigin="0.5,0.5" Margin="10,16,0,0" Grid.ColumnSpan="4" Grid.RowSpan="3" Grid.Column="5" Grid.Row="2" d:IsHidden="True">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="CharaSmallLeft" HorizontalAlignment="Left" Height="556" Margin="15,11,0,0" VerticalAlignment="Top" Width="516" Source="/Images/kimi_small_01.png" Grid.RowSpan="3" Grid.ColumnSpan="5" Grid.Row="2" Grid.Column="1" d:IsHidden="True"/>
+            <Image x:Name="CharaLeftSymbol" Grid.Column="3" HorizontalAlignment="Left" Height="140" Margin="7,5,0,0" VerticalAlignment="Top" Width="188" Source="/Images/big_heart.png" Grid.RowSpan="2" Grid.Row="1" RenderTransformOrigin="0.5,0.5" d:IsHidden="True" Grid.ColumnSpan="2">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <TextBlock x:Name="CharaLeftComment" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="80" Grid.RowSpan="2" Grid.ColumnSpan="3" Width="368" Grid.Row="1" Margin="17,31,0,0" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" FontWeight="Bold" d:IsHidden="True">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Image x:Name="CharaOmniLeftSmall" Grid.ColumnSpan="4" HorizontalAlignment="Left" Height="820" Margin="5,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="522" Source="/Images/kimi_stand_01.png" Grid.RowSpan="5"/>
+            <Image x:Name="CharaOmniRightSmall" Grid.Column="11" HorizontalAlignment="Left" Height="822" Margin="14,3,0,0" VerticalAlignment="Top" Width="524" Source="/Images/shiroji_04.png" Grid.ColumnSpan="3" Grid.RowSpan="5" Grid.Row="1"/>
+            <Image x:Name="MainMsgBubble" Source="/Images/right_big_bubble.png" RenderTransformOrigin="0.5,0.5" Margin="5,15,15,0" Grid.RowSpan="4" Grid.ColumnSpan="11" Grid.Row="4" Grid.Column="2" d:IsHidden="True">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <TextBlock x:Name="MainMsg" Text="TextBlock" TextWrapping="Wrap" FontSize="48" FontFamily="/Fonts/azuki.ttf#azuki_font" Margin="80,25,90,25" Grid.ColumnSpan="11" Grid.RowSpan="3" Grid.Row="5" Grid.Column="2" d:IsHidden="True"/>
+            <Button x:Name="NextMsgButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" RenderTransformOrigin="0.5,0.5" Margin="20,57,51,28" Grid.Column="12" Grid.RowSpan="2" Grid.Row="6" d:IsHidden="True">
+                <Image Source="/Images/yazirusi.png"/>
+            </Button>
+            <Button x:Name="BackMsgButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" RenderTransformOrigin="0.5,0.5" Margin="20,22,51,43" Grid.Column="12" Grid.Row="5" d:IsHidden="True">
+                <Image Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="180.0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </Button>
+        </Grid>
+        <Grid x:Name="SessionGrid" d:IsHidden="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="12*"/>
+                <RowDefinition Height="33*"/>
+                <RowDefinition Height="71*"/>
+                <RowDefinition Height="29*"/>
+                <RowDefinition Height="71*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="41*"/>
+                <ColumnDefinition Width="164*"/>
+                <ColumnDefinition Width="41*"/>
+                <ColumnDefinition Width="138*"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="BigInfo" HorizontalAlignment="Left" Height="652" Margin="6,5,0,0" VerticalAlignment="Top" Width="1006" Source="/Images/SS.png" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3"/>
+            <Image x:Name="SessionFrame" HorizontalAlignment="Left" Height="328" Margin="6,11,0,0" VerticalAlignment="Top" Width="1010" Source="/Images/white_frame.png" Stretch="Fill" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"/>
+            <TextBlock x:Name="SessionSubTitle" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" Width="745" FontSize="48" FontWeight="Bold" Margin="75,20,0,0" Grid.Column="1" Grid.Row="2"/>
+            <TextBlock x:Name="SessionSentence" HorizontalAlignment="Left" Margin="75,125,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="168" Width="745" FontSize="48" Grid.Column="1" Grid.Row="2"/>
+            <Image x:Name="SessionTitle" Source="/Images/challenge_time.png" Margin="21,15,11,62" Grid.Column="1" Grid.Row="1"/>
+        </Grid>
+        <Grid x:Name="RuleGrid" Grid.ColumnSpan="2" Grid.RowSpan="4" Visibility="Visible" d:IsHidden="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="43*"/>
+                <ColumnDefinition Width="240*"/>
+                <ColumnDefinition Width="58*"/>
+                <ColumnDefinition Width="43*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="41*"/>
+                <RowDefinition Height="189*"/>
+                <RowDefinition Height="660*"/>
+                <RowDefinition Height="85*"/>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="35*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="BoardButton" Click="Button_Click" Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Grid.Row="1" Grid.RowSpan="3" Margin="0,0,0,17" Grid.ColumnSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="41*"/>
+                        <ColumnDefinition Width="107*"/>
+                        <ColumnDefinition Width="38*"/>
+                        <ColumnDefinition Width="46*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="77*"/>
+                        <RowDefinition Height="145*"/>
+                        <RowDefinition Height="175*"/>
+                        <RowDefinition Height="175*"/>
+                        <RowDefinition Height="175*"/>
+                        <RowDefinition Height="130*"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="/Images/blackboard.png" Grid.RowSpan="6" Grid.ColumnSpan="5" Stretch="Fill" />
+                    <TextBlock x:Name="RuleTitle" Text="教室のルール" Foreground="White" FontSize="72" Grid.Column="2" Margin="0,10,0,0" Grid.Row="1"/>
+                    <TextBlock x:Name="RuleChecK1Msg" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="64" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,18,0,5"/>
+                    <TextBlock x:Name="RuleChecK2Msg" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="64" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,21,0,10"/>
+                    <TextBlock x:Name="RuleChecK3Msg" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="64" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,21,0,10"/>
+                    <CheckBox x:Name="RuleCheck1Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Grid.Row="2" Grid.Column="1" Margin="0,10,180,145">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+                    <CheckBox x:Name="RuleCheck2Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Grid.Row="3" Grid.Column="1" Margin="0,10,180,145">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+                    <CheckBox x:Name="RuleCheck3Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Grid.Row="4" Grid.Column="1" Margin="0,0,180,153">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+                </Grid>
+            </Button>
+            <Image x:Name="CharaStandSmallDownRight" Source="/Images/shiroji_02.png" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="10,14,6,13" Grid.Row="2">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Button x:Name="LongMsgBubble" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,4,0,10">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <Grid Width="1479">
+                    <Image x:Name="LongMsgImage" Source="/Images/long_bubble.png" RenderTransformOrigin="0.5,0.5" Margin="0,-26,0,0">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock x:Name="LongMsg" Text="TextBlock" FontSize="42" Margin="31,28,37,31" RenderTransformOrigin="0.5,0.5">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </Grid>
+            </Button>
+        </Grid>
+        <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="27*"/>
+                <RowDefinition Height="170*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="13*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="11*"/>
+                <ColumnDefinition Width="285*"/>
+                <ColumnDefinition Width="74*"/>
+                <ColumnDefinition Width="14*"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="MangaTitle" HorizontalAlignment="Left" VerticalAlignment="Center" Source="/Images/manga1_title.png" Grid.ColumnSpan="2" Margin="5,0,0,0" Grid.Column="1"/>
+            <Image x:Name="MangaImage" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.RowSpan="2" Source="/Images/manga1-1.png" Margin="6,0,0,0" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Button x:Name="MangaNextButton" Grid.Column="2" HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="2" VerticalAlignment="Top" Height="84" Width="372" Grid.RowSpan="2" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Image Source="/Images/mangaya.png"/>
+            </Button>
+        </Grid>
+        <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="83*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="27*"/>
+                <ColumnDefinition Width="74*"/>
+                <ColumnDefinition Width="23*"/>
+                <ColumnDefinition Width="41*"/>
+                <ColumnDefinition Width="69*"/>
+                <ColumnDefinition Width="17*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="73*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="25*"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="ItemImageCenter" HorizontalAlignment="Center" Height="512" VerticalAlignment="Top" Width="363" Source="/Images/item01_solo.png" Grid.Row="2" Grid.Column="4" Grid.RowSpan="2" Margin="0,21,0,0"/>
+            <Image x:Name="ItemNamePlateLeft" HorizontalAlignment="Left" Height="195" VerticalAlignment="Top" Width="610" Source="/Images/item_name.png" Grid.ColumnSpan="3" Margin="26,2,0,0" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1"/>
+            <TextBlock x:Name="ItemNameTextLeft" HorizontalAlignment="Left" Margin="70,41,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Grid.Row="1" Grid.ColumnSpan="3" Width="483" TextAlignment="Center" Grid.Column="1"/>
+            <Image x:Name="ItemNameBubble" HorizontalAlignment="Left" Height="240" Margin="45,39,0,0" VerticalAlignment="Top" Width="446" Source="/Images/item_bubble.png" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1"/>
+            <Image x:Name="ItemImageLeft" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Grid.Row="2" Margin="37,135,0,0" Grid.RowSpan="3" Grid.Column="1"/>
+            <Image x:Name="ItemNamePlateCenter" HorizontalAlignment="Left" Height="185" VerticalAlignment="Top" Width="606" Source="/Images/item_name.png" Grid.Row="2" Visibility="Visible" Grid.Column="3" Margin="12,0,0,0" Grid.ColumnSpan="3"/>
+            <TextBlock x:Name="ItemNameTextCenter" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Grid.Row="2" Margin="42,37,0,0" Height="98" Grid.Column="3" Width="483" TextAlignment="Center" Grid.ColumnSpan="3"/>
+            <Image x:Name="ItemInfoPlate" HorizontalAlignment="Left" Height="470" Margin="6,15,0,0" VerticalAlignment="Top" Width="1175" Source="/Images/item_info.png" Visibility="Visible" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="6" Grid.Column="3"/>
+            <Image x:Name="CharaStandSmallUpRight" HorizontalAlignment="Center" Width="277" Height="433" VerticalAlignment="Top" Source="/Images/shiroji_03.png" Grid.Column="7" Grid.RowSpan="3"/>
+            <TextBlock x:Name="ItemInfoTitle" HorizontalAlignment="Left" Margin="38,40,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="60" Width="555" FontSize="48" FontWeight="Bold" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3"/>
+            <TextBlock x:Name="ItemInfoSentence" HorizontalAlignment="Left" Margin="42,120,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="327" Width="1083" FontSize="36" Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="3" Grid.RowSpan="2"/>
+            <TextBlock x:Name="ItemNumber" HorizontalAlignment="Left" Margin="157,149,0,0" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Grid.RowSpan="2" Foreground="#FFEEEE1E" Grid.Column="1"/>
+        </Grid>
+        <Grid x:Name="GaugeGrid" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="7*"/>
                 <RowDefinition Height="80*"/>
@@ -822,12 +827,29 @@
             <Image x:Name="HeartImage" HorizontalAlignment="Left" Height="506" Margin="10,32,0,0" VerticalAlignment="Top" Width="595" Source="/Images/heart_red.png" Grid.Column="2" Grid.Row="2"/>
             <Image x:Name="NeedleImage" Height="349" Width="41" Source="/Images/red_needle.png" Grid.Column="2" Grid.Row="2" RenderTransformOrigin="0.5,0.8" Margin="288,140,296,61">
                 <Image.RenderTransform>
-                    <RotateTransform Angle="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GamePage}}, Path=Angle}"/>
+                    <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GamePage}}}"/>
                 </Image.RenderTransform>
             </Image>
             <TextBlock x:Name="FeelingScaleText" Grid.Column="2" HorizontalAlignment="Left" Margin="176,105,0,0" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="135" Width="270" FontWeight="Bold" FontSize="94" TextAlignment="Center"/>
         </Grid>
-        <Grid x:Name="SystemGrid">
+        <Grid x:Name="FrameGrid" HorizontalAlignment="Right" Width="1920">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="14*"/>
+                <RowDefinition Height="41*"/>
+                <RowDefinition Height="53*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="103*"/>
+                <ColumnDefinition Width="182*"/>
+                <ColumnDefinition Width="99*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="FeelingValueGrid" Grid.Column="1" Margin="12,21,31,24" Grid.Row="1">
+                <Image Source="/Images/feeling_value.png"/>
+                <TextBlock x:Name="FeelingPersonText" HorizontalAlignment="Center" Margin="0,10,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="847" TextAlignment="Center"/>
+                <TextBlock x:Name="FeelingValueText" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="SystemGrid" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="12*"/>
                 <RowDefinition Height="31*"/>

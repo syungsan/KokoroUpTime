@@ -44,6 +44,7 @@
     <None Remove="Images\blackboard.png" />
     <None Remove="Images\blue_needle.png" />
     <None Remove="Images\challenge_time.png" />
+    <None Remove="Images\feeling_value.png" />
     <None Remove="Images\frame_46-1.png" />
     <None Remove="Images\goodWordsFrame.png" />
     <None Remove="Images\gray_frame.png" />
@@ -144,6 +145,7 @@
     <Resource Include="Images\blackboard.png" />
     <Resource Include="Images\blue_needle.png" />
     <Resource Include="Images\challenge_time.png" />
+    <Resource Include="Images\feeling_value.png" />
     <Resource Include="Images\frame_46-1.png" />
     <Resource Include="Images\goodWordsFrame.png" />
     <Resource Include="Images\gray_frame.png" />

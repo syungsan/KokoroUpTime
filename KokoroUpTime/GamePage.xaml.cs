@@ -152,6 +152,11 @@ namespace KokoroUpTime
             this.CharaLeftComment.Visibility = Visibility.Hidden;
             this.CharaLeftSymbol.Visibility = Visibility.Hidden;
 
+            this.CharaOmniLeftSmall.Visibility = Visibility.Hidden;
+            this.CharaOmniRightSmall.Visibility = Visibility.Hidden;
+
+            this.FeelingValueGrid.Visibility = Visibility.Hidden;
+
             this.MusicInfoGrid.Visibility = Visibility.Hidden;
 
             this.NextPageButton.Visibility = Visibility.Hidden;
@@ -204,6 +209,8 @@ namespace KokoroUpTime
                 ["heart_image"] = this.HeartImage,
                 ["needle_image"] = this.NeedleImage,
                 ["chara_left_symbol"] = this.CharaLeftSymbol,
+                ["chara_omni_left_small"] = this.CharaOmniLeftSmall,
+                ["chara_omni_right_small"] = this.CharaOmniRightSmall,
             };
 
             this.textObjects = new Dictionary<string, TextBlock>
@@ -224,6 +231,8 @@ namespace KokoroUpTime
                 ["music_title"] = this.MusicTitle,
                 ["composer"] = this.Composer,
                 ["chara_left_comment"] = this.CharaLeftComment,
+                ["feeling_person_text"] = this.FeelingPersonText,
+                ["feeling_value_text"] = this.FeelingValueText,
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -244,6 +253,7 @@ namespace KokoroUpTime
                 // ["feeling_grid"] = this.FeelingGrid,
                 ["gauge_grid"] = this.GaugeGrid,
                 ["music_info_grid"] = this.MusicInfoGrid,
+                ["feeling_value_grid"] = this.FeelingValueGrid,
             };
         }
 
@@ -807,21 +817,19 @@ namespace KokoroUpTime
         {
             Button button = sender as Button;
 
-            if (this.isClickable)
+            if (button.Name.Contains("Back"))
+            {
+                this.scenarioCount -= 1;
+                this.ScenarioPlay();
+                // 連続Backの実現にはもっと複雑な処理がいる
+            }
+
+            if (this.isClickable && (button.Name == "NextMsgButton" || button.Name == "NextPageButton" || button.Name == "BoardButton" || button.Name == "LongMsgBubble" || button.Name == "MangaNextButton"))
             {
                 this.isClickable = false;
 
-                if (button.Name.Contains("Back"))
-                {
-                    this.scenarioCount -= 1;
-                    this.ScenarioPlay();
-                    // 連続Backの実現にはもっと複雑な処理がいる
-                }
-                else if (button.Name == "NextMsgButton" || button.Name == "NextPageButton" || button.Name == "BoardButton" || button.Name == "LongMsgBubble" || button.Name == "MangaNextButton")
-                {
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-                }
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
             }
 
             if (button.Name == "ExitButton")
@@ -829,11 +837,13 @@ namespace KokoroUpTime
                 this.CoverLayer.Visibility = Visibility.Visible;
                 this.ExitGrid.Visibility = Visibility.Visible;
             }
-            else if (button.Name == "ExitYesButton")
+            
+            if (button.Name == "ExitYesButton")
             {
                 Application.Current.Shutdown();
             }
-            else if (button.Name == "ExitNoButton")
+            
+            if (button.Name == "ExitNoButton")
             {
                 this.ExitGrid.Visibility = Visibility.Hidden;
                 this.CoverLayer.Visibility = Visibility.Hidden;
