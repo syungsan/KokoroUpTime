@@ -75,21 +75,86 @@ namespace KokoroUpTime
             this.MouseMove += new MouseEventHandler(OnMouseMove);
         }
 
-        // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
-        public void SetScenario(string scenario)
+        private void InitControls()
         {
-            this.scenarios = this.LoadScenario(scenario);
-            this.ScenarioPlay();
-        }
-
-        // CSVから2次元配列へシナリオデータの収納（CsvReaderクラスを使用）
-        private List<List<string>> LoadScenario(string filePath)
-        {
-            using (var csv = new CsvReader(filePath))
+            this.imageObjects = new Dictionary<string, Image>
             {
-                this.scenarios = csv.ReadToEnd();
-            }
-            return scenarios;
+                ["bg"] = this.BG,
+                ["chara_stand_right"] = this.CharaStandRight,
+                ["chara_stand_left"] = this.CharaStandLeft,
+                ["chara_face_left_a"] = this.CharaFaceLeftA,
+                ["chara_face_left_b"] = this.CharaFaceLeftB,
+                ["chara_face_left_c"] = this.CharaFaceLeftC,
+                ["chara_face_left"] = this.CharaFaceLeft,
+                ["main_msg_bubble"] = this.MainMsgBubble,
+                ["big_info"] = this.BigInfo,
+                ["chara_stand_small_right"] = this.CharaStandSmallDownRight,
+                ["manga_title"] = this.MangaTitle,
+                ["manga_image"] = this.MangaImage,
+                ["session_frame"] = this.SessionFrame,
+                ["session_title"] = this.SessionTitle,
+                ["item_image_center"] = this.ItemImageCenter,
+                ["item_image_left"] = this.ItemImageLeft,
+                ["item_name_plate_center"] = this.ItemNamePlateCenter,
+                ["item_name_bubble"] = this.ItemNameBubble,
+                ["item_name_plate_left"] = this.ItemNamePlateLeft,
+                ["item_info_plate"] = this.ItemInfoPlate,
+                ["chara_stand_small_up_right"] = this.CharaStandSmallUpRight,
+                ["long_msg_image"] = this.LongMsgImage,
+                ["heart_image"] = this.HeartImage,
+                ["needle_image"] = this.NeedleImage,
+                ["chara_stand_left_symbol"] = this.CharaStandLeftSymbol,
+                ["chara_stand_left_small"] = this.CharaStandLeftSmall,
+                ["chara_stand_right_small"] = this.CharaStandRightSmall,
+                ["chara_face_left_small"] = this.CharaFaceLeftSmall,
+                ["chara_stand_right_very_small"] = this.CharaStandRightVerySmall,
+            };
+
+            this.textObjects = new Dictionary<string, TextBlock>
+            {
+                ["main_msg"] = this.MainMsg,
+                ["session_sub_title"] = this.SessionSubTitle,
+                ["session_sentence"] = this.SessionSentence,
+                ["rule_title"] = this.RuleTitle,
+                ["rule_check1_msg"] = this.RuleChecK1Msg,
+                ["rule_check2_msg"] = this.RuleChecK2Msg,
+                ["rule_check3_msg"] = this.RuleChecK3Msg,
+                ["long_msg"] = this.LongMsg,
+                ["item_name_text_left"] = this.ItemNameTextLeft,
+                ["item_name_text_center"] = this.ItemNameTextCenter,
+                ["item_number"] = this.ItemNumber,
+                ["item_info_title"] = this.ItemInfoTitle,
+                ["item_info_sentence"] = this.ItemInfoSentence,
+                ["music_title"] = this.MusicTitle,
+                ["composer"] = this.Composer,
+                ["chara_stand_left_comment"] = this.CharaStandLeftComment,
+                ["feeling_person_text"] = this.FeelingPersonText,
+                ["feeling_value_text"] = this.FeelingValueText,
+                ["face_small_comment_text"] = this.FaceSmallCommentText,
+            };
+
+            this.buttonObjects = new Dictionary<string, Button>
+            {
+                ["next_msg_button"] = this.NextMsgButton,
+                ["back_msg_button"] = this.BackMsgButton,
+                ["next_page_button"] = this.NextPageButton,
+                ["back_page_button"] = this.BackPageButton,
+                ["manga_next_button"] = this.MangaNextButton,
+                ["board_button"] = this.BoardButton,
+                ["long_msg_bubble"] = this.LongMsgBubble,
+            };
+
+            this.gridObjects = new Dictionary<string, Grid>
+            {
+                ["main_msg_grid"] = this.MainMsgGrid,
+                ["good_words_grid"] = this.GoodWordsGrid,
+                ["bad_words_grid"] = this.BadWordsGrid,
+                // ["feeling_grid"] = this.FeelingGrid,
+                ["gauge_grid"] = this.GaugeGrid,
+                ["music_info_grid"] = this.MusicInfoGrid,
+                ["feeling_value_grid"] = this.FeelingValueGrid,
+                ["face_small_comment_grid"] = this.FaceSmallCommentGrid,
+            };
         }
 
         private void ResetControls()
@@ -101,7 +166,7 @@ namespace KokoroUpTime
             this.CharaFaceLeftA.Visibility = Visibility.Hidden;
             this.CharaFaceLeftB.Visibility = Visibility.Hidden;
             this.CharaFaceLeftC.Visibility = Visibility.Hidden;
-            this.BigInfo.Visibility = Visibility.Hidden;        
+            this.BigInfo.Visibility = Visibility.Hidden;
             this.MainMsgBubble.Visibility = Visibility.Hidden;
             this.MainMsg.Visibility = Visibility.Hidden;
             this.SessionTitle.Visibility = Visibility.Hidden;
@@ -112,7 +177,7 @@ namespace KokoroUpTime
 
             this.NextMsgButton.Visibility = Visibility.Hidden;
             this.BackMsgButton.Visibility = Visibility.Hidden;
- 
+
             this.BoardButton.Visibility = Visibility.Hidden;
             this.RuleCheck1Box.Visibility = Visibility.Hidden;
             this.RuleCheck2Box.Visibility = Visibility.Hidden;
@@ -151,6 +216,12 @@ namespace KokoroUpTime
             // this.FeelingGrid.Visibility = Visibility.Hidden;
             this.GaugeGrid.Visibility = Visibility.Hidden;
 
+            this.FaceSmallCommentGrid.Visibility = Visibility.Hidden;
+            this.FaceSmallCommentText.Visibility = Visibility.Hidden;
+
+            this.CharaFaceLeftSmall.Visibility = Visibility.Hidden;
+            this.CharaStandRightVerySmall.Visibility = Visibility.Hidden;
+
             this.CharaStandLeftComment.Visibility = Visibility.Hidden;
             this.CharaStandLeftSymbol.Visibility = Visibility.Hidden;
 
@@ -182,82 +253,21 @@ namespace KokoroUpTime
             this.ItemInfoSentence.Text = "";
         }
 
-        private void InitControls()
+        // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
+        public void SetScenario(string scenario)
         {
-            this.imageObjects = new Dictionary<string, Image>
-            {
-                ["bg"] = this.BG,
-                ["chara_stand_right"] = this.CharaStandRight,
-                ["chara_stand_left"] = this.CharaStandLeft,
-                ["chara_face_left_a"] = this.CharaFaceLeftA,
-                ["chara_face_left_b"] = this.CharaFaceLeftB,
-                ["chara_face_left_c"] = this.CharaFaceLeftC,
-                ["chara_face_left"] = this.CharaFaceLeft,
-                ["main_msg_bubble"] = this.MainMsgBubble,
-                ["big_info"] = this.BigInfo,
-                ["chara_stand_small_right"] = this.CharaStandSmallDownRight,
-                ["manga_title"] = this.MangaTitle,
-                ["manga_image"] = this.MangaImage,
-                ["session_frame"] = this.SessionFrame,
-                ["session_title"] = this.SessionTitle,
-                ["item_image_center"] = this.ItemImageCenter,
-                ["item_image_left"] = this.ItemImageLeft,
-                ["item_name_plate_center"] = this.ItemNamePlateCenter,
-                ["item_name_bubble"] = this.ItemNameBubble,
-                ["item_name_plate_left"] = this.ItemNamePlateLeft,
-                ["item_info_plate"] = this.ItemInfoPlate,
-                ["chara_stand_small_up_right"] = this.CharaStandSmallUpRight,
-                ["long_msg_image"] = this.LongMsgImage,
-                ["heart_image"] = this.HeartImage,
-                ["needle_image"] = this.NeedleImage,
-                ["chara_stand_left_symbol"] = this.CharaStandLeftSymbol,
-                ["chara_stand_left_small"] = this.CharaStandLeftSmall,
-                ["chara_stand_right_small"] = this.CharaStandRightSmall,
-            };
+            this.scenarios = this.LoadScenario(scenario);
+            this.ScenarioPlay();
+        }
 
-            this.textObjects = new Dictionary<string, TextBlock>
+        // CSVから2次元配列へシナリオデータの収納（CsvReaderクラスを使用）
+        private List<List<string>> LoadScenario(string filePath)
+        {
+            using (var csv = new CsvReader(filePath))
             {
-                ["main_msg"] = this.MainMsg,
-                ["session_sub_title"] = this.SessionSubTitle,
-                ["session_sentence"] = this.SessionSentence,
-                ["rule_title"] = this.RuleTitle,
-                ["rule_check1_msg"] = this.RuleChecK1Msg,
-                ["rule_check2_msg"] = this.RuleChecK2Msg,
-                ["rule_check3_msg"] = this.RuleChecK3Msg,
-                ["long_msg"] = this.LongMsg,
-                ["item_name_text_left"] = this.ItemNameTextLeft,
-                ["item_name_text_center"] = this.ItemNameTextCenter,
-                ["item_number"] = this.ItemNumber,
-                ["item_info_title"] = this.ItemInfoTitle,
-                ["item_info_sentence"] = this.ItemInfoSentence,
-                ["music_title"] = this.MusicTitle,
-                ["composer"] = this.Composer,
-                ["chara_stand_left_comment"] = this.CharaStandLeftComment,
-                ["feeling_person_text"] = this.FeelingPersonText,
-                ["feeling_value_text"] = this.FeelingValueText,
-            };
-
-            this.buttonObjects = new Dictionary<string, Button>
-            {
-                ["next_msg_button"] = this.NextMsgButton,
-                ["back_msg_button"] = this.BackMsgButton,
-                ["next_page_button"] = this.NextPageButton,
-                ["back_page_button"] = this.BackPageButton,
-                ["manga_next_button"] = this.MangaNextButton,
-                ["board_button"] = this.BoardButton,
-                ["long_msg_bubble"] = this.LongMsgBubble,
-            };
-
-            this.gridObjects = new Dictionary<string, Grid>
-            {
-                ["main_msg_grid"] = this.MainMsgGrid,
-                ["good_words_grid"] = this.GoodWordsGrid,
-                ["bad_words_grid"] = this.BadWordsGrid,
-                // ["feeling_grid"] = this.FeelingGrid,
-                ["gauge_grid"] = this.GaugeGrid,
-                ["music_info_grid"] = this.MusicInfoGrid,
-                ["feeling_value_grid"] = this.FeelingValueGrid,
-            };
+                this.scenarios = csv.ReadToEnd();
+            }
+            return scenarios;
         }
 
         // ゲーム進行の中核

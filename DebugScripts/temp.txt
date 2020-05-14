@@ -2,6 +2,7 @@ reset
 image,bg,background_01.png
 image,chara_stand_right,shiroji_01.png,appear_up
 image,main_msg_bubble,right_big_bubble.png
+grid,main_msg_grid
 bgm,set,もくもくStudy♪.mp3,loop,50
 bgm,play
 text,music_title,もくもくStudy♪
@@ -52,47 +53,44 @@ next
 reset
 image,bg,background_02.png
 image,chara_stand_right,shiroji_02.png,appear_up
+grid,main_msg_grid
 image,main_msg_bubble,right_big_bubble.png
 wait
 msg,main_msg,今日は、「こころあっぷタイム」に登場する３人を紹介する。,白じい
 wait
-hide,text,main_msg
-hide,button,next_msg_button
-hide,button,back_msg_button
-hide,image,main_msg_bubble
-image,chara_small_left_a,akamaru_small_04.png,appear_up
+clear,text,main_msg
+hide,grid,main_msg_grid
+image,chara_face_left_a,akamaru_face_04.png,appear_up
 image,main_msg_bubble,left_a_big_bubble.png
+grid,main_msg_grid
 wait
 msg,main_msg,おれの名前は 赤丸だ。小学校6年だ。好きな食べ物はカレーとコーラだ。苦手なものは犬だ。,赤丸
 wait
-hide,text,main_msg
-hide,button,next_msg_button
-hide,button,back_msg_button
-hide,image,main_msg_bubble
-hide,image,chara_small_left_a
-image,chara_small_left_b,aosuke_small_01.png,appear_up
+clear,text,main_msg
+hide,grid,main_msg_grid
+hide,image,chara_face_left_a
+image,chara_face_left_b,aosuke_face_01.png,appear_up
 image,main_msg_bubble,left_b_big_bubble.png
+grid,main_msg_grid
 wait
 msg,main_msg,ぼくの名前は青助です。小学校6年生です。好きなものはテレビ。勉強もスポーツも あんまり得意じゃないんだ。,青助
 wait
-hide,text,main_msg
-hide,button,next_msg_button
-hide,button,back_msg_button
-hide,image,main_msg_bubble
-hide,image,chara_small_left_b
-image,chara_small_left_c,kimi_small_02.png,appear_up
+clear,text,main_msg
+hide,grid,main_msg_grid
+hide,image,chara_face_left_b
+image,chara_face_left_c,kimi_face_02.png,appear_up
+grid,main_msg_grid
 image,main_msg_bubble,left_c_big_bubble.png
 msg,main_msg,わたしの名前はキミです。小学６年生です。好きなものはチョコレートです。人前で話すことがとても苦手です。,キミ
 wait
-hide,text,main_msg
-hide,button,next_msg_button
-hide,button,back_msg_button
-hide,image,main_msg_bubble
-hide,image,chara_small_left_c
+clear,text,main_msg
+hide,grid,main_msg_grid
+hide,image,chara_face_left_c
 next
 hide,image,chara_stand_right
 image,chara_stand_right,shiroji_03.png
 image,big_info,SS.png
+grid,main_msg_grid
 image,main_msg_bubble,right_big_bubble.png
 wait
 msg,main_msg,この３人とこころあっぷタイムを進めていくぞい！さて、３人は、なにかこまっていることがあるようじゃ。どんなことで、こまっているのだろう？マンガを見ながら考えてみよう！,白じい
@@ -123,6 +121,7 @@ image,chara_stand_right,shiroji_01.png,appear_up
 image,item_name_plate_left
 text,item_name_text_left,きもちセンサー
 image,item_image_center,item01_solo.png
+grid,main_msg_grid
 image,main_msg_bubble,right_big_bubble.png
 wait
 msg,main_msg,わしの作った発明品をつかって、自分のきもちを 調べてみるのじゃ！,白じい
@@ -149,6 +148,7 @@ image,session_frame
 text,session_sub_title,チャレンジタイムとは…
 text,session_sentence,☆こころあっぷタイムで新しいことに挑戦してみる時間のことじゃ。
 image,chara_stand_right,shiroji_04.png
+grid,main_msg_grid
 image,main_msg_bubble,right_big_bubble.png
 bgm,set,放課後♪TeaTime.mp3,loop,50
 bgm,play
@@ -160,11 +160,11 @@ msg,main_msg,「きもち」には、いいきもちといやなきもちだけ�
 next
 reset
 image,bg,water_frame.png
-grid,good_words_frame
-grid,bad_words_frame
+grid,good_words_grid
+grid,bad_words_grid
 next
-hide,grid,good_words_frame
-hide,grid,bad_words_frame
+hide,grid,good_words_grid
+hide,grid,bad_words_grid
 grid,gauge_grid
 image,heart_image,heart_red.png
 image,needle_image,red_needle.png
@@ -183,6 +183,7 @@ image,session_frame
 text,session_sub_title,グループ・アクティビティとは…
 text,session_sentence,☆こころあっぷタイムで考えたことを、みんなで話し合ってみる時間のことじゃ。
 image,chara_stand_right,shiroji_02.png
+grid,main_msg_grid
 image,main_msg_bubble,right_big_bubble.png
 wait
 msg,main_msg,今度は「きもち」をみつける練習をグループでしてみるのじゃ。次の場面を見て、グループでキミちゃんのきもちを考えて、話し合ってみるのじゃ。,白じい
@@ -191,30 +192,31 @@ reset
 image,bg,background_07.png
 image,chara_stand_right,teacher.png
 image,chara_stand_left,kimi_stand_01.png
+grid,main_msg_grid
 image,main_msg_bubble,right_big_bubble.png
 wait
 msg,main_msg,それでは、キミちゃん！意見を言ってくれるかな？,先生
 wait
-image,chara_left_symbol,big_heart.png,pomp,no_sync
-text,chara_left_comment,ドキ!!,red,rotation,no_sync
+image,chara_stand_left_symbol,big_heart.png,pomp,no_sync
+text,chara_stand_left_comment,ドキ!!,red,rotation,no_sync
 image,chara_stand_left,kimi_stand_01.png,pomp
 wait
 reset
 image,bg,water_frame.png
-image,chara_omni_right_small,shiroji_04.png
-image,chara_omni_left_small,kimi_stand_01.png
+image,chara_stand_right_small,shiroji_04.png
+image,chara_stand_left_small,kimi_stand_01.png
+grid,main_msg_grid
 image,main_msg_bubble,right_big_bubble.png
 msg,main_msg,授業中に先生から指名されたとき、キミちゃんはどんな「きもち」になるかの？,白じい
 wait
 msg,main_msg,きもちセンサーをつかって、きもちの種類を選んでみよう！,白じい
-hide,text,main_msg
-hide,image,main_msg_bubble
-grid,good_words_frame
-grid,bad_words_frame
+hide,grid,main_msg_grid
+grid,good_words_grid
+grid,bad_words_grid
 image,item_image_center,item01_solo.png
 next
-hide,grid,good_words_frame
-hide,grid,bad_words_frame
+hide,grid,good_words_grid
+hide,grid,bad_words_grid
 hide,image,item_image_center
 grid,feeling_value_grid
 text,feeling_person_text,キミちゃんの「きもち」
@@ -226,6 +228,7 @@ reset
 image,bg,background_07.png
 image,chara_stand_right,shiroji_02.png
 image,chara_stand_left,kimi_stand_01.png
+grid,main_msg_grid
 image,main_msg_bubble,left_big_bubble_yellow.png
 wait
 msg,main_msg,わたしは、しんぱいしたり、ふあんになったりすることがよくあるんだけど、場面がちがうと、きもちの「大きさ」がちがうような気がするわ。？,キミ
