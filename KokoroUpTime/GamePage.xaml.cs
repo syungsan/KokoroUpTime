@@ -98,9 +98,9 @@ namespace KokoroUpTime
             this.MainMsg.Visibility = Visibility.Hidden;
             this.CharaStandRight.Visibility = Visibility.Hidden;
             this.CharaStandLeft.Visibility = Visibility.Hidden;
-            this.CharaSmallLeftA.Visibility = Visibility.Hidden;
-            this.CharaSmallLeftB.Visibility = Visibility.Hidden;
-            this.CharaSmallLeftC.Visibility = Visibility.Hidden;
+            this.CharaFaceLeftA.Visibility = Visibility.Hidden;
+            this.CharaFaceLeftB.Visibility = Visibility.Hidden;
+            this.CharaFaceLeftC.Visibility = Visibility.Hidden;
             this.BigInfo.Visibility = Visibility.Hidden;        
             this.MainMsgBubble.Visibility = Visibility.Hidden;
             this.MainMsg.Visibility = Visibility.Hidden;
@@ -108,7 +108,7 @@ namespace KokoroUpTime
             this.SessionFrame.Visibility = Visibility.Hidden;
             this.SessionSubTitle.Visibility = Visibility.Hidden;
             this.SessionSentence.Visibility = Visibility.Hidden;
-            this.CharaSmallLeft.Visibility = Visibility.Hidden;
+            this.CharaFaceLeft.Visibility = Visibility.Hidden;
 
             this.NextMsgButton.Visibility = Visibility.Hidden;
             this.BackMsgButton.Visibility = Visibility.Hidden;
@@ -189,10 +189,10 @@ namespace KokoroUpTime
                 ["bg"] = this.BG,
                 ["chara_stand_right"] = this.CharaStandRight,
                 ["chara_stand_left"] = this.CharaStandLeft,
-                ["chara_small_left_a"] = this.CharaSmallLeftA,
-                ["chara_small_left_b"] = this.CharaSmallLeftB,
-                ["chara_small_left_c"] = this.CharaSmallLeftC,
-                ["chara_small_left"] = this.CharaSmallLeft,
+                ["chara_face_left_a"] = this.CharaFaceLeftA,
+                ["chara_face_left_b"] = this.CharaFaceLeftB,
+                ["chara_face_left_c"] = this.CharaFaceLeftC,
+                ["chara_face_left"] = this.CharaFaceLeft,
                 ["main_msg_bubble"] = this.MainMsgBubble,
                 ["big_info"] = this.BigInfo,
                 ["chara_stand_small_right"] = this.CharaStandSmallDownRight,

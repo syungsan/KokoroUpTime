@@ -1,6 +1,6 @@
 ﻿reset
 image,bg,background_02.png
-image,chara_small_left,akamaru_small_03.png
+image,chara_face_left,akamaru_face_03.png
 image,main_msg_bubble,left_big_bubble_red.png
 wait
 msg,main_msg,この前のこころあっぷタイムは、あったかスープを使って、「あたたかい言葉」を練習したぜ！,赤丸
@@ -9,7 +9,7 @@ hide,button,next_page_button
 hide,button,back_page_button
 hide,text,main_msg
 hide,image,main_msg_bubble
-hide,image,chara_small_left
+hide,image,chara_face_left
 image,item_image_center,item03_solo.png
 next
 hide,image,item_image_center

@@ -18,20 +18,16 @@
     <None Remove="Fonts\TanukiMagic.ttf" />
     <None Remove="good_words_grid.png" />
     <None Remove="Images\after.png" />
-    <None Remove="Images\akamaru.png" />
-    <None Remove="Images\akamaru3.png" />
-    <None Remove="Images\akamaru_small_01.png" />
-    <None Remove="Images\akamaru_small_02.png" />
-    <None Remove="Images\akamaru_small_03.png" />
-    <None Remove="Images\akamaru_small_04.png" />
+    <None Remove="Images\akamaru_face_01.png" />
+    <None Remove="Images\akamaru_face_02.png" />
+    <None Remove="Images\akamaru_face_03.png" />
+    <None Remove="Images\akamaru_face_04.png" />
     <None Remove="Images\akamaru_stand_01.png" />
-    <None Remove="Images\aosuke.png" />
-    <None Remove="Images\aosuke1.png" />
-    <None Remove="Images\aosuke_small_01.png" />
-    <None Remove="Images\aosuke_small_02.png" />
-    <None Remove="Images\aosuke_small_03.png" />
-    <None Remove="Images\aosuke_small_04.png" />
-    <None Remove="Images\aosuke_small_05.png" />
+    <None Remove="Images\aosuke_face_01.png" />
+    <None Remove="Images\aosuke_face_02.png" />
+    <None Remove="Images\aosuke_face_03.png" />
+    <None Remove="Images\aosuke_face_04.png" />
+    <None Remove="Images\aosuke_face_05.png" />
     <None Remove="Images\aosuke_stand_01.png" />
     <None Remove="Images\background_00.png" />
     <None Remove="Images\background_01.png" />
@@ -42,7 +38,6 @@
     <None Remove="Images\background_07.png" />
     <None Remove="Images\background_mokume.png" />
     <None Remove="Images\background_option.png" />
-    <None Remove="Images\badWordsFrame.png" />
     <None Remove="Images\bad_words_grid.png" />
     <None Remove="Images\before.png" />
     <None Remove="Images\big_heart.png" />
@@ -57,20 +52,17 @@
     <None Remove="Images\heart_blue.png" />
     <None Remove="Images\heart_red.png" />
     <None Remove="Images\hukidashi2.png" />
-    <None Remove="Images\icon.png" />
     <None Remove="Images\item01_solo.png" />
     <None Remove="Images\item02_solo.png" />
     <None Remove="Images\item03_solo.png" />
     <None Remove="Images\item_bubble.png" />
     <None Remove="Images\item_info.png" />
     <None Remove="Images\item_name.png" />
-    <None Remove="Images\kimif.png" />
-    <None Remove="Images\kimil.png" />
-    <None Remove="Images\kimi_small_01.png" />
-    <None Remove="Images\kimi_small_02.png" />
-    <None Remove="Images\kimi_small_03.png" />
-    <None Remove="Images\kimi_small_04.png" />
-    <None Remove="Images\kimi_small_05.png" />
+    <None Remove="Images\kimi_face_01.png" />
+    <None Remove="Images\kimi_face_02.png" />
+    <None Remove="Images\kimi_face_03.png" />
+    <None Remove="Images\kimi_face_04.png" />
+    <None Remove="Images\kimi_face_05.png" />
     <None Remove="Images\kimi_stand_01.png" />
     <None Remove="Images\left_a_big_bubble.png" />
     <None Remove="Images\left_big_bubble_blue.png" />
@@ -128,16 +120,16 @@
     <Resource Include="Fonts\JiyunoTsubasa.ttf" />
     <Resource Include="Fonts\TanukiMagic.ttf" />
     <Resource Include="Images\after.png" />
-    <Resource Include="Images\akamaru_small_01.png" />
-    <Resource Include="Images\akamaru_small_02.png" />
-    <Resource Include="Images\akamaru_small_03.png" />
-    <Resource Include="Images\akamaru_small_04.png" />
+    <Resource Include="Images\akamaru_face_01.png" />
+    <Resource Include="Images\akamaru_face_02.png" />
+    <Resource Include="Images\akamaru_face_03.png" />
+    <Resource Include="Images\akamaru_face_04.png" />
     <Resource Include="Images\akamaru_stand_01.png" />
-    <Resource Include="Images\aosuke_small_01.png" />
-    <Resource Include="Images\aosuke_small_02.png" />
-    <Resource Include="Images\aosuke_small_03.png" />
-    <Resource Include="Images\aosuke_small_04.png" />
-    <Resource Include="Images\aosuke_small_05.png" />
+    <Resource Include="Images\aosuke_face_01.png" />
+    <Resource Include="Images\aosuke_face_02.png" />
+    <Resource Include="Images\aosuke_face_03.png" />
+    <Resource Include="Images\aosuke_face_04.png" />
+    <Resource Include="Images\aosuke_face_05.png" />
     <Resource Include="Images\aosuke_stand_01.png" />
     <Resource Include="Images\background_00.png" />
     <Resource Include="Images\background_01.png" />
@@ -162,17 +154,17 @@
     <Resource Include="Images\heart_blue.png" />
     <Resource Include="Images\heart_red.png" />
     <Resource Include="Images\hukidashi2.png" />
-    <Resource Include="Images\item03_solo.png" />
-    <Resource Include="Images\item_bubble.png" />
     <Resource Include="Images\item01_solo.png" />
     <Resource Include="Images\item02_solo.png" />
+    <Resource Include="Images\item03_solo.png" />
+    <Resource Include="Images\item_bubble.png" />
     <Resource Include="Images\item_info.png" />
     <Resource Include="Images\item_name.png" />
-    <Resource Include="Images\kimi_small_01.png" />
-    <Resource Include="Images\kimi_small_02.png" />
-    <Resource Include="Images\kimi_small_03.png" />
-    <Resource Include="Images\kimi_small_04.png" />
-    <Resource Include="Images\kimi_small_05.png" />
+    <Resource Include="Images\kimi_face_01.png" />
+    <Resource Include="Images\kimi_face_02.png" />
+    <Resource Include="Images\kimi_face_03.png" />
+    <Resource Include="Images\kimi_face_04.png" />
+    <Resource Include="Images\kimi_face_05.png" />
     <Resource Include="Images\kimi_stand_01.png" />
     <Resource Include="Images\left_a_big_bubble.png" />
     <Resource Include="Images\left_big_bubble_blue.png" />
@@ -211,10 +203,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Update="Images\icon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </Resource>
     <None Update="Scenarios\chapter1.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
