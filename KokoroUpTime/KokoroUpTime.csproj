@@ -10,9 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="badWordsFrame.png" />
+    <None Remove="bad_words_grid.png" />
+    <None Remove="big_heart.png" />
     <None Remove="Fonts\azuki.ttf" />
     <None Remove="Fonts\JiyunoTsubasa.ttf" />
     <None Remove="Fonts\TanukiMagic.ttf" />
+    <None Remove="good_words_grid.png" />
     <None Remove="Images\after.png" />
     <None Remove="Images\akamaru.png" />
     <None Remove="Images\akamaru3.png" />
@@ -39,6 +43,7 @@
     <None Remove="Images\background_mokume.png" />
     <None Remove="Images\background_option.png" />
     <None Remove="Images\badWordsFrame.png" />
+    <None Remove="Images\bad_words_grid.png" />
     <None Remove="Images\before.png" />
     <None Remove="Images\big_heart.png" />
     <None Remove="Images\blackboard.png" />
@@ -46,7 +51,7 @@
     <None Remove="Images\challenge_time.png" />
     <None Remove="Images\feeling_value.png" />
     <None Remove="Images\frame_46-1.png" />
-    <None Remove="Images\goodWordsFrame.png" />
+    <None Remove="Images\good_words_grid.png" />
     <None Remove="Images\gray_frame.png" />
     <None Remove="Images\group_activity.png" />
     <None Remove="Images\heart_blue.png" />
@@ -101,6 +106,10 @@
     <None Remove="Images\water_frame.png" />
     <None Remove="Images\white_frame.png" />
     <None Remove="Images\yazirusi.png" />
+    <None Remove="kimi_stand_01.png" />
+    <None Remove="shiroji_02.png" />
+    <None Remove="shiroji_04.png" />
+    <None Remove="teacher.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -139,7 +148,7 @@
     <Resource Include="Images\background_07.png" />
     <Resource Include="Images\background_mokume.png" />
     <Resource Include="Images\background_option.png" />
-    <Resource Include="Images\badWordsFrame.png" />
+    <Resource Include="Images\bad_words_grid.png" />
     <Resource Include="Images\before.png" />
     <Resource Include="Images\big_heart.png" />
     <Resource Include="Images\blackboard.png" />
@@ -147,7 +156,7 @@
     <Resource Include="Images\challenge_time.png" />
     <Resource Include="Images\feeling_value.png" />
     <Resource Include="Images\frame_46-1.png" />
-    <Resource Include="Images\goodWordsFrame.png" />
+    <Resource Include="Images\good_words_grid.png" />
     <Resource Include="Images\gray_frame.png" />
     <Resource Include="Images\group_activity.png" />
     <Resource Include="Images\heart_blue.png" />

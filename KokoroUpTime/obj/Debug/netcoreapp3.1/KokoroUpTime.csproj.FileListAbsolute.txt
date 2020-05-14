@@ -5,8 +5,10 @@ D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\S
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\Correct.wav
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\Incorrect.wav
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\Intermediate.wav
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\manga.mp3
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\nc211089.wav
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\None.wav
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\もくもくStudy♪.mp3
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\放課後♪TeaTime.mp3
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\KokoroUpTime.exe
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\KokoroUpTime.deps.json
@@ -15,11 +17,11 @@ D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\K
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\KokoroUpTime.dll
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\KokoroUpTime.pdb
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Interop.WMPLib.dll
-D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Interop.WMPLib.dll
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csproj.ResolveComReference.cache
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\GamePage.g.cs
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\OptionPage.g.cs
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\TitlePage.g.cs
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\App.g.cs
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
@@ -27,6 +29,7 @@ D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\K
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime_MarkupCompile.lref
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\GamePage.baml
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\MainWindow.baml
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\OptionPage.baml
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\TitlePage.baml
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.g.resources
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csproj.CoreCompileInputs.cache
@@ -35,7 +38,4 @@ D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\K
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.dll
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.pdb
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.genruntimeconfig.cache
-D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\もくもくStudy♪.mp3
-D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\OptionPage.g.cs
-D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\OptionPage.baml
-D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\manga.mp3
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache

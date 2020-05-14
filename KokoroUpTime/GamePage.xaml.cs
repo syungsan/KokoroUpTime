@@ -143,17 +143,19 @@ namespace KokoroUpTime
             this.ItemInfoTitle.Visibility = Visibility.Hidden;
             this.ItemInfoSentence.Visibility = Visibility.Hidden;
 
-            this.GoodWordsFrame.Visibility = Visibility.Hidden;
-            this.BadWordsFrame.Visibility = Visibility.Hidden;
+            this.MainMsgGrid.Visibility = Visibility.Hidden;
+
+            this.GoodWordsGrid.Visibility = Visibility.Hidden;
+            this.BadWordsGrid.Visibility = Visibility.Hidden;
 
             // this.FeelingGrid.Visibility = Visibility.Hidden;
             this.GaugeGrid.Visibility = Visibility.Hidden;
 
-            this.CharaLeftComment.Visibility = Visibility.Hidden;
-            this.CharaLeftSymbol.Visibility = Visibility.Hidden;
+            this.CharaStandLeftComment.Visibility = Visibility.Hidden;
+            this.CharaStandLeftSymbol.Visibility = Visibility.Hidden;
 
-            this.CharaOmniLeftSmall.Visibility = Visibility.Hidden;
-            this.CharaOmniRightSmall.Visibility = Visibility.Hidden;
+            this.CharaStandLeftSmall.Visibility = Visibility.Hidden;
+            this.CharaStandRightSmall.Visibility = Visibility.Hidden;
 
             this.FeelingValueGrid.Visibility = Visibility.Hidden;
 
@@ -208,9 +210,9 @@ namespace KokoroUpTime
                 ["long_msg_image"] = this.LongMsgImage,
                 ["heart_image"] = this.HeartImage,
                 ["needle_image"] = this.NeedleImage,
-                ["chara_left_symbol"] = this.CharaLeftSymbol,
-                ["chara_omni_left_small"] = this.CharaOmniLeftSmall,
-                ["chara_omni_right_small"] = this.CharaOmniRightSmall,
+                ["chara_stand_left_symbol"] = this.CharaStandLeftSymbol,
+                ["chara_stand_left_small"] = this.CharaStandLeftSmall,
+                ["chara_stand_right_small"] = this.CharaStandRightSmall,
             };
 
             this.textObjects = new Dictionary<string, TextBlock>
@@ -230,7 +232,7 @@ namespace KokoroUpTime
                 ["item_info_sentence"] = this.ItemInfoSentence,
                 ["music_title"] = this.MusicTitle,
                 ["composer"] = this.Composer,
-                ["chara_left_comment"] = this.CharaLeftComment,
+                ["chara_stand_left_comment"] = this.CharaStandLeftComment,
                 ["feeling_person_text"] = this.FeelingPersonText,
                 ["feeling_value_text"] = this.FeelingValueText,
             };
@@ -248,8 +250,9 @@ namespace KokoroUpTime
 
             this.gridObjects = new Dictionary<string, Grid>
             {
-                ["good_words_frame"] = this.GoodWordsFrame,
-                ["bad_words_frame"] = this.BadWordsFrame,
+                ["main_msg_grid"] = this.MainMsgGrid,
+                ["good_words_grid"] = this.GoodWordsGrid,
+                ["bad_words_grid"] = this.BadWordsGrid,
                 // ["feeling_grid"] = this.FeelingGrid,
                 ["gauge_grid"] = this.GaugeGrid,
                 ["music_info_grid"] = this.MusicInfoGrid,
@@ -522,7 +525,7 @@ namespace KokoroUpTime
 
                             this.position = this.scenarios[this.scenarioCount][2];
                             this.textObjects[this.position].Visibility = Visibility.Hidden;
-                            this.textObjects[this.position].Text = "";
+                            // this.textObjects[this.position].Text = "";
 
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
@@ -543,6 +546,24 @@ namespace KokoroUpTime
 
                             this.position = this.scenarios[this.scenarioCount][2];
                             this.gridObjects[this.position].Visibility = Visibility.Hidden;
+
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+
+                            break;
+                    }
+                    break;
+
+                case "clear":
+
+                    var clearTarget = this.scenarios[this.scenarioCount][1];
+
+                    switch (clearTarget)
+                    {
+                        case "text":
+
+                            this.position = this.scenarios[this.scenarioCount][2];
+                            this.textObjects[this.position].Text = "";
 
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
