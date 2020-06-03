@@ -9,7 +9,24 @@
       Title="GamePage">
 
     <Page.Resources>
-        <Storyboard x:Key="appear_up_chara_stand_right"/>
+        <Storyboard x:Key="appear_up_chara_stand_right">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaStandRight" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaStandRight" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
         <Storyboard x:Key="appear_up_chara_stand_small_right">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaStandSmallDownRight" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="63">
@@ -252,7 +269,13 @@
         </Storyboard>
     </Page.Resources>
     <Grid>
-        <Grid x:Name="BaseGrid" Margin="0,0,0,17" d:IsHidden="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="BaseGrid" Margin="0,0,0,17">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="474*"/>
                 <ColumnDefinition Width="449*"/>
@@ -265,9 +288,9 @@
                 <RowDefinition Height="1020*"/>
                 <RowDefinition Height="20*"/>
             </Grid.RowDefinitions>
-            <Image x:Name="BG"  Stretch="Fill" Source="/Images/background_01.png" Grid.RowSpan="3" Grid.ColumnSpan="5" Margin="0,0,0,-17" d:IsHidden="True"/>
+            <Image x:Name="BG"  Stretch="Fill" Source="/Images/background_01.png" Grid.RowSpan="3" Grid.ColumnSpan="5" Margin="0,0,0,-17"/>
 
-            <Grid x:Name="GoodWordsGrid" HorizontalAlignment="Left" Height="1008" Margin="10,0,0,0" VerticalAlignment="Center" Width="434" Grid.Row="1" Grid.Column="1" d:IsHidden="True">
+            <Grid x:Name="GoodWordsGrid" HorizontalAlignment="Left" Height="1008" Margin="10,0,0,0" VerticalAlignment="Center" Width="434" Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="119*"/>
                     <RowDefinition Height="73*"/>
@@ -283,95 +306,95 @@
                     <RowDefinition Height="73*"/>
                     <RowDefinition Height="73*"/>
                 </Grid.RowDefinitions>
-                <Image Source="/Images/good_words_grid.png" Grid.RowSpan="13" d:IsHidden="True"/>
-                <StackPanel Grid.Row="1" Grid.RowSpan="12" d:IsHidden="True">
-                    <InkCanvas x:Name="GoodCanvas_1" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                <Image Source="/Images/good_words_grid.png" Grid.RowSpan="13"/>
+                <StackPanel Grid.Row="1" Grid.RowSpan="12">
+                    <InkCanvas x:Name="GoodCanvas_1" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="うれしい" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="うれしい" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="GoodCanvas_2" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="GoodCanvas_2" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="しあわせ" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="しあわせ" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="GoodCanvas_3" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="GoodCanvas_3" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="たのしい" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="たのしい" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="GoodCanvas_4" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="GoodCanvas_4" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="ホッとした" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="ホッとした" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="GoodCanvas_5" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="GoodCanvas_5" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="きもちいい" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="きもちいい" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="GoodCanvas_6" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="GoodCanvas_6" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="まんぞく" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="まんぞく" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="GoodCanvas_7" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="GoodCanvas_7" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="すき" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="すき" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="GoodCanvas_8" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="GoodCanvas_8" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="やる気マンマン" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="やる気マンマン" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="GoodCanvas_9" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="GoodCanvas_9" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="かんしゃ" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="かんしゃ" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="GoodCanvas_10" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="GoodCanvas_10" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="わくわく" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="わくわく" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="GoodCanvas_11" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="GoodCanvas_11" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="うきくき" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="うきくき" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="GoodCanvas_12" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="GoodCanvas_12" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="ほこらしい" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="ほこらしい" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
                 </StackPanel>
             </Grid>
-            <Grid x:Name="BadWordsGrid" HorizontalAlignment="Left" Height="1008" VerticalAlignment="Center" Width="434" Margin="73,0,0,0" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" d:IsHidden="True">
+            <Grid x:Name="BadWordsGrid" HorizontalAlignment="Left" Height="1008" VerticalAlignment="Center" Width="434" Margin="73,0,0,0" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="119*"/>
                     <RowDefinition Height="73*"/>
@@ -387,97 +410,97 @@
                     <RowDefinition Height="73*"/>
                     <RowDefinition Height="73*"/>
                 </Grid.RowDefinitions>
-                <Image Source="/Images/bad_words_grid.png" Grid.RowSpan="13" d:IsHidden="True"/>
-                <StackPanel Grid.Row="1" Grid.RowSpan="12" d:IsHidden="True">
-                    <InkCanvas x:Name="BadCanvas_1" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                <Image Source="/Images/bad_words_grid.png" Grid.RowSpan="13"/>
+                <StackPanel Grid.Row="1" Grid.RowSpan="12">
+                    <InkCanvas x:Name="BadCanvas_1" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="心配" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="心配" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="BadCanvas_2" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="BadCanvas_2" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="こまった" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="こまった" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="BadCanvas_3" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="BadCanvas_3" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="不安" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="不安" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="BadCanvas_4" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="BadCanvas_4" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="こわい" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="こわい" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="BadCanvas_5" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="BadCanvas_5" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="おちこみ" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="おちこみ" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="BadCanvas_6" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="BadCanvas_6" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="がっかり" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="がっかり" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="BadCanvas_7" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="BadCanvas_7" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="いかり" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="いかり" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="BadCanvas_8" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="BadCanvas_8" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="イライラ" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="イライラ" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="BadCanvas_9" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="BadCanvas_9" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="はずかしい" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="はずかしい" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="BadCanvas_10" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="BadCanvas_10" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="ふまん" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="ふまん" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="BadCanvas_11" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="BadCanvas_11" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="かなしい" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="かなしい" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
-                    <InkCanvas x:Name="BadCanvas_12" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly" d:IsHidden="True">
+                    <InkCanvas x:Name="BadCanvas_12" Height="72" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
                         </InkCanvas.DefaultDrawingAttributes>
-                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40" d:IsHidden="True"/>
-                        <Label Content="おびえる" FontSize="36" Margin="100,8,0,0" d:IsHidden="True"/>
+                        <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
+                        <Label Content="おびえる" FontSize="36" Margin="100,8,0,0"/>
                     </InkCanvas>
                 </StackPanel>
             </Grid>
 
         </Grid>
-        <Grid x:Name="CharaStandGrid" Visibility="Visible" d:IsHidden="True">
+        <Grid x:Name="CharaStandGrid" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="9*"/>
@@ -493,7 +516,7 @@
                 <ColumnDefinition Width="122*"/>
                 <ColumnDefinition Width="540*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="CharaStandRight" RenderTransformOrigin="0.5,0.5" Source="/Images/teacher.png" Margin="36,12,26,21" Grid.Column="4" Grid.RowSpan="4" Grid.ColumnSpan="2" d:IsHidden="True">
+            <Image x:Name="CharaStandRight" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_02.png" Margin="36,12,26,21" Grid.Column="4" Grid.RowSpan="4" Grid.ColumnSpan="2">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -536,7 +559,7 @@
             <Image x:Name="CharaStandLeftSmall" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="820" Margin="5,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="522" Source="/Images/kimi_stand_01.png" Grid.RowSpan="2" d:IsHidden="True"/>
             <Image x:Name="CharaStandRightSmall" Grid.Column="5" HorizontalAlignment="Left" Height="822" Margin="14,3,0,0" VerticalAlignment="Top" Width="524" Source="/Images/shiroji_04.png" Grid.Row="1" Grid.RowSpan="2" d:IsHidden="True"/>
         </Grid>
-        <Grid x:Name="CharaFaceGrid" Visibility="Visible" Grid.RowSpan="4" Grid.ColumnSpan="2" d:IsHidden="True">
+        <Grid x:Name="CharaFaceGrid" Visibility="Visible" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="33*"/>
                 <RowDefinition Height="90*"/>
@@ -558,7 +581,7 @@
                 <ColumnDefinition Width="190*"/>
                 <ColumnDefinition Width="195*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="CharaFaceLeftA" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/akamaru_face_04.png" Margin="53,14,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="2" Grid.Row="1" d:IsHidden="True">
+            <Image x:Name="CharaFaceLeftA" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/akamaru_face_04.png" Margin="53,14,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="2" Grid.Row="1">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -568,7 +591,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CharaFaceLeftB" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/aosuke_face_01.png" Margin="14,15,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="3" Grid.Row="1" d:IsHidden="True">
+            <Image x:Name="CharaFaceLeftB" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/aosuke_face_01.png" Margin="14,15,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="3" Grid.Row="1">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -578,7 +601,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CharaFaceLeftC" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/kimi_face_02.png" RenderTransformOrigin="0.5,0.5" Margin="10,16,0,0" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="4" Grid.Row="1" d:IsHidden="True">
+            <Image x:Name="CharaFaceLeftC" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/kimi_face_02.png" RenderTransformOrigin="0.5,0.5" Margin="10,16,0,0" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="4" Grid.Row="1">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -588,8 +611,8 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CharaFaceLeft" HorizontalAlignment="Left" Height="556" Margin="15,11,0,0" VerticalAlignment="Top" Width="516" Source="/Images/kimi_face_01.png" Grid.RowSpan="2" Grid.ColumnSpan="4" Grid.Row="1" Grid.Column="1" d:IsHidden="True"/>
-            <Grid x:Name="MainMsgGrid"  Margin="5,15,15,0" Grid.RowSpan="3" Grid.ColumnSpan="8" Grid.Row="2" Grid.Column="2" d:IsHidden="True">
+            <Image x:Name="CharaFaceLeft" HorizontalAlignment="Left" Height="556" Margin="15,11,0,0" VerticalAlignment="Top" Width="516" Source="/Images/kimi_face_01.png" Grid.RowSpan="2" Grid.ColumnSpan="4" Grid.Row="1" Grid.Column="1"/>
+            <Grid x:Name="MainMsgGrid"  Margin="5,15,15,0" Grid.RowSpan="3" Grid.ColumnSpan="8" Grid.Row="2" Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="27*"/>
                     <RowDefinition Height="26*"/>
@@ -601,13 +624,13 @@
                     <ColumnDefinition Width="123*"/>
                     <ColumnDefinition Width="22*"/>
                 </Grid.ColumnDefinitions>
-                <Image x:Name="MainMsgBubble" Source="/Images/right_big_bubble.png" Grid.ColumnSpan="3" Grid.RowSpan="4" d:IsHidden="True"/>
-                <TextBlock x:Name="MainMsg" Text="TextBlock" TextWrapping="Wrap" FontSize="48" FontFamily="/Fonts/azuki.ttf#azuki_font" Margin="5,10,46,10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" d:IsHidden="True"/>
-                <Button x:Name="NextMsgButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="13,34,28,32" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" d:IsHidden="True">
-                    <Image Source="/Images/yazirusi.png" d:IsHidden="True"/>
+                <Image x:Name="MainMsgBubble" Source="/Images/right_big_bubble.png" Grid.ColumnSpan="3" Grid.RowSpan="4"/>
+                <TextBlock x:Name="MainMsg" Text="TextBlock" TextWrapping="Wrap" FontSize="48" FontFamily="/Fonts/azuki.ttf#azuki_font" Margin="5,10,46,10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"/>
+                <Button x:Name="NextMsgButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="13,34,28,32" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2">
+                    <Image Source="/Images/yazirusi.png"/>
                 </Button>
-                <Button x:Name="BackMsgButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="9,7,32,32" Grid.Column="2" Grid.Row="1" d:IsHidden="True">
-                    <Image Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Button x:Name="BackMsgButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="9,7,32,32" Grid.Column="2" Grid.Row="1">
+                    <Image Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -634,13 +657,13 @@
                 <ColumnDefinition Width="41*"/>
                 <ColumnDefinition Width="138*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="BigInfo" HorizontalAlignment="Left" Height="652" Margin="6,5,0,0" VerticalAlignment="Top" Width="1006" Source="/Images/SS.png" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3" d:IsHidden="True"/>
-            <Image x:Name="SessionFrame" HorizontalAlignment="Left" Height="328" Margin="6,11,0,0" VerticalAlignment="Top" Width="1010" Source="/Images/white_frame.png" Stretch="Fill" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" d:IsHidden="True"/>
-            <TextBlock x:Name="SessionSubTitle" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" Width="745" FontSize="48" FontWeight="Bold" Margin="75,20,0,0" Grid.Column="1" Grid.Row="2" d:IsHidden="True"/>
-            <TextBlock x:Name="SessionSentence" HorizontalAlignment="Left" Margin="75,125,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="168" Width="745" FontSize="48" Grid.Column="1" Grid.Row="2" d:IsHidden="True"/>
-            <Image x:Name="SessionTitle" Source="/Images/challenge_time.png" Margin="21,15,11,62" Grid.Column="1" Grid.Row="1" d:IsHidden="True"/>
+            <Image x:Name="BigInfo" HorizontalAlignment="Left" Height="652" Margin="6,5,0,0" VerticalAlignment="Top" Width="1006" Source="/Images/SS.png" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3"/>
+            <Image x:Name="SessionFrame" HorizontalAlignment="Left" Height="328" Margin="6,11,0,0" VerticalAlignment="Top" Width="1010" Source="/Images/white_frame.png" Stretch="Fill" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"/>
+            <TextBlock x:Name="SessionSubTitle" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" Width="745" FontSize="48" FontWeight="Bold" Margin="75,20,0,0" Grid.Column="1" Grid.Row="2"/>
+            <TextBlock x:Name="SessionSentence" HorizontalAlignment="Left" Margin="75,125,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="168" Width="745" FontSize="48" Grid.Column="1" Grid.Row="2"/>
+            <Image x:Name="SessionTitle" Source="/Images/challenge_time.png" Margin="21,15,11,62" Grid.Column="1" Grid.Row="1"/>
         </Grid>
-        <Grid x:Name="RuleGrid" Grid.ColumnSpan="2" Grid.RowSpan="4" Visibility="Visible" d:IsHidden="True">
+        <Grid x:Name="RuleGrid" Visibility="Visible" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="43*"/>
                 <ColumnDefinition Width="240*"/>
@@ -655,8 +678,8 @@
                 <RowDefinition Height="70*"/>
                 <RowDefinition Height="35*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="BoardButton" Click="Button_Click" Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Grid.Row="1" Grid.RowSpan="3" Margin="0,0,0,17" Grid.ColumnSpan="2" d:IsHidden="True">
-                <Grid d:IsHidden="True">
+            <Button x:Name="BoardButton" Click="Button_Click" Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Grid.Row="1" Grid.RowSpan="3" Margin="0,0,0,17" Grid.ColumnSpan="2">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="54*"/>
                         <ColumnDefinition Width="41*"/>
@@ -672,29 +695,29 @@
                         <RowDefinition Height="175*"/>
                         <RowDefinition Height="130*"/>
                     </Grid.RowDefinitions>
-                    <Image Source="/Images/blackboard.png" Grid.RowSpan="6" Grid.ColumnSpan="5" Stretch="Fill" d:IsHidden="True" />
-                    <TextBlock x:Name="RuleTitle" Text="教室のルール" Foreground="White" FontSize="72" Grid.Column="2" Margin="0,10,0,0" Grid.Row="1" d:IsHidden="True"/>
-                    <TextBlock x:Name="RuleChecK1Msg" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="64" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,18,0,5" d:IsHidden="True"/>
-                    <TextBlock x:Name="RuleChecK2Msg" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="64" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,21,0,10" d:IsHidden="True"/>
-                    <TextBlock x:Name="RuleChecK3Msg" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="64" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,21,0,10" d:IsHidden="True"/>
-                    <CheckBox x:Name="RuleCheck1Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Grid.Row="2" Grid.Column="1" Margin="0,10,180,145" d:IsHidden="True">
+                    <Image Source="/Images/blackboard.png" Grid.RowSpan="6" Grid.ColumnSpan="5" Stretch="Fill" />
+                    <TextBlock x:Name="RuleTitle" Text="教室のルール" Foreground="White" FontSize="72" Grid.Column="2" Margin="0,10,0,0" Grid.Row="1"/>
+                    <TextBlock x:Name="RuleChecK1Msg" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="64" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,18,0,5"/>
+                    <TextBlock x:Name="RuleChecK2Msg" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="64" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,21,0,10"/>
+                    <TextBlock x:Name="RuleChecK3Msg" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="64" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,21,0,10"/>
+                    <CheckBox x:Name="RuleCheck1Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Grid.Row="2" Grid.Column="1" Margin="0,10,180,145">
                         <CheckBox.RenderTransform>
                             <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
                         </CheckBox.RenderTransform>
                     </CheckBox>
-                    <CheckBox x:Name="RuleCheck2Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Grid.Row="3" Grid.Column="1" Margin="0,10,180,145" d:IsHidden="True">
+                    <CheckBox x:Name="RuleCheck2Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Grid.Row="3" Grid.Column="1" Margin="0,10,180,145">
                         <CheckBox.RenderTransform>
                             <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
                         </CheckBox.RenderTransform>
                     </CheckBox>
-                    <CheckBox x:Name="RuleCheck3Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Grid.Row="4" Grid.Column="1" Margin="0,0,180,153" d:IsHidden="True">
+                    <CheckBox x:Name="RuleCheck3Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Grid.Row="4" Grid.Column="1" Margin="0,0,180,153">
                         <CheckBox.RenderTransform>
                             <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
                         </CheckBox.RenderTransform>
                     </CheckBox>
                 </Grid>
             </Button>
-            <Image x:Name="CharaStandSmallDownRight" Source="/Images/shiroji_02.png" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="10,14,6,13" Grid.Row="2" d:IsHidden="True">
+            <Image x:Name="CharaStandSmallDownRight" Source="/Images/shiroji_02.png" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="10,14,6,13" Grid.Row="2">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -704,7 +727,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Button x:Name="LongMsgBubble" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,4,0,10" d:IsHidden="True">
+            <Button x:Name="LongMsgBubble" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,4,0,10">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -713,8 +736,8 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </Button.RenderTransform>
-                <Grid Width="1479" d:IsHidden="True">
-                    <Image x:Name="LongMsgImage" Source="/Images/long_bubble.png" RenderTransformOrigin="0.5,0.5" Margin="0,-26,0,0" d:IsHidden="True">
+                <Grid Width="1479">
+                    <Image x:Name="LongMsgImage" Source="/Images/long_bubble.png" RenderTransformOrigin="0.5,0.5" Margin="0,-26,0,0">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -724,7 +747,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="LongMsg" Text="TextBlock" FontSize="42" Margin="31,28,37,31" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                    <TextBlock x:Name="LongMsg" Text="TextBlock" FontSize="42" Margin="31,28,37,31" RenderTransformOrigin="0.5,0.5">
                         <TextBlock.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -750,8 +773,8 @@
                 <ColumnDefinition Width="74*"/>
                 <ColumnDefinition Width="14*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="MangaTitle" HorizontalAlignment="Left" VerticalAlignment="Center" Source="/Images/manga1_title.png" Grid.ColumnSpan="2" Margin="5,0,0,0" Grid.Column="1" d:IsHidden="True"/>
-            <Image x:Name="MangaImage" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.RowSpan="2" Source="/Images/manga1-1.png" Margin="6,0,0,0" RenderTransformOrigin="0.5,0.5" Grid.Column="1" d:IsHidden="True">
+            <Image x:Name="MangaTitle" HorizontalAlignment="Left" VerticalAlignment="Center" Source="/Images/manga1_title.png" Grid.ColumnSpan="2" Margin="5,0,0,0" Grid.Column="1"/>
+            <Image x:Name="MangaImage" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.RowSpan="2" Source="/Images/manga1-1.png" Margin="6,0,0,0" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -761,8 +784,8 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Button x:Name="MangaNextButton" Grid.Column="2" HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="2" VerticalAlignment="Top" Height="84" Width="372" Grid.RowSpan="2" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True">
-                <Image Source="/Images/mangaya.png" d:IsHidden="True"/>
+            <Button x:Name="MangaNextButton" Grid.Column="2" HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="2" VerticalAlignment="Top" Height="84" Width="372" Grid.RowSpan="2" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Image Source="/Images/mangaya.png"/>
             </Button>
         </Grid>
         <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
@@ -786,18 +809,18 @@
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="25*"/>
             </Grid.RowDefinitions>
-            <Image x:Name="ItemImageCenter" HorizontalAlignment="Center" Height="512" VerticalAlignment="Top" Width="363" Source="/Images/item01_solo.png" Grid.Row="2" Grid.Column="4" Grid.RowSpan="2" Margin="0,21,0,0" d:IsHidden="True"/>
-            <Image x:Name="ItemNamePlateLeft" HorizontalAlignment="Left" Height="195" VerticalAlignment="Top" Width="610" Source="/Images/item_name.png" Grid.ColumnSpan="3" Margin="26,2,0,0" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1" d:IsHidden="True"/>
-            <TextBlock x:Name="ItemNameTextLeft" HorizontalAlignment="Left" Margin="70,41,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Grid.Row="1" Grid.ColumnSpan="3" Width="483" TextAlignment="Center" Grid.Column="1" d:IsHidden="True"/>
-            <Image x:Name="ItemNameBubble" HorizontalAlignment="Left" Height="240" Margin="45,39,0,0" VerticalAlignment="Top" Width="446" Source="/Images/item_bubble.png" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1" d:IsHidden="True"/>
-            <Image x:Name="ItemImageLeft" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Grid.Row="2" Margin="37,135,0,0" Grid.RowSpan="3" Grid.Column="1" d:IsHidden="True"/>
-            <Image x:Name="ItemNamePlateCenter" HorizontalAlignment="Left" Height="185" VerticalAlignment="Top" Width="606" Source="/Images/item_name.png" Grid.Row="2" Visibility="Visible" Grid.Column="3" Margin="12,0,0,0" Grid.ColumnSpan="3" d:IsHidden="True"/>
-            <TextBlock x:Name="ItemNameTextCenter" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Grid.Row="2" Margin="42,37,0,0" Height="98" Grid.Column="3" Width="483" TextAlignment="Center" Grid.ColumnSpan="3" d:IsHidden="True"/>
-            <Image x:Name="ItemInfoPlate" HorizontalAlignment="Left" Height="470" Margin="6,15,0,0" VerticalAlignment="Top" Width="1175" Source="/Images/item_info.png" Visibility="Visible" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="6" Grid.Column="3" d:IsHidden="True"/>
-            <Image x:Name="CharaStandSmallUpRight" HorizontalAlignment="Center" Width="277" Height="433" VerticalAlignment="Top" Source="/Images/shiroji_03.png" Grid.Column="7" Grid.RowSpan="3" d:IsHidden="True"/>
-            <TextBlock x:Name="ItemInfoTitle" HorizontalAlignment="Left" Margin="38,40,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="60" Width="555" FontSize="48" FontWeight="Bold" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" d:IsHidden="True"/>
-            <TextBlock x:Name="ItemInfoSentence" HorizontalAlignment="Left" Margin="42,120,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="327" Width="1083" FontSize="36" Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="3" Grid.RowSpan="2" d:IsHidden="True"/>
-            <TextBlock x:Name="ItemNumber" HorizontalAlignment="Left" Margin="157,149,0,0" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Grid.RowSpan="2" Foreground="#FFEEEE1E" Grid.Column="1" d:IsHidden="True"/>
+            <Image x:Name="ItemImageCenter" HorizontalAlignment="Center" Height="512" VerticalAlignment="Top" Width="363" Source="/Images/item01_solo.png" Grid.Row="2" Grid.Column="4" Grid.RowSpan="2" Margin="0,21,0,0"/>
+            <Image x:Name="ItemNamePlateLeft" HorizontalAlignment="Left" Height="195" VerticalAlignment="Top" Width="610" Source="/Images/item_name.png" Grid.ColumnSpan="3" Margin="26,2,0,0" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1"/>
+            <TextBlock x:Name="ItemNameTextLeft" HorizontalAlignment="Left" Margin="70,41,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Grid.Row="1" Grid.ColumnSpan="3" Width="483" TextAlignment="Center" Grid.Column="1"/>
+            <Image x:Name="ItemNameBubble" HorizontalAlignment="Left" Height="240" Margin="45,39,0,0" VerticalAlignment="Top" Width="446" Source="/Images/item_bubble.png" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1"/>
+            <Image x:Name="ItemImageLeft" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Grid.Row="2" Margin="37,135,0,0" Grid.RowSpan="3" Grid.Column="1"/>
+            <Image x:Name="ItemNamePlateCenter" HorizontalAlignment="Left" Height="185" VerticalAlignment="Top" Width="606" Source="/Images/item_name.png" Grid.Row="2" Visibility="Visible" Grid.Column="3" Margin="12,0,0,0" Grid.ColumnSpan="3"/>
+            <TextBlock x:Name="ItemNameTextCenter" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Grid.Row="2" Margin="42,37,0,0" Height="98" Grid.Column="3" Width="483" TextAlignment="Center" Grid.ColumnSpan="3"/>
+            <Image x:Name="ItemInfoPlate" HorizontalAlignment="Left" Height="470" Margin="6,15,0,0" VerticalAlignment="Top" Width="1175" Source="/Images/item_info.png" Visibility="Visible" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="6" Grid.Column="3"/>
+            <Image x:Name="CharaStandSmallUpRight" HorizontalAlignment="Center" Width="277" Height="433" VerticalAlignment="Top" Source="/Images/shiroji_03.png" Grid.Column="7" Grid.RowSpan="3"/>
+            <TextBlock x:Name="ItemInfoTitle" HorizontalAlignment="Left" Margin="38,40,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="60" Width="555" FontSize="48" FontWeight="Bold" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3"/>
+            <TextBlock x:Name="ItemInfoSentence" HorizontalAlignment="Left" Margin="42,120,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="327" Width="1083" FontSize="36" Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="3" Grid.RowSpan="2"/>
+            <TextBlock x:Name="ItemNumber" HorizontalAlignment="Left" Margin="157,149,0,0" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Grid.RowSpan="2" Foreground="#FFEEEE1E" Grid.Column="1"/>
         </Grid>
         <Grid x:Name="GaugeGrid" d:IsHidden="True">
             <Grid.RowDefinitions>
@@ -813,16 +836,16 @@
                 <ColumnDefinition Width="30*"/>
                 <ColumnDefinition Width="99*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="FeelingScaleView" HorizontalAlignment="Left" Height="374" Margin="4,0,0,0" VerticalAlignment="Top" Width="931" Source="/Images/mind_scale.png" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" d:IsHidden="True"/>
-            <Image x:Name="HeartImage" HorizontalAlignment="Left" Height="506" Margin="10,32,0,0" VerticalAlignment="Top" Width="595" Source="/Images/heart_red.png" Grid.Column="2" Grid.Row="2" d:IsHidden="True"/>
-            <Image x:Name="NeedleImage" Height="349" Width="41" Source="/Images/red_needle.png" Grid.Column="2" Grid.Row="2" RenderTransformOrigin="0.5,0.8" Margin="288,140,296,61" d:IsHidden="True">
+            <Image x:Name="FeelingScaleView" HorizontalAlignment="Left" Height="374" Margin="4,0,0,0" VerticalAlignment="Top" Width="931" Source="/Images/mind_scale.png" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3"/>
+            <Image x:Name="HeartImage" HorizontalAlignment="Left" Height="506" Margin="10,32,0,0" VerticalAlignment="Top" Width="595" Source="/Images/heart_red.png" Grid.Column="2" Grid.Row="2"/>
+            <Image x:Name="NeedleImage" Height="349" Width="41" Source="/Images/red_needle.png" Grid.Column="2" Grid.Row="2" RenderTransformOrigin="0.5,0.8" Margin="288,140,296,61">
                 <Image.RenderTransform>
                     <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GamePage}}}"/>
                 </Image.RenderTransform>
             </Image>
-            <TextBlock x:Name="FeelingScaleText" Grid.Column="2" HorizontalAlignment="Left" Margin="176,105,0,0" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="135" Width="270" FontWeight="Bold" FontSize="94" TextAlignment="Center" d:IsHidden="True"/>
+            <TextBlock x:Name="FeelingScaleText" Grid.Column="2" HorizontalAlignment="Left" Margin="176,105,0,0" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="135" Width="270" FontWeight="Bold" FontSize="94" TextAlignment="Center"/>
         </Grid>
-        <Grid x:Name="FeelingGrid" HorizontalAlignment="Right" Width="1920">
+        <Grid x:Name="FeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="7*"/>
                 <RowDefinition Height="28*"/>
@@ -837,9 +860,9 @@
                 <ColumnDefinition Width="99*"/>
             </Grid.ColumnDefinitions>
             <Grid x:Name="FeelingValueGrid" Grid.Column="1" Margin="12,4,31,6" Grid.Row="2" Grid.RowSpan="2">
-                <Image Source="/Images/feeling_value.png" d:IsHidden="True"/>
-                <TextBlock x:Name="FeelingPersonText" HorizontalAlignment="Center" Margin="0,10,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="847" TextAlignment="Center" d:IsHidden="True"/>
-                <TextBlock x:Name="FeelingValueText" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center" d:IsHidden="True"/>
+                <Image Source="/Images/feeling_value.png"/>
+                <TextBlock x:Name="FeelingPersonText" HorizontalAlignment="Center" Margin="0,10,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="847" TextAlignment="Center"/>
+                <TextBlock x:Name="FeelingValueText" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center"/>
             </Grid>
             <Grid x:Name="FaceSmallCommentGrid" Margin="38,31,45,0" Grid.RowSpan="2" Grid.Row="1">
                 <Image Source="/Images/face_small_bubble.png" Margin="0,0,10,4"/>
@@ -847,6 +870,39 @@
             </Grid>
             <Image x:Name="CharaFaceLeftSmall" HorizontalAlignment="Center" Height="458" Grid.Row="3" VerticalAlignment="Top" Width="425" Source="/Images/aosuke_face_06.png" Grid.RowSpan="2" Margin="0,12,0,0"/>
             <Image x:Name="CharaStandRightVerySmall" Grid.Column="2" HorizontalAlignment="Center" Height="736" VerticalAlignment="Top" Width="468" Source="/Images/shiroji_04.png" Grid.RowSpan="5"/>
+        </Grid>
+        <Grid x:Name="SummaryGrid" d:IsHidden="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="194*"/>
+                <RowDefinition Height="595*"/>
+                <RowDefinition Height="291*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="496*"/>
+                <ColumnDefinition Width="255*"/>
+                <ColumnDefinition Width="416*"/>
+                <ColumnDefinition Width="259*"/>
+                <ColumnDefinition Width="494*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="SummaryBoardGrid" d:LayoutOverrides="HorizontalAlignment" Margin="0,9,2,14" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="85*"/>
+                    <ColumnDefinition Width="85*"/>
+                    <ColumnDefinition Width="591*"/>
+                    <ColumnDefinition Width="85*"/>
+                    <ColumnDefinition Width="82*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="61*"/>
+                    <RowDefinition Height="104*"/>
+                    <RowDefinition Height="332*"/>
+                    <RowDefinition Height="75*"/>
+                </Grid.RowDefinitions>
+                <Image x:Name="SummaryBoardImage" Source="/Images/blackboard.png" Grid.RowSpan="4" Grid.ColumnSpan="5"/>
+                <TextBlock x:Name="SummarySentenceText" Margin="1,8,1,10" Grid.Row="2" Text="TextBlock" TextWrapping="Wrap" d:LayoutOverrides="HorizontalAlignment" Grid.ColumnSpan="3" Grid.Column="1" Background="{x:Null}" Foreground="#FFFFE800" FontSize="48"/>
+                <TextBlock x:Name="SummarySubTitleText" Grid.Column="2" Margin="10,0,10,20" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Foreground="White" Background="{x:Null}" FontSize="58" FontWeight="Bold" TextAlignment="Center"/>
+            </Grid>
+            <Image x:Name="SummaryTitleImage" Width="401" Source="/Images/summary_title.png" Margin="9,22,6,21" Height="151" Grid.Column="2" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
         </Grid>
         <Grid x:Name="SystemGrid" d:IsHidden="True">
             <Grid.RowDefinitions>
@@ -867,13 +923,13 @@
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="45*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="NextPageButton" Margin="0,2,4,0" VerticalAlignment="Top" Height="149" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="2" d:IsHidden="True">
-                <Image Source="/Images/after.png" Height="149" d:IsHidden="True"/>
+            <Button x:Name="NextPageButton" Margin="0,2,4,0" VerticalAlignment="Top" Height="149" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="2">
+                <Image Source="/Images/after.png" Height="149"/>
             </Button>
-            <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Margin="33,2,0,0" Grid.ColumnSpan="2" Grid.Row="4" d:IsHidden="True">
-                <Image Source="/Images/before.png" d:IsHidden="True"/>
+            <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Margin="33,2,0,0" Grid.ColumnSpan="2" Grid.Row="4">
+                <Image Source="/Images/before.png"/>
             </Button>
-            <Grid x:Name="MusicInfoGrid" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+            <Grid x:Name="MusicInfoGrid" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -882,15 +938,15 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </Grid.RenderTransform>
-                <Image Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/frame_46-1.png" d:IsHidden="True"/>
-                <Label Content="BGM♪" HorizontalAlignment="Left" Margin="173,24,0,0" VerticalAlignment="Top" Height="70" Width="109" Foreground="White" FontSize="36" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" d:IsHidden="True"/>
-                <Label Content="作曲・編曲" HorizontalAlignment="Left" Margin="122,135,0,0" VerticalAlignment="Top" Height="70" Width="212" Foreground="White" FontSize="36" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" d:IsHidden="True"/>
-                <TextBlock x:Name="MusicTitle" HorizontalAlignment="Center" Margin="0,70,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" Foreground="White" Width="432" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" d:IsHidden="True"/>
-                <TextBlock x:Name="Composer" HorizontalAlignment="Left" Margin="105,178,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Foreground="White" Width="227" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" d:IsHidden="True"/>
+                <Image Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/frame_46-1.png"/>
+                <Label Content="BGM♪" HorizontalAlignment="Left" Margin="173,24,0,0" VerticalAlignment="Top" Height="70" Width="109" Foreground="White" FontSize="36" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker"/>
+                <Label Content="作曲・編曲" HorizontalAlignment="Left" Margin="122,135,0,0" VerticalAlignment="Top" Height="70" Width="212" Foreground="White" FontSize="36" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker"/>
+                <TextBlock x:Name="MusicTitle" HorizontalAlignment="Center" Margin="0,70,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" Foreground="White" Width="432" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker"/>
+                <TextBlock x:Name="Composer" HorizontalAlignment="Left" Margin="105,178,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Foreground="White" Width="227" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker"/>
             </Grid>
-            <Button x:Name="ExitButton" Content="おわる" Grid.Column="6" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="80" FontSize="24" Click="Button_Click" Grid.ColumnSpan="2" Margin="8,0,0,0" d:IsHidden="True"/>
-            <Image x:Name="CoverLayer" HorizontalAlignment="Center" Height="1080" Grid.RowSpan="6" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" Grid.ColumnSpan="8" d:IsHidden="True"/>
-            <Grid x:Name="ExitGrid" Grid.Column="3" Grid.Row="2" Grid.RowSpan="2" d:IsHidden="True">
+            <Button x:Name="ExitButton" Content="おわる" Grid.Column="6" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="80" FontSize="24" Click="Button_Click" Grid.ColumnSpan="2" Margin="8,0,0,0"/>
+            <Image x:Name="CoverLayer" HorizontalAlignment="Center" Height="1080" Grid.RowSpan="6" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" Grid.ColumnSpan="8"/>
+            <Grid x:Name="ExitGrid" Grid.Column="3" Grid.Row="2" Grid.RowSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80*"/>
                     <ColumnDefinition Width="336*"/>
@@ -902,13 +958,13 @@
                     <RowDefinition Height="65*"/>
                     <RowDefinition Height="215*"/>
                 </Grid.RowDefinitions>
-                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/white_frame.png" Stretch="Fill" Grid.RowSpan="3" Grid.ColumnSpan="4" d:IsHidden="True"/>
-                <Label Content="本当にアプリを終了しますか？" HorizontalAlignment="Left" Margin="80,14,0,0" VerticalAlignment="Top" Height="100" Width="582" FontSize="48" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" d:IsHidden="True"/>
-                <Button x:Name="ExitYesButton" HorizontalAlignment="Left" Margin="33,47,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.Row="2" Grid.ColumnSpan="2" d:IsHidden="True">
-                    <Image Source="/Images/moya1.png" d:IsHidden="True"/>
+                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/white_frame.png" Stretch="Fill" Grid.RowSpan="3" Grid.ColumnSpan="4"/>
+                <Label Content="本当にアプリを終了しますか？" HorizontalAlignment="Left" Margin="80,14,0,0" VerticalAlignment="Top" Height="100" Width="582" FontSize="48" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1"/>
+                <Button x:Name="ExitYesButton" HorizontalAlignment="Left" Margin="33,47,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.Row="2" Grid.ColumnSpan="2">
+                    <Image Source="/Images/moya1.png"/>
                 </Button>
-                <Button x:Name="ExitNoButton" HorizontalAlignment="Left" Margin="2,47,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" d:IsHidden="True">
-                    <Image Source="/Images/moya2.png" d:IsHidden="True"/>
+                <Button x:Name="ExitNoButton" HorizontalAlignment="Left" Margin="2,47,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2">
+                    <Image Source="/Images/moya2.png"/>
                 </Button>
             </Grid>
         </Grid>

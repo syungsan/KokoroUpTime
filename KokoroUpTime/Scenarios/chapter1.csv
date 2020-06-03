@@ -328,3 +328,18 @@ grid,main_msg_grid
 wait
 msg,main_msg,青助くんのきもちは【　　】くらいの 大きさなんじゃな。ふたりのきもちと きもちの大きさを 見比べてみよう！,白じい
 next
+reset
+image,bg,background_09.png
+text,summary_subtitle_text,今日の教室で学んだこと
+text,summary_sentence_text,✓ いろいろな「きもち」を発見した鬱✓ 「きもち」の大きさを はかってみた
+grid,summary_grid
+image,chara_stand_right,shiroji_02.png,appear_up
+image,main_msg_bubble,right_big_bubble.png
+grid,main_msg_grid
+wait
+msg,main_msg,はじめてのこころあっぷタイムは どうじゃったかな？今日から、赤丸くん、青助くん、キミちゃんといっしょに「きもち」についての勉強をはじめていくぞい。,白じい
+wait
+msg,次回のテーマは「たのしいことを　さがそう」じゃ！おたのしみに！,白じい
+wait
+msg,第１回で登場した発明品は、「きもちセンサー」じゃ！アイテム図鑑から、いつでも確認できるぞい！,白じい
+wait
