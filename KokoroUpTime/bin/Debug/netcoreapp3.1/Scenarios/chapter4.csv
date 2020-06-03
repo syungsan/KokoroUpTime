@@ -18,3 +18,5 @@ image,main_msg_bubble,right_big_bubble.png
 wait
 msg,main_msg,あたたかい言葉には４つ種類があったのう。きちんとおぼえておるかな？フォッ、フォッ、フォッ！,白じい
 next
+next
+wait

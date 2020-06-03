@@ -131,6 +131,8 @@ namespace KokoroUpTime
                 ["feeling_person_text"] = this.FeelingPersonText,
                 ["feeling_value_text"] = this.FeelingValueText,
                 ["face_small_comment_text"] = this.FaceSmallCommentText,
+                ["summary_subtitle_text"] = this.SummarySubTitleText,
+                ["summary_sentence_text"] = this.SummarySentenceText,
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -154,6 +156,7 @@ namespace KokoroUpTime
                 ["music_info_grid"] = this.MusicInfoGrid,
                 ["feeling_value_grid"] = this.FeelingValueGrid,
                 ["face_small_comment_grid"] = this.FaceSmallCommentGrid,
+                ["summary_grid"] = this.SummaryGrid,
             };
         }
 
@@ -231,6 +234,8 @@ namespace KokoroUpTime
             this.FeelingValueGrid.Visibility = Visibility.Hidden;
 
             this.MusicInfoGrid.Visibility = Visibility.Hidden;
+
+            this.SummaryGrid.Visibility = Visibility.Hidden;
 
             this.NextPageButton.Visibility = Visibility.Hidden;
             this.BackPageButton.Visibility = Visibility.Hidden;

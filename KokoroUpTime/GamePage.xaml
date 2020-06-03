@@ -9,7 +9,24 @@
       Title="GamePage">
 
     <Page.Resources>
-        <Storyboard x:Key="appear_up_chara_stand_right"/>
+        <Storyboard x:Key="appear_up_chara_stand_right">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaStandRight" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaStandRight" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
         <Storyboard x:Key="appear_up_chara_stand_small_right">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CharaStandSmallDownRight" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="63">
@@ -252,6 +269,12 @@
         </Storyboard>
     </Page.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid x:Name="BaseGrid" Margin="0,0,0,17">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="474*"/>
@@ -493,7 +516,7 @@
                 <ColumnDefinition Width="122*"/>
                 <ColumnDefinition Width="540*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="CharaStandRight" RenderTransformOrigin="0.5,0.5" Source="/Images/teacher.png" Margin="36,12,26,21" Grid.Column="4" Grid.RowSpan="4" Grid.ColumnSpan="2">
+            <Image x:Name="CharaStandRight" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_02.png" Margin="36,12,26,21" Grid.Column="4" Grid.RowSpan="4" Grid.ColumnSpan="2">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -503,7 +526,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CharaStandLeft" RenderTransformOrigin="0.5,0.5" Source="/Images/kimi_stand_01.png" Margin="53,12,7,21" Grid.RowSpan="4" Grid.ColumnSpan="3">
+            <Image x:Name="CharaStandLeft" RenderTransformOrigin="0.5,0.5" Source="/Images/kimi_stand_01.png" Margin="53,12,7,21" Grid.RowSpan="4" Grid.ColumnSpan="3" d:IsHidden="True">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -513,7 +536,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CharaStandLeftSymbol" Grid.Column="1" HorizontalAlignment="Left" Height="140" Margin="31,0,0,0" VerticalAlignment="Center" Width="188" Source="/Images/big_heart.png" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+            <Image x:Name="CharaStandLeftSymbol" Grid.Column="1" HorizontalAlignment="Left" Height="140" Margin="31,0,0,0" VerticalAlignment="Center" Width="188" Source="/Images/big_heart.png" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" d:IsHidden="True">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -523,7 +546,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <TextBlock x:Name="CharaStandLeftComment" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="80" Width="368" Grid.Row="1" Margin="17,31,0,0" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" FontWeight="Bold" Height="80">
+            <TextBlock x:Name="CharaStandLeftComment" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="80" Width="368" Grid.Row="1" Margin="17,31,0,0" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" FontWeight="Bold" Height="80" d:IsHidden="True">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -533,10 +556,10 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <Image x:Name="CharaStandLeftSmall" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="820" Margin="5,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="522" Source="/Images/kimi_stand_01.png" Grid.RowSpan="2"/>
-            <Image x:Name="CharaStandRightSmall" Grid.Column="5" HorizontalAlignment="Left" Height="822" Margin="14,3,0,0" VerticalAlignment="Top" Width="524" Source="/Images/shiroji_04.png" Grid.Row="1" Grid.RowSpan="2"/>
+            <Image x:Name="CharaStandLeftSmall" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="820" Margin="5,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="522" Source="/Images/kimi_stand_01.png" Grid.RowSpan="2" d:IsHidden="True"/>
+            <Image x:Name="CharaStandRightSmall" Grid.Column="5" HorizontalAlignment="Left" Height="822" Margin="14,3,0,0" VerticalAlignment="Top" Width="524" Source="/Images/shiroji_04.png" Grid.Row="1" Grid.RowSpan="2" d:IsHidden="True"/>
         </Grid>
-        <Grid x:Name="CharaFaceGrid" Visibility="Visible" Grid.RowSpan="4" Grid.ColumnSpan="2">
+        <Grid x:Name="CharaFaceGrid" Visibility="Visible" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="33*"/>
                 <RowDefinition Height="90*"/>
@@ -620,7 +643,7 @@
                 </Button>
             </Grid>
         </Grid>
-        <Grid x:Name="SessionGrid">
+        <Grid x:Name="SessionGrid" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="12*"/>
                 <RowDefinition Height="33*"/>
@@ -640,7 +663,7 @@
             <TextBlock x:Name="SessionSentence" HorizontalAlignment="Left" Margin="75,125,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="168" Width="745" FontSize="48" Grid.Column="1" Grid.Row="2"/>
             <Image x:Name="SessionTitle" Source="/Images/challenge_time.png" Margin="21,15,11,62" Grid.Column="1" Grid.Row="1"/>
         </Grid>
-        <Grid x:Name="RuleGrid" Grid.ColumnSpan="2" Grid.RowSpan="4" Visibility="Visible">
+        <Grid x:Name="RuleGrid" Visibility="Visible" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="43*"/>
                 <ColumnDefinition Width="240*"/>
@@ -737,7 +760,7 @@
                 </Grid>
             </Button>
         </Grid>
-        <Grid x:Name="MangaGrid" Visibility="Visible">
+        <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="27*"/>
                 <RowDefinition Height="170*"/>
@@ -765,7 +788,7 @@
                 <Image Source="/Images/mangaya.png"/>
             </Button>
         </Grid>
-        <Grid x:Name="ItemGrid" Visibility="Visible">
+        <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30*"/>
                 <ColumnDefinition Width="83*"/>
@@ -799,7 +822,7 @@
             <TextBlock x:Name="ItemInfoSentence" HorizontalAlignment="Left" Margin="42,120,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="327" Width="1083" FontSize="36" Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="3" Grid.RowSpan="2"/>
             <TextBlock x:Name="ItemNumber" HorizontalAlignment="Left" Margin="157,149,0,0" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Grid.RowSpan="2" Foreground="#FFEEEE1E" Grid.Column="1"/>
         </Grid>
-        <Grid x:Name="GaugeGrid">
+        <Grid x:Name="GaugeGrid" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="7*"/>
                 <RowDefinition Height="80*"/>
@@ -822,7 +845,7 @@
             </Image>
             <TextBlock x:Name="FeelingScaleText" Grid.Column="2" HorizontalAlignment="Left" Margin="176,105,0,0" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="135" Width="270" FontWeight="Bold" FontSize="94" TextAlignment="Center"/>
         </Grid>
-        <Grid x:Name="FeelingGrid" HorizontalAlignment="Right" Width="1920">
+        <Grid x:Name="FeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="7*"/>
                 <RowDefinition Height="28*"/>
@@ -848,7 +871,40 @@
             <Image x:Name="CharaFaceLeftSmall" HorizontalAlignment="Center" Height="458" Grid.Row="3" VerticalAlignment="Top" Width="425" Source="/Images/aosuke_face_06.png" Grid.RowSpan="2" Margin="0,12,0,0"/>
             <Image x:Name="CharaStandRightVerySmall" Grid.Column="2" HorizontalAlignment="Center" Height="736" VerticalAlignment="Top" Width="468" Source="/Images/shiroji_04.png" Grid.RowSpan="5"/>
         </Grid>
-        <Grid x:Name="SystemGrid">
+        <Grid x:Name="SummaryGrid" d:IsHidden="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="194*"/>
+                <RowDefinition Height="595*"/>
+                <RowDefinition Height="291*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="496*"/>
+                <ColumnDefinition Width="255*"/>
+                <ColumnDefinition Width="416*"/>
+                <ColumnDefinition Width="259*"/>
+                <ColumnDefinition Width="494*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="SummaryBoardGrid" d:LayoutOverrides="HorizontalAlignment" Margin="0,9,2,14" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="85*"/>
+                    <ColumnDefinition Width="85*"/>
+                    <ColumnDefinition Width="591*"/>
+                    <ColumnDefinition Width="85*"/>
+                    <ColumnDefinition Width="82*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="61*"/>
+                    <RowDefinition Height="104*"/>
+                    <RowDefinition Height="332*"/>
+                    <RowDefinition Height="75*"/>
+                </Grid.RowDefinitions>
+                <Image x:Name="SummaryBoardImage" Source="/Images/blackboard.png" Grid.RowSpan="4" Grid.ColumnSpan="5"/>
+                <TextBlock x:Name="SummarySentenceText" Margin="1,8,1,10" Grid.Row="2" Text="TextBlock" TextWrapping="Wrap" d:LayoutOverrides="HorizontalAlignment" Grid.ColumnSpan="3" Grid.Column="1" Background="{x:Null}" Foreground="#FFFFE800" FontSize="48"/>
+                <TextBlock x:Name="SummarySubTitleText" Grid.Column="2" Margin="10,0,10,20" Grid.Row="1" Text="TextBlock" TextWrapping="Wrap" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Foreground="White" Background="{x:Null}" FontSize="58" FontWeight="Bold" TextAlignment="Center"/>
+            </Grid>
+            <Image x:Name="SummaryTitleImage" Width="401" Source="/Images/summary_title.png" Margin="9,22,6,21" Height="151" Grid.Column="2" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+        </Grid>
+        <Grid x:Name="SystemGrid" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="12*"/>
                 <RowDefinition Height="31*"/>

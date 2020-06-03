@@ -38,6 +38,7 @@
     <None Remove="Images\background_06.png" />
     <None Remove="Images\background_07.png" />
     <None Remove="Images\background_08.png" />
+    <None Remove="Images\background_09.png" />
     <None Remove="Images\background_mokume.png" />
     <None Remove="Images\background_option.png" />
     <None Remove="Images\bad_words_grid.png" />
@@ -99,6 +100,7 @@
     <None Remove="Images\small_bubble.png" />
     <None Remove="Images\small_icon.png" />
     <None Remove="Images\SS.png" />
+    <None Remove="Images\summary_title.png" />
     <None Remove="Images\teacher.png" />
     <None Remove="Images\title.png" />
     <None Remove="Images\water_frame.png" />
@@ -146,6 +148,7 @@
     <Resource Include="Images\background_06.png" />
     <Resource Include="Images\background_07.png" />
     <Resource Include="Images\background_08.png" />
+    <Resource Include="Images\background_09.png" />
     <Resource Include="Images\background_mokume.png" />
     <Resource Include="Images\background_option.png" />
     <Resource Include="Images\bad_words_grid.png" />
@@ -207,6 +210,7 @@
     <Resource Include="Images\small_bubble.png" />
     <Resource Include="Images\small_icon.png" />
     <Resource Include="Images\SS.png" />
+    <Resource Include="Images\summary_title.png" />
     <Resource Include="Images\teacher.png" />
     <Resource Include="Images\title.png" />
     <Resource Include="Images\water_frame.png" />
