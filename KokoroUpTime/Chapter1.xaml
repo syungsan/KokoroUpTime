@@ -269,34 +269,26 @@
         </Storyboard>
     </Page.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
         <Grid x:Name="BaseGrid">
-            <Image x:Name="BG"  Stretch="Fill" Source="/Images/background_01.png"/>
-        </Grid>
-        <Grid x:Name="RuleGrid" Visibility="Visible" d:IsHidden="True">
-            <Button x:Name="BoardButton" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Margin="215,41,215,122">
-                <Grid>
-                    <Image Source="/Images/blackboard.png" Stretch="Fill" />
-                    <TextBlock x:Name="RuleTitle" Text="教室のルール" Foreground="White" FontSize="72" Margin="494,90,436,681"/>
-                    <TextBlock x:Name="RuleChecK1Msg" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="64" Margin="494,249,239,504"/>
-                    <TextBlock x:Name="RuleChecK2Msg" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="64" Margin="494,434,239,327"/>
-                    <TextBlock x:Name="RuleChecK3Msg" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="64" Margin="494,617,239,145"/>
-                    <CheckBox x:Name="RuleCheck1Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="281,241,1172,644">
+            <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_01.png"/>
+            <Button x:Name="RuleBoardButton" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Margin="215,41,215,122" d:IsHidden="True">
+                <Grid x:Name="RuleButtonGrid">
+                    <Image x:Name="RuleBoardImage" Source="/Images/blackboard.png" Stretch="Fill" />
+                    <TextBlock x:Name="RuleBoardTitleText" Text="教室のルール" Foreground="White" FontSize="72" Margin="494,90,436,681"/>
+                    <TextBlock x:Name="RuleBoardCheck1Text" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="64" Margin="494,249,239,504"/>
+                    <TextBlock x:Name="RuleBoardCheck2Text" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="64" Margin="494,434,239,327"/>
+                    <TextBlock x:Name="RuleBoardCheck3Text" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="64" Margin="494,617,239,145"/>
+                    <CheckBox x:Name="RuleBoardCheck1Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="281,241,1172,644">
                         <CheckBox.RenderTransform>
                             <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
                         </CheckBox.RenderTransform>
                     </CheckBox>
-                    <CheckBox x:Name="RuleCheck2Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="281,423,1172,462">
+                    <CheckBox x:Name="RuleBoardCheck2Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="281,423,1172,462">
                         <CheckBox.RenderTransform>
                             <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
                         </CheckBox.RenderTransform>
                     </CheckBox>
-                    <CheckBox x:Name="RuleCheck3Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="281,596,1172,288">
+                    <CheckBox x:Name="RuleBoardCheck3Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="281,596,1172,288">
                         <CheckBox.RenderTransform>
                             <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
                         </CheckBox.RenderTransform>
@@ -304,9 +296,9 @@
                 </Grid>
             </Button>
         </Grid>
-        <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
-            <Image x:Name="MangaTitle" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/manga1_title.png" Margin="60,18,0,0" Height="98" Width="1860"/>
-            <Image x:Name="MangaImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/manga1-1.png" Margin="61,135,0,0" RenderTransformOrigin="0.5,0.5" Height="880" Width="1788">
+        <Grid x:Name="MangaGrid" Visibility="Visible">
+            <Image x:Name="MangaTitleImage" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Images/manga1_title.png" Margin="0,18,0,0" Height="98" Width="1788"/>
+            <Image x:Name="MangaImage" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Images/manga1-1.png" Margin="0,121,0,0" RenderTransformOrigin="0.5,0.5" Height="880" Width="1788">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -673,7 +665,7 @@
             <Image x:Name="CharaFaceLeft" HorizontalAlignment="Left" Height="556" Margin="91,176,0,0" VerticalAlignment="Top" Width="516" Source="/Images/kimi_face_01.png"/>
             <Image x:Name="CharaFaceLeftSmall" HorizontalAlignment="Left" Height="458" VerticalAlignment="Top" Width="425" Source="/Images/aosuke_face_06.png" Margin="45,262,0,0"/>
         </Grid>
-        <Grid x:Name="SystemGrid">
+        <Grid x:Name="SystemGrid" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="12*"/>
                 <RowDefinition Height="31*"/>

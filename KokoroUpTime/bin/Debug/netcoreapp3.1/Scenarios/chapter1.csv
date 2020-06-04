@@ -1,5 +1,6 @@
 reset
-image,bg,background_01.png
+image,background_image,background_01.png
+grid,base_grid
 image,chara_stand_right,shiroji_01.png,appear_up
 image,main_msg_bubble,right_big_bubble.png
 grid,main_msg_grid
@@ -33,16 +34,16 @@ wait
 msg,main_msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
 wait
 reset
-image,bg,background_03.png
-button,board_button
+image,background_image,background_03.png
+button,rule_board_button
 wait,no_button
-msg,rule_title,教室のルール
+msg,rule_board_title_text,教室のルール
 wait,no_button
-rule,rule_check1_msg,１．人のことを わらわない,0
+rule,rule_board_check1_text,１．人のことを わらわない,0
 wait,no_button
-rule,rule_check2_msg,２．ふざけない,1
+rule,rule_board_check2_text,２．ふざけない,1
 wait,no_button
-rule,rule_check3_msg,３．はずかしがらない,2
+rule,rule_board_check3_text,３．はずかしがらない,2
 wait,no_button
 image,chara_stand_small_right,shiroji_02.png,appear_up
 button,long_msg_bubble,,,appear_wide
@@ -51,7 +52,7 @@ rule,long_msg,以上のルールは必ず守るのじゃ！ルールがわかっ
 wait_tap
 next
 reset
-image,bg,background_02.png
+image,background_image,background_02.png
 image,chara_stand_right,shiroji_02.png,appear_up
 grid,main_msg_grid
 image,main_msg_bubble,right_big_bubble.png
@@ -116,7 +117,7 @@ image,manga_image,manga1-6.png,flip
 hide,button,manga_next_button
 next
 reset
-image,bg,background_mokume.png
+image,background_image,background_mokume.png
 image,chara_stand_right,shiroji_01.png,appear_up
 image,item_name_plate_left
 text,item_name_text_left,きもちセンサー
@@ -127,7 +128,7 @@ wait
 msg,main_msg,わしの作った発明品をつかって、自分のきもちを 調べてみるのじゃ！,白じい
 next
 reset
-image,bg,background_mokume.png
+image,background_image,background_mokume.png
 image,chara_stand_small_up_right,shiroji_03.png
 image,item_name_plate_center,item_name.png
 text,item_name_text_center,きもちセンサー
@@ -142,7 +143,7 @@ se,play,nc211089.wav
 next
 bgm,play
 reset
-image,bg,background_05.png
+image,background_image,background_05.png
 image,session_title,challenge_time.png
 image,session_frame
 text,session_sub_title,チャレンジタイムとは…
@@ -159,7 +160,7 @@ wait
 msg,main_msg,「きもち」には、いいきもちといやなきもちだけでなく、いろいろな種類があるぞい。自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
 next
 reset
-image,bg,water_frame.png
+image,background_image,water_frame.png
 grid,good_words_grid
 grid,bad_words_grid
 next
@@ -177,7 +178,7 @@ image,needle_image,blue_needle.png
 gauge,bad
 next
 reset
-image,bg,background_06.png
+image,background_image,background_06.png
 image,session_title,group_activity.png
 image,session_frame
 text,session_sub_title,グループ・アクティビティとは…
@@ -189,7 +190,7 @@ wait
 msg,main_msg,今度は「きもち」をみつける練習をグループでしてみるのじゃ。次の場面を見て、グループでキミちゃんのきもちを考えて、話し合ってみるのじゃ。,白じい
 next
 reset
-image,bg,background_07.png
+image,background_image,background_07.png
 image,chara_stand_right,teacher.png
 image,chara_stand_left,kimi_stand_01.png
 grid,main_msg_grid
@@ -202,7 +203,7 @@ text,chara_stand_left_comment,ドキ!!,red,rotation,no_sync
 image,chara_stand_left,kimi_stand_01.png,pomp
 wait
 reset
-image,bg,water_frame.png
+image,background_image,water_frame.png
 image,chara_stand_right_small,shiroji_04.png
 image,chara_stand_left_small,kimi_stand_01.png
 grid,main_msg_grid
@@ -225,7 +226,7 @@ image,main_msg_bubble,right_big_bubble.png
 msg,main_msg,キミちゃんは【きもち】という きもちなんじゃな。そのきもちを選んだ理由も考えて話し合ってみるのじゃ！,白じい
 next
 reset
-image,bg,background_07.png
+image,background_image,background_07.png
 image,chara_stand_right,shiroji_02.png
 image,chara_stand_left,kimi_stand_01.png
 grid,main_msg_grid
@@ -239,7 +240,7 @@ wait
 msg,main_msg,きもちセンサーを使うと、きもちの「大きさ」を０から１００であらわすことができるのじゃ。キミちゃんのきもちの「大きさ」をみてみよう！,白じい
 next
 reset
-image,bg,background_08.png
+image,background_image,background_08.png
 image,chara_stand_right,shiroji_02.png,appear_up
 image,main_msg_bubble,right_big_bubble.png
 grid,main_msg_grid
@@ -261,7 +262,7 @@ grid,main_msg_grid
 msg,main_msg,うん・・・・（ボクは野球が苦手なんだ・・・）,青助
 next
 reset
-image,bg,water_frame.png
+image,background_image,water_frame.png
 image,chara_face_left_small,akamaru_face_03.png
 text,face_small_comment_text,ホームラン打つぞ！
 grid,face_small_comment_grid
@@ -295,7 +296,7 @@ wait
 msg,main_msg,赤丸くんのきもちは【　　】くらいの 大きさなんじゃな。次は青助くんのきもちと　その大きさを考えてみよう。,白じい
 next
 reset
-image,bg,water_frame.png
+image,background_image,water_frame.png
 image,chara_face_left_small,aosuke_face_06.png
 text,face_small_comment_text,ボクは野球は鬱苦手なんだ・・・
 grid,face_small_comment_grid
@@ -329,7 +330,7 @@ wait
 msg,main_msg,青助くんのきもちは【　　】くらいの 大きさなんじゃな。ふたりのきもちと きもちの大きさを 見比べてみよう！,白じい
 next
 reset
-image,bg,background_09.png
+image,background_image,background_09.png
 text,summary_subtitle_text,今日の教室で学んだこと
 text,summary_sentence_text,✓ いろいろな「きもち」を発見した鬱✓ 「きもち」の大きさを はかってみた
 grid,summary_grid

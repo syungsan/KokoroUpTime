@@ -38,6 +38,8 @@ namespace KokoroUpTime
         private bool isClickable = false;
         private int tapCount = 0;
 
+        private int feelingSize = 0;
+
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
         private int word_num;
@@ -50,10 +52,7 @@ namespace KokoroUpTime
         private CheckBox[] checkBoxs;
 
         private WindowsMediaPlayer mediaPlayer;
-
         private SoundPlayer sePlayer = null;
-
-        private int feelingSize = 0;
 
         public Chapter1()
         {
@@ -62,24 +61,23 @@ namespace KokoroUpTime
             // Hide host's navigation UI
             this.ShowsNavigationUI = false;
 
-            this.InitControls();
-
-            this.CoverLayer.Visibility = Visibility.Hidden;
-            this.ExitGrid.Visibility = Visibility.Hidden;
-
             // メディアプレーヤークラスのインスタンスを作成する
             this.mediaPlayer = new WindowsMediaPlayer();
 
             this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
+
+            this.InitControls();
         }
 
         private void InitControls()
         {
             this.imageObjects = new Dictionary<string, Image>
             {
-                ["bg"] = this.BG,
+                ["background_image"] = this.BackgroundImage,
+                ["manga_title_image"] = this.MangaTitleImage,
+
                 ["chara_stand_right"] = this.CharaStandRight,
                 ["chara_stand_left"] = this.CharaStandLeft,
                 ["chara_face_left_a"] = this.CharaFaceLeftA,
@@ -89,7 +87,6 @@ namespace KokoroUpTime
                 ["main_msg_bubble"] = this.MainMsgBubble,
                 ["big_info"] = this.BigInfo,
                 ["chara_stand_small_right"] = this.CharaStandSmallDownRight,
-                ["manga_title"] = this.MangaTitle,
                 ["manga_image"] = this.MangaImage,
                 ["session_frame"] = this.SessionFrame,
                 ["session_title"] = this.SessionTitle,
@@ -112,13 +109,15 @@ namespace KokoroUpTime
 
             this.textObjects = new Dictionary<string, TextBlock>
             {
+                ["rule_board_title_text"] = this.RuleBoardTitleText,
+                ["rule_board_check1_text"] = this.RuleBoardCheck1Text,
+                ["rule_board_check2_text"] = this.RuleBoardCheck2Text,
+                ["rule_board_check3_text"] = this.RuleBoardCheck3Text,
+
                 ["main_msg"] = this.MainMsg,
                 ["session_sub_title"] = this.SessionSubTitle,
                 ["session_sentence"] = this.SessionSentence,
-                ["rule_title"] = this.RuleTitle,
-                ["rule_check1_msg"] = this.RuleChecK1Msg,
-                ["rule_check2_msg"] = this.RuleChecK2Msg,
-                ["rule_check3_msg"] = this.RuleChecK3Msg,
+                
                 ["long_msg"] = this.LongMsg,
                 ["item_name_text_left"] = this.ItemNameTextLeft,
                 ["item_name_text_center"] = this.ItemNameTextCenter,
@@ -137,17 +136,22 @@ namespace KokoroUpTime
 
             this.buttonObjects = new Dictionary<string, Button>
             {
+                ["board_button"] = this.RuleBoardButton,
+
                 ["next_msg_button"] = this.NextMsgButton,
                 ["back_msg_button"] = this.BackMsgButton,
                 ["next_page_button"] = this.NextPageButton,
                 ["back_page_button"] = this.BackPageButton,
                 ["manga_next_button"] = this.MangaNextButton,
-                ["board_button"] = this.BoardButton,
+                
                 ["long_msg_bubble"] = this.LongMsgBubble,
             };
 
             this.gridObjects = new Dictionary<string, Grid>
             {
+                ["base_grid"] = this.BaseGrid,
+                ["manga_grid"] = this.MangaGrid,
+
                 ["main_msg_grid"] = this.MainMsgGrid,
                 ["good_words_grid"] = this.GoodWordsGrid,
                 ["bad_words_grid"] = this.BadWordsGrid,
@@ -162,7 +166,21 @@ namespace KokoroUpTime
 
         private void ResetControls()
         {
-            this.BG.Visibility = Visibility.Hidden;
+            this.BaseGrid.Visibility = Visibility.Hidden;
+            this.MangaGrid.Visibility = Visibility.Hidden;
+
+            this.BackgroundImage.Visibility = Visibility.Hidden;
+            this.RuleBoardButton.Visibility = Visibility.Hidden;
+            this.RuleBoardTitleText.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck1Text.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck2Text.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck3Text.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck1Box.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck2Box.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck3Box.Visibility = Visibility.Hidden;
+            this.MangaTitleImage.Visibility = Visibility.Hidden;
+            this.MangaImage.Visibility = Visibility.Hidden;
+
             this.MainMsg.Visibility = Visibility.Hidden;
             this.CharaStandRight.Visibility = Visibility.Hidden;
             this.CharaStandLeft.Visibility = Visibility.Hidden;
@@ -181,21 +199,12 @@ namespace KokoroUpTime
             this.NextMsgButton.Visibility = Visibility.Hidden;
             this.BackMsgButton.Visibility = Visibility.Hidden;
 
-            this.BoardButton.Visibility = Visibility.Hidden;
-            this.RuleCheck1Box.Visibility = Visibility.Hidden;
-            this.RuleCheck2Box.Visibility = Visibility.Hidden;
-            this.RuleCheck3Box.Visibility = Visibility.Hidden;
+            
             this.CharaStandSmallDownRight.Visibility = Visibility.Hidden;
             this.LongMsgBubble.Visibility = Visibility.Hidden;
             // this.LongMsgImage.Visibility = Visibility.Hidden;
             // this.LongMsg.Visibility = Visibility.Hidden;
-            this.RuleTitle.Visibility = Visibility.Hidden;
-            this.RuleChecK1Msg.Visibility = Visibility.Hidden;
-            this.RuleChecK2Msg.Visibility = Visibility.Hidden;
-            this.RuleChecK3Msg.Visibility = Visibility.Hidden;
 
-            this.MangaTitle.Visibility = Visibility.Hidden;
-            this.MangaImage.Visibility = Visibility.Hidden;
             this.MangaNextButton.Visibility = Visibility.Hidden;
 
             this.ItemImageCenter.Visibility = Visibility.Hidden;
@@ -240,15 +249,15 @@ namespace KokoroUpTime
             this.NextPageButton.Visibility = Visibility.Hidden;
             this.BackPageButton.Visibility = Visibility.Hidden;
 
-            this.MainMsg.Text = "";
+            this.CoverLayer.Visibility = Visibility.Hidden;
+            this.ExitGrid.Visibility = Visibility.Hidden;
 
-            this.RuleTitle.Text = "";
-            this.RuleChecK1Msg.Text = "";
-            this.RuleChecK2Msg.Text = "";
-            this.RuleChecK3Msg.Text = "";
-            this.RuleCheck1Box.IsEnabled = false;
-            this.RuleCheck2Box.IsEnabled = false;
-            this.RuleCheck3Box.IsEnabled = false;
+            this.RuleBoardTitleText.Text = "";
+            this.RuleBoardCheck1Text.Text = "";
+            this.RuleBoardCheck2Text.Text = "";
+            this.RuleBoardCheck3Text.Text = "";
+
+            this.MainMsg.Text = "";
             this.LongMsg.Text = "";
 
             this.ItemNameTextLeft.Text = "";
@@ -256,6 +265,10 @@ namespace KokoroUpTime
             this.ItemNumber.Text = "";
             this.ItemInfoTitle.Text = "";
             this.ItemInfoSentence.Text = "";
+
+            this.RuleBoardCheck1Box.IsEnabled = false;
+            this.RuleBoardCheck2Box.IsEnabled = false;
+            this.RuleBoardCheck3Box.IsEnabled = false;
         }
 
         // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
@@ -595,7 +608,7 @@ namespace KokoroUpTime
 
                     var rule = this.scenarios[this.scenarioCount][2];
 
-                    this.checkBoxs = new CheckBox[] { this.RuleCheck1Box, this.RuleCheck2Box, this.RuleCheck3Box };
+                    this.checkBoxs = new CheckBox[] { this.RuleBoardCheck1Box, this.RuleBoardCheck2Box, this.RuleBoardCheck3Box };
 
                     var checkNum = this.scenarios[this.scenarioCount][3];
 
