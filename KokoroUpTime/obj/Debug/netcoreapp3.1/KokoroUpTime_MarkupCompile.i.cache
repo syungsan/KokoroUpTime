@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\
 KokoroUpTime
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\App.xaml
-41714449627
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\App.xaml
+51488888228
 
-9-1470523945
+10248891947
 1932099670144
-GamePage.xaml;MainWindow.xaml;OptionPage.xaml;TitlePage.xaml;
+Chapter1.xaml;Chapter6.xaml;MainWindow.xaml;OptionPage.xaml;TitlePage.xaml;
 
-False
+True
 

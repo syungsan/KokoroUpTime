@@ -69,7 +69,7 @@ namespace KokoroUpTime
                 for (int i = 1; i <= 12; ++i)
                 {
                     // Pageインスタンスを渡して遷移
-                    GamePage nextPage = new GamePage();
+                    Chapter1 nextPage = new Chapter1();
 
                     string scenario;
 
@@ -79,7 +79,7 @@ namespace KokoroUpTime
 
                         nextPage.SetScenario(scenario);
 
-                        this.NavigationService.Navigate(new Uri("GamePage.xaml", UriKind.Relative));
+                        this.NavigationService.Navigate(new Uri($"Chapter{i}.xaml", UriKind.Relative));
 
                         this.NavigationService.Navigate(nextPage);
 
