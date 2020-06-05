@@ -43,7 +43,7 @@ namespace KokoroUpTime
         private int word_num;
 
         private Dictionary<string, Image> imageObjects = null;
-        private Dictionary<string, TextBlock> textObjects = null;
+        private Dictionary<string, TextBlock> textBlockObjects = null;
         private Dictionary<string, Button> buttonObjects = null;
         private Dictionary<string, Grid> gridObjects = null;
 
@@ -109,7 +109,7 @@ namespace KokoroUpTime
                 ["chara_stand_right_very_small"] = this.CharaStandRightVerySmall,
             };
 
-            this.textObjects = new Dictionary<string, TextBlock>
+            this.textBlockObjects = new Dictionary<string, TextBlock>
             {
                 ["main_msg"] = this.MainMsg,
                 ["session_sub_title"] = this.SessionSubTitle,
@@ -126,11 +126,11 @@ namespace KokoroUpTime
                 ["item_info_sentence"] = this.ItemInfoSentence,
                 ["music_title"] = this.MusicTitle,
                 ["composer"] = this.Composer,
-                ["feeling_person_text"] = this.FeelingPersonText,
-                ["feeling_value_text"] = this.FeelingValueText,
-                ["face_small_comment_text"] = this.FaceSmallCommentText,
-                ["summary_subtitle_text"] = this.SummarySubTitleText,
-                ["summary_sentence_text"] = this.SummarySentenceText,
+                ["feeling_person_text"] = this.FeelingPersonTextBlock,
+                ["feeling_value_text"] = this.FeelingValueTextBlock,
+                ["face_small_comment_text"] = this.FaceSmallCommentTextBlock,
+                ["summary_subtitle_text"] = this.SummarySubTitleTextBlock,
+                ["summary_sentence_text"] = this.SummarySentenceTextBlock,
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -213,7 +213,7 @@ namespace KokoroUpTime
             this.GaugeGrid.Visibility = Visibility.Hidden;
 
             this.FaceSmallCommentGrid.Visibility = Visibility.Hidden;
-            this.FaceSmallCommentText.Visibility = Visibility.Hidden;
+            this.FaceSmallCommentTextBlock.Visibility = Visibility.Hidden;
 
             this.CharaFaceLeftSmall.Visibility = Visibility.Hidden;
             this.CharaStandRightVerySmall.Visibility = Visibility.Hidden;
@@ -407,7 +407,7 @@ namespace KokoroUpTime
 
                     this.position = this.scenarios[this.scenarioCount][1];
 
-                    var _textObject = this.textObjects[this.position];
+                    var _textObject = this.textBlockObjects[this.position];
 
                     var _message = this.scenarios[this.scenarioCount][2];
 
@@ -460,7 +460,7 @@ namespace KokoroUpTime
 
                     this.position = this.scenarios[this.scenarioCount][1];
 
-                    var textObject = this.textObjects[this.position];
+                    var textObject = this.textBlockObjects[this.position];
 
                     var _text = this.scenarios[this.scenarioCount][2];
 
@@ -530,8 +530,8 @@ namespace KokoroUpTime
                         case "text":
 
                             this.position = this.scenarios[this.scenarioCount][2];
-                            this.textObjects[this.position].Visibility = Visibility.Hidden;
-                            // this.textObjects[this.position].Text = "";
+                            this.textBlockObjects[this.position].Visibility = Visibility.Hidden;
+                            // this.textBlockObjects[this.position].Text = "";
 
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
@@ -569,7 +569,7 @@ namespace KokoroUpTime
                         case "text":
 
                             this.position = this.scenarios[this.scenarioCount][2];
-                            this.textObjects[this.position].Text = "";
+                            this.textBlockObjects[this.position].Text = "";
 
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
@@ -582,7 +582,7 @@ namespace KokoroUpTime
 
                     this.position = this.scenarios[this.scenarioCount][1];
 
-                    var ruleObject = this.textObjects[this.position];
+                    var ruleObject = this.textBlockObjects[this.position];
 
                     var rule = this.scenarios[this.scenarioCount][2];
 
@@ -739,7 +739,7 @@ namespace KokoroUpTime
                     }
                     */
                     this.Angle = 0.0f;
-                    this.FeelingScaleText.Text = "50";
+                    this.FeelingScaleTextBlock.Text = "50";
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1048,7 +1048,7 @@ namespace KokoroUpTime
 
             this.CalcAngle();
 
-            this.FeelingScaleText.Text = this.feelingSize.ToString();
+            this.FeelingScaleTextBlock.Text = this.feelingSize.ToString();
         }
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -1062,7 +1062,7 @@ namespace KokoroUpTime
             {
                 this.CalcAngle();
 
-                this.FeelingScaleText.Text = this.feelingSize.ToString();
+                this.FeelingScaleTextBlock.Text = this.feelingSize.ToString();
             }
         }
 

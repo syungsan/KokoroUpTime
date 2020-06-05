@@ -320,24 +320,24 @@
                     <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter6}}}"/>
                 </Image.RenderTransform>
             </Image>
-            <TextBlock x:Name="FeelingScaleText" HorizontalAlignment="Center" Margin="0,140,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="135" Width="270" FontWeight="Bold" FontSize="94" TextAlignment="Center"/>
+            <TextBlock x:Name="FeelingScaleTextBlock" HorizontalAlignment="Center" Margin="0,140,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="135" Width="270" FontWeight="Bold" FontSize="94" TextAlignment="Center"/>
         </Grid>
         <Grid x:Name="FeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
             <Grid x:Name="FeelingValueGrid" Margin="527,179,526,536">
                 <Image Source="/Images/feeling_value.png"/>
-                <TextBlock x:Name="FeelingPersonText" HorizontalAlignment="Center" Margin="0,10,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="847" TextAlignment="Center"/>
-                <TextBlock x:Name="FeelingValueText" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center"/>
+                <TextBlock x:Name="FeelingPersonTextBlock" HorizontalAlignment="Center" Margin="0,10,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="847" TextAlignment="Center"/>
+                <TextBlock x:Name="FeelingValueTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center"/>
             </Grid>
             <Grid x:Name="FaceSmallCommentGrid" Margin="38,66,1450,830">
                 <Image Source="/Images/face_small_bubble.png" Margin="0,0,10,4"/>
-                <TextBlock x:Name="FaceSmallCommentText" HorizontalAlignment="Left" Margin="19,10,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Height="125" Width="378" TextAlignment="Center"/>
+                <TextBlock x:Name="FaceSmallCommentTextBlock" HorizontalAlignment="Left" Margin="19,10,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Height="125" Width="378" TextAlignment="Center"/>
             </Grid>
         </Grid>
         <Grid x:Name="SummaryGrid" d:IsHidden="True">
             <Grid x:Name="SummaryBoardGrid" Margin="496,203,496,305">
                 <Image x:Name="SummaryBoardImage" Source="/Images/blackboard.png"/>
-                <TextBlock x:Name="SummarySentenceText" Margin="86,173,83,85" Text="TextBlock" TextWrapping="Wrap" Background="{x:Null}" Foreground="#FFFFE800" FontSize="48"/>
-                <TextBlock x:Name="SummarySubTitleText" Margin="180,61,177,427" Text="TextBlock" TextWrapping="Wrap" Foreground="White" Background="{x:Null}" FontSize="58" FontWeight="Bold" TextAlignment="Center"/>
+                <TextBlock x:Name="SummarySentenceTextBlock" Margin="86,173,83,85" Text="TextBlock" TextWrapping="Wrap" Background="{x:Null}" Foreground="#FFFFE800" FontSize="48"/>
+                <TextBlock x:Name="SummarySubTitleTextBlock" Margin="180,61,177,427" Text="TextBlock" TextWrapping="Wrap" Foreground="White" Background="{x:Null}" FontSize="58" FontWeight="Bold" TextAlignment="Center"/>
             </Grid>
             <Image x:Name="SummaryTitleImage" Width="401" Source="/Images/summary_title.png" Margin="760,22,759,907" Height="151"/>
         </Grid>

@@ -42,7 +42,7 @@ namespace KokoroUpTime
             string processor = "AssemblyName.ProcessorArchitecture : " + asmName.ProcessorArchitecture + "\r\n";
             string runtime = "Assembly.ImageRuntimeVersion : " + asm.ImageRuntimeVersion + "\r\n";
 
-            this.VersionText.Text = name + version + fullname + processor + runtime + "\r\n";
+            this.VersionTextBlock.Text = name + version + fullname + processor + runtime + "\r\n";
             this.WindowTitle = asmName.Name + " Ver" + asmName.Version.ToString();
         }
 
