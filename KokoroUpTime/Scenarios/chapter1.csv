@@ -1,39 +1,4 @@
 reset
-image,background_image,background_01.png
-grid,base_grid
-image,chara_stand_right,shiroji_01.png,appear_up
-image,main_msg_bubble,right_big_bubble.png
-grid,main_msg_grid
-bgm,set,もくもくStudy♪.mp3,loop,50
-bgm,play
-text,music_title,もくもくStudy♪
-text,composer,しゅんじ～
-grid,music_info_grid,slide,no_sync
-wait
-msg,main_msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
-wait
-msg,main_msg,はじめに、あなたの名前を教えてくれるかの？,白じい
-wait
-msg,main_msg,名前を入力【　　　　　　　　　　】,白じい
-wait
-msg,main_msg,あなたは【name】じゃな。【name】のうしろは、何かつけるかの？,白じい
-wait
-msg,main_msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい
-wait
-image,chara_stand_right,shiroji_02.png
-msg,main_msg,それでは【name】、　「こころあっぷタイム」とは何か説明していくぞい。,白じい
-wait
-msg,main_msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
-wait
-msg,main_msg,楽しくなったり、うれしくなったりするだけでなく、だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。,白じい
-wait
-msg,main_msg,こども、おとな、つよい人、よわい人、大きい人、ちいさい人、どんな人でも、こまっていることがあるのじゃ。,白じい
-wait
-msg,main_msg,『こころあっぷタイム』は、こまっているときに、元気になったり、リラックスできる方法を 学ぶ時間なのだ！ ,白じい
-wait
-msg,main_msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
-wait
-reset
 image,background_image,background_03.png
 button,rule_board_button
 wait,no_button
@@ -343,4 +308,42 @@ wait
 msg,次回のテーマは「たのしいことを　さがそう」じゃ！おたのしみに！,白じい
 wait
 msg,第１回で登場した発明品は、「きもちセンサー」じゃ！アイテム図鑑から、いつでも確認できるぞい！,白じい
+wait
+
+
+
+
+reset
+image,bg,background_01.png
+image,shiroji_right,shiroji_01.png,appear_up
+image,main_msg_bubble,right_big_bubble.png
+grid,main_msg_grid
+bgm,set,もくもくStudy♪.mp3,loop,50
+bgm,play
+text,music_title,もくもくStudy♪
+text,composer,しゅんじ～
+grid,music_info_grid,slide,no_sync
+wait
+msg,main_msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
+wait
+msg,main_msg,はじめに、あなたの名前を教えてくれるかの？,白じい
+wait
+msg,main_msg,名前を入力【　　　　　　　　　　】,白じい
+wait
+msg,main_msg,あなたは【name】じゃな。【name】のうしろは、何かつけるかの？,白じい
+wait
+msg,main_msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい
+wait
+image,shiroji_right,shiroji_02.png
+msg,main_msg,それでは【name】、　「こころあっぷタイム」とは何か説明していくぞい。,白じい
+wait
+msg,main_msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
+wait
+msg,main_msg,楽しくなったり、うれしくなったりするだけでなく、だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。,白じい
+wait
+msg,main_msg,こども、おとな、つよい人、よわい人、大きい人、ちいさい人、どんな人でも、こまっていることがあるのじゃ。,白じい
+wait
+msg,main_msg,『こころあっぷタイム』は、こまっているときに、元気になったり、リラックスできる方法を 学ぶ時間なのだ！ ,白じい
+wait
+msg,main_msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
 wait

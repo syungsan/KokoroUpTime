@@ -1,7 +1,6 @@
 reset
-image,background_image,background_01.png
-grid,base_grid
-image,chara_stand_right,shiroji_01.png,appear_up
+image,bg,background_01.png
+image,shiroji_right,shiroji_01.png,appear_up
 image,main_msg_bubble,right_big_bubble.png
 grid,main_msg_grid
 bgm,set,もくもくStudy♪.mp3,loop,50
@@ -20,7 +19,7 @@ msg,main_msg,あなたは【name】じゃな。【name】のうしろは、何�
 wait
 msg,main_msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい
 wait
-image,chara_stand_right,shiroji_02.png
+image,shiroji_right,shiroji_02.png
 msg,main_msg,それでは【name】、　「こころあっぷタイム」とは何か説明していくぞい。,白じい
 wait
 msg,main_msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
@@ -33,6 +32,8 @@ msg,main_msg,『こころあっぷタイム』は、こまっているときに�
 wait
 msg,main_msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
 wait
+
+
 reset
 image,background_image,background_03.png
 button,rule_board_button
