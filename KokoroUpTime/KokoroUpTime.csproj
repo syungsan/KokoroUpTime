@@ -39,6 +39,7 @@
     <None Remove="Images\background_07.png" />
     <None Remove="Images\background_08.png" />
     <None Remove="Images\background_09.png" />
+    <None Remove="Images\background_ending.png" />
     <None Remove="Images\background_mokume.png" />
     <None Remove="Images\background_option.png" />
     <None Remove="Images\bad_feeling.png" />
@@ -47,11 +48,9 @@
     <None Remove="Images\big_heart.png" />
     <None Remove="Images\blackboard.png" />
     <None Remove="Images\blue_needle.png" />
-    <None Remove="Images\challenge_complete_button.png" />
-    <None Remove="Images\challenge_message_box_image.png" />
-    <None Remove="Images\challenge_next_button.png" />
-    <None Remove="Images\challenge_small_bubble.png" />
     <None Remove="Images\challenge_time.png" />
+    <None Remove="Images\complete_button.png" />
+    <None Remove="Images\ending_bubble.png" />
     <None Remove="Images\face_small_bubble.png" />
     <None Remove="Images\feeling_value.png" />
     <None Remove="Images\frame_46-1.png" />
@@ -67,12 +66,15 @@
     <None Remove="Images\item03_solo.png" />
     <None Remove="Images\item_bubble.png" />
     <None Remove="Images\item_info.png" />
+    <None Remove="Images\item_last.png" />
     <None Remove="Images\item_name.png" />
     <None Remove="Images\kimi_face_01.png" />
     <None Remove="Images\kimi_face_02.png" />
     <None Remove="Images\kimi_face_03.png" />
     <None Remove="Images\kimi_face_04.png" />
     <None Remove="Images\kimi_face_05.png" />
+    <None Remove="Images\kimi_plate_inner.png" />
+    <None Remove="Images\kimi_plate_outer.png" />
     <None Remove="Images\kimi_stand_01.png" />
     <None Remove="Images\left_a_big_bubble.png" />
     <None Remove="Images\left_big_bubble_blue.png" />
@@ -90,9 +92,10 @@
     <None Remove="Images\manga1_title.png" />
     <None Remove="Images\mangaya.png" />
     <None Remove="Images\menu_bubble.png" />
-    <None Remove="Images\mind_scale.png" />
+    <None Remove="Images\message_box.png" />
     <None Remove="Images\moya1.png" />
     <None Remove="Images\moya2.png" />
+    <None Remove="Images\next_go_button.png" />
     <None Remove="Images\oranger_gradation.png" />
     <None Remove="Images\red_needle.png" />
     <None Remove="Images\return_to_title.png" />
@@ -104,7 +107,9 @@
     <None Remove="Images\shiroji_02.png" />
     <None Remove="Images\shiroji_03.png" />
     <None Remove="Images\shiroji_04.png" />
-    <None Remove="Images\small_bubble.png" />
+    <None Remove="Images\short_bubble.png" />
+    <None Remove="Images\small_bubble_left.png" />
+    <None Remove="Images\small_bubble_right.png" />
     <None Remove="Images\small_icon.png" />
     <None Remove="Images\SS.png" />
     <None Remove="Images\summary_title.png" />
@@ -156,6 +161,7 @@
     <Resource Include="Images\background_07.png" />
     <Resource Include="Images\background_08.png" />
     <Resource Include="Images\background_09.png" />
+    <Resource Include="Images\background_ending.png" />
     <Resource Include="Images\background_mokume.png" />
     <Resource Include="Images\background_option.png" />
     <Resource Include="Images\bad_feeling.png" />
@@ -163,11 +169,15 @@
     <Resource Include="Images\big_heart.png" />
     <Resource Include="Images\blackboard.png" />
     <Resource Include="Images\blue_needle.png" />
-    <Resource Include="Images\challenge_complete_button.png" />
-    <Resource Include="Images\challenge_message_box_image.png" />
-    <Resource Include="Images\challenge_next_button.png" />
-    <Resource Include="Images\challenge_small_bubble.png" />
+    <Resource Include="Images\complete_button.png" />
+    <Resource Include="Images\kimi_plate_inner.png" />
+    <Resource Include="Images\kimi_plate_outer.png" />
+    <Resource Include="Images\message_box.png" />
+    <Resource Include="Images\next_go_button.png" />
+    <Resource Include="Images\short_bubble.png" />
+    <Resource Include="Images\small_bubble_right.png" />
     <Resource Include="Images\challenge_time.png" />
+    <Resource Include="Images\ending_bubble.png" />
     <Resource Include="Images\face_small_bubble.png" />
     <Resource Include="Images\feeling_value.png" />
     <Resource Include="Images\frame_46-1.png" />
@@ -182,6 +192,7 @@
     <Resource Include="Images\item03_solo.png" />
     <Resource Include="Images\item_bubble.png" />
     <Resource Include="Images\item_info.png" />
+    <Resource Include="Images\item_last.png" />
     <Resource Include="Images\item_name.png" />
     <Resource Include="Images\kimi_face_01.png" />
     <Resource Include="Images\kimi_face_02.png" />
@@ -205,7 +216,6 @@
     <Resource Include="Images\manga1_title.png" />
     <Resource Include="Images\mangaya.png" />
     <Resource Include="Images\menu_bubble.png" />
-    <Resource Include="Images\mind_scale.png" />
     <Resource Include="Images\moya1.png" />
     <Resource Include="Images\moya2.png" />
     <Resource Include="Images\oranger_gradation.png" />
@@ -219,7 +229,7 @@
     <Resource Include="Images\shiroji_02.png" />
     <Resource Include="Images\shiroji_03.png" />
     <Resource Include="Images\shiroji_04.png" />
-    <Resource Include="Images\small_bubble.png" />
+    <Resource Include="Images\small_bubble_left.png" />
     <Resource Include="Images\small_icon.png" />
     <Resource Include="Images\SS.png" />
     <Resource Include="Images\summary_title.png" />
@@ -228,12 +238,6 @@
     <Resource Include="Images\water_frame.png" />
     <Resource Include="Images\white_frame.png" />
     <Resource Include="Images\yazirusi.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Chapter6.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -276,12 +280,6 @@
     <None Update="Sounds\放課後♪TeaTime.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Chapter6.xaml">
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
 
 </Project>

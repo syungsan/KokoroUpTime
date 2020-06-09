@@ -80,6 +80,8 @@ namespace KokoroUpTime
                 ["manga_image"] = this.MangaImage, //
                 ["item_center_image"] = this.ItemCenterImage, //
                 ["item_left_image"] = this.ItemLeftImage, //
+                ["item_left_last_image"] = this.ItemLeftLastImage,
+                ["item_last_info_image"] = this.ItemLastInfoImage,
                 // ["item_name_plate_center_image"] = this.ItemNamePlateCenterImage,
                 // ["item_name_bubble_image"] = this.ItemNameBubbleImage,
                 // ["item_name_plate_left_image"] = this.ItemNamePlateLeftImage,
@@ -97,14 +99,29 @@ namespace KokoroUpTime
                 ["select_good_feeling_image"] = this.SelectGoodFeelingImage,
                 ["select_bad_feeling_image"] = this.SelectBadFeelingImage,
                 ["select_item_feeling_image"] = this.SelectItemFeelingImage,
+
+                ["kimi_plate_outer_image"] = this.KimiPlateOuterImage,
+                ["kimi_in_plate_image"] = this.KimiInPlateImage,
+                ["kimi_plate_inner_up_image"] = this.KimiPlateInnerUpImage,
+                ["kimi_plate_inner_down_image"] = this.KimiPlateInnerDownImage,
+
                 ["view_kind_of_feeling_image"] = this.ViewKindOfFeelingImage,
                 ["view_feeling_value_image"] = this.ViewFeelingValueImage,
-                ["gauge_scale_image"] = this.GaugeScaleImage,
                 ["heart_image"] = this.HeartImage,
                 ["needle_image"] = this.NeedleImage,
+
                 ["summary_board_image"] = this.SummaryBoardImage,
                 ["summary_title_image"] = this.SummaryTitleImage,
                 ["children_info_image"] = this.ChildrenInfoImage, //
+                
+                ["ending_title_back_image"] = this.EndingTitleBackImage,
+                ["ending_item_image"] = this.EndingItemImage,
+                ["shiroji_ending_image"] = this.ShirojiEndingImage,
+                ["kimi_ending_image"] = this.KimiEndingImage,
+                ["aosuke_ending_image"] = this.AosukeEndingImage,
+                ["akamaru_ending_image"] = this.AkamaruEndingImage,
+                ["ending_short_bubble_image"] = this.EndingShortBubbleImage,
+
                 ["shiroji_right_image"] = this.ShirojiRightImage, //
                 ["shiroji_right_up_image"] = this.ShirojiRightUpImage,
                 ["shiroji_small_right_up_image"] = this.ShirojiSmallRightUpImage, //
@@ -146,18 +163,32 @@ namespace KokoroUpTime
                 ["item_name_center_text"] = this.ItemNameCenterTextBlock, //
                 ["item_number_text"] = this.ItemNumberTextBlock, //
                 ["item_info_title_text"] = this.ItemInfoTitleTextBlock, //
-                ["item_info_sentence_text"] = this.ItemInfoSentenceTextBlock,
+                ["item_info_sentence_text1"] = this.ItemInfoSentenceTextBlock1,
+                ["item_info_sentence_text2"] = this.ItemInfoSentenceTextBlock2,
+                ["item_last_info_text"] = this.ItemLastInfoTextBlock,
                 ["session_sub_title_text"] = this.SessionSubTitleTextBlock,
                 ["session_sentence_text"] = this.SessionSentenceTextBlock,
-                ["challenge_message_text"] = this.ChallengeMessageTextBlock,
-                ["challenge_message_box_text"] = this.ChallengeMessageBoxTextBlock,
+                ["challenge_msg_text"] = this.ChallengeMessageTextBlock,
+                ["challenge_msg_box_text"] = this.ChallengeMessageBoxTextBlock,
                 ["view_kind_of_feeling_person_text"] = this.ViewKindOfFeelingPersonTextBlock,
                 ["view_kind_of_feeling_text"] = this.ViewKindOfFeelingTextBlock,
-                ["view_feeling_value_person_text"] = this.ViewFeelingValuePersonTextBlock,
                 ["view_feeling_value_text"] = this.ViewFeelingValueTextBlock,
-                ["gauge_scale_text"] = this.GaugeScaleTextBlock,
+
+                ["case_of_kimi_text"] = this.CaseOfKimiTextBlock,
+                ["scene1_text"] = this.Scene1TextBlock,
+                ["kind_of_mind_up_text"] = this.KindOfMindUpTextBlock,
+                ["scale_of_mind_up_text"] = this.ScaleOfMindUpTextBlock,
+                ["scene2_text"] = this.Scene2TextBlock,
+                ["kind_of_mind_down_text"] = this.KindOfMindDownTextBlock,
+                ["scale_of_mind_down_text"] = this.ScaleOfMindDownTextBlock,
+
+
                 ["summary_sub_title_text"] = this.SummarySubTitleTextBlock,
                 ["summary_sentence_text"] = this.SummarySentenceTextBlock,
+
+                ["ending_chapter_no_text"] = this.EndingChapterNoTextBlock,
+                ["ending_msg_text"] = this.EndingMessageTextBlock,
+
                 ["kimi_stand_left_comment_text"] = this.KimiStandLeftCommentTextBlock,
                 ["children_face_small_left_comment_text"] = this.ChildrenFaceSmallLeftCommentTextBlock,
                 ["main_msg"] = this.MainMessageTextBlock, //
@@ -193,6 +224,9 @@ namespace KokoroUpTime
                 ["view_feeling_grid"] = this.ViewFeelingGrid,
                 ["gauge_grid"] = this.GaugeGrid,
                 ["summary_grid"] = this.SummaryGrid,
+
+                ["ending_grid"] = this.EndingGrid,
+
                 // ["any_frame_grid"] = this.AnyFrameGrid,
                 // ["shiroji_grid"] = this.ShirojiGrid,
                 ["children_stand_grid"] = this.ChildrenStandGrid,
@@ -204,19 +238,30 @@ namespace KokoroUpTime
                 ["item_name_bubble_grid"] = this.ItemNameBubbleGrid, //
                 ["item_name_plate_center_grid"] = this.ItemNamePlateCenterGrid, //
                 ["item_info_plate_grid"] = this.ItemInfoPlateGrid,
+                ["item_info_sentence_grid"] = this.ItemInfoSentenceGrid,
+                ["item_last_info_grid"] = this.ItemLastInfoGrid,
                 ["session_frame_grid"] = this.SessionFrameGrid,
-                ["challenge_message_grid"] = this.ChallengeMessageGrid,
-                ["challenge_message_box_grid"] = this.ChallengeMessageBoxGrid,
+                ["challenge_msg_grid"] = this.ChallengeMessageGrid,
+                ["challenge_msg_box_grid"] = this.ChallengeMessageBoxGrid,
                 ["challenge_good_feeling_grid"] = this.ChallengeGoodFeelingGrid,
                 ["challenge_bad_feeling_grid"] = this.ChallengeBadFeelingGrid,
                 ["select_good_feeling_grid"] = this.SelectGoodFeelingGrid,
                 ["select_bad_feeling_grid"] = this.SelectBadFeelingGrid,
+
+                ["kimi_plate_grid"] = this.KimiPlateGrid,
+                ["kimi_plate_inner_up_grid"] = this.KimiPlateInnerUpGrid,
+                ["kimi_plate_inner_down_grid"] = this.KimiPlateInnerDownGrid,
+
+
                 ["view_kind_of_feeling_grid"] = this.ViewKindOfFeelingGrid,
                 ["view_feeling_value_grid"] = this.ViewFeelingValueGrid,
                 ["children_face_small_left_comment_grid"] = this.ChildrenFaceSmallLeftCommentGrid,
-                ["gauge_scale_grid"] = this.GaugeScaleGrid,
                 ["heart_grid"] = this.HeartGrid,
                 ["summary_board_grid"] = this.SummaryBoardGrid,
+
+                ["ending_title_grid"] = this.EndingTitleGrid,
+                ["ending_msg_grid"] = this.EndingMessageGrid,
+
                 ["main_msg_grid"] = this.MainMessageGrid, //
                 // ["thin_message_grid"] = this.ThinMessageGrid,
                 ["music_info_grid"] = this.MusicInfoGrid, //
@@ -235,6 +280,9 @@ namespace KokoroUpTime
             this.ViewFeelingGrid.Visibility = Visibility.Hidden;
             this.GaugeGrid.Visibility = Visibility.Hidden;
             this.SummaryGrid.Visibility = Visibility.Hidden;
+
+            this.EndingGrid.Visibility = Visibility.Hidden;
+
             // this.AnyFrameGrid.Visibility = Visibility.Hidden;
             // this.ShirojiGrid.Visibility = Visibility.Hidden;
             this.ChildrenStandGrid.Visibility = Visibility.Hidden;
@@ -247,6 +295,8 @@ namespace KokoroUpTime
             this.ItemNameBubbleGrid.Visibility = Visibility.Hidden; //
             this.ItemNamePlateCenterGrid.Visibility = Visibility.Hidden; //
             this.ItemInfoPlateGrid.Visibility = Visibility.Hidden;
+            this.ItemInfoSentenceGrid.Visibility = Visibility.Hidden;
+            this.ItemLastInfoGrid.Visibility = Visibility.Hidden;
             this.SessionFrameGrid.Visibility = Visibility.Hidden;
             this.ViewKindOfFeelingGrid.Visibility = Visibility.Hidden;
             this.ViewFeelingValueGrid.Visibility = Visibility.Hidden;
@@ -257,9 +307,17 @@ namespace KokoroUpTime
             this.ChallengeBadFeelingGrid.Visibility = Visibility.Hidden;
             this.SelectGoodFeelingGrid.Visibility = Visibility.Hidden;
             this.SelectBadFeelingGrid.Visibility = Visibility.Hidden;
-            this.GaugeScaleGrid.Visibility = Visibility.Hidden;
+
+            this.KimiPlateGrid.Visibility = Visibility.Hidden;
+            this.KimiPlateInnerUpGrid.Visibility = Visibility.Hidden;
+            this.KimiPlateInnerDownGrid.Visibility = Visibility.Hidden;
+
             this.HeartGrid.Visibility = Visibility.Hidden;
             this.SummaryBoardGrid.Visibility = Visibility.Hidden;
+
+            this.EndingTitleGrid.Visibility = Visibility.Hidden;
+            this.EndingMessageGrid.Visibility = Visibility.Hidden;
+
             this.MainMessageGrid.Visibility = Visibility.Hidden; //
             // this.ThinMessageGrid.Visibility = Visibility.Hidden;
             this.MusicInfoGrid.Visibility = Visibility.Hidden; //
@@ -278,6 +336,8 @@ namespace KokoroUpTime
             this.MangaImage.Visibility = Visibility.Hidden; //
             this.ItemCenterImage.Visibility = Visibility.Hidden; //
             this.ItemLeftImage.Visibility = Visibility.Hidden; //
+            this.ItemLeftLastImage.Visibility = Visibility.Hidden;
+            this.ItemLastInfoImage.Visibility = Visibility.Hidden;
             // this.ItemNamePlateCenterImage.Visibility = Visibility.Hidden;
             // this.ItemNameBubbleImage.Visibility = Visibility.Hidden;
             // this.ItemNamePlateLeftImage.Visibility = Visibility.Hidden;
@@ -285,7 +345,9 @@ namespace KokoroUpTime
             // this.ItemNameCenterTextBlock.Visibility = Visibility.Hidden;
             // this.ItemNumberTextBlock.Visibility = Visibility.Hidden;
             this.ItemInfoTitleTextBlock.Visibility = Visibility.Hidden;
-            this.ItemInfoSentenceTextBlock.Visibility = Visibility.Hidden;
+            this.ItemInfoSentenceTextBlock1.Visibility = Visibility.Hidden;
+            this.ItemInfoSentenceTextBlock2.Visibility = Visibility.Hidden;
+            this.ItemLastInfoTextBlock.Visibility = Visibility.Hidden;
             this.SessionTitleImage.Visibility = Visibility.Hidden;
             this.SessionFrameImage.Visibility = Visibility.Hidden;
             this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden;
@@ -307,15 +369,33 @@ namespace KokoroUpTime
             this.SelectGoodFeelingImage.Visibility = Visibility.Hidden;
             this.SelectBadFeelingImage.Visibility = Visibility.Hidden;
             this.SelectItemFeelingImage.Visibility = Visibility.Hidden;
+
+            this.Scene1Label.Visibility = Visibility.Hidden;
+            this.KindOfMindUpLabel.Visibility = Visibility.Hidden;
+            this.ScaleOfMindUpLabel.Visibility = Visibility.Hidden;
+            this.Scene2Label.Visibility = Visibility.Hidden;
+            this.KindOfMindDownLabel.Visibility = Visibility.Hidden;
+            this.ScaleOfMindDownLabel.Visibility = Visibility.Hidden;
+            this.KimiPlateOuterImage.Visibility = Visibility.Hidden;
+            this.KimiInPlateImage.Visibility = Visibility.Hidden;
+            this.KimiPlateInnerUpImage.Visibility = Visibility.Hidden;
+            this.KimiPlateInnerDownImage.Visibility = Visibility.Hidden;
+            this.CaseOfKimiTextBlock.Visibility = Visibility.Hidden;
+            this.Scene1TextBlock.Visibility = Visibility.Hidden;
+            this.KindOfMindUpTextBlock.Visibility = Visibility.Hidden;
+            this.ScaleOfMindUpTextBlock.Visibility = Visibility.Hidden;
+            this.Scene2TextBlock.Visibility = Visibility.Hidden;
+            this.KindOfMindDownTextBlock.Visibility = Visibility.Hidden;
+            this.ScaleOfMindDownTextBlock.Visibility = Visibility.Hidden;
+
+
             this.ViewKindOfFeelingPersonTextBlock.Visibility = Visibility.Hidden;
             this.ViewKindOfFeelingImage.Visibility = Visibility.Hidden;
-            this.ViewFeelingValuePersonTextBlock.Visibility = Visibility.Hidden;
+            this.ViewFeelingValueLabel.Visibility = Visibility.Hidden;
             this.ViewFeelingValueImage.Visibility = Visibility.Hidden;
             this.ChildrenFaceSmallLeftCommentImage.Visibility = Visibility.Hidden;
             this.ViewFeelingValueTextBlock.Visibility = Visibility.Hidden;
             this.ChildrenFaceSmallLeftCommentTextBlock.Visibility = Visibility.Hidden;
-            this.GaugeScaleImage.Visibility = Visibility.Hidden;
-            this.GaugeScaleTextBlock.Visibility = Visibility.Hidden;
             this.HeartImage.Visibility = Visibility.Hidden;
             this.NeedleImage.Visibility = Visibility.Hidden;
             this.SummaryBoardImage.Visibility = Visibility.Hidden;
@@ -323,6 +403,18 @@ namespace KokoroUpTime
             this.SummarySubTitleTextBlock.Visibility = Visibility.Hidden;
             this.SummarySentenceTextBlock.Visibility = Visibility.Hidden;
             this.ChildrenInfoImage.Visibility = Visibility.Hidden; //
+
+            this.EndingTitleBackImage.Visibility = Visibility.Hidden;
+            this.EndingItemImage.Visibility = Visibility.Hidden;
+            this.ShirojiEndingImage.Visibility = Visibility.Hidden;
+            this.KimiEndingImage.Visibility = Visibility.Hidden;
+            this.AosukeEndingImage.Visibility = Visibility.Hidden;
+            this.AkamaruEndingImage.Visibility = Visibility.Hidden;
+            this.EndingShortBubbleImage.Visibility = Visibility.Hidden;
+            this.EndingChapterNoTextBlock.Visibility = Visibility.Hidden;
+            this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
+
+
             this.ShirojiRightImage.Visibility = Visibility.Hidden; //
             this.ShirojiRightUpImage.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightUpImage.Visibility = Visibility.Hidden; //
@@ -377,19 +469,30 @@ namespace KokoroUpTime
             this.ItemNameCenterTextBlock.Text = "";
             this.ItemNumberTextBlock.Text = "";
             this.ItemInfoTitleTextBlock.Text = "";
-            this.ItemInfoSentenceTextBlock.Text = "";
+            this.ItemInfoSentenceTextBlock1.Text = "";
+            this.ItemInfoSentenceTextBlock2.Text = "";
+            this.ItemLastInfoTextBlock.Text = "";
             this.SessionSubTitleTextBlock.Text = "";
             this.SessionSentenceTextBlock.Text = "";
             this.ChallengeMessageTextBlock.Text = "";
             this.ChallengeMessageBoxTextBlock.Text = "";
             this.ViewKindOfFeelingPersonTextBlock.Text = "";
             this.ViewKindOfFeelingTextBlock.Text = "";
-            this.ViewFeelingValuePersonTextBlock.Text = "";
             this.ViewFeelingValueTextBlock.Text = "";
+
+            this.CaseOfKimiTextBlock.Text = "";
+            this.Scene1TextBlock.Text = "";
+            this.KindOfMindUpTextBlock.Text = "";
+            this.ScaleOfMindUpTextBlock.Text = "";
+            this.Scene2TextBlock.Text = "";
+            this.KindOfMindDownTextBlock.Text = "";
+            this.ScaleOfMindDownTextBlock.Text = "";
+
             this.ChildrenFaceSmallLeftCommentTextBlock.Text = "";
-            this.GaugeScaleTextBlock.Text = "";
             this.SummarySubTitleTextBlock.Text = "";
             this.SummarySentenceTextBlock.Text = "";
+            this.EndingChapterNoTextBlock.Text = "";
+            this.EndingMessageTextBlock.Text = "";
             this.KimiStandLeftCommentTextBlock.Text = "";
             this.MainMessageTextBlock.Text = ""; //
             this.ThinMessageTextBlock.Text = ""; //
@@ -876,7 +979,7 @@ namespace KokoroUpTime
                     }
                     */
                     this.Angle = 0.0f;
-                    this.GaugeScaleTextBlock.Text = "50";
+                    this.ViewFeelingValueTextBlock.Text = "50";
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1185,7 +1288,7 @@ namespace KokoroUpTime
 
             this.CalcAngle();
 
-            this.GaugeScaleTextBlock.Text = this.feelingSize.ToString();
+            this.ViewFeelingValueTextBlock.Text = this.feelingSize.ToString();
         }
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -1199,7 +1302,7 @@ namespace KokoroUpTime
             {
                 this.CalcAngle();
 
-                this.GaugeScaleTextBlock.Text = this.feelingSize.ToString();
+                this.ViewFeelingValueTextBlock.Text = this.feelingSize.ToString();
             }
         }
 

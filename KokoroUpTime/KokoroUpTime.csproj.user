@@ -21,9 +21,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Chapter6.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Chapter1.xaml">
       <SubType>Designer</SubType>
     </Page>

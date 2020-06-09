@@ -8,46 +8,41 @@
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="OptionPage">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70*"/>
-            <RowDefinition Height="154*"/>
-            <RowDefinition Height="37*"/>
-            <RowDefinition Height="140*"/>
-            <RowDefinition Height="140*"/>
-            <RowDefinition Height="140*"/>
-            <RowDefinition Height="140*"/>
-            <RowDefinition Height="107*"/>
-            <RowDefinition Height="150*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="32*"/>
-            <ColumnDefinition Width="45*"/>
-            <ColumnDefinition Width="38*"/>
-            <ColumnDefinition Width="77*"/>
-        </Grid.ColumnDefinitions>
-        <Image Height="1080" Width="1920" Source="/Images/background_option.png" Stretch="Fill" Grid.ColumnSpan="4" Grid.RowSpan="9"/>
-        <Label Content="オプション" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="94" FontWeight="Bold" Foreground="White" Grid.Column="2" Grid.Row="1"/>
-        <Label Content="効果音♪" HorizontalAlignment="Left" Margin="16,5,0,16" FontSize="82" FontWeight="Bold" Grid.Row="3" Grid.Column="1"/>
-        <Label Content="BGM♪" HorizontalAlignment="Left" Margin="16,5,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold" Grid.Row="4" Grid.Column="1"/>
-        <Label Content="文字の速さ" HorizontalAlignment="Left" Margin="16,7,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold" Grid.Row="5" Grid.Column="1"/>
-        <Label Content="ふりがな" HorizontalAlignment="Left" Margin="16,4,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold" Grid.Row="6" Grid.Column="1"/>
-        <Button Content="ON" HorizontalAlignment="Left" Margin="27,3,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" Grid.Column="2" Grid.Row="3" BorderBrush="{x:Null}"/>
-        <Label Content="/" HorizontalAlignment="Left" Margin="223,1,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White" Grid.Column="2" Grid.Row="3"/>
-        <Button Content="OFF" HorizontalAlignment="Left" Margin="332,3,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="82" Background="{x:Null}" Foreground="White" RenderTransformOrigin="-0.101,0.088" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" BorderBrush="{x:Null}"/>
-        <Label Content="/" HorizontalAlignment="Left" Margin="271,2,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White" Grid.Column="2" Grid.Row="5"/>
-        <Label Content="/" HorizontalAlignment="Left" Margin="193,2,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White" Grid.Column="3" Grid.Row="5"/>
-        <Button Content="ON" HorizontalAlignment="Left" Margin="27,1,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" Grid.Column="2" Grid.Row="4" BorderBrush="{x:Null}"/>
-        <Label Content="/" HorizontalAlignment="Left" Margin="223,1,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White" Grid.Column="2" Grid.Row="4"/>
-        <Button Content="OFF" HorizontalAlignment="Left" Margin="332,1,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="82" Background="{x:Null}" Foreground="White" RenderTransformOrigin="-0.101,0.088" Grid.Column="2" Grid.Row="4" Grid.ColumnSpan="2" BorderBrush="{x:Null}"/>
-        <Button Content="はやい" HorizontalAlignment="Left" Margin="28,4,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" Grid.Column="2" Grid.Row="5" BorderBrush="{x:Null}"/>
-        <Button Content="ふつう" HorizontalAlignment="Left" Margin="340,4,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="5" BorderBrush="{x:Null}"/>
-        <Button Content="おそい" HorizontalAlignment="Left" Margin="275,4,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" Grid.Column="3" Grid.Row="5" BorderBrush="{x:Null}"/>
-        <Label Content="/" HorizontalAlignment="Left" Margin="222,1,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White" Grid.Column="2" Grid.Row="6"/>
-        <Button Content="あり" HorizontalAlignment="Left" Margin="28,3,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" Grid.Column="2" Grid.Row="6" BorderBrush="{x:Null}"/>
-        <Button Content="なし" HorizontalAlignment="Left" Margin="334,3,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" Grid.Column="2" Grid.Row="6" Grid.ColumnSpan="2" BorderBrush="{x:Null}"/>
-        <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Center" Margin="0,2,0,0" Grid.Row="8" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}">
-            <Image Source="/Images/return_to_title.png"/>
-        </Button>
-    </Grid>
+    <Viewbox>
+        <Grid Height="1080" Width="1920">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image Height="1080" Width="1920" Source="/Images/background_option.png" Stretch="Fill"/>
+            <Label Content="オプション" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="94" FontWeight="Bold" Foreground="White" Margin="0,56,0,0"/>
+            <Label Content="効果音♪" HorizontalAlignment="Left" Margin="336,246,0,726" FontSize="82" FontWeight="Bold"/>
+            <Label Content="BGM♪" HorizontalAlignment="Left" Margin="336,375,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold"/>
+            <Label Content="文字の速さ" HorizontalAlignment="Left" Margin="336,513,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold"/>
+            <Label Content="ふりがな" HorizontalAlignment="Left" Margin="336,646,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold"/>
+            <Button Content="ON" HorizontalAlignment="Left" Margin="797,244,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <Label Content="/" HorizontalAlignment="Left" Margin="993,242,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
+            <Button Content="OFF" HorizontalAlignment="Left" Margin="1102,244,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="82" Background="{x:Null}" Foreground="White" RenderTransformOrigin="-0.101,0.088" BorderBrush="{x:Null}"/>
+            <Label Content="/" HorizontalAlignment="Left" Margin="1041,508,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
+            <Label Content="/" HorizontalAlignment="Left" Margin="1343,508,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
+            <Button Content="ON" HorizontalAlignment="Left" Margin="797,371,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <Label Content="/" HorizontalAlignment="Left" Margin="993,371,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
+            <Button Content="OFF" HorizontalAlignment="Left" Margin="1102,371,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="82" Background="{x:Null}" Foreground="White" RenderTransformOrigin="-0.101,0.088" BorderBrush="{x:Null}"/>
+            <Button Content="はやい" HorizontalAlignment="Left" Margin="798,510,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <Button Content="ふつう" HorizontalAlignment="Left" Margin="1110,510,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <Button Content="おそい" HorizontalAlignment="Left" Margin="1425,510,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <Label Content="/" HorizontalAlignment="Left" Margin="992,643,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
+            <Button Content="あり" HorizontalAlignment="Left" Margin="798,645,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <Button Content="なし" HorizontalAlignment="Left" Margin="1104,645,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <Label Content="文字認識" HorizontalAlignment="Left" Margin="336,786,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold"/>
+            <Button Content="ON" HorizontalAlignment="Left" Margin="797,784,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <Label Content="/" HorizontalAlignment="Left" Margin="993,783,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
+            <Button Content="OFF" HorizontalAlignment="Left" Margin="1102,784,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="82" Background="{x:Null}" Foreground="White" RenderTransformOrigin="-0.101,0.088" BorderBrush="{x:Null}"/>
+            <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}">
+                <Image Source="/Images/return_to_title.png"/>
+            </Button>
+        </Grid>
+    </Viewbox>
 </Page>
