@@ -191,7 +191,7 @@ next
 reset
 image,bg,background_07.png
 image,chara_stand_right,teacher.png
-image,chara_stand_left,kimi_stand_01.png
+image,chara_stand_left,children_stand_01.png
 grid,main_msg_grid
 image,main_msg_bubble,right_big_bubble.png
 wait
@@ -199,12 +199,12 @@ msg,main_msg,それでは、キミちゃん！意見を言ってくれるかな�
 wait
 image,chara_stand_left_symbol,big_heart.png,pomp,no_sync
 text,chara_stand_left_comment,ドキ!!,red,rotation,no_sync
-image,chara_stand_left,kimi_stand_01.png,pomp
+image,chara_stand_left,children_stand_01.png,pomp
 wait
 reset
 image,bg,water_frame.png
 image,chara_stand_right_small,shiroji_04.png
-image,chara_stand_left_small,kimi_stand_01.png
+image,chara_stand_left_small,children_stand_01.png
 grid,main_msg_grid
 image,main_msg_bubble,right_big_bubble.png
 msg,main_msg,授業中に先生から指名されたとき、キミちゃんはどんな「きもち」になるかの？,白じい
@@ -218,16 +218,16 @@ next
 hide,grid,good_words_grid
 hide,grid,bad_words_grid
 hide,image,item_image_center
-grid,feeling_value_grid
-text,feeling_person_text,キミちゃんの「きもち」
-text,feeling_value_text,やる気マンマン
+grid,size_of_mind_grid
+text,mind_person_text,キミちゃんの「きもち」
+text,size_of_mind_text,やる気マンマン
 image,main_msg_bubble,right_big_bubble.png
 msg,main_msg,キミちゃんは【きもち】という きもちなんじゃな。そのきもちを選んだ理由も考えて話し合ってみるのじゃ！,白じい
 next
 reset
 image,bg,background_07.png
 image,chara_stand_right,shiroji_02.png
-image,chara_stand_left,kimi_stand_01.png
+image,chara_stand_left,children_stand_01.png
 grid,main_msg_grid
 image,main_msg_bubble,left_big_bubble_yellow.png
 wait
@@ -275,13 +275,13 @@ msg,main_msg,きもちセンサーをつかって、きもちの種類を選ん�
 wait
 clear,text,main_msg
 hide,grid,main_msg_grid
-text,feeling_person_text,赤丸くんの「きもち」
-text,feeling_value_text,イライラ
-grid,feeling_value_grid
+text,mind_person_text,赤丸くんの「きもち」
+text,size_of_mind_text,イライラ
+grid,size_of_mind_grid
 grid,main_msg_grid
 msg,main_msg,赤丸くんは【きもち】という きもちなんじゃな。きもちの大きさは どれくらいかの？,白じい
 wait
-hide,grid,feeling_value_grid
+hide,grid,size_of_mind_grid
 clear,text,main_msg
 hide,grid,main_msg_grid
 grid,gauge_grid
@@ -309,13 +309,13 @@ msg,main_msg,きもちセンサーをつかって、きもちの種類を選ん�
 wait
 clear,text,main_msg
 hide,grid,main_msg_grid
-text,feeling_person_text,青助くんの「きもち」
-text,feeling_value_text,やる気マンマン
-grid,feeling_value_grid
+text,mind_person_text,青助くんの「きもち」
+text,size_of_mind_text,やる気マンマン
+grid,size_of_mind_grid
 grid,main_msg_grid
 msg,main_msg,青助くんは【きもち】という きもちなんじゃな。きもちの大きさは　どれくらいかの？
 wait
-hide,grid,feeling_value_grid
+hide,grid,size_of_mind_grid
 hide,grid,main_msg_grid
 clear,text,main_msg
 grid,gauge_grid

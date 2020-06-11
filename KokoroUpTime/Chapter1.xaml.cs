@@ -38,7 +38,7 @@ namespace KokoroUpTime
         private bool isClickable = false;
         private int tapCount = 0;
 
-        private int feelingSize = 0;
+        private int mindSize = 0;
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
@@ -75,433 +75,229 @@ namespace KokoroUpTime
         {
             this.imageObjects = new Dictionary<string, Image>
             {
-                ["bg_image"] = this.BackgroundImage, //
-                ["manga_title_image"] = this.MangaTitleImage, //
-                ["manga_image"] = this.MangaImage, //
-                ["item_center_image"] = this.ItemCenterImage, //
-                ["item_left_image"] = this.ItemLeftImage, //
+                ["bg_image"] = this.BackgroundImage,
+                ["manga_title_image"] = this.MangaTitleImage,
+                ["manga_image"] = this.MangaImage,
+                ["item_center_image"] = this.ItemCenterImage,
+                ["item_left_image"] = this.ItemLeftImage,
                 ["item_left_last_image"] = this.ItemLeftLastImage,
-                ["item_last_info_image"] = this.ItemLastInfoImage,
-                // ["item_name_plate_center_image"] = this.ItemNamePlateCenterImage,
-                // ["item_name_bubble_image"] = this.ItemNameBubbleImage,
-                // ["item_name_plate_left_image"] = this.ItemNamePlateLeftImage,
-                // ["item_info_plate_image"] = this.ItemInfoPlateImage,
-                ["session_frame_image"] = this.SessionFrameImage,
                 ["session_title_image"] = this.SessionTitleImage,
-                ["challenge_good_feeling_image"] = this.ChallengeGoodFeelingImage,
-                ["challenge_bad_feeling_image"] = this.ChallengeBadFeelingImage,
-                ["challenge_title_image"] = this.ChallengeTitleImage,
-                ["challenge_small_bubble_image"] = this.ChallengeSmallBubbleImage,
-                ["challenge_item_image"] = this.ChallengeItemImage,
-                ["challenge_message_box_image"] = this.ChallengeMessageBoxImage,
-                ["challenge_complete_image"] = this.ChallengeCompleteImage,
-                ["challenge_next_image"] = this.ChallengeNextImage,
-                ["select_good_feeling_image"] = this.SelectGoodFeelingImage,
-                ["select_bad_feeling_image"] = this.SelectBadFeelingImage,
-                ["select_item_feeling_image"] = this.SelectItemFeelingImage,
-
-                ["kimi_plate_outer_image"] = this.KimiPlateOuterImage,
                 ["kimi_in_plate_image"] = this.KimiInPlateImage,
-                ["kimi_plate_inner_up_image"] = this.KimiPlateInnerUpImage,
-                ["kimi_plate_inner_down_image"] = this.KimiPlateInnerDownImage,
-
-                ["view_kind_of_feeling_image"] = this.ViewKindOfFeelingImage,
-                ["view_feeling_value_image"] = this.ViewFeelingValueImage,
-                ["heart_image"] = this.HeartImage,
-                ["needle_image"] = this.NeedleImage,
-
-                ["summary_board_image"] = this.SummaryBoardImage,
-                ["summary_title_image"] = this.SummaryTitleImage,
-                ["children_info_image"] = this.ChildrenInfoImage, //
-                
-                ["ending_title_back_image"] = this.EndingTitleBackImage,
-                ["ending_item_image"] = this.EndingItemImage,
+                ["kimi_plate_outer_image"] = this.KimiPlateOuterImage,
+                ["select_heart_image"] = this.SelectHeartImage,
+                ["select_needle_image"] = this.SelectNeedleImage,
+                ["children_info_image"] = this.ChildrenInfoImage,
                 ["shiroji_ending_image"] = this.ShirojiEndingImage,
-                ["kimi_ending_image"] = this.KimiEndingImage,
-                ["aosuke_ending_image"] = this.AosukeEndingImage,
-                ["akamaru_ending_image"] = this.AkamaruEndingImage,
-                ["ending_short_bubble_image"] = this.EndingShortBubbleImage,
-
-                ["shiroji_right_image"] = this.ShirojiRightImage, //
+                ["shiroji_right_image"] = this.ShirojiRightImage,
                 ["shiroji_right_up_image"] = this.ShirojiRightUpImage,
-                ["shiroji_small_right_up_image"] = this.ShirojiSmallRightUpImage, //
-                ["shiroji_small_right_down_image"] = this.ShirojiSmallRightDownImage, //
+                ["shiroji_small_right_up_image"] = this.ShirojiSmallRightUpImage,
+                ["shiroji_small_right_down_image"] = this.ShirojiSmallRightDownImage,
                 ["shiroji_right_center_image"] = this.ShirojiRightCenterImage,
                 ["shiroji_small_right_center_image"] = this.ShirojiSmallRightCenterImage,
                 ["shiroji_very_small_right_image"] = this.ShirojiVerySmallRightImage,
                 ["children_stand_left_image"] = this.ChildrenStandLeftImage,
                 ["children_stand_right_image"] = this.ChildrenStandRightImage,
-                ["kimi_stand__small_left_image"] = this.KimiStandSmallLeftImage,
-                ["kimi_stand_left_symbol_image"] = this.KimiStandLeftSymbolImage,
-                ["intro_akamaru_face_image"] = this.IntroAkamaruFaceImage, //
-                ["intro_aosuke_face_image"] = this.IntroAosukeFaceImage, //
-                ["intro_kimi_face_image"] = this.IntroKimiFaceImage, //
+                ["children_stand_left_onomatopoeia_image"] = this.ChildrenStandLeftOnomatopoeiaImage,
+                ["kimi_stand_small_left_image"] = this.KimiStandSmallLeftImage,
+                ["intro_akamaru_face_image"] = this.IntroAkamaruFaceImage,
+                ["intro_aosuke_face_image"] = this.IntroAosukeFaceImage,
+                ["intro_kimi_face_image"] = this.IntroKimiFaceImage,
                 ["children_face_small_left_image"] = this.ChildrenFaceSmallLeftImage,
-                ["children_face_small_left_comment_image"] = this.ChildrenFaceSmallLeftCommentImage,
                 ["teacher_image"] = this.TeacherImage,
-                ["main_msg_bubble_image"] = this.MainMessageBubbleImage, //
-                // ["next_message_arrow_down_image"] = this.NextMessageArrowDownImage,
-                // ["back_message_arrow_up_image"] = this.BackMessageAllowUpImage,
-                // ["thin_message_bubble_image"] = this.ThinMessageBubbleImage,
-                ["next_page_after_image"] = this.NextPageAfterImage,
-                ["back_page_before_image"] = this.BackPageBeforeImage,
-                // ["manga_flip_arrow_image"] = this.MangaFlipArrowImage,
-                // ["music_info_back_image"] = this.MusicInfoBackImage,
-                ["cover_layer_image"] = this.CoverLayerImage,
-                ["exit_back_image"] = this.ExitBackImage,
-                ["exit_yes_button_image"] = this.ExitYesButtonImage,
-                ["exit_no_button_image"] = this.ExitNoButtonImage,
+                ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
             {
-                ["rule_board_title_msg"] = this.RuleBoardTitleTextBlock, //
-                ["rule_board_check1_msg"] = this.RuleBoardCheck1TextBlock, //
-                ["rule_board_check2_msg"] = this.RuleBoardCheck2TextBlock, //
-                ["rule_board_check3_msg"] = this.RuleBoardCheck3TextBlock, //
-                ["item_name_left_text"] = this.ItemNameLeftTextBlock, //
-                ["item_name_center_text"] = this.ItemNameCenterTextBlock, //
-                ["item_number_text"] = this.ItemNumberTextBlock, //
-                ["item_info_title_text"] = this.ItemInfoTitleTextBlock, //
-                ["item_info_sentence_text1"] = this.ItemInfoSentenceTextBlock1,
-                ["item_info_sentence_text2"] = this.ItemInfoSentenceTextBlock2,
-                ["item_last_info_text"] = this.ItemLastInfoTextBlock,
+                ["rule_board_title_msg"] = this.RuleBoardTitleTextBlock,
+                ["rule_board_check1_msg"] = this.RuleBoardCheck1TextBlock,
+                ["rule_board_check2_msg"] = this.RuleBoardCheck2TextBlock,
+                ["rule_board_check3_msg"] = this.RuleBoardCheck3TextBlock,
                 ["session_sub_title_text"] = this.SessionSubTitleTextBlock,
                 ["session_sentence_text"] = this.SessionSentenceTextBlock,
-                ["challenge_msg_text"] = this.ChallengeMessageTextBlock,
-                ["challenge_msg_box_text"] = this.ChallengeMessageBoxTextBlock,
-                ["view_kind_of_feeling_person_text"] = this.ViewKindOfFeelingPersonTextBlock,
-                ["view_kind_of_feeling_text"] = this.ViewKindOfFeelingTextBlock,
-                ["view_feeling_value_text"] = this.ViewFeelingValueTextBlock,
-
+                ["view_kind_of_mind_person_text"] = this.ViewKindOfMindPersonTextBlock,
+                ["view_kind_of_mind_text"] = this.ViewKindOfMindTextBlock,
+                ["view_size_of_mind_text"] = this.ViewSizeOfMindTextBlock,
                 ["case_of_kimi_text"] = this.CaseOfKimiTextBlock,
-                ["scene1_text"] = this.Scene1TextBlock,
-                ["kind_of_mind_up_text"] = this.KindOfMindUpTextBlock,
-                ["scale_of_mind_up_text"] = this.ScaleOfMindUpTextBlock,
-                ["scene2_text"] = this.Scene2TextBlock,
-                ["kind_of_mind_down_text"] = this.KindOfMindDownTextBlock,
-                ["scale_of_mind_down_text"] = this.ScaleOfMindDownTextBlock,
-
-
-                ["summary_sub_title_text"] = this.SummarySubTitleTextBlock,
-                ["summary_sentence_text"] = this.SummarySentenceTextBlock,
-
-                ["ending_chapter_no_text"] = this.EndingChapterNoTextBlock,
+                ["kimi_scene1_text"] = this.KimiScene1TextBlock,
+                ["kimi_kind_of_mind_up_text"] = this.KimiKindOfMindUpTextBlock,
+                ["kimi_size_of_mind_up_text"] = this.KimiSizeOfMindUpTextBlock,
+                ["kimi_scene2_text"] = this.KimiScene2TextBlock,
+                ["kimi_kind_of_mind_down_text"] = this.KimiKindOfMindDownTextBlock,
+                ["kimi_size_of_mind_down_text"] = this.KimiSizeOfMindDownTextBlock,
+                ["compare_msg_text"] = this.CompareMessageTextBlock,
+                ["kind_of_mind_akamaru_text"] = this.KindOfMindAkamaruTextBlock,
+                ["size_of_mind_akamaru_text"] = this.SizeOfMindAkamaruTextBlock,
+                ["kind_of_mind_aosuke_text"] = this.KindOfMindAosukeTextBlock,
+                ["size_of_mind_aosuke_text"] = this.SizeOfMindAosukeTextBlock,
                 ["ending_msg_text"] = this.EndingMessageTextBlock,
-
-                ["kimi_stand_left_comment_text"] = this.KimiStandLeftCommentTextBlock,
-                ["children_face_small_left_comment_text"] = this.ChildrenFaceSmallLeftCommentTextBlock,
-                ["main_msg"] = this.MainMessageTextBlock, //
+                ["children_stand_left_onomatopoeia_text"] = this.ChildrenStandLeftOnomatopoeiaTextBlock,
+                ["children_face_small_left_msg_text"] = this.ChildrenFaceSmallLeftMessageTextBlock,
+                ["main_msg"] = this.MainMessageTextBlock,
                 ["thin_msg"] = this.ThinMessageTextBlock,
-                ["music_title_text"] = this.MusicTitleTextBlock, //
-                ["composer_name_text"] = this.ComposerNameTextBlock, //
+                ["music_title_text"] = this.MusicTitleTextBlock,
+                ["composer_name_text"] = this.ComposerNameTextBlock,
             };
 
             this.buttonObjects = new Dictionary<string, Button>
             {
-                ["rule_board_button"] = this.RuleBoardButton, //
-                ["next_msg_button"] = this.NextMessageButton, //
-                ["back_msg_button"] = this.BackMessageButton, //
-                ["thin_msg_button"] = this.ThinMessageButton, //
-                ["next_page_button"] = this.NextPageButton, //
-                ["back_page_button"] = this.BackPageButton, //
-                ["manga_flip_button"] = this.MangaFlipButton, //
-                ["exit_button"] = this.ExitButton,
-                ["exit_yes_button"] = this.ExitYesButton,
-                ["exit_no_button"] = this.ExitNoButton,
+                ["rule_board_button"] = this.RuleBoardButton,
+                ["next_msg_button"] = this.NextMessageButton,
+                ["back_msg_button"] = this.BackMessageButton,
+                ["thin_msg_button"] = this.ThinMessageButton,
+                ["next_page_button"] = this.NextPageButton,
+                ["back_page_button"] = this.BackPageButton,
+                ["manga_flip_button"] = this.MangaFlipButton,
                 ["challenge_complete_button"] = this.ChallengeCompleteButton,
                 ["challenge_next_button"] = this.ChallengeNextButton,
             };
 
             this.gridObjects = new Dictionary<string, Grid>
             {
-                // ["base_grid"] = this.BaseGrid,
-                // ["manga_grid"] = this.MangaGrid,
-                // ["item_grid"] = this.ItemGrid,
                 ["session_grid"] = this.SessionGrid,
                 ["challenge_grid"] = this.ChallengeGrid,
-                ["select_feeling_grid"] = this.SelectFeelingGrid,
-                ["view_feeling_grid"] = this.ViewFeelingGrid,
-                ["gauge_grid"] = this.GaugeGrid,
+                ["select_mind_grid"] = this.SelectMindGrid,
                 ["summary_grid"] = this.SummaryGrid,
-
                 ["ending_grid"] = this.EndingGrid,
-
-                // ["any_frame_grid"] = this.AnyFrameGrid,
-                // ["shiroji_grid"] = this.ShirojiGrid,
-                ["children_stand_grid"] = this.ChildrenStandGrid,
-                // ["children_face_grid"] = this.ChildrenFaceGrid,
-                ["any_chara_grid"] = this.AnyCharaGrid,
-                // ["system_grid"] = this.SystemGrid,
-                // ["rule_button_grid"] = this.RuleButtonGrid,
-                ["item_name_plate_left_grid"] = this.ItemNamePlateLeftGrid, // 
-                ["item_name_bubble_grid"] = this.ItemNameBubbleGrid, //
-                ["item_name_plate_center_grid"] = this.ItemNamePlateCenterGrid, //
+                ["item_name_plate_left_grid"] = this.ItemNamePlateLeftGrid, 
+                ["item_name_bubble_grid"] = this.ItemNameBubbleGrid,
+                ["item_name_plate_center_grid"] = this.ItemNamePlateCenterGrid,
                 ["item_info_plate_grid"] = this.ItemInfoPlateGrid,
                 ["item_info_sentence_grid"] = this.ItemInfoSentenceGrid,
                 ["item_last_info_grid"] = this.ItemLastInfoGrid,
-                ["session_frame_grid"] = this.SessionFrameGrid,
                 ["challenge_msg_grid"] = this.ChallengeMessageGrid,
-                ["challenge_msg_box_grid"] = this.ChallengeMessageBoxGrid,
-                ["challenge_good_feeling_grid"] = this.ChallengeGoodFeelingGrid,
-                ["challenge_bad_feeling_grid"] = this.ChallengeBadFeelingGrid,
-                ["select_good_feeling_grid"] = this.SelectGoodFeelingGrid,
-                ["select_bad_feeling_grid"] = this.SelectBadFeelingGrid,
-
-                ["kimi_plate_grid"] = this.KimiPlateGrid,
                 ["kimi_plate_inner_up_grid"] = this.KimiPlateInnerUpGrid,
                 ["kimi_plate_inner_down_grid"] = this.KimiPlateInnerDownGrid,
-
-
-                ["view_kind_of_feeling_grid"] = this.ViewKindOfFeelingGrid,
-                ["view_feeling_value_grid"] = this.ViewFeelingValueGrid,
-                ["children_face_small_left_comment_grid"] = this.ChildrenFaceSmallLeftCommentGrid,
-                ["heart_grid"] = this.HeartGrid,
-                ["summary_board_grid"] = this.SummaryBoardGrid,
-
-                ["ending_title_grid"] = this.EndingTitleGrid,
+                ["view_kind_of_mind_grid"] = this.ViewKindOfMindGrid,
+                ["view_size_of_mind_grid"] = this.ViewSizeOfMindGrid,
+                ["children_face_small_left_msg_grid"] = this.ChildrenFaceSmallLeftMessageGrid,
+                ["select_heart_grid"] = this.SelectHeartGrid,
+                ["compare_akamaru_heart_grid"] = this.CompareAkamaruHeartGrid,
+                ["compare_aosuke_heart_grid"] = this.CompareAosukeHeartGrid,
+                ["akamaru_and_aosuke_compare_grid"] = this.AkamaruAndAosukeCompareGrid,
+                ["compare_msg_grid"] = this.CompareMessageGrid,
                 ["ending_msg_grid"] = this.EndingMessageGrid,
-
-                ["main_msg_grid"] = this.MainMessageGrid, //
-                // ["thin_message_grid"] = this.ThinMessageGrid,
-                ["music_info_grid"] = this.MusicInfoGrid, //
-                ["exit_grid"] = this.ExitGrid,
+                ["main_msg_grid"] = this.MainMessageGrid,
+                ["music_info_grid"] = this.MusicInfoGrid,
+                ["exit_back_grid"] = this.ExitBackGrid,
             };
         }
 
         private void ResetControls()
         {
-            // this.BaseGrid.Visibility = Visibility.Hidden;
-            // this.MangaGrid.Visibility = Visibility.Hidden;
-            // this.ItemGrid.Visibility = Visibility.Hidden;
             this.SessionGrid.Visibility = Visibility.Hidden;
             this.ChallengeGrid.Visibility = Visibility.Hidden;
-            this.SelectFeelingGrid.Visibility = Visibility.Hidden;
-            this.ViewFeelingGrid.Visibility = Visibility.Hidden;
-            this.GaugeGrid.Visibility = Visibility.Hidden;
+            this.SelectMindGrid.Visibility = Visibility.Hidden;
             this.SummaryGrid.Visibility = Visibility.Hidden;
-
             this.EndingGrid.Visibility = Visibility.Hidden;
-
-            // this.AnyFrameGrid.Visibility = Visibility.Hidden;
-            // this.ShirojiGrid.Visibility = Visibility.Hidden;
-            this.ChildrenStandGrid.Visibility = Visibility.Hidden;
-            // this.ChildrenFaceGrid.Visibility = Visibility.Hidden;
-            this.AnyCharaGrid.Visibility = Visibility.Hidden;
-            // this.SystemGrid.Visibility = Visibility.Hidden;
-
-            // this.RuleButtonGrid.Visibility = Visibility.Hidden;
-            this.ItemNamePlateLeftGrid.Visibility = Visibility.Hidden; //
-            this.ItemNameBubbleGrid.Visibility = Visibility.Hidden; //
-            this.ItemNamePlateCenterGrid.Visibility = Visibility.Hidden; //
+            this.ItemNamePlateLeftGrid.Visibility = Visibility.Hidden;
+            this.ItemNameBubbleGrid.Visibility = Visibility.Hidden;
+            this.ItemNamePlateCenterGrid.Visibility = Visibility.Hidden;
             this.ItemInfoPlateGrid.Visibility = Visibility.Hidden;
-            this.ItemInfoSentenceGrid.Visibility = Visibility.Hidden;
             this.ItemLastInfoGrid.Visibility = Visibility.Hidden;
-            this.SessionFrameGrid.Visibility = Visibility.Hidden;
-            this.ViewKindOfFeelingGrid.Visibility = Visibility.Hidden;
-            this.ViewFeelingValueGrid.Visibility = Visibility.Hidden;
-            this.ChildrenFaceSmallLeftCommentGrid.Visibility = Visibility.Hidden;
+            this.ViewKindOfMindGrid.Visibility = Visibility.Hidden;
+            this.ViewSizeOfMindGrid.Visibility = Visibility.Hidden;
+            this.ChildrenFaceSmallLeftMessageGrid.Visibility = Visibility.Hidden;
             this.ChallengeMessageGrid.Visibility = Visibility.Hidden;
-            this.ChallengeMessageBoxGrid.Visibility = Visibility.Hidden;
-            this.ChallengeGoodFeelingGrid.Visibility = Visibility.Hidden;
-            this.ChallengeBadFeelingGrid.Visibility = Visibility.Hidden;
-            this.SelectGoodFeelingGrid.Visibility = Visibility.Hidden;
-            this.SelectBadFeelingGrid.Visibility = Visibility.Hidden;
-
-            this.KimiPlateGrid.Visibility = Visibility.Hidden;
             this.KimiPlateInnerUpGrid.Visibility = Visibility.Hidden;
             this.KimiPlateInnerDownGrid.Visibility = Visibility.Hidden;
-
-            this.HeartGrid.Visibility = Visibility.Hidden;
-            this.SummaryBoardGrid.Visibility = Visibility.Hidden;
-
-            this.EndingTitleGrid.Visibility = Visibility.Hidden;
+            this.SelectHeartGrid.Visibility = Visibility.Hidden;
+            this.CompareAkamaruHeartGrid.Visibility = Visibility.Hidden;
+            this.CompareAosukeHeartGrid.Visibility = Visibility.Hidden;
+            this.AkamaruAndAosukeCompareGrid.Visibility = Visibility.Hidden;
+            this.CompareMessageGrid.Visibility = Visibility.Hidden;
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
-
-            this.MainMessageGrid.Visibility = Visibility.Hidden; //
-            // this.ThinMessageGrid.Visibility = Visibility.Hidden;
-            this.MusicInfoGrid.Visibility = Visibility.Hidden; //
-            this.ExitGrid.Visibility = Visibility.Hidden;
-
-            this.BackgroundImage.Visibility = Visibility.Hidden; //
-            this.RuleBoardButton.Visibility = Visibility.Hidden; //
-            this.RuleBoardTitleTextBlock.Visibility = Visibility.Hidden; //
-            this.RuleBoardCheck1TextBlock.Visibility = Visibility.Hidden; //
-            this.RuleBoardCheck2TextBlock.Visibility = Visibility.Hidden; //
-            this.RuleBoardCheck3TextBlock.Visibility = Visibility.Hidden; //
-            this.RuleBoardCheck1Box.Visibility = Visibility.Hidden; //
-            this.RuleBoardCheck2Box.Visibility = Visibility.Hidden; //
-            this.RuleBoardCheck3Box.Visibility = Visibility.Hidden; //
-            this.MangaTitleImage.Visibility = Visibility.Hidden; //
-            this.MangaImage.Visibility = Visibility.Hidden; //
-            this.ItemCenterImage.Visibility = Visibility.Hidden; //
-            this.ItemLeftImage.Visibility = Visibility.Hidden; //
+            this.MainMessageGrid.Visibility = Visibility.Hidden;
+            this.MusicInfoGrid.Visibility = Visibility.Hidden;
+            this.ExitBackGrid.Visibility = Visibility.Hidden;
+            this.BackgroundImage.Visibility = Visibility.Hidden;
+            this.RuleBoardButton.Visibility = Visibility.Hidden;
+            this.RuleBoardTitleTextBlock.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck1TextBlock.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck2TextBlock.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck3TextBlock.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck1Box.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck2Box.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck3Box.Visibility = Visibility.Hidden;
+            this.MangaTitleImage.Visibility = Visibility.Hidden;
+            this.MangaImage.Visibility = Visibility.Hidden;
+            this.ItemCenterImage.Visibility = Visibility.Hidden;
+            this.ItemLeftImage.Visibility = Visibility.Hidden;
             this.ItemLeftLastImage.Visibility = Visibility.Hidden;
-            this.ItemLastInfoImage.Visibility = Visibility.Hidden;
-            // this.ItemNamePlateCenterImage.Visibility = Visibility.Hidden;
-            // this.ItemNameBubbleImage.Visibility = Visibility.Hidden;
-            // this.ItemNamePlateLeftImage.Visibility = Visibility.Hidden;
-            // this.ItemNameLeftTextBlock.Visibility = Visibility.Hidden;
-            // this.ItemNameCenterTextBlock.Visibility = Visibility.Hidden;
-            // this.ItemNumberTextBlock.Visibility = Visibility.Hidden;
-            this.ItemInfoTitleTextBlock.Visibility = Visibility.Hidden;
-            this.ItemInfoSentenceTextBlock1.Visibility = Visibility.Hidden;
-            this.ItemInfoSentenceTextBlock2.Visibility = Visibility.Hidden;
-            this.ItemLastInfoTextBlock.Visibility = Visibility.Hidden;
             this.SessionTitleImage.Visibility = Visibility.Hidden;
-            this.SessionFrameImage.Visibility = Visibility.Hidden;
             this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden;
             this.SessionSentenceTextBlock.Visibility = Visibility.Hidden;
-            this.ChallengeGoodFeelingImage.Visibility = Visibility.Hidden;
-            this.ChallengeBadFeelingImage.Visibility = Visibility.Hidden;
-            this.ChallengeTitleImage.Visibility = Visibility.Hidden;
-            this.ChallengeSmallBubbleImage.Visibility = Visibility.Hidden;
-            this.ChallengeItemImage.Visibility = Visibility.Hidden;
-            this.ChallengeMessageBoxImage.Visibility = Visibility.Hidden;
-            this.ChallengeCompleteImage.Visibility = Visibility.Hidden;
-            this.ChallengeNextImage.Visibility = Visibility.Hidden;
-            this.ChallengeMessageTextBlock.Visibility = Visibility.Hidden;
-            this.ChallengeMessageBoxTextBlock.Visibility = Visibility.Hidden;
-            this.ChallengeCompleteButton.Visibility = Visibility.Hidden;
             this.ChallengeNextButton.Visibility = Visibility.Hidden;
-            this.ChallengeGoodFeelingStackPanel.Visibility = Visibility.Hidden;
-            this.ChallengeBadFeelingStackPanel.Visibility = Visibility.Hidden;
-            this.SelectGoodFeelingImage.Visibility = Visibility.Hidden;
-            this.SelectBadFeelingImage.Visibility = Visibility.Hidden;
-            this.SelectItemFeelingImage.Visibility = Visibility.Hidden;
-
-            this.Scene1Label.Visibility = Visibility.Hidden;
-            this.KindOfMindUpLabel.Visibility = Visibility.Hidden;
-            this.ScaleOfMindUpLabel.Visibility = Visibility.Hidden;
-            this.Scene2Label.Visibility = Visibility.Hidden;
-            this.KindOfMindDownLabel.Visibility = Visibility.Hidden;
-            this.ScaleOfMindDownLabel.Visibility = Visibility.Hidden;
             this.KimiPlateOuterImage.Visibility = Visibility.Hidden;
             this.KimiInPlateImage.Visibility = Visibility.Hidden;
-            this.KimiPlateInnerUpImage.Visibility = Visibility.Hidden;
-            this.KimiPlateInnerDownImage.Visibility = Visibility.Hidden;
             this.CaseOfKimiTextBlock.Visibility = Visibility.Hidden;
-            this.Scene1TextBlock.Visibility = Visibility.Hidden;
-            this.KindOfMindUpTextBlock.Visibility = Visibility.Hidden;
-            this.ScaleOfMindUpTextBlock.Visibility = Visibility.Hidden;
-            this.Scene2TextBlock.Visibility = Visibility.Hidden;
-            this.KindOfMindDownTextBlock.Visibility = Visibility.Hidden;
-            this.ScaleOfMindDownTextBlock.Visibility = Visibility.Hidden;
-
-
-            this.ViewKindOfFeelingPersonTextBlock.Visibility = Visibility.Hidden;
-            this.ViewKindOfFeelingImage.Visibility = Visibility.Hidden;
-            this.ViewFeelingValueLabel.Visibility = Visibility.Hidden;
-            this.ViewFeelingValueImage.Visibility = Visibility.Hidden;
-            this.ChildrenFaceSmallLeftCommentImage.Visibility = Visibility.Hidden;
-            this.ViewFeelingValueTextBlock.Visibility = Visibility.Hidden;
-            this.ChildrenFaceSmallLeftCommentTextBlock.Visibility = Visibility.Hidden;
-            this.HeartImage.Visibility = Visibility.Hidden;
-            this.NeedleImage.Visibility = Visibility.Hidden;
-            this.SummaryBoardImage.Visibility = Visibility.Hidden;
-            this.SummaryTitleImage.Visibility = Visibility.Hidden;
-            this.SummarySubTitleTextBlock.Visibility = Visibility.Hidden;
-            this.SummarySentenceTextBlock.Visibility = Visibility.Hidden;
-            this.ChildrenInfoImage.Visibility = Visibility.Hidden; //
-
-            this.EndingTitleBackImage.Visibility = Visibility.Hidden;
-            this.EndingItemImage.Visibility = Visibility.Hidden;
-            this.ShirojiEndingImage.Visibility = Visibility.Hidden;
-            this.KimiEndingImage.Visibility = Visibility.Hidden;
-            this.AosukeEndingImage.Visibility = Visibility.Hidden;
-            this.AkamaruEndingImage.Visibility = Visibility.Hidden;
-            this.EndingShortBubbleImage.Visibility = Visibility.Hidden;
-            this.EndingChapterNoTextBlock.Visibility = Visibility.Hidden;
+            this.KimiScene1TextBlock.Visibility = Visibility.Hidden;
+            this.KimiKindOfMindUpTextBlock.Visibility = Visibility.Hidden;
+            this.KimiSizeOfMindUpTextBlock.Visibility = Visibility.Hidden;
+            this.KimiScene2TextBlock.Visibility = Visibility.Hidden;
+            this.KimiKindOfMindDownTextBlock.Visibility = Visibility.Hidden;
+            this.KimiSizeOfMindDownTextBlock.Visibility = Visibility.Hidden;
+            this.ViewKindOfMindPersonTextBlock.Visibility = Visibility.Hidden;
+            this.ViewKindOfMindTextBlock.Visibility = Visibility.Hidden;
+            this.ViewSizeOfMindTextBlock.Visibility = Visibility.Hidden;
+            this.ChildrenFaceSmallLeftImage.Visibility = Visibility.Hidden;
+            this.ChildrenFaceSmallLeftMessageTextBlock.Visibility = Visibility.Hidden;
+            this.CompareMessageTextBlock.Visibility = Visibility.Hidden;
+            this.KindOfMindAkamaruTextBlock.Visibility = Visibility.Hidden;
+            this.SizeOfMindAkamaruTextBlock.Visibility = Visibility.Hidden;
+            this.KindOfMindAosukeTextBlock.Visibility = Visibility.Hidden;
+            this.SizeOfMindAosukeTextBlock.Visibility = Visibility.Hidden;
+            this.ChildrenInfoImage.Visibility = Visibility.Hidden;
             this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
-
-
-            this.ShirojiRightImage.Visibility = Visibility.Hidden; //
+            this.ShirojiRightImage.Visibility = Visibility.Hidden;
             this.ShirojiRightUpImage.Visibility = Visibility.Hidden;
-            this.ShirojiSmallRightUpImage.Visibility = Visibility.Hidden; //
-            this.ShirojiSmallRightDownImage.Visibility = Visibility.Hidden; //
+            this.ShirojiSmallRightUpImage.Visibility = Visibility.Hidden;
+            this.ShirojiSmallRightDownImage.Visibility = Visibility.Hidden;
             this.ShirojiRightCenterImage.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightCenterImage.Visibility = Visibility.Hidden;
             this.ShirojiVerySmallRightImage.Visibility = Visibility.Hidden;
+            this.ShirojiEndingImage.Visibility = Visibility.Hidden;
             this.ChildrenStandLeftImage.Visibility = Visibility.Hidden;
             this.ChildrenStandRightImage.Visibility = Visibility.Hidden;
             this.KimiStandSmallLeftImage.Visibility = Visibility.Hidden;
-            this.KimiStandLeftSymbolImage.Visibility = Visibility.Hidden;
-            this.KimiStandLeftCommentTextBlock.Visibility = Visibility.Hidden;
-            this.IntroAkamaruFaceImage.Visibility = Visibility.Hidden; //
-            this.IntroAosukeFaceImage.Visibility = Visibility.Hidden; //
-            this.IntroKimiFaceImage.Visibility = Visibility.Hidden; //
-            this.ChildrenFaceSmallLeftImage.Visibility = Visibility.Hidden;
+            this.ChildrenStandLeftOnomatopoeiaImage.Visibility = Visibility.Hidden;
+            this.ChildrenStandLeftOnomatopoeiaTextBlock.Visibility = Visibility.Hidden;
+            this.IntroAkamaruFaceImage.Visibility = Visibility.Hidden;
+            this.IntroAosukeFaceImage.Visibility = Visibility.Hidden;
+            this.IntroKimiFaceImage.Visibility = Visibility.Hidden;
             this.TeacherImage.Visibility = Visibility.Hidden;
-            // this.MainMessageBubbleImage.Visibility = Visibility.Hidden;
-            // this.NextMessageArrowDownImage.Visibility = Visibility.Hidden;
-            // this.BackMessageAllowUpImage.Visibility = Visibility.Hidden;
-            // this.ThinMessageBubbleImage.Visibility = Visibility.Hidden;
-            this.MainMessageTextBlock.Visibility = Visibility.Hidden; //
-            this.ThinMessageTextBlock.Visibility = Visibility.Hidden; //
-            this.NextMessageButton.Visibility = Visibility.Hidden; //
-            this.BackMessageButton.Visibility = Visibility.Hidden; //
-            this.ThinMessageButton.Visibility = Visibility.Hidden; //
-            // this.NextPageAfterImage.Visibility = Visibility.Hidden;
-            // this.BackPageBeforeImage.Visibility = Visibility.Hidden;
-            // this.MangaFlipArrowImage.Visibility = Visibility.Hidden;
-            // this.MusicInfoBackImage.Visibility = Visibility.Hidden;
-            // this.MusicTitleTextBlock.Visibility = Visibility.Hidden;
-            // this.ComposerTextBlock.Visibility = Visibility.Hidden;
-            this.NextPageButton.Visibility = Visibility.Hidden; //
-            this.BackPageButton.Visibility = Visibility.Hidden; //
-            this.MangaFlipButton.Visibility = Visibility.Hidden; //
-            // this.BGMLabel.Visibility = Visibility.Hidden;
-            // this.WriterArrangerLabel.Visibility = Visibility.Hidden;
+            this.MainMessageTextBlock.Visibility = Visibility.Hidden;
+            this.ThinMessageButton.Visibility = Visibility.Hidden;
+            this.ThinMessageTextBlock.Visibility = Visibility.Hidden;
+            this.NextMessageButton.Visibility = Visibility.Hidden;
+            this.BackMessageButton.Visibility = Visibility.Hidden;
+            this.NextPageButton.Visibility = Visibility.Hidden;
+            this.BackPageButton.Visibility = Visibility.Hidden;
+            this.MangaFlipButton.Visibility = Visibility.Hidden;
             this.CoverLayerImage.Visibility = Visibility.Hidden;
-            this.ExitBackImage.Visibility = Visibility.Hidden;
-            this.ExitYesButtonImage.Visibility = Visibility.Hidden;
-            this.ExitNoButtonImage.Visibility = Visibility.Hidden;
-            this.ExitButton.Visibility = Visibility.Hidden;
-            this.ExitYesButton.Visibility = Visibility.Hidden;
-            this.ExitNoButton.Visibility = Visibility.Hidden;
-            this.ExitTitleLabel.Visibility = Visibility.Hidden;
-
-            this.RuleBoardTitleTextBlock.Text = ""; //
-            this.RuleBoardCheck1TextBlock.Text = ""; //
-            this.RuleBoardCheck2TextBlock.Text = ""; //
-            this.RuleBoardCheck3TextBlock.Text = ""; //
-            this.ItemNameLeftTextBlock.Text = ""; //
-            this.ItemNameCenterTextBlock.Text = "";
-            this.ItemNumberTextBlock.Text = "";
-            this.ItemInfoTitleTextBlock.Text = "";
-            this.ItemInfoSentenceTextBlock1.Text = "";
-            this.ItemInfoSentenceTextBlock2.Text = "";
-            this.ItemLastInfoTextBlock.Text = "";
+            this.RuleBoardTitleTextBlock.Text = "";
+            this.RuleBoardCheck1TextBlock.Text = "";
+            this.RuleBoardCheck2TextBlock.Text = "";
+            this.RuleBoardCheck3TextBlock.Text = "";
             this.SessionSubTitleTextBlock.Text = "";
             this.SessionSentenceTextBlock.Text = "";
-            this.ChallengeMessageTextBlock.Text = "";
-            this.ChallengeMessageBoxTextBlock.Text = "";
-            this.ViewKindOfFeelingPersonTextBlock.Text = "";
-            this.ViewKindOfFeelingTextBlock.Text = "";
-            this.ViewFeelingValueTextBlock.Text = "";
-
-            this.CaseOfKimiTextBlock.Text = "";
-            this.Scene1TextBlock.Text = "";
-            this.KindOfMindUpTextBlock.Text = "";
-            this.ScaleOfMindUpTextBlock.Text = "";
-            this.Scene2TextBlock.Text = "";
-            this.KindOfMindDownTextBlock.Text = "";
-            this.ScaleOfMindDownTextBlock.Text = "";
-
-            this.ChildrenFaceSmallLeftCommentTextBlock.Text = "";
-            this.SummarySubTitleTextBlock.Text = "";
-            this.SummarySentenceTextBlock.Text = "";
-            this.EndingChapterNoTextBlock.Text = "";
+            this.ViewKindOfMindPersonTextBlock.Text = "";
+            this.ViewKindOfMindTextBlock.Text = "";
+            this.ViewSizeOfMindTextBlock.Text = "";
+            this.ChildrenFaceSmallLeftMessageTextBlock.Text = "";
+            this.CompareMessageTextBlock.Text = "";
+            this.KindOfMindAkamaruTextBlock.Text = "";
+            this.SizeOfMindAkamaruTextBlock.Text = "";
+            this.KindOfMindAosukeTextBlock.Text = "";
+            this.SizeOfMindAosukeTextBlock.Text = "";
             this.EndingMessageTextBlock.Text = "";
-            this.KimiStandLeftCommentTextBlock.Text = "";
-            this.MainMessageTextBlock.Text = ""; //
-            this.ThinMessageTextBlock.Text = ""; //
-            this.MusicTitleTextBlock.Text = ""; //
-            this.ComposerNameTextBlock.Text = ""; //
-
-            this.RuleBoardCheck1Box.IsEnabled = false; //
-            this.RuleBoardCheck2Box.IsEnabled = false; //
-            this.RuleBoardCheck3Box.IsEnabled = false; //
+            this.MainMessageTextBlock.Text = "";
+            this.ThinMessageTextBlock.Text = "";
+            this.MusicTitleTextBlock.Text = "";
+            this.ComposerNameTextBlock.Text = "";
+            this.RuleBoardCheck1Box.IsEnabled = false;
+            this.RuleBoardCheck2Box.IsEnabled = false;
+            this.RuleBoardCheck3Box.IsEnabled = false;
         }
 
         // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
@@ -649,12 +445,20 @@ namespace KokoroUpTime
 
                     var _textObject = this.textBlockObjects[this.position];
 
-                    var _message = this.scenarios[this.scenarioCount][2];
+                    _textObject.Visibility = Visibility.Hidden;
 
-                    _textObject.Visibility = Visibility.Visible;
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    {
+                        var _message = this.scenarios[this.scenarioCount][2];
 
-                    this.ShowMessage(textObject: _textObject, message: _message);
+                        _textObject.Text = _message;
 
+                        this.ShowMessage(textObject: _textObject, message: _message);
+                    }
+                    else
+                    {
+                        this.ShowMessage(textObject: _textObject, message: _textObject.Text);
+                    }
                     break;
 
                 case "text":
@@ -663,11 +467,14 @@ namespace KokoroUpTime
 
                     var textObject = this.textBlockObjects[this.position];
 
-                    var _text = this.scenarios[this.scenarioCount][2];
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    {
+                        var _text = this.scenarios[this.scenarioCount][2];
 
-                    var text = _text.Replace("鬱", "\u2028");
+                        var text = _text.Replace("鬱", "\u2028");
 
-                    textObject.Text = text;
+                        textObject.Text = text;
+                    }
 
                     if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
                     {
@@ -689,11 +496,11 @@ namespace KokoroUpTime
                     }
                     textObject.Visibility = Visibility.Visible;
 
-                    string textIsSync = "sync";
+                    string textAnimeIsSync = "sync";
 
                     if (this.scenarios[this.scenarioCount].Count > 5 && this.scenarios[this.scenarioCount][5] != "")
                     {
-                        textIsSync = this.scenarios[this.scenarioCount][5];
+                        textAnimeIsSync = this.scenarios[this.scenarioCount][5];
                     }
 
                     if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
@@ -702,7 +509,7 @@ namespace KokoroUpTime
 
                         textStoryBoard += $"_{this.position}";
 
-                        this.ShowAnime(storyBoard: textStoryBoard, isSync: textIsSync);
+                        this.ShowAnime(storyBoard: textStoryBoard, isSync: textAnimeIsSync);
                     }
                     else
                     {
@@ -789,6 +596,9 @@ namespace KokoroUpTime
                             break;
 
                         case "grid":
+
+                            this.NextMessageButton.Visibility = Visibility.Hidden;
+                            this.BackMessageButton.Visibility = Visibility.Hidden;
 
                             this.position = this.scenarios[this.scenarioCount][2];
                             this.gridObjects[this.position].Visibility = Visibility.Hidden;
@@ -935,10 +745,10 @@ namespace KokoroUpTime
                 case "gauge":
 
                     /*
-                    var kindOfFeeling = this.scenarios[this.scenarioCount][1];
+                    var kindOfMind = this.scenarios[this.scenarioCount][1];
 
                     // 後々これを計算で得る
-                    var feelings = new Dictionary<string, float>() { { "good", 60.0f }, { "bad", 80.0f } };
+                    var minds = new Dictionary<string, float>() { { "good", 60.0f }, { "bad", 80.0f } };
 
                     var gaugeRotation = new RotateTransform
                     {
@@ -949,11 +759,11 @@ namespace KokoroUpTime
 
                     this.NeedleImage.RenderTransform = gaugeRotation;
 
-                    var feeling = feelings[kindOfFeeling] / 2.0f;
+                    var mind = minds[kindOfMind] / 2.0f;
 
-                    this.FeelingScaleText.Text = feeling.ToString();
+                    this.MindScaleText.Text = mind.ToString();
 
-                    GaugeUpdate(targetAngle: feeling);
+                    GaugeUpdate(targetAngle: mind);
 
                     void GaugeUpdate(float targetAngle)
                     {
@@ -979,7 +789,7 @@ namespace KokoroUpTime
                     }
                     */
                     this.Angle = 0.0f;
-                    this.ViewFeelingValueTextBlock.Text = "50";
+                    this.ViewSizeOfMindTextBlock.Text = "50";
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1003,6 +813,8 @@ namespace KokoroUpTime
             void ViewMsg(object sender, EventArgs e)
             {
                 textObject.Text = _message.Substring(0, word_num);
+
+                textObject.Visibility = Visibility.Visible;
 
                 if (word_num < _message.Length)
                 {
@@ -1084,14 +896,16 @@ namespace KokoroUpTime
         {
             Button button = sender as Button;
 
+            /*
             if (button.Name.Contains("Back"))
             {
                 this.scenarioCount -= 1;
                 this.ScenarioPlay();
                 // 連続Backの実現にはもっと複雑な処理がいる
             }
+            */
 
-            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "RuleBoardButton" || button.Name == "ThinMessageButton" || button.Name == "MangaFlipButton"))
+            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "RuleBoardButton" || button.Name == "ThinMessageButton" || button.Name == "MangaFlipButton" || button.Name == "ChallengeCompleteButton" || button.Name == "ChallengeNextButton"))
             {
                 this.isClickable = false;
 
@@ -1102,17 +916,17 @@ namespace KokoroUpTime
             if (button.Name == "ExitButton")
             {
                 this.CoverLayerImage.Visibility = Visibility.Visible;
-                this.ExitGrid.Visibility = Visibility.Visible;
+                this.ExitBackGrid.Visibility = Visibility.Visible;
             }
             
-            if (button.Name == "ExitYesButton")
+            if (button.Name == "ExitBackYesButton")
             {
                 Application.Current.Shutdown();
             }
             
-            if (button.Name == "ExitNoButton")
+            if (button.Name == "ExitBackNoButton")
             {
-                this.ExitGrid.Visibility = Visibility.Hidden;
+                this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
         }
@@ -1288,7 +1102,7 @@ namespace KokoroUpTime
 
             this.CalcAngle();
 
-            this.ViewFeelingValueTextBlock.Text = this.feelingSize.ToString();
+            this.ViewSizeOfMindTextBlock.Text = this.mindSize.ToString();
         }
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -1302,7 +1116,7 @@ namespace KokoroUpTime
             {
                 this.CalcAngle();
 
-                this.ViewFeelingValueTextBlock.Text = this.feelingSize.ToString();
+                this.ViewSizeOfMindTextBlock.Text = this.mindSize.ToString();
             }
         }
 
@@ -1310,29 +1124,32 @@ namespace KokoroUpTime
         {
             Point currentLocation = Mouse.GetPosition(this);
 
-            Point knobCenter = new Point(this.ActualWidth * 0.5, this.ActualHeight * 0.8);
+            var heartPosX = this.SelectHeartImage.TranslatePoint(new Point(0, 0), this).X;
+            var heartPosY = this.SelectHeartImage.TranslatePoint(new Point(0, 0), this).Y;
+
+            Point knobCenter = new Point(heartPosX + (this.SelectHeartImage.ActualWidth * 0.5), heartPosY + (this.SelectHeartImage.ActualHeight * 0.8));
 
             double radians = Math.Atan((currentLocation.Y - knobCenter.Y) / (currentLocation.X - knobCenter.X));
 
             this.Angle = radians * 180 / Math.PI + 90;
 
-            this.feelingSize = (int)(this.Angle + 50.0f);
+            this.mindSize = (int)(this.Angle + 50.0f);
 
             if (currentLocation.X - knobCenter.X < 0)
             {
                 this.Angle += 180;
 
-                this.feelingSize = (int)(this.Angle - 310.0f);
+                this.mindSize = (int)(this.Angle - 310.0f);
             }
-            if (this.feelingSize <= 0)
+            if (this.mindSize <= 0)
             {
-                this.feelingSize = 0;
-                this.Angle = (double)this.feelingSize - 50.0f;
+                this.mindSize = 0;
+                this.Angle = (double)this.mindSize - 50.0f;
             }
-            if (this.feelingSize >= 100)
+            if (this.mindSize >= 100)
             {
-                this.feelingSize = 100;
-                this.Angle = (double)this.feelingSize + 310.0f;
+                this.mindSize = 100;
+                this.Angle = (double)this.mindSize + 310.0f;
             }
         }
     }
