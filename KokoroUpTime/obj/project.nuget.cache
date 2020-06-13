@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "k5OqNEnNpOboMxH2A8gizqmPmd0RdXJZcSzAnLo+5PPIgFwrF0MVDB/n8+UbeWmHfka3sI1Z43johAIhBaTOqw==",
+  "dgSpecHash": "6kOSgbkiSgip3JLLPPeCeJxysrlIT9ZXUOX1Ib5PhV2Z+H54xfqo7SrcbwcqZaeRdw5E8Xi1h1ypG4fotLZolw==",
   "success": true,
   "projectFilePath": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\syung\\.nuget\\packages\\sqlite-net-pcl\\1.7.335\\sqlite-net-pcl.1.7.335.nupkg.sha512",
+    "C:\\Users\\syung\\.nuget\\packages\\sqlitepclraw.bundle_green\\2.0.3\\sqlitepclraw.bundle_green.2.0.3.nupkg.sha512",
+    "C:\\Users\\syung\\.nuget\\packages\\sqlitepclraw.core\\2.0.3\\sqlitepclraw.core.2.0.3.nupkg.sha512",
+    "C:\\Users\\syung\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.3\\sqlitepclraw.lib.e_sqlite3.2.0.3.nupkg.sha512",
+    "C:\\Users\\syung\\.nuget\\packages\\sqlitepclraw.provider.dynamic_cdecl\\2.0.3\\sqlitepclraw.provider.dynamic_cdecl.2.0.3.nupkg.sha512",
+    "C:\\Users\\syung\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+  ],
   "logs": []
 }

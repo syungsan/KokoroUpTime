@@ -20,6 +20,8 @@ using System.Security.AccessControl;
 using WMPLib;
 using System.Windows.Ink;
 using System.Media;
+using SQLite;
+using System.Runtime.CompilerServices;
 
 namespace KokoroUpTime
 {
@@ -38,7 +40,7 @@ namespace KokoroUpTime
         private bool isClickable = false;
         private int tapCount = 0;
 
-        private int mindSize = 0;
+        private int feelingSize = 0;
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
@@ -54,6 +56,12 @@ namespace KokoroUpTime
         private WindowsMediaPlayer mediaPlayer;
         private SoundPlayer sePlayer = null;
 
+        public string userName = "なまえ";
+
+        private DataCapter1 data;
+
+        private SQLiteConnection connection; 
+
         public Chapter1()
         {
             InitializeComponent();
@@ -68,6 +76,23 @@ namespace KokoroUpTime
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
 
+            this.data = new DataCapter1();
+
+            string dbName = $"{userName}.sqlite";
+            string dirPath = $"./Log/{userName}/";
+
+            DirectoryUtils.SafeCreateDirectory(dirPath);
+
+            string dbPath = System.IO.Path.Combine(dirPath, dbName);
+
+            this.data.CreatedAt = DateTime.Now.ToString();
+
+            using (this.connection = new SQLiteConnection(dbPath))
+            {
+                this.connection.CreateTable<DataCapter1>();
+                this.connection.Insert(this.data);
+            }
+            
             this.InitControls();
         }
 
@@ -115,21 +140,21 @@ namespace KokoroUpTime
                 ["rule_board_check3_msg"] = this.RuleBoardCheck3TextBlock,
                 ["session_sub_title_text"] = this.SessionSubTitleTextBlock,
                 ["session_sentence_text"] = this.SessionSentenceTextBlock,
-                ["view_kind_of_mind_person_text"] = this.ViewKindOfMindPersonTextBlock,
-                ["view_kind_of_mind_text"] = this.ViewKindOfMindTextBlock,
-                ["view_size_of_mind_text"] = this.ViewSizeOfMindTextBlock,
+                ["view_kind_of_feeling_person_text"] = this.ViewKindOfFeelingPersonTextBlock,
+                ["view_kind_of_feeling_text"] = this.ViewKindOfFeelingTextBlock,
+                ["view_size_of_feeling_text"] = this.ViewSizeOfFeelingTextBlock,
                 ["case_of_kimi_text"] = this.CaseOfKimiTextBlock,
                 ["kimi_scene1_text"] = this.KimiScene1TextBlock,
-                ["kimi_kind_of_mind_up_text"] = this.KimiKindOfMindUpTextBlock,
-                ["kimi_size_of_mind_up_text"] = this.KimiSizeOfMindUpTextBlock,
+                ["kimi_kind_of_feeling_up_text"] = this.KimiKindOfFeelingUpTextBlock,
+                ["kimi_size_of_feeling_up_text"] = this.KimiSizeOfFeelingUpTextBlock,
                 ["kimi_scene2_text"] = this.KimiScene2TextBlock,
-                ["kimi_kind_of_mind_down_text"] = this.KimiKindOfMindDownTextBlock,
-                ["kimi_size_of_mind_down_text"] = this.KimiSizeOfMindDownTextBlock,
+                ["kimi_kind_of_feeling_down_text"] = this.KimiKindOfFeelingDownTextBlock,
+                ["kimi_size_of_feeling_down_text"] = this.KimiSizeOfFeelingDownTextBlock,
                 ["compare_msg_text"] = this.CompareMessageTextBlock,
-                ["kind_of_mind_akamaru_text"] = this.KindOfMindAkamaruTextBlock,
-                ["size_of_mind_akamaru_text"] = this.SizeOfMindAkamaruTextBlock,
-                ["kind_of_mind_aosuke_text"] = this.KindOfMindAosukeTextBlock,
-                ["size_of_mind_aosuke_text"] = this.SizeOfMindAosukeTextBlock,
+                ["kind_of_feeling_akamaru_text"] = this.KindOfFeelingAkamaruTextBlock,
+                ["size_of_feeling_akamaru_text"] = this.SizeOfFeelingAkamaruTextBlock,
+                ["kind_of_feeling_aosuke_text"] = this.KindOfFeelingAosukeTextBlock,
+                ["size_of_feeling_aosuke_text"] = this.SizeOfFeelingAosukeTextBlock,
                 ["ending_msg_text"] = this.EndingMessageTextBlock,
                 ["children_stand_left_onomatopoeia_text"] = this.ChildrenStandLeftOnomatopoeiaTextBlock,
                 ["children_face_small_left_msg_text"] = this.ChildrenFaceSmallLeftMessageTextBlock,
@@ -156,7 +181,7 @@ namespace KokoroUpTime
             {
                 ["session_grid"] = this.SessionGrid,
                 ["challenge_grid"] = this.ChallengeGrid,
-                ["select_mind_grid"] = this.SelectMindGrid,
+                ["select_feeling_grid"] = this.SelectFeelingGrid,
                 ["summary_grid"] = this.SummaryGrid,
                 ["ending_grid"] = this.EndingGrid,
                 ["item_name_plate_left_grid"] = this.ItemNamePlateLeftGrid, 
@@ -168,8 +193,8 @@ namespace KokoroUpTime
                 ["challenge_msg_grid"] = this.ChallengeMessageGrid,
                 ["kimi_plate_inner_up_grid"] = this.KimiPlateInnerUpGrid,
                 ["kimi_plate_inner_down_grid"] = this.KimiPlateInnerDownGrid,
-                ["view_kind_of_mind_grid"] = this.ViewKindOfMindGrid,
-                ["view_size_of_mind_grid"] = this.ViewSizeOfMindGrid,
+                ["view_kind_of_feeling_grid"] = this.ViewKindOfFeelingGrid,
+                ["view_size_of_feeling_grid"] = this.ViewSizeOfFeelingGrid,
                 ["children_face_small_left_msg_grid"] = this.ChildrenFaceSmallLeftMessageGrid,
                 ["select_heart_grid"] = this.SelectHeartGrid,
                 ["compare_akamaru_heart_grid"] = this.CompareAkamaruHeartGrid,
@@ -187,7 +212,7 @@ namespace KokoroUpTime
         {
             this.SessionGrid.Visibility = Visibility.Hidden;
             this.ChallengeGrid.Visibility = Visibility.Hidden;
-            this.SelectMindGrid.Visibility = Visibility.Hidden;
+            this.SelectFeelingGrid.Visibility = Visibility.Hidden;
             this.SummaryGrid.Visibility = Visibility.Hidden;
             this.EndingGrid.Visibility = Visibility.Hidden;
             this.ItemNamePlateLeftGrid.Visibility = Visibility.Hidden;
@@ -195,8 +220,8 @@ namespace KokoroUpTime
             this.ItemNamePlateCenterGrid.Visibility = Visibility.Hidden;
             this.ItemInfoPlateGrid.Visibility = Visibility.Hidden;
             this.ItemLastInfoGrid.Visibility = Visibility.Hidden;
-            this.ViewKindOfMindGrid.Visibility = Visibility.Hidden;
-            this.ViewSizeOfMindGrid.Visibility = Visibility.Hidden;
+            this.ViewKindOfFeelingGrid.Visibility = Visibility.Hidden;
+            this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
             this.ChildrenFaceSmallLeftMessageGrid.Visibility = Visibility.Hidden;
             this.ChallengeMessageGrid.Visibility = Visibility.Hidden;
             this.KimiPlateInnerUpGrid.Visibility = Visibility.Hidden;
@@ -232,21 +257,21 @@ namespace KokoroUpTime
             this.KimiInPlateImage.Visibility = Visibility.Hidden;
             this.CaseOfKimiTextBlock.Visibility = Visibility.Hidden;
             this.KimiScene1TextBlock.Visibility = Visibility.Hidden;
-            this.KimiKindOfMindUpTextBlock.Visibility = Visibility.Hidden;
-            this.KimiSizeOfMindUpTextBlock.Visibility = Visibility.Hidden;
+            this.KimiKindOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
+            this.KimiSizeOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
             this.KimiScene2TextBlock.Visibility = Visibility.Hidden;
-            this.KimiKindOfMindDownTextBlock.Visibility = Visibility.Hidden;
-            this.KimiSizeOfMindDownTextBlock.Visibility = Visibility.Hidden;
-            this.ViewKindOfMindPersonTextBlock.Visibility = Visibility.Hidden;
-            this.ViewKindOfMindTextBlock.Visibility = Visibility.Hidden;
-            this.ViewSizeOfMindTextBlock.Visibility = Visibility.Hidden;
+            this.KimiKindOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
+            this.KimiSizeOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
+            this.ViewKindOfFeelingPersonTextBlock.Visibility = Visibility.Hidden;
+            this.ViewKindOfFeelingTextBlock.Visibility = Visibility.Hidden;
+            this.ViewSizeOfFeelingTextBlock.Visibility = Visibility.Hidden;
             this.ChildrenFaceSmallLeftImage.Visibility = Visibility.Hidden;
             this.ChildrenFaceSmallLeftMessageTextBlock.Visibility = Visibility.Hidden;
             this.CompareMessageTextBlock.Visibility = Visibility.Hidden;
-            this.KindOfMindAkamaruTextBlock.Visibility = Visibility.Hidden;
-            this.SizeOfMindAkamaruTextBlock.Visibility = Visibility.Hidden;
-            this.KindOfMindAosukeTextBlock.Visibility = Visibility.Hidden;
-            this.SizeOfMindAosukeTextBlock.Visibility = Visibility.Hidden;
+            this.KindOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
+            this.SizeOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
+            this.KindOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
+            this.SizeOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
             this.ChildrenInfoImage.Visibility = Visibility.Hidden;
             this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
             this.ShirojiRightImage.Visibility = Visibility.Hidden;
@@ -281,15 +306,15 @@ namespace KokoroUpTime
             this.RuleBoardCheck3TextBlock.Text = "";
             this.SessionSubTitleTextBlock.Text = "";
             this.SessionSentenceTextBlock.Text = "";
-            this.ViewKindOfMindPersonTextBlock.Text = "";
-            this.ViewKindOfMindTextBlock.Text = "";
-            this.ViewSizeOfMindTextBlock.Text = "";
+            this.ViewKindOfFeelingPersonTextBlock.Text = "";
+            this.ViewKindOfFeelingTextBlock.Text = "";
+            this.ViewSizeOfFeelingTextBlock.Text = "";
             this.ChildrenFaceSmallLeftMessageTextBlock.Text = "";
             this.CompareMessageTextBlock.Text = "";
-            this.KindOfMindAkamaruTextBlock.Text = "";
-            this.SizeOfMindAkamaruTextBlock.Text = "";
-            this.KindOfMindAosukeTextBlock.Text = "";
-            this.SizeOfMindAosukeTextBlock.Text = "";
+            this.KindOfFeelingAkamaruTextBlock.Text = "";
+            this.SizeOfFeelingAkamaruTextBlock.Text = "";
+            this.KindOfFeelingAosukeTextBlock.Text = "";
+            this.SizeOfFeelingAosukeTextBlock.Text = "";
             this.EndingMessageTextBlock.Text = "";
             this.MainMessageTextBlock.Text = "";
             this.ThinMessageTextBlock.Text = "";
@@ -745,10 +770,10 @@ namespace KokoroUpTime
                 case "gauge":
 
                     /*
-                    var kindOfMind = this.scenarios[this.scenarioCount][1];
+                    var kindOfFeeling = this.scenarios[this.scenarioCount][1];
 
                     // 後々これを計算で得る
-                    var minds = new Dictionary<string, float>() { { "good", 60.0f }, { "bad", 80.0f } };
+                    var feelings = new Dictionary<string, float>() { { "good", 60.0f }, { "bad", 80.0f } };
 
                     var gaugeRotation = new RotateTransform
                     {
@@ -759,11 +784,11 @@ namespace KokoroUpTime
 
                     this.NeedleImage.RenderTransform = gaugeRotation;
 
-                    var mind = minds[kindOfMind] / 2.0f;
+                    var feeling = feelings[kindOfFeeling] / 2.0f;
 
-                    this.MindScaleText.Text = mind.ToString();
+                    this.FeelingScaleText.Text = feeling.ToString();
 
-                    GaugeUpdate(targetAngle: mind);
+                    GaugeUpdate(targetAngle: feeling);
 
                     void GaugeUpdate(float targetAngle)
                     {
@@ -789,7 +814,7 @@ namespace KokoroUpTime
                     }
                     */
                     this.Angle = 0.0f;
-                    this.ViewSizeOfMindTextBlock.Text = "50";
+                    this.ViewSizeOfFeelingTextBlock.Text = "50";
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1102,7 +1127,7 @@ namespace KokoroUpTime
 
             this.CalcAngle();
 
-            this.ViewSizeOfMindTextBlock.Text = this.mindSize.ToString();
+            this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
         }
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -1116,10 +1141,10 @@ namespace KokoroUpTime
             {
                 this.CalcAngle();
 
-                this.ViewSizeOfMindTextBlock.Text = this.mindSize.ToString();
+                this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
             }
         }
-
+        
         private void CalcAngle()
         {
             Point currentLocation = Mouse.GetPosition(this);
@@ -1133,23 +1158,23 @@ namespace KokoroUpTime
 
             this.Angle = radians * 180 / Math.PI + 90;
 
-            this.mindSize = (int)(this.Angle + 50.0f);
+            this.feelingSize = (int)(this.Angle + 50.0f);
 
             if (currentLocation.X - knobCenter.X < 0)
             {
                 this.Angle += 180;
 
-                this.mindSize = (int)(this.Angle - 310.0f);
+                this.feelingSize = (int)(this.Angle - 310.0f);
             }
-            if (this.mindSize <= 0)
+            if (this.feelingSize <= 0)
             {
-                this.mindSize = 0;
-                this.Angle = (double)this.mindSize - 50.0f;
+                this.feelingSize = 0;
+                this.Angle = (double)this.feelingSize - 50.0f;
             }
-            if (this.mindSize >= 100)
+            if (this.feelingSize >= 100)
             {
-                this.mindSize = 100;
-                this.Angle = (double)this.mindSize + 310.0f;
+                this.feelingSize = 100;
+                this.Angle = (double)this.feelingSize + 310.0f;
             }
         }
     }

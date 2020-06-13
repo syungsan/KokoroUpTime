@@ -43,7 +43,7 @@
     <None Remove="Images\background_ending.png" />
     <None Remove="Images\background_mokume.png" />
     <None Remove="Images\background_option.png" />
-    <None Remove="Images\bad_mind.png" />
+    <None Remove="Images\bad_feeling.png" />
     <None Remove="Images\bad_words_grid.png" />
     <None Remove="Images\before.png" />
     <None Remove="Images\big_heart.png" />
@@ -55,11 +55,11 @@
     <None Remove="Images\complete_button.png" />
     <None Remove="Images\ending_bubble.png" />
     <None Remove="Images\face_small_bubble.png" />
+    <None Remove="Images\feeling_value.png" />
+    <None Remove="Images\good_feeling.png" />
     <None Remove="Images\kimi_stand_01.png" />
     <None Remove="Images\long_bubble_right_up.png" />
-    <None Remove="Images\mind_value.png" />
     <None Remove="Images\frame_46-1.png" />
-    <None Remove="Images\good_mind.png" />
     <None Remove="Images\good_words_grid.png" />
     <None Remove="Images\gray_frame.png" />
     <None Remove="Images\group_activity.png" />
@@ -143,6 +143,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Fonts\azuki.ttf" />
     <Resource Include="Fonts\JiyunoTsubasa.ttf" />
     <Resource Include="Fonts\TanukiMagic.ttf" />
@@ -172,7 +176,7 @@
     <Resource Include="Images\background_ending.png" />
     <Resource Include="Images\background_mokume.png" />
     <Resource Include="Images\background_option.png" />
-    <Resource Include="Images\bad_mind.png" />
+    <Resource Include="Images\bad_feeling.png" />
     <Resource Include="Images\before.png" />
     <Resource Include="Images\big_heart.png" />
     <Resource Include="Images\blackboard.png" />
@@ -193,9 +197,9 @@
     <Resource Include="Images\challenge_time.png" />
     <Resource Include="Images\ending_bubble.png" />
     <Resource Include="Images\face_small_bubble.png" />
-    <Resource Include="Images\mind_value.png" />
+    <Resource Include="Images\feeling_value.png" />
     <Resource Include="Images\frame_46-1.png" />
-    <Resource Include="Images\good_mind.png" />
+    <Resource Include="Images\good_feeling.png" />
     <Resource Include="Images\gray_frame.png" />
     <Resource Include="Images\group_activity.png" />
     <Resource Include="Images\heart_blue.png" />
