@@ -28,7 +28,7 @@ namespace KokoroUpTime
     /// <summary>
     /// GameWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class Chapter1 : Page
+    public partial class Chapter2 : Page
     {
         private float MESSAGE_SPEED = 30.0f;
 
@@ -58,11 +58,11 @@ namespace KokoroUpTime
 
         public string userName = "なまえ";
 
-        private DataCapter1 data;
+        private DataCapter2 data;
 
         private SQLiteConnection connection; 
 
-        public Chapter1()
+        public Chapter2()
         {
             InitializeComponent();
 
@@ -76,7 +76,7 @@ namespace KokoroUpTime
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
 
-            this.data = new DataCapter1();
+            this.data = new DataCapter2();
 
             string dbName = $"{userName}.sqlite";
             string dirPath = $"./Log/{userName}/";
