@@ -32,6 +32,10 @@ namespace KokoroUpTime
     {
         private float MESSAGE_SPEED = 30.0f;
 
+        private string[] GOOD_FEELINGS = {"うれしい", "しあわせ", "たのしい", "ホッとした", "きもちいい", "まんぞく", "すき", "やる気マンマン", "かんしゃ", "わくわく", "うきうき", "ほこらしい"};
+
+        private string[] BAD_FEELINGS = { "心配", "こまった", "不安", "こわい", "おちこみ", "がっかり", "いかり", "イライラ", "はずかしい", "ふまん", "かなしい", "おびえる"};
+
         private int scenarioCount = 0;
         private List<List<string>> scenarios = null;
 
@@ -60,7 +64,9 @@ namespace KokoroUpTime
 
         private DataCapter1 data;
 
-        private SQLiteConnection connection; 
+        private SQLiteConnection connection;
+
+        private string scene;
 
         public Chapter1()
         {
@@ -92,7 +98,12 @@ namespace KokoroUpTime
                 this.connection.CreateTable<DataCapter1>();
                 this.connection.Insert(this.data);
             }
-            
+
+            this.ChallengeGoodFeelingItemControl.ItemsSource = GOOD_FEELINGS;
+            this.ChallengeBadFeelingItemControl.ItemsSource = BAD_FEELINGS;
+            this.SelectGoodFeelingItemControl.ItemsSource = GOOD_FEELINGS;
+            this.SelectBadFeelingItemControl.ItemsSource = BAD_FEELINGS;
+
             this.InitControls();
         }
 
@@ -357,6 +368,15 @@ namespace KokoroUpTime
                 case "reset":
 
                     this.ResetControls();
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
+                case "scene":
+
+                    this.scene = this.scenarios[this.scenarioCount][1]; ;
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();

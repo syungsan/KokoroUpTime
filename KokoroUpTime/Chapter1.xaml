@@ -734,188 +734,36 @@
             <Grid x:Name="ChallengeGrid">
                 <Image x:Name="ChallengeTitleImage" HorizontalAlignment="Left" Height="88" Margin="306,13,0,0" VerticalAlignment="Top" Width="788" Source="/Images/challenge_time.png"/>
                 <Grid x:Name="ChallengeGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="263,120,0,0" VerticalAlignment="Top" Width="400">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
                     <Image x:Name="ChallengeGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill"/>
-                    <StackPanel x:Name="ChallengeGoodFeelingStackPanel" Margin="0,121,0,0">
-                        <InkCanvas x:Name="ChallengeGoodFeelingCanvas_1" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="うれしい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeGoodFeelingCanvas_2" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="しあわせ" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeGoodFeelingCanvas_3" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="たのしい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeGoodFeelingCanvas_4" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="ホッとした" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeGoodFeelingCanvas_5" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="きもちいい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeGoodFeelingCanvas_6" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="まんぞく" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeGoodFeelingCanvas_7" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="すき" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeGoodFeelingCanvas_8" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="やる気マンマン" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeGoodFeelingCanvas_9" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="かんしゃ" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeGoodFeelingCanvas_10" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="わくわく" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeGoodFeelingCanvas_11" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="うきくき" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeGoodFeelingCanvas_12" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="ほこらしい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                    </StackPanel>
+                    <ItemsControl x:Name="ChallengeGoodFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <InkCanvas x:Name="ChallengeGoodFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
+                                    <TextBlock x:Name="ChallengeGoodFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
+                                    <TextBlock x:Name="ChallengeGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
+                                    <InkCanvas.DefaultDrawingAttributes>
+                                        <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                                    </InkCanvas.DefaultDrawingAttributes>
+                                </InkCanvas>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Grid>
                 <Grid x:Name="ChallengeBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="734,120,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
                     <Image x:Name="ChallengeBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill"/>
-                    <StackPanel x:Name="ChallengeBadFeelingStackPanel" Margin="0,121,0,0">
-                        <InkCanvas x:Name="ChallengeBadFeelingCanvas_1" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="心配" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeBadFeelingCanvas_2" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="こまった" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeBadFeelingCanvas_3" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="不安" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeBadFeelingCanvas_4" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="こわい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeBadFeelingCanvas_5" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="おちこみ" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeBadFeelingCanvas_6" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="がっかり" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeBadFeelingCanvas_7" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="いかり" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeBadFeelingCanvas_8" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="イライラ" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeBadFeelingCanvas_9" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="はずかしい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeBadFeelingCanvas_10" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="ふまん" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeBadFeelingCanvas_11" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="かなしい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="ChallengeBadFeelingCanvas_12" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="おびえる" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                    </StackPanel>
+                    <ItemsControl x:Name="ChallengeBadFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <InkCanvas x:Name="ChallengeBadFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
+                                    <TextBlock x:Name="ChallengeBadFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
+                                    <TextBlock x:Name="ChallengeBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
+                                    <InkCanvas.DefaultDrawingAttributes>
+                                        <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
+                                    </InkCanvas.DefaultDrawingAttributes>
+                                </InkCanvas>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Grid>
                 <Grid x:Name="ChallengeMessageBoxGrid" Height="250" Width="514" Margin="1278,136,128,694">
                     <Image x:Name="ChallengeMessageBoxImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/message_box.png"/>
@@ -931,188 +779,39 @@
             </Grid>
             <Grid x:Name="SelectFeelingGrid">
                 <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
                     <Image x:Name="SelectGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill"/>
-                    <StackPanel x:Name="SelectGoodFeelingStackPanel" Margin="0,121,0,0">
-                        <InkCanvas x:Name="SelectGoodFeelingCanvas_1" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="うれしい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectGoodFeelingCanvas_2" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="しあわせ" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectGoodFeelingCanvas_3" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="たのしい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectGoodFeelingCanvas_4" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="ホッとした" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectGoodFeelingCanvas_5" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="きもちいい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectGoodFeelingCanvas_6" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="まんぞく" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectGoodFeelingCanvas_7" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="すき" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectGoodFeelingCanvas_8" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="やる気マンマン" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectGoodFeelingCanvas_9" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="かんしゃ" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectGoodFeelingCanvas_10" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="わくわく" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectGoodFeelingCanvas_11" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="うきくき" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectGoodFeelingCanvas_12" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="ほこらしい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                    </StackPanel>
+                    <ItemsControl x:Name="SelectGoodFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <InkCanvas x:Name="SelectGoodFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
+                                    <TextBlock x:Name="SelectGoodFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
+                                    <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
+                                    <InkCanvas.DefaultDrawingAttributes>
+                                        <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
+                                    </InkCanvas.DefaultDrawingAttributes>
+                                </InkCanvas>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Grid>
                 <Grid x:Name="SelectBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="923,72,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Image x:Name="SelectBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill"/>
-                    <StackPanel x:Name="SelectBadFeelingStackPanel" Margin="0,121,0,0">
-                        <InkCanvas x:Name="SelectBadFeelingCanvas_1" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="心配" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectBadFeelingCanvas_2" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="こまった" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectBadFeelingCanvas_3" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="不安" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectBadFeelingCanvas_4" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="こわい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectBadFeelingCanvas_5" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="おちこみ" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectBadFeelingCanvas_6" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="がっかり" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectBadFeelingCanvas_7" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="いかり" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectBadFeelingCanvas_8" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="イライラ" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectBadFeelingCanvas_9" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="はずかしい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectBadFeelingCanvas_10" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="ふまん" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectBadFeelingCanvas_11" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="かなしい" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                        <InkCanvas x:Name="SelectBadFeelingCanvas_12" Height="64" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                            <Label Content="●" FontSize="30" VerticalAlignment="Center" Margin="40,14,0,0" Width="40"/>
-                            <Label Content="おびえる" FontSize="36" Margin="100,8,0,0"/>
-                        </InkCanvas>
-                    </StackPanel>
+                    <ItemsControl x:Name="SelectBadFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <InkCanvas x:Name="SelectBadFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
+                                    <TextBlock x:Name="SelectBadFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
+                                    <TextBlock x:Name="SelectBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
+                                    <InkCanvas.DefaultDrawingAttributes>
+                                        <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
+                                    </InkCanvas.DefaultDrawingAttributes>
+                                </InkCanvas>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Grid>
                 <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="727,0,0,0" VerticalAlignment="Center" Width="273" Source="/Images/item01_solo.png" RenderTransformOrigin="0.659,0.453"/>
             </Grid>
