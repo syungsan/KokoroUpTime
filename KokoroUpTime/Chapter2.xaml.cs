@@ -28,7 +28,7 @@ namespace KokoroUpTime
     /// <summary>
     /// GameWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class Chapter1 : Page
+    public partial class Chapter2 : Page
     {
         private float MESSAGE_SPEED = 30.0f;
 
@@ -62,7 +62,7 @@ namespace KokoroUpTime
 
         private SQLiteConnection connection; 
 
-        public Chapter1()
+        public Chapter2()
         {
             InitializeComponent();
 
@@ -173,15 +173,12 @@ namespace KokoroUpTime
                 ["next_page_button"] = this.NextPageButton,
                 ["back_page_button"] = this.BackPageButton,
                 ["manga_flip_button"] = this.MangaFlipButton,
-                ["challenge_complete_button"] = this.ChallengeCompleteButton,
-                ["challenge_next_button"] = this.ChallengeNextButton,
             };
 
             this.gridObjects = new Dictionary<string, Grid>
             {
                 ["session_grid"] = this.SessionGrid,
                 ["challenge_grid"] = this.ChallengeGrid,
-                ["select_feeling_grid"] = this.SelectFeelingGrid,
                 ["summary_grid"] = this.SummaryGrid,
                 ["ending_grid"] = this.EndingGrid,
                 ["item_name_plate_left_grid"] = this.ItemNamePlateLeftGrid, 
@@ -212,7 +209,6 @@ namespace KokoroUpTime
         {
             this.SessionGrid.Visibility = Visibility.Hidden;
             this.ChallengeGrid.Visibility = Visibility.Hidden;
-            this.SelectFeelingGrid.Visibility = Visibility.Hidden;
             this.SummaryGrid.Visibility = Visibility.Hidden;
             this.EndingGrid.Visibility = Visibility.Hidden;
             this.ItemNamePlateLeftGrid.Visibility = Visibility.Hidden;
@@ -252,7 +248,6 @@ namespace KokoroUpTime
             this.SessionTitleImage.Visibility = Visibility.Hidden;
             this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden;
             this.SessionSentenceTextBlock.Visibility = Visibility.Hidden;
-            this.ChallengeNextButton.Visibility = Visibility.Hidden;
             this.KimiPlateOuterImage.Visibility = Visibility.Hidden;
             this.KimiInPlateImage.Visibility = Visibility.Hidden;
             this.CaseOfKimiTextBlock.Visibility = Visibility.Hidden;
@@ -1113,7 +1108,7 @@ namespace KokoroUpTime
             Correct,
         }
 
-        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter1), new UIPropertyMetadata(0.0));
+        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter2), new UIPropertyMetadata(0.0));
 
         private double Angle
         {
