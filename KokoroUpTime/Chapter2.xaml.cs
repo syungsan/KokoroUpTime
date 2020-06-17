@@ -58,7 +58,7 @@ namespace KokoroUpTime
 
         public string userName = "なまえ";
 
-        private DataCapter1 data;
+        private DataCapter2 data;
 
         private SQLiteConnection connection; 
 
@@ -76,7 +76,7 @@ namespace KokoroUpTime
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
 
-            this.data = new DataCapter1();
+            this.data = new DataCapter2();
 
             string dbName = $"{userName}.sqlite";
             string dirPath = $"./Log/{userName}/";

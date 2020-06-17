@@ -25,4 +25,16 @@ namespace KokoroUpTime
 
         public string CreatedAt{ get; set; }
     }
+
+    public class DataCapter2
+    {
+        // このレコードは定石
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        // データベースに記録するレコードの型の宣言をしてください。
+
+        // 何かしらレコードを記録するときは日付も記録する。
+        public string CreatedAt { get; set; }
+    }
 }

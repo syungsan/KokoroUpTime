@@ -9,11 +9,19 @@ KokoroUpTime
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
+<<<<<<< HEAD
 C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\App.xaml
 5-576020060
 
 111245074366
 19830196020
+=======
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\App.xaml
+5-576020060
+
+111245074366
+1981278999944
+>>>>>>> 4adc9752f7ee8a2ecc27968a9ca05ed4e8d003e1
 Chapter1.xaml;Chapter2.xaml;MainWindow.xaml;OptionPage.xaml;TitlePage.xaml;
 
 False
