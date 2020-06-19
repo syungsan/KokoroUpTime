@@ -30,7 +30,7 @@ namespace KokoroUpTime
     /// </summary>
     public partial class Chapter1 : Page
     {
-        private float MESSAGE_SPEED = 30.0f;
+        private float MESSAGE_SPEED = 30000.0f;
 
         private string[] GOOD_FEELINGS = {"うれしい", "しあわせ", "たのしい", "ホッとした", "きもちいい", "まんぞく", "すき", "やる気マンマン", "かんしゃ", "わくわく", "うきうき", "ほこらしい"};
 
@@ -173,6 +173,7 @@ namespace KokoroUpTime
                 ["thin_msg"] = this.ThinMessageTextBlock,
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
+                
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -216,6 +217,8 @@ namespace KokoroUpTime
                 ["main_msg_grid"] = this.MainMessageGrid,
                 ["music_info_grid"] = this.MusicInfoGrid,
                 ["exit_back_grid"] = this.ExitBackGrid,
+
+                ["writing_grid"] = this.WritingGrid,
             };
         }
 
@@ -311,6 +314,12 @@ namespace KokoroUpTime
             this.BackPageButton.Visibility = Visibility.Hidden;
             this.MangaFlipButton.Visibility = Visibility.Hidden;
             this.CoverLayerImage.Visibility = Visibility.Hidden;
+
+           
+
+            this.WritingGrid.Visibility = Visibility.Hidden;
+            this.CanvasGrid.Visibility = Visibility.Hidden;
+
             this.RuleBoardTitleTextBlock.Text = "";
             this.RuleBoardCheck1TextBlock.Text = "";
             this.RuleBoardCheck2TextBlock.Text = "";
@@ -327,7 +336,8 @@ namespace KokoroUpTime
             this.KindOfFeelingAosukeTextBlock.Text = "";
             this.SizeOfFeelingAosukeTextBlock.Text = "";
             this.EndingMessageTextBlock.Text = "";
-            this.MainMessageTextBlock.Text = "";
+            
+            //this.MainMessageTextBlock.Text = "";
             this.ThinMessageTextBlock.Text = "";
             this.MusicTitleTextBlock.Text = "";
             this.ComposerNameTextBlock.Text = "";
@@ -496,7 +506,6 @@ namespace KokoroUpTime
                     {
                         var _message = this.scenarios[this.scenarioCount][2];
 
-                        _textObject.Text = _message;
 
                         this.ShowMessage(textObject: _textObject, message: _message);
                     }
@@ -843,6 +852,8 @@ namespace KokoroUpTime
             }
         }
 
+
+        /*
         void ShowMessage(TextBlock textObject, string message, object obj=null)
         {
             // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
@@ -863,6 +874,59 @@ namespace KokoroUpTime
 
                 if (word_num < _message.Length)
                 {
+                    word_num++;
+                }
+                else
+                {
+                    this.msgTimer.Stop();
+                    this.msgTimer = null;
+
+                    if (obj != null)
+                    {
+                        this.MessageCallBack(obj);
+                    }
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+            }
+        }
+        */
+
+        void ShowMessage(TextBlock textObject, string message, object obj = null)
+        {
+            
+            // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
+            var _message = message.Replace("鬱", "\u2028");
+            _message = _message.Replace("【name】","n");
+            _message = _message.Replace("【くん／ちゃん／さん】", "");
+
+            // メッセージ表示処理
+            this.msgTimer = new DispatcherTimer();
+            this.msgTimer.Tick += ViewMsg;
+            this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / MESSAGE_SPEED);
+            this.msgTimer.Start();
+
+            // 一文字ずつメッセージ表示（Inner Func）
+            void ViewMsg(object sender, EventArgs e)
+            {
+                textObject.Visibility = Visibility.Visible;
+
+                if (word_num < _message.Length)
+                {
+                    if (_message.Substring(word_num, 1) != "n" && this.NameImage.Source == null)
+                    {
+                        this.MainMessageText1.Text = _message.Substring(0, word_num);
+
+                    }
+                    if (_message.Substring(word_num,1) =="n" && this.MainMessageText2.Text == null)
+                    {
+                        _message = _message.Replace("n", " ");
+                        this.NameImage.Source = new BitmapImage(new Uri("/Log/Name.bmp", UriKind.Relative));
+                    }
+                    if(this.MainMessageText1 !=null && NameImage.Source != null)
+                    {
+                        this.MainMessageText2.Text = _message.Substring(this.MainMessageText1.Text.Length, word_num - MainMessageText1.Text.Length + 1);
+                    }
                     word_num++;
                 }
                 else
@@ -963,17 +1027,93 @@ namespace KokoroUpTime
                 this.CoverLayerImage.Visibility = Visibility.Visible;
                 this.ExitBackGrid.Visibility = Visibility.Visible;
             }
-            
+
             if (button.Name == "ExitBackYesButton")
             {
                 Application.Current.Shutdown();
             }
-            
+
             if (button.Name == "ExitBackNoButton")
             {
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
+            if (button.Name == "NameButton")
+            {
+                this.CanvasGrid.Visibility = Visibility.Visible;
+                this.WritingGrid.Visibility = Visibility.Hidden;
+            }
+            if (button.Name == "PenButton")
+            {
+                WritingCanvas.EditingMode = InkCanvasEditingMode.Ink;
+            }
+            if (button.Name == "EraserButton")
+            {
+                WritingCanvas.EditingMode = InkCanvasEditingMode.EraseByPoint;
+            }
+            if (button.Name == "AllEraseButton")
+            {
+                WritingCanvas.Strokes.Clear();
+            }
+            if (button.Name == "FinishButton")
+            {
+                if(WritingCanvas.Strokes != null)
+                {
+                    // ストロークが描画されている境界を取得
+                    Rect rectBounds = WritingCanvas.Strokes.GetBounds();
+
+                    // 描画先を作成
+                    DrawingVisual dv = new DrawingVisual();
+                    DrawingContext dc = dv.RenderOpen();
+                    // 描画エリアの位置補正（補正しないと黒い部分ができてしまう）
+                    dc.PushTransform(new TranslateTransform(-rectBounds.X, -rectBounds.Y));
+
+                    // 描画エリア(dc)に四角形を作成
+                    // 四角形の大きさはストロークが描画されている枠サイズとし、
+                    // 背景色はInkCanvasコントロールと同じにする
+                    dc.DrawRectangle(WritingCanvas.Background, null, rectBounds);
+
+                    // 上記で作成した描画エリア(dc)にInkCanvasのストロークを描画
+                    WritingCanvas.Strokes.Draw(dc);
+                    dc.Close();
+
+                    // ビジュアルオブジェクトをビットマップに変換する
+                    RenderTargetBitmap rtb = new RenderTargetBitmap(
+                        (int)rectBounds.Width, (int)rectBounds.Height,
+                        96, 96,
+                        PixelFormats.Default);
+                    rtb.Render(dv);
+
+                    // ビットマップエンコーダー変数の宣言
+                    BitmapEncoder enc = null;
+                    enc = new BmpBitmapEncoder();
+
+
+                    if (enc != null)
+                    {
+                        // ビットマップフレームを作成してエンコーダーにフレームを追加する
+                        enc.Frames.Add(BitmapFrame.Create(rtb));
+                        // ファイルに書き込む
+                        System.IO.Stream stream = System.IO.File.Create(@"C:\Users/maglab/Documents/Github/KoKoroUpTime/KoKoroUpTime/Log/Name.bmp");
+                        enc.Save(stream);
+                        stream.Close();
+                    }
+                    MessageBox.Show("start");
+                    this.NameText.Source= new BitmapImage(new Uri("/Log/Name.bmp", UriKind.RelativeOrAbsolute));
+                    MessageBox.Show("end");
+                }
+                this.CanvasGrid.Visibility = Visibility.Hidden;
+                this.WritingGrid.Visibility = Visibility.Visible;
+
+            }
+            if (button.Name =="DecisionButton")
+            {
+                this.WritingGrid.Visibility = Visibility.Hidden;
+
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+            }
+
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
