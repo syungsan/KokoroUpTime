@@ -6,8 +6,8 @@
       "version": "3.1.0"
     },
     "additionalProbingPaths": [
-      "C:\\Users\\MAGDYNABOOK-03\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\syung\\.nuget\\packages"
+      "C:\\Users\\maglab\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\maglab\\.nuget\\packages"
     ],
     "configProperties": {
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true
