@@ -7,7 +7,7 @@
     },
     "additionalProbingPaths": [
       "C:\\Users\\maglab\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\maglab\\.nuget\\packages"
+      "C:\\Users\\syung\\.nuget\\packages"
     ],
     "configProperties": {
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true
