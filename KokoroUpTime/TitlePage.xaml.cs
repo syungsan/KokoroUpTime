@@ -66,7 +66,7 @@ namespace KokoroUpTime
             }
             else if (button.Content.ToString() == "名前入力")
             {
-                OptionPage nextPage = new OptionPage();
+                
 
                 this.NavigationService.Navigate(new Uri("OptionPage.xaml", UriKind.Relative));
 
