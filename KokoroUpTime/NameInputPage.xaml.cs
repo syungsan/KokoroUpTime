@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace KokoroUpTime
 {
     /// <summary>
-    /// Page1.xaml の相互作用ロジック
+    /// NameInputPage.xaml の相互作用ロジック
     /// </summary>
-    public partial class Page1 : Page
+    public partial class NameInputPage : Page
     {
-        public Page1()
+        public NameInputPage()
         {
             InitializeComponent();
         }
