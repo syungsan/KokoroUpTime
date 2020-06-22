@@ -16,7 +16,7 @@
     <Compile Update="OptionPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Page1.xaml.cs">
+    <Compile Update="NameInputPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="TitlePage.xaml.cs">
@@ -36,7 +36,7 @@
     <Page Update="OptionPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Page1.xaml">
+    <Page Update="NameInputPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="TitlePage.xaml">
