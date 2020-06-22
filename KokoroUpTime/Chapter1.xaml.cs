@@ -22,6 +22,7 @@ using System.Windows.Ink;
 using System.Media;
 using SQLite;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 
 namespace KokoroUpTime
 {
@@ -30,43 +31,61 @@ namespace KokoroUpTime
     /// </summary>
     public partial class Chapter1 : Page
     {
+        // メッセージスピードはオプションで設定できるようにする
         private float MESSAGE_SPEED = 30000.0f;
 
+        // 気持ちのリスト
         private string[] GOOD_FEELINGS = {"うれしい", "しあわせ", "たのしい", "ホッとした", "きもちいい", "まんぞく", "すき", "やる気マンマン", "かんしゃ", "わくわく", "うきうき", "ほこらしい"};
-
         private string[] BAD_FEELINGS = { "心配", "こまった", "不安", "こわい", "おちこみ", "がっかり", "いかり", "イライラ", "はずかしい", "ふまん", "かなしい", "おびえる"};
 
+        // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
         private List<List<string>> scenarios = null;
 
+        // 各種コントロールの名前を収める変数
         private string position = "";
 
+        // マウスクリックを可能にするかどうかのフラグ
         private bool isClickable = false;
+
+        // 何回タップしたか
         private int tapCount = 0;
 
+        // 気持ちの大きさ
         private int feelingSize = 0;
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
         private int word_num;
 
+        // 各種コントロールを任意の文字列で呼び出すための辞書
         private Dictionary<string, Image> imageObjects = null;
         private Dictionary<string, TextBlock> textBlockObjects = null;
         private Dictionary<string, Button> buttonObjects = null;
         private Dictionary<string, Grid> gridObjects = null;
 
+        // 黒板のチェックボックス
         private CheckBox[] checkBoxs;
 
+        // 音関連
         private WindowsMediaPlayer mediaPlayer;
         private SoundPlayer sePlayer = null;
 
-        public string userName = "なまえ";
-
+        // データベースに収めるデータモデルのインスタンス
         private DataCapter1 data;
 
-        private SQLiteConnection connection;
+        // データベースのパスを通す
+        private string dbPath;
 
+        // ゲームの切り替えシーン
         private string scene;
+
+        // 仮のユーザネームを設定
+        public string userName = "なまえ";
+
+        // なったことのある自分の気持ち記録用
+        private List<string> myKindOfGoodFeelings = new List<string>();
+        private List<string> myKindOfBadFeelings = new List<string>();
 
         public Chapter1()
         {
@@ -78,27 +97,40 @@ namespace KokoroUpTime
             // メディアプレーヤークラスのインスタンスを作成する
             this.mediaPlayer = new WindowsMediaPlayer();
 
+            // マウスイベントの設定
             this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
 
+            // データモデルインスタンス確保
             this.data = new DataCapter1();
 
+            // データベース本体のファイルを作成する
             string dbName = $"{userName}.sqlite";
             string dirPath = $"./Log/{userName}/";
 
+            // FileUtils.csからディレクトリ作成のメソッド
+            // 各ユーザの初回起動のとき実行ファイルの場所下のLogフォルダにユーザネームのフォルダを作る
             DirectoryUtils.SafeCreateDirectory(dirPath);
 
-            string dbPath = System.IO.Path.Combine(dirPath, dbName);
+            this.dbPath = System.IO.Path.Combine(dirPath, dbName);
 
+            // 現在時刻を取得
             this.data.CreatedAt = DateTime.Now.ToString();
 
-            using (this.connection = new SQLiteConnection(dbPath))
+            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
+            using (var connection = new SQLiteConnection(dbPath))
             {
-                this.connection.CreateTable<DataCapter1>();
-                this.connection.Insert(this.data);
+                // 仮（本当は名前を登録するタイミングで）
+                connection.CreateTable<DataOption>();
+                connection.CreateTable<DataProgress>();
+                connection.CreateTable<DataCapter1>();
+
+                // 毎回のアクセス日付を記録
+                connection.Insert(this.data);
             }
 
+            // xamlのItemControlに気持ちリストをデータバインド
             this.ChallengeGoodFeelingItemControl.ItemsSource = GOOD_FEELINGS;
             this.ChallengeBadFeelingItemControl.ItemsSource = BAD_FEELINGS;
             this.SelectGoodFeelingItemControl.ItemsSource = GOOD_FEELINGS;
@@ -109,6 +141,8 @@ namespace KokoroUpTime
 
         private void InitControls()
         {
+            // 各種コントロールに任意の文字列をあてがう
+
             this.imageObjects = new Dictionary<string, Image>
             {
                 ["bg_image"] = this.BackgroundImage,
@@ -185,8 +219,8 @@ namespace KokoroUpTime
                 ["next_page_button"] = this.NextPageButton,
                 ["back_page_button"] = this.BackPageButton,
                 ["manga_flip_button"] = this.MangaFlipButton,
-                ["challenge_complete_button"] = this.ChallengeCompleteButton,
-                ["challenge_next_button"] = this.ChallengeNextButton,
+                ["select_feeling_complete_button"] = this.SelectFeelingCompleteButton,
+                ["select_feeling_next_button"] = this.SelectFeelingNextButton,
             };
 
             this.gridObjects = new Dictionary<string, Grid>
@@ -224,6 +258,8 @@ namespace KokoroUpTime
 
         private void ResetControls()
         {
+            // 各種コントロールを隠すことでフルリセット
+
             this.SessionGrid.Visibility = Visibility.Hidden;
             this.ChallengeGrid.Visibility = Visibility.Hidden;
             this.SelectFeelingGrid.Visibility = Visibility.Hidden;
@@ -266,7 +302,8 @@ namespace KokoroUpTime
             this.SessionTitleImage.Visibility = Visibility.Hidden;
             this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden;
             this.SessionSentenceTextBlock.Visibility = Visibility.Hidden;
-            this.ChallengeNextButton.Visibility = Visibility.Hidden;
+            this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+            this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
             this.KimiPlateOuterImage.Visibility = Visibility.Hidden;
             this.KimiInPlateImage.Visibility = Visibility.Hidden;
             this.CaseOfKimiTextBlock.Visibility = Visibility.Hidden;
@@ -315,9 +352,14 @@ namespace KokoroUpTime
             this.MangaFlipButton.Visibility = Visibility.Hidden;
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
+<<<<<<< HEAD
            
 
            
+=======
+            this.WritingGrid.Visibility = Visibility.Hidden;
+            this.CanvasGrid.Visibility = Visibility.Hidden;
+>>>>>>> 4262d75044d762f837ccf03d628436b5601c5086
 
             this.RuleBoardTitleTextBlock.Text = "";
             this.RuleBoardCheck1TextBlock.Text = "";
@@ -336,7 +378,7 @@ namespace KokoroUpTime
             this.SizeOfFeelingAosukeTextBlock.Text = "";
             this.EndingMessageTextBlock.Text = "";
             
-            //this.MainMessageTextBlock.Text = "";
+            this.MainMessageTextBlock.Text = "";
             this.ThinMessageTextBlock.Text = "";
             this.MusicTitleTextBlock.Text = "";
             this.ComposerNameTextBlock.Text = "";
@@ -365,8 +407,10 @@ namespace KokoroUpTime
         // ゲーム進行の中核
         private void ScenarioPlay()
         {
+            // デバッグのためシナリオのインデックスを出力
             Debug.Print((this.scenarioCount + 1).ToString());
 
+            // 処理分岐のフラグ
             var tag = this.scenarios[this.scenarioCount][0];
 
             // メッセージ表示関連
@@ -374,6 +418,7 @@ namespace KokoroUpTime
 
             switch (tag)
             {
+                // フルリセット
                 case "reset":
 
                     this.ResetControls();
@@ -383,6 +428,7 @@ namespace KokoroUpTime
 
                     break;
 
+                // シーン名を取得
                 case "scene":
 
                     this.scene = this.scenarios[this.scenarioCount][1]; ;
@@ -392,36 +438,44 @@ namespace KokoroUpTime
 
                     break;
 
+                // グリッドに対しての処理
                 case "grid":
 
+                    // グリッドコントロールを任意の名前により取得
                     this.position = this.scenarios[this.scenarioCount][1];
 
                     var gridObject = this.gridObjects[this.position];
 
                     gridObject.Visibility = Visibility.Visible;
 
+                    // アニメ処理をシナリオの流れと同期するか（待ち処理入れる）か非同期にするか（同時進行するか）
                     string gridAnimeIsSync = "sync";
 
+                    // if文は必要のない処理をコンマ以降で指定しなくてよくするため
                     if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
                     {
                         gridAnimeIsSync = this.scenarios[this.scenarioCount][3];
                     }
 
+                    // アニメを実現するストーリーボードの指定
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
                         var gridStoryBoard = this.scenarios[this.scenarioCount][2];
 
+                        // ストーリーボードの名前にコントロールの名前を付け足す
                         gridStoryBoard += $"_{this.position}";
 
                         this.ShowAnime(storyBoard: gridStoryBoard, isSync: gridAnimeIsSync);
                     }
                     else
                     {
+                        // アニメの処理をしない場合はそのまま次に進む
                         this.scenarioCount += 1;
                         this.ScenarioPlay();
                     }
                     break;
 
+                // イメージに対しての処理
                 case "image":
 
                     this.position = this.scenarios[this.scenarioCount][1];
@@ -434,6 +488,7 @@ namespace KokoroUpTime
                     {
                         imageFile = this.scenarios[this.scenarioCount][2];
 
+                        // フォルダの画像でなくリソース内の画像を表示することでスピードアップ
                         imageObject.Source = new BitmapImage(new Uri($"Images/{imageFile}", UriKind.Relative));
                     }
                     imageObject.Visibility = Visibility.Visible;
@@ -460,6 +515,7 @@ namespace KokoroUpTime
                     }
                     break;
 
+                // ボタンに対する処理
                 case "button":
 
                     this.position = this.scenarios[this.scenarioCount][1];
@@ -490,6 +546,7 @@ namespace KokoroUpTime
                     }
                     break;
 
+                // 流れる文字をTextBlockで表現するための処理
                 case "msg":
 
                     this.NextMessageButton.Visibility = Visibility.Hidden;
@@ -505,15 +562,18 @@ namespace KokoroUpTime
                     {
                         var _message = this.scenarios[this.scenarioCount][2];
 
+                        _message = this.SequenceCheck(_message);
 
                         this.ShowMessage(textObject: _textObject, message: _message);
                     }
                     else
                     {
+                        // xamlに直接書いたStaticな文章を表示する場合
                         this.ShowMessage(textObject: _textObject, message: _textObject.Text);
                     }
                     break;
 
+                // 流れない文字に対するTextBlock処理
                 case "text":
 
                     this.position = this.scenarios[this.scenarioCount][1];
@@ -524,11 +584,12 @@ namespace KokoroUpTime
                     {
                         var _text = this.scenarios[this.scenarioCount][2];
 
-                        var text = _text.Replace("鬱", "\u2028");
+                        var text = this.SequenceCheck(_text);
 
                         textObject.Text = text;
                     }
 
+                    // 色を変えれるようにする
                     if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
                     {
                         var textColor = this.scenarios[this.scenarioCount][3];
@@ -551,6 +612,7 @@ namespace KokoroUpTime
 
                     string textAnimeIsSync = "sync";
 
+                    // テキストに対するアニメも一応用意
                     if (this.scenarios[this.scenarioCount].Count > 5 && this.scenarios[this.scenarioCount][5] != "")
                     {
                         textAnimeIsSync = this.scenarios[this.scenarioCount][5];
@@ -571,6 +633,7 @@ namespace KokoroUpTime
                     }
                     break;
 
+                // メッセージに対する待ち（メッセージボタンの表示切り替え）
                 case "wait":
 
                     bool msgButtonVisible = true;
@@ -594,6 +657,7 @@ namespace KokoroUpTime
 
                     break;
 
+                // 各場面に対する待ち（ページめくりボタンの表示切り替え）
                 case "next":
 
                     this.NextPageButton.Visibility = Visibility.Visible;
@@ -603,6 +667,7 @@ namespace KokoroUpTime
 
                     break;
 
+                // 漫画めくり
                 case "flip":
 
                     this.MangaFlipButton.Visibility = Visibility.Visible;
@@ -610,6 +675,7 @@ namespace KokoroUpTime
 
                     break;
 
+                // 各種コントロールを個別に隠す処理
                 case "hide":
 
                     // オブジェクトを消すときは後々ほとんどアニメで処理するようにする
@@ -663,6 +729,7 @@ namespace KokoroUpTime
                     }
                     break;
 
+                // テキストコントロール一般の文字を消す処理
                 case "clear":
 
                     var clearTarget = this.scenarios[this.scenarioCount][1];
@@ -681,6 +748,7 @@ namespace KokoroUpTime
                     }
                     break;
 
+                // 教室のルール黒板の処理
                 case "rule":
 
                     this.position = this.scenarios[this.scenarioCount][1];
@@ -714,6 +782,7 @@ namespace KokoroUpTime
                     this.isClickable = false;
                     break;
 
+                // BGM
                 case "bgm":
 
                     var bgmStatus = this.scenarios[this.scenarioCount][1];
@@ -767,6 +836,7 @@ namespace KokoroUpTime
 
                     break;
 
+                // 効果音
                 case "se":
 
                     var seStatus = this.scenarios[this.scenarioCount][1];
@@ -795,6 +865,7 @@ namespace KokoroUpTime
 
                     break;
 
+                // ハートゲージに対する処理
                 case "gauge":
 
                     /*
@@ -851,13 +922,45 @@ namespace KokoroUpTime
             }
         }
 
+        string SequenceCheck(string text)
+        {
+            // 正規表現によって$と$の間の文字列を抜き出す（無駄処理）
+            var Matches = new Regex(@"\$(.+?)\$").Matches(text);
 
-        /*
+            for (int i = 0; i < Matches.Count; i++)
+            {
+                var sequence = Matches[i].Value;
+
+                switch (sequence)
+                {
+                    case "$kimis_kind_of_feeling$":
+
+                        text = text.Replace("$kimis_kind_of_feeling$", this.data.KimisKindOfFeelings.Split(",")[0]);
+
+                        break;
+
+                    case "$akamarus_kind_of_feeling$":
+
+                        text = text.Replace("$akamarus_kind_of_feeling$", this.data.AkamarusKindOfFeelings.Split(",")[0]);
+
+                        break;
+
+                    case "$aosukes_kind_of_feeling$":
+
+                        text = text.Replace("$aosukes_kind_of_feeling$", this.data.AosukesKindOfFeelings.Split(",")[0]);
+
+                        break;
+                }
+            }
+
+            // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
+            text = text.Replace("鬱", "\u2028");
+
+            return text;
+        }
+
         void ShowMessage(TextBlock textObject, string message, object obj=null)
         {
-            // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
-            var _message = message.Replace("鬱", "\u2028");
-
             // メッセージ表示処理
             this.msgTimer = new DispatcherTimer();
             this.msgTimer.Tick += ViewMsg;
@@ -867,11 +970,11 @@ namespace KokoroUpTime
             // 一文字ずつメッセージ表示（Inner Func）
             void ViewMsg(object sender, EventArgs e)
             {
-                textObject.Text = _message.Substring(0, word_num);
+                textObject.Text = message.Substring(0, word_num);
 
                 textObject.Visibility = Visibility.Visible;
 
-                if (word_num < _message.Length)
+                if (word_num < message.Length)
                 {
                     word_num++;
                 }
@@ -889,14 +992,13 @@ namespace KokoroUpTime
                 }
             }
         }
-        */
 
-        void ShowMessage(TextBlock textObject, string message, object obj = null)
+        void ShowMessage2(TextBlock textObject, string message, object obj = null)
         {
-            
             // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
             var _message = message.Replace("鬱", "\u2028");
-            _message = _message.Replace("【name】","n");
+
+            _message = _message.Replace("【name】", "n");
             _message = _message.Replace("【くん／ちゃん／さん】", "");
 
             // メッセージ表示処理
@@ -915,17 +1017,32 @@ namespace KokoroUpTime
                     if (_message.Substring(word_num, 1) != "n" && this.NameImage.Source == null)
                     {
                         this.MainMessageText1.Text = _message.Substring(0, word_num);
+                    }
 
-                    }
-                    if (_message.Substring(word_num,1) =="n" && this.MainMessageText2.Text == null)
+                    if (_message.Substring(word_num, 1) == "n" && this.MainMessageText2.Text == null)
                     {
+                        // ここに入ってませんよ… if文の条件を変えてみては？
+
                         _message = _message.Replace("n", " ");
-                        this.NameImage.Source = new BitmapImage(new Uri("/Log/Name.bmp", UriKind.Relative));
+
+                        // Name.bmpを収める場所の設定
+                        string nameBmp = "Name.bmp";
+                        string dirPath = $"./Log/{userName}/";
+
+                        string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
+
+                        // 実行ファイルの場所を絶対パスで取得
+                        var startupPath = FileUtils.GetStartupPath();
+
+                        // 画像がでかすぎでは…
+                        this.NameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
                     }
-                    if(this.MainMessageText1 !=null && NameImage.Source != null)
+
+                    if (this.MainMessageText1 != null && NameImage.Source != null)
                     {
                         this.MainMessageText2.Text = _message.Substring(this.MainMessageText1.Text.Length, word_num - MainMessageText1.Text.Length + 1);
                     }
+
                     word_num++;
                 }
                 else
@@ -937,12 +1054,14 @@ namespace KokoroUpTime
                     {
                         this.MessageCallBack(obj);
                     }
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
             }
         }
 
+        // アニメーション（ストーリーボード）の処理
         private void ShowAnime(string storyBoard, string isSync)
         {
             Storyboard sb = this.FindResource(storyBoard) as Storyboard;
@@ -981,6 +1100,7 @@ namespace KokoroUpTime
             }
         }
 
+        // 黒板ルール処理のためだけの追加
         private void MessageCallBack(object obj)
         {
             switch (obj)
@@ -1002,6 +1122,8 @@ namespace KokoroUpTime
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            // 各種ボタンが押されたときの処理
+
             Button button = sender as Button;
 
             /*
@@ -1012,14 +1134,6 @@ namespace KokoroUpTime
                 // 連続Backの実現にはもっと複雑な処理がいる
             }
             */
-
-            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "RuleBoardButton" || button.Name == "ThinMessageButton" || button.Name == "MangaFlipButton" || button.Name == "ChallengeCompleteButton" || button.Name == "ChallengeNextButton"))
-            {
-                this.isClickable = false;
-
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
 
             if (button.Name == "ExitButton")
             {
@@ -1037,8 +1151,161 @@ namespace KokoroUpTime
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
+<<<<<<< HEAD
+=======
+
+            if (button.Name == "NameButton")
+            {
+                this.CanvasGrid.Visibility = Visibility.Visible;
+                this.WritingGrid.Visibility = Visibility.Hidden;
+            }
+
+            if (button.Name == "PenButton")
+            {
+                WritingCanvas.EditingMode = InkCanvasEditingMode.Ink;
+            }
+
+            if (button.Name == "EraserButton")
+            {
+                WritingCanvas.EditingMode = InkCanvasEditingMode.EraseByPoint;
+            }
+
+            if (button.Name == "AllEraseButton")
+            {
+                WritingCanvas.Strokes.Clear();
+            }
+
+            if (button.Name == "FinishButton")
+            {
+                if(WritingCanvas.Strokes != null)
+                {
+                    // ストロークが描画されている境界を取得
+                    Rect rectBounds = WritingCanvas.Strokes.GetBounds();
+
+                    // 描画先を作成
+                    DrawingVisual dv = new DrawingVisual();
+                    DrawingContext dc = dv.RenderOpen();
+
+                    // 描画エリアの位置補正（補正しないと黒い部分ができてしまう）
+                    dc.PushTransform(new TranslateTransform(-rectBounds.X, -rectBounds.Y));
+
+                    // 描画エリア(dc)に四角形を作成
+                    // 四角形の大きさはストロークが描画されている枠サイズとし、
+                    // 背景色はInkCanvasコントロールと同じにする
+                    dc.DrawRectangle(WritingCanvas.Background, null, rectBounds);
+
+                    // 上記で作成した描画エリア(dc)にInkCanvasのストロークを描画
+                    WritingCanvas.Strokes.Draw(dc);
+                    dc.Close();
+
+                    // ビジュアルオブジェクトをビットマップに変換する
+                    RenderTargetBitmap rtb = new RenderTargetBitmap(
+                        (int)rectBounds.Width, (int)rectBounds.Height,
+                        96, 96,
+                        PixelFormats.Default);
+                    rtb.Render(dv);
+
+                    // ビットマップエンコーダー変数の宣言
+                    BitmapEncoder enc = null;
+                    enc = new BmpBitmapEncoder();
+
+                    // Name.bmpを収める場所の設定
+                    string nameBmp = "Name.bmp";
+                    string dirPath = $"./Log/{userName}/";
+
+                    string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
+
+                    // 実行ファイルの場所を絶対パスで取得
+                    var startupPath = FileUtils.GetStartupPath();
+
+                    if (enc != null)
+                    {
+                        // ビットマップフレームを作成してエンコーダーにフレームを追加する
+                        enc.Frames.Add(BitmapFrame.Create(rtb));
+
+                        // ファイルに書き込む
+                        System.IO.Stream stream = System.IO.File.Create($@"{startupPath}/{nameBmpPath}");
+                        enc.Save(stream);
+                        
+                        stream.Close();
+                    }
+
+                    MessageBox.Show("start");
+                    this.NameText.Source= new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
+                    MessageBox.Show("end");
+                }
+
+                this.CanvasGrid.Visibility = Visibility.Hidden;
+                this.WritingGrid.Visibility = Visibility.Visible;
+            }
+
+            if (button.Name == "DecisionButton")
+            {
+                this.WritingGrid.Visibility = Visibility.Hidden;
+
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+            }
+
+            if (button.Name == "SelectFeelingCompleteButton")
+            {
+                if (this.scene == "チャレンジきもち選択")
+                {
+                    // 配列をコンマで結合して文字列として扱う
+                    this.data.MyKindOfGoodFeelings = string.Join(",", this.myKindOfGoodFeelings);
+                    this.data.MyKindOfBadFeelings = string.Join(",", this.myKindOfBadFeelings);
+
+                    // 当回のプレイのチャレンジタイムのログに関するデータベースをアップデート
+                    using (var connection = new SQLiteConnection(this.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataCapter1 SET MyKindOfGoodFeelings = '{this.data.MyKindOfGoodFeelings}', MyKindOfBadFeelings = '{this.data.MyKindOfBadFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
+                    }
+                }
+                
+                if (this.scene == "キミちゃんのきもち")
+                {
+                    using (var connection = new SQLiteConnection(this.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataCapter1 SET KimisKindOfFeelings = '{this.data.KimisKindOfFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
+                    }
+                }
+
+                if (this.scene == "赤丸くんのきもち")
+                {
+                    using (var connection = new SQLiteConnection(this.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataCapter1 SET AkamarusKindOfFeelings = '{this.data.AkamarusKindOfFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
+                    }
+                }
+
+                if (this.scene == "青助くんのきもち")
+                {
+                    using (var connection = new SQLiteConnection(this.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataCapter1 SET AosukesKindOfFeelings = '{this.data.AosukesKindOfFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
+                    }
+                }
+
+                this.AllGestureCanvas_Enabled(false);
+            }
+
+            if (button.Name == "SelectFeelingNextButton")
+            {
+                this.AllGestureCanvas_Clear();
+                this.AllGestureCanvas_Enabled(true);
+            }
+
+            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "RuleBoardButton" || button.Name == "ThinMessageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "SelectFeelingNextButton"))
+            {
+                this.isClickable = false;
+
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+            }
+>>>>>>> 4262d75044d762f837ccf03d628436b5601c5086
         }
 
+        // 黒板ルールのためだけに追加
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = sender as CheckBox;
@@ -1058,6 +1325,7 @@ namespace KokoroUpTime
             }
         }
 
+        // 黒板ルールのためだけに追加
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = sender as CheckBox;
@@ -1070,9 +1338,7 @@ namespace KokoroUpTime
 
         private void SetBGM(string soundFile, bool isLoop, int volume)
         {
-            string exePath = Environment.GetCommandLineArgs()[0];
-            string exeFullPath = System.IO.Path.GetFullPath(exePath);
-            string startupPath = System.IO.Path.GetDirectoryName(exeFullPath);
+            var startupPath = FileUtils.GetStartupPath();
 
             // ループ再生を指定
             this.mediaPlayer.settings.setMode("loop", isLoop);
@@ -1114,6 +1380,7 @@ namespace KokoroUpTime
             sePlayer.Play();
         }
 
+        // ジェスチャー認識キャンバスのロード
         void GestureCanvas_Loaded(object sender, RoutedEventArgs e)
         {
             var gestureCanvas = (InkCanvas)sender;
@@ -1136,15 +1403,14 @@ namespace KokoroUpTime
             });
         }
 
+        // ジェスチャーキャンバスの処理
         void GestureCanvas_Gesture(object sender, InkCanvasGestureEventArgs e)
         {
             // 信頼性 (RecognitionConfidence) を無視したほうが、Circle と Triangle の認識率は上がるようです。
             var gestureResult = e.GetGestureRecognitionResults()
                 .FirstOrDefault(r => r.ApplicationGesture != ApplicationGesture.NoGesture);
 
-            string exePath = Environment.GetCommandLineArgs()[0];
-            string exeFullPath = System.IO.Path.GetFullPath(exePath);
-            string startupPath = System.IO.Path.GetDirectoryName(exeFullPath);
+            var startupPath = FileUtils.GetStartupPath();
 
             if (gestureResult == null)
             {
@@ -1184,8 +1450,77 @@ namespace KokoroUpTime
 
             var gestureCanvas = (InkCanvas)sender;
 
-            gestureCanvas.Strokes.Clear();
-            gestureCanvas.Strokes.Add(e.Strokes);
+            if (gestureResult.ApplicationGesture == ApplicationGesture.Circle || gestureResult.ApplicationGesture == ApplicationGesture.DoubleCircle)
+            {
+                // 気持ち選択場面でのそれぞれの選択項目に対する処理
+                foreach (var textBlock in gestureCanvas.Children.OfType<TextBlock>())
+                {
+                    switch (textBlock.Name)
+                    {
+                        case "ChallengeGoodFeelingItemTextBlock":
+
+                            this.myKindOfGoodFeelings.Add(textBlock.Text);
+
+                            break;
+
+                        case "ChallengeBadFeelingItemTextBlock":
+
+                            this.myKindOfBadFeelings.Add(textBlock.Text);
+
+                            break;
+
+                        case "SelectGoodFeelingItemTextBlock":
+
+                            if (this.scene == "キミちゃんのきもち")
+                            {
+                                this.data.KimisKindOfFeelings = $@"{textBlock.Text},良い";
+                            }
+
+                            if (this.scene == "赤丸くんのきもち")
+                            {
+                                this.data.AkamarusKindOfFeelings = $@"{textBlock.Text},良い";
+                            }
+
+                            if (this.scene == "青助くんのきもち")
+                            {
+                                this.data.AosukesKindOfFeelings = $@"{textBlock.Text},良い";
+                            }
+
+                            break;
+
+                        case "SelectBadFeelingItemTextBlock":
+
+                            if (this.scene == "キミちゃんのきもち")
+                            {
+                                this.data.KimisKindOfFeelings = $@"{textBlock.Text},悪い";
+                            }
+
+                            if (this.scene == "赤丸くんのきもち")
+                            {
+                                this.data.AkamarusKindOfFeelings = $@"{textBlock.Text},悪い";
+                            }
+
+                            if (this.scene == "青助くんのきもち")
+                            {
+                                this.data.AosukesKindOfFeelings = $@"{textBlock.Text},悪い";
+                            }
+
+                            break;
+                    }
+                }
+            }
+
+            if (this.scene == "キミちゃんのきもち" || this.scene == "赤丸くんのきもち" || this.scene == "青助くんのきもち")
+            {
+                this.AllGestureCanvas_Clear();
+
+                gestureCanvas.Strokes.Add(e.Strokes);
+            }
+            else
+            {
+                gestureCanvas.Strokes.Clear();
+                gestureCanvas.Strokes.Add(e.Strokes);
+            }
         }
 
         private enum AnswerResult
@@ -1196,6 +1531,57 @@ namespace KokoroUpTime
             Correct,
         }
 
+        void AllGestureCanvas_Clear()
+        {
+            // 拡張クラス（Expansion.csの一部）を使ってItemTenplateの子要素（InkCanvas）にアクセス
+            // 全てのInkCanvasをクリアしてから新しいストロークを書き込む排他処理
+            foreach (var goodInkCanvas in this.ChallengeGoodFeelingItemControl.GetChildren<InkCanvas>().ToList())
+            {
+                goodInkCanvas.Strokes.Clear();
+            }
+
+            foreach (var badInkCanvas in this.ChallengeBadFeelingItemControl.GetChildren<InkCanvas>().ToList())
+            {
+                badInkCanvas.Strokes.Clear();
+            }
+
+            foreach (var goodInkCanvas in this.SelectGoodFeelingItemControl.GetChildren<InkCanvas>().ToList())
+            {
+                goodInkCanvas.Strokes.Clear();
+            }
+
+            foreach (var badInkCanvas in this.SelectBadFeelingItemControl.GetChildren<InkCanvas>().ToList())
+            {
+                badInkCanvas.Strokes.Clear();
+            }
+        }
+
+        void AllGestureCanvas_Enabled(bool IsEnable)
+        {
+            // 拡張クラス（Expansion.csの一部）を使ってItemTenplateの子要素（InkCanvas）にアクセス
+            // 全てのInkCanvasをクリアしてから新しいストロークを書き込む排他処理
+            foreach (var goodInkCanvas in this.ChallengeGoodFeelingItemControl.GetChildren<InkCanvas>().ToList())
+            {
+                goodInkCanvas.IsEnabled = IsEnable;
+            }
+
+            foreach (var badInkCanvas in this.ChallengeBadFeelingItemControl.GetChildren<InkCanvas>().ToList())
+            {
+                badInkCanvas.IsEnabled = IsEnable;
+            }
+
+            foreach (var goodInkCanvas in this.SelectGoodFeelingItemControl.GetChildren<InkCanvas>().ToList())
+            {
+                goodInkCanvas.IsEnabled = IsEnable;
+            }
+
+            foreach (var badInkCanvas in this.SelectBadFeelingItemControl.GetChildren<InkCanvas>().ToList())
+            {
+                badInkCanvas.IsEnabled = IsEnable;
+            }
+        }
+
+        // ハートゲージの角度をデータバインド
         private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter1), new UIPropertyMetadata(0.0));
 
         private double Angle
@@ -1204,36 +1590,48 @@ namespace KokoroUpTime
             set { SetValue(AngleProperty, value); }
         }
 
+        // マウスのドラッグ処理（マウスの左ボタンを押下したとき）
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(this);
 
-            this.CalcAngle();
-
-            this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
-        }
-
-        private void OnMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Mouse.Capture(null);
-        }
-
-        private void OnMouseMove(object sender, MouseEventArgs e)
-        {
-            if (Mouse.Captured == this)
+            if (this.SelectNeedleImage.Visibility == Visibility.Visible)
             {
                 this.CalcAngle();
 
                 this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
             }
         }
+
+        // マウスのドラッグ処理（マウスの左ボタンを離したとき）
+        private void OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.Capture(null);
+        }
+
+        // マウスのドラッグ処理（マウスを動かしたとき）
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (Mouse.Captured == this)
+            {
+                if (this.SelectNeedleImage.Visibility == Visibility.Visible)
+                {
+                    this.CalcAngle();
+
+                    this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
+                }   
+            }
+        }
         
+        // ハートゲージの針の角度に関する計算
         private void CalcAngle()
         {
             Point currentLocation = Mouse.GetPosition(this);
 
             var heartPosX = this.SelectHeartImage.TranslatePoint(new Point(0, 0), this).X;
             var heartPosY = this.SelectHeartImage.TranslatePoint(new Point(0, 0), this).Y;
+
+            // FullHDからディスプレイサイズが変わると針の挙動がおかしくなるので後々スクリーンサイズとの比をとる
 
             Point knobCenter = new Point(heartPosX + (this.SelectHeartImage.ActualWidth * 0.5), heartPosY + (this.SelectHeartImage.ActualHeight * 0.8));
 
