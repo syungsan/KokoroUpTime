@@ -493,7 +493,7 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="appear_fade_in_challenge_next_button"/>
+        <Storyboard x:Key="appear_fade_in_select_feeling_next_button"/>
         <Storyboard x:Key="appear_up_kimi_in_plate_image">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KimiInPlateImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="365">
@@ -1033,7 +1033,7 @@
                 <Button x:Name="GoodFeelingButton12" Background="{x:Null}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Content="●好きなスポーツをする" Margin="960,510,300,510"  FontSize="48"/>
                 <Button x:Name="GoodFeelingButton13" Background="{x:Null}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Content="●好きな教科の勉強をする" Margin="960,600,300,420"  FontSize="48"/>
                 <Button x:Name="GoodFeelingButton14" Background="{x:Null}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Content="●レストランに食べに行く" Margin="960,690,300,330"  FontSize="48"/>
-                <Button x:Name="ChallengeNextButton" HorizontalAlignment="Left" Margin="1314,871,0,0" VerticalAlignment="Top" Height="144" Width="442" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}">
+                <Button x:Name="SelectFeelingNextButton" HorizontalAlignment="Left" Margin="1314,871,0,0" VerticalAlignment="Top" Height="144" Width="442" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}">
                     <Image x:Name="ChallengeNextImage" Source="/Images/next_go_button.png" />
                 </Button>
 

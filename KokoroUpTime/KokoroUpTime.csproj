@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Log\**" />
+    <EmbeddedResource Remove="Log\**" />
+    <None Remove="Log\**" />
+    <Page Remove="Log\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="badMindSelectFrame.png" />
     <None Remove="bad_words_grid.png" />
     <None Remove="big_heart.png" />
@@ -126,7 +133,6 @@
     <None Remove="Images\white_frame.png" />
     <None Remove="Images\yazirusi.png" />
     <None Remove="children_stand_01.png" />
-    <None Remove="Log\Name.bmp" />
     <None Remove="shiroji_02.png" />
     <None Remove="shiroji_04.png" />
     <None Remove="teacher.png" />
@@ -254,7 +260,6 @@
     <Resource Include="Images\water_frame.png" />
     <Resource Include="Images\white_frame.png" />
     <Resource Include="Images\yazirusi.png" />
-    <Resource Include="Log\Name.bmp" />
   </ItemGroup>
 
   <ItemGroup>
