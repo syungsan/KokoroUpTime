@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Log\**" />
+    <EmbeddedResource Remove="Log\**" />
+    <None Remove="Log\**" />
+    <Page Remove="Log\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="badMindSelectFrame.png" />
     <None Remove="bad_words_grid.png" />
     <None Remove="big_heart.png" />
