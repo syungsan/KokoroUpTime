@@ -24,4 +24,18 @@ namespace KokoroUpTime
             return Directory.CreateDirectory(path);
         }
     }
+
+    // ファイル操作に関するユーティリティクラス
+    public static class FileUtils
+    {
+        // 実行プログラムのルートディレクトリの絶対パスを返す
+        public static string GetStartupPath()
+        {
+            string exePath = Environment.GetCommandLineArgs()[0];
+            string exeFullPath = Path.GetFullPath(exePath);
+            string startupPath = Path.GetDirectoryName(exeFullPath);
+
+            return startupPath;
+        }
+    }
 }
