@@ -6,7 +6,7 @@
       "version": "3.1.0"
     },
     "additionalProbingPaths": [
-      "C:\\Users\\syung\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\maglab\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\syung\\.nuget\\packages"
     ],
     "configProperties": {

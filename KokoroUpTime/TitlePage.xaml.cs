@@ -64,6 +64,14 @@ namespace KokoroUpTime
 
                 this.NavigationService.Navigate(nextPage);
             }
+            else if (button.Content.ToString() == "名前入力")
+            {
+                
+
+                this.NavigationService.Navigate(new Uri("OptionPage.xaml", UriKind.Relative));
+
+                this.NavigationService.Navigate(nextPage);
+            }
             else
             {
                 for (int i = 1; i <= 12; ++i)

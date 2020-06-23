@@ -1231,31 +1231,6 @@
                     <TextBlock x:Name="MusicTitleTextBlock" HorizontalAlignment="Center" Margin="0,70,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" Foreground="White" Width="432" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" d:IsHidden="True"/>
                     <TextBlock x:Name="ComposerNameTextBlock" HorizontalAlignment="Left" Margin="105,178,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Foreground="White" Width="227" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" d:IsHidden="True"/>
                 </Grid>
-                <Grid x:Name="WritingGrid" d:IsHidden="True" >
-                    <Button x:Name="NameButton" Margin="150,150,900,750" Background="White" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
-                        <Image x:Name="NameText" Source="{Binding Path=BmpImg}"  Stretch="Fill" d:IsHidden="True"/>
-                    </Button>
-                    <Button x:Name="DecisionButton" Content="けってい" Margin="1200,150,400,750" Click="Button_Click" d:IsHidden="True"/>
-                </Grid>
-                <Grid x:Name="CanvasGrid" d:IsHidden="True" >
-                    <Button x:Name="PenButton" Content="ぺん" Margin="0,0,1440,780" FontSize="100" Click="Button_Click" d:IsHidden="True"/>
-                    <Button x:Name="EraserButton" Content="けしごむ" Margin="480,0,960,780" FontSize="100" Click="Button_Click" d:IsHidden="True"/>
-                    <Button x:Name="AllEraseButton" Content="ぜんぶけす" Margin="960,0,480,780" FontSize="100" Click="Button_Click" d:IsHidden="True"/>
-                    <Button x:Name="FinishButton" Content="おわり" Margin="1440,0,0,780" FontSize="100" Click="Button_Click" d:IsHidden="True"/>
-                    <InkCanvas x:Name="WritingCanvas" Margin="0,300,0,0" d:IsHidden="True"/>
-                </Grid>
-                <Button x:Name="ExitButton" Content="おわる" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" FontSize="24" Click="Button_Click" Margin="1833,10,0,0" d:IsHidden="True"/>
-                <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
-                <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">
-                    <Image x:Name="ExitBackImage" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/white_frame.png" Stretch="Fill" d:IsHidden="True"/>
-                    <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Left" Margin="169,113,0,0" VerticalAlignment="Top" Height="100" Width="582" FontSize="48" Text="本当にアプリを終了しますか？" FontWeight="Bold" TextAlignment="Center" d:IsHidden="True"/>
-                    <Button x:Name="ExitBackYesButton" HorizontalAlignment="Left" Margin="33,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
-                        <Image x:Name="ExitBackYesButtonImage" Source="/Images/moya1.png" d:IsHidden="True"/>
-                    </Button>
-                    <Button x:Name="ExitBackNoButton" HorizontalAlignment="Left" Margin="465,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
-                        <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png" d:IsHidden="True"/>
-                    </Button>
-                </Grid>
             </Grid>
         </Grid>
     </Viewbox>

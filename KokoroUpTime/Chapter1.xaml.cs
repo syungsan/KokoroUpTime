@@ -252,7 +252,7 @@ namespace KokoroUpTime
                 ["music_info_grid"] = this.MusicInfoGrid,
                 ["exit_back_grid"] = this.ExitBackGrid,
 
-                ["writing_grid"] = this.WritingGrid,
+               
             };
         }
 
@@ -352,8 +352,14 @@ namespace KokoroUpTime
             this.MangaFlipButton.Visibility = Visibility.Hidden;
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
+<<<<<<< HEAD
+           
+
+           
+=======
             this.WritingGrid.Visibility = Visibility.Hidden;
             this.CanvasGrid.Visibility = Visibility.Hidden;
+>>>>>>> 4262d75044d762f837ccf03d628436b5601c5086
 
             this.RuleBoardTitleTextBlock.Text = "";
             this.RuleBoardCheck1TextBlock.Text = "";
@@ -1145,6 +1151,8 @@ namespace KokoroUpTime
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
+<<<<<<< HEAD
+=======
 
             if (button.Name == "NameButton")
             {
@@ -1294,6 +1302,7 @@ namespace KokoroUpTime
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
+>>>>>>> 4262d75044d762f837ccf03d628436b5601c5086
         }
 
         // 黒板ルールのためだけに追加
