@@ -651,7 +651,7 @@ namespace KokoroUpTime
 
                     break;
 
-                // 各場面に対する待ち（ページめくりボタンの表示切り替え）
+                // 各場面に対する待ち（ページめくりボタン）
                 case "next":
 
                     this.NextPageButton.Visibility = Visibility.Visible;
@@ -1586,7 +1586,7 @@ namespace KokoroUpTime
         {
             Mouse.Capture(this);
 
-            if (this.SelectNeedleImage.Visibility == Visibility.Visible)
+            if (this.SelectHeartGrid.Visibility == Visibility.Visible)
             {
                 this.CalcAngle();
 
@@ -1605,7 +1605,7 @@ namespace KokoroUpTime
         {
             if (Mouse.Captured == this)
             {
-                if (this.SelectNeedleImage.Visibility == Visibility.Visible)
+                if (this.SelectHeartGrid.Visibility == Visibility.Visible)
                 {
                     this.CalcAngle();
 
@@ -1617,14 +1617,9 @@ namespace KokoroUpTime
         // ハートゲージの針の角度に関する計算
         private void CalcAngle()
         {
-            Point currentLocation = Mouse.GetPosition(this);
+            Point currentLocation = this.PointToScreen(Mouse.GetPosition(this));
 
-            var heartPosX = this.SelectHeartImage.TranslatePoint(new Point(0, 0), this).X;
-            var heartPosY = this.SelectHeartImage.TranslatePoint(new Point(0, 0), this).Y;
-
-            // FullHDからディスプレイサイズが変わると針の挙動がおかしくなるので後々スクリーンサイズとの比をとる
-
-            Point knobCenter = new Point(heartPosX + (this.SelectHeartImage.ActualWidth * 0.5), heartPosY + (this.SelectHeartImage.ActualHeight * 0.8));
+            Point knobCenter = this.SelectHeartImage.PointToScreen(new Point(this.SelectHeartImage.ActualWidth * 0.5, this.SelectHeartImage.ActualHeight * 0.8));
 
             double radians = Math.Atan((currentLocation.Y - knobCenter.Y) / (currentLocation.X - knobCenter.X));
 
