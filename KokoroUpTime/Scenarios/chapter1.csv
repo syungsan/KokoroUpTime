@@ -1,5 +1,5 @@
-scene,前説
 reset
+scene,前説
 image,bg_image,background_01.png
 image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
@@ -13,8 +13,6 @@ wait
 msg,main_msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
 wait
 msg,main_msg,はじめに、あなたの名前を教えてくれるかの？,白じい
-wait
-grid,writing_grid
 wait
 msg,main_msg,あなたは【name】じゃな。【name】のうしろは、何かつけるかの？,白じい
 wait
@@ -33,8 +31,8 @@ msg,main_msg,『こころあっぷタイム』は、こまっているときに�
 wait
 msg,main_msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
 wait
-scene,教室のルール
 reset
+scene,教室のルール
 image,bg_image,background_03.png
 button,rule_board_button
 wait,no_button
@@ -52,8 +50,8 @@ wait,no_button
 rule,thin_msg,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,all,白じい
 wait_tap
 next
-scene,子供たちの紹介
 reset
+scene,子供たちの紹介
 image,bg_image,background_02.png
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
@@ -100,8 +98,8 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,この３人とこころあっぷタイムを進めていくぞい！さて、３人は、なにかこまっていることがあるようじゃ。どんなことで、こまっているのだろう？マンガを見ながら考えてみよう！,白じい
 next
-scene,漫画購読
 reset
+scene,漫画購読
 bgm,set,manga.mp3,loop,50
 bgm,play
 text,music_title_text,まんが
@@ -121,8 +119,8 @@ flip
 image,manga_image,manga1-6.png,flip
 hide,button,manga_flip_button
 next
-scene,アイテム出現
 reset
+scene,アイテム出現
 image,bg_image,background_mokume.png
 image,shiroji_right_image,shiroji_01.png,appear_up
 grid,item_name_plate_left_grid
@@ -132,8 +130,8 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,わしの作った発明品をつかって、自分のきもちを 調べてみるのじゃ！,白じい
 next
-scene,アイテム紹介
 reset
+scene,アイテム紹介
 bgm,stop
 se,play,nc211089.wav
 image,bg_image,background_mokume.png
@@ -145,8 +143,8 @@ hide,grid,item_info_sentence_grid
 grid,item_info_plate_grid
 grid,item_info_sentence_grid,appear_fade_in
 next
-scene,チャレンジタイム開始
 reset
+scene,チャレンジタイム開始
 image,bg_image,background_05.png
 image,session_title_image,challenge_time.png
 text,session_sub_title_text,チャレンジタイムとは…
@@ -163,8 +161,8 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,「きもち」には、いいきもちといやなきもちだけでなく、いろいろな種類があるぞい。自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
 next
-scene,チャレンジきもち選択
 reset
+scene,チャレンジきもち選択
 image,bg_image,orange_gradation.png
 grid,challenge_grid
 image,shiroji_very_small_right_image
@@ -173,8 +171,8 @@ wait,no_button
 grid,challenge_msg_grid,appear_expansion
 button,select_feeling_next_button,appear_fade_in
 wait,no_button
-scene,グループアクティビティ開始
 reset
+scene,グループアクティビティ開始
 image,bg_image,background_06.png
 image,session_title_image,group_activity.png
 text,session_sub_title_text,グループ・アクティビティとは…
@@ -201,7 +199,7 @@ text,children_stand_left_onomatopoeia_text,,,rotation,no_sync
 image,children_stand_left_image,,pomp
 wait
 reset
-scene,キミちゃんのきもち
+scene,キミちゃんのきもちの種類
 image,bg_image,water_frame.png
 image,shiroji_small_right_center_image
 image,kimi_stand_small_left_image
@@ -214,10 +212,7 @@ msg,main_msg,きもちセンサーをつかって、きもちの種類を選ん�
 wait
 hide,grid,main_msg_grid
 grid,select_feeling_grid
-button,select_feeling_complete_button
-wait,no_button
-button,select_feeling_next_button,appear_fade_in
-wait,no_button
+next
 hide,button,select_feeling_next_button
 hide,button,select_feeling_complete_button
 hide,grid,select_feeling_grid
@@ -236,7 +231,7 @@ reset
 scene,キミちゃんのきもちの大きさ
 image,bg_image,background_07.png
 image,shiroji_right_image,shiroji_02.png
-image,children_stand_left_image
+image,children_stand_left_image,kimi_stand_01.png
 image,main_msg_bubble_image,left_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion
 wait
@@ -289,7 +284,7 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,うん・・・・（ボクは野球が苦手なんだ・・・）,青助
 next
 reset
-scene,赤丸くんのきもち
+scene,赤丸くんのきもちの種類
 image,bg_image,water_frame.png
 image,children_face_small_left_image,akamaru_face_03.png
 text,children_face_small_left_msg_text,ホームラン打つぞ！
@@ -305,12 +300,7 @@ wait
 clear,text,main_msg
 hide,grid,main_msg_grid
 grid,select_feeling_grid
-button,select_feeling_complete_button
-wait,no_button
-button,select_feeling_next_button,appear_fade_in
-wait,no_button
-hide,button,select_feeling_next_button
-hide,button,select_feeling_complete_button
+next
 hide,grid,select_feeling_grid
 hide,button,next_page_button
 hide,button,back_page_button
@@ -320,24 +310,27 @@ grid,view_kind_of_feeling_grid
 grid,main_msg_grid,appear_expansion
 msg,main_msg,赤丸くんは【$akamarus_kind_of_feeling$】という きもちなんじゃな。きもちの大きさは どれくらいかの？,白じい
 next
-hide,grid,view_kind_of_feeling_grid
-clear,text,main_msg
-hide,grid,main_msg_grid
-image,select_heart_image,heart_red.png
-image,select_needle_image,red_needle.png
+reset
+scene,赤丸くんのきもちの大きさ
+image,bg_image,water_frame.png
+image,children_face_small_left_image,akamaru_face_03.png
+text,children_face_small_left_msg_text,ホームラン打つぞ！
+grid,children_face_small_left_msg_grid
+image,shiroji_small_right_center_image
+gauge
 grid,select_heart_grid
 next
 hide,button,next_page_button
 hide,button,back_page_button
-text,view_size_of_feeling_text,99
+text,view_size_of_feeling_text,$akamarus_size_of_feeling$
 grid,view_size_of_feeling_grid
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 wait
-msg,main_msg,赤丸くんのきもちは【　　】くらいの 大きさなんじゃな。次は青助くんのきもちと　その大きさを考えてみよう。,白じい
+msg,main_msg,赤丸くんのきもちは【$akamarus_size_of_feeling$】くらいの 大きさなんじゃな。次は青助くんのきもちと　その大きさを考えてみよう。,白じい
 next
 reset
-scene,青助くんのきもち
+scene,青助くんのきもちの種類
 image,bg_image,water_frame.png
 image,children_face_small_left_image,aosuke_face_06.png
 text,children_face_small_left_msg_text,ボクは野球は鬱苦手なんだ・・・
@@ -353,12 +346,7 @@ wait
 clear,text,main_msg
 hide,grid,main_msg_grid
 grid,select_feeling_grid
-button,select_feeling_complete_button
-wait,no_button
-button,select_feeling_next_button,appear_fade_in
-wait,no_button
-hide,button,select_feeling_next_button
-hide,button,select_feeling_complete_button
+next
 hide,grid,select_feeling_grid
 hide,button,next_page_button
 hide,button,back_page_button
@@ -368,27 +356,32 @@ grid,view_kind_of_feeling_grid
 grid,main_msg_grid,appear_expansion
 msg,main_msg,青助くんは【$aosukes_kind_of_feeling$】という きもちなんじゃな。きもちの大きさは どれくらいかの？,白じい
 next
-hide,grid,view_kind_of_feeling_grid
-clear,text,main_msg
-hide,grid,main_msg_grid
-image,select_heart_image,heart_blue.png
-image,select_needle_image,blue_needle.png
+reset
+scene,青助くんのきもちの大きさ
+image,bg_image,water_frame.png
+image,children_face_small_left_image,aosuke_face_06.png
+text,children_face_small_left_msg_text,ボクは野球は鬱苦手なんだ・・・
+grid,children_face_small_left_msg_grid
+image,shiroji_small_right_center_image
+gauge
 grid,select_heart_grid
 next
 hide,button,next_page_button
 hide,button,back_page_button
-text,view_size_of_feeling_text,21
+text,view_size_of_feeling_text,$aosukes_size_of_feeling$
 grid,view_size_of_feeling_grid
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 wait
-msg,main_msg,青助くんのきもちは【　　】くらいの 大きさなんじゃな。ふたりのきもちと きもちの大きさを 見比べてみよう！,白じい
+msg,main_msg,青助くんのきもちは【$aosukes_size_of_feeling$】くらいの 大きさなんじゃな。ふたりのきもちと きもちの大きさを 見比べてみよう！,白じい
 next
 reset
 scene,ふたりのきもちの比較
 image,bg_image,water_frame.png
 text,kind_of_feeling_akamaru_text,$akamarus_kind_of_feeling$
 text,kind_of_feeling_aosuke_text,$aosukes_kind_of_feeling$
+text,size_of_feeling_akamaru_text,$akamarus_size_of_feeling$
+text,size_of_feeling_aosuke_text,$aosukes_size_of_feeling$
 grid,akamaru_and_aosuke_compare_grid
 image,shiroji_very_small_right_image
 grid,compare_msg_grid

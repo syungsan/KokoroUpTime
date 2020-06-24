@@ -70,7 +70,7 @@ namespace KokoroUpTime
 
                 this.NavigationService.Navigate(new Uri("OptionPage.xaml", UriKind.Relative));
 
-                this.NavigationService.Navigate(nextPage);
+                // this.NavigationService.Navigate(nextPage);
             }
             else
             {
