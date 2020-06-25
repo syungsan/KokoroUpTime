@@ -60,9 +60,14 @@ namespace KokoroUpTime
 
         private DataCapter2 data;
 
-        private SQLiteConnection connection; 
+        private SQLiteConnection connection;
 
-        public Chapter2()
+        private string[] GOOD_EVENT = new string[] {  "●野球でホームランを打つ" , "●友達と遊ぶ", "●新しいゲームを買う", "●のんびりする" , "●遊園地に行く", "●コンサートに行く" , "●テストで１００点を取る",
+                                                       "●遠足に行く", "●友達とおしゃべりする" , "●動物園に行く" ,"●おいしいものを食べる", "●好きな教科の勉強をする", "●好きなスポーツをする" , "●野球でホームランを打つ" };
+
+
+
+public Chapter2()
         {
             InitializeComponent();
 
@@ -89,11 +94,13 @@ namespace KokoroUpTime
 
             using (this.connection = new SQLiteConnection(dbPath))
             {
-                this.connection.CreateTable<DataCapter1>();
+                this.connection.CreateTable<DataCapter2>();
                 this.connection.Insert(this.data);
             }
             
             this.InitControls();
+
+            this.SelectGoodEvent.ItemsSource = GOOD_EVENT;
         }
 
         private void InitControls()
@@ -130,6 +137,8 @@ namespace KokoroUpTime
                 ["children_face_small_left_image"] = this.ChildrenFaceSmallLeftImage,
                 ["teacher_image"] = this.TeacherImage,
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
+
+                
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -178,7 +187,7 @@ namespace KokoroUpTime
             this.gridObjects = new Dictionary<string, Grid>
             {
                 ["session_grid"] = this.SessionGrid,
-                ["challenge_grid"] = this.ChallengeGrid,
+                ["challenge1_grid"] = this.Challenge1Grid,
                 ["summary_grid"] = this.SummaryGrid,
                 ["ending_grid"] = this.EndingGrid,
                 ["item_name_plate_left_grid"] = this.ItemNamePlateLeftGrid, 
@@ -208,7 +217,7 @@ namespace KokoroUpTime
         private void ResetControls()
         {
             this.SessionGrid.Visibility = Visibility.Hidden;
-            this.ChallengeGrid.Visibility = Visibility.Hidden;
+            this.Challenge1Grid.Visibility = Visibility.Hidden;
             this.SummaryGrid.Visibility = Visibility.Hidden;
             this.EndingGrid.Visibility = Visibility.Hidden;
             this.ItemNamePlateLeftGrid.Visibility = Visibility.Hidden;
@@ -318,6 +327,122 @@ namespace KokoroUpTime
             this.RuleBoardCheck1Box.IsEnabled = false;
             this.RuleBoardCheck2Box.IsEnabled = false;
             this.RuleBoardCheck3Box.IsEnabled = false;
+
+            this.SessionGrid.Visibility = Visibility.Hidden;
+            this.Challenge1Grid.Visibility = Visibility.Hidden;
+            
+            this.SummaryGrid.Visibility = Visibility.Hidden;
+            this.EndingGrid.Visibility = Visibility.Hidden;
+            this.ItemNamePlateLeftGrid.Visibility = Visibility.Hidden;
+            this.ItemNameBubbleGrid.Visibility = Visibility.Hidden;
+            this.ItemNamePlateCenterGrid.Visibility = Visibility.Hidden;
+            this.ItemInfoPlateGrid.Visibility = Visibility.Hidden;
+            this.ItemLastInfoGrid.Visibility = Visibility.Hidden;
+            this.ViewKindOfFeelingGrid.Visibility = Visibility.Hidden;
+            this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
+            this.ChildrenFaceSmallLeftMessageGrid.Visibility = Visibility.Hidden;
+            this.ChallengeMessageGrid.Visibility = Visibility.Hidden;
+            this.KimiPlateInnerUpGrid.Visibility = Visibility.Hidden;
+            this.KimiPlateInnerDownGrid.Visibility = Visibility.Hidden;
+            this.SelectHeartGrid.Visibility = Visibility.Hidden;
+            this.CompareAkamaruHeartGrid.Visibility = Visibility.Hidden;
+            this.CompareAosukeHeartGrid.Visibility = Visibility.Hidden;
+            this.AkamaruAndAosukeCompareGrid.Visibility = Visibility.Hidden;
+            this.CompareMessageGrid.Visibility = Visibility.Hidden;
+            this.EndingMessageGrid.Visibility = Visibility.Hidden;
+            this.MainMessageGrid.Visibility = Visibility.Hidden;
+            this.MusicInfoGrid.Visibility = Visibility.Hidden;
+
+            //this.ExitBackGrid.Visibility = Visibility.Hidden;
+
+            this.BackgroundImage.Visibility = Visibility.Hidden;
+            this.RuleBoardButton.Visibility = Visibility.Hidden;
+            this.RuleBoardTitleTextBlock.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck1TextBlock.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck2TextBlock.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck3TextBlock.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck1Box.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck2Box.Visibility = Visibility.Hidden;
+            this.RuleBoardCheck3Box.Visibility = Visibility.Hidden;
+            this.MangaTitleImage.Visibility = Visibility.Hidden;
+            this.MangaImage.Visibility = Visibility.Hidden;
+            this.ItemCenterImage.Visibility = Visibility.Hidden;
+            this.ItemLeftImage.Visibility = Visibility.Hidden;
+            this.ItemLeftLastImage.Visibility = Visibility.Hidden;
+            this.SessionTitleImage.Visibility = Visibility.Hidden;
+            this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden;
+            this.SessionSentenceTextBlock.Visibility = Visibility.Hidden;
+           
+            this.KimiPlateOuterImage.Visibility = Visibility.Hidden;
+            this.KimiInPlateImage.Visibility = Visibility.Hidden;
+            this.CaseOfKimiTextBlock.Visibility = Visibility.Hidden;
+            this.KimiScene1TextBlock.Visibility = Visibility.Hidden;
+            this.KimiKindOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
+            this.KimiSizeOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
+            this.KimiScene2TextBlock.Visibility = Visibility.Hidden;
+            this.KimiKindOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
+            this.KimiSizeOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
+            this.ViewKindOfFeelingPersonTextBlock.Visibility = Visibility.Hidden;
+            this.ViewKindOfFeelingTextBlock.Visibility = Visibility.Hidden;
+            this.ViewSizeOfFeelingTextBlock.Visibility = Visibility.Hidden;
+            this.ChildrenFaceSmallLeftImage.Visibility = Visibility.Hidden;
+            this.ChildrenFaceSmallLeftMessageTextBlock.Visibility = Visibility.Hidden;
+            this.CompareMessageTextBlock.Visibility = Visibility.Hidden;
+            this.KindOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
+            this.SizeOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
+            this.KindOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
+            this.SizeOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
+            this.ChildrenInfoImage.Visibility = Visibility.Hidden;
+            this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
+            this.ShirojiRightImage.Visibility = Visibility.Hidden;
+            this.ShirojiRightUpImage.Visibility = Visibility.Hidden;
+            this.ShirojiSmallRightUpImage.Visibility = Visibility.Hidden;
+            this.ShirojiSmallRightDownImage.Visibility = Visibility.Hidden;
+            this.ShirojiRightCenterImage.Visibility = Visibility.Hidden;
+            this.ShirojiSmallRightCenterImage.Visibility = Visibility.Hidden;
+            this.ShirojiVerySmallRightImage.Visibility = Visibility.Hidden;
+            this.ShirojiEndingImage.Visibility = Visibility.Hidden;
+            this.ChildrenStandLeftImage.Visibility = Visibility.Hidden;
+            this.ChildrenStandRightImage.Visibility = Visibility.Hidden;
+            this.KimiStandSmallLeftImage.Visibility = Visibility.Hidden;
+            this.ChildrenStandLeftOnomatopoeiaImage.Visibility = Visibility.Hidden;
+            this.ChildrenStandLeftOnomatopoeiaTextBlock.Visibility = Visibility.Hidden;
+            this.IntroAkamaruFaceImage.Visibility = Visibility.Hidden;
+            this.IntroAosukeFaceImage.Visibility = Visibility.Hidden;
+            this.IntroKimiFaceImage.Visibility = Visibility.Hidden;
+            this.TeacherImage.Visibility = Visibility.Hidden;
+            this.MainMessageTextBlock.Visibility = Visibility.Hidden;
+            this.ThinMessageButton.Visibility = Visibility.Hidden;
+            this.ThinMessageTextBlock.Visibility = Visibility.Hidden;
+            this.NextMessageButton.Visibility = Visibility.Hidden;
+            this.BackMessageButton.Visibility = Visibility.Hidden;
+            this.NextPageButton.Visibility = Visibility.Hidden;
+            this.BackPageButton.Visibility = Visibility.Hidden;
+            this.MangaFlipButton.Visibility = Visibility.Hidden;
+
+            //this.CoverLayerImage.Visibility = Visibility.Hidden;
+
+            this.RuleBoardTitleTextBlock.Text = "";
+            this.RuleBoardCheck1TextBlock.Text = "";
+            this.RuleBoardCheck2TextBlock.Text = "";
+            this.RuleBoardCheck3TextBlock.Text = "";
+            this.SessionSubTitleTextBlock.Text = "";
+            this.SessionSentenceTextBlock.Text = "";
+            this.ViewKindOfFeelingPersonTextBlock.Text = "";
+            this.ViewKindOfFeelingTextBlock.Text = "";
+            this.ViewSizeOfFeelingTextBlock.Text = "";
+            this.ChildrenFaceSmallLeftMessageTextBlock.Text = "";
+            this.CompareMessageTextBlock.Text = "";
+            this.KindOfFeelingAkamaruTextBlock.Text = "";
+            this.SizeOfFeelingAkamaruTextBlock.Text = "";
+            this.KindOfFeelingAosukeTextBlock.Text = "";
+            this.SizeOfFeelingAosukeTextBlock.Text = "";
+            this.EndingMessageTextBlock.Text = "";
+
+            this.MainMessageTextBlock.Text = "";
+            this.ThinMessageTextBlock.Text = "";
+            this.MusicTitleTextBlock.Text = "";
+            this.ComposerNameTextBlock.Text = "";
         }
 
         // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
