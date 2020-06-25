@@ -48,7 +48,7 @@ namespace KokoroUpTime
         // マウスクリックを可能にするかどうかのフラグ
         private bool isClickable = false;
 
-        // 何回タップしたか
+        // 画面を何回タップしたか
         private int tapCount = 0;
 
         // 気持ちの大きさ
@@ -83,11 +83,19 @@ namespace KokoroUpTime
         // 仮のユーザネームを設定
         public string userName = "なまえ";
 
-        // なったことのある自分の気持ち記録用
+        // なったことのある自分の気持ちの一時記録用
         private List<string> myKindOfGoodFeelings = new List<string>();
         private List<string> myKindOfBadFeelings = new List<string>();
 
+<<<<<<< HEAD
        
+=======
+        private bool hasKimisKindOfFeelingsRecorded = false;
+        private bool hasAkamarusKindOfFeelingsRecorded = false;
+        private bool hasAosukesKindOfFeelingsRecorded = false;
+        private bool hasAkamarusSizeOfFeelingRecorded = false;
+        private bool hasAosukesSizeOfFeelingRecorded = false;
+>>>>>>> dcdb0f7af4f8621e4c3950c087ad848d061fa796
 
         public Chapter1()
         {
@@ -107,7 +115,7 @@ namespace KokoroUpTime
             // データモデルインスタンス確保
             this.data = new DataCapter1();
 
-            // データベース本体のファイルを作成する
+            // データベース本体のファイルのパス設定
             string dbName = $"{userName}.sqlite";
             string dirPath = $"./Log/{userName}/";
 
@@ -209,7 +217,6 @@ namespace KokoroUpTime
                 ["thin_msg"] = this.ThinMessageTextBlock,
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
-                
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -252,12 +259,16 @@ namespace KokoroUpTime
                 ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid,
                 ["music_info_grid"] = this.MusicInfoGrid,
+<<<<<<< HEAD
                 //["exit_back_grid"] = this.ExitBackGrid,
 
               
                 
 
                
+=======
+                ["exit_back_grid"] = this.ExitBackGrid,
+>>>>>>> dcdb0f7af4f8621e4c3950c087ad848d061fa796
             };
         }
 
@@ -355,9 +366,13 @@ namespace KokoroUpTime
             this.NextPageButton.Visibility = Visibility.Hidden;
             this.BackPageButton.Visibility = Visibility.Hidden;
             this.MangaFlipButton.Visibility = Visibility.Hidden;
+<<<<<<< HEAD
             //this.CoverLayerImage.Visibility = Visibility.Hidden:
 
 
+=======
+            this.CoverLayerImage.Visibility = Visibility.Hidden;
+>>>>>>> dcdb0f7af4f8621e4c3950c087ad848d061fa796
             this.RuleBoardTitleTextBlock.Text = "";
             this.RuleBoardCheck1TextBlock.Text = "";
             this.RuleBoardCheck2TextBlock.Text = "";
@@ -374,7 +389,6 @@ namespace KokoroUpTime
             this.KindOfFeelingAosukeTextBlock.Text = "";
             this.SizeOfFeelingAosukeTextBlock.Text = "";
             this.EndingMessageTextBlock.Text = "";
-            
             this.MainMessageTextBlock.Text = "";
             this.ThinMessageTextBlock.Text = "";
             this.MusicTitleTextBlock.Text = "";
@@ -654,7 +668,7 @@ namespace KokoroUpTime
 
                     break;
 
-                // 各場面に対する待ち（ページめくりボタンの表示切り替え）
+                // 各場面に対する待ち（ページめくりボタン）
                 case "next":
 
                     this.NextPageButton.Visibility = Visibility.Visible;
@@ -865,6 +879,45 @@ namespace KokoroUpTime
                 // ハートゲージに対する処理
                 case "gauge":
 
+                    this.SelectHeartImage.Source = null;
+                    this.SelectNeedleImage.Source = null;
+
+                    if (this.scene == "赤丸くんのきもちの大きさ")
+                    {
+                        if (this.data.AkamarusKindOfFeelings.Split(",")[1].ToString() == "良い")
+                        {
+                            this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_red.png", UriKind.Relative));
+                            this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/red_needle.png", UriKind.Relative));
+                        }
+                        else if (this.data.AkamarusKindOfFeelings.Split(",")[1].ToString() == "悪い")
+                        {
+                            this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_blue.png", UriKind.Relative));
+                            this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/blue_needle.png", UriKind.Relative));
+                        }
+                    }
+
+                    if (this.scene == "青助くんのきもちの大きさ")
+                    {
+                        if (this.data.AosukesKindOfFeelings.Split(",")[1].ToString() == "良い")
+                        {
+                            this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_red.png", UriKind.Relative));
+                            this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/red_needle.png", UriKind.Relative));
+                        }
+                        else if (this.data.AosukesKindOfFeelings.Split(",")[1].ToString() == "悪い")
+                        {
+                            this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_blue.png", UriKind.Relative));
+                            this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/blue_needle.png", UriKind.Relative));
+                        }
+                    }
+
+                    this.Angle = 0.0f;
+                    this.ViewSizeOfFeelingTextBlock.Text = "50";
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
                     /*
                     var kindOfFeeling = this.scenarios[this.scenarioCount][1];
 
@@ -909,13 +962,6 @@ namespace KokoroUpTime
                         timer.Start();
                     }
                     */
-                    this.Angle = 0.0f;
-                    this.ViewSizeOfFeelingTextBlock.Text = "50";
-
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-
-                    break;
             }
         }
 
@@ -945,6 +991,18 @@ namespace KokoroUpTime
                     case "$aosukes_kind_of_feeling$":
 
                         text = text.Replace("$aosukes_kind_of_feeling$", this.data.AosukesKindOfFeelings.Split(",")[0]);
+
+                        break;
+
+                    case "$akamarus_size_of_feeling$":
+
+                        text = text.Replace("$akamarus_size_of_feeling$", this.data.AkamarusSizeOfFeeling.ToString());
+
+                        break;
+
+                    case "$aosukes_size_of_feeling$":
+
+                        text = text.Replace("$aosukes_size_of_feeling$", this.data.AosukesSizeOfFeeling.ToString());
 
                         break;
                 }
@@ -1132,6 +1190,7 @@ namespace KokoroUpTime
             }
             */
 
+            // FullScreen時のデバッグ用に作っておく
             if (button.Name == "ExitButton")
             {
                 //this.CoverLayerImage.Visibility = Visibility.Visible;
@@ -1145,6 +1204,7 @@ namespace KokoroUpTime
 
             if (button.Name == "ExitBackNoButton")
             {
+<<<<<<< HEAD
                 //this.ExitBackGrid.Visibility = Visibility.Hidden;
                 //this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
@@ -1154,6 +1214,70 @@ namespace KokoroUpTime
            
 
            
+
+            if (button.Name == "SelectFeelingCompleteButton")
+            {
+                if (this.scene == "チャレンジきもち選択")
+=======
+                this.ExitBackGrid.Visibility = Visibility.Hidden;
+                this.CoverLayerImage.Visibility = Visibility.Hidden;
+            }
+
+            if (button.Name == "NextPageButton")
+            {
+                if (this.scene == "キミちゃんのきもちの種類" && !hasKimisKindOfFeelingsRecorded)
+                {
+                    using (var connection = new SQLiteConnection(this.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataCapter1 SET KimisKindOfFeelings = '{this.data.KimisKindOfFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
+                    }
+                    this.hasKimisKindOfFeelingsRecorded = true;
+                    this.AllGestureCanvas_Clear();
+                }
+
+                if (this.scene == "赤丸くんのきもちの種類" && !hasAkamarusKindOfFeelingsRecorded)
+>>>>>>> dcdb0f7af4f8621e4c3950c087ad848d061fa796
+                {
+                    using (var connection = new SQLiteConnection(this.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataCapter1 SET AkamarusKindOfFeelings = '{this.data.AkamarusKindOfFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
+                    }
+                    this.hasAkamarusKindOfFeelingsRecorded = true;
+                    this.AllGestureCanvas_Clear();
+                }
+
+                if (this.scene == "青助くんのきもちの種類" && !hasAosukesKindOfFeelingsRecorded)
+                {
+                    using (var connection = new SQLiteConnection(this.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataCapter1 SET AosukesKindOfFeelings = '{this.data.AosukesKindOfFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
+                    }
+                    this.hasAosukesKindOfFeelingsRecorded = true;
+                    this.AllGestureCanvas_Clear();
+                }
+
+                if (this.scene == "赤丸くんのきもちの大きさ" && !hasAkamarusSizeOfFeelingRecorded)
+                {
+                    this.data.AkamarusSizeOfFeeling = this.feelingSize;
+
+                    using (var connection = new SQLiteConnection(this.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataCapter1 SET AkamarusSizeOfFeeling = '{this.data.AkamarusSizeOfFeeling}' WHERE CreatedAt = '{this.data.CreatedAt}';");
+                    }
+                    this.hasAkamarusSizeOfFeelingRecorded = true;
+                }
+
+                if (this.scene == "青助くんのきもちの大きさ" && !hasAosukesSizeOfFeelingRecorded)
+                {
+                    this.data.AosukesSizeOfFeeling = this.feelingSize;
+
+                    using (var connection = new SQLiteConnection(this.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataCapter1 SET AosukesSizeOfFeeling = '{this.data.AosukesSizeOfFeeling}' WHERE CreatedAt = '{this.data.CreatedAt}';");
+                    }
+                    this.hasAosukesSizeOfFeelingRecorded = true;
+                }
+            }
 
             if (button.Name == "SelectFeelingCompleteButton")
             {
@@ -1170,30 +1294,6 @@ namespace KokoroUpTime
                     }
                 }
                 
-                if (this.scene == "キミちゃんのきもち")
-                {
-                    using (var connection = new SQLiteConnection(this.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataCapter1 SET KimisKindOfFeelings = '{this.data.KimisKindOfFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
-                    }
-                }
-
-                if (this.scene == "赤丸くんのきもち")
-                {
-                    using (var connection = new SQLiteConnection(this.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataCapter1 SET AkamarusKindOfFeelings = '{this.data.AkamarusKindOfFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
-                    }
-                }
-
-                if (this.scene == "青助くんのきもち")
-                {
-                    using (var connection = new SQLiteConnection(this.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataCapter1 SET AosukesKindOfFeelings = '{this.data.AosukesKindOfFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
-                    }
-                }
-
                 this.AllGestureCanvas_Enabled(false);
             }
 
@@ -1210,7 +1310,10 @@ namespace KokoroUpTime
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> dcdb0f7af4f8621e4c3950c087ad848d061fa796
         }
 
         // 黒板ルールのためだけに追加
@@ -1379,17 +1482,17 @@ namespace KokoroUpTime
 
                         case "SelectGoodFeelingItemTextBlock":
 
-                            if (this.scene == "キミちゃんのきもち")
+                            if (this.scene == "キミちゃんのきもちの種類")
                             {
                                 this.data.KimisKindOfFeelings = $@"{textBlock.Text},良い";
                             }
 
-                            if (this.scene == "赤丸くんのきもち")
+                            if (this.scene == "赤丸くんのきもちの種類")
                             {
                                 this.data.AkamarusKindOfFeelings = $@"{textBlock.Text},良い";
                             }
 
-                            if (this.scene == "青助くんのきもち")
+                            if (this.scene == "青助くんのきもちの種類")
                             {
                                 this.data.AosukesKindOfFeelings = $@"{textBlock.Text},良い";
                             }
@@ -1398,17 +1501,17 @@ namespace KokoroUpTime
 
                         case "SelectBadFeelingItemTextBlock":
 
-                            if (this.scene == "キミちゃんのきもち")
+                            if (this.scene == "キミちゃんのきもちの種類")
                             {
                                 this.data.KimisKindOfFeelings = $@"{textBlock.Text},悪い";
                             }
 
-                            if (this.scene == "赤丸くんのきもち")
+                            if (this.scene == "赤丸くんのきもちの種類")
                             {
                                 this.data.AkamarusKindOfFeelings = $@"{textBlock.Text},悪い";
                             }
 
-                            if (this.scene == "青助くんのきもち")
+                            if (this.scene == "青助くんのきもちの種類")
                             {
                                 this.data.AosukesKindOfFeelings = $@"{textBlock.Text},悪い";
                             }
@@ -1418,7 +1521,7 @@ namespace KokoroUpTime
                 }
             }
 
-            if (this.scene == "キミちゃんのきもち" || this.scene == "赤丸くんのきもち" || this.scene == "青助くんのきもち")
+            if (this.scene == "キミちゃんのきもちの種類" || this.scene == "赤丸くんのきもちの種類" || this.scene == "青助くんのきもちの種類")
             {
                 this.AllGestureCanvas_Clear();
 
@@ -1441,7 +1544,7 @@ namespace KokoroUpTime
 
         void AllGestureCanvas_Clear()
         {
-            // 拡張クラス（Expansion.csの一部）を使ってItemTenplateの子要素（InkCanvas）にアクセス
+            // 拡張クラス（Expansion.csの一部）GetChildrenを使ってItemTenplateの子要素（InkCanvas）にアクセス
             // 全てのInkCanvasをクリアしてから新しいストロークを書き込む排他処理
             foreach (var goodInkCanvas in this.ChallengeGoodFeelingItemControl.GetChildren<InkCanvas>().ToList())
             {
@@ -1466,8 +1569,6 @@ namespace KokoroUpTime
 
         void AllGestureCanvas_Enabled(bool IsEnable)
         {
-            // 拡張クラス（Expansion.csの一部）を使ってItemTenplateの子要素（InkCanvas）にアクセス
-            // 全てのInkCanvasをクリアしてから新しいストロークを書き込む排他処理
             foreach (var goodInkCanvas in this.ChallengeGoodFeelingItemControl.GetChildren<InkCanvas>().ToList())
             {
                 goodInkCanvas.IsEnabled = IsEnable;
@@ -1492,7 +1593,7 @@ namespace KokoroUpTime
         // ハートゲージの角度をデータバインド
         private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter1), new UIPropertyMetadata(0.0));
 
-        private double Angle
+        public double Angle
         {
             get { return (double)GetValue(AngleProperty); }
             set { SetValue(AngleProperty, value); }
@@ -1503,7 +1604,7 @@ namespace KokoroUpTime
         {
             Mouse.Capture(this);
 
-            if (this.SelectNeedleImage.Visibility == Visibility.Visible)
+            if (this.SelectHeartGrid.Visibility == Visibility.Visible)
             {
                 this.CalcAngle();
 
@@ -1522,7 +1623,7 @@ namespace KokoroUpTime
         {
             if (Mouse.Captured == this)
             {
-                if (this.SelectNeedleImage.Visibility == Visibility.Visible)
+                if (this.SelectHeartGrid.Visibility == Visibility.Visible)
                 {
                     this.CalcAngle();
 
@@ -1534,14 +1635,9 @@ namespace KokoroUpTime
         // ハートゲージの針の角度に関する計算
         private void CalcAngle()
         {
-            Point currentLocation = Mouse.GetPosition(this);
+            Point currentLocation = this.PointToScreen(Mouse.GetPosition(this));
 
-            var heartPosX = this.SelectHeartImage.TranslatePoint(new Point(0, 0), this).X;
-            var heartPosY = this.SelectHeartImage.TranslatePoint(new Point(0, 0), this).Y;
-
-            // FullHDからディスプレイサイズが変わると針の挙動がおかしくなるので後々スクリーンサイズとの比をとる
-
-            Point knobCenter = new Point(heartPosX + (this.SelectHeartImage.ActualWidth * 0.5), heartPosY + (this.SelectHeartImage.ActualHeight * 0.8));
+            Point knobCenter = this.SelectHeartImage.PointToScreen(new Point(this.SelectHeartImage.ActualWidth * 0.5, this.SelectHeartImage.ActualHeight * 0.8));
 
             double radians = Math.Atan((currentLocation.Y - knobCenter.Y) / (currentLocation.X - knobCenter.X));
 
