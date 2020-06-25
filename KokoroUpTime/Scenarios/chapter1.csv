@@ -14,7 +14,7 @@ msg,main_msg,フォッフォッフォ！わしの名前は「白じい」じゃ�
 wait
 msg,main_msg,はじめに、あなたの名前を教えてくれるかの？,白じい
 wait
-grid,writing_grid
+msg,main_msg,名前を入力
 wait
 msg,main_msg,あなたは【name】じゃな。【name】のうしろは、何かつけるかの？,白じい
 wait
