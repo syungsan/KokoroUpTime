@@ -16,14 +16,14 @@
     <Compile Update="OptionPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="NameInputPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="TitlePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="NameInputPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Chapter2.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -34,9 +34,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="OptionPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="NameInputPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="TitlePage.xaml">
