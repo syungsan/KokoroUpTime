@@ -10,13 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Log\**" />
-    <EmbeddedResource Remove="Log\**" />
-    <None Remove="Log\**" />
-    <Page Remove="Log\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="badMindSelectFrame.png" />
     <None Remove="bad_words_grid.png" />
     <None Remove="big_heart.png" />
@@ -263,12 +256,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="NameInputPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Chapter2.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Scenarios\NameInput.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Scenarios\chapter6.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -311,6 +310,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="NameInputPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Chapter2.xaml">
       <SubType>Designer</SubType>
     </Page>
