@@ -23,7 +23,7 @@
             <Image Source="/Images/small_bubble_left.png" Margin="1275,590,110,225"/>
             <Button Content="オプション" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,918,1720,91"/>
             <Button Content="アイテム図鑑" FontSize="36" Foreground="White" Margin="210,999,1520,10"/>
-            <Button Content="なまえ入力" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,999,1720,10"/>
+            <Button Content="なまえ" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,999,1720,10"/>
             <Button Content="第1回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Margin="400,425,1420,587"/>
             <Button Content="第2回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="400,493,1420,517"/>
             <Button Content="第3回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Margin="400,563,1420,454"/>
