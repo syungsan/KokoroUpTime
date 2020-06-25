@@ -658,7 +658,7 @@
                 <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_01.png"/>
 
             </Grid>
-            <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
+            <Grid x:Name="MangaGrid" Visibility="Visible">
                 <Image x:Name="MangaTitleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/manga1_title.png" Margin="86,24,0,0" Height="98" Width="1752"/>
                 <Image x:Name="MangaImage" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Images/manga1-1.png" Margin="0,121,0,0" RenderTransformOrigin="0.5,0.5" Height="880" Width="1788">
                     <Image.RenderTransform>
@@ -671,7 +671,7 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
+            <Grid x:Name="ItemGrid" Visibility="Visible">
                 <Image x:Name="ItemCenterImage" HorizontalAlignment="Left" Height="512" VerticalAlignment="Top" Width="363" Source="/Images/item01_solo.png" Margin="804,266,0,0" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -709,7 +709,7 @@
                     <TextBlock x:Name="ItemLastInfoTextBlock" HorizontalAlignment="Left" Margin="12,38,0,0" VerticalAlignment="Top" Height="66" Width="408" FontSize="48" FontWeight="Bold" Text="No.1  きもちセンサー"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SessionGrid" d:IsHidden="True">
+            <Grid x:Name="SessionGrid">
                 <Image x:Name="SessionTitleImage" Source="/Images/challenge_time.png" Margin="226,75,906,917"/>
                 <Grid x:Name="SessionFrameGrid" Width="1010" Height="328" Margin="226,243,684,509">
                     <Image x:Name="SessionFrameImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/white_frame.png" Stretch="Fill"/>
@@ -718,7 +718,7 @@
                     <TextBlock x:Name="SessionStarTextBlock" HorizontalAlignment="Left" Margin="35,109,0,0" VerticalAlignment="Top" FontSize="48" RenderTransformOrigin="0.345,0.474" FontWeight="Bold" Text="☆" TextAlignment="Center"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
+            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920">
                 <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684">
                     <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png"/>
                     <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center"/>
@@ -730,12 +730,12 @@
                     <TextBlock x:Name="ViewKindOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="GaugeGrid" d:IsHidden="True">
+            <Grid x:Name="GaugeGrid">
                 <Grid x:Name="SelectHeartGrid" Margin="776,410,776,358">
                     <Image x:Name="SelectHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_red.png"/>
                     <Image x:Name="SelectNeedleImage" Height="213" Source="/Images/red_needle.png" RenderTransformOrigin="0.5,0.8" Margin="171,65,172,0" VerticalAlignment="Top">
                         <Image.RenderTransform>
-                            <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter1}}}"/>
+                            <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter2}}}"/>
                         </Image.RenderTransform>
                     </Image>
                 </Grid>
@@ -743,7 +743,7 @@
                     <Image x:Name="CompareAkamaruHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_red.png"/>
                     <Image x:Name="CompareAkamaruNeedleImage" Height="168" Source="/Images/red_needle.png" RenderTransformOrigin="0.5,0.8" Margin="128,60,128,0" VerticalAlignment="Top">
                         <Image.RenderTransform>
-                            <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter1}}}"/>
+                            <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter2}}}"/>
                         </Image.RenderTransform>
                     </Image>
                 </Grid>
@@ -751,12 +751,12 @@
                     <Image x:Name="CompareAosukeHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_blue.png"/>
                     <Image x:Name="CompareAosukeNeedleImage" Height="168" Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.8" Margin="128,60,128,0" VerticalAlignment="Top">
                         <Image.RenderTransform>
-                            <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter1}}}"/>
+                            <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter2}}}"/>
                         </Image.RenderTransform>
                     </Image>
                 </Grid>
             </Grid>
-            <Grid x:Name="SummaryGrid" d:IsHidden="True">
+            <Grid x:Name="SummaryGrid">
                 <Grid x:Name="SummaryBoardGrid" Margin="496,203,496,305">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -773,7 +773,7 @@
                 </Grid>
                 <Image x:Name="SummaryTitleImage" Width="401" Source="/Images/summary_title.png" Margin="760,22,759,907" Height="151"/>
             </Grid>
-            <Grid x:Name="AnyFrameGrid" d:IsHidden="True">
+            <Grid x:Name="AnyFrameGrid">
                 <Button x:Name="RuleBoardButton" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Margin="215,41,215,122">
                     <Grid x:Name="RuleButtonGrid">
                         <Image x:Name="RuleBoardImage" Source="/Images/blackboard.png" Stretch="Fill" />
@@ -868,7 +868,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid x:Name="EndingGrid" d:IsHidden="True">
+            <Grid x:Name="EndingGrid">
                 <Grid x:Name="EndingTitleGrid" Width="878" Height="427" Margin="521,202,521,451">
                     <Image x:Name="EndingTitleBackImage" Source="/Images/ending_bubble.png" Stretch="Uniform"/>
                     <TextBlock x:Name="EndingTitleTextBlock" HorizontalAlignment="Center" Margin="0,214,0,0" VerticalAlignment="Top" FontSize="88" FontWeight="Bold" Foreground="Black" Text="しゅうりょう！" TextAlignment="Center"/>
@@ -943,7 +943,7 @@
                 </Image>
                 <Image x:Name="ShirojiEndingImage" HorizontalAlignment="Left" Height="570" Margin="1204,485,0,0" VerticalAlignment="Top" Width="526" Source="/Images/shiroji_01.png"/>
             </Grid>
-            <Grid x:Name="ChildrenStandGrid" Visibility="Visible" d:IsHidden="True">
+            <Grid x:Name="ChildrenStandGrid" Visibility="Visible">
                 <Image x:Name="ChildrenStandLeftImage" RenderTransformOrigin="0.5,0.5" Source="/Images/children_stand_01.png" Width="310" Height="765" Margin="323,237,1287,78">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -977,7 +977,7 @@
                     </TextBlock.RenderTransform>
                 </TextBlock>
             </Grid>
-            <Grid x:Name="ChildrenFaceGrid" Visibility="Visible" d:IsHidden="True">
+            <Grid x:Name="ChildrenFaceGrid" Visibility="Visible">
                 <Image x:Name="IntroAkamaruFaceImage" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/akamaru_face_04.png" Margin="258,179,0,0" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -1014,30 +1014,28 @@
                     <TextBlock x:Name="ChildrenFaceSmallLeftMessageTextBlock" HorizontalAlignment="Left" Margin="19,10,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Height="125" Width="378" TextAlignment="Center"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="AnyCharaGrid" d:IsHidden="True">
+            <Grid x:Name="AnyCharaGrid">
                 <Image x:Name="TeacherImage" HorizontalAlignment="Left" Height="924" Margin="1358,86,0,0" VerticalAlignment="Top" Width="290" Source="/Images/teacher.png"/>
             </Grid>
-            <Grid x:Name="ChallengeGrid" Background="Orange">
+            <Grid x:Name="Challenge1Grid" Background="Orange" d:IsHidden="True" >
                 <Image x:Name="GoodFeelingImage" Source="/Images/challenge_frame1.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="300,100,300,300" Stretch="Fill"/>
-                <Button x:Name="GoodFeelingButton1" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Content="●野球でホームランをうつ" Margin="330,150,960,870"  FontSize="48"/>
-                <Button x:Name="GoodFeelingButton2" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Content="●友達と遊ぶ" Margin="330,240,960,780"  FontSize="48"/>
-                <Button x:Name="GoodFeelingButton3" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Content="●新しいゲームを買う" Margin="330,330,960,690"  FontSize="48"/>
-                <Button x:Name="GoodFeelingButton4" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Content="●のんびりする" Margin="330,420,960,600"  FontSize="48"/>
-                <Button x:Name="GoodFeelingButton5" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Content="●遊園地に行く" Margin="330,510,960,510"  FontSize="48"/>
-                <Button x:Name="GoodFeelingButton6" Background="{x:Null}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Content="●コンサートに行く" Margin="330,600,960,420"  FontSize="48"/>
-                <Button x:Name="GoodFeelingButton7" Background="{x:Null}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Content="●テストで１００点取る" Margin="330,690,960,330"  FontSize="48"/>
-                <Button x:Name="GoodFeelingButton8" Background="{x:Null}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Content="●遠足に行く" Margin="960,150,300,870"  FontSize="48"/>
-                <Button x:Name="GoodFeelingButton9" Background="{x:Null}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Content="●友達とおしゃべりする" Margin="960,240,300,780"  FontSize="48"/>
-                <Button x:Name="GoodFeelingButton10" Background="{x:Null}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Content="●動物園に行く" Margin="960,330,300,690"  FontSize="48"/>
-                <Button x:Name="GoodFeelingButton11" Background="{x:Null}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Content="●おいしいものを食べる" Margin="960,420,300,600"  FontSize="48"/>
-                <Button x:Name="GoodFeelingButton12" Background="{x:Null}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Content="●好きなスポーツをする" Margin="960,510,300,510"  FontSize="48"/>
-                <Button x:Name="GoodFeelingButton13" Background="{x:Null}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Content="●好きな教科の勉強をする" Margin="960,600,300,420"  FontSize="48"/>
-                <Button x:Name="GoodFeelingButton14" Background="{x:Null}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Content="●レストランに食べに行く" Margin="960,690,300,330"  FontSize="48"/>
-                <Button x:Name="SelectFeelingNextButton" HorizontalAlignment="Left" Margin="1314,871,0,0" VerticalAlignment="Top" Height="144" Width="442" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}">
-                    <Image x:Name="ChallengeNextImage" Source="/Images/next_go_button.png" />
-                </Button>
-
+                <ListBox x:Name="SelectGoodEvent" Margin="300,100,300,300" Background="{x:Null}" SelectionMode="Multiple">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Image x:Name="SelectCircle" Stretch="Fill" Source="/Images/circle.png"/>
+                                <TextBlock x:Name="SelectEvent" Text="{Binding}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
             </Grid>
+
             <Grid x:Name="SystemGrid" d:IsHidden="True">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
