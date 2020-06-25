@@ -16,31 +16,51 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Stretch="Fill" Source="/Images/background_00.png" Visibility="Visible"/>
-            <Image Source="/Images/title.png" Margin="210,95,205,785"/>
-            <Image Source="/Images/menu_bubble.png" Margin="210,339,1030,157"/>
-            <Image Source="/Images/shiroji_02.png" Margin="1026,602,619,145"/>
-            <Image Source="/Images/small_bubble_left.png" Margin="1275,590,110,225"/>
-            <Button Content="オプション" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,918,1720,91"/>
-            <Button Content="アイテム図鑑" FontSize="36" Foreground="White" Margin="210,999,1520,10"/>
-            <Button Content="なまえ入力" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,999,1720,10"/>
-            <Button Content="第1回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Margin="400,425,1420,587"/>
-            <Button Content="第2回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="400,493,1420,517"/>
-            <Button Content="第3回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Margin="400,563,1420,454"/>
-            <Button Content="第4回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Margin="400,626,1420,386"/>
-            <Button Content="第5回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="400,694,1420,318"/>
-            <Button Content="第6回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Margin="400,762,1420,248"/>
-            <Button Content="第7回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="570,425,1230,587"/>
-            <Button Content="第8回" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click" Margin="570,493,1230,517"/>
-            <Button Content="第9回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="570,563,1230,454"/>
-            <Button Content="第10回" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click" Margin="570,626,1230,386"/>
-            <Button Content="第11回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="570,694,1230,318"/>
-            <Button Content="第12回" FontSize="36" Foreground="#FFFFE6AF" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Margin="570,762,1230,248"/>
-            <Button Content="こころアップタイムとは" FontSize="36" BorderBrush="{x:Null}" Background="{x:Null}" Margin="1400,620,205,392"/>
-            <Button Content="教室のルール" FontSize="36" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}" Margin="1400,688,205,324"/>
-            <Button Content="その他" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36" Margin="1400,756,205,254"/>
+            <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_00.png" Visibility="Visible"/>
+            <Image x:Name="TitleImage" Source="/Images/title.png" Margin="210,95,205,785"/>
+            <Image x:Name="MenuImage" Source="/Images/menu_bubble.png" Margin="210,339,1030,157"/>
+            <Image x:Name="ShirojiImage" Source="/Images/shiroji_02.png" Margin="1026,602,619,145"/>
+            <Image x:Name="BubbleImage" Source="/Images/small_bubble_left.png" Margin="1275,590,110,225"/>
+            <Button x:Name="OptionButton" Content="オプション" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,918,1720,91"/>
+            <Button x:Name="ItemsButtonButton" Content="アイテム図鑑" FontSize="36" Foreground="White" Margin="210,999,1520,10"/>
+            <Button x:Name="NameEntryButton" Content="なまえ入力" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,999,1720,10"/>
+            <Button x:Name="Chapter1Button" Content="第1回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Margin="400,425,1420,587"/>
+            <Button x:Name="Chapter2Button" Content="第2回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="400,493,1420,517"/>
+            <Button x:Name="Chapter3Button" Content="第3回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Margin="400,563,1420,454"/>
+            <Button x:Name="Chapter4Button" Content="第4回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Margin="400,626,1420,386"/>
+            <Button x:Name="Chapter5Button" Content="第5回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="400,694,1420,318"/>
+            <Button x:Name="Chapter6Button" Content="第6回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Margin="400,762,1420,248"/>
+            <Button x:Name="Chapter7Button" Content="第7回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="570,425,1230,587"/>
+            <Button x:Name="Chapter8Button" Content="第8回" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click" Margin="570,493,1230,517"/>
+            <Button x:Name="Chapter9Button" Content="第9回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="570,563,1230,454"/>
+            <Button x:Name="Chapter10Button" Content="第10回" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click" Margin="570,626,1230,386"/>
+            <Button x:Name="Chapter11Button" Content="第11回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="570,694,1230,318"/>
+            <Button x:Name="Chapter12Button" Content="第12回" FontSize="36" Foreground="#FFFFE6AF" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Margin="570,762,1230,248"/>
+            <Button x:Name="AboutButton" Content="こころアップタイムとは" FontSize="36" BorderBrush="{x:Null}" Background="{x:Null}" Margin="1400,620,205,392"/>
+            <Button x:Name="RuleButton" Content="教室のルール" FontSize="36" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}" Margin="1400,688,205,324"/>
+            <Button x:Name="AnotherButton" Content="その他" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36" Margin="1400,756,205,254"/>
             <TextBlock x:Name="VersionTextBlock" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="287" Width="770" Margin="1034,311,0,0" FontSize="24" Foreground="#FFF0CA95" FontFamily="/Fonts/JiyunoTsubasa.ttf#JiyunoTsubasaFont"/>
-            <Button Content="Full/Win" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="195" Click="Button_Click" FontSize="36" Margin="1715,10,0,0"/>
+            <Button x:Name="ChangeScreenButton" Content="Full/Win" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="195" Click="Button_Click" FontSize="36" Margin="1715,10,0,0"/>
+            <StackPanel x:Name="CurrentNameStackPanel" Orientation="Horizontal" Margin="743,932,745,22">
+                <Image x:Name="CurrentNameImage" Height="48"/>
+                <TextBlock x:Name="CurrentUserTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Width="432" Height="70"/>
+            </StackPanel>
+            <Button x:Name="SelectUserButton" Content="なまえ選択" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,918,1520,91"/>
+            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
+            <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169" Background="#FFF9C9D0">
+                <TextBlock x:Name="SelectUserListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="なまえの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
+                <ListBox x:Name="SelectUserListBox" Margin="48,140,48,130" FontSize="48">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel x:Name="SelectUserListStackPanel" Orientation="Horizontal">
+                                <Image x:Name="SelectUserListNameImage" Source="{Binding NameBmpPath}" Height="48"/>
+                                <TextBlock x:Name="SelectUserListTextBlock" Text="{Binding UserInfo}" FontSize="48"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button x:Name="SelectUserListOKButton" Content="OK" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
+            </Grid>
         </Grid>
     </Viewbox>
 </Page>

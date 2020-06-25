@@ -1,5 +1,5 @@
-reset
 scene,前説
+reset
 image,bg_image,background_01.png
 image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
@@ -31,8 +31,8 @@ msg,main_msg,『こころあっぷタイム』は、こまっているときに�
 wait
 msg,main_msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
 wait
-reset
 scene,教室のルール
+reset
 image,bg_image,background_03.png
 button,rule_board_button
 wait,no_button
@@ -50,8 +50,8 @@ wait,no_button
 rule,thin_msg,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,all,白じい
 wait_tap
 next
-reset
 scene,子供たちの紹介
+reset
 image,bg_image,background_02.png
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
@@ -82,6 +82,7 @@ hide,image,intro_aosuke_face_image
 image,intro_kimi_face_image,,appear_up,no_sync
 image,main_msg_bubble_image,left_c_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
+wait
 msg,main_msg,わたしの名前はキミです。小学６年生です。好きなものはチョコレートです。人前で話すことがとても苦手です。,キミ
 wait
 hide,grid,main_msg_grid
@@ -98,8 +99,8 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,この３人とこころあっぷタイムを進めていくぞい！さて、３人は、なにかこまっていることがあるようじゃ。どんなことで、こまっているのだろう？マンガを見ながら考えてみよう！,白じい
 next
-reset
 scene,漫画購読
+reset
 bgm,set,manga.mp3,loop,50
 bgm,play
 text,music_title_text,まんが
@@ -119,8 +120,8 @@ flip
 image,manga_image,manga1-6.png,flip
 hide,button,manga_flip_button
 next
-reset
 scene,アイテム出現
+reset
 image,bg_image,background_mokume.png
 image,shiroji_right_image,shiroji_01.png,appear_up
 grid,item_name_plate_left_grid
@@ -130,8 +131,8 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,わしの作った発明品をつかって、自分のきもちを 調べてみるのじゃ！,白じい
 next
-reset
 scene,アイテム紹介
+reset
 bgm,stop
 se,play,nc211089.wav
 image,bg_image,background_mokume.png
@@ -143,8 +144,8 @@ hide,grid,item_info_sentence_grid
 grid,item_info_plate_grid
 grid,item_info_sentence_grid,appear_fade_in
 next
-reset
 scene,チャレンジタイム開始
+reset
 image,bg_image,background_05.png
 image,session_title_image,challenge_time.png
 text,session_sub_title_text,チャレンジタイムとは…
@@ -161,8 +162,8 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,「きもち」には、いいきもちといやなきもちだけでなく、いろいろな種類があるぞい。自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
 next
-reset
 scene,チャレンジきもち選択
+reset
 image,bg_image,orange_gradation.png
 grid,challenge_grid
 image,shiroji_very_small_right_image
@@ -171,8 +172,8 @@ wait,no_button
 grid,challenge_msg_grid,appear_expansion
 button,select_feeling_next_button,appear_fade_in
 wait,no_button
-reset
 scene,グループアクティビティ開始
+reset
 image,bg_image,background_06.png
 image,session_title_image,group_activity.png
 text,session_sub_title_text,グループ・アクティビティとは…
@@ -184,8 +185,8 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,今度は「きもち」をみつける練習をグループでしてみるのじゃ。次の場面を見て、グループでキミちゃんのきもちを考えて、話し合ってみるのじゃ。,白じい
 next
-reset
 scene,キミちゃんドキッ！
+reset
 image,bg_image,background_07.png
 image,teacher_image
 image,children_stand_left_image,kimi_stand_01.png
@@ -198,8 +199,8 @@ image,children_stand_left_onomatopoeia_image,,pomp,no_sync
 text,children_stand_left_onomatopoeia_text,,,rotation,no_sync
 image,children_stand_left_image,,pomp
 wait
-reset
 scene,キミちゃんのきもちの種類
+reset
 image,bg_image,water_frame.png
 image,shiroji_small_right_center_image
 image,kimi_stand_small_left_image
@@ -227,8 +228,8 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,キミちゃんは【$kimis_kind_of_feeling$】という きもちなんじゃな。そのきもちを選んだ理由も考えて話し合ってみるのじゃ！,白じい
 next
-reset
 scene,キミちゃんのきもちの大きさ
+reset
 image,bg_image,background_07.png
 image,shiroji_right_image,shiroji_02.png
 image,children_stand_left_image,kimi_stand_01.png
@@ -245,8 +246,8 @@ msg,main_msg,キミちゃんはいいところに気がついておるぞい。�
 wait
 msg,main_msg,きもちセンサーを使うと、きもちの「大きさ」を０から１００であらわすことができるのじゃ。キミちゃんのきもちの「大きさ」をみてみよう！,白じい
 next
-reset
 scene,キミちゃんの場面のきもち
+reset
 image,bg_image,background_07.png
 image,kimi_in_plate_image,,appear_up
 image,kimi_plate_outer_image,,appear_fade_in
@@ -260,8 +261,8 @@ text,kimi_scene2_text,,,appear_fade_in
 text,kimi_kind_of_feeling_down_text,,,appear_fade_in
 text,kimi_size_of_feeling_down_text,,,appear_fade_in
 next
-reset
 scene,公園で草野球
+reset
 image,bg_image,background_08.png
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
@@ -283,8 +284,8 @@ image,main_msg_bubble_image,left_big_bubble_blue.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,うん・・・・（ボクは野球が苦手なんだ・・・）,青助
 next
-reset
 scene,赤丸くんのきもちの種類
+reset
 image,bg_image,water_frame.png
 image,children_face_small_left_image,akamaru_face_03.png
 text,children_face_small_left_msg_text,ホームラン打つぞ！
@@ -310,8 +311,8 @@ grid,view_kind_of_feeling_grid
 grid,main_msg_grid,appear_expansion
 msg,main_msg,赤丸くんは【$akamarus_kind_of_feeling$】という きもちなんじゃな。きもちの大きさは どれくらいかの？,白じい
 next
-reset
 scene,赤丸くんのきもちの大きさ
+reset
 image,bg_image,water_frame.png
 image,children_face_small_left_image,akamaru_face_03.png
 text,children_face_small_left_msg_text,ホームラン打つぞ！
@@ -329,8 +330,8 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,赤丸くんのきもちは【$akamarus_size_of_feeling$】くらいの 大きさなんじゃな。次は青助くんのきもちと　その大きさを考えてみよう。,白じい
 next
-reset
 scene,青助くんのきもちの種類
+reset
 image,bg_image,water_frame.png
 image,children_face_small_left_image,aosuke_face_06.png
 text,children_face_small_left_msg_text,ボクは野球は鬱苦手なんだ・・・
@@ -356,8 +357,8 @@ grid,view_kind_of_feeling_grid
 grid,main_msg_grid,appear_expansion
 msg,main_msg,青助くんは【$aosukes_kind_of_feeling$】という きもちなんじゃな。きもちの大きさは どれくらいかの？,白じい
 next
-reset
 scene,青助くんのきもちの大きさ
+reset
 image,bg_image,water_frame.png
 image,children_face_small_left_image,aosuke_face_06.png
 text,children_face_small_left_msg_text,ボクは野球は鬱苦手なんだ・・・
@@ -375,20 +376,23 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,青助くんのきもちは【$aosukes_size_of_feeling$】くらいの 大きさなんじゃな。ふたりのきもちと きもちの大きさを 見比べてみよう！,白じい
 next
-reset
 scene,ふたりのきもちの比較
+reset
 image,bg_image,water_frame.png
 text,kind_of_feeling_akamaru_text,$akamarus_kind_of_feeling$
 text,kind_of_feeling_aosuke_text,$aosukes_kind_of_feeling$
 text,size_of_feeling_akamaru_text,$akamarus_size_of_feeling$
 text,size_of_feeling_aosuke_text,$aosukes_size_of_feeling$
 grid,akamaru_and_aosuke_compare_grid
+grid,compare_akamaru_heart_grid
+grid,compare_aosuke_heart_grid
 image,shiroji_very_small_right_image
+gauge
 grid,compare_msg_grid
 msg,compare_msg_text,同じ場面でも鬱人によってきもちと大きさが鬱ことなっておるな！
 next
-reset
 scene,まとめ
+reset
 image,bg_image,background_09.png
 grid,summary_grid
 image,shiroji_right_image,shiroji_02.png,appear_up
@@ -399,8 +403,8 @@ msg,main_msg,はじめてのこころあっぷタイムは どうじゃったか
 wait
 msg,main_msg,次回のテーマは「たのしいことを さがそう」じゃ！おたのしみに！,白じい
 next
-reset
 scene,今回の発明品おさらい
+reset
 image,bg_image,background_10.png
 image,item_left_last_image
 grid,item_last_info_grid
@@ -410,8 +414,8 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,第１回で登場した発明品は、「きもちセンサー」じゃ！鬱アイテム図鑑から、いつでも確認できるぞい！,白じい
 next
-reset
 scene,エンディング
+reset
 image,bg_image,background_ending.png
 grid,ending_grid
 image,shiroji_ending_image
