@@ -1,4 +1,5 @@
-﻿reset
+﻿scene 前説
+reset
 image,bg,background_02.png
 image,chara_face_left,kimi_face_01.png
 image,main_msg_bubble,left_big_bubble_yellow.png
@@ -18,3 +19,4 @@ image,main_msg_bubble,right_big_bubble.png
 wait
 msg,main_msg,きもちセンサーをつかってどんなことができるようになったかおぼえておるかな？フォッ、フォッ、フォッ！,白じい
 next
+grid,chalenge1_grid
