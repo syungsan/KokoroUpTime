@@ -87,6 +87,8 @@ namespace KokoroUpTime
         private List<string> myKindOfGoodFeelings = new List<string>();
         private List<string> myKindOfBadFeelings = new List<string>();
 
+       
+
         public Chapter1()
         {
             InitializeComponent();
@@ -138,7 +140,7 @@ namespace KokoroUpTime
 
             this.InitControls();
         }
-
+        
         private void InitControls()
         {
             // 各種コントロールに任意の文字列をあてがう
@@ -250,7 +252,10 @@ namespace KokoroUpTime
                 ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid,
                 ["music_info_grid"] = this.MusicInfoGrid,
-                ["exit_back_grid"] = this.ExitBackGrid,
+                //["exit_back_grid"] = this.ExitBackGrid,
+
+              
+                
 
                
             };
@@ -284,7 +289,7 @@ namespace KokoroUpTime
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
             this.MainMessageGrid.Visibility = Visibility.Hidden;
             this.MusicInfoGrid.Visibility = Visibility.Hidden;
-            this.ExitBackGrid.Visibility = Visibility.Hidden;
+            //this.ExitBackGrid.Visibility = Visibility.Hidden;
             this.BackgroundImage.Visibility = Visibility.Hidden;
             this.RuleBoardButton.Visibility = Visibility.Hidden;
             this.RuleBoardTitleTextBlock.Visibility = Visibility.Hidden;
@@ -350,16 +355,8 @@ namespace KokoroUpTime
             this.NextPageButton.Visibility = Visibility.Hidden;
             this.BackPageButton.Visibility = Visibility.Hidden;
             this.MangaFlipButton.Visibility = Visibility.Hidden;
-            this.CoverLayerImage.Visibility = Visibility.Hidden;
+            //this.CoverLayerImage.Visibility = Visibility.Hidden:
 
-<<<<<<< HEAD
-           
-
-           
-=======
-            this.WritingGrid.Visibility = Visibility.Hidden;
-            this.CanvasGrid.Visibility = Visibility.Hidden;
->>>>>>> 4262d75044d762f837ccf03d628436b5601c5086
 
             this.RuleBoardTitleTextBlock.Text = "";
             this.RuleBoardCheck1TextBlock.Text = "";
@@ -1137,8 +1134,8 @@ namespace KokoroUpTime
 
             if (button.Name == "ExitButton")
             {
-                this.CoverLayerImage.Visibility = Visibility.Visible;
-                this.ExitBackGrid.Visibility = Visibility.Visible;
+                //this.CoverLayerImage.Visibility = Visibility.Visible;
+                //this.ExitBackGrid.Visibility = Visibility.Visible;
             }
 
             if (button.Name == "ExitBackYesButton")
@@ -1148,104 +1145,15 @@ namespace KokoroUpTime
 
             if (button.Name == "ExitBackNoButton")
             {
-                this.ExitBackGrid.Visibility = Visibility.Hidden;
-                this.CoverLayerImage.Visibility = Visibility.Hidden;
-            }
-<<<<<<< HEAD
-=======
-
-            if (button.Name == "NameButton")
-            {
-                this.CanvasGrid.Visibility = Visibility.Visible;
-                this.WritingGrid.Visibility = Visibility.Hidden;
+                //this.ExitBackGrid.Visibility = Visibility.Hidden;
+                //this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
 
-            if (button.Name == "PenButton")
-            {
-                WritingCanvas.EditingMode = InkCanvasEditingMode.Ink;
-            }
 
-            if (button.Name == "EraserButton")
-            {
-                WritingCanvas.EditingMode = InkCanvasEditingMode.EraseByPoint;
-            }
 
-            if (button.Name == "AllEraseButton")
-            {
-                WritingCanvas.Strokes.Clear();
-            }
+           
 
-            if (button.Name == "FinishButton")
-            {
-                if(WritingCanvas.Strokes != null)
-                {
-                    // ストロークが描画されている境界を取得
-                    Rect rectBounds = WritingCanvas.Strokes.GetBounds();
-
-                    // 描画先を作成
-                    DrawingVisual dv = new DrawingVisual();
-                    DrawingContext dc = dv.RenderOpen();
-
-                    // 描画エリアの位置補正（補正しないと黒い部分ができてしまう）
-                    dc.PushTransform(new TranslateTransform(-rectBounds.X, -rectBounds.Y));
-
-                    // 描画エリア(dc)に四角形を作成
-                    // 四角形の大きさはストロークが描画されている枠サイズとし、
-                    // 背景色はInkCanvasコントロールと同じにする
-                    dc.DrawRectangle(WritingCanvas.Background, null, rectBounds);
-
-                    // 上記で作成した描画エリア(dc)にInkCanvasのストロークを描画
-                    WritingCanvas.Strokes.Draw(dc);
-                    dc.Close();
-
-                    // ビジュアルオブジェクトをビットマップに変換する
-                    RenderTargetBitmap rtb = new RenderTargetBitmap(
-                        (int)rectBounds.Width, (int)rectBounds.Height,
-                        96, 96,
-                        PixelFormats.Default);
-                    rtb.Render(dv);
-
-                    // ビットマップエンコーダー変数の宣言
-                    BitmapEncoder enc = null;
-                    enc = new BmpBitmapEncoder();
-
-                    // Name.bmpを収める場所の設定
-                    string nameBmp = "Name.bmp";
-                    string dirPath = $"./Log/{userName}/";
-
-                    string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
-
-                    // 実行ファイルの場所を絶対パスで取得
-                    var startupPath = FileUtils.GetStartupPath();
-
-                    if (enc != null)
-                    {
-                        // ビットマップフレームを作成してエンコーダーにフレームを追加する
-                        enc.Frames.Add(BitmapFrame.Create(rtb));
-
-                        // ファイルに書き込む
-                        System.IO.Stream stream = System.IO.File.Create($@"{startupPath}/{nameBmpPath}");
-                        enc.Save(stream);
-                        
-                        stream.Close();
-                    }
-
-                    MessageBox.Show("start");
-                    this.NameText.Source= new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
-                    MessageBox.Show("end");
-                }
-
-                this.CanvasGrid.Visibility = Visibility.Hidden;
-                this.WritingGrid.Visibility = Visibility.Visible;
-            }
-
-            if (button.Name == "DecisionButton")
-            {
-                this.WritingGrid.Visibility = Visibility.Hidden;
-
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
+           
 
             if (button.Name == "SelectFeelingCompleteButton")
             {
@@ -1302,7 +1210,7 @@ namespace KokoroUpTime
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
->>>>>>> 4262d75044d762f837ccf03d628436b5601c5086
+
         }
 
         // 黒板ルールのためだけに追加
