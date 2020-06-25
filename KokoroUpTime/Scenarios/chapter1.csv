@@ -14,11 +14,8 @@ msg,main_msg,フォッフォッフォ！わしの名前は「白じい」じゃ�
 wait
 msg,main_msg,はじめに、あなたの名前を教えてくれるかの？,白じい
 wait
-<<<<<<< HEAD
 msg,main_msg,名前を入力
 wait
-=======
->>>>>>> dcdb0f7af4f8621e4c3950c087ad848d061fa796
 msg,main_msg,あなたは【name】じゃな。【name】のうしろは、何かつけるかの？,白じい
 wait
 msg,main_msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい

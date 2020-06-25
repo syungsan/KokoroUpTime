@@ -140,7 +140,6 @@ namespace KokoroUpTime
                         csv.Write(initConfigs);
                     }
                 }
-
             }
         }
 

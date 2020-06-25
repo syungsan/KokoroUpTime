@@ -127,3 +127,4 @@ C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.pdb
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.genruntimeconfig.cache
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Scenarios\NameInput.csv
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Scenarios\NameInput.csv

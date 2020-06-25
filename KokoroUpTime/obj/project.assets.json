@@ -239,19 +239,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\maglab\\.nuget\\packages\\": {}
+    "C:\\Users\\syung\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "0.8.0.2",
     "restore": {
-      "projectUniqueName": "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+      "projectUniqueName": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
       "projectName": "KokoroUpTime",
-      "projectPath": "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
-      "packagesPath": "C:\\Users\\maglab\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\obj\\",
+      "projectPath": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+      "packagesPath": "C:\\Users\\syung\\.nuget\\packages\\",
+      "outputPath": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\maglab\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\syung\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -290,12 +290,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.2, 3.1.2]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -304,7 +298,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
       }
     }
   }
