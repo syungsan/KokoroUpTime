@@ -21,10 +21,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="NameInputPage.xaml">
+    <Page Update="Chapter2.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Chapter2.xaml">
+    <Page Update="NameInputPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Chapter1.xaml">
