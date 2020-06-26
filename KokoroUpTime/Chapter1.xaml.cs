@@ -87,15 +87,13 @@ namespace KokoroUpTime
         private List<string> myKindOfGoodFeelings = new List<string>();
         private List<string> myKindOfBadFeelings = new List<string>();
 
-<<<<<<< HEAD
-       
-=======
+
         private bool hasKimisKindOfFeelingsRecorded = false;
         private bool hasAkamarusKindOfFeelingsRecorded = false;
         private bool hasAosukesKindOfFeelingsRecorded = false;
         private bool hasAkamarusSizeOfFeelingRecorded = false;
         private bool hasAosukesSizeOfFeelingRecorded = false;
->>>>>>> dcdb0f7af4f8621e4c3950c087ad848d061fa796
+
 
         public Chapter1()
         {
@@ -259,16 +257,9 @@ namespace KokoroUpTime
                 ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid,
                 ["music_info_grid"] = this.MusicInfoGrid,
-<<<<<<< HEAD
+
                 //["exit_back_grid"] = this.ExitBackGrid,
 
-              
-                
-
-               
-=======
-                ["exit_back_grid"] = this.ExitBackGrid,
->>>>>>> dcdb0f7af4f8621e4c3950c087ad848d061fa796
             };
         }
 
@@ -366,13 +357,9 @@ namespace KokoroUpTime
             this.NextPageButton.Visibility = Visibility.Hidden;
             this.BackPageButton.Visibility = Visibility.Hidden;
             this.MangaFlipButton.Visibility = Visibility.Hidden;
-<<<<<<< HEAD
-            //this.CoverLayerImage.Visibility = Visibility.Hidden:
 
+            //this.CoverLayerImage.Visibility = Visibility.Hidden;
 
-=======
-            this.CoverLayerImage.Visibility = Visibility.Hidden;
->>>>>>> dcdb0f7af4f8621e4c3950c087ad848d061fa796
             this.RuleBoardTitleTextBlock.Text = "";
             this.RuleBoardCheck1TextBlock.Text = "";
             this.RuleBoardCheck2TextBlock.Text = "";
@@ -1204,7 +1191,7 @@ namespace KokoroUpTime
 
             if (button.Name == "ExitBackNoButton")
             {
-<<<<<<< HEAD
+
                 //this.ExitBackGrid.Visibility = Visibility.Hidden;
                 //this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
@@ -1218,9 +1205,12 @@ namespace KokoroUpTime
             if (button.Name == "SelectFeelingCompleteButton")
             {
                 if (this.scene == "チャレンジきもち選択")
-=======
-                this.ExitBackGrid.Visibility = Visibility.Hidden;
-                this.CoverLayerImage.Visibility = Visibility.Hidden;
+                {
+
+                }
+
+                //this.ExitBackGrid.Visibility = Visibility.Hidden;
+                //this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
 
             if (button.Name == "NextPageButton")
@@ -1236,7 +1226,7 @@ namespace KokoroUpTime
                 }
 
                 if (this.scene == "赤丸くんのきもちの種類" && !hasAkamarusKindOfFeelingsRecorded)
->>>>>>> dcdb0f7af4f8621e4c3950c087ad848d061fa796
+
                 {
                     using (var connection = new SQLiteConnection(this.dbPath))
                     {
@@ -1310,10 +1300,7 @@ namespace KokoroUpTime
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
-<<<<<<< HEAD
 
-=======
->>>>>>> dcdb0f7af4f8621e4c3950c087ad848d061fa796
         }
 
         // 黒板ルールのためだけに追加
