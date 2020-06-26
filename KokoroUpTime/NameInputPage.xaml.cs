@@ -47,12 +47,6 @@ namespace KokoroUpTime
         // マウスクリックを可能にするかどうかのフラグ
         private bool isClickable = false;
 
-        // 何回タップしたか
-        private int tapCount = 0;
-
-        // 気持ちの大きさ
-        private int feelingSize = 0;
-
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
         private int word_num;
