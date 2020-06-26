@@ -31,11 +31,12 @@ namespace KokoroUpTime
         //全画面表示か
         private bool isMaximized = false;
 
-        private InitConfig initConfig = new InitConfig();
-
+        public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
 
         private string[] dirPaths;
+
+        private bool isFirstBootFlag = true;
 
         public TitlePage()
         {
@@ -43,8 +44,6 @@ namespace KokoroUpTime
 
             // Hide host's navigation UI
             this.ShowsNavigationUI = false;
-
-            this.LoadUser();
 
             this.SelectUserListGrid.Visibility = Visibility.Hidden;
             this.CoverLayerImage.Visibility = Visibility.Hidden;
@@ -64,6 +63,33 @@ namespace KokoroUpTime
             this.VersionTextBlock.Text = name + version + fullname + processor + runtime + "\r\n";
             this.WindowTitle = asmName.Name + " Ver" + asmName.Version.ToString();
             // ################################################################################
+        }
+
+        public void SetInitConfig(InitConfig _initConfig)
+        {
+            this.initConfig = _initConfig;
+        }
+
+        public void SetDataOption(DataOption _dataOption)
+        {
+            this.dataOption = _dataOption;
+        }
+
+        public void SetIsFirstBootFlag()
+        {
+            this.isFirstBootFlag = false;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (this.isFirstBootFlag)
+            {
+                this.LoadUser();
+            }
+            else
+            {
+                this.setCurrentUserName();
+            }
         }
 
         void LoadUser()
@@ -104,19 +130,7 @@ namespace KokoroUpTime
                         this.dataOption.CreatedAt = row.CreatedAt;
                     }
                 }
-                if (!this.dataOption.IsWordRecognition)
-                {
-                    // 実行ファイルの場所を絶対パスで取得
-                    var startupPath = FileUtils.GetStartupPath();
-
-                    this.CurrentNameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{userDirPath}/Name.bmp", UriKind.Absolute));
-                    this.CurrentUserTextBlock.Text = this.initConfig.userTitle;
-                }
-                else
-                {
-                    this.CurrentNameImage.Source = null;
-                    this.CurrentUserTextBlock.Text = $"{this.initConfig.userName}{this.initConfig.userTitle}";
-                }
+                this.setCurrentUserName();
             }
             else
             {
@@ -140,6 +154,25 @@ namespace KokoroUpTime
                         csv.Write(initConfigs);
                     }
                 }
+            }
+        }
+
+        void setCurrentUserName()
+        {
+            string userDirPath = $"./Log/{this.initConfig.userName}_{this.initConfig.userTitle}/";
+
+            if (!this.dataOption.IsWordRecognition)
+            {
+                // 実行ファイルの場所を絶対パスで取得
+                var startupPath = FileUtils.GetStartupPath();
+
+                this.CurrentNameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{userDirPath}/Name.bmp", UriKind.Absolute));
+                this.CurrentUserTextBlock.Text = this.initConfig.userTitle;
+            }
+            else
+            {
+                this.CurrentNameImage.Source = null;
+                this.CurrentUserTextBlock.Text = $"{this.initConfig.userName}{this.initConfig.userTitle}";
             }
         }
 
@@ -210,7 +243,10 @@ namespace KokoroUpTime
             {
                 OptionPage nextPage = new OptionPage();
 
-                this.NavigationService.Navigate(new Uri("OptionPage.xaml", UriKind.Relative));
+                nextPage.SetInitConfig(this.initConfig);
+                nextPage.SetDataOption(this.dataOption);
+
+                // this.NavigationService.Navigate(new Uri("OptionPage.xaml", UriKind.Relative));
 
                 this.NavigationService.Navigate(nextPage);
             }
@@ -255,7 +291,6 @@ namespace KokoroUpTime
                         Chapter1 nextPage1 = new Chapter1();
 
                         nextPage1.SetInitConfig(this.initConfig);
-
                         nextPage1.SetDataOption(this.dataOption);
 
                         nextPage1.SetScenario("./Scenarios/chapter1.csv");

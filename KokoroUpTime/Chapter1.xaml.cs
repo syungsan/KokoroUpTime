@@ -380,7 +380,7 @@ namespace KokoroUpTime
             this.data.CreatedAt = DateTime.Now.ToString();
 
             // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(this.dbPath))
             {
                 // 仮（本当は名前を登録するタイミングで）
                 connection.CreateTable<DataOption>();
