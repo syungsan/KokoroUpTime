@@ -79,7 +79,7 @@ namespace KokoroUpTime
                 for (int i = 1; i <= 12; ++i)
                 {
                     // Pageインスタンスを渡して遷移
-                    Chapter1 nextPage = new Chapter1();
+                    Chapter2 nextPage = new Chapter2();
 
                     string scenario;
 
