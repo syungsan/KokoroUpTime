@@ -61,6 +61,25 @@ image,shiroji_very_small_right_image,appear_up
 grid,challenge_msg_grid
 hide,grid,challenge_msg_grid
 
+scene,会話①
+image,bg_image,background_08.png
+image,children_stand_left_image,,appear_up,no_sync
+image,shiroji_right_image,shiroji_01.png,appear_up
+image,main_msg_bubble_image,left_big_bubble_blue.png
+msg,main_msg,ねえ、白じい。鬱楽しいことはわかったんだけど、なんだかぜんぜんやる気が出ないんだよ。,キミ
+wait
+msg,main_msg,やる気や元気がでないときって、どうしたらいいのかなぁ？,あおすけ
+wait
+image,main_msg_bubble_image,left_big_bubble_blue.png
+msg,main_msg,青助くん！それはとても重要なポイントじゃ。鬱じつは、すごく楽しいことははじめることがむずかしいことがある。,白じい
+wait
+msg,main_msg,たとえば、元気がでないときに、みんなで遊園地に行ったり、鬱スポーツをすることはかんたんなことではないのう。,白じい
+wait
+msg,main_msg,そういう元気が出ないときは、わしの発明品をつかえばよいぞ！。,白じい
+wait
+hide,image,children_stand_left_image
+hide,image,shiroji_right_image,shiroji_01.png
+
 
 
 
