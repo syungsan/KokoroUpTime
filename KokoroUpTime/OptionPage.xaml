@@ -10,38 +10,32 @@
 
     <Viewbox>
         <Grid Height="1080" Width="1920">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Image Height="1080" Width="1920" Source="/Images/background_option.png" Stretch="Fill"/>
-            <Label Content="オプション" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="94" FontWeight="Bold" Foreground="White" Margin="0,56,0,0"/>
-            <Label Content="効果音♪" HorizontalAlignment="Left" Margin="336,246,0,726" FontSize="82" FontWeight="Bold"/>
-            <Label Content="BGM♪" HorizontalAlignment="Left" Margin="336,375,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold"/>
-            <Label Content="文字の速さ" HorizontalAlignment="Left" Margin="336,513,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold"/>
-            <Label Content="ふりがな" HorizontalAlignment="Left" Margin="336,646,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold"/>
-            <Button Content="ON" HorizontalAlignment="Left" Margin="797,244,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
-            <Label Content="/" HorizontalAlignment="Left" Margin="993,242,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
-            <Button Content="OFF" HorizontalAlignment="Left" Margin="1102,244,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="82" Background="{x:Null}" Foreground="White" RenderTransformOrigin="-0.101,0.088" BorderBrush="{x:Null}"/>
-            <Label Content="/" HorizontalAlignment="Left" Margin="1041,508,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
-            <Label Content="/" HorizontalAlignment="Left" Margin="1343,508,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
-            <Button Content="ON" HorizontalAlignment="Left" Margin="797,371,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
-            <Label Content="/" HorizontalAlignment="Left" Margin="993,371,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
-            <Button Content="OFF" HorizontalAlignment="Left" Margin="1102,371,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="82" Background="{x:Null}" Foreground="White" RenderTransformOrigin="-0.101,0.088" BorderBrush="{x:Null}"/>
-            <Button Content="はやい" HorizontalAlignment="Left" Margin="798,510,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
-            <Button Content="ふつう" HorizontalAlignment="Left" Margin="1110,510,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
-            <Button Content="おそい" HorizontalAlignment="Left" Margin="1425,510,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
-            <Label Content="/" HorizontalAlignment="Left" Margin="992,643,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
-            <Button Content="あり" HorizontalAlignment="Left" Margin="798,645,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
-            <Button Content="なし" HorizontalAlignment="Left" Margin="1104,645,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
-            <Label Content="文字認識" HorizontalAlignment="Left" Margin="336,786,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold"/>
-            <Button Content="ON" HorizontalAlignment="Left" Margin="797,784,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
-            <Label Content="/" HorizontalAlignment="Left" Margin="993,783,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
-            <Button Content="OFF" HorizontalAlignment="Left" Margin="1102,784,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="82" Background="{x:Null}" Foreground="White" RenderTransformOrigin="-0.101,0.088" BorderBrush="{x:Null}"/>
+            <Image x:Name="BackgroundImage" Height="1080" Width="1920" Source="/Images/background_option.png" Stretch="Fill"/>
+            <TextBlock x:Name="OptionTitleTextBlock" Text="オプション" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="94" FontWeight="Bold" Foreground="White" Margin="0,56,0,0"/>
+            <TextBlock x:Name="SETextBlock" Text="効果音♪" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="336,246,0,726" FontSize="82" FontWeight="Bold"/>
+            <TextBlock x:Name="BGMTextBlock" Text="BGM♪" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="336,375,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold"/>
+            <TextBlock x:Name="MessageSpeedTextBlock" Text="文字の速さ" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="336,513,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold"/>
+            <TextBlock x:Name="RubiTextBlock" Text="ふりがな" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="336,646,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold"/>
+            <Button x:Name="SEOnButton" Content="ON" Click="Button_Click" HorizontalAlignment="Left" Margin="797,244,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <TextBlock x:Name="SESlashTextBlock" Text="/" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="993,242,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
+            <Button x:Name="SEOffButton" Content="OFF" Click="Button_Click" HorizontalAlignment="Left" Margin="1102,244,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="82" Background="{x:Null}" Foreground="White" RenderTransformOrigin="-0.101,0.088" BorderBrush="{x:Null}"/>
+            <TextBlock x:Name="MessageSpeedSlashLeft" Text="/" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="1041,508,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
+            <TextBlock x:Name="MessageSpeedSlashRight" Text="/" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="1343,508,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
+            <Button x:Name="BGMOnButton" Content="ON" Click="Button_Click" HorizontalAlignment="Left" Margin="797,371,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <TextBlock x:Name="BGMSlashTextBlock" Text="/" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="993,371,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
+            <Button x:Name="BGMOffButton" Content="OFF" Click="Button_Click" HorizontalAlignment="Left" Margin="1102,371,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="82" Background="{x:Null}" Foreground="White" RenderTransformOrigin="-0.101,0.088" BorderBrush="{x:Null}"/>
+            <Button x:Name="MessageSpeedFastButton" Content="はやい" Click="Button_Click" HorizontalAlignment="Left" Margin="798,510,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <Button x:Name="MessageSpeedMiddleButton" Content="ふつう" Click="Button_Click" HorizontalAlignment="Left" Margin="1110,510,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <Button x:Name="MessageSpeedSlowButton" Content="おそい" Click="Button_Click" HorizontalAlignment="Left" Margin="1425,510,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <TextBlock x:Name="RubiSlashTextBlock" Text="/" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="992,643,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
+            <Button x:Name="RubiOnButton" Content="あり" Click="Button_Click" HorizontalAlignment="Left" Margin="798,645,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <Button x:Name="RubiOffButton" Content="なし" Click="Button_Click" HorizontalAlignment="Left" Margin="1104,645,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <TextBlock x:Name="WordRecognitionTextBlock" Text="文字認識" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="336,786,0,0" VerticalAlignment="Top" FontSize="82" FontWeight="Bold"/>
+            <Button x:Name="WordRecognitionOnButton" Content="ON" Click="Button_Click" HorizontalAlignment="Left" Margin="797,784,0,0" VerticalAlignment="Top" FontSize="82" Background="{x:Null}" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"/>
+            <TextBlock x:Name="WordRecognitionSlashTextBlock" Text="/" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="993,783,0,0" VerticalAlignment="Top" FontSize="82" Foreground="White"/>
+            <Button x:Name="WordRecognitionOffButton" Content="OFF" Click="Button_Click" HorizontalAlignment="Left" Margin="1102,784,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="82" Background="{x:Null}" Foreground="White" RenderTransformOrigin="-0.101,0.088" BorderBrush="{x:Null}"/>
             <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}">
-                <Image Source="/Images/return_to_title.png"/>
+                <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png"/>
             </Button>
         </Grid>
     </Viewbox>
