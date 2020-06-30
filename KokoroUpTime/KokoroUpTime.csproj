@@ -112,6 +112,7 @@
     <None Remove="Images\message_box.png" />
     <None Remove="Images\moya1.png" />
     <None Remove="Images\moya2.png" />
+    <None Remove="Images\Name.bmp" />
     <None Remove="Images\next_go_button.png" />
     <None Remove="Images\oranger_gradation.png" />
     <None Remove="Images\orange_gradation.png" />
@@ -213,6 +214,7 @@
     <Resource Include="Images\manga2-3.png" />
     <Resource Include="Images\manga2_title.png" />
     <Resource Include="Images\message_box.png" />
+    <Resource Include="Images\Name.bmp" />
     <Resource Include="Images\next_go_button.png" />
     <Resource Include="Images\orange_gradation.png" />
     <Resource Include="Images\short_bubble_left.png" />
@@ -289,7 +291,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Scenarios\NameInput.csv">
+    <None Update="Scenarios\nameinput.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter6.csv">
