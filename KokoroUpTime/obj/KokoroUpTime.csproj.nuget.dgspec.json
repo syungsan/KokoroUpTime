@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {}
   },
   "projects": {
@@ -13,19 +12,6 @@
         "projectPath": "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
         "packagesPath": "C:\\Users\\maglab\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\obj\\",
-=======
-    "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {}
-  },
-  "projects": {
-    "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {
-      "version": "0.8.0.2",
-      "restore": {
-        "projectUniqueName": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
-        "projectName": "KokoroUpTime",
-        "projectPath": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
-        "packagesPath": "C:\\Users\\maglab\\.nuget\\packages\\",
-        "outputPath": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\obj\\",
->>>>>>> da404619c37f7c6ef7c96085675671e128a79e2f
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\maglab\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -81,11 +67,7 @@
               "privateAssets": "none"
             }
           },
-<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
->>>>>>> da404619c37f7c6ef7c96085675671e128a79e2f
         }
       }
     }

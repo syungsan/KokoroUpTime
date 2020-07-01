@@ -1,33 +1,20 @@
 ﻿KokoroUpTime
-
+0.8.0.2
 
 winexe
 C#
 .cs
-<<<<<<< HEAD
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\
-=======
-D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\
->>>>>>> da404619c37f7c6ef7c96085675671e128a79e2f
 KokoroUpTime
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-<<<<<<< HEAD
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\App.xaml
-6-423888295
-
-151014129109
-198-420619031
-Chapter1.xaml;Chapter2.xaml;MainWindow.xaml;NameInputPage.xaml;OptionPage.xaml;TitlePage.xaml;
-=======
-D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\App.xaml
 7-1573892298
 
-151374631167
+161477166904
 198-420619031
 Chapter1.xaml;Chapter2.xaml;ItemBook.xaml;MainWindow.xaml;NameInputPage.xaml;OptionPage.xaml;TitlePage.xaml;
->>>>>>> da404619c37f7c6ef7c96085675671e128a79e2f
 
-True
+False
 
