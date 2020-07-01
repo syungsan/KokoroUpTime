@@ -50,6 +50,7 @@
     <None Remove="Images\big_heart.png" />
     <None Remove="Images\blackboard.png" />
     <None Remove="Images\blue_needle.png" />
+<<<<<<< HEAD
     <None Remove="Images\branch_selection1.png" />
     <None Remove="Images\branch_selection2.png" />
     <None Remove="Images\challenge1_title.png" />
@@ -57,8 +58,10 @@
     <None Remove="Images\challenge_time.png" />
     <None Remove="Images\challenge_time_text.png" />
     <None Remove="Images\challenge_time_title.png" />
+=======
     <None Remove="Images\challenge_frame1.png" />
     <None Remove="Images\challenge_time.png" />
+>>>>>>> da404619c37f7c6ef7c96085675671e128a79e2f
     <None Remove="Images\circle.png" />
     <None Remove="Images\compare_akamaru_value_frame.png" />
     <None Remove="Images\compare_aosuke_value_frame.png" />
@@ -67,7 +70,9 @@
     <None Remove="Images\face_small_bubble.png" />
     <None Remove="Images\feeling_value.png" />
     <None Remove="Images\good_feeling.png" />
+<<<<<<< HEAD
     <None Remove="Images\item_review.png" />
+=======
     <None Remove="Images\item00_book.png" />
     <None Remove="Images\item01_book.png" />
     <None Remove="Images\item02_book.png" />
@@ -80,6 +85,7 @@
     <None Remove="Images\item09_book.png" />
     <None Remove="Images\item10_book.png" />
     <None Remove="Images\item11_book.png" />
+>>>>>>> da404619c37f7c6ef7c96085675671e128a79e2f
     <None Remove="Images\kimi_stand_01.png" />
     <None Remove="Images\long_bubble_right_up.png" />
     <None Remove="Images\frame_46-1.png" />
@@ -210,18 +216,23 @@
     <Resource Include="Images\big_heart.png" />
     <Resource Include="Images\blackboard.png" />
     <Resource Include="Images\blue_needle.png" />
+<<<<<<< HEAD
     <Resource Include="Images\branch_selection1.png" />
     <Resource Include="Images\branch_selection2.png" />
     <Resource Include="Images\challenge1_title.png" />
     <Resource Include="Images\challenge_frame1.png" />
     <Resource Include="Images\challenge_time_text.png" />
     <Resource Include="Images\challenge_time_title.png" />
+=======
     <Resource Include="Images\challenge_frame1.png" />
+>>>>>>> da404619c37f7c6ef7c96085675671e128a79e2f
     <Resource Include="Images\circle.png" />
     <Resource Include="Images\compare_akamaru_value_frame.png" />
     <Resource Include="Images\compare_aosuke_value_frame.png" />
     <Resource Include="Images\complete_button.png" />
+<<<<<<< HEAD
     <Resource Include="Images\item_review.png" />
+=======
     <Resource Include="Images\item00_book.png" />
     <Resource Include="Images\item01_book.png" />
     <Resource Include="Images\item02_book.png" />
@@ -234,6 +245,7 @@
     <Resource Include="Images\item09_book.png" />
     <Resource Include="Images\item10_book.png" />
     <Resource Include="Images\item11_book.png" />
+>>>>>>> da404619c37f7c6ef7c96085675671e128a79e2f
     <Resource Include="Images\kimi_plate_inner.png" />
     <Resource Include="Images\kimi_plate_outer.png" />
     <Resource Include="Images\kimi_stand_01.png" />

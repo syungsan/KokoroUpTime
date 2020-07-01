@@ -24,13 +24,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Page Update="Chapter2.xaml">
-      <SubType>Designer</SubType>
-    </Page>
+=======
     <Page Update="ItemBook.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="NameInputPage.xaml">
+>>>>>>> da404619c37f7c6ef7c96085675671e128a79e2f
       <SubType>Designer</SubType>
     </Page>
     <Page Update="NameInputPage.xaml">

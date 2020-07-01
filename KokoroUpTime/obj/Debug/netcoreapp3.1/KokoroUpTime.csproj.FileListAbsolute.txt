@@ -130,7 +130,9 @@ C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache
 =======
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Scenarios\NameInput.csv
+<<<<<<< HEAD
 >>>>>>> 1dcc5e72e1aa3acf1e34e224f8cc3260d2c5c4a1
+=======
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Scenarios\chapter1.csv
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Scenarios\chapter2.csv
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Scenarios\chapter3.csv
@@ -199,5 +201,3 @@ D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemBook.g.cs
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemBook.baml
 >>>>>>> da404619c37f7c6ef7c96085675671e128a79e2f
-C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemBook.g.cs
-C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemBook.baml
