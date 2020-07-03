@@ -89,6 +89,7 @@ namespace KokoroUpTime
 
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
+        public DataItem dataItem = new DataItem();
 
         public Chapter1()
         {
@@ -395,6 +396,11 @@ namespace KokoroUpTime
         public void SetDataOption(DataOption _dataOption)
         {
             this.dataOption = _dataOption;
+        }
+
+        public void SetDataItem(DataItem _dataItem)
+        {
+            this.dataItem = _dataItem;
         }
 
         // CSVから2次元配列へシナリオデータの収納（CsvReaderクラスを使用）

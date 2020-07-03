@@ -13,7 +13,7 @@ namespace KokoroUpTime
         public string userTitle = null;
     }
 
-        public class DataOption
+    public class DataOption
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -27,6 +27,36 @@ namespace KokoroUpTime
         public bool IsAddRubi { get; set; }
 
         public bool IsWordRecognition { get; set; }
+
+        public string CreatedAt { get; set; }
+    }
+
+    public class DataItem
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        public bool HasGotItem01 { get; set; }
+
+        public bool HasGotItem02 { get; set; }
+
+        public bool HasGotItem03 { get; set; }
+
+        public bool HasGotItem04 { get; set; }
+
+        public bool HasGotItem05 { get; set; }
+
+        public bool HasGotItem06 { get; set; }
+
+        public bool HasGotItem07 { get; set; }
+
+        public bool HasGotItem08 { get; set; }
+
+        public bool HasGotItem09 { get; set; }
+
+        public bool HasGotItem10 { get; set; }
+
+        public bool HasGotItem11 { get; set; }
 
         public string CreatedAt { get; set; }
     }
@@ -121,5 +151,7 @@ namespace KokoroUpTime
         public int LatestChapter12Scene { get; set; }
 
         public bool HasCompletedChapter12 { get; set; }
+
+        public string CreatedAt { get; set; }
     }
 }

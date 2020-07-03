@@ -23,7 +23,7 @@
             <Image x:Name="ShirojiImage" Source="/Images/shiroji_02.png" Margin="1026,602,619,145"/>
             <Image x:Name="BubbleImage" Source="/Images/small_bubble_left.png" Margin="1275,590,110,225"/>
             <Button x:Name="OptionButton" Content="オプション" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,918,1720,91"/>
-            <Button x:Name="ItemsButtonButton" Content="アイテム図鑑" FontSize="36" Foreground="White" Margin="210,999,1520,10"/>
+            <Button x:Name="ItemsButtonButton" Content="アイテム図鑑" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,999,1520,10"/>
             <Button x:Name="NameEntryButton" Content="なまえ入力" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,999,1720,10"/>
             <Button x:Name="Chapter1Button" Content="第1回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Margin="400,425,1420,587"/>
             <Button x:Name="Chapter2Button" Content="第2回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="400,493,1420,517"/>
