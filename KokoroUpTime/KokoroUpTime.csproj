@@ -145,7 +145,6 @@
     <None Remove="Images\short_bubble_right_up.png" />
     <None Remove="Images\small_bubble_left.png" />
     <None Remove="Images\small_bubble_right_down.png" />
-    <None Remove="Images\small_icon.png" />
     <None Remove="Images\SS.png" />
     <None Remove="Images\summary_title.png" />
     <None Remove="Images\teacher.png" />
@@ -300,7 +299,6 @@
     <Resource Include="Images\shiroji_03.png" />
     <Resource Include="Images\shiroji_04.png" />
     <Resource Include="Images\small_bubble_left.png" />
-    <Resource Include="Images\small_icon.png" />
     <Resource Include="Images\SS.png" />
     <Resource Include="Images\summary_title.png" />
     <Resource Include="Images\teacher.png" />
