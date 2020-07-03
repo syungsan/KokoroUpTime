@@ -195,3 +195,5 @@ D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.genruntimeconfig.cache
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemBook.g.cs
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemBook.baml
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemPage.g.cs
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemPage.baml

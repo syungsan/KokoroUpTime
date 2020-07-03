@@ -33,6 +33,7 @@ namespace KokoroUpTime
 
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
+        public DataItem dataItem = new DataItem();
 
         private string[] dirPaths;
 
@@ -75,9 +76,14 @@ namespace KokoroUpTime
             this.dataOption = _dataOption;
         }
 
-        public void SetIsFirstBootFlag()
+        public void SetDataItem(DataItem _dataItem)
         {
-            this.isFirstBootFlag = false;
+            this.dataItem = _dataItem;
+        }
+
+        public void SetIsFirstBootFlag(bool flag)
+        {
+            this.isFirstBootFlag = flag;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -128,6 +134,33 @@ namespace KokoroUpTime
                         this.dataOption.IsAddRubi = row.IsAddRubi;
 
                         this.dataOption.CreatedAt = row.CreatedAt;
+                    }
+
+                    var item = connection.Query<DataItem>("SELECT * FROM DataItem WHERE Id = 1;");
+
+                    foreach (var row in item)
+                    {
+                        this.dataItem.HasGotItem01 = row.HasGotItem01;
+
+                        this.dataItem.HasGotItem02 = row.HasGotItem02;
+
+                        this.dataItem.HasGotItem03 = row.HasGotItem03;
+
+                        this.dataItem.HasGotItem04 = row.HasGotItem04;
+
+                        this.dataItem.HasGotItem05 = row.HasGotItem05;
+
+                        this.dataItem.HasGotItem06 = row.HasGotItem06;
+
+                        this.dataItem.HasGotItem07 = row.HasGotItem07;
+
+                        this.dataItem.HasGotItem08 = row.HasGotItem08;
+
+                        this.dataItem.HasGotItem09 = row.HasGotItem09;
+
+                        this.dataItem.HasGotItem10 = row.HasGotItem10;
+
+                        this.dataItem.HasGotItem11 = row.HasGotItem11;
                     }
                 }
                 this.setCurrentUserName();
@@ -239,28 +272,35 @@ namespace KokoroUpTime
 
                 this.Maximize(mainWindow: _mainWindow);
             }
+            else if (button.Content.ToString() == "アイテム図鑑")
+            {
+                ItemPage nextPage = new ItemPage();
+
+                nextPage.SetInitConfig(this.initConfig);
+                nextPage.SetDataOption(this.dataOption);
+                nextPage.SetDataItem(this.dataItem);
+
+                this.NavigationService.Navigate(nextPage);
+            }
             else if (button.Content.ToString() == "オプション")
             {
                 OptionPage nextPage = new OptionPage();
 
                 nextPage.SetInitConfig(this.initConfig);
                 nextPage.SetDataOption(this.dataOption);
-
-                // this.NavigationService.Navigate(new Uri("OptionPage.xaml", UriKind.Relative));
+                nextPage.SetDataItem(this.dataItem);
 
                 this.NavigationService.Navigate(nextPage);
             }
             else if (button.Content.ToString() == "名前入力")
             {
-                this.NavigationService.Navigate(new Uri("OptionPage.xaml", UriKind.Relative));
 
-                // this.NavigationService.Navigate(nextPage);
             }
             else if (button.Content.ToString() == "なまえ選択")
             {
                 if (this.initConfig.userName == null)
                 {
-                    MessageBox.Show("なまえがひとつも登録されていません。\nまずは第1回から始めてください。");
+                    MessageBox.Show("なまえがひとつも登録されていません。\nまずは名前の入力から始めてください。");
                 }
                 else
                 {
@@ -272,6 +312,8 @@ namespace KokoroUpTime
             }
             else if (button.Content.ToString() == "OK")
             {
+                // 名前を何でもよいから選択しないと落ちる
+                // 後々デフォルトで先頭が選択された状態で始める
                 var newUserNamePath = this.dirPaths[this.SelectUserListBox.SelectedIndex];
 
                 File.Copy($@"{newUserNamePath}/user.conf", @"./Log/system.conf", true);
@@ -292,6 +334,7 @@ namespace KokoroUpTime
 
                         nextPage1.SetInitConfig(this.initConfig);
                         nextPage1.SetDataOption(this.dataOption);
+                        nextPage1.SetDataItem(this.dataItem);
 
                         nextPage1.SetScenario("./Scenarios/chapter1.csv");
                         

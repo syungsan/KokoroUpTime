@@ -24,6 +24,7 @@ namespace KokoroUpTime
 
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
+        public DataItem dataItem = new DataItem();
 
         private string dbPath;
 
@@ -48,6 +49,11 @@ namespace KokoroUpTime
             this.dataOption = _dataOption;
 
             this.LoadOption();
+        }
+
+        public void SetDataItem(DataItem _dataItem)
+        {
+            this.dataItem = _dataItem;
         }
 
         private void LoadOption()
@@ -234,9 +240,11 @@ namespace KokoroUpTime
             {
                 TitlePage nextPage = new TitlePage();
 
-                nextPage.SetIsFirstBootFlag();
+                nextPage.SetIsFirstBootFlag(false);
+
                 nextPage.SetInitConfig(this.initConfig);
                 nextPage.SetDataOption(this.dataOption);
+                nextPage.SetDataItem(this.dataItem);
 
                 this.NavigationService.Navigate(nextPage);
             }
