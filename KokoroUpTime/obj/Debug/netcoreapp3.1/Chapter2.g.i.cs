@@ -1669,7 +1669,7 @@ namespace KokoroUpTime {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/KokoroUpTime;component/chapter2.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/KokoroUpTime;V0.8.0.2;component/chapter2.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Chapter2.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
