@@ -50,6 +50,13 @@
     <None Remove="Images\big_heart.png" />
     <None Remove="Images\blackboard.png" />
     <None Remove="Images\blue_needle.png" />
+    <None Remove="Images\branch_selection1.png" />
+    <None Remove="Images\branch_selection2.png" />
+    <None Remove="Images\challenge1_title.png" />
+    <None Remove="Images\challenge_frame1.png" />
+    <None Remove="Images\challenge_time.png" />
+    <None Remove="Images\challenge_time_text.png" />
+    <None Remove="Images\challenge_time_title.png" />
     <None Remove="Images\challenge_frame1.png" />
     <None Remove="Images\challenge_time.png" />
     <None Remove="Images\circle.png" />
@@ -60,6 +67,7 @@
     <None Remove="Images\face_small_bubble.png" />
     <None Remove="Images\feeling_value.png" />
     <None Remove="Images\good_feeling.png" />
+    <None Remove="Images\item_review.png" />
     <None Remove="Images\item00_book.png" />
     <None Remove="Images\item01_book.png" />
     <None Remove="Images\item02_book.png" />
@@ -110,11 +118,16 @@
     <None Remove="Images\manga1-5.png" />
     <None Remove="Images\manga1-6.png" />
     <None Remove="Images\manga1_title.png" />
+    <None Remove="Images\manga2-1.png" />
+    <None Remove="Images\manga2-2.png" />
+    <None Remove="Images\manga2-3.png" />
+    <None Remove="Images\manga2_title.png" />
     <None Remove="Images\mangaya.png" />
     <None Remove="Images\menu_bubble.png" />
     <None Remove="Images\message_box.png" />
     <None Remove="Images\moya1.png" />
     <None Remove="Images\moya2.png" />
+    <None Remove="Images\Name.bmp" />
     <None Remove="Images\next_go_button.png" />
     <None Remove="Images\oranger_gradation.png" />
     <None Remove="Images\orange_gradation.png" />
@@ -197,11 +210,18 @@
     <Resource Include="Images\big_heart.png" />
     <Resource Include="Images\blackboard.png" />
     <Resource Include="Images\blue_needle.png" />
+    <Resource Include="Images\branch_selection1.png" />
+    <Resource Include="Images\branch_selection2.png" />
+    <Resource Include="Images\challenge1_title.png" />
+    <Resource Include="Images\challenge_frame1.png" />
+    <Resource Include="Images\challenge_time_text.png" />
+    <Resource Include="Images\challenge_time_title.png" />
     <Resource Include="Images\challenge_frame1.png" />
     <Resource Include="Images\circle.png" />
     <Resource Include="Images\compare_akamaru_value_frame.png" />
     <Resource Include="Images\compare_aosuke_value_frame.png" />
     <Resource Include="Images\complete_button.png" />
+    <Resource Include="Images\item_review.png" />
     <Resource Include="Images\item00_book.png" />
     <Resource Include="Images\item01_book.png" />
     <Resource Include="Images\item02_book.png" />
@@ -218,7 +238,12 @@
     <Resource Include="Images\kimi_plate_outer.png" />
     <Resource Include="Images\kimi_stand_01.png" />
     <Resource Include="Images\long_bubble_right_up.png" />
+    <Resource Include="Images\manga2-1.png" />
+    <Resource Include="Images\manga2-2.png" />
+    <Resource Include="Images\manga2-3.png" />
+    <Resource Include="Images\manga2_title.png" />
     <Resource Include="Images\message_box.png" />
+    <Resource Include="Images\Name.bmp" />
     <Resource Include="Images\next_go_button.png" />
     <Resource Include="Images\orange_gradation.png" />
     <Resource Include="Images\short_bubble_left.png" />
@@ -286,16 +311,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="NameInputPage.xaml.cs">
+    <Compile Update="Chapter2.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Chapter2.xaml.cs">
+    <Compile Update="NameInputPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Scenarios\NameInput.csv">
+    <None Update="Scenarios\nameinput.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter6.csv">
@@ -340,10 +365,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="NameInputPage.xaml">
+    <Page Update="Chapter2.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Chapter2.xaml">
+    <Page Update="NameInputPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

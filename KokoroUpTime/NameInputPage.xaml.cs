@@ -34,8 +34,9 @@ namespace KokoroUpTime
         // メッセージスピードはオプションで設定できるようにする
         private float MESSAGE_SPEED = 30000.0f;
 
-        // 気持ちのリスト
-        private string[] EDIT_BUTTON = {"えんぴつ", "けしごむ", "すべてけす", "かんせい"};
+        // 手書き入力について
+        private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
+        private DrawingAttributes ink = new DrawingAttributes();
 
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
@@ -46,12 +47,6 @@ namespace KokoroUpTime
 
         // マウスクリックを可能にするかどうかのフラグ
         private bool isClickable = false;
-
-        // 何回タップしたか
-        private int tapCount = 0;
-
-        // 気持ちの大きさ
-        private int feelingSize = 0;
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
@@ -130,10 +125,13 @@ namespace KokoroUpTime
             }
 
             this.EditingModeItemsControl.ItemsSource = EDIT_BUTTON;
-
+            this.ink.Width = 25;
+            this.ink.Height =25;
+            this.NameCanvas.DefaultDrawingAttributes = ink;
             this.InitControls();
         }
         
+
         private void InitControls()
         {
             // 各種コントロールに任意の文字列をあてがう
@@ -176,7 +174,7 @@ namespace KokoroUpTime
         private void ResetControls()
         {
             // 各種コントロールを隠すことでフルリセット
-
+       
             
             this.EndingGrid.Visibility = Visibility.Hidden;
             this.NameInputGrid.Visibility = Visibility.Hidden;
@@ -208,7 +206,11 @@ namespace KokoroUpTime
            
             this.EndingMessageTextBlock.Text = "";
             
-            this.MainMessageTextBlock.Text = "";
+           
+
+            this.MainMessageText1.Text = "";
+            this.MainMessageText2.Text = "";
+
             this.ThinMessageTextBlock.Text = "";
        
         }
@@ -390,7 +392,7 @@ namespace KokoroUpTime
 
                         _message = this.SequenceCheck(_message);
 
-                        this.ShowMessage(textObject: _textObject, message: _message);
+                        this.ShowMessage2(textObject: _textObject, message: _message);
                     }
                     else
                     {
@@ -651,7 +653,7 @@ namespace KokoroUpTime
                         this.MainMessageText1.Text = _message.Substring(0, word_num);
                     }
 
-                    if (_message.Substring(word_num, 1) == "n" && this.MainMessageText2.Text != null)
+                    if (_message.Substring(word_num, 1) == "n" && this.MainMessageText2.Text == null)
                     {
                         // ここに入ってませんよ… if文の条件を変えてみては？
 
@@ -666,7 +668,7 @@ namespace KokoroUpTime
                         // 実行ファイルの場所を絶対パスで取得
                         var startupPath = FileUtils.GetStartupPath();
 
-                        // 画像がでかすぎでは…
+                      
                         this.NameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
                     }
 
@@ -674,6 +676,7 @@ namespace KokoroUpTime
                     {
                         this.MainMessageText2.Text = _message.Substring(this.MainMessageText1.Text.Length, word_num - MainMessageText1.Text.Length + 1);
                     }
+                   
 
                     word_num++;
                 }

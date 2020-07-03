@@ -47,8 +47,8 @@
                 <TextBlock x:Name="CurrentUserTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Width="432" Height="70"/>
             </StackPanel>
             <Button x:Name="SelectUserButton" Content="なまえ選択" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,918,1520,91"/>
-            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
-            <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169" Background="#FFF9C9D0">
+            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
+            <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169" Background="#FFF9C9D0" d:IsHidden="True">
                 <TextBlock x:Name="SelectUserListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="なまえの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
                 <ListBox x:Name="SelectUserListBox" Margin="48,140,48,130" FontSize="48">
                     <ListBox.ItemTemplate>

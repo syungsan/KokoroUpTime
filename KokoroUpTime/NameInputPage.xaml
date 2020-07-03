@@ -209,8 +209,8 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="SystemGrid">
-                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+            <Grid x:Name="SystemGrid" d:IsHidden="True">
+                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -219,7 +219,7 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Grid.RenderTransform>
-                    <Image x:Name="MainMessageBubbleImage" Source="/Images/right_big_bubble.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                    <Image x:Name="MainMessageBubbleImage" Source="/Images/right_big_bubble.png" RenderTransformOrigin="0.5,0.5">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -229,12 +229,12 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="55,145,266,45" FontSize="48" FontFamily="/Fonts/azuki.ttf#azuki_font" d:IsHidden="True">
-                        <Run x:Name="MainMessageText1"  />
+                    <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="55,145,266,45" FontSize="48" FontFamily="/Fonts/azuki.ttf#azuki_font">
+                        <Run x:Name="MainMessageText1"  Text="Text"/>
                         <InlineUIContainer>
-                            <Image x:Name="NameImage" d:IsHidden="True"/>
+                            <Image x:Name="NameImage" d:IsHidden="True" Height="48" Width="120" Stretch="Fill"/>
                         </InlineUIContainer>
-                        <Run x:Name="MainMessageText2" />
+                        <Run x:Name="MainMessageText2" Text="Text"/>
                     </TextBlock>
                     <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32" d:IsHidden="True">
                         <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png" d:IsHidden="True"/>
@@ -252,7 +252,7 @@
                         </Image>
                     </Button>
                 </Grid>
-                <Button x:Name="ThinMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Margin="215,894,215,0" Height="141" VerticalAlignment="Top">
+                <Button x:Name="ThinMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Margin="215,894,215,0" Height="141" VerticalAlignment="Top" d:IsHidden="True">
                     <Button.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -296,7 +296,7 @@
                     <Image x:Name="BackPageBeforeImage" Source="/Images/before.png" d:IsHidden="True"/>
                 </Button>
             </Grid>
-            <Grid x:Name="CanvasGrid"  >
+            <Grid x:Name="CanvasGrid" d:IsHidden="True"  >
                 <InkCanvas x:Name="NameCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,300,0,0" />
                 <Viewbox Margin="0,0,0,780" Stretch="Fill">
                     <ItemsControl x:Name="EditingModeItemsControl" >
@@ -314,12 +314,22 @@
                 </Viewbox>
                
             </Grid>
-            <Grid x:Name="NameInputGrid">
+            <Grid x:Name="NameInputGrid" d:IsHidden="True">
                 <Button x:Name="NameButton" Margin="100,200,900,700" Background="White" Click="Button_Click">
                     <Image x:Name="NameButtonImage"/>
                 </Button>
                 <Button x:Name="DecisionButton" Content="けってい"  FontSize="80" Background="White" Margin="1200,200,400,700" Click="Button_Click" d:IsHidden="True"/>
             </Grid>
+            <Grid x:Name="NameSelect" Visibility="Hidden">
+                <ListBox x:Name="NameSelectBox" Margin="300" HorizontalAlignment="Center">
+                    <Image x:Name="NameSelectImage" Source="/Images/hukidashi2.png" />
+                    <RadioButton x:Name="NameSelectButton1" />
+                    <RadioButton x:Name="NameSelectButton2" />
+                    <RadioButton x:Name="NameSelectButton3" />
+                </ListBox>
+                
+            </Grid>
+                        
         </Grid>
     </Viewbox>
 </Page>
