@@ -197,3 +197,4 @@ D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemBook.g.cs
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemBook.baml
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache
+
