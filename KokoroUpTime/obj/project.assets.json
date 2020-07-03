@@ -244,11 +244,11 @@
   "project": {
     "version": "0.8.0.2",
     "restore": {
-      "projectUniqueName": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+      "projectUniqueName": "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
       "projectName": "KokoroUpTime",
-      "projectPath": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+      "projectPath": "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
       "packagesPath": "C:\\Users\\maglab\\.nuget\\packages\\",
-      "outputPath": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\obj\\",
+      "outputPath": "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\maglab\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -290,6 +290,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.2, 3.1.2]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -298,7 +304,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

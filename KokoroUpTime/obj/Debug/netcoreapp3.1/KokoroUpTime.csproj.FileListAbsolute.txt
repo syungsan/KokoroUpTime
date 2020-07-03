@@ -99,7 +99,6 @@ C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Interop.WMPLib.dll
-C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Interop.WMPLib.dll
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csproj.ResolveComReference.cache
 C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Chapter1.g.cs
@@ -195,3 +194,6 @@ D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.genruntimeconfig.cache
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemBook.g.cs
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemBook.baml
+C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemBook.g.cs
+C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\ItemBook.baml
+C:\Users\maglab\Documents\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache

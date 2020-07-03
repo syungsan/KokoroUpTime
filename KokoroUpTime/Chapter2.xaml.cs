@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 using CsvReadWrite;
 using System.Diagnostics;
@@ -22,6 +23,7 @@ using System.Windows.Ink;
 using System.Media;
 using SQLite;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 
 namespace KokoroUpTime
 {
@@ -30,44 +32,65 @@ namespace KokoroUpTime
     /// </summary>
     public partial class Chapter2 : Page
     {
-        private float MESSAGE_SPEED = 30.0f;
+        // メッセージスピードはオプションで設定できるようにする
+        private float MESSAGE_SPEED = 3000000.0f;
 
+        // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
         private List<List<string>> scenarios = null;
 
+        // 各種コントロールの名前を収める変数
         private string position = "";
 
+        // マウスクリックを可能にするかどうかのフラグ
         private bool isClickable = false;
+
+        // 画面を何回タップしたか
         private int tapCount = 0;
 
+        // 気持ちの大きさ
         private int feelingSize = 0;
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
         private int word_num;
 
+        // 各種コントロールを任意の文字列で呼び出すための辞書
         private Dictionary<string, Image> imageObjects = null;
         private Dictionary<string, TextBlock> textBlockObjects = null;
         private Dictionary<string, Button> buttonObjects = null;
         private Dictionary<string, Grid> gridObjects = null;
 
-        private CheckBox[] checkBoxs;
 
+
+        // 音関連
         private WindowsMediaPlayer mediaPlayer;
         private SoundPlayer sePlayer = null;
 
+        // データベースに収めるデータモデルのインスタンス
+        private DataCapter1 data;
+
+        // データベースのパスを通す
+        private string dbPath;
+
+        // ゲームの切り替えシーン
+        private string scene;
+
+        // 仮のユーザネームを設定
         public string userName = "なまえ";
 
-        private DataCapter2 data;
+        // なったことのある自分の気持ちの一時記録用
+        private List<string> myKindOfGoodFeelings = new List<string>();
+        private List<string> myKindOfBadFeelings = new List<string>();
 
-        private SQLiteConnection connection;
-
-        private string[] GOOD_EVENT = new string[] {  "●野球でホームランを打つ" , "●友達と遊ぶ", "●新しいゲームを買う", "●のんびりする" , "●遊園地に行く", "●コンサートに行く" , "●テストで１００点を取る",
-                                                       "●遠足に行く", "●友達とおしゃべりする" , "●動物園に行く" ,"●おいしいものを食べる", "●好きな教科の勉強をする", "●好きなスポーツをする" , "●野球でホームランを打つ" };
+        private string[] GOOD_EVENT = {"●野球でホームランを打つ", "●友達と遊ぶ", "●新しいゲームを買う", "●のんびりする", "●遊園地に行く", "●コンサートに行く", "●テストで100点を取る",
+                                        "●遠足に行く","●友達とおしゃべりする","●動物園に行く","●おいしいものを食べる","●好きなスポーツをする","●好きな教科の勉強をする","●レストランに食べに行く"};
 
 
 
-public Chapter2()
+
+
+        public Chapter2()
         {
             InitializeComponent();
 
@@ -77,34 +100,48 @@ public Chapter2()
             // メディアプレーヤークラスのインスタンスを作成する
             this.mediaPlayer = new WindowsMediaPlayer();
 
+            // マウスイベントの設定
             this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
 
-            this.data = new DataCapter2();
+            // データモデルインスタンス確保
+            this.data = new DataCapter1();
 
+            // データベース本体のファイルのパス設定
             string dbName = $"{userName}.sqlite";
             string dirPath = $"./Log/{userName}/";
 
+            // FileUtils.csからディレクトリ作成のメソッド
+            // 各ユーザの初回起動のとき実行ファイルの場所下のLogフォルダにユーザネームのフォルダを作る
             DirectoryUtils.SafeCreateDirectory(dirPath);
 
-            string dbPath = System.IO.Path.Combine(dirPath, dbName);
+            this.dbPath = System.IO.Path.Combine(dirPath, dbName);
 
+            // 現在時刻を取得
             this.data.CreatedAt = DateTime.Now.ToString();
 
-            using (this.connection = new SQLiteConnection(dbPath))
+            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
+            using (var connection = new SQLiteConnection(dbPath))
             {
-                this.connection.CreateTable<DataCapter2>();
-                this.connection.Insert(this.data);
-            }
-            
-            this.InitControls();
+                // 仮（本当は名前を登録するタイミングで）
+                connection.CreateTable<DataOption>();
+                connection.CreateTable<DataProgress>();
+                connection.CreateTable<DataCapter1>();
 
-            this.SelectGoodEvent.ItemsSource = GOOD_EVENT;
+                // 毎回のアクセス日付を記録
+                connection.Insert(this.data);
+            }
+
+            this.GoodEventSelectBox.ItemsSource = GOOD_EVENT;
+
+            this.InitControls();
         }
 
         private void InitControls()
         {
+            // 各種コントロールに任意の文字列をあてがう
+
             this.imageObjects = new Dictionary<string, Image>
             {
                 ["bg_image"] = this.BackgroundImage,
@@ -131,22 +168,16 @@ public Chapter2()
                 ["children_stand_right_image"] = this.ChildrenStandRightImage,
                 ["children_stand_left_onomatopoeia_image"] = this.ChildrenStandLeftOnomatopoeiaImage,
                 ["kimi_stand_small_left_image"] = this.KimiStandSmallLeftImage,
-                ["intro_akamaru_face_image"] = this.IntroAkamaruFaceImage,
+
                 ["intro_aosuke_face_image"] = this.IntroAosukeFaceImage,
                 ["intro_kimi_face_image"] = this.IntroKimiFaceImage,
                 ["children_face_small_left_image"] = this.ChildrenFaceSmallLeftImage,
                 ["teacher_image"] = this.TeacherImage,
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
-
-                
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
             {
-                ["rule_board_title_msg"] = this.RuleBoardTitleTextBlock,
-                ["rule_board_check1_msg"] = this.RuleBoardCheck1TextBlock,
-                ["rule_board_check2_msg"] = this.RuleBoardCheck2TextBlock,
-                ["rule_board_check3_msg"] = this.RuleBoardCheck3TextBlock,
                 ["session_sub_title_text"] = this.SessionSubTitleTextBlock,
                 ["session_sentence_text"] = this.SessionSentenceTextBlock,
                 ["view_kind_of_feeling_person_text"] = this.ViewKindOfFeelingPersonTextBlock,
@@ -175,27 +206,32 @@ public Chapter2()
 
             this.buttonObjects = new Dictionary<string, Button>
             {
-                ["rule_board_button"] = this.RuleBoardButton,
+
                 ["next_msg_button"] = this.NextMessageButton,
                 ["back_msg_button"] = this.BackMessageButton,
                 ["thin_msg_button"] = this.ThinMessageButton,
                 ["next_page_button"] = this.NextPageButton,
                 ["back_page_button"] = this.BackPageButton,
                 ["manga_flip_button"] = this.MangaFlipButton,
+                ["select_feeling_complete_button"] = this.SelectFeelingCompleteButton,
+                ["select_feeling_next_button"] = this.SelectFeelingNextButton,
             };
 
             this.gridObjects = new Dictionary<string, Grid>
             {
                 ["session_grid"] = this.SessionGrid,
                 ["challenge1_grid"] = this.Challenge1Grid,
+                ["challenge_time_grid"] = this.ChallegeTimeGrid,
+
                 ["summary_grid"] = this.SummaryGrid,
                 ["ending_grid"] = this.EndingGrid,
-                ["item_name_plate_left_grid"] = this.ItemNamePlateLeftGrid, 
+                ["item_name_plate_left_grid"] = this.ItemNamePlateLeftGrid,
                 ["item_name_bubble_grid"] = this.ItemNameBubbleGrid,
                 ["item_name_plate_center_grid"] = this.ItemNamePlateCenterGrid,
                 ["item_info_plate_grid"] = this.ItemInfoPlateGrid,
                 ["item_info_sentence_grid"] = this.ItemInfoSentenceGrid,
                 ["item_last_info_grid"] = this.ItemLastInfoGrid,
+                ["item_review_grid"] = this.ItemReviewGrid,
                 ["challenge_msg_grid"] = this.ChallengeMessageGrid,
                 ["kimi_plate_inner_up_grid"] = this.KimiPlateInnerUpGrid,
                 ["kimi_plate_inner_down_grid"] = this.KimiPlateInnerDownGrid,
@@ -210,127 +246,20 @@ public Chapter2()
                 ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid,
                 ["music_info_grid"] = this.MusicInfoGrid,
-                ["exit_back_grid"] = this.ExitBackGrid,
+                ["branch_select_grid"] = this.BranchSelectGrid,
+
+                //["exit_back_grid"] = this.ExitBackGrid,
+
             };
         }
 
         private void ResetControls()
         {
-            this.SessionGrid.Visibility = Visibility.Hidden;
-            this.Challenge1Grid.Visibility = Visibility.Hidden;
-            this.SummaryGrid.Visibility = Visibility.Hidden;
-            this.EndingGrid.Visibility = Visibility.Hidden;
-            this.ItemNamePlateLeftGrid.Visibility = Visibility.Hidden;
-            this.ItemNameBubbleGrid.Visibility = Visibility.Hidden;
-            this.ItemNamePlateCenterGrid.Visibility = Visibility.Hidden;
-            this.ItemInfoPlateGrid.Visibility = Visibility.Hidden;
-            this.ItemLastInfoGrid.Visibility = Visibility.Hidden;
-            this.ViewKindOfFeelingGrid.Visibility = Visibility.Hidden;
-            this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
-            this.ChildrenFaceSmallLeftMessageGrid.Visibility = Visibility.Hidden;
-            this.ChallengeMessageGrid.Visibility = Visibility.Hidden;
-            this.KimiPlateInnerUpGrid.Visibility = Visibility.Hidden;
-            this.KimiPlateInnerDownGrid.Visibility = Visibility.Hidden;
-            this.SelectHeartGrid.Visibility = Visibility.Hidden;
-            this.CompareAkamaruHeartGrid.Visibility = Visibility.Hidden;
-            this.CompareAosukeHeartGrid.Visibility = Visibility.Hidden;
-            this.AkamaruAndAosukeCompareGrid.Visibility = Visibility.Hidden;
-            this.CompareMessageGrid.Visibility = Visibility.Hidden;
-            this.EndingMessageGrid.Visibility = Visibility.Hidden;
-            this.MainMessageGrid.Visibility = Visibility.Hidden;
-            this.MusicInfoGrid.Visibility = Visibility.Hidden;
-            this.ExitBackGrid.Visibility = Visibility.Hidden;
-            this.BackgroundImage.Visibility = Visibility.Hidden;
-            this.RuleBoardButton.Visibility = Visibility.Hidden;
-            this.RuleBoardTitleTextBlock.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck1TextBlock.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck2TextBlock.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck3TextBlock.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck1Box.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck2Box.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck3Box.Visibility = Visibility.Hidden;
-            this.MangaTitleImage.Visibility = Visibility.Hidden;
-            this.MangaImage.Visibility = Visibility.Hidden;
-            this.ItemCenterImage.Visibility = Visibility.Hidden;
-            this.ItemLeftImage.Visibility = Visibility.Hidden;
-            this.ItemLeftLastImage.Visibility = Visibility.Hidden;
-            this.SessionTitleImage.Visibility = Visibility.Hidden;
-            this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden;
-            this.SessionSentenceTextBlock.Visibility = Visibility.Hidden;
-            this.KimiPlateOuterImage.Visibility = Visibility.Hidden;
-            this.KimiInPlateImage.Visibility = Visibility.Hidden;
-            this.CaseOfKimiTextBlock.Visibility = Visibility.Hidden;
-            this.KimiScene1TextBlock.Visibility = Visibility.Hidden;
-            this.KimiKindOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
-            this.KimiSizeOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
-            this.KimiScene2TextBlock.Visibility = Visibility.Hidden;
-            this.KimiKindOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
-            this.KimiSizeOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
-            this.ViewKindOfFeelingPersonTextBlock.Visibility = Visibility.Hidden;
-            this.ViewKindOfFeelingTextBlock.Visibility = Visibility.Hidden;
-            this.ViewSizeOfFeelingTextBlock.Visibility = Visibility.Hidden;
-            this.ChildrenFaceSmallLeftImage.Visibility = Visibility.Hidden;
-            this.ChildrenFaceSmallLeftMessageTextBlock.Visibility = Visibility.Hidden;
-            this.CompareMessageTextBlock.Visibility = Visibility.Hidden;
-            this.KindOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
-            this.SizeOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
-            this.KindOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
-            this.SizeOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
-            this.ChildrenInfoImage.Visibility = Visibility.Hidden;
-            this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
-            this.ShirojiRightImage.Visibility = Visibility.Hidden;
-            this.ShirojiRightUpImage.Visibility = Visibility.Hidden;
-            this.ShirojiSmallRightUpImage.Visibility = Visibility.Hidden;
-            this.ShirojiSmallRightDownImage.Visibility = Visibility.Hidden;
-            this.ShirojiRightCenterImage.Visibility = Visibility.Hidden;
-            this.ShirojiSmallRightCenterImage.Visibility = Visibility.Hidden;
-            this.ShirojiVerySmallRightImage.Visibility = Visibility.Hidden;
-            this.ShirojiEndingImage.Visibility = Visibility.Hidden;
-            this.ChildrenStandLeftImage.Visibility = Visibility.Hidden;
-            this.ChildrenStandRightImage.Visibility = Visibility.Hidden;
-            this.KimiStandSmallLeftImage.Visibility = Visibility.Hidden;
-            this.ChildrenStandLeftOnomatopoeiaImage.Visibility = Visibility.Hidden;
-            this.ChildrenStandLeftOnomatopoeiaTextBlock.Visibility = Visibility.Hidden;
-            this.IntroAkamaruFaceImage.Visibility = Visibility.Hidden;
-            this.IntroAosukeFaceImage.Visibility = Visibility.Hidden;
-            this.IntroKimiFaceImage.Visibility = Visibility.Hidden;
-            this.TeacherImage.Visibility = Visibility.Hidden;
-            this.MainMessageTextBlock.Visibility = Visibility.Hidden;
-            this.ThinMessageButton.Visibility = Visibility.Hidden;
-            this.ThinMessageTextBlock.Visibility = Visibility.Hidden;
-            this.NextMessageButton.Visibility = Visibility.Hidden;
-            this.BackMessageButton.Visibility = Visibility.Hidden;
-            this.NextPageButton.Visibility = Visibility.Hidden;
-            this.BackPageButton.Visibility = Visibility.Hidden;
-            this.MangaFlipButton.Visibility = Visibility.Hidden;
-            this.CoverLayerImage.Visibility = Visibility.Hidden;
-            this.RuleBoardTitleTextBlock.Text = "";
-            this.RuleBoardCheck1TextBlock.Text = "";
-            this.RuleBoardCheck2TextBlock.Text = "";
-            this.RuleBoardCheck3TextBlock.Text = "";
-            this.SessionSubTitleTextBlock.Text = "";
-            this.SessionSentenceTextBlock.Text = "";
-            this.ViewKindOfFeelingPersonTextBlock.Text = "";
-            this.ViewKindOfFeelingTextBlock.Text = "";
-            this.ViewSizeOfFeelingTextBlock.Text = "";
-            this.ChildrenFaceSmallLeftMessageTextBlock.Text = "";
-            this.CompareMessageTextBlock.Text = "";
-            this.KindOfFeelingAkamaruTextBlock.Text = "";
-            this.SizeOfFeelingAkamaruTextBlock.Text = "";
-            this.KindOfFeelingAosukeTextBlock.Text = "";
-            this.SizeOfFeelingAosukeTextBlock.Text = "";
-            this.EndingMessageTextBlock.Text = "";
-            this.MainMessageTextBlock.Text = "";
-            this.ThinMessageTextBlock.Text = "";
-            this.MusicTitleTextBlock.Text = "";
-            this.ComposerNameTextBlock.Text = "";
-            this.RuleBoardCheck1Box.IsEnabled = false;
-            this.RuleBoardCheck2Box.IsEnabled = false;
-            this.RuleBoardCheck3Box.IsEnabled = false;
+            // 各種コントロールを隠すことでフルリセット
 
             this.SessionGrid.Visibility = Visibility.Hidden;
             this.Challenge1Grid.Visibility = Visibility.Hidden;
-            
+
             this.SummaryGrid.Visibility = Visibility.Hidden;
             this.EndingGrid.Visibility = Visibility.Hidden;
             this.ItemNamePlateLeftGrid.Visibility = Visibility.Hidden;
@@ -338,6 +267,10 @@ public Chapter2()
             this.ItemNamePlateCenterGrid.Visibility = Visibility.Hidden;
             this.ItemInfoPlateGrid.Visibility = Visibility.Hidden;
             this.ItemLastInfoGrid.Visibility = Visibility.Hidden;
+
+            this.ItemReviewGrid.Visibility = Visibility.Hidden;
+            this.ChallegeTimeGrid.Visibility = Visibility.Hidden;
+
             this.ViewKindOfFeelingGrid.Visibility = Visibility.Hidden;
             this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
             this.ChildrenFaceSmallLeftMessageGrid.Visibility = Visibility.Hidden;
@@ -355,15 +288,9 @@ public Chapter2()
 
             //this.ExitBackGrid.Visibility = Visibility.Hidden;
 
+            this.BranchSelectGrid.Visibility = Visibility.Hidden;
+
             this.BackgroundImage.Visibility = Visibility.Hidden;
-            this.RuleBoardButton.Visibility = Visibility.Hidden;
-            this.RuleBoardTitleTextBlock.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck1TextBlock.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck2TextBlock.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck3TextBlock.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck1Box.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck2Box.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck3Box.Visibility = Visibility.Hidden;
             this.MangaTitleImage.Visibility = Visibility.Hidden;
             this.MangaImage.Visibility = Visibility.Hidden;
             this.ItemCenterImage.Visibility = Visibility.Hidden;
@@ -372,7 +299,8 @@ public Chapter2()
             this.SessionTitleImage.Visibility = Visibility.Hidden;
             this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden;
             this.SessionSentenceTextBlock.Visibility = Visibility.Hidden;
-           
+            this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+            this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
             this.KimiPlateOuterImage.Visibility = Visibility.Hidden;
             this.KimiInPlateImage.Visibility = Visibility.Hidden;
             this.CaseOfKimiTextBlock.Visibility = Visibility.Hidden;
@@ -407,7 +335,7 @@ public Chapter2()
             this.KimiStandSmallLeftImage.Visibility = Visibility.Hidden;
             this.ChildrenStandLeftOnomatopoeiaImage.Visibility = Visibility.Hidden;
             this.ChildrenStandLeftOnomatopoeiaTextBlock.Visibility = Visibility.Hidden;
-            this.IntroAkamaruFaceImage.Visibility = Visibility.Hidden;
+
             this.IntroAosukeFaceImage.Visibility = Visibility.Hidden;
             this.IntroKimiFaceImage.Visibility = Visibility.Hidden;
             this.TeacherImage.Visibility = Visibility.Hidden;
@@ -420,12 +348,9 @@ public Chapter2()
             this.BackPageButton.Visibility = Visibility.Hidden;
             this.MangaFlipButton.Visibility = Visibility.Hidden;
 
-            //this.CoverLayerImage.Visibility = Visibility.Hidden;
+            this.CoverLayerImage.Visibility = Visibility.Hidden;
 
-            this.RuleBoardTitleTextBlock.Text = "";
-            this.RuleBoardCheck1TextBlock.Text = "";
-            this.RuleBoardCheck2TextBlock.Text = "";
-            this.RuleBoardCheck3TextBlock.Text = "";
+
             this.SessionSubTitleTextBlock.Text = "";
             this.SessionSentenceTextBlock.Text = "";
             this.ViewKindOfFeelingPersonTextBlock.Text = "";
@@ -438,11 +363,11 @@ public Chapter2()
             this.KindOfFeelingAosukeTextBlock.Text = "";
             this.SizeOfFeelingAosukeTextBlock.Text = "";
             this.EndingMessageTextBlock.Text = "";
-
             this.MainMessageTextBlock.Text = "";
             this.ThinMessageTextBlock.Text = "";
             this.MusicTitleTextBlock.Text = "";
             this.ComposerNameTextBlock.Text = "";
+
         }
 
         // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
@@ -465,8 +390,10 @@ public Chapter2()
         // ゲーム進行の中核
         private void ScenarioPlay()
         {
+            // デバッグのためシナリオのインデックスを出力
             Debug.Print((this.scenarioCount + 1).ToString());
 
+            // 処理分岐のフラグ
             var tag = this.scenarios[this.scenarioCount][0];
 
             // メッセージ表示関連
@@ -474,6 +401,7 @@ public Chapter2()
 
             switch (tag)
             {
+                // フルリセット
                 case "reset":
 
                     this.ResetControls();
@@ -483,36 +411,54 @@ public Chapter2()
 
                     break;
 
+                // シーン名を取得
+                case "scene":
+
+                    this.scene = this.scenarios[this.scenarioCount][1]; ;
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
+                // グリッドに対しての処理
                 case "grid":
 
+                    // グリッドコントロールを任意の名前により取得
                     this.position = this.scenarios[this.scenarioCount][1];
 
                     var gridObject = this.gridObjects[this.position];
 
                     gridObject.Visibility = Visibility.Visible;
 
+                    // アニメ処理をシナリオの流れと同期するか（待ち処理入れる）か非同期にするか（同時進行するか）
                     string gridAnimeIsSync = "sync";
 
+                    // if文は必要のない処理をコンマ以降で指定しなくてよくするため
                     if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
                     {
                         gridAnimeIsSync = this.scenarios[this.scenarioCount][3];
                     }
 
+                    // アニメを実現するストーリーボードの指定
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
                         var gridStoryBoard = this.scenarios[this.scenarioCount][2];
 
+                        // ストーリーボードの名前にコントロールの名前を付け足す
                         gridStoryBoard += $"_{this.position}";
 
                         this.ShowAnime(storyBoard: gridStoryBoard, isSync: gridAnimeIsSync);
                     }
                     else
                     {
+                        // アニメの処理をしない場合はそのまま次に進む
                         this.scenarioCount += 1;
                         this.ScenarioPlay();
                     }
                     break;
 
+                // イメージに対しての処理
                 case "image":
 
                     this.position = this.scenarios[this.scenarioCount][1];
@@ -525,6 +471,7 @@ public Chapter2()
                     {
                         imageFile = this.scenarios[this.scenarioCount][2];
 
+                        // フォルダの画像でなくリソース内の画像を表示することでスピードアップ
                         imageObject.Source = new BitmapImage(new Uri($"Images/{imageFile}", UriKind.Relative));
                     }
                     imageObject.Visibility = Visibility.Visible;
@@ -533,7 +480,7 @@ public Chapter2()
 
                     if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
                     {
-                       imageAnimeIsSync = this.scenarios[this.scenarioCount][4];
+                        imageAnimeIsSync = this.scenarios[this.scenarioCount][4];
                     }
 
                     if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
@@ -551,6 +498,7 @@ public Chapter2()
                     }
                     break;
 
+                // ボタンに対する処理
                 case "button":
 
                     this.position = this.scenarios[this.scenarioCount][1];
@@ -581,6 +529,7 @@ public Chapter2()
                     }
                     break;
 
+                // 流れる文字をTextBlockで表現するための処理
                 case "msg":
 
                     this.NextMessageButton.Visibility = Visibility.Hidden;
@@ -596,16 +545,18 @@ public Chapter2()
                     {
                         var _message = this.scenarios[this.scenarioCount][2];
 
-                        _textObject.Text = _message;
+                        _message = this.SequenceCheck(_message);
 
                         this.ShowMessage(textObject: _textObject, message: _message);
                     }
                     else
                     {
+                        // xamlに直接書いたStaticな文章を表示する場合
                         this.ShowMessage(textObject: _textObject, message: _textObject.Text);
                     }
                     break;
 
+                // 流れない文字に対するTextBlock処理
                 case "text":
 
                     this.position = this.scenarios[this.scenarioCount][1];
@@ -616,11 +567,12 @@ public Chapter2()
                     {
                         var _text = this.scenarios[this.scenarioCount][2];
 
-                        var text = _text.Replace("鬱", "\u2028");
+                        var text = this.SequenceCheck(_text);
 
                         textObject.Text = text;
                     }
 
+                    // 色を変えれるようにする
                     if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
                     {
                         var textColor = this.scenarios[this.scenarioCount][3];
@@ -643,6 +595,7 @@ public Chapter2()
 
                     string textAnimeIsSync = "sync";
 
+                    // テキストに対するアニメも一応用意
                     if (this.scenarios[this.scenarioCount].Count > 5 && this.scenarios[this.scenarioCount][5] != "")
                     {
                         textAnimeIsSync = this.scenarios[this.scenarioCount][5];
@@ -663,7 +616,11 @@ public Chapter2()
                     }
                     break;
 
+                // メッセージに対する待ち（メッセージボタンの表示切り替え）
                 case "wait":
+
+
+                    Delay();
 
                     bool msgButtonVisible = true;
 
@@ -686,7 +643,16 @@ public Chapter2()
 
                     break;
 
+                // 各場面に対する待ち（ページめくりボタン）
                 case "next":
+
+
+                    static async void Delay()
+                    {
+                        await System.Threading.Tasks.Task.Delay(3000000);
+                    }
+
+                    Delay();
 
                     this.NextPageButton.Visibility = Visibility.Visible;
                     this.BackPageButton.Visibility = Visibility.Visible;
@@ -695,6 +661,7 @@ public Chapter2()
 
                     break;
 
+                // 漫画めくり
                 case "flip":
 
                     this.MangaFlipButton.Visibility = Visibility.Visible;
@@ -702,6 +669,7 @@ public Chapter2()
 
                     break;
 
+                // 各種コントロールを個別に隠す処理
                 case "hide":
 
                     // オブジェクトを消すときは後々ほとんどアニメで処理するようにする
@@ -755,6 +723,7 @@ public Chapter2()
                     }
                     break;
 
+                // テキストコントロール一般の文字を消す処理
                 case "clear":
 
                     var clearTarget = this.scenarios[this.scenarioCount][1];
@@ -773,39 +742,14 @@ public Chapter2()
                     }
                     break;
 
-                case "rule":
 
-                    this.position = this.scenarios[this.scenarioCount][1];
-
-                    var ruleObject = this.textBlockObjects[this.position];
-
-                    var rule = this.scenarios[this.scenarioCount][2];
-
-                    this.checkBoxs = new CheckBox[] { this.RuleBoardCheck1Box, this.RuleBoardCheck2Box, this.RuleBoardCheck3Box };
-
-                    var checkNum = this.scenarios[this.scenarioCount][3];
-
-                    object _obj;
-
-                    if (checkNum == "all")
-                    {
-                        _obj = checkBoxs;
-                    }
-                    else
-                    {
-                        _obj = checkBoxs[int.Parse(checkNum)];
-                    }
-                    ruleObject.Visibility = Visibility.Visible;
-
-                    this.ShowMessage(textObject: ruleObject, message: rule, obj: _obj);
-
-                    break;
 
                 case "wait_tap":
 
                     this.isClickable = false;
                     break;
 
+                // BGM
                 case "bgm":
 
                     var bgmStatus = this.scenarios[this.scenarioCount][1];
@@ -859,6 +803,7 @@ public Chapter2()
 
                     break;
 
+                // 効果音
                 case "se":
 
                     var seStatus = this.scenarios[this.scenarioCount][1];
@@ -887,7 +832,47 @@ public Chapter2()
 
                     break;
 
+                // ハートゲージに対する処理
                 case "gauge":
+
+                    this.SelectHeartImage.Source = null;
+                    this.SelectNeedleImage.Source = null;
+
+                    if (this.scene == "赤丸くんのきもちの大きさ")
+                    {
+                        if (this.data.AkamarusKindOfFeelings.Split(",")[1].ToString() == "良い")
+                        {
+                            this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_red.png", UriKind.Relative));
+                            this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/red_needle.png", UriKind.Relative));
+                        }
+                        else if (this.data.AkamarusKindOfFeelings.Split(",")[1].ToString() == "悪い")
+                        {
+                            this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_blue.png", UriKind.Relative));
+                            this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/blue_needle.png", UriKind.Relative));
+                        }
+                    }
+
+                    if (this.scene == "青助くんのきもちの大きさ")
+                    {
+                        if (this.data.AosukesKindOfFeelings.Split(",")[1].ToString() == "良い")
+                        {
+                            this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_red.png", UriKind.Relative));
+                            this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/red_needle.png", UriKind.Relative));
+                        }
+                        else if (this.data.AosukesKindOfFeelings.Split(",")[1].ToString() == "悪い")
+                        {
+                            this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_blue.png", UriKind.Relative));
+                            this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/blue_needle.png", UriKind.Relative));
+                        }
+                    }
+
+                    this.Angle = 0.0f;
+                    this.ViewSizeOfFeelingTextBlock.Text = "50";
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
 
                     /*
                     var kindOfFeeling = this.scenarios[this.scenarioCount][1];
@@ -933,21 +918,60 @@ public Chapter2()
                         timer.Start();
                     }
                     */
-                    this.Angle = 0.0f;
-                    this.ViewSizeOfFeelingTextBlock.Text = "50";
-
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-
-                    break;
             }
         }
 
-        void ShowMessage(TextBlock textObject, string message, object obj=null)
+        string SequenceCheck(string text)
         {
-            // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
-            var _message = message.Replace("鬱", "\u2028");
+            // 正規表現によって$と$の間の文字列を抜き出す（無駄処理）
+            var Matches = new Regex(@"\$(.+?)\$").Matches(text);
 
+            for (int i = 0; i < Matches.Count; i++)
+            {
+                var sequence = Matches[i].Value;
+
+                switch (sequence)
+                {
+                    case "$kimis_kind_of_feeling$":
+
+                        text = text.Replace("$kimis_kind_of_feeling$", this.data.KimisKindOfFeelings.Split(",")[0]);
+
+                        break;
+
+                    case "$akamarus_kind_of_feeling$":
+
+                        text = text.Replace("$akamarus_kind_of_feeling$", this.data.AkamarusKindOfFeelings.Split(",")[0]);
+
+                        break;
+
+                    case "$aosukes_kind_of_feeling$":
+
+                        text = text.Replace("$aosukes_kind_of_feeling$", this.data.AosukesKindOfFeelings.Split(",")[0]);
+
+                        break;
+
+                    case "$akamarus_size_of_feeling$":
+
+                        text = text.Replace("$akamarus_size_of_feeling$", this.data.AkamarusSizeOfFeeling.ToString());
+
+                        break;
+
+                    case "$aosukes_size_of_feeling$":
+
+                        text = text.Replace("$aosukes_size_of_feeling$", this.data.AosukesSizeOfFeeling.ToString());
+
+                        break;
+                }
+            }
+
+            // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
+            text = text.Replace("鬱", "\u2028");
+
+            return text;
+        }
+
+        void ShowMessage(TextBlock textObject, string message, object obj = null)
+        {
             // メッセージ表示処理
             this.msgTimer = new DispatcherTimer();
             this.msgTimer.Tick += ViewMsg;
@@ -957,11 +981,11 @@ public Chapter2()
             // 一文字ずつメッセージ表示（Inner Func）
             void ViewMsg(object sender, EventArgs e)
             {
-                textObject.Text = _message.Substring(0, word_num);
+                textObject.Text = message.Substring(0, word_num);
 
                 textObject.Visibility = Visibility.Visible;
 
-                if (word_num < _message.Length)
+                if (word_num < message.Length)
                 {
                     word_num++;
                 }
@@ -980,6 +1004,75 @@ public Chapter2()
             }
         }
 
+        void ShowMessage2(TextBlock textObject, string message, object obj = null)
+        {
+            // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
+            var _message = message.Replace("鬱", "\u2028");
+
+            _message = _message.Replace("【name】", "n");
+            _message = _message.Replace("【くん／ちゃん／さん】", "");
+
+            // メッセージ表示処理
+            this.msgTimer = new DispatcherTimer();
+            this.msgTimer.Tick += ViewMsg;
+            this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / MESSAGE_SPEED);
+            this.msgTimer.Start();
+
+            // 一文字ずつメッセージ表示（Inner Func）
+            void ViewMsg(object sender, EventArgs e)
+            {
+                textObject.Visibility = Visibility.Visible;
+
+                if (word_num < _message.Length)
+                {
+                    if (_message.Substring(word_num, 1) != "n" && this.NameImage.Source == null)
+                    {
+                        this.MainMessageText1.Text = _message.Substring(0, word_num);
+                    }
+
+                    if (_message.Substring(word_num, 1) == "n" && this.MainMessageText2.Text == null)
+                    {
+                        // ここに入ってませんよ… if文の条件を変えてみては？
+
+                        _message = _message.Replace("n", " ");
+
+                        // Name.bmpを収める場所の設定
+                        string nameBmp = "Name.bmp";
+                        string dirPath = $"./Log/{userName}/";
+
+                        string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
+
+                        // 実行ファイルの場所を絶対パスで取得
+                        var startupPath = FileUtils.GetStartupPath();
+
+                        // 画像がでかすぎでは…
+                        this.NameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
+                    }
+
+                    if (this.MainMessageText1 != null && NameImage.Source != null)
+                    {
+                        this.MainMessageText2.Text = _message.Substring(this.MainMessageText1.Text.Length, word_num - MainMessageText1.Text.Length + 1);
+                    }
+
+                    word_num++;
+                }
+                else
+                {
+                    this.msgTimer.Stop();
+                    this.msgTimer = null;
+
+                    if (obj != null)
+                    {
+                        this.MessageCallBack(obj);
+                    }
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+            }
+        }
+
+        // アニメーション（ストーリーボード）の処理
         private void ShowAnime(string storyBoard, string isSync)
         {
             Storyboard sb = this.FindResource(storyBoard) as Storyboard;
@@ -1018,6 +1111,7 @@ public Chapter2()
             }
         }
 
+        // 黒板ルール処理のためだけの追加
         private void MessageCallBack(object obj)
         {
             switch (obj)
@@ -1030,7 +1124,8 @@ public Chapter2()
 
                 case CheckBox[] checkBoxs:
 
-                    foreach (CheckBox checkBox in checkBoxs) {
+                    foreach (CheckBox checkBox in checkBoxs)
+                    {
                         checkBox.IsEnabled = true;
                     }
                     break;
@@ -1039,6 +1134,8 @@ public Chapter2()
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            // 各種ボタンが押されたときの処理
+
             Button button = sender as Button;
 
             /*
@@ -1050,66 +1147,66 @@ public Chapter2()
             }
             */
 
-            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "RuleBoardButton" || button.Name == "ThinMessageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "SelectFeelingNextButton"))
-            {
-                this.isClickable = false;
-
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
-
+            // FullScreen時のデバッグ用に作っておく
             if (button.Name == "ExitButton")
             {
-                this.CoverLayerImage.Visibility = Visibility.Visible;
-                this.ExitBackGrid.Visibility = Visibility.Visible;
+                //this.CoverLayerImage.Visibility = Visibility.Visible;
+                //this.ExitBackGrid.Visibility = Visibility.Visible;
             }
-            
+
             if (button.Name == "ExitBackYesButton")
             {
                 Application.Current.Shutdown();
             }
-            
+
             if (button.Name == "ExitBackNoButton")
             {
-                this.ExitBackGrid.Visibility = Visibility.Hidden;
-                this.CoverLayerImage.Visibility = Visibility.Hidden;
+
+                //this.ExitBackGrid.Visibility = Visibility.Hidden;
+                //this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
-        }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = sender as CheckBox;
-
-            if (this.checkBoxs.Contains(checkBox))
+            if (button.Name == "NextMessageButton")
             {
-                this.tapCount += 1;
-
-                if (this.tapCount >= this.checkBoxs.Length)
-                {
-                    foreach (CheckBox _checkBox in this.checkBoxs)
-                    {
-                        _checkBox.IsEnabled = false;
-                    }
-                    this.isClickable = true;
-                }
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
             }
-        }
-
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = sender as CheckBox;
-
-            if (this.checkBoxs.Contains(checkBox))
+            if (button.Name == "NextPageButton")
             {
-                this.tapCount -= 1;
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
             }
+            if (button.Name == "MangaFlipButton")
+            {
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+            }
+            if (button.Name == "BranchButton1")
+            {
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+                this.BranchSelectGrid.Visibility = Visibility.Hidden;
+            }
+            if (button.Name == "BranchButton2")
+            {
+                this.BranchSelectGrid.Visibility = Visibility.Hidden;
+
+                this.ItemReviewGrid.Visibility = Visibility.Visible;
+                this.NextPageButton.Visibility = Visibility.Hidden;
+                this.BackPageButton.Visibility = Visibility.Hidden;
+            }
+
+
+
+
+
+
+
+
         }
 
         private void SetBGM(string soundFile, bool isLoop, int volume)
         {
-            string exePath = Environment.GetCommandLineArgs()[0];
-            string exeFullPath = System.IO.Path.GetFullPath(exePath);
-            string startupPath = System.IO.Path.GetDirectoryName(exeFullPath);
+            var startupPath = FileUtils.GetStartupPath();
 
             // ループ再生を指定
             this.mediaPlayer.settings.setMode("loop", isLoop);
@@ -1151,6 +1248,7 @@ public Chapter2()
             sePlayer.Play();
         }
 
+        // ジェスチャー認識キャンバスのロード
         void GestureCanvas_Loaded(object sender, RoutedEventArgs e)
         {
             var gestureCanvas = (InkCanvas)sender;
@@ -1173,15 +1271,14 @@ public Chapter2()
             });
         }
 
+        // ジェスチャーキャンバスの処理
         void GestureCanvas_Gesture(object sender, InkCanvasGestureEventArgs e)
         {
             // 信頼性 (RecognitionConfidence) を無視したほうが、Circle と Triangle の認識率は上がるようです。
             var gestureResult = e.GetGestureRecognitionResults()
                 .FirstOrDefault(r => r.ApplicationGesture != ApplicationGesture.NoGesture);
 
-            string exePath = Environment.GetCommandLineArgs()[0];
-            string exeFullPath = System.IO.Path.GetFullPath(exePath);
-            string startupPath = System.IO.Path.GetDirectoryName(exeFullPath);
+            var startupPath = FileUtils.GetStartupPath();
 
             if (gestureResult == null)
             {
@@ -1220,10 +1317,9 @@ public Chapter2()
             PlaySE($@"{startupPath}/Sounds/{answerResult}.wav");
 
             var gestureCanvas = (InkCanvas)sender;
-
-            gestureCanvas.Strokes.Clear();
-            gestureCanvas.Strokes.Add(e.Strokes);
         }
+
+
 
         private enum AnswerResult
         {
@@ -1233,46 +1329,56 @@ public Chapter2()
             Correct,
         }
 
+
+
+        // ハートゲージの角度をデータバインド
         private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter2), new UIPropertyMetadata(0.0));
 
-        private double Angle
+        public double Angle
         {
             get { return (double)GetValue(AngleProperty); }
             set { SetValue(AngleProperty, value); }
         }
 
+        // マウスのドラッグ処理（マウスの左ボタンを押下したとき）
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(this);
 
-            this.CalcAngle();
-
-            this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
-        }
-
-        private void OnMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Mouse.Capture(null);
-        }
-
-        private void OnMouseMove(object sender, MouseEventArgs e)
-        {
-            if (Mouse.Captured == this)
+            if (this.SelectHeartGrid.Visibility == Visibility.Visible)
             {
                 this.CalcAngle();
 
                 this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
             }
         }
-        
+
+        // マウスのドラッグ処理（マウスの左ボタンを離したとき）
+        private void OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.Capture(null);
+        }
+
+        // マウスのドラッグ処理（マウスを動かしたとき）
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (Mouse.Captured == this)
+            {
+                if (this.SelectHeartGrid.Visibility == Visibility.Visible)
+                {
+                    this.CalcAngle();
+
+                    this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
+                }
+            }
+        }
+
+        // ハートゲージの針の角度に関する計算
         private void CalcAngle()
         {
-            Point currentLocation = Mouse.GetPosition(this);
+            Point currentLocation = this.PointToScreen(Mouse.GetPosition(this));
 
-            var heartPosX = this.SelectHeartImage.TranslatePoint(new Point(0, 0), this).X;
-            var heartPosY = this.SelectHeartImage.TranslatePoint(new Point(0, 0), this).Y;
-
-            Point knobCenter = new Point(heartPosX + (this.SelectHeartImage.ActualWidth * 0.5), heartPosY + (this.SelectHeartImage.ActualHeight * 0.8));
+            Point knobCenter = this.SelectHeartImage.PointToScreen(new Point(this.SelectHeartImage.ActualWidth * 0.5, this.SelectHeartImage.ActualHeight * 0.8));
 
             double radians = Math.Atan((currentLocation.Y - knobCenter.Y) / (currentLocation.X - knobCenter.X));
 
@@ -1296,6 +1402,16 @@ public Chapter2()
                 this.feelingSize = 100;
                 this.Angle = (double)this.feelingSize + 310.0f;
             }
+        }
+
+        private void GoodEventSelectBox_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GoodEventSelectBox_Unselected(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
