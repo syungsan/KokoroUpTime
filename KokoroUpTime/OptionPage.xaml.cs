@@ -230,15 +230,15 @@ namespace KokoroUpTime
 
             if (button.Name == "ReturnToTitleButton")
             {
-                TitlePage nextPage = new TitlePage();
+                TitlePage titlePage = new TitlePage();
 
-                nextPage.SetIsFirstBootFlag(false);
+                titlePage.SetIsFirstBootFlag(false);
 
-                nextPage.SetInitConfig(this.initConfig);
-                nextPage.SetDataOption(this.dataOption);
-                nextPage.SetDataItem(this.dataItem);
+                titlePage.SetInitConfig(this.initConfig);
+                titlePage.SetDataOption(this.dataOption);
+                titlePage.SetDataItem(this.dataItem);
 
-                this.NavigationService.Navigate(nextPage);
+                this.NavigationService.Navigate(titlePage);
             }
             else
             {

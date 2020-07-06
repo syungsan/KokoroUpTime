@@ -11,12 +11,6 @@
 
     <Viewbox>
         <Grid Height="1080" Width="1920">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
             <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_00.png" Visibility="Visible"/>
             <Image x:Name="TitleImage" Source="/Images/title.png" Margin="210,95,205,785"/>
             <Image x:Name="MenuImage" Source="/Images/menu_bubble.png" Margin="210,339,1030,157"/>
@@ -37,9 +31,9 @@
             <Button x:Name="Chapter10Button" Content="第10回" FontSize="36" Foreground="#FFFFE6AF" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click" Margin="570,626,1230,386"/>
             <Button x:Name="Chapter11Button" Content="第11回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="570,694,1230,318"/>
             <Button x:Name="Chapter12Button" Content="第12回" FontSize="36" Foreground="#FFFFE6AF" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Margin="570,762,1230,248"/>
-            <Button x:Name="AboutButton" Content="こころアップタイムとは" FontSize="36" BorderBrush="{x:Null}" Background="{x:Null}" Margin="1400,620,205,392"/>
-            <Button x:Name="RuleButton" Content="教室のルール" FontSize="36" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}" Margin="1400,688,205,324"/>
-            <Button x:Name="AnotherButton" Content="その他" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36" Margin="1400,756,205,254"/>
+            <Button x:Name="AboutButton" Content="こころアップタイムとは" FontSize="36" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click" Margin="1400,620,205,392"/>
+            <Button x:Name="RuleButton" Content="教室のルール" FontSize="36" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}" Click="Button_Click" Margin="1400,688,205,324"/>
+            <Button x:Name="AnotherButton" Content="その他" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36" Click="Button_Click" Margin="1400,756,205,254"/>
             <TextBlock x:Name="VersionTextBlock" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="287" Width="770" Margin="1034,311,0,0" FontSize="24" Foreground="#FFF0CA95" FontFamily="/Fonts/JiyunoTsubasa.ttf#JiyunoTsubasaFont"/>
             <Button x:Name="ChangeScreenButton" Content="Full/Win" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="195" Click="Button_Click" FontSize="36" Margin="1715,10,0,0"/>
             <StackPanel x:Name="CurrentNameStackPanel" Orientation="Horizontal" Margin="743,932,745,22">

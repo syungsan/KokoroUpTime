@@ -145,6 +145,7 @@
     <None Remove="Images\red_needle.png" />
     <None Remove="Images\return_to_item.png" />
     <None Remove="Images\return_to_title.png" />
+    <None Remove="Images\return_to_top.png" />
     <None Remove="Images\right_big_bubble.png" />
     <None Remove="Images\right_big_bubble_blue.png" />
     <None Remove="Images\right_big_bubble_red.png" />
@@ -270,6 +271,7 @@
     <Resource Include="Images\next_go_button.png" />
     <Resource Include="Images\orange_gradation.png" />
     <Resource Include="Images\return_to_item.png" />
+    <Resource Include="Images\return_to_top.png" />
     <Resource Include="Images\short_bubble_left.png" />
     <Resource Include="Images\short_bubble_right_up.png" />
     <Resource Include="Images\small_bubble_right_down.png" />

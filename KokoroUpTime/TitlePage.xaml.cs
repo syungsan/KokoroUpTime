@@ -275,91 +275,110 @@ namespace KokoroUpTime
         {
             Button button = sender as Button;
 
-            if (button.Content.ToString() == "Full/Win")
+            switch (button.Content.ToString())
             {
-                Window _mainWindow = Application.Current.MainWindow;
+                case "Full/Win":
 
-                this.Maximize(mainWindow: _mainWindow);
-            }
-            else if (button.Content.ToString() == "アイテム図鑑")
-            {
-                ItemPage nextPage = new ItemPage();
+                    Window _mainWindow = Application.Current.MainWindow;
 
-                nextPage.SetInitConfig(this.initConfig);
-                nextPage.SetDataOption(this.dataOption);
-                nextPage.SetDataItem(this.dataItem);
+                    this.Maximize(mainWindow: _mainWindow);
 
-                this.NavigationService.Navigate(nextPage);
-            }
-            else if (button.Content.ToString() == "オプション")
-            {
-                OptionPage nextPage = new OptionPage();
+                    break;
 
-                nextPage.SetInitConfig(this.initConfig);
-                nextPage.SetDataOption(this.dataOption);
-                nextPage.SetDataItem(this.dataItem);
+                case "アイテム図鑑":
 
-                this.NavigationService.Navigate(nextPage);
-            }
-            else if (button.Content.ToString() == "名前入力")
-            {
+                    ItemPage itemPage = new ItemPage();
 
-            }
-            else if (button.Content.ToString() == "なまえ選択")
-            {
-                if (this.initConfig.userName == null)
-                {
-                    MessageBox.Show("なまえがひとつも登録されていません。\nまずは名前の入力から始めてください。");
-                }
-                else
-                {
-                    this.LoadUsers();
+                    itemPage.SetInitConfig(this.initConfig);
+                    itemPage.SetDataOption(this.dataOption);
+                    itemPage.SetDataItem(this.dataItem);
 
-                    this.CoverLayerImage.Visibility = Visibility.Visible;
-                    this.SelectUserListGrid.Visibility = Visibility.Visible;
-                }
-            }
-            else if (button.Content.ToString() == "OK")
-            {
-                // 名前を何でもよいから選択しないと落ちる
-                // 後々デフォルトで先頭が選択された状態で始める
-                var newUserNamePath = this.dirPaths[this.SelectUserListBox.SelectedIndex];
+                    this.NavigationService.Navigate(itemPage);
 
-                File.Copy($@"{newUserNamePath}/user.conf", @"./Log/system.conf", true);
+                    break;
 
-                this.LoadUser();
+                case "オプション":
 
-                this.SelectUserListGrid.Visibility = Visibility.Hidden;
-                this.CoverLayerImage.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                // Pageインスタンスを渡して遷移
-                switch (button.Content.ToString())
-                {
-                    case "第1回":
+                    OptionPage optionPage = new OptionPage();
 
-                        Chapter1 nextPage1 = new Chapter1();
+                    optionPage.SetInitConfig(this.initConfig);
+                    optionPage.SetDataOption(this.dataOption);
+                    optionPage.SetDataItem(this.dataItem);
 
-                        nextPage1.SetInitConfig(this.initConfig);
-                        nextPage1.SetDataOption(this.dataOption);
-                        nextPage1.SetDataItem(this.dataItem);
+                    this.NavigationService.Navigate(optionPage);
 
-                        nextPage1.SetScenario("./Scenarios/chapter1.csv");
-                        
-                        this.NavigationService.Navigate(nextPage1);
+                    break;
 
-                        break;
 
-                    case "第2回":
+                case "名前入力":
 
-                        Chapter2 nextPage2 = new Chapter2();
-                        nextPage2.SetScenario("./Scenarios/chapter2.csv");
+                    break;
 
-                        this.NavigationService.Navigate(nextPage2);
 
-                        break;
-                }
+                case "なまえ選択":
+
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("なまえがひとつも登録されていません。\nまずは名前の入力から始めてください。");
+                    }
+                    else
+                    {
+                        this.LoadUsers();
+
+                        this.CoverLayerImage.Visibility = Visibility.Visible;
+                        this.SelectUserListGrid.Visibility = Visibility.Visible;
+                    }
+                    break;
+
+                case "OK":
+
+                    // 名前を何でもよいから選択しないと落ちる
+                    // 後々デフォルトで先頭が選択された状態で始める
+                    var newUserNamePath = this.dirPaths[this.SelectUserListBox.SelectedIndex];
+
+                    File.Copy($@"{newUserNamePath}/user.conf", @"./Log/system.conf", true);
+
+                    this.LoadUser();
+
+                    this.SelectUserListGrid.Visibility = Visibility.Hidden;
+                    this.CoverLayerImage.Visibility = Visibility.Hidden;
+
+                    break;
+
+                case "こころアップタイムとは":
+
+                    AboutPage aboutPage = new AboutPage();
+
+                    aboutPage.SetInitConfig(this.initConfig);
+                    aboutPage.SetDataOption(this.dataOption);
+                    aboutPage.SetDataItem(this.dataItem);
+
+                    this.NavigationService.Navigate(aboutPage);
+
+                    break;
+
+                case "第1回":
+
+                    Chapter1 chapter1 = new Chapter1();
+
+                    chapter1.SetInitConfig(this.initConfig);
+                    chapter1.SetDataOption(this.dataOption);
+                    chapter1.SetDataItem(this.dataItem);
+
+                    chapter1.SetScenario("./Scenarios/chapter1.csv");
+
+                    this.NavigationService.Navigate(chapter1);
+
+                    break;
+
+                case "第2回":
+
+                    Chapter2 chapter2 = new Chapter2();
+                    chapter2.SetScenario("./Scenarios/chapter2.csv");
+
+                    this.NavigationService.Navigate(chapter2);
+
+                    break;
             }
         }
 
