@@ -65,8 +65,27 @@
                 <Image x:Name="Item11NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,510,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                 <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,510,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
             </Grid>
+            <Grid x:Name="ItemDetailGrid">
+                <Image x:Name="Item01DetailImage" HorizontalAlignment="Center" Height="587" VerticalAlignment="Center" Width="1304" Source="/Images/item01_detail.png"/>
+                <Image x:Name="Item02DetailImage" Height="607" Width="1288" Source="/Images/item02_detail.png" Margin="316,236,316,236"/>
+                <Image x:Name="Item03DetailImage" Height="693" Width="1323" Source="/Images/item03_detail.png" Margin="298,194,298,194"/>
+                <Image x:Name="Item04DetailImage" Height="637" Width="1377" Source="/Images/item04_detail.png" Margin="272,222,272,222"/>
+                <Image x:Name="Item05DetailImage" Height="712" Width="1351" Source="/Images/item05_detail.png" Margin="284,184,284,184"/>
+                <Image x:Name="Item06DetailImage" Height="575" Width="1195" Source="/Images/item06_detail.png" Margin="362,252,362,252"/>
+                <Image x:Name="Item07DetailImage" Height="589" Width="1217" Source="/Images/item07_detail.png" Margin="352,246,352,245"/>
+                <Image x:Name="Item08DetailImage" Height="602" Width="1260" Source="/Images/item08_detail.png" Margin="330,239,330,239"/>
+                <Image x:Name="Item09DetailImage" Height="562" Width="1218" Source="/Images/item09_detail.png" Margin="351,259,351,259"/>
+                <Image x:Name="Item10DetailImage" Height="626" Width="1265" Source="/Images/item10_detail.png" Margin="328,227,328,227"/>
+                <Image x:Name="Item11DetailImage" Height="549" Width="1248" Source="/Images/item11_detail.png" Margin="336,266,336,266"/>
+            </Grid>
             <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}">
                 <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png"/>
+            </Button>
+            <Button x:Name="ReturnToItemButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}">
+                <Image x:Name="ReturnToItemImage" Source="/Images/return_to_item.png"/>
+            </Button>
+            <Button x:Name="NextPageButton" HorizontalAlignment="Left" Margin="1635,923,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="277" Height="158" Click="Button_Click" BorderBrush="{x:Null}">
+                <Image x:Name="NextPageImage" Source="/Images/after.png"/>
             </Button>
         </Grid>
     </Viewbox>

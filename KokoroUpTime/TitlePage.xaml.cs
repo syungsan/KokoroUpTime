@@ -68,17 +68,26 @@ namespace KokoroUpTime
 
         public void SetInitConfig(InitConfig _initConfig)
         {
-            this.initConfig = _initConfig;
+            if (!this.isFirstBootFlag)
+            {
+                this.initConfig = _initConfig;
+            }
         }
 
         public void SetDataOption(DataOption _dataOption)
         {
-            this.dataOption = _dataOption;
+            if (!this.isFirstBootFlag)
+            {
+                this.dataOption = _dataOption;
+            }  
         }
 
         public void SetDataItem(DataItem _dataItem)
         {
-            this.dataItem = _dataItem;
+            if (!this.isFirstBootFlag)
+            {
+                this.dataItem = _dataItem;
+            } 
         }
 
         public void SetIsFirstBootFlag(bool flag)
@@ -115,9 +124,9 @@ namespace KokoroUpTime
                 string dbName = $"{this.initConfig.userName}.sqlite";
                 string userDirPath = $"./Log/{this.initConfig.userName}_{this.initConfig.userTitle}/";
 
-                var dbPath = System.IO.Path.Combine(userDirPath, dbName);
+                this.initConfig.dbPath = System.IO.Path.Combine(userDirPath, dbName);
 
-                using (var connection = new SQLiteConnection(dbPath))
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                 {
                     var option = connection.Query<DataOption>("SELECT * FROM DataOption WHERE Id = 1;");
 
@@ -232,9 +241,9 @@ namespace KokoroUpTime
                     string dbName = $"{userInfo[0]}.sqlite";
                     string dbDirPath = $"./Log/{userInfo[0]}_{userInfo[1]}/";
 
-                    var dbPath = System.IO.Path.Combine(dbDirPath, dbName);
+                    var individualDbPath = System.IO.Path.Combine(dbDirPath, dbName);
 
-                    using (var connection = new SQLiteConnection(dbPath))
+                    using (var connection = new SQLiteConnection(individualDbPath))
                     {
                         var option = connection.Query<DataOption>("SELECT IsWordRecognition FROM DataOption WHERE Id = 1;");
 

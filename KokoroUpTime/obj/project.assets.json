@@ -121,6 +121,18 @@
         "runtime": {
           "lib/netcoreapp2.1/_._": {}
         }
+      },
+      "WpfAnimatedGif/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.0/WpfAnimatedGif.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/WpfAnimatedGif.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
       }
     }
   },
@@ -231,10 +243,31 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "WpfAnimatedGif/2.0.0": {
+      "sha512": "Z468xEqg+MSSW30BkbIcwoCQ9E0GiRQxU6L9qYCUmP28fQ79Dq4QSakWm3Dfw8CoRY3xLl3gf1xRfqILSs6/mw==",
+      "type": "package",
+      "path": "wpfanimatedgif/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/WpfAnimatedGif.dll",
+        "lib/net35/WpfAnimatedGif.pdb",
+        "lib/net35/WpfAnimatedGif.xml",
+        "lib/net40/WpfAnimatedGif.dll",
+        "lib/net40/WpfAnimatedGif.pdb",
+        "lib/net40/WpfAnimatedGif.xml",
+        "lib/netcoreapp3.0/WpfAnimatedGif.dll",
+        "lib/netcoreapp3.0/WpfAnimatedGif.pdb",
+        "lib/netcoreapp3.0/WpfAnimatedGif.xml",
+        "wpfanimatedgif.2.0.0.nupkg.sha512",
+        "wpfanimatedgif.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "WpfAnimatedGif >= 2.0.0",
       "sqlite-net-pcl >= 1.7.335"
     ]
   },
@@ -242,7 +275,7 @@
     "C:\\Users\\syung\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "0.8.0.2",
+    "version": "0.8.3.1",
     "restore": {
       "projectUniqueName": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
       "projectName": "KokoroUpTime",
@@ -275,6 +308,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "WpfAnimatedGif": {
+            "target": "Package",
+            "version": "[2.0.0, )"
+          },
           "sqlite-net-pcl": {
             "target": "Package",
             "version": "[1.7.335, )"

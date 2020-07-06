@@ -11,6 +11,8 @@ namespace KokoroUpTime
         public string userName = null;
 
         public string userTitle = null;
+
+        public string dbPath = null;
     }
 
     public class DataOption
@@ -102,53 +104,53 @@ namespace KokoroUpTime
 
         public int CurrentCapter { get; set; }
 
-        public int CurrentScene { get; set; }
+        public string CurrentScene { get; set; }
 
-        public int LatestChapter1Scene { get; set; }
+        public string LatestChapter1Scene { get; set; }
 
         public bool HasCompletedChapter1 { get; set; }
 
-        public int LatestChapter2Scene { get; set; }
+        public string LatestChapter2Scene { get; set; }
 
         public bool HasCompletedChapter2 { get; set; }
 
-        public int LatestChapter3Scene { get; set; }
+        public string LatestChapter3Scene { get; set; }
 
         public bool HasCompletedChapter3 { get; set; }
 
-        public int LatestChapter4Scene { get; set; }
+        public string LatestChapter4Scene { get; set; }
 
         public bool HasCompletedChapter4 { get; set; }
 
-        public int LatestChapter5Scene { get; set; }
+        public string LatestChapter5Scene { get; set; }
 
         public bool HasCompletedChapter5 { get; set; }
 
-        public int LatestChapter6Scene { get; set; }
+        public string LatestChapter6Scene { get; set; }
 
         public bool HasCompletedChapter6 { get; set; }
 
-        public int LatestChapter7Scene { get; set; }
+        public string LatestChapter7Scene { get; set; }
 
         public bool HasCompletedChapter7 { get; set; }
 
-        public int LatestChapter8Scene { get; set; }
+        public string LatestChapter8Scene { get; set; }
 
         public bool HasCompletedChapter8 { get; set; }
 
-        public int LatestChapter9Scene { get; set; }
+        public string LatestChapter9Scene { get; set; }
 
         public bool HasCompletedChapter9 { get; set; }
 
-        public int LatestChapter10Scene { get; set; }
+        public string LatestChapter10Scene { get; set; }
 
         public bool HasCompletedChapter10 { get; set; }
 
-        public int LatestChapter11Scene { get; set; }
+        public string LatestChapter11Scene { get; set; }
 
         public bool HasCompletedChapter11 { get; set; }
 
-        public int LatestChapter12Scene { get; set; }
+        public string LatestChapter12Scene { get; set; }
 
         public bool HasCompletedChapter12 { get; set; }
 

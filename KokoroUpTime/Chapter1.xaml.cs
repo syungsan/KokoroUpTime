@@ -23,6 +23,7 @@ using System.Media;
 using SQLite;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using WpfAnimatedGif;
 
 namespace KokoroUpTime
 {
@@ -70,9 +71,6 @@ namespace KokoroUpTime
 
         // データベースに収めるデータモデルのインスタンス
         private DataCapter1 data;
-
-        // データベースのパスを通す
-        private string dbPath;
 
         // ゲームの切り替えシーン
         private string scene;
@@ -186,6 +184,7 @@ namespace KokoroUpTime
                 ["thin_msg"] = this.ThinMessageTextBlock,
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
+                ["item_book_title_text"] = this.ItemBookTitleTextBlock,
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -354,6 +353,10 @@ namespace KokoroUpTime
             this.RuleBoardCheck1Box.IsEnabled = false;
             this.RuleBoardCheck2Box.IsEnabled = false;
             this.RuleBoardCheck3Box.IsEnabled = false;
+
+            this.ItemBookTitleTextBlock.Visibility = Visibility.Hidden;
+            this.ItemBookMainGrid.Visibility = Visibility.Hidden;
+            this.ItemBookNoneGrid.Visibility = Visibility.Hidden;
         }
 
         // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
@@ -367,6 +370,9 @@ namespace KokoroUpTime
         {
             this.initConfig = _initConfig;
 
+            // ======== 新規ユーザ登録時 ===============================================
+
+            /*
             // データベース本体のファイルのパス設定
             string dbName = $"{initConfig.userName}.sqlite";
             string dirPath = $"./Log/{initConfig.userName}_{initConfig.userTitle}/";
@@ -376,12 +382,15 @@ namespace KokoroUpTime
             DirectoryUtils.SafeCreateDirectory(dirPath);
 
             this.dbPath = System.IO.Path.Combine(dirPath, dbName);
+            */
+
+            // =========================================================================
 
             // 現在時刻を取得
             this.data.CreatedAt = DateTime.Now.ToString();
 
             // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(this.dbPath))
+            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
             {
                 // 仮（本当は名前を登録するタイミングで）
                 connection.CreateTable<DataOption>();
@@ -895,7 +904,6 @@ namespace KokoroUpTime
                         this.scenarioCount += 1;
                         this.ScenarioPlay();
                     }
-
                     break;
 
                 // ハートゲージに対する処理
@@ -992,6 +1000,70 @@ namespace KokoroUpTime
                     {
                         this.Angle = 0.0f;
                     }
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
+                case "get_item":
+
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataItem SET HasGotItem01 = 1 WHERE Id = 1;");
+                    }
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
+                // イメージに対しての処理
+                case "gif":
+
+                    this.position = this.scenarios[this.scenarioCount][1];
+
+                    var gifObject = this.imageObjects[this.position];
+
+                    var gifFile = this.scenarios[this.scenarioCount][2];
+
+                    var gifImage = new BitmapImage();
+
+                    gifImage.BeginInit();
+
+                    gifImage.UriSource = new Uri($"Images/{gifFile}", UriKind.Relative);
+
+                    gifImage.EndInit();
+
+                    ImageBehavior.SetAnimatedSource(gifObject, gifImage);
+
+                    gifObject.Visibility = Visibility.Visible;
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
+                case "item_book":
+
+                    Image[] itemMainImages = { this.Item02MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item08MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
+
+                    Image[] itemNoneImages = { this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
+
+                    var hasGotItems = new bool[] { this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
+
+                    for (int i = 0; i < hasGotItems.Length; i++)
+                    {
+                        if (hasGotItems[i] == true)
+                        {
+                            itemNoneImages[i].Visibility = Visibility.Hidden;
+                        }
+                        else
+                        {
+                            itemMainImages[i].Visibility = Visibility.Hidden;
+                        }
+                    }
+                    this.GetItemGrid.Visibility = Visibility.Visible;
+                    this.ItemBookMainGrid.Visibility = Visibility.Visible;
+                    this.ItemBookNoneGrid.Visibility = Visibility.Visible;
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1280,7 +1352,7 @@ namespace KokoroUpTime
             {
                 if (this.scene == "キミちゃんのきもちの種類" && !hasKimisKindOfFeelingsRecorded)
                 {
-                    using (var connection = new SQLiteConnection(this.dbPath))
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
                         connection.Execute($@"UPDATE DataCapter1 SET KimisKindOfFeelings = '{this.data.KimisKindOfFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
                     }
@@ -1290,7 +1362,7 @@ namespace KokoroUpTime
 
                 if (this.scene == "赤丸くんのきもちの種類" && !hasAkamarusKindOfFeelingsRecorded)
                 {
-                    using (var connection = new SQLiteConnection(this.dbPath))
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
                         connection.Execute($@"UPDATE DataCapter1 SET AkamarusKindOfFeelings = '{this.data.AkamarusKindOfFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
                     }
@@ -1300,7 +1372,7 @@ namespace KokoroUpTime
 
                 if (this.scene == "青助くんのきもちの種類" && !hasAosukesKindOfFeelingsRecorded)
                 {
-                    using (var connection = new SQLiteConnection(this.dbPath))
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
                         connection.Execute($@"UPDATE DataCapter1 SET AosukesKindOfFeelings = '{this.data.AosukesKindOfFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
                     }
@@ -1312,7 +1384,7 @@ namespace KokoroUpTime
                 {
                     this.data.AkamarusSizeOfFeeling = this.feelingSize;
 
-                    using (var connection = new SQLiteConnection(this.dbPath))
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
                         connection.Execute($@"UPDATE DataCapter1 SET AkamarusSizeOfFeeling = '{this.data.AkamarusSizeOfFeeling}' WHERE CreatedAt = '{this.data.CreatedAt}';");
                     }
@@ -1323,7 +1395,7 @@ namespace KokoroUpTime
                 {
                     this.data.AosukesSizeOfFeeling = this.feelingSize;
 
-                    using (var connection = new SQLiteConnection(this.dbPath))
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
                         connection.Execute($@"UPDATE DataCapter1 SET AosukesSizeOfFeeling = '{this.data.AosukesSizeOfFeeling}' WHERE CreatedAt = '{this.data.CreatedAt}';");
                     }
@@ -1340,7 +1412,7 @@ namespace KokoroUpTime
                     this.data.MyKindOfBadFeelings = string.Join(",", this.myKindOfBadFeelings);
 
                     // 当回のプレイのチャレンジタイムのログに関するデータベースをアップデート
-                    using (var connection = new SQLiteConnection(this.dbPath))
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
                         connection.Execute($@"UPDATE DataCapter1 SET MyKindOfGoodFeelings = '{this.data.MyKindOfGoodFeelings}', MyKindOfBadFeelings = '{this.data.MyKindOfBadFeelings}' WHERE CreatedAt = '{this.data.CreatedAt}';");
                     }

@@ -4,9 +4,11 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>0.8.0.2</Version>
+    <Version>0.8.3.1</Version>
     <PackageIcon></PackageIcon>
     <ApplicationIcon>icon_sr9_icon.ico</ApplicationIcon>
+    <AssemblyVersion>0.8.3.1</AssemblyVersion>
+    <FileVersion>0.8.3.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -60,18 +62,40 @@
     <None Remove="Images\face_small_bubble.png" />
     <None Remove="Images\feeling_value.png" />
     <None Remove="Images\good_feeling.png" />
+    <None Remove="Images\ite07_solo.gif" />
     <None Remove="Images\item00_book.png" />
     <None Remove="Images\item01_book.png" />
+    <None Remove="Images\item01_detail.png" />
+    <None Remove="Images\item01_solo.gif" />
+    <None Remove="Images\item01_title.png" />
     <None Remove="Images\item02_book.png" />
+    <None Remove="Images\item02_detail.png" />
+    <None Remove="Images\item02_solo.gif" />
     <None Remove="Images\item03_book.png" />
+    <None Remove="Images\item03_detail.png" />
+    <None Remove="Images\item03_solo.gif" />
     <None Remove="Images\item04_book.png" />
+    <None Remove="Images\item04_detail.png" />
+    <None Remove="Images\item04_solo.gif" />
     <None Remove="Images\item05_book.png" />
+    <None Remove="Images\item05_detail.png" />
+    <None Remove="Images\item05_solo.gif" />
     <None Remove="Images\item06_book.png" />
+    <None Remove="Images\item06_detail.png" />
+    <None Remove="Images\item06_solo.gif" />
     <None Remove="Images\item07_book.png" />
+    <None Remove="Images\item07_detail.png" />
     <None Remove="Images\item08_book.png" />
+    <None Remove="Images\item08_detail.png" />
+    <None Remove="Images\item08_solo.gif" />
     <None Remove="Images\item09_book.png" />
+    <None Remove="Images\item09_detail.png" />
+    <None Remove="Images\item09_solo.gif" />
     <None Remove="Images\item10_book.png" />
+    <None Remove="Images\item10_detail.png" />
     <None Remove="Images\item11_book.png" />
+    <None Remove="Images\item11_detail.png" />
+    <None Remove="Images\item11_solo.gif" />
     <None Remove="Images\kimi_stand_01.png" />
     <None Remove="Images\long_bubble_right_up.png" />
     <None Remove="Images\frame_46-1.png" />
@@ -119,6 +143,7 @@
     <None Remove="Images\oranger_gradation.png" />
     <None Remove="Images\orange_gradation.png" />
     <None Remove="Images\red_needle.png" />
+    <None Remove="Images\return_to_item.png" />
     <None Remove="Images\return_to_title.png" />
     <None Remove="Images\right_big_bubble.png" />
     <None Remove="Images\right_big_bubble_blue.png" />
@@ -159,6 +184,7 @@
 
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -202,18 +228,40 @@
     <Resource Include="Images\compare_akamaru_value_frame.png" />
     <Resource Include="Images\compare_aosuke_value_frame.png" />
     <Resource Include="Images\complete_button.png" />
+    <Resource Include="Images\ite07_solo.gif" />
     <Resource Include="Images\item00_book.png" />
     <Resource Include="Images\item01_book.png" />
+    <Resource Include="Images\item01_detail.png" />
+    <Resource Include="Images\item01_solo.gif" />
+    <Resource Include="Images\item01_title.png" />
     <Resource Include="Images\item02_book.png" />
+    <Resource Include="Images\item02_detail.png" />
+    <Resource Include="Images\item02_solo.gif" />
     <Resource Include="Images\item03_book.png" />
+    <Resource Include="Images\item03_detail.png" />
+    <Resource Include="Images\item03_solo.gif" />
     <Resource Include="Images\item04_book.png" />
+    <Resource Include="Images\item04_detail.png" />
+    <Resource Include="Images\item04_solo.gif" />
     <Resource Include="Images\item05_book.png" />
+    <Resource Include="Images\item05_detail.png" />
+    <Resource Include="Images\item05_solo.gif" />
     <Resource Include="Images\item06_book.png" />
+    <Resource Include="Images\item06_detail.png" />
+    <Resource Include="Images\item06_solo.gif" />
     <Resource Include="Images\item07_book.png" />
+    <Resource Include="Images\item07_detail.png" />
     <Resource Include="Images\item08_book.png" />
+    <Resource Include="Images\item08_detail.png" />
+    <Resource Include="Images\item08_solo.gif" />
     <Resource Include="Images\item09_book.png" />
+    <Resource Include="Images\item09_detail.png" />
+    <Resource Include="Images\item09_solo.gif" />
     <Resource Include="Images\item10_book.png" />
+    <Resource Include="Images\item10_detail.png" />
     <Resource Include="Images\item11_book.png" />
+    <Resource Include="Images\item11_detail.png" />
+    <Resource Include="Images\item11_solo.gif" />
     <Resource Include="Images\kimi_plate_inner.png" />
     <Resource Include="Images\kimi_plate_outer.png" />
     <Resource Include="Images\kimi_stand_01.png" />
@@ -221,6 +269,7 @@
     <Resource Include="Images\message_box.png" />
     <Resource Include="Images\next_go_button.png" />
     <Resource Include="Images\orange_gradation.png" />
+    <Resource Include="Images\return_to_item.png" />
     <Resource Include="Images\short_bubble_left.png" />
     <Resource Include="Images\short_bubble_right_up.png" />
     <Resource Include="Images\small_bubble_right_down.png" />

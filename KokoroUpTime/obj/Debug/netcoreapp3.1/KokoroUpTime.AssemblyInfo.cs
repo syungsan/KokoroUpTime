@@ -13,11 +13,11 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("KokoroUpTime")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("0.8.0.2")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.8.0.2")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("0.8.3.1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.8.3.1")]
 [assembly: System.Reflection.AssemblyProductAttribute("KokoroUpTime")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KokoroUpTime")]
-[assembly: System.Reflection.AssemblyVersionAttribute("0.8.0.2")]
+[assembly: System.Reflection.AssemblyVersionAttribute("0.8.3.1")]
 
 // MSBuild WriteCodeFragment クラスによって生成されました。
 

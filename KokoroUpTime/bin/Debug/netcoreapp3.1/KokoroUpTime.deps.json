@@ -6,8 +6,9 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "KokoroUpTime/0.8.0.2": {
+      "KokoroUpTime/0.8.3.1": {
         "dependencies": {
+          "WpfAnimatedGif": "2.0.0",
           "sqlite-net-pcl": "1.7.335",
           "Interop.WMPLib": "1.0.0.0"
         },
@@ -130,6 +131,14 @@
         }
       },
       "System.Memory/4.5.3": {},
+      "WpfAnimatedGif/2.0.0": {
+        "runtime": {
+          "lib/netcoreapp3.0/WpfAnimatedGif.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      },
       "Interop.WMPLib/1.0.0.0": {
         "runtime": {
           "Interop.WMPLib.dll": {
@@ -141,7 +150,7 @@
     }
   },
   "libraries": {
-    "KokoroUpTime/0.8.0.2": {
+    "KokoroUpTime/0.8.3.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -187,6 +196,13 @@
       "sha512": "sha512-3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
       "path": "system.memory/4.5.3",
       "hashPath": "system.memory.4.5.3.nupkg.sha512"
+    },
+    "WpfAnimatedGif/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Z468xEqg+MSSW30BkbIcwoCQ9E0GiRQxU6L9qYCUmP28fQ79Dq4QSakWm3Dfw8CoRY3xLl3gf1xRfqILSs6/mw==",
+      "path": "wpfanimatedgif/2.0.0",
+      "hashPath": "wpfanimatedgif.2.0.0.nupkg.sha512"
     },
     "Interop.WMPLib/1.0.0.0": {
       "type": "reference",

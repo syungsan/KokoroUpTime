@@ -26,8 +26,6 @@ namespace KokoroUpTime
         public DataOption dataOption = new DataOption();
         public DataItem dataItem = new DataItem();
 
-        private string dbPath;
-
         public OptionPage()
         {
             InitializeComponent();
@@ -36,12 +34,6 @@ namespace KokoroUpTime
         public void SetInitConfig(InitConfig _initConfig)
         {
             this.initConfig = _initConfig;
-
-            // データベース本体のファイルのパス設定
-            string dbName = $"{initConfig.userName}.sqlite";
-            string dirPath = $"./Log/{initConfig.userName}_{initConfig.userTitle}/";
-
-            this.dbPath = System.IO.Path.Combine(dirPath, dbName);
         }
 
         public void SetDataOption(DataOption _dataOption)
@@ -252,7 +244,7 @@ namespace KokoroUpTime
             {
                 this.dataOption.CreatedAt = DateTime.Now.ToString();
 
-                using (var connection = new SQLiteConnection(this.dbPath))
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                 {
                     connection.Execute($@"UPDATE DataOption SET IsPlaySE = '{Convert.ToInt32(this.dataOption.IsPlaySE)}', IsPlayBGM = '{Convert.ToInt32(this.dataOption.IsPlayBGM)}', MessageSpeed = '{this.dataOption.MessageSpeed}', IsAddRubi = '{Convert.ToInt32(this.dataOption.IsAddRubi)}', IsWordRecognition = '{Convert.ToInt32(this.dataOption.IsWordRecognition)}', CreatedAt = '{this.dataOption.CreatedAt}' WHERE Id = 1;");
                 }
