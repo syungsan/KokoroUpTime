@@ -214,7 +214,6 @@
     <Resource Include="Images\challenge_frame1.png" />
     <Resource Include="Images\challenge_time_text.png" />
     <Resource Include="Images\challenge_time_title.png" />
-    <Resource Include="Images\circle.png" />
     <Resource Include="Images\compare_akamaru_value_frame.png" />
     <Resource Include="Images\compare_aosuke_value_frame.png" />
     <Resource Include="Images\complete_button.png" />

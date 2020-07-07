@@ -24,6 +24,7 @@ using System.Media;
 using SQLite;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using System.Windows.Shell;
 
 namespace KokoroUpTime
 {
@@ -874,6 +875,39 @@ namespace KokoroUpTime
 
                     break;
 
+                case "jump":
+                    string jumptag = this.scenarios[this.scenarioCount][1];
+                    for (int i =0; i<99;i++)
+                    {
+                        if(this.scenarios[i][0] == "scene")
+                        {
+                            if(jumptag == this.scenarios[i][1])
+                            {
+                                this.scenarioCount = i;
+                                this.ScenarioPlay();
+                            }
+                        }
+                    }
+                        break;
+
+               /*case "jump":
+                    for (int i = 1;i< 100; i++)
+                    {
+                        string targettag;
+                        targettag = this.scenarios[i][0];
+                        if(targettag == "scene")
+                        {
+                            targettag = this.scenarios[i][1];
+                            if
+                            {
+                                //
+                            }
+                        }
+                        
+                    }
+                    break;
+               */
+
                     /*
                     var kindOfFeeling = this.scenarios[this.scenarioCount][1];
 
@@ -1188,11 +1222,9 @@ namespace KokoroUpTime
             }
             if (button.Name == "BranchButton2")
             {
+                this.scenarioCount += 2;
+                this.ScenarioPlay();
                 this.BranchSelectGrid.Visibility = Visibility.Hidden;
-
-                this.ItemReviewGrid.Visibility = Visibility.Visible;
-                this.NextPageButton.Visibility = Visibility.Hidden;
-                this.BackPageButton.Visibility = Visibility.Hidden;
             }
 
 
@@ -1403,15 +1435,20 @@ namespace KokoroUpTime
                 this.Angle = (double)this.feelingSize + 310.0f;
             }
         }
-
-        private void GoodEventSelectBox_Selected(object sender, RoutedEventArgs e)
+        private void GoodEventSelectBox_Loaded(object sender, RoutedEventArgs e)
         {
+            // var collection = GoodEventSelectBox.SelectedItems;
 
+            //ListBoxItem selectcollection = (ListBoxItem)collection;
+
+            //selectcollection.Visibility = Visibility.Hidden;
+
+            //MessageBox.Show(this.GoodEventSelectBox.SelectedItems[0].);
         }
 
-        private void GoodEventSelectBox_Unselected(object sender, RoutedEventArgs e)
+        private void GoodEventSelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
     }
 }

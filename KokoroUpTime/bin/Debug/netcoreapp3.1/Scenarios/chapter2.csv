@@ -1,4 +1,5 @@
 ﻿reset
+jump,チャレンジタイムパート①
 scene,前説
 image,bg_image,background_02.png
 image,intro_kimi_face_image,,appear_up,no_sync
@@ -29,6 +30,9 @@ hide,image,main_msg_bubble_image
 hide,image,shiroji_right_image
 grid,branch_select_grid
 
+jump,おぼえているよ
+jump,かくにんしたいな
+
 scene,おぼえているよ
 reset
 bgm,set,manga.mp3,loop,50
@@ -44,6 +48,12 @@ flip
 image,manga_image,manga2-3.png,flip
 hide,button,manga_flip_button
 next
+
+jump,チャレンジタイムパート①
+scene,かくにんしたいな
+grid,item_review_grid
+next
+jump,チャレンジタイムパート①
 
 scene,チャレンジタイムパート①
 reset
@@ -80,9 +90,11 @@ wait
 hide,image,children_stand_left_image
 hide,image,shiroji_right_image,shiroji_01.png
 
+scene アイテム紹介
+image,bg_image,back_ground_mokume.png
 
 
 
-scene,かくにんしたいな
-grid,item_review_grid
-next
+
+
+

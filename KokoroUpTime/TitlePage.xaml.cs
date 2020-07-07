@@ -250,9 +250,9 @@ namespace KokoroUpTime
 
                 this.NavigationService.Navigate(nextPage);
             }
-            else if (button.Content.ToString() == "名前入力")
+            else if (button.Content.ToString() == "なまえ入力")
             {
-                this.NavigationService.Navigate(new Uri("OptionPage.xaml", UriKind.Relative));
+                this.NavigationService.Navigate(new Uri("NameInputPage.xaml", UriKind.Relative));
 
                 // this.NavigationService.Navigate(nextPage);
             }
