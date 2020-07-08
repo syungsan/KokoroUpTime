@@ -25,27 +25,25 @@ namespace KokoroUpTime
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
         public DataItem dataItem = new DataItem();
+        public DataProgress dataProgress = new DataProgress();
 
         public OptionPage()
         {
             InitializeComponent();
         }
 
-        public void SetInitConfig(InitConfig _initConfig)
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
         {
             this.initConfig = _initConfig;
-        }
-
-        public void SetDataOption(DataOption _dataOption)
-        {
             this.dataOption = _dataOption;
+            this.dataItem = _dataItem;
+            this.dataProgress = _dataProgress;
 
             this.LoadOption();
         }
 
-        public void SetDataItem(DataItem _dataItem)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.dataItem = _dataItem;
         }
 
         private void LoadOption()
@@ -234,19 +232,15 @@ namespace KokoroUpTime
 
                 titlePage.SetIsFirstBootFlag(false);
 
-                titlePage.SetInitConfig(this.initConfig);
-                titlePage.SetDataOption(this.dataOption);
-                titlePage.SetDataItem(this.dataItem);
+                titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                 this.NavigationService.Navigate(titlePage);
             }
             else
             {
-                this.dataOption.CreatedAt = DateTime.Now.ToString();
-
                 using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                 {
-                    connection.Execute($@"UPDATE DataOption SET IsPlaySE = '{Convert.ToInt32(this.dataOption.IsPlaySE)}', IsPlayBGM = '{Convert.ToInt32(this.dataOption.IsPlayBGM)}', MessageSpeed = '{this.dataOption.MessageSpeed}', IsAddRubi = '{Convert.ToInt32(this.dataOption.IsAddRubi)}', IsWordRecognition = '{Convert.ToInt32(this.dataOption.IsWordRecognition)}', CreatedAt = '{this.dataOption.CreatedAt}' WHERE Id = 1;");
+                    connection.Execute($@"UPDATE DataOption SET IsPlaySE = '{Convert.ToInt32(this.dataOption.IsPlaySE)}', IsPlayBGM = '{Convert.ToInt32(this.dataOption.IsPlayBGM)}', MessageSpeed = '{this.dataOption.MessageSpeed}', IsAddRubi = '{Convert.ToInt32(this.dataOption.IsAddRubi)}', IsWordRecognition = '{Convert.ToInt32(this.dataOption.IsWordRecognition)}' WHERE Id = 1;");
                 }
             }
         }

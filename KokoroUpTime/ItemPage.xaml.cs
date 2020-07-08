@@ -23,6 +23,7 @@ namespace KokoroUpTime
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
         public DataItem dataItem = new DataItem();
+        public DataProgress dataProgress = new DataProgress();
 
         private List<Button> itemMainButtons = new List<Button>();
 
@@ -50,6 +51,10 @@ namespace KokoroUpTime
             this.itemMainButtons.Add(this.Item09MainButton);
             this.itemMainButtons.Add(this.Item10MainButton);
             this.itemMainButtons.Add(this.Item11MainButton);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
         }
 
         private void ResetMainVisible()
@@ -82,19 +87,12 @@ namespace KokoroUpTime
             this.Item11DetailImage.Visibility = Visibility.Hidden;
         }
 
-        public void SetInitConfig(InitConfig _initConfig)
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
         {
             this.initConfig = _initConfig;
-        }
-
-        public void SetDataOption(DataOption _dataOption)
-        {
             this.dataOption = _dataOption;
-        }
-
-        public void SetDataItem(DataItem _dataItem)
-        {
             this.dataItem = _dataItem;
+            this.dataProgress = _dataProgress;
 
             this.LoadItem();
         }
@@ -130,9 +128,7 @@ namespace KokoroUpTime
 
                 titlePage.SetIsFirstBootFlag(false);
 
-                titlePage.SetInitConfig(this.initConfig);
-                titlePage.SetDataOption(this.dataOption);
-                titlePage.SetDataItem(this.dataItem);
+                titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                 this.NavigationService.Navigate(titlePage);
             }

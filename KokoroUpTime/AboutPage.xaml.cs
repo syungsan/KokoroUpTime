@@ -21,25 +21,23 @@ namespace KokoroUpTime
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
         public DataItem dataItem = new DataItem();
+        public DataProgress dataProgress = new DataProgress();
 
         public AboutPage()
         {
             InitializeComponent();
         }
 
-        public void SetInitConfig(InitConfig _initConfig)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+        }
+
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
         {
             this.initConfig = _initConfig;
-        }
-
-        public void SetDataOption(DataOption _dataOption)
-        {
             this.dataOption = _dataOption;
-        }
-
-        public void SetDataItem(DataItem _dataItem)
-        {
             this.dataItem = _dataItem;
+            this.dataProgress = _dataProgress;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -52,9 +50,7 @@ namespace KokoroUpTime
 
                 titlePage.SetIsFirstBootFlag(false);
 
-                titlePage.SetInitConfig(this.initConfig);
-                titlePage.SetDataOption(this.dataOption);
-                titlePage.SetDataItem(this.dataItem);
+                titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                 this.NavigationService.Navigate(titlePage);
             }

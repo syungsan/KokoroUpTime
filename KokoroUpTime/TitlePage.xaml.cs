@@ -34,6 +34,7 @@ namespace KokoroUpTime
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
         public DataItem dataItem = new DataItem();
+        public DataProgress dataProgress = new DataProgress();
 
         private string[] dirPaths;
 
@@ -66,28 +67,15 @@ namespace KokoroUpTime
             // ################################################################################
         }
 
-        public void SetInitConfig(InitConfig _initConfig)
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
         {
             if (!this.isFirstBootFlag)
             {
                 this.initConfig = _initConfig;
-            }
-        }
-
-        public void SetDataOption(DataOption _dataOption)
-        {
-            if (!this.isFirstBootFlag)
-            {
                 this.dataOption = _dataOption;
-            }  
-        }
-
-        public void SetDataItem(DataItem _dataItem)
-        {
-            if (!this.isFirstBootFlag)
-            {
                 this.dataItem = _dataItem;
-            } 
+                this.dataProgress = _dataProgress;
+            }
         }
 
         public void SetIsFirstBootFlag(bool flag)
@@ -103,7 +91,7 @@ namespace KokoroUpTime
             }
             else
             {
-                this.setCurrentUserName();
+                this.SetCurrentUserName();
             }
         }
 
@@ -141,8 +129,6 @@ namespace KokoroUpTime
                         this.dataOption.MessageSpeed = row.MessageSpeed;
 
                         this.dataOption.IsAddRubi = row.IsAddRubi;
-
-                        this.dataOption.CreatedAt = row.CreatedAt;
                     }
 
                     var item = connection.Query<DataItem>("SELECT * FROM DataItem WHERE Id = 1;");
@@ -172,7 +158,7 @@ namespace KokoroUpTime
                         this.dataItem.HasGotItem11 = row.HasGotItem11;
                     }
                 }
-                this.setCurrentUserName();
+                this.SetCurrentUserName();
             }
             else
             {
@@ -199,7 +185,7 @@ namespace KokoroUpTime
             }
         }
 
-        void setCurrentUserName()
+        void SetCurrentUserName()
         {
             string userDirPath = $"./Log/{this.initConfig.userName}_{this.initConfig.userTitle}/";
 
@@ -289,9 +275,7 @@ namespace KokoroUpTime
 
                     ItemPage itemPage = new ItemPage();
 
-                    itemPage.SetInitConfig(this.initConfig);
-                    itemPage.SetDataOption(this.dataOption);
-                    itemPage.SetDataItem(this.dataItem);
+                    itemPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                     this.NavigationService.Navigate(itemPage);
 
@@ -301,9 +285,7 @@ namespace KokoroUpTime
 
                     OptionPage optionPage = new OptionPage();
 
-                    optionPage.SetInitConfig(this.initConfig);
-                    optionPage.SetDataOption(this.dataOption);
-                    optionPage.SetDataItem(this.dataItem);
+                    optionPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                     this.NavigationService.Navigate(optionPage);
 
@@ -349,9 +331,7 @@ namespace KokoroUpTime
 
                     AboutPage aboutPage = new AboutPage();
 
-                    aboutPage.SetInitConfig(this.initConfig);
-                    aboutPage.SetDataOption(this.dataOption);
-                    aboutPage.SetDataItem(this.dataItem);
+                    aboutPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                     this.NavigationService.Navigate(aboutPage);
 
@@ -361,11 +341,7 @@ namespace KokoroUpTime
 
                     Chapter1 chapter1 = new Chapter1();
 
-                    chapter1.SetInitConfig(this.initConfig);
-                    chapter1.SetDataOption(this.dataOption);
-                    chapter1.SetDataItem(this.dataItem);
-
-                    chapter1.SetScenario("./Scenarios/chapter1.csv");
+                    chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                     this.NavigationService.Navigate(chapter1);
 

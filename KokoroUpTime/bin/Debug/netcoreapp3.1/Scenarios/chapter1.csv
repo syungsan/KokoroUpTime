@@ -1,3 +1,4 @@
+start
 scene,前説
 reset
 image,bg_image,background_01.png
@@ -430,4 +431,4 @@ grid,ending_grid
 image,shiroji_ending_image
 grid,ending_msg_grid
 msg,ending_msg_text,よくがんばった！次はホームアクティビティにすすむぞい！
-next
+end

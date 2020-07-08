@@ -29,8 +29,6 @@ namespace KokoroUpTime
         public bool IsAddRubi { get; set; }
 
         public bool IsWordRecognition { get; set; }
-
-        public string CreatedAt { get; set; }
     }
 
     public class DataItem
@@ -59,8 +57,6 @@ namespace KokoroUpTime
         public bool HasGotItem10 { get; set; }
 
         public bool HasGotItem11 { get; set; }
-
-        public string CreatedAt { get; set; }
     }
 
     public class DataCapter1
@@ -153,7 +149,5 @@ namespace KokoroUpTime
         public string LatestChapter12Scene { get; set; }
 
         public bool HasCompletedChapter12 { get; set; }
-
-        public string CreatedAt { get; set; }
     }
 }
