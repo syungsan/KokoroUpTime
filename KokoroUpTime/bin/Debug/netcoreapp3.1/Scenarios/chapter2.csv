@@ -1,5 +1,5 @@
 ﻿reset
-jump,チャレンジタイムパート①
+jump,会話①
 scene,前説
 image,bg_image,background_02.png
 image,intro_kimi_face_image,,appear_up,no_sync
@@ -67,32 +67,57 @@ next
 reset
 image,bg_image,orange_gradation.png
 grid,challenge1_grid
-image,shiroji_very_small_right_image,appear_up
-grid,challenge_msg_grid
+image,shiroji_very_small_right_image
+grid,challenge_msg_grid,appear_expansion
+wait_tap
 hide,grid,challenge_msg_grid
 
 scene,会話①
+reset
 image,bg_image,background_08.png
-image,children_stand_left_image,,appear_up,no_sync
+image,children_stand_left_image,aosuke_stand_01.png,appear_up
 image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble_blue.png
-msg,main_msg,ねえ、白じい。鬱楽しいことはわかったんだけど、なんだかぜんぜんやる気が出ないんだよ。,キミ
-wait
-msg,main_msg,やる気や元気がでないときって、どうしたらいいのかなぁ？,あおすけ
-wait
+grid,main_msg_grid,appear_expansion_slow
 image,main_msg_bubble_image,left_big_bubble_blue.png
-msg,main_msg,青助くん！それはとても重要なポイントじゃ。鬱じつは、すごく楽しいことははじめることがむずかしいことがある。,白じい
+msg,main_msg,ねえ、白じい。鬱楽しいことはわかったんだけど、なんだかぜんぜんやる気が出ないんだよ。,あおすけ
+wait
+msg,main_msg,【Background　Aqua】やる気や元気がでないときって、どうしたらいいのかなぁ？【Stop】,あおすけ
+wait
+image,main_msg_bubble_image,right_big_bubble.png
+msg,main_msg,青助くん！それはとても重要なポイントじゃ。鬱【Background　Yellow】じつは、すごく楽しいことははじめることがむずかしいことがある。【Stop】,白じい
 wait
 msg,main_msg,たとえば、元気がでないときに、みんなで遊園地に行ったり、鬱スポーツをすることはかんたんなことではないのう。,白じい
 wait
-msg,main_msg,そういう元気が出ないときは、わしの発明品をつかえばよいぞ！。,白じい
+msg,main_msg,【Background　Yellow】そういう元気が出ないときは、わしの発明品をつかえばよいぞ！【Stop】。,白じい
 wait
 hide,image,children_stand_left_image
 hide,image,shiroji_right_image,shiroji_01.png
-
-scene アイテム紹介
-image,bg_image,back_ground_mokume.png
-
+hide,grid,main_msg_grid
+scene,アイテム出現
+reset
+image,bg_image,background_mokume.png
+image,shiroji_right_image,shiroji_01.png,appear_up
+grid,item_name_plate_left_grid
+image,item_center_image,item02_solo.png,appear_rotation
+image,main_msg_bubble_image,right_big_bubble.png
+grid,main_msg_grid,appear_expansion
+wait
+msg,main_msg,青助くんのように元気がないときはにはわしの発明品を使ってみてくれ！,白じい
+next
+scene,アイテム紹介
+reset
+bgm,stop
+se,play,nc211089.wav
+image,bg_image,background_mokume.png
+image,shiroji_small_right_up_image
+grid,item_name_plate_center_grid
+grid,item_name_bubble_grid
+image,item_left_image,item02_solo.png
+hide,grid,item_info_sentence_grid
+grid,item_info_plate_grid
+grid,item_info_sentence_grid,appear_fade_in
+next
 
 
 
