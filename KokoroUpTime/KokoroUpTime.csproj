@@ -49,10 +49,13 @@
     <None Remove="Images\before.png" />
     <None Remove="Images\big_heart.png" />
     <None Remove="Images\blackboard.png" />
+    <None Remove="Images\blue_bubble_left_down.png" />
+    <None Remove="Images\blue_gradation.png" />
     <None Remove="Images\blue_needle.png" />
     <None Remove="Images\branch_selection1.png" />
     <None Remove="Images\branch_selection2.png" />
     <None Remove="Images\challenge1_title.png" />
+    <None Remove="Images\challenge2_title.png" />
     <None Remove="Images\challenge_frame1.png" />
     <None Remove="Images\challenge_time.png" />
     <None Remove="Images\challenge_time_text.png" />
@@ -61,10 +64,12 @@
     <None Remove="Images\compare_akamaru_value_frame.png" />
     <None Remove="Images\compare_aosuke_value_frame.png" />
     <None Remove="Images\complete_button.png" />
+    <None Remove="Images\difficulty_of_action_frame.png" />
     <None Remove="Images\ending_bubble.png" />
     <None Remove="Images\face_small_bubble.png" />
     <None Remove="Images\feeling_value.png" />
     <None Remove="Images\good_feeling.png" />
+    <None Remove="Images\group_activity_title01.png" />
     <None Remove="Images\item00_book.png" />
     <None Remove="Images\item01_book.png" />
     <None Remove="Images\item02_book.png" />
@@ -77,8 +82,10 @@
     <None Remove="Images\item09_book.png" />
     <None Remove="Images\item10_book.png" />
     <None Remove="Images\item11_book.png" />
+    <None Remove="Images\item_plate.png" />
     <None Remove="Images\item_review.png" />
     <None Remove="Images\kimi_stand_01.png" />
+    <None Remove="Images\kind_of_feeling_button_frame.png" />
     <None Remove="Images\long_bubble_right_up.png" />
     <None Remove="Images\frame_46-1.png" />
     <None Remove="Images\good_words_grid.png" />
@@ -141,6 +148,7 @@
     <None Remove="Images\shiroji_04.png" />
     <None Remove="Images\short_bubble_left.png" />
     <None Remove="Images\short_bubble_right_up.png" />
+    <None Remove="Images\size_of_feeling_button_frame.png" />
     <None Remove="Images\small_bubble_left.png" />
     <None Remove="Images\small_bubble_right_down.png" />
     <None Remove="Images\small_icon.png" />
@@ -150,6 +158,7 @@
     <None Remove="Images\title.png" />
     <None Remove="Images\water_frame.png" />
     <None Remove="Images\white_frame.png" />
+    <None Remove="Images\writing_text_buble.png" />
     <None Remove="Images\yazirusi.png" />
     <None Remove="children_stand_01.png" />
     <None Remove="shiroji_02.png" />
@@ -207,16 +216,21 @@
     <Resource Include="Images\before.png" />
     <Resource Include="Images\big_heart.png" />
     <Resource Include="Images\blackboard.png" />
+    <Resource Include="Images\blue_bubble_left_down.png" />
+    <Resource Include="Images\blue_gradation.png" />
     <Resource Include="Images\blue_needle.png" />
     <Resource Include="Images\branch_selection1.png" />
     <Resource Include="Images\branch_selection2.png" />
     <Resource Include="Images\challenge1_title.png" />
+    <Resource Include="Images\challenge2_title.png" />
     <Resource Include="Images\challenge_frame1.png" />
     <Resource Include="Images\challenge_time_text.png" />
     <Resource Include="Images\challenge_time_title.png" />
     <Resource Include="Images\compare_akamaru_value_frame.png" />
     <Resource Include="Images\compare_aosuke_value_frame.png" />
     <Resource Include="Images\complete_button.png" />
+    <Resource Include="Images\difficulty_of_action_frame.png" />
+    <Resource Include="Images\group_activity_title01.png" />
     <Resource Include="Images\item00_book.png" />
     <Resource Include="Images\item01_book.png" />
     <Resource Include="Images\item02_book.png" />
@@ -229,10 +243,12 @@
     <Resource Include="Images\item09_book.png" />
     <Resource Include="Images\item10_book.png" />
     <Resource Include="Images\item11_book.png" />
+    <Resource Include="Images\item_plate.png" />
     <Resource Include="Images\item_review.png" />
     <Resource Include="Images\kimi_plate_inner.png" />
     <Resource Include="Images\kimi_plate_outer.png" />
     <Resource Include="Images\kimi_stand_01.png" />
+    <Resource Include="Images\kind_of_feeling_button_frame.png" />
     <Resource Include="Images\long_bubble_right_up.png" />
     <Resource Include="Images\manga2-1.png" />
     <Resource Include="Images\manga2-2.png" />
@@ -244,6 +260,7 @@
     <Resource Include="Images\orange_gradation.png" />
     <Resource Include="Images\short_bubble_left.png" />
     <Resource Include="Images\short_bubble_right_up.png" />
+    <Resource Include="Images\size_of_feeling_button_frame.png" />
     <Resource Include="Images\small_bubble_right_down.png" />
     <Resource Include="Images\challenge_time.png" />
     <Resource Include="Images\ending_bubble.png" />
@@ -303,6 +320,7 @@
     <Resource Include="Images\title.png" />
     <Resource Include="Images\water_frame.png" />
     <Resource Include="Images\white_frame.png" />
+    <Resource Include="Images\writing_text_buble.png" />
     <Resource Include="Images\yazirusi.png" />
   </ItemGroup>
 

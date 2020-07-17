@@ -296,7 +296,7 @@
                     <Image x:Name="BackPageBeforeImage" Source="/Images/before.png" d:IsHidden="True"/>
                 </Button>
             </Grid>
-            <Grid x:Name="CanvasGrid"  >
+            <Grid x:Name="CanvasGrid" d:IsHidden="True"  >
                 <InkCanvas x:Name="NameCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,300,0,0" />
                 <Viewbox Margin="0,0,0,780" Stretch="Fill">
                     <ItemsControl x:Name="EditingModeItemsControl" >

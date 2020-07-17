@@ -1,5 +1,5 @@
 ﻿reset
-jump,会話①
+jump,チャレンジタイムパート②
 scene,前説
 image,bg_image,background_02.png
 image,intro_kimi_face_image,,appear_up,no_sync
@@ -21,7 +21,6 @@ image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 msg,main_msg,きもちセンサーをつかってどんなことができるようになったか鬱おぼえておるかな？フォッ、フォッ、フォッ！,白じい
 next
-
 scene,条件分岐
 hide,button,next_page_button
 hide,button,back_page_button
@@ -48,8 +47,8 @@ flip
 image,manga_image,manga2-3.png,flip
 hide,button,manga_flip_button
 next
-
 jump,チャレンジタイムパート①
+
 scene,かくにんしたいな
 grid,item_review_grid
 next
@@ -71,7 +70,6 @@ image,shiroji_very_small_right_image
 grid,challenge_msg_grid,appear_expansion
 wait_tap
 hide,grid,challenge_msg_grid
-
 scene,会話①
 reset
 image,bg_image,background_08.png
@@ -118,6 +116,36 @@ hide,grid,item_info_sentence_grid
 grid,item_info_plate_grid
 grid,item_info_sentence_grid,appear_fade_in
 next
+reset
+
+scene,チャレンジタイムパート②
+image,bg_image,background_05.png
+image,shiroji_left_image,shiroji_01.png,appear_up
+image,main_msg_bubble_image,right_big_bubble.png
+msg,main_msg,「ちょっぴりうきうき」のポイントは、鬱✓きもちの大きさが小さい鬱✓かんたんにできることがたいせつなのじゃ,白じい
+next
+iamge,bg_iage,background_02.png
+image,bg_image,orange_gradation.png
+grid,challenge2_grid
+
+scene,グループアクティビティ
+image,bg_image,blue_gradation.png
+grid,groupe_activity_grid
+grid,item_plate_grid
+wait
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
