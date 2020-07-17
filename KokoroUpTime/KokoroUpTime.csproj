@@ -337,6 +337,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Chapter3.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="NameInputPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -346,6 +349,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Scenarios\chapter3.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Scenarios\NameInput.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -358,7 +364,7 @@
     <None Update="Scenarios\chapter4.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scenarios\chapter3.csv">
+    <None Update="Scenarios\chapter3_back.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter2.csv">
@@ -391,6 +397,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Chapter3.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="NameInputPage.xaml">
       <SubType>Designer</SubType>
     </Page>
