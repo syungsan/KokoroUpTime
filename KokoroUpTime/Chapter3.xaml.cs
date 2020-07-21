@@ -430,7 +430,7 @@ namespace KokoroUpTime
 
                     // 画面のフェードイン処理とか入れる（別関数を呼び出す）
 
-                    this.dataProgress.CurrentCapter = 1;
+                    this.dataProgress.CurrentCapter = 3;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
@@ -445,7 +445,9 @@ namespace KokoroUpTime
 
                     // 画面のフェードアウト処理とか入れる（別関数を呼び出す）
 
-                    this.dataProgress.HasCompletedChapter1 = true;
+                    this.StopBGM();
+
+                    this.dataProgress.HasCompletedChapter3 = true;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
