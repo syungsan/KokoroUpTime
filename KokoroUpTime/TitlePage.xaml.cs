@@ -92,6 +92,7 @@ namespace KokoroUpTime
             else
             {
                 this.SetCurrentUserName();
+                this.SetCurrentSceneInfo();
             }
         }
 
@@ -157,7 +158,65 @@ namespace KokoroUpTime
 
                         this.dataItem.HasGotItem11 = row.HasGotItem11;
                     }
+
+                    var progress = connection.Query<DataProgress>("SELECT * FROM DataProgress WHERE Id = 1;");
+
+                    foreach (var row in progress)
+                    {
+                        this.dataProgress.CurrentCapter = row.CurrentCapter;
+
+                        this.dataProgress.CurrentScene = row.CurrentScene;
+
+                        this.dataProgress.LatestChapter1Scene = row.LatestChapter1Scene;
+
+                        this.dataProgress.HasCompletedChapter1 = row.HasCompletedChapter1;
+
+                        this.dataProgress.LatestChapter2Scene = row.LatestChapter2Scene;
+
+                        this.dataProgress.HasCompletedChapter2 = row.HasCompletedChapter2;
+
+                        this.dataProgress.LatestChapter3Scene = row.LatestChapter3Scene;
+
+                        this.dataProgress.HasCompletedChapter3 = row.HasCompletedChapter3;
+
+                        this.dataProgress.LatestChapter4Scene = row.LatestChapter4Scene;
+
+                        this.dataProgress.HasCompletedChapter4 = row.HasCompletedChapter4;
+
+                        this.dataProgress.LatestChapter5Scene = row.LatestChapter5Scene;
+
+                        this.dataProgress.HasCompletedChapter5 = row.HasCompletedChapter5;
+
+                        this.dataProgress.LatestChapter6Scene = row.LatestChapter6Scene;
+
+                        this.dataProgress.HasCompletedChapter6 = row.HasCompletedChapter6;
+
+                        this.dataProgress.LatestChapter7Scene = row.LatestChapter7Scene;
+
+                        this.dataProgress.HasCompletedChapter7 = row.HasCompletedChapter7;
+
+                        this.dataProgress.LatestChapter8Scene = row.LatestChapter8Scene;
+
+                        this.dataProgress.HasCompletedChapter8 = row.HasCompletedChapter8;
+
+                        this.dataProgress.LatestChapter9Scene = row.LatestChapter9Scene;
+
+                        this.dataProgress.HasCompletedChapter9 = row.HasCompletedChapter9;
+
+                        this.dataProgress.LatestChapter10Scene = row.LatestChapter10Scene;
+
+                        this.dataProgress.HasCompletedChapter10 = row.HasCompletedChapter10;
+
+                        this.dataProgress.LatestChapter11Scene = row.LatestChapter11Scene;
+
+                        this.dataProgress.HasCompletedChapter11 = row.HasCompletedChapter11;
+
+                        this.dataProgress.LatestChapter12Scene = row.LatestChapter12Scene;
+
+                        this.dataProgress.HasCompletedChapter12 = row.HasCompletedChapter12;
+                    }
                 }
+                this.SetCurrentSceneInfo();
                 this.SetCurrentUserName();
             }
             else
@@ -202,6 +261,11 @@ namespace KokoroUpTime
                 this.CurrentNameImage.Source = null;
                 this.CurrentUserTextBlock.Text = $"{this.initConfig.userName}{this.initConfig.userTitle}";
             }
+        }
+
+        void SetCurrentSceneInfo()
+        {
+            this.CurrentSceneTextBlock.Text = $"第{this.dataProgress.CurrentCapter}回の「{this.dataProgress.CurrentScene}」をプレイ中…。";
         }
 
         void LoadUsers()
@@ -350,9 +414,20 @@ namespace KokoroUpTime
                 case "第2回":
 
                     Chapter2 chapter2 = new Chapter2();
-                    chapter2.SetScenario("./Scenarios/chapter2.csv");
+
+                    // chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                     this.NavigationService.Navigate(chapter2);
+
+                    break;
+
+                case "第3回":
+
+                    Chapter3 chapter3 = new Chapter3();
+
+                    chapter3.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                    this.NavigationService.Navigate(chapter3);
 
                     break;
             }

@@ -36,13 +36,13 @@
             <Button x:Name="AnotherButton" Content="その他" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36" Click="Button_Click" Margin="1400,756,205,254"/>
             <TextBlock x:Name="VersionTextBlock" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="287" Width="770" Margin="1034,311,0,0" FontSize="24" Foreground="#FFF0CA95" FontFamily="/Fonts/JiyunoTsubasa.ttf#JiyunoTsubasaFont"/>
             <Button x:Name="ChangeScreenButton" Content="Full/Win" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="195" Click="Button_Click" FontSize="36" Margin="1715,10,0,0"/>
-            <StackPanel x:Name="CurrentNameStackPanel" Orientation="Horizontal" Margin="743,932,745,22">
+            <StackPanel x:Name="CurrentNameStackPanel" Orientation="Horizontal" Margin="743,868,745,86">
                 <Image x:Name="CurrentNameImage" Height="48"/>
                 <TextBlock x:Name="CurrentUserTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Width="432" Height="70"/>
             </StackPanel>
             <Button x:Name="SelectUserButton" Content="なまえ選択" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,918,1520,91"/>
             <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
-            <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169" Background="#FFF9C9D0">
+            <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169" Background="#FFF9C9D0" d:IsHidden="True">
                 <TextBlock x:Name="SelectUserListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="なまえの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
                 <ListBox x:Name="SelectUserListBox" Margin="48,140,48,130" FontSize="48">
                     <ListBox.ItemTemplate>
@@ -56,6 +56,16 @@
                 </ListBox>
                 <Button x:Name="SelectUserListOKButton" Content="OK" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
             </Grid>
+            <TextBlock x:Name="CurrentSceneTextBlock" Margin="743,979,407,27" Text="TextBlock" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" FontSize="36" d:LayoutOverrides="HorizontalAlignment">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
         </Grid>
     </Viewbox>
 </Page>
