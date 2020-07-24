@@ -37,11 +37,11 @@ namespace KokoroUpTime
         private string[] BAD_FEELINGS = { "心配", "こまった", "不安", "こわい", "おちこみ", "がっかり", "いかり", "イライラ", "はずかしい", "ふまん", "かなしい", "おびえる"};
 
         // ゲームを進行させるシナリオ
-        private int scenarioCount = 0;
-        private List<List<string>> scenarios = null;
+        private int scenarioCount = 0; //
+        private List<List<string>> scenarios = null; //
 
         // 各種コントロールの名前を収める変数
-        private string position = "";
+        private string position = ""; //
 
         // マウスクリックを可能にするかどうかのフラグ
         private bool isClickable = false;
@@ -53,20 +53,20 @@ namespace KokoroUpTime
         private int feelingSize = 0;
 
         // メッセージ表示関連
-        private DispatcherTimer msgTimer;
-        private int word_num;
+        private DispatcherTimer msgTimer; //
+        private int word_num; //
 
         // 各種コントロールを任意の文字列で呼び出すための辞書
-        private Dictionary<string, Image> imageObjects = null;
-        private Dictionary<string, TextBlock> textBlockObjects = null;
-        private Dictionary<string, Button> buttonObjects = null;
-        private Dictionary<string, Grid> gridObjects = null;
+        private Dictionary<string, Image> imageObjects = null; //
+        private Dictionary<string, TextBlock> textBlockObjects = null; //
+        private Dictionary<string, Button> buttonObjects = null; //
+        private Dictionary<string, Grid> gridObjects = null; //
 
         // 黒板のチェックボックス
         private CheckBox[] checkBoxs;
 
         // 音関連
-        private WindowsMediaPlayer mediaPlayer;
+        private WindowsMediaPlayer mediaPlayer; //
         private SoundPlayer sePlayer = null;
 
         // ゲームの切り替えシーン
@@ -123,10 +123,10 @@ namespace KokoroUpTime
 
             this.imageObjects = new Dictionary<string, Image>
             {
-                ["bg_image"] = this.BackgroundImage,
+                ["bg_image"] = this.BackgroundImage, //
                 ["manga_title_image"] = this.MangaTitleImage,
                 ["manga_image"] = this.MangaImage,
-                ["item_center_image"] = this.ItemCenterImage,
+                ["item_center_image"] = this.ItemCenterImage, //
                 ["item_left_image"] = this.ItemLeftImage,
                 ["item_left_last_image"] = this.ItemLeftLastImage,
                 ["session_title_image"] = this.SessionTitleImage,
@@ -136,7 +136,7 @@ namespace KokoroUpTime
                 ["select_needle_image"] = this.SelectNeedleImage,
                 ["children_info_image"] = this.ChildrenInfoImage,
                 ["shiroji_ending_image"] = this.ShirojiEndingImage,
-                ["shiroji_right_image"] = this.ShirojiRightImage,
+                ["shiroji_right_image"] = this.ShirojiRightImage, //
                 ["shiroji_right_up_image"] = this.ShirojiRightUpImage,
                 ["shiroji_small_right_up_image"] = this.ShirojiSmallRightUpImage,
                 ["shiroji_small_right_down_image"] = this.ShirojiSmallRightDownImage,
@@ -150,9 +150,9 @@ namespace KokoroUpTime
                 ["intro_akamaru_face_image"] = this.IntroAkamaruFaceImage,
                 ["intro_aosuke_face_image"] = this.IntroAosukeFaceImage,
                 ["intro_kimi_face_image"] = this.IntroKimiFaceImage,
-                ["children_face_small_left_image"] = this.ChildrenFaceSmallLeftImage,
+                ["children_face_left_image"] = this.ChildrenFaceLeftImage, //
                 ["teacher_image"] = this.TeacherImage,
-                ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
+                ["main_msg_bubble_image"] = this.MainMessageBubbleImage, //
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -181,7 +181,7 @@ namespace KokoroUpTime
                 ["ending_msg_text"] = this.EndingMessageTextBlock,
                 ["children_stand_left_onomatopoeia_text"] = this.ChildrenStandLeftOnomatopoeiaTextBlock,
                 ["children_face_small_left_msg_text"] = this.ChildrenFaceSmallLeftMessageTextBlock,
-                ["main_msg"] = this.MainMessageTextBlock,
+                ["main_msg"] = this.MainMessageTextBlock, //
                 ["thin_msg"] = this.ThinMessageTextBlock,
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
@@ -191,11 +191,11 @@ namespace KokoroUpTime
             this.buttonObjects = new Dictionary<string, Button>
             {
                 ["rule_board_button"] = this.RuleBoardButton,
-                ["next_msg_button"] = this.NextMessageButton,
-                ["back_msg_button"] = this.BackMessageButton,
+                ["next_msg_button"] = this.NextMessageButton, //
+                ["back_msg_button"] = this.BackMessageButton, //
                 ["thin_msg_button"] = this.ThinMessageButton,
-                ["next_page_button"] = this.NextPageButton,
-                ["back_page_button"] = this.BackPageButton,
+                ["next_page_button"] = this.NextPageButton, //
+                ["back_page_button"] = this.BackPageButton, //
                 ["manga_flip_button"] = this.MangaFlipButton,
                 ["select_feeling_complete_button"] = this.SelectFeelingCompleteButton,
                 ["select_feeling_next_button"] = this.SelectFeelingNextButton,
@@ -203,6 +203,7 @@ namespace KokoroUpTime
 
             this.gridObjects = new Dictionary<string, Grid>
             {
+                ["memory_check_grid"] = this.MemoryCheckGrid,
                 ["session_grid"] = this.SessionGrid,
                 ["challenge_grid"] = this.ChallengeGrid,
                 ["select_feeling_grid"] = this.SelectFeelingGrid,
@@ -226,9 +227,9 @@ namespace KokoroUpTime
                 ["akamaru_and_aosuke_compare_grid"] = this.AkamaruAndAosukeCompareGrid,
                 ["compare_msg_grid"] = this.CompareMessageGrid,
                 ["ending_msg_grid"] = this.EndingMessageGrid,
-                ["main_msg_grid"] = this.MainMessageGrid,
-                ["music_info_grid"] = this.MusicInfoGrid,
-                ["exit_back_grid"] = this.ExitBackGrid,
+                ["main_msg_grid"] = this.MainMessageGrid, //
+                ["music_info_grid"] = this.MusicInfoGrid, //
+                ["exit_back_grid"] = this.ExitBackGrid, //
             };
         }
 
@@ -236,6 +237,7 @@ namespace KokoroUpTime
         {
             // 各種コントロールを隠すことでフルリセット
 
+            this.MemoryCheckGrid.Visibility = Visibility.Hidden; //
             this.SessionGrid.Visibility = Visibility.Hidden;
             this.ChallengeGrid.Visibility = Visibility.Hidden;
             this.SelectFeelingGrid.Visibility = Visibility.Hidden;
@@ -258,10 +260,10 @@ namespace KokoroUpTime
             this.AkamaruAndAosukeCompareGrid.Visibility = Visibility.Hidden;
             this.CompareMessageGrid.Visibility = Visibility.Hidden;
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
-            this.MainMessageGrid.Visibility = Visibility.Hidden;
-            this.MusicInfoGrid.Visibility = Visibility.Hidden;
-            this.ExitBackGrid.Visibility = Visibility.Hidden;
-            this.BackgroundImage.Visibility = Visibility.Hidden;
+            this.MainMessageGrid.Visibility = Visibility.Hidden; //
+            this.MusicInfoGrid.Visibility = Visibility.Hidden; //
+            this.ExitBackGrid.Visibility = Visibility.Hidden; //
+            this.BackgroundImage.Visibility = Visibility.Hidden; //
             this.RuleBoardButton.Visibility = Visibility.Hidden;
             this.RuleBoardTitleTextBlock.Visibility = Visibility.Hidden;
             this.RuleBoardCheck1TextBlock.Visibility = Visibility.Hidden;
@@ -272,7 +274,7 @@ namespace KokoroUpTime
             this.RuleBoardCheck3Box.Visibility = Visibility.Hidden;
             this.MangaTitleImage.Visibility = Visibility.Hidden;
             this.MangaImage.Visibility = Visibility.Hidden;
-            this.ItemCenterImage.Visibility = Visibility.Hidden;
+            this.ItemCenterImage.Visibility = Visibility.Hidden; //
             this.ItemLeftImage.Visibility = Visibility.Hidden;
             this.ItemLeftLastImage.Visibility = Visibility.Hidden;
             this.SessionTitleImage.Visibility = Visibility.Hidden;
@@ -292,7 +294,7 @@ namespace KokoroUpTime
             this.ViewKindOfFeelingPersonTextBlock.Visibility = Visibility.Hidden;
             this.ViewKindOfFeelingTextBlock.Visibility = Visibility.Hidden;
             this.ViewSizeOfFeelingTextBlock.Visibility = Visibility.Hidden;
-            this.ChildrenFaceSmallLeftImage.Visibility = Visibility.Hidden;
+            this.ChildrenFaceLeftImage.Visibility = Visibility.Hidden; //
             this.ChildrenFaceSmallLeftMessageTextBlock.Visibility = Visibility.Hidden;
             this.CompareMessageTextBlock.Visibility = Visibility.Hidden;
             this.KindOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
@@ -301,7 +303,7 @@ namespace KokoroUpTime
             this.SizeOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
             this.ChildrenInfoImage.Visibility = Visibility.Hidden;
             this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
-            this.ShirojiRightImage.Visibility = Visibility.Hidden;
+            this.ShirojiRightImage.Visibility = Visibility.Hidden; //
             this.ShirojiRightUpImage.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightUpImage.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightDownImage.Visibility = Visibility.Hidden;
@@ -318,7 +320,7 @@ namespace KokoroUpTime
             this.IntroAosukeFaceImage.Visibility = Visibility.Hidden;
             this.IntroKimiFaceImage.Visibility = Visibility.Hidden;
             this.TeacherImage.Visibility = Visibility.Hidden;
-            this.MainMessageTextBlock.Visibility = Visibility.Hidden;
+            this.MainMessageTextBlock.Visibility = Visibility.Hidden; //
             this.ThinMessageButton.Visibility = Visibility.Hidden;
             this.ThinMessageTextBlock.Visibility = Visibility.Hidden;
             this.NextMessageButton.Visibility = Visibility.Hidden;
@@ -344,11 +346,11 @@ namespace KokoroUpTime
             this.SizeOfFeelingAosukeTextBlock.Text = "";
             this.EndingMessageTextBlock.Text = "";
 
-            this.MainMessageTextBlock.Text = "";
+            this.MainMessageTextBlock.Text = ""; //
 
             this.ThinMessageTextBlock.Text = "";
-            this.MusicTitleTextBlock.Text = "";
-            this.ComposerNameTextBlock.Text = "";
+            this.MusicTitleTextBlock.Text = ""; //
+            this.ComposerNameTextBlock.Text = ""; //
             this.RuleBoardCheck1Box.IsEnabled = false;
             this.RuleBoardCheck2Box.IsEnabled = false;
             this.RuleBoardCheck3Box.IsEnabled = false;

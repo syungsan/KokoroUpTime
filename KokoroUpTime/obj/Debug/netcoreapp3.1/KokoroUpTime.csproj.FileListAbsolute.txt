@@ -141,3 +141,6 @@ D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Chapter3.g.cs
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Chapter3.baml
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Scenarios\chapter3_back.csv
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Scenarios\chapter3_back.csv
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Chapter3.g.cs
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Chapter3.baml

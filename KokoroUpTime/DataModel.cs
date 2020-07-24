@@ -59,40 +59,6 @@ namespace KokoroUpTime
         public bool HasGotItem11 { get; set; }
     }
 
-    public class DataCapter1
-    {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-
-        public string MyKindOfGoodFeelings { get; set; }
-
-        public string MyKindOfBadFeelings { get; set; }
-
-        public string KimisKindOfFeelings { get; set; }
-
-        public string AkamarusKindOfFeelings { get; set; }
-
-        public int AkamarusSizeOfFeeling { get; set; }
-
-        public string AosukesKindOfFeelings { get; set; }
-
-        public int AosukesSizeOfFeeling { get; set; }
-
-        public string CreatedAt { get; set; }
-    }
-
-    public class DataCapter2
-    {
-        // このレコードは定石
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-
-        // データベースに記録するレコードの型の宣言をしてください。
-
-        // 何かしらレコードを記録するときは日付も記録する。
-        public string CreatedAt { get; set; }
-    }
-
     public class DataProgress
     {
         [PrimaryKey, AutoIncrement]
@@ -149,5 +115,48 @@ namespace KokoroUpTime
         public string LatestChapter12Scene { get; set; }
 
         public bool HasCompletedChapter12 { get; set; }
+    }
+
+    public class DataCapter1
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        public string MyKindOfGoodFeelings { get; set; }
+
+        public string MyKindOfBadFeelings { get; set; }
+
+        public string KimisKindOfFeelings { get; set; }
+
+        public string AkamarusKindOfFeelings { get; set; }
+
+        public int AkamarusSizeOfFeeling { get; set; }
+
+        public string AosukesKindOfFeelings { get; set; }
+
+        public int AosukesSizeOfFeeling { get; set; }
+
+        public string CreatedAt { get; set; }
+    }
+
+    public class DataCapter2
+    {
+        // このレコードは定石
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        // データベースに記録するレコードの型の宣言をしてください。
+
+        // 何かしらレコードを記録するときは日付も記録する。
+        public string CreatedAt { get; set; }
+    }
+
+    public class DataCapter3
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+
+        public string CreatedAt { get; set; }
     }
 }

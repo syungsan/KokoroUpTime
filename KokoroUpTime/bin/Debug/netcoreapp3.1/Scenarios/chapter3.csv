@@ -2,7 +2,7 @@ start
 scene,前説
 reset
 image,bg_image,background_02.png
-image,children_face_small_left_image,aosuke_face_01.png
+image,children_face_left_image,aosuke_face_01.png
 image,main_msg_bubble_image,left_big_bubble_blue.png
 grid,main_msg_grid,appear_expansion
 bgm,set,もくもくStudy♪.mp3,loop,50
@@ -16,7 +16,7 @@ next
 hide,button,next_page_button
 hide,button,back_page_button
 hide,grid,main_msg_grid
-hide,image,children_face_small_left_image
+hide,image,children_face_left_image
 image,item_center_image,item02_solo.png
 next
 hide,button,next_page_button
@@ -29,4 +29,9 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,うきうきシューズを使うときは、3つのポイントがあったのう。みんなはおぼえておるか？フォッ、フォッ、フォッ！,白じい
 next
+hide,button,next_page_button
+hide,button,back_page_button
+hide,grid,main_msg_grid
+hide,image,shiroji_right_image
+grid,memory_check_grid
 
