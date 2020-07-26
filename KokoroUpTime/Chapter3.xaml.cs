@@ -61,6 +61,7 @@ namespace KokoroUpTime
         private Dictionary<string, TextBlock> textBlockObjects = null; //
         private Dictionary<string, Button> buttonObjects = null; //
         private Dictionary<string, Grid> gridObjects = null; //
+        private Dictionary<string, Border> borderObjects = null; //
 
         // 黒板のチェックボックス
         private CheckBox[] checkBoxs;
@@ -124,12 +125,18 @@ namespace KokoroUpTime
             this.imageObjects = new Dictionary<string, Image>
             {
                 ["bg_image"] = this.BackgroundImage, //
-                ["manga_title_image"] = this.MangaTitleImage,
-                ["manga_image"] = this.MangaImage,
+                ["manga_title_image"] = this.MangaTitleImage, //
+                ["manga_image"] = this.MangaImage, //
                 ["item_center_image"] = this.ItemCenterImage, //
-                ["item_left_image"] = this.ItemLeftImage,
+                ["item_left_image"] = this.ItemLeftImage, //
+                ["item_detail_info_image"] = this.ItemDetailInfoImage, //
+                ["children_face_left_center_image"] = this.ChildrenFaceLeftCenterImage, //
+                ["children_feeling_comment_image"] = this.ChildrenFeelingCommentImage, //
+                ["shiroji_very_small_right_up_image"] = this.ShirojiVerySmallRightUpImage, //
+
+
                 ["item_left_last_image"] = this.ItemLeftLastImage,
-                ["session_title_image"] = this.SessionTitleImage,
+                ["session_title_image"] = this.SessionTitleImage, //
                 ["kimi_in_plate_image"] = this.KimiInPlateImage,
                 ["kimi_plate_outer_image"] = this.KimiPlateOuterImage,
                 ["select_heart_image"] = this.SelectHeartImage,
@@ -137,7 +144,8 @@ namespace KokoroUpTime
                 ["children_info_image"] = this.ChildrenInfoImage,
                 ["shiroji_ending_image"] = this.ShirojiEndingImage,
                 ["shiroji_right_image"] = this.ShirojiRightImage, //
-                ["shiroji_right_up_image"] = this.ShirojiRightUpImage,
+                ["shiroji_right_up_image"] = this.ShirojiRightUpImage, //
+                ["shiroji_left_image"] = this.ShirojiLeftImage, //
                 ["shiroji_small_right_up_image"] = this.ShirojiSmallRightUpImage,
                 ["shiroji_small_right_down_image"] = this.ShirojiSmallRightDownImage,
                 ["shiroji_right_center_image"] = this.ShirojiRightCenterImage,
@@ -153,6 +161,7 @@ namespace KokoroUpTime
                 ["children_face_left_image"] = this.ChildrenFaceLeftImage, //
                 ["teacher_image"] = this.TeacherImage,
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage, //
+                ["kind_of_feeling_input_image"] = this.KindOfFeelingInputImage, //
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -161,8 +170,8 @@ namespace KokoroUpTime
                 ["rule_board_check1_msg"] = this.RuleBoardCheck1TextBlock,
                 ["rule_board_check2_msg"] = this.RuleBoardCheck2TextBlock,
                 ["rule_board_check3_msg"] = this.RuleBoardCheck3TextBlock,
-                ["session_sub_title_text"] = this.SessionSubTitleTextBlock,
-                ["session_sentence_text"] = this.SessionSentenceTextBlock,
+                ["session_sub_title_text"] = this.SessionSubTitleTextBlock, //
+                ["session_sentence_text"] = this.SessionSentenceTextBlock, //
                 ["view_kind_of_feeling_person_text"] = this.ViewKindOfFeelingPersonTextBlock,
                 ["view_kind_of_feeling_text"] = this.ViewKindOfFeelingTextBlock,
                 ["view_size_of_feeling_text"] = this.ViewSizeOfFeelingTextBlock,
@@ -186,6 +195,12 @@ namespace KokoroUpTime
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
                 ["item_book_title_text"] = this.ItemBookTitleTextBlock,
+                ["challenge_time_title_text"] = this.ChallengeTimeTitleTextBlock, //
+
+                ["children_feeling_title_text"] = ChildrenFeelingTitleTextBlock, //
+                ["children_feeling_comment_text"] = this.ChildrenFeelingCommentTextBlock, //
+                ["kind_of_feeling_title_text"] = this.KindOfFeelingTitleTextBlock, //
+                ["size_of_feeling_title_text"] = this.SizeOfFeelingTitleTextBlock, //
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -196,16 +211,23 @@ namespace KokoroUpTime
                 ["thin_msg_button"] = this.ThinMessageButton,
                 ["next_page_button"] = this.NextPageButton, //
                 ["back_page_button"] = this.BackPageButton, //
-                ["manga_flip_button"] = this.MangaFlipButton,
+                ["manga_flip_button"] = this.MangaFlipButton, //
                 ["select_feeling_complete_button"] = this.SelectFeelingCompleteButton,
                 ["select_feeling_next_button"] = this.SelectFeelingNextButton,
+
+                ["check_manga_button"] = this.CheckMangaButton, //
+                ["feeling_next_go_button"] = this.FeelingNextGoButton, //
+                ["feeling_prev_back_button"] = this.FeelingPrevBackButton, //
+                ["kind_of_feeling_input_button"] = this.KindOfFeelingInputButton, //
+                ["size_of_feeling_input_button"] = this.SizeOfFeelingInputButton, //
+                ["manga_prev_back_button"] = this.MangaPrevBackButton, //
             };
 
             this.gridObjects = new Dictionary<string, Grid>
             {
-                ["memory_check_grid"] = this.MemoryCheckGrid,
-                ["session_grid"] = this.SessionGrid,
-                ["challenge_grid"] = this.ChallengeGrid,
+                ["memory_check_grid"] = this.MemoryCheckGrid, //
+                ["session_grid"] = this.SessionGrid, //
+                // ["challenge_time_grid"] = this.ChallengeTimeGrid, //
                 ["select_feeling_grid"] = this.SelectFeelingGrid,
                 ["summary_grid"] = this.SummaryGrid,
                 ["ending_grid"] = this.EndingGrid,
@@ -215,6 +237,10 @@ namespace KokoroUpTime
                 ["item_info_plate_grid"] = this.ItemInfoPlateGrid,
                 ["item_info_sentence_grid"] = this.ItemInfoSentenceGrid,
                 ["item_last_info_grid"] = this.ItemLastInfoGrid,
+
+                ["item_check_grid"] = this.ItemCheckGrid, //
+                ["children_feeling_comment_grid"] = this.ChildrenFeelingCommentGrid, //
+
                 ["challenge_msg_grid"] = this.ChallengeMessageGrid,
                 ["kimi_plate_inner_up_grid"] = this.KimiPlateInnerUpGrid,
                 ["kimi_plate_inner_down_grid"] = this.KimiPlateInnerDownGrid,
@@ -231,6 +257,12 @@ namespace KokoroUpTime
                 ["music_info_grid"] = this.MusicInfoGrid, //
                 ["exit_back_grid"] = this.ExitBackGrid, //
             };
+
+            this.borderObjects = new Dictionary<string, Border>
+            {
+                ["challenge_time_title_border"] = this.ChallengeTimeTitleBorder, //
+                ["children_feeling_title_border"] = this.ChildrenFeelingTitleBorder, //
+            };
         }
 
         private void ResetControls()
@@ -238,7 +270,7 @@ namespace KokoroUpTime
             // 各種コントロールを隠すことでフルリセット
 
             this.MemoryCheckGrid.Visibility = Visibility.Hidden; //
-            this.SessionGrid.Visibility = Visibility.Hidden;
+            this.SessionGrid.Visibility = Visibility.Hidden; //
             this.ChallengeGrid.Visibility = Visibility.Hidden;
             this.SelectFeelingGrid.Visibility = Visibility.Hidden;
             this.SummaryGrid.Visibility = Visibility.Hidden;
@@ -272,14 +304,16 @@ namespace KokoroUpTime
             this.RuleBoardCheck1Box.Visibility = Visibility.Hidden;
             this.RuleBoardCheck2Box.Visibility = Visibility.Hidden;
             this.RuleBoardCheck3Box.Visibility = Visibility.Hidden;
-            this.MangaTitleImage.Visibility = Visibility.Hidden;
-            this.MangaImage.Visibility = Visibility.Hidden;
+            this.MangaTitleImage.Visibility = Visibility.Hidden; //
+            this.MangaImage.Visibility = Visibility.Hidden; //
             this.ItemCenterImage.Visibility = Visibility.Hidden; //
-            this.ItemLeftImage.Visibility = Visibility.Hidden;
+            this.ItemLeftImage.Visibility = Visibility.Hidden; //
+            this.ItemDetailInfoImage.Visibility = Visibility.Hidden; //
+            this.ItemCheckGrid.Visibility = Visibility.Hidden; //
             this.ItemLeftLastImage.Visibility = Visibility.Hidden;
-            this.SessionTitleImage.Visibility = Visibility.Hidden;
-            this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden;
-            this.SessionSentenceTextBlock.Visibility = Visibility.Hidden;
+            this.SessionTitleImage.Visibility = Visibility.Hidden; //
+            this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden; //
+            this.SessionSentenceTextBlock.Visibility = Visibility.Hidden; //
             this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
             this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
             this.KimiPlateOuterImage.Visibility = Visibility.Hidden;
@@ -304,7 +338,8 @@ namespace KokoroUpTime
             this.ChildrenInfoImage.Visibility = Visibility.Hidden;
             this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
             this.ShirojiRightImage.Visibility = Visibility.Hidden; //
-            this.ShirojiRightUpImage.Visibility = Visibility.Hidden;
+            this.ShirojiRightUpImage.Visibility = Visibility.Hidden; //
+            this.ShirojiLeftImage.Visibility = Visibility.Hidden; //
             this.ShirojiSmallRightUpImage.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightDownImage.Visibility = Visibility.Hidden;
             this.ShirojiRightCenterImage.Visibility = Visibility.Hidden;
@@ -327,8 +362,29 @@ namespace KokoroUpTime
             this.BackMessageButton.Visibility = Visibility.Hidden;
             this.NextPageButton.Visibility = Visibility.Hidden;
             this.BackPageButton.Visibility = Visibility.Hidden;
-            this.MangaFlipButton.Visibility = Visibility.Hidden;
+            this.MangaFlipButton.Visibility = Visibility.Hidden; //
             this.CoverLayerImage.Visibility = Visibility.Hidden;
+            this.ChallengeTimeTitleBorder.Visibility = Visibility.Hidden; //
+            this.ChallengeTimeTitleTextBlock.Visibility = Visibility.Hidden; //
+
+            this.ChildrenFeelingTitleBorder.Visibility = Visibility.Hidden; //
+            this.ChildrenFaceLeftCenterImage.Visibility = Visibility.Hidden; //
+            this.ChildrenFeelingCommentGrid.Visibility = Visibility.Hidden; //
+            // this.ChildrenFeelingCommentImage.Visibility = Visibility.Hidden; //
+            this.ChildrenFeelingCommentTextBlock.Visibility = Visibility.Hidden; //
+            this.ShirojiVerySmallRightUpImage.Visibility = Visibility.Hidden; //
+            this.CheckMangaButton.Visibility = Visibility.Hidden; //
+            this.FeelingNextGoButton.Visibility = Visibility.Hidden; //
+            this.FeelingPrevBackButton.Visibility = Visibility.Hidden; //
+            this.KindOfFeelingTitleTextBlock.Visibility = Visibility.Hidden; //
+            this.SizeOfFeelingTitleTextBlock.Visibility = Visibility.Hidden; //
+            this.KindOfFeelingInputButton.Visibility = Visibility.Hidden; //
+            this.KindOfFeelingInputImage.Visibility = Visibility.Hidden; //
+            this.SizeOfFeelingInputButton.Visibility = Visibility.Hidden; //
+            this.ChildrenFeelingTitleTextBlock.Visibility = Visibility.Hidden; //
+
+            this.MangaPrevBackButton.Visibility = Visibility.Hidden; //
+
             this.RuleBoardTitleTextBlock.Text = "";
             this.RuleBoardCheck1TextBlock.Text = "";
             this.RuleBoardCheck2TextBlock.Text = "";
@@ -351,6 +407,10 @@ namespace KokoroUpTime
             this.ThinMessageTextBlock.Text = "";
             this.MusicTitleTextBlock.Text = ""; //
             this.ComposerNameTextBlock.Text = ""; //
+
+            this.ChildrenFeelingCommentTextBlock.Text = ""; //
+            this.ChildrenFeelingTitleTextBlock.Text = ""; //
+
             this.RuleBoardCheck1Box.IsEnabled = false;
             this.RuleBoardCheck2Box.IsEnabled = false;
             this.RuleBoardCheck3Box.IsEnabled = false;
@@ -571,6 +631,37 @@ namespace KokoroUpTime
                     }
                     break;
 
+                // ボーダーに対しての処理
+                case "border":
+
+                    this.position = this.scenarios[this.scenarioCount][1];
+
+                    var borderObject = this.borderObjects[this.position];
+
+                    borderObject.Visibility = Visibility.Visible;
+
+                    string borderAnimeIsSync = "sync";
+
+                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
+                    {
+                        borderAnimeIsSync = this.scenarios[this.scenarioCount][4];
+                    }
+
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    {
+                        var borderStoryBoard = this.scenarios[this.scenarioCount][2];
+
+                        borderStoryBoard += $"_{this.position}";
+
+                        this.ShowAnime(storyBoard: borderStoryBoard, isSync: borderAnimeIsSync);
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
+                    break;
+
                 // ボタンに対する処理
                 case "button":
 
@@ -614,18 +705,25 @@ namespace KokoroUpTime
 
                     _textObject.Visibility = Visibility.Hidden;
 
+                    string msgIsSync = "sync";
+
+                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
+                    {
+                        msgIsSync = this.scenarios[this.scenarioCount][3];
+                    }
+
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
                         var _message = this.scenarios[this.scenarioCount][2];
 
                         _message = this.SequenceCheck(_message);
 
-                        this.ShowMessage(textObject: _textObject, message: _message);
+                        this.ShowMessage(textObject: _textObject, message: _message, isSync: msgIsSync);
                     }
                     else
                     {
                         // xamlに直接書いたStaticな文章を表示する場合
-                        this.ShowMessage(textObject: _textObject, message: _textObject.Text);
+                        this.ShowMessage(textObject: _textObject, message: _textObject.Text, isSync: msgIsSync);
                     }
                     break;
 
@@ -786,6 +884,16 @@ namespace KokoroUpTime
                             this.ScenarioPlay();
 
                             break;
+
+                        case "border":
+
+                            this.position = this.scenarios[this.scenarioCount][2];
+                            this.borderObjects[this.position].Visibility = Visibility.Hidden;
+
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+
+                            break;
                     }
                     break;
 
@@ -808,7 +916,15 @@ namespace KokoroUpTime
                     }
                     break;
 
+                case "jump":
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
                 // 教室のルール黒板の処理
+                /*
                 case "rule":
 
                     this.position = this.scenarios[this.scenarioCount][1];
@@ -836,6 +952,7 @@ namespace KokoroUpTime
                     this.ShowMessage(textObject: ruleObject, message: rule, obj: _obj);
 
                     break;
+                */
 
                 case "wait_tap":
 
@@ -1165,8 +1282,14 @@ namespace KokoroUpTime
             return text;
         }
 
-        void ShowMessage(TextBlock textObject, string message, object obj=null)
+        void ShowMessage(TextBlock textObject, string message, string isSync, object obj=null)
         {
+            if (isSync == "no_sync")
+            {
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+            }
+
             this.word_num = 0;
 
             // メッセージ表示処理
@@ -1198,8 +1321,12 @@ namespace KokoroUpTime
                     {
                         this.MessageCallBack(obj);
                     }
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+
+                    if (isSync == "sync")
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
                 }
             }
         }
@@ -1346,6 +1473,36 @@ namespace KokoroUpTime
 
             Button button = sender as Button;
 
+            if (this.isClickable)
+            {
+                if (button.Name == "WishCheckButton")
+                {
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "ImRememberButton")
+                {
+                    JumpTo("manga");
+                }
+
+                if (button.Name == "CheckMangaButton")
+                {
+                    JumpTo("manga_aosuke_part");
+                }
+
+                if (button.Name == "MangaPrevBackButton")
+                {
+                    if (this.scene == "青助くんのきもちを考える1")
+                    {
+                        JumpTo("think_aosuke's_feeling_1");
+                    }
+                }
+            }
+
+            
+
+
             /*
             if (button.Name.Contains("Back"))
             {
@@ -1476,6 +1633,18 @@ namespace KokoroUpTime
                 titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                 this.NavigationService.Navigate(titlePage);
+            }
+        }
+
+        private void JumpTo(string tag)
+        {
+            foreach (var (scenario, index) in this.scenarios.Indexed())
+            {
+                if (scenario[0] == "jump" && scenario[1] == tag)
+                {
+                    this.scenarioCount = index + 1;
+                    this.ScenarioPlay();
+                }
             }
         }
 
