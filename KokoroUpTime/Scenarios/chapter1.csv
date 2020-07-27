@@ -426,6 +426,11 @@ item_book
 next
 scene,エンディング
 reset
+bgm,set,tasogare_no_oka.mp3,loop,50
+bgm,play
+text,music_title_text,たそがれの丘
+text,composer_name_text,しゅんじ～
+grid,music_info_grid,slide,no_sync
 image,bg_image,background_ending.png
 grid,ending_grid
 image,shiroji_ending_image

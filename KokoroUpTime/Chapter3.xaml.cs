@@ -707,9 +707,9 @@ namespace KokoroUpTime
 
                     string msgIsSync = "sync";
 
-                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
+                    if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
                     {
-                        msgIsSync = this.scenarios[this.scenarioCount][3];
+                        msgIsSync = this.scenarios[this.scenarioCount][4];
                     }
 
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
