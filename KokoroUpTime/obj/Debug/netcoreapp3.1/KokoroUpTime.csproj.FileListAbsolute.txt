@@ -142,3 +142,4 @@ D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1
 D:\Developer\Tadano\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Chapter3.baml
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Chapter3.g.cs
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Chapter3.baml
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\tasogare_no_oka.mp3

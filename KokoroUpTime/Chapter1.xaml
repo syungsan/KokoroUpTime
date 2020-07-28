@@ -711,7 +711,7 @@
                     <TextBlock x:Name="ItemNameCenterTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="80" Height="105" Width="447" FontWeight="Bold" Margin="67,32,0,0" Text="きもちセンサー" TextAlignment="Center"/>
                 </Grid>
                 <Grid x:Name="ItemInfoPlateGrid" Width="1175" Height="470" Margin="661,463,84,147">
-                    <Image x:Name="ItemInfoPlateImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_info.png" Visibility="Visible"/>
+                    <Image x:Name="ItemInfoPlateImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_detail_info.png" Visibility="Visible"/>
                     <TextBlock x:Name="ItemInfoTitleTextBlock" Width="469" FontSize="52" FontWeight="Bold" Margin="55,24,651,369" Text="きもちセンサーとは・・・"/>
                     <Grid x:Name="ItemInfoSentenceGrid" Margin="55,118,41,33">
                         <TextBlock x:Name="ItemInfoSentenceTextBlock1" FontSize="46" TextWrapping="Wrap" Margin="0,0,0,183"><Run Text="✔ だれでもいろんな「きもち」になるが、「きもち」を"/><LineBreak /><Run Text="　　「ことば」であらわすことは かんたんなことではないのだ。"/></TextBlock>
