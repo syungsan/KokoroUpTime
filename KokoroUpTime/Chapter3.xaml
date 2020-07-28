@@ -672,7 +672,7 @@
             <Grid x:Name="BaseGrid">
                 <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/water_frame.png"/>
             </Grid>
-            <Grid x:Name="MangaGrid" Visibility="Visible">
+            <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
                 <Image x:Name="MangaTitleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/manga1_title.png" Margin="86,24,0,0" Height="98" Width="1752"/>
                 <Image x:Name="MangaImage" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Images/manga1-1.png" Margin="0,121,0,0" RenderTransformOrigin="0.5,0.5" Height="880" Width="1788">
                     <Image.RenderTransform>
@@ -787,7 +787,7 @@
                 </Grid>
                 <Image x:Name="ChallengeItemImage" HorizontalAlignment="Left" Height="489" Margin="1098,172,0,0" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="ChallengeTimeGrid">
+            <Grid x:Name="ChallengeTimeGrid" d:IsHidden="True">
                 <Border x:Name="ChallengeTimeTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,261,0,540" Background="#FFFFC000" d:IsHidden="True">
                     <TextBlock x:Name="ChallengeTimeTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="180" Foreground="#FF9966FF" FontWeight="Normal" TextAlignment="Center"/>
                 </Border>
@@ -1011,7 +1011,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid x:Name="ShirojiGrid">
+            <Grid x:Name="ShirojiGrid" d:IsHidden="True">
                 <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="1215,187,126,266" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -1076,7 +1076,7 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="ChildrenFaceGrid" Visibility="Visible">
+            <Grid x:Name="ChildrenFaceGrid" Visibility="Visible" d:IsHidden="True">
                 <Image x:Name="IntroAkamaruFaceImage" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/akamaru_face_04.png" Margin="258,179,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -1216,7 +1216,7 @@
                     </Button>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid" d:IsHidden="True">
+            <Grid x:Name="SystemGrid">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
@@ -1312,10 +1312,10 @@
                     <TextBlock x:Name="EndingMessageTextBlock" HorizontalAlignment="Center" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="1060" Margin="0,105,0,0" FontSize="48"/>
 
                 </Grid>
-                <Button x:Name="NextPageButton" Margin="1598,892,49,0" VerticalAlignment="Top" Height="149" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Width="273" d:IsHidden="True">
+                <Button x:Name="NextPageButton" Margin="1598,892,49,0" VerticalAlignment="Top" Height="149" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Width="273">
                     <Image x:Name="NextPageAfterImage" Source="/Images/after.png" Height="149"/>
                 </Button>
-                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Margin="33,892,0,0" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
+                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Margin="33,892,0,0" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin">
                     <Image x:Name="BackPageBeforeImage" Source="/Images/before.png"/>
                 </Button>
                 <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True">
