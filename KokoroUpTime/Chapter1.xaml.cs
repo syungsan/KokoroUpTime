@@ -69,6 +69,9 @@ namespace KokoroUpTime
         private WindowsMediaPlayer mediaPlayer;
         private SoundPlayer sePlayer = null;
 
+        // マウス押下中フラグ
+        private bool isMouseDown = false;
+
         // ゲームの切り替えシーン
         private string scene;
 
@@ -1766,7 +1769,14 @@ namespace KokoroUpTime
         {
             Mouse.Capture(this);
 
-            if (this.SelectHeartGrid.Visibility == Visibility.Visible && (this.scene == "赤丸くんのきもちの大きさ" || this.scene == "青助くんのきもちの大きさ"))
+            var dragObjName = (e.Source as FrameworkElement).Name;
+
+            if (dragObjName == "SelectNeedleImage")
+            {
+                this.isMouseDown = true;
+            }
+
+            if (this.isMouseDown && this.SelectHeartGrid.Visibility == Visibility.Visible && (this.scene == "赤丸くんのきもちの大きさ" || this.scene == "青助くんのきもちの大きさ"))
             {
                 this.CalcAngle();
 
@@ -1778,11 +1788,18 @@ namespace KokoroUpTime
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(null);
+
+            this.isMouseDown = false;
         }
 
         // マウスのドラッグ処理（マウスを動かしたとき）
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
+            if (!isMouseDown)
+            {
+                return;
+            }
+
             if (Mouse.Captured == this)
             {
                 if (this.SelectHeartGrid.Visibility == Visibility.Visible && (this.scene == "赤丸くんのきもちの大きさ" || this.scene == "青助くんのきもちの大きさ"))

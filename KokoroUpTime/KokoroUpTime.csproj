@@ -170,6 +170,7 @@
     <None Remove="Images\short_bubble_right_up.png" />
     <None Remove="Images\small_bubble_left.png" />
     <None Remove="Images\small_bubble_left_down_blue.png" />
+    <None Remove="Images\small_bubble_left_down_yellow.png" />
     <None Remove="Images\small_bubble_right_down.png" />
     <None Remove="Images\small_icon.png" />
     <None Remove="Images\SS.png" />
@@ -301,6 +302,7 @@
     <Resource Include="Images\short_bubble_left.png" />
     <Resource Include="Images\short_bubble_right_up.png" />
     <Resource Include="Images\small_bubble_left_down_blue.png" />
+    <Resource Include="Images\small_bubble_left_down_yellow.png" />
     <Resource Include="Images\small_bubble_right_down.png" />
     <Resource Include="Images\challenge_time.png" />
     <Resource Include="Images\ending_bubble.png" />

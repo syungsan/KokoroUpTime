@@ -70,6 +70,9 @@ namespace KokoroUpTime
         private WindowsMediaPlayer mediaPlayer; //
         private SoundPlayer sePlayer = null;
 
+        // マウス押下中フラグ
+        private bool isMouseDown = false;
+
         // ゲームの切り替えシーン
         private string scene;
 
@@ -159,6 +162,7 @@ namespace KokoroUpTime
                 ["intro_aosuke_face_image"] = this.IntroAosukeFaceImage,
                 ["intro_kimi_face_image"] = this.IntroKimiFaceImage,
                 ["children_face_left_image"] = this.ChildrenFaceLeftImage, //
+                ["children_face_right_image"] = this.ChildrenFaceRightImage, //
                 ["teacher_image"] = this.TeacherImage,
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage, //
                 ["kind_of_feeling_input_image"] = this.KindOfFeelingInputImage, //
@@ -329,6 +333,7 @@ namespace KokoroUpTime
             this.ViewKindOfFeelingTextBlock.Visibility = Visibility.Hidden;
             this.ViewSizeOfFeelingTextBlock.Visibility = Visibility.Hidden;
             this.ChildrenFaceLeftImage.Visibility = Visibility.Hidden; //
+            this.ChildrenFaceRightImage.Visibility = Visibility.Hidden; //
             this.ChildrenFaceSmallLeftMessageTextBlock.Visibility = Visibility.Hidden;
             this.CompareMessageTextBlock.Visibility = Visibility.Hidden;
             this.KindOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
@@ -761,6 +766,12 @@ namespace KokoroUpTime
                             case "red":
 
                                 textColorBrush = new SolidColorBrush(Colors.Red);
+
+                                break;
+
+                            case "yellow":
+
+                                textColorBrush = new SolidColorBrush(Colors.Yellow);
 
                                 break;
                         }
@@ -1488,16 +1499,44 @@ namespace KokoroUpTime
 
                 if (button.Name == "CheckMangaButton")
                 {
-                    JumpTo("manga_aosuke_part");
+                    if (this.scene == "キミちゃんのきもちを考える1")
+                    {
+                        JumpTo("manga_kimi_part");
+                    }
+
+                    if (this.scene == "青助くんのきもちを考える1")
+                    {
+                        JumpTo("manga_aosuke_part");
+                    }
                 }
 
                 if (button.Name == "MangaPrevBackButton")
                 {
+                    if (this.scene == "キミちゃんのきもちを考える1")
+                    {
+                        JumpTo("think_kimi's_feeling_1");
+                    }
+
                     if (this.scene == "青助くんのきもちを考える1")
                     {
                         JumpTo("think_aosuke's_feeling_1");
                     }
                 }
+
+                if (button.Name == "FeelingNextGoButton")
+                {
+                    if (this.scene == "キミちゃんのきもちを考える1")
+                    {
+                        JumpTo("chiku_chiku_kotoba");
+                    }
+
+                    if (this.scene == "青助くんのきもちを考える1")
+                    {
+                        JumpTo("think_kimi's_feeling_1");
+                    }
+                }
+
+                
             }
 
             
@@ -1937,6 +1976,13 @@ namespace KokoroUpTime
         {
             Mouse.Capture(this);
 
+            var dragObjName = (e.Source as FrameworkElement).Name;
+
+            if (dragObjName == "SelectNeedleImage")
+            {
+                this.isMouseDown = true;
+            }
+
             if (this.SelectHeartGrid.Visibility == Visibility.Visible && (this.scene == "赤丸くんのきもちの大きさ" || this.scene == "青助くんのきもちの大きさ"))
             {
                 this.CalcAngle();
@@ -1949,11 +1995,18 @@ namespace KokoroUpTime
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(null);
+
+            this.isMouseDown = false;
         }
 
         // マウスのドラッグ処理（マウスを動かしたとき）
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
+            if (!isMouseDown)
+            {
+                return;
+            }
+
             if (Mouse.Captured == this)
             {
                 if (this.SelectHeartGrid.Visibility == Visibility.Visible && (this.scene == "赤丸くんのきもちの大きさ" || this.scene == "青助くんのきもちの大きさ"))
