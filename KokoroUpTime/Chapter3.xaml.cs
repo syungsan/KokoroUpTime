@@ -603,7 +603,7 @@ namespace KokoroUpTime
 
                     var imageObject = this.imageObjects[this.position];
 
-                    string imageFile;
+                    string imageFile = "";
 
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
@@ -612,6 +612,43 @@ namespace KokoroUpTime
                         // フォルダの画像でなくリソース内の画像を表示することでスピードアップ
                         imageObject.Source = new BitmapImage(new Uri($"Images/{imageFile}", UriKind.Relative));
                     }
+
+                    if (this.scenarios[this.scenarioCount].Count > 5 && this.scenarios[this.scenarioCount][5] != "")
+                    {
+                         if (this.scenarios[this.scenarioCount][5] == "gray")
+                        {
+                            // BitmapImageのPixelFormatをPbgra32に変換する
+                            FormatConvertedBitmap bitmap = new FormatConvertedBitmap((BitmapSource)imageObject.Source, PixelFormats.Pbgra32, null, 0);
+
+                            // 画像の大きさに従った配列を作る
+                            int width = bitmap.PixelWidth;
+                            int height = bitmap.PixelHeight;
+                            byte[] originalPixcels = new byte[width * height * 4];
+                            byte[] inversedPixcels = new byte[width * height * 4];
+
+                            // BitmapSourceから配列にコピー
+                            int stride = (width * bitmap.Format.BitsPerPixel + 7) / 8;
+                            bitmap.CopyPixels(originalPixcels, stride, 0);
+
+                            // 色を白黒にする
+                            for (int x = 0; x < originalPixcels.Length; x = x + 4)
+                            {
+                                var grayAverage = (originalPixcels[x] + originalPixcels[x + 1] + originalPixcels[x + 2]) / 3;
+
+                                inversedPixcels[x] = (byte)grayAverage;
+                                inversedPixcels[x + 1] = (byte)grayAverage;
+                                inversedPixcels[x + 2] = (byte)grayAverage;
+                                inversedPixcels[x + 3] = originalPixcels[x + 3];
+                            }
+
+                            // 配列からBitmaopSourceを作る
+                            BitmapSource inversedBitmap = BitmapSource.Create(width, height, 96, 96, PixelFormats.Pbgra32, null, inversedPixcels, stride);
+
+                            // BitmapSourceを表示する
+                            imageObject.Source = inversedBitmap;
+                        }
+                    }
+
                     imageObject.Visibility = Visibility.Visible;
 
                     string imageAnimeIsSync = "sync";
@@ -2021,9 +2058,9 @@ namespace KokoroUpTime
         // ハートゲージの針の角度に関する計算
         private void CalcAngle()
         {
-            Point currentLocation = this.PointToScreen(Mouse.GetPosition(this));
+            System.Windows.Point currentLocation = this.PointToScreen(Mouse.GetPosition(this));
 
-            Point knobCenter = this.SelectHeartImage.PointToScreen(new Point(this.SelectHeartImage.ActualWidth * 0.5, this.SelectHeartImage.ActualHeight * 0.7));
+            System.Windows.Point knobCenter = this.SelectHeartImage.PointToScreen(new System.Windows.Point(this.SelectHeartImage.ActualWidth * 0.5, this.SelectHeartImage.ActualHeight * 0.7));
 
             double radians = Math.Atan((currentLocation.Y - knobCenter.Y) / (currentLocation.X - knobCenter.X));
 
