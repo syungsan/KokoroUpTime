@@ -167,6 +167,7 @@ namespace KokoroUpTime
                 ["teacher_image"] = this.TeacherImage,
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage, //
                 ["kind_of_feeling_input_image"] = this.KindOfFeelingInputImage, //
+                ["shiroji_small_left_down_image"] = this.ShirojiSmallLeftDownImage, //
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -264,6 +265,9 @@ namespace KokoroUpTime
                 ["main_msg_grid"] = this.MainMessageGrid, //
                 ["music_info_grid"] = this.MusicInfoGrid, //
                 ["exit_back_grid"] = this.ExitBackGrid, //
+
+                ["hot_word_button_grid"] = this.HotWordButtonGrid, //
+                ["hot_word_comment_grid"] = this.HotWordCommentGrid, //
             };
 
             this.borderObjects = new Dictionary<string, Border>
@@ -378,6 +382,9 @@ namespace KokoroUpTime
             this.ChallengeTimeTitleBorder.Visibility = Visibility.Hidden; //
             this.ChallengeTimeTitleTextBlock.Visibility = Visibility.Hidden; //
 
+            this.HotWordButtonGrid.Visibility = Visibility.Hidden; //
+            this.HotWordCommentGrid.Visibility = Visibility.Hidden; //
+            this.ShirojiSmallLeftDownImage.Visibility = Visibility.Hidden; //
 
             this.Let_sTryTitleBorder.Visibility = Visibility.Hidden; //
 
@@ -624,37 +631,10 @@ namespace KokoroUpTime
 
                     if (this.scenarios[this.scenarioCount].Count > 5 && this.scenarios[this.scenarioCount][5] != "")
                     {
-                         if (this.scenarios[this.scenarioCount][5] == "gray")
+                        if (this.scenarios[this.scenarioCount][5] == "gray")
                         {
-                            // BitmapImageのPixelFormatをPbgra32に変換する
-                            FormatConvertedBitmap bitmap = new FormatConvertedBitmap((BitmapSource)imageObject.Source, PixelFormats.Pbgra32, null, 0);
-
-                            // 画像の大きさに従った配列を作る
-                            int width = bitmap.PixelWidth;
-                            int height = bitmap.PixelHeight;
-                            byte[] originalPixcels = new byte[width * height * 4];
-                            byte[] inversedPixcels = new byte[width * height * 4];
-
-                            // BitmapSourceから配列にコピー
-                            int stride = (width * bitmap.Format.BitsPerPixel + 7) / 8;
-                            bitmap.CopyPixels(originalPixcels, stride, 0);
-
-                            // 色を白黒にする
-                            for (int x = 0; x < originalPixcels.Length; x = x + 4)
-                            {
-                                var grayAverage = (originalPixcels[x] + originalPixcels[x + 1] + originalPixcels[x + 2]) / 3;
-
-                                inversedPixcels[x] = (byte)grayAverage;
-                                inversedPixcels[x + 1] = (byte)grayAverage;
-                                inversedPixcels[x + 2] = (byte)grayAverage;
-                                inversedPixcels[x + 3] = originalPixcels[x + 3];
-                            }
-
-                            // 配列からBitmaopSourceを作る
-                            BitmapSource inversedBitmap = BitmapSource.Create(width, height, 96, 96, PixelFormats.Pbgra32, null, inversedPixcels, stride);
-
                             // BitmapSourceを表示する
-                            imageObject.Source = inversedBitmap;
+                            imageObject.Source = this.Image2Gray(imageObject.Source);
                         }
                     }
 
@@ -1463,6 +1443,38 @@ namespace KokoroUpTime
                     this.ScenarioPlay();
                 }
             }
+        }
+
+        private BitmapSource Image2Gray(ImageSource originalImageSource)
+        {
+            // BitmapImageのPixelFormatをPbgra32に変換する
+            FormatConvertedBitmap bitmap = new FormatConvertedBitmap((BitmapSource)originalImageSource, PixelFormats.Pbgra32, null, 0);
+
+            // 画像の大きさに従った配列を作る
+            int width = bitmap.PixelWidth;
+            int height = bitmap.PixelHeight;
+            byte[] originalPixcels = new byte[width * height * 4];
+            byte[] grayPixcels = new byte[width * height * 4];
+
+            // BitmapSourceから配列にコピー
+            int stride = (width * bitmap.Format.BitsPerPixel + 7) / 8;
+            bitmap.CopyPixels(originalPixcels, stride, 0);
+
+            // 色を白黒にする
+            for (int x = 0; x < originalPixcels.Length; x = x + 4)
+            {
+                var grayAverage = (originalPixcels[x] + originalPixcels[x + 1] + originalPixcels[x + 2]) / 3;
+
+                grayPixcels[x] = (byte)grayAverage;
+                grayPixcels[x + 1] = (byte)grayAverage;
+                grayPixcels[x + 2] = (byte)grayAverage;
+                grayPixcels[x + 3] = originalPixcels[x + 3]; // アルファ値の維持
+            }
+
+            // 配列からBitmaopSourceを作る
+            BitmapSource grayBitmap = BitmapSource.Create(width, height, 96, 96, PixelFormats.Pbgra32, null, grayPixcels, stride);
+
+            return grayBitmap;
         }
 
         // アニメーション（ストーリーボード）の処理

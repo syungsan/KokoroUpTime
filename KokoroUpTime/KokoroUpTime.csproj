@@ -43,6 +43,7 @@
     <None Remove="Images\background_08.png" />
     <None Remove="Images\background_09.png" />
     <None Remove="Images\background_10.png" />
+    <None Remove="Images\background_12.png" />
     <None Remove="Images\background_ending.png" />
     <None Remove="Images\background_mokume.png" />
     <None Remove="Images\background_mokume2.PNG" />
@@ -64,6 +65,10 @@
     <None Remove="Images\face_small_bubble.png" />
     <None Remove="Images\feeling_value.png" />
     <None Remove="Images\good_feeling.png" />
+    <None Remove="Images\hot_word_button1.png" />
+    <None Remove="Images\hot_word_button2.png" />
+    <None Remove="Images\hot_word_button3.png" />
+    <None Remove="Images\hot_word_button4.png" />
     <None Remove="Images\im_remember.png" />
     <None Remove="Images\ite07_solo.gif" />
     <None Remove="Images\item00_book.png" />
@@ -168,6 +173,7 @@
     <None Remove="Images\shiroji_04.png" />
     <None Remove="Images\short_bubble_left.png" />
     <None Remove="Images\short_bubble_right_up.png" />
+    <None Remove="Images\small_bubble_center_down.png" />
     <None Remove="Images\small_bubble_left.png" />
     <None Remove="Images\small_bubble_left_down_blue.png" />
     <None Remove="Images\small_bubble_left_down_yellow.png" />
@@ -231,6 +237,7 @@
     <Resource Include="Images\background_08.png" />
     <Resource Include="Images\background_09.png" />
     <Resource Include="Images\background_10.png" />
+    <Resource Include="Images\background_12.png" />
     <Resource Include="Images\background_ending.png" />
     <Resource Include="Images\background_mokume.png" />
     <Resource Include="Images\background_mokume2.PNG" />
@@ -246,6 +253,10 @@
     <Resource Include="Images\compare_akamaru_value_frame.png" />
     <Resource Include="Images\compare_aosuke_value_frame.png" />
     <Resource Include="Images\complete_button.png" />
+    <Resource Include="Images\hot_word_button1.png" />
+    <Resource Include="Images\hot_word_button2.png" />
+    <Resource Include="Images\hot_word_button3.png" />
+    <Resource Include="Images\hot_word_button4.png" />
     <Resource Include="Images\im_remember.png" />
     <Resource Include="Images\ite07_solo.gif" />
     <Resource Include="Images\item00_book.png" />
@@ -301,6 +312,7 @@
     <Resource Include="Images\return_to_top.png" />
     <Resource Include="Images\short_bubble_left.png" />
     <Resource Include="Images\short_bubble_right_up.png" />
+    <Resource Include="Images\small_bubble_center_down.png" />
     <Resource Include="Images\small_bubble_left_down_blue.png" />
     <Resource Include="Images\small_bubble_left_down_yellow.png" />
     <Resource Include="Images\small_bubble_right_down.png" />

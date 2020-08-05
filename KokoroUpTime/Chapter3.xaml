@@ -670,7 +670,7 @@
     <Viewbox>
         <Grid Height="1080" Width="1920">
             <Grid x:Name="BaseGrid">
-                <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/water_frame.png"/>
+                <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_12.png"/>
             </Grid>
             <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
                 <Image x:Name="MangaTitleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/manga1_title.png" Margin="86,24,0,0" Height="98" Width="1752"/>
@@ -807,10 +807,10 @@
                 <Image x:Name="ChallengeItemImage" HorizontalAlignment="Left" Height="489" Margin="1098,172,0,0" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png"/>
             </Grid>
             <Grid x:Name="ChallengeTimeGrid">
-                <Border x:Name="ChallengeTimeTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,261,0,540" Background="#FFFFC000">
+                <Border x:Name="ChallengeTimeTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,261,0,540" Background="#FFFFC000" d:IsHidden="True">
                     <TextBlock x:Name="ChallengeTimeTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="180" Foreground="#FF9966FF" FontWeight="Normal" TextAlignment="Center"/>
                 </Border>
-                <Grid x:Name="ChildrenFeelingGrid">
+                <Grid x:Name="ChildrenFeelingGrid" d:IsHidden="True">
                     <Border x:Name="ChildrenFeelingTitleBorder" BorderThickness="1" Margin="0,45,0,860" Background="#FFED99A1">
                         <TextBlock x:Name="ChildrenFeelingTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" TextAlignment="Center"/>
                     </Border>
@@ -844,9 +844,27 @@
                     </Button>
                     <Button x:Name="SizeOfFeelingInputButton" Content="(      )" HorizontalAlignment="Left" Margin="1244,653,0,0" VerticalAlignment="Top" FontSize="140" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click"/>
                 </Grid>
-                <Border x:Name="Let_sTryTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,131,0,771" Background="#FFED7D31">
+                <Border x:Name="Let_sTryTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,131,0,771" Background="#FFED7D31" d:IsHidden="True">
                     <TextBlock x:Name="Let_sTryTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" Foreground="#FF4472C4" FontWeight="Normal" TextAlignment="Center"/>
                 </Border>
+                <Grid x:Name="HotWordButtonGrid">
+                    <Button x:Name="HotWord1Button" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}" Margin="519,134,519,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment">
+                        <Image x:Name="HotWord1ButtonImage" Source="/Images/hot_word_button1.png"/>
+                    </Button>
+                    <Button x:Name="HotWord2Button" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}" Margin="519,347,519,0" VerticalAlignment="Top">
+                        <Image x:Name="HotWord2ButtonImage" Source="/Images/hot_word_button2.png"/>
+                    </Button>
+                    <Button x:Name="HotWord3Button" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}" Margin="519,573,519,0" VerticalAlignment="Top">
+                        <Image x:Name="HotWord3ButtonImage" Source="/Images/hot_word_button3.png"/>
+                    </Button>
+                    <Button x:Name="HotWord4Button" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}" Margin="519,789,519,0" VerticalAlignment="Top">
+                        <Image x:Name="HotWord4ButtonImage" Source="/Images/hot_word_button4.png"/>
+                    </Button>
+                </Grid>
+                <Grid x:Name="HotWordCommentGrid" Height="216" Margin="41,294,1447,570" Width="432">
+                    <Image x:Name="HotWordCommentImage" Source="/Images/small_bubble_center_down.png"/>
+                    <TextBlock x:Name="HotWordCommentTextBlock" Text="タップして例を確認するのじゃ！" TextWrapping="Wrap" FontSize="48" Margin="35,13,32,61"/>
+                </Grid>
             </Grid>
             <Grid x:Name="SelectFeelingGrid" d:IsHidden="True">
                 <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400">
@@ -1033,7 +1051,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid x:Name="ShirojiGrid" d:IsHidden="True">
+            <Grid x:Name="ShirojiGrid">
                 <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="1215,187,126,266" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -1054,7 +1072,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ShirojiSmallRightUpImage" HorizontalAlignment="Left" Height="410" Margin="1419,114,0,0" VerticalAlignment="Top" Width="379" Source="/Images/shiroji_03.png" Stretch="Uniform" StretchDirection="Both"/>
+                <Image x:Name="ShirojiSmallRightUpImage" HorizontalAlignment="Left" Height="410" Margin="1419,114,0,0" VerticalAlignment="Top" Width="379" Source="/Images/shiroji_03.png" Stretch="Uniform" StretchDirection="Both" d:IsHidden="True"/>
                 <Image x:Name="ShirojiSmallRightDownImage" Source="/Images/shiroji_02.png" RenderTransformOrigin="0.5,0.5" Margin="1321,580,162,27" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -1088,6 +1106,16 @@
                 </Image>
                 <Image x:Name="ShirojiEndingImage" HorizontalAlignment="Left" Height="570" Margin="1204,485,0,0" VerticalAlignment="Top" Width="526" Source="/Images/shiroji_01.png" d:IsHidden="True"/>
                 <Image x:Name="ShirojiLeftImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_02.png" Width="579" Height="627" Margin="123,187,1218,266" d:IsHidden="True">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="ShirojiSmallLeftDownImage" Source="/Images/shiroji_02.png" RenderTransformOrigin="0.5,0.5" Margin="10,533,1473,74" d:LayoutOverrides="VerticalAlignment">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>

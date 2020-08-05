@@ -216,3 +216,11 @@ msg,main_msg,あたたかい言葉には、4つの種類があるぞい。鬱鬱
 wait
 msg,main_msg,それぞれの言葉がどのようなものか、見てみようかの。,白じい
 next
+jump,hot_word_button
+scene,ホットワードボタン
+reset
+image,bg_image,background_12.png
+grid,hot_word_button_grid
+image,shiroji_small_left_down_image
+grid,hot_word_comment_grid
+wait,no_button
