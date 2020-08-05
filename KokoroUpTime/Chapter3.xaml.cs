@@ -130,6 +130,7 @@ namespace KokoroUpTime
                 ["bg_image"] = this.BackgroundImage, //
                 ["manga_title_image"] = this.MangaTitleImage, //
                 ["manga_image"] = this.MangaImage, //
+                ["item_center_up_image"] = this.ItemCenterUpImage, //
                 ["item_center_image"] = this.ItemCenterImage, //
                 ["item_left_image"] = this.ItemLeftImage, //
                 ["item_detail_info_image"] = this.ItemDetailInfoImage, //
@@ -201,6 +202,9 @@ namespace KokoroUpTime
                 ["item_book_title_text"] = this.ItemBookTitleTextBlock,
                 ["challenge_time_title_text"] = this.ChallengeTimeTitleTextBlock, //
 
+                ["let_s_try_title_text"] = this.Let_sTryTitleTextBlock, //
+                
+
                 ["children_feeling_title_text"] = ChildrenFeelingTitleTextBlock, //
                 ["children_feeling_comment_text"] = this.ChildrenFeelingCommentTextBlock, //
                 ["kind_of_feeling_title_text"] = this.KindOfFeelingTitleTextBlock, //
@@ -266,6 +270,7 @@ namespace KokoroUpTime
             {
                 ["challenge_time_title_border"] = this.ChallengeTimeTitleBorder, //
                 ["children_feeling_title_border"] = this.ChildrenFeelingTitleBorder, //
+                ["let_s_try_title_border"] = this.Let_sTryTitleBorder, //
             };
         }
 
@@ -310,6 +315,7 @@ namespace KokoroUpTime
             this.RuleBoardCheck3Box.Visibility = Visibility.Hidden;
             this.MangaTitleImage.Visibility = Visibility.Hidden; //
             this.MangaImage.Visibility = Visibility.Hidden; //
+            this.ItemCenterUpImage.Visibility = Visibility.Hidden; //
             this.ItemCenterImage.Visibility = Visibility.Hidden; //
             this.ItemLeftImage.Visibility = Visibility.Hidden; //
             this.ItemDetailInfoImage.Visibility = Visibility.Hidden; //
@@ -371,6 +377,9 @@ namespace KokoroUpTime
             this.CoverLayerImage.Visibility = Visibility.Hidden;
             this.ChallengeTimeTitleBorder.Visibility = Visibility.Hidden; //
             this.ChallengeTimeTitleTextBlock.Visibility = Visibility.Hidden; //
+
+
+            this.Let_sTryTitleBorder.Visibility = Visibility.Hidden; //
 
             this.ChildrenFeelingTitleBorder.Visibility = Visibility.Hidden; //
             this.ChildrenFaceLeftCenterImage.Visibility = Visibility.Hidden; //
@@ -2013,14 +2022,17 @@ namespace KokoroUpTime
         {
             Mouse.Capture(this);
 
-            var dragObjName = (e.Source as FrameworkElement).Name;
-
-            if (dragObjName == "SelectNeedleImage")
+            if (e.Source as FrameworkElement != null)
             {
-                this.isMouseDown = true;
-            }
+                var dragObjName = (e.Source as FrameworkElement).Name;
 
-            if (this.SelectHeartGrid.Visibility == Visibility.Visible && (this.scene == "赤丸くんのきもちの大きさ" || this.scene == "青助くんのきもちの大きさ"))
+                if (dragObjName == "SelectNeedleImage")
+                {
+                    this.isMouseDown = true;
+                }
+            }
+            
+            if (this.isMouseDown && this.SelectHeartGrid.Visibility == Visibility.Visible && (this.scene == "赤丸くんのきもちの大きさ" || this.scene == "青助くんのきもちの大きさ"))
             {
                 this.CalcAngle();
 

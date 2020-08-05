@@ -1769,11 +1769,14 @@ namespace KokoroUpTime
         {
             Mouse.Capture(this);
 
-            var dragObjName = (e.Source as FrameworkElement).Name;
-
-            if (dragObjName == "SelectNeedleImage")
+            if (e.Source as FrameworkElement != null)
             {
-                this.isMouseDown = true;
+                var dragObjName = (e.Source as FrameworkElement).Name;
+
+                if (dragObjName == "SelectNeedleImage")
+                {
+                    this.isMouseDown = true;
+                }
             }
 
             if (this.isMouseDown && this.SelectHeartGrid.Visibility == Visibility.Visible && (this.scene == "赤丸くんのきもちの大きさ" || this.scene == "青助くんのきもちの大きさ"))
