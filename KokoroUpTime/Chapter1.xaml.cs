@@ -1152,16 +1152,16 @@ namespace KokoroUpTime
             // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
             text = text.Replace("鬱", "\u2028");
 
-            if (this.dataOption.IsWordRecognition == true)
+            if (this.dataOption.InputMethod == 1 || this.dataOption.InputMethod == 2)
             {
-                text = text.Replace("【name】", initConfig.userName);
+                text = text.Replace("【name】", this.initConfig.userName);
             }
-            else
+            else if (this.dataOption.InputMethod == 0)
             {
                 text = text.Replace("【name】", "n");
             }
 
-            text = text.Replace("【くん／ちゃん／さん】", initConfig.userTitle);
+            text = text.Replace("【くん／ちゃん／さん】", this.initConfig.userTitle);
 
             return text;
         }
@@ -1209,7 +1209,7 @@ namespace KokoroUpTime
         {
             this.word_num = 0;
 
-            if (this.dataOption.IsWordRecognition == false && textObject.Name == "MainMessageTextBlock")
+            if (this.dataOption.InputMethod == 0 && textObject.Name == "MainMessageTextBlock")
             {
                 this.MainMessageFrontText.Text = "";
                 this.MainMessageBackText.Text = "";
@@ -1227,22 +1227,22 @@ namespace KokoroUpTime
             // 一文字ずつメッセージ表示（Inner Func）
             void ViewMsg(object sender, EventArgs e)
             {
-                if (this.dataOption.IsWordRecognition == false && textObject.Name == "MainMessageTextBlock" && this.scene == "前説")
+                if (this.dataOption.InputMethod == 0 && textObject.Name == "MainMessageTextBlock" && this.scene == "前説")
                 {
                     if (this.word_num > 0 && message.Substring(this.word_num - 1, 1) == "n") // && this.MainMessageBackText.Text == null)
                     {
                         message = message.Replace("n", "");
 
-                        // Name.bmpを収める場所の設定
-                        string nameBmp = "Name.bmp";
+                        // name.pngを収める場所の設定
+                        string namePng = "name.png";
                         string dirPath = $"./Log/{initConfig.userName}_{initConfig.userTitle}/";
 
-                        string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
+                        string namePngPath = System.IO.Path.Combine(dirPath, namePng);
 
                         // 実行ファイルの場所を絶対パスで取得
                         var startupPath = FileUtils.GetStartupPath();
 
-                        this.NameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
+                        this.NameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{namePngPath}", UriKind.Absolute));
                     }
                     else if (this.word_num > 0 && NameImage.Source != null) // && this.MainMessageFrontText != null)
                     {

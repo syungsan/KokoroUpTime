@@ -28,7 +28,7 @@ namespace KokoroUpTime
 
         public bool IsAddRubi { get; set; }
 
-        public bool IsWordRecognition { get; set; }
+        public int InputMethod { get; set; }
     }
 
     public class DataItem

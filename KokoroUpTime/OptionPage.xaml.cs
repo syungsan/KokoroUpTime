@@ -88,13 +88,17 @@ namespace KokoroUpTime
                 this.RubiOffButton.Foreground = new SolidColorBrush(Colors.Blue);
             }
 
-            if (this.dataOption.IsWordRecognition == true)
+            if (this.dataOption.InputMethod == 0)
             {
-                this.WordRecognitionOnButton.Foreground = new SolidColorBrush(Colors.Blue);
+                this.HandWritingButton.Foreground = new SolidColorBrush(Colors.Blue);
             }
-            else if (this.dataOption.IsWordRecognition == false)
+            else if (this.dataOption.InputMethod == 1)
             {
-                this.WordRecognitionOffButton.Foreground = new SolidColorBrush(Colors.Blue);
+                this.WordRecognitionButton.Foreground = new SolidColorBrush(Colors.Blue);
+            }
+            else if (this.dataOption.InputMethod == 2)
+            {
+                this.KeyboardButton.Foreground = new SolidColorBrush(Colors.Blue);
             }
         }
 
@@ -204,25 +208,39 @@ namespace KokoroUpTime
                 }
             }
 
-            if (button.Name == "WordRecognitionOnButton")
+            if (button.Name == "HandWritingButton")
             {
                 if (button.Foreground != new SolidColorBrush(Colors.Blue))
                 {
                     button.Foreground = new SolidColorBrush(Colors.Blue);
-                    this.WordRecognitionOffButton.Foreground = new SolidColorBrush(Colors.White);
+                    this.WordRecognitionButton.Foreground = new SolidColorBrush(Colors.White);
+                    this.KeyboardButton.Foreground = new SolidColorBrush(Colors.White);
 
-                    this.dataOption.IsWordRecognition = true;
+                    this.dataOption.InputMethod = 0;
                 }
             }
 
-            if (button.Name == "WordRecognitionOffButton")
+            if (button.Name == "WordRecognitionButton")
             {
                 if (button.Foreground != new SolidColorBrush(Colors.Blue))
                 {
                     button.Foreground = new SolidColorBrush(Colors.Blue);
-                    this.WordRecognitionOnButton.Foreground = new SolidColorBrush(Colors.White);
+                    this.HandWritingButton.Foreground = new SolidColorBrush(Colors.White);
+                    this.KeyboardButton.Foreground = new SolidColorBrush(Colors.White);
 
-                    this.dataOption.IsWordRecognition = false;
+                    this.dataOption.InputMethod = 1;
+                }
+            }
+
+            if (button.Name == "KeyboardButton")
+            {
+                if (button.Foreground != new SolidColorBrush(Colors.Blue))
+                {
+                    button.Foreground = new SolidColorBrush(Colors.Blue);
+                    this.WordRecognitionButton.Foreground = new SolidColorBrush(Colors.White);
+                    this.HandWritingButton.Foreground = new SolidColorBrush(Colors.White);
+
+                    this.dataOption.InputMethod = 2;
                 }
             }
 
@@ -240,7 +258,7 @@ namespace KokoroUpTime
             {
                 using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                 {
-                    connection.Execute($@"UPDATE DataOption SET IsPlaySE = '{Convert.ToInt32(this.dataOption.IsPlaySE)}', IsPlayBGM = '{Convert.ToInt32(this.dataOption.IsPlayBGM)}', MessageSpeed = '{this.dataOption.MessageSpeed}', IsAddRubi = '{Convert.ToInt32(this.dataOption.IsAddRubi)}', IsWordRecognition = '{Convert.ToInt32(this.dataOption.IsWordRecognition)}' WHERE Id = 1;");
+                    connection.Execute($@"UPDATE DataOption SET IsPlaySE = '{Convert.ToInt32(this.dataOption.IsPlaySE)}', IsPlayBGM = '{Convert.ToInt32(this.dataOption.IsPlayBGM)}', MessageSpeed = '{this.dataOption.MessageSpeed}', IsAddRubi = '{Convert.ToInt32(this.dataOption.IsAddRubi)}', InputMethod = '{this.dataOption.InputMethod}' WHERE Id = 1;");
                 }
             }
         }

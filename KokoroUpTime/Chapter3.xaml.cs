@@ -1305,11 +1305,11 @@ namespace KokoroUpTime
             // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
             text = text.Replace("鬱", "\u2028");
 
-            if (this.dataOption.IsWordRecognition == true)
+            if (this.dataOption.InputMethod == 1 || this.dataOption.InputMethod == 2)
             {
                 text = text.Replace("【name】", initConfig.userName);
             }
-            else
+            else if (this.dataOption.InputMethod == 0)
             {
                 text = text.Replace("【name】", "n");
             }
@@ -1368,6 +1368,7 @@ namespace KokoroUpTime
             }
         }
 
+        /*
         void ShowMessage_Back(TextBlock textObject, string message, object obj=null)
         {
             this.word_num = 0;
@@ -1444,6 +1445,7 @@ namespace KokoroUpTime
                 }
             }
         }
+        */
 
         private BitmapSource Image2Gray(ImageSource originalImageSource)
         {
@@ -1546,17 +1548,23 @@ namespace KokoroUpTime
             {
                 if (button.Name == "WishCheckButton")
                 {
+                    this.isClickable = false;
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
 
                 if (button.Name == "ImRememberButton")
                 {
+                    this.isClickable = false;
+
                     JumpTo("manga");
                 }
 
                 if (button.Name == "CheckMangaButton")
                 {
+                    this.isClickable = false;
+
                     if (this.scene == "キミちゃんのきもちを考える1")
                     {
                         JumpTo("manga_kimi_part");
@@ -1570,6 +1578,8 @@ namespace KokoroUpTime
 
                 if (button.Name == "MangaPrevBackButton")
                 {
+                    this.isClickable = false;
+                    
                     if (this.scene == "キミちゃんのきもちを考える1")
                     {
                         JumpTo("think_kimi's_feeling_1");
@@ -1583,6 +1593,8 @@ namespace KokoroUpTime
 
                 if (button.Name == "FeelingNextGoButton")
                 {
+                    this.isClickable = false;
+
                     if (this.scene == "キミちゃんのきもちを考える1")
                     {
                         JumpTo("chiku_chiku_kotoba");
@@ -1593,8 +1605,6 @@ namespace KokoroUpTime
                         JumpTo("think_kimi's_feeling_1");
                     }
                 }
-
-                
             }
 
             

@@ -123,7 +123,7 @@ namespace KokoroUpTime
 
                     foreach (var row in option)
                     {
-                        this.dataOption.IsWordRecognition = row.IsWordRecognition;
+                        this.dataOption.InputMethod = row.InputMethod;
 
                         this.dataOption.IsPlaySE = row.IsPlaySE;
 
@@ -228,8 +228,8 @@ namespace KokoroUpTime
 
             foreach (var confPath in new string[2] { $"./Log/{this.initConfig.userName}_{this.initConfig.userTitle}/user.conf", "./Log/system.conf" })
             {
-                if (File.Exists(confPath))
-                {
+                // if (File.Exists(confPath))
+                // {
                     var accessTime = DateTime.Now.ToString();
 
                     var initConfigs = new List<List<string>>();
@@ -242,7 +242,7 @@ namespace KokoroUpTime
                     {
                         csv.Write(initConfigs);
                     }
-                }
+                // }
             }
         }
 
@@ -250,15 +250,15 @@ namespace KokoroUpTime
         {
             string userDirPath = $"./Log/{this.initConfig.userName}_{this.initConfig.userTitle}/";
 
-            if (!this.dataOption.IsWordRecognition)
+            if (this.dataOption.InputMethod == 0)
             {
                 // 実行ファイルの場所を絶対パスで取得
                 var startupPath = FileUtils.GetStartupPath();
 
-                this.CurrentNameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{userDirPath}/Name.bmp", UriKind.Absolute));
+                this.CurrentNameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{userDirPath}/name.png", UriKind.Absolute));
                 this.CurrentUserTextBlock.Text = this.initConfig.userTitle;
             }
-            else
+            else if (this.dataOption.InputMethod == 1 || this.dataOption.InputMethod == 2)
             {
                 this.CurrentNameImage.Source = null;
                 this.CurrentUserTextBlock.Text = $"{this.initConfig.userName}{this.initConfig.userTitle}";
@@ -282,7 +282,7 @@ namespace KokoroUpTime
                 {
                     string[] userInfos;
 
-                    bool isWordRecognition = false;
+                    int inputMethod = 0;
 
                     using (var csv = new CsvReader($"{dirPath}/user.conf"))
                     {
@@ -297,20 +297,20 @@ namespace KokoroUpTime
 
                     using (var connection = new SQLiteConnection(individualDbPath))
                     {
-                        var option = connection.Query<DataOption>("SELECT IsWordRecognition FROM DataOption WHERE Id = 1;");
+                        var option = connection.Query<DataOption>("SELECT InputMethod FROM DataOption WHERE Id = 1;");
 
                         foreach (var row in option)
                         {
-                            isWordRecognition = row.IsWordRecognition;
+                            inputMethod = row.InputMethod;
                         }
                     }
  
-                    if (!isWordRecognition)
+                    if (inputMethod == 0)
                     {
                         var startupPath = FileUtils.GetStartupPath();
-                        items.Add(new UserInfoItem() { NameBmpPath = $@"{startupPath}/{dirPath}/Name.bmp", UserInfo = $"{userInfos[1]}, {userInfos[2]}" });
+                        items.Add(new UserInfoItem() { NameBmpPath = $@"{startupPath}/{dirPath}/name.png", UserInfo = $"{userInfos[1]}, {userInfos[2]}" });
                     }
-                    else
+                    else if (inputMethod == 1 || inputMethod == 2)
                     {
                         items.Add(new UserInfoItem() { NameBmpPath = null, UserInfo = $"{userInfos[0]}{userInfos[1]}, {userInfos[2]}" });
                     }
@@ -358,7 +358,13 @@ namespace KokoroUpTime
                     break;
 
 
-                case "名前入力":
+                case "なまえ入力":
+
+                    NameInputPage nameInputPage = new NameInputPage();
+
+                    // nameInputPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                    this.NavigationService.Navigate(nameInputPage);
 
                     break;
 
@@ -383,7 +389,7 @@ namespace KokoroUpTime
                     foreach (var item in this.SelectDataListBox.SelectedItems)
                     {
                         var selectedUserDataPath = this.dirPaths[this.SelectDataListBox.Items.IndexOf(item)];
-
+                        // ここからだよん
                     }
 
                     this.SelectDataListGrid.Visibility = Visibility.Hidden;

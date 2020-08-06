@@ -391,10 +391,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Datas\default.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Scenarios\chapter3.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scenarios\NameInput.csv">
+    <None Update="Scenarios\name_input.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter6.csv">
@@ -448,6 +451,10 @@
     <Page Update="Chapter2.xaml">
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Datas\" />
   </ItemGroup>
 
 </Project>

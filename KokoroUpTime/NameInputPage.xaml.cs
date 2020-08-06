@@ -15,14 +15,9 @@ using CsvReadWrite;
 using System.Diagnostics;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using System.IO;
 using System.Linq;
-using System.Security.AccessControl;
-using WMPLib;
-using System.Windows.Ink;
-using System.Media;
 using SQLite;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 
 namespace KokoroUpTime
 {
@@ -31,11 +26,9 @@ namespace KokoroUpTime
     /// </summary>
     public partial class NameInputPage : Page
     {
-        // メッセージスピードはオプションで設定できるようにする
-        private float MESSAGE_SPEED = 30000.0f;
+        private float INIT_MESSAGE_SPEED = 30.0f;
 
-        // 気持ちのリスト
-        private string[] EDIT_BUTTON = {"えんぴつ", "けしごむ", "すべてけす", "かんせい"};
+        private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
 
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
@@ -47,12 +40,6 @@ namespace KokoroUpTime
         // マウスクリックを可能にするかどうかのフラグ
         private bool isClickable = false;
 
-        // 何回タップしたか
-        private int tapCount = 0;
-
-        // 気持ちの大きさ
-        private int feelingSize = 0;
-
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
         private int word_num;
@@ -63,28 +50,9 @@ namespace KokoroUpTime
         private Dictionary<string, Button> buttonObjects = null;
         private Dictionary<string, Grid> gridObjects = null;
 
-
-        // 音関連
-        private WindowsMediaPlayer mediaPlayer;
-        private SoundPlayer sePlayer = null;
-
-        // データベースに収めるデータモデルのインスタンス
-        private DataCapter1 data;
-
-        // データベースのパスを通す
-        private string dbPath;
-
-        // ゲームの切り替えシーン
-        private string scene;
-
-        // 仮のユーザネームを設定
-        public string userName = "なまえ";
-
-        // なったことのある自分の気持ち記録用
-        private List<string> myKindOfGoodFeelings = new List<string>();
-        private List<string> myKindOfBadFeelings = new List<string>();
-
-       
+        private int selectInputMethod = 0;
+        private string selectUserTitle = "";
+        private string newUserName = "";
 
         public NameInputPage()
         {
@@ -93,47 +61,19 @@ namespace KokoroUpTime
             // Hide host's navigation UI
             this.ShowsNavigationUI = false;
 
-            // メディアプレーヤークラスのインスタンスを作成する
-            this.mediaPlayer = new WindowsMediaPlayer();
-
-            // マウスイベントの設定
-            this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
-            this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
-            this.MouseMove += new MouseEventHandler(OnMouseMove);
-
-            // データモデルインスタンス確保
-            this.data = new DataCapter1();
-
-            // データベース本体のファイルを作成する
-            string dbName = $"{userName}.sqlite";
-            string dirPath = $"./Log/{userName}/";
-
-            // FileUtils.csからディレクトリ作成のメソッド
-            // 各ユーザの初回起動のとき実行ファイルの場所下のLogフォルダにユーザネームのフォルダを作る
-            DirectoryUtils.SafeCreateDirectory(dirPath);
-
-            this.dbPath = System.IO.Path.Combine(dirPath, dbName);
-
-            // 現在時刻を取得
-            this.data.CreatedAt = DateTime.Now.ToString();
-
-            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(dbPath))
-            {
-                // 仮（本当は名前を登録するタイミングで）
-                connection.CreateTable<DataOption>();
-                connection.CreateTable<DataProgress>();
-                connection.CreateTable<DataCapter1>();
-
-                // 毎回のアクセス日付を記録
-                connection.Insert(this.data);
-            }
-
             this.EditingModeItemsControl.ItemsSource = EDIT_BUTTON;
+
+            this.NameButtonImage.Source = null;
 
             this.InitControls();
         }
-        
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.scenarios = this.LoadScenario("./Scenarios/name_input.csv");
+            this.ScenarioPlay();
+        }
+
         private void InitControls()
         {
             // 各種コントロールに任意の文字列をあてがう
@@ -143,33 +83,28 @@ namespace KokoroUpTime
                 ["bg_image"] = this.BackgroundImage,
                 ["shiroji_right_image"] = this.ShirojiRightImage,
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
+                ["cover_layer_image"] = this.CoverLayerImage,
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
             {
                 ["main_msg"] = this.MainMessageTextBlock,
-                ["thin_msg"] = this.ThinMessageTextBlock,
-                
             };
 
             this.buttonObjects = new Dictionary<string, Button>
             {
-                
                 ["next_msg_button"] = this.NextMessageButton,
                 ["back_msg_button"] = this.BackMessageButton,
-                ["thin_msg_button"] = this.ThinMessageButton,
-                ["next_page_button"] = this.NextPageButton,
-                ["back_page_button"] = this.BackPageButton,
+                ["return_to_title_button"] = this.ReturnToTitleButton,
             };
 
             this.gridObjects = new Dictionary<string, Grid>
             {
-                ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid,
-                //["exit_back_grid"] = this.ExitBackGrid,
-
                 ["name_input_grid"] = this.NameInputGrid,
-              
+                ["select_input_method_grid"] = this.SelectInputMethodGrid,
+                ["select_user_title_grid"] = this.SelectUserTitleGrid,
+                ["make_user_name_complete_grid"] = this.MakeUserNameCompleteGrid,
             };
         }
 
@@ -177,47 +112,20 @@ namespace KokoroUpTime
         {
             // 各種コントロールを隠すことでフルリセット
 
-            
-            this.EndingGrid.Visibility = Visibility.Hidden;
             this.NameInputGrid.Visibility = Visibility.Hidden;
             this.CanvasGrid.Visibility = Visibility.Hidden;
 
-           
-            this.EndingMessageGrid.Visibility = Visibility.Hidden;
             this.MainMessageGrid.Visibility = Visibility.Hidden;
-           
-            //this.ExitBackGrid.Visibility = Visibility.Hidden;
             this.BackgroundImage.Visibility = Visibility.Hidden;
-        
-            this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
             this.ShirojiRightImage.Visibility = Visibility.Hidden;
-           
             this.MainMessageTextBlock.Visibility = Visibility.Hidden;
-            this.ThinMessageButton.Visibility = Visibility.Hidden;
-            this.ThinMessageTextBlock.Visibility = Visibility.Hidden;
             this.NextMessageButton.Visibility = Visibility.Hidden;
             this.BackMessageButton.Visibility = Visibility.Hidden;
-            this.NextPageButton.Visibility = Visibility.Hidden;
-            this.BackPageButton.Visibility = Visibility.Hidden;
-          
-            //this.CoverLayerImage.Visibility = Visibility.Hidden:
-
-
-         
-         
-           
-            this.EndingMessageTextBlock.Text = "";
-            
-            this.MainMessageTextBlock.Text = "";
-            this.ThinMessageTextBlock.Text = "";
-       
-        }
-
-        // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
-        public void SetScenario(string scenario)
-        {
-            this.scenarios = this.LoadScenario(scenario);
-            this.ScenarioPlay();
+            this.ReturnToTitleButton.Visibility = Visibility.Hidden;
+            this.SelectInputMethodGrid.Visibility = Visibility.Hidden;
+            this.CoverLayerImage.Visibility = Visibility.Hidden;
+            this.SelectUserTitleGrid.Visibility = Visibility.Hidden;
+            this.MakeUserNameCompleteGrid.Visibility = Visibility.Hidden;
         }
 
         // CSVから2次元配列へシナリオデータの収納（CsvReaderクラスを使用）
@@ -239,25 +147,12 @@ namespace KokoroUpTime
             // 処理分岐のフラグ
             var tag = this.scenarios[this.scenarioCount][0];
 
-            // メッセージ表示関連
-            this.word_num = 0;
-
             switch (tag)
             {
                 // フルリセット
                 case "reset":
 
                     this.ResetControls();
-
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-
-                    break;
-
-                // シーン名を取得
-                case "scene":
-
-                    this.scene = this.scenarios[this.scenarioCount][1]; ;
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -323,7 +218,7 @@ namespace KokoroUpTime
 
                     if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
                     {
-                       imageAnimeIsSync = this.scenarios[this.scenarioCount][4];
+                        imageAnimeIsSync = this.scenarios[this.scenarioCount][4];
                     }
 
                     if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
@@ -399,66 +294,6 @@ namespace KokoroUpTime
                     }
                     break;
 
-                // 流れない文字に対するTextBlock処理
-                case "text":
-
-                    this.position = this.scenarios[this.scenarioCount][1];
-
-                    var textObject = this.textBlockObjects[this.position];
-
-                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
-                    {
-                        var _text = this.scenarios[this.scenarioCount][2];
-
-                        var text = this.SequenceCheck(_text);
-
-                        textObject.Text = text;
-                    }
-
-                    // 色を変えれるようにする
-                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
-                    {
-                        var textColor = this.scenarios[this.scenarioCount][3];
-
-                        SolidColorBrush textColorBrush = new SolidColorBrush(Colors.Black);
-
-                        switch (textColor)
-                        {
-                            case "white":
-                                textColorBrush = new SolidColorBrush(Colors.White);
-                                break;
-
-                            case "red":
-                                textColorBrush = new SolidColorBrush(Colors.Red);
-                                break;
-                        }
-                        textObject.Foreground = textColorBrush;
-                    }
-                    textObject.Visibility = Visibility.Visible;
-
-                    string textAnimeIsSync = "sync";
-
-                    // テキストに対するアニメも一応用意
-                    if (this.scenarios[this.scenarioCount].Count > 5 && this.scenarios[this.scenarioCount][5] != "")
-                    {
-                        textAnimeIsSync = this.scenarios[this.scenarioCount][5];
-                    }
-
-                    if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
-                    {
-                        var textStoryBoard = this.scenarios[this.scenarioCount][4];
-
-                        textStoryBoard += $"_{this.position}";
-
-                        this.ShowAnime(storyBoard: textStoryBoard, isSync: textAnimeIsSync);
-                    }
-                    else
-                    {
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-                    }
-                    break;
-
                 // メッセージに対する待ち（メッセージボタンの表示切り替え）
                 case "wait":
 
@@ -483,31 +318,41 @@ namespace KokoroUpTime
 
                     break;
 
-                // 各場面に対する待ち（ページめくりボタンの表示切り替え）
-                case "next":
+                // 各種コントロールを個別に隠す処理
+                case "hide":
 
-                    this.NextPageButton.Visibility = Visibility.Visible;
-                    this.BackPageButton.Visibility = Visibility.Visible;
+                    // オブジェクトを消すときは後々ほとんどアニメで処理するようにする
+                    var hideTarget = this.scenarios[this.scenarioCount][1];
 
-                    this.isClickable = true;
-
-                    break;
-
-                // 漫画めくり
-                
-               
-
-                // テキストコントロール一般の文字を消す処理
-                case "clear":
-
-                    var clearTarget = this.scenarios[this.scenarioCount][1];
-
-                    switch (clearTarget)
+                    switch (hideTarget)
                     {
-                        case "text":
+                        case "image":
 
                             this.position = this.scenarios[this.scenarioCount][2];
-                            this.textBlockObjects[this.position].Text = "";
+                            this.imageObjects[this.position].Visibility = Visibility.Hidden;
+
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+
+                            break;
+
+                        case "grid":
+
+                            this.NextMessageButton.Visibility = Visibility.Hidden;
+                            this.BackMessageButton.Visibility = Visibility.Hidden;
+
+                            this.position = this.scenarios[this.scenarioCount][2];
+                            this.gridObjects[this.position].Visibility = Visibility.Hidden;
+
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+
+                            break;
+
+                        case "button":
+
+                            this.position = this.scenarios[this.scenarioCount][2];
+                            this.buttonObjects[this.position].Visibility = Visibility.Hidden;
 
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
@@ -516,103 +361,56 @@ namespace KokoroUpTime
                     }
                     break;
 
-  
+                case "jump":
 
-                case "wait_tap":
-
-                    this.isClickable = false;
-                    break;
-
-               
-
-                // 効果音
-                case "se":
-
-                    var seStatus = this.scenarios[this.scenarioCount][1];
-
-                    switch (seStatus)
-                    {
-                        case "play":
-
-                            var seFile = this.scenarios[this.scenarioCount][2];
-
-                            string exePath = Environment.GetCommandLineArgs()[0];
-                            string exeFullPath = System.IO.Path.GetFullPath(exePath);
-                            string startupPath = System.IO.Path.GetDirectoryName(exeFullPath);
-
-                            this.PlaySE(soundFile: $@"{startupPath}/Sounds/{seFile}");
-
-                            break;
-
-                        case "stop":
-
-                           
-                            break;
-                    }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
                     break;
-
-               
             }
         }
 
         string SequenceCheck(string text)
         {
-            // 正規表現によって$と$の間の文字列を抜き出す（無駄処理）
-            var Matches = new Regex(@"\$(.+?)\$").Matches(text);
-
-            for (int i = 0; i < Matches.Count; i++)
-            {
-                var sequence = Matches[i].Value;
-
-                switch (sequence)
-                {
-                    case "$kimis_kind_of_feeling$":
-
-                        text = text.Replace("$kimis_kind_of_feeling$", this.data.KimisKindOfFeelings.Split(",")[0]);
-
-                        break;
-
-                    case "$akamarus_kind_of_feeling$":
-
-                        text = text.Replace("$akamarus_kind_of_feeling$", this.data.AkamarusKindOfFeelings.Split(",")[0]);
-
-                        break;
-
-                    case "$aosukes_kind_of_feeling$":
-
-                        text = text.Replace("$aosukes_kind_of_feeling$", this.data.AosukesKindOfFeelings.Split(",")[0]);
-
-                        break;
-                }
-            }
-
             // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
             text = text.Replace("鬱", "\u2028");
+
+            if (this.selectInputMethod == 1 || this.selectInputMethod == 2)
+            {
+                text = text.Replace("【name】", this.newUserName);
+            }
+            else if (this.selectInputMethod == 0)
+            {
+                text = text.Replace("【name】", "n");
+            }
+            text = text.Replace("【くん／ちゃん／さん】", this.selectUserTitle);
 
             return text;
         }
 
-        void ShowMessage(TextBlock textObject, string message, object obj=null)
+        void ShowMessage(TextBlock textObject, string message)
         {
+            this.word_num = 0;
+
             // メッセージ表示処理
             this.msgTimer = new DispatcherTimer();
             this.msgTimer.Tick += ViewMsg;
-            this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / MESSAGE_SPEED);
+            this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / INIT_MESSAGE_SPEED);
             this.msgTimer.Start();
 
             // 一文字ずつメッセージ表示（Inner Func）
             void ViewMsg(object sender, EventArgs e)
             {
-                textObject.Text = message.Substring(0, word_num);
+                textObject.Text = message.Substring(0, this.word_num);
 
-                textObject.Visibility = Visibility.Visible;
-
-                if (word_num < message.Length)
+                if (this.word_num == 0)
                 {
-                    word_num++;
+                    textObject.Visibility = Visibility.Visible;
+                }
+
+                if (this.word_num < message.Length)
+                {
+                    this.word_num++;
                 }
                 else
                 {
@@ -625,68 +423,84 @@ namespace KokoroUpTime
             }
         }
 
-        void ShowMessage2(TextBlock textObject, string message, object obj = null)
+        /*
+        void ShowMessage(TextBlock textObject, string message, object obj = null)
         {
-            // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
-            var _message = message.Replace("鬱", "\u2028");
+            this.word_num = 0;
 
-            _message = _message.Replace("【name】", "n");
-            _message = _message.Replace("【くん／ちゃん／さん】", "");
+            if (this.dataOption.IsWordRecognition == false && textObject.Name == "MainMessageTextBlock")
+            {
+                this.MainMessageFrontText.Text = "";
+                this.MainMessageBackText.Text = "";
+                this.NameImage.Source = null;
+
+                textObject.Visibility = Visibility.Visible;
+            }
 
             // メッセージ表示処理
             this.msgTimer = new DispatcherTimer();
             this.msgTimer.Tick += ViewMsg;
-            this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / MESSAGE_SPEED);
+            this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / this.dataOption.MessageSpeed);
             this.msgTimer.Start();
 
             // 一文字ずつメッセージ表示（Inner Func）
             void ViewMsg(object sender, EventArgs e)
             {
-                textObject.Visibility = Visibility.Visible;
-
-                if (word_num < _message.Length)
+                if (this.dataOption.IsWordRecognition == false && textObject.Name == "MainMessageTextBlock" && this.scene == "前説")
                 {
-                    if (_message.Substring(word_num, 1) != "n" && this.NameImage.Source == null)
+                    if (this.word_num > 0 && message.Substring(this.word_num - 1, 1) == "n") // && this.MainMessageBackText.Text == null)
                     {
-                        this.MainMessageText1.Text = _message.Substring(0, word_num);
-                    }
-
-                    if (_message.Substring(word_num, 1) == "n" && this.MainMessageText2.Text != null)
-                    {
-                        // ここに入ってませんよ… if文の条件を変えてみては？
-
-                        _message = _message.Replace("n", " ");
+                        message = message.Replace("n", "");
 
                         // Name.bmpを収める場所の設定
                         string nameBmp = "Name.bmp";
-                        string dirPath = $"./Log/{userName}/";
+                        string dirPath = $"./Log/{initConfig.userName}_{initConfig.userTitle}/";
 
                         string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
 
                         // 実行ファイルの場所を絶対パスで取得
                         var startupPath = FileUtils.GetStartupPath();
 
-                        // 画像がでかすぎでは…
                         this.NameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
                     }
-
-                    if (this.MainMessageText1 != null && NameImage.Source != null)
+                    else if (this.word_num > 0 && NameImage.Source != null) // && this.MainMessageFrontText != null)
                     {
-                        this.MainMessageText2.Text = _message.Substring(this.MainMessageText1.Text.Length, word_num - MainMessageText1.Text.Length + 1);
+                        this.MainMessageBackText.Text = message.Substring(this.MainMessageFrontText.Text.Length, this.word_num - MainMessageFrontText.Text.Length);
                     }
+                    else
+                    {
+                        this.MainMessageFrontText.Text = message.Substring(0, this.word_num);
+                    }
+                }
+                else
+                {
+                    textObject.Text = message.Substring(0, this.word_num);
 
-                    word_num++;
+                    if (this.word_num == 0)
+                    {
+                        textObject.Visibility = Visibility.Visible;
+                    }
+                }
+
+                if (this.word_num < message.Length)
+                {
+                    this.word_num++;
                 }
                 else
                 {
                     this.msgTimer.Stop();
                     this.msgTimer = null;
 
+                    if (obj != null)
+                    {
+                        this.MessageCallBack(obj);
+                    }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
             }
         }
+        */
 
         // アニメーション（ストーリーボード）の処理
         private void ShowAnime(string storyBoard, string isSync)
@@ -727,67 +541,218 @@ namespace KokoroUpTime
             }
         }
 
+        private int GetLatestImageUserNumber()
+        {
+            List<int> imageUserNumbers = new List<int>();
+
+            var dirPaths = Directory.GetDirectories("./Log/");
+
+            foreach (var dirPath in dirPaths)
+            {
+                var splitDirName = dirPath.Split("_");
+
+                if (splitDirName[0] == "./Log/画像")
+                {
+                    imageUserNumbers.Add(Int32.Parse(splitDirName[1]));
+                }
+            }
+            int imageUserMaxNumber;
+
+            if (imageUserNumbers.Count > 0)
+            {
+                imageUserMaxNumber = imageUserNumbers.Max() + 1;
+            }
+            else
+            {
+                imageUserMaxNumber = 1;
+            }
+            return imageUserMaxNumber;
+        }
+
+        private void JumpTo(string tag)
+        {
+            foreach (var (scenario, index) in this.scenarios.Indexed())
+            {
+                if (scenario[0] == "jump" && scenario[1] == tag)
+                {
+                    this.scenarioCount = index + 1;
+                    this.ScenarioPlay();
+                }
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // 各種ボタンが押されたときの処理
 
             Button button = sender as Button;
 
-            /*
-            if (button.Name.Contains("Back"))
+            if (this.isClickable)
             {
-                this.scenarioCount -= 1;
-                this.ScenarioPlay();
-                // 連続Backの実現にはもっと複雑な処理がいる
-            }
-            */
+                if (button.Name == "NextMessageButton")
+                {
+                    this.isClickable = false;
 
-            if (button.Name == "ExitButton")
-            {
-                //this.CoverLayerImage.Visibility = Visibility.Visible;
-                //this.ExitBackGrid.Visibility = Visibility.Visible;
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "NameButton")
+                {
+                    this.isClickable = false;
+
+                    this.NameInputGrid.Visibility = Visibility.Hidden;
+                    this.CanvasGrid.Visibility = Visibility.Visible;
+                }
+
+                if (button.Name == "DecisionButton")
+                {
+                    this.isClickable = false;
+
+                    Image[] handWritingNameImages = new Image[] { this.KunHandWritingNameImage, this.ChanHandWritingNameImage, this.SanHandWritingNameImage, this.NoneHandWritingNameImage };
+                    TextBlock[] titleTextBlocks = new TextBlock[] { this.KunTextBlock, this.ChanTextBlock, this.SanTextBlock, this.NoneTextBlock };
+                    string[] titles = new string[] { " くん", " ちゃん", " さん", "（なし）" };
+
+                    if (this.selectInputMethod == 0)
+                    {
+                        // 実行ファイルの場所を絶対パスで取得
+                        var startupPath = FileUtils.GetStartupPath();
+
+                        foreach (var (handWritingNameImage, index) in handWritingNameImages.Indexed())
+                        {
+                            handWritingNameImage.Source = new BitmapImage(new Uri($@"{startupPath}/Log/temp_name.png", UriKind.Absolute));
+
+                            titleTextBlocks[index].Text = titles[index];
+                        }
+                    }
+                    else if (this.selectInputMethod == 1)
+                    {
+                        // 文字認識
+                    }
+                    else if (this.selectInputMethod == 2)
+                    {
+                        // キーボード
+                    }
+                    this.NameInputGrid.Visibility = Visibility.Hidden;
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "SelectInputMethodOKButton")
+                {
+                    this.isClickable = false;
+
+                    RadioButton[] inputMethodRadioButtons = new RadioButton[] { this.HandWritingRadioButton, this.WordRecognitionRadioButton, this.KeyboardRadioButton };
+
+                    foreach (var (method, index) in inputMethodRadioButtons.Indexed())
+                    {
+                        if (method.IsChecked == true)
+                        {
+                            this.selectInputMethod = index;
+                        }
+                    }
+                    this.SelectInputMethodGrid.Visibility = Visibility.Hidden;
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "ReturnToTitleButton")
+                {
+                    this.isClickable = false;
+
+                    TitlePage titlePage = new TitlePage();
+
+                    titlePage.SetIsFirstBootFlag(true);
+
+                    this.NavigationService.Navigate(titlePage);
+                }
+
+                if (button.Name == "SelectUserTitleOKButton")
+                {
+                    this.isClickable = false;
+
+                    RadioButton[] userTiitleRadioButtons = new RadioButton[] { this.KunRadioButton, this.ChanRadioButton, this.SanRadioButton, this.NoneRadioButton };
+                    string[] titles = new string[] { "くん", "ちゃん", "さん", "" };
+
+                    foreach (var (userTiitleRadioButton, index) in userTiitleRadioButtons.Indexed())
+                    {
+                        if (userTiitleRadioButton.IsChecked == true)
+                        {
+                            this.selectUserTitle = titles[index];
+                        }
+                    }
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "MakeUserNameCompleteOKButton")
+                {
+                    this.isClickable = false;
+
+                    if (this.selectInputMethod == 0)
+                    {
+                        // 実行ファイルの場所を絶対パスで取得
+                        var startupPath = FileUtils.GetStartupPath();
+
+                        var tempNameImagePath = $@"{startupPath}/Log/temp_name.png";
+
+                        this.newUserName = $@"画像_{this.GetLatestImageUserNumber()}";
+
+                        var newUserNameDirPath = $@"{startupPath}/Log/{this.newUserName}_{this.selectUserTitle}";
+
+                        var distNameImagePath = $@"{newUserNameDirPath}/name.png";
+
+                        DirectoryUtils.SafeCreateDirectory(newUserNameDirPath);
+
+                        File.Move(tempNameImagePath, distNameImagePath);
+
+                        this.InitConfigFile();
+                        this.InitDatabaseFile();
+
+                        File.Copy($@"{newUserNameDirPath}/user.conf", @"./Log/system.conf", true);
+                    }
+                    else if (this.selectInputMethod == 1)
+                    {
+                        // 文字認識
+                    }
+                    else if (this.selectInputMethod == 2)
+                    {
+                        // キーボード
+                    }
+                    JumpTo("complete");
+                }
+
+                if (button.Name == "MakeUserNameCompleteNOButton")
+                {
+                    this.isClickable = false;
+
+                    this.NameButtonImage.Source = null;
+
+                    JumpTo("make_name");
+                }
             }
 
-            if (button.Name == "ExitBackYesButton")
+            if (button.Content.ToString() == "えんぴつ")
             {
-                Application.Current.Shutdown();
+                this.NameCanvas.EditingMode = InkCanvasEditingMode.Ink;
             }
 
-            if (button.Name == "ExitBackNoButton")
+            if (button.Content.ToString() == "けしごむ")
             {
-                //this.ExitBackGrid.Visibility = Visibility.Hidden;
-                //this.CoverLayerImage.Visibility = Visibility.Hidden;
+                this.NameCanvas.EditingMode = InkCanvasEditingMode.EraseByPoint;
             }
-            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "RuleBoardButton" || button.Name == "ThinMessageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "SelectFeelingNextButton"))
-            {
-                this.isClickable = false;
 
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
-            if(button.Name == "NameButton")
+            if (button.Content.ToString() == "すべてけす")
             {
-                this.NameInputGrid.Visibility = Visibility.Hidden;
-                this.CanvasGrid.Visibility = Visibility.Visible;
+                this.NameCanvas.Strokes.Clear();
+            }
 
-            }
-            if(button.Content == "えんぴつ")
+            if (button.Content.ToString() == "かんせい")
             {
-                NameCanvas.EditingMode = InkCanvasEditingMode.Ink;
-            }
-            if (button.Content == "けしごむ")
-            {
-                NameCanvas.EditingMode = InkCanvasEditingMode.EraseByPoint;
-            }
-            if (button.Content == "すべてけす")
-            {
-                NameCanvas.Strokes.Clear();
-            }
-            if (button.Content == "かんせい")
-            {
-
                 // ストロークが描画されている境界を取得
-                Rect rectBounds = NameCanvas.Strokes.GetBounds();
+                Rect rectBounds = this.NameCanvas.Strokes.GetBounds();
 
                 // 描画先を作成
                 DrawingVisual dv = new DrawingVisual();
@@ -799,157 +764,91 @@ namespace KokoroUpTime
                 // 描画エリア(dc)に四角形を作成
                 // 四角形の大きさはストロークが描画されている枠サイズとし、
                 // 背景色はInkCanvasコントロールと同じにする
-                dc.DrawRectangle(NameCanvas.Background, null, rectBounds);
+                dc.DrawRectangle(this.NameCanvas.Background, null, rectBounds);
 
                 // 上記で作成した描画エリア(dc)にInkCanvasのストロークを描画
-                NameCanvas.Strokes.Draw(dc);
+                this.NameCanvas.Strokes.Draw(dc);
                 dc.Close();
 
                 // ビジュアルオブジェクトをビットマップに変換する
-                RenderTargetBitmap rtb = new RenderTargetBitmap(
-                    (int)rectBounds.Width, (int)rectBounds.Height,
-                    96, 96,
-                    PixelFormats.Default);
+                RenderTargetBitmap rtb = new RenderTargetBitmap((int)rectBounds.Width, (int)rectBounds.Height, 96, 96, PixelFormats.Pbgra32);
+
                 rtb.Render(dv);
 
                 //仮置き
-                string nameBmp = "Name.bmp";
-                string dirPath = $"./Log/{userName}";
+                string nameBmp = "temp_name.png";
+                string dirPath = $"./Log";
 
                 string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
                 var startupPath = FileUtils.GetStartupPath();
 
-                // ビットマップエンコーダー変数の宣言
-                BitmapEncoder enc = null;
-                enc = new BmpBitmapEncoder();
-                // ビットマップフレームを作成してエンコーダーにフレームを追加する
-                enc.Frames.Add(BitmapFrame.Create(rtb));
+                PngBitmapEncoder png = new PngBitmapEncoder();
+                png.Frames.Add(BitmapFrame.Create(rtb));
+
                 // ファイルのパスは仮
-                using (var stream = System.IO.File.Create($@"{startupPath}/{nameBmpPath}"))
+                using (var stream = File.Create($@"{startupPath}/{nameBmpPath}"))
                 {
-                    enc.Save(stream);
-                   
+                    png.Save(stream);
                 }
-               
+
+                var pngmap = new BitmapImage();
+
+                pngmap.BeginInit();
+                pngmap.CacheOption = BitmapCacheOption.OnLoad;    //ココ
+                pngmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;  //ココ
+                pngmap.UriSource = new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute);
+                pngmap.EndInit();
+
+                pngmap.Freeze();                                  //ココ
+
+                this.NameButtonImage.Source = null;
+                this.NameButtonImage.Source = pngmap;
+
+                this.isClickable = true;
+
                 this.NameInputGrid.Visibility = Visibility.Visible;
                 this.CanvasGrid.Visibility = Visibility.Hidden;
-
-                this.NameButtonImage.Source = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.RelativeOrAbsolute));
-
-
             }
-            if(button.Name == "DecisionButton")
-            {
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-
-                this.NameInputGrid.Visibility = Visibility.Hidden;
-            }
-
-        }
-       
-
-        private void PlaySE(string soundFile)
-        {
-            sePlayer = new SoundPlayer(soundFile);
-            sePlayer.Play();
         }
 
-        // ジェスチャー認識キャンバスのロード
-        void GestureCanvas_Loaded(object sender, RoutedEventArgs e)
+        private void InitConfigFile()
         {
-            var gestureCanvas = (InkCanvas)sender;
-
-            gestureCanvas.SetEnabledGestures(new[]
-            {
-                ApplicationGesture.Circle,
-                ApplicationGesture.DoubleCircle,
-                ApplicationGesture.Triangle,
-                ApplicationGesture.Check,
-                ApplicationGesture.ArrowDown,
-                ApplicationGesture.ChevronDown,
-                ApplicationGesture.DownUp,
-                ApplicationGesture.Up,
-                ApplicationGesture.Down,
-                ApplicationGesture.Left,
-                ApplicationGesture.Right,
-                ApplicationGesture.Curlicue,
-                ApplicationGesture.DoubleCurlicue,
-            });
-        }
-
-        // ジェスチャーキャンバスの処理
-        void GestureCanvas_Gesture(object sender, InkCanvasGestureEventArgs e)
-        {
-            // 信頼性 (RecognitionConfidence) を無視したほうが、Circle と Triangle の認識率は上がるようです。
-            var gestureResult = e.GetGestureRecognitionResults()
-                .FirstOrDefault(r => r.ApplicationGesture != ApplicationGesture.NoGesture);
-
             var startupPath = FileUtils.GetStartupPath();
 
-            if (gestureResult == null)
+            var newUserNameDirPath = $@"{startupPath}/Log/{this.newUserName}_{this.selectUserTitle}";
+
+            var confPath = $@"{newUserNameDirPath}/user.conf";
+
+            var accessTime = DateTime.Now.ToString();
+
+            var initConfigs = new List<List<string>>();
+
+            var initConfig = new List<string>() { this.newUserName, this.selectUserTitle, accessTime };
+
+            initConfigs.Add(initConfig);
+
+            using (var csv = new CsvWriter(confPath))
             {
-                PlaySE($@"{startupPath}/Sounds/None.wav");
-                return;
+                csv.Write(initConfigs);
             }
+        }
 
-            AnswerResult answerResult;
+        private void InitDatabaseFile()
+        {
+            var startupPath = FileUtils.GetStartupPath();
 
-            switch (gestureResult.ApplicationGesture)
+            var newUserNameDirPath = $@"{startupPath}/Log/{this.newUserName}_{this.selectUserTitle}";
+
+            var srcDBPath = $@"{startupPath}/Datas/default.sqlite";
+
+            var distDBPath = $@"{newUserNameDirPath}/{this.newUserName}.sqlite";
+
+            File.Copy(srcDBPath, distDBPath);
+
+            using (var connection = new SQLiteConnection(distDBPath))
             {
-                case ApplicationGesture.Circle:
-                case ApplicationGesture.DoubleCircle:
-                    answerResult = AnswerResult.Correct;
-                    break;
-                case ApplicationGesture.Triangle:
-                    answerResult = AnswerResult.Intermediate;
-                    break;
-                case ApplicationGesture.Check:
-                case ApplicationGesture.ArrowDown:
-                case ApplicationGesture.ChevronDown:
-                case ApplicationGesture.DownUp:
-                case ApplicationGesture.Up:
-                case ApplicationGesture.Down:
-                case ApplicationGesture.Left:
-                case ApplicationGesture.Right:
-                case ApplicationGesture.Curlicue:
-                case ApplicationGesture.DoubleCurlicue:
-                    answerResult = AnswerResult.Incorrect;
-                    break;
-
-                default:
-                    throw new InvalidOperationException();
+                connection.Execute($@"UPDATE DataOption SET InputMethod = '{this.selectInputMethod}' WHERE Id = 1;");
             }
-
-            PlaySE($@"{startupPath}/Sounds/{answerResult}.wav");
-
-           
-        }
-
-        private enum AnswerResult
-        {
-            None,
-            Incorrect,
-            Intermediate,
-            Correct,
-        }
-
-        // マウスのドラッグ処理（マウスの左ボタンを押下したとき）
-        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Mouse.Capture(this);
-        }
-
-        // マウスのドラッグ処理（マウスの左ボタンを離したとき）
-        private void OnMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Mouse.Capture(null);
-        }
-
-        // マウスのドラッグ処理（マウスを動かしたとき）
-        private void OnMouseMove(object sender, MouseEventArgs e)
-        {
-            
         }
     }
 }
