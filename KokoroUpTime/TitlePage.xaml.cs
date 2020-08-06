@@ -48,7 +48,9 @@ namespace KokoroUpTime
             this.ShowsNavigationUI = false;
 
             this.SelectUserListGrid.Visibility = Visibility.Hidden;
+            this.SelectDataListGrid.Visibility = Visibility.Hidden;
             this.CoverLayerImage.Visibility = Visibility.Hidden;
+            this.ExitBackGrid.Visibility = Visibility.Hidden;
 
             // デバッグ用表示 #################################################################
             Assembly asm = Assembly.GetExecutingAssembly(); // 実行中のアセンブリを取得する。
@@ -96,7 +98,7 @@ namespace KokoroUpTime
             }
         }
 
-        void LoadUser()
+        private void LoadUser()
         {
             if (File.Exists("./Log/system.conf"))
             {
@@ -244,7 +246,7 @@ namespace KokoroUpTime
             }
         }
 
-        void SetCurrentUserName()
+        private void SetCurrentUserName()
         {
             string userDirPath = $"./Log/{this.initConfig.userName}_{this.initConfig.userTitle}/";
 
@@ -263,12 +265,12 @@ namespace KokoroUpTime
             }
         }
 
-        void SetCurrentSceneInfo()
+        private void SetCurrentSceneInfo()
         {
             this.CurrentSceneTextBlock.Text = $"第{this.dataProgress.CurrentCapter}回の「{this.dataProgress.CurrentScene}」をプレイ中…。";
         }
 
-        void LoadUsers()
+        private List<UserInfoItem> LoadUsers()
         {
             List<UserInfoItem> items = new List<UserInfoItem>();
 
@@ -278,18 +280,18 @@ namespace KokoroUpTime
             {
                 if (File.Exists($"{dirPath}/user.conf"))
                 {
-                    string[] userInfo;
+                    string[] userInfos;
 
                     bool isWordRecognition = false;
 
                     using (var csv = new CsvReader($"{dirPath}/user.conf"))
                     {
                         var csvs = csv.ReadToEnd();
-                        userInfo = new string[3] { csvs[0][0], csvs[0][1], csvs[0][2] };
+                        userInfos = new string[3] { csvs[0][0], csvs[0][1], csvs[0][2] };
                     }
 
-                    string dbName = $"{userInfo[0]}.sqlite";
-                    string dbDirPath = $"./Log/{userInfo[0]}_{userInfo[1]}/";
+                    string dbName = $"{userInfos[0]}.sqlite";
+                    string dbDirPath = $"./Log/{userInfos[0]}_{userInfos[1]}/";
 
                     var individualDbPath = System.IO.Path.Combine(dbDirPath, dbName);
 
@@ -306,11 +308,11 @@ namespace KokoroUpTime
                     if (!isWordRecognition)
                     {
                         var startupPath = FileUtils.GetStartupPath();
-                        items.Add(new UserInfoItem() { NameBmpPath = $@"{startupPath}/{dirPath}/Name.bmp", UserInfo = $"{userInfo[1]}, {userInfo[2]}" });
+                        items.Add(new UserInfoItem() { NameBmpPath = $@"{startupPath}/{dirPath}/Name.bmp", UserInfo = $"{userInfos[1]}, {userInfos[2]}" });
                     }
                     else
                     {
-                        items.Add(new UserInfoItem() { NameBmpPath = null, UserInfo = $"{userInfo[0]}{userInfo[1]}, {userInfo[2]}" });
+                        items.Add(new UserInfoItem() { NameBmpPath = null, UserInfo = $"{userInfos[0]}{userInfos[1]}, {userInfos[2]}" });
                     }
                 }
                 else
@@ -318,7 +320,7 @@ namespace KokoroUpTime
                     // error;
                 }
             }
-            this.SelectUserListBox.ItemsSource = items;
+            return items;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -360,6 +362,41 @@ namespace KokoroUpTime
 
                     break;
 
+                case "データ出力":
+
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("データが一つもできていません。\nまずはどれかプレイしてください。");
+                    }
+                    else
+                    {
+                        this.SelectDataListBox.ItemsSource = this.LoadUsers();
+
+                        this.CoverLayerImage.Visibility = Visibility.Visible;
+                        this.SelectDataListGrid.Visibility = Visibility.Visible;
+                    }
+                    break;
+
+                case "出力":
+
+                    // 複数選択可能
+                    foreach (var item in this.SelectDataListBox.SelectedItems)
+                    {
+                        var selectedUserDataPath = this.dirPaths[this.SelectDataListBox.Items.IndexOf(item)];
+
+                    }
+
+                    this.SelectDataListGrid.Visibility = Visibility.Hidden;
+                    this.CoverLayerImage.Visibility = Visibility.Hidden;
+
+                    break;
+
+                case "キャンセル":
+
+                    this.SelectDataListGrid.Visibility = Visibility.Hidden;
+                    this.CoverLayerImage.Visibility = Visibility.Hidden;
+
+                    break;
 
                 case "なまえ選択":
 
@@ -369,7 +406,7 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        this.LoadUsers();
+                        this.SelectUserListBox.ItemsSource = this.LoadUsers();
 
                         this.CoverLayerImage.Visibility = Visibility.Visible;
                         this.SelectUserListGrid.Visibility = Visibility.Visible;
@@ -380,9 +417,9 @@ namespace KokoroUpTime
 
                     // 名前を何でもよいから選択しないと落ちる
                     // 後々デフォルトで先頭が選択された状態で始める
-                    var newUserNamePath = this.dirPaths[this.SelectUserListBox.SelectedIndex];
+                    var selectedUserNamePath = this.dirPaths[this.SelectUserListBox.SelectedIndex];
 
-                    File.Copy($@"{newUserNamePath}/user.conf", @"./Log/system.conf", true);
+                    File.Copy($@"{selectedUserNamePath}/user.conf", @"./Log/system.conf", true);
 
                     this.LoadUser();
 
@@ -398,6 +435,13 @@ namespace KokoroUpTime
                     aboutPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                     this.NavigationService.Navigate(aboutPage);
+
+                    break;
+
+                case "終了":
+
+                    this.CoverLayerImage.Visibility = Visibility.Visible;
+                    this.ExitBackGrid.Visibility = Visibility.Visible;
 
                     break;
 
@@ -430,6 +474,17 @@ namespace KokoroUpTime
                     this.NavigationService.Navigate(chapter3);
 
                     break;
+            }
+
+            if (button.Name == "ExitBackYesButton")
+            {
+                Application.Current.Shutdown();
+            }
+
+            if (button.Name == "ExitBackNoButton")
+            {
+                this.ExitBackGrid.Visibility = Visibility.Hidden;
+                this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
         }
 
