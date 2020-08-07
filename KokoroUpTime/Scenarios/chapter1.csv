@@ -2,7 +2,7 @@ start
 scene,前説
 reset
 image,bg_image,background_01.png
-image,shiroji_right_image,shiroji_01.png,appear_up
+image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 bgm,set,もくもくStudy♪.mp3,loop,50
@@ -11,18 +11,7 @@ text,music_title_text,もくもくStudy♪
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
 wait
-msg,main_msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
-wait
-msg,main_msg,はじめに、あなたの名前を教えてくれるかの？,白じい
-wait
-msg,main_msg,名前を入力
-wait
-msg,main_msg,あなたは【name】じゃな。【name】のうしろは、何かつけるかの？,白じい
-wait
-msg,main_msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい
-wait
-image,shiroji_right_image,shiroji_02.png
-msg,main_msg,それでは【name】、「こころあっぷタイム」とは何か説明していくぞい。,白じい
+msg,main_msg,それでは【name】【くん／ちゃん／さん】、「こころあっぷタイム」とは何か説明していくぞい。,白じい
 wait
 msg,main_msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
 wait
