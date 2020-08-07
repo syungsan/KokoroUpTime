@@ -9,6 +9,10 @@
       Title="TitlePage"
       Loaded="Window_Loaded">
 
+    <Page.Resources>
+        <local:ImageConverter x:Key="ImageConverter"/>
+    </Page.Resources>
+
     <Viewbox>
         <Grid Height="1080" Width="1920">
             <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_00.png" Visibility="Visible"/>
@@ -16,8 +20,8 @@
             <Image x:Name="MenuImage" Source="/Images/menu_bubble.png" Margin="210,339,1030,157"/>
             <Image x:Name="ShirojiImage" Source="/Images/shiroji_02.png" Margin="1026,602,619,145"/>
             <Image x:Name="BubbleImage" Source="/Images/small_bubble_left.png" Margin="1275,590,110,225"/>
-            <Button x:Name="OptionButton" Content="オプション" FontSize="36" Foreground="White" Click="Button_Click" Margin="411,918,1319,91"/>
-            <Button x:Name="ItemsButtonButton" Content="アイテム図鑑" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,999,1520,10"/>
+            <Button x:Name="OptionButton" Content="オプション" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,999,1720,10"/>
+            <Button x:Name="ItemsButtonButton" Content="アイテム図鑑" FontSize="36" Foreground="White" Click="Button_Click" Margin="411,918,1319,91"/>
             <Button x:Name="NameEntryButton" Content="なまえ入力" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,918,1720,91"/>
             <Button x:Name="Chapter1Button" Content="第1回" FontSize="36" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" Click="Button_Click" Margin="400,425,1420,587"/>
             <Button x:Name="Chapter2Button" Content="第2回" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFE6AF" FontSize="36" Click="Button_Click" Margin="400,493,1420,517"/>
@@ -50,11 +54,11 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <Button x:Name="EndButton" Content="終了" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,999,1720,10"/>
-            <Button x:Name="SelectDataButton" Content="データ出力" FontSize="36" Foreground="White" Click="Button_Click" Margin="411,999,1319,10"/>
+            <Button x:Name="EndButton" Content="終了" FontSize="36" Foreground="White" Click="Button_Click" Margin="411,999,1319,10"/>
+            <Button x:Name="SelectDataButton" Content="データ管理" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,999,1520,10"/>
             <Button x:Name="SelectUserButton" Content="なまえ選択" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,918,1520,91"/>
-            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
-            <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169" Background="#FFF9C9D0">
+            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
+            <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169" Background="#FFF9C9D0" d:IsHidden="True">
                 <TextBlock x:Name="SelectUserListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="なまえの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
                 <ListBox x:Name="SelectUserListBox" Margin="48,140,48,130" FontSize="48" SelectionMode="Single">
                     <ListBox.ItemTemplate>
@@ -65,7 +69,7 @@
                                         <ScaleTransform ScaleX="5.0" ScaleY="5.0"/>
                                     </CheckBox.LayoutTransform>
                                 </CheckBox>
-                                <Image x:Name="SelectUserListNameImage" Source="{Binding NameBmpPath}" Height="48"/>
+                                <Image x:Name="SelectUserListNameImage" Source="{Binding NameBmpPath, Converter={StaticResource ImageConverter}}" Height="48"/>
                                 <TextBlock x:Name="SelectUserListTextBlock" Text="{Binding UserInfo}" FontSize="48"/>
                             </StackPanel>
                         </DataTemplate>
@@ -73,25 +77,27 @@
                 </ListBox>
                 <Button x:Name="SelectUserListOKButton" Content="OK" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
             </Grid>
-            <Grid x:Name="SelectDataListGrid" Margin="405,100,407,169" Background="#FFEAF9C9">
+            <Grid x:Name="SelectDataListGrid" Margin="405,100,407,169">
+                <Border x:Name="SelectDataListBorder" BorderThickness="1" BorderBrush="Black" Background="#FFE8F9CF" CornerRadius="32,32,32,32"/>
                 <TextBlock x:Name="SelectDataListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="データの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
                 <ListBox x:Name="SelectDataListBox" Margin="48,140,48,130" FontSize="48" SelectionMode="Multiple">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel x:Name="SelectUserListStackPanel" Orientation="Horizontal">
-                                <CheckBox IsChecked="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}">
+                                <CheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}">
                                     <CheckBox.LayoutTransform>
                                         <ScaleTransform ScaleX="5.0" ScaleY="5.0"/>
                                     </CheckBox.LayoutTransform>
                                 </CheckBox>
-                                <Image x:Name="SelectUserListNameImage" Source="{Binding NameBmpPath}" Height="48"/>
+                                <Image x:Name="SelectUserListNameImage" Source="{Binding NameBmpPath, Converter={StaticResource ImageConverter}}" Height="48"/>
                                 <TextBlock x:Name="SelectUserListTextBlock" Text="{Binding UserInfo}" FontSize="48"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button x:Name="SelectDataListOKButton" Content="出力" HorizontalAlignment="Left" Margin="333,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
-                <Button x:Name="SelectDataListCancelButton" Content="キャンセル" HorizontalAlignment="Left" Margin="563,710,0,0" VerticalAlignment="Top" Height="65" Width="215" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
+                <Button x:Name="SelectDataListExportButton" Content="出力" HorizontalAlignment="Left" Margin="229,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
+                <Button x:Name="SelectDataListCancelButton" Content="戻る" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
+                <Button x:Name="SelectDataListDeleteButton" Content="削除" HorizontalAlignment="Left" Margin="716,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
             </Grid>
             <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">
                 <Image x:Name="ExitBackImage" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/white_frame.png" Stretch="Fill"/>

@@ -21,6 +21,8 @@ using System.Linq;
 using Microsoft.VisualBasic;
 using SQLitePCL;
 
+using System.Threading;
+
 namespace KokoroUpTime
 {
     /// <summary>
@@ -255,7 +257,19 @@ namespace KokoroUpTime
                 // 実行ファイルの場所を絶対パスで取得
                 var startupPath = FileUtils.GetStartupPath();
 
-                this.CurrentNameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{userDirPath}/name.png", UriKind.Absolute));
+                var bitmap = new BitmapImage();
+
+                bitmap.BeginInit();
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;    //ココ
+                bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;  //ココ
+                bitmap.UriSource = new Uri($@"{startupPath}/{userDirPath}/name.png", UriKind.Absolute);
+                bitmap.EndInit();
+
+                bitmap.Freeze();                                  //ココ
+
+                this.CurrentNameImage.Source = null;
+                this.CurrentNameImage.Source = bitmap;
+
                 this.CurrentUserTextBlock.Text = this.initConfig.userTitle;
             }
             else if (this.dataOption.InputMethod == 1 || this.dataOption.InputMethod == 2)
@@ -327,9 +341,9 @@ namespace KokoroUpTime
         {
             Button button = sender as Button;
 
-            switch (button.Content.ToString())
+            switch (button.Name)
             {
-                case "Full/Win":
+                case "ChangeScreenButton":
 
                     Window _mainWindow = Application.Current.MainWindow;
 
@@ -337,7 +351,7 @@ namespace KokoroUpTime
 
                     break;
 
-                case "アイテム図鑑":
+                case "ItemsButtonButton":
 
                     ItemPage itemPage = new ItemPage();
 
@@ -347,7 +361,7 @@ namespace KokoroUpTime
 
                     break;
 
-                case "オプション":
+                case "OptionButton":
 
                     OptionPage optionPage = new OptionPage();
 
@@ -358,7 +372,7 @@ namespace KokoroUpTime
                     break;
 
 
-                case "なまえ入力":
+                case "NameEntryButton":
 
                     NameInputPage nameInputPage = new NameInputPage();
 
@@ -368,7 +382,7 @@ namespace KokoroUpTime
 
                     break;
 
-                case "データ出力":
+                case "SelectDataButton":
 
                     if (this.initConfig.userName == null)
                     {
@@ -383,12 +397,12 @@ namespace KokoroUpTime
                     }
                     break;
 
-                case "出力":
+                case "SelectDataListExportButton":
 
                     // 複数選択可能
                     foreach (var item in this.SelectDataListBox.SelectedItems)
                     {
-                        var selectedUserDataPath = this.dirPaths[this.SelectDataListBox.Items.IndexOf(item)];
+                        var selectedDataPath = this.dirPaths[this.SelectDataListBox.Items.IndexOf(item)];
                         // ここからだよん
                     }
 
@@ -397,14 +411,47 @@ namespace KokoroUpTime
 
                     break;
 
-                case "キャンセル":
+                case "SelectDataListCancelButton":
 
                     this.SelectDataListGrid.Visibility = Visibility.Hidden;
                     this.CoverLayerImage.Visibility = Visibility.Hidden;
 
                     break;
 
-                case "なまえ選択":
+                case "SelectDataListDeleteButton":
+
+                    if (this.SelectDataListBox.SelectedItems.Count > 0)
+                    {
+                        if (MessageBox.Show("選択したデータを完全に削除します。\nよろしいですか？", "Information", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.No)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            // 複数選択可能
+                            foreach (var item in this.SelectDataListBox.SelectedItems)
+                            {
+                                var selectedDataPath = this.dirPaths[this.SelectDataListBox.Items.IndexOf(item)];
+
+                                // (this.SelectDataListBox.ItemsSource as List<UserInfoItem>).Remove(item as UserInfoItem);
+
+                                if (Directory.Exists(selectedDataPath))
+                                {
+                                    Directory.Delete(selectedDataPath, true);
+                                }
+                            }
+                            // this.SelectDataListBox.Items.Refresh();
+
+                            this.SelectDataListBox.ItemsSource = this.LoadUsers();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("データを一つ以上選択してください。");
+                    }
+                    break;
+
+                case "SelectUserButton":
 
                     if (this.initConfig.userName == null)
                     {
@@ -419,7 +466,7 @@ namespace KokoroUpTime
                     }
                     break;
 
-                case "OK":
+                case "SelectUserListOKButton":
 
                     // 名前を何でもよいから選択しないと落ちる
                     // 後々デフォルトで先頭が選択された状態で始める
@@ -434,7 +481,7 @@ namespace KokoroUpTime
 
                     break;
 
-                case "こころアップタイムとは":
+                case "AboutButton":
 
                     AboutPage aboutPage = new AboutPage();
 
@@ -444,12 +491,30 @@ namespace KokoroUpTime
 
                     break;
 
-                case "終了":
+                case "EndButton":
 
                     this.CoverLayerImage.Visibility = Visibility.Visible;
                     this.ExitBackGrid.Visibility = Visibility.Visible;
 
                     break;
+
+                case "ExitBackYesButton":
+
+                    Application.Current.Shutdown();
+
+                    break;
+
+
+                case "ExitBackNoButton":
+
+                    this.ExitBackGrid.Visibility = Visibility.Hidden;
+                    this.CoverLayerImage.Visibility = Visibility.Hidden;
+
+                    break;
+            }
+
+            switch (button.Content.ToString())
+            {
 
                 case "第1回":
 
@@ -480,17 +545,6 @@ namespace KokoroUpTime
                     this.NavigationService.Navigate(chapter3);
 
                     break;
-            }
-
-            if (button.Name == "ExitBackYesButton")
-            {
-                Application.Current.Shutdown();
-            }
-
-            if (button.Name == "ExitBackNoButton")
-            {
-                this.ExitBackGrid.Visibility = Visibility.Hidden;
-                this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
         }
 
