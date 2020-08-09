@@ -44,16 +44,7 @@
                 <Image x:Name="CurrentNameImage" Height="48"/>
                 <TextBlock x:Name="CurrentUserTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Width="432" Height="70"/>
             </StackPanel>
-            <TextBlock x:Name="CurrentSceneTextBlock" Margin="743,979,205,27" Text="TextBlock" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" FontSize="36">
-                <TextBlock.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </TextBlock.RenderTransform>
-            </TextBlock>
+            <TextBlock x:Name="CurrentSceneTextBlock" Margin="743,979,205,27" Text="TextBlock" TextWrapping="Wrap" FontSize="36"/>
             <Button x:Name="EndButton" Content="終了" FontSize="36" Foreground="White" Click="Button_Click" Margin="411,999,1319,10"/>
             <Button x:Name="SelectDataButton" Content="データ管理" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,999,1520,10"/>
             <Button x:Name="SelectUserButton" Content="なまえ選択" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,918,1520,91"/>
@@ -96,7 +87,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
                 <Button x:Name="SelectDataListExportButton" Content="出力" HorizontalAlignment="Left" Margin="229,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
-                <Button x:Name="SelectDataListCancelButton" Content="戻る" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
+                <Button x:Name="SelectDataListReturnButton" Content="戻る" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
                 <Button x:Name="SelectDataListDeleteButton" Content="削除" HorizontalAlignment="Left" Margin="716,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
             </Grid>
             <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">

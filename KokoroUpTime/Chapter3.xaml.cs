@@ -455,7 +455,7 @@ namespace KokoroUpTime
             /*
             // データベース本体のファイルのパス設定
             string dbName = $"{initConfig.userName}.sqlite";
-            string dirPath = $"./Log/{initConfig.userName}_{initConfig.userTitle}/";
+            string dirPath = $"./Log/{initConfig.userName}/";
 
             // FileUtils.csからディレクトリ作成のメソッド
             // 各ユーザの初回起動のとき実行ファイルの場所下のLogフォルダにユーザネームのフォルダを作る
@@ -1399,7 +1399,7 @@ namespace KokoroUpTime
 
                         // Name.bmpを収める場所の設定
                         string nameBmp = "Name.bmp";
-                        string dirPath = $"./Log/{initConfig.userName}_{initConfig.userTitle}/";
+                        string dirPath = $"./Log/{initConfig.userName}/";
 
                         string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
 

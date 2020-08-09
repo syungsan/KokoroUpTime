@@ -20,8 +20,7 @@ using SQLite;
 using System.Linq;
 using Microsoft.VisualBasic;
 using SQLitePCL;
-
-using System.Threading;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace KokoroUpTime
 {
@@ -89,149 +88,150 @@ namespace KokoroUpTime
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (this.isFirstBootFlag)
+            if (File.Exists("./Log/system.conf"))
             {
-                this.LoadUser();
+                if (this.isFirstBootFlag)
+                {
+                    this.LoadUser();
+                }
+                else
+                {
+                    this.SetCurrentUserName();
+                    this.SetCurrentSceneInfo();
+                }
             }
             else
             {
-                this.SetCurrentUserName();
+                this.CurrentUserTextBlock.Text = "名無しさん";
                 this.SetCurrentSceneInfo();
             }
         }
 
         private void LoadUser()
         {
-            if (File.Exists("./Log/system.conf"))
+            using (var csv = new CsvReader("./Log/system.conf"))
             {
-                using (var csv = new CsvReader("./Log/system.conf"))
-                {
-                    var csvs = csv.ReadToEnd();
+                var csvs = csv.ReadToEnd();
 
-                    this.CurrentUserTextBlock.Text = $"{csvs[0][0]}{csvs[0][1]}";
+                this.CurrentUserTextBlock.Text = $"{csvs[0][0]}{csvs[0][1]}";
 
-                    this.initConfig.userName = csvs[0][0];
-                    this.initConfig.userTitle = csvs[0][1];
-                }
-
-                string dbName = $"{this.initConfig.userName}.sqlite";
-                string userDirPath = $"./Log/{this.initConfig.userName}_{this.initConfig.userTitle}/";
-
-                this.initConfig.dbPath = System.IO.Path.Combine(userDirPath, dbName);
-
-                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                {
-                    var option = connection.Query<DataOption>("SELECT * FROM DataOption WHERE Id = 1;");
-
-                    foreach (var row in option)
-                    {
-                        this.dataOption.InputMethod = row.InputMethod;
-
-                        this.dataOption.IsPlaySE = row.IsPlaySE;
-
-                        this.dataOption.IsPlayBGM = row.IsPlayBGM;
-
-                        this.dataOption.MessageSpeed = row.MessageSpeed;
-
-                        this.dataOption.IsAddRubi = row.IsAddRubi;
-                    }
-
-                    var item = connection.Query<DataItem>("SELECT * FROM DataItem WHERE Id = 1;");
-
-                    foreach (var row in item)
-                    {
-                        this.dataItem.HasGotItem01 = row.HasGotItem01;
-
-                        this.dataItem.HasGotItem02 = row.HasGotItem02;
-
-                        this.dataItem.HasGotItem03 = row.HasGotItem03;
-
-                        this.dataItem.HasGotItem04 = row.HasGotItem04;
-
-                        this.dataItem.HasGotItem05 = row.HasGotItem05;
-
-                        this.dataItem.HasGotItem06 = row.HasGotItem06;
-
-                        this.dataItem.HasGotItem07 = row.HasGotItem07;
-
-                        this.dataItem.HasGotItem08 = row.HasGotItem08;
-
-                        this.dataItem.HasGotItem09 = row.HasGotItem09;
-
-                        this.dataItem.HasGotItem10 = row.HasGotItem10;
-
-                        this.dataItem.HasGotItem11 = row.HasGotItem11;
-                    }
-
-                    var progress = connection.Query<DataProgress>("SELECT * FROM DataProgress WHERE Id = 1;");
-
-                    foreach (var row in progress)
-                    {
-                        this.dataProgress.CurrentCapter = row.CurrentCapter;
-
-                        this.dataProgress.CurrentScene = row.CurrentScene;
-
-                        this.dataProgress.LatestChapter1Scene = row.LatestChapter1Scene;
-
-                        this.dataProgress.HasCompletedChapter1 = row.HasCompletedChapter1;
-
-                        this.dataProgress.LatestChapter2Scene = row.LatestChapter2Scene;
-
-                        this.dataProgress.HasCompletedChapter2 = row.HasCompletedChapter2;
-
-                        this.dataProgress.LatestChapter3Scene = row.LatestChapter3Scene;
-
-                        this.dataProgress.HasCompletedChapter3 = row.HasCompletedChapter3;
-
-                        this.dataProgress.LatestChapter4Scene = row.LatestChapter4Scene;
-
-                        this.dataProgress.HasCompletedChapter4 = row.HasCompletedChapter4;
-
-                        this.dataProgress.LatestChapter5Scene = row.LatestChapter5Scene;
-
-                        this.dataProgress.HasCompletedChapter5 = row.HasCompletedChapter5;
-
-                        this.dataProgress.LatestChapter6Scene = row.LatestChapter6Scene;
-
-                        this.dataProgress.HasCompletedChapter6 = row.HasCompletedChapter6;
-
-                        this.dataProgress.LatestChapter7Scene = row.LatestChapter7Scene;
-
-                        this.dataProgress.HasCompletedChapter7 = row.HasCompletedChapter7;
-
-                        this.dataProgress.LatestChapter8Scene = row.LatestChapter8Scene;
-
-                        this.dataProgress.HasCompletedChapter8 = row.HasCompletedChapter8;
-
-                        this.dataProgress.LatestChapter9Scene = row.LatestChapter9Scene;
-
-                        this.dataProgress.HasCompletedChapter9 = row.HasCompletedChapter9;
-
-                        this.dataProgress.LatestChapter10Scene = row.LatestChapter10Scene;
-
-                        this.dataProgress.HasCompletedChapter10 = row.HasCompletedChapter10;
-
-                        this.dataProgress.LatestChapter11Scene = row.LatestChapter11Scene;
-
-                        this.dataProgress.HasCompletedChapter11 = row.HasCompletedChapter11;
-
-                        this.dataProgress.LatestChapter12Scene = row.LatestChapter12Scene;
-
-                        this.dataProgress.HasCompletedChapter12 = row.HasCompletedChapter12;
-                    }
-                }
-                this.SetCurrentSceneInfo();
-                this.SetCurrentUserName();
-            }
-            else
-            {
-                this.CurrentUserTextBlock.Text = "名無しさん";
+                this.initConfig.userName = csvs[0][0];
+                this.initConfig.userTitle = csvs[0][1];
             }
 
-            foreach (var confPath in new string[2] { $"./Log/{this.initConfig.userName}_{this.initConfig.userTitle}/user.conf", "./Log/system.conf" })
+            string dbName = $"{this.initConfig.userName}.sqlite";
+            string userDirPath = $"./Log/{this.initConfig.userName}/";
+
+            this.initConfig.dbPath = System.IO.Path.Combine(userDirPath, dbName);
+
+            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
             {
-                // if (File.Exists(confPath))
-                // {
+                var option = connection.Query<DataOption>("SELECT * FROM DataOption WHERE Id = 1;");
+
+                foreach (var row in option)
+                {
+                    this.dataOption.InputMethod = row.InputMethod;
+
+                    this.dataOption.IsPlaySE = row.IsPlaySE;
+
+                    this.dataOption.IsPlayBGM = row.IsPlayBGM;
+
+                    this.dataOption.MessageSpeed = row.MessageSpeed;
+
+                    this.dataOption.IsAddRubi = row.IsAddRubi;
+                }
+
+                var item = connection.Query<DataItem>("SELECT * FROM DataItem WHERE Id = 1;");
+
+                foreach (var row in item)
+                {
+                    this.dataItem.HasGotItem01 = row.HasGotItem01;
+
+                    this.dataItem.HasGotItem02 = row.HasGotItem02;
+
+                    this.dataItem.HasGotItem03 = row.HasGotItem03;
+
+                    this.dataItem.HasGotItem04 = row.HasGotItem04;
+
+                    this.dataItem.HasGotItem05 = row.HasGotItem05;
+
+                    this.dataItem.HasGotItem06 = row.HasGotItem06;
+
+                    this.dataItem.HasGotItem07 = row.HasGotItem07;
+
+                    this.dataItem.HasGotItem08 = row.HasGotItem08;
+
+                    this.dataItem.HasGotItem09 = row.HasGotItem09;
+
+                    this.dataItem.HasGotItem10 = row.HasGotItem10;
+
+                    this.dataItem.HasGotItem11 = row.HasGotItem11;
+                }
+
+                var progress = connection.Query<DataProgress>("SELECT * FROM DataProgress WHERE Id = 1;");
+
+                foreach (var row in progress)
+                {
+                    this.dataProgress.CurrentCapter = row.CurrentCapter;
+
+                    this.dataProgress.CurrentScene = row.CurrentScene;
+
+                    this.dataProgress.LatestChapter1Scene = row.LatestChapter1Scene;
+
+                    this.dataProgress.HasCompletedChapter1 = row.HasCompletedChapter1;
+
+                    this.dataProgress.LatestChapter2Scene = row.LatestChapter2Scene;
+
+                    this.dataProgress.HasCompletedChapter2 = row.HasCompletedChapter2;
+
+                    this.dataProgress.LatestChapter3Scene = row.LatestChapter3Scene;
+
+                    this.dataProgress.HasCompletedChapter3 = row.HasCompletedChapter3;
+
+                    this.dataProgress.LatestChapter4Scene = row.LatestChapter4Scene;
+
+                    this.dataProgress.HasCompletedChapter4 = row.HasCompletedChapter4;
+
+                    this.dataProgress.LatestChapter5Scene = row.LatestChapter5Scene;
+
+                    this.dataProgress.HasCompletedChapter5 = row.HasCompletedChapter5;
+
+                    this.dataProgress.LatestChapter6Scene = row.LatestChapter6Scene;
+
+                    this.dataProgress.HasCompletedChapter6 = row.HasCompletedChapter6;
+
+                    this.dataProgress.LatestChapter7Scene = row.LatestChapter7Scene;
+
+                    this.dataProgress.HasCompletedChapter7 = row.HasCompletedChapter7;
+
+                    this.dataProgress.LatestChapter8Scene = row.LatestChapter8Scene;
+
+                    this.dataProgress.HasCompletedChapter8 = row.HasCompletedChapter8;
+
+                    this.dataProgress.LatestChapter9Scene = row.LatestChapter9Scene;
+
+                    this.dataProgress.HasCompletedChapter9 = row.HasCompletedChapter9;
+
+                    this.dataProgress.LatestChapter10Scene = row.LatestChapter10Scene;
+
+                    this.dataProgress.HasCompletedChapter10 = row.HasCompletedChapter10;
+
+                    this.dataProgress.LatestChapter11Scene = row.LatestChapter11Scene;
+
+                    this.dataProgress.HasCompletedChapter11 = row.HasCompletedChapter11;
+
+                    this.dataProgress.LatestChapter12Scene = row.LatestChapter12Scene;
+
+                    this.dataProgress.HasCompletedChapter12 = row.HasCompletedChapter12;
+                }
+            }
+            this.SetCurrentUserName();
+            this.SetCurrentSceneInfo();
+            
+            foreach (var confPath in new string[2] { $"./Log/{this.initConfig.userName}/user.conf", "./Log/system.conf" })
+            {
+                if (File.Exists(confPath))
+                {
                     var accessTime = DateTime.Now.ToString();
 
                     var initConfigs = new List<List<string>>();
@@ -244,13 +244,13 @@ namespace KokoroUpTime
                     {
                         csv.Write(initConfigs);
                     }
-                // }
+                }
             }
         }
 
         private void SetCurrentUserName()
         {
-            string userDirPath = $"./Log/{this.initConfig.userName}_{this.initConfig.userTitle}/";
+            string userDirPath = $"./Log/{this.initConfig.userName}/";
 
             if (this.dataOption.InputMethod == 0)
             {
@@ -281,7 +281,14 @@ namespace KokoroUpTime
 
         private void SetCurrentSceneInfo()
         {
-            this.CurrentSceneTextBlock.Text = $"第{this.dataProgress.CurrentCapter}回の「{this.dataProgress.CurrentScene}」をプレイ中…。";
+            if (this.dataProgress.CurrentCapter == 0 && this.dataProgress.CurrentScene == null)
+            {
+                this.CurrentSceneTextBlock.Text = "まだ何もプレイしてません…。";
+            }
+            else
+            {
+                this.CurrentSceneTextBlock.Text = $"第{this.dataProgress.CurrentCapter}回の「{this.dataProgress.CurrentScene}」をプレイ中…。";
+            }  
         }
 
         private List<UserInfoItem> LoadUsers()
@@ -305,7 +312,7 @@ namespace KokoroUpTime
                     }
 
                     string dbName = $"{userInfos[0]}.sqlite";
-                    string dbDirPath = $"./Log/{userInfos[0]}_{userInfos[1]}/";
+                    string dbDirPath = $"./Log/{userInfos[0]}/";
 
                     var individualDbPath = System.IO.Path.Combine(dbDirPath, dbName);
 
@@ -322,11 +329,11 @@ namespace KokoroUpTime
                     if (inputMethod == 0)
                     {
                         var startupPath = FileUtils.GetStartupPath();
-                        items.Add(new UserInfoItem() { NameBmpPath = $@"{startupPath}/{dirPath}/name.png", UserInfo = $"{userInfos[1]}, {userInfos[2]}" });
+                        items.Add(new UserInfoItem() { NameBmpPath = $@"{startupPath}/{dirPath}/name.png", UserInfo = $"{userInfos[1]}, {userInfos[2]}", UserName = $"{userInfos[0]}{userInfos[1]}", UserDir = userInfos[0] });
                     }
                     else if (inputMethod == 1 || inputMethod == 2)
                     {
-                        items.Add(new UserInfoItem() { NameBmpPath = null, UserInfo = $"{userInfos[0]}{userInfos[1]}, {userInfos[2]}" });
+                        items.Add(new UserInfoItem() { NameBmpPath = null, UserInfo = $"{userInfos[0]}{userInfos[1]}, {userInfos[2]}", UserName = $"{userInfos[0]}{userInfos[1]}", UserDir = userInfos[0] });
                     }
                 }
                 else
@@ -353,24 +360,35 @@ namespace KokoroUpTime
 
                 case "ItemsButtonButton":
 
-                    ItemPage itemPage = new ItemPage();
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        ItemPage itemPage = new ItemPage();
 
-                    itemPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                        itemPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                    this.NavigationService.Navigate(itemPage);
-
+                        this.NavigationService.Navigate(itemPage);
+                    }
                     break;
 
                 case "OptionButton":
 
-                    OptionPage optionPage = new OptionPage();
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        OptionPage optionPage = new OptionPage();
 
-                    optionPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                        optionPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                    this.NavigationService.Navigate(optionPage);
-
+                        this.NavigationService.Navigate(optionPage);
+                    }
                     break;
-
 
                 case "NameEntryButton":
 
@@ -386,7 +404,7 @@ namespace KokoroUpTime
 
                     if (this.initConfig.userName == null)
                     {
-                        MessageBox.Show("データが一つもできていません。\nまずはどれかプレイしてください。");
+                        MessageBox.Show("データが一つもできていません。\nまずは名前を入力して、\nどれかプレイしてください。", "情報");
                     }
                     else
                     {
@@ -399,19 +417,52 @@ namespace KokoroUpTime
 
                 case "SelectDataListExportButton":
 
-                    // 複数選択可能
-                    foreach (var item in this.SelectDataListBox.SelectedItems)
+                    if (this.SelectDataListBox.SelectedItems.Count > 0)
                     {
-                        var selectedDataPath = this.dirPaths[this.SelectDataListBox.Items.IndexOf(item)];
-                        // ここからだよん
+                        var browser = new CommonOpenFileDialog();
+
+                        browser.Title = "フォルダーを選択してください";
+                        browser.IsFolderPicker = true;
+
+                        string outputDir;
+
+                        if (browser.ShowDialog() == CommonFileDialogResult.Ok)
+                        {
+                            outputDir = browser.FileName;
+                        }
+
+                        DirectoryUtils.SafeCreateDirectory("./temp");
+
+                        // 複数選択可能
+                        foreach (var item in this.SelectDataListBox.SelectedItems)
+                        {
+                            var sourceDirName = this.dirPaths[this.SelectDataListBox.Items.IndexOf(item)];
+
+                            var destDirName = $@"./temp/{ (item as UserInfoItem).UserDir}";
+
+                            DirectoryUtils.CopyDirectory(sourceDirName, destDirName);
+
+                            string[] userInfos;
+
+                            using (var csv = new CsvReader($"{destDirName}/user.conf"))
+                            {
+                                var csvs = csv.ReadToEnd();
+                                userInfos = new string[3] { csvs[0][0], csvs[0][1], csvs[0][2] };
+                            }
+                            File.Delete($"{destDirName}/user.conf");
+
+                            var dbPath = $"{destDirName}/{userInfos[0]}.conf";
+
+                            DB2Excel.WriteDB2Excel(dbPath, userInfos);
+                        }
                     }
-
-                    this.SelectDataListGrid.Visibility = Visibility.Hidden;
-                    this.CoverLayerImage.Visibility = Visibility.Hidden;
-
+                    else
+                    {
+                        MessageBox.Show("データを一つ以上選択してください。", "情報");
+                    }
                     break;
 
-                case "SelectDataListCancelButton":
+                case "SelectDataListReturnButton":
 
                     this.SelectDataListGrid.Visibility = Visibility.Hidden;
                     this.CoverLayerImage.Visibility = Visibility.Hidden;
@@ -422,7 +473,7 @@ namespace KokoroUpTime
 
                     if (this.SelectDataListBox.SelectedItems.Count > 0)
                     {
-                        if (MessageBox.Show("選択したデータを完全に削除します。\nよろしいですか？", "Information", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.No)
+                        if (MessageBox.Show("選択したデータを完全に削除します。\nよろしいですか？", "注意！", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.No)
                         {
                             return;
                         }
@@ -443,11 +494,54 @@ namespace KokoroUpTime
                             // this.SelectDataListBox.Items.Refresh();
 
                             this.SelectDataListBox.ItemsSource = this.LoadUsers();
+
+                            if (this.SelectDataListBox.Items.Count <= 0)
+                            {
+                                if (this.CurrentNameImage.Source != null)
+                                {
+                                    this.CurrentNameImage.Source = null;
+                                }
+                                this.CurrentUserTextBlock.Text = "名無しさん";
+
+                                this.dataProgress.CurrentCapter = 0;
+                                this.dataProgress.CurrentScene = null;
+
+                                this.SetCurrentSceneInfo();
+
+                                this.initConfig.userName = null;
+
+                                if (File.Exists("./Log/system.conf"))
+                                {
+                                    File.Delete("./Log/system.conf");
+                                }
+                            }
+                            else
+                            {
+                                bool nameExist = false;
+
+                                foreach (var item in this.SelectDataListBox.Items)
+                                {
+                                    if ((item as UserInfoItem).UserName == $"{this.initConfig.userName}{this.initConfig.userTitle}")
+                                    {
+                                        nameExist = true;
+                                    }
+                                }
+
+                                if (!nameExist)
+                                {
+                                    var startupPath = FileUtils.GetStartupPath();
+
+                                    var userDirPath = $@"{startupPath}/Log/{(this.SelectDataListBox.Items[0] as UserInfoItem).UserDir}";
+
+                                    File.Copy($@"{userDirPath}/user.conf", @"./Log/system.conf", true);
+                                }
+                                this.LoadUser();
+                            }
                         }
                     }
                     else
                     {
-                        MessageBox.Show("データを一つ以上選択してください。");
+                        MessageBox.Show("データを一つ以上選択してください。", "情報");
                     }
                     break;
 
@@ -455,7 +549,7 @@ namespace KokoroUpTime
 
                     if (this.initConfig.userName == null)
                     {
-                        MessageBox.Show("なまえがひとつも登録されていません。\nまずは名前の入力から始めてください。");
+                        MessageBox.Show("なまえがひとつも登録されていません。\nまずは名前の入力から始めてください。", "情報");
                     }
                     else
                     {
@@ -518,32 +612,50 @@ namespace KokoroUpTime
 
                 case "第1回":
 
-                    Chapter1 chapter1 = new Chapter1();
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        Chapter1 chapter1 = new Chapter1();
 
-                    chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                        chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                    this.NavigationService.Navigate(chapter1);
-
+                        this.NavigationService.Navigate(chapter1);
+                    }
                     break;
 
                 case "第2回":
 
-                    Chapter2 chapter2 = new Chapter2();
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        Chapter2 chapter2 = new Chapter2();
 
-                    // chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                        // chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                    this.NavigationService.Navigate(chapter2);
-
+                        this.NavigationService.Navigate(chapter2);
+                    }
                     break;
 
                 case "第3回":
 
-                    Chapter3 chapter3 = new Chapter3();
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        Chapter3 chapter3 = new Chapter3();
 
-                    chapter3.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                        chapter3.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                    this.NavigationService.Navigate(chapter3);
-
+                        this.NavigationService.Navigate(chapter3);
+                    }
                     break;
             }
         }
@@ -582,5 +694,7 @@ namespace KokoroUpTime
     {
         public string UserInfo { get; set; }
         public string NameBmpPath { get; set; }
+        public string UserName { get; set; }
+        public string UserDir { get; set; }
     }
 }

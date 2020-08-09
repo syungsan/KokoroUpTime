@@ -454,7 +454,7 @@ namespace KokoroUpTime
 
                         // Name.bmpを収める場所の設定
                         string nameBmp = "Name.bmp";
-                        string dirPath = $"./Log/{initConfig.userName}_{initConfig.userTitle}/";
+                        string dirPath = $"./Log/{initConfig.userName}/";
 
                         string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
 
@@ -551,7 +551,7 @@ namespace KokoroUpTime
             {
                 var splitDirName = dirPath.Split("_");
 
-                if (splitDirName[0] == "./Log/画像")
+                if (splitDirName[0] == "./Log/画像Name")
                 {
                     imageUserNumbers.Add(Int32.Parse(splitDirName[1]));
                 }
@@ -615,12 +615,14 @@ namespace KokoroUpTime
 
                     if (this.selectInputMethod == 0)
                     {
+                        DirectoryUtils.SafeCreateDirectory("./temp");
+
                         // 実行ファイルの場所を絶対パスで取得
                         var startupPath = FileUtils.GetStartupPath();
 
                         foreach (var (handWritingNameImage, index) in handWritingNameImages.Indexed())
                         {
-                            handWritingNameImage.Source = new BitmapImage(new Uri($@"{startupPath}/Log/temp_name.png", UriKind.Absolute));
+                            handWritingNameImage.Source = new BitmapImage(new Uri($@"{startupPath}/temp/temp_name.png", UriKind.Absolute));
 
                             titleTextBlocks[index].Text = titles[index];
                         }
@@ -696,11 +698,11 @@ namespace KokoroUpTime
                         // 実行ファイルの場所を絶対パスで取得
                         var startupPath = FileUtils.GetStartupPath();
 
-                        var tempNameImagePath = $@"{startupPath}/Log/temp_name.png";
+                        var tempNameImagePath = $@"{startupPath}/temp/temp_name.png";
 
-                        this.newUserName = $@"画像_{this.GetLatestImageUserNumber()}";
+                        this.newUserName = $@"画像Name_{this.GetLatestImageUserNumber()}";
 
-                        var newUserNameDirPath = $@"{startupPath}/Log/{this.newUserName}_{this.selectUserTitle}";
+                        var newUserNameDirPath = $@"{startupPath}/Log/{this.newUserName}";
 
                         var distNameImagePath = $@"{newUserNameDirPath}/name.png";
 
@@ -712,6 +714,11 @@ namespace KokoroUpTime
                         this.InitDatabaseFile();
 
                         File.Copy($@"{newUserNameDirPath}/user.conf", @"./Log/system.conf", true);
+
+                        if (Directory.Exists("./temp"))
+                        {
+                            Directory.Delete("./temp", true);
+                        }
                     }
                     else if (this.selectInputMethod == 1)
                     {
@@ -751,6 +758,8 @@ namespace KokoroUpTime
 
             if (button.Content.ToString() == "かんせい")
             {
+                DirectoryUtils.SafeCreateDirectory("./temp");
+
                 // ストロークが描画されている境界を取得
                 Rect rectBounds = this.NameCanvas.Strokes.GetBounds();
 
@@ -777,7 +786,7 @@ namespace KokoroUpTime
 
                 //仮置き
                 string nameBmp = "temp_name.png";
-                string dirPath = $"./Log";
+                string dirPath = $"./temp";
 
                 string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
                 var startupPath = FileUtils.GetStartupPath();
@@ -815,7 +824,7 @@ namespace KokoroUpTime
         {
             var startupPath = FileUtils.GetStartupPath();
 
-            var newUserNameDirPath = $@"{startupPath}/Log/{this.newUserName}_{this.selectUserTitle}";
+            var newUserNameDirPath = $@"{startupPath}/Log/{this.newUserName}";
 
             var confPath = $@"{newUserNameDirPath}/user.conf";
 
@@ -837,7 +846,7 @@ namespace KokoroUpTime
         {
             var startupPath = FileUtils.GetStartupPath();
 
-            var newUserNameDirPath = $@"{startupPath}/Log/{this.newUserName}_{this.selectUserTitle}";
+            var newUserNameDirPath = $@"{startupPath}/Log/{this.newUserName}";
 
             var srcDBPath = $@"{startupPath}/Datas/default.sqlite";
 

@@ -377,7 +377,7 @@ namespace KokoroUpTime
             /*
             // データベース本体のファイルのパス設定
             string dbName = $"{initConfig.userName}.sqlite";
-            string dirPath = $"./Log/{initConfig.userName}_{initConfig.userTitle}/";
+            string dirPath = $"./Log/{initConfig.userName}/";
 
             // FileUtils.csからディレクトリ作成のメソッド
             // 各ユーザの初回起動のとき実行ファイルの場所下のLogフォルダにユーザネームのフォルダを作る
@@ -394,11 +394,6 @@ namespace KokoroUpTime
             // データベースのテーブル作成と現在時刻の書き込みを同時に行う
             using (var connection = new SQLiteConnection(this.initConfig.dbPath))
             {
-                // 仮（本当は名前を登録するタイミングで）
-                connection.CreateTable<DataOption>();
-                connection.CreateTable<DataProgress>();
-                connection.CreateTable<DataCapter1>();
-
                 // 毎回のアクセス日付を記録
                 connection.Insert(this.dataCapter1);
             }
@@ -1235,7 +1230,7 @@ namespace KokoroUpTime
 
                         // name.pngを収める場所の設定
                         string namePng = "name.png";
-                        string dirPath = $"./Log/{initConfig.userName}_{initConfig.userTitle}/";
+                        string dirPath = $"./Log/{initConfig.userName}/";
 
                         string namePngPath = System.IO.Path.Combine(dirPath, namePng);
 
