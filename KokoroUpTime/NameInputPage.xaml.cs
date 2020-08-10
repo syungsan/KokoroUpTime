@@ -18,6 +18,10 @@ using System.Windows.Threading;
 using System.IO;
 using System.Linq;
 using SQLite;
+using System.Text.RegularExpressions;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
+using System.Windows.Interop;
+using Microsoft.VisualBasic;
 
 namespace KokoroUpTime
 {
@@ -29,6 +33,8 @@ namespace KokoroUpTime
         private float INIT_MESSAGE_SPEED = 30.0f;
 
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
+
+        private string[] IMAGE_TEXTS = { "name" };
 
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
@@ -43,6 +49,12 @@ namespace KokoroUpTime
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
         private int word_num;
+
+        private int inlineCount;
+        private int imageInlineCount;
+
+        private List<Run> runs = new List<Run>();
+        private List<InlineUIContainer> imageInlines = new List<InlineUIContainer>();
 
         // 各種コントロールを任意の文字列で呼び出すための辞書
         private Dictionary<string, Image> imageObjects = null;
@@ -283,14 +295,16 @@ namespace KokoroUpTime
                     {
                         var _message = this.scenarios[this.scenarioCount][2];
 
-                        _message = this.SequenceCheck(_message);
+                        var _messages = this.SequenceCheck(_message);
 
-                        this.ShowMessage(textObject: _textObject, message: _message);
+                        this.ShowMessage(textObject: _textObject, messages: _messages);
                     }
                     else
                     {
+                        var _messages = this.SequenceCheck(_textObject.Text);
+
                         // xamlに直接書いたStaticな文章を表示する場合
-                        this.ShowMessage(textObject: _textObject, message: _textObject.Text);
+                        this.ShowMessage(textObject: _textObject, messages: _messages);
                     }
                     break;
 
@@ -370,7 +384,7 @@ namespace KokoroUpTime
             }
         }
 
-        string SequenceCheck(string text)
+        private List<List<string>> SequenceCheck(string text)
         {
             // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
             text = text.Replace("鬱", "\u2028");
@@ -379,17 +393,79 @@ namespace KokoroUpTime
             {
                 text = text.Replace("【name】", this.newUserName);
             }
-            else if (this.selectInputMethod == 0)
-            {
-                text = text.Replace("【name】", "n");
-            }
+
             text = text.Replace("【くん／ちゃん／さん】", this.selectUserTitle);
 
-            return text;
+            List<List<string>> text2ds = new List<List<string>>();
+
+            // まずは画像から
+            text = text.Replace("】", "【");
+
+            var texts = text.Split("【");
+
+            foreach (var imageText in IMAGE_TEXTS)
+            {
+                int[] matchIndexs = { };
+
+                foreach (var (txt, index) in texts.Indexed())
+                {
+                    if (txt == imageText)
+                    {
+                        matchIndexs.Append(index);
+                    }
+                }
+
+                foreach (var tex in texts)
+                {
+                    List<string> tex1ds = new List<string> { tex };
+                    text2ds.Add(tex1ds);
+                }
+
+                foreach (var matchIndex in matchIndexs)
+                {
+                    text2ds[matchIndex].Add(imageText);
+                }
+            }
+
+            /*
+            // そしてテキストタグを
+            var matchTexts = new Regex(@"<@=(.+?)>(.+?)</@>").Matches(text);
+
+            for (int i = 0; i < matchTexts.Count; i++)
+            {
+                var sequence = matchTexts[i].Value;
+
+                var matchTags = new Regex(@"<@=(.+?)>").Matches(sequence);
+
+                var trimTag = matchTags[0].Value.Replace("<@=", "").Replace(">", "");
+
+                var tags = trimTag.Split(",");
+
+                text = text.Replace(matchTags[0].Value, "<@").Replace("</@>", "<@");
+
+                var texts = text.Split("<@");
+
+                foreach (var tex in texts)
+                {
+                    List<string> tex1ds = new List<string> { tex };
+                    text2ds.Add(tex1ds);
+                } 
+                var trimSeq = sequence.Replace(matchTags[0].Value, "").Replace("</@>", "");
+
+                foreach (var tag in tags)
+                {
+                    text2ds[Array.IndexOf(texts, trimSeq)].Add(tag);
+                }
+            }
+            */
+            return text2ds;
         }
 
-        void ShowMessage(TextBlock textObject, string message)
+        private void ShowMessage(TextBlock textObject, List<List<string>> messages)
         {
+            textObject.Text = "";
+            textObject.Visibility = Visibility.Visible;
+
             this.word_num = 0;
 
             // メッセージ表示処理
@@ -398,109 +474,95 @@ namespace KokoroUpTime
             this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / INIT_MESSAGE_SPEED);
             this.msgTimer.Start();
 
-            // 一文字ずつメッセージ表示（Inner Func）
-            void ViewMsg(object sender, EventArgs e)
+            this.inlineCount = 0;
+            this.imageInlineCount = 0;
+
+            foreach (var run in this.runs)
             {
-                textObject.Text = message.Substring(0, this.word_num);
-
-                if (this.word_num == 0)
-                {
-                    textObject.Visibility = Visibility.Visible;
-                }
-
-                if (this.word_num < message.Length)
-                {
-                    this.word_num++;
-                }
-                else
-                {
-                    this.msgTimer.Stop();
-                    this.msgTimer = null;
-
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-                }
+                run.Text = "";
             }
-        }
+            this.runs.Clear();
 
-        /*
-        void ShowMessage(TextBlock textObject, string message, object obj = null)
-        {
-            this.word_num = 0;
+            this.imageInlines.Clear();
 
-            if (this.dataOption.IsWordRecognition == false && textObject.Name == "MainMessageTextBlock")
+            textObject.Inlines.Clear();
+
+            foreach (var msgs in messages)
             {
-                this.MainMessageFrontText.Text = "";
-                this.MainMessageBackText.Text = "";
-                this.NameImage.Source = null;
+                string namePngPath = "./temp/temp_name.png";
 
-                textObject.Visibility = Visibility.Visible;
+                if (msgs[0] == "name" && File.Exists(namePngPath))
+                {
+                    var imageInline = new InlineUIContainer { Child = new Image { Source = null, Height = 48 } };
+
+                    textObject.Inlines.Add(imageInline);
+
+                    this.imageInlines.Add(imageInline);
+                }
+                var run = new Run { Text = "", Foreground = new SolidColorBrush(Colors.Black) };
+
+                textObject.Inlines.Add(run);
+
+                this.runs.Add(run);
             }
-
-            // メッセージ表示処理
-            this.msgTimer = new DispatcherTimer();
-            this.msgTimer.Tick += ViewMsg;
-            this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / this.dataOption.MessageSpeed);
-            this.msgTimer.Start();
 
             // 一文字ずつメッセージ表示（Inner Func）
             void ViewMsg(object sender, EventArgs e)
             {
-                if (this.dataOption.IsWordRecognition == false && textObject.Name == "MainMessageTextBlock" && this.scene == "前説")
+                if (this.inlineCount < messages.Count)
                 {
-                    if (this.word_num > 0 && message.Substring(this.word_num - 1, 1) == "n") // && this.MainMessageBackText.Text == null)
+                    var msgs = messages[this.inlineCount];
+
+                    string namePngPath = "./temp/temp_name.png";
+
+                    if (msgs[0] == "name" && File.Exists(namePngPath))
                     {
-                        message = message.Replace("n", "");
-
-                        // Name.bmpを収める場所の設定
-                        string nameBmp = "Name.bmp";
-                        string dirPath = $"./Log/{initConfig.userName}/";
-
-                        string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
+                        // msgs[0].Replace("name", "");
 
                         // 実行ファイルの場所を絶対パスで取得
                         var startupPath = FileUtils.GetStartupPath();
 
-                        this.NameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
+                        var image = new BitmapImage();
+
+                        image.BeginInit();
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        image.UriSource = new Uri($@"{startupPath}/{namePngPath}", UriKind.Absolute);
+                        image.EndInit();
+
+                        image.Freeze();
+
+                        (this.imageInlines[imageInlineCount].Child as Image).Source = image;
+
+                        this.imageInlineCount++;
+
+                        this.inlineCount++;
+                        this.word_num = 0;
+
+                        return;
                     }
-                    else if (this.word_num > 0 && NameImage.Source != null) // && this.MainMessageFrontText != null)
+                    this.runs[inlineCount].Text = msgs[0].Substring(0, this.word_num);
+
+                    if (this.word_num < msgs[0].Length)
                     {
-                        this.MainMessageBackText.Text = message.Substring(this.MainMessageFrontText.Text.Length, this.word_num - MainMessageFrontText.Text.Length);
+                        this.word_num++;
                     }
                     else
                     {
-                        this.MainMessageFrontText.Text = message.Substring(0, this.word_num);
+                        this.inlineCount++;
+                        this.word_num = 0;
                     }
-                }
-                else
-                {
-                    textObject.Text = message.Substring(0, this.word_num);
-
-                    if (this.word_num == 0)
-                    {
-                        textObject.Visibility = Visibility.Visible;
-                    }
-                }
-
-                if (this.word_num < message.Length)
-                {
-                    this.word_num++;
                 }
                 else
                 {
                     this.msgTimer.Stop();
                     this.msgTimer = null;
 
-                    if (obj != null)
-                    {
-                        this.MessageCallBack(obj);
-                    }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
             }
         }
-        */
 
         // アニメーション（ストーリーボード）の処理
         private void ShowAnime(string storyBoard, string isSync)
@@ -664,6 +726,11 @@ namespace KokoroUpTime
                 {
                     this.isClickable = false;
 
+                    if (Directory.Exists("./temp"))
+                    {
+                        Directory.Delete("./temp", true);
+                    }
+
                     TitlePage titlePage = new TitlePage();
 
                     titlePage.SetIsFirstBootFlag(true);
@@ -693,6 +760,8 @@ namespace KokoroUpTime
                 {
                     this.isClickable = false;
 
+                    DirectoryUtils.SafeCreateDirectory("./Log");
+
                     if (this.selectInputMethod == 0)
                     {
                         // 実行ファイルの場所を絶対パスで取得
@@ -708,17 +777,12 @@ namespace KokoroUpTime
 
                         DirectoryUtils.SafeCreateDirectory(newUserNameDirPath);
 
-                        File.Move(tempNameImagePath, distNameImagePath);
+                        File.Copy(tempNameImagePath, distNameImagePath);
 
                         this.InitConfigFile();
                         this.InitDatabaseFile();
 
                         File.Copy($@"{newUserNameDirPath}/user.conf", @"./Log/system.conf", true);
-
-                        if (Directory.Exists("./temp"))
-                        {
-                            Directory.Delete("./temp", true);
-                        }
                     }
                     else if (this.selectInputMethod == 1)
                     {

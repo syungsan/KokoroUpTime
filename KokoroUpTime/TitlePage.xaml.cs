@@ -424,7 +424,7 @@ namespace KokoroUpTime
                         browser.Title = "フォルダーを選択してください";
                         browser.IsFolderPicker = true;
 
-                        string outputDir;
+                        string outputDir = "";
 
                         if (browser.ShowDialog() == CommonFileDialogResult.Ok)
                         {
@@ -451,9 +451,29 @@ namespace KokoroUpTime
                             }
                             File.Delete($"{destDirName}/user.conf");
 
+                            var finalDir = $"{outputDir}/{userInfos[0]}";
+
                             var dbPath = $"{destDirName}/{userInfos[0]}.conf";
 
-                            DB2Excel.WriteDB2Excel(dbPath, userInfos);
+                            File.Copy("./Datas/default.xlsx", $"{destDirName}/{userInfos[0]}.xlsx");
+
+                            DB2Excel.WriteDB2Excel(dbPath, $"{destDirName}/{userInfos[0]}.xlsx", userInfos);
+
+                            File.Delete($"{destDirName}/{userInfos[0]}.sqlite");
+
+                            try
+                            {
+                                Directory.Move(destDirName, finalDir);
+                            }
+                            catch (Exception error)
+                            {
+                                MessageBox.Show(error.Message, "失敗！");
+                            }
+
+                            if (Directory.Exists("./temp"))
+                            {
+                                Directory.Delete("./temp", true);
+                            }
                         }
                     }
                     else
