@@ -11,6 +11,18 @@
 
     <Page.Resources>
         <local:ImageConverter x:Key="ImageConverter"/>
+        <Storyboard x:Key="appear_credit">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CreditGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-1588"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="disappear_credit">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CreditGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1588"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Page.Resources>
 
     <Viewbox>
@@ -48,6 +60,7 @@
             <Button x:Name="EndButton" Content="終了" FontSize="36" Foreground="White" Click="Button_Click" Margin="411,999,1319,10"/>
             <Button x:Name="SelectDataButton" Content="データ管理" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,999,1520,10"/>
             <Button x:Name="SelectUserButton" Content="なまえ選択" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,918,1520,91"/>
+            <Button x:Name="CreditButton" Content="作成　こころあっぷタイム編集委員会" HorizontalAlignment="Left" Margin="1335,1018,0,0" VerticalAlignment="Top" FontSize="36" Background="{x:Null}" FontWeight="Bold" Foreground="#FFD0F9FF" Click="Button_Click" BorderBrush="{x:Null}"/>
             <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
             <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169" Background="#FFF9C9D0" d:IsHidden="True">
                 <TextBlock x:Name="SelectUserListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="なまえの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
@@ -68,7 +81,7 @@
                 </ListBox>
                 <Button x:Name="SelectUserListOKButton" Content="OK" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
             </Grid>
-            <Grid x:Name="SelectDataListGrid" Margin="405,100,407,169">
+            <Grid x:Name="SelectDataListGrid" Margin="405,100,407,169" d:IsHidden="True">
                 <Border x:Name="SelectDataListBorder" BorderThickness="1" BorderBrush="Black" Background="#FFE8F9CF" CornerRadius="32,32,32,32"/>
                 <TextBlock x:Name="SelectDataListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="データの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
                 <ListBox x:Name="SelectDataListBox" Margin="48,140,48,130" FontSize="48" SelectionMode="Multiple">
@@ -99,6 +112,32 @@
                 <Button x:Name="ExitBackNoButton" HorizontalAlignment="Left" Margin="465,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
                     <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
                 </Button>
+            </Grid>
+            <Grid x:Name="CreditGrid" Margin="338,129,340,20" RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Image x:Name="CreditBackImage" Source="/Images/159474.png"/>
+                <Grid x:Name="CreditInnerGrid" Margin="-33,41,33,-41">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-3.0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <TextBlock x:Name="CreditTitleTextBlock" HorizontalAlignment="Center" Margin="0,145,0,0" Text="スタッフ" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Foreground="#FFF74C4C"/>
+                    <TextBlock x:Name="DoushisyaTextBlock" HorizontalAlignment="Center" Margin="0,301,0,0" Text="同志社大学" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
+                    <TextBlock x:Name="MaglabTextBlock" HorizontalAlignment="Center" Margin="0,414,0,0" Text="縄手研究室" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
+                    <TextBlock x:Name="ProgrammerTextBlock" HorizontalAlignment="Center" Margin="0,642,0,0" Text="プログラミング　宮内　足立　多々納" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
+                    <Button x:Name="CreditReturnButton" Content="戻る" HorizontalAlignment="Left" Margin="1038,713,0,0" VerticalAlignment="Top" FontSize="48" Click="Button_Click"/>
+                </Grid>
             </Grid>
         </Grid>
     </Viewbox>

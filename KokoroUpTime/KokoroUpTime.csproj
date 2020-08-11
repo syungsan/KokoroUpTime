@@ -20,6 +20,7 @@
     <None Remove="Fonts\JiyunoTsubasa.ttf" />
     <None Remove="Fonts\TanukiMagic.ttf" />
     <None Remove="good_words_grid.png" />
+    <None Remove="Images\159474.png" />
     <None Remove="Images\after.png" />
     <None Remove="Images\akamaru_face_01.png" />
     <None Remove="Images\akamaru_face_02.png" />
@@ -221,6 +222,7 @@
     <Resource Include="Fonts\azuki.ttf" />
     <Resource Include="Fonts\JiyunoTsubasa.ttf" />
     <Resource Include="Fonts\TanukiMagic.ttf" />
+    <Resource Include="Images\159474.png" />
     <Resource Include="Images\after.png" />
     <Resource Include="Images\akamaru_face_01.png" />
     <Resource Include="Images\akamaru_face_02.png" />

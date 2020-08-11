@@ -21,6 +21,9 @@ using System.Linq;
 using Microsoft.VisualBasic;
 using SQLitePCL;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
+
 
 namespace KokoroUpTime
 {
@@ -52,6 +55,7 @@ namespace KokoroUpTime
             this.SelectDataListGrid.Visibility = Visibility.Hidden;
             this.CoverLayerImage.Visibility = Visibility.Hidden;
             this.ExitBackGrid.Visibility = Visibility.Hidden;
+            this.CreditGrid.Visibility = Visibility.Hidden;
 
             // デバッグ用表示 #################################################################
             Assembly asm = Assembly.GetExecutingAssembly(); // 実行中のアセンブリを取得する。
@@ -629,6 +633,42 @@ namespace KokoroUpTime
                     this.ExitBackGrid.Visibility = Visibility.Hidden;
                     this.CoverLayerImage.Visibility = Visibility.Hidden;
 
+                    break;
+
+                case "CreditButton":
+
+                    this.CoverLayerImage.Visibility = Visibility.Visible;
+                    this.CreditGrid.Visibility = Visibility.Visible;
+
+                    Storyboard sbStart = this.FindResource("appear_credit") as Storyboard;
+
+                    if (sbStart != null)
+                    {
+                        sbStart.Begin(this);
+                    }
+                    break;
+
+                case "CreditReturnButton":
+
+                    Storyboard sbEnd = this.FindResource("disappear_credit") as Storyboard;
+
+                    if (sbEnd != null)
+                    {
+                        sbEnd.Begin(this);
+                    }
+ 
+                    // 1秒後に処理を実行
+                    DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+                    timer.Start();
+                    timer.Tick += (s, args) =>
+                    {
+                        // タイマーの停止
+                        timer.Stop();
+
+                        // 以下に待機後の処理を書く
+                        this.CoverLayerImage.Visibility = Visibility.Hidden;
+                        this.CreditGrid.Visibility = Visibility.Hidden;
+                    };
                     break;
             }
 
