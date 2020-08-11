@@ -12,6 +12,8 @@ namespace KokoroUpTime
 
         public string userTitle = null;
 
+        public string accessDateTime = null;
+
         public string dbPath = null;
     }
 

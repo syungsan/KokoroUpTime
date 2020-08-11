@@ -60,6 +60,7 @@ namespace KokoroUpTime
             return true;
         }
 
+        /*
         /// <summary>
         /// セル書込(R1C1形式)
         /// </summary>
@@ -71,6 +72,7 @@ namespace KokoroUpTime
             // 値を書込
             _excelWorksheet.Cells[row, col].Value = value;
         }
+        */
 
         /// <summary>
         /// セル書込("A1"形式)

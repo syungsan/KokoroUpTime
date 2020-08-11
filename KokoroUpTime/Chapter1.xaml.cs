@@ -372,22 +372,6 @@ namespace KokoroUpTime
             this.dataItem = _dataItem;
             this.dataProgress = _dataProgress;
 
-            // ======== 新規ユーザ登録時 ===============================================
-
-            /*
-            // データベース本体のファイルのパス設定
-            string dbName = $"{initConfig.userName}.sqlite";
-            string dirPath = $"./Log/{initConfig.userName}/";
-
-            // FileUtils.csからディレクトリ作成のメソッド
-            // 各ユーザの初回起動のとき実行ファイルの場所下のLogフォルダにユーザネームのフォルダを作る
-            DirectoryUtils.SafeCreateDirectory(dirPath);
-
-            this.dbPath = System.IO.Path.Combine(dirPath, dbName);
-            */
-
-            // =========================================================================
-
             // 現在時刻を取得
             this.dataCapter1.CreatedAt = DateTime.Now.ToString();
 
@@ -401,18 +385,11 @@ namespace KokoroUpTime
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.scenarios = this.LoadScenario("./Scenarios/chapter1.csv");
-            this.ScenarioPlay();
-        }
-
-        // CSVから2次元配列へシナリオデータの収納（CsvReaderクラスを使用）
-        private List<List<string>> LoadScenario(string filePath)
-        {
-            using (var csv = new CsvReader(filePath))
+            using (var csv = new CsvReader("./Scenarios/chapter1.csv"))
             {
                 this.scenarios = csv.ReadToEnd();
             }
-            return scenarios;
+            this.ScenarioPlay();
         }
 
         // ゲーム進行の中核

@@ -117,6 +117,7 @@ namespace KokoroUpTime
 
                 this.initConfig.userName = csvs[0][0];
                 this.initConfig.userTitle = csvs[0][1];
+                this.initConfig.accessDateTime = csvs[0][2];
             }
 
             string dbName = $"{this.initConfig.userName}.sqlite";
@@ -453,8 +454,12 @@ namespace KokoroUpTime
 
                             var finalDir = $"{outputDir}/{userInfos[0]}";
 
-                            var dbPath = $"{destDirName}/{userInfos[0]}.conf";
+                            var dbPath = $"{destDirName}/{userInfos[0]}.sqlite";
 
+                            if (File.Exists($"{destDirName}/{userInfos[0]}.xlsx"))
+                            {
+                                File.Delete($"{destDirName}/{userInfos[0]}.xlsx");
+                            }
                             File.Copy("./Datas/default.xlsx", $"{destDirName}/{userInfos[0]}.xlsx");
 
                             DB2Excel.WriteDB2Excel(dbPath, $"{destDirName}/{userInfos[0]}.xlsx", userInfos);

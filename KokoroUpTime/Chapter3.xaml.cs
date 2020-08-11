@@ -484,18 +484,11 @@ namespace KokoroUpTime
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.scenarios = this.LoadScenario("./Scenarios/chapter3.csv");
-            this.ScenarioPlay();
-        }
-
-        // CSVから2次元配列へシナリオデータの収納（CsvReaderクラスを使用）
-        private List<List<string>> LoadScenario(string filePath)
-        {
-            using (var csv = new CsvReader(filePath))
+            using (var csv = new CsvReader("./Scenarios/chapter3.csv"))
             {
                 this.scenarios = csv.ReadToEnd();
             }
-            return scenarios;
+            this.ScenarioPlay();
         }
 
         // ゲーム進行の中核
