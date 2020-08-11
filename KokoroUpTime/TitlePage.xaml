@@ -136,7 +136,7 @@
                     <TextBlock x:Name="DoushisyaTextBlock" HorizontalAlignment="Center" Margin="0,301,0,0" Text="同志社大学" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
                     <TextBlock x:Name="MaglabTextBlock" HorizontalAlignment="Center" Margin="0,414,0,0" Text="縄手研究室" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
                     <TextBlock x:Name="ProgrammerTextBlock" HorizontalAlignment="Center" Margin="0,642,0,0" Text="プログラミング　宮内　足立　多々納" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
-                    <Button x:Name="CreditReturnButton" Content="戻る" HorizontalAlignment="Left" Margin="1038,713,0,0" VerticalAlignment="Top" FontSize="48" Click="Button_Click"/>
+                    <Button x:Name="CreditReturnButton" Content="閉じる" HorizontalAlignment="Left" Margin="1022,722,0,0" VerticalAlignment="Top" FontSize="48" Click="Button_Click"/>
                 </Grid>
             </Grid>
         </Grid>
