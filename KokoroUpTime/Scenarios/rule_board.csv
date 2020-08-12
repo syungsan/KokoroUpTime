@@ -1,0 +1,18 @@
+reset
+image,bg_image
+button,rule_board_button
+wait
+msg,rule_board_title_msg,教室のルール
+wait,no_button
+rule,rule_board_check1_msg,１．人のことを わらわない,0
+wait
+rule,rule_board_check2_msg,２．ふざけない,1
+wait
+rule,rule_board_check3_msg,３．はずかしがらない,2
+wait
+image,shiroji_small_right_down_image,,appear_up
+button,thin_msg_button,appear_wide,no_sync
+wait
+rule,thin_msg,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,all,白じい
+wait_tap
+return

@@ -277,7 +277,7 @@ namespace KokoroUpTime {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/KokoroUpTime;V0.8.3.1;component/optionpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/KokoroUpTime;V0.8.4.1;component/optionpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\OptionPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

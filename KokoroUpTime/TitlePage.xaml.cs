@@ -63,13 +63,15 @@ namespace KokoroUpTime
             // AssemblyNameから取得
             AssemblyName asmName = asm.GetName();
 
-            string name = "AssemblyName.Name : " + asmName.Name + "\r\n";
-            string version = "AssemblyName.Version : " + asmName.Version.ToString() + "\r\n";
-            string fullname = "AssemblyName.FullName : " + asmName.FullName + "\r\n";
-            string processor = "AssemblyName.ProcessorArchitecture : " + asmName.ProcessorArchitecture + "\r\n";
-            string runtime = "Assembly.ImageRuntimeVersion : " + asm.ImageRuntimeVersion + "\r\n";
+            // string name = "AssemblyName.Name : " + asmName.Name + "\r\n";
+            // string version = "AssemblyName.Version : " + asmName.Version.ToString() + "\r\n";
+            // string fullname = "AssemblyName.FullName : " + asmName.FullName + "\r\n";
+            // string processor = "AssemblyName.ProcessorArchitecture : " + asmName.ProcessorArchitecture + "\r\n";
+            // string runtime = "Assembly.ImageRuntimeVersion : " + asm.ImageRuntimeVersion + "\r\n";
 
-            this.VersionTextBlock.Text = name + version + fullname + processor + runtime + "\r\n";
+            // this.VersionTextBlock.Text = name + version + fullname + processor + runtime + "\r\n";
+            this.VersionTextBlock.Text = "Version " + asmName.Version.ToString();
+
             this.WindowTitle = asmName.Name + " Ver" + asmName.Version.ToString();
             // ################################################################################
         }
@@ -614,6 +616,16 @@ namespace KokoroUpTime
 
                     break;
 
+                case "RuleButton":
+
+                    RuleBoardPage ruleBoardPage = new RuleBoardPage();
+
+                    ruleBoardPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                    this.NavigationService.Navigate(ruleBoardPage);
+
+                    break;
+
                 case "EndButton":
 
                     this.CoverLayerImage.Visibility = Visibility.Visible;
@@ -637,15 +649,15 @@ namespace KokoroUpTime
 
                 case "CreditButton":
 
-                    this.CoverLayerImage.Visibility = Visibility.Visible;
-                    this.CreditGrid.Visibility = Visibility.Visible;
-
                     Storyboard sbStart = this.FindResource("appear_credit") as Storyboard;
 
                     if (sbStart != null)
                     {
                         sbStart.Begin(this);
                     }
+                    this.CoverLayerImage.Visibility = Visibility.Visible;
+                    this.CreditGrid.Visibility = Visibility.Visible;
+
                     break;
 
                 case "CreditReturnButton":

@@ -50,7 +50,7 @@
             <Button x:Name="AboutButton" Content="こころアップタイムとは" FontSize="36" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click" Margin="1400,620,205,392"/>
             <Button x:Name="RuleButton" Content="教室のルール" FontSize="36" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}" Click="Button_Click" Margin="1400,688,205,324"/>
             <Button x:Name="AnotherButton" Content="その他" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36" Click="Button_Click" Margin="1400,756,205,254"/>
-            <TextBlock x:Name="VersionTextBlock" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="287" Width="770" Margin="1034,311,0,0" FontSize="24" Foreground="#FFF0CA95" FontFamily="/Fonts/JiyunoTsubasa.ttf#JiyunoTsubasaFont"/>
+            <TextBlock x:Name="VersionTextBlock" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="53" Width="197" Margin="1518,309,0,0" FontSize="24" Foreground="#FFFF9E17" FontFamily="/Fonts/JiyunoTsubasa.ttf#JiyunoTsubasaFont" FontWeight="Bold"/>
             <Button x:Name="ChangeScreenButton" Content="Full/Win" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="195" Click="Button_Click" FontSize="36" Margin="1715,10,0,0"/>
             <StackPanel x:Name="CurrentNameStackPanel" Orientation="Horizontal" Margin="743,868,745,86">
                 <Image x:Name="CurrentNameImage" Height="48"/>
@@ -113,7 +113,7 @@
                     <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
                 </Button>
             </Grid>
-            <Grid x:Name="CreditGrid" Margin="338,129,340,20" RenderTransformOrigin="0.5,0.5">
+            <Grid x:Name="CreditGrid" Margin="338,129,340,20" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

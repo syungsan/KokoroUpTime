@@ -1,5 +1,5 @@
 ﻿KokoroUpTime
-0.8.3.1
+0.8.4.1
 
 winexe
 C#
@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\App.xaml
-10-1009914360
+111455747189
 
-22-289783522
+23-1026338197
 212-1994537782
-AboutPage.xaml;Chapter1.xaml;Chapter2.xaml;Chapter3.xaml;ItemPage.xaml;MainWindow.xaml;NameInputPage.xaml;OptionPage.xaml;Splash.xaml;TitlePage.xaml;
+AboutPage.xaml;Chapter1.xaml;Chapter2.xaml;Chapter3.xaml;ItemPage.xaml;MainWindow.xaml;NameInputPage.xaml;OptionPage.xaml;RuleBoardPage.xaml;Splash.xaml;TitlePage.xaml;
 
-True
+False
 
