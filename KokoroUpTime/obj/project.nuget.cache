@@ -1,16 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "BzCd+khwIPJ0ryEXkWSYl7/a6jzLvuTfcb+ZuwXZ6N+NvQA4DbHGzmE/Y3Y2B1peEUO+HZsCV91EQ4FDiouqcw==",
+  "dgSpecHash": "n7Dc5JeqHmwdSyGZc4L8ow9wapYLAN/vouI7o3IL03t3KemkrXwG0vyhOCwBMQmPq/CDOt4CtvAPq0iE4EMGNQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+  "projectFilePath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KokoroUpTime-subbranch\\KokoroUpTime\\KokoroUpTime.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\maglab\\.nuget\\packages\\sqlite-net-pcl\\1.7.335\\sqlite-net-pcl.1.7.335.nupkg.sha512",
-    "C:\\Users\\maglab\\.nuget\\packages\\sqlitepclraw.bundle_green\\2.0.3\\sqlitepclraw.bundle_green.2.0.3.nupkg.sha512",
-    "C:\\Users\\maglab\\.nuget\\packages\\sqlitepclraw.core\\2.0.3\\sqlitepclraw.core.2.0.3.nupkg.sha512",
-    "C:\\Users\\maglab\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.3\\sqlitepclraw.lib.e_sqlite3.2.0.3.nupkg.sha512",
-    "C:\\Users\\maglab\\.nuget\\packages\\sqlitepclraw.provider.dynamic_cdecl\\2.0.3\\sqlitepclraw.provider.dynamic_cdecl.2.0.3.nupkg.sha512",
-    "C:\\Users\\maglab\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
-    "C:\\Users\\maglab\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\sqlite-net-pcl\\1.7.335\\sqlite-net-pcl.1.7.335.nupkg.sha512",
+    "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\sqlitepclraw.bundle_green\\2.0.3\\sqlitepclraw.bundle_green.2.0.3.nupkg.sha512",
+    "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\sqlitepclraw.core\\2.0.3\\sqlitepclraw.core.2.0.3.nupkg.sha512",
+    "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.3\\sqlitepclraw.lib.e_sqlite3.2.0.3.nupkg.sha512",
+    "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\sqlitepclraw.provider.dynamic_cdecl\\2.0.3\\sqlitepclraw.provider.dynamic_cdecl.2.0.3.nupkg.sha512",
+    "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
   ],
   "logs": []
 }

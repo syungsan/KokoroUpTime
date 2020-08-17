@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {}
+    "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KokoroUpTime-subbranch\\KokoroUpTime\\KokoroUpTime.csproj": {}
   },
   "projects": {
-    "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {
+    "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KokoroUpTime-subbranch\\KokoroUpTime\\KokoroUpTime.csproj": {
       "version": "0.8.0.2",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+        "projectUniqueName": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KokoroUpTime-subbranch\\KokoroUpTime\\KokoroUpTime.csproj",
         "projectName": "KokoroUpTime",
-        "projectPath": "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
-        "packagesPath": "C:\\Users\\maglab\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maglab\\Documents\\GitHub\\KokoroUpTime\\KokoroUpTime\\obj\\",
+        "projectPath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KokoroUpTime-subbranch\\KokoroUpTime\\KokoroUpTime.csproj",
+        "packagesPath": "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KokoroUpTime-subbranch\\KokoroUpTime\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\maglab\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MAGDYNABOOK-03\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -53,12 +56,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[3.1.2, 3.1.2]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -67,7 +64,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
