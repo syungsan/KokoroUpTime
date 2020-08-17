@@ -10,7 +10,6 @@
       Loaded="Window_Loaded">
 
     <Viewbox>
-
         <Grid Height="1080" Width="1920" Background="#FFC5E0B4">
             <TextBlock x:Name="TitleTextBlock" HorizontalAlignment="Left" Margin="148,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="88" Text="こころあっぷタイムとは・・・？"/>
             <RichTextBox x:Name="MainRichTextBox" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" Focusable="False" Cursor="Arrow" >

@@ -20,6 +20,7 @@ namespace KokoroUpTime
     /// </summary>
     public partial class ItemPage : Page
     {
+        // ページ間参照橋渡し変数
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
         public DataItem dataItem = new DataItem();
@@ -29,6 +30,7 @@ namespace KokoroUpTime
 
         private bool[] hasGotItems;
 
+        // アイテム所持是非のフラグ
         private Image[] itemDetailImages;
 
         private int currentItemNo;
@@ -53,8 +55,19 @@ namespace KokoroUpTime
             this.itemMainButtons.Add(this.Item11MainButton);
         }
 
+        // xamlの処理が終わってWindowが表示されてからの処理
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            this.LoadItem();
+        }
+
+        // ページ間参照変数の橋渡し
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
+        {
+            this.initConfig = _initConfig;
+            this.dataOption = _dataOption;
+            this.dataItem = _dataItem;
+            this.dataProgress = _dataProgress;
         }
 
         private void ResetMainVisible()
@@ -87,20 +100,11 @@ namespace KokoroUpTime
             this.Item11DetailImage.Visibility = Visibility.Hidden;
         }
 
-        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
-        {
-            this.initConfig = _initConfig;
-            this.dataOption = _dataOption;
-            this.dataItem = _dataItem;
-            this.dataProgress = _dataProgress;
-
-            this.LoadItem();
-        }
-
         private void LoadItem()
         {
             Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
 
+            // アイテムを持っているかどうかのフラグ
             this.hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
 
             this.itemDetailImages = new Image[] { this.Item01DetailImage, this.Item02DetailImage, this.Item03DetailImage, this.Item04DetailImage, this.Item05DetailImage, this.Item06DetailImage, this.Item07DetailImage, this.Item08DetailImage, this.Item09DetailImage, this.Item10DetailImage, this.Item11DetailImage };
@@ -126,6 +130,7 @@ namespace KokoroUpTime
             {
                 TitlePage titlePage = new TitlePage();
 
+                // タイトルページのリロードなし
                 titlePage.SetIsFirstBootFlag(false);
 
                 titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
@@ -146,6 +151,7 @@ namespace KokoroUpTime
 
                     this.ReturnToItemButton.Visibility = Visibility.Visible;
 
+                    // もっとアイテムを持っているのであれば次を表示するボタン
                     if (this.hasGotItems.Where(c => c).Count() > 1)
                     {
                         this.NextPageButton.Visibility = Visibility.Visible;
@@ -178,6 +184,7 @@ namespace KokoroUpTime
 
             if (button.Name == "NextPageButton")
             {
+                // アイテム詳細を循環させる
                 if (this.currentItemNo >= this.itemDetailImages.Length - 1)
                 {
                     this.currentItemNo = 0;
@@ -186,6 +193,7 @@ namespace KokoroUpTime
                 {
                     this.currentItemNo += 1;
                 }
+
                 while (!this.hasGotItems[this.currentItemNo])
                 {
                     this.currentItemNo += 1;

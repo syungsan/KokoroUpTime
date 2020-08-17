@@ -5,7 +5,7 @@ using System.Text;
 using OfficeOpenXml;
 using System.IO;
 
-namespace KokoroUpTime
+namespace ExcelManage
 {
     class ExcelManager
     {
@@ -34,6 +34,7 @@ namespace KokoroUpTime
             }
         }
 
+        // ターゲットのシートをセットする
         public void SetSheet(string sheet="Sheet1")
         {
             // シート名で参照

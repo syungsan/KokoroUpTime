@@ -18,10 +18,8 @@ using System.Windows.Threading;
 using System.IO;
 using System.Linq;
 using SQLite;
-using System.Text.RegularExpressions;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
-using System.Windows.Interop;
-using Microsoft.VisualBasic;
+using Expansion;
+using FileIOUtils;
 
 namespace KokoroUpTime
 {
@@ -75,14 +73,17 @@ namespace KokoroUpTime
 
             this.EditingModeItemsControl.ItemsSource = EDIT_BUTTON;
 
-            this.NameButtonImage.Source = null;
+            this.NameImage.Source = null;
 
             this.InitControls();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.scenarios = this.LoadScenario("./Scenarios/name_input.csv");
+            using (var csv = new CsvReader("./Scenarios/name_input.csv"))
+            {
+                this.scenarios = csv.ReadToEnd();
+            }
             this.ScenarioPlay();
         }
 
@@ -138,16 +139,6 @@ namespace KokoroUpTime
             this.CoverLayerImage.Visibility = Visibility.Hidden;
             this.SelectUserTitleGrid.Visibility = Visibility.Hidden;
             this.MakeUserNameCompleteGrid.Visibility = Visibility.Hidden;
-        }
-
-        // CSVから2次元配列へシナリオデータの収納（CsvReaderクラスを使用）
-        private List<List<string>> LoadScenario(string filePath)
-        {
-            using (var csv = new CsvReader(filePath))
-            {
-                this.scenarios = csv.ReadToEnd();
-            }
-            return scenarios;
         }
 
         // ゲーム進行の中核
@@ -398,7 +389,7 @@ namespace KokoroUpTime
 
             List<List<string>> text2ds = new List<List<string>>();
 
-            // まずは画像から
+            // まずは画像文字から
             text = text.Replace("】", "【");
 
             var texts = text.Split("【");
@@ -799,7 +790,7 @@ namespace KokoroUpTime
                 {
                     this.isClickable = false;
 
-                    this.NameButtonImage.Source = null;
+                    this.NameImage.Source = null;
 
                     JumpTo("make_name");
                 }
@@ -874,8 +865,8 @@ namespace KokoroUpTime
 
                 pngmap.Freeze();                                  //ココ
 
-                this.NameButtonImage.Source = null;
-                this.NameButtonImage.Source = pngmap;
+                this.NameImage.Source = null;
+                this.NameImage.Source = pngmap;
 
                 this.isClickable = true;
 

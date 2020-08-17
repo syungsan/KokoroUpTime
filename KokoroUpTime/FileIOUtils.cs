@@ -4,7 +4,7 @@ using System.Text;
 
 using System.IO;
 
-namespace KokoroUpTime
+namespace FileIOUtils
 {
     /// <summary>
     /// Directory クラスに関する汎用関数を管理するクラス

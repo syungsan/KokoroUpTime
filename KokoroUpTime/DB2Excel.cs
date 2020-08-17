@@ -7,12 +7,15 @@ using System.Windows;
 using SQLite;
 using CsvReadWrite;
 using System.IO;
+using ExcelManage;
+using Expansion;
 using System.Diagnostics;
 
 namespace KokoroUpTime
 {
     class DB2Excel
     {
+        // 一応データモデルの使用
         // private static InitConfig initConfig = new InitConfig();
         private static DataOption dataOption = new DataOption();
         private static DataItem dataItem = new DataItem();
@@ -24,13 +27,14 @@ namespace KokoroUpTime
 
             List<List<string>> allScenes = new List<List<string>>();
 
-            // 各回のシナリオファイルから構成シーン数を配列として取得
+            // 各回のシナリオファイルから構成シーン数をリストとして取得
             for (int i = 1; i <= 12; i++)
             {
                 var file = $"./Scenarios/chapter{i}.csv";
 
                 List<string> scenes = new List<string>();
 
+                // ファイルが存在しない場合は空のシーンリストを追加
                 if (File.Exists(file))
                 {
                     using (var csv = new CsvReader(file))
@@ -49,20 +53,20 @@ namespace KokoroUpTime
                 allScenes.Add(scenes);
             }
 
-            string[] datProgs = { dataProgress.LatestChapter1Scene, dataProgress.LatestChapter2Scene, dataProgress.LatestChapter3Scene, dataProgress.LatestChapter4Scene, dataProgress.LatestChapter5Scene, dataProgress.LatestChapter6Scene, dataProgress.LatestChapter7Scene, dataProgress.LatestChapter8Scene, dataProgress.LatestChapter9Scene, dataProgress.LatestChapter10Scene, dataProgress.LatestChapter11Scene, dataProgress.LatestChapter12Scene };
+            var excel = new ExcelManager();
+            excel.Open(outputPath);
 
+            // まとめシートに書き込み #######################################################
+
+            // ループで正確にセルに記録するために配列を回す
+            string[] datProgs = { dataProgress.LatestChapter1Scene, dataProgress.LatestChapter2Scene, dataProgress.LatestChapter3Scene, dataProgress.LatestChapter4Scene, dataProgress.LatestChapter5Scene, dataProgress.LatestChapter6Scene, dataProgress.LatestChapter7Scene, dataProgress.LatestChapter8Scene, dataProgress.LatestChapter9Scene, dataProgress.LatestChapter10Scene, dataProgress.LatestChapter11Scene, dataProgress.LatestChapter12Scene };
             string[] sceneNumCells = { "B9", "B10", "B11", "B12", "B13", "B14", "B15", "B16", "B17", "B18", "B19", "B20" };
             string[] playSceneNumCells = { "C9", "C10", "C11", "C12", "C13", "C14", "C15", "C16", "C17", "C18", "C19", "C20" };
             string[] playSceneNameCells = { "D9", "D10", "D11", "D12", "D13", "D14", "D15", "D16", "D17", "D18", "D19", "D20" };
 
-            var excel = new ExcelManager();
-            excel.Open(outputPath);
-
-            // まとめ ########################################################################
-
             excel.SetSheet("まとめ");
 
-            // プレイ名
+            // プレイヤー名
             excel.WriteCell("B2", $"{userInfos[0]}{userInfos[1]}");
 
             // アクセス日
@@ -88,6 +92,7 @@ namespace KokoroUpTime
             }
         }
 
+        // 各ユーザのデータベースの内容を全て吸い上げるための関数
         private static void GetFullInfoFromDB(string dbPath)
         {
             using (var connection = new SQLiteConnection(dbPath))

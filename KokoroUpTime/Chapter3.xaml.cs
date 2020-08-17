@@ -24,6 +24,8 @@ using SQLite;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using WpfAnimatedGif;
+using FileIOUtils;
+using Expansion;
 
 namespace KokoroUpTime
 {

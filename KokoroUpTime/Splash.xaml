@@ -8,6 +8,7 @@
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="Splash"
       Loaded="Window_Loaded">
+    
     <Page.Resources>
         <Storyboard x:Key="word_lotation">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CircleWordImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)">
@@ -25,18 +26,19 @@
         </Storyboard>
     </Page.Resources>
 
-    <Grid Background="White">
-        <Image x:Name="CircleWordImage" HorizontalAlignment="Center" Height="356" VerticalAlignment="Center" Width="356" Source="/Images/circle_word.PNG" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-        <Image x:Name="ShirojiImage" HorizontalAlignment="Center" Height="260" VerticalAlignment="Center" Width="240" Source="/Images/shiroji_03.png"/>
-
-    </Grid>
+    <Viewbox>
+        <Grid Background="White" Height="1080" Width="1920">
+            <Image x:Name="CircleWordImage" HorizontalAlignment="Center" Height="356" VerticalAlignment="Center" Width="356" Source="/Images/circle_word.PNG" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="ShirojiImage" HorizontalAlignment="Center" Height="260" VerticalAlignment="Center" Width="240" Source="/Images/shiroji_03.png"/>
+        </Grid>
+    </Viewbox>
 </Page>

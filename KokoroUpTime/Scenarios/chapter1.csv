@@ -5,7 +5,7 @@ image,bg_image,background_01.png
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-bgm,set,もくもくStudy♪.mp3,loop,50
+bgm,set,mokumoku_study.mp3,loop,50
 bgm,play
 text,music_title_text,もくもくStudy♪
 text,composer_name_text,しゅんじ～
@@ -93,9 +93,9 @@ msg,main_msg,この３人とこころあっぷタイムを進めていくぞい�
 next
 scene,漫画購読
 reset
-bgm,set,manga.mp3,loop,50
+bgm,set,atsumare!_tomodachi!.mp3,loop,50
 bgm,play
-text,music_title_text,まんが
+text,music_title_text,集まれ！友達！
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
 image,manga_title_image
@@ -144,9 +144,9 @@ image,session_title_image,challenge_time.png
 text,session_sub_title_text,チャレンジタイムとは…
 text,session_sentence_text,こころあっぷタイムで新しいことに挑戦してみる時間のことじゃ。
 grid,session_grid
-bgm,set,放課後♪TeaTime.mp3,loop,50
+bgm,set,kokoro_up_time.mp3,loop,50
 bgm,play
-text,music_title_text,放課後♪ティータイム
+text,music_title_text,こころあっぷタイム
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
 image,shiroji_right_up_image,shiroji_04.png,appear_up

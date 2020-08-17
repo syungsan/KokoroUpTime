@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace KokoroUpTime
+namespace ImageConvert
 {
     public class ImageConverter : IValueConverter
     {

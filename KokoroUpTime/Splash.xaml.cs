@@ -18,12 +18,16 @@ namespace KokoroUpTime
     /// <summary>
     /// Splash.xaml の相互作用ロジック
     /// </summary>
+    /// 
+    /// このスプラッシュスクリーンはアプリ立ち上げ時の
+    /// 表示の不安定さを隠ぺいするためのもの
     public partial class Splash : Page
     {
         public Splash()
         {
             Window _mainWindow = Application.Current.MainWindow;
 
+            // メインウィンドウの最大化
             this.Maximize(mainWindow: _mainWindow);
 
             InitializeComponent();
@@ -47,12 +51,12 @@ namespace KokoroUpTime
             {
                 sb.Completed += (s, e) =>
                 {
+                    // アニメ終了後にタイトル画面へ遷移
                     TitlePage titlePage = new TitlePage();
 
                     this.NavigationService.Navigate(titlePage);
                 };
                 sb.Begin(this);
-                
             }
         }
 

@@ -23,6 +23,7 @@ using SQLitePCL;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using FileIOUtils;
 
 
 namespace KokoroUpTime
@@ -711,11 +712,11 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        Chapter2 chapter2 = new Chapter2();
+                        // Chapter2 chapter2 = new Chapter2();
 
                         // chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                        this.NavigationService.Navigate(chapter2);
+                        // this.NavigationService.Navigate(chapter2);
                     }
                     break;
 

@@ -4,13 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KokoroUpTime"
+      xmlns:converter="clr-namespace:ImageConvert"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="TitlePage"
       Loaded="Window_Loaded">
 
     <Page.Resources>
-        <local:ImageConverter x:Key="ImageConverter"/>
+        <converter:ImageConverter x:Key="ImageConverter"/>
         <Storyboard x:Key="appear_credit">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CreditGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-1588"/>
@@ -61,8 +62,8 @@
             <Button x:Name="SelectDataButton" Content="データ管理" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,999,1520,10"/>
             <Button x:Name="SelectUserButton" Content="なまえ選択" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,918,1520,91"/>
             <Button x:Name="CreditButton" Content="作成　こころあっぷタイム編集委員会" HorizontalAlignment="Left" Margin="1335,1018,0,0" VerticalAlignment="Top" FontSize="36" Background="{x:Null}" FontWeight="Bold" Foreground="#FFD0F9FF" Click="Button_Click" BorderBrush="{x:Null}"/>
-            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
-            <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169" Background="#FFF9C9D0" d:IsHidden="True">
+            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
+            <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169" Background="#FFF9C9D0">
                 <TextBlock x:Name="SelectUserListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="なまえの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
                 <ListBox x:Name="SelectUserListBox" Margin="48,140,48,130" FontSize="48" SelectionMode="Single">
                     <ListBox.ItemTemplate>
@@ -81,7 +82,7 @@
                 </ListBox>
                 <Button x:Name="SelectUserListOKButton" Content="OK" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
             </Grid>
-            <Grid x:Name="SelectDataListGrid" Margin="405,100,407,169" d:IsHidden="True">
+            <Grid x:Name="SelectDataListGrid" Margin="405,100,407,169">
                 <Border x:Name="SelectDataListBorder" BorderThickness="1" BorderBrush="Black" Background="#FFE8F9CF" CornerRadius="32,32,32,32"/>
                 <TextBlock x:Name="SelectDataListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="データの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
                 <ListBox x:Name="SelectDataListBox" Margin="48,140,48,130" FontSize="48" SelectionMode="Multiple">
@@ -103,7 +104,7 @@
                 <Button x:Name="SelectDataListReturnButton" Content="戻る" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
                 <Button x:Name="SelectDataListDeleteButton" Content="削除" HorizontalAlignment="Left" Margin="716,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
             </Grid>
-            <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">
+            <Grid x:Name="ExitBackGrid" Margin="497,215,497,190">
                 <Image x:Name="ExitBackImage" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/white_frame.png" Stretch="Fill"/>
                 <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Left" Margin="169,113,0,0" VerticalAlignment="Top" Height="100" Width="582" FontSize="48" Text="本当にアプリを終了しますか？" FontWeight="Bold" TextAlignment="Center"/>
                 <Button x:Name="ExitBackYesButton" HorizontalAlignment="Left" Margin="33,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
@@ -113,7 +114,7 @@
                     <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
                 </Button>
             </Grid>
-            <Grid x:Name="CreditGrid" Margin="338,129,340,20" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+            <Grid x:Name="CreditGrid" Margin="338,129,340,20" RenderTransformOrigin="0.5,0.5">
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

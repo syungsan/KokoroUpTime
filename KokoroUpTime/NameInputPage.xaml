@@ -189,8 +189,9 @@
                     <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png"/>
                 </Button>
             </Grid>
-            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
-            <Grid x:Name="SelectInputMethodGrid" Margin="636,228,636,228" Background="#FFF9ECC9" d:IsHidden="True">
+            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
+            <Grid x:Name="SelectInputMethodGrid" Margin="636,228,636,228">
+                <Border x:Name="SelectInputMethodBorder" BorderThickness="1" CornerRadius="32,32,32,32" Background="#FFF9E9C7" BorderBrush="Black"/>
                 <TextBlock x:Name="SelectInputMethodTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="入力方法の選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
                 <Button x:Name="SelectInputMethodOKButton" Content="OK" HorizontalAlignment="Center" Margin="0,525,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
                 <TextBlock x:Name="HandWritingTextBlock" HorizontalAlignment="Center" Margin="0,170,0,0" Text="手書き" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52"/>
@@ -252,7 +253,7 @@
                     <TextBlock x:Name="NoneTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Width="530" Height="70" Text="TextBlock"/>
                 </StackPanel>
             </Grid>
-            <Grid x:Name="MakeUserNameCompleteGrid" Width="844" Height="325" Margin="410,378,666,377" d:IsHidden="True">
+            <Grid x:Name="MakeUserNameCompleteGrid" Width="844" Height="325" Margin="410,378,666,377">
                 <Button x:Name="MakeUserNameCompleteOKButton" Height="325" Width="422" Margin="0,0,412,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
                     <Image x:Name="MakeUserNameCompleteOKImage" Source="/Images/moya1.png"/>
                 </Button>
@@ -260,13 +261,13 @@
                     <Image x:Name="MakeUserNameCompleteNOImage" Source="/Images/moya2.png"/>
                 </Button>
             </Grid>
-            <Grid x:Name="NameInputGrid" d:IsHidden="True">
+            <Grid x:Name="NameInputGrid">
                 <Button x:Name="NameButton" Margin="100,200,900,700" Background="White" Click="Button_Click">
-                    <Image x:Name="NameButtonImage"/>
+                    <Image x:Name="NameImage"/>
                 </Button>
                 <Button x:Name="DecisionButton" Content="けってい" FontSize="80" Background="White" Margin="1200,200,400,700" Click="Button_Click"/>
             </Grid>
-            <Grid x:Name="CanvasGrid" d:IsHidden="True">
+            <Grid x:Name="CanvasGrid">
                 <Border x:Name="CanvasBackBorder" BorderThickness="1" BorderBrush="Black" Margin="0,300,0,0" Background="White"/>
                 <InkCanvas x:Name="NameCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,300,0,0" Background="{x:Null}">
                     <InkCanvas.DefaultDrawingAttributes>

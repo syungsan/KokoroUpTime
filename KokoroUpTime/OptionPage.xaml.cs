@@ -20,8 +20,10 @@ namespace KokoroUpTime
     /// </summary>
     public partial class OptionPage : Page
     {
+        // メッセージスピード「遅い，ふつう，速い」
         private float[] MESSAGE_SPEEDS = { 20.0f, 30.0f, 300.0f };
 
+        // ページ間参照変数橋渡し
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
         public DataItem dataItem = new DataItem();
@@ -32,20 +34,21 @@ namespace KokoroUpTime
             InitializeComponent();
         }
 
+        // ページ間参照関数橋渡し
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
         {
             this.initConfig = _initConfig;
             this.dataOption = _dataOption;
             this.dataItem = _dataItem;
             this.dataProgress = _dataProgress;
-
-            this.LoadOption();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            this.LoadOption();
         }
 
+        // データベースから初期値を設定
         private void LoadOption()
         {
             if (this.dataOption.IsPlaySE == true)
@@ -248,6 +251,7 @@ namespace KokoroUpTime
             {
                 TitlePage titlePage = new TitlePage();
 
+                // タイトルページのリロードなし
                 titlePage.SetIsFirstBootFlag(false);
 
                 titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
@@ -256,6 +260,7 @@ namespace KokoroUpTime
             }
             else
             {
+                // タイトルへ戻るボタン以外でオプションを常にデータベースへ記録
                 using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                 {
                     connection.Execute($@"UPDATE DataOption SET IsPlaySE = '{Convert.ToInt32(this.dataOption.IsPlaySE)}', IsPlayBGM = '{Convert.ToInt32(this.dataOption.IsPlayBGM)}', MessageSpeed = '{this.dataOption.MessageSpeed}', IsAddRubi = '{Convert.ToInt32(this.dataOption.IsAddRubi)}', InputMethod = '{this.dataOption.InputMethod}' WHERE Id = 1;");

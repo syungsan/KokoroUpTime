@@ -18,6 +18,7 @@ namespace KokoroUpTime
     /// </summary>
     public partial class AboutPage : Page
     {
+        // データモデル
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
         public DataItem dataItem = new DataItem();
@@ -28,10 +29,12 @@ namespace KokoroUpTime
             InitializeComponent();
         }
 
+        // 追加のイニシャライザ
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
         }
 
+        // データモデルの橋渡し
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
         {
             this.initConfig = _initConfig;
@@ -48,10 +51,13 @@ namespace KokoroUpTime
             {
                 TitlePage titlePage = new TitlePage();
 
+                // タイトルページのリロードなし
                 titlePage.SetIsFirstBootFlag(false);
 
+                // データモデルの橋渡し
                 titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
+                // ページ遷移
                 this.NavigationService.Navigate(titlePage);
             }
         }

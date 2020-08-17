@@ -6,6 +6,7 @@ using SQLite;
 
 namespace KokoroUpTime
 {
+    // 各種初期化変数
     public class InitConfig
     {
         public string userName = null;
@@ -17,6 +18,7 @@ namespace KokoroUpTime
         public string dbPath = null;
     }
 
+    // データベースオプションカラム
     public class DataOption
     {
         [PrimaryKey, AutoIncrement]
@@ -33,6 +35,7 @@ namespace KokoroUpTime
         public int InputMethod { get; set; }
     }
 
+    // アイテム取得フラグカラム
     public class DataItem
     {
         [PrimaryKey, AutoIncrement]
@@ -61,6 +64,7 @@ namespace KokoroUpTime
         public bool HasGotItem11 { get; set; }
     }
 
+    // 各チャプターの進捗具合を収めるカラム
     public class DataProgress
     {
         [PrimaryKey, AutoIncrement]
@@ -119,6 +123,7 @@ namespace KokoroUpTime
         public bool HasCompletedChapter12 { get; set; }
     }
 
+    // チャプター1のログカラム
     public class DataCapter1
     {
         [PrimaryKey, AutoIncrement]
@@ -141,6 +146,7 @@ namespace KokoroUpTime
         public string CreatedAt { get; set; }
     }
 
+    // チャプター2のログカラム
     public class DataCapter2
     {
         // このレコードは定石
@@ -153,6 +159,7 @@ namespace KokoroUpTime
         public string CreatedAt { get; set; }
     }
 
+    // チャプター3のログカラム
     public class DataCapter3
     {
         [PrimaryKey, AutoIncrement]
