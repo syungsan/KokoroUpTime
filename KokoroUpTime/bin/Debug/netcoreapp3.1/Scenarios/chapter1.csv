@@ -5,7 +5,7 @@ image,bg_image,background_01.png
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-bgm,set,mokumoku_study.mp3,loop,50
+bgm,set,moku_moku_study.mp3,loop,50
 bgm,play
 text,music_title_text,もくもくStudy♪
 text,composer_name_text,しゅんじ～
