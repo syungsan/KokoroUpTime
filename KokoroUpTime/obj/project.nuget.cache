@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "n7Dc5JeqHmwdSyGZc4L8ow9wapYLAN/vouI7o3IL03t3KemkrXwG0vyhOCwBMQmPq/CDOt4CtvAPq0iE4EMGNQ==",
+  "dgSpecHash": "SQqQMekidQpDbvzhyic9iCFeBfs2rf8Tde/KVcPpYAY0rLSXKrDfv+HpFHiUm/opkCARJVePmSOb5NYo3ySqDw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KokoroUpTime-subbranch\\KokoroUpTime\\KokoroUpTime.csproj",
+  "projectFilePath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KoKoroUpTime1\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\sqlite-net-pcl\\1.7.335\\sqlite-net-pcl.1.7.335.nupkg.sha512",
     "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\sqlitepclraw.bundle_green\\2.0.3\\sqlitepclraw.bundle_green.2.0.3.nupkg.sha512",
