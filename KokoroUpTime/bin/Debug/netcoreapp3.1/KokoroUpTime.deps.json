@@ -8,10 +8,8 @@
     ".NETCoreApp,Version=v3.1": {
       "KokoroUpTime/0.8.4.1": {
         "dependencies": {
-          "Costura.Fody": "4.1.0",
           "EPPlus": "4.5.3.3",
-          "Fody": "6.2.4",
-          "WindowsAPICodePack-Shell": "1.1.1",
+          "Osklib.Wpf": "1.6.0",
           "WpfAnimatedGif": "2.0.0",
           "sqlite-net-pcl": "1.7.335",
           "Interop.WMPLib": "1.0.0.0"
@@ -20,7 +18,6 @@
           "KokoroUpTime.dll": {}
         }
       },
-      "Costura.Fody/4.1.0": {},
       "EPPlus/4.5.3.3": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "3.1.0",
@@ -42,7 +39,6 @@
           }
         }
       },
-      "Fody/6.2.4": {},
       "Microsoft.Extensions.Configuration/3.1.0": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "3.1.0"
@@ -133,6 +129,25 @@
       "Microsoft.Win32.SystemEvents/4.7.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0"
+        }
+      },
+      "Osklib/1.6.0": {
+        "runtime": {
+          "lib/netcoreapp3.0/Osklib.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Osklib.Wpf/1.6.0": {
+        "dependencies": {
+          "Osklib": "1.6.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/Osklib.Wpf.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
@@ -775,25 +790,6 @@
           }
         }
       },
-      "WindowsAPICodePack-Core/1.1.1": {
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.dll": {
-            "assemblyVersion": "1.1.0.0",
-            "fileVersion": "1.1.0.0"
-          }
-        }
-      },
-      "WindowsAPICodePack-Shell/1.1.1": {
-        "dependencies": {
-          "WindowsAPICodePack-Core": "1.1.1"
-        },
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {
-            "assemblyVersion": "1.1.0.0",
-            "fileVersion": "1.1.0.0"
-          }
-        }
-      },
       "WpfAnimatedGif/2.0.0": {
         "runtime": {
           "lib/netcoreapp3.0/WpfAnimatedGif.dll": {
@@ -818,26 +814,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Costura.Fody/4.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-MkW5aqhqNvuP6MiaaD5Yx8efXv+5ucsumRx+Nsn5b+PA4RnaxJLtXhGkm1N+Hi7sjkSlL8kl1klSS/7v2DxZHw==",
-      "path": "costura.fody/4.1.0",
-      "hashPath": "costura.fody.4.1.0.nupkg.sha512"
-    },
     "EPPlus/4.5.3.3": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-aZnWmrQNRQuV/2Kwu+pTv1HVX1ZBvoGKw2GuzUOmBRpOD09sYJFGHww8NVQd3IIeb1vqosPDFZgND/1nxTzFKQ==",
       "path": "epplus/4.5.3.3",
       "hashPath": "epplus.4.5.3.3.nupkg.sha512"
-    },
-    "Fody/6.2.4": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-IHt3dR3i9NjFqqhFzUAwoFbDkOJiarDkZBSrQA3tjAquARMvhamYvnB10/slNLNr4UMc2zY/uHX21aP6mLGaQg==",
-      "path": "fody/6.2.4",
-      "hashPath": "fody.6.2.4.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration/3.1.0": {
       "type": "package",
@@ -915,6 +897,20 @@
       "sha512": "sha512-mtVirZr++rq+XCDITMUdnETD59XoeMxSpLRIII7JRI6Yj0LEDiO1pPn0ktlnIj12Ix8bfvQqQDMMIF9wC98oCA==",
       "path": "microsoft.win32.systemevents/4.7.0",
       "hashPath": "microsoft.win32.systemevents.4.7.0.nupkg.sha512"
+    },
+    "Osklib/1.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SHCCq0s1PrIqSxVsmFl2KNmCok+gt0MFeE/SGG2Hq2W8JDaRRyHchzocBnqMR25ajBt1rq3uo00UiygIhmeJfA==",
+      "path": "osklib/1.6.0",
+      "hashPath": "osklib.1.6.0.nupkg.sha512"
+    },
+    "Osklib.Wpf/1.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mggffq9UT8LrCOpmL7HGRRb88eMvYcSEDy2n7iekYLB3PlWQTpeMBI/V5uYv0680dSHtcm90/o2teVOk9IkAMg==",
+      "path": "osklib.wpf/1.6.0",
+      "hashPath": "osklib.wpf.1.6.0.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
       "type": "package",
@@ -1405,20 +1401,6 @@
       "sha512": "sha512-A/uxsWi/Ifzkmd4ArTLISMbfFs6XpRPsXZonrIqyTY70xi8t+mDtvSM5Os0RqyRDobjMBwIDHDL4NOIbkDwf7A==",
       "path": "system.xml.xpath.xmldocument/4.3.0",
       "hashPath": "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
-    },
-    "WindowsAPICodePack-Core/1.1.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-GoURoQuE7ea7B7q24YRTBfZbsNO7ZtwSyBHbM8zO0ynwfjAGC0bbAmVrDvZ6HbWtqqOt6QTzdmYnj2WJglb5JQ==",
-      "path": "windowsapicodepack-core/1.1.1",
-      "hashPath": "windowsapicodepack-core.1.1.1.nupkg.sha512"
-    },
-    "WindowsAPICodePack-Shell/1.1.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-CPFamhL3jPo8O6+ErGsLS4LK3DWP5ncxqhbzpPnYkIW9rjatunUij35iTjprbr9mlYR/5Pbguw21MwSmTOKR4g==",
-      "path": "windowsapicodepack-shell/1.1.1",
-      "hashPath": "windowsapicodepack-shell.1.1.1.nupkg.sha512"
     },
     "WpfAnimatedGif/2.0.0": {
       "type": "package",

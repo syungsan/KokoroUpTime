@@ -20,6 +20,8 @@ using System.Linq;
 using SQLite;
 using Expansion;
 using FileIOUtils;
+using Osklib;
+using Osklib.Wpf;
 
 namespace KokoroUpTime
 {
@@ -71,11 +73,20 @@ namespace KokoroUpTime
             // Hide host's navigation UI
             this.ShowsNavigationUI = false;
 
+            // ページ遷移履歴のクリア
+            // これをしないとタッチキーボードのバックスペースでタイトルに戻ってしまう
+            NavigationCommands.BrowseBack.InputGestures.Clear();
+            NavigationCommands.BrowseForward.InputGestures.Clear();
+
             this.EditingModeItemsControl.ItemsSource = EDIT_BUTTON;
 
             this.NameImage.Source = null;
 
             this.InitControls();
+
+            this.NameTextBox.Text = "名無し";
+
+            OnScreenKeyboardSettings.EnableForTextBoxes = true;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -380,7 +391,7 @@ namespace KokoroUpTime
             // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
             text = text.Replace("鬱", "\u2028");
 
-            if (this.selectInputMethod == 1 || this.selectInputMethod == 2)
+            if (this.selectInputMethod == 1)
             {
                 text = text.Replace("【name】", this.newUserName);
             }
@@ -622,6 +633,26 @@ namespace KokoroUpTime
             return imageUserMaxNumber;
         }
 
+        private List<string> GetWordUserList()
+        {
+            List<string> wordUserList = new List<string>();
+
+            var dirPaths = Directory.GetDirectories("./Log/");
+
+            foreach (var dirPath in dirPaths)
+            {
+                var splitDirName = dirPath.Split("_");
+
+                if (splitDirName[0] != "./Log/画像Name")
+                {
+                    var wordUserName = splitDirName[0].Split("/")[2];
+                    
+                    wordUserList.Add(wordUserName);
+                }
+            }
+            return wordUserList;
+        }
+
         private void JumpTo(string tag)
         {
             foreach (var (scenario, index) in this.scenarios.Indexed())
@@ -654,22 +685,25 @@ namespace KokoroUpTime
                 {
                     this.isClickable = false;
 
-                    this.NameInputGrid.Visibility = Visibility.Hidden;
-                    this.CanvasGrid.Visibility = Visibility.Visible;
+                    if (this.selectInputMethod == 0)
+                    {
+                        this.NameInputGrid.Visibility = Visibility.Hidden;
+                        this.CanvasGrid.Visibility = Visibility.Visible;
+                    }
                 }
 
                 if (button.Name == "DecisionButton")
                 {
                     this.isClickable = false;
 
+                    DirectoryUtils.SafeCreateDirectory("./Log");
+
                     Image[] handWritingNameImages = new Image[] { this.KunHandWritingNameImage, this.ChanHandWritingNameImage, this.SanHandWritingNameImage, this.NoneHandWritingNameImage };
-                    TextBlock[] titleTextBlocks = new TextBlock[] { this.KunTextBlock, this.ChanTextBlock, this.SanTextBlock, this.NoneTextBlock };
+                    TextBlock[] nameTextBlocks = new TextBlock[] { this.KunTextBlock, this.ChanTextBlock, this.SanTextBlock, this.NoneTextBlock };
                     string[] titles = new string[] { " くん", " ちゃん", " さん", "（なし）" };
 
                     if (this.selectInputMethod == 0)
                     {
-                        DirectoryUtils.SafeCreateDirectory("./temp");
-
                         // 実行ファイルの場所を絶対パスで取得
                         var startupPath = FileUtils.GetStartupPath();
 
@@ -677,18 +711,37 @@ namespace KokoroUpTime
                         {
                             handWritingNameImage.Source = new BitmapImage(new Uri($@"{startupPath}/temp/temp_name.png", UriKind.Absolute));
 
-                            titleTextBlocks[index].Text = titles[index];
+                            nameTextBlocks[index].Text = titles[index];
                         }
                     }
                     else if (this.selectInputMethod == 1)
                     {
-                        // 文字認識
-                    }
-                    else if (this.selectInputMethod == 2)
-                    {
                         // キーボード
+                        this.newUserName = this.NameTextBox.Text;
+
+                        var wordUserNames = this.GetWordUserList();
+
+                        if (!wordUserNames.Contains(this.newUserName))
+                        {                          
+                            foreach (var (handWritingNameImage, index) in handWritingNameImages.Indexed())
+                            {
+                                handWritingNameImage.Source = null;
+
+                                nameTextBlocks[index].Text = this.newUserName + titles[index];
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("すでに同じ名前の人がいます。\n別の名前を入力してください。", "情報");
+
+                            this.isClickable = true;
+
+                            return;
+                        }
                     }
                     this.NameInputGrid.Visibility = Visibility.Hidden;
+
+                    // this.CloseOSK();
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -698,7 +751,7 @@ namespace KokoroUpTime
                 {
                     this.isClickable = false;
 
-                    RadioButton[] inputMethodRadioButtons = new RadioButton[] { this.HandWritingRadioButton, this.WordRecognitionRadioButton, this.KeyboardRadioButton };
+                    RadioButton[] inputMethodRadioButtons = new RadioButton[] { this.HandWritingRadioButton, this.KeyboardRadioButton };
 
                     foreach (var (method, index) in inputMethodRadioButtons.Indexed())
                     {
@@ -706,6 +759,16 @@ namespace KokoroUpTime
                         {
                             this.selectInputMethod = index;
                         }
+                    }
+
+                    // 入力方法を選択した場合の準備
+                    if (this.selectInputMethod == 0)
+                    {
+                        this.NameTextBox.Visibility = Visibility.Hidden;
+                    }
+                    else if (this.selectInputMethod == 1)
+                    {
+                        
                     }
                     this.SelectInputMethodGrid.Visibility = Visibility.Hidden;
 
@@ -751,38 +814,37 @@ namespace KokoroUpTime
                 {
                     this.isClickable = false;
 
-                    DirectoryUtils.SafeCreateDirectory("./Log");
+                    // 実行ファイルの場所を絶対パスで取得
+                    var startupPath = FileUtils.GetStartupPath();
+
+                    var newUserNameDirPath = "";
 
                     if (this.selectInputMethod == 0)
                     {
-                        // 実行ファイルの場所を絶対パスで取得
-                        var startupPath = FileUtils.GetStartupPath();
-
                         var tempNameImagePath = $@"{startupPath}/temp/temp_name.png";
 
                         this.newUserName = $@"画像Name_{this.GetLatestImageUserNumber()}";
 
-                        var newUserNameDirPath = $@"{startupPath}/Log/{this.newUserName}";
+                        newUserNameDirPath = $@"{startupPath}/Log/{this.newUserName}";
 
                         var distNameImagePath = $@"{newUserNameDirPath}/name.png";
 
                         DirectoryUtils.SafeCreateDirectory(newUserNameDirPath);
 
                         File.Copy(tempNameImagePath, distNameImagePath);
-
-                        this.InitConfigFile();
-                        this.InitDatabaseFile();
-
-                        File.Copy($@"{newUserNameDirPath}/user.conf", @"./Log/system.conf", true);
                     }
                     else if (this.selectInputMethod == 1)
                     {
-                        // 文字認識
-                    }
-                    else if (this.selectInputMethod == 2)
-                    {
                         // キーボード
+                        newUserNameDirPath = $@"{startupPath}/Log/{this.newUserName}";
+
+                        DirectoryUtils.SafeCreateDirectory(newUserNameDirPath);
                     }
+                    this.InitConfigFile();
+                    this.InitDatabaseFile();
+
+                    File.Copy($@"{newUserNameDirPath}/user.conf", @"./Log/system.conf", true);
+
                     JumpTo("complete");
                 }
 
@@ -791,6 +853,8 @@ namespace KokoroUpTime
                     this.isClickable = false;
 
                     this.NameImage.Source = null;
+
+                    this.NameTextBox.Text = "名無し";
 
                     JumpTo("make_name");
                 }
@@ -816,7 +880,7 @@ namespace KokoroUpTime
                 DirectoryUtils.SafeCreateDirectory("./temp");
 
                 // ストロークが描画されている境界を取得
-                Rect rectBounds = this.NameCanvas.Strokes.GetBounds();
+                System.Windows.Rect rectBounds = this.NameCanvas.Strokes.GetBounds();
 
                 // 描画先を作成
                 DrawingVisual dv = new DrawingVisual();
@@ -912,6 +976,50 @@ namespace KokoroUpTime
             using (var connection = new SQLiteConnection(distDBPath))
             {
                 connection.Execute($@"UPDATE DataOption SET InputMethod = '{this.selectInputMethod}' WHERE Id = 1;");
+            }
+        }
+
+        private void TriggerKeyboard(object sender, EventArgs e)
+        {
+            // this.CoverLayerImage.Visibility = Visibility.Visible;
+
+            try
+            {
+                OnScreenKeyboard.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TextBoxMouseDown(object sender, RoutedEventArgs e)
+        {
+            if (!OnScreenKeyboard.IsOpened())
+            {
+                try
+                {
+                    OnScreenKeyboard.Show();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void CloseOSK()
+        {
+            if (OnScreenKeyboard.IsOpened())
+            {
+                try
+                {
+                    OnScreenKeyboard.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }

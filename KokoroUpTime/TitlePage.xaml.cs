@@ -20,11 +20,9 @@ using SQLite;
 using System.Linq;
 using Microsoft.VisualBasic;
 using SQLitePCL;
-using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using FileIOUtils;
-
 
 namespace KokoroUpTime
 {
@@ -260,11 +258,11 @@ namespace KokoroUpTime
         {
             string userDirPath = $"./Log/{this.initConfig.userName}/";
 
-            if (this.dataOption.InputMethod == 0)
-            {
-                // 実行ファイルの場所を絶対パスで取得
-                var startupPath = FileUtils.GetStartupPath();
+            // 実行ファイルの場所を絶対パスで取得
+            var startupPath = FileUtils.GetStartupPath();
 
+            if (File.Exists($@"{startupPath}/{userDirPath}/name.png"))
+            {
                 var bitmap = new BitmapImage();
 
                 bitmap.BeginInit();
@@ -280,7 +278,7 @@ namespace KokoroUpTime
 
                 this.CurrentUserTextBlock.Text = this.initConfig.userTitle;
             }
-            else if (this.dataOption.InputMethod == 1 || this.dataOption.InputMethod == 2)
+            else
             {
                 this.CurrentNameImage.Source = null;
                 this.CurrentUserTextBlock.Text = $"{this.initConfig.userName}{this.initConfig.userTitle}";
@@ -333,13 +331,13 @@ namespace KokoroUpTime
                             inputMethod = row.InputMethod;
                         }
                     }
- 
-                    if (inputMethod == 0)
+                    var startupPath = FileUtils.GetStartupPath();
+
+                    if (File.Exists($@"{startupPath}/{dirPath}/name.png"))
                     {
-                        var startupPath = FileUtils.GetStartupPath();
                         items.Add(new UserInfoItem() { NameBmpPath = $@"{startupPath}/{dirPath}/name.png", UserInfo = $"{userInfos[1]}, {userInfos[2]}", UserName = $"{userInfos[0]}{userInfos[1]}", UserDir = userInfos[0] });
                     }
-                    else if (inputMethod == 1 || inputMethod == 2)
+                    else
                     {
                         items.Add(new UserInfoItem() { NameBmpPath = null, UserInfo = $"{userInfos[0]}{userInfos[1]}, {userInfos[2]}", UserName = $"{userInfos[0]}{userInfos[1]}", UserDir = userInfos[0] });
                     }
@@ -427,64 +425,75 @@ namespace KokoroUpTime
 
                     if (this.SelectDataListBox.SelectedItems.Count > 0)
                     {
-                        var browser = new CommonOpenFileDialog();
+                        var result = FileOpenDialog.Dialogs.DialogResult.None;
+
+                        var browser = new FileOpenDialog.Dialogs.FolderBrowserDialog();
 
                         browser.Title = "フォルダーを選択してください";
-                        browser.IsFolderPicker = true;
 
-                        string outputDir = "";
+                        // ウィンドウが取得できるときは設定する
+                        var obj = sender as DependencyObject;
 
-                        if (browser.ShowDialog() == CommonFileDialogResult.Ok)
+                        if (obj != null)
                         {
-                            outputDir = browser.FileName;
+                            var window = Window.GetWindow(obj);
+
+                            if (window != null) result = browser.ShowDialog(window);
+                        }
+                        else
+                        {
+                            result = browser.ShowDialog(IntPtr.Zero);
                         }
 
-                        DirectoryUtils.SafeCreateDirectory("./temp");
-
-                        // 複数選択可能
-                        foreach (var item in this.SelectDataListBox.SelectedItems)
+                        if (result == FileOpenDialog.Dialogs.DialogResult.OK)
                         {
-                            var sourceDirName = this.dirPaths[this.SelectDataListBox.Items.IndexOf(item)];
+                            DirectoryUtils.SafeCreateDirectory("./temp");
 
-                            var destDirName = $@"./temp/{ (item as UserInfoItem).UserDir}";
-
-                            DirectoryUtils.CopyDirectory(sourceDirName, destDirName);
-
-                            string[] userInfos;
-
-                            using (var csv = new CsvReader($"{destDirName}/user.conf"))
+                            // 複数選択可能
+                            foreach (var item in this.SelectDataListBox.SelectedItems)
                             {
-                                var csvs = csv.ReadToEnd();
-                                userInfos = new string[3] { csvs[0][0], csvs[0][1], csvs[0][2] };
-                            }
-                            File.Delete($"{destDirName}/user.conf");
+                                var sourceDirName = this.dirPaths[this.SelectDataListBox.Items.IndexOf(item)];
 
-                            var finalDir = $"{outputDir}/{userInfos[0]}";
+                                var destDirName = $@"./temp/{ (item as UserInfoItem).UserDir}";
 
-                            var dbPath = $"{destDirName}/{userInfos[0]}.sqlite";
+                                DirectoryUtils.CopyDirectory(sourceDirName, destDirName);
 
-                            if (File.Exists($"{destDirName}/{userInfos[0]}.xlsx"))
-                            {
-                                File.Delete($"{destDirName}/{userInfos[0]}.xlsx");
-                            }
-                            File.Copy("./Datas/default.xlsx", $"{destDirName}/{userInfos[0]}.xlsx");
+                                string[] userInfos;
 
-                            DB2Excel.WriteDB2Excel(dbPath, $"{destDirName}/{userInfos[0]}.xlsx", userInfos);
+                                using (var csv = new CsvReader($"{destDirName}/user.conf"))
+                                {
+                                    var csvs = csv.ReadToEnd();
+                                    userInfos = new string[3] { csvs[0][0], csvs[0][1], csvs[0][2] };
+                                }
+                                File.Delete($"{destDirName}/user.conf");
 
-                            File.Delete($"{destDirName}/{userInfos[0]}.sqlite");
+                                var finalDir = $"{browser.SelectedPath}/{userInfos[0]}";
 
-                            try
-                            {
-                                Directory.Move(destDirName, finalDir);
-                            }
-                            catch (Exception error)
-                            {
-                                MessageBox.Show(error.Message, "失敗！");
-                            }
+                                var dbPath = $"{destDirName}/{userInfos[0]}.sqlite";
 
-                            if (Directory.Exists("./temp"))
-                            {
-                                Directory.Delete("./temp", true);
+                                if (File.Exists($"{destDirName}/{userInfos[0]}.xlsx"))
+                                {
+                                    File.Delete($"{destDirName}/{userInfos[0]}.xlsx");
+                                }
+                                File.Copy("./Datas/default.xlsx", $"{destDirName}/{userInfos[0]}.xlsx");
+
+                                DB2Excel.WriteDB2Excel(dbPath, $"{destDirName}/{userInfos[0]}.xlsx", userInfos);
+
+                                File.Delete($"{destDirName}/{userInfos[0]}.sqlite");
+
+                                try
+                                {
+                                    Directory.Move(destDirName, finalDir);
+                                }
+                                catch (Exception error)
+                                {
+                                    MessageBox.Show(error.Message, "失敗！");
+                                }
+
+                                if (Directory.Exists("./temp"))
+                                {
+                                    Directory.Delete("./temp", true);
+                                }
                             }
                         }
                     }

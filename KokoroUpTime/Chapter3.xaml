@@ -957,30 +957,6 @@
                 <Image x:Name="SummaryTitleImage" Width="401" Source="/Images/summary_title.png" Margin="760,22,759,907" Height="151"/>
             </Grid>
             <Grid x:Name="AnyFrameGrid" d:IsHidden="True">
-                <Button x:Name="RuleBoardButton" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Margin="215,41,215,122">
-                    <Grid x:Name="RuleButtonGrid">
-                        <Image x:Name="RuleBoardImage" Source="/Images/blackboard.png" Stretch="Fill" />
-                        <TextBlock x:Name="RuleBoardTitleTextBlock" Text="教室のルール" Foreground="White" FontSize="72" Margin="494,90,436,681"/>
-                        <TextBlock x:Name="RuleBoardCheck1TextBlock" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="64" Margin="494,249,239,504"/>
-                        <TextBlock x:Name="RuleBoardCheck2TextBlock" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="64" Margin="494,434,239,327"/>
-                        <TextBlock x:Name="RuleBoardCheck3TextBlock" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="64" Margin="494,617,239,145"/>
-                        <CheckBox x:Name="RuleBoardCheck1Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="281,241,1172,644">
-                            <CheckBox.RenderTransform>
-                                <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
-                            </CheckBox.RenderTransform>
-                        </CheckBox>
-                        <CheckBox x:Name="RuleBoardCheck2Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="281,423,1172,462">
-                            <CheckBox.RenderTransform>
-                                <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
-                            </CheckBox.RenderTransform>
-                        </CheckBox>
-                        <CheckBox x:Name="RuleBoardCheck3Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="281,596,1172,288">
-                            <CheckBox.RenderTransform>
-                                <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
-                            </CheckBox.RenderTransform>
-                        </CheckBox>
-                    </Grid>
-                </Button>
                 <Image x:Name="ChildrenInfoImage" HorizontalAlignment="Left" Height="652" Margin="211,65,0,0" VerticalAlignment="Top" Width="1006" Source="/Images/SS.png" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>

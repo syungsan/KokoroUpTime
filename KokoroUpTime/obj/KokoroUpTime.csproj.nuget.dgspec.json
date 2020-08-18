@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {}
+    "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {}
   },
   "projects": {
-    "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {
+    "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {
       "version": "0.8.4.1",
       "restore": {
-        "projectUniqueName": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+        "projectUniqueName": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
         "projectName": "KokoroUpTime",
-        "projectPath": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
-        "packagesPath": "C:\\Users\\maglab\\.nuget\\packages\\",
-        "outputPath": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\obj\\",
+        "projectPath": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+        "packagesPath": "C:\\Users\\syung\\.nuget\\packages\\",
+        "outputPath": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\maglab\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\syung\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,23 +38,13 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "Costura.Fody": {
-              "target": "Package",
-              "version": "[4.1.0, )"
-            },
             "EPPlus": {
               "target": "Package",
               "version": "[4.5.3.3, )"
             },
-            "Fody": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "Osklib.Wpf": {
               "target": "Package",
-              "version": "[6.2.4, )"
-            },
-            "WindowsAPICodePack-Shell": {
-              "target": "Package",
-              "version": "[1.1.1, )"
+              "version": "[1.6.0, )"
             },
             "WpfAnimatedGif": {
               "target": "Package",
@@ -83,7 +73,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

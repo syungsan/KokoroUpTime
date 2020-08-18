@@ -4,7 +4,7 @@ image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 wait
-msg,main_msg,フォッフォッフォ！<@=red>わしの名前<@/red>は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
+msg,main_msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
 wait
 jump,make_name
 hide,grid,make_user_name_complete_grid

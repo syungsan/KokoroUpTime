@@ -190,24 +190,18 @@
                 </Button>
             </Grid>
             <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
-            <Grid x:Name="SelectInputMethodGrid" Margin="636,228,636,228">
+            <Grid x:Name="SelectInputMethodGrid" Margin="636,269,636,269">
                 <Border x:Name="SelectInputMethodBorder" BorderThickness="1" CornerRadius="32,32,32,32" Background="#FFF9E9C7" BorderBrush="Black"/>
                 <TextBlock x:Name="SelectInputMethodTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="入力方法の選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
-                <Button x:Name="SelectInputMethodOKButton" Content="OK" HorizontalAlignment="Center" Margin="0,525,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
-                <TextBlock x:Name="HandWritingTextBlock" HorizontalAlignment="Center" Margin="0,170,0,0" Text="手書き" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52"/>
-                <TextBlock x:Name="WordRecognitionTextBlock" HorizontalAlignment="Left" Margin="252,268,0,0" Text="文字認識" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52"/>
-                <TextBlock x:Name="KeyboardTextBlock" HorizontalAlignment="Left" Margin="252,371,0,0" Text="キーボード" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52"/>
+                <Button x:Name="SelectInputMethodOKButton" Content="OK" HorizontalAlignment="Center" Margin="0,429,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
+                <TextBlock x:Name="HandWritingTextBlock" HorizontalAlignment="Center" Margin="0,165,0,0" Text="手書き" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52"/>
+                <TextBlock x:Name="KeyboardTextBlock" HorizontalAlignment="Left" Margin="252,285,0,0" Text="キーボード" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52"/>
                 <RadioButton x:Name="HandWritingRadioButton" HorizontalAlignment="Left" Margin="131,165,0,0" VerticalAlignment="Top" IsChecked="True">
                     <RadioButton.LayoutTransform>
                         <ScaleTransform ScaleX="5.0" ScaleY="5.0"/>
                     </RadioButton.LayoutTransform>
                 </RadioButton>
-                <RadioButton x:Name="WordRecognitionRadioButton" HorizontalAlignment="Left" Margin="131,268,0,0" VerticalAlignment="Top">
-                    <RadioButton.LayoutTransform>
-                        <ScaleTransform ScaleX="5.0" ScaleY="5.0"/>
-                    </RadioButton.LayoutTransform>
-                </RadioButton>
-                <RadioButton x:Name="KeyboardRadioButton" HorizontalAlignment="Left" Margin="131,371,0,0" VerticalAlignment="Top">
+                <RadioButton x:Name="KeyboardRadioButton" HorizontalAlignment="Left" Margin="131,283,0,0" VerticalAlignment="Top">
                     <RadioButton.LayoutTransform>
                         <ScaleTransform ScaleX="5.0" ScaleY="5.0"/>
                     </RadioButton.LayoutTransform>
@@ -265,6 +259,7 @@
                 <Button x:Name="NameButton" Margin="100,200,900,700" Background="White" Click="Button_Click">
                     <Image x:Name="NameImage"/>
                 </Button>
+                <TextBox x:Name="NameTextBox" Text="TextBox" TextWrapping="Wrap" Margin="100,200,900,700" FontSize="100" Background="{x:Null}" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown"/>
                 <Button x:Name="DecisionButton" Content="けってい" FontSize="80" Background="White" Margin="1200,200,400,700" Click="Button_Click"/>
             </Grid>
             <Grid x:Name="CanvasGrid">

@@ -2,12 +2,6 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "Costura.Fody/4.1.0": {
-        "type": "package",
-        "build": {
-          "build/Costura.Fody.props": {}
-        }
-      },
       "EPPlus/4.5.3.3": {
         "type": "package",
         "dependencies": {
@@ -28,12 +22,6 @@
         },
         "runtime": {
           "lib/netstandard2.1/EPPlus.dll": {}
-        }
-      },
-      "Fody/6.2.4": {
-        "type": "package",
-        "build": {
-          "build/Fody.targets": {}
         }
       },
       "Microsoft.Extensions.Configuration/3.1.0": {
@@ -164,6 +152,30 @@
             "rid": "win"
           }
         }
+      },
+      "Osklib/1.6.0": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.0/Osklib.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/Osklib.dll": {}
+        }
+      },
+      "Osklib.Wpf/1.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Osklib": "1.6.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.0/Osklib.Wpf.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/Osklib.Wpf.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
         "type": "package",
@@ -1283,27 +1295,6 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "WindowsAPICodePack-Core/1.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/Microsoft.WindowsAPICodePack.dll": {}
-        },
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.dll": {}
-        }
-      },
-      "WindowsAPICodePack-Shell/1.1.1": {
-        "type": "package",
-        "dependencies": {
-          "WindowsAPICodePack-Core": "1.1.1"
-        },
-        "compile": {
-          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {}
-        },
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {}
-        }
-      },
       "WpfAnimatedGif/2.0.0": {
         "type": "package",
         "compile": {
@@ -1319,22 +1310,6 @@
     }
   },
   "libraries": {
-    "Costura.Fody/4.1.0": {
-      "sha512": "MkW5aqhqNvuP6MiaaD5Yx8efXv+5ucsumRx+Nsn5b+PA4RnaxJLtXhGkm1N+Hi7sjkSlL8kl1klSS/7v2DxZHw==",
-      "type": "package",
-      "path": "costura.fody/4.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "build/Costura.Fody.props",
-        "costura.fody.4.1.0.nupkg.sha512",
-        "costura.fody.nuspec",
-        "lib/net40/Costura.dll",
-        "lib/net40/Costura.xml",
-        "weaver/Costura.Fody.dll",
-        "weaver/Costura.Fody.xcf"
-      ]
-    },
     "EPPlus/4.5.3.3": {
       "sha512": "aZnWmrQNRQuV/2Kwu+pTv1HVX1ZBvoGKw2GuzUOmBRpOD09sYJFGHww8NVQd3IIeb1vqosPDFZgND/1nxTzFKQ==",
       "type": "package",
@@ -1354,39 +1329,6 @@
         "lib/netstandard2.1/EPPlus.dll",
         "lib/netstandard2.1/EPPlus.xml",
         "readme.txt"
-      ]
-    },
-    "Fody/6.2.4": {
-      "sha512": "IHt3dR3i9NjFqqhFzUAwoFbDkOJiarDkZBSrQA3tjAquARMvhamYvnB10/slNLNr4UMc2zY/uHX21aP6mLGaQg==",
-      "type": "package",
-      "path": "fody/6.2.4",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "License.txt",
-        "build/Fody.targets",
-        "fody.6.2.4.nupkg.sha512",
-        "fody.nuspec",
-        "netclassictask/Fody.dll",
-        "netclassictask/FodyCommon.dll",
-        "netclassictask/FodyHelpers.dll",
-        "netclassictask/FodyIsolated.dll",
-        "netclassictask/Mono.Cecil.Pdb.dll",
-        "netclassictask/Mono.Cecil.Pdb.pdb",
-        "netclassictask/Mono.Cecil.Rocks.dll",
-        "netclassictask/Mono.Cecil.Rocks.pdb",
-        "netclassictask/Mono.Cecil.dll",
-        "netclassictask/Mono.Cecil.pdb",
-        "netstandardtask/Fody.dll",
-        "netstandardtask/FodyCommon.dll",
-        "netstandardtask/FodyHelpers.dll",
-        "netstandardtask/FodyIsolated.dll",
-        "netstandardtask/Mono.Cecil.Pdb.dll",
-        "netstandardtask/Mono.Cecil.Pdb.pdb",
-        "netstandardtask/Mono.Cecil.Rocks.dll",
-        "netstandardtask/Mono.Cecil.Rocks.pdb",
-        "netstandardtask/Mono.Cecil.dll",
-        "netstandardtask/Mono.Cecil.pdb"
       ]
     },
     "Microsoft.Extensions.Configuration/3.1.0": {
@@ -1574,6 +1516,54 @@
         "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.xml",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "Osklib/1.6.0": {
+      "sha512": "SHCCq0s1PrIqSxVsmFl2KNmCok+gt0MFeE/SGG2Hq2W8JDaRRyHchzocBnqMR25ajBt1rq3uo00UiygIhmeJfA==",
+      "type": "package",
+      "path": "osklib/1.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Osklib.dll",
+        "lib/net40/Osklib.xml",
+        "lib/net45/Osklib.dll",
+        "lib/net45/Osklib.xml",
+        "lib/net47/Osklib.dll",
+        "lib/net47/Osklib.xml",
+        "lib/net471/Osklib.dll",
+        "lib/net471/Osklib.xml",
+        "lib/netcoreapp3.0/Osklib.dll",
+        "lib/netcoreapp3.0/Osklib.xml",
+        "osklib.1.6.0.nupkg.sha512",
+        "osklib.nuspec"
+      ]
+    },
+    "Osklib.Wpf/1.6.0": {
+      "sha512": "mggffq9UT8LrCOpmL7HGRRb88eMvYcSEDy2n7iekYLB3PlWQTpeMBI/V5uYv0680dSHtcm90/o2teVOk9IkAMg==",
+      "type": "package",
+      "path": "osklib.wpf/1.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Osklib.Wpf.dll",
+        "lib/net40/Osklib.Wpf.pdb",
+        "lib/net40/Osklib.Wpf.xml",
+        "lib/net45/Osklib.Wpf.dll",
+        "lib/net45/Osklib.Wpf.pdb",
+        "lib/net45/Osklib.Wpf.xml",
+        "lib/net47/Osklib.Wpf.dll",
+        "lib/net47/Osklib.Wpf.pdb",
+        "lib/net47/Osklib.Wpf.xml",
+        "lib/netcoreapp3.0/Osklib.Wpf.dll",
+        "lib/netcoreapp3.0/Osklib.Wpf.pdb",
+        "lib/netcoreapp3.0/Osklib.Wpf.xml",
+        "osklib.wpf.1.6.0.nupkg.sha512",
+        "osklib.wpf.nuspec",
+        "src/Osklib.Wpf/DispatcherOnScreenKeyboardWatcher.cs",
+        "src/Osklib.Wpf/OnScreenKeyboardSettings.cs",
+        "src/Osklib.Wpf/Osklib.Wpf.csproj",
+        "src/Osklib.Wpf/StandardControlFlag.cs"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
@@ -4576,32 +4566,6 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "WindowsAPICodePack-Core/1.1.1": {
-      "sha512": "GoURoQuE7ea7B7q24YRTBfZbsNO7ZtwSyBHbM8zO0ynwfjAGC0bbAmVrDvZ6HbWtqqOt6QTzdmYnj2WJglb5JQ==",
-      "type": "package",
-      "path": "windowsapicodepack-core/1.1.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/Microsoft.WindowsAPICodePack.dll",
-        "lib/Microsoft.WindowsAPICodePack.xml",
-        "windowsapicodepack-core.1.1.1.nupkg.sha512",
-        "windowsapicodepack-core.nuspec"
-      ]
-    },
-    "WindowsAPICodePack-Shell/1.1.1": {
-      "sha512": "CPFamhL3jPo8O6+ErGsLS4LK3DWP5ncxqhbzpPnYkIW9rjatunUij35iTjprbr9mlYR/5Pbguw21MwSmTOKR4g==",
-      "type": "package",
-      "path": "windowsapicodepack-shell/1.1.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/Microsoft.WindowsAPICodePack.Shell.dll",
-        "lib/Microsoft.WindowsAPICodePack.Shell.xml",
-        "windowsapicodepack-shell.1.1.1.nupkg.sha512",
-        "windowsapicodepack-shell.nuspec"
-      ]
-    },
     "WpfAnimatedGif/2.0.0": {
       "sha512": "Z468xEqg+MSSW30BkbIcwoCQ9E0GiRQxU6L9qYCUmP28fQ79Dq4QSakWm3Dfw8CoRY3xLl3gf1xRfqILSs6/mw==",
       "type": "package",
@@ -4625,28 +4589,26 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "Costura.Fody >= 4.1.0",
       "EPPlus >= 4.5.3.3",
-      "Fody >= 6.2.4",
-      "WindowsAPICodePack-Shell >= 1.1.1",
+      "Osklib.Wpf >= 1.6.0",
       "WpfAnimatedGif >= 2.0.0",
       "sqlite-net-pcl >= 1.7.335"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\maglab\\.nuget\\packages\\": {}
+    "C:\\Users\\syung\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "0.8.4.1",
     "restore": {
-      "projectUniqueName": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+      "projectUniqueName": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
       "projectName": "KokoroUpTime",
-      "projectPath": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
-      "packagesPath": "C:\\Users\\maglab\\.nuget\\packages\\",
-      "outputPath": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\obj\\",
+      "projectPath": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+      "packagesPath": "C:\\Users\\syung\\.nuget\\packages\\",
+      "outputPath": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\maglab\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\syung\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4670,23 +4632,13 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
-          "Costura.Fody": {
-            "target": "Package",
-            "version": "[4.1.0, )"
-          },
           "EPPlus": {
             "target": "Package",
             "version": "[4.5.3.3, )"
           },
-          "Fody": {
-            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-            "suppressParent": "All",
+          "Osklib.Wpf": {
             "target": "Package",
-            "version": "[6.2.4, )"
-          },
-          "WindowsAPICodePack-Shell": {
-            "target": "Package",
-            "version": "[1.1.1, )"
+            "version": "[1.6.0, )"
           },
           "WpfAnimatedGif": {
             "target": "Package",
@@ -4715,30 +4667,8 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "パッケージ 'WindowsAPICodePack-Core 1.1.1' はプロジェクトのターゲット フレームワーク '.NETCoreApp,Version=v3.1' ではなく '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' を使用して復元されました。このパッケージは、使用しているプロジェクトとの完全な互換性がない可能性があります。",
-      "libraryId": "WindowsAPICodePack-Core",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "パッケージ 'WindowsAPICodePack-Shell 1.1.1' はプロジェクトのターゲット フレームワーク '.NETCoreApp,Version=v3.1' ではなく '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' を使用して復元されました。このパッケージは、使用しているプロジェクトとの完全な互換性がない可能性があります。",
-      "libraryId": "WindowsAPICodePack-Shell",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  }
 }

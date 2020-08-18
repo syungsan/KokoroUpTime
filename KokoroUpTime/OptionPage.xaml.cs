@@ -97,10 +97,6 @@ namespace KokoroUpTime
             }
             else if (this.dataOption.InputMethod == 1)
             {
-                this.WordRecognitionButton.Foreground = new SolidColorBrush(Colors.Blue);
-            }
-            else if (this.dataOption.InputMethod == 2)
-            {
                 this.KeyboardButton.Foreground = new SolidColorBrush(Colors.Blue);
             }
         }
@@ -216,22 +212,9 @@ namespace KokoroUpTime
                 if (button.Foreground != new SolidColorBrush(Colors.Blue))
                 {
                     button.Foreground = new SolidColorBrush(Colors.Blue);
-                    this.WordRecognitionButton.Foreground = new SolidColorBrush(Colors.White);
                     this.KeyboardButton.Foreground = new SolidColorBrush(Colors.White);
 
                     this.dataOption.InputMethod = 0;
-                }
-            }
-
-            if (button.Name == "WordRecognitionButton")
-            {
-                if (button.Foreground != new SolidColorBrush(Colors.Blue))
-                {
-                    button.Foreground = new SolidColorBrush(Colors.Blue);
-                    this.HandWritingButton.Foreground = new SolidColorBrush(Colors.White);
-                    this.KeyboardButton.Foreground = new SolidColorBrush(Colors.White);
-
-                    this.dataOption.InputMethod = 1;
                 }
             }
 
@@ -240,10 +223,9 @@ namespace KokoroUpTime
                 if (button.Foreground != new SolidColorBrush(Colors.Blue))
                 {
                     button.Foreground = new SolidColorBrush(Colors.Blue);
-                    this.WordRecognitionButton.Foreground = new SolidColorBrush(Colors.White);
                     this.HandWritingButton.Foreground = new SolidColorBrush(Colors.White);
 
-                    this.dataOption.InputMethod = 2;
+                    this.dataOption.InputMethod = 1;
                 }
             }
 

@@ -48,9 +48,6 @@ namespace KokoroUpTime
         // マウスクリックを可能にするかどうかのフラグ
         private bool isClickable = false;
 
-        // 画面を何回タップしたか
-        private int tapCount = 0;
-
         // 気持ちの大きさ
         private int feelingSize = 0;
 
@@ -64,9 +61,6 @@ namespace KokoroUpTime
         private Dictionary<string, Button> buttonObjects = null; //
         private Dictionary<string, Grid> gridObjects = null; //
         private Dictionary<string, Border> borderObjects = null; //
-
-        // 黒板のチェックボックス
-        private CheckBox[] checkBoxs;
 
         // 音関連
         private WindowsMediaPlayer mediaPlayer; //
@@ -174,10 +168,6 @@ namespace KokoroUpTime
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
             {
-                ["rule_board_title_msg"] = this.RuleBoardTitleTextBlock,
-                ["rule_board_check1_msg"] = this.RuleBoardCheck1TextBlock,
-                ["rule_board_check2_msg"] = this.RuleBoardCheck2TextBlock,
-                ["rule_board_check3_msg"] = this.RuleBoardCheck3TextBlock,
                 ["session_sub_title_text"] = this.SessionSubTitleTextBlock, //
                 ["session_sentence_text"] = this.SessionSentenceTextBlock, //
                 ["view_kind_of_feeling_person_text"] = this.ViewKindOfFeelingPersonTextBlock,
@@ -216,7 +206,6 @@ namespace KokoroUpTime
 
             this.buttonObjects = new Dictionary<string, Button>
             {
-                ["rule_board_button"] = this.RuleBoardButton,
                 ["next_msg_button"] = this.NextMessageButton, //
                 ["back_msg_button"] = this.BackMessageButton, //
                 ["thin_msg_button"] = this.ThinMessageButton,
@@ -311,14 +300,6 @@ namespace KokoroUpTime
             this.MusicInfoGrid.Visibility = Visibility.Hidden; //
             this.ExitBackGrid.Visibility = Visibility.Hidden; //
             this.BackgroundImage.Visibility = Visibility.Hidden; //
-            this.RuleBoardButton.Visibility = Visibility.Hidden;
-            this.RuleBoardTitleTextBlock.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck1TextBlock.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck2TextBlock.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck3TextBlock.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck1Box.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck2Box.Visibility = Visibility.Hidden;
-            this.RuleBoardCheck3Box.Visibility = Visibility.Hidden;
             this.MangaTitleImage.Visibility = Visibility.Hidden; //
             this.MangaImage.Visibility = Visibility.Hidden; //
             this.ItemCenterUpImage.Visibility = Visibility.Hidden; //
@@ -408,10 +389,6 @@ namespace KokoroUpTime
 
             this.MangaPrevBackButton.Visibility = Visibility.Hidden; //
 
-            this.RuleBoardTitleTextBlock.Text = "";
-            this.RuleBoardCheck1TextBlock.Text = "";
-            this.RuleBoardCheck2TextBlock.Text = "";
-            this.RuleBoardCheck3TextBlock.Text = "";
             this.SessionSubTitleTextBlock.Text = "";
             this.SessionSentenceTextBlock.Text = "";
             this.ViewKindOfFeelingPersonTextBlock.Text = "";
@@ -433,10 +410,6 @@ namespace KokoroUpTime
 
             this.ChildrenFeelingCommentTextBlock.Text = ""; //
             this.ChildrenFeelingTitleTextBlock.Text = ""; //
-
-            this.RuleBoardCheck1Box.IsEnabled = false;
-            this.RuleBoardCheck2Box.IsEnabled = false;
-            this.RuleBoardCheck3Box.IsEnabled = false;
 
             this.ItemBookTitleTextBlock.Visibility = Visibility.Hidden;
             this.ItemBookMainGrid.Visibility = Visibility.Hidden;
@@ -1747,37 +1720,6 @@ namespace KokoroUpTime
                     this.scenarioCount = index + 1;
                     this.ScenarioPlay();
                 }
-            }
-        }
-
-        // 黒板ルールのためだけに追加
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = sender as CheckBox;
-
-            if (this.checkBoxs.Contains(checkBox))
-            {
-                this.tapCount += 1;
-
-                if (this.tapCount >= this.checkBoxs.Length)
-                {
-                    foreach (CheckBox _checkBox in this.checkBoxs)
-                    {
-                        _checkBox.IsEnabled = false;
-                    }
-                    this.isClickable = true;
-                }
-            }
-        }
-
-        // 黒板ルールのためだけに追加
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = sender as CheckBox;
-
-            if (this.checkBoxs.Contains(checkBox))
-            {
-                this.tapCount -= 1;
             }
         }
 
