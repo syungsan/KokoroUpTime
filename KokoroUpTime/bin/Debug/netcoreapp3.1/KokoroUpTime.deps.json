@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "KokoroUpTime/0.8.4.1": {
+      "KokoroUpTime/0.8.5.1": {
         "dependencies": {
           "EPPlus": "4.5.3.3",
           "Osklib.Wpf": "1.6.0",
@@ -809,7 +809,7 @@
     }
   },
   "libraries": {
-    "KokoroUpTime/0.8.4.1": {
+    "KokoroUpTime/0.8.5.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

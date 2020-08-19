@@ -1,5 +1,5 @@
 ﻿KokoroUpTime
-0.8.4.1
+0.8.5.1
 
 winexe
 C#
@@ -16,5 +16,5 @@ D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\App.xaml
 212-270072723
 AboutPage.xaml;Chapter1.xaml;Chapter3.xaml;ItemPage.xaml;MainWindow.xaml;NameInputPage.xaml;OptionPage.xaml;RuleBoardPage.xaml;Splash.xaml;TitlePage.xaml;
 
-True
+False
 

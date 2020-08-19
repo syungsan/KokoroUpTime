@@ -92,6 +92,12 @@ namespace KokoroUpTime
             this.NameTextBox.Text = BASE_USER_NAME;
 
             OnScreenKeyboardSettings.EnableForTextBoxes = true;
+
+            // 最初に一時フォルダを削除しておく
+            if (Directory.Exists("./temp"))
+            {
+                Directory.Delete("./temp", true);
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -715,6 +721,15 @@ namespace KokoroUpTime
                         // 実行ファイルの場所を絶対パスで取得
                         var startupPath = FileUtils.GetStartupPath();
 
+                        if (!File.Exists($@"{startupPath}/temp/temp_name.png"))
+                        {
+                            MessageBox.Show("空の名前は入力できません。", "情報");
+
+                            this.isClickable = true;
+
+                            return;
+                        }
+
                         // 全ての宛名に画像の登録
                         foreach (var (handWritingNameImage, index) in handWritingNameImages.Indexed())
                         {
@@ -874,6 +889,14 @@ namespace KokoroUpTime
 
                     this.NameImage.Source = null;
 
+                    var startupPath = FileUtils.GetStartupPath();
+
+                    if (File.Exists($@"{startupPath}/temp/temp_name.png"))
+                    {
+                        File.Delete($@"{startupPath}/temp/temp_name.png");
+                    }
+                    this.NameCanvas.Strokes.Clear();
+
                     this.NameTextBox.Text = BASE_USER_NAME;
 
                     this.HandWritingRadioButton.IsChecked = true;
@@ -921,6 +944,13 @@ namespace KokoroUpTime
                 // 上記で作成した描画エリア(dc)にInkCanvasのストロークを描画
                 this.NameCanvas.Strokes.Draw(dc);
                 dc.Close();
+
+                if ((int)rectBounds.Width < 0 || (int)rectBounds.Height < 0)
+                {
+                    MessageBox.Show("何か描いて、名前を入力してください。", "情報");
+
+                    return;
+                }
 
                 // ビジュアルオブジェクトをビットマップに変換する
                 RenderTargetBitmap rtb = new RenderTargetBitmap((int)rectBounds.Width, (int)rectBounds.Height, 96, 96, PixelFormats.Pbgra32);

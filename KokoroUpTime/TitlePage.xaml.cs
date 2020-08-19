@@ -12,14 +12,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using System.Reflection;
-using System.Diagnostics;
 using CsvReadWrite;
 using System.IO;
-using System.Windows.Media.TextFormatting;
 using SQLite;
-using System.Linq;
-using Microsoft.VisualBasic;
-using SQLitePCL;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using FileIOUtils;
@@ -31,9 +26,12 @@ namespace KokoroUpTime
     /// </summary>
     public partial class TitlePage : Page
     {
-        //全画面表示か
-        private bool isMaximized = false;
+        private string BASE_USER_NAME = "名無しさん";
 
+        //全画面表示か
+        private bool isMaximized = true;
+
+        // ページ間参照変数橋渡し
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
         public DataItem dataItem = new DataItem();
@@ -41,6 +39,7 @@ namespace KokoroUpTime
 
         private string[] dirPaths;
 
+        // 初回アクセスかどうかのフラグ
         private bool isFirstBootFlag = true;
 
         public TitlePage()
@@ -75,6 +74,7 @@ namespace KokoroUpTime
             // ################################################################################
         }
 
+        // ページ間参照橋渡し関数
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
         {
             if (!this.isFirstBootFlag)
@@ -86,18 +86,20 @@ namespace KokoroUpTime
             }
         }
 
+        // 他ページから制御するフラグ
         public void SetIsFirstBootFlag(bool flag)
         {
             this.isFirstBootFlag = flag;
         }
 
+        // xamlをロードしきったら発火
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (File.Exists("./Log/system.conf"))
             {
                 if (this.isFirstBootFlag)
                 {
-                    this.LoadUser();
+                    this.LoadCurrentUser();
                 }
                 else
                 {
@@ -107,22 +109,23 @@ namespace KokoroUpTime
             }
             else
             {
-                this.CurrentUserTextBlock.Text = "名無しさん";
+                this.CurrentUserTextBlock.Text = BASE_USER_NAME;
                 this.SetCurrentSceneInfo();
             }
         }
 
-        private void LoadUser()
+        // 現在のユーザが選択されたら情報をロード
+        private void LoadCurrentUser()
         {
             using (var csv = new CsvReader("./Log/system.conf"))
             {
                 var csvs = csv.ReadToEnd();
 
-                this.CurrentUserTextBlock.Text = $"{csvs[0][0]}{csvs[0][1]}";
-
                 this.initConfig.userName = csvs[0][0];
                 this.initConfig.userTitle = csvs[0][1];
                 this.initConfig.accessDateTime = csvs[0][2];
+
+                // this.CurrentUserTextBlock.Text = $"{this.initConfig.userName}{this.initConfig.userTitle}";
             }
 
             string dbName = $"{this.initConfig.userName}.sqlite";
@@ -130,8 +133,10 @@ namespace KokoroUpTime
 
             this.initConfig.dbPath = System.IO.Path.Combine(userDirPath, dbName);
 
+            // データベースよりロード
             using (var connection = new SQLiteConnection(this.initConfig.dbPath))
             {
+                // オプション関係
                 var option = connection.Query<DataOption>("SELECT * FROM DataOption WHERE Id = 1;");
 
                 foreach (var row in option)
@@ -147,6 +152,7 @@ namespace KokoroUpTime
                     this.dataOption.IsAddRubi = row.IsAddRubi;
                 }
 
+                // アイテム関係
                 var item = connection.Query<DataItem>("SELECT * FROM DataItem WHERE Id = 1;");
 
                 foreach (var row in item)
@@ -174,6 +180,7 @@ namespace KokoroUpTime
                     this.dataItem.HasGotItem11 = row.HasGotItem11;
                 }
 
+                // 進捗情報関係
                 var progress = connection.Query<DataProgress>("SELECT * FROM DataProgress WHERE Id = 1;");
 
                 foreach (var row in progress)
@@ -234,6 +241,7 @@ namespace KokoroUpTime
             this.SetCurrentUserName();
             this.SetCurrentSceneInfo();
             
+            // アプリを立ち上げたときに常に選択ユーザのアクセスタイムを記録するのか
             foreach (var confPath in new string[2] { $"./Log/{this.initConfig.userName}/user.conf", "./Log/system.conf" })
             {
                 if (File.Exists(confPath))
@@ -254,6 +262,7 @@ namespace KokoroUpTime
             }
         }
 
+        // タイトルの現在のユーザを表示
         private void SetCurrentUserName()
         {
             string userDirPath = $"./Log/{this.initConfig.userName}/";
@@ -285,6 +294,7 @@ namespace KokoroUpTime
             }
         }
 
+        // タイトルの現在のユーザの最近のプレイシーンを表示
         private void SetCurrentSceneInfo()
         {
             if (this.dataProgress.CurrentCapter == 0 && this.dataProgress.CurrentScene == null)
@@ -297,7 +307,8 @@ namespace KokoroUpTime
             }  
         }
 
-        private List<UserInfoItem> LoadUsers()
+        // 登録中のすべてのユーザ情報をロード
+        private List<UserInfoItem> LoadAnyUsers()
         {
             List<UserInfoItem> items = new List<UserInfoItem>();
 
@@ -309,7 +320,7 @@ namespace KokoroUpTime
                 {
                     string[] userInfos;
 
-                    int inputMethod = 0;
+                    // int inputMethod = 0;
 
                     using (var csv = new CsvReader($"{dirPath}/user.conf"))
                     {
@@ -317,6 +328,7 @@ namespace KokoroUpTime
                         userInfos = new string[3] { csvs[0][0], csvs[0][1], csvs[0][2] };
                     }
 
+                    /*
                     string dbName = $"{userInfos[0]}.sqlite";
                     string dbDirPath = $"./Log/{userInfos[0]}/";
 
@@ -331,6 +343,8 @@ namespace KokoroUpTime
                             inputMethod = row.InputMethod;
                         }
                     }
+                    */
+
                     var startupPath = FileUtils.GetStartupPath();
 
                     if (File.Exists($@"{startupPath}/{dirPath}/name.png"))
@@ -345,6 +359,7 @@ namespace KokoroUpTime
                 else
                 {
                     // error;
+                    // Logディレクトリに異物（ディレクトリ）が入っている
                 }
             }
             return items;
@@ -414,7 +429,7 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        this.SelectDataListBox.ItemsSource = this.LoadUsers();
+                        this.SelectDataListBox.ItemsSource = this.LoadAnyUsers();
 
                         this.CoverLayerImage.Visibility = Visibility.Visible;
                         this.SelectDataListGrid.Visibility = Visibility.Visible;
@@ -495,6 +510,9 @@ namespace KokoroUpTime
                                     Directory.Delete("./temp", true);
                                 }
                             }
+
+                            // 処理が重くなったら後々プログレスバーをつける
+                            MessageBox.Show("全てのデータの出力が完成しました。", "情報");
                         }
                     }
                     else
@@ -534,7 +552,7 @@ namespace KokoroUpTime
                             }
                             // this.SelectDataListBox.Items.Refresh();
 
-                            this.SelectDataListBox.ItemsSource = this.LoadUsers();
+                            this.SelectDataListBox.ItemsSource = this.LoadAnyUsers();
 
                             if (this.SelectDataListBox.Items.Count <= 0)
                             {
@@ -542,7 +560,7 @@ namespace KokoroUpTime
                                 {
                                     this.CurrentNameImage.Source = null;
                                 }
-                                this.CurrentUserTextBlock.Text = "名無しさん";
+                                this.CurrentUserTextBlock.Text = BASE_USER_NAME;
 
                                 this.dataProgress.CurrentCapter = 0;
                                 this.dataProgress.CurrentScene = null;
@@ -568,6 +586,7 @@ namespace KokoroUpTime
                                     }
                                 }
 
+                                // 削除候補に現在のユーザが含まれていた時の処理（残りのユーザの先頭をカレントユーザにする）
                                 if (!nameExist)
                                 {
                                     var startupPath = FileUtils.GetStartupPath();
@@ -576,7 +595,7 @@ namespace KokoroUpTime
 
                                     File.Copy($@"{userDirPath}/user.conf", @"./Log/system.conf", true);
                                 }
-                                this.LoadUser();
+                                this.LoadCurrentUser();
                             }
                         }
                     }
@@ -594,22 +613,30 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        this.SelectUserListBox.ItemsSource = this.LoadUsers();
+                        this.SelectUserListBox.ItemsSource = this.LoadAnyUsers();
 
                         this.CoverLayerImage.Visibility = Visibility.Visible;
                         this.SelectUserListGrid.Visibility = Visibility.Visible;
+
+                        // カレントユーザを最初から選択された状態にする
+                        foreach (var item in this.SelectUserListBox.Items)
+                        {
+                            if ((item as UserInfoItem).UserName == $"{this.initConfig.userName}{this.initConfig.userTitle}")
+                            {
+                                this.SelectUserListBox.SelectedItem = item;
+                            }
+                        }
                     }
                     break;
 
+                // ユーザの切り替え処理
                 case "SelectUserListOKButton":
 
-                    // 名前を何でもよいから選択しないと落ちる
-                    // 後々デフォルトで先頭が選択された状態で始める
                     var selectedUserNamePath = this.dirPaths[this.SelectUserListBox.SelectedIndex];
 
                     File.Copy($@"{selectedUserNamePath}/user.conf", @"./Log/system.conf", true);
 
-                    this.LoadUser();
+                    this.LoadCurrentUser();
 
                     this.SelectUserListGrid.Visibility = Visibility.Hidden;
                     this.CoverLayerImage.Visibility = Visibility.Hidden;
@@ -750,7 +777,7 @@ namespace KokoroUpTime
         //全画面表示にする
         public void Maximize(Window mainWindow)
         {
-            if (!isMaximized)
+            if (!this.isMaximized)
             {
                 mainWindow.ShowActivated = true;
                 mainWindow.Topmost = true;
@@ -764,15 +791,15 @@ namespace KokoroUpTime
                 // mainWindow.Cursor = Cursors.None;
                 mainWindow.WindowState = WindowState.Maximized;
 
-                isMaximized = true;
+                this.isMaximized = true;
             }
-            else if (isMaximized)
+            else if (this.isMaximized)
             {
                 mainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
                 mainWindow.ResizeMode = ResizeMode.CanResize;
                 mainWindow.Topmost = false;
 
-                isMaximized = false;
+                this.isMaximized = false;
             }
         }
     }

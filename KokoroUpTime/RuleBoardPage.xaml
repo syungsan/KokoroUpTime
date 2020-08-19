@@ -119,7 +119,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="42" RenderTransformOrigin="0.5,0.5" Margin="30,48,30,30">
+                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="38" RenderTransformOrigin="0.5,0.5" Margin="22,54,18,24" FontFamily="/Fonts/azuki.ttf#azuki_font">
                         <TextBlock.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
