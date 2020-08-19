@@ -1,7 +1,5 @@
 # KokoroUpTime
  
 実行ファイルが起動しないときは、同封のRuntimeを先にインストールしてください。
-(windowsdesktop-runtime-3.1.3-win-x64.exe)
+(windowsdesktop-runtime-3.1.7-win-x64.exe)
 
-最新版はこちらなので、こちらをインストールしてください。
-(dotnet-runtime-3.1.7-win-x64.exe)
