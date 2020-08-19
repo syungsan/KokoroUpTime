@@ -26,6 +26,7 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Shell;
 
+
 namespace KokoroUpTime
 {
     /// <summary>
@@ -65,6 +66,7 @@ namespace KokoroUpTime
         private Dictionary<string, Ellipse> GoodEventObject = null;
 
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
+        private string[] IMAGE_TEXTS = { "name" };
 
 
         // 音関連
@@ -79,6 +81,8 @@ namespace KokoroUpTime
 
         // ゲームの切り替えシーン
         private string scene;
+
+        private string tag;
 
         // 仮のユーザネームを設定
         public string userName = "なまえ";
@@ -173,6 +177,7 @@ namespace KokoroUpTime
                 ["select_needle_image"] = this.SelectNeedleImage,
                 ["children_info_image"] = this.ChildrenInfoImage,
                 ["shiroji_ending_image"] = this.ShirojiEndingImage,
+                ["shiroji_left_image"] = this.ShirojiLeftImage,
                 ["shiroji_right_image"] = this.ShirojiRightImage,
                 ["shiroji_right_up_image"] = this.ShirojiRightUpImage,
                 ["shiroji_small_right_up_image"] = this.ShirojiSmallRightUpImage,
@@ -180,6 +185,7 @@ namespace KokoroUpTime
                 ["shiroji_right_center_image"] = this.ShirojiRightCenterImage,
                 ["shiroji_small_right_center_image"] = this.ShirojiSmallRightCenterImage,
                 ["shiroji_very_small_right_image"] = this.ShirojiVerySmallRightImage,
+                ["shiroji_center_down_small_image"]=this.ShirojiCenterDownSmallImage,
                 ["children_stand_left_image"] = this.ChildrenStandLeftImage,
                 ["children_stand_right_image"] = this.ChildrenStandRightImage,
                 ["kimi_stand_small_left_image"] = this.KimiStandSmallLeftImage,
@@ -188,6 +194,7 @@ namespace KokoroUpTime
                 ["intro_kimi_face_image"] = this.IntroKimiFaceImage,
                 ["children_face_small_left_image"] = this.ChildrenFaceSmallLeftImage,
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
+                ["item_point_message_bubble_image"]=this.ItemPointMessageBubbleImage,
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -213,6 +220,11 @@ namespace KokoroUpTime
                 ["thin_msg"] = this.ThinMessageTextBlock,
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
+                ["challenge2_bubble_action_text"] =this.Challenge2BubbleActionText,
+                ["aosuke_difficulty_of_action_text"] =this.AosukeDifficultyOfActionText,
+                ["aosuke_kind_of_feeling_text"] =this.AosukeKindOfFeelingText,
+                ["aosuke_size_of_feeling_text"] =this.AosukeSizeOfFeelingText,
+                ["item_point_msg_text"] = this.ItemPointMessageText,
 
                 ["GoodEventText1"] = this.GoodEventText1,
                 ["GoodEventText2"] = this.GoodEventText2,
@@ -264,6 +276,8 @@ namespace KokoroUpTime
                 ["challenge_msg_grid"] = this.ChallengeMessageGrid,
                 ["kimi_plate_inner_up_grid"] = this.KimiPlateInnerUpGrid,
                 ["kimi_plate_inner_down_grid"] = this.KimiPlateInnerDownGrid,
+                ["item_plate_grid"]=this.ItemPlateGrid,
+                
                
                 ["children_face_small_left_msg_grid"] = this.ChildrenFaceSmallLeftMessageGrid,
                 ["select_heart_grid"] = this.SelectHeartGrid,
@@ -273,6 +287,7 @@ namespace KokoroUpTime
                 ["compare_msg_grid"] = this.CompareMessageGrid,
                 ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid,
+                ["item_point_message_grid"] =this.ItemPointMessageGrid,
                 ["music_info_grid"] = this.MusicInfoGrid,
                 ["branch_select_grid"] = this.BranchSelectGrid,
                 ["challenge_time_title_grid"] = this.ChallengeTimeTitleGrid,
@@ -322,6 +337,7 @@ namespace KokoroUpTime
 
             this.ItemReviewGrid.Visibility = Visibility.Hidden;
             this.ChallegeTimeGrid.Visibility = Visibility.Hidden;
+            this.Epiloguegrid.Visibility = Visibility.Hidden;
 
           
             this.ChildrenFaceSmallLeftMessageGrid.Visibility = Visibility.Hidden;
@@ -372,6 +388,7 @@ namespace KokoroUpTime
             this.ChildrenInfoImage.Visibility = Visibility.Hidden;
             this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
             this.ShirojiRightImage.Visibility = Visibility.Hidden;
+            this.ShirojiLeftImage.Visibility = Visibility.Hidden;
             this.ShirojiRightUpImage.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightUpImage.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightDownImage.Visibility = Visibility.Hidden;
@@ -382,6 +399,7 @@ namespace KokoroUpTime
             this.ChildrenStandLeftImage.Visibility = Visibility.Hidden;
             this.ChildrenStandRightImage.Visibility = Visibility.Hidden;
             this.KimiStandSmallLeftImage.Visibility = Visibility.Hidden;
+            this.ShirojiCenterDownSmallImage.Visibility = Visibility.Hidden;
 
             this.AosukesmallFaceImage.Visibility = Visibility.Hidden;
             this.IntroKimiFaceImage.Visibility = Visibility.Hidden;
@@ -393,6 +411,7 @@ namespace KokoroUpTime
             this.NextPageButton.Visibility = Visibility.Hidden;
             this.BackPageButton.Visibility = Visibility.Hidden;
             this.MangaFlipButton.Visibility = Visibility.Hidden;
+            this.ItemPointMessageBubbleImage.Visibility = Visibility.Hidden;
 
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
@@ -423,10 +442,13 @@ namespace KokoroUpTime
             this.EndingMessageTextBlock.Text = "";
             this.MainMessageFrontText.Text = "";
             this.MainMessageBackText.Text = "";
-            this.FrexibleMainMessageText.Text = "";
+            //this.FrexibleMainMessageText.Text = "";
             this.ThinMessageTextBlock.Text = "";
             this.MusicTitleTextBlock.Text = "";
             this.ComposerNameTextBlock.Text = "";
+            this.ItemPointMessageText.Text = "";
+
+
 
         }
 
@@ -507,11 +529,18 @@ namespace KokoroUpTime
                 // シーン名を取得
                 case "scene":
 
-                    this.scene = this.scenarios[this.scenarioCount][1]; ;
+                    this.scene = this.scenarios[this.scenarioCount][1]; 
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
+                    break;
+
+                case "tag":
+                    this.Tag = this.scenarios[this.scenarioCount][1];
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
                     break;
 
                 // グリッドに対しての処理
@@ -947,18 +976,8 @@ namespace KokoroUpTime
                     break;
 
                 case "jump":
-                    string jumptag = this.scenarios[this.scenarioCount][1];
-                    for (int i =0; i<128;i++)
-                    {
-                        if(this.scenarios[i][0] == "scene")
-                        {
-                            if(jumptag == this.scenarios[i][1])
-                            {
-                                this.scenarioCount = i;
-                                this.ScenarioPlay();
-                            }
-                        }
-                    }
+                    string _jumptag = this.scenarios[this.scenarioCount][1];
+                    this.JumpScenario(jumptag: _jumptag);
                         break;
 
                /*case "jump":
@@ -1026,7 +1045,7 @@ namespace KokoroUpTime
             }
         }
 
-        string SequenceCheck(string text)
+        private string SequenceCheck(string text)
         {
             // 正規表現によって$と$の間の文字列を抜き出す（無駄処理）
             var Matches = new Regex(@"\$(.+?)\$").Matches(text);
@@ -1039,14 +1058,14 @@ namespace KokoroUpTime
                 {
                     case "$aosukes_kind_of_feeling$":
 
-                   //     text = text.Replace("$aosukes_kind_of_feeling$", this.data.AosukesKindOfFeelings.Split(",")[0]);
+                        //     text = text.Replace("$aosukes_kind_of_feeling$", this.data.AosukesKindOfFeelings.Split(",")[0]);
 
                         break;
 
-                  
+
                     case "$aosukes_size_of_feeling$":
 
-                     //   text = text.Replace("$aosukes_size_of_feeling$", this.data.AosukesSizeOfFeeling.ToString());
+                        //   text = text.Replace("$aosukes_size_of_feeling$", this.data.AosukesSizeOfFeeling.ToString());
 
                         break;
                 }
@@ -1056,6 +1075,7 @@ namespace KokoroUpTime
             text = text.Replace("鬱", "\u2028");
 
             return text;
+            
         }
        
         void ShowMessage(TextBlock textObject, string message, object obj = null)
@@ -1065,9 +1085,8 @@ namespace KokoroUpTime
 
             message = message.Replace("【name】", "n");
             message = message.Replace("【くん／ちゃん／さん】", "");
-            message = message.Replace("【Background　Aqua】", "C bga");
-            message = message.Replace("【Background　Yellow】", "C bgy");
-            message = message.Replace("【FontStyle　Change】", "C fsc");
+            message = message.Replace("【Marker】", "C mar");
+            message = message.Replace("【Ultra Bold】", "C ulb");
             message = message.Replace("【FontColor　Red】", "C fcr");
             message = message.Replace("【Stop】", "S");
 
@@ -1097,44 +1116,48 @@ namespace KokoroUpTime
                         // 実行ファイルの場所を絶対パスで取得
                         var startupPath = FileUtils.GetStartupPath();
 
-                        this.NameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
+                        //this.NameImage.Source = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
                     }
+
+                    //
                     else if (message.Substring(this.word_num, 1) == "C")
                     {
-                        
-                        string TargetFont1 = message.Substring(this.word_num,5);
-                        string TargetFont2=null;
-                        
-                        if (message.Substring(this.word_num+5, 1) == "C")
-                        {
-                           TargetFont2= message.Substring(this.word_num + 5, 5);
-                           message = message.Replace(TargetFont2, "");
-                           MessageBox.Show(TargetFont2);
-                        }
-                        message = message.Replace(TargetFont1, "");
-
-                        if(TargetFont1 == "C bga" || TargetFont2 == "C bga")
-                        {
-                            this.FrexibleMainMessageText.Background = Brushes.Aqua;
-                        }
-                        if (TargetFont1 == "C bgy" || TargetFont2 == "C bgy")
-                        {
-                            this.FrexibleMainMessageText.Background = Brushes.Yellow;
-                        }
-                        if (TargetFont1 == "C fcr" || TargetFont2 == "C fcr")
-                        {
-                            this.FrexibleMainMessageText.Foreground = Brushes.Red;
-                        }
-                        /*
-                        if (TargetFont1 == "C fcr" || TargetFont2 == "C fcr")
-                        {
-                            this.FrexibleMainMessageText.FontFamily = 
-                        }
-                        */
-                        TargetFont1 = null;
-                       
-                        this.msgTimer.Stop();
+                         this.msgTimer.Stop();
                         this.msgTimer = null;
+                        Run FrexibleMainMessageText = new Run();
+                        this.MainMessageTextBlock.Inlines.Add(FrexibleMainMessageText.Text);
+
+                        string CharaColor = this.scenarios[this.scenarioCount][3];
+
+                        string TargetFont = message.Substring(this.word_num, 5);
+                        message = message.Replace(TargetFont, "");
+
+                        if(TargetFont=="C mar")
+                        {
+                            if (CharaColor == "白じい")
+                            {
+                                FrexibleMainMessageText.Background = Brushes.Purple;
+                            }
+                            else if (CharaColor == "赤丸")
+                            {
+                                FrexibleMainMessageText.Background = Brushes.Red;
+                            }
+                            else if (CharaColor == "青助")
+                            {
+                                FrexibleMainMessageText.Background = Brushes.Aqua;
+                            }
+                            else if (CharaColor == "キミ")
+                            {
+                                FrexibleMainMessageText.Background = Brushes.Yellow;
+                            }
+                        }
+
+                        if(TargetFont=="C ulb")
+                        {
+                            FrexibleMainMessageText.FontWeight = FontWeights.UltraBlack;
+                        }
+
+                       
                         this.msgTimer = new DispatcherTimer();
                         this.msgTimer.Tick += ViewMsg2;
                         this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / MESSAGE_SPEED);
@@ -1145,11 +1168,11 @@ namespace KokoroUpTime
                             
                             if (this.MainMessageFrontText == null)
                             {
-                                this.FrexibleMainMessageText.Text = message.Substring(0, this.word_num);
+                                //this.FrexibleMainMessageText.Text = message.Substring(0, this.word_num);
                             }
                             else if (this.MainMessageFrontText != null)
                             {
-                                this.FrexibleMainMessageText.Text = message.Substring(this.MainMessageFrontText.Text.Length, this.word_num - MainMessageFrontText.Text.Length);
+                                //this.FrexibleMainMessageText.Text = message.Substring(this.MainMessageFrontText.Text.Length, this.word_num - MainMessageFrontText.Text.Length);
                             }
 
                             word_num++;
@@ -1172,13 +1195,17 @@ namespace KokoroUpTime
                         }
 
                     }
-                    else if(this.word_num>0 && this.NameImage.Source != null)
+                    else if(this.word_num>0 /*&& this.NameImage.Source != null*/)
                     {
                         this.MainMessageBackText.Text = message.Substring(this.MainMessageFrontText.Text.Length, this.word_num - MainMessageFrontText.Text.Length);
                     }
                     else
                     {
                         this.MainMessageFrontText.Text = message.Substring(0, this.word_num);
+                        if (textObject == this.ItemPointMessageText)
+                        {
+                            this.ItemPointMessageText.Text = message.Substring(0, this.word_num);
+                        }
                     }
                    
                     word_num++;
@@ -1314,15 +1341,13 @@ namespace KokoroUpTime
             }
             if (button.Name == "BranchButton1")
             {
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-                this.BranchSelectGrid.Visibility = Visibility.Hidden;
+                string _jumptag = "おぼえているよ";
+                this.JumpScenario(_jumptag);
             }
             if (button.Name == "BranchButton2")
             {
-                this.scenarioCount += 2;
-                this.ScenarioPlay();
-                this.BranchSelectGrid.Visibility = Visibility.Hidden;
+                string _jumptag = "きもちセンサーの復習";
+                this.JumpScenario(_jumptag);
             }
             if(button.Name.Substring(0,9) == "GoodEvent") 
             {
@@ -1657,6 +1682,21 @@ namespace KokoroUpTime
             {
                 this.feelingSize = 100;
                 this.Angle = (double)this.feelingSize + 310.0f;
+            }
+        }
+
+        private void JumpScenario(string jumptag)
+        {
+            for (int i = 0; i < this.scenarios.Count; i++)
+            {
+                if (this.scenarios[i][0] == "scene" || this.scenarios[i][0]=="tag")
+                {
+                    if (jumptag == this.scenarios[i][1])
+                    {
+                        this.scenarioCount = i;
+                        this.ScenarioPlay();
+                    }
+                }
             }
         }
         

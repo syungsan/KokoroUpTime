@@ -49,6 +49,7 @@
     <None Remove="Images\before.png" />
     <None Remove="Images\big_heart.png" />
     <None Remove="Images\blackboard.png" />
+    <None Remove="Images\blue_bubble.png" />
     <None Remove="Images\blue_bubble_left_down.png" />
     <None Remove="Images\blue_gradation.png" />
     <None Remove="Images\blue_needle.png" />
@@ -150,6 +151,7 @@
     <None Remove="Images\short_bubble_right_up.png" />
     <None Remove="Images\size_of_feeling_button_frame.png" />
     <None Remove="Images\small_bubble_left.png" />
+    <None Remove="Images\small_bubble_left_up.png" />
     <None Remove="Images\small_bubble_right_down.png" />
     <None Remove="Images\small_icon.png" />
     <None Remove="Images\SS.png" />
@@ -216,6 +218,7 @@
     <Resource Include="Images\before.png" />
     <Resource Include="Images\big_heart.png" />
     <Resource Include="Images\blackboard.png" />
+    <Resource Include="Images\blue_bubble.png" />
     <Resource Include="Images\blue_bubble_left_down.png" />
     <Resource Include="Images\blue_gradation.png" />
     <Resource Include="Images\blue_needle.png" />
@@ -261,6 +264,7 @@
     <Resource Include="Images\short_bubble_left.png" />
     <Resource Include="Images\short_bubble_right_up.png" />
     <Resource Include="Images\size_of_feeling_button_frame.png" />
+    <Resource Include="Images\small_bubble_left_up.png" />
     <Resource Include="Images\small_bubble_right_down.png" />
     <Resource Include="Images\challenge_time.png" />
     <Resource Include="Images\ending_bubble.png" />

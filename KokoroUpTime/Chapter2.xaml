@@ -654,6 +654,99 @@
             </DoubleAnimationUsingKeyFrames>
 
         </Storyboard>
+        <Storyboard x:Key="appear_up_shiroji_left_image">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiLeftImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiRightImage" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="appear_fade_in_challenge2_grid">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="AosukeSizeOfFeeling" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.1000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.8000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="AosukeKindOfFeeling" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.4000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="AosukeDifficultyOfAction" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.5000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Challenge2ActionBubble" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="AosukesmallFaceImage" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KindOfFeeling" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.4000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.1000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="SizeOfFeeling" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.8000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.5000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="DifficultyOfAction" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.2000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.9000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="appear_fade_in_item_plate_grid">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemPlateMainText" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="appear_expansion_item_point_message_bubble_image">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemPointMessageBubbleImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemPointMessageBubbleImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+        <Storyboard x:Key="appear_up_shiroji_center_down_small_image">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiCenterDownSmallImage" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiCenterDownSmallImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Page.Resources>
 
     <Viewbox>
@@ -675,7 +768,7 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
+            <Grid x:Name="ItemGrid" Visibility="Visible">
                 <Image x:Name="ItemCenterImage" HorizontalAlignment="Left" Height="512" VerticalAlignment="Top" Width="363" Source="/Images/item01_solo.png" Margin="804,266,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -717,8 +810,8 @@
                         <TextBlock x:Name="ItemInfoSentenceTextBlock3" FontSize="40" TextWrapping="Wrap" Margin="0,200,0,0"><Run Text="✔ うきうきシューズをつかって、「ちょっぴりうきうき」をさがすとよいぞ"/><LineBreak /><Run Text="      い！"/></TextBlock>
                     </Grid>
                 </Grid>
-                <Image x:Name="ItemLeftLastImage" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item02_solo.png" Margin="354,186,0,0" d:IsHidden="True"/>
-                <Grid x:Name="ItemLastInfoGrid" Height="116" Width="490" Margin="715,380,715,584" d:IsHidden="True">
+                <Image x:Name="ItemLeftLastImage" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item02_solo.png" Margin="354,186,0,0"/>
+                <Grid x:Name="ItemLastInfoGrid" Height="116" Width="490" Margin="715,380,715,584">
                     <Image x:Name="ItemLastInfoImage" Source="/Images/item_last.png"/>
                     <TextBlock x:Name="ItemLastInfoTextBlock" HorizontalAlignment="Left" Margin="12,38,0,0" VerticalAlignment="Top" Height="66" Width="408" FontSize="48" FontWeight="Bold" Text="No.2  うきうきシューズ"/>
                 </Grid>
@@ -728,10 +821,11 @@
                     <TextBlock x:Name="ItemReviewText1" Margin="715,315,515,680" Text="#1  「きもちセンサー」" FontSize="60"/>
                     <TextBlock x:Name="ItemReviewText2" Margin="715,400,515,515" Text="気持ちの大きさと種類を&#10;図ることが出来ます" FontSize="60"/>
                 </Grid>
-                <Grid x:Name="ItemPlateGrid">
-                    <Image x:Name="ItemPlateBackGroundImage" Source="/Images/item_plate.png" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="300,200,300,200"/>
-                    <Image x:Name="ItemmInPlateImage" Source="/Images/item02_solo.png"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,150,350,500"/>
-                    <TextBlock x:Name="ItemPlateText" FontSize="60" Text="✓きもちの大きさが小さい&#10;✓かんたんにできる&#10;✓まわりの人といっしょにできる" Margin="800,220,330,590"/>
+                <Grid x:Name="ItemPlateGrid" Margin="200,50,200,200" d:IsHidden="True">
+                    <Image x:Name="ItemPlateBackGroundImage" Source="/Images/item_plate.png" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                    <Image x:Name="ItemmInPlateImage" Source="/Images/item02_solo.png"   Margin="-230,-100,900,415"/>
+                    <TextBlock x:Name="ItemPlateSubText" FontSize="50" Text="✓きもちの大きさが小さい&#10;✓かんたんにできる" FontFamily="Yu Gothic" FontWeight="Bold" Margin="400,40,0,630"/>
+                    <TextBlock x:Name="ItemPlateMainText" FontSize="60" Text="✓まわりの人といっしょにできる" FontFamily="Yu Gothic" FontWeight="UltraBold" Margin="400,220,20,500"/>
 
                 </Grid>
             </Grid>
@@ -847,31 +941,31 @@
             </Grid>
             <Grid x:Name="Challenge2Grid" d:IsHidden="True">
 
-                <Image x:Name="Challenge2GridTitle" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="200,20" Source="Images/challenge2_title.png"/>
-                <TextBlock x:Name="Challenge2Text" Text="青助くんの楽しいことリストについて、きもちの大きさを書いてみよう&#10;次に、かんたんにできるか〇×△をつけてみよう！" FontSize="60" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,200"/>
-                <TextBlock x:Name="AosukeSizeOfFeeling" Text="きもちの種類" FontSize="40" Margin="1078,424,610,578"/>
-                <TextBlock x:Name="AosukeKindOfFeeling" Text="きもちのおおきさ" FontSize="40" Margin="1078,702,569,310"/>
-                <TextBlock x:Name="AosukeDifficultyOfAction" Text="かんたんにできるか" FontSize="40" Margin="1499,463,124,545"/>
-                <Grid x:Name="KindOfFeeling">
-                    <TextBlock x:Name="KIndOfFeelingText" Text="やさしい" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="1037,507,569,416"/>
+                <Image x:Name="Challenge2GridTitle" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="200,20" Source="Images/challenge2_title.png" d:IsHidden="True"/>
+                <TextBlock x:Name="Challenge2Text" Text="青助くんの楽しいことリストについて、きもちの大きさを書いてみよう&#10;次に、かんたんにできるか〇×△をつけてみよう！" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Yu Gothic" FontWeight="UltraBold" Margin="100,200" d:IsHidden="True"/>
+                <TextBlock x:Name="KindOfFeeling" Text="きもちの種類" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1037,444,569,578"/>
+                <TextBlock x:Name="SizeOfFeeling" Text="きもちのおおきさ" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1007,720,539,300"/>
+                <TextBlock x:Name="DifficultyOfAction" Text="かんたんにできるか" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1428,473,59,545"/>
+                <Grid x:Name="KindOfFeelingGrid">
+                    <TextBlock x:Name="AosukeKindOfFeelingText" Text="ゆったり" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" Margin="1037,507,569,416"/>
                     <Button x:Name="KindOfFeelingButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="1037,507,569,416" Click="Button_Click">
                         <Image x:Name="KindOfFeelingButtonImage" Source="Images/kind_of_feeling_button_frame.png"/>
                     </Button>
                 </Grid>
-                <Grid x:Name="SizeOfFeeling">
-                    <TextBlock x:Name="SizeOfFeelingButtonText" Margin="1120,815,650,200"/>
+                <Grid x:Name="SizeOfFeelingGrid">
+                    <TextBlock x:Name="AosukeSizeOfFeelingText" Text="20" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" Margin="1120,815,650,200"/>
                     <Button x:Name="SizeOfFeelingButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="1037,775,569,162" Click="Button_Click">
                         <Image x:Name="SizeOfFeelingButtonImage" Source="/Images/size_of_feeling_button_frame.png" Stretch="UniformToFill"/>
                     </Button>
                 </Grid>
-                <Grid x:Name="DifficultyOfAction">
-                    <Button x:Name="DifficultyOfActionButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="1458,540,89,215" Click="Button_Click">
-                        <Image x:Name="DifficultyOfActionButtonImage" Source="/Images/difficulty_of_action_frame.png" Stretch="Fill"/>
-                    </Button>
+                <Grid x:Name="DifficultyOfActionGrid" Margin="1458,540,89,215">
+                    <Image x:Name="DifficultyOfActionButtonImage" Source="/Images/difficulty_of_action_frame.png" Stretch="Fill" />
+                    <TextBlock x:Name="AosukeDifficultyOfActionText" Text="△" FontSize="180" FontFamily="MSP Gothic" TextAlignment="Center" Margin="80,60"/>
+                    <Button x:Name="DifficultyOfActionButton" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click"/>
                 </Grid>
                 <Grid x:Name="Challenge2ActionBubble" Margin="202,333,928,265">
                     <Image x:Name="Challenge2ActionBuble" Source="/Images/blue_bubble_left_down.png" />
-                    <TextBlock x:Name="Challenge2BubbleActionText" Text="休み時間に友達とおしゃべりする" TextWrapping="Wrap" FontSize="70" Margin="40,100,40,170"/>
+                    <TextBlock x:Name="Challenge2BubbleActionText" Text="公園でお昼寝する" TextWrapping="Wrap" FontSize="70" FontFamily="Yu Gothic"  Margin="40,100,40,170"/>
                 </Grid>
                 <Image x:Name="AosukesmallFaceImage" HorizontalAlignment="Left" Height="321" VerticalAlignment="Top" Width="330" Source="/Images/aosuke_face_01.png" Margin="10,586,0,0" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
@@ -927,10 +1021,12 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Image x:Name="SummaryBoardImage" Source="/Images/blackboard.png"/>
-                    <TextBlock x:Name="SummarySubTitleTextBlock" Margin="118,92,118,396" Text="今日の教室で学んだこと" TextWrapping="Wrap" Foreground="White" Background="{x:Null}" FontSize="68" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock x:Name="SummarySentenceTextBlock" TextWrapping="Wrap" Foreground="#FFFFE800" FontSize="58" Margin="69,232,66,160">
-                        ✓ いろいろな「きもち」を発見した<LineBreak/>
-                        ✓ 「きもち」の大きさを はかってみた
+                    <TextBlock x:Name="SummarySubTitleTextBlock" Margin="118,42,118,446" Text="今日の教室で学んだこと" TextWrapping="Wrap" Foreground="White" Background="{x:Null}" FontSize="68" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock x:Name="SummarySentenceTextBlock" Text="✓ たのしいことをさがしてみた&#10;✓「ちょっぴりうきうき」をたくさんみつ&#10;    けた"  TextWrapping="Wrap" Foreground="#FFFFE800" FontSize="58" Margin="69,152,66,190"/>
+                    <Image x:Name="SummaryItemImage" Source="/Images/item02_solo.png" Margin="47,328,614,-21"/>
+                    <TextBlock x:Name="SummaryItemText" Margin="308,400,100,75" Foreground="White" FontFamily="MS PGothic" FontWeight="Bold">
+                        <Run x:Name="SummaryItemTitle" Text="本日の発明品" FontSize="40" />
+                        <Run x:Name="SummaryItemName" Text="&#10;No.2 うきうきシューズ" FontSize="50"/>
                     </TextBlock>
                 </Grid>
                 <Image x:Name="SummaryTitleImage" Width="401" Source="/Images/summary_title.png" Margin="760,22,759,907" Height="151"/>
@@ -1030,8 +1126,8 @@
                 <TextBlock x:Name="EpilogueText" Margin="100,140,450,290" FontSize="70" LineHeight="120" Text="青助くんはうきうきシューズをつかって、&#10;「ちょっぴりうきうき」をみつけて&#10;毎日少しずつやってみました。&#10;すると…なんだか少しずつ元気になってきたようです。"/>
                 <Image x:Name="EpilogueItem" Source="/Images/item02_solo.png" Margin="1288,465,12,10"/>
             </Grid>
-            <Grid x:Name="ShirojiGrid" >
-                <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="1271,343,70,110" d:IsHidden="True">
+            <Grid x:Name="ShirojiGrid" d:IsHidden="True" >
+                <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="1271,343,70,110">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -1041,7 +1137,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ShirojiLeftImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="71,343,1270,110">
+                <Image x:Name="ShirojiLeftImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="71,343,1270,110" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -1093,6 +1189,16 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
+                <Image x:Name="ShirojiCenterDownSmallImage" Source="/Images/shiroji_03.png" Margin="213,489,1148,82" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
                 <Image x:Name="ShirojiEndingImage" HorizontalAlignment="Left" Height="570" Margin="1204,485,0,0" VerticalAlignment="Top" Width="526" Source="/Images/shiroji_01.png" d:IsHidden="True"/>
             </Grid>
             <Grid x:Name="ChildrenStandGrid" Visibility="Visible" d:IsHidden="True">
@@ -1127,8 +1233,8 @@
                 </Grid>
             </Grid>
             <Grid x:Name="AnyCharaGrid" d:IsHidden="True"/>
-            <Grid x:Name="SystemGrid">
-                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <Grid x:Name="SystemGrid" d:IsHidden="True">
+                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -1224,6 +1330,19 @@
                         </Image.RenderTransform>
                     </Image>
                     <TextBlock x:Name="ChallengeMessageTextBlock" Margin="35,40,35,100" FontSize="48" TextWrapping="Wrap"><Run Text="楽しいことをたくさん集めてみたぞい。"/><LineBreak /><Run Text="自分のいいきもちになるものに〇をつけてみるのじゃ。" TextDecorations="BaseLine"/></TextBlock>
+                </Grid>
+                <Grid x:Name="ItemPointMessageGrid" Margin="670,600,300,0">
+                    <Image x:Name="ItemPointMessageBubbleImage" Source="/Images/small_bubble_left_up.png" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock x:Name="ItemPointMessageText"  FontSize="34" FontFamily="Yu Gothic" LineHeight="60" Margin="140,152,20,128"/>
                 </Grid>
                 <Grid x:Name="CompareMessageGrid" Height="322" Width="540" Margin="1335,150,45,608" d:IsHidden="True">
                     <Image x:Name="CompareSmallBubbleImage" Source="/Images/small_bubble_right_down.png"/>

@@ -1,5 +1,5 @@
 ﻿reset
-jump,チャレンジタイムパート②
+jump,まとめ
 scene,前説
 image,bg_image,background_02.png
 image,intro_kimi_face_image,,appear_up,no_sync
@@ -28,9 +28,7 @@ hide,text,main_msg
 hide,image,main_msg_bubble_image
 hide,image,shiroji_right_image
 grid,branch_select_grid
-
-jump,おぼえているよ
-jump,かくにんしたいな
+wait
 
 scene,おぼえているよ
 reset
@@ -49,7 +47,9 @@ hide,button,manga_flip_button
 next
 jump,チャレンジタイムパート①
 
-scene,かくにんしたいな
+scene,きもちセンサーの復習
+reset
+image,bg_image,background_02.png
 grid,item_review_grid
 next
 jump,チャレンジタイムパート①
@@ -70,6 +70,8 @@ image,shiroji_very_small_right_image
 grid,challenge_msg_grid,appear_expansion
 wait_tap
 hide,grid,challenge_msg_grid
+jump,会話①
+
 scene,会話①
 reset
 image,bg_image,background_08.png
@@ -78,20 +80,22 @@ image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble_blue.png
 grid,main_msg_grid,appear_expansion_slow
 image,main_msg_bubble_image,left_big_bubble_blue.png
-msg,main_msg,ねえ、白じい。鬱楽しいことはわかったんだけど、なんだかぜんぜんやる気が出ないんだよ。,あおすけ
+msg,main_msg,ねえ、白じい。鬱楽しいことはわかったんだけど、なんだかぜんぜんやる気が出ないんだよ。,青助
 wait
-msg,main_msg,【Background　Aqua】やる気や元気がでないときって、どうしたらいいのかなぁ？【Stop】,あおすけ
+msg,main_msg,【Marker】やる気や元気がでないときって、どうしたらいいのかなぁ？【Stop】,青助
 wait
 image,main_msg_bubble_image,right_big_bubble.png
-msg,main_msg,青助くん！それはとても重要なポイントじゃ。鬱【Background　Yellow】じつは、すごく楽しいことははじめることがむずかしいことがある。【Stop】,白じい
+msg,main_msg,青助くん！それはとても重要なポイントじゃ。鬱【Marker】じつは、すごく楽しいことははじめることがむずかしいことがある。【Stop】,白じい
 wait
 msg,main_msg,たとえば、元気がでないときに、みんなで遊園地に行ったり、鬱スポーツをすることはかんたんなことではないのう。,白じい
 wait
-msg,main_msg,【Background　Yellow】そういう元気が出ないときは、わしの発明品をつかえばよいぞ！【Stop】。,白じい
+msg,main_msg,【Marker】そういう元気が出ないときは、わしの発明品をつかえばよいぞ！【Stop】。,白じい
 wait
 hide,image,children_stand_left_image
 hide,image,shiroji_right_image,shiroji_01.png
 hide,grid,main_msg_grid
+jump,アイテム出現
+
 scene,アイテム出現
 reset
 image,bg_image,background_mokume.png
@@ -103,6 +107,8 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,青助くんのように元気がないときはにはわしの発明品を使ってみてくれ！,白じい
 next
+jump,アイテム紹介
+
 scene,アイテム紹介
 reset
 bgm,stop
@@ -116,25 +122,107 @@ hide,grid,item_info_sentence_grid
 grid,item_info_plate_grid
 grid,item_info_sentence_grid,appear_fade_in
 next
-reset
+jump,チャレンジタイムパート②
 
 scene,チャレンジタイムパート②
-image,bg_image,background_05.png
+reset
+image,bg_image,background_07.png
 image,shiroji_left_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
+grid,main_msg_grid,appear_expansion_slow
 msg,main_msg,「ちょっぴりうきうき」のポイントは、鬱✓きもちの大きさが小さい鬱✓かんたんにできることがたいせつなのじゃ,白じい
 next
 iamge,bg_iage,background_02.png
 image,bg_image,orange_gradation.png
-grid,challenge2_grid
+grid,challenge2_grid,appear_fade_in
+
+scene,チャレンジタイムパート②終了
+image,bg_image,background_07.png
+image,shiroji_left_image,shiroji_01.png,appear_up
+image,main_msg_bubble_image,right_big_bubble.png
+grid,main_msg_grid,appear_expansion_slow
+msg,main_msg,チャレンジタイムはできたかのう？鬱きもちの小ささとかんたんにできることはなんだか関係がありそうじゃのう！,白じい
+next
+reset
+image,bg_image,background_03.png
+grid,未定grid
+next
+
+///////
+scene,会話
+image,bg_image,background_07.png
+grid,main_msg_grid,appear_expansion_slow
+image,main_msg_bubble_image,left_big_bubble_blue.png
+msg,main_msg,白じい！鬱友だちと話したり、遊んだりしていると、【Marker】ちょっとずつ元気になってきたよ！【Stop】,青助
+msg,main_msg,ひとりでする「ちょっぴりうきうき」もいいけど鬱友だちといっしょにできるとやっぱり楽しいね！,青助
+msg,main_msg,そのとおり！青助くんの言う通りじゃ！鬱まわりの人といっしょにできることも重要なポイントなのじゃ！,白じい
+msg,main_msg,それではうきうきシューズのポイントをまとめておくぞい！,白じい
+next
+///////
+scene,アイテムの復習
+reset
+image,bg_image,background_07.png
+grid,item_plate_grid,appear_fade_in
+image,shiroji_center_down_small_image,shiroji_03.png,appear_up
+grid,item_point_message_grid
+image,item_point_message_bubble_image,small_bubble_left_up.png,appear_expansion
+msg,item_point_msg_text,うきうきシューズをつかって鬱「ちょっぴりうきうき」を探すときのポイントは鬱3つあるのじゃ！,白じい
+next
 
 scene,グループアクティビティ
+reset
 image,bg_image,blue_gradation.png
 grid,groupe_activity_grid
 grid,item_plate_grid
 wait
 
+scene,まとめ
+reset
+image,bg_image,background_09.png
+grid,summary_grid
+image,shiroji_right_image,shiroji_02.png,appear_up
+grid,main_msg_grid,appear_expansion_slow
+msg,main_msg,今日のこころアップタイムはどうじゃったかな？鬱元気がでないときには楽しいことをさがすのは難しいことじゃが、ちょっとずつチャレンジしてみてほしい。,白じい
+wait
+msg,main_msg,次回のテーマは「【Ultra Bold】あたたかい言葉をかけよう【Stop】」じゃ！。,白じい
+next
+jump,アイテム図鑑登録
 
+scene,アイテム図鑑登録
+reset
+image,bg_image,background_03.png
+grid,item_last_info_grid
+image,item_left_last_iamge
+image,shiroji_right_image,shiroji_01.png,appear_up
+grid,main_msg_grid,appear_expansion_slow
+msg,main_msg,第2回で登場した発明品は、「うきうきシューズ」じゃ！鬱アイテム図鑑から、いつでも確認できるぞい！,白じい
+next
+
+scene,チャレンジタイムパート②「おいしいものを食べる」
+text,challenge2_bubble_action_text,おいしいものを食べる
+hide,text,aosuke_difficulty_of_action_text
+hide,text,aosuke_kind_of_feeling_text
+hide,text,aosuke_size_of_feeling_text,
+wait
+jump,チャレンジタイムパート②「全部のテストで100点をとる」
+scene,チャレンジタイムパート②「全部のテストで100点をとる」
+text,challenge2_bubble_action_text,おいしいものを食べる
+hide,text,aosuke_difficulty_of_action_text
+hide,text,aosuke_kind_of_feeling_text
+hide,text,aosuke_size_of_feeling_text,
+wait
+jump,チャレンジタイムパート②「休み時間に友だちとおしゃべりする」
+scene,チャレンジタイムパート②「休み時間に友だちとおしゃべりする」
+text,challenge2_bubble_action_text,おいしいものを食べる
+hide,text,aosuke_difficulty_of_action_text
+hide,text,aosuke_kind_of_feeling_text
+hide,text,aosuke_size_of_feeling_text,
+wait
+jump,チャレンジタイムパート②終了
+
+tag,気持ちのおおきさ
+tag,きもちの種類
+tag,かんたんにできるか
 
 
 
