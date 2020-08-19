@@ -29,16 +29,28 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="appear_wide_thin_msg_button">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ThinMessageButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0">
+        <Storyboard x:Key="appear_wide_thin_msg_grid">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ThinMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.000">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <ExponentialEase EasingMode="EaseInOut"/>
+                        <SineEase EasingMode="EaseInOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.000">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <ExponentialEase EasingMode="EaseInOut"/>
+                        <SineEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ThinMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.000">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <SineEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.000">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <SineEase EasingMode="EaseInOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
@@ -52,30 +64,28 @@
 
             </Grid>
             <Grid x:Name="AnyFrameGrid">
-                <Button x:Name="RuleBoardButton" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Margin="215,41,215,122">
-                    <Grid x:Name="RuleButtonGrid">
-                        <Image x:Name="RuleBoardImage" Source="/Images/blackboard.png" Stretch="Fill" />
-                        <TextBlock x:Name="RuleBoardTitleTextBlock" Text="教室のルール" Foreground="White" FontSize="72" Margin="494,90,436,681"/>
-                        <TextBlock x:Name="RuleBoardCheck1TextBlock" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="64" Margin="494,249,239,504"/>
-                        <TextBlock x:Name="RuleBoardCheck2TextBlock" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="64" Margin="494,434,239,327"/>
-                        <TextBlock x:Name="RuleBoardCheck3TextBlock" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="64" Margin="494,617,239,145"/>
-                        <CheckBox x:Name="RuleBoardCheck1Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="281,241,1172,644">
-                            <CheckBox.RenderTransform>
-                                <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
-                            </CheckBox.RenderTransform>
-                        </CheckBox>
-                        <CheckBox x:Name="RuleBoardCheck2Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="281,423,1172,462">
-                            <CheckBox.RenderTransform>
-                                <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
-                            </CheckBox.RenderTransform>
-                        </CheckBox>
-                        <CheckBox x:Name="RuleBoardCheck3Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="281,596,1172,288">
-                            <CheckBox.RenderTransform>
-                                <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
-                            </CheckBox.RenderTransform>
-                        </CheckBox>
-                    </Grid>
-                </Button>
+                <Grid x:Name="RuleBoardGrid" Margin="217,48,217,120">
+                    <Image x:Name="RuleBoardImage" Source="/Images/blackboard.png" Stretch="Fill" />
+                    <TextBlock x:Name="RuleBoardTitleTextBlock" Text="教室のルール" Foreground="White" FontSize="72" Margin="494,90,436,681"/>
+                    <TextBlock x:Name="RuleBoardCheck1TextBlock" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="64" Margin="494,249,239,504"/>
+                    <TextBlock x:Name="RuleBoardCheck2TextBlock" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="64" Margin="494,434,239,327"/>
+                    <TextBlock x:Name="RuleBoardCheck3TextBlock" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="64" Margin="494,617,239,145"/>
+                    <CheckBox x:Name="RuleBoardCheck1Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Margin="281,241,1172,644">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+                    <CheckBox x:Name="RuleBoardCheck2Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Margin="281,423,1172,462">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+                    <CheckBox x:Name="RuleBoardCheck3Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Margin="281,596,1172,288">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+                </Grid>
             </Grid>
             <Grid x:Name="ShirojiGrid">
                 <Image x:Name="ShirojiSmallRightDownImage" Source="/Images/shiroji_02.png" RenderTransformOrigin="0.5,0.5" Margin="1321,580,162,27">
@@ -90,40 +100,38 @@
                 </Image>
             </Grid>
             <Grid x:Name="SystemGrid">
-                <Button x:Name="ThinMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Margin="215,894,215,0" Height="141" VerticalAlignment="Top">
-                    <Button.RenderTransform>
+                <Grid x:Name="ThinMessageGrid" Margin="700,881,490,57" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
                             <SkewTransform/>
                             <RotateTransform/>
                             <TranslateTransform/>
                         </TransformGroup>
-                    </Button.RenderTransform>
-                    <Grid x:Name="ThinMessageGrid" Width="1479">
-                        <Image x:Name="ThinMessageBubbleImage" Source="/Images/long_bubble_right_up.png" RenderTransformOrigin="0.5,0.5" Margin="0,-26,0,0">
-                            <Image.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Image.RenderTransform>
-                        </Image>
-                        <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="42" Margin="31,28,37,31" RenderTransformOrigin="0.5,0.5">
-                            <TextBlock.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </TextBlock.RenderTransform>
-                        </TextBlock>
-                    </Grid>
-                </Button>
-                <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}">
-                    <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png"/>
+                    </Grid.RenderTransform>
+                    <Image x:Name="ThinMessageBubbleImage" Source="/Images/very_short_bubble_right_up.png" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="42" RenderTransformOrigin="0.5,0.5" Margin="30,48,30,30">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </Grid>
+                <Button x:Name="ReturnToTopButton" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" Width="215" Height="189" Click="Button_Click" BorderBrush="{x:Null}" Margin="0,881,0,0">
+                    <Image x:Name="ReturnToTopImage" Source="/Images/return_to_top.png" Height="189" Width="215"/>
                 </Button>
             </Grid>
         </Grid>

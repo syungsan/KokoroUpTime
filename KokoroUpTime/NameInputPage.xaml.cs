@@ -36,6 +36,8 @@ namespace KokoroUpTime
 
         private string[] IMAGE_TEXTS = { "name" };
 
+        private string BASE_USER_NAME = "名無し";
+
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
         private List<List<string>> scenarios = null;
@@ -43,7 +45,7 @@ namespace KokoroUpTime
         // 各種コントロールの名前を収める変数
         private string position = "";
 
-        // マウスクリックを可能にするかどうかのフラグ
+        // ボタンのマウスクリックを可能にするかどうかのフラグ
         private bool isClickable = false;
 
         // メッセージ表示関連
@@ -62,9 +64,12 @@ namespace KokoroUpTime
         private Dictionary<string, Button> buttonObjects = null;
         private Dictionary<string, Grid> gridObjects = null;
 
+        // 入力方法 [0: 手書き, 1: キーボード]
         private int selectInputMethod = 0;
-        private string selectUserTitle = "";
+
+        // 新しいユーザネーム
         private string newUserName = "";
+        private string selectUserTitle = "";
 
         public NameInputPage()
         {
@@ -84,7 +89,7 @@ namespace KokoroUpTime
 
             this.InitControls();
 
-            this.NameTextBox.Text = "名無し";
+            this.NameTextBox.Text = BASE_USER_NAME;
 
             OnScreenKeyboardSettings.EnableForTextBoxes = true;
         }
@@ -138,7 +143,6 @@ namespace KokoroUpTime
 
             this.NameInputGrid.Visibility = Visibility.Hidden;
             this.CanvasGrid.Visibility = Visibility.Hidden;
-
             this.MainMessageGrid.Visibility = Visibility.Hidden;
             this.BackgroundImage.Visibility = Visibility.Hidden;
             this.ShirojiRightImage.Visibility = Visibility.Hidden;
@@ -489,6 +493,7 @@ namespace KokoroUpTime
 
             textObject.Inlines.Clear();
 
+            // 画像インラインと文字インラインの合体
             foreach (var msgs in messages)
             {
                 string namePngPath = "./temp/temp_name.png";
@@ -605,6 +610,7 @@ namespace KokoroUpTime
             }
         }
 
+        // 登録済みの画像名前ユーザの添え字の最大値を返す
         private int GetLatestImageUserNumber()
         {
             List<int> imageUserNumbers = new List<int>();
@@ -633,6 +639,7 @@ namespace KokoroUpTime
             return imageUserMaxNumber;
         }
 
+        // 文字名前ユーザのリストを返す
         private List<string> GetWordUserList()
         {
             List<string> wordUserList = new List<string>();
@@ -653,6 +660,7 @@ namespace KokoroUpTime
             return wordUserList;
         }
 
+        // シナリオ選択肢処理
         private void JumpTo(string tag)
         {
             foreach (var (scenario, index) in this.scenarios.Indexed())
@@ -707,6 +715,7 @@ namespace KokoroUpTime
                         // 実行ファイルの場所を絶対パスで取得
                         var startupPath = FileUtils.GetStartupPath();
 
+                        // 全ての宛名に画像の登録
                         foreach (var (handWritingNameImage, index) in handWritingNameImages.Indexed())
                         {
                             handWritingNameImage.Source = new BitmapImage(new Uri($@"{startupPath}/temp/temp_name.png", UriKind.Absolute));
@@ -721,7 +730,15 @@ namespace KokoroUpTime
 
                         var wordUserNames = this.GetWordUserList();
 
-                        if (!wordUserNames.Contains(this.newUserName))
+                        if (this.newUserName == "")
+                        {
+                            MessageBox.Show("空の名前は入力できません。", "情報");
+
+                            this.isClickable = true;
+
+                            return;
+                        }
+                        else if (!wordUserNames.Contains(this.newUserName))
                         {                          
                             foreach (var (handWritingNameImage, index) in handWritingNameImages.Indexed())
                             {
@@ -741,6 +758,7 @@ namespace KokoroUpTime
                     }
                     this.NameInputGrid.Visibility = Visibility.Hidden;
 
+                    // OSKを落とすと管理者権限出ないと再表示できなくなる
                     // this.CloseOSK();
 
                     this.scenarioCount += 1;
@@ -840,6 +858,8 @@ namespace KokoroUpTime
 
                         DirectoryUtils.SafeCreateDirectory(newUserNameDirPath);
                     }
+
+                    // 新入力ユーザをカレントユーザにする操作
                     this.InitConfigFile();
                     this.InitDatabaseFile();
 
@@ -854,7 +874,11 @@ namespace KokoroUpTime
 
                     this.NameImage.Source = null;
 
-                    this.NameTextBox.Text = "名無し";
+                    this.NameTextBox.Text = BASE_USER_NAME;
+
+                    this.HandWritingRadioButton.IsChecked = true;
+
+                    this.SanRadioButton.IsChecked = true;
 
                     JumpTo("make_name");
                 }
@@ -939,6 +963,7 @@ namespace KokoroUpTime
             }
         }
 
+        // このユーザのコンフィギュレーションファイルを作成
         private void InitConfigFile()
         {
             var startupPath = FileUtils.GetStartupPath();
@@ -961,6 +986,7 @@ namespace KokoroUpTime
             }
         }
 
+        // デフォルトのデータベースをユーザのものへとコピー
         private void InitDatabaseFile()
         {
             var startupPath = FileUtils.GetStartupPath();
@@ -979,10 +1005,9 @@ namespace KokoroUpTime
             }
         }
 
+        // TextBoxにフォーカスが当たったときに起動
         private void TriggerKeyboard(object sender, EventArgs e)
         {
-            // this.CoverLayerImage.Visibility = Visibility.Visible;
-
             try
             {
                 OnScreenKeyboard.Show();
@@ -993,6 +1018,7 @@ namespace KokoroUpTime
             }
         }
 
+        // TextBoxをクリックしたときに起動
         private void TextBoxMouseDown(object sender, RoutedEventArgs e)
         {
             if (!OnScreenKeyboard.IsOpened())
@@ -1008,6 +1034,8 @@ namespace KokoroUpTime
             }
         }
 
+        /*
+        // OSKを完全に切ってしまう
         private void CloseOSK()
         {
             if (OnScreenKeyboard.IsOpened())
@@ -1022,5 +1050,6 @@ namespace KokoroUpTime
                 }
             }
         }
+        */
     }
 }

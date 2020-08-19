@@ -44,7 +44,7 @@ namespace KokoroUpTime
         // 各種コントロールを任意の文字列で呼び出すための辞書
         private Dictionary<string, Image> imageObjects = null;
         private Dictionary<string, TextBlock> textBlockObjects = null;
-        private Dictionary<string, Button> buttonObjects = null;
+        private Dictionary<string, Grid> gridObjects = null;
 
         // 黒板のチェックボックス
         private CheckBox[] checkBoxs;
@@ -83,10 +83,10 @@ namespace KokoroUpTime
                 ["thin_msg"] = this.ThinMessageTextBlock,
             };
 
-            this.buttonObjects = new Dictionary<string, Button>
+            this.gridObjects = new Dictionary<string, Grid>
             {
-                ["rule_board_button"] = this.RuleBoardButton,
-                ["thin_msg_button"] = this.ThinMessageButton,
+                ["rule_board_grid"] = this.RuleBoardGrid,
+                ["thin_msg_grid"] = this.ThinMessageGrid,
             };
         }
 
@@ -95,7 +95,6 @@ namespace KokoroUpTime
             // 各種コントロールを隠すことでフルリセット
 
             this.BackgroundImage.Visibility = Visibility.Hidden;
-            this.RuleBoardButton.Visibility = Visibility.Hidden;
             this.RuleBoardTitleTextBlock.Visibility = Visibility.Hidden;
             this.RuleBoardCheck1TextBlock.Visibility = Visibility.Hidden;
             this.RuleBoardCheck2TextBlock.Visibility = Visibility.Hidden;
@@ -104,7 +103,8 @@ namespace KokoroUpTime
             this.RuleBoardCheck2Box.Visibility = Visibility.Hidden;
             this.RuleBoardCheck3Box.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightDownImage.Visibility = Visibility.Hidden;
-            this.ThinMessageButton.Visibility = Visibility.Hidden;
+            this.RuleBoardGrid.Visibility = Visibility.Hidden;
+            this.ThinMessageGrid.Visibility = Visibility.Hidden;
             this.ThinMessageTextBlock.Visibility = Visibility.Hidden;
             this.RuleBoardTitleTextBlock.Text = "";
             this.RuleBoardCheck1TextBlock.Text = "";
@@ -114,7 +114,7 @@ namespace KokoroUpTime
             this.RuleBoardCheck1Box.IsEnabled = false;
             this.RuleBoardCheck2Box.IsEnabled = false;
             this.RuleBoardCheck3Box.IsEnabled = false;
-            this.ReturnToTitleButton.Visibility = Visibility.Hidden;
+            this.ReturnToTopButton.Visibility = Visibility.Hidden;
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
@@ -153,6 +153,43 @@ namespace KokoroUpTime
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
+                    break;
+
+                // グリッドに対しての処理
+                case "grid":
+
+                    // グリッドコントロールを任意の名前により取得
+                    this.position = this.scenarios[this.scenarioCount][1];
+
+                    var gridObject = this.gridObjects[this.position];
+
+                    gridObject.Visibility = Visibility.Visible;
+
+                    // アニメ処理をシナリオの流れと同期するか（待ち処理入れる）か非同期にするか（同時進行するか）
+                    string gridAnimeIsSync = "sync";
+
+                    // if文は必要のない処理をコンマ以降で指定しなくてよくするため
+                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
+                    {
+                        gridAnimeIsSync = this.scenarios[this.scenarioCount][3];
+                    }
+
+                    // アニメを実現するストーリーボードの指定
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    {
+                        var gridStoryBoard = this.scenarios[this.scenarioCount][2];
+
+                        // ストーリーボードの名前にコントロールの名前を付け足す
+                        gridStoryBoard += $"_{this.position}";
+
+                        this.ShowAnime(storyBoard: gridStoryBoard, isSync: gridAnimeIsSync);
+                    }
+                    else
+                    {
+                        // アニメの処理をしない場合はそのまま次に進む
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
                     break;
 
                 // イメージに対しての処理
@@ -195,37 +232,6 @@ namespace KokoroUpTime
                     }
                     break;
 
-                // ボタンに対する処理
-                case "button":
-
-                    this.position = this.scenarios[this.scenarioCount][1];
-
-                    var buttonObject = this.buttonObjects[this.position];
-
-                    buttonObject.Visibility = Visibility.Visible;
-
-                    string buttonAnimeIsSync = "sync";
-
-                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
-                    {
-                        buttonAnimeIsSync = this.scenarios[this.scenarioCount][3];
-                    }
-
-                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
-                    {
-                        var buttonStoryBoard = this.scenarios[this.scenarioCount][2];
-
-                        buttonStoryBoard += $"_{this.position}";
-
-                        this.ShowAnime(storyBoard: buttonStoryBoard, isSync: buttonAnimeIsSync);
-                    }
-                    else
-                    {
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-                    }
-                    break;
-
                 // 流れる文字をTextBlockで表現するための処理
                 case "msg":
 
@@ -248,68 +254,6 @@ namespace KokoroUpTime
                     }
                     break;
 
-                // 流れない文字に対するTextBlock処理
-                case "text":
-
-                    this.position = this.scenarios[this.scenarioCount][1];
-
-                    var textObject = this.textBlockObjects[this.position];
-
-                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
-                    {
-                        var text = this.scenarios[this.scenarioCount][2];
-
-                        textObject.Text = text;
-                    }
-
-                    // 色を変えれるようにする
-                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
-                    {
-                        var textColor = this.scenarios[this.scenarioCount][3];
-
-                        SolidColorBrush textColorBrush = new SolidColorBrush(Colors.Black);
-
-                        switch (textColor)
-                        {
-                            case "white":
-
-                                textColorBrush = new SolidColorBrush(Colors.White);
-
-                                break;
-
-                            case "red":
-
-                                textColorBrush = new SolidColorBrush(Colors.Red);
-
-                                break;
-                        }
-                        textObject.Foreground = textColorBrush;
-                    }
-                    textObject.Visibility = Visibility.Visible;
-
-                    string textAnimeIsSync = "sync";
-
-                    // テキストに対するアニメも一応用意
-                    if (this.scenarios[this.scenarioCount].Count > 5 && this.scenarios[this.scenarioCount][5] != "")
-                    {
-                        textAnimeIsSync = this.scenarios[this.scenarioCount][5];
-                    }
-
-                    if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
-                    {
-                        var textStoryBoard = this.scenarios[this.scenarioCount][4];
-
-                        textStoryBoard += $"_{this.position}";
-
-                        this.ShowAnime(storyBoard: textStoryBoard, isSync: textAnimeIsSync);
-                    }
-                    else
-                    {
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-                    }
-                    break;
-
                 // メッセージに対する待ち（メッセージボタンの表示切り替え）
                 case "wait":
 
@@ -317,9 +261,31 @@ namespace KokoroUpTime
 
                     break;
 
+                case "time_span":
+
+                    if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
+                    {
+                        var spanTime = float.Parse(this.scenarios[this.scenarioCount][1]);
+
+                        // 数秒後に処理を実行
+                        DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(spanTime) };
+                        timer.Start();
+                        timer.Tick += (s, args) =>
+                        {
+                            // タイマーの停止
+                            timer.Stop();
+
+                            // 以下に待機後の処理を書く
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+                        };
+
+                    }
+                    break;
+
                 case "return":
 
-                    this.ReturnToTitleButton.Visibility = Visibility.Visible;
+                    this.ReturnToTopButton.Visibility = Visibility.Visible;
 
                     this.isClickable = true;
 
@@ -354,9 +320,25 @@ namespace KokoroUpTime
 
                     break;
 
-                case "wait_tap":
+                case "check":
 
-                    this.isClickable = false;
+                    var checkObjName = this.scenarios[this.scenarioCount][1];
+
+                    switch (checkObjName)
+                    {
+                        case "check_box":
+
+                            var checkObjNum = this.scenarios[this.scenarioCount][2];
+
+                            this.checkBoxs = new CheckBox[] { this.RuleBoardCheck1Box, this.RuleBoardCheck2Box, this.RuleBoardCheck3Box };
+
+                            this.CheckObj(checkBoxs[int.Parse(checkObjNum)]);
+
+                            break;
+                    }
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
                     break;
             }
         }
@@ -449,13 +431,17 @@ namespace KokoroUpTime
                     checkBox.Visibility = Visibility.Visible;
 
                     break;
+            }
+        }
 
-                case CheckBox[] checkBoxs:
+        private void CheckObj(object obj)
+        {
+            switch (obj)
+            {
+                case CheckBox checkBox:
 
-                    foreach (CheckBox checkBox in checkBoxs)
-                    {
-                        checkBox.IsEnabled = true;
-                    }
+                    checkBox.IsChecked = true;
+
                     break;
             }
         }
@@ -466,15 +452,7 @@ namespace KokoroUpTime
 
             Button button = sender as Button;
 
-            if (this.isClickable && (button.Name == "RuleBoardButton" || button.Name == "ThinMessageButton"))
-            {
-                this.isClickable = false;
-
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
-
-            if (button.Name == "ReturnToTitleButton")
+            if (button.Name == "ReturnToTopButton")
             {
                 TitlePage titlePage = new TitlePage();
 
@@ -483,37 +461,6 @@ namespace KokoroUpTime
                 titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                 this.NavigationService.Navigate(titlePage);
-            }
-        }
-
-        // 黒板ルールのためだけに追加
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = sender as CheckBox;
-
-            if (this.checkBoxs.Contains(checkBox))
-            {
-                this.tapCount += 1;
-
-                if (this.tapCount >= this.checkBoxs.Length)
-                {
-                    foreach (CheckBox _checkBox in this.checkBoxs)
-                    {
-                        _checkBox.IsEnabled = false;
-                    }
-                    this.isClickable = true;
-                }
-            }
-        }
-
-        // 黒板ルールのためだけに追加
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = sender as CheckBox;
-
-            if (this.checkBoxs.Contains(checkBox))
-            {
-                this.tapCount -= 1;
             }
         }
     }

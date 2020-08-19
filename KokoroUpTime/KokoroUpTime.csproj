@@ -190,6 +190,7 @@
     <None Remove="Images\summary_title.png" />
     <None Remove="Images\teacher.png" />
     <None Remove="Images\title.png" />
+    <None Remove="Images\very_short_bubble_right_up.png" />
     <None Remove="Images\water_frame.png" />
     <None Remove="Images\white_frame.png" />
     <None Remove="Images\wish_check.png" />
@@ -383,6 +384,7 @@
     <Resource Include="Images\summary_title.png" />
     <Resource Include="Images\teacher.png" />
     <Resource Include="Images\title.png" />
+    <Resource Include="Images\very_short_bubble_right_up.png" />
     <Resource Include="Images\water_frame.png" />
     <Resource Include="Images\white_frame.png" />
     <Resource Include="Images\wish_check.png" />
