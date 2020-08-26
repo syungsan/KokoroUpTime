@@ -1,27 +1,17 @@
+start
 scene,前説
 reset
 image,bg_image,background_01.png
-image,shiroji_right_image,shiroji_01.png,appear_up
+image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-bgm,set,もくもくStudy♪.mp3,loop,50
+bgm,set,moku_moku_study.mp3,loop,50
 bgm,play
 text,music_title_text,もくもくStudy♪
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
 wait
-msg,main_msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
-wait
-msg,main_msg,はじめに、あなたの名前を教えてくれるかの？,白じい
-wait
-msg,main_msg,名前を入力
-wait
-msg,main_msg,あなたは【name】じゃな。【name】のうしろは、何かつけるかの？,白じい
-wait
-msg,main_msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい
-wait
-image,shiroji_right_image,shiroji_02.png
-msg,main_msg,それでは【name】、「こころあっぷタイム」とは何か説明していくぞい。,白じい
+msg,main_msg,それでは【name】【くん／ちゃん／さん】、「こころあっぷタイム」とは何か説明していくぞい。,白じい
 wait
 msg,main_msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
 wait
@@ -103,9 +93,9 @@ msg,main_msg,この３人とこころあっぷタイムを進めていくぞい�
 next
 scene,漫画購読
 reset
-bgm,set,manga.mp3,loop,50
+bgm,set,atsumare!_tomodachi!.mp3,loop,50
 bgm,play
-text,music_title_text,まんが
+text,music_title_text,集まれ！友達！
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
 image,manga_title_image
@@ -145,6 +135,7 @@ image,item_left_image
 hide,grid,item_info_sentence_grid
 grid,item_info_plate_grid
 grid,item_info_sentence_grid,appear_fade_in
+get_item
 next
 scene,チャレンジタイム開始
 reset
@@ -153,9 +144,9 @@ image,session_title_image,challenge_time.png
 text,session_sub_title_text,チャレンジタイムとは…
 text,session_sentence_text,こころあっぷタイムで新しいことに挑戦してみる時間のことじゃ。
 grid,session_grid
-bgm,set,放課後♪TeaTime.mp3,loop,50
+bgm,set,kokoro_up_time.mp3,loop,50
 bgm,play
-text,music_title_text,放課後♪ティータイム
+text,music_title_text,こころあっぷタイム
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
 image,shiroji_right_up_image,shiroji_04.png,appear_up
@@ -395,6 +386,11 @@ msg,compare_msg_text,同じ場面でも鬱人によってきもちと大きさ�
 next
 scene,まとめ
 reset
+bgm,set,tasogare_no_oka.mp3,loop,50
+bgm,play
+text,music_title_text,たそがれの丘
+text,composer_name_text,しゅんじ～
+grid,music_info_grid,slide,no_sync
 image,bg_image,background_09.png
 grid,summary_grid
 image,shiroji_right_image,shiroji_02.png,appear_up
@@ -408,13 +404,19 @@ next
 scene,今回の発明品おさらい
 reset
 image,bg_image,background_10.png
-image,item_left_last_image
+gif,item_left_last_image,item01_solo.gif
 grid,item_last_info_grid
 image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,第１回で登場した発明品は、「きもちセンサー」じゃ！鬱アイテム図鑑から、いつでも確認できるぞい！,白じい
+next
+scene,アイテム図鑑
+reset
+image,bg_image,background_mokume2.PNG
+text,item_book_title_text
+item_book
 next
 scene,エンディング
 reset
@@ -423,4 +425,4 @@ grid,ending_grid
 image,shiroji_ending_image
 grid,ending_msg_grid
 msg,ending_msg_text,よくがんばった！次はホームアクティビティにすすむぞい！
-next
+end

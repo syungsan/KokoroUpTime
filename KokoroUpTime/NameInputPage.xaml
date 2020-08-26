@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:KokoroUpTime"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="NameInputPage">
+      Title="NameInputPage"
+      Loaded="Window_Loaded">
 
     <Page.Resources>
         <Storyboard x:Key="appear_up_shiroji_right_image">
@@ -27,29 +28,7 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="appear_up_shiroji_small_right_down_image"/>
-        <Storyboard x:Key="appear_up_intro_akamaru_face_image"/>
-        <Storyboard x:Key="appear_up_intro_aosuke_face_image"/>
-        <Storyboard x:Key="appear_up_intro_kimi_face_image"/>
-        <Storyboard x:Key="flip_manga_image"/>
-        <Storyboard x:Key="appear_wide_thin_msg_button">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ThinMessageButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <ExponentialEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <ExponentialEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="slide_music_info_grid"/>
-        <Storyboard x:Key="rotation_children_stand_left_onomatopoeia_text"/>
-        <Storyboard x:Key="pomp_children_stand_left_onomatopoeia_image"/>
-        <Storyboard x:Key="pomp_children_stand_left_image"/>
+        <Storyboard x:Key="appear_wide_thin_msg_button"/>
         <Storyboard x:Key="appear_expansion_main_msg_grid">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.00">
@@ -99,9 +78,7 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-
         </Storyboard>
-        <Storyboard x:Key="fade_in_shiroji_right_center_image"/>
         <Storyboard x:Key="appear_expansion_slow_main_msg_grid">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.00">
@@ -151,54 +128,16 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-
         </Storyboard>
-        <Storyboard x:Key="appear_up_children_info_image"/>
-        <Storyboard x:Key="appear_rotation_item_center_image"/>
-        <Storyboard x:Key="appear_fade_in_item_info_sentence_grid"/>
-        <Storyboard x:Key="appear_up_shiroji_right_up_image"/>
-        <Storyboard x:Key="appear_expansion_challenge_msg_grid"/>
-        <Storyboard x:Key="appear_fade_in_select_feeling_next_button"/>
-        <Storyboard x:Key="appear_up_kimi_in_plate_image"/>
-        <Storyboard x:Key="appear_fade_in_kimi_plate_outer_image"/>
-        <Storyboard x:Key="appear_fade_in_kimi_scene1_text"/>
-        <Storyboard x:Key="appear_fade_in_kimi_scene2_text"/>
-        <Storyboard x:Key="appear_fade_in_kimi_kind_of_feeling_up_text"/>
-        <Storyboard x:Key="appear_fade_in_kimi_kind_of_feeling_down_text"/>
-        <Storyboard x:Key="appear_fade_in_kimi_size_of_feeling_up_text"/>
-        <Storyboard x:Key="appear_fade_in_kimi_size_of_feeling_down_text"/>
-        <Storyboard x:Key="appear_fade_in_kimi_plate_inner_up_grid"/>
-        <Storyboard x:Key="appear_fade_in_kimi_plate_inner_down_grid"/>
     </Page.Resources>
 
     <Viewbox>
         <Grid Height="1080" Width="1920">
-            <Grid x:Name="BaseGrid" d:IsHidden="True">
-                <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_01.png" d:IsHidden="True"/>
-
+            <Grid x:Name="BaseGrid">
+                <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_01.png"/>
             </Grid>
-            <Grid x:Name="EndingGrid" d:IsHidden="True">
-                <Grid x:Name="EndingTitleGrid" Width="878" Height="427" Margin="521,202,521,451" d:IsHidden="True">
-                    <Image x:Name="EndingTitleBackImage" Source="/Images/ending_bubble.png" Stretch="Uniform" d:IsHidden="True"/>
-                    <TextBlock x:Name="EndingTitleTextBlock" HorizontalAlignment="Center" Margin="0,214,0,0" VerticalAlignment="Top" FontSize="88" FontWeight="Bold" Foreground="Black" Text="しゅうりょう！" TextAlignment="Center" d:IsHidden="True"/>
-                    <TextBlock x:Name="EndingChapterNoTextBlock" HorizontalAlignment="Center" Margin="0,97,0,0" VerticalAlignment="Top" FontSize="88" FontWeight="Bold" Text="第１回" TextAlignment="Center" d:IsHidden="True"/>
-                </Grid>
-                <Image x:Name="EndingItemImage" HorizontalAlignment="Center" Height="489" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Margin="0,460,0,0" d:IsHidden="True"/>
-                <Image x:Name="KimiEndingImage" HorizontalAlignment="Left" Height="470" Margin="1364,10,0,0" VerticalAlignment="Top" Width="436" Source="/Images/kimi_face_02.png" d:IsHidden="True"/>
-                <Image x:Name="AosukeEndingImage" HorizontalAlignment="Left" Height="470" Margin="120,10,0,0" VerticalAlignment="Top" Width="436" Source="/Images/aosuke_face_01.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <Image x:Name="AkamaruEndingImage" HorizontalAlignment="Left" Height="470" Margin="59,460,0,0" VerticalAlignment="Top" Width="436" Source="/Images/akamaru_face_04.png" d:IsHidden="True"/>
-            </Grid>
-            <Grid x:Name="ShirojiGrid" d:IsHidden="True">
-                <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="1271,343,70,110" d:IsHidden="True">
+            <Grid x:Name="ShirojiGrid">
+                <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="1271,343,70,110">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -209,7 +148,7 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="SystemGrid" d:IsHidden="True">
+            <Grid x:Name="SystemGrid">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
@@ -229,18 +168,12 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="55,145,266,45" FontSize="48" FontFamily="/Fonts/azuki.ttf#azuki_font">
-                        <Run x:Name="MainMessageText1"  Text="Text"/>
-                        <InlineUIContainer>
-                            <Image x:Name="NameImage" d:IsHidden="True" Height="48" Width="120" Stretch="Fill"/>
-                        </InlineUIContainer>
-                        <Run x:Name="MainMessageText2" Text="Text"/>
-                    </TextBlock>
-                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32" d:IsHidden="True">
-                        <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png" d:IsHidden="True"/>
+                    <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="55,145,266,45" FontSize="48" FontFamily="/Fonts/azuki.ttf#azuki_font"/>
+                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32">
+                        <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png"/>
                     </Button>
-                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1289,142,32,187" d:IsHidden="True">
-                        <Image x:Name="BackMessageAllowUpImage" Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1289,142,32,187">
+                        <Image x:Name="BackMessageAllowUpImage" Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5">
                             <Image.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -252,54 +185,92 @@
                         </Image>
                     </Button>
                 </Grid>
-                <Button x:Name="ThinMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Margin="215,894,215,0" Height="141" VerticalAlignment="Top" d:IsHidden="True">
-                    <Button.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Button.RenderTransform>
-                    <Grid x:Name="ThinMessageGrid" Width="1479">
-                        <Image x:Name="ThinMessageBubbleImage" Source="/Images/long_bubble_right_up.png" RenderTransformOrigin="0.5,0.5" Margin="0,-26,0,0">
-                            <Image.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Image.RenderTransform>
-                        </Image>
-                        <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="42" Margin="31,28,37,31" RenderTransformOrigin="0.5,0.5">
-                            <TextBlock.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </TextBlock.RenderTransform>
-                        </TextBlock>
-                    </Grid>
-                </Button>
-                <Grid x:Name="EndingMessageGrid" Width="1149" Height="210" Margin="210,826,561,44" d:IsHidden="True">
-                    <Image x:Name="EndingShortBubbleImage" Source="/Images/short_bubble_right_up.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="EndingMessageTextBlock" HorizontalAlignment="Center" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="1060" Margin="0,105,0,0" FontSize="48" d:IsHidden="True"/>
-
-                </Grid>
-                <Button x:Name="NextPageButton" Margin="1598,892,49,0" VerticalAlignment="Top" Height="149" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Width="273" d:IsHidden="True">
-                    <Image x:Name="NextPageAfterImage" Source="/Images/after.png" Height="149" d:IsHidden="True"/>
-                </Button>
-                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Margin="33,892,0,0" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
-                    <Image x:Name="BackPageBeforeImage" Source="/Images/before.png" d:IsHidden="True"/>
+                <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}">
+                    <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png"/>
                 </Button>
             </Grid>
-            <Grid x:Name="CanvasGrid" d:IsHidden="True"  >
-                <InkCanvas x:Name="NameCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,300,0,0" />
-                <Viewbox Margin="0,0,0,780" Stretch="Fill">
-                    <ItemsControl x:Name="EditingModeItemsControl" >
+            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
+            <Grid x:Name="SelectInputMethodGrid" Margin="636,269,636,269">
+                <Border x:Name="SelectInputMethodBorder" BorderThickness="1" CornerRadius="32,32,32,32" Background="#FFF9E9C7" BorderBrush="Black"/>
+                <TextBlock x:Name="SelectInputMethodTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="入力方法の選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
+                <Button x:Name="SelectInputMethodOKButton" Content="OK" HorizontalAlignment="Center" Margin="0,429,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
+                <TextBlock x:Name="HandWritingTextBlock" HorizontalAlignment="Center" Margin="0,165,0,0" Text="手書き" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52"/>
+                <TextBlock x:Name="KeyboardTextBlock" HorizontalAlignment="Left" Margin="252,285,0,0" Text="キーボード" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52"/>
+                <RadioButton x:Name="HandWritingRadioButton" HorizontalAlignment="Left" Margin="131,165,0,0" VerticalAlignment="Top" IsChecked="True">
+                    <RadioButton.LayoutTransform>
+                        <ScaleTransform ScaleX="5.0" ScaleY="5.0"/>
+                    </RadioButton.LayoutTransform>
+                </RadioButton>
+                <RadioButton x:Name="KeyboardRadioButton" HorizontalAlignment="Left" Margin="131,283,0,0" VerticalAlignment="Top">
+                    <RadioButton.LayoutTransform>
+                        <ScaleTransform ScaleX="5.0" ScaleY="5.0"/>
+                    </RadioButton.LayoutTransform>
+                </RadioButton>
+            </Grid>
+            <Grid x:Name="SelectUserTitleGrid" Width="782" Height="545" Margin="569,158,569,377">
+                <Image x:Name="SelectUserTitleImage" Source="/Images/hukidashi2.png" />
+                <Button x:Name="SelectUserTitleOKButton" Content="OK" HorizontalAlignment="Center" Margin="0,432,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
+                <RadioButton x:Name="KunRadioButton" HorizontalAlignment="Left" Margin="71,66,0,0" VerticalAlignment="Top">
+                    <RadioButton.LayoutTransform>
+                        <ScaleTransform ScaleX="5.0" ScaleY="5.0"/>
+                    </RadioButton.LayoutTransform>
+                </RadioButton>
+                <RadioButton x:Name="ChanRadioButton" HorizontalAlignment="Left" Margin="71,150,0,0" VerticalAlignment="Top">
+                    <RadioButton.LayoutTransform>
+                        <ScaleTransform ScaleX="5.0" ScaleY="5.0"/>
+                    </RadioButton.LayoutTransform>
+                </RadioButton>
+                <RadioButton x:Name="SanRadioButton" HorizontalAlignment="Left" Margin="71,240,0,0" VerticalAlignment="Top" IsChecked="True">
+                    <RadioButton.LayoutTransform>
+                        <ScaleTransform ScaleX="5.0" ScaleY="5.0"/>
+                    </RadioButton.LayoutTransform>
+                </RadioButton>
+                <RadioButton x:Name="NoneRadioButton" HorizontalAlignment="Left" Margin="71,331,0,0" VerticalAlignment="Top">
+                    <RadioButton.LayoutTransform>
+                        <ScaleTransform ScaleX="5.0" ScaleY="5.0"/>
+                    </RadioButton.LayoutTransform>
+                </RadioButton>
+                <StackPanel x:Name="KunStackPanel" Orientation="Horizontal" Margin="181,66,71,409">
+                    <Image x:Name="KunHandWritingNameImage" Height="48"/>
+                    <TextBlock x:Name="KunTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Width="530" Height="70" Text="TextBlock"/>
+                </StackPanel>
+                <StackPanel x:Name="ChanStackPanel" Orientation="Horizontal" Margin="181,150,71,325">
+                    <Image x:Name="ChanHandWritingNameImage" Height="48"/>
+                    <TextBlock x:Name="ChanTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Width="530" Height="70" Text="TextBlock"/>
+                </StackPanel>
+                <StackPanel x:Name="SanStackPanel" Orientation="Horizontal" Margin="181,240,71,235">
+                    <Image x:Name="SanHandWritingNameImage" Height="48"/>
+                    <TextBlock x:Name="SanTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Width="530" Height="70" Text="TextBlock"/>
+                </StackPanel>
+                <StackPanel x:Name="NoneStackPanel" Orientation="Horizontal" Margin="181,331,71,144">
+                    <Image x:Name="NoneHandWritingNameImage" Height="48"/>
+                    <TextBlock x:Name="NoneTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Width="530" Height="70" Text="TextBlock"/>
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="MakeUserNameCompleteGrid" Width="844" Height="325" Margin="410,378,666,377">
+                <Button x:Name="MakeUserNameCompleteOKButton" Height="325" Width="422" Margin="0,0,412,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                    <Image x:Name="MakeUserNameCompleteOKImage" Source="/Images/moya1.png"/>
+                </Button>
+                <Button x:Name="MakeUserNameCompleteNOButton" Height="325" Width="422" Margin="412,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                    <Image x:Name="MakeUserNameCompleteNOImage" Source="/Images/moya2.png"/>
+                </Button>
+            </Grid>
+            <Grid x:Name="NameInputGrid">
+                <Button x:Name="NameButton" Margin="100,200,900,700" Background="White" Click="Button_Click">
+                    <Image x:Name="NameImage"/>
+                </Button>
+                <TextBox x:Name="NameTextBox" Text="TextBox" TextWrapping="Wrap" Margin="100,200,900,700" FontSize="100" Background="{x:Null}" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown"/>
+                <Button x:Name="DecisionButton" Content="けってい" FontSize="80" Background="White" Margin="1200,200,400,700" Click="Button_Click"/>
+            </Grid>
+            <Grid x:Name="CanvasGrid">
+                <Border x:Name="CanvasBackBorder" BorderThickness="1" BorderBrush="Black" Margin="0,300,0,0" Background="White"/>
+                <InkCanvas x:Name="NameCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,300,0,0" Background="{x:Null}">
+                    <InkCanvas.DefaultDrawingAttributes>
+                        <DrawingAttributes Height="20" Width="20" StylusTip="Ellipse"/>
+                    </InkCanvas.DefaultDrawingAttributes>
+                </InkCanvas>
+                <Viewbox x:Name="EditingModeViewbox" Margin="0,0,0,780" Stretch="Fill">
+                    <ItemsControl x:Name="EditingModeItemsControl">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Button x:Name="EditingModeButton" Content="{Binding}" Click="Button_Click" Padding="20"/>
@@ -307,29 +278,12 @@
                         </ItemsControl.ItemTemplate>
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" />
+                                <StackPanel Orientation="Horizontal"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                 </Viewbox>
-               
             </Grid>
-            <Grid x:Name="NameInputGrid" d:IsHidden="True">
-                <Button x:Name="NameButton" Margin="100,200,900,700" Background="White" Click="Button_Click">
-                    <Image x:Name="NameButtonImage"/>
-                </Button>
-                <Button x:Name="DecisionButton" Content="けってい"  FontSize="80" Background="White" Margin="1200,200,400,700" Click="Button_Click" d:IsHidden="True"/>
-            </Grid>
-            <Grid x:Name="NameSelect" Visibility="Hidden">
-                <ListBox x:Name="NameSelectBox" Margin="300" HorizontalAlignment="Center">
-                    <Image x:Name="NameSelectImage" Source="/Images/hukidashi2.png" />
-                    <RadioButton x:Name="NameSelectButton1" />
-                    <RadioButton x:Name="NameSelectButton2" />
-                    <RadioButton x:Name="NameSelectButton3" />
-                </ListBox>
-                
-            </Grid>
-                        
         </Grid>
     </Viewbox>
 </Page>

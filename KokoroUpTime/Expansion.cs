@@ -5,8 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media;
 
-
-namespace KokoroUpTime
+namespace Expansion
 {
     // データテンプレート内の子要素群にアクセスする
     public static class DependencyObjectExtensions

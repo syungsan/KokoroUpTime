@@ -20,42 +20,35 @@ namespace KokoroUpTime
     /// </summary>
     public partial class OptionPage : Page
     {
+        // メッセージスピード「遅い，ふつう，速い」
         private float[] MESSAGE_SPEEDS = { 20.0f, 30.0f, 300.0f };
 
+        // ページ間参照変数橋渡し
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
         public DataItem dataItem = new DataItem();
-
-        private string dbPath;
+        public DataProgress dataProgress = new DataProgress();
 
         public OptionPage()
         {
             InitializeComponent();
         }
 
-        public void SetInitConfig(InitConfig _initConfig)
+        // ページ間参照関数橋渡し
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
         {
             this.initConfig = _initConfig;
-
-            // データベース本体のファイルのパス設定
-            string dbName = $"{initConfig.userName}.sqlite";
-            string dirPath = $"./Log/{initConfig.userName}_{initConfig.userTitle}/";
-
-            this.dbPath = System.IO.Path.Combine(dirPath, dbName);
+            this.dataOption = _dataOption;
+            this.dataItem = _dataItem;
+            this.dataProgress = _dataProgress;
         }
 
-        public void SetDataOption(DataOption _dataOption)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.dataOption = _dataOption;
-
             this.LoadOption();
         }
 
-        public void SetDataItem(DataItem _dataItem)
-        {
-            this.dataItem = _dataItem;
-        }
-
+        // データベースから初期値を設定
         private void LoadOption()
         {
             if (this.dataOption.IsPlaySE == true)
@@ -98,13 +91,13 @@ namespace KokoroUpTime
                 this.RubiOffButton.Foreground = new SolidColorBrush(Colors.Blue);
             }
 
-            if (false)//this.dataOption.IsWordRecognition == true)
+            if (this.dataOption.InputMethod == 0)
             {
-                this.WordRecognitionOnButton.Foreground = new SolidColorBrush(Colors.Blue);
+                this.HandWritingButton.Foreground = new SolidColorBrush(Colors.Blue);
             }
-            else if (false)//this.dataOption.IsWordRecognition == false)
+            else if (this.dataOption.InputMethod == 1)
             {
-                this.WordRecognitionOffButton.Foreground = new SolidColorBrush(Colors.Blue);
+                this.KeyboardButton.Foreground = new SolidColorBrush(Colors.Blue);
             }
         }
 
@@ -214,47 +207,45 @@ namespace KokoroUpTime
                 }
             }
 
-            if (button.Name == "WordRecognitionOnButton")
+            if (button.Name == "HandWritingButton")
             {
                 if (button.Foreground != new SolidColorBrush(Colors.Blue))
                 {
                     button.Foreground = new SolidColorBrush(Colors.Blue);
-                    this.WordRecognitionOffButton.Foreground = new SolidColorBrush(Colors.White);
+                    this.KeyboardButton.Foreground = new SolidColorBrush(Colors.White);
 
-                   // this.dataOption.IsWordRecognition = true;
+                    this.dataOption.InputMethod = 0;
                 }
             }
 
-            if (button.Name == "WordRecognitionOffButton")
+            if (button.Name == "KeyboardButton")
             {
                 if (button.Foreground != new SolidColorBrush(Colors.Blue))
                 {
                     button.Foreground = new SolidColorBrush(Colors.Blue);
-                    this.WordRecognitionOnButton.Foreground = new SolidColorBrush(Colors.White);
+                    this.HandWritingButton.Foreground = new SolidColorBrush(Colors.White);
 
-                   // this.dataOption.IsWordRecognition = false;
+                    this.dataOption.InputMethod = 1;
                 }
             }
 
             if (button.Name == "ReturnToTitleButton")
             {
-                TitlePage nextPage = new TitlePage();
+                TitlePage titlePage = new TitlePage();
 
-                nextPage.SetIsFirstBootFlag(false);
+                // タイトルページのリロードなし
+                titlePage.SetIsFirstBootFlag(false);
 
-                nextPage.SetInitConfig(this.initConfig);
-                nextPage.SetDataOption(this.dataOption);
-                nextPage.SetDataItem(this.dataItem);
+                titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                this.NavigationService.Navigate(nextPage);
+                this.NavigationService.Navigate(titlePage);
             }
             else
             {
-                //this.dataOption.CreatedAt = DateTime.Now.ToString();
-
-                using (var connection = new SQLiteConnection(this.dbPath))
+                // タイトルへ戻るボタン以外でオプションを常にデータベースへ記録
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                 {
-                   // connection.Execute($@"UPDATE DataOption SET IsPlaySE = '{Convert.ToInt32(this.dataOption.IsPlaySE)}', IsPlayBGM = '{Convert.ToInt32(this.dataOption.IsPlayBGM)}', MessageSpeed = '{this.dataOption.MessageSpeed}', IsAddRubi = '{Convert.ToInt32(this.dataOption.IsAddRubi)}', IsWordRecognition = '{Convert.ToInt32(this.dataOption.IsWordRecognition)}', CreatedAt = '{this.dataOption.CreatedAt}' WHERE Id = 1;");
+                    connection.Execute($@"UPDATE DataOption SET IsPlaySE = '{Convert.ToInt32(this.dataOption.IsPlaySE)}', IsPlayBGM = '{Convert.ToInt32(this.dataOption.IsPlayBGM)}', MessageSpeed = '{this.dataOption.MessageSpeed}', IsAddRubi = '{Convert.ToInt32(this.dataOption.IsAddRubi)}', InputMethod = '{this.dataOption.InputMethod}' WHERE Id = 1;");
                 }
             }
         }

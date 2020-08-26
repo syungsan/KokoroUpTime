@@ -1,0 +1,60 @@
+﻿<Page x:Class="KokoroUpTime.AboutPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KokoroUpTime"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="AboutPage"
+      Loaded="Window_Loaded">
+
+    <Viewbox>
+        <Grid Height="1080" Width="1920" Background="#FFC5E0B4">
+            <TextBlock x:Name="TitleTextBlock" HorizontalAlignment="Left" Margin="148,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="88" Text="こころあっぷタイムとは・・・？"/>
+            <RichTextBox x:Name="MainRichTextBox" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" Focusable="False" Cursor="Arrow" >
+                <FlowDocument>
+                    <List FontSize="54">
+                        <ListItem FontSize="54" BorderThickness="0,230,0,0">
+                            <Paragraph>だれでも「こころ」を もっていますが、</Paragraph>
+                            <Paragraph>
+                                <Paragraph.TextDecorations>
+                                    <TextDecoration/>
+                                </Paragraph.TextDecorations> 「こころ」の勉強をすることは あまりありません。
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem BorderThickness="0,30,0,0">
+                            <Paragraph>楽しくなったり、うれしくなったりするだけでなく、</Paragraph>
+                            <Paragraph>
+                                <Paragraph.TextDecorations>
+                                    <TextDecoration/>
+                                </Paragraph.TextDecorations> だれにでも、心配したり、悲しんだり、怒ったりすることがあります。
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem BorderThickness="0,30,0,0">
+                            <Paragraph>こども、おとな、つよい人、よわい人、大きい人、ちいさい人、</Paragraph>
+                            <Paragraph>
+                                <Paragraph.TextDecorations>
+                                    <TextDecoration/>
+                                </Paragraph.TextDecorations> どんな人でも、こまっていることがあります。
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem BorderThickness="0,30,0,0" FontSize="72">
+                            <Paragraph>『こころあっぷタイム』は、こまっているときに、
+                            </Paragraph>
+                            <Paragraph FontWeight="Bold" BorderThickness="140,0,0,0">
+                                <Paragraph.TextDecorations>
+                                    <TextDecoration/>
+                                </Paragraph.TextDecorations> 元気になったり、リラックスできる方法を 学ぶ時間です。
+                            </Paragraph>
+                        </ListItem>
+                    </List>
+                </FlowDocument>
+            </RichTextBox>
+            <Button x:Name="ReturnToTopButton" HorizontalAlignment="Left" Margin="10,827,0,0" VerticalAlignment="Top" Height="243" Width="277" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click">
+                <Image x:Name="ReturnToTopImage" Source="/Images/return_to_top.png" />
+            </Button>
+            <Image x:Name="ShirojiImage" HorizontalAlignment="Left" Height="575" Margin="1379,165,0,0" VerticalAlignment="Top" Width="531" Source="/Images/shiroji_02.png"/>
+        </Grid>
+    </Viewbox>
+</Page>

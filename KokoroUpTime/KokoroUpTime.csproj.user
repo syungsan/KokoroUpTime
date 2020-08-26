@@ -1,12 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <_LastSelectedProfileId>D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Update="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="AboutPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Chapter1.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -19,18 +24,27 @@
     <Compile Update="OptionPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="RuleBoardPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Splash.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="TitlePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="AboutPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chapter3.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="ItemPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="NameInputPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Chapter2.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Chapter1.xaml">
@@ -40,6 +54,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="OptionPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="RuleBoardPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Splash.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="TitlePage.xaml">

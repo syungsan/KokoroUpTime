@@ -1,20 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
+# Blend for Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KokoroUpTime", "KokoroUpTime\KokoroUpTime.csproj", "{F5F2D1CE-B7DE-4957-AA66-BB1C0C180F0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KokoroUpTime", "KokoroUpTime\KokoroUpTime.csproj", "{F5F2D1CE-B7DE-4957-AA66-BB1C0C180F0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F5F2D1CE-B7DE-4957-AA66-BB1C0C180F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F5F2D1CE-B7DE-4957-AA66-BB1C0C180F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5F2D1CE-B7DE-4957-AA66-BB1C0C180F0F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F5F2D1CE-B7DE-4957-AA66-BB1C0C180F0F}.Debug|x64.Build.0 = Debug|Any CPU
 		{F5F2D1CE-B7DE-4957-AA66-BB1C0C180F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5F2D1CE-B7DE-4957-AA66-BB1C0C180F0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5F2D1CE-B7DE-4957-AA66-BB1C0C180F0F}.Release|x64.ActiveCfg = Release|Any CPU
+		{F5F2D1CE-B7DE-4957-AA66-BB1C0C180F0F}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
