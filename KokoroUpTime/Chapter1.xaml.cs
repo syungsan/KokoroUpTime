@@ -81,14 +81,18 @@ namespace KokoroUpTime
         private List<string> myKindOfGoodFeelings = new List<string>();
         private List<string> myKindOfBadFeelings = new List<string>();
 
+
         private bool hasKimisKindOfFeelingsRecorded = false;
         private bool hasAkamarusKindOfFeelingsRecorded = false;
         private bool hasAosukesKindOfFeelingsRecorded = false;
         private bool hasAkamarusSizeOfFeelingRecorded = false;
         private bool hasAosukesSizeOfFeelingRecorded = false;
 
+
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
+        public DataItem dataItem = new DataItem();
+
 
         public Chapter1()
         {
@@ -227,7 +231,9 @@ namespace KokoroUpTime
                 ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid,
                 ["music_info_grid"] = this.MusicInfoGrid,
+
                 ["exit_back_grid"] = this.ExitBackGrid,
+
             };
         }
 
@@ -325,7 +331,9 @@ namespace KokoroUpTime
             this.NextPageButton.Visibility = Visibility.Hidden;
             this.BackPageButton.Visibility = Visibility.Hidden;
             this.MangaFlipButton.Visibility = Visibility.Hidden;
+
             this.CoverLayerImage.Visibility = Visibility.Hidden;
+
             this.RuleBoardTitleTextBlock.Text = "";
             this.RuleBoardCheck1TextBlock.Text = "";
             this.RuleBoardCheck2TextBlock.Text = "";
@@ -395,6 +403,11 @@ namespace KokoroUpTime
         public void SetDataOption(DataOption _dataOption)
         {
             this.dataOption = _dataOption;
+        }
+
+        public void SetDataItem(DataItem _dataItem)
+        {
+            this.dataItem = _dataItem;
         }
 
         // CSVから2次元配列へシナリオデータの収納（CsvReaderクラスを使用）
@@ -1258,6 +1271,8 @@ namespace KokoroUpTime
 
             if (button.Name == "ExitBackNoButton")
             {
+                //this.ExitBackGrid.Visibility = Visibility.Hidden;
+                //this.CoverLayerImage.Visibility = Visibility.Hidden;
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
@@ -1265,6 +1280,12 @@ namespace KokoroUpTime
             if (button.Name == "SelectFeelingCompleteButton")
             {
                 if (this.scene == "チャレンジきもち選択")
+                {
+
+                }
+
+                //this.ExitBackGrid.Visibility = Visibility.Hidden;
+                //this.CoverLayerImage.Visibility = Visibility.Hidden;
 
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
@@ -1283,6 +1304,7 @@ namespace KokoroUpTime
                 }
 
                 if (this.scene == "赤丸くんのきもちの種類" && !hasAkamarusKindOfFeelingsRecorded)
+
                 {
                     using (var connection = new SQLiteConnection(this.dbPath))
                     {
