@@ -1,0 +1,16 @@
+reset
+image,bg_image,background_01.png
+image,shiroji_right_image,shiroji_01.png,appear_up
+image,main_msg_bubble_image,right_big_bubble.png
+grid,main_msg_grid,appear_expansion
+wait
+msg,main_msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
+wait
+msg,main_msg,はじめに、あなたの名前を教えてくれるかの？,白じい
+grid,name_input_grid
+
+msg,main_msg,あなたは【name】じゃな。【name】のうしろは、何かつけるかの？,白じい
+wait
+msg,main_msg,【name】【くん／ちゃん／さん】と呼んでいいかの？,白じい
+wait
+next
