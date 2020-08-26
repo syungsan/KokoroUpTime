@@ -1040,7 +1040,7 @@ namespace KokoroUpTime
             // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
             text = text.Replace("鬱", "\u2028");
 
-            if (this.dataOption.IsWordRecognition == true)
+            if (false)//this.dataOption.IsWordRecognition == true)
             {
                 text = text.Replace("【name】", initConfig.userName);
             }
@@ -1097,7 +1097,7 @@ namespace KokoroUpTime
         {
             this.word_num = 0;
 
-            if (this.dataOption.IsWordRecognition == false && textObject.Name == "MainMessageTextBlock")
+            if (false)//this.dataOption.IsWordRecognition == false && textObject.Name == "MainMessageTextBlock")
             {
                 this.MainMessageFrontText.Text = "";
                 this.MainMessageBackText.Text = "";
@@ -1115,7 +1115,7 @@ namespace KokoroUpTime
             // 一文字ずつメッセージ表示（Inner Func）
             void ViewMsg(object sender, EventArgs e)
             {
-                if (this.dataOption.IsWordRecognition == false && textObject.Name == "MainMessageTextBlock" && this.scene == "前説")
+                if (false)//this.dataOption.IsWordRecognition == false && textObject.Name == "MainMessageTextBlock" && this.scene == "前説")
                 {
                     if (this.word_num > 0 && message.Substring(this.word_num - 1, 1) == "n") // && this.MainMessageBackText.Text == null)
                     {

@@ -117,7 +117,7 @@ namespace KokoroUpTime
 
                     foreach (var row in option)
                     {
-                        this.dataOption.IsWordRecognition = row.IsWordRecognition;
+                       // this.dataOption.IsWordRecognition = row.IsWordRecognition;
 
                         this.dataOption.IsPlaySE = row.IsPlaySE;
 
@@ -127,7 +127,7 @@ namespace KokoroUpTime
 
                         this.dataOption.IsAddRubi = row.IsAddRubi;
 
-                        this.dataOption.CreatedAt = row.CreatedAt;
+                       // this.dataOption.CreatedAt = row.CreatedAt;
                     }
                 }
                 this.setCurrentUserName();
@@ -161,7 +161,7 @@ namespace KokoroUpTime
         {
             string userDirPath = $"./Log/{this.initConfig.userName}_{this.initConfig.userTitle}/";
 
-            if (!this.dataOption.IsWordRecognition)
+            if (false)//!this.dataOption.IsWordRecognition)
             {
                 // 実行ファイルの場所を絶対パスで取得
                 var startupPath = FileUtils.GetStartupPath();
@@ -207,7 +207,7 @@ namespace KokoroUpTime
 
                         foreach (var row in option)
                         {
-                            isWordRecognition = row.IsWordRecognition;
+                            //isWordRecognition = row.IsWordRecognition;
                         }
                     }
  

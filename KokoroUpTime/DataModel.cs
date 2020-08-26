@@ -6,14 +6,20 @@ using SQLite;
 
 namespace KokoroUpTime
 {
+    // 各種初期化変数
     public class InitConfig
     {
         public string userName = null;
 
         public string userTitle = null;
+
+        public string accessDateTime = null;
+
+        public string dbPath = null;
     }
 
-        public class DataOption
+    // データベースオプションカラム
+    public class DataOption
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -26,9 +32,95 @@ namespace KokoroUpTime
 
         public bool IsAddRubi { get; set; }
 
-        public bool IsWordRecognition { get; set; }
+        public int InputMethod { get; set; }
+    }
 
-        public string CreatedAt { get; set; }
+    // アイテム取得フラグカラム
+    public class DataItem
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        public bool HasGotItem01 { get; set; }
+
+        public bool HasGotItem02 { get; set; }
+
+        public bool HasGotItem03 { get; set; }
+
+        public bool HasGotItem04 { get; set; }
+
+        public bool HasGotItem05 { get; set; }
+
+        public bool HasGotItem06 { get; set; }
+
+        public bool HasGotItem07 { get; set; }
+
+        public bool HasGotItem08 { get; set; }
+
+        public bool HasGotItem09 { get; set; }
+
+        public bool HasGotItem10 { get; set; }
+
+        public bool HasGotItem11 { get; set; }
+    }
+
+    // 各チャプターの進捗具合を収めるカラム
+    public class DataProgress
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        public int CurrentCapter { get; set; }
+
+        public string CurrentScene { get; set; }
+
+        public string LatestChapter1Scene { get; set; }
+
+        public bool HasCompletedChapter1 { get; set; }
+
+        public string LatestChapter2Scene { get; set; }
+
+        public bool HasCompletedChapter2 { get; set; }
+
+        public string LatestChapter3Scene { get; set; }
+
+        public bool HasCompletedChapter3 { get; set; }
+
+        public string LatestChapter4Scene { get; set; }
+
+        public bool HasCompletedChapter4 { get; set; }
+
+        public string LatestChapter5Scene { get; set; }
+
+        public bool HasCompletedChapter5 { get; set; }
+
+        public string LatestChapter6Scene { get; set; }
+
+        public bool HasCompletedChapter6 { get; set; }
+
+        public string LatestChapter7Scene { get; set; }
+
+        public bool HasCompletedChapter7 { get; set; }
+
+        public string LatestChapter8Scene { get; set; }
+
+        public bool HasCompletedChapter8 { get; set; }
+
+        public string LatestChapter9Scene { get; set; }
+
+        public bool HasCompletedChapter9 { get; set; }
+
+        public string LatestChapter10Scene { get; set; }
+
+        public bool HasCompletedChapter10 { get; set; }
+
+        public string LatestChapter11Scene { get; set; }
+
+        public bool HasCompletedChapter11 { get; set; }
+
+        public string LatestChapter12Scene { get; set; }
+
+        public bool HasCompletedChapter12 { get; set; }
     }
 
     public class DataCapter1
@@ -74,11 +166,17 @@ namespace KokoroUpTime
 
         public string AosukesDifficultyOfEating { get; set; }
 
-        public string AosukesSizeOfFeelingOfGettingHighScore{ get; set; }
+        public string AosukesSizeOfFeelingOfGettingHighScore { get; set; }
 
         public string AosukesKindOfFeelingOfGettingHighScore { get; set; }
 
-        public string AosukesDifficultyOfHighScore { get; set; }
+        public string AosukesDifficultyOfGettingHighScore { get; set; }
+
+        public string AosukesKindOfFeelingOfTalkingWithFriend { get; set; }
+
+        public string AosukesSizeOfFeelingOfTalkingWithFriend { get; set; }
+
+        public string AosukesDifficultyOfTalkingWithFriend { get; set; }
 
         public string MyALittlleExcitingEvents { get; set; }
 
@@ -86,61 +184,4 @@ namespace KokoroUpTime
         public string CreatedAt { get; set; }
     }
 
-    public class DataProgress
-    {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-
-        public int CurrentCapter { get; set; }
-
-        public int CurrentScene { get; set; }
-
-        public int LatestChapter1Scene { get; set; }
-
-        public bool HasCompletedChapter1 { get; set; }
-
-        public int LatestChapter2Scene { get; set; }
-
-        public bool HasCompletedChapter2 { get; set; }
-
-        public int LatestChapter3Scene { get; set; }
-
-        public bool HasCompletedChapter3 { get; set; }
-
-        public int LatestChapter4Scene { get; set; }
-
-        public bool HasCompletedChapter4 { get; set; }
-
-        public int LatestChapter5Scene { get; set; }
-
-        public bool HasCompletedChapter5 { get; set; }
-
-        public int LatestChapter6Scene { get; set; }
-
-        public bool HasCompletedChapter6 { get; set; }
-
-        public int LatestChapter7Scene { get; set; }
-
-        public bool HasCompletedChapter7 { get; set; }
-
-        public int LatestChapter8Scene { get; set; }
-
-        public bool HasCompletedChapter8 { get; set; }
-
-        public int LatestChapter9Scene { get; set; }
-
-        public bool HasCompletedChapter9 { get; set; }
-
-        public int LatestChapter10Scene { get; set; }
-
-        public bool HasCompletedChapter10 { get; set; }
-
-        public int LatestChapter11Scene { get; set; }
-
-        public bool HasCompletedChapter11 { get; set; }
-
-        public int LatestChapter12Scene { get; set; }
-
-        public bool HasCompletedChapter12 { get; set; }
-    }
 }

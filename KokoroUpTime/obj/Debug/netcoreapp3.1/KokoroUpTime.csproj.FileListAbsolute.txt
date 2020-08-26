@@ -302,7 +302,6 @@ C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\b
 C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Interop.WMPLib.dll
-C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache
 C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Interop.WMPLib.dll
 C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csproj.ResolveComReference.cache
 C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Chapter1.g.cs
@@ -331,3 +330,5 @@ C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\o
 C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.dll
 C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.pdb
 C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.genruntimeconfig.cache
+C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache
+C:\Users\MAGDYNABOOK-03\Desktop\KoKoroUpTime1\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\WpfAnimatedGif.dll
