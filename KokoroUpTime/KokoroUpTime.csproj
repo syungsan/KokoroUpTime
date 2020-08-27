@@ -261,7 +261,6 @@
     <Resource Include="Images\blue_needle.png" />
     <Resource Include="Images\challenge_frame1.png" />
     <Resource Include="Images\check_manga.png" />
-    <Resource Include="Images\circle.png" />
     <Resource Include="Images\circle_word.PNG" />
     <Resource Include="Images\compare_akamaru_value_frame.png" />
     <Resource Include="Images\compare_aosuke_value_frame.png" />

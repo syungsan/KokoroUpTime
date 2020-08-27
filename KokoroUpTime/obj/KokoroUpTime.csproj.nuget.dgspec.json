@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {}
+    "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {}
   },
   "projects": {
-    "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {
+    "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {
       "version": "0.8.5.1",
       "restore": {
-        "projectUniqueName": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+        "projectUniqueName": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
         "projectName": "KokoroUpTime",
-        "projectPath": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
-        "packagesPath": "C:\\Users\\syung\\.nuget\\packages\\",
-        "outputPath": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\obj\\",
+        "projectPath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+        "packagesPath": "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\syung\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MAGDYNABOOK-03\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -73,7 +76,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
