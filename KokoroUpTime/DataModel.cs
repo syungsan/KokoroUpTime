@@ -70,7 +70,7 @@ namespace KokoroUpTime
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public int CurrentCapter { get; set; }
+        public int CurrentChapter { get; set; }
 
         public string CurrentScene { get; set; }
 
@@ -124,7 +124,7 @@ namespace KokoroUpTime
     }
 
     // チャプター1のログカラム
-    public class DataCapter1
+    public class DataChapter1
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -147,7 +147,7 @@ namespace KokoroUpTime
     }
 
     // チャプター2のログカラム
-    public class DataCapter2
+    public class DataChapter2
     {
         // このレコードは定石
         [PrimaryKey, AutoIncrement]
@@ -160,7 +160,7 @@ namespace KokoroUpTime
     }
 
     // チャプター3のログカラム
-    public class DataCapter3
+    public class DataChapter3
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
