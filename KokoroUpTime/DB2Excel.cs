@@ -143,7 +143,7 @@ namespace KokoroUpTime
 
                 foreach (var row in progress)
                 {
-                    dataProgress.CurrentCapter = row.CurrentCapter;
+                    dataProgress.CurrentChapter = row.CurrentChapter;
 
                     dataProgress.CurrentScene = row.CurrentScene;
 

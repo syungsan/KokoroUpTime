@@ -1,32 +1,27 @@
-﻿using System;
+﻿using CsvReadWrite;
+using Expansion;
+using FileIOUtils;
+using SQLite;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Media;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Threading;
-
-using CsvReadWrite;
-using System.Diagnostics;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Linq;
-using System.Security.AccessControl;
 using WMPLib;
-using System.Windows.Ink;
-using System.Media;
-using SQLite;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
-using System.Windows.Shell;
-using System.IO;
 using WpfAnimatedGif;
+
 
 
 namespace KokoroUpTime
@@ -91,7 +86,7 @@ namespace KokoroUpTime
         private SoundPlayer sePlayer = null;
 
         // データベースに収めるデータモデルのインスタン
-        private DataCapter2 data;
+        private DataChapter2 dataChapter2;
 
         // データベースのパスを通す
         private string dbPath;
@@ -150,7 +145,7 @@ namespace KokoroUpTime
             this.MouseMove += new MouseEventHandler(OnMouseMove);
 
             // データモデルインスタンス確保
-            this.data = new DataCapter2();
+            this.dataChapter2 = new DataChapter2();
 
             // データベース本体のファイルのパス設定
             string dbName = $"{userName}.sqlite";
@@ -163,7 +158,7 @@ namespace KokoroUpTime
             this.dbPath = System.IO.Path.Combine(dirPath, dbName);
 
             // 現在時刻を取得
-            this.data.CreatedAt = DateTime.Now.ToString();
+            this.dataChapter2.CreatedAt = DateTime.Now.ToString();
 
             // データベースのテーブル作成と現在時刻の書き込みを同時に行う
             using (var connection = new SQLiteConnection(dbPath))
@@ -171,10 +166,10 @@ namespace KokoroUpTime
                 // 仮（本当は名前を登録するタイミングで）
                 connection.CreateTable<DataOption>();
                 connection.CreateTable<DataProgress>();
-                connection.CreateTable<DataCapter2>();
+                connection.CreateTable<DataChapter2>();
 
                 // 毎回のアクセス日付を記録
-                connection.Insert(this.data);
+                connection.Insert(this.dataChapter2);
             }
 
             this.EditingModeItemsControl.ItemsSource = EDIT_BUTTON;
@@ -261,6 +256,7 @@ namespace KokoroUpTime
                 // ["aosuke_size_of_feeling_text"] =this.AosukeSizeOfFeelingText,
                 ["item_point_msg_text"] = this.ItemPointMessageText,
                 ["challenge2_bubble_action_text"]=this.Challenge2BubbleActionText,
+                ["item_book_title_text"]=this.ItemBookTitleTextBlock,
                 
 
                 ["GoodEventText1"] = this.GoodEventText1,
@@ -391,6 +387,7 @@ namespace KokoroUpTime
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
             this.MainMessageGrid.Visibility = Visibility.Hidden;
             this.MusicInfoGrid.Visibility = Visibility.Hidden;
+            this.ItemBookGrid.Visibility = Visibility.Hidden;
 
             //this.ExitBackGrid.Visibility = Visibility.Hidden;
 
@@ -473,6 +470,9 @@ namespace KokoroUpTime
             this.DifficultySelectGrid.Visibility = Visibility.Hidden;
             this.SelectFeelingGrid.Visibility = Visibility.Hidden;
 
+            this.ReturnToTitleButton.Visibility = Visibility.Hidden;
+            this.CanvasGrid.Visibility = Visibility.Hidden;
+
             this.SessionSubTitleTextBlock.Text = "";
             this.SessionSentenceTextBlock.Text = "";
            
@@ -500,22 +500,33 @@ namespace KokoroUpTime
 
         }
 
-        // TitlePageからscenarioプロパティの書き換えができないのでメソッドでセットする
-        public void SetScenario(string scenario)
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
         {
-            this.scenarios = this.LoadScenario(scenario);
-            this.ScenarioPlay();
+            this.initConfig = _initConfig;
+            this.dataOption = _dataOption;
+            this.dataItem = _dataItem;
+            this.dataProgress = _dataProgress;
+
+            // 現在時刻を取得
+            this.dataChapter2.CreatedAt = DateTime.Now.ToString();
+
+            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
+            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+            {
+                // 毎回のアクセス日付を記録
+                connection.Insert(this.dataChapter2);
+            }
         }
 
-        // CSVから2次元配列へシナリオデータの収納（CsvReaderクラスを使用）
-        private List<List<string>> LoadScenario(string filePath)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            using (var csv = new CsvReader(filePath))
+            using (var csv = new CsvReader("./Scenarios/chapter2.csv"))
             {
                 this.scenarios = csv.ReadToEnd();
             }
-            return scenarios;
+            this.ScenarioPlay();
         }
+
         public void SetInitConfig(InitConfig _initConfig)
         {
             this.initConfig = _initConfig;
@@ -531,7 +542,7 @@ namespace KokoroUpTime
             this.dbPath = System.IO.Path.Combine(dirPath, dbName);
 
             // 現在時刻を取得
-            this.data.CreatedAt = DateTime.Now.ToString();
+            this.dataChapter2.CreatedAt = DateTime.Now.ToString();
 
             // データベースのテーブル作成と現在時刻の書き込みを同時に行う
             using (var connection = new SQLiteConnection(this.dbPath))
@@ -539,10 +550,10 @@ namespace KokoroUpTime
                 // 仮（本当は名前を登録するタイミングで）
                 connection.CreateTable<DataOption>();
                 connection.CreateTable<DataProgress>();
-                connection.CreateTable<DataCapter2>();
+                connection.CreateTable<DataChapter2>();
 
                 // 毎回のアクセス日付を記録
-                connection.Insert(this.data);
+                connection.Insert(this.dataChapter2);
             }
         }
 
@@ -1124,9 +1135,9 @@ namespace KokoroUpTime
 
                 case "item_book":
 
-                    Image[] itemMainImages = { this.Item02MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item08MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
+                    Image[] itemMainImages = { this.Item01MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item08MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
 
-                    Image[] itemNoneImages = { this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
+                    Image[] itemNoneImages = { this.Item01NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
 
                     var hasGotItems = new bool[] { this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
 
@@ -1165,14 +1176,14 @@ namespace KokoroUpTime
                 {
                     case "$aosukes_kind_of_feeling$":
 
-                        //     text = text.Replace("$aosukes_kind_of_feeling$", this.data.AosukesKindOfFeelings.Split(",")[0]);
+                        //     text = text.Replace("$aosukes_kind_of_feeling$", this.dataChapter2.AosukesKindOfFeelings.Split(",")[0]);
 
                         break;
 
 
                     case "$aosukes_size_of_feeling$":
 
-                        //   text = text.Replace("$aosukes_size_of_feeling$", this.data.AosukesSizeOfFeeling.ToString());
+                        //   text = text.Replace("$aosukes_size_of_feeling$", this.dataChapter2.AosukesSizeOfFeeling.ToString());
 
                         break;
                 }
@@ -1445,8 +1456,8 @@ namespace KokoroUpTime
             // FullScreen時のデバッグ用に作っておく
             if (button.Name == "ExitButton")
             {
-                //this.CoverLayerImage.Visibility = Visibility.Visible;
-                //this.ExitBackGrid.Visibility = Visibility.Visible;
+                this.CoverLayerImage.Visibility = Visibility.Visible;
+                this.ExitBackGrid.Visibility = Visibility.Visible;
             }
 
             if (button.Name == "ExitBackYesButton")
@@ -1457,8 +1468,8 @@ namespace KokoroUpTime
             if (button.Name == "ExitBackNoButton")
             {
 
-                //this.ExitBackGrid.Visibility = Visibility.Hidden;
-                //this.CoverLayerImage.Visibility = Visibility.Hidden;
+                this.ExitBackGrid.Visibility = Visibility.Hidden;
+                this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
             if (button.Name == "NextMessageButton")
             {
@@ -1530,10 +1541,10 @@ namespace KokoroUpTime
                             this.mySelectGoodEvents.Add(this.textBlockObjects["GoodEventText" + i.ToString()].Text);
                         }
                     }
-                    this.data.MySelectGoodEvents = string.Join(",", this.mySelectGoodEvents);
+                    this.dataChapter2.MySelectGoodEvents = string.Join(",", this.mySelectGoodEvents);
                     using (var connection = new SQLiteConnection(this.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataCapter2 SET MySelectGoodEvents = '{this.data.MySelectGoodEvents}'WHERE CreatedAt = '{this.data.CreatedAt}';");
+                        connection.Execute($@"UPDATE DataChapter2 SET MySelectGoodEvents = '{this.dataChapter2.MySelectGoodEvents}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                     }
 
                 }
@@ -1546,12 +1557,12 @@ namespace KokoroUpTime
                     this.aosukesDifficultyOfEating = this.AosukeDifficultyOfActionText.Text;
                     this.aosukesSizeOfFeelingOfEating = this.AosukeSizeOfFeelingText.Text;
 
-                    this.data.AosukesDifficultyOfEating = this.aosukesDifficultyOfEating;
-                    this.data.AosukesSizeOfFeelingOfEating = this.aosukesSizeOfFeelingOfEating;
+                    this.dataChapter2.AosukesDifficultyOfEating = this.aosukesDifficultyOfEating;
+                    this.dataChapter2.AosukesSizeOfFeelingOfEating = this.aosukesSizeOfFeelingOfEating;
                     using (var connection = new SQLiteConnection(this.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataCapter2 SET AosukesSizeOfFeelingOfEating = '{this.data.AosukesSizeOfFeelingOfEating}'WHERE CreatedAt = '{this.data.CreatedAt}';");
-                        connection.Execute($@"UPDATE DataCapter2 SET AosukesDifficultyOfEating = '{this.data.AosukesDifficultyOfEating}'WHERE CreatedAt = '{this.data.CreatedAt}';");
+                        connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfEating = '{this.dataChapter2.AosukesSizeOfFeelingOfEating}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                        connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfEating = '{this.dataChapter2.AosukesDifficultyOfEating}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                     }
                 }
                 if (scene == "「全部のテストで100点をとる」ときは？")
@@ -1559,12 +1570,12 @@ namespace KokoroUpTime
                     this.aosukesDifficultyOfGettingHighScore = this.AosukeDifficultyOfActionText.Text;
                     this.aosukesSizeOfFeelingOfGettingHighScore = this.AosukeSizeOfFeelingText.Text;
 
-                    this.data.AosukesDifficultyOfGettingHighScore = this.aosukesDifficultyOfGettingHighScore;
-                    this.data.AosukesSizeOfFeelingOfGettingHighScore = this.aosukesSizeOfFeelingOfGettingHighScore;
+                    this.dataChapter2.AosukesDifficultyOfGettingHighScore = this.aosukesDifficultyOfGettingHighScore;
+                    this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore = this.aosukesSizeOfFeelingOfGettingHighScore;
                     using (var connection = new SQLiteConnection(this.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataCapter2 SET AosukesSizeOfFeelingOfGettingHighScore = '{this.data.AosukesSizeOfFeelingOfGettingHighScore}'WHERE CreatedAt = '{this.data.CreatedAt}';");
-                        connection.Execute($@"UPDATE DataCapter2 SET AosukesDifficultyOfGettingHighScore = '{this.data.AosukesDifficultyOfGettingHighScore}'WHERE CreatedAt = '{this.data.CreatedAt}';");
+                        connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfGettingHighScore = '{this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                        connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfGettingHighScore = '{this.dataChapter2.AosukesDifficultyOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
 
                     }
                 }
@@ -1573,12 +1584,12 @@ namespace KokoroUpTime
                     this.aosukesDifficultyOfTalkingWithFriend = this.AosukeDifficultyOfActionText.Text;
                     this.aosukesSizeOfFeelingOfTalkingWithFriend = this.AosukeSizeOfFeelingText.Text;
 
-                    this.data.AosukesSizeOfFeelingOfTalkingWithFriend = this.aosukesDifficultyOfEating;
-                    this.data.AosukesDifficultyOfTalkingWithFriend = this.aosukesSizeOfFeelingOfEating;
+                    this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend = this.aosukesDifficultyOfEating;
+                    this.dataChapter2.AosukesDifficultyOfTalkingWithFriend = this.aosukesSizeOfFeelingOfEating;
                     using (var connection = new SQLiteConnection(this.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataCapter2 SET AosukesSizeOfFeelingOfTalkingWithFriend = '{this.data.AosukesSizeOfFeelingOfTalkingWithFriend}'WHERE CreatedAt = '{this.data.CreatedAt}';");
-                        connection.Execute($@"UPDATE DataCapter2 SET AosukesDifficultyOfTalkingWithFriend = '{this.data.AosukesDifficultyOfTalkingWithFriend}'WHERE CreatedAt = '{this.data.CreatedAt}';");
+                        connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfTalkingWithFriend = '{this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                        connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfTalkingWithFriend = '{this.dataChapter2.AosukesDifficultyOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                     }
                 }
             }
@@ -1689,6 +1700,16 @@ namespace KokoroUpTime
                 this.DifficultySelectGrid.Visibility = Visibility.Hidden;
                 this.AosukeDifficultyOfActionText.Text = "△";
                 this.JumpScenario(scene);
+            }
+            if (button.Name == "ReturnToTitleButton")
+            {
+                TitlePage titlePage = new TitlePage();
+
+                titlePage.SetIsFirstBootFlag(false);
+
+                titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                this.NavigationService.Navigate(titlePage);
             }
         }
 

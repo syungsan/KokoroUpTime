@@ -185,7 +185,7 @@ namespace KokoroUpTime
 
                 foreach (var row in progress)
                 {
-                    this.dataProgress.CurrentCapter = row.CurrentCapter;
+                    this.dataProgress.CurrentChapter = row.CurrentChapter;
 
                     this.dataProgress.CurrentScene = row.CurrentScene;
 
@@ -297,13 +297,13 @@ namespace KokoroUpTime
         // タイトルの現在のユーザの最近のプレイシーンを表示
         private void SetCurrentSceneInfo()
         {
-            if (this.dataProgress.CurrentCapter == 0 && this.dataProgress.CurrentScene == null)
+            if (this.dataProgress.CurrentChapter == 0 && this.dataProgress.CurrentScene == null)
             {
                 this.CurrentSceneTextBlock.Text = "まだ何もプレイしてません…。";
             }
             else
             {
-                this.CurrentSceneTextBlock.Text = $"第{this.dataProgress.CurrentCapter}回の「{this.dataProgress.CurrentScene}」をプレイ中…。";
+                this.CurrentSceneTextBlock.Text = $"第{this.dataProgress.CurrentChapter}回の「{this.dataProgress.CurrentScene}」をプレイ中…。";
             }  
         }
 
@@ -562,7 +562,7 @@ namespace KokoroUpTime
                                 }
                                 this.CurrentUserTextBlock.Text = BASE_USER_NAME;
 
-                                this.dataProgress.CurrentCapter = 0;
+                                this.dataProgress.CurrentChapter = 0;
                                 this.dataProgress.CurrentScene = null;
 
                                 this.SetCurrentSceneInfo();
@@ -748,11 +748,11 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        // Chapter2 chapter2 = new Chapter2();
+                        Chapter2 chapter2 = new Chapter2();
 
-                        // chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                        chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                        // this.NavigationService.Navigate(chapter2);
+                        this.NavigationService.Navigate(chapter2);
                     }
                     break;
 
