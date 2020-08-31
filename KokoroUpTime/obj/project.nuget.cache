@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HrPb+4jcEZgOTUXtMz7nhEY+PV/p+GzXd+ZIRpgt5yOxRSKBC4sE6xQpRsvzbvo/55e8W2d0AICHTjqKgbL8wg==",
+  "dgSpecHash": "gLMVunlrOZXwoTQFjFm6Cadtx6tCGmTOpdB5OKogDKB7x2uySiykXhXJwIZwnO2GXc74GeswZEgLkvl3LpPeoA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+  "projectFilePath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KokoroUpTime-master\\KokoroUpTime\\KokoroUpTime.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\epplus\\4.5.3.3\\epplus.4.5.3.3.nupkg.sha512",
     "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.0\\microsoft.extensions.configuration.3.1.0.nupkg.sha512",
