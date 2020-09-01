@@ -1107,7 +1107,7 @@
             <Grid x:Name="AnyCharaGrid" d:IsHidden="True">
                 <Image x:Name="TeacherImage" HorizontalAlignment="Left" Height="924" Margin="1358,86,0,0" VerticalAlignment="Top" Width="290" Source="/Images/teacher.png" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="ItemBookGrid">
+            <Grid x:Name="ItemBookGrid" d:IsHidden="True">
                 <TextBlock x:Name="ItemBookTitleTextBlock" Margin="38,20,1387,935" Text="アイテム図鑑" TextWrapping="Wrap" FontSize="90" Foreground="White" FontWeight="Bold"/>
                 <Grid x:Name="ItemBookMainGrid">
                     <Grid.RowDefinitions>
@@ -1142,7 +1142,7 @@
                     <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid" d:IsHidden="True">
+            <Grid x:Name="SystemGrid">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>

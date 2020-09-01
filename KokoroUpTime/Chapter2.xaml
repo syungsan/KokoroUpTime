@@ -646,8 +646,16 @@
         </Storyboard>
         <Storyboard x:Key="appear_up_children_stand_left_image">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChildrenStandLeftImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="872"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChildrenStandLeftImage" Storyboard.TargetProperty="(UIElement.Opacity)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
@@ -668,7 +676,7 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiRightImage" Storyboard.TargetProperty="(UIElement.Opacity)">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiLeftImage" Storyboard.TargetProperty="(UIElement.Opacity)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
@@ -770,7 +778,7 @@
                 </Image>
             </Grid>
             <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
-                <Image x:Name="ItemCenterImage" HorizontalAlignment="Left" Height="512" VerticalAlignment="Top" Width="363" Source="/Images/item01_solo.png" Margin="804,266,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Image x:Name="ItemCenterImage" HorizontalAlignment="Left" Height="512" VerticalAlignment="Top" Width="363" Source="/Images/item01_solo.png" Margin="804,266,0,0" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -780,7 +788,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ItemLeftImage" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Margin="187,380,0,0" d:IsHidden="True">
+                <Image x:Name="ItemLeftImage" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Margin="187,380,0,0">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -791,20 +799,20 @@
                     </Image.RenderTransform>
                 </Image>
                 <Grid x:Name="ItemNamePlateLeftGrid" Width="610" Height="195" Margin="90,55,1220,830" d:IsHidden="True">
-                    <Image x:Name="ItemNamePlateLeftImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_name.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="ItemNameLeftTextBlock" HorizontalAlignment="Left" Margin="67,36,0,0" VerticalAlignment="Top" FontSize="75" Width="458" FontWeight="Bold" Height="115" Text="うきうきシューズ" TextAlignment="Center" d:IsHidden="True"/>
+                    <Image x:Name="ItemNamePlateLeftImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_name.png"/>
+                    <TextBlock x:Name="ItemNameLeftTextBlock" HorizontalAlignment="Left" Margin="67,36,0,0" VerticalAlignment="Top" FontSize="75" Width="458" FontWeight="Bold" Height="115" Text="うきうきシューズ" TextAlignment="Center"/>
                 </Grid>
                 <Grid x:Name="ItemNameBubbleGrid" Width="446" Height="240" Margin="172,140,1302,700" d:IsHidden="True">
                     <Image x:Name="ItemNameBubbleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_bubble.png" d:IsHidden="True"/>
                     <TextBlock x:Name="ItemNumberTextBlock" HorizontalAlignment="Left" Margin="140,118,0,0" VerticalAlignment="Top" FontSize="48" Foreground="#FFEEEE1E" FontWeight="Bold" Text="No. 2" d:IsHidden="True"/>
                 </Grid>
                 <Grid x:Name="ItemNamePlateCenterGrid" Width="606" Height="185" Margin="705,234,609,661" d:IsHidden="True">
-                    <Image x:Name="ItemNamePlateCenterImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_name.png" Visibility="Visible" d:IsHidden="True"/>
-                    <TextBlock x:Name="ItemNameCenterTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="75" Height="105" Width="447" FontWeight="Bold" Margin="67,32,0,0" Text="うきうきシューズ" TextAlignment="Center" d:IsHidden="True"/>
+                    <Image x:Name="ItemNamePlateCenterImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_name.png" Visibility="Visible"/>
+                    <TextBlock x:Name="ItemNameCenterTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="75" Height="105" Width="447" FontWeight="Bold" Margin="67,32,0,0" Text="うきうきシューズ" TextAlignment="Center"/>
                 </Grid>
-                <Grid x:Name="ItemInfoPlateGrid" Width="1175" Height="470" Margin="661,463,84,147" d:IsHidden="True">
-                    <Image x:Name="ItemInfoPlateImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_info.png" Visibility="Visible" d:IsHidden="True"/>
-                    <TextBlock x:Name="ItemInfoTitleTextBlock" Width="469" FontSize="52" FontWeight="Bold" Margin="55,24,651,369" Text="うきうきシューズとは・・・" d:IsHidden="True"/>
+                <Grid x:Name="ItemInfoPlateGrid" Width="1175" Height="470" Margin="661,463,84,147">
+                    <Image x:Name="ItemInfoPlateImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_detail_info.png" Visibility="Visible"/>
+                    <TextBlock x:Name="ItemInfoTitleTextBlock" Width="469" FontSize="52" FontWeight="Bold" Margin="55,24,651,369" Text="うきうきシューズとは・・・"/>
                     <Grid x:Name="ItemInfoSentenceGrid" Margin="55,118,41,33" d:IsHidden="True">
                         <TextBlock x:Name="ItemInfoSentenceTextBlock1" FontSize="40" TextWrapping="Wrap" Margin="0,0,0,253" d:IsHidden="True"><Run Text="✔ 元気がないときに楽しいことをさがすことはとてもむずかしいことじゃ"/><LineBreak /><Run Text="　　"/></TextBlock>
                         <TextBlock x:Name="ItemInfoSentenceTextBlock2" FontSize="40" TextWrapping="Wrap" Margin="0,80,0,130" d:IsHidden="True"><Run Text="✔ うきうきシューズをつかうと、元気がないときでも楽しいことをさがすこ"/><LineBreak /><Run Text="      とができるようになるぞい"/></TextBlock>
@@ -812,18 +820,18 @@
                     </Grid>
                 </Grid>
                 <Image x:Name="ItemLeftLastImage" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item02_solo.png" Margin="354,186,0,0"/>
-                <Grid x:Name="ItemLastInfoGrid" Height="116" Width="490" Margin="715,380,715,584" d:IsHidden="True">
-                    <Image x:Name="ItemLastInfoImage" Source="/Images/item_last.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="ItemLastInfoTextBlock" HorizontalAlignment="Left" Margin="12,38,0,0" VerticalAlignment="Top" Height="66" Width="408" FontSize="48" FontWeight="Bold" Text="No.2  うきうきシューズ" d:IsHidden="True"/>
+                <Grid x:Name="ItemLastInfoGrid" Height="116" Width="490" Margin="715,380,715,584">
+                    <Image x:Name="ItemLastInfoImage" Source="/Images/item_last.png"/>
+                    <TextBlock x:Name="ItemLastInfoTextBlock" HorizontalAlignment="Left" Margin="12,38,0,0" VerticalAlignment="Top" Height="66" Width="408" FontSize="48" FontWeight="Bold" Text="No.2  うきうきシューズ"/>
                 </Grid>
-                <Grid x:Name="ItemReviewGrid" d:IsHidden="True">
-                    <Image x:Name="ItemLeftBigImage" Source="/IMages/Item01_solo.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,200,100,200" d:IsHidden="True"/>
-                    <Image x:Name="ItemReviewPlateImage" Source="/Images/item_review.png" Margin="700,300,500,500" Stretch="Fill" d:IsHidden="True"/>
+                <Grid x:Name="ItemReviewGrid">
+                    <Image x:Name="ItemLeftBigImage" Source="/IMages/Item01_solo.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,200,100,200"/>
+                    <Image x:Name="ItemReviewPlateImage" Source="/Images/item_review.png" Margin="700,300,500,500" Stretch="Fill"/>
                     <TextBlock x:Name="ItemReviewText1" Margin="715,315,515,680" Text="#1  「きもちセンサー」" FontSize="60" d:IsHidden="True"/>
                     <TextBlock x:Name="ItemReviewText2" Margin="715,400,515,515" Text="気持ちの大きさと種類を&#10;図ることが出来ます" FontSize="60" d:IsHidden="True"/>
                 </Grid>
-                <Grid x:Name="ItemPlateGrid" Margin="200,50,200,200">
-                    <Image x:Name="ItemPlateBackGroundImage" Source="/Images/item_plate.png" VerticalAlignment="Top" HorizontalAlignment="Center" Height="337" Margin="0,78,0,0"/>
+                <Grid x:Name="ItemPlateGrid" Margin="200,50,200,200" d:IsHidden="True">
+                    <Image x:Name="ItemPlateBackGroundImage" Source="/Images/item_check_back_bubble.png" Stretch="Fill" VerticalAlignment="Top"  Height="337" Margin="70,78,158,0"/>
                     <Image x:Name="ItemmInPlateImage" Source="/Images/item02_solo.png"   Margin="-203,40,867,355"/>
                     <TextBlock x:Name="ItemPlateSubText" FontSize="50" Text="✓きもちの大きさが小さい&#10;✓かんたんにできる" FontFamily="Yu Gothic" FontWeight="Bold" Margin="400,122,0,470"/>
                     <TextBlock x:Name="ItemPlateMainText" FontSize="60" Text="✓まわりの人といっしょにできる" FontFamily="Yu Gothic" FontWeight="UltraBold" Margin="400,297,20,415"/>
@@ -844,8 +852,8 @@
                 <Image x:Name="ChallengeTimeText" Source="/Images/challenge_time_text.png" Margin="100,0,700,300" VerticalAlignment="Center" Panel.ZIndex="4" d:IsHidden="True"/>
             </Grid>
             <Grid x:Name="ChallengeTimeTitleGrid" d:IsHidden="True">
-                <Image x:Name="ChallengeTimeTitleImage" Source="/Images/orange_title_plate.png" VerticalAlignment="Top" Margin="0,250,0,0" d:IsHidden="True"/>
-                <TextBlock x:Name="ChallengeTimeTitleText" Text="チャレンジタイム！パート②" FontSize="140" Foreground="BlueViolet"  VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Yu Gothic" FontWeight="UltraBlack" Margin="0,250,0,0" Width="1920" Height="188" d:IsHidden="True"/>
+                <Image x:Name="ChallengeTimeTitleImage" Source="/Images/orange_title_plate.png" VerticalAlignment="Top" Margin="0,250,0,0"/>
+                <TextBlock x:Name="ChallengeTimeTitleText" Text="チャレンジタイム！パート②" FontSize="140" Foreground="BlueViolet"  VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Yu Gothic" FontWeight="UltraBlack" Margin="0,250,0,0" Width="1920" Height="188"/>
             </Grid>
             <Grid x:Name="Challenge1Grid" d:IsHidden="True">
                 <Image x:Name="Challenge1Title" Source="/Images/challenge1_title.png" Margin="300,50,500,900" d:IsHidden="True"/>
@@ -958,19 +966,24 @@
                     <Image x:Name="KindOfFeelingButtonImage" Source="Images/kind_of_feeling_button_frame.png" d:IsHidden="True"/>
                     <TextBlock x:Name="AosukeKindOfFeelingText" Text="ゆったり" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" d:IsHidden="True" />
                 </Grid>
-                <Grid x:Name="AosukeSizeOfFeelingGrid"  Margin="1037,807,569,116" d:IsHidden="True">
-                    <Button x:Name="SizeOfFeelingButton" Background="Transparent" BorderBrush="Transparent" Click="Button_Click" d:IsHidden="True">
-                        <TextBlock x:Name="AosukeSizeOfFeelingText" Text="(  20  )" FontSize="100" d:IsHidden="True"/>
+                <Grid x:Name="AosukeSizeOfFeelingGrid"  Margin="1037,807,569,116">
+                    <Button x:Name="SizeOfFeelingButton" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                        <TextBlock x:Name="AosukeSizeOfFeelingText" Text="(  20  )" FontSize="93"/>
                     </Button>
                 </Grid>
                 <Grid x:Name="AosukeDifficultyOfActionGrid" Margin="1458,540,89,215" d:IsHidden="True">
-                    <Image x:Name="DifficultyOfActionButtonImage" Source="/Images/difficulty_of_action_frame.png" Stretch="Fill" d:IsHidden="True" />
-                    <Button x:Name="DifficultyOfActionButton" Background="Transparent" BorderBrush="Transparent" Click="Button_Click" d:IsHidden="True">
-                        <TextBlock x:Name="AosukeDifficultyOfActionText" Text="△" FontSize="180" FontFamily="MSP Gothic" TextAlignment="Center" Margin="40,60" d:IsHidden="True"/>
+                    <Image x:Name="DifficultyOfActionButtonImage" Source="/Images/difficulty_of_action_frame.png" Stretch="Fill" />
+                    <Button x:Name="DifficultyOfActionButton" Background="Transparent" BorderBrush="Transparent" Click="Button_Click" Margin="5.4,6.5">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="46"/>
+                            </Style>
+                        </Button.Resources>
+                        <TextBlock x:Name="AosukeDifficultyOfActionText" Text="△" FontSize="180" FontFamily="MSP Gothic" TextAlignment="Center" Margin="40,60"/>
                     </Button>
                 </Grid>
                 <Grid x:Name="Challenge2ActionBubble" Margin="202,333,928,265" d:IsHidden="True">
-                    <Image x:Name="Challenge2ActionBuble" Source="/Images/blue_bubble_left_down.png" d:IsHidden="True" />
+                    <Image x:Name="Challenge2ActionBubleImage" Source="/Images/blue_bubble_left_down.png" d:IsHidden="True" />
                     <TextBlock x:Name="Challenge2BubbleActionText" Text="公園でお昼寝する" TextWrapping="Wrap" FontSize="70" FontFamily="Yu Gothic"  Margin="40,100,40,170" d:IsHidden="True"/>
                 </Grid>
                 <Image x:Name="AosukesmallFaceImage" HorizontalAlignment="Left" Height="321" VerticalAlignment="Top" Width="330" Source="/Images/aosuke_face_01.png" Margin="10,586,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
@@ -983,13 +996,19 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
+                <Grid x:Name="Challenge2CoverGrid" Background="Transparent"/>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid" d:IsHidden="True">
+            <Grid x:Name="GroupeActivityGrid" >
                 <Image x:Name="GroupActivityTitle" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Images/group_activity_title01.png" Height="155"/>
                 <TextBlock x:Name="GroupActivitText" FontSize="40" Text="友だちと話し合って、「ちょっぴりうきうき」をたくさん書いてみよう！"  HorizontalAlignment="Left" Margin="300,530,300,500"/>
                 <Image x:Name="GroupActivityWritingBubleImage" Source="/Images/writing_text_buble.png" Stretch="Fill" Margin="300,600,300,10"/>
-                <Button x:Name="GroupActivityWritingButton" Background="White" BorderBrush="{x:Null}" Click="Button_Click" Margin="330,630,330,30">
-                    <Image x:Name="GroupActivityWritingImage" d:IsHidden="True"/>
+                <Button x:Name="GroupActivityWritingButton" Background="White" BorderBrush="{x:Null}" Click="Button_Click" Margin="301.5,602.5,301.5,12.5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="83"/>
+                        </Style>
+                    </Button.Resources>
+                    <Image x:Name="GroupActivityWritingImage"/>
                 </Button>
             </Grid>
             <Grid x:Name="SelectFeelingGrid" d:IsHidden="True">
@@ -1045,14 +1064,14 @@
                 </Grid>
             </Grid>
             <Grid x:Name="DifficultySelectGrid" d:IsHidden="True">
-                <Button x:Name="GoodButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="100,400,1000,400" Click="Button_Click" d:IsHidden="True">
-                    <Image x:Name="GoodButtonImage" Source="/Images/good.png" Stretch="Uniform" d:IsHidden="True"/>
+                <Button x:Name="GoodButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="400,400,1200,400" Click="Button_Click">
+                    <Image x:Name="GoodButtonImage" Source="/Images/good.png" Stretch="Uniform"/>
                 </Button>
-                <Button x:Name="BadButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="800,400" Click="Button_Click" d:IsHidden="True">
-                    <Image x:Name="BadButtonImage" Source="/Images/bad.png" Stretch="Uniform" d:IsHidden="True"/>
+                <Button x:Name="BadButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="800,400" Click="Button_Click">
+                    <Image x:Name="BadButtonImage" Source="/Images/bad.png" Stretch="Uniform"/>
                 </Button>
-                <Button x:Name="NormalButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="1000,400,100,400" Click="Button_Click" d:IsHidden="True">
-                    <Image x:Name="NormalButtonImage" Source="/Images/normal.png" Stretch="Uniform" Width="275" d:IsHidden="True"/>
+                <Button x:Name="NormalButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="1200,400,400,400" Click="Button_Click">
+                    <Image x:Name="NormalButtonImage" Source="/Images/normal.png" Stretch="Uniform" Width="275"/>
                 </Button>
             </Grid>
             <Grid x:Name="SummaryGrid" d:IsHidden="True">
@@ -1149,9 +1168,9 @@
                 <Grid x:Name="EndingTitleGrid" Width="878" Height="427" Margin="521,202,521,451" d:IsHidden="True">
                     <Image x:Name="EndingTitleBackImage" Source="/Images/ending_bubble.png" Stretch="Uniform" d:IsHidden="True"/>
                     <TextBlock x:Name="EndingTitleTextBlock" HorizontalAlignment="Center" Margin="0,214,0,0" VerticalAlignment="Top" FontSize="88" FontWeight="Bold" Foreground="Black" Text="しゅうりょう！" TextAlignment="Center" d:IsHidden="True"/>
-                    <TextBlock x:Name="EndingChapterNoTextBlock" HorizontalAlignment="Center" Margin="0,97,0,0" VerticalAlignment="Top" FontSize="88" FontWeight="Bold" Text="第１回" TextAlignment="Center" d:IsHidden="True"/>
+                    <TextBlock x:Name="EndingChapterNoTextBlock" HorizontalAlignment="Center" Margin="0,97,0,0" VerticalAlignment="Top" FontSize="88" FontWeight="Bold" Text="第２回" TextAlignment="Center" d:IsHidden="True"/>
                 </Grid>
-                <Image x:Name="EndingItemImage" HorizontalAlignment="Center" Height="489" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Margin="0,460,0,0" d:IsHidden="True"/>
+                <Image x:Name="EndingItemImage" HorizontalAlignment="Center" Height="489" VerticalAlignment="Top" Width="346" Source="/Images/item02_solo.png" Margin="0,460,0,0" d:IsHidden="True"/>
                 <Image x:Name="KimiEndingImage" HorizontalAlignment="Left" Height="470" Margin="1364,10,0,0" VerticalAlignment="Top" Width="436" Source="/Images/kimi_face_02.png" d:IsHidden="True"/>
                 <Image x:Name="AosukeEndingImage" HorizontalAlignment="Left" Height="470" Margin="120,10,0,0" VerticalAlignment="Top" Width="436" Source="/Images/aosuke_face_01.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
@@ -1276,8 +1295,8 @@
                 </Grid>
             </Grid>
             <Grid x:Name="AnyCharaGrid" d:IsHidden="True"/>
-            <Grid x:Name="ItemBookGrid">
-                <TextBlock x:Name="ItemBookTitleTextBlock" Margin="38,20,1387,935" Text="アイテム図鑑" TextWrapping="Wrap" FontSize="90" Foreground="White" FontWeight="Bold" d:IsHidden="True"/>
+            <Grid x:Name="ItemBookGrid" d:IsHidden="True">
+                <TextBlock x:Name="ItemBookTitleTextBlock" Margin="38,20,1387,935" Text="アイテム図鑑" TextWrapping="Wrap" FontSize="90" Foreground="White" FontWeight="Bold"/>
                 <Grid x:Name="ItemBookMainGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -1298,8 +1317,8 @@
                     <Image x:Name="Item11MainImage" Source="/Images/item11_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="1283,470,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
                 </Grid>
                 <Grid x:Name="ItemBookNoneGrid">
-                    <Image x:Name="Item01NoneImage" HorizontalAlignment="Left" Height="460" Margin="339,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item03NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
+                    <Image x:Name="Item01NoneImage" HorizontalAlignment="Left" Height="460" Margin="32,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item03NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                     <Image x:Name="Item04NoneImage" HorizontalAlignment="Left" Height="460" Margin="968,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                     <Image x:Name="Item05NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                     <Image x:Name="Item06NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
@@ -1464,18 +1483,22 @@
                         <Image x:Name="BranchButton2Image" Source="/Images/branch_selection2.png" Stretch="Fill" d:IsHidden="True" />
                     </Button>
                 </Grid>
-                <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" Visibility="Hidden" d:IsHidden="True">
-                    <Image x:Name="ExitBackImage" HorizontalAlignment="Center" VerticalAlignment="Center"  Stretch="Fill" d:IsHidden="True" />
-                    <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Left" Margin="169,113,0,0" VerticalAlignment="Top" Height="100" Width="582" FontSize="48" Text="本当にアプリを終了しますか？" FontWeight="Bold" TextAlignment="Center" d:IsHidden="True"/>
-                    <Button x:Name="ExitBackYesButton" HorizontalAlignment="Left" Margin="33,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
-                        <Image x:Name="ExitBackYesButtonImage" d:IsHidden="True" />
+                <Grid x:Name="ExitBackGrid" Margin="497,215,497,190">
+                    <Image x:Name="ExitBackImage" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/white_frame.png" Stretch="Fill"/>
+                    <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Left" Margin="169,113,0,0" VerticalAlignment="Top" Height="100" Width="582" FontSize="48" Text="本当にアプリを終了しますか？" FontWeight="Bold" TextAlignment="Center"/>
+                    <Button x:Name="ExitBackYesButton" HorizontalAlignment="Left" Margin="33,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                        <Image x:Name="ExitBackYesButtonImage" Source="/Images/moya1.png"/>
                     </Button>
-                    <Button x:Name="ExitBackNoButton" HorizontalAlignment="Left" Margin="465,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
-                        <Image x:Name="ExitBackNoButtonImage" d:IsHidden="True" />
+                    <Button x:Name="ExitBackNoButton" HorizontalAlignment="Left" Margin="465,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                        <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
                     </Button>
                 </Grid>
                 <Grid x:Name="CanvasGrid" d:IsHidden="True"  >
-                    <InkCanvas x:Name="NameCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,300,0,0" />
+                    <InkCanvas x:Name="NameCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,300,0,0" Background="{x:Null}">
+                        <InkCanvas.DefaultDrawingAttributes>
+                            <DrawingAttributes Height="20" Width="20" StylusTip="Ellipse"/>
+                        </InkCanvas.DefaultDrawingAttributes>
+                    </InkCanvas>
                     <Viewbox Margin="0,0,0,780" Stretch="Fill">
                         <ItemsControl x:Name="EditingModeItemsControl" d:IsHidden="True" >
                             <ItemsControl.ItemTemplate>

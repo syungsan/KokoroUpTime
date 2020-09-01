@@ -88,9 +88,6 @@ namespace KokoroUpTime
         // データベースに収めるデータモデルのインスタン
         private DataChapter2 dataChapter2;
 
-        // データベースのパスを通す
-        private string dbPath;
-
         // ゲームの切り替えシーン
         private string scene;
 
@@ -155,13 +152,11 @@ namespace KokoroUpTime
             // 各ユーザの初回起動のとき実行ファイルの場所下のLogフォルダにユーザネームのフォルダを作る
             DirectoryUtils.SafeCreateDirectory(dirPath);
 
-            this.dbPath = System.IO.Path.Combine(dirPath, dbName);
-
             // 現在時刻を取得
             this.dataChapter2.CreatedAt = DateTime.Now.ToString();
 
             // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
             {
                 // 仮（本当は名前を登録するタイミングで）
                 connection.CreateTable<DataOption>();
@@ -223,6 +218,7 @@ namespace KokoroUpTime
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
                 ["item_point_message_bubble_image"]=this.ItemPointMessageBubbleImage,
                 ["item_left_last_image"] =this.ItemLeftLastImage,
+                ["challenge2_action_buble_image"] =this.Challenge2ActionBubleImage,
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -327,8 +323,9 @@ namespace KokoroUpTime
                 ["select_heart_grid"]=this.SelectHeartGrid,
                 ["difficulty_select_grid"] =this.DifficultySelectGrid,
                 ["select_feeling_grid"] =this.SelectFeelingGrid,
-                //["exit_back_grid"] = this.ExitBackGrid,
+                ["exit_back_grid"] = this.ExitBackGrid,
                 ["epilogue_grid"] =this.Epiloguegrid,
+                ["challenge2_cover_grid"]=this.Challenge2CoverGrid,
             };
 
             GoodEventObject = new Dictionary<string, Ellipse>
@@ -361,6 +358,7 @@ namespace KokoroUpTime
             this.GroupeActivityGrid.Visibility = Visibility.Hidden;
             this.CanvasGrid.Visibility = Visibility.Hidden;
             this.ItemPlateGrid.Visibility = Visibility.Hidden;
+            this.Challenge2CoverGrid.Visibility = Visibility.Hidden;
 
             this.SummaryGrid.Visibility = Visibility.Hidden;
             this.EndingGrid.Visibility = Visibility.Hidden;
@@ -387,9 +385,12 @@ namespace KokoroUpTime
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
             this.MainMessageGrid.Visibility = Visibility.Hidden;
             this.MusicInfoGrid.Visibility = Visibility.Hidden;
-            this.ItemBookGrid.Visibility = Visibility.Hidden;
+            this.GetItemGrid.Visibility = Visibility.Hidden;
+            this.ItemBookMainGrid.Visibility = Visibility.Hidden;
+            this.ItemBookNoneGrid.Visibility = Visibility.Hidden;
+            this.ItemBookTitleTextBlock.Visibility = Visibility.Hidden;
 
-            //this.ExitBackGrid.Visibility = Visibility.Hidden;
+            this.ExitBackGrid.Visibility = Visibility.Hidden;
 
             this.BranchSelectGrid.Visibility = Visibility.Hidden;
 
@@ -483,7 +484,7 @@ namespace KokoroUpTime
             this.KindOfFeelingAosukeTextBlock.Text = "";
             this.SizeOfFeelingAosukeTextBlock.Text = "";
             this.EndingMessageTextBlock.Text = "";
-            //this.FrexibleMainMessageText.Text = "";
+            
             this.ThinMessageTextBlock.Text = "";
             this.MusicTitleTextBlock.Text = "";
             this.ComposerNameTextBlock.Text = "";
@@ -527,40 +528,7 @@ namespace KokoroUpTime
             this.ScenarioPlay();
         }
 
-        public void SetInitConfig(InitConfig _initConfig)
-        {
-            this.initConfig = _initConfig;
-
-            // データベース本体のファイルのパス設定
-            string dbName = $"{initConfig.userName}.sqlite";
-            string dirPath = $"./Log/{initConfig.userName}_{initConfig.userTitle}/";
-
-            // FileUtils.csからディレクトリ作成のメソッド
-            // 各ユーザの初回起動のとき実行ファイルの場所下のLogフォルダにユーザネームのフォルダを作る
-            DirectoryUtils.SafeCreateDirectory(dirPath);
-
-            this.dbPath = System.IO.Path.Combine(dirPath, dbName);
-
-            // 現在時刻を取得
-            this.dataChapter2.CreatedAt = DateTime.Now.ToString();
-
-            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(this.dbPath))
-            {
-                // 仮（本当は名前を登録するタイミングで）
-                connection.CreateTable<DataOption>();
-                connection.CreateTable<DataProgress>();
-                connection.CreateTable<DataChapter2>();
-
-                // 毎回のアクセス日付を記録
-                connection.Insert(this.dataChapter2);
-            }
-        }
-
-        public void SetDataOption(DataOption _dataOption)
-        {
-            this.dataOption = _dataOption;
-        }
+     
         // ゲーム進行の中核
         private void ScenarioPlay()
         {
@@ -609,7 +577,7 @@ namespace KokoroUpTime
                     break;
 
                 case "tag":
-                    this.Tag = this.scenarios[this.scenarioCount][1];
+                    this.tag = this.scenarios[this.scenarioCount][1];
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1542,7 +1510,7 @@ namespace KokoroUpTime
                         }
                     }
                     this.dataChapter2.MySelectGoodEvents = string.Join(",", this.mySelectGoodEvents);
-                    using (var connection = new SQLiteConnection(this.dbPath))
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
                         connection.Execute($@"UPDATE DataChapter2 SET MySelectGoodEvents = '{this.dataChapter2.MySelectGoodEvents}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                     }
@@ -1559,7 +1527,7 @@ namespace KokoroUpTime
 
                     this.dataChapter2.AosukesDifficultyOfEating = this.aosukesDifficultyOfEating;
                     this.dataChapter2.AosukesSizeOfFeelingOfEating = this.aosukesSizeOfFeelingOfEating;
-                    using (var connection = new SQLiteConnection(this.dbPath))
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
                         connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfEating = '{this.dataChapter2.AosukesSizeOfFeelingOfEating}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                         connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfEating = '{this.dataChapter2.AosukesDifficultyOfEating}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
@@ -1572,7 +1540,7 @@ namespace KokoroUpTime
 
                     this.dataChapter2.AosukesDifficultyOfGettingHighScore = this.aosukesDifficultyOfGettingHighScore;
                     this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore = this.aosukesSizeOfFeelingOfGettingHighScore;
-                    using (var connection = new SQLiteConnection(this.dbPath))
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
                         connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfGettingHighScore = '{this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                         connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfGettingHighScore = '{this.dataChapter2.AosukesDifficultyOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
@@ -1586,7 +1554,7 @@ namespace KokoroUpTime
 
                     this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend = this.aosukesDifficultyOfEating;
                     this.dataChapter2.AosukesDifficultyOfTalkingWithFriend = this.aosukesSizeOfFeelingOfEating;
-                    using (var connection = new SQLiteConnection(this.dbPath))
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
                         connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfTalkingWithFriend = '{this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                         connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfTalkingWithFriend = '{this.dataChapter2.AosukesDifficultyOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
@@ -1600,6 +1568,7 @@ namespace KokoroUpTime
             if (button.Content == "えんぴつ")
             {
                 NameCanvas.EditingMode = InkCanvasEditingMode.Ink;
+
             }
             if (button.Content == "けしごむ")
             {
@@ -1632,10 +1601,7 @@ namespace KokoroUpTime
                 dc.Close();
 
                 // ビジュアルオブジェクトをビットマップに変換する
-                RenderTargetBitmap rtb = new RenderTargetBitmap(
-                    (int)rectBounds.Width, (int)rectBounds.Height,
-                    96, 96,
-                    PixelFormats.Default);
+                RenderTargetBitmap rtb = new RenderTargetBitmap((int)rectBounds.Width, (int)rectBounds.Height,96, 96,PixelFormats.Pbgra32);
                 rtb.Render(dv);
 
                 //仮置き
@@ -1645,21 +1611,29 @@ namespace KokoroUpTime
                 string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
                 var startupPath = FileUtils.GetStartupPath();
 
-                // ビットマップエンコーダー変数の宣言
-                BitmapEncoder enc = null;
-                enc = new BmpBitmapEncoder();
-                // ビットマップフレームを作成してエンコーダーにフレームを追加する
-                enc.Frames.Add(BitmapFrame.Create(rtb));
+                PngBitmapEncoder png = new PngBitmapEncoder();
+                png.Frames.Add(BitmapFrame.Create(rtb));
+
                 // ファイルのパスは仮
-                using (var stream = System.IO.File.Create($@"{startupPath}/{nameBmpPath}"))
+                using (var stream = File.Create($@"{startupPath}/{nameBmpPath}"))
                 {
-                    enc.Save(stream);
+                    png.Save(stream);
                 }
+
+                var pngmap = new BitmapImage();
+
+                pngmap.BeginInit();
+                pngmap.CacheOption = BitmapCacheOption.OnLoad;    //ココ
+                pngmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;  //ココ
+                pngmap.UriSource = new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute);
+                pngmap.EndInit();
+
+                pngmap.Freeze();
 
                 this.GroupeActivityGrid.Visibility = Visibility.Visible;
                 this.CanvasGrid.Visibility = Visibility.Hidden;
 
-                this.GroupActivityWritingImage.Source = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.RelativeOrAbsolute));
+                this.GroupActivityWritingImage.Source = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
 
                 if (scene == "グループアクティビティ")
                 {
@@ -1667,6 +1641,30 @@ namespace KokoroUpTime
                     {
                         this.SelectFeelingNextButton.Visibility = Visibility.Visible;
                     }
+                }
+            }
+            if (this.tag == "かんたんにできるか")
+            {
+                this.DifficultySelectGrid.Visibility = Visibility.Hidden;
+
+                if (button.Name == "GoodButton")
+                {
+                    this.AosukeDifficultyOfActionText.Text = "〇";
+                }
+                if (button.Name == "BadButton")
+                {
+                    this.AosukeDifficultyOfActionText.Text = "×";
+                }
+                if (button.Name == "NormalButton")
+                {
+                    this.AosukeDifficultyOfActionText.Text = "△";
+                }
+
+                this.JumpScenario(scene);
+
+                if (this.AosukeDifficultyOfActionText.Text != "" && this.AosukeSizeOfFeelingText.Text != "")
+                {
+                    this.SelectFeelingNextButton.Visibility = Visibility.Visible;
                 }
             }
             if (button.Name == "SizeOfFeelingButton")
@@ -1683,24 +1681,7 @@ namespace KokoroUpTime
                 string _jumptag = "かんたんにできるか";
                 this.JumpScenario(_jumptag);
             }
-            if (button.Name == "GoodButton")
-            {
-                this.DifficultySelectGrid.Visibility = Visibility.Hidden;
-                this.AosukeDifficultyOfActionText.Text = "〇";
-                this.JumpScenario(scene);
-            }
-            if (button.Name == "BadButton")
-            {
-                this.DifficultySelectGrid.Visibility = Visibility.Hidden;
-                this.AosukeDifficultyOfActionText.Text = "×";
-                this.JumpScenario(scene);
-            }
-            if (button.Name == "NormalButton")
-            {
-                this.DifficultySelectGrid.Visibility = Visibility.Hidden;
-                this.AosukeDifficultyOfActionText.Text = "△";
-                this.JumpScenario(scene);
-            }
+            
             if (button.Name == "ReturnToTitleButton")
             {
                 TitlePage titlePage = new TitlePage();
@@ -1874,6 +1855,11 @@ namespace KokoroUpTime
                 this.SelectHeartGrid.Visibility = Visibility.Hidden;
                 this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
                 this.AosukeSizeOfFeelingText.Text = "(  " + this.ViewSizeOfFeelingTextBlock.Text + "  )";
+
+                if (this.AosukeDifficultyOfActionText.Text != "" && this.AosukeSizeOfFeelingText.Text != "")
+                {
+                    this.SelectFeelingNextButton.Visibility = Visibility.Visible;
+                }
 
                 this.JumpScenario(scene);
 

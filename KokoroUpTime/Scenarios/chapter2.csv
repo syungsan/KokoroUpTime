@@ -1,5 +1,6 @@
 ﻿reset
 scene,前説
+jump,チャレンジタイムパート②終了
 image,bg_image,background_02.png
 image,children_face_image,kimi_face_01.png,appear_up,no_sync
 image,main_msg_bubble_image,left_big_bubble_yellow.png
@@ -140,8 +141,10 @@ text,challenge2_bubble_action_text,公園でおひるねする
 text,aosuke_kind_of_feeling_text,ゆったり
 text,aosuke_size_of_feeling_text,(  20  )
 text,aosuke_difficulty_of_action_text,△
+grid,challenge2_cover_grid
 grid,challenge2_grid,appear_fade_in
 button,select_feeling_next_button,appear_fade_in
+
 wait
 reset
 jump,チャレンジタイムパート②「おいしいものを食べる」
@@ -150,10 +153,10 @@ scene,チャレンジタイムパート②「おいしいものを食べる」
 text,challenge2_bubble_action_text,おいしいものを食べる
 text,aosuke_kind_of_feeling_text,うれしい
 text,aosuke_size_of_feeling_text,(      )
+image,challenge2_action_buble_image,blue_bubble.png
 scene,「おいしいものを食べる」ときは？
 image,bg_image,orange_gradation.png
 grid,challenge2_grid
-button,select_feeling_next_button
 wait
 reset
 jump,チャレンジタイムパート②「全部のテストで100点をとる」
@@ -162,10 +165,10 @@ scene,チャレンジタイムパート②「全部のテストで100点をと�
 text,challenge2_bubble_action_text,全部のテストで100点をとる
 text,aosuke_kind_of_feeling_text,うれしい
 text,aosuke_size_of_feeling_text,(      )
+image,challenge2_action_buble_image,blue_bubble.png
 scene,「全部のテストで100点をとる」ときは？
 image,bg_image,orange_gradation.png
 grid,challenge2_grid
-button,select_feeling_next_button
 wait
 reset
 jump,チャレンジタイムパート②「休み時間に友だちとおしゃべりする」
@@ -174,10 +177,10 @@ scene,チャレンジタイムパート②「休み時間に友だちとおし�
 text,challenge2_bubble_action_text,休み時間に友だちとおしゃべりする
 text,aosuke_kind_of_feeling_text,楽しい
 text,aosuke_size_of_feeling_text,(      )
+image,challenge2_action_buble_image,blue_bubble.png
 scene,「休み時間に友だちとおしゃべりする」ときは？
 image,bg_image,orange_gradation.png
 grid,challenge2_grid
-button,select_feeling_next_button
 wait
 reset
 jump,チャレンジタイムパート②終了
@@ -205,6 +208,7 @@ grid,epilogue_grid
 msg,epilogue_text,青助くんはうきうきシューズをつかって、鬱「ちょっぴりうきうき」をみつけて鬱毎日少しずつやってみました。鬱すると…なんだか少しずつ元気になってきたようです。
 next
 scene,会話②
+reset
 image,bg_image,background_07.png
 image,children_face_image,aosuke_face_02.png,appear_up,no_sync
 image,shiroji_right_image,shiroji_02.png,appear_up,,gray

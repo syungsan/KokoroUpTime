@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KokoroUpTime-master\\KokoroUpTime\\KokoroUpTime.csproj": {}
+    "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KokoroUpTime-master\\KokoroUpTime\\KokoroUpTime.csproj": {
+    "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {
       "version": "0.8.5.1",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KokoroUpTime-master\\KokoroUpTime\\KokoroUpTime.csproj",
+        "projectUniqueName": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
         "projectName": "KokoroUpTime",
-        "projectPath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KokoroUpTime-master\\KokoroUpTime\\KokoroUpTime.csproj",
+        "projectPath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
         "packagesPath": "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\KokoroUpTime-master\\KokoroUpTime\\obj\\",
+        "outputPath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

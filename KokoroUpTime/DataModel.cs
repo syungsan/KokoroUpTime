@@ -156,25 +156,13 @@ namespace KokoroUpTime
         // データベースに記録するレコードの型の宣言をしてください。
         public string MySelectGoodEvents { get; set; }
 
-        public string AosukesSizeOfFeelingOfSleeping { get; set; }
-
-        public string AosukesKindOfFeelingOfSleeping { get; set; }
-
-        public string AosukesDifficultyOfSleeping { get; set; }
-
         public string AosukesSizeOfFeelingOfEating { get; set; }
-
-        public string AosukesKindOfFeelingOfEating { get; set; }
 
         public string AosukesDifficultyOfEating { get; set; }
 
         public string AosukesSizeOfFeelingOfGettingHighScore { get; set; }
 
-        public string AosukesKindOfFeelingOfGettingHighScore { get; set; }
-
         public string AosukesDifficultyOfGettingHighScore { get; set; }
-
-        public string AosukesKindOfFeelingOfTalkingWithFriend { get; set; }
 
         public string AosukesSizeOfFeelingOfTalkingWithFriend { get; set; }
 
