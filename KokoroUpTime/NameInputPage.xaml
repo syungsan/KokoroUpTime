@@ -284,6 +284,11 @@
                     </ItemsControl>
                 </Viewbox>
             </Grid>
+            <TextBlock Margin="202,200,198,200" Background="White">
+                <InlineUIContainer>
+                    <Image Source="Images/word_art_msg_02_01.png" Height="80" Width="226" Stretch="UniformToFill" />
+                </InlineUIContainer>
+            </TextBlock>
         </Grid>
     </Viewbox>
 </Page>

@@ -99,29 +99,21 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="appear_up_children_face_image">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChildrenFaceImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="365">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <ExponentialEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <ExponentialEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChildrenFaceImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChildrenFaceImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <ExponentialEase EasingMode="EaseInOut"/>
+                        <BounceEase EasingMode="EaseInOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1">
+                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <ExponentialEase EasingMode="EaseInOut"/>
+                        <BounceEase EasingMode="EaseInOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="flip_manga_image">
@@ -756,6 +748,45 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Key="wipe_in_challenge_time_result_msg_grid">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChallengeTimeResultImage01" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1800"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChallengeTimeResultImage02" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="1800"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChallengeTimeResultImage03" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="1800"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChallengeTimeResultImage04" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="1800"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="wipe_in_word_art_msg">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiCenterDownSmallImage" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiCenterDownSmallImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Page.Resources>
 
     <Viewbox>
@@ -998,7 +1029,7 @@
                 </Image>
                 <Grid x:Name="Challenge2CoverGrid" Background="Transparent"/>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid" >
+            <Grid x:Name="GroupeActivityGrid" d:IsHidden="True" >
                 <Image x:Name="GroupActivityTitle" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Images/group_activity_title01.png" Height="155"/>
                 <TextBlock x:Name="GroupActivitText" FontSize="40" Text="友だちと話し合って、「ちょっぴりうきうき」をたくさん書いてみよう！"  HorizontalAlignment="Left" Margin="300,530,300,500"/>
                 <Image x:Name="GroupActivityWritingBubleImage" Source="/Images/writing_text_buble.png" Stretch="Fill" Margin="300,600,300,10"/>
@@ -1184,9 +1215,14 @@
                 </Image>
                 <Image x:Name="AkamaruEndingImage" HorizontalAlignment="Left" Height="470" Margin="59,460,0,0" VerticalAlignment="Top" Width="436" Source="/Images/akamaru_face_04.png" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="Epiloguegrid" d:IsHidden="True">
-                <TextBlock x:Name="EpilogueText" Margin="100,140,450,290" FontSize="70" LineHeight="120" Text="青助くんはうきうきシューズをつかって、&#10;「ちょっぴりうきうき」をみつけて&#10;毎日少しずつやってみました。&#10;すると…なんだか少しずつ元気になってきたようです。" d:IsHidden="True"/>
-                <Image x:Name="EpilogueItem" Source="/Images/item02_solo.png" Margin="1288,465,12,10" d:IsHidden="True"/>
+            <Grid x:Name="ChallengeTimeResultGrid">
+                <Grid x:Name="ChallengeTimeResultMessageGrid">
+                    <Image x:Name="ChallengeTimeResultImage01" Margin="100,0,100,700" Height="200" Width="1600" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Left" Source="/Images/challenge_time_result_msg_02_01.png"/>
+                    <Image x:Name="ChallengeTimeResultImage02" Margin="100,125,100,625" Height="200" Width="400" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Left" Source="/Images/challenge_time_result_msg_02_02.png"/>
+                    <Image x:Name="ChallengeTimeResultImage03" Margin="100,250,100,500" Height="200" Width="400" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Left" Source="/Images/challenge_time_result_msg_02_03.png"/>
+                    <Image x:Name="ChallengeTimeResultImage04" Margin="100,375,100,375" Height="200" Width="1800" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Left" Source="/Images/challenge_time_result_msg_02_04.png"/>
+                </Grid>
+                <Image x:Name="EpilogueItem" Source="/Images/item02_solo.png" Margin="1288,465,12,10"/>
             </Grid>
             <Grid x:Name="ShirojiGrid" d:IsHidden="True" >
                 <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="1271,343,70,110" d:IsHidden="True">
@@ -1493,7 +1529,8 @@
                         <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
                     </Button>
                 </Grid>
-                <Grid x:Name="CanvasGrid" d:IsHidden="True"  >
+                <Grid x:Name="CanvasGrid"  >
+                    <Border x:Name="CanvasBackBorder" BorderThickness="1" BorderBrush="Black" Margin="0,300,0,0" Background="White"/>
                     <InkCanvas x:Name="NameCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,300,0,0" Background="{x:Null}">
                         <InkCanvas.DefaultDrawingAttributes>
                             <DrawingAttributes Height="20" Width="20" StylusTip="Ellipse"/>

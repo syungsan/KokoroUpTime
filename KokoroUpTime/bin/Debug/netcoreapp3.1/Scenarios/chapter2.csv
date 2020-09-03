@@ -1,6 +1,6 @@
 ﻿reset
 scene,前説
-jump,チャレンジタイムパート②終了
+jump,チャレンジタイムパート②
 image,bg_image,background_02.png
 image,children_face_image,kimi_face_01.png,appear_up,no_sync
 image,main_msg_bubble_image,left_big_bubble_yellow.png
@@ -133,7 +133,7 @@ image,bg_image,background_07.png
 image,shiroji_left_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
-msg,main_msg,「ちょっぴりうきうき」のポイントは、鬱✓きもちの大きさが小さい鬱✓かんたんにできることがたいせつなのじゃ,白じい
+msg,main_msg,「ちょっぴりうきうき」のポイントは、鬱【word_art_01】鬱【word_art_02】ことが大切なのじゃ,白じい
 next
 reset
 image,bg_image,orange_gradation.png
@@ -204,8 +204,8 @@ msg,main_msg,チャレンジタイムはできたかのう？鬱きもちの小�
 next
 reset
 image,bg_image,background_03.png
-grid,epilogue_grid
-msg,epilogue_text,青助くんはうきうきシューズをつかって、鬱「ちょっぴりうきうき」をみつけて鬱毎日少しずつやってみました。鬱すると…なんだか少しずつ元気になってきたようです。
+grid,challenge_time_result_grid
+grid,challenge_time_result_msg_grid,wipe_in
 next
 scene,会話②
 reset
@@ -234,14 +234,12 @@ grid,item_point_message_grid
 image,item_point_message_bubble_image,small_bubble_left_up.png,appear_expansion
 msg,item_point_msg_text,うきうきシューズをつかって鬱「ちょっぴりうきうき」を探すときのポイントは鬱3つあるのじゃ！,白じい
 next
-
 scene,グループアクティビティ
 reset
 image,bg_image,blue_gradation.png
 grid,groupe_activity_grid
 grid,item_plate_grid
 wait
-
 scene,まとめ
 reset
 image,bg_image,background_09.png
@@ -265,7 +263,6 @@ image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
 msg,main_msg,第2回で登場した発明品は、「うきうきシューズ」じゃ！鬱アイテム図鑑から、いつでも確認できるぞい！,白じい
 next
-
 scene,アイテム図鑑
 reset
 image,bg_image,background_mokume2.PNG

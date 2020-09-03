@@ -70,6 +70,10 @@
     <None Remove="Images\challenge2_title.png" />
     <None Remove="Images\challenge_frame1.png" />
     <None Remove="Images\challenge_time.png" />
+    <None Remove="Images\challenge_time_result_msg_02_01.png" />
+    <None Remove="Images\challenge_time_result_msg_02_02.png" />
+    <None Remove="Images\challenge_time_result_msg_02_03.png" />
+    <None Remove="Images\challenge_time_result_msg_02_04.png" />
     <None Remove="Images\challenge_time_text.png" />
     <None Remove="Images\challenge_time_title.png" />
     <None Remove="Images\check_manga.png" />
@@ -226,6 +230,8 @@
     <None Remove="Images\water_frame.png" />
     <None Remove="Images\white_frame.png" />
     <None Remove="Images\wish_check.png" />
+    <None Remove="Images\word_art_msg_02_01.png" />
+    <None Remove="Images\word_art_msg_02_02.png" />
     <None Remove="Images\writing_text_buble.png" />
     <None Remove="Images\yazirusi.png" />
     <None Remove="children_stand_01.png" />
@@ -301,6 +307,10 @@
     <Resource Include="Images\challenge1_title.png" />
     <Resource Include="Images\challenge2_title.png" />
     <Resource Include="Images\challenge_frame1.png" />
+    <Resource Include="Images\challenge_time_result_msg_02_01.png" />
+    <Resource Include="Images\challenge_time_result_msg_02_02.png" />
+    <Resource Include="Images\challenge_time_result_msg_02_03.png" />
+    <Resource Include="Images\challenge_time_result_msg_02_04.png" />
     <Resource Include="Images\challenge_time_text.png" />
     <Resource Include="Images\challenge_time_title.png" />
     <Resource Include="Images\check_manga.png" />
@@ -453,6 +463,8 @@
     <Resource Include="Images\water_frame.png" />
     <Resource Include="Images\white_frame.png" />
     <Resource Include="Images\wish_check.png" />
+    <Resource Include="Images\word_art_msg_02_01.png" />
+    <Resource Include="Images\word_art_msg_02_02.png" />
     <Resource Include="Images\writing_text_buble.png" />
     <Resource Include="Images\yazirusi.png" />
   </ItemGroup>

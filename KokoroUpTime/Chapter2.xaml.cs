@@ -75,7 +75,7 @@ namespace KokoroUpTime
         private Dictionary<string, Ellipse> GoodEventObject = null;
 
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
-        private string[] IMAGE_TEXTS = { "name" };
+        private string[] IMAGE_TEXTS = { "name" ,"word_art_01", "word_art_02" };
         private string[] WORD_TEXTS = { "marker", "bold" };
 
         private Dictionary<string, SolidColorBrush> CharacterColor = null;
@@ -93,15 +93,8 @@ namespace KokoroUpTime
 
         private string tag;
 
-        // 仮のユーザネームを設定
-        public string userName = "なまえ";
-
         // なったことのある自分の気持ちの一時記録用
         public List<string> mySelectGoodEvents = new List<string>();
-
-        public int aosukesSizeOfFeelingOfSleeping;
-        public string aosukesKindOfFeelingOfSleeping;
-        public string aosukesDifficultyOfSleeping;
 
         public string aosukesSizeOfFeelingOfEating;
         public string aosukesKindOfFeelingOfEating;
@@ -116,6 +109,8 @@ namespace KokoroUpTime
         public string aosukesDifficultyOfTalkingWithFriend;
 
         public Image MyALittlleExcitingEvents ;
+
+
 
 
 
@@ -144,37 +139,14 @@ namespace KokoroUpTime
             // データモデルインスタンス確保
             this.dataChapter2 = new DataChapter2();
 
-            // データベース本体のファイルのパス設定
-            string dbName = $"{userName}.sqlite";
-            string dirPath = $"./Log/{userName}/";
-
-            // FileUtils.csからディレクトリ作成のメソッド
-            // 各ユーザの初回起動のとき実行ファイルの場所下のLogフォルダにユーザネームのフォルダを作る
-            DirectoryUtils.SafeCreateDirectory(dirPath);
-
-            // 現在時刻を取得
-            this.dataChapter2.CreatedAt = DateTime.Now.ToString();
-
-            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-            {
-                // 仮（本当は名前を登録するタイミングで）
-                connection.CreateTable<DataOption>();
-                connection.CreateTable<DataProgress>();
-                connection.CreateTable<DataChapter2>();
-
-                // 毎回のアクセス日付を記録
-                connection.Insert(this.dataChapter2);
-            }
-
             this.EditingModeItemsControl.ItemsSource = EDIT_BUTTON;
 
             this.CharacterColor = new Dictionary<string, SolidColorBrush>
             {
                 ["白じい"] = new SolidColorBrush(Colors.Purple),
                 ["青助"] = new SolidColorBrush(Colors.Aqua),
-                ["赤丸"] = new SolidColorBrush(Colors.Red), 
-                ["キミ"] =new SolidColorBrush(Colors.Yellow),
+                ["赤丸"] = new SolidColorBrush(Colors.Red),
+                ["キミ"] = new SolidColorBrush(Colors.Yellow),
             };
 
             this.InitControls();
@@ -239,7 +211,6 @@ namespace KokoroUpTime
                 ["kind_of_feeling_aosuke_text"] = this.KindOfFeelingAosukeTextBlock,
                 ["size_of_feeling_aosuke_text"] = this.SizeOfFeelingAosukeTextBlock,
                 ["ending_msg_text"] = this.EndingMessageTextBlock,
-                ["epilogue_text"]=this.EpilogueText,
                 ["children_face_small_left_msg_text"] = this.ChildrenFaceSmallLeftMessageTextBlock,
                 ["main_msg"] = this.MainMessageTextBlock,
                 ["thin_msg"] = this.ThinMessageTextBlock,
@@ -324,7 +295,8 @@ namespace KokoroUpTime
                 ["difficulty_select_grid"] =this.DifficultySelectGrid,
                 ["select_feeling_grid"] =this.SelectFeelingGrid,
                 ["exit_back_grid"] = this.ExitBackGrid,
-                ["epilogue_grid"] =this.Epiloguegrid,
+                ["challenge_time_result_grid"] =this.ChallengeTimeResultGrid,
+                ["challenge_time_result_msg_grid"] = this.ChallengeTimeResultMessageGrid,
                 ["challenge2_cover_grid"]=this.Challenge2CoverGrid,
             };
 
@@ -371,9 +343,10 @@ namespace KokoroUpTime
 
             this.ItemReviewGrid.Visibility = Visibility.Hidden;
             this.ChallegeTimeGrid.Visibility = Visibility.Hidden;
-            this.Epiloguegrid.Visibility = Visibility.Hidden;
+            this.ChallengeTimeResultGrid.Visibility = Visibility.Hidden;
+            this.ChallengeTimeResultMessageGrid.Visibility = Visibility.Hidden;
 
-          
+
             this.ChildrenFaceSmallLeftMessageGrid.Visibility = Visibility.Hidden;
             this.ChallengeMessageGrid.Visibility = Visibility.Hidden;
             this.KimiPlateInnerUpGrid.Visibility = Visibility.Hidden;
@@ -495,7 +468,7 @@ namespace KokoroUpTime
             this.AosukeSizeOfFeelingText.Text = "";
             this.Challenge2BubbleActionText.Text = "";
 
-            this.EpilogueText.Text = "";
+            
 
 
 
@@ -1178,12 +1151,15 @@ namespace KokoroUpTime
                         matchIndexs.Append(index);
                     }
                 }
-
-                foreach (var tex in texts)
+                if(text2ds.Count < texts.Length)
                 {
-                    List<string> tex1ds = new List<string> { tex };
-                    text2ds.Add(tex1ds);
+                    foreach (var tex in texts)
+                    {
+                        List<string> tex1ds = new List<string> { tex };
+                        text2ds.Add(tex1ds);
+                    }
                 }
+               
 
                 foreach (var matchIndex in matchIndexs)
                 {
@@ -1213,6 +1189,7 @@ namespace KokoroUpTime
        
         void ShowMessage(TextBlock textObject, List<List<string>> messages)
         {
+           
             textObject.Text = "";
             textObject.Visibility = Visibility.Visible;
 
@@ -1251,7 +1228,22 @@ namespace KokoroUpTime
 
                     this.imageInlines.Add(imageInline);
                 }
+                if(msgs[0] == "word_art_01")
+                {
+                    var imageInline = new InlineUIContainer { Child = new Image { Name="WordArtMessage01" , Source = null, Height = 48 , Width=0 , Stretch=Stretch.UniformToFill} };
 
+                    textObject.Inlines.Add(imageInline);
+
+                    this.imageInlines.Add(imageInline);
+                }
+                if (msgs[0] == "word_art_02")
+                {
+                    var imageInline = new InlineUIContainer { Child = new Image {Name = "WordArtMessage02" ,Source = null, Height = 48, Width=0 ,Stretch = Stretch.UniformToFill} };
+
+                    textObject.Inlines.Add(imageInline);
+
+                    this.imageInlines.Add(imageInline);
+                }
                 var run = new Run { Text = "", Foreground = new SolidColorBrush(Colors.Black) };
 
                 textObject.Inlines.Add(run);
@@ -1288,6 +1280,8 @@ namespace KokoroUpTime
 
                     string namePngPath = "./temp/temp_name.png";
 
+                    bool _isSync = false;
+
                     if (msgs[0] == "name" && File.Exists(namePngPath))
                     {
                         // msgs[0].Replace("name", "");
@@ -1305,7 +1299,49 @@ namespace KokoroUpTime
 
                         image.Freeze();
 
-                        (this.imageInlines[imageInlineCount].Child as Image).Source = image;
+                        this.imageInlineCount++;
+
+                        this.inlineCount++;
+                        this.word_num = 0;
+
+                        return;
+                    }
+                    if (msgs[0] == "word_art_01")
+                    {
+                        
+                        (this.imageInlines[imageInlineCount].Child as Image).Source = new BitmapImage(new Uri($"Images/word_art_msg_02_01.png", UriKind.Relative));
+
+                        var _wordArtImage = (this.imageInlines[imageInlineCount].Child as Image);
+
+                        var _imageName = _wordArtImage.Name;
+
+                        var expansionrate = (this.imageInlines[imageInlineCount].Child as Image).Height / (this.imageInlines[imageInlineCount].Child as Image).Source.Height;
+
+                        var _newWidth = _wordArtImage.Source.Width*expansionrate;
+
+                        this.WipeInWordArtMessage(wordArtImage: _wordArtImage,imageName: _imageName, newWidth: _newWidth, TimeSpan.Parse("0:0:1"));
+
+                        this.imageInlineCount++;
+
+                        this.inlineCount++;
+                        this.word_num = 0;
+
+                        return;
+                    }
+                    if (msgs[0] == "word_art_02")
+                    {
+
+                        (this.imageInlines[imageInlineCount].Child as Image).Source = new BitmapImage(new Uri($"Images/word_art_msg_02_02.png", UriKind.Relative));
+
+                        var _wordArtImage = (this.imageInlines[imageInlineCount].Child as Image);
+
+                        var _imageName = _wordArtImage.Name;
+
+                        var expansionrate = (this.imageInlines[imageInlineCount].Child as Image).Height / (this.imageInlines[imageInlineCount].Child as Image).Source.Height;
+
+                        var _newWidth = _wordArtImage.Source.Width * expansionrate;
+
+                        this.WipeInWordArtMessage(wordArtImage: _wordArtImage, imageName: _imageName, newWidth: _newWidth, TimeSpan.Parse("0:0:1"));
 
                         this.imageInlineCount++;
 
@@ -1606,7 +1642,7 @@ namespace KokoroUpTime
 
                 //仮置き
                 string nameBmp = "GroupActivity2.bmp";
-                string dirPath = $"./Log/{userName}";
+                string dirPath = $"./Log/{this.initConfig.userName}";
 
                 string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
                 var startupPath = FileUtils.GetStartupPath();
@@ -1959,6 +1995,53 @@ namespace KokoroUpTime
             BitmapSource grayBitmap = BitmapSource.Create(width, height, 96, 96, PixelFormats.Pbgra32, null, grayPixcels, stride);
 
             return grayBitmap;
+        }
+
+        private void WipeInWordArtMessage(Image wordArtImage, string imageName, double newWidth, TimeSpan duration)
+        {
+            this.msgTimer.Stop();
+            /*
+            Storyboard sb = new Storyboard();
+
+            DoubleAnimationUsingKeyFrames animation = new DoubleAnimationUsingKeyFrames();
+            sb.Children.Add(animation);
+            var frame = new EasingDoubleKeyFrame(newWidth, TimeSpan.Parse("0:0:1"));
+            animation.KeyFrames.Add(frame);
+            Storyboard.SetTargetName(animation, imageName);
+            Storyboard.SetTargetProperty(animation, new PropertyPath("(FrameworkElement.Width)"));
+           
+
+            var beginsb = new BeginStoryboard { Storyboard = sb, Name = imageName };
+            RegisterName(imageName, beginsb);
+
+            
+            if (sb != null)
+            {
+                // 二重終了防止策
+                bool isDuplicate = false;
+
+                sb.Completed += (s, e) =>
+                {
+                    if (!isDuplicate)
+                    {
+                        this.msgTimer.Start();
+
+                        isDuplicate = true;
+                    }
+                };
+                wordArtImage.BeginStoryboard(sb);
+            }
+            */
+
+            DoubleAnimation animation = new DoubleAnimation(newWidth,duration);
+            wordArtImage.BeginAnimation(Image.WidthProperty, animation);
+
+            while (wordArtImage.Width != newWidth)
+            {
+                MessageBox.Show("少々wait");
+            }
+
+            this.msgTimer.Start();
         }
 
     }
