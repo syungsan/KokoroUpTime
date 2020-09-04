@@ -1,6 +1,7 @@
 ﻿using CsvReadWrite;
 using Expansion;
 using FileIOUtils;
+using Osklib;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -21,6 +21,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using WMPLib;
 using WpfAnimatedGif;
+
 
 
 
@@ -76,7 +77,7 @@ namespace KokoroUpTime
 
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
         private string[] IMAGE_TEXTS = { "name" ,"word_art_01", "word_art_02" };
-        private string[] WORD_TEXTS = { "marker", "bold" };
+        private string[] WORD_TEXTS = { "marker", "bold" ,"under_line"};
 
         private Dictionary<string, SolidColorBrush> CharacterColor = null;
 
@@ -190,7 +191,9 @@ namespace KokoroUpTime
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
                 ["item_point_message_bubble_image"]=this.ItemPointMessageBubbleImage,
                 ["item_left_last_image"] =this.ItemLeftLastImage,
-                ["challenge2_action_buble_image"] =this.Challenge2ActionBubleImage,
+                ["challenge2_action_bubble_image"] =this.Challenge2ActionBubbleImage,
+                ["activity_title_image"] =this.ActivityTitleImage,
+                ["activity_text_image"] =this.ActivityTextImage,
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -259,9 +262,9 @@ namespace KokoroUpTime
             {
                 ["session_grid"] = this.SessionGrid,
                 ["challenge1_grid"] = this.Challenge1Grid,
-                ["challenge_time_grid"] = this.ChallegeTimeGrid,
+                ["activity_grid"] = this.ActivityGrid,
                 ["challenge_time_title_grid"] =this.ChallengeTimeTitleGrid,
-                ["groupe_activity_grid"]=this.GroupeActivityGrid,
+                ["group_activity_grid"]=this.GroupActivityGrid,
                 ["item_plate_grid"]=this.ItemPlateGrid,
                 ["challenge2_grid"] = this.Challenge2Grid,
 
@@ -298,6 +301,7 @@ namespace KokoroUpTime
                 ["challenge_time_result_grid"] =this.ChallengeTimeResultGrid,
                 ["challenge_time_result_msg_grid"] = this.ChallengeTimeResultMessageGrid,
                 ["challenge2_cover_grid"]=this.Challenge2CoverGrid,
+                ["goupe_activity_message_grid"]=this.GroupeActivityMessageGrid,
             };
 
             GoodEventObject = new Dictionary<string, Ellipse>
@@ -327,7 +331,7 @@ namespace KokoroUpTime
             this.Challenge1Grid.Visibility = Visibility.Hidden;
             this.Challenge2Grid.Visibility = Visibility.Hidden;
             this.ChallengeTimeTitleGrid.Visibility = Visibility.Hidden;
-            this.GroupeActivityGrid.Visibility = Visibility.Hidden;
+            this.GroupActivityGrid.Visibility = Visibility.Hidden;
             this.CanvasGrid.Visibility = Visibility.Hidden;
             this.ItemPlateGrid.Visibility = Visibility.Hidden;
             this.Challenge2CoverGrid.Visibility = Visibility.Hidden;
@@ -342,7 +346,9 @@ namespace KokoroUpTime
             this.ItemPointMessageGrid.Visibility = Visibility.Hidden;
 
             this.ItemReviewGrid.Visibility = Visibility.Hidden;
-            this.ChallegeTimeGrid.Visibility = Visibility.Hidden;
+            this.ActivityGrid.Visibility = Visibility.Hidden;
+            this.ActivityTitleImage.Visibility = Visibility.Hidden;
+            this.ActivityTextImage.Visibility = Visibility.Hidden;
             this.ChallengeTimeResultGrid.Visibility = Visibility.Hidden;
             this.ChallengeTimeResultMessageGrid.Visibility = Visibility.Hidden;
 
@@ -446,6 +452,11 @@ namespace KokoroUpTime
 
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
             this.CanvasGrid.Visibility = Visibility.Hidden;
+            
+            this.GroupActivityWritingText.Visibility = Visibility.Hidden;
+            this.GroupeActivityMessageGrid.Visibility = Visibility.Hidden;
+            
+            this.tag = "";
 
             this.SessionSubTitleTextBlock.Text = "";
             this.SessionSentenceTextBlock.Text = "";
@@ -467,8 +478,10 @@ namespace KokoroUpTime
             this.AosukeKindOfFeelingText.Text = "";
             this.AosukeSizeOfFeelingText.Text = "";
             this.Challenge2BubbleActionText.Text = "";
+            this.GroupActivityWritingText.Text = "";
 
-            
+
+
 
 
 
@@ -516,6 +529,21 @@ namespace KokoroUpTime
 
             switch (tag)
             {
+                case "start":
+
+                    // 画面のフェードイン処理とか入れる（別関数を呼び出す）
+
+                    this.dataProgress.CurrentChapter = 1;
+
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataProgress SET CurrentChapter = '{this.dataProgress.CurrentChapter}' WHERE Id = 1;");
+                    }
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
                 case "end":
 
                     // 画面のフェードアウト処理とか入れる（別関数を呼び出す）
@@ -574,6 +602,8 @@ namespace KokoroUpTime
                     {
                         gridAnimeIsSync = this.scenarios[this.scenarioCount][3];
                     }
+
+                   
 
                     // アニメを実現するストーリーボードの指定
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
@@ -767,6 +797,7 @@ namespace KokoroUpTime
 
                     bool msgButtonVisible = true;
 
+                    
                     if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
                     {
                         var _msgButtonVisible = this.scenarios[this.scenarioCount][1];
@@ -775,9 +806,12 @@ namespace KokoroUpTime
                         {
                             msgButtonVisible = false;
                         }
+                        if (_msgButtonVisible == "next_only")
+                        {
+                            this.NextMessageButton.Visibility = Visibility.Visible;
+                        }
                     }
-
-                    if (msgButtonVisible)
+                    else
                     {
                         this.NextMessageButton.Visibility = Visibility.Visible;
                         this.BackMessageButton.Visibility = Visibility.Visible;
@@ -1106,29 +1140,7 @@ namespace KokoroUpTime
 
         private List<List<string>> SequenceCheck(string text)
         {
-            // 正規表現によって$と$の間の文字列を抜き出す（無駄処理）
-            var Matches = new Regex(@"\$(.+?)\$").Matches(text);
-
-            for (int i = 0; i < Matches.Count; i++)
-            {
-                var sequence = Matches[i].Value;
-
-                switch (sequence)
-                {
-                    case "$aosukes_kind_of_feeling$":
-
-                        //     text = text.Replace("$aosukes_kind_of_feeling$", this.dataChapter2.AosukesKindOfFeelings.Split(",")[0]);
-
-                        break;
-
-
-                    case "$aosukes_size_of_feeling$":
-
-                        //   text = text.Replace("$aosukes_size_of_feeling$", this.dataChapter2.AosukesSizeOfFeeling.ToString());
-
-                        break;
-                }
-            }
+           
 
             // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
             text = text.Replace("鬱", "\u2028");
@@ -1230,7 +1242,7 @@ namespace KokoroUpTime
                 }
                 if(msgs[0] == "word_art_01")
                 {
-                    var imageInline = new InlineUIContainer { Child = new Image { Name="WordArtMessage01" , Source = null, Height = 48 , Width=0 , Stretch=Stretch.UniformToFill} };
+                    var imageInline = new InlineUIContainer { Child = new Image { Name="WordArtMessage01" , Source = null, Height = 80 , Width=0 , Stretch=Stretch.UniformToFill} };
 
                     textObject.Inlines.Add(imageInline);
 
@@ -1238,7 +1250,7 @@ namespace KokoroUpTime
                 }
                 if (msgs[0] == "word_art_02")
                 {
-                    var imageInline = new InlineUIContainer { Child = new Image {Name = "WordArtMessage02" ,Source = null, Height = 48, Width=0 ,Stretch = Stretch.UniformToFill} };
+                    var imageInline = new InlineUIContainer { Child = new Image {Name = "WordArtMessage02" ,Source = null, Height = 80, Width=0 ,Stretch = Stretch.UniformToFill} };
 
                     textObject.Inlines.Add(imageInline);
 
@@ -1460,6 +1472,7 @@ namespace KokoroUpTime
             // FullScreen時のデバッグ用に作っておく
             if (button.Name == "ExitButton")
             {
+
                 this.CoverLayerImage.Visibility = Visibility.Visible;
                 this.ExitBackGrid.Visibility = Visibility.Visible;
             }
@@ -1480,6 +1493,37 @@ namespace KokoroUpTime
                 
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
+            }
+            if (button.Name == "BackMessageButton")
+            {
+                for (int i = this.scenarioCount; i < this.scenarios.Count; i--)
+                {
+                    bool flag = false;
+                    if (this.scenarios[i][0] == "msg")
+                    {
+                        string talkingCharacter = this.scenarios[i][3];
+
+                        for (int j=i-1; j < this.scenarios.Count; j--)
+                        {
+                            if (this.scenarios[j][0] == "msg" && talkingCharacter == this.scenarios[j][3])
+                            {
+                                this.scenarioCount = j;
+                                this.ScenarioPlay();
+
+                                flag = true;
+
+                                break;
+                            }
+                            
+                        }
+                    }
+                    if(flag == true)
+                    {
+                        break;
+                    }
+                   
+                }
+
             }
             if (button.Name == "NextPageButton")
             {
@@ -1597,13 +1641,30 @@ namespace KokoroUpTime
                     }
                 }
             }
+            if(button.Name == "SelectFeelingCompleteButton")
+            {
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+            } 
             if(button.Name== "GroupActivityWritingButton")
             {
-                this.CanvasGrid.Visibility = Visibility.Visible;
+                if (this.position == "group_activity_grid")
+                {
+                    if (this.dataOption.InputMethod == 1)
+                    {
+                        this.GroupActivityWritingText.Visibility = Visibility.Visible;
+                        this.GroupActivityWritingText.Focus();
+                    }
+                    if (this.dataOption.InputMethod == 0)
+                    {
+                        this.CanvasGrid.Visibility = Visibility.Visible;
+                    }
+                }
             }
             if (button.Content == "えんぴつ")
             {
-                NameCanvas.EditingMode = InkCanvasEditingMode.Ink;
+                    NameCanvas.EditingMode = InkCanvasEditingMode.Ink;
+
 
             }
             if (button.Content == "けしごむ")
@@ -1618,7 +1679,7 @@ namespace KokoroUpTime
             {
 
                 // ストロークが描画されている境界を取得
-                Rect rectBounds = new Rect(0, 0, this.NameCanvas.ActualWidth, this.NameCanvas.ActualHeight);
+                System.Windows.Rect rectBounds = new System.Windows.Rect(0, 0,this.NameCanvas.ActualWidth,this.NameCanvas.ActualHeight );
 
                 // 描画先を作成
                 DrawingVisual dv = new DrawingVisual();
@@ -1666,7 +1727,7 @@ namespace KokoroUpTime
 
                 pngmap.Freeze();
 
-                this.GroupeActivityGrid.Visibility = Visibility.Visible;
+                this.GroupActivityGrid.Visibility = Visibility.Visible;
                 this.CanvasGrid.Visibility = Visibility.Hidden;
 
                 this.GroupActivityWritingImage.Source = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
@@ -2000,48 +2061,43 @@ namespace KokoroUpTime
         private void WipeInWordArtMessage(Image wordArtImage, string imageName, double newWidth, TimeSpan duration)
         {
             this.msgTimer.Stop();
-            /*
-            Storyboard sb = new Storyboard();
 
-            DoubleAnimationUsingKeyFrames animation = new DoubleAnimationUsingKeyFrames();
-            sb.Children.Add(animation);
-            var frame = new EasingDoubleKeyFrame(newWidth, TimeSpan.Parse("0:0:1"));
-            animation.KeyFrames.Add(frame);
-            Storyboard.SetTargetName(animation, imageName);
-            Storyboard.SetTargetProperty(animation, new PropertyPath("(FrameworkElement.Width)"));
-           
+            DoubleAnimation animation = new DoubleAnimation(newWidth,duration);
 
-            var beginsb = new BeginStoryboard { Storyboard = sb, Name = imageName };
-            RegisterName(imageName, beginsb);
-
-            
-            if (sb != null)
+            animation.Completed += (s, e) =>
             {
                 // 二重終了防止策
                 bool isDuplicate = false;
 
-                sb.Completed += (s, e) =>
+                if (!isDuplicate)
                 {
-                    if (!isDuplicate)
-                    {
-                        this.msgTimer.Start();
+                    this.msgTimer.Start();
 
-                        isDuplicate = true;
-                    }
-                };
-                wordArtImage.BeginStoryboard(sb);
-            }
-            */
+                    isDuplicate = true;
+                }
+            };
 
-            DoubleAnimation animation = new DoubleAnimation(newWidth,duration);
             wordArtImage.BeginAnimation(Image.WidthProperty, animation);
+        }
 
-            while (wordArtImage.Width != newWidth)
+        private void TextBoxMouseDown(object sender, RoutedEventArgs e)
+        {
+            if (!OnScreenKeyboard.IsOpened())
             {
-                MessageBox.Show("少々wait");
+                try
+                {
+                    OnScreenKeyboard.Show();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
+        }
 
-            this.msgTimer.Start();
+        private void TriggerKeyboard(object sender, RoutedEventArgs e)
+        {
+
         }
 
     }

@@ -88,6 +88,7 @@
     <None Remove="Images\feeling_value.png" />
     <None Remove="Images\good.png" />
     <None Remove="Images\good_feeling.png" />
+    <None Remove="Images\group_activity_text.png" />
     <None Remove="Images\group_activity_title01.png" />
     <None Remove="Images\hot_word_button1.png" />
     <None Remove="Images\hot_word_button2.png" />
@@ -216,6 +217,7 @@
     <None Remove="Images\short_bubble_right_up.png" />
     <None Remove="Images\size_of_feeling_button_frame.png" />
     <None Remove="Images\small_bubble_center_down.png" />
+    <None Remove="Images\small_bubble_center_right_down.png" />
     <None Remove="Images\small_bubble_left.png" />
     <None Remove="Images\small_bubble_left_down_blue.png" />
     <None Remove="Images\small_bubble_left_down_yellow.png" />
@@ -232,7 +234,7 @@
     <None Remove="Images\wish_check.png" />
     <None Remove="Images\word_art_msg_02_01.png" />
     <None Remove="Images\word_art_msg_02_02.png" />
-    <None Remove="Images\writing_text_buble.png" />
+    <None Remove="Images\writing_text_bubble.png" />
     <None Remove="Images\yazirusi.png" />
     <None Remove="children_stand_01.png" />
     <None Remove="shiroji_02.png" />
@@ -320,6 +322,7 @@
     <Resource Include="Images\complete_button.png" />
     <Resource Include="Images\difficulty_of_action_frame.png" />
     <Resource Include="Images\good.png" />
+    <Resource Include="Images\group_activity_text.png" />
     <Resource Include="Images\group_activity_title01.png" />
     <Resource Include="Images\hot_word_button1.png" />
     <Resource Include="Images\hot_word_button2.png" />
@@ -399,6 +402,7 @@
     <Resource Include="Images\short_bubble_right_up.png" />
     <Resource Include="Images\size_of_feeling_button_frame.png" />
     <Resource Include="Images\small_bubble_center_down.png" />
+    <Resource Include="Images\small_bubble_center_right_down.png" />
     <Resource Include="Images\small_bubble_left_down_blue.png" />
     <Resource Include="Images\small_bubble_left_down_yellow.png" />
     <Resource Include="Images\small_bubble_left_up.png" />
@@ -465,7 +469,7 @@
     <Resource Include="Images\wish_check.png" />
     <Resource Include="Images\word_art_msg_02_01.png" />
     <Resource Include="Images\word_art_msg_02_02.png" />
-    <Resource Include="Images\writing_text_buble.png" />
+    <Resource Include="Images\writing_text_bubble.png" />
     <Resource Include="Images\yazirusi.png" />
   </ItemGroup>
 
