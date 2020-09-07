@@ -56,6 +56,7 @@ namespace KokoroUpTime
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
+        private DispatcherTimer buttonTimer;
         private int word_num;
 
         // 各種コントロールを任意の文字列で呼び出すための辞書
@@ -673,6 +674,8 @@ namespace KokoroUpTime
 
                     bool msgButtonVisible = true;
 
+                    this.buttonTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+
                     if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
                     {
                         var _msgButtonVisible = this.scenarios[this.scenarioCount][1];
@@ -681,12 +684,27 @@ namespace KokoroUpTime
                         {
                             msgButtonVisible = false;
                         }
-                    }
+                        if (_msgButtonVisible == "next_only")
+                        {
+                            this.buttonTimer.Start();
+                            this.buttonTimer.Tick += (s, args) =>
+                            {
+                                buttonTimer.Stop();
+                                this.NextMessageButton.Visibility = Visibility.Visible;
+                            };
 
-                    if (msgButtonVisible)
+                        }
+                    }
+                    else
                     {
-                        this.NextMessageButton.Visibility = Visibility.Visible;
-                        this.BackMessageButton.Visibility = Visibility.Visible;
+                        this.buttonTimer.Start();
+                        this.buttonTimer.Tick += (s, args) =>
+                        {
+                            this.buttonTimer.Stop();
+                            this.NextMessageButton.Visibility = Visibility.Visible;
+                            this.BackMessageButton.Visibility = Visibility.Visible;
+                        };
+
                     }
                     this.isClickable = true;
 
@@ -695,8 +713,16 @@ namespace KokoroUpTime
                 // 各場面に対する待ち（ページめくりボタン）
                 case "next":
 
-                    this.NextPageButton.Visibility = Visibility.Visible;
-                    this.BackPageButton.Visibility = Visibility.Visible;
+                    this.buttonTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+
+                    this.buttonTimer.Start();
+                    this.buttonTimer.Tick += (s, args) =>
+                    {
+                        this.buttonTimer.Stop();
+                        this.NextPageButton.Visibility = Visibility.Visible;
+                        this.BackPageButton.Visibility = Visibility.Visible;
+                    };
+
 
                     this.isClickable = true;
 
@@ -1331,6 +1357,39 @@ namespace KokoroUpTime
                 // 連続Backの実現にはもっと複雑な処理がいる
             }
             */
+            if (button.Name == "BackMessageButton")
+            {
+                this.BackMessageButton.Visibility = Visibility.Hidden;
+                this.NextMessageButton.Visibility = Visibility.Hidden;
+
+
+                for (int i = this.scenarioCount; i < this.scenarios.Count; i--)
+                {
+                    bool flag = false;
+                    if (this.scenarios[i][0] == "msg")
+                    {
+                        string talkingCharacter = this.scenarios[i][3];
+
+                        for (int j = i - 1; j < this.scenarios.Count; j--)
+                        {
+                            if (this.scenarios[j][0] == "msg" && talkingCharacter == this.scenarios[j][3])
+                            {
+                                this.scenarioCount = j;
+                                this.ScenarioPlay();
+
+                                flag = true;
+
+                                break;
+                            }
+
+                        }
+                    }
+                    if (flag == true)
+                    {
+                        break;
+                    }
+                }
+            }
 
             // FullScreen時のデバッグ用に作っておく
             if (button.Name == "ExitButton")
@@ -1411,6 +1470,9 @@ namespace KokoroUpTime
                     }
                     this.hasAosukesSizeOfFeelingRecorded = true;
                 }
+
+                button.Visibility = Visibility.Hidden;
+                
             }
 
             if (button.Name == "SelectFeelingCompleteButton")
@@ -1440,8 +1502,22 @@ namespace KokoroUpTime
             {
                 this.isClickable = false;
 
+                if (button.Name == "NextMessageButton")
+                {
+                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                    this.NextMessageButton.Visibility = Visibility.Hidden;
+                }
+
+                if (button.Name == "NextPageButton")
+                {
+                    this.BackPageButton.Visibility = Visibility.Hidden;
+                    this.NextPageButton.Visibility = Visibility.Hidden;
+                }
+
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
+
+               
             }
 
             if (button.Name == "ReturnToTitleButton")

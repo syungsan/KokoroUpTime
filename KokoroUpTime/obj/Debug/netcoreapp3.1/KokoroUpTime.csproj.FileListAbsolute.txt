@@ -321,4 +321,3 @@ C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netco
 C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.dll
 C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.pdb
 C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.genruntimeconfig.cache
-C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache

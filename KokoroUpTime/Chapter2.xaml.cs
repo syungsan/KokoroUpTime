@@ -1,11 +1,14 @@
 ﻿using CsvReadWrite;
 using Expansion;
 using FileIOUtils;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Information;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using Osklib;
 using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Media;
@@ -37,9 +40,6 @@ namespace KokoroUpTime
         private string[] GOOD_FEELINGS = { "うれしい", "しあわせ", "たのしい", "ホッとした", "きもちいい", "まんぞく", "すき", "やる気マンマン", "かんしゃ", "わくわく", "うきうき", "ほこらしい" };
         private string[] BAD_FEELINGS = { "心配", "こまった", "不安", "こわい", "おちこみ", "がっかり", "いかり", "イライラ", "はずかしい", "ふまん", "かなしい", "おびえる" };
 
-        // メッセージスピードはオプションで設定できるようにする
-        private float MESSAGE_SPEED = 3000000.0f;
-
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
         private List<List<string>> scenarios = null;
@@ -58,6 +58,7 @@ namespace KokoroUpTime
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
+        private DispatcherTimer buttonTimer;
         private int word_num;
 
         private int inlineCount;
@@ -109,7 +110,7 @@ namespace KokoroUpTime
         public string aosukesKindOfFeelingOfTalkingWithFriend;
         public string aosukesDifficultyOfTalkingWithFriend;
 
-        public Image MyALittlleExcitingEvents ;
+        public string myALittlleExcitingEvents ;
 
 
 
@@ -264,7 +265,7 @@ namespace KokoroUpTime
                 ["challenge1_grid"] = this.Challenge1Grid,
                 ["activity_grid"] = this.ActivityGrid,
                 ["challenge_time_title_grid"] =this.ChallengeTimeTitleGrid,
-                ["group_activity_grid"]=this.GroupActivityGrid,
+                ["group_activity_grid"]=this.GroupeActivityGrid,
                 ["item_plate_grid"]=this.ItemPlateGrid,
                 ["challenge2_grid"] = this.Challenge2Grid,
 
@@ -331,7 +332,7 @@ namespace KokoroUpTime
             this.Challenge1Grid.Visibility = Visibility.Hidden;
             this.Challenge2Grid.Visibility = Visibility.Hidden;
             this.ChallengeTimeTitleGrid.Visibility = Visibility.Hidden;
-            this.GroupActivityGrid.Visibility = Visibility.Hidden;
+            this.GroupeActivityGrid.Visibility = Visibility.Hidden;
             this.CanvasGrid.Visibility = Visibility.Hidden;
             this.ItemPlateGrid.Visibility = Visibility.Hidden;
             this.Challenge2CoverGrid.Visibility = Visibility.Hidden;
@@ -453,9 +454,12 @@ namespace KokoroUpTime
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
             this.CanvasGrid.Visibility = Visibility.Hidden;
             
-            this.GroupActivityWritingText.Visibility = Visibility.Hidden;
+            //this.GroupeActivityInputText.Visibility = Visibility.Hidden;
             this.GroupeActivityMessageGrid.Visibility = Visibility.Hidden;
-            
+
+            this.InputTextGrid.Visibility = Visibility.Hidden;
+
+
             this.tag = "";
 
             this.SessionSubTitleTextBlock.Text = "";
@@ -478,7 +482,7 @@ namespace KokoroUpTime
             this.AosukeKindOfFeelingText.Text = "";
             this.AosukeSizeOfFeelingText.Text = "";
             this.Challenge2BubbleActionText.Text = "";
-            this.GroupActivityWritingText.Text = "";
+            //this.GroupeActivityInputText.Text = "";
 
 
 
@@ -792,12 +796,10 @@ namespace KokoroUpTime
                 // メッセージに対する待ち（メッセージボタンの表示切り替え）
                 case "wait":
 
-
-                    
-
                     bool msgButtonVisible = true;
 
-                    
+                    this.buttonTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+
                     if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
                     {
                         var _msgButtonVisible = this.scenarios[this.scenarioCount][1];
@@ -808,25 +810,43 @@ namespace KokoroUpTime
                         }
                         if (_msgButtonVisible == "next_only")
                         {
-                            this.NextMessageButton.Visibility = Visibility.Visible;
+                            this.buttonTimer.Start();
+                            this.buttonTimer.Tick += (s, args) =>
+                            {
+                                buttonTimer.Stop();
+                                this.NextMessageButton.Visibility = Visibility.Visible;
+                            };
+
                         }
                     }
                     else
                     {
-                        this.NextMessageButton.Visibility = Visibility.Visible;
-                        this.BackMessageButton.Visibility = Visibility.Visible;
+                        this.buttonTimer.Start();
+                        this.buttonTimer.Tick += (s, args) =>
+                        {
+                            this.buttonTimer.Stop();
+                            this.NextMessageButton.Visibility = Visibility.Visible;
+                            this.BackMessageButton.Visibility = Visibility.Visible;
+                        };
+
                     }
                     this.isClickable = true;
-
+                    
                     break;
 
                 // 各場面に対する待ち（ページめくりボタン）
                 case "next":
 
-                    
+                    this.buttonTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
 
-                    this.NextPageButton.Visibility = Visibility.Visible;
-                    this.BackPageButton.Visibility = Visibility.Visible;
+                    this.buttonTimer.Start();
+                    this.buttonTimer.Tick += (s, args) =>
+                    {
+                        this.buttonTimer.Stop();
+                        this.NextPageButton.Visibility = Visibility.Visible;
+                        this.BackPageButton.Visibility = Visibility.Visible;
+                    };
+            
 
                     this.isClickable = true;
 
@@ -1209,7 +1229,7 @@ namespace KokoroUpTime
             // メッセージ表示処理
             this.msgTimer = new DispatcherTimer();
             this.msgTimer.Tick += ViewMsg;
-            this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / MESSAGE_SPEED);
+            this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / this.dataOption.MessageSpeed);
             this.msgTimer.Start();
 
             this.inlineCount = 0;
@@ -1325,13 +1345,11 @@ namespace KokoroUpTime
 
                         var _wordArtImage = (this.imageInlines[imageInlineCount].Child as Image);
 
-                        var _imageName = _wordArtImage.Name;
-
                         var expansionrate = (this.imageInlines[imageInlineCount].Child as Image).Height / (this.imageInlines[imageInlineCount].Child as Image).Source.Height;
 
                         var _newWidth = _wordArtImage.Source.Width*expansionrate;
 
-                        this.WipeInWordArtMessage(wordArtImage: _wordArtImage,imageName: _imageName, newWidth: _newWidth, TimeSpan.Parse("0:0:1"));
+                        this.WipeInWordArtMessage(wordArtImage: _wordArtImage, newWidth: _newWidth, TimeSpan.Parse("0:0:1"));
 
                         this.imageInlineCount++;
 
@@ -1347,13 +1365,11 @@ namespace KokoroUpTime
 
                         var _wordArtImage = (this.imageInlines[imageInlineCount].Child as Image);
 
-                        var _imageName = _wordArtImage.Name;
-
                         var expansionrate = (this.imageInlines[imageInlineCount].Child as Image).Height / (this.imageInlines[imageInlineCount].Child as Image).Source.Height;
 
                         var _newWidth = _wordArtImage.Source.Width * expansionrate;
 
-                        this.WipeInWordArtMessage(wordArtImage: _wordArtImage, imageName: _imageName, newWidth: _newWidth, TimeSpan.Parse("0:0:1"));
+                        this.WipeInWordArtMessage(wordArtImage: _wordArtImage, newWidth: _newWidth, TimeSpan.Parse("0:0:1"));
 
                         this.imageInlineCount++;
 
@@ -1488,14 +1504,11 @@ namespace KokoroUpTime
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
-            if (button.Name == "NextMessageButton")
-            {
-                
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
             if (button.Name == "BackMessageButton")
             {
+                this.BackMessageButton.Visibility = Visibility.Hidden;
+                this.NextMessageButton.Visibility = Visibility.Hidden;
+
                 for (int i = this.scenarioCount; i < this.scenarios.Count; i--)
                 {
                     bool flag = false;
@@ -1503,7 +1516,7 @@ namespace KokoroUpTime
                     {
                         string talkingCharacter = this.scenarios[i][3];
 
-                        for (int j=i-1; j < this.scenarios.Count; j--)
+                        for (int j = i - 1; j < this.scenarios.Count; j--)
                         {
                             if (this.scenarios[j][0] == "msg" && talkingCharacter == this.scenarios[j][3])
                             {
@@ -1514,26 +1527,13 @@ namespace KokoroUpTime
 
                                 break;
                             }
-                            
                         }
                     }
-                    if(flag == true)
+                    if (flag == true)
                     {
                         break;
                     }
-                   
                 }
-
-            }
-            if (button.Name == "NextPageButton")
-            {
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
-            if (button.Name == "MangaFlipButton")
-            {
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
             }
             if (button.Name == "BranchButton1")
             {
@@ -1597,8 +1597,7 @@ namespace KokoroUpTime
 
                 }
                
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
+                
 
                 if(scene== "「おいしいものを食べる」ときは？")
                 {
@@ -1627,7 +1626,7 @@ namespace KokoroUpTime
 
                     }
                 }
-                if (scene == "「休み時間に友だちとおしゃべりする」")
+                if (scene == "「休み時間に友だちとおしゃべりする」ときは？")
                 {
                     this.aosukesDifficultyOfTalkingWithFriend = this.AosukeDifficultyOfActionText.Text;
                     this.aosukesSizeOfFeelingOfTalkingWithFriend = this.AosukeSizeOfFeelingText.Text;
@@ -1640,32 +1639,68 @@ namespace KokoroUpTime
                         connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfTalkingWithFriend = '{this.dataChapter2.AosukesDifficultyOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                     }
                 }
-            }
-            if(button.Name == "SelectFeelingCompleteButton")
-            {
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            } 
-            if(button.Name== "GroupActivityWritingButton")
-            {
-                if (this.position == "group_activity_grid")
+
+                if (scene == "グループアクティビティ")
                 {
                     if (this.dataOption.InputMethod == 1)
                     {
-                        this.GroupActivityWritingText.Visibility = Visibility.Visible;
-                        this.GroupActivityWritingText.Focus();
+                        this.myALittlleExcitingEvents = this.InputText.Text;
+                        this.dataChapter2.MyALittlleExcitingEvents = this.myALittlleExcitingEvents;
+                        
+                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        {
+                            connection.Execute($@"UPDATE DataChapter2 SET MyALittlleExcitingEvents = '{this.dataChapter2.MyALittlleExcitingEvents}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                        }
+                    }
+                }
+
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+            }
+            
+            if(button.Name== "GroupeActivityWritingButton")
+            {
+                
+                    if (this.dataOption.InputMethod == 1)
+                    {
+                        this.InputTextGrid.Visibility = Visibility.Visible;
+
+                        this.ReadyKeyboard();
+                        this.InputText.Focus();
+
+                        if (this.GroupeActivityWritingButton.Content == null)
+                        {
+                            this.GroupeActivityWritingButton.Content = new ScrollViewer { Height = 350, Width = 1300, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto };
+                            ScrollViewer scroll = this.GroupeActivityWritingButton.Content as ScrollViewer;
+                            TextBlock text = new TextBlock { Name = "GroupeActivityInputText", FontSize = 40, FontFamily = new FontFamily("Yu Gothic"), TextWrapping = TextWrapping.Wrap};
+                            text.PreviewMouseDown += new MouseButtonEventHandler(TextBoxMouseDown);
+
+                            scroll.Content = text;
+                            this.InputText.SelectAll();
+                        }
+                        else
+                        {
+                            ScrollViewer scroll = this.GroupeActivityWritingButton.Content as ScrollViewer;
+                            TextBlock text = scroll.Content as TextBlock;
+                            this.InputText.Text = text.Text;
+
+                        }
                     }
                     if (this.dataOption.InputMethod == 0)
                     {
+                        if (this.GroupeActivityWritingButton.Content == null)
+                        {
+                            this.GroupeActivityWritingButton.Content = new Image { Name = "GroupeActivityWritingImage", Margin = new Thickness(0, 60, 0, 0) };
+                        }
+
                         this.CanvasGrid.Visibility = Visibility.Visible;
+                        
                     }
-                }
+                
             }
             if (button.Content == "えんぴつ")
             {
-                    NameCanvas.EditingMode = InkCanvasEditingMode.Ink;
-
-
+                NameCanvas.EditingMode = InkCanvasEditingMode.Ink;
             }
             if (button.Content == "けしごむ")
             {
@@ -1702,7 +1737,7 @@ namespace KokoroUpTime
                 rtb.Render(dv);
 
                 //仮置き
-                string nameBmp = "GroupActivity2.bmp";
+                string nameBmp = "GroupeActivity02_MyALittlleExcitingEvents.bmp";
                 string dirPath = $"./Log/{this.initConfig.userName}";
 
                 string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
@@ -1727,18 +1762,11 @@ namespace KokoroUpTime
 
                 pngmap.Freeze();
 
-                this.GroupActivityGrid.Visibility = Visibility.Visible;
+                this.GroupeActivityGrid.Visibility = Visibility.Visible;
                 this.CanvasGrid.Visibility = Visibility.Hidden;
 
-                this.GroupActivityWritingImage.Source = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
+               (this.GroupeActivityWritingButton.Content as Image).Source  = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
 
-                if (scene == "グループアクティビティ")
-                {
-                    if (this.SelectFeelingNextButton.Visibility == Visibility.Hidden)
-                    {
-                        this.SelectFeelingNextButton.Visibility = Visibility.Visible;
-                    }
-                }
             }
             if (this.tag == "かんたんにできるか")
             {
@@ -1778,7 +1806,54 @@ namespace KokoroUpTime
                 string _jumptag = "かんたんにできるか";
                 this.JumpScenario(_jumptag);
             }
-            
+
+            if(button.Name== "InputTextCompleteButton")
+            {
+                if (this.InputText.Text != "")
+                {
+                    this.InputTextGrid.Visibility = Visibility.Hidden;
+                    ScrollViewer scroll = this.GroupeActivityWritingButton.Content as ScrollViewer;
+                    TextBlock text = scroll.Content as TextBlock;
+                    text.Text = this.InputText.Text;
+
+                    if (OnScreenKeyboard.IsOpened())
+                    {
+                        try
+                        {
+                            OnScreenKeyboard.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("なにも書かれてないよ");
+                }
+                
+              
+            }
+            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton"))
+            {
+                this.isClickable = false;
+
+                if (button.Name == "NextMessageButton")
+                {
+                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                    this.NextMessageButton.Visibility = Visibility.Hidden;
+                }
+
+                if (button.Name == "NextPageButton")
+                {
+                    this.BackPageButton.Visibility = Visibility.Hidden;
+                    this.NextPageButton.Visibility = Visibility.Hidden;
+                }
+
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
+            }
             if (button.Name == "ReturnToTitleButton")
             {
                 TitlePage titlePage = new TitlePage();
@@ -2058,7 +2133,7 @@ namespace KokoroUpTime
             return grayBitmap;
         }
 
-        private void WipeInWordArtMessage(Image wordArtImage, string imageName, double newWidth, TimeSpan duration)
+        private void WipeInWordArtMessage(Image wordArtImage, double newWidth, TimeSpan duration)
         {
             this.msgTimer.Stop();
 
@@ -2080,7 +2155,7 @@ namespace KokoroUpTime
             wordArtImage.BeginAnimation(Image.WidthProperty, animation);
         }
 
-        private void TextBoxMouseDown(object sender, RoutedEventArgs e)
+        private void ReadyKeyboard()
         {
             if (!OnScreenKeyboard.IsOpened())
             {
@@ -2095,10 +2170,9 @@ namespace KokoroUpTime
             }
         }
 
-        private void TriggerKeyboard(object sender, RoutedEventArgs e)
+        private void TextBoxMouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            this.Button_Click(this.GroupeActivityWritingButton, e);
         }
-
     }
 }

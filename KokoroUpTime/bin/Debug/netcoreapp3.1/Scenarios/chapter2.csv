@@ -1,7 +1,6 @@
 ﻿start
 reset
 scene,前説
-jump,グループアクティビティ
 image,bg_image,background_02.png
 image,children_face_image,kimi_face_01.png,appear_up,no_sync
 image,main_msg_bubble_image,left_big_bubble_yellow.png
@@ -21,7 +20,7 @@ scene,条件分岐
 reset
 image,bg_image,background_02.png
 grid,branch_select_grid
-wait
+wait,no_button
 
 scene,漫画シーン
 reset
@@ -63,7 +62,7 @@ image,bg_image,orange_gradation.png
 grid,challenge1_grid
 image,shiroji_very_small_right_image,shiroji_03.png
 grid,challenge_msg_grid,appear_expansion
-wait_tap
+wait,no_button
 hide,grid,challenge_msg_grid
 jump,会話①
 
@@ -143,9 +142,9 @@ grid,challenge2_grid,appear_fade_in
 button,select_feeling_next_button,appear_fade_in
 wait,no_button
 reset
-jump,チャレンジタイムパート②「おいしいものを食べる」
+jump,チャレンジタイムパート②「おいしいものを食べる」ときは？
 
-scene,チャレンジタイムパート②「おいしいものを食べる」
+scene,チャレンジタイムパート②「おいしいものを食べる」ときは？
 text,challenge2_bubble_action_text,おいしいものを食べる
 text,aosuke_kind_of_feeling_text,うれしい
 text,aosuke_size_of_feeling_text,(      )
@@ -153,11 +152,11 @@ image,challenge2_action_bubble_image,blue_bubble.png
 scene,「おいしいものを食べる」ときは？
 image,bg_image,orange_gradation.png
 grid,challenge2_grid
-wait
+wait,no_button
 reset
-jump,チャレンジタイムパート②「全部のテストで100点をとる」
+jump,チャレンジタイムパート②「全部のテストで100点をとる」ときは？
 
-scene,チャレンジタイムパート②「全部のテストで100点をとる」
+scene,チャレンジタイムパート②「全部のテストで100点をとる」ときは？
 text,challenge2_bubble_action_text,全部のテストで100点をとる
 text,aosuke_kind_of_feeling_text,うれしい
 text,aosuke_size_of_feeling_text,(      )
@@ -165,11 +164,11 @@ image,challenge2_action_bubble_image,blue_bubble.png
 scene,「全部のテストで100点をとる」ときは？
 image,bg_image,orange_gradation.png
 grid,challenge2_grid
-wait
+wait,no_button
 reset
-jump,チャレンジタイムパート②「休み時間に友だちとおしゃべりする」
+jump,チャレンジタイムパート②「休み時間に友だちとおしゃべりする」ときは？
 
-scene,チャレンジタイムパート②「休み時間に友だちとおしゃべりする」
+scene,チャレンジタイムパート②「休み時間に友だちとおしゃべりする」ときは？
 text,challenge2_bubble_action_text,休み時間に友だちとおしゃべりする
 text,aosuke_kind_of_feeling_text,楽しい
 text,aosuke_size_of_feeling_text,(      )
@@ -177,7 +176,7 @@ image,challenge2_action_bubble_image,blue_bubble.png
 scene,「休み時間に友だちとおしゃべりする」ときは？
 image,bg_image,orange_gradation.png
 grid,challenge2_grid
-wait
+wait,no_button
 reset
 jump,チャレンジタイムパート②終了
 
@@ -192,6 +191,7 @@ image,bg_image,blue_gradation.png
 grid,difficulty_select_grid
 
 scene,チャレンジタイムパート②終了
+reset
 image,bg_image,background_07.png
 image,shiroji_left_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
