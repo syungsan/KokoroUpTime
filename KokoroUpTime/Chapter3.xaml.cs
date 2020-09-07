@@ -164,6 +164,7 @@ namespace KokoroUpTime
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage, //
                 ["kind_of_feeling_input_image"] = this.KindOfFeelingInputImage, //
                 ["shiroji_small_left_down_image"] = this.ShirojiSmallLeftDownImage, //
+                ["hot_word_title_image"] = this.HotWordTitleImage, //
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -368,6 +369,8 @@ namespace KokoroUpTime
             this.HotWordButtonGrid.Visibility = Visibility.Hidden; //
             this.HotWordCommentGrid.Visibility = Visibility.Hidden; //
             this.ShirojiSmallLeftDownImage.Visibility = Visibility.Hidden; //
+
+            this.HotWordTitleImage.Visibility = Visibility.Hidden; //
 
             this.Let_sTryTitleBorder.Visibility = Visibility.Hidden; //
 
@@ -925,6 +928,19 @@ namespace KokoroUpTime
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
+
+                    break;
+
+                case "goto":
+
+                    if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
+                    {
+                        var jumpToLabel = this.scenarios[this.scenarioCount][1];
+
+                        this.JumpTo(jumpToLabel);
+                    }
+                    // this.scenarioCount += 1;
+                    // this.ScenarioPlay();
 
                     break;
 
@@ -1526,7 +1542,7 @@ namespace KokoroUpTime
                 {
                     this.isClickable = false;
 
-                    JumpTo("manga");
+                    this.JumpTo("manga");
                 }
 
                 if (button.Name == "CheckMangaButton")
@@ -1535,12 +1551,12 @@ namespace KokoroUpTime
 
                     if (this.scene == "キミちゃんのきもちを考える1")
                     {
-                        JumpTo("manga_kimi_part");
+                        this.JumpTo("manga_kimi_part");
                     }
 
                     if (this.scene == "青助くんのきもちを考える1")
                     {
-                        JumpTo("manga_aosuke_part");
+                        this.JumpTo("manga_aosuke_part");
                     }
                 }
 
@@ -1550,12 +1566,12 @@ namespace KokoroUpTime
                     
                     if (this.scene == "キミちゃんのきもちを考える1")
                     {
-                        JumpTo("think_kimi's_feeling_1");
+                        this.JumpTo("think_kimi's_feeling_1");
                     }
 
                     if (this.scene == "青助くんのきもちを考える1")
                     {
-                        JumpTo("think_aosuke's_feeling_1");
+                        this.JumpTo("think_aosuke's_feeling_1");
                     }
                 }
 
@@ -1565,14 +1581,33 @@ namespace KokoroUpTime
 
                     if (this.scene == "キミちゃんのきもちを考える1")
                     {
-                        JumpTo("chiku_chiku_kotoba");
+                        this.JumpTo("chiku_chiku_kotoba");
                     }
 
                     if (this.scene == "青助くんのきもちを考える1")
                     {
-                        JumpTo("think_kimi's_feeling_1");
+                        this.JumpTo("think_kimi's_feeling_1");
                     }
                 }
+
+                if (this.scene == "ホットワードボタン")
+                {
+                    Image[] hotWordButtonImages = { HotWord1ButtonImage, HotWord2ButtonImage, HotWord3ButtonImage, HotWord4ButtonImage };
+
+                    for (int index = 1; index <= 4; index++)
+                    {
+                        if (button.Name == $@"HotWord{index}Button")
+                        {
+                            this.isClickable = false;
+
+                            hotWordButtonImages[index - 1].Source = this.Image2Gray(hotWordButtonImages[index - 1].Source);
+
+                            this.JumpTo($@"hot_word_{index}");
+                        }
+                    }
+                }
+
+ 
             }
 
             

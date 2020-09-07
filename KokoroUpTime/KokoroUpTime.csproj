@@ -72,6 +72,10 @@
     <None Remove="Images\face_small_bubble.png" />
     <None Remove="Images\feeling_value.png" />
     <None Remove="Images\good_feeling.png" />
+    <None Remove="Images\hot_word_1_title.png" />
+    <None Remove="Images\hot_word_2_title.png" />
+    <None Remove="Images\hot_word_3_title.png" />
+    <None Remove="Images\hot_word_4_title.png" />
     <None Remove="Images\hot_word_button1.png" />
     <None Remove="Images\hot_word_button2.png" />
     <None Remove="Images\hot_word_button3.png" />
@@ -266,6 +270,10 @@
     <Resource Include="Images\compare_akamaru_value_frame.png" />
     <Resource Include="Images\compare_aosuke_value_frame.png" />
     <Resource Include="Images\complete_button.png" />
+    <Resource Include="Images\hot_word_1_title.png" />
+    <Resource Include="Images\hot_word_2_title.png" />
+    <Resource Include="Images\hot_word_3_title.png" />
+    <Resource Include="Images\hot_word_4_title.png" />
     <Resource Include="Images\hot_word_button1.png" />
     <Resource Include="Images\hot_word_button2.png" />
     <Resource Include="Images\hot_word_button3.png" />
