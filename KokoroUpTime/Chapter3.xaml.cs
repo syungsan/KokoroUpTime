@@ -90,6 +90,8 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
+        public int hotWordCount = 0;
+
         public Chapter3()
         {
             InitializeComponent();
@@ -133,6 +135,7 @@ namespace KokoroUpTime
                 ["children_face_left_center_image"] = this.ChildrenFaceLeftCenterImage, //
                 ["children_feeling_comment_image"] = this.ChildrenFeelingCommentImage, //
                 ["shiroji_very_small_right_up_image"] = this.ShirojiVerySmallRightUpImage, //
+                ["item_center_right_image"] = this.ItemCenterRightImage, //
 
 
                 ["item_left_last_image"] = this.ItemLeftLastImage,
@@ -373,6 +376,8 @@ namespace KokoroUpTime
             this.HotWordTitleImage.Visibility = Visibility.Hidden; //
 
             this.Let_sTryTitleBorder.Visibility = Visibility.Hidden; //
+
+            this.ItemCenterRightImage.Visibility = Visibility.Hidden; //
 
             this.ChildrenFeelingTitleBorder.Visibility = Visibility.Hidden; //
             this.ChildrenFaceLeftCenterImage.Visibility = Visibility.Hidden; //
@@ -1600,6 +1605,8 @@ namespace KokoroUpTime
                         {
                             this.isClickable = false;
 
+                            this.hotWordCount += 1;
+
                             hotWordButtonImages[index - 1].Source = this.Image2Gray(hotWordButtonImages[index - 1].Source);
 
                             this.JumpTo($@"hot_word_{index}");
@@ -1650,6 +1657,22 @@ namespace KokoroUpTime
 
             if (button.Name == "NextPageButton")
             {
+                if (this.scene == "ホットワードボタン" && this.hotWordCount >= 4)
+                {
+                    Button[] hotWordButtons = { HotWord1Button, HotWord2Button, HotWord3Button, HotWord4Button };
+
+                    foreach (Button hotWordButton in hotWordButtons)
+                    {
+                        hotWordButton.IsEnabled = false;
+                    }
+
+                    this.JumpTo("hot_word_complete");
+                }
+
+
+
+
+
                 if (this.scene == "キミちゃんのきもちの種類" && !hasKimisKindOfFeelingsRecorded)
                 {
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
