@@ -262,6 +262,7 @@ hide,grid,main_msg_grid
 image,main_msg_bubble_image,left_big_bubble_blue.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,うん・・・・（ボクは野球が苦手なんだ・・・）,青助
+
 next
 scene,赤丸くんのきもちの種類
 reset

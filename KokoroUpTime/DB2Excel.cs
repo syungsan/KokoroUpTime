@@ -21,6 +21,8 @@ namespace KokoroUpTime
         private static DataItem dataItem = new DataItem();
         private static DataProgress dataProgress = new DataProgress();
 
+        private static DataChapter2 dataChapter2 = new DataChapter2();
+
         public static void WriteDB2Excel(string dbPath, string outputPath, string[] userInfos)
         {
             GetFullInfoFromDB(dbPath);
@@ -63,6 +65,37 @@ namespace KokoroUpTime
             string[] sceneNumCells = { "B9", "B10", "B11", "B12", "B13", "B14", "B15", "B16", "B17", "B18", "B19", "B20" };
             string[] playSceneNumCells = { "C9", "C10", "C11", "C12", "C13", "C14", "C15", "C16", "C17", "C18", "C19", "C20" };
             string[] playSceneNameCells = { "D9", "D10", "D11", "D12", "D13", "D14", "D15", "D16", "D17", "D18", "D19", "D20" };
+
+            excel.SetSheet("まとめ");
+
+            // プレイヤー名
+            excel.WriteCell("B2", $"{userInfos[0]}{userInfos[1]}");
+
+            // アクセス日
+            excel.WriteCell("B5", $"{userInfos[2]}");
+
+            foreach (var (allScene, index) in allScenes.Indexed())
+            {
+                excel.WriteCell(sceneNumCells[index], allScene.Count);
+
+                var playSceneNum = allScene.IndexOf(datProgs[index]);
+
+                excel.WriteCell(playSceneNumCells[index], playSceneNum);
+
+                excel.WriteCell(playSceneNameCells[index], datProgs[index]);
+            }
+
+            // ###############################################################################
+
+            //第２回に書き込む
+
+             excel.SetSheet("第２回");
+
+            // ループで正確にセルに記録するために配列を回す
+            //string[] datProgs = { dataChapter2.MySelectGoodEvents,dataChapter2.AosukesSizeOfFeelingOfEating,dataChapter2.AosukesDifficultyOfEating , dataChapter2.AosukesSizeOfFeelingOfGettingHighScore,dataChapter2.AosukesDifficultyOfGettingHighScore,dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend,dataChapter2.AosukesDifficultyOfTalkingWithFriend,dataChapter2.MyALittlleExcitingEvents };
+            //string[] sceneNumCells = { "B9", "B10", "B11", "B12", "B13", "B14", "B15", "B16", "B17", "B18", "B19", "B20" };
+            //string[] playSceneNumCells = { "C9", "C10", "C11", "C12", "C13", "C14", "C15", "C16", "C17", "C18", "C19", "C20" };
+            //string[] playSceneNameCells = { "D9", "D10", "D11", "D12", "D13", "D14", "D15", "D16", "D17", "D18", "D19", "D20" };
 
             excel.SetSheet("まとめ");
 

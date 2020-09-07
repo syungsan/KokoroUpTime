@@ -1653,7 +1653,7 @@ namespace KokoroUpTime
                 case ApplicationGesture.DoubleCircle:
                     answerResult = AnswerResult.Correct;
                     break;
-                case ApplicationGesture.Triangle:
+               case ApplicationGesture.Triangle:
                     answerResult = AnswerResult.Intermediate;
                     break;
                 case ApplicationGesture.Check:
@@ -1668,6 +1668,7 @@ namespace KokoroUpTime
                 case ApplicationGesture.DoubleCurlicue:
                     answerResult = AnswerResult.Incorrect;
                     break;
+                    
 
                 default:
                     throw new InvalidOperationException();

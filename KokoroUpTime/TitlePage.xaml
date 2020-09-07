@@ -61,12 +61,12 @@
                 <Image x:Name="CurrentNameImage" Height="48"/>
                 <TextBlock x:Name="CurrentUserTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Width="432" Height="70"/>
             </StackPanel>
-            <TextBlock x:Name="CurrentSceneTextBlock" Margin="703,979,245,27" Text="TextBlock" TextWrapping="Wrap" FontSize="36"/>
-            <Button x:Name="EndButton" Content="終了" FontSize="36" Foreground="White" Click="Button_Click" Margin="411,999,1319,10"/>
+            <TextBlock x:Name="CurrentSceneTextBlock" Margin="703,979,245,27" Text="TextBlock" TextWrapping="Wrap" FontSize="36" d:IsHidden="True"/>
+            <Button x:Name="EndButton" Content="終了" FontSize="36" Foreground="White" Click="Button_Click" Margin="411,999,1319,10" d:IsHidden="True"/>
             <Button x:Name="SelectDataButton" Content="データ管理" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,999,1520,10"/>
-            <Button x:Name="SelectUserButton" Content="なまえ選択" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,918,1520,91"/>
-            <Button x:Name="CreditButton" Content="作成　こころあっぷタイム編集委員会" HorizontalAlignment="Left" Margin="1343,1026,0,0" VerticalAlignment="Top" FontSize="36" Background="{x:Null}" FontWeight="Bold" Foreground="#FFD0F9FF" Click="Button_Click" BorderBrush="{x:Null}"/>
-            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
+            <Button x:Name="SelectUserButton" Content="なまえ選択" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,918,1520,91" d:IsHidden="True"/>
+            <Button x:Name="CreditButton" Content="作成　こころあっぷタイム編集委員会" HorizontalAlignment="Left" Margin="1343,1026,0,0" VerticalAlignment="Top" FontSize="36" Background="{x:Null}" FontWeight="Bold" Foreground="#FFD0F9FF" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True"/>
+            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
             <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169">
                 <Border x:Name="SelectUserListBorder" BorderThickness="1" BorderBrush="Black" Background="#FFFFCECE" CornerRadius="32,32,32,32"/>
                 <TextBlock x:Name="SelectUserListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="なまえの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
