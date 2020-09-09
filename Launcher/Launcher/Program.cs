@@ -7,7 +7,7 @@ namespace Launcher
     {
         static void Main(string[] args)
         {
-            Process.Start("./Programs\\KokoroUpTime.exe");
+            Process.Start("./netcoreapp3.1\\KokoroUpTime.exe");
         }
     }
 }
