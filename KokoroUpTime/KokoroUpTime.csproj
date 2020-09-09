@@ -63,7 +63,6 @@
     <None Remove="Images\challenge_frame1.png" />
     <None Remove="Images\challenge_time.png" />
     <None Remove="Images\check_manga.png" />
-    <None Remove="Images\circle.png" />
     <None Remove="Images\circle_word.PNG" />
     <None Remove="Images\compare_akamaru_value_frame.png" />
     <None Remove="Images\compare_aosuke_value_frame.png" />
@@ -265,7 +264,6 @@
     <Resource Include="Images\blue_needle.png" />
     <Resource Include="Images\challenge_frame1.png" />
     <Resource Include="Images\check_manga.png" />
-    <Resource Include="Images\circle.png" />
     <Resource Include="Images\circle_word.PNG" />
     <Resource Include="Images\compare_akamaru_value_frame.png" />
     <Resource Include="Images\compare_aosuke_value_frame.png" />
@@ -414,6 +412,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Datas\default.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter2.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter3.csv">

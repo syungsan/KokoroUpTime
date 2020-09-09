@@ -32,10 +32,10 @@ namespace KokoroUpTime
         private string position = "";
 
         // マウスクリックを可能にするかどうかのフラグ
-        private bool isClickable = false;
+        // private bool isClickable = false;
 
         // 画面を何回タップしたか
-        private int tapCount = 0;
+        // private int tapCount = 0;
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
@@ -255,11 +255,13 @@ namespace KokoroUpTime
                     break;
 
                 // メッセージに対する待ち（メッセージボタンの表示切り替え）
+                /*
                 case "wait":
 
                     this.isClickable = true;
 
                     break;
+                */
 
                 case "time_span":
 
@@ -287,7 +289,7 @@ namespace KokoroUpTime
 
                     this.ReturnToTopButton.Visibility = Visibility.Visible;
 
-                    this.isClickable = true;
+                    // this.isClickable = true;
 
                     break;
 
