@@ -37,6 +37,9 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
+        public DataChapter1 dataChapter1 = new DataChapter1();
+        public DataChapter2 dataChapter2 = new DataChapter2();
+
         private string[] dirPaths;
 
         // 初回アクセスかどうかのフラグ
@@ -83,6 +86,18 @@ namespace KokoroUpTime
                 this.dataOption = _dataOption;
                 this.dataItem = _dataItem;
                 this.dataProgress = _dataProgress;
+            }
+        }
+
+        public void SetCurrentResult(DataChapter1 _dataChapter1, DataChapter2 _dataChapter2)
+        {
+            if (_dataChapter1 != null)
+            {
+                dataChapter1 = _dataChapter1;
+            }
+            if (_dataChapter2 != null)
+            {
+                dataChapter2 = _dataChapter2;
             }
         }
 
@@ -755,7 +770,7 @@ namespace KokoroUpTime
                         this.NavigationService.Navigate(chapter2);
                     }
                     break;
-
+                /*
                 case "第3回":
 
                     if (this.initConfig.userName == null)
@@ -771,6 +786,7 @@ namespace KokoroUpTime
                         this.NavigationService.Navigate(chapter3);
                     }
                     break;
+                    */
             }
         }
 

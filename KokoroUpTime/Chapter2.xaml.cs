@@ -537,7 +537,7 @@ namespace KokoroUpTime
 
                     // 画面のフェードイン処理とか入れる（別関数を呼び出す）
 
-                    this.dataProgress.CurrentChapter = 1;
+                    this.dataProgress.CurrentChapter = 2;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
@@ -552,11 +552,11 @@ namespace KokoroUpTime
 
                     // 画面のフェードアウト処理とか入れる（別関数を呼び出す）
 
-                    this.dataProgress.HasCompletedChapter1 = true;
+                    this.dataProgress.HasCompletedChapter2 = true;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataProgress SET HasCompletedChapter1 = '{Convert.ToInt32(this.dataProgress.HasCompletedChapter1)}' WHERE Id = 1;");
+                        connection.Execute($@"UPDATE DataProgress SET HasCompletedChapter2 = '{Convert.ToInt32(this.dataProgress.HasCompletedChapter2)}' WHERE Id = 1;");
                     }
                     this.ReturnToTitleButton.Visibility = Visibility.Visible;
 
@@ -574,8 +574,15 @@ namespace KokoroUpTime
                 // シーン名を取得
                 case "scene":
 
-                    this.scene = this.scenarios[this.scenarioCount][1]; 
+                    this.scene = this.scenarios[this.scenarioCount][1];
 
+                    this.dataProgress.CurrentScene = this.scene;
+                    this.dataProgress.LatestChapter1Scene = this.scene;
+
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter2Scene = '{this.dataProgress.LatestChapter1Scene}' WHERE Id = 1;");
+                    }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
@@ -1682,9 +1689,11 @@ namespace KokoroUpTime
                         {
                             ScrollViewer scroll = this.GroupeActivityWritingButton.Content as ScrollViewer;
                             TextBlock text = scroll.Content as TextBlock;
-                            this.InputText.Text = text.Text;
-
-                        }
+                            if (text.Text != "")
+                            {
+                                 this.InputText.Text = text.Text;
+                            }
+                    }
                     }
                     if (this.dataOption.InputMethod == 0)
                     {

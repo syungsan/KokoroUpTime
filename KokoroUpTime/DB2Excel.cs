@@ -21,7 +21,11 @@ namespace KokoroUpTime
         private static DataItem dataItem = new DataItem();
         private static DataProgress dataProgress = new DataProgress();
 
+        private static DataChapter1 dataChapter1 = new DataChapter1();
+        private static Dictionary<string, string> chapter1Result = null;
+
         private static DataChapter2 dataChapter2 = new DataChapter2();
+        private static Dictionary<string, string> chapter2Result = null;
 
         public static void WriteDB2Excel(string dbPath, string outputPath, string[] userInfos)
         {
@@ -86,38 +90,59 @@ namespace KokoroUpTime
             }
 
             // ###############################################################################
-
-            //第２回に書き込む
-
-             excel.SetSheet("第２回");
-
-            // ループで正確にセルに記録するために配列を回す
-            //string[] datProgs = { dataChapter2.MySelectGoodEvents,dataChapter2.AosukesSizeOfFeelingOfEating,dataChapter2.AosukesDifficultyOfEating , dataChapter2.AosukesSizeOfFeelingOfGettingHighScore,dataChapter2.AosukesDifficultyOfGettingHighScore,dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend,dataChapter2.AosukesDifficultyOfTalkingWithFriend,dataChapter2.MyALittlleExcitingEvents };
-            //string[] sceneNumCells = { "B9", "B10", "B11", "B12", "B13", "B14", "B15", "B16", "B17", "B18", "B19", "B20" };
-            //string[] playSceneNumCells = { "C9", "C10", "C11", "C12", "C13", "C14", "C15", "C16", "C17", "C18", "C19", "C20" };
-            //string[] playSceneNameCells = { "D9", "D10", "D11", "D12", "D13", "D14", "D15", "D16", "D17", "D18", "D19", "D20" };
-
-            excel.SetSheet("まとめ");
-
-            // プレイヤー名
-            excel.WriteCell("B2", $"{userInfos[0]}{userInfos[1]}");
-
-            // アクセス日
-            excel.WriteCell("B5", $"{userInfos[2]}");
-
-            foreach (var (allScene, index) in allScenes.Indexed())
+            /*
+            //第１回に書き込み
+            if(dataProgress.HasCompletedChapter1 == true)
             {
-                excel.WriteCell(sceneNumCells[index], allScene.Count);
+                excel.SetSheet("第１回");
 
-                var playSceneNum = allScene.IndexOf(datProgs[index]);
+                chapter1Result = new Dictionary<string, string>
+                {
+                    { "A4", dataChapter1.MyKindOfGoodFeelings},
+                    { "B5", dataChapter1.MyKindOfBadFeelings },
+                    { "F4" , dataChapter1.KimisKindOfFeelings},
+                    { "F8" , dataChapter1.AkamarusKindOfFeelings},
+                    { "G8" , dataChapter1.AkamarusSizeOfFeeling.ToString()},
+                    { "F12" , dataChapter1.AosukesKindOfFeelings},
+                    { "G12" , dataChapter1.AosukesSizeOfFeeling.ToString()},
+                };
 
-                excel.WriteCell(playSceneNumCells[index], playSceneNum);
 
-                excel.WriteCell(playSceneNameCells[index], datProgs[index]);
+                foreach (KeyValuePair<string, string> item in chapter2Result)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
             }
+
 
             // ###############################################################################
 
+            //第２回に書き込み
+            if (dataProgress.HasCompletedChapter2 == true)
+            {
+                excel.SetSheet("第２回");
+
+                chapter2Result = new Dictionary<string, string>
+                {
+                    {"A4" , dataChapter2.MySelectGoodEvents},
+                    {"E5" , dataChapter2.AosukesSizeOfFeelingOfEating},
+                    {"F5" , dataChapter2.AosukesDifficultyOfEating},
+                    {"E6" , dataChapter2.AosukesSizeOfFeelingOfGettingHighScore},
+                    {"F6" , dataChapter2.AosukesDifficultyOfGettingHighScore},
+                    {"E7" , dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend},
+                    {"F7" , dataChapter2.AosukesDifficultyOfTalkingWithFriend},
+                    {"H4" , dataChapter2.MyALittlleExcitingEvents},
+                };
+
+                foreach (KeyValuePair<string, string> item in chapter2Result)
+                {
+                        excel.WriteCell(item.Key, item.Value);
+                }
+
+            }
+
+            // ###############################################################################
+            */
             // 名前を付けて保存する
             if (excel.SaveAs(outputPath) == false)
             {
@@ -172,7 +197,7 @@ namespace KokoroUpTime
                     dataItem.HasGotItem11 = row.HasGotItem11;
                 }
 
-                var progress = connection.Query<DataProgress>("SELECT * FROM DataProgress WHERE Id = 1;");
+               /* var progress = connection.Query<DataProgress>("SELECT * FROM DataProgress WHERE Id = 1;");
 
                 foreach (var row in progress)
                 {
@@ -228,6 +253,47 @@ namespace KokoroUpTime
 
                     dataProgress.HasCompletedChapter12 = row.HasCompletedChapter12;
                 }
+
+                var result1 = connection.Query<DataChapter1>($"SELECT * FROM DataChapter1' WHERE CreatedAt = '{dataChapter1.CreatedAt}';");
+
+                foreach (var row in result1)
+                {
+                    dataChapter1.MyKindOfGoodFeelings = row.MyKindOfGoodFeelings;
+
+                    dataChapter1.MyKindOfBadFeelings = row.MyKindOfBadFeelings;
+
+                    dataChapter1.KimisKindOfFeelings = row.KimisKindOfFeelings;
+
+                    dataChapter1.AkamarusKindOfFeelings = row.AkamarusKindOfFeelings;
+
+                    dataChapter1.AkamarusSizeOfFeeling = row.AkamarusSizeOfFeeling;
+
+                    dataChapter1.AosukesKindOfFeelings = row.AosukesKindOfFeelings;
+
+                    dataChapter1.AosukesSizeOfFeeling = row.AosukesSizeOfFeeling;
+                }
+
+                var result2 = connection.Query<DataChapter2>($@"SELECT * FROM DataChapter2' WHERE CreatedAt = '{dataChapter2.CreatedAt}';");
+
+                foreach (var row in result2)
+                {
+                    dataChapter2.MySelectGoodEvents = row.MySelectGoodEvents;
+
+                    dataChapter2.AosukesSizeOfFeelingOfEating = row.AosukesSizeOfFeelingOfEating;
+
+                    dataChapter2.AosukesDifficultyOfEating = row.AosukesDifficultyOfEating;
+
+                    dataChapter2.AosukesSizeOfFeelingOfGettingHighScore = row.AosukesSizeOfFeelingOfGettingHighScore;
+
+                    dataChapter2.AosukesDifficultyOfGettingHighScore = row.AosukesDifficultyOfGettingHighScore;
+
+                    dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend = row.AosukesSizeOfFeelingOfTalkingWithFriend;
+
+                    dataChapter2.AosukesDifficultyOfTalkingWithFriend = row.AosukesDifficultyOfTalkingWithFriend;
+
+                    dataChapter2.MyALittlleExcitingEvents = row.MyALittlleExcitingEvents;
+                }
+                */
             }
         }
     }

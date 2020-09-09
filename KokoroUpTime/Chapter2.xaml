@@ -1626,7 +1626,7 @@
                         </ItemsControl>
                     </Viewbox>
                 </Grid>
-                <Grid x:Name="InputTextGrid" d:IsHidden="True" >
+                <Grid x:Name="InputTextGrid" >
                     <TextBlock x:Name="AssignmentContentText" Text="「ちょっぴりうきうき」を書いてみよう!" Background="White" FontSize="60" VerticalAlignment="Top" Height="100"/>
                     <TextBox x:Name="InputText" Margin="0,100,0,0" FontSize="40" TextWrapping="Wrap" AcceptsReturn="True" FontFamily="Yu Gothic" Text="(たとえば)みんなでごはんを食べる"  PreviewMouseDown="TextBoxMouseDown" />
                     <Button x:Name="InputTextCompleteButton" VerticalAlignment="Top" HorizontalAlignment="Right" Height="80" Width="150" Content="かんせい!" FontSize="40" Margin="10,10" Click="Button_Click"/>

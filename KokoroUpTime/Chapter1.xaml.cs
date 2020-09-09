@@ -712,18 +712,23 @@ namespace KokoroUpTime
 
                 // 各場面に対する待ち（ページめくりボタン）
                 case "next":
-
-                    this.buttonTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
-
-                    this.buttonTimer.Start();
-                    this.buttonTimer.Tick += (s, args) =>
+                    if (this.scene == "教室のルール")
                     {
-                        this.buttonTimer.Stop();
                         this.NextPageButton.Visibility = Visibility.Visible;
                         this.BackPageButton.Visibility = Visibility.Visible;
-                    };
+                    }
+                    else
+                    {
+                        this.buttonTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
 
-
+                        this.buttonTimer.Start();
+                        this.buttonTimer.Tick += (s, args) =>
+                        {
+                            this.buttonTimer.Stop();
+                            this.NextPageButton.Visibility = Visibility.Visible;
+                            this.BackPageButton.Visibility = Visibility.Visible;
+                        };
+                    }
                     this.isClickable = true;
 
                     break;
@@ -1104,6 +1109,22 @@ namespace KokoroUpTime
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
+                    break;
+
+                case "jump":
+                    string jumptag = this.scenarios[this.scenarioCount][1];
+
+                    for (int i = 0; i < this.scenarios.Count; i++)
+                    {
+                        if (this.scenarios[i][0] == "scene" || this.scenarios[i][0] == "tag")
+                        {
+                            if (jumptag == this.scenarios[i][1])
+                            {
+                                this.scenarioCount = i;
+                                this.ScenarioPlay();
+                            }
+                        }
+                    }
                     break;
             }
         }
@@ -1844,18 +1865,12 @@ namespace KokoroUpTime
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(null);
-
-            this.isMouseDown = false;
         }
 
         // マウスのドラッグ処理（マウスを動かしたとき）
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (!isMouseDown)
-            {
-                return;
-            }
-
+          
             if (Mouse.Captured == this)
             {
                 if (this.SelectHeartGrid.Visibility == Visibility.Visible && (this.scene == "赤丸くんのきもちの大きさ" || this.scene == "青助くんのきもちの大きさ"))

@@ -447,7 +447,9 @@
     <Resource Include="Images\menu_bubble.png" />
     <Resource Include="Images\moya1.png" />
     <Resource Include="Images\moya2.png" />
-    <Resource Include="Images\red_needle.png" />
+    <Resource Include="Images\red_needle.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\return_to_title.png" />
     <Resource Include="Images\right_big_bubble.png" />
     <Resource Include="Images\right_big_bubble_blue.png" />
