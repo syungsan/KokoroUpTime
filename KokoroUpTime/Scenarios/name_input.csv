@@ -6,7 +6,7 @@ grid,main_msg_grid,appear_expansion
 wait
 msg,main_msg,フォッフォッフォ！わしの名前は「白じい」じゃ！鬱みんなの「こころ」の勉強の手助けをしておる。,白じい
 wait
-jump,make_name
+sub,make_name
 hide,grid,make_user_name_complete_grid
 hide,image,cover_layer_image
 msg,main_msg,はじめに、あなたの名前を教えてくれるかの？,白じい
@@ -31,7 +31,7 @@ wait
 image,cover_layer_image
 grid,make_user_name_complete_grid
 wait,no_button
-jump,complete
+sub,complete
 hide,grid,make_user_name_complete_grid
 hide,image,cover_layer_image
 msg,main_msg,それでは、【name】【くん／ちゃん／さん】よ、鬱第1回から始めて見るとよいぞ。,白じい

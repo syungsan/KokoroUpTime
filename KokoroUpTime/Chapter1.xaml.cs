@@ -1111,6 +1111,7 @@ namespace KokoroUpTime
 
                     break;
 
+                /*
                 case "jump":
                     string jumptag = this.scenarios[this.scenarioCount][1];
 
@@ -1126,6 +1127,7 @@ namespace KokoroUpTime
                         }
                     }
                     break;
+                */
             }
         }
 
@@ -1537,8 +1539,6 @@ namespace KokoroUpTime
 
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
-
-               
             }
 
             if (button.Name == "ReturnToTitleButton")

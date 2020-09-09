@@ -10,18 +10,25 @@ bgm,play
 text,music_title_text,もくもくStudy♪
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
+#
 msg,main_msg,それでは【name】【くん／ちゃん／さん】、「こころあっぷタイム」とは何か説明していくぞい。,白じい
 wait,next_only
+#
 msg,main_msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
 wait
+#
 msg,main_msg,楽しくなったり、うれしくなったりするだけでなく、だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。,白じい
 wait
+#
 msg,main_msg,こども、おとな、つよい人、よわい人、大きい人、ちいさい人、どんな人でも、こまっていることがあるのじゃ。,白じい
 wait
+#
 msg,main_msg,『こころあっぷタイム』は、こまっているときに、元気になったり、リラックスできる方法を 学ぶ時間なのだ！ ,白じい
 wait
+#
 msg,main_msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
 wait
+#
 scene,教室のルール
 reset
 image,bg_image,background_03.png
@@ -41,6 +48,7 @@ wait,no_button
 rule,thin_msg,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,all,白じい
 wait_tap
 next
+#
 scene,子供たちの紹介
 reset
 image,bg_image,background_02.png
@@ -48,14 +56,16 @@ image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,今日は、「こころあっぷタイム」に登場する３人を紹介する。,白じい
-wait,next_only
+wait
+#
 hide,grid,main_msg_grid
 clear,text,main_msg
 image,intro_akamaru_face_image,,appear_up,no_sync
 image,main_msg_bubble_image,left_a_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
 msg,main_msg,おれの名前は 赤丸だ。小学校6年だ。好きな食べ物はカレーとコーラだ。苦手なものは犬だ。,赤丸
-wait,next_only
+wait
+#
 hide,grid,main_msg_grid
 clear,text,main_msg
 hide,image,intro_akamaru_face_image
@@ -63,7 +73,8 @@ image,intro_aosuke_face_image,,appear_up,no_sync
 image,main_msg_bubble_image,left_b_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
 msg,main_msg,ぼくの名前は青助です。小学校6年生です。好きなものはテレビ。勉強もスポーツも あんまり得意じゃないんだ。,青助
-wait,next_only
+wait
+#
 hide,grid,main_msg_grid
 clear,text,main_msg
 hide,image,intro_aosuke_face_image
@@ -72,6 +83,7 @@ image,main_msg_bubble_image,left_c_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
 msg,main_msg,わたしの名前はキミです。小学６年生です。好きなものはチョコレートです。人前で話すことがとても苦手です。,キミ
 next
+#
 hide,grid,main_msg_grid
 clear,text,main_msg
 hide,image,intro_kimi_face_image
@@ -84,6 +96,7 @@ image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,この３人とこころあっぷタイムを進めていくぞい！さて、３人は、なにかこまっていることがあるようじゃ。どんなことで、こまっているのだろう？マンガを見ながら考えてみよう！,白じい
 next
+#
 scene,漫画購読
 reset
 bgm,set,atsumare!_tomodachi!.mp3,loop,50

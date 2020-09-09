@@ -324,3 +324,5 @@ C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netco
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Chapter2.g.cs
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\Chapter2.baml
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Scenarios\chapter2.csv
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\Incorrect.wav
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\Intermediate.wav

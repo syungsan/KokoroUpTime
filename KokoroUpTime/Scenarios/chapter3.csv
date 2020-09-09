@@ -1,4 +1,4 @@
-jump,hot_word_complete
+sub,hot_word_complete
 scene,ホットワード全習得
 reset
 image,bg_image,background_12.png
@@ -24,7 +24,8 @@ wait
 msg,main_msg,赤丸くんがあったかスープを使ってみたようじゃ。青助くんとキミちゃんに、どのような「あたたかい言葉」をかけておるかいっしょにみてみよう。,白じい
 image,item_center_right_image
 next
-
+end
+stop
 
 
 
@@ -82,7 +83,7 @@ image,item_left_image,item02_solo.png
 image,item_detail_info_image,item02_info.png
 grid,item_check_grid
 next
-jump,manga
+sub,manga
 scene,漫画購読
 reset
 bgm,set,atsumare!_tomodachi!.mp3,loop,50
@@ -134,7 +135,7 @@ msg,main_msg,赤丸くんは、なんだがチクチクする言葉をつかっ�
 wait
 msg,main_msg,きもちとその大きさを考えてみよう！,白じい
 wait
-jump,think_aosuke's_feeling_1
+sub,think_aosuke's_feeling_1
 scene,青助くんのきもちを考える1
 reset
 image,bg_image,water_frame.png
@@ -154,13 +155,13 @@ button,size_of_feeling_input_button
 button,feeling_next_go_button
 button,feeling_prev_back_button
 wait,no_button
-jump,manga_aosuke_part
+sub,manga_aosuke_part
 reset
 image,manga_title_image,manga3_title.png
 image,manga_image,manga3-1.png,flip
 button,manga_prev_back_button
 wait,no_button
-jump,think_kimi's_feeling_1
+sub,think_kimi's_feeling_1
 scene,キミちゃんのきもちを考える1
 reset
 image,bg_image,water_frame.png
@@ -180,13 +181,13 @@ button,size_of_feeling_input_button
 button,feeling_next_go_button
 button,feeling_prev_back_button
 wait,no_button
-jump,manga_kimi_part
+sub,manga_kimi_part
 reset
 image,manga_title_image,manga3_title.png
 image,manga_image,manga3-2.png,flip
 button,manga_prev_back_button
 wait,no_button
-jump,chiku_chiku_kotoba
+sub,chiku_chiku_kotoba
 scene,赤丸くんのチクチク言葉
 reset
 image,bg_image,background_07.png
@@ -258,7 +259,7 @@ msg,main_msg,あたたかい言葉には、4つの種類があるぞい。鬱鬱
 wait
 msg,main_msg,それぞれの言葉がどのようなものか、見てみようかの。,白じい
 next
-jump,hot_word_button
+sub,hot_word_button
 scene,ホットワードボタン
 reset
 image,bg_image,background_12.png
@@ -266,7 +267,7 @@ grid,hot_word_button_grid
 image,shiroji_small_left_down_image
 grid,hot_word_comment_grid
 wait,no_button
-jump,hot_word_1
+sub,hot_word_1
 reset
 image,bg_image,background_08.png
 image,hot_word_title_image,hot_word_1_title.png
@@ -277,7 +278,7 @@ wait
 msg,main_msg,すごいね。野球上手いね！,青助
 next
 goto,hot_word_button
-jump,hot_word_2
+sub,hot_word_2
 reset
 image,bg_image,background_08.png
 image,hot_word_title_image,hot_word_2_title.png
@@ -288,7 +289,7 @@ wait
 msg,main_msg,だいじょうぶ？気をつけてね。,キミ
 next
 goto,hot_word_button
-jump,hot_word_3
+sub,hot_word_3
 reset
 image,bg_image,background_08.png
 image,hot_word_title_image,hot_word_3_title.png
@@ -299,7 +300,7 @@ wait
 msg,main_msg,がんばってね！おうえんしてるよ。,キミ
 next
 goto,hot_word_button
-jump,hot_word_4
+sub,hot_word_4
 reset
 image,bg_image,background_08.png
 image,hot_word_title_image,hot_word_4_title.png

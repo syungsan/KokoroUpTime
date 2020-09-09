@@ -387,7 +387,7 @@ namespace KokoroUpTime
                     }
                     break;
 
-                case "jump":
+                case "sub":
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -667,11 +667,11 @@ namespace KokoroUpTime
         }
 
         // シナリオ選択肢処理
-        private void JumpTo(string tag)
+        private void GoTo(string tag)
         {
             foreach (var (scenario, index) in this.scenarios.Indexed())
             {
-                if (scenario[0] == "jump" && scenario[1] == tag)
+                if (scenario[0] == "sub" && scenario[1] == tag)
                 {
                     this.scenarioCount = index + 1;
                     this.ScenarioPlay();
@@ -880,7 +880,7 @@ namespace KokoroUpTime
 
                     File.Copy($@"{newUserNameDirPath}/user.conf", @"./Log/system.conf", true);
 
-                    JumpTo("complete");
+                    GoTo("complete");
                 }
 
                 if (button.Name == "MakeUserNameCompleteNOButton")
@@ -903,7 +903,7 @@ namespace KokoroUpTime
 
                     this.SanRadioButton.IsChecked = true;
 
-                    JumpTo("make_name");
+                    GoTo("make_name");
                 }
             }
 

@@ -1,7 +1,6 @@
 ﻿start
 reset
 scene,前説
-jump,グループアクティビティ
 image,bg_image,background_02.png
 image,children_face_image,kimi_face_01.png,appear_up,no_sync
 image,main_msg_bubble_image,left_big_bubble_yellow.png

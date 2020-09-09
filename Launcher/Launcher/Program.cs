@@ -1,13 +1,11 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.IO;
 
-namespace Launcher
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            Process.Start("./netcoreapp3.1\\KokoroUpTime.exe");
-        }
+        Directory.SetCurrentDirectory("./Programs");
+        Process.Start("./KokoroUpTime.exe");
     }
 }
