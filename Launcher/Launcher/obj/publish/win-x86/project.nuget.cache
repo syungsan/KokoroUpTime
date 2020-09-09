@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "FWI+Ze75fzN3Plt/QuA9s1hstk9M2N2xa/yCPzoJ4rQPYqwUDrkJMiLA2r694WfouscY7dMYg56c8fHpN+pKGA==",
+  "success": true,
+  "projectFilePath": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\Launcher\\Launcher\\Launcher.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\syung\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\3.1.7\\microsoft.netcore.app.runtime.win-x86.3.1.7.nupkg.sha512",
+    "C:\\Users\\syung\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\3.1.7\\microsoft.windowsdesktop.app.runtime.win-x86.3.1.7.nupkg.sha512",
+    "C:\\Users\\syung\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\3.1.7\\microsoft.aspnetcore.app.runtime.win-x86.3.1.7.nupkg.sha512"
+  ],
+  "logs": []
+}
