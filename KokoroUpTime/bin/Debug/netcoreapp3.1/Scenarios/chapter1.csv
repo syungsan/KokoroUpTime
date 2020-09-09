@@ -10,9 +10,8 @@ bgm,play
 text,music_title_text,もくもくStudy♪
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
-wait
 msg,main_msg,それでは【name】【くん／ちゃん／さん】、「こころあっぷタイム」とは何か説明していくぞい。,白じい
-wait
+wait,next_only
 msg,main_msg,だれでも「こころ」を もっているんじゃが、「こころ」の勉強をすることは あまりないのじゃ。,白じい
 wait
 msg,main_msg,楽しくなったり、うれしくなったりするだけでなく、だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。,白じい
@@ -48,39 +47,34 @@ image,bg_image,background_02.png
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,今日は、「こころあっぷタイム」に登場する３人を紹介する。,白じい
-wait
+wait,next_only
 hide,grid,main_msg_grid
 clear,text,main_msg
 image,intro_akamaru_face_image,,appear_up,no_sync
 image,main_msg_bubble_image,left_a_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
-wait
 msg,main_msg,おれの名前は 赤丸だ。小学校6年だ。好きな食べ物はカレーとコーラだ。苦手なものは犬だ。,赤丸
-wait
+wait,next_only
 hide,grid,main_msg_grid
 clear,text,main_msg
 hide,image,intro_akamaru_face_image
 image,intro_aosuke_face_image,,appear_up,no_sync
 image,main_msg_bubble_image,left_b_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
-wait
 msg,main_msg,ぼくの名前は青助です。小学校6年生です。好きなものはテレビ。勉強もスポーツも あんまり得意じゃないんだ。,青助
-wait
+wait,next_only
 hide,grid,main_msg_grid
 clear,text,main_msg
 hide,image,intro_aosuke_face_image
 image,intro_kimi_face_image,,appear_up,no_sync
 image,main_msg_bubble_image,left_c_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
-wait
 msg,main_msg,わたしの名前はキミです。小学６年生です。好きなものはチョコレートです。人前で話すことがとても苦手です。,キミ
-wait
+next
 hide,grid,main_msg_grid
 clear,text,main_msg
 hide,image,intro_kimi_face_image
-next
 hide,button,next_page_button
 hide,button,back_page_button
 hide,image,shiroji_right_image
@@ -88,7 +82,6 @@ image,shiroji_right_center_image,,fade_in
 image,children_info_image,,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,この３人とこころあっぷタイムを進めていくぞい！さて、３人は、なにかこまっていることがあるようじゃ。どんなことで、こまっているのだろう？マンガを見ながら考えてみよう！,白じい
 next
 scene,漫画購読
@@ -120,7 +113,6 @@ grid,item_name_plate_left_grid
 image,item_center_image,,appear_rotation
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,わしの作った発明品をつかって、自分のきもちを 調べてみるのじゃ！,白じい
 next
 scene,アイテム紹介
@@ -152,7 +144,6 @@ grid,music_info_grid,slide,no_sync
 image,shiroji_right_up_image,shiroji_04.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,「きもち」には、いいきもちといやなきもちだけでなく、いろいろな種類があるぞい。自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
 next
 scene,チャレンジきもち選択
@@ -175,8 +166,8 @@ grid,session_grid
 image,shiroji_right_up_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,今度は「きもち」をみつける練習をグループでしてみるのじゃ。次の場面を見て、グループでキミちゃんのきもちを考えて、話し合ってみるのじゃ。,白じい
+wait,next_only
 next
 scene,キミちゃんドキッ！
 reset
@@ -185,9 +176,8 @@ image,teacher_image
 image,children_stand_left_image,kimi_stand_01.png
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,それでは、キミちゃん！意見を言ってくれるかな？,先生
-wait
+wait,next_only
 image,children_stand_left_onomatopoeia_image,,pomp,no_sync
 text,children_stand_left_onomatopoeia_text,,,rotation,no_sync
 image,children_stand_left_image,,pomp
@@ -199,9 +189,8 @@ image,shiroji_small_right_center_image
 image,kimi_stand_small_left_image
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,授業中に先生から指名されたとき、キミちゃんはどんな「きもち」になるかの？,白じい
-wait
+wait,next_only
 msg,main_msg,きもちセンサーをつかって、きもちの種類を選んでみよう！,白じい
 wait
 hide,grid,main_msg_grid
@@ -218,7 +207,6 @@ hide,button,back_page_button
 clear,text,main_msg
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,キミちゃんは【$kimis_kind_of_feeling$】という きもちなんじゃな。そのきもちを選んだ理由も考えて話し合ってみるのじゃ！,白じい
 next
 scene,キミちゃんのきもちの大きさ
@@ -228,15 +216,14 @@ image,shiroji_right_image,shiroji_02.png
 image,children_stand_left_image,kimi_stand_01.png
 image,main_msg_bubble_image,left_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,わたしは、しんぱいしたり、ふあんになったりすることがよくあるんだけど、場面がちがうと、きもちの「大きさ」がちがうような気がするわ。？,キミ
-wait
+wait,next_only
 clear,text,main_msg
 hide,grid,main_msg_grid
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,キミちゃんはいいところに気がついておるぞい。きもちには「大きさ」があるようじゃ。,白じい
-wait
+wait,next_only
 msg,main_msg,きもちセンサーを使うと、きもちの「大きさ」を０から１００であらわすことができるのじゃ。キミちゃんのきもちの「大きさ」をみてみよう！,白じい
 next
 scene,キミちゃんの場面のきもち
@@ -260,9 +247,8 @@ image,bg_image,background_08.png
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,赤丸くんと青助くんは、放課後、野球を するようじゃ。２人の「きもち」とその「大きさ」を 考えてみよう！,白じい
-wait
+wait,next_only
 clear,text,main_msg
 hide,grid,main_msg_grid
 image,children_stand_right_image,akamaru_stand_01.png
@@ -270,7 +256,7 @@ image,children_stand_left_image,aosuke_stand_01.png
 image,main_msg_bubble_image,right_big_bubble_red.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,よっしゃ！野球しようぜ！！ホームラン打つぞー！,赤丸
-wait
+wait,next_only
 clear,text,main_msg
 hide,grid,main_msg_grid
 image,main_msg_bubble_image,left_big_bubble_blue.png
@@ -286,9 +272,8 @@ grid,children_face_small_left_msg_grid
 image,shiroji_small_right_center_image
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,放課後に草野球をするとき、赤丸くんはどんな「きもち」になるかの？,白じい
-wait
+wait,next_only
 msg,main_msg,きもちセンサーをつかって、きもちの種類を選んでみよう！,白じい
 wait
 clear,text,main_msg
@@ -332,9 +317,8 @@ grid,children_face_small_left_msg_grid
 image,shiroji_small_right_center_image
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,放課後に草野球をするとき、青助くんはどんな「きもち」になるかの？,白じい
-wait
+wait,next_only
 msg,main_msg,きもちセンサーをつかって、きもちの種類を選んでみよう！,白じい
 wait
 clear,text,main_msg
@@ -366,7 +350,6 @@ text,view_size_of_feeling_text,$aosukes_size_of_feeling$
 grid,view_size_of_feeling_grid
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,青助くんのきもちは【$aosukes_size_of_feeling$】くらいの 大きさなんじゃな。ふたりのきもちと きもちの大きさを 見比べてみよう！,白じい
 next
 scene,ふたりのきもちの比較
@@ -396,9 +379,8 @@ grid,summary_grid
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,はじめてのこころあっぷタイムは どうじゃったかな？今日から、赤丸くん、青助くん、キミちゃんといっしょに「きもち」についての勉強をはじめていくぞい。,白じい
-wait
+wait,next_only
 msg,main_msg,次回のテーマは「たのしいことを さがそう」じゃ！おたのしみに！,白じい
 next
 scene,今回の発明品おさらい
@@ -409,7 +391,6 @@ grid,item_last_info_grid
 image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,第１回で登場した発明品は、「きもちセンサー」じゃ！鬱アイテム図鑑から、いつでも確認できるぞい！,白じい
 next
 scene,アイテム図鑑

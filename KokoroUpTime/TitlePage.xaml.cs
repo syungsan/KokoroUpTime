@@ -37,6 +37,9 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
+        public DataChapter1 dataChapter1 = new DataChapter1();
+        public DataChapter2 dataChapter2 = new DataChapter2();
+
         private string[] dirPaths;
 
         // 初回アクセスかどうかのフラグ
@@ -83,6 +86,18 @@ namespace KokoroUpTime
                 this.dataOption = _dataOption;
                 this.dataItem = _dataItem;
                 this.dataProgress = _dataProgress;
+            }
+        }
+
+        public void SetCurrentResult(DataChapter1 _dataChapter1, DataChapter2 _dataChapter2)
+        {
+            if (_dataChapter1 != null)
+            {
+                dataChapter1 = _dataChapter1;
+            }
+            if (_dataChapter2 != null)
+            {
+                dataChapter2 = _dataChapter2;
             }
         }
 
@@ -185,7 +200,7 @@ namespace KokoroUpTime
 
                 foreach (var row in progress)
                 {
-                    this.dataProgress.CurrentCapter = row.CurrentCapter;
+                    this.dataProgress.CurrentChapter = row.CurrentChapter;
 
                     this.dataProgress.CurrentScene = row.CurrentScene;
 
@@ -297,13 +312,13 @@ namespace KokoroUpTime
         // タイトルの現在のユーザの最近のプレイシーンを表示
         private void SetCurrentSceneInfo()
         {
-            if (this.dataProgress.CurrentCapter == 0 && this.dataProgress.CurrentScene == null)
+            if (this.dataProgress.CurrentChapter == 0 && this.dataProgress.CurrentScene == null)
             {
                 this.CurrentSceneTextBlock.Text = "まだ何もプレイしてません…。";
             }
             else
             {
-                this.CurrentSceneTextBlock.Text = $"第{this.dataProgress.CurrentCapter}回の「{this.dataProgress.CurrentScene}」をプレイ中…。";
+                this.CurrentSceneTextBlock.Text = $"第{this.dataProgress.CurrentChapter}回の「{this.dataProgress.CurrentScene}」をプレイ中…。";
             }  
         }
 
@@ -562,7 +577,7 @@ namespace KokoroUpTime
                                 }
                                 this.CurrentUserTextBlock.Text = BASE_USER_NAME;
 
-                                this.dataProgress.CurrentCapter = 0;
+                                this.dataProgress.CurrentChapter = 0;
                                 this.dataProgress.CurrentScene = null;
 
                                 this.SetCurrentSceneInfo();
@@ -748,14 +763,14 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        // Chapter2 chapter2 = new Chapter2();
+                        Chapter2 chapter2 = new Chapter2();
 
-                        // chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                        chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                        // this.NavigationService.Navigate(chapter2);
+                        this.NavigationService.Navigate(chapter2);
                     }
                     break;
-
+                /*
                 case "第3回":
 
                     if (this.initConfig.userName == null)
@@ -771,6 +786,7 @@ namespace KokoroUpTime
                         this.NavigationService.Navigate(chapter3);
                     }
                     break;
+                    */
             }
         }
 

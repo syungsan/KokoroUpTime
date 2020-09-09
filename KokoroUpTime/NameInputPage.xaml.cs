@@ -1064,6 +1064,11 @@ namespace KokoroUpTime
             }
         }
 
+        private void TriggerKeyboard(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         /*
         // OSKを完全に切ってしまう
         private void CloseOSK()

@@ -6,12 +6,8 @@
       xmlns:local="clr-namespace:KokoroUpTime"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-<<<<<<< HEAD
-      Title="ItemPage">
-=======
       Title="ItemPage"
       Loaded="Window_Loaded">
->>>>>>> 81f65705c56288c9c7635795ae2a138bb6f91ff7
 
     <Viewbox>
 
@@ -19,12 +15,6 @@
             <Image x:Name="BackgroundImage" Source="/Images/background_mokume2.PNG" Stretch="Fill"/>
             <TextBlock x:Name="TitleTextBlock" Margin="38,20,1387,935" Text="アイテム図鑑" TextWrapping="Wrap" FontSize="90" Foreground="White" FontWeight="Bold"/>
             <Grid x:Name="ItemMainGrid">
-<<<<<<< HEAD
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-=======
->>>>>>> 81f65705c56288c9c7635795ae2a138bb6f91ff7
                 <Button x:Name="Item01MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="24,38,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
                     <Image x:Name="Item01MainImage" Source="/Images/item01_book.png"/>
                 </Button>
@@ -73,11 +63,6 @@
                 <Image x:Name="Item11NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,510,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                 <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,510,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
             </Grid>
-<<<<<<< HEAD
-            <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}">
-                <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png"/>
-            </Button>
-=======
             <Grid x:Name="ItemDetailGrid">
                 <Image x:Name="Item01DetailImage" HorizontalAlignment="Center" Height="587" VerticalAlignment="Center" Width="1304" Source="/Images/item01_detail.png"/>
                 <Image x:Name="Item02DetailImage" Height="607" Width="1288" Source="/Images/item02_detail.png" Margin="316,236,316,236"/>
@@ -100,7 +85,6 @@
             <Button x:Name="NextPageButton" HorizontalAlignment="Left" Margin="1635,923,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="277" Height="158" Click="Button_Click" BorderBrush="{x:Null}">
                 <Image x:Name="NextPageImage" Source="/Images/after.png"/>
             </Button>
->>>>>>> 81f65705c56288c9c7635795ae2a138bb6f91ff7
         </Grid>
     </Viewbox>
 </Page>

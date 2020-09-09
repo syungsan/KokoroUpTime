@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-<<<<<<< HEAD
-=======
 using System.Linq;
->>>>>>> 81f65705c56288c9c7635795ae2a138bb6f91ff7
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,16 +20,6 @@ namespace KokoroUpTime
     /// </summary>
     public partial class ItemPage : Page
     {
-<<<<<<< HEAD
-        public InitConfig initConfig = new InitConfig();
-        public DataOption dataOption = new DataOption();
-        public DataItem dataItem = new DataItem();
-
-        private string dbPath;
-
-        private List<Button> itemMainButtons = new List<Button>();
-
-=======
         // ページ間参照橋渡し変数
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
@@ -48,27 +35,12 @@ namespace KokoroUpTime
 
         private int currentItemNo;
 
->>>>>>> 81f65705c56288c9c7635795ae2a138bb6f91ff7
         public ItemPage()
         {
             InitializeComponent();
 
-<<<<<<< HEAD
-            this.Item01MainButton.Visibility = Visibility.Hidden;
-            this.Item02MainButton.Visibility = Visibility.Hidden;
-            this.Item03MainButton.Visibility = Visibility.Hidden;
-            this.Item04MainButton.Visibility = Visibility.Hidden;
-            this.Item05MainButton.Visibility = Visibility.Hidden;
-            this.Item06MainButton.Visibility = Visibility.Hidden;
-            this.Item07MainButton.Visibility = Visibility.Hidden;
-            this.Item08MainButton.Visibility = Visibility.Hidden;
-            this.Item09MainButton.Visibility = Visibility.Hidden;
-            this.Item10MainButton.Visibility = Visibility.Hidden;
-            this.Item11MainButton.Visibility = Visibility.Hidden;
-=======
             this.ResetMainVisible();
             this.ResetDetailVisible();
->>>>>>> 81f65705c56288c9c7635795ae2a138bb6f91ff7
 
             this.itemMainButtons.Add(this.Item01MainButton);
             this.itemMainButtons.Add(this.Item02MainButton);
@@ -83,37 +55,6 @@ namespace KokoroUpTime
             this.itemMainButtons.Add(this.Item11MainButton);
         }
 
-<<<<<<< HEAD
-        public void SetInitConfig(InitConfig _initConfig)
-        {
-            this.initConfig = _initConfig;
-
-            // データベース本体のファイルのパス設定
-            string dbName = $"{initConfig.userName}.sqlite";
-            string dirPath = $"./Log/{initConfig.userName}_{initConfig.userTitle}/";
-
-            this.dbPath = System.IO.Path.Combine(dirPath, dbName);
-        }
-
-        public void SetDataOption(DataOption _dataOption)
-        {
-            this.dataOption = _dataOption;
-        }
-
-        public void SetDataItem(DataItem _dataItem)
-        {
-            this.dataItem = _dataItem;
-
-            this.LoadItem();
-        }
-
-        void LoadItem()
-        {
-            Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
-
-            bool[] hasGotItems = { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
-        
-=======
         // xamlの処理が終わってWindowが表示されてからの処理
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -168,7 +109,6 @@ namespace KokoroUpTime
 
             this.itemDetailImages = new Image[] { this.Item01DetailImage, this.Item02DetailImage, this.Item03DetailImage, this.Item04DetailImage, this.Item05DetailImage, this.Item06DetailImage, this.Item07DetailImage, this.Item08DetailImage, this.Item09DetailImage, this.Item10DetailImage, this.Item11DetailImage };
 
->>>>>>> 81f65705c56288c9c7635795ae2a138bb6f91ff7
             for (int i=0; i < hasGotItems.Length; i++)
             {
                 if (hasGotItems[i] == true)
@@ -178,11 +118,8 @@ namespace KokoroUpTime
                     itemNoneImages[i].Visibility = Visibility.Hidden;
                 }
             }
-<<<<<<< HEAD
-=======
             this.NextPageButton.Visibility = Visibility.Hidden;
             this.ReturnToItemButton.Visibility = Visibility.Hidden;
->>>>>>> 81f65705c56288c9c7635795ae2a138bb6f91ff7
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -191,17 +128,6 @@ namespace KokoroUpTime
 
             if (button.Name == "ReturnToTitleButton")
             {
-<<<<<<< HEAD
-                TitlePage nextPage = new TitlePage();
-
-                nextPage.SetIsFirstBootFlag(false);
-
-                nextPage.SetInitConfig(this.initConfig);
-                nextPage.SetDataOption(this.dataOption);
-                nextPage.SetDataItem(this.dataItem);
-
-                this.NavigationService.Navigate(nextPage);
-=======
                 TitlePage titlePage = new TitlePage();
 
                 // タイトルページのリロードなし
@@ -275,7 +201,6 @@ namespace KokoroUpTime
                 this.ResetDetailVisible();
 
                 this.itemDetailImages[this.currentItemNo].Visibility = Visibility.Visible;
->>>>>>> 81f65705c56288c9c7635795ae2a138bb6f91ff7
             }
         }
     }
