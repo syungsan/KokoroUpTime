@@ -321,3 +321,8 @@ C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netco
 C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.dll
 C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.pdb
 C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.genruntimeconfig.cache
+C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\Cancel.wav
+C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\Decision.wav
+C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\Incorrect.wav
+C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\bin\Debug\netcoreapp3.1\Sounds\Intermediate.wav
+C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache

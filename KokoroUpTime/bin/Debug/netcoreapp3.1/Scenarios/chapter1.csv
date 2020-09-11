@@ -167,7 +167,6 @@ image,shiroji_right_up_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,今度は「きもち」をみつける練習をグループでしてみるのじゃ。次の場面を見て、グループでキミちゃんのきもちを考えて、話し合ってみるのじゃ。,白じい
-wait,next_only
 next
 scene,キミちゃんドキッ！
 reset
@@ -216,7 +215,7 @@ image,shiroji_right_image,shiroji_02.png
 image,children_stand_left_image,kimi_stand_01.png
 image,main_msg_bubble_image,left_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,わたしは、しんぱいしたり、ふあんになったりすることがよくあるんだけど、場面がちがうと、きもちの「大きさ」がちがうような気がするわ。？,キミ
+msg,main_msg,わたしは、しんぱいしたり、ふあんになったりすることがよくあるんだけど、場面がちがうと、きもちの「大きさ」がちがうような気がするわ。,キミ
 wait,next_only
 clear,text,main_msg
 hide,grid,main_msg_grid
@@ -251,6 +250,7 @@ msg,main_msg,赤丸くんと青助くんは、放課後、野球を するよう
 wait,next_only
 clear,text,main_msg
 hide,grid,main_msg_grid
+hide,image,shiroji_right_image
 image,children_stand_right_image,akamaru_stand_01.png
 image,children_stand_left_image,aosuke_stand_01.png
 image,main_msg_bubble_image,right_big_bubble_red.png
@@ -305,7 +305,6 @@ text,view_size_of_feeling_text,$akamarus_size_of_feeling$
 grid,view_size_of_feeling_grid
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-wait
 msg,main_msg,赤丸くんのきもちは【$akamarus_size_of_feeling$】くらいの 大きさなんじゃな。次は青助くんのきもちと　その大きさを考えてみよう。,白じい
 next
 scene,青助くんのきもちの種類
