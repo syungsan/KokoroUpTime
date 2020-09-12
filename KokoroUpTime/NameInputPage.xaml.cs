@@ -22,6 +22,8 @@ using Expansion;
 using FileIOUtils;
 using Osklib;
 using Osklib.Wpf;
+using System.Text.RegularExpressions;
+using System.Numerics;
 
 namespace KokoroUpTime
 {
@@ -33,8 +35,6 @@ namespace KokoroUpTime
         private float INIT_MESSAGE_SPEED = 30.0f;
 
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
-
-        private string[] IMAGE_TEXTS = { "name" };
 
         private string BASE_USER_NAME = "名無し";
 
@@ -398,78 +398,93 @@ namespace KokoroUpTime
 
         private List<List<string>> SequenceCheck(string text)
         {
+            Dictionary<string, string> imageOrTextDic = new Dictionary<string, string>()
+            {
+                {"name", this.newUserName},
+                {"dumy", "dumyText"}
+            };
+
+            text = text.Replace("【くん／ちゃん／さん】", this.selectUserTitle);
+
             // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
             text = text.Replace("鬱", "\u2028");
 
             if (this.selectInputMethod == 1)
             {
-                text = text.Replace("【name】", this.newUserName);
+                MatchCollection imageOrTextTags = null;
+
+                foreach (string imageOrTextKey in imageOrTextDic.Keys)
+                {
+                    switch (imageOrTextKey)
+                    {
+                        case "name":
+
+                            imageOrTextTags = new Regex(@"\<image=name\>(.*?)\<\/image\>").Matches(text);
+
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    if (imageOrTextTags != null)
+                    {
+                        foreach (Match imageOrTextTag in imageOrTextTags)
+                        {
+                            text = text.Replace(imageOrTextTag.Value, imageOrTextDic[imageOrTextKey]);
+                        }
+                    }   
+                }
             }
 
-            text = text.Replace("【くん／ちゃん／さん】", this.selectUserTitle);
+            var matchTexts = new Regex(@"\<(.+?\=.+?)\>(.*?)\<(\/.+?)\>").Matches(text);
 
+            var tempText = text;
+
+            List<string> text1ds;
             List<List<string>> text2ds = new List<List<string>>();
 
-            // まずは画像文字から
-            text = text.Replace("】", "【");
-
-            var texts = text.Split("【");
-
-            foreach (var imageText in IMAGE_TEXTS)
+            foreach (Match matchText in matchTexts)
             {
-                int[] matchIndexs = { };
+                var startTagRaw = new Regex(@"\<(.+?\=.+?)\>").Matches(matchText.Value)[0].ToString();
+                var endTagRaw = new Regex(@"\<(\/.+?)\>").Matches(matchText.Value)[0].ToString();
 
-                foreach (var (txt, index) in texts.Indexed())
+                var trimTag = startTagRaw.Replace("<", "").Replace(">", "");
+                var tagRaws = trimTag.Split("=");
+
+                var tag = tagRaws[0];
+                var option = string.Join(",", tagRaws[1].Split("#"));
+
+                tempText = tempText.Replace(startTagRaw, "$").Replace(endTagRaw, "$");
+                var texts = tempText.Split("$");
+
+                text1ds = new List<string> { };
+
+                if (texts[0] != "")
                 {
-                    if (txt == imageText)
-                    {
-                        matchIndexs.Append(index);
-                    }
+                    text1ds.Add(texts[0]);
+                    tempText = tempText.Remove(0, texts[0].Length);
+                    text2ds.Add(text1ds);
                 }
 
-                foreach (var tex in texts)
-                {
-                    List<string> tex1ds = new List<string> { tex };
-                    text2ds.Add(tex1ds);
-                }
+                text1ds = new List<string> { };
 
-                foreach (var matchIndex in matchIndexs)
-                {
-                    text2ds[matchIndex].Add(imageText);
-                }
+                text1ds.Add(texts[1]);
+                text1ds.Add(tag);
+                text1ds.Add(option);
+
+                tempText = tempText.Remove(0, texts[1].Length + 2);
+
+                text2ds.Add(text1ds);
             }
 
-            /*
-            // そしてテキストタグを
-            var matchTexts = new Regex(@"<@=(.+?)>(.+?)</@>").Matches(text);
-
-            for (int i = 0; i < matchTexts.Count; i++)
+            if (tempText.Length > 0)
             {
-                var sequence = matchTexts[i].Value;
+                text1ds = new List<string> { };
 
-                var matchTags = new Regex(@"<@=(.+?)>").Matches(sequence);
-
-                var trimTag = matchTags[0].Value.Replace("<@=", "").Replace(">", "");
-
-                var tags = trimTag.Split(",");
-
-                text = text.Replace(matchTags[0].Value, "<@").Replace("</@>", "<@");
-
-                var texts = text.Split("<@");
-
-                foreach (var tex in texts)
-                {
-                    List<string> tex1ds = new List<string> { tex };
-                    text2ds.Add(tex1ds);
-                } 
-                var trimSeq = sequence.Replace(matchTags[0].Value, "").Replace("</@>", "");
-
-                foreach (var tag in tags)
-                {
-                    text2ds[Array.IndexOf(texts, trimSeq)].Add(tag);
-                }
+                text1ds.Add(tempText);
+                text2ds.Add(text1ds);
             }
-            */
             return text2ds;
         }
 
@@ -504,7 +519,7 @@ namespace KokoroUpTime
             {
                 string namePngPath = "./temp/temp_name.png";
 
-                if (msgs[0] == "name" && File.Exists(namePngPath))
+                if (msgs.Count > 2 && msgs[1] == "image" && msgs[2] == "name" && File.Exists(namePngPath))
                 {
                     var imageInline = new InlineUIContainer { Child = new Image { Source = null, Height = 48 } };
 
@@ -512,7 +527,80 @@ namespace KokoroUpTime
 
                     this.imageInlines.Add(imageInline);
                 }
-                var run = new Run { Text = "", Foreground = new SolidColorBrush(Colors.Black) };
+                var run = new Run { };
+
+                if (msgs.Count > 2 && msgs[1] == "font")
+                {
+                    var options = msgs[2].Split(",");
+
+                    var foreground = new SolidColorBrush(Colors.Black);
+                    double fontSize = 48;
+
+                    var background = new SolidColorBrush(Colors.White);
+                    background.Opacity = 0;
+
+                    var fontWeights = FontWeights.Normal;
+
+                    TextDecoration textDecoration = new TextDecoration();
+                    TextDecorationCollection textDecorations = new TextDecorationCollection();
+
+                    if (options.Length > 0 && options[0] != "")
+                    {
+                        switch (options[0])
+                        {
+                            case "red": { foreground = new SolidColorBrush(Colors.Red); break; };
+                            case "green": { foreground = new SolidColorBrush(Colors.Green); break; };
+                            case "blue": { foreground = new SolidColorBrush(Colors.Blue); break; };
+
+                            default: { break; }
+                        }
+                    }
+
+                    if (options.Length > 1 && options[1] != "")
+                    {
+                        fontSize = double.Parse(options[1]);
+                    }
+
+                    if (options.Length > 2 && options[2] != "")
+                    {
+                        switch (options[2])
+                        {
+                            case "red": { background = new SolidColorBrush(Colors.Red); background.Opacity = 1; break; };
+                            case "green": { background = new SolidColorBrush(Colors.Green); background.Opacity = 1; break; };
+                            case "blue": { background = new SolidColorBrush(Colors.Blue); background.Opacity = 1; break; };
+
+                            default: { break; }
+                        }
+                    }
+
+                    if (options.Length > 3 && options[3] != "")
+                    {
+                        if (options[3] == "true")
+                        {
+                            fontWeights = FontWeights.UltraBold;
+                        }
+                    }
+
+                    if (options.Length > 4 && options[4] != "")
+                    {
+                        switch (options[4])
+                        {
+                            case "red": { textDecoration.Pen = new Pen(Brushes.Red, 1); break; };
+                            case "green": { textDecoration.Pen = new Pen(Brushes.Green, 1); break; };
+                            case "blue": { textDecoration.Pen = new Pen(Brushes.Blue, 1); break; };
+
+                            default: { break; }
+                        }
+                        textDecoration.PenThicknessUnit = TextDecorationUnit.FontRecommended;
+                        textDecorations.Add(textDecoration);
+                    }
+
+                    run = new Run { Text = "", Foreground = foreground, FontSize = fontSize, Background = background, FontWeight = fontWeights, TextDecorations = textDecorations};
+                }
+                else
+                {
+                    run = new Run { Text = "" };
+                }
 
                 textObject.Inlines.Add(run);
 
@@ -528,10 +616,8 @@ namespace KokoroUpTime
 
                     string namePngPath = "./temp/temp_name.png";
 
-                    if (msgs[0] == "name" && File.Exists(namePngPath))
+                    if (msgs.Count > 2 && msgs[1] == "image" && msgs[2] == "name" && File.Exists(namePngPath))
                     {
-                        // msgs[0].Replace("name", "");
-
                         // 実行ファイルの場所を絶対パスで取得
                         var startupPath = FileUtils.GetStartupPath();
 

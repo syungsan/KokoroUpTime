@@ -37,8 +37,8 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
-        public DataChapter1 dataChapter1 = new DataChapter1();
-        public DataChapter2 dataChapter2 = new DataChapter2();
+        public DataChapter1 dataChapter1 = new DataChapter1(); // ?
+        public DataChapter2 dataChapter2 = new DataChapter2(); // ?
 
         private string[] dirPaths;
 
@@ -89,6 +89,7 @@ namespace KokoroUpTime
             }
         }
 
+        // ?
         public void SetCurrentResult(DataChapter1 _dataChapter1, DataChapter2 _dataChapter2)
         {
             if (_dataChapter1 != null)
@@ -139,8 +140,6 @@ namespace KokoroUpTime
                 this.initConfig.userName = csvs[0][0];
                 this.initConfig.userTitle = csvs[0][1];
                 this.initConfig.accessDateTime = csvs[0][2];
-
-                // this.CurrentUserTextBlock.Text = $"{this.initConfig.userName}{this.initConfig.userTitle}";
             }
 
             string dbName = $"{this.initConfig.userName}.sqlite";
@@ -165,6 +164,8 @@ namespace KokoroUpTime
                     this.dataOption.MessageSpeed = row.MessageSpeed;
 
                     this.dataOption.IsAddRubi = row.IsAddRubi;
+
+                    this.dataOption.Is3SecondRule = row.Is3SecondRule;
                 }
 
                 // アイテム関係
@@ -394,7 +395,7 @@ namespace KokoroUpTime
 
                     break;
 
-                case "ItemsButtonButton":
+                case "ItemsButton":
 
                     if (this.initConfig.userName == null)
                     {
@@ -558,14 +559,11 @@ namespace KokoroUpTime
                             {
                                 var selectedDataPath = this.dirPaths[this.SelectDataListBox.Items.IndexOf(item)];
 
-                                // (this.SelectDataListBox.ItemsSource as List<UserInfoItem>).Remove(item as UserInfoItem);
-
                                 if (Directory.Exists(selectedDataPath))
                                 {
                                     Directory.Delete(selectedDataPath, true);
                                 }
                             }
-                            // this.SelectDataListBox.Items.Refresh();
 
                             this.SelectDataListBox.ItemsSource = this.LoadAnyUsers();
 

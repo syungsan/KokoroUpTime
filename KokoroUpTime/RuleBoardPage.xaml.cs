@@ -140,7 +140,7 @@ namespace KokoroUpTime
             // デバッグのためシナリオのインデックスを出力
             Debug.Print((this.scenarioCount + 1).ToString());
 
-            // 処理分岐のフラグ
+            // 処理分岐用のタグ
             var tag = this.scenarios[this.scenarioCount][0];
 
             switch (tag)
