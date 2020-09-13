@@ -39,6 +39,8 @@ namespace KokoroUpTime
         private string[] GOOD_FEELINGS = {"うれしい", "しあわせ", "たのしい", "ホッとした", "きもちいい", "まんぞく", "すき", "やる気マンマン", "かんしゃ", "わくわく", "うきうき", "ほこらしい"};
         private string[] BAD_FEELINGS = { "心配", "こまった", "不安", "こわい", "おちこみ", "がっかり", "いかり", "イライラ", "はずかしい", "ふまん", "かなしい", "おびえる"};
 
+        private float THREE_SECOND_RULE_TIME = 3.0f;
+
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0; //
         private List<List<string>> scenarios = null; //
@@ -776,36 +778,117 @@ namespace KokoroUpTime
                     }
                     break;
 
-                // メッセージに対する待ち（メッセージボタンの表示切り替え）
                 case "wait":
 
-                    bool msgButtonVisible = true;
-
+                    // 時間のオプション指定がない場合は無限待ち
                     if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
                     {
-                        var _msgButtonVisible = this.scenarios[this.scenarioCount][1];
+                        var spanTime = float.Parse(this.scenarios[this.scenarioCount][1]);
 
-                        if (_msgButtonVisible == "no_button")
+                        // 数秒後に処理を実行
+                        DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(spanTime) };
+                        timer.Start();
+                        timer.Tick += (s, args) =>
                         {
-                            msgButtonVisible = false;
-                        }
-                    }
+                            // タイマーの停止
+                            timer.Stop();
 
-                    if (msgButtonVisible)
-                    {
-                        this.NextMessageButton.Visibility = Visibility.Visible;
-                        this.BackMessageButton.Visibility = Visibility.Visible;
+                            // 以下に待機後の処理を書く
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+                        };
                     }
                     this.isClickable = true;
 
                     break;
 
-                // 各場面に対する待ち（ページめくりボタン）
-                case "next":
+                // ボタン押下待ち
+                case "click":
 
-                    this.NextPageButton.Visibility = Visibility.Visible;
-                    this.BackPageButton.Visibility = Visibility.Visible;
+                    if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
+                    {
+                        var clickButton = this.scenarios[this.scenarioCount][1];
 
+                        string clickMethod = "";
+
+                        if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                        {
+                            clickMethod = this.scenarios[this.scenarioCount][2];
+                        }
+
+                        if (this.dataOption.Is3SecondRule)
+                        {
+                            DispatcherTimer waitTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(THREE_SECOND_RULE_TIME) };
+
+                            if (clickMethod == "next_only")
+                            {
+                                waitTimer.Start();
+
+                                waitTimer.Tick += (s, args) =>
+                                {
+                                    waitTimer.Stop();
+                                    waitTimer = null;
+
+                                    if (clickButton == "msg")
+                                    {
+                                        this.NextMessageButton.Visibility = Visibility.Visible;
+                                    }
+                                    else if (clickButton == "page")
+                                    {
+                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                    }
+                                };
+                            }
+                            else
+                            {
+                                waitTimer.Start();
+
+                                waitTimer.Tick += (s, args) =>
+                                {
+                                    waitTimer.Stop();
+                                    waitTimer = null;
+
+                                    if (clickButton == "msg")
+                                    {
+                                        this.NextMessageButton.Visibility = Visibility.Visible;
+                                        this.BackMessageButton.Visibility = Visibility.Visible;
+                                    }
+                                    else if (clickButton == "page")
+                                    {
+                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                    }
+                                };
+                            }
+                        }
+                        else
+                        {
+                            if (clickMethod == "next_only")
+                            {
+                                if (clickButton == "msg")
+                                {
+                                    this.NextMessageButton.Visibility = Visibility.Visible;
+                                }
+                                else if (clickButton == "page")
+                                {
+                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                            else
+                            {
+                                if (clickButton == "msg")
+                                {
+                                    this.NextMessageButton.Visibility = Visibility.Visible;
+                                    this.BackMessageButton.Visibility = Visibility.Visible;
+                                }
+                                else if (clickButton == "page")
+                                {
+                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                        }
+                    }
                     this.isClickable = true;
 
                     break;
@@ -916,41 +999,7 @@ namespace KokoroUpTime
 
                         this.GoTo(GoToLabel);
                     }
-                    // this.scenarioCount += 1;
-                    // this.ScenarioPlay();
-
                     break;
-
-                // 教室のルール黒板の処理
-                /*
-                case "rule":
-
-                    this.position = this.scenarios[this.scenarioCount][1];
-
-                    var ruleObject = this.textBlockObjects[this.position];
-
-                    var rule = this.scenarios[this.scenarioCount][2];
-
-                    this.checkBoxs = new CheckBox[] { this.RuleBoardCheck1Box, this.RuleBoardCheck2Box, this.RuleBoardCheck3Box };
-
-                    var checkNum = this.scenarios[this.scenarioCount][3];
-
-                    object _obj;
-
-                    if (checkNum == "all")
-                    {
-                        _obj = checkBoxs;
-                    }
-                    else
-                    {
-                        _obj = checkBoxs[int.Parse(checkNum)];
-                    }
-                    ruleObject.Visibility = Visibility.Visible;
-
-                    this.ShowMessage(textObject: ruleObject, message: rule, obj: _obj);
-
-                    break;
-                */
 
                 case "wait_tap":
 
@@ -1217,6 +1266,13 @@ namespace KokoroUpTime
                     this.ScenarioPlay();
 
                     break;
+
+                case "#":
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
             }
         }
 
@@ -1341,11 +1397,11 @@ namespace KokoroUpTime
             // 画像インラインと文字インラインの合体
             foreach (var stns in sentences)
             {
-                string namePngPath = "./temp/temp_name.png";
+                string namePngPath = $"./Log/{this.initConfig.userName}/name.png";
 
                 if (stns.Count > 2 && stns[1] == "image" && stns[2] == "name" && File.Exists(namePngPath))
                 {
-                    var imageInline = new InlineUIContainer { Child = new Image { Source = null, Height = 48 } };
+                    var imageInline = new InlineUIContainer { Child = new Image { Source = null, Height = textObject.FontSize } };
 
                     textObject.Inlines.Add(imageInline);
 
@@ -1358,7 +1414,7 @@ namespace KokoroUpTime
                     var options = stns[2].Split(",");
 
                     var foreground = new SolidColorBrush(Colors.Black);
-                    double fontSize = 48;
+                    double fontSize = textObject.FontSize;
 
                     var background = new SolidColorBrush(Colors.White);
                     background.Opacity = 0;
@@ -1449,7 +1505,7 @@ namespace KokoroUpTime
                 {
                     var stns = sentences[this.inlineCount];
 
-                    string namePngPath = "./temp/temp_name.png";
+                    string namePngPath = $"./Log/{this.initConfig.userName}/name.png";
 
                     if (stns.Count > 2 && stns[1] == "image" && stns[2] == "name" && File.Exists(namePngPath))
                     {
@@ -1569,26 +1625,6 @@ namespace KokoroUpTime
             }
         }
 
-        // 黒板ルール処理のためだけの追加
-        private void MessageCallBack(object obj)
-        {
-            switch (obj)
-            {
-                case CheckBox checkBox:
-
-                    checkBox.Visibility = Visibility.Visible;
-
-                    break;
-
-                case CheckBox[] checkBoxs:
-
-                    foreach (CheckBox checkBox in checkBoxs) {
-                        checkBox.IsEnabled = true;
-                    }
-                    break;
-            }
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // 各種ボタンが押されたときの処理
@@ -1597,6 +1633,35 @@ namespace KokoroUpTime
 
             if (this.isClickable)
             {
+                if (button.Name == "BackMessageButton" || button.Name == "BackPageButton")
+                {
+                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                    this.NextMessageButton.Visibility = Visibility.Hidden;
+
+                    this.BackPageButton.Visibility = Visibility.Hidden;
+                    this.NextPageButton.Visibility = Visibility.Hidden;
+
+                    var currentScenarioCount = this.scenarioCount;
+
+                    int returnCount = 0;
+
+                    for (int i = currentScenarioCount; i <= currentScenarioCount; i--)
+                    {
+                        if (this.scenarios[i][0] == "#")
+                        {
+                            returnCount += 1;
+
+                            if (returnCount == 2)
+                            {
+                                this.scenarioCount = i;
+                                this.ScenarioPlay();
+
+                                break;
+                            }
+                        }
+                    }
+                }
+
                 if (button.Name == "WishCheckButton")
                 {
                     this.isClickable = false;

@@ -254,16 +254,7 @@ namespace KokoroUpTime
                     }
                     break;
 
-                // メッセージに対する待ち（メッセージボタンの表示切り替え）
-                /*
                 case "wait":
-
-                    this.isClickable = true;
-
-                    break;
-                */
-
-                case "time_span":
 
                     if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
                     {
@@ -281,7 +272,6 @@ namespace KokoroUpTime
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
                         };
-
                     }
                     break;
 

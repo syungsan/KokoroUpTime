@@ -34,6 +34,10 @@ namespace KokoroUpTime
     {
         private float INIT_MESSAGE_SPEED = 30.0f;
 
+        private bool IS_3_SECOND_RULE = true;
+
+        private float THREE_SECOND_RULE_TIME = 3.0f;
+
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
 
         private string BASE_USER_NAME = "名無し";
@@ -309,36 +313,132 @@ namespace KokoroUpTime
 
                         var _messages = this.SequenceCheck(_message);
 
-                        this.ShowMessage(textObject: _textObject, messages: _messages);
+                        this.ShowSentence(textObject: _textObject, sentences: _messages, mode: "msg");
                     }
                     else
                     {
                         var _messages = this.SequenceCheck(_textObject.Text);
 
                         // xamlに直接書いたStaticな文章を表示する場合
-                        this.ShowMessage(textObject: _textObject, messages: _messages);
+                        this.ShowSentence(textObject: _textObject, sentences: _messages, mode: "msg");
                     }
                     break;
 
-                // メッセージに対する待ち（メッセージボタンの表示切り替え）
+                // 流れない文字に対するTextBlock処理
+                case "text":
+
+                    this.position = this.scenarios[this.scenarioCount][1];
+
+                    var __textObject = this.textBlockObjects[this.position];
+
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    {
+                        var _text = this.scenarios[this.scenarioCount][2];
+
+                        var _texts = this.SequenceCheck(_text);
+
+                        this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
+                    }
+                    __textObject.Visibility = Visibility.Visible;
+
+                    string textAnimeIsSync = "sync";
+
+                    // テキストに対するアニメも一応用意
+                    if (this.scenarios[this.scenarioCount].Count > 5 && this.scenarios[this.scenarioCount][5] != "")
+                    {
+                        textAnimeIsSync = this.scenarios[this.scenarioCount][5];
+                    }
+
+                    if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
+                    {
+                        var textStoryBoard = this.scenarios[this.scenarioCount][4];
+
+                        textStoryBoard += $"_{this.position}";
+
+                        this.ShowAnime(storyBoard: textStoryBoard, isSync: textAnimeIsSync);
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
+                    break;
+
                 case "wait":
 
-                    bool msgButtonVisible = true;
+                    // 時間のオプション指定がない場合は無限待ち
+                    if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
+                    {
+                        var spanTime = float.Parse(this.scenarios[this.scenarioCount][1]);
+
+                        // 数秒後に処理を実行
+                        DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(spanTime) };
+                        timer.Start();
+                        timer.Tick += (s, args) =>
+                        {
+                            // タイマーの停止
+                            timer.Stop();
+
+                            // 以下に待機後の処理を書く
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+                        };
+                    }
+                    this.isClickable = true;
+
+                    break;
+
+                // ボタン押下待ち
+                case "click":
+
+                    string clickMethod = "";
 
                     if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
                     {
-                        var _msgButtonVisible = this.scenarios[this.scenarioCount][1];
-
-                        if (_msgButtonVisible == "no_button")
-                        {
-                            msgButtonVisible = false;
-                        }
+                        clickMethod = this.scenarios[this.scenarioCount][1];
                     }
 
-                    if (msgButtonVisible)
+                    if (IS_3_SECOND_RULE)
                     {
-                        this.NextMessageButton.Visibility = Visibility.Visible;
-                        this.BackMessageButton.Visibility = Visibility.Visible;
+                        DispatcherTimer waitTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(THREE_SECOND_RULE_TIME) };
+
+                        if (clickMethod == "next_only")
+                        {
+                            waitTimer.Start();
+
+                            waitTimer.Tick += (s, args) =>
+                            {
+                                waitTimer.Stop();
+                                waitTimer = null;
+
+                                this.NextMessageButton.Visibility = Visibility.Visible;
+                            };
+                        }
+                        else
+                        {
+                            waitTimer.Start();
+
+                            waitTimer.Tick += (s, args) =>
+                            {
+                                waitTimer.Stop();
+                                waitTimer = null;
+
+                                this.NextMessageButton.Visibility = Visibility.Visible;
+                                this.BackMessageButton.Visibility = Visibility.Visible;
+                            };
+                        }
+                    }
+                    else
+                    {
+                        if (clickMethod == "next_only")
+                        {
+                            this.NextMessageButton.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            this.NextMessageButton.Visibility = Visibility.Visible;
+                            this.BackMessageButton.Visibility = Visibility.Visible;
+                        }
                     }
                     this.isClickable = true;
 
@@ -388,6 +488,13 @@ namespace KokoroUpTime
                     break;
 
                 case "sub":
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
+                case "#":
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -488,40 +595,43 @@ namespace KokoroUpTime
             return text2ds;
         }
 
-        private void ShowMessage(TextBlock textObject, List<List<string>> messages)
+        private void ShowSentence(TextBlock textObject, List<List<string>> sentences, string mode)
         {
             textObject.Text = "";
-            textObject.Visibility = Visibility.Visible;
 
-            this.word_num = 0;
-
-            // メッセージ表示処理
-            this.msgTimer = new DispatcherTimer();
-            this.msgTimer.Tick += ViewMsg;
-            this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / INIT_MESSAGE_SPEED);
-            this.msgTimer.Start();
-
-            this.inlineCount = 0;
-            this.imageInlineCount = 0;
-
-            foreach (var run in this.runs)
+            if (mode == "msg")
             {
-                run.Text = "";
+                textObject.Visibility = Visibility.Visible;
+
+                this.word_num = 0;
+
+                // メッセージ表示処理
+                this.msgTimer = new DispatcherTimer();
+                this.msgTimer.Tick += ViewWord;
+                this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / INIT_MESSAGE_SPEED);
+                this.msgTimer.Start();
+
+                this.inlineCount = 0;
+                this.imageInlineCount = 0;
+
+                foreach (var run in this.runs)
+                {
+                    run.Text = "";
+                }
+                this.runs.Clear();
+                this.imageInlines.Clear();
+
+                textObject.Inlines.Clear();
             }
-            this.runs.Clear();
-
-            this.imageInlines.Clear();
-
-            textObject.Inlines.Clear();
 
             // 画像インラインと文字インラインの合体
-            foreach (var msgs in messages)
+            foreach (var stns in sentences)
             {
                 string namePngPath = "./temp/temp_name.png";
 
-                if (msgs.Count > 2 && msgs[1] == "image" && msgs[2] == "name" && File.Exists(namePngPath))
+                if (stns.Count > 2 && stns[1] == "image" && stns[2] == "name" && File.Exists(namePngPath))
                 {
-                    var imageInline = new InlineUIContainer { Child = new Image { Source = null, Height = 48 } };
+                    var imageInline = new InlineUIContainer { Child = new Image { Source = null, Height = textObject.FontSize } };
 
                     textObject.Inlines.Add(imageInline);
 
@@ -529,12 +639,12 @@ namespace KokoroUpTime
                 }
                 var run = new Run { };
 
-                if (msgs.Count > 2 && msgs[1] == "font")
+                if (stns.Count > 2 && stns[1] == "font")
                 {
-                    var options = msgs[2].Split(",");
+                    var options = stns[2].Split(",");
 
                     var foreground = new SolidColorBrush(Colors.Black);
-                    double fontSize = 48;
+                    double fontSize = textObject.FontSize;
 
                     var background = new SolidColorBrush(Colors.White);
                     background.Opacity = 0;
@@ -568,6 +678,7 @@ namespace KokoroUpTime
                             case "red": { background = new SolidColorBrush(Colors.Red); background.Opacity = 1; break; };
                             case "green": { background = new SolidColorBrush(Colors.Green); background.Opacity = 1; break; };
                             case "blue": { background = new SolidColorBrush(Colors.Blue); background.Opacity = 1; break; };
+                            case "yellow": { background = new SolidColorBrush(Colors.Yellow); background.Opacity = 1; break; };
 
                             default: { break; }
                         }
@@ -588,14 +699,14 @@ namespace KokoroUpTime
                             case "red": { textDecoration.Pen = new Pen(Brushes.Red, 1); break; };
                             case "green": { textDecoration.Pen = new Pen(Brushes.Green, 1); break; };
                             case "blue": { textDecoration.Pen = new Pen(Brushes.Blue, 1); break; };
+                            case "black": { textDecoration.Pen = new Pen(Brushes.Black, 1); break; };
 
                             default: { break; }
                         }
                         textDecoration.PenThicknessUnit = TextDecorationUnit.FontRecommended;
                         textDecorations.Add(textDecoration);
                     }
-
-                    run = new Run { Text = "", Foreground = foreground, FontSize = fontSize, Background = background, FontWeight = fontWeights, TextDecorations = textDecorations};
+                    run = new Run { Text = "", Foreground = foreground, FontSize = fontSize, Background = background, FontWeight = fontWeights, TextDecorations = textDecorations };
                 }
                 else
                 {
@@ -605,18 +716,28 @@ namespace KokoroUpTime
                 textObject.Inlines.Add(run);
 
                 this.runs.Add(run);
+
+                if (mode == "text")
+                {
+                    foreach (var _run in this.runs)
+                    {
+                        _run.Text = "";
+                        _run.Text = stns[0];
+                    }
+                    this.runs.Clear();
+                }
             }
 
             // 一文字ずつメッセージ表示（Inner Func）
-            void ViewMsg(object sender, EventArgs e)
+            void ViewWord(object sender, EventArgs e)
             {
-                if (this.inlineCount < messages.Count)
+                if (this.inlineCount < sentences.Count)
                 {
-                    var msgs = messages[this.inlineCount];
+                    var stns = sentences[this.inlineCount];
 
                     string namePngPath = "./temp/temp_name.png";
 
-                    if (msgs.Count > 2 && msgs[1] == "image" && msgs[2] == "name" && File.Exists(namePngPath))
+                    if (stns.Count > 2 && stns[1] == "image" && stns[2] == "name" && File.Exists(namePngPath))
                     {
                         // 実行ファイルの場所を絶対パスで取得
                         var startupPath = FileUtils.GetStartupPath();
@@ -640,9 +761,9 @@ namespace KokoroUpTime
 
                         return;
                     }
-                    this.runs[inlineCount].Text = msgs[0].Substring(0, this.word_num);
+                    this.runs[inlineCount].Text = stns[0].Substring(0, this.word_num);
 
-                    if (this.word_num < msgs[0].Length)
+                    if (this.word_num < stns[0].Length)
                     {
                         this.word_num++;
                     }
@@ -770,6 +891,32 @@ namespace KokoroUpTime
             // 各種ボタンが押されたときの処理
 
             Button button = sender as Button;
+
+            if (button.Name == "BackMessageButton")
+            {
+                this.BackMessageButton.Visibility = Visibility.Hidden;
+                this.NextMessageButton.Visibility = Visibility.Hidden;
+
+                var currentScenarioCount = this.scenarioCount;
+
+                int returnCount = 0;
+
+                for (int i = currentScenarioCount; i <= currentScenarioCount; i--)
+                {
+                    if (this.scenarios[i][0] == "#")
+                    {
+                        returnCount += 1;
+
+                        if (returnCount == 2)
+                        {
+                            this.scenarioCount = i;
+                            this.ScenarioPlay();
+
+                            break;
+                        }
+                    }
+                }
+            }
 
             if (this.isClickable)
             {

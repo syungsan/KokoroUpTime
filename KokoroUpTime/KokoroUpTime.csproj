@@ -147,6 +147,7 @@
     <None Remove="Images\kimi_stand_01.png" />
     <None Remove="Images\kind_of_feeling_button_frame.png" />
     <None Remove="Images\kind_of_feeling_input.png" />
+    <None Remove="Images\large_transparent.png" />
     <None Remove="Images\left_big_bubble.png" />
     <None Remove="Images\long_bubble_right_up.png" />
     <None Remove="Images\frame_46-1.png" />
@@ -217,6 +218,7 @@
     <None Remove="Images\shiroji_04.png" />
     <None Remove="Images\short_bubble_left.png" />
     <None Remove="Images\short_bubble_right_up.png" />
+    <None Remove="Images\simple_goldfish.png" />
     <None Remove="Images\size_of_feeling_button_frame.png" />
     <None Remove="Images\small_bubble_center_down.png" />
     <None Remove="Images\small_bubble_center_right_down.png" />
@@ -385,6 +387,7 @@
     <Resource Include="Images\kimi_stand_01.png" />
     <Resource Include="Images\kind_of_feeling_button_frame.png" />
     <Resource Include="Images\kind_of_feeling_input.png" />
+    <Resource Include="Images\large_transparent.png" />
     <Resource Include="Images\left_big_bubble.png" />
     <Resource Include="Images\long_bubble_right_up.png" />
     <Resource Include="Images\manga2-1.png" />
@@ -405,6 +408,7 @@
     <Resource Include="Images\return_to_top.png" />
     <Resource Include="Images\short_bubble_left.png" />
     <Resource Include="Images\short_bubble_right_up.png" />
+    <Resource Include="Images\simple_goldfish.png" />
     <Resource Include="Images\size_of_feeling_button_frame.png" />
     <Resource Include="Images\small_bubble_center_down.png" />
     <Resource Include="Images\small_bubble_center_right_down.png" />

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vwb1QlAIL5EcIpJG6TBEyXqjj6umDHljR8Dyf4UjlN3HgZGj8U4uMZDiJMfKowcPux35HatwLtl25AsEa4y9RA==",
+  "dgSpecHash": "8P0jDMpJDSe330AIQKimjH4oopWeFUX21kTKMLcIYXK0p7PEpnKdRyt4HHC55P6vgsWcmJVtB/fVorU3G7pkZQ==",
   "success": true,
   "projectFilePath": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
   "expectedPackageFiles": [
@@ -109,10 +109,7 @@
     "C:\\Users\\syung\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\syung\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
     "C:\\Users\\syung\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\syung\\.nuget\\packages\\wpfanimatedgif\\2.0.0\\wpfanimatedgif.2.0.0.nupkg.sha512",
-    "C:\\Users\\syung\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\3.1.8\\microsoft.netcore.app.runtime.win-x86.3.1.8.nupkg.sha512",
-    "C:\\Users\\syung\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\3.1.8\\microsoft.windowsdesktop.app.runtime.win-x86.3.1.8.nupkg.sha512",
-    "C:\\Users\\syung\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\3.1.8\\microsoft.aspnetcore.app.runtime.win-x86.3.1.8.nupkg.sha512"
+    "C:\\Users\\syung\\.nuget\\packages\\wpfanimatedgif\\2.0.0\\wpfanimatedgif.2.0.0.nupkg.sha512"
   ],
   "logs": []
 }

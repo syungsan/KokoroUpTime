@@ -138,11 +138,42 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Grid.RenderTransform>
-                    <TextBlock x:Name="CreditTitleTextBlock" HorizontalAlignment="Center" Margin="0,145,0,0" Text="スタッフ" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Foreground="#FFF74C4C"/>
-                    <TextBlock x:Name="DoushisyaTextBlock" HorizontalAlignment="Center" Margin="0,301,0,0" Text="同志社大学" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
-                    <TextBlock x:Name="MaglabTextBlock" HorizontalAlignment="Center" Margin="0,414,0,0" Text="縄手研究室" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
-                    <TextBlock x:Name="ProgrammerTextBlock" HorizontalAlignment="Center" Margin="0,642,0,0" Text="プログラミング　宮内　足立　多々納" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
+                    <TextBlock x:Name="CreditTitleTextBlock" HorizontalAlignment="Center" Margin="0,84,0,0" Text="スタッフ" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Foreground="#FFF74C4C"/>
                     <Button x:Name="CreditReturnButton" Content="閉じる" HorizontalAlignment="Left" Margin="1022,722,0,0" VerticalAlignment="Top" FontSize="48" Click="Button_Click"/>
+                    <RichTextBox x:Name="DoushisyaRichTextBox" Margin="191,196,191,424" Focusable="False" Cursor="Arrow" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}">
+                        <FlowDocument>
+                            <Paragraph TextAlignment="Center">
+                                <Run Text="同志社大学関係者紹介" FontSize="36"/>
+                            </Paragraph>
+                            <Paragraph TextAlignment="Center">
+                                <Run Text="イラスト : エロ漫画家" FontSize="28"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox x:Name="ShimadaiRichTextBox" Margin="191,506,191,115" Focusable="False" Cursor="Arrow" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}">
+                        <FlowDocument>
+                            <Paragraph TextAlignment="Center">
+                                <Run Text="島根大学関係者紹介" FontSize="36" BaselineAlignment="Baseline"/>
+                                <LineBreak/>
+                                <InlineUIContainer>
+                                    <Image x:Name="NawateLogoImage" Height="120" Width="120" Source="/Images/large_transparent.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,-68"/>
+                                </InlineUIContainer>
+                                <Run Text=" "/>
+                                <Run Text="縄手研究室（ヒューマンインタフェース研究室）" FontSize="28"/>
+                                <LineBreak/>
+                                <Run Text="責任教官 : 縄手雅彦" FontSize="28"/>
+                                <LineBreak/>
+                                <LineBreak/>
+                                <Run Text="プログラマー : 安達幹雄, 宮内啓伍, 高橋秀太郎" FontSize="28"/>
+                                <LineBreak/>
+                                <LineBreak/>
+                                <Run Text="アドバイザ : 多々納俊治" FontSize="28" BaselineAlignment="Top"/>
+                                <InlineUIContainer>
+                                    <Image x:Name="TadanoLaboratoryLogoImage" Height="44" Width="56" Source="/Images/simple_goldfish.png" Margin="20,0,0,0"/>
+                                </InlineUIContainer>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
                 </Grid>
             </Grid>
         </Grid>
