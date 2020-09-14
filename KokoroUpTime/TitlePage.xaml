@@ -47,7 +47,7 @@
             </Grid>
             <Image x:Name="ShirojiImage" Source="/Images/shiroji_02.png" Margin="1026,602,619,145"/>
             <Button x:Name="OptionButton" Content="オプション" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,999,1720,10"/>
-            <Button x:Name="ItemsButtonButton" Content="アイテム図鑑" FontSize="36" Foreground="White" Click="Button_Click" Margin="411,918,1319,91"/>
+            <Button x:Name="ItemsButton" Content="アイテム図鑑" FontSize="36" Foreground="White" Click="Button_Click" Margin="411,918,1319,91"/>
             <Button x:Name="NameEntryButton" Content="なまえ入力" FontSize="36" Foreground="White" Click="Button_Click" Margin="10,918,1720,91"/>
             <Grid x:Name="BubbleGrid" Width="529" Height="230">
                 <Image x:Name="BubbleImage" Source="/Images/small_bubble_left.png" Margin="594,185,-594,-185"/>
@@ -67,7 +67,7 @@
             <Button x:Name="SelectUserButton" Content="なまえ選択" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,918,1520,91"/>
             <Button x:Name="CreditButton" Content="作成　こころあっぷタイム編集委員会" HorizontalAlignment="Left" Margin="1343,1026,0,0" VerticalAlignment="Top" FontSize="36" Background="{x:Null}" FontWeight="Bold" Foreground="#FFD0F9FF" Click="Button_Click" BorderBrush="{x:Null}"/>
             <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
-            <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169" d:IsHidden="True">
+            <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169">
                 <Border x:Name="SelectUserListBorder" BorderThickness="1" BorderBrush="Black" Background="#FFFFCECE" CornerRadius="32,32,32,32"/>
                 <TextBlock x:Name="SelectUserListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="なまえの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
                 <ListBox x:Name="SelectUserListBox" Margin="48,140,48,130" FontSize="48" SelectionMode="Single">
@@ -87,7 +87,7 @@
                 </ListBox>
                 <Button x:Name="SelectUserListOKButton" Content="OK" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
             </Grid>
-            <Grid x:Name="SelectDataListGrid" Margin="405,100,407,169" d:IsHidden="True">
+            <Grid x:Name="SelectDataListGrid" Margin="405,100,407,169">
                 <Border x:Name="SelectDataListBorder" BorderThickness="1" BorderBrush="Black" Background="#FFE8F9CF" CornerRadius="32,32,32,32"/>
                 <TextBlock x:Name="SelectDataListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="データの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
                 <ListBox x:Name="SelectDataListBox" Margin="48,140,48,130" FontSize="48" SelectionMode="Multiple">
@@ -109,7 +109,7 @@
                 <Button x:Name="SelectDataListReturnButton" Content="戻る" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
                 <Button x:Name="SelectDataListDeleteButton" Content="削除" HorizontalAlignment="Left" Margin="716,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
             </Grid>
-            <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">
+            <Grid x:Name="ExitBackGrid" Margin="497,215,497,190">
                 <Border x:Name="ExitBackBorder" BorderThickness="1" BorderBrush="Black" Background="White" CornerRadius="32,32,32,32"/>
                 <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Left" Margin="169,113,0,0" VerticalAlignment="Top" Height="100" Width="582" FontSize="48" Text="本当にアプリを終了しますか？" FontWeight="Bold" TextAlignment="Center"/>
                 <Button x:Name="ExitBackYesButton" HorizontalAlignment="Left" Margin="33,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
@@ -119,7 +119,7 @@
                     <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
                 </Button>
             </Grid>
-            <Grid x:Name="CreditGrid" Margin="338,129,340,20" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+            <Grid x:Name="CreditGrid" Margin="338,129,340,20" RenderTransformOrigin="0.5,0.5">
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -138,11 +138,42 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Grid.RenderTransform>
-                    <TextBlock x:Name="CreditTitleTextBlock" HorizontalAlignment="Center" Margin="0,145,0,0" Text="スタッフ" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Foreground="#FFF74C4C"/>
-                    <TextBlock x:Name="DoushisyaTextBlock" HorizontalAlignment="Center" Margin="0,301,0,0" Text="同志社大学" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
-                    <TextBlock x:Name="MaglabTextBlock" HorizontalAlignment="Center" Margin="0,414,0,0" Text="縄手研究室" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
-                    <TextBlock x:Name="ProgrammerTextBlock" HorizontalAlignment="Center" Margin="0,642,0,0" Text="プログラミング　宮内　足立　多々納" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
+                    <TextBlock x:Name="CreditTitleTextBlock" HorizontalAlignment="Center" Margin="0,84,0,0" Text="スタッフ" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Foreground="#FFF74C4C"/>
                     <Button x:Name="CreditReturnButton" Content="閉じる" HorizontalAlignment="Left" Margin="1022,722,0,0" VerticalAlignment="Top" FontSize="48" Click="Button_Click"/>
+                    <RichTextBox x:Name="DoushisyaRichTextBox" Margin="191,196,191,424" Focusable="False" Cursor="Arrow" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}">
+                        <FlowDocument>
+                            <Paragraph TextAlignment="Center">
+                                <Run Text="同志社大学関係者紹介" FontSize="36"/>
+                            </Paragraph>
+                            <Paragraph TextAlignment="Center">
+                                <Run Text="イラスト : エロ漫画家" FontSize="28"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox x:Name="ShimadaiRichTextBox" Margin="191,506,191,115" Focusable="False" Cursor="Arrow" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}">
+                        <FlowDocument>
+                            <Paragraph TextAlignment="Center">
+                                <Run Text="島根大学関係者紹介" FontSize="36" BaselineAlignment="Baseline"/>
+                                <LineBreak/>
+                                <InlineUIContainer>
+                                    <Image x:Name="NawateLogoImage" Height="120" Width="120" Source="/Images/large_transparent.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,-68"/>
+                                </InlineUIContainer>
+                                <Run Text=" "/>
+                                <Run Text="縄手研究室（ヒューマンインタフェース研究室）" FontSize="28"/>
+                                <LineBreak/>
+                                <Run Text="責任教官 : 縄手雅彦" FontSize="28"/>
+                                <LineBreak/>
+                                <LineBreak/>
+                                <Run Text="プログラマー : 安達幹雄, 宮内啓伍, 高橋秀太郎" FontSize="28"/>
+                                <LineBreak/>
+                                <LineBreak/>
+                                <Run Text="アドバイザ : 多々納俊治" FontSize="28" BaselineAlignment="Top"/>
+                                <InlineUIContainer>
+                                    <Image x:Name="TadanoLaboratoryLogoImage" Height="44" Width="56" Source="/Images/simple_goldfish.png" Margin="20,0,0,0"/>
+                                </InlineUIContainer>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
                 </Grid>
             </Grid>
         </Grid>

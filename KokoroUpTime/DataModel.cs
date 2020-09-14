@@ -33,6 +33,8 @@ namespace KokoroUpTime
         public bool IsAddRubi { get; set; }
 
         public int InputMethod { get; set; }
+
+        public bool Is3SecondRule { get; set; }
     }
 
     // アイテム取得フラグカラム

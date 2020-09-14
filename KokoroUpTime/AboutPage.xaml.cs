@@ -41,7 +41,6 @@ namespace KokoroUpTime
             this.dataOption = _dataOption;
             this.dataItem = _dataItem;
             this.dataProgress = _dataProgress;
-            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

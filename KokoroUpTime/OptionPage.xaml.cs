@@ -99,6 +99,15 @@ namespace KokoroUpTime
             {
                 this.KeyboardButton.Foreground = new SolidColorBrush(Colors.Blue);
             }
+
+            if (this.dataOption.Is3SecondRule == true)
+            {
+                this.ThreeSecondRuleOnButton.Foreground = new SolidColorBrush(Colors.Blue);
+            }
+            else if (this.dataOption.Is3SecondRule == false)
+            {
+                this.ThreeSecondRuleOffButton.Foreground = new SolidColorBrush(Colors.Blue);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -229,6 +238,28 @@ namespace KokoroUpTime
                 }
             }
 
+            if (button.Name == "ThreeSecondRuleOnButton")
+            {
+                if (button.Foreground != new SolidColorBrush(Colors.Blue))
+                {
+                    button.Foreground = new SolidColorBrush(Colors.Blue);
+                    this.ThreeSecondRuleOffButton.Foreground = new SolidColorBrush(Colors.White);
+
+                    this.dataOption.Is3SecondRule = true;
+                }
+            }
+
+            if (button.Name == "ThreeSecondRuleOffButton")
+            {
+                if (button.Foreground != new SolidColorBrush(Colors.Blue))
+                {
+                    button.Foreground = new SolidColorBrush(Colors.Blue);
+                    this.ThreeSecondRuleOnButton.Foreground = new SolidColorBrush(Colors.White);
+
+                    this.dataOption.Is3SecondRule = false;
+                }
+            }
+
             if (button.Name == "ReturnToTitleButton")
             {
                 TitlePage titlePage = new TitlePage();
@@ -245,7 +276,7 @@ namespace KokoroUpTime
                 // タイトルへ戻るボタン以外でオプションを常にデータベースへ記録
                 using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                 {
-                    connection.Execute($@"UPDATE DataOption SET IsPlaySE = '{Convert.ToInt32(this.dataOption.IsPlaySE)}', IsPlayBGM = '{Convert.ToInt32(this.dataOption.IsPlayBGM)}', MessageSpeed = '{this.dataOption.MessageSpeed}', IsAddRubi = '{Convert.ToInt32(this.dataOption.IsAddRubi)}', InputMethod = '{this.dataOption.InputMethod}' WHERE Id = 1;");
+                    connection.Execute($@"UPDATE DataOption SET IsPlaySE = '{Convert.ToInt32(this.dataOption.IsPlaySE)}', IsPlayBGM = '{Convert.ToInt32(this.dataOption.IsPlayBGM)}', MessageSpeed = '{this.dataOption.MessageSpeed}', IsAddRubi = '{Convert.ToInt32(this.dataOption.IsAddRubi)}', InputMethod = '{this.dataOption.InputMethod}' , Is3SecondRule = '{Convert.ToInt32(this.dataOption.Is3SecondRule)}' WHERE Id = 1;");
                 }
             }
         }

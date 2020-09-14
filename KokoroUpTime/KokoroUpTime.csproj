@@ -4,10 +4,10 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>0.8.5.1</Version>
+    <Version>0.8.6.1</Version>
     <PackageIcon></PackageIcon>
     <ApplicationIcon>icon_sr9_icon.ico</ApplicationIcon>
-    <AssemblyVersion>0.8.5.1</AssemblyVersion>
+    <AssemblyVersion>0.8.6.1</AssemblyVersion>
     <FileVersion>0.8.5.1</FileVersion>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
@@ -77,7 +77,6 @@
     <None Remove="Images\challenge_time_text.png" />
     <None Remove="Images\challenge_time_title.png" />
     <None Remove="Images\check_manga.png" />
-    <None Remove="Images\circle.png" />
     <None Remove="Images\circle_word.PNG" />
     <None Remove="Images\compare_akamaru_value_frame.png" />
     <None Remove="Images\compare_aosuke_value_frame.png" />
@@ -90,6 +89,10 @@
     <None Remove="Images\good_feeling.png" />
     <None Remove="Images\group_activity_text.png" />
     <None Remove="Images\group_activity_title01.png" />
+    <None Remove="Images\hot_word_1_title.png" />
+    <None Remove="Images\hot_word_2_title.png" />
+    <None Remove="Images\hot_word_3_title.png" />
+    <None Remove="Images\hot_word_4_title.png" />
     <None Remove="Images\hot_word_button1.png" />
     <None Remove="Images\hot_word_button2.png" />
     <None Remove="Images\hot_word_button3.png" />
@@ -144,6 +147,7 @@
     <None Remove="Images\kimi_stand_01.png" />
     <None Remove="Images\kind_of_feeling_button_frame.png" />
     <None Remove="Images\kind_of_feeling_input.png" />
+    <None Remove="Images\large_transparent.png" />
     <None Remove="Images\left_big_bubble.png" />
     <None Remove="Images\long_bubble_right_up.png" />
     <None Remove="Images\frame_46-1.png" />
@@ -194,7 +198,6 @@
     <None Remove="Images\message_box.png" />
     <None Remove="Images\moya1.png" />
     <None Remove="Images\moya2.png" />
-    <None Remove="Images\Name.bmp" />
     <None Remove="Images\next_go_button.png" />
     <None Remove="Images\normal.png" />
     <None Remove="Images\oranger_gradation.png" />
@@ -215,6 +218,7 @@
     <None Remove="Images\shiroji_04.png" />
     <None Remove="Images\short_bubble_left.png" />
     <None Remove="Images\short_bubble_right_up.png" />
+    <None Remove="Images\simple_goldfish.png" />
     <None Remove="Images\size_of_feeling_button_frame.png" />
     <None Remove="Images\small_bubble_center_down.png" />
     <None Remove="Images\small_bubble_center_right_down.png" />
@@ -324,6 +328,10 @@
     <Resource Include="Images\good.png" />
     <Resource Include="Images\group_activity_text.png" />
     <Resource Include="Images\group_activity_title01.png" />
+    <Resource Include="Images\hot_word_1_title.png" />
+    <Resource Include="Images\hot_word_2_title.png" />
+    <Resource Include="Images\hot_word_3_title.png" />
+    <Resource Include="Images\hot_word_4_title.png" />
     <Resource Include="Images\hot_word_button1.png" />
     <Resource Include="Images\hot_word_button2.png" />
     <Resource Include="Images\hot_word_button3.png" />
@@ -379,6 +387,7 @@
     <Resource Include="Images\kimi_stand_01.png" />
     <Resource Include="Images\kind_of_feeling_button_frame.png" />
     <Resource Include="Images\kind_of_feeling_input.png" />
+    <Resource Include="Images\large_transparent.png" />
     <Resource Include="Images\left_big_bubble.png" />
     <Resource Include="Images\long_bubble_right_up.png" />
     <Resource Include="Images\manga2-1.png" />
@@ -390,7 +399,6 @@
     <Resource Include="Images\manga3-3.png" />
     <Resource Include="Images\manga3_title.png" />
     <Resource Include="Images\message_box.png" />
-    <Resource Include="Images\Name.bmp" />
     <Resource Include="Images\next_go_button.png" />
     <Resource Include="Images\normal.png" />
     <Resource Include="Images\orange_gradation.png" />
@@ -400,6 +408,7 @@
     <Resource Include="Images\return_to_top.png" />
     <Resource Include="Images\short_bubble_left.png" />
     <Resource Include="Images\short_bubble_right_up.png" />
+    <Resource Include="Images\simple_goldfish.png" />
     <Resource Include="Images\size_of_feeling_button_frame.png" />
     <Resource Include="Images\small_bubble_center_down.png" />
     <Resource Include="Images\small_bubble_center_right_down.png" />
@@ -447,9 +456,7 @@
     <Resource Include="Images\menu_bubble.png" />
     <Resource Include="Images\moya1.png" />
     <Resource Include="Images\moya2.png" />
-    <Resource Include="Images\red_needle.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Images\red_needle.png" />
     <Resource Include="Images\return_to_title.png" />
     <Resource Include="Images\right_big_bubble.png" />
     <Resource Include="Images\right_big_bubble_blue.png" />

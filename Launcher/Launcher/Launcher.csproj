@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon>icon_sr9_icon.ico</ApplicationIcon>
+    <AssemblyName>こころあっぷタイム</AssemblyName>
+  </PropertyGroup>
+
+</Project>

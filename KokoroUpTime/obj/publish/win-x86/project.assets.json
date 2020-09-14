@@ -1295,27 +1295,6 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "WindowsAPICodePack-Core/1.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/Microsoft.WindowsAPICodePack.dll": {}
-        },
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.dll": {}
-        }
-      },
-      "WindowsAPICodePack-Shell/1.1.1": {
-        "type": "package",
-        "dependencies": {
-          "WindowsAPICodePack-Core": "1.1.1"
-        },
-        "compile": {
-          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {}
-        },
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {}
-        }
-      },
       "WpfAnimatedGif/2.0.0": {
         "type": "package",
         "compile": {
@@ -2676,27 +2655,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
-        }
-      },
-      "WindowsAPICodePack-Core/1.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/Microsoft.WindowsAPICodePack.dll": {}
-        },
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.dll": {}
-        }
-      },
-      "WindowsAPICodePack-Shell/1.1.1": {
-        "type": "package",
-        "dependencies": {
-          "WindowsAPICodePack-Core": "1.1.1"
-        },
-        "compile": {
-          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {}
-        },
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {}
         }
       },
       "WpfAnimatedGif/2.0.0": {
@@ -6484,32 +6442,6 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "WindowsAPICodePack-Core/1.1.1": {
-      "sha512": "GoURoQuE7ea7B7q24YRTBfZbsNO7ZtwSyBHbM8zO0ynwfjAGC0bbAmVrDvZ6HbWtqqOt6QTzdmYnj2WJglb5JQ==",
-      "type": "package",
-      "path": "windowsapicodepack-core/1.1.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/Microsoft.WindowsAPICodePack.dll",
-        "lib/Microsoft.WindowsAPICodePack.xml",
-        "windowsapicodepack-core.1.1.1.nupkg.sha512",
-        "windowsapicodepack-core.nuspec"
-      ]
-    },
-    "WindowsAPICodePack-Shell/1.1.1": {
-      "sha512": "CPFamhL3jPo8O6+ErGsLS4LK3DWP5ncxqhbzpPnYkIW9rjatunUij35iTjprbr9mlYR/5Pbguw21MwSmTOKR4g==",
-      "type": "package",
-      "path": "windowsapicodepack-shell/1.1.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/Microsoft.WindowsAPICodePack.Shell.dll",
-        "lib/Microsoft.WindowsAPICodePack.Shell.xml",
-        "windowsapicodepack-shell.1.1.1.nupkg.sha512",
-        "windowsapicodepack-shell.nuspec"
-      ]
-    },
     "WpfAnimatedGif/2.0.0": {
       "sha512": "Z468xEqg+MSSW30BkbIcwoCQ9E0GiRQxU6L9qYCUmP28fQ79Dq4QSakWm3Dfw8CoRY3xLl3gf1xRfqILSs6/mw==",
       "type": "package",
@@ -6535,7 +6467,6 @@
     ".NETCoreApp,Version=v3.1": [
       "EPPlus >= 4.5.3.3",
       "Osklib.Wpf >= 1.6.0",
-      "WindowsAPICodePack-Shell >= 1.1.1",
       "WpfAnimatedGif >= 2.0.0",
       "sqlite-net-pcl >= 1.7.335"
     ]
@@ -6544,7 +6475,7 @@
     "C:\\Users\\syung\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "0.8.4.1",
+    "version": "0.8.6.1",
     "restore": {
       "projectUniqueName": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
       "projectName": "KokoroUpTime",
@@ -6585,10 +6516,6 @@
             "target": "Package",
             "version": "[1.6.0, )"
           },
-          "WindowsAPICodePack-Shell": {
-            "target": "Package",
-            "version": "[1.1.1, )"
-          },
           "WpfAnimatedGif": {
             "target": "Package",
             "version": "[2.0.0, )"
@@ -6608,20 +6535,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
-            "version": "[3.1.5, 3.1.5]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Runtime.win-x86",
-            "version": "[3.1.5, 3.1.5]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Runtime.win-x86",
-            "version": "[3.1.5, 3.1.5]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -6630,7 +6543,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {
@@ -6638,27 +6551,5 @@
         "#import": []
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "パッケージ 'WindowsAPICodePack-Core 1.1.1' はプロジェクトのターゲット フレームワーク '.NETCoreApp,Version=v3.1' ではなく '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' を使用して復元されました。このパッケージは、使用しているプロジェクトとの完全な互換性がない可能性があります。",
-      "libraryId": "WindowsAPICodePack-Core",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "パッケージ 'WindowsAPICodePack-Shell 1.1.1' はプロジェクトのターゲット フレームワーク '.NETCoreApp,Version=v3.1' ではなく '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' を使用して復元されました。このパッケージは、使用しているプロジェクトとの完全な互換性がない可能性があります。",
-      "libraryId": "WindowsAPICodePack-Shell",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  }
 }

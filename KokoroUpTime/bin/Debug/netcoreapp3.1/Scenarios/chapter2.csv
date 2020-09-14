@@ -271,11 +271,12 @@ msg,main_msg,今日のこころアップタイムはどうじゃったかな？�
 wait,next_only
 msg,main_msg,次回のテーマは「【marker】あたたかい言葉をかけよう【」じゃ！。,白じい
 next
-jump,アイテム図鑑登録
+jump,今回の発明品おさらい
 
-scene,アイテム図鑑登録
+scene,今回の発明品おさらい
 reset
-image,bg_image,background_03.png
+image,bg_image,background_10.png
+gif,item_left_last_image,item02_solo.gif
 grid,item_last_info_grid
 image,item_left_last_image
 image,shiroji_right_image,shiroji_01.png,appear_up

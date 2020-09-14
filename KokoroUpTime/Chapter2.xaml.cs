@@ -372,7 +372,7 @@ namespace KokoroUpTime
 
             this.ExitBackGrid.Visibility = Visibility.Hidden;
 
-            this.BranchSelectGrid.Visibility = Visibility.Hidden;
+            // this.BranchSelectGrid.Visibility = Visibility.Hidden;
 
             this.BackgroundImage.Visibility = Visibility.Hidden;
             this.MangaTitleImage.Visibility = Visibility.Hidden;

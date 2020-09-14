@@ -32,10 +32,10 @@ namespace KokoroUpTime
         private string position = "";
 
         // マウスクリックを可能にするかどうかのフラグ
-        private bool isClickable = false;
+        // private bool isClickable = false;
 
         // 画面を何回タップしたか
-        private int tapCount = 0;
+        // private int tapCount = 0;
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
@@ -140,7 +140,7 @@ namespace KokoroUpTime
             // デバッグのためシナリオのインデックスを出力
             Debug.Print((this.scenarioCount + 1).ToString());
 
-            // 処理分岐のフラグ
+            // 処理分岐用のタグ
             var tag = this.scenarios[this.scenarioCount][0];
 
             switch (tag)
@@ -254,14 +254,7 @@ namespace KokoroUpTime
                     }
                     break;
 
-                // メッセージに対する待ち（メッセージボタンの表示切り替え）
                 case "wait":
-
-                    this.isClickable = true;
-
-                    break;
-
-                case "time_span":
 
                     if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
                     {
@@ -279,7 +272,6 @@ namespace KokoroUpTime
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
                         };
-
                     }
                     break;
 
@@ -287,7 +279,7 @@ namespace KokoroUpTime
 
                     this.ReturnToTopButton.Visibility = Visibility.Visible;
 
-                    this.isClickable = true;
+                    // this.isClickable = true;
 
                     break;
 

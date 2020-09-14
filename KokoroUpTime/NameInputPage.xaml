@@ -262,7 +262,7 @@
                 <TextBox x:Name="NameTextBox" Text="TextBox" TextWrapping="Wrap" Margin="100,200,900,700" FontSize="100" Background="{x:Null}" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown"/>
                 <Button x:Name="DecisionButton" Content="けってい" FontSize="80" Background="White" Margin="1200,200,400,700" Click="Button_Click"/>
             </Grid>
-            <Grid x:Name="CanvasGrid" d:IsHidden="True">
+            <Grid x:Name="CanvasGrid">
                 <Border x:Name="CanvasBackBorder" BorderThickness="1" BorderBrush="Black" Margin="0,300,0,0" Background="White"/>
                 <InkCanvas x:Name="NameCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,300,0,0" Background="{x:Null}">
                     <InkCanvas.DefaultDrawingAttributes>

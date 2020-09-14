@@ -5,7 +5,7 @@
   },
   "projects": {
     "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj": {
-      "version": "0.8.4.1",
+      "version": "0.8.6.1",
       "restore": {
         "projectUniqueName": "D:\\TadanoProjects\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
         "projectName": "KokoroUpTime",
@@ -46,10 +46,6 @@
               "target": "Package",
               "version": "[1.6.0, )"
             },
-            "WindowsAPICodePack-Shell": {
-              "target": "Package",
-              "version": "[1.1.1, )"
-            },
             "WpfAnimatedGif": {
               "target": "Package",
               "version": "[2.0.0, )"
@@ -69,20 +65,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
-              "version": "[3.1.5, 3.1.5]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Runtime.win-x86",
-              "version": "[3.1.5, 3.1.5]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x86",
-              "version": "[3.1.5, 3.1.5]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -91,7 +73,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
