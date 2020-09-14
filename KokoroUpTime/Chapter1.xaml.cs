@@ -27,6 +27,7 @@ using WpfAnimatedGif;
 using Expansion;
 using FileIOUtils;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
+using System.IO;
 
 namespace KokoroUpTime
 {
@@ -677,13 +678,14 @@ namespace KokoroUpTime
 
                 // 各場面に対する待ち（ページめくりボタン）
                 case "next":
-                    
-                    if (this.scene == "教室のルール"||(this.SelectHeartGrid.Visibility == Visibility.Visible||this.SelectFeelingGrid.Visibility == Visibility.Visible))
+
+                    if (this.scene == "教室のルール" || (this.SelectHeartGrid.Visibility == Visibility.Visible || this.SelectFeelingGrid.Visibility == Visibility.Visible))
                     {
                         this.NextPageButton.Visibility = Visibility.Visible;
                         this.BackPageButton.Visibility = Visibility.Visible;
                     }
-                    else
+                    
+                    break;
                 // ボタン押下待ち
                 case "click":
 

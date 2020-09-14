@@ -185,4 +185,14 @@ namespace KokoroUpTime
 
         public string CreatedAt { get; set; }
     }
+
+    // チャプター3のログカラム
+    public class DataChapter4
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+
+        public string CreatedAt { get; set; }
+    }
 }

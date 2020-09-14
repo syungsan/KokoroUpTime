@@ -33,7 +33,7 @@ namespace KokoroUpTime
     /// <summary>
     /// GameWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class Chapter2 : Page
+    public partial class Chapter4 : Page
     {
 
         // 気持ちのリスト
@@ -88,7 +88,7 @@ namespace KokoroUpTime
         private SoundPlayer sePlayer = null;
 
         // データベースに収めるデータモデルのインスタン
-        private DataChapter2 dataChapter2;
+        private DataChapter4 dataChapter4;
 
         // ゲームの切り替えシーン
         private string scene;
@@ -123,7 +123,7 @@ namespace KokoroUpTime
         public DataProgress dataProgress = new DataProgress();
 
 
-        public Chapter2()
+        public Chapter4()
         {
             InitializeComponent();
 
@@ -139,7 +139,7 @@ namespace KokoroUpTime
             this.MouseMove += new MouseEventHandler(OnMouseMove);
 
             // データモデルインスタンス確保
-            this.dataChapter2 = new DataChapter2();
+            this.dataChapter4 = new DataChapter4();
 
             this.EditingModeItemsControl.ItemsSource = EDIT_BUTTON;
 
@@ -499,13 +499,13 @@ namespace KokoroUpTime
             this.dataProgress = _dataProgress;
 
             // 現在時刻を取得
-            this.dataChapter2.CreatedAt = DateTime.Now.ToString();
+            this.dataChapter4.CreatedAt = DateTime.Now.ToString();
 
             // データベースのテーブル作成と現在時刻の書き込みを同時に行う
             using (var connection = new SQLiteConnection(this.initConfig.dbPath))
             {
                 // 毎回のアクセス日付を記録
-                connection.Insert(this.dataChapter2);
+                connection.Insert(this.dataChapter4);
             }
         }
 
@@ -552,11 +552,11 @@ namespace KokoroUpTime
 
                     // 画面のフェードアウト処理とか入れる（別関数を呼び出す）
 
-                    this.dataProgress.HasCompletedChapter2 = true;
+                    this.dataProgress.HasCompletedChapter4 = true;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataProgress SET HasCompletedChapter2 = '{Convert.ToInt32(this.dataProgress.HasCompletedChapter2)}' WHERE Id = 1;");
+                        connection.Execute($@"UPDATE DataProgress SET HasCompletedChapter4 = '{Convert.ToInt32(this.dataProgress.HasCompletedChapter4)}' WHERE Id = 1;");
                     }
                     this.ReturnToTitleButton.Visibility = Visibility.Visible;
 
@@ -581,7 +581,7 @@ namespace KokoroUpTime
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter2Scene = '{this.dataProgress.LatestChapter1Scene}' WHERE Id = 1;");
+                        connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter4Scene = '{this.dataProgress.LatestChapter1Scene}' WHERE Id = 1;");
                     }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1585,82 +1585,6 @@ namespace KokoroUpTime
             }
             if (button.Name == "SelectFeelingNextButton")
             {
-                if (scene == "チャレンジタイムパート①")
-                {
-                    for (int i = 1; i < 15; i++)
-                    {
-                        string targettextname = "GoodEventButton" + i.ToString();
-                        var targetObject = this.GoodEventObject[targettextname];
-                        if (targetObject.Visibility == Visibility.Visible)
-                        {
-                            this.mySelectGoodEvents.Add(this.textBlockObjects["GoodEventText" + i.ToString()].Text);
-                        }
-                    }
-                    this.dataChapter2.MySelectGoodEvents = string.Join(",", this.mySelectGoodEvents);
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter2 SET MySelectGoodEvents = '{this.dataChapter2.MySelectGoodEvents}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                    }
-
-                }
-               
-                
-
-                if(scene== "「おいしいものを食べる」ときは？")
-                {
-                    this.aosukesDifficultyOfEating = this.AosukeDifficultyOfActionText.Text;
-                    this.aosukesSizeOfFeelingOfEating = this.AosukeSizeOfFeelingText.Text;
-
-                    this.dataChapter2.AosukesDifficultyOfEating = this.aosukesDifficultyOfEating;
-                    this.dataChapter2.AosukesSizeOfFeelingOfEating = this.aosukesSizeOfFeelingOfEating;
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfEating = '{this.dataChapter2.AosukesSizeOfFeelingOfEating}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                        connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfEating = '{this.dataChapter2.AosukesDifficultyOfEating}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                    }
-                }
-                if (scene == "「全部のテストで100点をとる」ときは？")
-                {
-                    this.aosukesDifficultyOfGettingHighScore = this.AosukeDifficultyOfActionText.Text;
-                    this.aosukesSizeOfFeelingOfGettingHighScore = this.AosukeSizeOfFeelingText.Text;
-
-                    this.dataChapter2.AosukesDifficultyOfGettingHighScore = this.aosukesDifficultyOfGettingHighScore;
-                    this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore = this.aosukesSizeOfFeelingOfGettingHighScore;
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfGettingHighScore = '{this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                        connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfGettingHighScore = '{this.dataChapter2.AosukesDifficultyOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-
-                    }
-                }
-                if (scene == "「休み時間に友だちとおしゃべりする」ときは？")
-                {
-                    this.aosukesDifficultyOfTalkingWithFriend = this.AosukeDifficultyOfActionText.Text;
-                    this.aosukesSizeOfFeelingOfTalkingWithFriend = this.AosukeSizeOfFeelingText.Text;
-
-                    this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend = this.aosukesDifficultyOfEating;
-                    this.dataChapter2.AosukesDifficultyOfTalkingWithFriend = this.aosukesSizeOfFeelingOfEating;
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfTalkingWithFriend = '{this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                        connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfTalkingWithFriend = '{this.dataChapter2.AosukesDifficultyOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                    }
-                }
-
-                if (scene == "グループアクティビティ")
-                {
-                    if (this.dataOption.InputMethod == 1)
-                    {
-                        this.myALittlleExcitingEvents = this.InputText.Text;
-                        this.dataChapter2.MyALittlleExcitingEvents = this.myALittlleExcitingEvents;
-                        
-                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                        {
-                            connection.Execute($@"UPDATE DataChapter2 SET MyALittlleExcitingEvents = '{this.dataChapter2.MyALittlleExcitingEvents}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                        }
-                    }
-                }
-
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
@@ -2003,7 +1927,7 @@ namespace KokoroUpTime
 
 
         // ハートゲージの角度をデータバインド
-        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter2), new UIPropertyMetadata(0.0));
+        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter4), new UIPropertyMetadata(0.0));
 
         public double Angle
         {
