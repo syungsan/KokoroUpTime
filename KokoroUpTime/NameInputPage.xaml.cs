@@ -59,8 +59,8 @@ namespace KokoroUpTime
         private int inlineCount;
         private int imageInlineCount;
 
-        private List<Run> runs = new List<Run>();
-        private List<InlineUIContainer> imageInlines = new List<InlineUIContainer>();
+        private Dictionary<string, List<Run>> runs = new Dictionary<string, List<Run>>();
+        private Dictionary<string, List<InlineUIContainer>> imageInlines = new Dictionary<string, List<InlineUIContainer>>();
 
         // 各種コントロールを任意の文字列で呼び出すための辞書
         private Dictionary<string, Image> imageObjects = null;
@@ -307,6 +307,17 @@ namespace KokoroUpTime
 
                     _textObject.Visibility = Visibility.Hidden;
 
+                    if (this.imageInlines.ContainsKey(_textObject.Name))
+                    {
+                        this.imageInlines.Remove(_textObject.Name);
+                    }
+                    if (this.runs.ContainsKey(_textObject.Name))
+                    {
+                        this.runs.Remove(_textObject.Name);
+                    }
+                    this.imageInlines.Add(_textObject.Name, new List<InlineUIContainer>());
+                    this.runs.Add(_textObject.Name, new List<Run>());
+
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
                         var _message = this.scenarios[this.scenarioCount][2];
@@ -331,6 +342,19 @@ namespace KokoroUpTime
 
                     var __textObject = this.textBlockObjects[this.position];
 
+                    __textObject.Visibility = Visibility.Visible;
+
+                    if (this.imageInlines.ContainsKey(__textObject.Name))
+                    {
+                        this.imageInlines.Remove(__textObject.Name);
+                    }
+                    if (this.runs.ContainsKey(__textObject.Name))
+                    {
+                        this.runs.Remove(__textObject.Name);
+                    }
+                    this.imageInlines.Add(__textObject.Name, new List<InlineUIContainer>());
+                    this.runs.Add(__textObject.Name, new List<Run>());
+
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
                         var _text = this.scenarios[this.scenarioCount][2];
@@ -339,7 +363,13 @@ namespace KokoroUpTime
 
                         this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
                     }
-                    __textObject.Visibility = Visibility.Visible;
+                    else
+                    {
+                        var _texts = this.SequenceCheck(__textObject.Text);
+
+                        // xamlに直接書いたStaticな文章を表示する場合
+                        this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
+                    }
 
                     string textAnimeIsSync = "sync";
 
@@ -496,6 +526,16 @@ namespace KokoroUpTime
 
                 case "#":
 
+                    // しれっとメモリ開放
+                    if (this.imageInlines?.Count > 0)
+                    {
+                        this.imageInlines.Clear();
+                    }
+                    if (this.runs?.Count > 0)
+                    {
+                        this.runs.Clear();
+                    }
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
@@ -599,6 +639,12 @@ namespace KokoroUpTime
         {
             textObject.Text = "";
 
+            this.runs[textObject.Name].Clear();
+            this.imageInlines[textObject.Name].Clear();
+
+            this.inlineCount = 0;
+            this.imageInlineCount = 0;
+
             if (mode == "msg")
             {
                 textObject.Visibility = Visibility.Visible;
@@ -607,27 +653,18 @@ namespace KokoroUpTime
 
                 // メッセージ表示処理
                 this.msgTimer = new DispatcherTimer();
-                this.msgTimer.Tick += ViewWord;
+                this.msgTimer.Tick += ViewWordCharacter;
                 this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / INIT_MESSAGE_SPEED);
                 this.msgTimer.Start();
-
-                this.inlineCount = 0;
-                this.imageInlineCount = 0;
-
-                foreach (var run in this.runs)
-                {
-                    run.Text = "";
-                }
-                this.runs.Clear();
-                this.imageInlines.Clear();
-
-                textObject.Inlines.Clear();
             }
+
+            textObject.Inlines.Clear();
+
 
             // 画像インラインと文字インラインの合体
             foreach (var stns in sentences)
             {
-                string namePngPath = "./temp/temp_name.png";
+                string namePngPath = $"./temp/temp_name.png";
 
                 if (stns.Count > 2 && stns[1] == "image" && stns[2] == "name" && File.Exists(namePngPath))
                 {
@@ -635,7 +672,7 @@ namespace KokoroUpTime
 
                     textObject.Inlines.Add(imageInline);
 
-                    this.imageInlines.Add(imageInline);
+                    this.imageInlines[textObject.Name].Add(imageInline);
                 }
                 var run = new Run { };
 
@@ -661,6 +698,7 @@ namespace KokoroUpTime
                             case "red": { foreground = new SolidColorBrush(Colors.Red); break; };
                             case "green": { foreground = new SolidColorBrush(Colors.Green); break; };
                             case "blue": { foreground = new SolidColorBrush(Colors.Blue); break; };
+                            case "yellow": { foreground = new SolidColorBrush(Colors.Yellow); break; };
 
                             default: { break; }
                         }
@@ -699,6 +737,7 @@ namespace KokoroUpTime
                             case "red": { textDecoration.Pen = new Pen(Brushes.Red, 1); break; };
                             case "green": { textDecoration.Pen = new Pen(Brushes.Green, 1); break; };
                             case "blue": { textDecoration.Pen = new Pen(Brushes.Blue, 1); break; };
+                            case "yellow": { textDecoration.Pen = new Pen(Brushes.Yellow, 1); break; };
                             case "black": { textDecoration.Pen = new Pen(Brushes.Black, 1); break; };
 
                             default: { break; }
@@ -715,27 +754,22 @@ namespace KokoroUpTime
 
                 textObject.Inlines.Add(run);
 
-                this.runs.Add(run);
+                this.runs[textObject.Name].Add(run);
 
                 if (mode == "text")
                 {
-                    foreach (var _run in this.runs)
-                    {
-                        _run.Text = "";
-                        _run.Text = stns[0];
-                    }
-                    this.runs.Clear();
+                    ViewTextAtOnes();
                 }
             }
 
             // 一文字ずつメッセージ表示（Inner Func）
-            void ViewWord(object sender, EventArgs e)
+            void ViewWordCharacter(object sender, EventArgs e)
             {
                 if (this.inlineCount < sentences.Count)
                 {
                     var stns = sentences[this.inlineCount];
 
-                    string namePngPath = "./temp/temp_name.png";
+                    string namePngPath = $"./temp/temp_name.png";
 
                     if (stns.Count > 2 && stns[1] == "image" && stns[2] == "name" && File.Exists(namePngPath))
                     {
@@ -752,7 +786,7 @@ namespace KokoroUpTime
 
                         image.Freeze();
 
-                        (this.imageInlines[imageInlineCount].Child as Image).Source = image;
+                        (this.imageInlines[textObject.Name][imageInlineCount].Child as Image).Source = image;
 
                         this.imageInlineCount++;
 
@@ -761,7 +795,7 @@ namespace KokoroUpTime
 
                         return;
                     }
-                    this.runs[inlineCount].Text = stns[0].Substring(0, this.word_num);
+                    this.runs[textObject.Name][inlineCount].Text = stns[0].Substring(0, this.word_num);
 
                     if (this.word_num < stns[0].Length)
                     {
@@ -780,6 +814,41 @@ namespace KokoroUpTime
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
+                }
+            }
+
+            // 一気にテキストを表示（Inner Func）
+            void ViewTextAtOnes()
+            {
+                if (this.inlineCount < sentences.Count)
+                {
+                    var stns = sentences[this.inlineCount];
+
+                    string namePngPath = $"./temp/temp_name.png";
+
+                    if (stns.Count > 2 && stns[1] == "image" && stns[2] == "name" && File.Exists(namePngPath))
+                    {
+                        // 実行ファイルの場所を絶対パスで取得
+                        var startupPath = FileUtils.GetStartupPath();
+
+                        var image = new BitmapImage();
+
+                        image.BeginInit();
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        image.UriSource = new Uri($@"{startupPath}/{namePngPath}", UriKind.Absolute);
+                        image.EndInit();
+
+                        image.Freeze();
+
+                        (this.imageInlines[textObject.Name][imageInlineCount].Child as Image).Source = image;
+
+                        this.imageInlineCount++;
+                        this.inlineCount++;
+
+                        return;
+                    }
+                    this.runs[textObject.Name][inlineCount].Text = stns[0];
                 }
             }
         }

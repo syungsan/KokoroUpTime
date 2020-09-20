@@ -42,6 +42,8 @@ namespace KokoroUpTime
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
 
+        private int RETURN_COUNT = 1;
+
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0; //
         private List<List<string>> scenarios = null; //
@@ -1309,8 +1311,15 @@ namespace KokoroUpTime
 
                 case "#":
 
-                    this.imageInlines.Clear();
-                    this.runs.Clear();
+                    // しれっとメモリ開放
+                    if (this.imageInlines?.Count > 0)
+                    {
+                        this.imageInlines.Clear();
+                    }
+                    if (this.runs?.Count > 0)
+                    {
+                        this.runs.Clear();
+                    }
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1709,24 +1718,23 @@ namespace KokoroUpTime
                     this.BackPageButton.Visibility = Visibility.Hidden;
                     this.NextPageButton.Visibility = Visibility.Hidden;
 
-                    var currentScenarioCount = this.scenarioCount;
-
+                    var index = this.scenarioCount;
                     int returnCount = 0;
 
-                    for (int i = currentScenarioCount; i <= currentScenarioCount; i--)
+                    while (index > 0)
                     {
-                        if (this.scenarios[i][0] == "#")
+                        if (this.scenarios[index][0] == "#")
                         {
-                            returnCount += 1;
-
-                            if (returnCount == 2)
+                            if (returnCount >= RETURN_COUNT)
                             {
-                                this.scenarioCount = i;
+                                this.scenarioCount = index;
                                 this.ScenarioPlay();
 
                                 break;
                             }
+                            returnCount += 1;
                         }
+                        index -= 1;
                     }
                 }
 
