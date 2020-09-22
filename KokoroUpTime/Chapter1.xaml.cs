@@ -594,17 +594,6 @@ namespace KokoroUpTime
 
                     _textObject.Visibility = Visibility.Hidden;
 
-                    if (this.imageInlines.ContainsKey(_textObject.Name))
-                    {
-                        this.imageInlines.Remove(_textObject.Name);
-                    }
-                    if (this.runs.ContainsKey(_textObject.Name))
-                    {
-                        this.runs.Remove(_textObject.Name);
-                    }
-                    this.imageInlines.Add(_textObject.Name, new List<InlineUIContainer>());
-                    this.runs.Add(_textObject.Name, new List<Run>());
-
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
                         var _message = this.scenarios[this.scenarioCount][2];
@@ -630,17 +619,6 @@ namespace KokoroUpTime
                     var __textObject = this.textBlockObjects[this.position];
 
                     __textObject.Visibility = Visibility.Visible;
-
-                    if (this.imageInlines.ContainsKey(__textObject.Name))
-                    {
-                        this.imageInlines.Remove(__textObject.Name);
-                    }
-                    if (this.runs.ContainsKey(__textObject.Name))
-                    {
-                        this.runs.Remove(__textObject.Name);
-                    }
-                    this.imageInlines.Add(__textObject.Name, new List<InlineUIContainer>());
-                    this.runs.Add(__textObject.Name, new List<Run>());
 
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
@@ -1367,6 +1345,17 @@ namespace KokoroUpTime
 
         private void ShowSentence(TextBlock textObject, List<List<string>> sentences, string mode, object obj = null)
         {
+            if (this.imageInlines.ContainsKey(textObject.Name))
+            {
+                this.imageInlines.Remove(textObject.Name);
+            }
+            if (this.runs.ContainsKey(textObject.Name))
+            {
+                this.runs.Remove(textObject.Name);
+            }
+            this.imageInlines.Add(textObject.Name, new List<InlineUIContainer>());
+            this.runs.Add(textObject.Name, new List<Run>());
+
             textObject.Text = "";
 
             this.runs[textObject.Name].Clear();

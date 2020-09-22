@@ -228,6 +228,7 @@
     <None Remove="Images\small_bubble_center_right_down.png" />
     <None Remove="Images\small_bubble_left.png" />
     <None Remove="Images\small_bubble_left_down_blue.png" />
+    <None Remove="Images\small_bubble_left_down_red.png" />
     <None Remove="Images\small_bubble_left_down_yellow.png" />
     <None Remove="Images\small_bubble_left_up.png" />
     <None Remove="Images\small_bubble_right_down.png" />
@@ -421,6 +422,7 @@
     <Resource Include="Images\small_bubble_center_down.png" />
     <Resource Include="Images\small_bubble_center_right_down.png" />
     <Resource Include="Images\small_bubble_left_down_blue.png" />
+    <Resource Include="Images\small_bubble_left_down_red.png" />
     <Resource Include="Images\small_bubble_left_down_yellow.png" />
     <Resource Include="Images\small_bubble_left_up.png" />
     <Resource Include="Images\small_bubble_right_down.png" />
