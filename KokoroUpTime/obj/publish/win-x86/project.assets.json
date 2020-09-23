@@ -6472,23 +6472,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\maglab\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "0.8.6.1",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+      "projectUniqueName": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
       "projectName": "KokoroUpTime",
-      "projectPath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
-      "packagesPath": "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MAGDYNABOOK-03\\Desktop\\GitHub\\KokoroUpTime\\KokoroUpTime\\obj\\publish\\win-x86\\",
+      "projectPath": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\KokoroUpTime.csproj",
+      "packagesPath": "C:\\Users\\maglab\\.nuget\\packages\\",
+      "outputPath": "D:\\Developer\\Tadano\\C#Projects\\KokoroUpTime\\KokoroUpTime\\obj\\publish\\win-x86\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\MAGDYNABOOK-03\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\maglab\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6561,7 +6557,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {
