@@ -1,0 +1,22 @@
+reset
+image,bg_image
+grid,rule_board_grid
+wait,0.5
+msg,rule_board_title_msg,教室のルール
+wait,1.0
+rule,rule_board_check1_msg,１．人のことを わらわない,0
+wait,0.5
+rule,rule_board_check2_msg,２．ふざけない,1
+wait,0.5
+rule,rule_board_check3_msg,３．はずかしがらない,2
+wait,0.5
+image,shiroji_small_right_down_image,,appear_up
+wait,0.5
+check,check_box,0
+wait,0.5
+check,check_box,1
+wait,0.5
+check,check_box,2
+grid,thin_msg_grid,appear_wide
+msg,thin_msg,以上の３つのルールは必ず守るのじゃ！,白じい
+return
