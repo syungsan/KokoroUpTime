@@ -1454,7 +1454,6 @@ namespace KokoroUpTime
                     }
                     this.runs.Clear();
                 }
-            MessageBox.Show(this.MainMessageTextBlock.Text);
             }
 
             // 一文字ずつメッセージ表示（Inner Func）
@@ -1511,6 +1510,9 @@ namespace KokoroUpTime
                     this.ScenarioPlay();
                 }
             }
+
+            MessageBox.Show(this.MainMessageTextBlock.Text);
+
         }
 
         // アニメーション（ストーリーボード）の処理
