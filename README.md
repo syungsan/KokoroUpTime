@@ -11,3 +11,7 @@ Net.Core関連のRuntimeを別途インストールする必要はなくなり�
 - bin/Release/netcoreapp3.1/publish/KokoroUpTime 自体が配布するフォルダになります。
 - 配布するKokoroUpTimeフォルダ内のProgramsフォルダと同じ階層にLancherプロジェクトのPublishフォルダにある「こころあっぷタイム.exe」をコピーしてください。
 - KokoroUpTimeフォルダを圧縮してください。最終的に配布するのは、そのzipファイルとなります。
+
+## GitHubで公開する場合
+
+1ファイル100MB以上のアップロードはできないので、zipファイルにせず、新しいレポジトリを作るなどして、そこへ非圧縮のままKokoroUpTimeフォルダごとアップロードし、ユーザにクローン（ダウンロード）してもらいましょう。
