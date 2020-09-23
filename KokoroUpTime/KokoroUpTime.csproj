@@ -43,12 +43,14 @@
     <None Remove="Images\background_01.png" />
     <None Remove="Images\background_02.png" />
     <None Remove="Images\background_03.png" />
+    <None Remove="Images\background_04.png" />
     <None Remove="Images\background_05.png" />
     <None Remove="Images\background_06.png" />
     <None Remove="Images\background_07.png" />
     <None Remove="Images\background_08.png" />
     <None Remove="Images\background_09.png" />
     <None Remove="Images\background_10.png" />
+    <None Remove="Images\background_11.png" />
     <None Remove="Images\background_12.png" />
     <None Remove="Images\background_ending.png" />
     <None Remove="Images\background_mokume.png" />
@@ -64,6 +66,7 @@
     <None Remove="Images\blue_bubble_left_down.png" />
     <None Remove="Images\blue_gradation.png" />
     <None Remove="Images\blue_needle.png" />
+    <None Remove="Images\blue_title_plate.png" />
     <None Remove="Images\branch_selection1.png" />
     <None Remove="Images\branch_selection2.png" />
     <None Remove="Images\challenge1_title.png" />
@@ -116,6 +119,7 @@
     <None Remove="Images\item04_book.png" />
     <None Remove="Images\item04_detail.png" />
     <None Remove="Images\item04_solo.gif" />
+    <None Remove="Images\item04_solo.png" />
     <None Remove="Images\item04_title.png" />
     <None Remove="Images\item05_book.png" />
     <None Remove="Images\item05_detail.png" />
@@ -149,6 +153,8 @@
     <None Remove="Images\kind_of_feeling_input.png" />
     <None Remove="Images\large_transparent.png" />
     <None Remove="Images\left_big_bubble.png" />
+    <None Remove="Images\left_big_bubble_center_down_yellow.png" />
+    <None Remove="Images\left_small_bubble_center_down_yellow.png" />
     <None Remove="Images\long_bubble_right_up.png" />
     <None Remove="Images\frame_46-1.png" />
     <None Remove="Images\good_words_grid.png" />
@@ -193,7 +199,11 @@
     <None Remove="Images\manga3-2.png" />
     <None Remove="Images\manga3-3.png" />
     <None Remove="Images\manga3_title.png" />
+    <None Remove="Images\manga4-1.png" />
+    <None Remove="Images\manga4-2.png" />
+    <None Remove="Images\manga4-3.png" />
     <None Remove="Images\mangaya.png" />
+    <None Remove="Images\mangaya_orange.png" />
     <None Remove="Images\menu_bubble.png" />
     <None Remove="Images\message_box.png" />
     <None Remove="Images\moya1.png" />
@@ -204,6 +214,7 @@
     <None Remove="Images\orange_gradation.png" />
     <None Remove="Images\orange_title_plate.png" />
     <None Remove="Images\prev_back_.png" />
+    <None Remove="Images\purple_title_plate.png" />
     <None Remove="Images\red_needle.png" />
     <None Remove="Images\return_to_item.png" />
     <None Remove="Images\return_to_title.png" />
@@ -241,6 +252,7 @@
     <None Remove="Images\writing_text_bubble.png" />
     <None Remove="Images\yazirusi.png" />
     <None Remove="children_stand_01.png" />
+    <None Remove="Images\yellow_title_plate.png" />
     <None Remove="shiroji_02.png" />
     <None Remove="shiroji_04.png" />
     <None Remove="teacher.png" />
@@ -288,12 +300,14 @@
     <Resource Include="Images\background_01.png" />
     <Resource Include="Images\background_02.png" />
     <Resource Include="Images\background_03.png" />
+    <Resource Include="Images\background_04.png" />
     <Resource Include="Images\background_05.png" />
     <Resource Include="Images\background_06.png" />
     <Resource Include="Images\background_07.png" />
     <Resource Include="Images\background_08.png" />
     <Resource Include="Images\background_09.png" />
     <Resource Include="Images\background_10.png" />
+    <Resource Include="Images\background_11.png" />
     <Resource Include="Images\background_12.png" />
     <Resource Include="Images\background_ending.png" />
     <Resource Include="Images\background_mokume.png" />
@@ -308,6 +322,7 @@
     <Resource Include="Images\blue_bubble_left_down.png" />
     <Resource Include="Images\blue_gradation.png" />
     <Resource Include="Images\blue_needle.png" />
+    <Resource Include="Images\blue_title_plate.png" />
     <Resource Include="Images\branch_selection1.png" />
     <Resource Include="Images\branch_selection2.png" />
     <Resource Include="Images\challenge1_title.png" />
@@ -355,6 +370,7 @@
     <Resource Include="Images\item04_book.png" />
     <Resource Include="Images\item04_detail.png" />
     <Resource Include="Images\item04_solo.gif" />
+    <Resource Include="Images\item04_solo.png" />
     <Resource Include="Images\item04_title.png" />
     <Resource Include="Images\item05_book.png" />
     <Resource Include="Images\item05_detail.png" />
@@ -389,6 +405,7 @@
     <Resource Include="Images\kind_of_feeling_input.png" />
     <Resource Include="Images\large_transparent.png" />
     <Resource Include="Images\left_big_bubble.png" />
+    <Resource Include="Images\left_small_bubble_center_down_yellow.png" />
     <Resource Include="Images\long_bubble_right_up.png" />
     <Resource Include="Images\manga2-1.png" />
     <Resource Include="Images\manga2-2.png" />
@@ -398,12 +415,19 @@
     <Resource Include="Images\manga3-2.png" />
     <Resource Include="Images\manga3-3.png" />
     <Resource Include="Images\manga3_title.png" />
+    <Resource Include="Images\manga4-1.png" />
+    <Resource Include="Images\manga4-2.png" />
+    <Resource Include="Images\manga4-3.png" />
+    <Resource Include="Images\mangaya_orange.png" />
     <Resource Include="Images\message_box.png" />
     <Resource Include="Images\next_go_button.png" />
     <Resource Include="Images\normal.png" />
     <Resource Include="Images\orange_gradation.png" />
     <Resource Include="Images\orange_title_plate.png" />
     <Resource Include="Images\prev_back_.png" />
+    <Resource Include="Images\purple_title_plate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\return_to_item.png" />
     <Resource Include="Images\return_to_top.png" />
     <Resource Include="Images\short_bubble_left.png" />
@@ -480,9 +504,13 @@
     <Resource Include="Images\word_art_msg_02_02.png" />
     <Resource Include="Images\writing_text_bubble.png" />
     <Resource Include="Images\yazirusi.png" />
+    <Resource Include="Images\yellow_title_plate.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Chapter4.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Chapter3.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -498,13 +526,13 @@
     <None Update="Datas\default.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scenarios\chapter4.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Scenarios\chapter2.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter3.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter4.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\rule_board.csv">
@@ -561,6 +589,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Chapter4.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Chapter3.xaml">
       <SubType>Designer</SubType>
     </Page>

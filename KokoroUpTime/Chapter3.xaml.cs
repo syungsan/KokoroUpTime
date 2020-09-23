@@ -27,6 +27,7 @@ using WpfAnimatedGif;
 using FileIOUtils;
 using Expansion;
 using System.IO;
+using System.Windows.Media.Effects;
 
 namespace KokoroUpTime
 {
@@ -1469,13 +1470,15 @@ namespace KokoroUpTime
                             case "red": { textDecoration.Pen = new Pen(Brushes.Red, 1); break; };
                             case "green": { textDecoration.Pen = new Pen(Brushes.Green, 1); break; };
                             case "blue": { textDecoration.Pen = new Pen(Brushes.Blue, 1); break; };
-                            case "black": { textDecoration.Pen = new Pen(Brushes.Black, 1); break; };
+                            case "black": { textDecoration.Pen = new Pen(Brushes.Black, 1) ; break; };
+
 
                             default: { break; }
                         }
                         textDecoration.PenThicknessUnit = TextDecorationUnit.FontRecommended;
                         textDecorations.Add(textDecoration);
                     }
+                  
                     run = new Run { Text = "", Foreground = foreground, FontSize = fontSize, Background = background, FontWeight = fontWeights, TextDecorations = textDecorations };
                 }
                 else

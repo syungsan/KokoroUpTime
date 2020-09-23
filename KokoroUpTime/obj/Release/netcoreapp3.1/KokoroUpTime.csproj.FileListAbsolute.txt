@@ -178,3 +178,8 @@ D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1\KokoroUpTime.pdb
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1\KokoroUpTime.genruntimeconfig.cache
 D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1\KokoroUpTime.csprojAssemblyReference.cache
+C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\bin\Release\netcoreapp3.1\Sounds\Cancel.wav
+C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\bin\Release\netcoreapp3.1\Sounds\Decision.wav
+C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\bin\Release\netcoreapp3.1\Scenarios\chapter4.csv
+C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1\Chapter4.g.cs
+C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Release\netcoreapp3.1\Chapter4.baml

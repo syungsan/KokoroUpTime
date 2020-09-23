@@ -164,6 +164,7 @@ namespace KokoroUpTime
                 ["manga_title_image"] = this.MangaTitleImage,
                 ["manga_image"] = this.MangaImage,
                 ["item_center_image"] = this.ItemCenterImage,
+                ["item_center_up_image"] = this.ItemCenterUpImage, 
                 ["item_left_image"] = this.ItemLeftImage,
                 ["item_left_last_image"] = this.ItemLeftLastImage,
                 ["session_title_image"] = this.SessionTitleImage,
@@ -224,7 +225,6 @@ namespace KokoroUpTime
                 ["aosuke_difficulty_of_action_text"] =this.AosukeDifficultyOfActionText,
                 ["aosuke_kind_of_feeling_text"] =this.AosukeKindOfFeelingText,
                 ["aosuke_size_of_feeling_text"] = this.AosukeSizeOfFeelingText,
-                // ["aosuke_size_of_feeling_text"] =this.AosukeSizeOfFeelingText,
                 ["item_point_msg_text"] = this.ItemPointMessageText,
                 ["challenge2_bubble_action_text"]=this.Challenge2BubbleActionText,
                 ["item_book_title_text"]=this.ItemBookTitleTextBlock,
@@ -372,7 +372,7 @@ namespace KokoroUpTime
 
             this.ExitBackGrid.Visibility = Visibility.Hidden;
 
-            // this.BranchSelectGrid.Visibility = Visibility.Hidden;
+            this.BranchSelectGrid.Visibility = Visibility.Hidden;
 
             this.BackgroundImage.Visibility = Visibility.Hidden;
             this.MangaTitleImage.Visibility = Visibility.Hidden;
