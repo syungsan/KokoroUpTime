@@ -234,6 +234,8 @@ namespace KokoroUpTime
                 ["item_check_center_text"] =this.ItemCheckCenterText,
                 ["item_point_msg_text"] = this.ItemPointMessageText,
                 ["item_book_title_text"]=this.ItemBookTitleTextBlock,
+                ["result_kind_of_feeling_text"]=this.ResultKindOfFeelingText,
+                ["result_size_of_feeling_text"] = this.ResultSizeOfFeelingText,
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -406,6 +408,8 @@ namespace KokoroUpTime
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
             this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
+            this.ResultKindOfFeelingGrid.Visibility = Visibility.Hidden;
+            this.resultSizeOfFeelingGrid.Visibility = Visibility.Hidden;
             this.DifficultySelectGrid.Visibility = Visibility.Hidden;
             this.SelectFeelingGrid.Visibility = Visibility.Hidden;
 
@@ -637,7 +641,7 @@ namespace KokoroUpTime
                     }
                     break;
 
-                // ボーダーに対しての処理
+                //ボーダーに対しての処理
                 /*case "border":
 
                     this.position = this.scenarios[this.scenarioCount][1];
@@ -741,11 +745,7 @@ namespace KokoroUpTime
 
                         var _texts = this.SequenceCheck(_text);
 
-                        MessageBox.Show(this.MainMessageTextBlock.Text);
-
                         this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
-
-                        MessageBox.Show(this.MainMessageTextBlock.Text);
                     }
                     __textObject.Visibility = Visibility.Visible;
 
@@ -830,6 +830,25 @@ namespace KokoroUpTime
                                     else if (clickButton == "page")
                                     {
                                         this.NextPageButton.Visibility = Visibility.Visible;
+                                    }
+                                };
+                            }
+                            else if(clickMethod == "back_only")
+                            {
+                                waitTimer.Start();
+
+                                waitTimer.Tick += (s, args) =>
+                                {
+                                    waitTimer.Stop();
+                                    waitTimer = null;
+
+                                    if (clickButton == "msg")
+                                    {
+                                        this.BackMessageButton.Visibility = Visibility.Visible;
+                                    }
+                                    else if (clickButton == "page")
+                                    {
+                                        this.BackPageButton.Visibility = Visibility.Visible;
                                     }
                                 };
                             }
@@ -1510,9 +1529,6 @@ namespace KokoroUpTime
                     this.ScenarioPlay();
                 }
             }
-
-            MessageBox.Show(this.MainMessageTextBlock.Text);
-
         }
 
         // アニメーション（ストーリーボード）の処理
