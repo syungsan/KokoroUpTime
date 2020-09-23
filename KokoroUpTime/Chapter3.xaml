@@ -924,7 +924,7 @@
                     <Image x:Name="SelectHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_red.png" d:IsHidden="True"/>
                     <Image x:Name="SelectNeedleImage" Height="213" Source="/Images/red_needle.png" RenderTransformOrigin="0.5,0.8" Margin="171,65,172,0" VerticalAlignment="Top" d:IsHidden="True">
                         <Image.RenderTransform>
-                            <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter1}}}"/>
+                            <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter3}}}"/>
                         </Image.RenderTransform>
                     </Image>
                 </Grid>
@@ -932,7 +932,7 @@
                     <Image x:Name="CompareAkamaruHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_red.png" d:IsHidden="True"/>
                     <Image x:Name="CompareAkamaruNeedleImage" Height="168" Source="/Images/red_needle.png" RenderTransformOrigin="0.5,0.8" Margin="128,53,128,0" VerticalAlignment="Top" d:IsHidden="True">
                         <Image.RenderTransform>
-                            <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter1}}}"/>
+                            <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter3}}}"/>
                         </Image.RenderTransform>
                     </Image>
                 </Grid>
@@ -940,7 +940,7 @@
                     <Image x:Name="CompareAosukeHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_blue.png" d:IsHidden="True"/>
                     <Image x:Name="CompareAosukeNeedleImage" Height="168" Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.8" Margin="128,56,128,0" VerticalAlignment="Top" d:IsHidden="True">
                         <Image.RenderTransform>
-                            <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter1}}}"/>
+                            <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter3}}}"/>
                         </Image.RenderTransform>
                     </Image>
                 </Grid>

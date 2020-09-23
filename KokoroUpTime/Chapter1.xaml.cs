@@ -633,10 +633,18 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        var _texts = this.SequenceCheck(__textObject.Text);
 
-                        // xamlに直接書いたStaticな文章を表示する場合
-                        this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
+                        if (__textObject.Text == "")
+                        {
+
+                        }
+                        else
+                        {
+                            var _texts = this.SequenceCheck(__textObject.Text);
+
+                            // xamlに直接書いたStaticな文章を表示する場合
+                            this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
+                        }
                     }
 
                     string textAnimeIsSync = "sync";
