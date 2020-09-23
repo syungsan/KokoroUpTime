@@ -27,7 +27,7 @@ using WpfAnimatedGif;
 using FileIOUtils;
 using Expansion;
 using System.IO;
-using System.Windows.Media.Effects;
+using System.Threading;
 
 namespace KokoroUpTime
 {
@@ -41,6 +41,8 @@ namespace KokoroUpTime
         private string[] BAD_FEELINGS = { "心配", "こまった", "不安", "こわい", "おちこみ", "がっかり", "いかり", "イライラ", "はずかしい", "ふまん", "かなしい", "おびえる"};
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
+
+        private int RETURN_COUNT = 1;
 
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0; //
@@ -62,8 +64,8 @@ namespace KokoroUpTime
         private int inlineCount;
         private int imageInlineCount;
 
-        private List<Run> runs = new List<Run>();
-        private List<InlineUIContainer> imageInlines = new List<InlineUIContainer>();
+        private Dictionary<string, List<Run>> runs = new Dictionary<string, List<Run>>();
+        private Dictionary<string, List<InlineUIContainer>> imageInlines = new Dictionary<string, List<InlineUIContainer>>();
 
         // 各種コントロールを任意の文字列で呼び出すための辞書
         private Dictionary<string, Image> imageObjects = null; //
@@ -144,6 +146,7 @@ namespace KokoroUpTime
                 ["item_detail_info_image"] = this.ItemDetailInfoImage, //
                 ["children_face_left_center_image"] = this.ChildrenFaceLeftCenterImage, //
                 ["children_feeling_comment_image"] = this.ChildrenFeelingCommentImage, //
+                ["children_feeling_comment_big_image"] = this.ChildrenFeelingCommentBigImage, //
                 ["shiroji_very_small_right_up_image"] = this.ShirojiVerySmallRightUpImage, //
                 ["item_center_right_image"] = this.ItemCenterRightImage, //
 
@@ -178,6 +181,8 @@ namespace KokoroUpTime
                 ["kind_of_feeling_input_image"] = this.KindOfFeelingInputImage, //
                 ["shiroji_small_left_down_image"] = this.ShirojiSmallLeftDownImage, //
                 ["hot_word_title_image"] = this.HotWordTitleImage, //
+                ["glad_comment_up_image"] = this.GladCommentUpImage, //
+                ["glad_comment_down_image"] = this.GladCommentDownImage, //
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -210,10 +215,12 @@ namespace KokoroUpTime
                 ["challenge_time_title_text"] = this.ChallengeTimeTitleTextBlock, //
 
                 ["let_s_try_title_text"] = this.Let_sTryTitleTextBlock, //
-                
+                ["hot_word_text"] = this.HotWordTextBlock, //
+
 
                 ["children_feeling_title_text"] = ChildrenFeelingTitleTextBlock, //
                 ["children_feeling_comment_text"] = this.ChildrenFeelingCommentTextBlock, //
+                ["children_feeling_comment_big_text"] = this.ChildrenFeelingCommentBigTextBlock, //
                 ["kind_of_feeling_title_text"] = this.KindOfFeelingTitleTextBlock, //
                 ["size_of_feeling_title_text"] = this.SizeOfFeelingTitleTextBlock, //
             };
@@ -254,6 +261,7 @@ namespace KokoroUpTime
 
                 ["item_check_grid"] = this.ItemCheckGrid, //
                 ["children_feeling_comment_grid"] = this.ChildrenFeelingCommentGrid, //
+                ["children_feeling_comment_big_grid"] = this.ChildrenFeelingCommentBigGrid, //
 
                 ["challenge_msg_grid"] = this.ChallengeMessageGrid,
                 ["kimi_plate_inner_up_grid"] = this.KimiPlateInnerUpGrid,
@@ -280,6 +288,7 @@ namespace KokoroUpTime
                 ["challenge_time_title_border"] = this.ChallengeTimeTitleBorder, //
                 ["children_feeling_title_border"] = this.ChildrenFeelingTitleBorder, //
                 ["let_s_try_title_border"] = this.Let_sTryTitleBorder, //
+                ["hot_word_border"] = this.HotWordBorder, //
             };
         }
 
@@ -389,11 +398,17 @@ namespace KokoroUpTime
 
             this.ItemCenterRightImage.Visibility = Visibility.Hidden; //
 
+            this.HotWordBorder.Visibility = Visibility.Hidden; //
+
+            this.GladCommentUpImage.Visibility = Visibility.Hidden; //
+            this.GladCommentDownImage.Visibility = Visibility.Hidden; //
+
             this.ChildrenFeelingTitleBorder.Visibility = Visibility.Hidden; //
             this.ChildrenFaceLeftCenterImage.Visibility = Visibility.Hidden; //
             this.ChildrenFeelingCommentGrid.Visibility = Visibility.Hidden; //
+            this.ChildrenFeelingCommentBigGrid.Visibility = Visibility.Hidden; //
             // this.ChildrenFeelingCommentImage.Visibility = Visibility.Hidden; //
-            this.ChildrenFeelingCommentTextBlock.Visibility = Visibility.Hidden; //
+            // this.ChildrenFeelingCommentTextBlock.Visibility = Visibility.Hidden; //
             this.ShirojiVerySmallRightUpImage.Visibility = Visibility.Hidden; //
             this.CheckMangaButton.Visibility = Visibility.Hidden; //
             this.FeelingNextGoButton.Visibility = Visibility.Hidden; //
@@ -407,8 +422,8 @@ namespace KokoroUpTime
 
             this.MangaPrevBackButton.Visibility = Visibility.Hidden; //
 
-            this.SessionSubTitleTextBlock.Text = "";
-            this.SessionSentenceTextBlock.Text = "";
+            this.SessionSubTitleTextBlock.Text = ""; //
+            this.SessionSentenceTextBlock.Text = ""; //
             this.ViewKindOfFeelingPersonTextBlock.Text = "";
             this.ViewKindOfFeelingTextBlock.Text = "";
             this.ViewSizeOfFeelingTextBlock.Text = "";
@@ -427,6 +442,7 @@ namespace KokoroUpTime
             this.ComposerNameTextBlock.Text = ""; //
 
             this.ChildrenFeelingCommentTextBlock.Text = ""; //
+            this.ChildrenFeelingCommentBigTextBlock.Text = ""; //
             this.ChildrenFeelingTitleTextBlock.Text = ""; //
 
             this.ItemBookTitleTextBlock.Visibility = Visibility.Hidden;
@@ -746,6 +762,8 @@ namespace KokoroUpTime
 
                     var __textObject = this.textBlockObjects[this.position];
 
+                    __textObject.Visibility = Visibility.Visible;
+
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
                         var _text = this.scenarios[this.scenarioCount][2];
@@ -754,7 +772,13 @@ namespace KokoroUpTime
 
                         this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
                     }
-                    __textObject.Visibility = Visibility.Visible;
+                    else
+                    {
+                        var _texts = this.SequenceCheck(__textObject.Text);
+
+                        // xamlに直接書いたStaticな文章を表示する場合
+                        this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
+                    }
 
                     string textAnimeIsSync = "sync";
 
@@ -1002,10 +1026,6 @@ namespace KokoroUpTime
                     }
                     break;
 
-                case "wait_tap":
-
-                    this.isClickable = false;
-                    break;
 
                 // BGM
                 case "bgm":
@@ -1270,6 +1290,16 @@ namespace KokoroUpTime
 
                 case "#":
 
+                    // しれっとメモリ開放
+                    if (this.imageInlines?.Count > 0)
+                    {
+                        this.imageInlines.Clear();
+                    }
+                    if (this.runs?.Count > 0)
+                    {
+                        this.runs.Clear();
+                    }
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
@@ -1290,28 +1320,25 @@ namespace KokoroUpTime
             // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
             text = text.Replace("鬱", "\u2028");
 
-            MatchCollection imageOrTextTags = null;
-            string imagePath = "";
-
             foreach (string imageOrTextKey in imageOrTextDic.Keys)
             {
                 switch (imageOrTextKey)
                 {
                     case "name":
 
-                        imageOrTextTags = new Regex(@"\<image=name\>(.*?)\<\/image\>").Matches(text);
-                        imagePath = $"./Log/{initConfig.userName}/name.png";
+                        var imageNameTags = new Regex(@"\<image=name\>(.*?)\<\/image\>").Matches(text);
+                        var imageNamePath = $"./Log/{initConfig.userName}/name.png";
+
+                        if (imageNameTags.Count > 0)
+                        {
+                            if (!File.Exists(imageNamePath))
+                            {
+                                text = text.Replace(imageNameTags[0].Value, imageOrTextDic[imageOrTextKey]);
+                            }
+                        }
                         break;
 
                     default: { break; }
-                }
-
-                if (imageOrTextTags != null)
-                {
-                    if (!File.Exists(imagePath))
-                    {
-                        text = text.Replace(imageOrTextTags[0].Value, imageOrTextDic[imageOrTextKey]);
-                    }
                 }
             }
 
@@ -1368,7 +1395,24 @@ namespace KokoroUpTime
 
         private void ShowSentence(TextBlock textObject, List<List<string>> sentences, string mode)
         {
+            if (this.imageInlines.ContainsKey(textObject.Name))
+            {
+                this.imageInlines.Remove(textObject.Name);
+            }
+            if (this.runs.ContainsKey(textObject.Name))
+            {
+                this.runs.Remove(textObject.Name);
+            }
+            this.imageInlines.Add(textObject.Name, new List<InlineUIContainer>());
+            this.runs.Add(textObject.Name, new List<Run>());
+
             textObject.Text = "";
+
+            this.runs[textObject.Name].Clear();
+            this.imageInlines[textObject.Name].Clear();
+
+            this.inlineCount = 0;
+            this.imageInlineCount = 0;
 
             if (mode == "msg")
             {
@@ -1378,22 +1422,12 @@ namespace KokoroUpTime
 
                 // メッセージ表示処理
                 this.msgTimer = new DispatcherTimer();
-                this.msgTimer.Tick += ViewWord;
+                this.msgTimer.Tick += ViewWordCharacter;
                 this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / this.dataOption.MessageSpeed);
                 this.msgTimer.Start();
-
-                this.inlineCount = 0;
-                this.imageInlineCount = 0;
-
-                foreach (var run in this.runs)
-                {
-                    run.Text = "";
-                }
-                this.runs.Clear();
-                this.imageInlines.Clear();
-
-                textObject.Inlines.Clear();
             }
+
+            textObject.Inlines.Clear();
 
             // 画像インラインと文字インラインの合体
             foreach (var stns in sentences)
@@ -1406,7 +1440,7 @@ namespace KokoroUpTime
 
                     textObject.Inlines.Add(imageInline);
 
-                    this.imageInlines.Add(imageInline);
+                    this.imageInlines[textObject.Name].Add(imageInline);
                 }
                 var run = new Run { };
 
@@ -1432,6 +1466,7 @@ namespace KokoroUpTime
                             case "red": { foreground = new SolidColorBrush(Colors.Red); break; };
                             case "green": { foreground = new SolidColorBrush(Colors.Green); break; };
                             case "blue": { foreground = new SolidColorBrush(Colors.Blue); break; };
+                            case "yellow": { foreground = new SolidColorBrush(Colors.Yellow); break; };
 
                             default: { break; }
                         }
@@ -1470,15 +1505,14 @@ namespace KokoroUpTime
                             case "red": { textDecoration.Pen = new Pen(Brushes.Red, 1); break; };
                             case "green": { textDecoration.Pen = new Pen(Brushes.Green, 1); break; };
                             case "blue": { textDecoration.Pen = new Pen(Brushes.Blue, 1); break; };
-                            case "black": { textDecoration.Pen = new Pen(Brushes.Black, 1) ; break; };
-
+                            case "yellow": { textDecoration.Pen = new Pen(Brushes.Yellow, 1); break; };
+                            case "black": { textDecoration.Pen = new Pen(Brushes.Black, 1); break; };
 
                             default: { break; }
                         }
                         textDecoration.PenThicknessUnit = TextDecorationUnit.FontRecommended;
                         textDecorations.Add(textDecoration);
                     }
-                  
                     run = new Run { Text = "", Foreground = foreground, FontSize = fontSize, Background = background, FontWeight = fontWeights, TextDecorations = textDecorations };
                 }
                 else
@@ -1488,21 +1522,16 @@ namespace KokoroUpTime
  
                 textObject.Inlines.Add(run);
 
-                this.runs.Add(run);
+                this.runs[textObject.Name].Add(run);
 
                 if (mode == "text")
                 {
-                    foreach (var _run in this.runs)
-                    {
-                        _run.Text = "";
-                        _run.Text = stns[0];
-                    }
-                    this.runs.Clear();
+                    ViewTextAtOnes();
                 }
             }
 
             // 一文字ずつメッセージ表示（Inner Func）
-            void ViewWord(object sender, EventArgs e)
+            void ViewWordCharacter(object sender, EventArgs e)
             {
                 if (this.inlineCount < sentences.Count)
                 {
@@ -1525,7 +1554,7 @@ namespace KokoroUpTime
 
                         image.Freeze();
 
-                        (this.imageInlines[imageInlineCount].Child as Image).Source = image;
+                        (this.imageInlines[textObject.Name][imageInlineCount].Child as Image).Source = image;
 
                         this.imageInlineCount++;
 
@@ -1534,7 +1563,7 @@ namespace KokoroUpTime
 
                         return;
                     }
-                    this.runs[inlineCount].Text = stns[0].Substring(0, this.word_num);
+                    this.runs[textObject.Name][inlineCount].Text = stns[0].Substring(0, this.word_num);
 
                     if (this.word_num < stns[0].Length)
                     {
@@ -1553,6 +1582,41 @@ namespace KokoroUpTime
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
+                }
+            }
+
+            // 一気にテキストを表示（Inner Func）
+            void ViewTextAtOnes()
+            {
+                if (this.inlineCount < sentences.Count)
+                {
+                    var stns = sentences[this.inlineCount];
+
+                    string namePngPath = $"./Log/{this.initConfig.userName}/name.png";
+
+                    if (stns.Count > 2 && stns[1] == "image" && stns[2] == "name" && File.Exists(namePngPath))
+                    {
+                        // 実行ファイルの場所を絶対パスで取得
+                        var startupPath = FileUtils.GetStartupPath();
+
+                        var image = new BitmapImage();
+
+                        image.BeginInit();
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        image.UriSource = new Uri($@"{startupPath}/{namePngPath}", UriKind.Absolute);
+                        image.EndInit();
+
+                        image.Freeze();
+
+                        (this.imageInlines[textObject.Name][imageInlineCount].Child as Image).Source = image;
+
+                        this.imageInlineCount++;
+                        this.inlineCount++;
+
+                        return;
+                    }
+                    this.runs[textObject.Name][inlineCount].Text = stns[0];
                 }
             }
         }
@@ -1636,6 +1700,8 @@ namespace KokoroUpTime
 
             if (this.isClickable)
             {
+                this.isClickable = false;
+
                 if (button.Name == "BackMessageButton" || button.Name == "BackPageButton")
                 {
                     this.BackMessageButton.Visibility = Visibility.Hidden;
@@ -1644,84 +1710,103 @@ namespace KokoroUpTime
                     this.BackPageButton.Visibility = Visibility.Hidden;
                     this.NextPageButton.Visibility = Visibility.Hidden;
 
-                    var currentScenarioCount = this.scenarioCount;
-
+                    var index = this.scenarioCount;
                     int returnCount = 0;
 
-                    for (int i = currentScenarioCount; i <= currentScenarioCount; i--)
+                    while (index > 0)
                     {
-                        if (this.scenarios[i][0] == "#")
+                        if (this.scenarios[index][0] == "#")
                         {
-                            returnCount += 1;
-
-                            if (returnCount == 2)
+                            if (returnCount >= RETURN_COUNT)
                             {
-                                this.scenarioCount = i;
+                                this.scenarioCount = index;
                                 this.ScenarioPlay();
 
                                 break;
                             }
+                            returnCount += 1;
                         }
+                        index -= 1;
                     }
                 }
 
                 if (button.Name == "WishCheckButton")
                 {
-                    this.isClickable = false;
-
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    this.GoTo("remember_item");
                 }
 
                 if (button.Name == "ImRememberButton")
                 {
-                    this.isClickable = false;
-
                     this.GoTo("manga");
                 }
 
                 if (button.Name == "CheckMangaButton")
                 {
-                    this.isClickable = false;
-
-                    if (this.scene == "キミちゃんのきもちを考える1")
+                    switch (this.scene)
                     {
-                        this.GoTo("manga_kimi_part");
-                    }
+                        case "キミちゃんのきもちを考える1":
 
-                    if (this.scene == "青助くんのきもちを考える1")
-                    {
-                        this.GoTo("manga_aosuke_part");
+                            this.GoTo("manga_kimi_part");
+                            break;
+
+                        case "青助くんのきもちを考える1":
+
+                            this.GoTo("manga_aosuke_part");
+                            break;
+
+                        default: { break; }
                     }
                 }
 
                 if (button.Name == "MangaPrevBackButton")
                 {
-                    this.isClickable = false;
-                    
-                    if (this.scene == "キミちゃんのきもちを考える1")
+                    switch (this.scene)
                     {
-                        this.GoTo("think_kimi's_feeling_1");
-                    }
+                        case "キミちゃんのきもちを考える1":
 
-                    if (this.scene == "青助くんのきもちを考える1")
-                    {
-                        this.GoTo("think_aosuke's_feeling_1");
+                            this.GoTo("think_kimi's_feeling_1");
+                            break;
+
+                        case "青助くんのきもちを考える1":
+
+                            this.GoTo("think_aosuke's_feeling_1");
+                            break;
+
+                        default: { break; }
                     }
                 }
 
                 if (button.Name == "FeelingNextGoButton")
                 {
-                    this.isClickable = false;
-
-                    if (this.scene == "キミちゃんのきもちを考える1")
+                    switch (this.scene)
                     {
-                        this.GoTo("chiku_chiku_kotoba");
-                    }
 
-                    if (this.scene == "青助くんのきもちを考える1")
-                    {
-                        this.GoTo("think_kimi's_feeling_1");
+                        case "青助くんのきもちを考える1":
+
+                            this.GoTo("think_kimi's_feeling_1");
+                            break;
+
+                        case "キミちゃんのきもちを考える1":
+
+                            this.GoTo("chiku_chiku_kotoba");
+                            break;
+
+                        case "青助くんのきもちを考える2":
+
+                            this.GoTo("think_kimi's_feeling_2");
+                            break;
+
+                        case "キミちゃんのきもちを考える2":
+
+                            this.GoTo("think_akamaru's_feeling");
+                            break;
+
+                        case "赤丸くんのきもちを考える":
+
+                            this.GoTo("group_activity_start");
+                            break;
+
+                        default: { break; }
                     }
                 }
 
@@ -1733,8 +1818,6 @@ namespace KokoroUpTime
                     {
                         if (button.Name == $@"HotWord{index}Button")
                         {
-                            this.isClickable = false;
-
                             this.hotWordCount += 1;
 
                             hotWordButtonImages[index - 1].Source = this.Image2Gray(hotWordButtonImages[index - 1].Source);
@@ -1744,20 +1827,38 @@ namespace KokoroUpTime
                     }
                 }
 
- 
+                if (button.Name == "NextPageButton")
+                {
+                    if (this.scene == "ホットワードボタン" && this.hotWordCount >= 4)
+                    {
+                        Button[] hotWordButtons = { HotWord1Button, HotWord2Button, HotWord3Button, HotWord4Button };
+
+                        foreach (Button hotWordButton in hotWordButtons)
+                        {
+                            hotWordButton.IsEnabled = false;
+                        }
+                        this.GoTo("hot_word_complete");
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
+                }
+
+                if (button.Name == "NextMessageButton")
+                {
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "MangaFlipButton")
+                {
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
             }
 
-            
-
-
-            /*
-            if (button.Name.Contains("Back"))
-            {
-                this.scenarioCount -= 1;
-                this.ScenarioPlay();
-                // 連続Backの実現にはもっと複雑な処理がいる
-            }
-            */
 
             // FullScreen時のデバッグ用に作っておく
             if (button.Name == "ExitButton")
@@ -1768,7 +1869,17 @@ namespace KokoroUpTime
 
             if (button.Name == "ExitBackYesButton")
             {
-                Application.Current.Shutdown();
+                // Application.Current.Shutdown();
+
+                this.StopBGM();
+
+                TitlePage titlePage = new TitlePage();
+
+                titlePage.SetIsFirstBootFlag(false);
+
+                titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                this.NavigationService.Navigate(titlePage);
             }
 
             if (button.Name == "ExitBackNoButton")
@@ -1783,78 +1894,7 @@ namespace KokoroUpTime
 
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
-            }
-
-            if (button.Name == "NextPageButton")
-            {
-                if (this.scene == "ホットワードボタン" && this.hotWordCount >= 4)
-                {
-                    Button[] hotWordButtons = { HotWord1Button, HotWord2Button, HotWord3Button, HotWord4Button };
-
-                    foreach (Button hotWordButton in hotWordButtons)
-                    {
-                        hotWordButton.IsEnabled = false;
-                    }
-
-                    this.GoTo("hot_word_complete");
-                }
-
-
-
-
-
-                if (this.scene == "キミちゃんのきもちの種類" && !hasKimisKindOfFeelingsRecorded)
-                {
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter1 SET KimisKindOfFeelings = '{this.dataChapter1.KimisKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
-                    }
-                    this.hasKimisKindOfFeelingsRecorded = true;
-                    this.AllGestureCanvas_Clear();
-                }
-
-                if (this.scene == "赤丸くんのきもちの種類" && !hasAkamarusKindOfFeelingsRecorded)
-                {
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter1 SET AkamarusKindOfFeelings = '{this.dataChapter1.AkamarusKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
-                    }
-                    this.hasAkamarusKindOfFeelingsRecorded = true;
-                    this.AllGestureCanvas_Clear();
-                }
-
-                if (this.scene == "青助くんのきもちの種類" && !hasAosukesKindOfFeelingsRecorded)
-                {
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter1 SET AosukesKindOfFeelings = '{this.dataChapter1.AosukesKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
-                    }
-                    this.hasAosukesKindOfFeelingsRecorded = true;
-                    this.AllGestureCanvas_Clear();
-                }
-
-                if (this.scene == "赤丸くんのきもちの大きさ" && !hasAkamarusSizeOfFeelingRecorded)
-                {
-                    this.dataChapter1.AkamarusSizeOfFeeling = this.feelingSize;
-
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter1 SET AkamarusSizeOfFeeling = '{this.dataChapter1.AkamarusSizeOfFeeling}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
-                    }
-                    this.hasAkamarusSizeOfFeelingRecorded = true;
-                }
-
-                if (this.scene == "青助くんのきもちの大きさ" && !hasAosukesSizeOfFeelingRecorded)
-                {
-                    this.dataChapter1.AosukesSizeOfFeeling = this.feelingSize;
-
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter1 SET AosukesSizeOfFeeling = '{this.dataChapter1.AosukesSizeOfFeeling}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
-                    }
-                    this.hasAosukesSizeOfFeelingRecorded = true;
-                }
-            }
+            } 
 
             if (button.Name == "SelectFeelingCompleteButton")
             {
@@ -1877,14 +1917,6 @@ namespace KokoroUpTime
             {
                 this.AllGestureCanvas_Clear();
                 this.AllGestureCanvas_Enabled(true);
-            }
-
-            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "RuleBoardButton" || button.Name == "ThinMessageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "SelectFeelingNextButton"))
-            {
-                this.isClickable = false;
-
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
             }
 
             if (button.Name == "ReturnToTitleButton")

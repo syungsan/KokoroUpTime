@@ -1,0 +1,33 @@
+﻿KokoroUpTime
+0.8.6.1
+
+winexe
+C#
+.cs
+<<<<<<< HEAD
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\win-x86\
+=======
+C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\obj\Debug\netcoreapp3.1\win-x86\
+>>>>>>> 2a1c5617cb787c542276078ff60e7f1a9bf26152
+KokoroUpTime
+none
+false
+TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
+<<<<<<< HEAD
+D:\TadanoProjects\C#Projects\KokoroUpTime\KokoroUpTime\App.xaml
+111455747189
+
+25902142272
+212-1779534239
+AboutPage.xaml;Chapter1.xaml;Chapter2.xaml;Chapter3.xaml;ItemPage.xaml;MainWindow.xaml;NameInputPage.xaml;OptionPage.xaml;RuleBoardPage.xaml;Splash.xaml;TitlePage.xaml;
+=======
+C:\Users\MAGDYNABOOK-03\Desktop\GitHub\KokoroUpTime\KokoroUpTime\App.xaml
+121777670131
+
+261147184265
+212222459741
+AboutPage.xaml;Chapter1.xaml;Chapter2.xaml;Chapter3.xaml;Chapter4.xaml;ItemPage.xaml;MainWindow.xaml;NameInputPage.xaml;OptionPage.xaml;RuleBoardPage.xaml;Splash.xaml;TitlePage.xaml;
+>>>>>>> 2a1c5617cb787c542276078ff60e7f1a9bf26152
+
+False
+

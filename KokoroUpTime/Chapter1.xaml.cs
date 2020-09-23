@@ -40,7 +40,9 @@ namespace KokoroUpTime
         private string[] GOOD_FEELINGS = {"●　うれしい", "●　しあわせ", "●　たのしい", "●　ホッとした", "●　きもちいい", "●　まんぞく", "●　すき", "●　やる気マンマン", "●　かんしゃ", "●　わくわく", "●　うきうき", "●　ほこらしい"};
         private string[] BAD_FEELINGS = { "●　心配", "●　こまった", "●　不安", "●　こわい", "●　おちこみ", "●　がっかり", "●　いかり", "●　イライラ", "●　はずかしい", "●　ふまん", "●　かなしい", "●　おびえる"};
 
-        private float THREE_SECOND_RULE_TIME = 3.0f; 
+        private float THREE_SECOND_RULE_TIME = 3.0f;
+
+        private int RETURN_COUNT = 1;
 
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
@@ -65,8 +67,8 @@ namespace KokoroUpTime
         private int inlineCount;
         private int imageInlineCount;
 
-        private List<Run> runs = new List<Run>();
-        private List<InlineUIContainer> imageInlines = new List<InlineUIContainer>();
+        private Dictionary<string, List<Run>> runs = new Dictionary<string, List<Run>>();
+        private Dictionary<string, List<InlineUIContainer>> imageInlines = new Dictionary<string, List<InlineUIContainer>>();
 
         // 各種コントロールを任意の文字列で呼び出すための辞書
         private Dictionary<string, Image> imageObjects = null;
@@ -619,6 +621,8 @@ namespace KokoroUpTime
 
                     var __textObject = this.textBlockObjects[this.position];
 
+                    __textObject.Visibility = Visibility.Visible;
+
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
                         var _text = this.scenarios[this.scenarioCount][2];
@@ -627,7 +631,13 @@ namespace KokoroUpTime
 
                         this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
                     }
-                    __textObject.Visibility = Visibility.Visible;
+                    else
+                    {
+                        var _texts = this.SequenceCheck(__textObject.Text);
+
+                        // xamlに直接書いたStaticな文章を表示する場合
+                        this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
+                    }
 
                     string textAnimeIsSync = "sync";
 
@@ -882,6 +892,9 @@ namespace KokoroUpTime
                         _obj = checkBoxs[int.Parse(checkNum)];
                     }
                     ruleObject.Visibility = Visibility.Visible;
+
+                    this.imageInlines.Add(ruleObject.Name, new List<InlineUIContainer>());
+                    this.runs.Add(ruleObject.Name, new List<Run>());
 
                     var rules = this.SequenceCheck(rule);
 
@@ -1159,6 +1172,16 @@ namespace KokoroUpTime
 
                 case "#":
 
+                    // しれっとメモリ開放
+                    if (this.imageInlines?.Count > 0)
+                    {
+                        this.imageInlines.Clear();
+                    }
+                    if (this.runs?.Count > 0)
+                    {
+                        this.runs.Clear();
+                    }
+ 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
@@ -1220,28 +1243,25 @@ namespace KokoroUpTime
 
             text = text.Replace("鬱", "\u2028");
 
-            MatchCollection imageOrTextTags = null;
-            string imagePath = "";
-
             foreach (string imageOrTextKey in imageOrTextDic.Keys)
             {
                 switch (imageOrTextKey)
                 {
                     case "name":
 
-                        imageOrTextTags = new Regex(@"\<image=name\>(.*?)\<\/image\>").Matches(text);
-                        imagePath = $"./Log/{initConfig.userName}/name.png";
+                        var imageNameTags = new Regex(@"\<image=name\>(.*?)\<\/image\>").Matches(text);
+                        var imageNamePath = $"./Log/{initConfig.userName}/name.png";
+
+                        if (imageNameTags.Count > 0)
+                        {
+                            if (!File.Exists(imageNamePath))
+                            {
+                                text = text.Replace(imageNameTags[0].Value, imageOrTextDic[imageOrTextKey]);
+                            }
+                        }
                         break;
 
                     default: { break; }
-                }
-
-                if (imageOrTextTags != null)
-                {
-                    if (!File.Exists(imagePath))
-                    {
-                        text = text.Replace(imageOrTextTags[0].Value, imageOrTextDic[imageOrTextKey]);
-                    }
                 }
             }
 
@@ -1336,9 +1356,26 @@ namespace KokoroUpTime
             }
         }
 
-        private void ShowSentence(TextBlock textObject, List<List<string>> sentences, string mode, object obj=null)
+        private void ShowSentence(TextBlock textObject, List<List<string>> sentences, string mode, object obj = null)
         {
+            if (this.imageInlines.ContainsKey(textObject.Name))
+            {
+                this.imageInlines.Remove(textObject.Name);
+            }
+            if (this.runs.ContainsKey(textObject.Name))
+            {
+                this.runs.Remove(textObject.Name);
+            }
+            this.imageInlines.Add(textObject.Name, new List<InlineUIContainer>());
+            this.runs.Add(textObject.Name, new List<Run>());
+
             textObject.Text = "";
+
+            this.runs[textObject.Name].Clear();
+            this.imageInlines[textObject.Name].Clear();
+
+            this.inlineCount = 0;
+            this.imageInlineCount = 0;
 
             if (mode == "msg")
             {
@@ -1348,22 +1385,12 @@ namespace KokoroUpTime
 
                 // メッセージ表示処理
                 this.msgTimer = new DispatcherTimer();
-                this.msgTimer.Tick += ViewWord;
+                this.msgTimer.Tick += ViewWordCharacter;
                 this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / this.dataOption.MessageSpeed);
                 this.msgTimer.Start();
-
-                this.inlineCount = 0;
-                this.imageInlineCount = 0;
-
-                foreach (var run in this.runs)
-                {
-                    run.Text = "";
-                }
-                this.runs.Clear();
-                this.imageInlines.Clear();
-
-                textObject.Inlines.Clear();
             }
+
+            textObject.Inlines.Clear();
 
             // 画像インラインと文字インラインの合体
             foreach (var stns in sentences)
@@ -1376,7 +1403,7 @@ namespace KokoroUpTime
 
                     textObject.Inlines.Add(imageInline);
 
-                    this.imageInlines.Add(imageInline);
+                    this.imageInlines[textObject.Name].Add(imageInline);
                 }
                 var run = new Run { };
 
@@ -1456,21 +1483,16 @@ namespace KokoroUpTime
 
                 textObject.Inlines.Add(run);
 
-                this.runs.Add(run);
+                this.runs[textObject.Name].Add(run);
 
                 if (mode == "text")
                 {
-                    foreach (var _run in this.runs)
-                    {
-                        _run.Text = "";
-                        _run.Text = stns[0];
-                    }
-                    this.runs.Clear();
+                    ViewTextAtOnes();
                 }
             }
 
             // 一文字ずつメッセージ表示（Inner Func）
-            void ViewWord(object sender, EventArgs e)
+            void ViewWordCharacter(object sender, EventArgs e)
             {
                 if (this.inlineCount < sentences.Count)
                 {
@@ -1493,7 +1515,7 @@ namespace KokoroUpTime
 
                         image.Freeze();
 
-                        (this.imageInlines[imageInlineCount].Child as Image).Source = image;
+                        (this.imageInlines[textObject.Name][imageInlineCount].Child as Image).Source = image;
 
                         this.imageInlineCount++;
 
@@ -1502,7 +1524,7 @@ namespace KokoroUpTime
 
                         return;
                     }
-                    this.runs[inlineCount].Text = stns[0].Substring(0, this.word_num);
+                    this.runs[textObject.Name][inlineCount].Text = stns[0].Substring(0, this.word_num);
 
                     if (this.word_num < stns[0].Length)
                     {
@@ -1526,6 +1548,41 @@ namespace KokoroUpTime
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
+                }
+            }
+
+            // 一気にテキストを表示（Inner Func）
+            void ViewTextAtOnes()
+            {
+                if (this.inlineCount < sentences.Count)
+                {
+                    var stns = sentences[this.inlineCount];
+
+                    string namePngPath = $"./Log/{this.initConfig.userName}/name.png";
+
+                    if (stns.Count > 2 && stns[1] == "image" && stns[2] == "name" && File.Exists(namePngPath))
+                    {
+                        // 実行ファイルの場所を絶対パスで取得
+                        var startupPath = FileUtils.GetStartupPath();
+
+                        var image = new BitmapImage();
+
+                        image.BeginInit();
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        image.UriSource = new Uri($@"{startupPath}/{namePngPath}", UriKind.Absolute);
+                        image.EndInit();
+
+                        image.Freeze();
+
+                        (this.imageInlines[textObject.Name][imageInlineCount].Child as Image).Source = image;
+
+                        this.imageInlineCount++;
+                        this.inlineCount++;
+
+                        return;
+                    }
+                    this.runs[textObject.Name][inlineCount].Text = stns[0];
                 }
             }
         }
@@ -1602,25 +1659,24 @@ namespace KokoroUpTime
 
                 this.BackPageButton.Visibility = Visibility.Hidden;
                 this.NextPageButton.Visibility = Visibility.Hidden;
-
-                var currentScenarioCount = this.scenarioCount;
-
+ 
+                var index = this.scenarioCount;
                 int returnCount = 0;
 
-                for (int i = currentScenarioCount; i <= currentScenarioCount; i--)
+                while (index > 0)
                 {
-                    if (this.scenarios[i][0] == "#")
+                    if (this.scenarios[index][0] == "#")
                     {
-                        returnCount += 1;
-
-                        if (returnCount == 2)
+                        if (returnCount >= RETURN_COUNT)
                         {
-                            this.scenarioCount = i;
+                            this.scenarioCount = index;
                             this.ScenarioPlay();
 
                             break;
                         }
+                        returnCount += 1;
                     }
+                    index -= 1;
                 }
             }
 

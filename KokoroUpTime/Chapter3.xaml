@@ -672,9 +672,9 @@
             <Grid x:Name="BaseGrid" d:IsHidden="True">
                 <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_12.png" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="MangaGrid" Visibility="Visible">
-                <Image x:Name="MangaTitleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/manga1_title.png" Margin="86,24,0,0" Height="98" Width="1752"/>
-                <Image x:Name="MangaImage" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Images/manga1-1.png" Margin="0,121,0,0" RenderTransformOrigin="0.5,0.5" Height="880" Width="1788">
+            <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
+                <Image x:Name="MangaTitleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/manga1_title.png" Margin="86,24,0,0" Height="98" Width="1752" d:IsHidden="True"/>
+                <Image x:Name="MangaImage" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Images/manga1-1.png" Margin="0,121,0,0" RenderTransformOrigin="0.5,0.5" Height="880" Width="1788" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -684,8 +684,8 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Button x:Name="MangaPrevBackButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,989,1616,-2" Click="Button_Click">
-                    <Image x:Name="MangaPrevBackImage" Source="/Images/prev_back_.png"/>
+                <Button x:Name="MangaPrevBackButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,989,1616,-2" Click="Button_Click" d:IsHidden="True">
+                    <Image x:Name="MangaPrevBackImage" Source="/Images/prev_back_.png" d:IsHidden="True"/>
                 </Button>
             </Grid>
             <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
@@ -754,13 +754,13 @@
                 </Grid>
                 <Image x:Name="ItemCenterRightImage" Height="651" Width="463" Source="/Images/item03_solo.png" Margin="1065,105,392,324" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="SessionGrid" d:IsHidden="True">
-                <Image x:Name="SessionTitleImage" Source="/Images/challenge_time.png" Margin="226,75,906,917" d:IsHidden="True"/>
-                <Grid x:Name="SessionFrameGrid" Width="1010" Height="328" Margin="226,243,684,509" d:IsHidden="True">
-                    <Image x:Name="SessionFrameImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/white_frame.png" Stretch="Fill" d:IsHidden="True"/>
-                    <TextBlock x:Name="SessionSubTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" FontSize="48" FontWeight="Bold" Margin="44,32,0,0" HorizontalAlignment="Left" Width="745" d:IsHidden="True"/>
-                    <TextBlock x:Name="SessionSentenceTextBlock" HorizontalAlignment="Left" Margin="89,112,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="168" Width="865" FontSize="48" d:IsHidden="True"/>
-                    <TextBlock x:Name="SessionStarTextBlock" HorizontalAlignment="Left" Margin="35,109,0,0" VerticalAlignment="Top" FontSize="48" RenderTransformOrigin="0.345,0.474" FontWeight="Bold" Text="☆" TextAlignment="Center" d:IsHidden="True"/>
+            <Grid x:Name="SessionGrid">
+                <Image x:Name="SessionTitleImage" Source="/Images/challenge_time.png" Margin="226,75,906,917"/>
+                <Grid x:Name="SessionFrameGrid" Width="1010" Height="328" Margin="226,243,684,509">
+                    <Image x:Name="SessionFrameImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/white_frame.png" Stretch="Fill"/>
+                    <TextBlock x:Name="SessionSubTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" FontSize="48" FontWeight="Bold" Margin="44,32,0,0" HorizontalAlignment="Left" Width="745"/>
+                    <TextBlock x:Name="SessionSentenceTextBlock" HorizontalAlignment="Left" Margin="89,112,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="168" Width="865" FontSize="48"/>
+                    <TextBlock x:Name="SessionStarTextBlock" HorizontalAlignment="Left" Margin="35,109,0,0" VerticalAlignment="Top" FontSize="48" RenderTransformOrigin="0.345,0.474" FontWeight="Bold" Text="☆" TextAlignment="Center"/>
                 </Grid>
             </Grid>
             <Grid x:Name="ChallengeGrid" d:IsHidden="True">
@@ -827,7 +827,11 @@
                     </Image>
                     <Grid x:Name="ChildrenFeelingCommentGrid" Height="186" Width="763" Margin="638,351,519,543" d:IsHidden="True">
                         <Image x:Name="ChildrenFeelingCommentImage" Source="/Images/small_bubble_left_down_blue.png" d:IsHidden="True"/>
-                        <TextBlock x:Name="ChildrenFeelingCommentTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="48" Margin="46,35,10,66" TextAlignment="Justify" d:IsHidden="True"/>
+                        <TextBlock x:Name="ChildrenFeelingCommentTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="48" Margin="51,10,37,52" TextAlignment="Justify" FontWeight="Normal" d:IsHidden="True"/>
+                    </Grid>
+                    <Grid x:Name="ChildrenFeelingCommentBigGrid" Height="350" Width="1090" Margin="643,229,187,501" d:IsHidden="True">
+                        <Image x:Name="ChildrenFeelingCommentBigImage" Source="/Images/small_bubble_left_down_red.png" d:IsHidden="True"/>
+                        <TextBlock x:Name="ChildrenFeelingCommentBigTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="48" Margin="55,41,40,104" TextAlignment="Justify" FontWeight="Normal" d:IsHidden="True"/>
                     </Grid>
                     <Button x:Name="CheckMangaButton" Margin="1500,236,4,500" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
                         <Image x:Name="CheckMangaImage" Source="/Images/check_manga.png" d:IsHidden="True"/>
@@ -852,7 +856,7 @@
                     <Button x:Name="HotWord1Button" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}" Margin="519,134,519,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" d:IsHidden="True">
                         <Image x:Name="HotWord1ButtonImage" Source="/Images/hot_word_button1.png" d:IsHidden="True"/>
                     </Button>
-                    <Button x:Name="HotWord2Button" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}" Margin="519,347,519,0" VerticalAlignment="Top" d:IsHidden="True">
+                    <Button x:Name="HotWord2Button" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}" Margin="519,353,519,0" VerticalAlignment="Top" d:IsHidden="True">
                         <Image x:Name="HotWord2ButtonImage" Source="/Images/hot_word_button2.png" d:IsHidden="True"/>
                     </Button>
                     <Button x:Name="HotWord3Button" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}" Margin="519,573,519,0" VerticalAlignment="Top" d:IsHidden="True">
@@ -1142,6 +1146,8 @@
                 </Grid>
                 <Image x:Name="ChildrenFaceLeftCenterImage" HorizontalAlignment="Left" Height="602" VerticalAlignment="Top" Width="559" Source="/Images/aosuke_face_07.png" Margin="105,279,0,0" d:IsHidden="True"/>
                 <Image x:Name="ChildrenFaceRightImage" HorizontalAlignment="Left" Height="602" VerticalAlignment="Top" Width="559" Source="/Images/akamaru_face_02.png" Margin="1150,132,0,0" d:IsHidden="True"/>
+                <Image x:Name="GladCommentUpImage" HorizontalAlignment="Left" Height="168" Margin="677,179,0,0" VerticalAlignment="Top" Width="170" Source="/Images/aosuke_glad.png" d:IsHidden="True"/>
+                <Image x:Name="GladCommentDownImage" HorizontalAlignment="Left" Height="168" Margin="677,412,0,0" VerticalAlignment="Top" Width="170" Source="/Images/kimi_glad.png" d:IsHidden="True"/>
             </Grid>
             <Grid x:Name="EndingGrid" d:IsHidden="True">
                 <Grid x:Name="EndingTitleGrid" Width="878" Height="427" Margin="521,202,521,451" d:IsHidden="True">
@@ -1265,7 +1271,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="55,145,266,45" FontSize="48" FontFamily="/Fonts/azuki.ttf#azuki_font" d:IsHidden="True"/>
+                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="55,145,266,45" FontSize="48" FontFamily="/Fonts/azuki.ttf#azuki_font" d:IsHidden="True"/>
                     <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32" d:IsHidden="True">
                         <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png" d:IsHidden="True"/>
                     </Button>
@@ -1344,6 +1350,9 @@
                 <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True">
                     <Image x:Name="MangaFlipArrowImage" Source="/Images/mangaya.png" d:IsHidden="True"/>
                 </Button>
+                <Border x:Name="HotWordBorder" BorderThickness="1" Margin="0,438,0,438" Background="#B2FF783A" d:IsHidden="True">
+                    <TextBlock x:Name="HotWordTextBlock" Text="TextBlock" TextWrapping="Wrap" Foreground="#FF0071E2" FontSize="120" TextAlignment="Center" FontWeight="Bold" d:IsHidden="True"/>
+                </Border>
                 <Button x:Name="SelectFeelingCompleteButton" HorizontalAlignment="Left" Margin="1290,891,0,0" VerticalAlignment="Top" Height="144" Width="442" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">
                     <Image x:Name="ChallengeCompleteImage" Source="/Images/complete_button.png" d:IsHidden="True"/>
                 </Button>
@@ -1368,8 +1377,8 @@
                 <Button x:Name="ExitButton" Content="おわる" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" FontSize="24" Click="Button_Click" Margin="1833,10,0,0" d:IsHidden="True"/>
                 <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
                 <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">
-                    <Image x:Name="ExitBackImage" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/white_frame.png" Stretch="Fill" d:IsHidden="True"/>
-                    <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Left" Margin="169,113,0,0" VerticalAlignment="Top" Height="100" Width="582" FontSize="48" Text="本当にアプリを終了しますか？" FontWeight="Bold" TextAlignment="Center" d:IsHidden="True"/>
+                    <Border x:Name="ExitBackBorder" BorderThickness="1" BorderBrush="Black" Background="White" CornerRadius="32,32,32,32" d:IsHidden="True"/>
+                    <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Height="139" Width="459" FontSize="48" Text="本当にアプリを終了してタイトルにもどりますか？" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center" d:IsHidden="True"/>
                     <Button x:Name="ExitBackYesButton" HorizontalAlignment="Left" Margin="33,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
                         <Image x:Name="ExitBackYesButtonImage" Source="/Images/moya1.png" d:IsHidden="True"/>
                     </Button>

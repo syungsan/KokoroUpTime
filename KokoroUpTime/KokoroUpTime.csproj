@@ -38,6 +38,7 @@
     <None Remove="Images\aosuke_face_05.png" />
     <None Remove="Images\aosuke_face_06.png" />
     <None Remove="Images\aosuke_face_07.png" />
+    <None Remove="Images\aosuke_glad.png" />
     <None Remove="Images\aosuke_stand_01.png" />
     <None Remove="Images\background_00.png" />
     <None Remove="Images\background_01.png" />
@@ -148,6 +149,7 @@
     <None Remove="Images\item_check_back_bubble.png" />
     <None Remove="Images\item_detail_info.png" />
     <None Remove="Images\item_review.png" />
+    <None Remove="Images\kimi_glad.png" />
     <None Remove="Images\kimi_stand_01.png" />
     <None Remove="Images\kind_of_feeling_button_frame.png" />
     <None Remove="Images\kind_of_feeling_input.png" />
@@ -230,11 +232,14 @@
     <None Remove="Images\short_bubble_left.png" />
     <None Remove="Images\short_bubble_right_up.png" />
     <None Remove="Images\simple_goldfish.png" />
+    <None Remove="Images\situation_aosuke.png" />
+    <None Remove="Images\situation_kimi.png" />
     <None Remove="Images\size_of_feeling_button_frame.png" />
     <None Remove="Images\small_bubble_center_down.png" />
     <None Remove="Images\small_bubble_center_right_down.png" />
     <None Remove="Images\small_bubble_left.png" />
     <None Remove="Images\small_bubble_left_down_blue.png" />
+    <None Remove="Images\small_bubble_left_down_red.png" />
     <None Remove="Images\small_bubble_left_down_yellow.png" />
     <None Remove="Images\small_bubble_left_up.png" />
     <None Remove="Images\small_bubble_right_down.png" />
@@ -295,6 +300,7 @@
     <Resource Include="Images\aosuke_face_05.png" />
     <Resource Include="Images\aosuke_face_06.png" />
     <Resource Include="Images\aosuke_face_07.png" />
+    <Resource Include="Images\aosuke_glad.png" />
     <Resource Include="Images\aosuke_stand_01.png" />
     <Resource Include="Images\background_00.png" />
     <Resource Include="Images\background_01.png" />
@@ -398,6 +404,7 @@
     <Resource Include="Images\item11_solo.gif" />
     <Resource Include="Images\item_check_back_bubble.png" />
     <Resource Include="Images\item_review.png" />
+    <Resource Include="Images\kimi_glad.png" />
     <Resource Include="Images\kimi_plate_inner.png" />
     <Resource Include="Images\kimi_plate_outer.png" />
     <Resource Include="Images\kimi_stand_01.png" />
@@ -433,10 +440,13 @@
     <Resource Include="Images\short_bubble_left.png" />
     <Resource Include="Images\short_bubble_right_up.png" />
     <Resource Include="Images\simple_goldfish.png" />
+    <Resource Include="Images\situation_aosuke.png" />
+    <Resource Include="Images\situation_kimi.png" />
     <Resource Include="Images\size_of_feeling_button_frame.png" />
     <Resource Include="Images\small_bubble_center_down.png" />
     <Resource Include="Images\small_bubble_center_right_down.png" />
     <Resource Include="Images\small_bubble_left_down_blue.png" />
+    <Resource Include="Images\small_bubble_left_down_red.png" />
     <Resource Include="Images\small_bubble_left_down_yellow.png" />
     <Resource Include="Images\small_bubble_left_up.png" />
     <Resource Include="Images\small_bubble_right_down.png" />

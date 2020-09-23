@@ -337,6 +337,11 @@ namespace KokoroUpTime
 
         void ShowMessage(TextBlock textObject, string message, object obj = null)
         {
+            if(this.dataOption.MessageSpeed == 0.0f)
+            {
+                this.dataOption.MessageSpeed = 30.0f;
+            }
+
             this.word_num = 0;
 
             // メッセージ表示処理
