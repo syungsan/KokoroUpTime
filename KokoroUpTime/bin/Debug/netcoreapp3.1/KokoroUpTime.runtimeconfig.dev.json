@@ -1,8 +1,14 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
+<<<<<<< HEAD
+      "C:\\Users\\MAGDYNABOOK-03\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages",
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+=======
       "C:\\Users\\maglab\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\maglab\\.nuget\\packages"
+>>>>>>> master
     ]
   }
 }

@@ -121,7 +121,7 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChildrenFaceImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChildrenFaceRightImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BounceEase EasingMode="EaseInOut"/>
@@ -855,7 +855,7 @@
                     <Image x:Name="MangaPrevBackImage" Source="/Images/prev_back_.png" d:IsHidden="True"/>
                 </Button>
             </Grid>
-            <Grid x:Name="ItemGrid" Visibility="Visible">
+            <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
                 <Image x:Name="ItemCenterImage" HorizontalAlignment="Left" Height="512" VerticalAlignment="Top" Width="363" Source="/Images/item01_solo.png" Margin="804,266,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -941,22 +941,22 @@
                     <TextBlock x:Name="ItemPlateSubText" FontSize="50" Text="✓きもちの大きさが小さい&#10;✓かんたんにできる" FontFamily="Yu Gothic" FontWeight="Bold" Margin="400,122,0,470" d:IsHidden="True"/>
                     <TextBlock x:Name="ItemPlateMainText" FontSize="60" Text="✓まわりの人といっしょにできる" FontFamily="Yu Gothic" FontWeight="UltraBold" Margin="400,297,20,415" d:IsHidden="True"/>
                 </Grid>
-                <Grid x:Name="ItemCheckRightGrid" Margin="1150,250,50,350">
+                <Grid x:Name="ItemCheckRightGrid" Margin="1230,240,20,400" d:IsHidden="True">
                     <Image x:Name="ItemCheckRightImage" Source="/Images/item_check_back_bubble.png" Stretch="Fill"/>
-                    <TextBlock x:Name="ItemCheckRightText" Text="➢じょうずにことわる&#10;①あやまる&#10;②理由言う&#10;③断る&#10;④かわりの言葉" FontSize="49" FontFamily="Yu Gothic" FontWeight="UltraBold" Foreground="Red" Margin="30,50"/>
+                    <TextBlock x:Name="ItemCheckRightText" Text="➢じょうずにことわる&#10;①あやまる&#10;②理由言う&#10;③断る&#10;④かわりの言葉" FontSize="44" FontFamily="Yu Gothic" FontWeight="UltraBold" Foreground="Red" Margin="30,50"/>
                 </Grid>
-                <Grid x:Name="ItemCheckCentertGrid" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="650,200,560,420" d:IsHidden="True">
+                <Grid x:Name="ItemCheckCentertGrid" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="680,230,590,450">
                     <Image x:Name="ItemCheckCenterImage" Source="/Images/item_check_back_bubble.png" Stretch="Fill"/>
                     <TextBlock x:Name="ItemCheckCenterText" Text="" FontSize="60" FontFamily="Yu Gothic" FontWeight="UltraBold" Foreground="Red" Margin="30,50"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SessionGrid" d:IsHidden="True">
+            <Grid x:Name="SessionGrid">
                 <Image x:Name="SessionTitleImage" Source="/Images/challenge_time.png" Margin="226,75,906,917"/>
                 <Grid x:Name="SessionFrameGrid" Width="1010" Height="328" Margin="226,243,684,509">
-                    <Image x:Name="SessionFrameImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/white_frame.png" Stretch="Fill" d:IsHidden="True"/>
-                    <TextBlock x:Name="SessionSubTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" FontSize="48" FontWeight="Bold" Margin="44,32,0,0" HorizontalAlignment="Left" Width="745" d:IsHidden="True"/>
-                    <TextBlock x:Name="SessionSentenceTextBlock" HorizontalAlignment="Left" Margin="89,112,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="168" Width="865" FontSize="48" d:IsHidden="True"/>
-                    <TextBlock x:Name="SessionStarTextBlock" HorizontalAlignment="Left" Margin="35,109,0,0" VerticalAlignment="Top" FontSize="48" RenderTransformOrigin="0.345,0.474" FontWeight="Bold" Text="☆" TextAlignment="Center" d:IsHidden="True"/>
+                    <Image x:Name="SessionFrameImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/white_frame.png" Stretch="Fill"/>
+                    <TextBlock x:Name="SessionSubTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" FontSize="48" FontWeight="Bold" Margin="44,32,0,0" HorizontalAlignment="Left" Width="745"/>
+                    <TextBlock x:Name="SessionSentenceTextBlock" HorizontalAlignment="Left" Margin="89,112,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="168" Width="865" FontSize="48"/>
+                    <TextBlock x:Name="SessionStarTextBlock" HorizontalAlignment="Left" Margin="35,109,0,0" VerticalAlignment="Top" FontSize="48" RenderTransformOrigin="0.345,0.474" FontWeight="Bold" Text="☆" TextAlignment="Center"/>
                 </Grid>
             </Grid>
             <Grid x:Name="ChallengeTimeGrid" d:IsHidden="True">
@@ -972,18 +972,18 @@
                     <Image x:Name="ChildrenTextBubbleImage" Source="/Images/left_small_bubble_center_down_yellow.png" Stretch="Fill" d:IsHidden="True"/>
                     <TextBlock x:Name="ChildrenTextBubbleText" Text="" FontSize="30" FontFamily="Yu Gothic" Margin="25,15,15,40" d:IsHidden="True"/>
                 </Grid>
-                <Grid x:Name="KindOfFeelingGrid" Margin="870,586,750,250" d:IsHidden="True">
-                    <TextBlock x:Name="KindOfFeelingTitleText" Text="きもちの種類" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" d:IsHidden="True"/>
-                    <Button x:Name="KindOfFeelingButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,80,0,0" Click="Button_Click" d:IsHidden="True">
+                <Grid x:Name="KindOfFeelingGrid" Margin="870,586,750,250">
+                    <TextBlock x:Name="KindOfFeelingTitleText" Text="きもちの種類" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center"/>
+                    <Button x:Name="KindOfFeelingButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,80,0,0" Click="Button_Click">
                         <Grid d:IsHidden="True">
                             <Image x:Name="KindOfFeelingButtonImage" Source="Images/kind_of_feeling_button_frame.png"  Stretch="Fill" d:IsHidden="True"/>
                             <TextBlock x:Name="KindOfFeelingText" Text="" FontSize="45" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" d:IsHidden="True"/>
                         </Grid>
                     </Button>
                 </Grid>
-                <Grid x:Name="SizeOfFeelingGrid"  Margin="1300,586,225,250" d:IsHidden="True">
-                    <TextBlock x:Name="SizeOfFeelingTitleText" Text="きもちのおおきさ" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" d:IsHidden="True" />
-                    <Button x:Name="SizeOfFeelingButton" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Margin="0,80,0,0" d:IsHidden="True">
+                <Grid x:Name="SizeOfFeelingGrid"  Margin="1300,586,225,250">
+                    <TextBlock x:Name="SizeOfFeelingTitleText" Text="きもちのおおきさ" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" />
+                    <Button x:Name="SizeOfFeelingButton" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Margin="0,80,0,0">
                         <TextBlock x:Name="SizeOfFeelingText" Text="(        )" FontSize="93" d:IsHidden="True"/>
                     </Button>
                 </Grid>
@@ -1144,9 +1144,21 @@
 
             <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
                 <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684" d:IsHidden="True">
-                    <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center" d:IsHidden="True"/>
-                    <TextBlock x:Name="ViewSizeOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="50" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center" d:IsHidden="True"/>
+                    <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png"/>
+                    <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center"/>
+                    <TextBlock x:Name="ViewSizeOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="50" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center"/>
+                </Grid>
+                <Grid x:Name="ResultFeelingGrid">
+                    <Grid x:Name="ResultKindOfFeelingGrid" Margin="870,436,750,400">
+                        <TextBlock x:Name="ResultKindOfFeelingTitleText" Text="きもちの種類" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center"/>
+                        <Image x:Name="ResultKindOfFeelingImage" Source="Images/kind_of_feeling_button_frame.png"  Stretch="Fill" Margin="0,80,0,0"/>
+                        <TextBlock x:Name="ResultKindOfFeelingText" Text="ホッとした" FontSize="45" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" Margin="15,95,15,15"/>
+                    </Grid>
+                    <Grid x:Name="resultSizeOfFeelingGrid"  Margin="1300,436,225,400">
+                        <TextBlock x:Name="ResultSizeOfFeelingTitleText" Text="きもちのおおきさ" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" />
+                        <TextBlock x:Name="ResultSizeOfFeelingText" Text="(        )" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="93" Margin="0,80,0,0"/>
+                    </Grid>
+
                 </Grid>
             </Grid>
             <Grid x:Name="GaugeGrid" d:IsHidden="True">
@@ -1281,13 +1293,13 @@
                 <Image x:Name="AkamaruEndingImage" HorizontalAlignment="Left" Height="470" Margin="59,460,0,0" VerticalAlignment="Top" Width="436" Source="/Images/akamaru_face_04.png" d:IsHidden="True"/>
             </Grid>
             <Grid x:Name="ChallengeTimeResultGrid" d:IsHidden="True">
-                <Grid x:Name="ChallengeTimeResultMessageGrid" d:IsHidden="True">
+                <Grid x:Name="ChallengeTimeResultMessageGrid">
                     <Image x:Name="ChallengeTimeResultImage01" Margin="100,0,100,700" Height="200" Width="1600" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Left" Source="/Images/challenge_time_result_msg_02_01.png" d:IsHidden="True"/>
                     <Image x:Name="ChallengeTimeResultImage02" Margin="100,125,100,625" Height="200" Width="400" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Left" Source="/Images/challenge_time_result_msg_02_02.png" d:IsHidden="True"/>
                     <Image x:Name="ChallengeTimeResultImage03" Margin="100,250,100,500" Height="200" Width="400" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Left" Source="/Images/challenge_time_result_msg_02_03.png" d:IsHidden="True"/>
                     <Image x:Name="ChallengeTimeResultImage04" Margin="100,375,100,375" Height="200" Width="1800" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Left" Source="/Images/challenge_time_result_msg_02_04.png" d:IsHidden="True"/>
                 </Grid>
-                <Image x:Name="EpilogueItem" Source="/Images/item02_solo.png" Margin="1288,465,12,10" d:IsHidden="True"/>
+                <Image x:Name="EpilogueItem" Source="/Images/item02_solo.png" Margin="1288,465,12,10"/>
             </Grid>
             <Grid x:Name="ShirojiGrid" d:IsHidden="True" >
                 <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="1271,343,70,110">
@@ -1428,7 +1440,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ChildrenFaceRightImage" HorizontalAlignment="Right" Height="550" VerticalAlignment="Top" Width="500"  Margin="100,200" Source="/Images/akamaru_face_03.png" RenderTransformOrigin="0.5,0.5">
+                <Image x:Name="ChildrenFaceRightImage" HorizontalAlignment="Right" Height="550" VerticalAlignment="Top" Width="500"  Margin="100,200" Source="/Images/akamaru_face_03.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -1439,7 +1451,14 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="AnyCharaGrid" d:IsHidden="True"/>
+            <Grid x:Name="AnyPlateGrid" d:IsHidden="True">
+                <Grid x:Name="SituationsPlate" Margin="200,200">
+                    <Border x:Name="SituationPlate" Background="Red" CornerRadius="100"/>
+                    <TextBlock x:Name="SituationTitleText" Text="場面①" FontSize="60" FontWeight="UltraBold"  FontFamily="Yu Gothic" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,50"/>
+                    <Image x:Name="SituationCharacterImage" Margin="50,250,1100,100" Source="/Images/akamaru_face_01.png"/>
+                    <TextBlock x:Name="SituationText" Text="赤丸くんはじゅぎょうで使う教科書を&#10;わすれてこまっています。&#10;だれかに、教科書をかりなければなりません。" FontSize="60" FontWeight="UltraBold" FontFamily="Yu Gothic" TextWrapping="Wrap" Margin="450,250,20,50"/>
+                </Grid>
+            </Grid>
             <Grid x:Name="ItemBookGrid" d:IsHidden="True">
                 <TextBlock x:Name="ItemBookTitleTextBlock" Margin="38,20,1387,935" Text="アイテム図鑑" TextWrapping="Wrap" FontSize="90" Foreground="White" FontWeight="Bold" d:IsHidden="True"/>
                 <Grid x:Name="ItemBookMainGrid" d:IsHidden="True">

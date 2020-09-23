@@ -1778,9 +1778,9 @@ namespace KokoroUpTime
 
                 if (button.Name == "FeelingNextGoButton")
                 {
+                    Debug.Print("てきとう");
                     switch (this.scene)
                     {
-
                         case "青助くんのきもちを考える1":
 
                             this.GoTo("think_kimi's_feeling_1");

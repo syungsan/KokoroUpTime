@@ -66,9 +66,9 @@ namespace KokoroUpTime
         private int inlineCount;
         private int imageInlineCount;
 
-        private List<Run> runs = new List<Run>();
-        private List<InlineUIContainer> imageInlines = new List<InlineUIContainer>();
-        
+        private Dictionary<string, List<Run>> runs = new Dictionary<string, List<Run>>();
+        private Dictionary<string, List<InlineUIContainer>> imageInlines = new Dictionary<string, List<InlineUIContainer>>();
+
 
         // 各種コントロールを任意の文字列で呼び出すための辞書
         private Dictionary<string, Image> imageObjects = null;
@@ -234,6 +234,8 @@ namespace KokoroUpTime
                 ["item_check_center_text"] =this.ItemCheckCenterText,
                 ["item_point_msg_text"] = this.ItemPointMessageText,
                 ["item_book_title_text"]=this.ItemBookTitleTextBlock,
+                ["result_kind_of_feeling_text"]=this.ResultKindOfFeelingText,
+                ["result_size_of_feeling_text"] = this.ResultSizeOfFeelingText,
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -402,10 +404,13 @@ namespace KokoroUpTime
 
             this.ItemCheckCentertGrid.Visibility = Visibility.Hidden;
             this.ItemCheckRightGrid.Visibility = Visibility.Hidden;
+            //this.SituationsPlateGrid.Visibility = Visibility.Hidden;
 
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
             this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
+            this.ResultKindOfFeelingGrid.Visibility = Visibility.Hidden;
+            this.resultSizeOfFeelingGrid.Visibility = Visibility.Hidden;
             this.DifficultySelectGrid.Visibility = Visibility.Hidden;
             this.SelectFeelingGrid.Visibility = Visibility.Hidden;
 
@@ -438,11 +443,6 @@ namespace KokoroUpTime
             this.ItemPointMessageText.Text = "";
 
             //this.GroupeActivityInputText.Text = "";
-
-
-
-
-
 
         }
 
@@ -637,7 +637,7 @@ namespace KokoroUpTime
                     }
                     break;
 
-                // ボーダーに対しての処理
+                //ボーダーに対しての処理
                 /*case "border":
 
                     this.position = this.scenarios[this.scenarioCount][1];
@@ -741,11 +741,7 @@ namespace KokoroUpTime
 
                         var _texts = this.SequenceCheck(_text);
 
-                        MessageBox.Show(this.MainMessageTextBlock.Text);
-
                         this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
-
-                        MessageBox.Show(this.MainMessageTextBlock.Text);
                     }
                     __textObject.Visibility = Visibility.Visible;
 
@@ -830,6 +826,25 @@ namespace KokoroUpTime
                                     else if (clickButton == "page")
                                     {
                                         this.NextPageButton.Visibility = Visibility.Visible;
+                                    }
+                                };
+                            }
+                            else if(clickMethod == "back_only")
+                            {
+                                waitTimer.Start();
+
+                                waitTimer.Tick += (s, args) =>
+                                {
+                                    waitTimer.Stop();
+                                    waitTimer = null;
+
+                                    if (clickButton == "msg")
+                                    {
+                                        this.BackMessageButton.Visibility = Visibility.Visible;
+                                    }
+                                    else if (clickButton == "page")
+                                    {
+                                        this.BackPageButton.Visibility = Visibility.Visible;
                                     }
                                 };
                             }
@@ -1209,6 +1224,16 @@ namespace KokoroUpTime
 
                 case "#":
 
+                    // しれっとメモリ開放
+                    if (this.imageInlines?.Count > 0)
+                    {
+                        this.imageInlines.Clear();
+                    }
+                    if (this.runs?.Count > 0)
+                    {
+                        this.runs.Clear();
+                    }
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
@@ -1305,10 +1330,26 @@ namespace KokoroUpTime
             }
             return text2ds;
         }
-
-        private void ShowSentence(TextBlock textObject, List<List<string>> sentences, string mode)
+        private void ShowSentence(TextBlock textObject, List<List<string>> sentences, string mode, object obj = null)
         {
+            if (this.imageInlines.ContainsKey(textObject.Name))
+            {
+                this.imageInlines.Remove(textObject.Name);
+            }
+            if (this.runs.ContainsKey(textObject.Name))
+            {
+                this.runs.Remove(textObject.Name);
+            }
+            this.imageInlines.Add(textObject.Name, new List<InlineUIContainer>());
+            this.runs.Add(textObject.Name, new List<Run>());
+
             textObject.Text = "";
+
+            this.runs[textObject.Name].Clear();
+            this.imageInlines[textObject.Name].Clear();
+
+            this.inlineCount = 0;
+            this.imageInlineCount = 0;
 
             if (mode == "msg")
             {
@@ -1318,22 +1359,13 @@ namespace KokoroUpTime
 
                 // メッセージ表示処理
                 this.msgTimer = new DispatcherTimer();
-                this.msgTimer.Tick += ViewWord;
-                this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / 3000000000000000f);
+                this.msgTimer.Tick += ViewWordCharacter;
+                this.msgTimer.Interval = TimeSpan.FromSeconds(1.0f / this.dataOption.MessageSpeed);
                 this.msgTimer.Start();
-
-                this.inlineCount = 0;
-                this.imageInlineCount = 0;
-
-                foreach (var run in this.runs)
-                {
-                    run.Text = "";
-                }
-                this.runs.Clear();
-                this.imageInlines.Clear();
-
-                textObject.Inlines.Clear();
             }
+
+            textObject.Inlines.Clear();
+
             // 画像インラインと文字インラインの合体
             foreach (var stns in sentences)
             {
@@ -1345,7 +1377,7 @@ namespace KokoroUpTime
 
                     textObject.Inlines.Add(imageInline);
 
-                    this.imageInlines.Add(imageInline);
+                    this.imageInlines[textObject.Name].Add(imageInline);
                 }
                 var run = new Run { };
 
@@ -1361,12 +1393,9 @@ namespace KokoroUpTime
 
                     var fontWeights = FontWeights.Normal;
 
-                    DropShadowEffect dropShadowEffect = null;
-
                     TextDecoration textDecoration = new TextDecoration();
                     TextDecorationCollection textDecorations = new TextDecorationCollection();
 
-                    //フォントの色
                     if (options.Length > 0 && options[0] != "")
                     {
                         switch (options[0])
@@ -1374,17 +1403,16 @@ namespace KokoroUpTime
                             case "red": { foreground = new SolidColorBrush(Colors.Red); break; };
                             case "green": { foreground = new SolidColorBrush(Colors.Green); break; };
                             case "blue": { foreground = new SolidColorBrush(Colors.Blue); break; };
-                            case "yellow": { foreground = new SolidColorBrush(Colors.Yellow); break; };
 
                             default: { break; }
                         }
                     }
-                    //フォントサイズ
+
                     if (options.Length > 1 && options[1] != "")
                     {
                         fontSize = double.Parse(options[1]);
                     }
-                    //背景色
+
                     if (options.Length > 2 && options[2] != "")
                     {
                         switch (options[2])
@@ -1397,7 +1425,7 @@ namespace KokoroUpTime
                             default: { break; }
                         }
                     }
-                    //文字の太さ
+
                     if (options.Length > 3 && options[3] != "")
                     {
                         if (options[3] == "true")
@@ -1405,7 +1433,7 @@ namespace KokoroUpTime
                             fontWeights = FontWeights.UltraBold;
                         }
                     }
-                    //アンダーライン
+
                     if (options.Length > 4 && options[4] != "")
                     {
                         switch (options[4])
@@ -1420,44 +1448,25 @@ namespace KokoroUpTime
                         textDecoration.PenThicknessUnit = TextDecorationUnit.FontRecommended;
                         textDecorations.Add(textDecoration);
                     }
-
-                    //影
-                    if (options.Length > 5 && options[5] != "")
-                    {
-                        switch (options[5])
-                        {
-                            case "red": { dropShadowEffect = new DropShadowEffect { Color = Colors.Red, ShadowDepth =4, Direction=330, Opacity=0.5, BlurRadius=0.0 }; break; };
-                            case "green": { dropShadowEffect = new DropShadowEffect { Color = Colors.Green, ShadowDepth = 4, Direction = 330, Opacity = 0.5, BlurRadius = 0.0 }; break; };
-                            case "blue": { dropShadowEffect = new DropShadowEffect { Color = Colors.Blue, ShadowDepth = 4, Direction = 330, Opacity = 0.5, BlurRadius = 0.0 }; break; };
-                            case "black": { dropShadowEffect = new DropShadowEffect { Color = Colors.Black, ShadowDepth = 4, Direction = 330, Opacity = 0.5, BlurRadius = 0.0 }; break; };
-
-                            default: { break; }
-                        }
-                    }
-                    
-                    run = new Run { Text = "", Foreground = foreground, FontSize = fontSize, Background = background, FontWeight = fontWeights, TextDecorations = textDecorations};
+                    run = new Run { Text = "", Foreground = foreground, FontSize = fontSize, Background = background, FontWeight = fontWeights, TextDecorations = textDecorations };
                 }
                 else
                 {
-                    run = new Run { Text = ""};
+                    run = new Run { Text = "" };
                 }
 
                 textObject.Inlines.Add(run);
-                this.runs.Add(run);
+
+                this.runs[textObject.Name].Add(run);
 
                 if (mode == "text")
                 {
-                    foreach (var _text in this.runs)
-                    {
-                        _text.Text = "";
-                        _text.Text = stns[0];
-                    }
-                    this.runs.Clear();
+                    ViewTextAtOnes();
                 }
             }
 
             // 一文字ずつメッセージ表示（Inner Func）
-            void ViewWord(object sender, EventArgs e)
+            void ViewWordCharacter(object sender, EventArgs e)
             {
                 if (this.inlineCount < sentences.Count)
                 {
@@ -1480,7 +1489,7 @@ namespace KokoroUpTime
 
                         image.Freeze();
 
-                        (this.imageInlines[imageInlineCount].Child as Image).Source = image;
+                        (this.imageInlines[textObject.Name][imageInlineCount].Child as Image).Source = image;
 
                         this.imageInlineCount++;
 
@@ -1489,7 +1498,7 @@ namespace KokoroUpTime
 
                         return;
                     }
-                    this.runs[inlineCount].Text = stns[0].Substring(0, this.word_num);
+                    this.runs[textObject.Name][inlineCount].Text = stns[0].Substring(0, this.word_num);
 
                     if (this.word_num < stns[0].Length)
                     {
@@ -1506,15 +1515,51 @@ namespace KokoroUpTime
                     this.msgTimer.Stop();
                     this.msgTimer = null;
 
+                    if (obj != null)
+                    {
+                        this.MessageCallBack(obj);
+                    }
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
             }
 
-            MessageBox.Show(this.MainMessageTextBlock.Text);
+            // 一気にテキストを表示（Inner Func）
+            void ViewTextAtOnes()
+            {
+                if (this.inlineCount < sentences.Count)
+                {
+                    var stns = sentences[this.inlineCount];
 
+                    string namePngPath = $"./Log/{this.initConfig.userName}/name.png";
+
+                    if (stns.Count > 2 && stns[1] == "image" && stns[2] == "name" && File.Exists(namePngPath))
+                    {
+                        // 実行ファイルの場所を絶対パスで取得
+                        var startupPath = FileUtils.GetStartupPath();
+
+                        var image = new BitmapImage();
+
+                        image.BeginInit();
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        image.UriSource = new Uri($@"{startupPath}/{namePngPath}", UriKind.Absolute);
+                        image.EndInit();
+
+                        image.Freeze();
+
+                        (this.imageInlines[textObject.Name][imageInlineCount].Child as Image).Source = image;
+
+                        this.imageInlineCount++;
+                        this.inlineCount++;
+
+                        return;
+                    }
+                    this.runs[textObject.Name][inlineCount].Text = stns[0];
+                }
+            }
         }
-
         // アニメーション（ストーリーボード）の処理
         private void ShowAnime(string storyBoard, string isSync)
         {
