@@ -7,8 +7,12 @@
     },
     "additionalProbingPaths": [
       "C:\\Users\\MAGDYNABOOK-03\\.dotnet\\store\\|arch|\\|tfm|",
+<<<<<<< HEAD
       "C:\\Users\\MAGDYNABOOK-03\\.nuget\\packages",
       "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+=======
+      "C:\\Users\\maglab\\.nuget\\packages"
+>>>>>>> master
     ],
     "configProperties": {
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true

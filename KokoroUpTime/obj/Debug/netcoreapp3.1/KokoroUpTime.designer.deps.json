@@ -19,75 +19,94 @@
           "System.Text.Encoding.CodePages": "4.7.0",
           "System.Xml.XPath.XmlDocument": "4.3.0",
           "System.Xml.XmlDocument": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard2.1/EPPlus.dll": {
             "assemblyVersion": "4.5.3.3",
             "fileVersion": "4.5.3.3"
           }
+=======
+>>>>>>> master
         }
       },
       "Microsoft.Extensions.Configuration/3.1.0": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "3.1.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.dll": {
             "assemblyVersion": "3.1.0.0",
             "fileVersion": "3.100.19.56504"
           }
+=======
+>>>>>>> master
         }
       },
       "Microsoft.Extensions.Configuration.Abstractions/3.1.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "3.1.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.Abstractions.dll": {
             "assemblyVersion": "3.1.0.0",
             "fileVersion": "3.100.19.56504"
           }
+=======
+>>>>>>> master
         }
       },
       "Microsoft.Extensions.Configuration.FileExtensions/3.1.0": {
         "dependencies": {
           "Microsoft.Extensions.Configuration": "3.1.0",
           "Microsoft.Extensions.FileProviders.Physical": "3.1.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.FileExtensions.dll": {
             "assemblyVersion": "3.1.0.0",
             "fileVersion": "3.100.19.56504"
           }
+=======
+>>>>>>> master
         }
       },
       "Microsoft.Extensions.Configuration.Json/3.1.0": {
         "dependencies": {
           "Microsoft.Extensions.Configuration": "3.1.0",
           "Microsoft.Extensions.Configuration.FileExtensions": "3.1.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.Json.dll": {
             "assemblyVersion": "3.1.0.0",
             "fileVersion": "3.100.19.56504"
           }
+=======
+>>>>>>> master
         }
       },
       "Microsoft.Extensions.FileProviders.Abstractions/3.1.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "3.1.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Abstractions.dll": {
             "assemblyVersion": "3.1.0.0",
             "fileVersion": "3.100.19.56504"
           }
+=======
+>>>>>>> master
         }
       },
       "Microsoft.Extensions.FileProviders.Physical/3.1.0": {
         "dependencies": {
           "Microsoft.Extensions.FileProviders.Abstractions": "3.1.0",
           "Microsoft.Extensions.FileSystemGlobbing": "3.1.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Physical.dll": {
@@ -112,11 +131,18 @@
           }
         }
       },
+=======
+        }
+      },
+      "Microsoft.Extensions.FileSystemGlobbing/3.1.0": {},
+      "Microsoft.Extensions.Primitives/3.1.0": {},
+>>>>>>> master
       "Microsoft.NETCore.Platforms/3.1.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
       "Microsoft.Win32.SystemEvents/4.7.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll": {
@@ -179,6 +205,19 @@
           }
         }
       },
+=======
+        }
+      },
+      "Osklib/1.6.0": {},
+      "Osklib.Wpf/1.6.0": {
+        "dependencies": {
+          "Osklib": "1.6.0"
+        }
+      },
+      "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
+      "runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
+      "runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
+>>>>>>> master
       "runtime.native.System/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -210,6 +249,7 @@
           "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl": "4.3.2"
         }
       },
+<<<<<<< HEAD
       "runtime.opensuse.13.2-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
         "runtimeTargets": {
           "runtimes/opensuse.13.2-x64/native/System.Security.Cryptography.Native.OpenSsl.so": {
@@ -291,6 +331,19 @@
             "assemblyVersion": "1.7.335.0",
             "fileVersion": "1.7.335.0"
           }
+=======
+      "runtime.opensuse.13.2-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
+      "runtime.opensuse.42.1-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
+      "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple/4.3.0": {},
+      "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
+      "runtime.rhel.7-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
+      "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
+      "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
+      "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
+      "sqlite-net-pcl/1.7.335": {
+        "dependencies": {
+          "SQLitePCLRaw.bundle_green": "2.0.3"
+>>>>>>> master
         }
       },
       "SQLitePCLRaw.bundle_green/2.0.3": {
@@ -298,6 +351,7 @@
           "SQLitePCLRaw.core": "2.0.3",
           "SQLitePCLRaw.lib.e_sqlite3": "2.0.3",
           "SQLitePCLRaw.provider.dynamic_cdecl": "2.0.3"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netcoreapp3.0/SQLitePCLRaw.batteries_v2.dll": {
@@ -308,11 +362,14 @@
             "assemblyVersion": "2.0.3.851",
             "fileVersion": "2.0.3.851"
           }
+=======
+>>>>>>> master
         }
       },
       "SQLitePCLRaw.core/2.0.3": {
         "dependencies": {
           "System.Memory": "4.5.3"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard2.0/SQLitePCLRaw.core.dll": {
@@ -394,6 +451,14 @@
             "assemblyVersion": "2.0.3.851",
             "fileVersion": "2.0.3.851"
           }
+=======
+        }
+      },
+      "SQLitePCLRaw.lib.e_sqlite3/2.0.3": {},
+      "SQLitePCLRaw.provider.dynamic_cdecl/2.0.3": {
+        "dependencies": {
+          "SQLitePCLRaw.core": "2.0.3"
+>>>>>>> master
         }
       },
       "System.Collections/4.3.0": {
@@ -415,12 +480,15 @@
           "System.Runtime.Extensions": "4.3.0",
           "System.Threading": "4.3.0",
           "System.Threading.Tasks": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.3/System.Collections.Concurrent.dll": {
             "assemblyVersion": "4.0.13.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Collections.NonGeneric/4.3.0": {
@@ -431,12 +499,15 @@
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
           "System.Threading": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.3/System.Collections.NonGeneric.dll": {
             "assemblyVersion": "4.0.2.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Collections.Specialized/4.3.0": {
@@ -448,23 +519,29 @@
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
           "System.Threading": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.3/System.Collections.Specialized.dll": {
             "assemblyVersion": "4.0.2.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.ComponentModel/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.3/System.ComponentModel.dll": {
             "assemblyVersion": "4.0.2.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.ComponentModel.Primitives/4.3.0": {
@@ -472,12 +549,15 @@
           "System.ComponentModel": "4.3.0",
           "System.Resources.ResourceManager": "4.3.0",
           "System.Runtime": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.0/System.ComponentModel.Primitives.dll": {
             "assemblyVersion": "4.1.1.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.ComponentModel.TypeConverter/4.3.0": {
@@ -497,12 +577,15 @@
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
           "System.Threading": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.5/System.ComponentModel.TypeConverter.dll": {
             "assemblyVersion": "4.1.1.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Data.Common/4.3.0": {
@@ -515,12 +598,15 @@
           "System.Runtime.Extensions": "4.3.0",
           "System.Text.RegularExpressions": "4.3.0",
           "System.Threading.Tasks": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.2/System.Data.Common.dll": {
             "assemblyVersion": "4.1.1.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Diagnostics.Debug/4.3.0": {
@@ -541,6 +627,7 @@
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
           "Microsoft.Win32.SystemEvents": "4.7.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard2.0/System.Drawing.Common.dll": {
@@ -561,6 +648,8 @@
             "assemblyVersion": "4.0.2.0",
             "fileVersion": "4.700.19.56404"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Globalization/4.3.0": {
@@ -586,6 +675,7 @@
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
           "System.Runtime.InteropServices": "4.3.0"
+<<<<<<< HEAD
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.3/System.Globalization.Extensions.dll": {
@@ -600,6 +690,8 @@
             "assemblyVersion": "4.0.2.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.IO/4.3.0": {
@@ -626,12 +718,15 @@
       "System.IO.FileSystem.Primitives/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.3/System.IO.FileSystem.Primitives.dll": {
             "assemblyVersion": "4.0.2.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Linq/4.3.0": {
@@ -641,12 +736,15 @@
           "System.Resources.ResourceManager": "4.3.0",
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.6/System.Linq.dll": {
             "assemblyVersion": "4.1.1.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Memory/4.5.3": {},
@@ -678,12 +776,15 @@
         "dependencies": {
           "System.Reflection": "4.3.0",
           "System.Runtime": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.5/System.Reflection.TypeExtensions.dll": {
             "assemblyVersion": "4.1.1.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Resources.ResourceManager/4.3.0": {
@@ -731,12 +832,15 @@
           "System.Resources.ResourceManager": "4.3.0",
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.3/System.Runtime.Numerics.dll": {
             "assemblyVersion": "4.0.2.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Security.Claims/4.3.0": {
@@ -748,12 +852,15 @@
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
           "System.Security.Principal": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.3/System.Security.Claims.dll": {
             "assemblyVersion": "4.0.2.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Security.Cryptography.Algorithms/4.3.0": {
@@ -772,6 +879,7 @@
           "System.Text.Encoding": "4.3.0",
           "runtime.native.System.Security.Cryptography.Apple": "4.3.0",
           "runtime.native.System.Security.Cryptography.OpenSsl": "4.3.2"
+<<<<<<< HEAD
         },
         "runtimeTargets": {
           "runtimes/osx/lib/netstandard1.6/System.Security.Cryptography.Algorithms.dll": {
@@ -810,6 +918,11 @@
           }
         }
       },
+=======
+        }
+      },
+      "System.Security.Cryptography.Cng/4.7.0": {},
+>>>>>>> master
       "System.Security.Cryptography.Csp/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -825,6 +938,7 @@
           "System.Security.Cryptography.Primitives": "4.3.0",
           "System.Text.Encoding": "4.3.0",
           "System.Threading": "4.3.0"
+<<<<<<< HEAD
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.3/System.Security.Cryptography.Csp.dll": {
@@ -839,6 +953,8 @@
             "assemblyVersion": "4.0.1.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Security.Cryptography.Encoding/4.3.0": {
@@ -855,6 +971,7 @@
           "System.Security.Cryptography.Primitives": "4.3.0",
           "System.Text.Encoding": "4.3.0",
           "runtime.native.System.Security.Cryptography.OpenSsl": "4.3.2"
+<<<<<<< HEAD
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.3/System.Security.Cryptography.Encoding.dll": {
@@ -869,6 +986,8 @@
             "assemblyVersion": "4.0.1.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -886,6 +1005,7 @@
           "System.Security.Cryptography.Primitives": "4.3.0",
           "System.Text.Encoding": "4.3.0",
           "runtime.native.System.Security.Cryptography.OpenSsl": "4.3.2"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.6/System.Security.Cryptography.OpenSsl.dll": {
@@ -900,11 +1020,14 @@
             "assemblyVersion": "4.0.1.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Security.Cryptography.Pkcs/4.7.0": {
         "dependencies": {
           "System.Security.Cryptography.Cng": "4.7.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netcoreapp3.0/System.Security.Cryptography.Pkcs.dll": {
@@ -919,6 +1042,8 @@
             "assemblyVersion": "4.1.1.0",
             "fileVersion": "4.700.19.56404"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Security.Cryptography.Primitives/4.3.0": {
@@ -930,12 +1055,15 @@
           "System.Runtime": "4.3.0",
           "System.Threading": "4.3.0",
           "System.Threading.Tasks": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.3/System.Security.Cryptography.Primitives.dll": {
             "assemblyVersion": "4.0.1.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Security.Cryptography.X509Certificates/4.3.2": {
@@ -965,6 +1093,7 @@
           "runtime.native.System": "4.3.0",
           "runtime.native.System.Net.Http": "4.3.0",
           "runtime.native.System.Security.Cryptography.OpenSsl": "4.3.2"
+<<<<<<< HEAD
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.6/System.Security.Cryptography.X509Certificates.dll": {
@@ -979,17 +1108,22 @@
             "assemblyVersion": "4.1.1.2",
             "fileVersion": "4.6.25815.3"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Security.Principal/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.0/System.Security.Principal.dll": {
             "assemblyVersion": "4.0.2.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Text.Encoding/4.3.0": {
@@ -1002,6 +1136,7 @@
       "System.Text.Encoding.CodePages/4.7.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {
@@ -1016,6 +1151,8 @@
             "assemblyVersion": "4.1.3.0",
             "fileVersion": "4.700.19.56404"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Text.Encoding.Extensions/4.3.0": {
@@ -1029,24 +1166,30 @@
       "System.Text.RegularExpressions/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.6/System.Text.RegularExpressions.dll": {
             "assemblyVersion": "4.1.1.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Threading/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0",
           "System.Threading.Tasks": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.3/System.Threading.dll": {
             "assemblyVersion": "4.0.12.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Threading.Tasks/4.3.0": {
@@ -1061,12 +1204,15 @@
           "System.Collections": "4.3.0",
           "System.Runtime": "4.3.0",
           "System.Threading.Tasks": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.0/System.Threading.Tasks.Extensions.dll": {
             "assemblyVersion": "4.1.0.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Xml.ReaderWriter/4.3.0": {
@@ -1086,12 +1232,15 @@
           "System.Text.RegularExpressions": "4.3.0",
           "System.Threading.Tasks": "4.3.0",
           "System.Threading.Tasks.Extensions": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.ReaderWriter.dll": {
             "assemblyVersion": "4.1.0.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Xml.XmlDocument/4.3.0": {
@@ -1106,12 +1255,15 @@
           "System.Text.Encoding": "4.3.0",
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {
             "assemblyVersion": "4.0.2.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Xml.XPath/4.3.0": {
@@ -1125,12 +1277,15 @@
           "System.Runtime.Extensions": "4.3.0",
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.dll": {
             "assemblyVersion": "4.0.2.0",
             "fileVersion": "4.6.24705.1"
           }
+=======
+>>>>>>> master
         }
       },
       "System.Xml.XPath.XmlDocument/4.3.0": {
@@ -1145,6 +1300,7 @@
           "System.Xml.ReaderWriter": "4.3.0",
           "System.Xml.XPath": "4.3.0",
           "System.Xml.XmlDocument": "4.3.0"
+<<<<<<< HEAD
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {
@@ -1161,6 +1317,11 @@
           }
         }
       }
+=======
+        }
+      },
+      "WpfAnimatedGif/2.0.0": {}
+>>>>>>> master
     }
   },
   "libraries": {
