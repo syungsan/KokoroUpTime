@@ -1453,7 +1453,7 @@
             </Grid>
             <Grid x:Name="AnyPlateGrid" d:IsHidden="True">
                 <Grid x:Name="SituationsPlate" Margin="200,200">
-                    <Border x:Name="SituationPlate" Background="Paste" CornerRadius="100"/>
+                    <Border x:Name="SituationPlate" Background="Red" CornerRadius="100"/>
                     <TextBlock x:Name="SituationTitleText" Text="場面①" FontSize="60" FontWeight="UltraBold"  FontFamily="Yu Gothic" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,50"/>
                     <Image x:Name="SituationCharacterImage" Margin="50,250,1100,100" Source="/Images/akamaru_face_01.png"/>
                     <TextBlock x:Name="SituationText" Text="赤丸くんはじゅぎょうで使う教科書を&#10;わすれてこまっています。&#10;だれかに、教科書をかりなければなりません。" FontSize="60" FontWeight="UltraBold" FontFamily="Yu Gothic" TextWrapping="Wrap" Margin="450,250,20,50"/>

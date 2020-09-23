@@ -220,6 +220,7 @@ hide,image,children_face_right_image
 hide,image,shiroji_left_image
 hide,image,item_center_image
 hide,grid,item_check_right_grid
+clear,text,main_msg
 text,item_check_center_text,<font=red#48##true>➢じょうずにたのむ鬱①理由を言う鬱②してほしいことを言う鬱③おれいを言う</font>
 grid,item_check_center_grid
 image,children_face_left_image,aosuke_face_01.png,appear_up,no_sync
@@ -228,6 +229,7 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,キミちゃん。鬱<font=#60#blue#true#black>①今日、家の用事があるから、鬱そうじがかりをかわってもらってもいい？</font>,青助
 click,msg,next_only
 #
+clear,text,main_msg
 hide,grid,main_msg_grid
 image,children_face_left_image,aosuke_face_01.png,,,gray
 image,children_face_right_image,kimi_face_03.png,appear_up,no_sync
@@ -236,12 +238,14 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,いいわよ。鬱赤丸くんといっしょにやっておくわね。,キミ
 click,msg
 #
+clear,text,main_msg
 image,children_face_right_image,kimi_face_03.png,,,gray
 image,children_face_left_image,aosuke_face_02.png
 image,main_msg_bubble_image,left_big_bubble_blue.png
 msg,main_msg,キミちゃん。鬱<font=#60#blue#true#black>③ありがとう。今度はボクがやるね。</font>,青助
 click,msg
 #
+clear,text,main_msg
 hide,image,children_face_right_image
 hide,image,children_face_left_image
 hide,grid,main_msg_grid
@@ -276,6 +280,7 @@ hide,image,children_face_right_image
 hide,image,shiroji_left_image
 hide,image,item_center_image
 hide,grid,item_check_right_grid
+clear,text,main_msg
 text,item_check_center_text,<font=red#40##true>➢じょうずにことわる鬱①あやまる鬱②理由言う鬱③断る鬱④かわりの言葉</font>
 grid,item_check_center_grid
 image,children_face_left_image,aosuke_face_01.png,appear_up,no_sync
@@ -285,6 +290,7 @@ msg,main_msg,キミちゃん。ごめんね。鬱明日も、家の用事があ�
 click,msg,next_only
 #
 hide,grid,main_msg_grid
+clear,text,main_msg
 image,children_face_left_image,aosuke_face_01.png,,,gray
 image,children_face_right_image,kimi_face_03.png,appear_up,no_sync
 image,main_msg_bubble_image,right_big_bubble_yellow.png
@@ -292,18 +298,21 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,<font=##yellow#true#black>①ごめんなさい、青助くん。鬱②わたしも明日はやくかえらないといけないの。</font>,キミ
 click,msg
 #
+clear,text,main_msg
 image,children_face_right_image,kimi_face_03.png
 image,children_face_left_image,aosuke_face_01.png,,,gray
 image,main_msg_bubble_image,right_big_bubble_yellow.png
-msg,main_msg,<font=##yellow#true#black>③だから、そうじがかりは、かわれないわ。鬱④いっしょに、赤丸くんにたのんでみましょうよ。</font>キミ
+msg,main_msg,<font=##yellow#true#black>③だから、そうじがかりは、かわれないわ。鬱④いっしょに、赤丸くんにたのんでみましょうよ。</font>,キミ
 click,msg
 #
+clear,text,main_msg
 image,children_face_right_image,kimi_face_03.png,,,gray
 image,children_face_left_image,aosuke_face_02.png
 image,main_msg_bubble_image,left_big_bubble_blue.png
 msg,main_msg,キミちゃん、ありがとう。,青助
 click,msg
 #
+clear,text,main_msg
 hide,image,main_msg_bubble_image
 hide,image,children_face_right_image
 hide,image,children_face_left_image
@@ -315,6 +324,7 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,2人とも、きちんとつたえることができておるのう。鬱2人はどんなきもちかのう？,白じい
 click,page,next_only
 #
+hide,image,shiroji_left_image
 hide,image,children_face_left_image
 hide,image,main_msg_bubble_image
 hide,grid,main_msg_grid
