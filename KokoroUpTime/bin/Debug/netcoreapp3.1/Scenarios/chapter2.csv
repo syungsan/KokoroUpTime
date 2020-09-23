@@ -7,6 +7,12 @@ image,main_msg_bubble_image,left_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion_slow
 msg,main_msg,前のこころあっぷタイムでは、きもちセンサーをつかって鬱みんなでいっしょに勉強したね,キミ
 next
+hide,button,next_page_button
+hide,button,back_page_button
+hide,grid,main_msg_grid
+hide,image,children_face_image
+image,item_center_up_image,item03_solo.png
+next
 reset
 image,bg_image,background_02.png
 image,shiroji_right_image,shiroji_01.png,appear_up

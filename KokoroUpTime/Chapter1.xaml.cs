@@ -26,6 +26,7 @@ using System.Text.RegularExpressions;
 using WpfAnimatedGif;
 using Expansion;
 using FileIOUtils;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using System.IO;
 
 namespace KokoroUpTime
@@ -36,8 +37,8 @@ namespace KokoroUpTime
     public partial class Chapter1 : Page
     {
         // 気持ちのリスト
-        private string[] GOOD_FEELINGS = {"うれしい", "しあわせ", "たのしい", "ホッとした", "きもちいい", "まんぞく", "すき", "やる気マンマン", "かんしゃ", "わくわく", "うきうき", "ほこらしい"};
-        private string[] BAD_FEELINGS = { "心配", "こまった", "不安", "こわい", "おちこみ", "がっかり", "いかり", "イライラ", "はずかしい", "ふまん", "かなしい", "おびえる"};
+        private string[] GOOD_FEELINGS = {"●　うれしい", "●　しあわせ", "●　たのしい", "●　ホッとした", "●　きもちいい", "●　まんぞく", "●　すき", "●　やる気マンマン", "●　かんしゃ", "●　わくわく", "●　うきうき", "●　ほこらしい"};
+        private string[] BAD_FEELINGS = { "●　心配", "●　こまった", "●　不安", "●　こわい", "●　おちこみ", "●　がっかり", "●　いかり", "●　イライラ", "●　はずかしい", "●　ふまん", "●　かなしい", "●　おびえる"};
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
 
@@ -125,10 +126,10 @@ namespace KokoroUpTime
             this.dataChapter1 = new DataChapter1();
 
             // xamlのItemControlに気持ちリストをデータバインド
-            this.ChallengeGoodFeelingItemControl.ItemsSource = GOOD_FEELINGS;
-            this.ChallengeBadFeelingItemControl.ItemsSource = BAD_FEELINGS;
-            this.SelectGoodFeelingItemControl.ItemsSource = GOOD_FEELINGS;
-            this.SelectBadFeelingItemControl.ItemsSource = BAD_FEELINGS;
+            this.ChallengeGoodFeelingListBox.ItemsSource = GOOD_FEELINGS;
+            this.ChallengeBadFeelingListBox.ItemsSource = BAD_FEELINGS;
+            this.SelectGoodFeelingListBox.ItemsSource = GOOD_FEELINGS;
+            this.SelectBadFeelingListBox.ItemsSource = BAD_FEELINGS;
 
             this.InitControls();
         }
@@ -370,6 +371,8 @@ namespace KokoroUpTime
             this.ItemBookMainGrid.Visibility = Visibility.Hidden;
             this.ItemBookNoneGrid.Visibility = Visibility.Hidden;
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
+
+            this.ClearSelectFeelingEllipse();
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
@@ -683,6 +686,16 @@ namespace KokoroUpTime
 
                     break;
 
+                // 各場面に対する待ち（ページめくりボタン）
+                case "next":
+
+                    if (this.scene == "教室のルール" || (this.SelectHeartGrid.Visibility == Visibility.Visible || this.SelectFeelingGrid.Visibility == Visibility.Visible))
+                    {
+                        this.NextPageButton.Visibility = Visibility.Visible;
+                        this.BackPageButton.Visibility = Visibility.Visible;
+                    }
+                    
+                    break;
                 // ボタン押下待ち
                 case "click":
 
@@ -1189,19 +1202,19 @@ namespace KokoroUpTime
                 {
                     case "$kimis_kind_of_feeling$":
 
-                        text = text.Replace("$kimis_kind_of_feeling$", this.dataChapter1.KimisKindOfFeelings.Split(",")[0]);
+                        text = text.Replace("$kimis_kind_of_feeling$", this.dataChapter1.KimisKindOfFeelings.Split(",")[0].Replace("●　",""));
 
                         break;
 
                     case "$akamarus_kind_of_feeling$":
 
-                        text = text.Replace("$akamarus_kind_of_feeling$", this.dataChapter1.AkamarusKindOfFeelings.Split(",")[0]);
+                        text = text.Replace("$akamarus_kind_of_feeling$", this.dataChapter1.AkamarusKindOfFeelings.Split(",")[0].Replace("●　", ""));
 
                         break;
 
                     case "$aosukes_kind_of_feeling$":
 
-                        text = text.Replace("$aosukes_kind_of_feeling$", this.dataChapter1.AosukesKindOfFeelings.Split(",")[0]);
+                        text = text.Replace("$aosukes_kind_of_feeling$", this.dataChapter1.AosukesKindOfFeelings.Split(",")[0].Replace("●　", ""));
 
                         break;
 
@@ -1729,6 +1742,40 @@ namespace KokoroUpTime
 
             if (button.Name == "NextPageButton")
             {
+                if(this.SelectGoodFeelingListBox.SelectedItem != null)
+                {
+                    if (this.scene == "キミちゃんのきもちの種類")
+                    {
+                        this.dataChapter1.KimisKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
+                    }
+                    if (this.scene == "赤丸くんのきもちの種類")
+                    {
+                        this.dataChapter1.AkamarusKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
+                    }
+
+                    if (this.scene == "青助くんのきもちの種類")
+                    {
+                        this.dataChapter1.AosukesKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
+                    }
+                }
+                if(this.SelectBadFeelingListBox.SelectedItem != null)
+                {
+                    if (this.scene == "キミちゃんのきもちの種類")
+                    {
+                        this.dataChapter1.KimisKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
+                    }
+                    if (this.scene == "赤丸くんのきもちの種類")
+                    {
+                        this.dataChapter1.AkamarusKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
+                    }
+
+                    if (this.scene == "青助くんのきもちの種類")
+                    {
+                        this.dataChapter1.AosukesKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
+                    }
+                }
+                
+
                 if (this.scene == "キミちゃんのきもちの種類" && !hasKimisKindOfFeelingsRecorded)
                 {
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
@@ -1736,7 +1783,7 @@ namespace KokoroUpTime
                         connection.Execute($@"UPDATE DataChapter1 SET KimisKindOfFeelings = '{this.dataChapter1.KimisKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
                     }
                     this.hasKimisKindOfFeelingsRecorded = true;
-                    this.AllGestureCanvas_Clear();
+                    // 手書き用　this.AllGestureCanvas_Clear();
                 }
 
                 if (this.scene == "赤丸くんのきもちの種類" && !hasAkamarusKindOfFeelingsRecorded)
@@ -1746,7 +1793,7 @@ namespace KokoroUpTime
                         connection.Execute($@"UPDATE DataChapter1 SET AkamarusKindOfFeelings = '{this.dataChapter1.AkamarusKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
                     }
                     this.hasAkamarusKindOfFeelingsRecorded = true;
-                    this.AllGestureCanvas_Clear();
+                    // 手書き用this.AllGestureCanvas_Clear();
                 }
 
                 if (this.scene == "青助くんのきもちの種類" && !hasAosukesKindOfFeelingsRecorded)
@@ -1756,7 +1803,7 @@ namespace KokoroUpTime
                         connection.Execute($@"UPDATE DataChapter1 SET AosukesKindOfFeelings = '{this.dataChapter1.AosukesKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
                     }
                     this.hasAosukesKindOfFeelingsRecorded = true;
-                    this.AllGestureCanvas_Clear();
+                    // 手書き用　this.AllGestureCanvas_Clear();
                 }
 
                 if (this.scene == "赤丸くんのきもちの大きさ" && !hasAkamarusSizeOfFeelingRecorded)
@@ -1799,13 +1846,32 @@ namespace KokoroUpTime
                         connection.Execute($@"UPDATE DataChapter1 SET MyKindOfGoodFeelings = '{this.dataChapter1.MyKindOfGoodFeelings}', MyKindOfBadFeelings = '{this.dataChapter1.MyKindOfBadFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
                     }
                 }
-                this.AllGestureCanvas_Enabled(false);
+                
+                //手書き用this.AllGestureCanvas_Enabled(false);
             }
 
             if (button.Name == "SelectFeelingNextButton")
             {
+                if (this.scene == "チャレンジきもち選択")
+                {
+                    foreach (string selectFeeling in this.ChallengeGoodFeelingListBox.SelectedItems)
+                    {
+                        this.myKindOfGoodFeelings.Add(selectFeeling);
+
+                    }
+                }
+                if (this.scene == "チャレンジきもち選択")
+                {
+                    foreach (string selectFeeling in this.ChallengeBadFeelingListBox.SelectedItems)
+                    {
+                        this.myKindOfBadFeelings.Add(selectFeeling);
+
+                    }
+                }
+                /* 手書き用
                 this.AllGestureCanvas_Clear();
                 this.AllGestureCanvas_Enabled(true);
+                */
             }
 
             if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "RuleBoardButton" || button.Name == "ThinMessageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "SelectFeelingNextButton"))
@@ -1914,7 +1980,7 @@ namespace KokoroUpTime
             sePlayer = new SoundPlayer(soundFile);
             sePlayer.Play();
         }
-
+        /*
         // ジェスチャー認識キャンバスのロード
         void GestureCanvas_Loaded(object sender, RoutedEventArgs e)
         {
@@ -1937,7 +2003,7 @@ namespace KokoroUpTime
                 ApplicationGesture.DoubleCurlicue,
             });
         }
-
+        
         // ジェスチャーキャンバスの処理
         void GestureCanvas_Gesture(object sender, InkCanvasGestureEventArgs e)
         {
@@ -1957,7 +2023,7 @@ namespace KokoroUpTime
 
             switch (gestureResult.ApplicationGesture)
             {
-                case ApplicationGesture.Circle:
+               case ApplicationGesture.Circle:
                 case ApplicationGesture.DoubleCircle:
                     answerResult = AnswerResult.Correct;
                     break;
@@ -2059,6 +2125,7 @@ namespace KokoroUpTime
                 gestureCanvas.Strokes.Add(e.Strokes);
             }
         }
+        */
 
         private enum AnswerResult
         {
@@ -2066,12 +2133,15 @@ namespace KokoroUpTime
             Incorrect,
             Intermediate,
             Correct,
+            Decision,
+            Cancel,
         }
-
+        /*
         void AllGestureCanvas_Clear()
         {
             // 拡張クラス（Expansion.csの一部）GetChildrenを使ってItemTenplateの子要素（InkCanvas）にアクセス
             // 全てのInkCanvasをクリアしてから新しいストロークを書き込む排他処理
+
             foreach (var goodInkCanvas in this.ChallengeGoodFeelingItemControl.GetChildren<InkCanvas>().ToList())
             {
                 goodInkCanvas.Strokes.Clear();
@@ -2082,12 +2152,12 @@ namespace KokoroUpTime
                 badInkCanvas.Strokes.Clear();
             }
 
-            foreach (var goodInkCanvas in this.SelectGoodFeelingItemControl.GetChildren<InkCanvas>().ToList())
+            foreach (var goodInkCanvas in this.SelectGoodFeelingListBox.GetChildren<InkCanvas>().ToList())
             {
                 goodInkCanvas.Strokes.Clear();
             }
 
-            foreach (var badInkCanvas in this.SelectBadFeelingItemControl.GetChildren<InkCanvas>().ToList())
+            foreach (var badInkCanvas in this.SelectBadFeelingListBox.GetChildren<InkCanvas>().ToList())
             {
                 badInkCanvas.Strokes.Clear();
             }
@@ -2105,16 +2175,17 @@ namespace KokoroUpTime
                 badInkCanvas.IsEnabled = IsEnable;
             }
 
-            foreach (var goodInkCanvas in this.SelectGoodFeelingItemControl.GetChildren<InkCanvas>().ToList())
+            foreach (var goodInkCanvas in this.SelectGoodFeelingListBox.GetChildren<InkCanvas>().ToList())
             {
                 goodInkCanvas.IsEnabled = IsEnable;
             }
 
-            foreach (var badInkCanvas in this.SelectBadFeelingItemControl.GetChildren<InkCanvas>().ToList())
+            foreach (var badInkCanvas in this.SelectBadFeelingListBox.GetChildren<InkCanvas>().ToList())
             {
                 badInkCanvas.IsEnabled = IsEnable;
             }
         }
+        */
 
         // ハートゲージの角度をデータバインド
         private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter1), new UIPropertyMetadata(0.0));
@@ -2200,6 +2271,102 @@ namespace KokoroUpTime
                 this.feelingSize = 100;
                 this.Angle = (double)this.feelingSize + 310.0f;
             }
+        }
+
+        private void selectFeeling(object sender, MouseButtonEventArgs e)
+        {
+            this.ClearSelectFeelingEllipse();
+
+            //XAML上で記載したListBoxのテンプレートにEllipseコントロールを追加
+            Grid feelingGrid = sender as Grid;
+
+            Color feelingColor;
+
+            if(feelingGrid.Name == "SelectGoodFeelingGrid"|| feelingGrid.Name == "ChallengeGoodFeelingGrid")
+            {
+                feelingColor = (Color)ColorConverter.ConvertFromString("#FFEE2222");
+            }
+            else if(feelingGrid.Name == "SelectBadFeelingGrid"|| feelingGrid.Name == "ChallengeBadFeelingGrid")
+            {
+                feelingColor = (Color)ColorConverter.ConvertFromString("#FF1E90FF");
+            }
+
+            Brush colorBrush = new SolidColorBrush { Color = feelingColor };
+            Ellipse feelingColorEllipse = new Ellipse { Stroke = colorBrush, StrokeThickness = 3, Margin = new Thickness(25, 5, 25, 0) };
+
+            AnswerResult selectResult = AnswerResult.None;
+
+            if (feelingGrid.Children.Count < 3)
+            {
+                feelingGrid.Children.Add(feelingColorEllipse);
+                selectResult = AnswerResult.Decision;
+            }
+            else
+            {
+                feelingGrid.Children.RemoveAt(2);
+                selectResult = AnswerResult.Cancel;
+            }
+
+            var startupPath = FileUtils.GetStartupPath();
+
+            PlaySE($@"{startupPath}/Sounds/{selectResult}.wav");
+        }
+
+        private void ClearSelectFeelingEllipse()
+        {
+            string selectFeelingName = "";
+
+            if (this.SelectFeelingGrid.Visibility == Visibility.Visible)
+            {
+                ListBoxItem myListBoxItem = null;
+
+                if (this.SelectGoodFeelingListBox.SelectedItem != null)
+                {
+                    myListBoxItem = (ListBoxItem)(this.SelectGoodFeelingListBox.ItemContainerGenerator.ContainerFromItem(this.SelectGoodFeelingListBox.SelectedItem));
+                    selectFeelingName = "SelectGoodFeelingGrid";
+
+
+                }
+                if (this.SelectBadFeelingListBox.SelectedItem != null)
+                {
+                    myListBoxItem = (ListBoxItem)(this.SelectBadFeelingListBox.ItemContainerGenerator.ContainerFromItem(this.SelectBadFeelingListBox.SelectedItem));
+                    selectFeelingName = "SelectBadFeelingGrid";
+
+
+                }
+                if (myListBoxItem != null)
+                {
+                    ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
+                    DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
+                    Grid grid = (Grid)myDataTemplate.FindName(selectFeelingName, myContentPresenter);
+                    if (grid.Children.Count == 3)
+                    {
+                        grid.Children.RemoveAt(2);
+                    }
+
+                }
+                this.SelectGoodFeelingListBox.SelectedIndex = -1;
+                this.SelectBadFeelingListBox.SelectedIndex = -1;
+            }
+        }
+
+        private childItem FindVisualChild<childItem>(DependencyObject obj)where childItem : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is childItem)
+                {
+                    return (childItem)child;
+                }
+                else
+                {
+                    childItem childOfChild = FindVisualChild<childItem>(child);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+            return null;
         }
     }
 }
