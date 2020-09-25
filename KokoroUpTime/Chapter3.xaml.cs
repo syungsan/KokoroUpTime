@@ -774,10 +774,13 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        var _texts = this.SequenceCheck(__textObject.Text);
+                        if (__textObject.Text != "")
+                        {
+                            var _texts = this.SequenceCheck(__textObject.Text);
 
-                        // xamlに直接書いたStaticな文章を表示する場合
-                        this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
+                            // xamlに直接書いたStaticな文章を表示する場合
+                            this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
+                        }
                     }
 
                     string textAnimeIsSync = "sync";
@@ -1778,7 +1781,6 @@ namespace KokoroUpTime
 
                 if (button.Name == "FeelingNextGoButton")
                 {
-                    Debug.Print("てきとう");
                     switch (this.scene)
                     {
                         case "青助くんのきもちを考える1":

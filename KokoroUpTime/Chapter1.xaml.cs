@@ -633,12 +633,7 @@ namespace KokoroUpTime
                     }
                     else
                     {
-
-                        if (__textObject.Text == "")
-                        {
-
-                        }
-                        else
+                        if (__textObject.Text != "")
                         {
                             var _texts = this.SequenceCheck(__textObject.Text);
 
