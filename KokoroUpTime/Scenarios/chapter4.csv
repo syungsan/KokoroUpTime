@@ -1,6 +1,6 @@
 start
 reset
-goto,Debug
+situation,select_branch
 #
 scene,前回のおさらい
 reset

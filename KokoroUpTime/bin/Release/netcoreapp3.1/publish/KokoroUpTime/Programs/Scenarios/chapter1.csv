@@ -315,6 +315,7 @@ msg,main_msg,きもちセンサーをつかって、きもちの種類を選ん�
 click,msg
 #
 clear,text,main_msg
+clear,select_feeling
 hide,grid,main_msg_grid
 grid,select_feeling_grid
 click,page
@@ -365,6 +366,7 @@ msg,main_msg,きもちセンサーをつかって、きもちの種類を選ん�
 click,msg
 #
 clear,text,main_msg
+clear,select_feeling
 hide,grid,main_msg_grid
 grid,select_feeling_grid
 click,page

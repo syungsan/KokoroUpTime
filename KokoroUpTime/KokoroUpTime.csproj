@@ -213,6 +213,7 @@
     <None Remove="Images\next_go_button.png" />
     <None Remove="Images\normal.png" />
     <None Remove="Images\oranger_gradation.png" />
+    <None Remove="Images\orange_button_plate.png" />
     <None Remove="Images\orange_gradation.png" />
     <None Remove="Images\orange_title_plate.png" />
     <None Remove="Images\prev_back_.png" />
@@ -429,6 +430,7 @@
     <Resource Include="Images\message_box.png" />
     <Resource Include="Images\next_go_button.png" />
     <Resource Include="Images\normal.png" />
+    <Resource Include="Images\orange_button_plate.png" />
     <Resource Include="Images\orange_gradation.png" />
     <Resource Include="Images\orange_title_plate.png" />
     <Resource Include="Images\prev_back_.png" />
