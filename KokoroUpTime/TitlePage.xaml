@@ -66,7 +66,7 @@
             <Button x:Name="SelectDataButton" Content="データ管理" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,999,1520,10"/>
             <Button x:Name="SelectUserButton" Content="なまえ選択" FontSize="36" Foreground="White" Click="Button_Click" Margin="210,918,1520,91"/>
             <Button x:Name="CreditButton" Content="作成　こころあっぷタイム編集委員会" HorizontalAlignment="Left" Margin="1343,1026,0,0" VerticalAlignment="Top" FontSize="36" Background="{x:Null}" FontWeight="Bold" Foreground="#FFD0F9FF" Click="Button_Click" BorderBrush="{x:Null}"/>
-            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
+            <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
             <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169">
                 <Border x:Name="SelectUserListBorder" BorderThickness="1" BorderBrush="Black" Background="#FFFFCECE" CornerRadius="32,32,32,32"/>
                 <TextBlock x:Name="SelectUserListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="なまえの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
@@ -146,7 +146,9 @@
                                 <Run Text="同志社大学関係者紹介" FontSize="36"/>
                             </Paragraph>
                             <Paragraph TextAlignment="Center">
-                                <Run Text="イラスト : エロ漫画家" FontSize="28"/>
+                                <Run Text="〇作成スタッフ&#10;肥田乃梨子, 小國真由子, 村澤孝子, 石川信一" FontSize="28"/>
+                                <Run Text="&#10;〇Up2-D2プログラム作成メンバー&#10;神尾陽子, 斎藤　彩, 岡　琢哉, 渡辺　範雄, 笹森　洋樹, 石川　信一" FontSize="28"/>
+                                <Run Text="&#10;〇イラスト &#10;日野行望" FontSize="28"/>
                             </Paragraph>
                         </FlowDocument>
                     </RichTextBox>

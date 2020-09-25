@@ -868,6 +868,15 @@ namespace KokoroUpTime
                             this.ScenarioPlay();
 
                             break;
+
+                        case "select_feeling":
+
+                            this.ClearSelectFeelingEllipse();
+
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+
+                            break;
                     }
                     break;
 
@@ -1906,6 +1915,8 @@ namespace KokoroUpTime
                 titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                 this.NavigationService.Navigate(titlePage);
+
+                this.StopBGM();
             }
         }
 

@@ -4,20 +4,20 @@ scene,前説
 image,bg_image,background_02.png
 image,children_face_image,kimi_face_01.png,appear_up,no_sync
 image,main_msg_bubble_image,left_big_bubble_yellow.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,前のこころあっぷタイムでは、きもちセンサーをつかって鬱みんなでいっしょに勉強したね,キミ
 next
 hide,button,next_page_button
 hide,button,back_page_button
 hide,grid,main_msg_grid
 hide,image,children_face_image
-image,item_center_up_image,item03_solo.png
+image,item_center_up_image,item02_solo.png
 next
 reset
 image,bg_image,background_02.png
 image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,きもちセンサーをつかってどんなことができるようになったか鬱おぼえておるかな？フォッ、フォッ、フォッ！,白じい
 next
 jump,条件分岐
@@ -58,8 +58,8 @@ image,bg_image,background_05.png
 grid,activity_grid
 image,activity_title_image,challenge_time_title.png
 image,activity_text_image,challenge_time_text.png
-grid,main_msg_grid,appear_expansion_slow
 image,shiroji_right_up_image,shiroji_04.png,appear_up
+grid,main_msg_grid,appear_expansion
 image,main_msg_bubble_image,right_big_bubble.png
 msg,main_msg,きもちセンサーをつかってチャレンジタイムにとりくんでみよう！,白じい
 next
@@ -78,7 +78,7 @@ image,bg_image,background_08.png
 image,children_stand_left_image,aosuke_stand_01.png,appear_up,no_sync
 image,shiroji_right_image,shiroji_01.png,appear_up,,gray
 image,main_msg_bubble_image,left_big_bubble_blue.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 image,main_msg_bubble_image,left_big_bubble_blue.png
 msg,main_msg,ねえ、白じい。鬱楽しいことはわかったんだけど、なんだかぜんぜんやる気が出ないんだよ。,青助
 wait,next_only
@@ -134,7 +134,7 @@ reset
 image,bg_image,background_07.png
 image,shiroji_left_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,「ちょっぴりうきうき」のポイントは、鬱【word_art_01】鬱【word_art_02】ことが大切なのじゃ,白じい
 next
 reset
@@ -201,7 +201,7 @@ reset
 image,bg_image,background_07.png
 image,shiroji_left_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,チャレンジタイムはできたかのう？鬱きもちの小ささとかんたんにできることはなんだか関係がありそうじゃのう！,白じい
 next
 reset
@@ -217,7 +217,7 @@ image,bg_image,background_07.png
 image,children_face_image,aosuke_face_02.png,appear_up,no_sync
 image,shiroji_right_image,shiroji_02.png,appear_up,,gray
 image,main_msg_bubble_image,left_big_bubble_blue.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,白じい！鬱友だちと話したり、遊んだりしていると、【marker】ちょっとずつ元気になってきたよ！【,青助
 wait,next_only
 msg,main_msg,ひとりでする「ちょっぴりうきうき」もいいけど鬱友だちといっしょにできるとやっぱり楽しいね！,青助
@@ -251,7 +251,7 @@ image,activity_text_image,group_activity_text.png
 image,main_msg_bubble_image,right_big_bubble.png
 image,shiroji_right_up_image,shiroji_04.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,それでは、うきうきシューズをつかって、鬱「ちょっぴりうきうき」をたくさん集めてみるのじゃ！,白じい
 next
 reset
@@ -272,7 +272,7 @@ image,bg_image,background_09.png
 grid,summary_grid
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,今日のこころアップタイムはどうじゃったかな？鬱元気がでないときには楽しいことをさがすのは難しいことじゃが、ちょっとずつチャレンジしてみてほしい。,白じい
 wait,next_only
 msg,main_msg,次回のテーマは「【marker】あたたかい言葉をかけよう【」じゃ！。,白じい
@@ -287,7 +287,7 @@ grid,item_last_info_grid
 image,item_left_last_image
 image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,第2回で登場した発明品は、「うきうきシューズ」じゃ！鬱アイテム図鑑から、いつでも確認できるぞい！,白じい
 next
 jump,アイテム図鑑

@@ -317,6 +317,7 @@ click,msg
 clear,text,main_msg
 hide,grid,main_msg_grid
 grid,select_feeling_grid
+clear,select_feeling
 click,page
 #
 hide,grid,select_feeling_grid
@@ -367,6 +368,7 @@ click,msg
 clear,text,main_msg
 hide,grid,main_msg_grid
 grid,select_feeling_grid
+clear,select_feeling
 click,page
 #
 hide,grid,select_feeling_grid

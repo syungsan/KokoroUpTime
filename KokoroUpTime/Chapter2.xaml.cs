@@ -145,7 +145,7 @@ namespace KokoroUpTime
 
             this.CharacterColor = new Dictionary<string, SolidColorBrush>
             {
-                ["白じい"] = new SolidColorBrush(Colors.Purple),
+                ["白じい"] = new SolidColorBrush(Colors.Orange),
                 ["青助"] = new SolidColorBrush(Colors.Aqua),
                 ["赤丸"] = new SolidColorBrush(Colors.Red),
                 ["キミ"] = new SolidColorBrush(Colors.Yellow),
@@ -378,6 +378,7 @@ namespace KokoroUpTime
             this.MangaTitleImage.Visibility = Visibility.Hidden;
             this.MangaImage.Visibility = Visibility.Hidden;
             this.ItemCenterImage.Visibility = Visibility.Hidden;
+            this.ItemCenterUpImage.Visibility = Visibility.Hidden;
             this.ItemLeftImage.Visibility = Visibility.Hidden;
             this.ItemLeftLastImage.Visibility = Visibility.Hidden;
             this.SessionTitleImage.Visibility = Visibility.Hidden;
@@ -817,24 +818,40 @@ namespace KokoroUpTime
                         }
                         if (_msgButtonVisible == "next_only")
                         {
-                            this.buttonTimer.Start();
-                            this.buttonTimer.Tick += (s, args) =>
+                            if (this.dataOption.Is3SecondRule)
                             {
-                                buttonTimer.Stop();
+                                this.buttonTimer.Start();
+                                this.buttonTimer.Tick += (s, args) =>
+                                {
+                                    buttonTimer.Stop();
+                                    this.NextMessageButton.Visibility = Visibility.Visible;
+                                };
+                            }
+                            else
+                            {
                                 this.NextMessageButton.Visibility = Visibility.Visible;
-                            };
+                            }
+                            
 
                         }
                     }
                     else
                     {
-                        this.buttonTimer.Start();
-                        this.buttonTimer.Tick += (s, args) =>
+                        if (this.dataOption.Is3SecondRule)
                         {
-                            this.buttonTimer.Stop();
+                            this.buttonTimer.Start();
+                            this.buttonTimer.Tick += (s, args) =>
+                            {
+                                this.buttonTimer.Stop();
+                                this.NextMessageButton.Visibility = Visibility.Visible;
+                                this.BackMessageButton.Visibility = Visibility.Visible;
+                            };
+                        }
+                        else
+                        {
                             this.NextMessageButton.Visibility = Visibility.Visible;
                             this.BackMessageButton.Visibility = Visibility.Visible;
-                        };
+                        }
 
                     }
                     this.isClickable = true;
@@ -844,16 +861,24 @@ namespace KokoroUpTime
                 // 各場面に対する待ち（ページめくりボタン）
                 case "next":
 
-                    this.buttonTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
-
-                    this.buttonTimer.Start();
-                    this.buttonTimer.Tick += (s, args) =>
+                    if (this.dataOption.Is3SecondRule)
                     {
-                        this.buttonTimer.Stop();
+                        this.buttonTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+
+                        this.buttonTimer.Start();
+                        this.buttonTimer.Tick += (s, args) =>
+                        {
+                            this.buttonTimer.Stop();
+                            this.NextPageButton.Visibility = Visibility.Visible;
+                            this.BackPageButton.Visibility = Visibility.Visible;
+                        };
+
+                    }
+                    else
+                    {
                         this.NextPageButton.Visibility = Visibility.Visible;
                         this.BackPageButton.Visibility = Visibility.Visible;
-                    };
-            
+                    }
 
                     this.isClickable = true;
 

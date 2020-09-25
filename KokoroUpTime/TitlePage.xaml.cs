@@ -698,7 +698,7 @@ namespace KokoroUpTime
                     break;
 
                 case "CreditButton":
-
+                    
                     Storyboard sbStart = this.FindResource("appear_credit") as Storyboard;
 
                     if (sbStart != null)
@@ -709,6 +709,7 @@ namespace KokoroUpTime
                     this.CreditGrid.Visibility = Visibility.Visible;
 
                     break;
+                    
 
                 case "CreditReturnButton":
 
@@ -800,6 +801,7 @@ namespace KokoroUpTime
                         this.NavigationService.Navigate(chapter4);
                     }
                     break;
+                    
             }
         }
 
