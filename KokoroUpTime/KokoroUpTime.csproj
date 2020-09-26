@@ -21,6 +21,7 @@
     <None Remove="bad_words_grid.png" />
     <None Remove="big_heart.png" />
     <None Remove="Fonts\azuki.ttf" />
+    <None Remove="Fonts\HGRPP1.TTC" />
     <None Remove="Fonts\JiyunoTsubasa.ttf" />
     <None Remove="Fonts\TanukiMagic.ttf" />
     <None Remove="good_words_grid.png" />
@@ -205,6 +206,7 @@
     <None Remove="Images\manga4-2.png" />
     <None Remove="Images\manga4-3.png" />
     <None Remove="Images\mangaya.png" />
+    <None Remove="Images\mangaya_gauge.png" />
     <None Remove="Images\mangaya_orange.png" />
     <None Remove="Images\menu_bubble.png" />
     <None Remove="Images\message_box.png" />
@@ -285,6 +287,7 @@
 
   <ItemGroup>
     <Resource Include="Fonts\azuki.ttf" />
+    <Resource Include="Fonts\HGRPP1.TTC" />
     <Resource Include="Fonts\JiyunoTsubasa.ttf" />
     <Resource Include="Fonts\TanukiMagic.ttf" />
     <Resource Include="Images\159474.png" />
@@ -426,6 +429,7 @@
     <Resource Include="Images\manga4-1.png" />
     <Resource Include="Images\manga4-2.png" />
     <Resource Include="Images\manga4-3.png" />
+    <Resource Include="Images\mangaya_gauge.png" />
     <Resource Include="Images\mangaya_orange.png" />
     <Resource Include="Images\message_box.png" />
     <Resource Include="Images\next_go_button.png" />

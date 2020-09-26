@@ -55,7 +55,7 @@
                 <Button x:Name="RuleButton" Content="教室のルール" FontSize="36" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}" Click="Button_Click" Margin="717,269,-503,-107"/>
                 <Button x:Name="AnotherButton" Content="その他" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36" Click="Button_Click" Margin="717,337,-503,-177"/>
             </Grid>
-            <TextBlock x:Name="VersionTextBlock" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="53" Width="197" Margin="1522,285,0,0" FontSize="24" Foreground="#FFFF9E17" FontFamily="/Fonts/JiyunoTsubasa.ttf#JiyunoTsubasaFont" FontWeight="Bold"/>
+            <TextBlock x:Name="VersionTextBlock" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="53" Width="197" Margin="1522,285,0,0" FontSize="24" Foreground="#FFFF9E17" FontFamily="/Fonts/JiyunoTsubasa.ttf#自由の翼フォント" FontWeight="Bold"/>
             <Button x:Name="ChangeScreenButton" Content="Full/Win" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="195" Click="Button_Click" FontSize="36" Margin="1715,10,0,0"/>
             <StackPanel x:Name="CurrentNameStackPanel" Orientation="Horizontal" Margin="703,884,785,70">
                 <Image x:Name="CurrentNameImage" Height="48"/>

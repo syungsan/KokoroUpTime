@@ -794,8 +794,25 @@ namespace KokoroUpTime
                 case "flip":
 
                     this.MangaFlipButton.Visibility = Visibility.Visible;
-                    this.isClickable = true;
 
+                    Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
+
+                    if (sb != null)
+                    {
+                        // 二重終了防止策
+                        bool isDuplicate = false;
+
+                        sb.Completed += (s, e) =>
+                        {
+                            if (!isDuplicate)
+                            {
+                                this.isClickable = true;
+
+                                isDuplicate = true;
+                            }
+                        };
+                        sb.Begin(this);
+                    }
                     break;
 
                 // 各種コントロールを個別に隠す処理
@@ -1329,7 +1346,7 @@ namespace KokoroUpTime
         }
 
         // 純正のメッセージ表示関数
-        void PureShowMessage(TextBlock textObject, string message, object obj=null)
+        private void PureShowMessage(TextBlock textObject, string message, object obj=null)
         {
             this.word_num = 0;
 
@@ -1692,40 +1709,6 @@ namespace KokoroUpTime
                 }
             }
 
-            /*
-            if (button.Name == "BackMessageButton")
-            {
-                this.BackMessageButton.Visibility = Visibility.Hidden;
-                this.NextMessageButton.Visibility = Visibility.Hidden;
-
-                for (int i = this.scenarioCount; i < this.scenarios.Count; i--)
-                {
-                    bool flag = false;
-                    if (this.scenarios[i][0] == "msg")
-                    {
-                        string talkingCharacter = this.scenarios[i][3];
-
-                        for (int j = i - 1; j < this.scenarios.Count; j--)
-                        {
-                            if (this.scenarios[j][0] == "msg" && talkingCharacter == this.scenarios[j][3])
-                            {
-                                this.scenarioCount = j;
-                                this.ScenarioPlay();
-
-                                flag = true;
-
-                                break;
-                            }
-                        }
-                    }
-                    if (flag == true)
-                    {
-                        break;
-                    }
-                }
-            }
-            */
-
             // FullScreen時のデバッグ用に作っておく
             if (button.Name == "ExitButton")
             {
@@ -1925,7 +1908,7 @@ namespace KokoroUpTime
         {
             CheckBox checkBox = sender as CheckBox;
 
-            if (this.checkBoxs.Contains(checkBox))
+            if (this.checkBoxs != null && this.checkBoxs.Contains(checkBox))
             {
                 this.tapCount += 1;
 
@@ -1945,7 +1928,7 @@ namespace KokoroUpTime
         {
             CheckBox checkBox = sender as CheckBox;
 
-            if (this.checkBoxs.Contains(checkBox))
+            if (this.checkBoxs != null && this.checkBoxs.Contains(checkBox))
             {
                 this.tapCount -= 1;
             }
@@ -1994,6 +1977,9 @@ namespace KokoroUpTime
             sePlayer = new SoundPlayer(soundFile);
             sePlayer.Play();
         }
+
+
+
         /*
         // ジェスチャー認識キャンバスのロード
         void GestureCanvas_Loaded(object sender, RoutedEventArgs e)
