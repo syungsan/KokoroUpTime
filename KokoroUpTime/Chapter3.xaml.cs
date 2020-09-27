@@ -729,9 +729,6 @@ namespace KokoroUpTime
                 // 流れる文字をTextBlockで表現するための処理
                 case "msg":
 
-                    this.NextMessageButton.Visibility = Visibility.Hidden;
-                    this.BackMessageButton.Visibility = Visibility.Hidden;
-
                     this.position = this.scenarios[this.scenarioCount][1];
 
                     var _textObject = this.textBlockObjects[this.position];
@@ -826,8 +823,18 @@ namespace KokoroUpTime
                             this.ScenarioPlay();
                         };
                     }
-                    this.isClickable = true;
 
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    {
+                        if (this.scenarios[this.scenarioCount][2] == "disable_click")
+                        {
+                            this.isClickable = false;
+                        }
+                    }
+                    else
+                    {
+                        this.isClickable = true;
+                    }
                     break;
 
                 // ボタン押下待ち
@@ -1831,6 +1838,9 @@ namespace KokoroUpTime
 
                 if (button.Name == "NextPageButton")
                 {
+                    this.BackPageButton.Visibility = Visibility.Hidden;
+                    this.NextPageButton.Visibility = Visibility.Hidden;
+
                     if (this.scene == "ホットワードボタン" && this.hotWordCount >= 4)
                     {
                         Button[] hotWordButtons = { HotWord1Button, HotWord2Button, HotWord3Button, HotWord4Button };
@@ -1850,6 +1860,9 @@ namespace KokoroUpTime
 
                 if (button.Name == "NextMessageButton")
                 {
+                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                    this.NextMessageButton.Visibility = Visibility.Hidden;
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }

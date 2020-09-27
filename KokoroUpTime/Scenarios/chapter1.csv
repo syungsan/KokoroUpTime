@@ -43,9 +43,10 @@ wait
 rule,rule_board_check3_msg,３．はずかしがらない,2
 wait
 image,shiroji_small_right_down_image,,appear_up
-button,thin_msg_button,appear_wide
+grid,thin_msg_grid,appear_wide
 rule,thin_msg,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,all,白じい
-click_tap
+wait,,disable_click
+hide,grid,thin_msg_grid
 click,page
 #
 scene,子供たちの紹介

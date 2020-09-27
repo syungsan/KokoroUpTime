@@ -139,16 +139,16 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="appear_wide_thin_msg_button">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ThinMessageButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+        <Storyboard x:Key="appear_wide_thin_msg_grid">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ThinMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <ExponentialEase EasingMode="EaseInOut"/>
+                        <SineEase EasingMode="EaseInOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.0">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <ExponentialEase EasingMode="EaseInOut"/>
+                        <SineEase EasingMode="EaseInOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
@@ -1374,38 +1374,6 @@
                         </Image>
                     </Button>
                 </Grid>
-                <Button x:Name="ThinMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Margin="215,894,215,0" Height="141" VerticalAlignment="Top" d:IsHidden="True">
-                    <Button.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Button.RenderTransform>
-                    <Grid x:Name="ThinMessageGrid" Width="1479" d:IsHidden="True">
-                        <Image x:Name="ThinMessageBubbleImage" Source="/Images/long_bubble_right_up.png" RenderTransformOrigin="0.5,0.5" Margin="0,-26,0,0" d:IsHidden="True">
-                            <Image.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Image.RenderTransform>
-                        </Image>
-                        <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="38" Margin="31,33,37,31" RenderTransformOrigin="0.5,0.5" FontFamily="/Fonts/azuki.ttf#あずきフォント" d:IsHidden="True">
-                            <TextBlock.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </TextBlock.RenderTransform>
-                        </TextBlock>
-                    </Grid>
-                </Button>
                 <Grid x:Name="ChallengeMessageGrid" Height="386" Width="648" Margin="1164,107,108,587" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
@@ -1417,6 +1385,36 @@
                     </Grid.RenderTransform>
                     <Image x:Name="ChallengeSmallBubbleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/small_bubble_right_down.png" d:IsHidden="True"/>
                     <TextBlock x:Name="ChallengeMessageTextBlock" Margin="41,52,44,100" FontSize="48" d:IsHidden="True"><Run Text="チャレンジタイムはできたかの？"/><LineBreak /><Run Text="もう一度見直してみよう！"/><LineBreak /><Run Text="次に進んで良いかの？"/></TextBlock>
+                </Grid>
+                <Grid x:Name="ThinMessageGrid" Margin="220,918,220,39" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Image x:Name="ThinMessageBubbleImage" Source="/Images/long_bubble_right_up.png" RenderTransformOrigin="0.5,0.5" Margin="0,-26,0,0">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="38" Margin="31,33,37,31" RenderTransformOrigin="0.5,0.5" FontFamily="/Fonts/azuki.ttf#あずきフォント">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
                 </Grid>
                 <Grid x:Name="CompareMessageGrid" Height="322" Width="540" Margin="1335,150,45,608" d:IsHidden="True">
                     <Image x:Name="CompareSmallBubbleImage" Source="/Images/small_bubble_right_down.png" d:IsHidden="True"/>

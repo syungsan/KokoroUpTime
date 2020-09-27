@@ -298,9 +298,6 @@ namespace KokoroUpTime
                 // 流れる文字をTextBlockで表現するための処理
                 case "msg":
 
-                    this.NextMessageButton.Visibility = Visibility.Hidden;
-                    this.BackMessageButton.Visibility = Visibility.Hidden;
-
                     this.position = this.scenarios[this.scenarioCount][1];
 
                     var _textObject = this.textBlockObjects[this.position];
@@ -392,8 +389,18 @@ namespace KokoroUpTime
                             this.ScenarioPlay();
                         };
                     }
-                    this.isClickable = true;
 
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    {
+                        if (this.scenarios[this.scenarioCount][2] == "disable_click")
+                        {
+                            this.isClickable = false;
+                        }
+                    }
+                    else
+                    {
+                        this.isClickable = true;
+                    }
                     break;
 
                 // ボタン押下待ち
@@ -950,37 +957,40 @@ namespace KokoroUpTime
 
             Button button = sender as Button;
 
-            if (button.Name == "BackMessageButton")
+            if (this.isClickable)
             {
-                this.BackMessageButton.Visibility = Visibility.Hidden;
-                this.NextMessageButton.Visibility = Visibility.Hidden;
+                this.isClickable = false;
 
-                var currentScenarioCount = this.scenarioCount;
-
-                int returnCount = 0;
-
-                for (int i = currentScenarioCount; i <= currentScenarioCount; i--)
+                if (button.Name == "BackMessageButton")
                 {
-                    if (this.scenarios[i][0] == "#")
+                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                    this.NextMessageButton.Visibility = Visibility.Hidden;
+
+                    var currentScenarioCount = this.scenarioCount;
+
+                    int returnCount = 0;
+
+                    for (int i = currentScenarioCount; i <= currentScenarioCount; i--)
                     {
-                        returnCount += 1;
-
-                        if (returnCount == 2)
+                        if (this.scenarios[i][0] == "#")
                         {
-                            this.scenarioCount = i;
-                            this.ScenarioPlay();
+                            returnCount += 1;
 
-                            break;
+                            if (returnCount == 2)
+                            {
+                                this.scenarioCount = i;
+                                this.ScenarioPlay();
+
+                                break;
+                            }
                         }
                     }
                 }
-            }
 
-            if (this.isClickable)
-            {
                 if (button.Name == "NextMessageButton")
                 {
-                    this.isClickable = false;
+                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                    this.NextMessageButton.Visibility = Visibility.Hidden;
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -988,8 +998,6 @@ namespace KokoroUpTime
 
                 if (button.Name == "NameButton")
                 {
-                    this.isClickable = false;
-
                     if (this.selectInputMethod == 0)
                     {
                         this.NameInputGrid.Visibility = Visibility.Hidden;
@@ -999,8 +1007,6 @@ namespace KokoroUpTime
 
                 if (button.Name == "DecisionButton")
                 {
-                    this.isClickable = false;
-
                     DirectoryUtils.SafeCreateDirectory("./Log");
 
                     Image[] handWritingNameImages = new Image[] { this.KunHandWritingNameImage, this.ChanHandWritingNameImage, this.SanHandWritingNameImage, this.NoneHandWritingNameImage };
@@ -1073,8 +1079,6 @@ namespace KokoroUpTime
 
                 if (button.Name == "SelectInputMethodOKButton")
                 {
-                    this.isClickable = false;
-
                     RadioButton[] inputMethodRadioButtons = new RadioButton[] { this.HandWritingRadioButton, this.KeyboardRadioButton };
 
                     foreach (var (method, index) in inputMethodRadioButtons.Indexed())
@@ -1102,8 +1106,6 @@ namespace KokoroUpTime
 
                 if (button.Name == "ReturnToTitleButton")
                 {
-                    this.isClickable = false;
-
                     if (Directory.Exists("./temp"))
                     {
                         Directory.Delete("./temp", true);
@@ -1118,8 +1120,6 @@ namespace KokoroUpTime
 
                 if (button.Name == "SelectUserTitleOKButton")
                 {
-                    this.isClickable = false;
-
                     RadioButton[] userTiitleRadioButtons = new RadioButton[] { this.KunRadioButton, this.ChanRadioButton, this.SanRadioButton, this.NoneRadioButton };
                     string[] titles = new string[] { "くん", "ちゃん", "さん", "" };
 
@@ -1136,8 +1136,6 @@ namespace KokoroUpTime
 
                 if (button.Name == "MakeUserNameCompleteOKButton")
                 {
-                    this.isClickable = false;
-
                     // 実行ファイルの場所を絶対パスで取得
                     var startupPath = FileUtils.GetStartupPath();
 
@@ -1176,8 +1174,6 @@ namespace KokoroUpTime
 
                 if (button.Name == "MakeUserNameCompleteNOButton")
                 {
-                    this.isClickable = false;
-
                     this.NameImage.Source = null;
 
                     var startupPath = FileUtils.GetStartupPath();
