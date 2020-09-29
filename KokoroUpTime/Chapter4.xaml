@@ -903,7 +903,7 @@
                 <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="727,0,0,0" VerticalAlignment="Center" Width="273" RenderTransformOrigin="0.659,0.453" d:IsHidden="True"/>
             </Grid>
 
-            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
+            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920">
                 <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684" d:IsHidden="True">
                     <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png"/>
                     <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center"/>
@@ -915,7 +915,7 @@
                         <Image x:Name="ResultKindOfFeelingImage" Source="Images/kind_of_feeling_button_frame.png"  Stretch="Fill" Margin="0,80,0,0"/>
                         <TextBlock x:Name="ResultKindOfFeelingText" Text="ホッとした" FontSize="45" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" Margin="15,95,15,15"/>
                     </Grid>
-                    <Grid x:Name="resultSizeOfFeelingGrid"  Margin="1300,436,225,400">
+                    <Grid x:Name="ResultSizeOfFeelingGrid"  Margin="1300,436,225,400">
                         <TextBlock x:Name="ResultSizeOfFeelingTitleText" Text="きもちのおおきさ" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" />
                         <TextBlock x:Name="ResultSizeOfFeelingText" Text="(        )" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="93" Margin="0,80,0,0"/>
                     </Grid>
@@ -1153,13 +1153,13 @@
                     <ItemsControl x:Name="SelectSituationItemsControl" >
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                            <Button x:Name="SelectSituationButton" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}">
-                                    <Grid>
-                                    <Image x:Name="SelectSituationButtonImage" Source="/Images/orange_button_plate.png"/>
+                            <Button x:Name="SelectSituationButton" Margin="0,800,0,0" Background="{x:Null}" BorderBrush="{x:Null}">
+                                <Grid>
+                                    <Image x:Name="SelectSituationButtonImage" Source="/Images/orange_button_plate.png" Stretch="Fill"/>
                                     <TextBlock x:Name="SelectSituationButtonText" Text="{Binding}" FontSize="50" Foreground="White" FontFamily="Yu Gothic" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30,20"/>
-                                    </Grid>
-                                </Button>
-                            </DataTemplate>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
             </Grid>
