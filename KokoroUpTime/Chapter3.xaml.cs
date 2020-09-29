@@ -102,7 +102,7 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
-        public int hotWordCount = 0;
+        private int hotWordCount = 0;
 
         public Chapter3()
         {
@@ -1705,6 +1705,8 @@ namespace KokoroUpTime
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Debug.Print(this.isClickable.ToString());
+
             // 各種ボタンが押されたときの処理
 
             Button button = sender as Button;
@@ -1713,14 +1715,24 @@ namespace KokoroUpTime
             {
                 this.isClickable = false;
 
-                if (button.Name == "BackMessageButton" || button.Name == "BackPageButton")
+                if (button.Name == "BackMessageButton")
                 {
                     this.BackMessageButton.Visibility = Visibility.Hidden;
                     this.NextMessageButton.Visibility = Visibility.Hidden;
 
+                    BackScenario();
+                }
+
+                if (button.Name == "BackPageButton")
+                {
                     this.BackPageButton.Visibility = Visibility.Hidden;
                     this.NextPageButton.Visibility = Visibility.Hidden;
 
+                    BackScenario();
+                }
+
+                void BackScenario()
+                {
                     var index = this.scenarioCount;
                     int returnCount = 0;
 
@@ -2204,9 +2216,9 @@ namespace KokoroUpTime
         }
 
         // ハートゲージの角度をデータバインド
-        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter1), new UIPropertyMetadata(0.0));
+        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter3), new UIPropertyMetadata(0.0));
 
-        public double Angle
+        private double Angle
         {
             get { return (double)GetValue(AngleProperty); }
             set { SetValue(AngleProperty, value); }
