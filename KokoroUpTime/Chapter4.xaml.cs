@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -238,6 +239,7 @@ namespace KokoroUpTime
                 ["item_last_info_grid"] = this.ItemLastInfoGrid,
                 ["item_review_grid"] = this.ItemReviewGrid,
                 ["item_plate_grid"]=this.ItemPlateGrid,
+
                 
                
                 ["select_heart_grid"] = this.SelectHeartGrid,
@@ -255,7 +257,8 @@ namespace KokoroUpTime
                 ["item_check_right_grid"] =this.ItemCheckRightGrid,
                 ["item_check_center_grid"] =this.ItemCheckCentertGrid,
                 ["children_text_grid"] =this.ChildrenTextGrid,
-                ["seesaw_grid"]=this.SeesawGrid
+                ["seesaw_grid"]=this.SeesawGrid,
+                ["result_feeling_grid"] =this.ResultFeelingGrid,
             };
 
            
@@ -346,8 +349,7 @@ namespace KokoroUpTime
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
             this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
-            this.ResultKindOfFeelingGrid.Visibility = Visibility.Hidden;
-            this.resultSizeOfFeelingGrid.Visibility = Visibility.Hidden;
+            this.ResultFeelingGrid.Visibility = Visibility.Hidden;
             this.DifficultySelectGrid.Visibility = Visibility.Hidden;
             this.SelectFeelingGrid.Visibility = Visibility.Hidden;
 
@@ -368,6 +370,10 @@ namespace KokoroUpTime
             
             this.MusicTitleTextBlock.Text = "";
             this.ComposerNameTextBlock.Text = "";
+
+            this.ResultKindOfFeelingText.Text = "";
+            this.ResultSizeOfFeelingText.Text = "";
+
 
             //this.GroupeActivityInputText.Text = "";
 
@@ -415,7 +421,7 @@ namespace KokoroUpTime
 
                     // 画面のフェードイン処理とか入れる（別関数を呼び出す）
 
-                    this.dataProgress.CurrentChapter = 3;
+                    this.dataProgress.CurrentChapter = 4;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
@@ -1069,12 +1075,15 @@ namespace KokoroUpTime
                 // ハートゲージに対する処理
                 case "gauge":
 
-                    this.ViewSizeOfFeelingTextBlock.Text = "50";
+                    if(this.ViewSizeOfFeelingTextBlock.Text == "")
+                    {
+                        this.ViewSizeOfFeelingTextBlock.Text = "50";
+                    }
 
                     this.SelectHeartImage.Source = null;
                     this.SelectNeedleImage.Source = null;
 
-                    if (this.scene == "チャレンジタイム 開始")
+                    if (this.scene == "日直を任された場面のきもち" || this.scene == "赤丸くんにたのまれた場面のきもち")
                     {
                         if (this.SelectGoodFeelingListBox.SelectedItem != null)
                         {
@@ -1088,6 +1097,8 @@ namespace KokoroUpTime
                         }
                     }
 
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
 
                     break;
 
@@ -1179,7 +1190,25 @@ namespace KokoroUpTime
 
                     var selectedSituation = this.SITUATIONS_SELECTION[this.position];
 
+                    Thickness buttonMargin;
+
+                    if (this.position == "select_branch")
+                    {
+                        buttonMargin = new Thickness(0, 800, 0, 0);
+                    }
+                    else if(this.position == "situation_akamaru" || this.position== "select_situation")
+                    {
+                        buttonMargin = new Thickness(0, 100, 0, 0);
+                    }
+                    else
+                    {
+                        buttonMargin = new Thickness(0, 100, 0, 0);
+                    }
+
                     this.SelectSituationItemsControl.ItemsSource = selectedSituation;
+                    
+
+
 
                     //this.scenarioCount += 1;
                     //this.ScenarioPlay();
@@ -1504,6 +1533,7 @@ namespace KokoroUpTime
                         return;
                     }
                     this.runs[textObject.Name][inlineCount].Text = stns[0];
+                    this.inlineCount++;
                 }
             }
         }
@@ -1744,7 +1774,14 @@ namespace KokoroUpTime
             }
             if (button.Name == "SizeOfFeelingButton")
             {
-                this.GoTo("size_of_feeling");
+                if(this.KindOfFeelingText.Text == "")
+                {
+                    MessageBox.Show("先にきもちの種類をえらんでみよう！");
+                }
+                else
+                {
+                    this.GoTo("size_of_feeling");
+                }
             }
             if (button.Name == "KindOfFeelingButton")
             {
