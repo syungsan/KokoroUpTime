@@ -1,10 +1,6 @@
 start
 reset
-<<<<<<< HEAD
-situation,select_branch
-=======
 goto,Debug
->>>>>>> f0588495ee660e0889d1324f52d0626aa5740806
 #
 scene,前回のおさらい
 reset
@@ -145,11 +141,7 @@ image,main_msg_bubble_image,left_big_bubble.png
 image,children_stand_right_image,kimi_stand_01.png,,,gray
 image,shiroji_left_image,shiroji_01.png
 grid,main_msg_grid
-<<<<<<< HEAD
-msg,main_msg,<font=#60#yellow#true#black##>相手も自分もいいきもちになる方法</font>というのはないものかのう？,白じい
-=======
 msg,main_msg,<font=#60#yellow#true#black#>相手も自分もいいきもちになる方法</font>というのはないものかのう？,白じい
->>>>>>> f0588495ee660e0889d1324f52d0626aa5740806
 click,page
 #
 hide,image,shiroji_right_image
@@ -159,11 +151,7 @@ hide,grid,main_msg_grid
 image,bg_image,blue_gradation.png
 grid,activity_title_grid
 image,activity_title_image,blue_title_plate.png
-<<<<<<< HEAD
-text,activity_title_text,「自分」も「相手」も両方が鬱<font=red###true#>「いいきもち」</font>になる方法は？
-=======
 text,activity_title_text,「自分」も「相手」も両方が鬱<font=red#80##true##>「いいきもち」</font>になる方法は？
->>>>>>> f0588495ee660e0889d1324f52d0626aa5740806
 grid,seesaw_grid,seesaw
 click,page
 #
@@ -172,10 +160,7 @@ hide,image,item_center_image
 hide,grid,item_name_plate_left_grid
 hide,grid,activity_title_grid
 hide,grid,main_msg_grid
-<<<<<<< HEAD
-=======
 hide,grid,seesaw_grid
->>>>>>> f0588495ee660e0889d1324f52d0626aa5740806
 clear,text,main_msg
 image,bg_image,background_04.png
 image,shiroji_right_image,shiroji_01.png,appear_up
@@ -237,16 +222,10 @@ hide,image,shiroji_left_image
 hide,image,item_center_image
 hide,grid,item_check_right_grid
 clear,text,main_msg
-<<<<<<< HEAD
-text,item_check_center_text,<font=red#48##true>➢じょうずにたのむ鬱①理由を言う鬱②してほしいことを言う鬱③おれいを言う</font>
-grid,item_check_center_grid
-image,children_face_left_image,aosuke_face_01.png,appear_up,no_sync
-=======
 hide,grid,main_msg_grid
 text,item_check_center_text,<font=red#48##true>➢じょうずにたのむ鬱①理由を言う鬱②してほしいことを言う鬱③おれいを言う</font>
 grid,item_check_center_grid
 image,children_face_left_image,aosuke_face_01.png,appear_up
->>>>>>> f0588495ee660e0889d1324f52d0626aa5740806
 image,main_msg_bubble_image,left_big_bubble_blue.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,キミちゃん。鬱<font=#60#blue#true#black>①今日、家の用事があるから、鬱そうじがかりをかわってもらってもいい？</font>,青助
@@ -255,11 +234,7 @@ click,msg,next_only
 clear,text,main_msg
 hide,grid,main_msg_grid
 image,children_face_left_image,aosuke_face_01.png,,,gray
-<<<<<<< HEAD
-image,children_face_right_image,kimi_face_03.png,appear_up,no_sync
-=======
 image,children_face_right_image,kimi_face_03.png,appear_up
->>>>>>> f0588495ee660e0889d1324f52d0626aa5740806
 image,main_msg_bubble_image,right_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,いいわよ。鬱赤丸くんといっしょにやっておくわね。,キミ
@@ -308,16 +283,10 @@ hide,image,shiroji_left_image
 hide,image,item_center_image
 hide,grid,item_check_right_grid
 clear,text,main_msg
-<<<<<<< HEAD
-text,item_check_center_text,<font=red#40##true>➢じょうずにことわる鬱①あやまる鬱②理由言う鬱③断る鬱④かわりの言葉</font>
-grid,item_check_center_grid
-image,children_face_left_image,aosuke_face_01.png,appear_up,no_sync
-=======
 hide,grid,main_msg_grid
 text,item_check_center_text,<font=red#38##true>➢じょうずにことわる鬱①あやまる鬱②理由言う鬱③断る鬱④かわりの言葉</font>
 grid,item_check_center_grid
 image,children_face_left_image,aosuke_face_01.png,appear_up
->>>>>>> f0588495ee660e0889d1324f52d0626aa5740806
 image,main_msg_bubble_image,left_big_bubble_blue.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,キミちゃん。ごめんね。鬱明日も、家の用事があるから、そうじがかりをかわってもらってもいい？,青助
@@ -326,11 +295,7 @@ click,msg,next_only
 hide,grid,main_msg_grid
 clear,text,main_msg
 image,children_face_left_image,aosuke_face_01.png,,,gray
-<<<<<<< HEAD
-image,children_face_right_image,kimi_face_03.png,appear_up,no_sync
-=======
 image,children_face_right_image,kimi_face_03.png,appear_up
->>>>>>> f0588495ee660e0889d1324f52d0626aa5740806
 image,main_msg_bubble_image,right_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,<font=##yellow#true#black>①ごめんなさい、青助くん。鬱②わたしも明日はやくかえらないといけないの。</font>,キミ
@@ -366,12 +331,8 @@ hide,image,shiroji_left_image
 hide,image,children_face_left_image
 hide,image,main_msg_bubble_image
 hide,grid,main_msg_grid
-<<<<<<< HEAD
-image,children_face_left_image,aosuke_face_03.png,appear_up,no_sync
-=======
 clear,text,main_msg
 image,children_face_left_image,aosuke_face_03.png,appear_up
->>>>>>> f0588495ee660e0889d1324f52d0626aa5740806
 image,main_msg_bubble_image,left_big_bubble_blue.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,じょうずにたのめたよ。次は、赤丸くんに聞いてみよう！,青助
@@ -379,16 +340,11 @@ text,result_kind_of_feeling_text,ホッとした
 text,result_size_of_feeling_text,(  65  )
 click,page
 #
-<<<<<<< HEAD
-image,bg_image,background_11.png
-image,children_face_left_image,kimi_face_02.png,appear_up,no_sync
-=======
 hide,image,main_msg_bubble_image
 hide,grid,main_msg_grid
 clear,text,main_msg
 image,bg_image,background_11.png
 image,children_face_left_image,kimi_face_02.png,appear_up
->>>>>>> f0588495ee660e0889d1324f52d0626aa5740806
 image,main_msg_bubble_image,left_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,しっかりことわれたわ。鬱青助くんにもきらわれてないみたい。,キミ
@@ -519,10 +475,7 @@ goto,current_scene
 #
 sub,size_of_feeling
 reset
-<<<<<<< HEAD
-=======
 gauge
->>>>>>> f0588495ee660e0889d1324f52d0626aa5740806
 image,bg_image,blue_gradation.png
 grid,select_heart_grid
 grid,view_size_of_feeling_grid

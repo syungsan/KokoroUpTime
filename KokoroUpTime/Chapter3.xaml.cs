@@ -1627,6 +1627,7 @@ namespace KokoroUpTime
                         return;
                     }
                     this.runs[textObject.Name][inlineCount].Text = stns[0];
+                    this.inlineCount++;
                 }
             }
         }
