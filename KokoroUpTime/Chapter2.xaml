@@ -1450,7 +1450,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="50,145,220,45" FontSize="42" FontFamily="/Fonts/azuki.ttf#azuki_font" d:IsHidden="True"/>
+                    <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="50,145,220,45" FontSize="42" FontFamily="/Fonts/azuki.ttf#あずきフォント" d:IsHidden="True"/>
                     <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32" d:IsHidden="True">
                         <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png" d:IsHidden="True"/>
                     </Button>
@@ -1589,10 +1589,10 @@
                         </TransformGroup>
                     </Grid.RenderTransform>
                     <Image x:Name="MusicInfoBackImage" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/frame_46-1.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="BGMTextBlock" HorizontalAlignment="Left" Margin="173,24,0,0" VerticalAlignment="Top" Height="70" Width="109" Foreground="White" FontSize="36" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" Text="BGM♪" TextAlignment="Center" d:IsHidden="True"/>
-                    <TextBlock x:Name="WriterArrangerTextBlock" HorizontalAlignment="Left" Margin="122,135,0,0" VerticalAlignment="Top" Height="70" Width="212" Foreground="White" FontSize="36" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" Text="作曲・編曲" TextAlignment="Center" d:IsHidden="True"/>
-                    <TextBlock x:Name="MusicTitleTextBlock" HorizontalAlignment="Center" Margin="0,70,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" Foreground="White" Width="432" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" d:IsHidden="True"/>
-                    <TextBlock x:Name="ComposerNameTextBlock" HorizontalAlignment="Left" Margin="105,178,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Foreground="White" Width="227" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" d:IsHidden="True"/>
+                    <TextBlock x:Name="BGMTextBlock" HorizontalAlignment="Left" Margin="173,24,0,0" VerticalAlignment="Top" Height="70" Width="109" Foreground="White" FontSize="36" FontFamily="/Fonts/TanukiMagic.ttf#たぬき油性マジック" Text="BGM♪" TextAlignment="Center" d:IsHidden="True"/>
+                    <TextBlock x:Name="WriterArrangerTextBlock" HorizontalAlignment="Left" Margin="122,135,0,0" VerticalAlignment="Top" Height="70" Width="212" Foreground="White" FontSize="36" FontFamily="/Fonts/TanukiMagic.ttf#たぬき油性マジック" Text="作曲・編曲" TextAlignment="Center" d:IsHidden="True"/>
+                    <TextBlock x:Name="MusicTitleTextBlock" HorizontalAlignment="Center" Margin="0,70,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" Foreground="White" Width="432" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#たぬき油性マジック" d:IsHidden="True"/>
+                    <TextBlock x:Name="ComposerNameTextBlock" HorizontalAlignment="Left" Margin="105,178,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Foreground="White" Width="227" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#たぬき油性マジック" d:IsHidden="True"/>
                 </Grid>
                 <Button x:Name="ExitButton" Content="おわる" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" FontSize="24" Click="Button_Click" Margin="1833,10,0,0" d:IsHidden="True"/>
                 <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
