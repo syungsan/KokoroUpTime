@@ -181,12 +181,15 @@ namespace KokoroUpTime
                 ["children_stand_right_image"] = this.ChildrenStandRightImage,
                 ["kimi_stand_small_left_image"] = this.KimiStandSmallLeftImage,
                 ["manga_flip_arrow_go_image"] = this.MangaFlipArrowGoImage,
+                ["session_title_image"]=this.SessionTitleImage,
 
          
                
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
                 ["item_left_last_image"] =this.ItemLeftLastImage,
                 ["activity_title_image"] =this.ActivityTitleImage,
+                ["situation_character_image"] =this.SituationCharacterImage,
+                
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -207,6 +210,17 @@ namespace KokoroUpTime
                 ["item_book_title_text"]=this.ItemBookTitleTextBlock,
                 ["result_kind_of_feeling_text"]=this.ResultKindOfFeelingText,
                 ["result_size_of_feeling_text"] = this.ResultSizeOfFeelingText,
+                ["situation_title_text"]=this.SituationTitleText,
+                ["situation_text"]=this.SituationText,
+
+                ["first_choices_button_of_three_text"] =this.FirstChoicesButtonOfThreeText,
+                ["second_choices_button_of_three_text"] = this.SecondChoicesButtonOfThreeText,
+                ["third_choices_button_of_three_text"] = this.ThirdChoicesButtonOfThreeText,
+
+                ["first_choices_button_of_four_text"] = this.FirstChoicesButtonOfFourText,
+                ["second_choices_button_of_four_text"] = this.SecondChoicesButtonOfFourText,
+                ["third_choices_button_of_four_text"] = this.ThirdChoicesButtonOfFourText,
+                ["fourth_choices_button_of_four_text"] = this.FirstChoicesButtonOfFourText,
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -220,6 +234,7 @@ namespace KokoroUpTime
                 ["select_feeling_complete_button"] = this.SelectFeelingCompleteButton,
                 ["select_feeling_next_button"] = this.SelectFeelingNextButton,
                 ["select_feeling_back_button"] = this.SelectFeelingBackButton,
+                ["complete_role_play_button"] =this.CompleteRolePlayButton,
             };
 
             this.gridObjects = new Dictionary<string, Grid>
@@ -259,6 +274,10 @@ namespace KokoroUpTime
                 ["children_text_grid"] =this.ChildrenTextGrid,
                 ["seesaw_grid"]=this.SeesawGrid,
                 ["result_feeling_grid"] =this.ResultFeelingGrid,
+                ["situation_plate_grid"] = this.SituationPlateGrid,
+                ["groupe_activity_grid"] =this.GroupeActivityGrid,
+                ["three_chices_grid"] = this.ThreeChoicesGrid,
+                ["four_chices_grid"] = this.FourChoicesGrid,
             };
 
            
@@ -286,6 +305,7 @@ namespace KokoroUpTime
             this.ChallengeTimeResultGrid.Visibility = Visibility.Hidden;
             this.ChallengeTimeResultMessageGrid.Visibility = Visibility.Hidden;
             this.ActivityTitleGrid.Visibility = Visibility.Hidden;
+            this.GroupeActivityGrid.Visibility = Visibility.Hidden;
 
             this.SelectHeartGrid.Visibility = Visibility.Hidden;
             this.SeesawGrid.Visibility = Visibility.Hidden;
@@ -299,8 +319,9 @@ namespace KokoroUpTime
             this.ItemBookTitleTextBlock.Visibility = Visibility.Hidden;
 
             this.ExitBackGrid.Visibility = Visibility.Hidden;
-
             this.BranchSelectGrid.Visibility = Visibility.Hidden;
+            this.ThreeChoicesGrid.Visibility = Visibility.Hidden;
+            this.FourChoicesGrid.Visibility = Visibility.Hidden;
 
             this.BackgroundImage.Visibility = Visibility.Hidden;
             this.MangaTitleImage.Visibility = Visibility.Hidden;
@@ -314,6 +335,7 @@ namespace KokoroUpTime
             this.SessionSentenceTextBlock.Visibility = Visibility.Hidden;
             this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
             this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
+            this.CenterDownMessageButton.Visibility = Visibility.Hidden;
 
             this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
             this.ShirojiRightImage.Visibility = Visibility.Hidden;
@@ -344,7 +366,7 @@ namespace KokoroUpTime
 
             this.ItemCheckCentertGrid.Visibility = Visibility.Hidden;
             this.ItemCheckRightGrid.Visibility = Visibility.Hidden;
-            this.SituationsPlateGrid.Visibility = Visibility.Hidden;
+            this.SituationPlateGrid.Visibility = Visibility.Hidden;
 
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
@@ -355,10 +377,12 @@ namespace KokoroUpTime
 
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
             this.CanvasGrid.Visibility = Visibility.Hidden;
-            
+            this.CompleteRolePlayBorder.Visibility = Visibility.Hidden;
+
             //this.GroupeActivityInputText.Visibility = Visibility.Hidden;
 
             this.SelectFeelingBackButton.Visibility = Visibility.Hidden;
+            this.CompleteRolePlayButton.Visibility = Visibility.Hidden;
 
             this.InputTextGrid.Visibility = Visibility.Hidden;
 
@@ -1106,7 +1130,7 @@ namespace KokoroUpTime
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataItem SET HasGotItem01 = 1 WHERE Id = 1;");
+                        connection.Execute($@"UPDATE DataItem SET HasGotItem04 = 1 WHERE Id = 1;");
                     }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1141,11 +1165,11 @@ namespace KokoroUpTime
 
                 case "item_book":
 
-                    Image[] itemMainImages = { this.Item02MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item08MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
+                    Image[] itemMainImages = { this.Item01MainImage, this.Item02MainImage, this.Item03MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item08MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
 
-                    Image[] itemNoneImages = { this.Item01NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
+                    Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item03NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
 
-                    var hasGotItems = new bool[] { this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
+                    var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
 
                     for (int i = 0; i < hasGotItems.Length; i++)
                     {
@@ -1205,7 +1229,7 @@ namespace KokoroUpTime
                         buttonMargin = new Thickness(0, 100, 0, 0);
                     }
 
-                    this.SelectSituationItemsControl.ItemsSource = selectedSituation;
+                    
                     
 
 
@@ -1815,7 +1839,7 @@ namespace KokoroUpTime
                 
               
             }
-            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton"||button.Name== "BranchButton2"|| button.Name == "MangaPrevBackButton"))
+            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton"||button.Name== "BranchButton2"|| button.Name == "MangaPrevBackButton"|| button.Name == "CompleteRolePlayButton"))
             {
                 this.isClickable = false;
 

@@ -25,6 +25,9 @@
     <None Remove="Fonts\TanukiMagic.ttf" />
     <None Remove="good_words_grid.png" />
     <None Remove="Images\159474.png" />
+    <None Remove="Images\activity_result_msg_04_01.png" />
+    <None Remove="Images\activity_result_msg_04_02.png" />
+    <None Remove="Images\activity_result_msg_04_03.png" />
     <None Remove="Images\after.png" />
     <None Remove="Images\akamaru_face_01.png" />
     <None Remove="Images\akamaru_face_02.png" />
@@ -85,6 +88,7 @@
     <None Remove="Images\compare_akamaru_value_frame.png" />
     <None Remove="Images\compare_aosuke_value_frame.png" />
     <None Remove="Images\complete_button.png" />
+    <None Remove="Images\complete_role_play.png" />
     <None Remove="Images\difficulty_of_action_frame.png" />
     <None Remove="Images\ending_bubble.png" />
     <None Remove="Images\face_small_bubble.png" />
@@ -242,6 +246,7 @@
     <None Remove="Images\small_bubble_left_down_blue.png" />
     <None Remove="Images\small_bubble_left_down_red.png" />
     <None Remove="Images\small_bubble_left_down_yellow.png" />
+    <None Remove="Images\small_bubble_left_red.png" />
     <None Remove="Images\small_bubble_left_up.png" />
     <None Remove="Images\small_bubble_right_down.png" />
     <None Remove="Images\small_icon.png" />
@@ -288,6 +293,9 @@
     <Resource Include="Fonts\JiyunoTsubasa.ttf" />
     <Resource Include="Fonts\TanukiMagic.ttf" />
     <Resource Include="Images\159474.png" />
+    <Resource Include="Images\activity_result_msg_04_01.png" />
+    <Resource Include="Images\activity_result_msg_04_02.png" />
+    <Resource Include="Images\activity_result_msg_04_03.png" />
     <Resource Include="Images\after.png" />
     <Resource Include="Images\akamaru_face_01.png" />
     <Resource Include="Images\akamaru_face_02.png" />
@@ -346,6 +354,7 @@
     <Resource Include="Images\compare_akamaru_value_frame.png" />
     <Resource Include="Images\compare_aosuke_value_frame.png" />
     <Resource Include="Images\complete_button.png" />
+    <Resource Include="Images\complete_role_play.png" />
     <Resource Include="Images\difficulty_of_action_frame.png" />
     <Resource Include="Images\good.png" />
     <Resource Include="Images\group_activity_text.png" />
@@ -450,6 +459,7 @@
     <Resource Include="Images\small_bubble_left_down_blue.png" />
     <Resource Include="Images\small_bubble_left_down_red.png" />
     <Resource Include="Images\small_bubble_left_down_yellow.png" />
+    <Resource Include="Images\small_bubble_left_red.png" />
     <Resource Include="Images\small_bubble_left_up.png" />
     <Resource Include="Images\small_bubble_right_down.png" />
     <Resource Include="Images\challenge_time.png" />
