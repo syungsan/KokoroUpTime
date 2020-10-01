@@ -107,6 +107,7 @@ image,item_center_image,item02_solo.png,appear_rotation
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,青助くんのように元気がないときはにはわしの発明品を使ってみてくれ！,白じい
+get_item
 next
 jump,アイテム紹介
 
