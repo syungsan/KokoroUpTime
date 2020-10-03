@@ -166,8 +166,8 @@ namespace KokoroUpTime
                 ["shiroji_small_right_down_image"] = this.ShirojiSmallRightDownImage,
                 ["shiroji_right_center_image"] = this.ShirojiRightCenterImage,
                 ["shiroji_small_right_center_image"] = this.ShirojiSmallRightCenterImage,
-                ["shiroji_very_small_right_image"] = this.ShirojiVerySmallRightImage,
-                ["children_stand_left_image"] = this.ChildrenStandLeftImage,
+                ["shiroji_right_down_small_image"] = this.ShirojiRightDownSmallImage,
+                ["children_stand_left_image"] = this.ChildrenStandLeftImage, //
                 ["children_stand_right_image"] = this.ChildrenStandRightImage,
                 ["children_stand_left_onomatopoeia_image"] = this.ChildrenStandLeftOnomatopoeiaImage,
                 ["kimi_stand_small_left_image"] = this.KimiStandSmallLeftImage,
@@ -183,6 +183,10 @@ namespace KokoroUpTime
                 ["hot_word_title_image"] = this.HotWordTitleImage, //
                 ["glad_comment_up_image"] = this.GladCommentUpImage, //
                 ["glad_comment_down_image"] = this.GladCommentDownImage, //
+                ["item_left_center_small_image"] = this.ItemLeftCenterSmallImage, //
+                ["let's_use_hot_word_title_image"] = this.Let_sUseHotWordTitleImage, //
+                ["hot_word_arrow_image"] = this.HotWordArrowImage, //
+                ["item_left_down_image"] = this.ItemLeftDownImage, //
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -223,6 +227,10 @@ namespace KokoroUpTime
                 ["children_feeling_comment_big_text"] = this.ChildrenFeelingCommentBigTextBlock, //
                 ["kind_of_feeling_title_text"] = this.KindOfFeelingTitleTextBlock, //
                 ["size_of_feeling_title_text"] = this.SizeOfFeelingTitleTextBlock, //
+                ["let's_use_hot_word_msg"] = this.Let_sUseHotWordMessageTextBlock, //
+
+                ["selected_hot_word_title_text"] = this.SelectHotWordTitleTextBlock, //
+                ["selected_hot_word_value_text"] = this.SelectHotWordValueTextBlock, //
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -242,6 +250,7 @@ namespace KokoroUpTime
                 ["kind_of_feeling_input_button"] = this.KindOfFeelingInputButton, //
                 ["size_of_feeling_input_button"] = this.SizeOfFeelingInputButton, //
                 ["manga_prev_back_button"] = this.MangaPrevBackButton, //
+                ["complete_next_button"] = this.CompleteNextButton, //
             };
 
             this.gridObjects = new Dictionary<string, Grid>
@@ -263,7 +272,6 @@ namespace KokoroUpTime
                 ["children_feeling_comment_grid"] = this.ChildrenFeelingCommentGrid, //
                 ["children_feeling_comment_big_grid"] = this.ChildrenFeelingCommentBigGrid, //
 
-                ["challenge_msg_grid"] = this.ChallengeMessageGrid,
                 ["kimi_plate_inner_up_grid"] = this.KimiPlateInnerUpGrid,
                 ["kimi_plate_inner_down_grid"] = this.KimiPlateInnerDownGrid,
                 ["view_kind_of_feeling_grid"] = this.ViewKindOfFeelingGrid,
@@ -281,6 +289,8 @@ namespace KokoroUpTime
 
                 ["hot_word_button_grid"] = this.HotWordButtonGrid, //
                 ["hot_word_comment_grid"] = this.HotWordCommentGrid, //
+                ["situations_grid"] = this.SituationsGrid, //
+                ["let's_use_hot_word_msg_grid"] = this.Let_sUseHotWordMessageGrid, //
             };
 
             this.borderObjects = new Dictionary<string, Border>
@@ -289,6 +299,8 @@ namespace KokoroUpTime
                 ["children_feeling_title_border"] = this.ChildrenFeelingTitleBorder, //
                 ["let_s_try_title_border"] = this.Let_sTryTitleBorder, //
                 ["hot_word_border"] = this.HotWordBorder, //
+                ["selected_hot_word_border"] = this.SelectHotWordBorder, //
+                ["complimentary_situation_border"] = this.ComplimentarySituationBorder, //
             };
         }
 
@@ -310,7 +322,7 @@ namespace KokoroUpTime
             this.ViewKindOfFeelingGrid.Visibility = Visibility.Hidden;
             this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
             this.ChildrenFaceSmallLeftMessageGrid.Visibility = Visibility.Hidden;
-            this.ChallengeMessageGrid.Visibility = Visibility.Hidden;
+            this.Let_sUseHotWordMessageGrid.Visibility = Visibility.Hidden; //
             this.KimiPlateInnerUpGrid.Visibility = Visibility.Hidden;
             this.KimiPlateInnerDownGrid.Visibility = Visibility.Hidden;
             this.SelectHeartGrid.Visibility = Visibility.Hidden;
@@ -365,7 +377,7 @@ namespace KokoroUpTime
             this.ShirojiSmallRightDownImage.Visibility = Visibility.Hidden;
             this.ShirojiRightCenterImage.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightCenterImage.Visibility = Visibility.Hidden;
-            this.ShirojiVerySmallRightImage.Visibility = Visibility.Hidden;
+            this.ShirojiRightDownSmallImage.Visibility = Visibility.Hidden; //
             this.ShirojiEndingImage.Visibility = Visibility.Hidden;
             this.ChildrenStandLeftImage.Visibility = Visibility.Hidden;
             this.ChildrenStandRightImage.Visibility = Visibility.Hidden;
@@ -422,6 +434,19 @@ namespace KokoroUpTime
 
             this.MangaPrevBackButton.Visibility = Visibility.Hidden; //
 
+            this.CompleteNextButton.Visibility = Visibility.Hidden; //
+            this.ItemLeftCenterSmallImage.Visibility = Visibility.Hidden; //
+            this.Let_sUseHotWordMessageGrid.Visibility = Visibility.Hidden; //
+            this.SituationsGrid.Visibility = Visibility.Hidden; //
+            this.Let_sUseHotWordTitleImage.Visibility = Visibility.Hidden; //
+
+            this.SelectHotWordBorder.Visibility = Visibility.Hidden; //
+            this.SelectHotWordTitleTextBlock.Visibility = Visibility.Hidden; //
+            this.SelectHotWordValueTextBlock.Visibility = Visibility.Hidden; //
+            this.ComplimentarySituationBorder.Visibility = Visibility.Hidden; //
+            this.HotWordArrowImage.Visibility = Visibility.Hidden; //
+            this.ItemLeftDownImage.Visibility = Visibility.Hidden; //
+
             this.SessionSubTitleTextBlock.Text = ""; //
             this.SessionSentenceTextBlock.Text = ""; //
             this.ViewKindOfFeelingPersonTextBlock.Text = "";
@@ -444,6 +469,9 @@ namespace KokoroUpTime
             this.ChildrenFeelingCommentTextBlock.Text = ""; //
             this.ChildrenFeelingCommentBigTextBlock.Text = ""; //
             this.ChildrenFeelingTitleTextBlock.Text = ""; //
+
+            this.SelectHotWordTitleTextBlock.Text = ""; //
+            this.SelectHotWordValueTextBlock.Text = ""; //
 
             this.ItemBookTitleTextBlock.Visibility = Visibility.Hidden;
             this.ItemBookMainGrid.Visibility = Visibility.Hidden;
@@ -733,7 +761,7 @@ namespace KokoroUpTime
 
                     var _textObject = this.textBlockObjects[this.position];
 
-                    _textObject.Visibility = Visibility.Hidden;
+                    // _textObject.Visibility = Visibility.Hidden;
 
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
@@ -745,10 +773,17 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        var _messages = this.SequenceCheck(_textObject.Text);
+                        if (_textObject.Text != "")
+                        {
+                            var _messages = this.SequenceCheck(_textObject.Text);
 
-                        // xamlに直接書いたStaticな文章を表示する場合
-                        this.ShowSentence(textObject: _textObject, sentences: _messages, mode: "msg");
+                            // xamlに直接書いた単一のStaticな文章を表示する場合
+                            this.ShowSentence(textObject: _textObject, sentences: _messages, mode: "msg");
+                        }
+                        else
+                        {
+                            // TextBlockがInlineContentを含む場合は対処のしようがない
+                        }
                     }
                     break;
 
@@ -775,8 +810,12 @@ namespace KokoroUpTime
                         {
                             var _texts = this.SequenceCheck(__textObject.Text);
 
-                            // xamlに直接書いたStaticな文章を表示する場合
+                            // xamlに直接書いた単一のStaticな文章を表示する場合
                             this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
+                        }
+                        else
+                        {
+                            // TextBlockがInlineContentを含む場合は何もせずそのまま表示
                         }
                     }
 
@@ -1884,6 +1923,17 @@ namespace KokoroUpTime
                 {
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
+                }
+
+                if (button.Name == "CompleteNextButton")
+                {
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "SelectHotWordButton")
+                {
+                    this.GoTo("select_hot_word_title");
                 }
             }
 
