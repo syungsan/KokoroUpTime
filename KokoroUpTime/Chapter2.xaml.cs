@@ -12,6 +12,7 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -24,6 +25,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using WMPLib;
 using WpfAnimatedGif;
+using BitmapImageReader;
 
 
 
@@ -888,8 +890,25 @@ namespace KokoroUpTime
                 case "flip":
 
                     this.MangaFlipButton.Visibility = Visibility.Visible;
-                    this.isClickable = true;
 
+                    Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
+
+                    if (sb != null)
+                    {
+                        // 二重終了防止策
+                        bool isDuplicate = false;
+
+                        sb.Completed += (s, e) =>
+                        {
+                            if (!isDuplicate)
+                            {
+                                this.isClickable = true;
+
+                                isDuplicate = true;
+                            }
+                        };
+                        sb.Begin(this);
+                    }
                     break;
 
                 // 各種コントロールを個別に隠す処理
@@ -1068,6 +1087,20 @@ namespace KokoroUpTime
                     this.ScenarioPlay();
 
                     break;
+
+                case "get_item":
+
+                    this.dataItem.HasGotItem02 = true;
+
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataItem SET HasGotItem02 = 1 WHERE Id = 1;");
+                    }
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
                 case "jump":
                     string _jumptag = this.scenarios[this.scenarioCount][1];
                     this.JumpScenario(jumptag: _jumptag);
@@ -1145,13 +1178,24 @@ namespace KokoroUpTime
 
                     var gifImage = new BitmapImage();
 
+                    Task<BitmapImage> task = Task.Run(() =>{
+                        return BitmapImageReader.BitmapImageReader.GifImageReader_Task(gifFile);
+                     }
+                    );
+                    
+
+                    gifImage = task.Result;
+
+                    /*var gifImage = new BitmapImage();
+
                     gifImage.BeginInit();
 
                     gifImage.UriSource = new Uri($"Images/{gifFile}", UriKind.Relative);
 
                     gifImage.EndInit();
+                    */
 
-                   ImageBehavior.SetAnimatedSource(gifObject,gifImage);
+                    ImageBehavior.SetAnimatedSource(gifObject, gifImage);
 
                     gifObject.Visibility = Visibility.Visible;
 
@@ -1166,7 +1210,7 @@ namespace KokoroUpTime
 
                     Image[] itemNoneImages = { this.Item01NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
 
-                    var hasGotItems = new bool[] { this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
+                    var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
 
                     for (int i = 0; i < hasGotItems.Length; i++)
                     {
