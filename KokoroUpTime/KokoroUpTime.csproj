@@ -21,6 +21,7 @@
     <None Remove="bad_words_grid.png" />
     <None Remove="big_heart.png" />
     <None Remove="Fonts\azuki.ttf" />
+    <None Remove="Fonts\HGRPP1.TTC" />
     <None Remove="Fonts\JiyunoTsubasa.ttf" />
     <None Remove="Fonts\TanukiMagic.ttf" />
     <None Remove="good_words_grid.png" />
@@ -41,6 +42,7 @@
     <None Remove="Images\aosuke_face_05.png" />
     <None Remove="Images\aosuke_face_06.png" />
     <None Remove="Images\aosuke_face_07.png" />
+    <None Remove="Images\aosuke_feeling_plate.png" />
     <None Remove="Images\aosuke_glad.png" />
     <None Remove="Images\aosuke_stand_01.png" />
     <None Remove="Images\background_00.png" />
@@ -153,6 +155,7 @@
     <None Remove="Images\item_check_back_bubble.png" />
     <None Remove="Images\item_detail_info.png" />
     <None Remove="Images\item_review.png" />
+    <None Remove="Images\kimi_feeling_plate.png" />
     <None Remove="Images\kimi_glad.png" />
     <None Remove="Images\kimi_stand_01.png" />
     <None Remove="Images\kind_of_feeling_button_frame.png" />
@@ -208,7 +211,9 @@
     <None Remove="Images\manga4-1.png" />
     <None Remove="Images\manga4-2.png" />
     <None Remove="Images\manga4-3.png" />
+    <None Remove="Images\manga4_title.png" />
     <None Remove="Images\mangaya.png" />
+    <None Remove="Images\mangaya_gauge.png" />
     <None Remove="Images\mangaya_orange.png" />
     <None Remove="Images\menu_bubble.png" />
     <None Remove="Images\message_box.png" />
@@ -216,6 +221,7 @@
     <None Remove="Images\moya2.png" />
     <None Remove="Images\next_go_button.png" />
     <None Remove="Images\normal.png" />
+    <None Remove="Images\ok_button.png" />
     <None Remove="Images\oranger_gradation.png" />
     <None Remove="Images\orange_button_plate.png" />
     <None Remove="Images\orange_gradation.png" />
@@ -243,11 +249,13 @@
     <None Remove="Images\small_bubble_center_down.png" />
     <None Remove="Images\small_bubble_center_right_down.png" />
     <None Remove="Images\small_bubble_left.png" />
+    <None Remove="Images\small_bubble_left_blue.png" />
     <None Remove="Images\small_bubble_left_down_blue.png" />
     <None Remove="Images\small_bubble_left_down_red.png" />
     <None Remove="Images\small_bubble_left_down_yellow.png" />
     <None Remove="Images\small_bubble_left_red.png" />
     <None Remove="Images\small_bubble_left_up.png" />
+    <None Remove="Images\small_bubble_left_yellow.png" />
     <None Remove="Images\small_bubble_right_down.png" />
     <None Remove="Images\small_icon.png" />
     <None Remove="Images\SS.png" />
@@ -290,6 +298,7 @@
 
   <ItemGroup>
     <Resource Include="Fonts\azuki.ttf" />
+    <Resource Include="Fonts\HGRPP1.TTC" />
     <Resource Include="Fonts\JiyunoTsubasa.ttf" />
     <Resource Include="Fonts\TanukiMagic.ttf" />
     <Resource Include="Images\159474.png" />
@@ -309,6 +318,7 @@
     <Resource Include="Images\aosuke_face_05.png" />
     <Resource Include="Images\aosuke_face_06.png" />
     <Resource Include="Images\aosuke_face_07.png" />
+    <Resource Include="Images\aosuke_feeling_plate.png" />
     <Resource Include="Images\aosuke_glad.png" />
     <Resource Include="Images\aosuke_stand_01.png" />
     <Resource Include="Images\background_00.png" />
@@ -414,6 +424,7 @@
     <Resource Include="Images\item11_solo.gif" />
     <Resource Include="Images\item_check_back_bubble.png" />
     <Resource Include="Images\item_review.png" />
+    <Resource Include="Images\kimi_feeling_plate.png" />
     <Resource Include="Images\kimi_glad.png" />
     <Resource Include="Images\kimi_plate_inner.png" />
     <Resource Include="Images\kimi_plate_outer.png" />
@@ -435,10 +446,13 @@
     <Resource Include="Images\manga4-1.png" />
     <Resource Include="Images\manga4-2.png" />
     <Resource Include="Images\manga4-3.png" />
+    <Resource Include="Images\manga4_title.png" />
+    <Resource Include="Images\mangaya_gauge.png" />
     <Resource Include="Images\mangaya_orange.png" />
     <Resource Include="Images\message_box.png" />
     <Resource Include="Images\next_go_button.png" />
     <Resource Include="Images\normal.png" />
+    <Resource Include="Images\ok_button.png" />
     <Resource Include="Images\orange_button_plate.png" />
     <Resource Include="Images\orange_gradation.png" />
     <Resource Include="Images\orange_title_plate.png" />
@@ -456,11 +470,13 @@
     <Resource Include="Images\size_of_feeling_button_frame.png" />
     <Resource Include="Images\small_bubble_center_down.png" />
     <Resource Include="Images\small_bubble_center_right_down.png" />
+    <Resource Include="Images\small_bubble_left_blue.png" />
     <Resource Include="Images\small_bubble_left_down_blue.png" />
     <Resource Include="Images\small_bubble_left_down_red.png" />
     <Resource Include="Images\small_bubble_left_down_yellow.png" />
     <Resource Include="Images\small_bubble_left_red.png" />
     <Resource Include="Images\small_bubble_left_up.png" />
+    <Resource Include="Images\small_bubble_left_yellow.png" />
     <Resource Include="Images\small_bubble_right_down.png" />
     <Resource Include="Images\challenge_time.png" />
     <Resource Include="Images\ending_bubble.png" />

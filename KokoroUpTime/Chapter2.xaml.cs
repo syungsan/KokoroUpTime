@@ -12,6 +12,7 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -24,6 +25,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using WMPLib;
 using WpfAnimatedGif;
+using BitmapImageReader;
 
 
 
@@ -888,8 +890,25 @@ namespace KokoroUpTime
                 case "flip":
 
                     this.MangaFlipButton.Visibility = Visibility.Visible;
-                    this.isClickable = true;
 
+                    Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
+
+                    if (sb != null)
+                    {
+                        // 二重終了防止策
+                        bool isDuplicate = false;
+
+                        sb.Completed += (s, e) =>
+                        {
+                            if (!isDuplicate)
+                            {
+                                this.isClickable = true;
+
+                                isDuplicate = true;
+                            }
+                        };
+                        sb.Begin(this);
+                    }
                     break;
 
                 // 各種コントロールを個別に隠す処理
@@ -1159,13 +1178,24 @@ namespace KokoroUpTime
 
                     var gifImage = new BitmapImage();
 
+                    Task<BitmapImage> task = Task.Run(() =>{
+                        return BitmapImageReader.BitmapImageReader.GifImageReader_Task(gifFile);
+                     }
+                    );
+                    
+
+                    gifImage = task.Result;
+
+                    /*var gifImage = new BitmapImage();
+
                     gifImage.BeginInit();
 
                     gifImage.UriSource = new Uri($"Images/{gifFile}", UriKind.Relative);
 
                     gifImage.EndInit();
+                    */
 
-                   ImageBehavior.SetAnimatedSource(gifObject,gifImage);
+                    ImageBehavior.SetAnimatedSource(gifObject, gifImage);
 
                     gifObject.Visibility = Visibility.Visible;
 
