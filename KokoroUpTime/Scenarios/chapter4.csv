@@ -1,5 +1,4 @@
 start
-goto,Debug
 scene,前回のおさらい
 reset
 image,bg_image,background_02.png
@@ -36,9 +35,9 @@ click,page,next_only
 sub,manga
 scene,漫画購読
 reset
-bgm,set,manga.mp3,loop,50
+bgm,set,atsumare!_tomodachi!.mp3,loop,50
 bgm,play
-text,music_title_text,まんが
+text,music_title_text,集まれ！友達！
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
 image,manga_title_image
@@ -47,7 +46,8 @@ flip
 image,manga_image,manga4-2.png,flip
 flip
 image,manga_image,manga4-3.png,flip
-wait
+hide,button,manga_flip_button
+click,page
 #
 scene,チャレンジタイム 開始
 reset
@@ -79,7 +79,7 @@ grid,children_text_grid
 text,children_text_bubble_text,え…、帰っちゃうの…？鬱手伝ってほしいな…
 grid,activity_title_grid
 image,activity_title_image,purple_title_plate.png
-text,activity_title_text,<font=yellow#80####black>日直の仕事をまかされた場面での鬱きもちを考えてみよう！</font>
+text,activity_title_text,<font=yellow#80##true>日直の仕事をまかされた場面での鬱きもちを考えてみよう！</font>
 button,select_feeling_back_button
 wait
 #
@@ -94,7 +94,7 @@ image,bg_image,blue_gradation.png
 grid,challenge_time_grid
 grid,activity_title_grid
 image,activity_title_image,purple_title_plate.png
-text,activity_title_text,<font=yellow#80####black>赤丸くんにたのまれた場面での鬱きもちを考えてみよう！</font>
+text,activity_title_text,<font=yellow#80##true>赤丸くんにたのまれた場面での鬱きもちを考えてみよう！</font>
 text,children_text_bubble_text,ほんとはいやだな…鬱あってるか、自信ないし…
 button,select_feeling_back_button
 wait
@@ -150,7 +150,7 @@ hide,grid,main_msg_grid
 image,bg_image,blue_gradation.png
 grid,activity_title_grid
 image,activity_title_image,blue_title_plate.png
-text,activity_title_text,「自分」も「相手」も両方が鬱<font=red#80##true##>「いいきもち」</font>になる方法は？
+text,activity_title_text,<font=#80##true>「自分」も「相手」も両方が</font>鬱<font=red#80##true##>「いいきもち」</font><font=yellow#80##true>になる方法は？</font>
 grid,seesaw_grid,seesaw
 click,page
 #
@@ -201,7 +201,7 @@ reset
 image,bg_image,background_11.png
 grid,activity_title_grid
 image,activity_title_image,yellow_title_plate.png
-text,activity_title_text,<font=#80##true>きちんと伝えてみよう①</font>
+text,activity_title_text,<font=purple#80##true>きちんと伝えてみよう①</font>
 image,shiroji_left_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
@@ -261,7 +261,7 @@ reset
 image,bg_image,background_11.png
 grid,activity_title_grid
 image,activity_title_image,yellow_title_plate.png
-text,activity_title_text,<font=#80##true>きちんと伝えてみよう②</font>
+text,activity_title_text,<font=purple#80##true>きちんと伝えてみよう②</font>
 image,shiroji_left_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
@@ -359,7 +359,6 @@ text,result_size_of_feeling_text,(  40  )
 grid,result_feeling_grid,appear_fade_in
 click,page
 #
-sub,Debug
 scene,グループアクティビティ
 reset
 image,bg_image,background_06.png

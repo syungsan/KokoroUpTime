@@ -178,7 +178,7 @@ namespace KokoroUpTime
                 ["shiroji_small_right_down_image"] = this.ShirojiSmallRightDownImage,
                 ["children_stand_left_image"] = this.ChildrenStandLeftImage,
                 ["children_stand_right_image"] = this.ChildrenStandRightImage,
-                ["manga_flip_arrow_go_image"] = this.MangaFlipArrowGoImage,
+                ["manga_flip_arrow_image_gauge"] = this.MangaFlipArrowImageGauge,
                 ["session_title_image"] = this.SessionTitleImage,
 
 
@@ -362,7 +362,7 @@ namespace KokoroUpTime
             this.BackPageButton.Visibility = Visibility.Hidden;
             this.MangaFlipButton.Visibility = Visibility.Hidden;
             this.MangaPrevBackButton.Visibility = Visibility.Hidden;
-            this.MangaFlipArrowGoImage.Visibility = Visibility.Hidden;
+            this.MangaFlipArrowImageGauge.Visibility = Visibility.Hidden;
 
             this.ItemCheckCentertGrid.Visibility = Visibility.Hidden;
             this.ItemCheckRightGrid.Visibility = Visibility.Hidden;
@@ -856,7 +856,27 @@ namespace KokoroUpTime
                 case "flip":
 
                     this.MangaFlipButton.Visibility = Visibility.Visible;
-                    this.isClickable = true;
+
+                    Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
+
+                    this.isClickable = false;
+
+                    if (sb != null)
+                    {
+                        // 二重終了防止策
+                        bool isDuplicate = false;
+
+                        sb.Completed += (s, e) =>
+                        {
+                            if (!isDuplicate)
+                            {
+                                this.isClickable = true;
+
+                                isDuplicate = true;
+                            }
+                        };
+                        sb.Begin(this);
+                    }
 
                     break;
 
@@ -1427,6 +1447,8 @@ namespace KokoroUpTime
                             case "red": { foreground = new SolidColorBrush(Colors.Red); break; };
                             case "green": { foreground = new SolidColorBrush(Colors.Green); break; };
                             case "blue": { foreground = new SolidColorBrush(Colors.Blue); break; };
+                            case "yellow": { foreground = new SolidColorBrush(Colors.Yellow); break; };
+                            case "purple": { foreground = new SolidColorBrush(Colors.Purple); break; };
 
                             default: { break; }
                         }

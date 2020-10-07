@@ -1433,7 +1433,7 @@
                 </Button>
                 <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}">
                     <Grid x:Name="MangaFlipButtonLayerGrid">
-                        <Image x:Name="MangaFlipArrowImageGauge" Source="/Images/mangaya_gauge.png">
+                        <Image x:Name="MangaFlipArrowImageGauge" Source="/Images/mangaya_orange.png">
                             <Image.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>

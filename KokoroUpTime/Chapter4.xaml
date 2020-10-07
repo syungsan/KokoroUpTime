@@ -598,6 +598,16 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Key="wipe_flip_manga_button_image">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MangaFlipArrowImageGauge" Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].(GradientStop.Offset)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MangaFlipArrowImageGauge" Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Offset)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Page.Resources>
 
     <Viewbox>
@@ -1244,10 +1254,25 @@
                 <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Margin="33,892,0,0" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
                     <Image x:Name="BackPageBeforeImage" Source="/Images/before.png"/>
                 </Button>
-                <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True">
-                    <Grid d:IsHidden="True">
-                        <Image x:Name="MangaFlipArrowStayImage" Source="/Images/mangaya.png" d:IsHidden="True"/>
-                        <Image x:Name="MangaFlipArrowGoImage" Source="/Images/mangaya_orange.png" d:IsHidden="True"/>
+                <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <Grid x:Name="MangaFlipButtonLayerGrid">
+                        <Image x:Name="MangaFlipArrowImageGauge" Source="/Images/mangaya_orange.png">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <LinearGradientBrush EndPoint="0,0" StartPoint="1,0">
+                                    <GradientStop x:Name="BlackStop" Color="Black" Offset="1"/>
+                                    <GradientStop x:Name="TransparentStop" Color="Transparent" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image x:Name="MangaFlipArrowImage" Source="/Images/mangaya.png"/>
                     </Grid>
                 </Button>
                 <Button x:Name="SelectFeelingCompleteButton" Margin="1598,892,49,0" VerticalAlignment="Top" Height="144" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">
