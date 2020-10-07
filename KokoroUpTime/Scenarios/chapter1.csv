@@ -26,6 +26,11 @@ click,msg
 msg,main_msg,『こころあっぷタイム』は、こまっているときに、鬱<font=####black>元気になったり、リラックスできる方法を 学ぶ時間なのだ！</font> ,白じい
 click,msg
 #
+reset
+image,bg_image,background_01.png
+image,shiroji_right_image,shiroji_02.png
+image,main_msg_bubble_image,right_big_bubble.png
+grid,main_msg_grid
 msg,main_msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
 click,msg
 #
@@ -43,10 +48,10 @@ wait
 rule,rule_board_check3_msg,３．はずかしがらない,2
 wait
 image,shiroji_small_right_down_image,,appear_up
-button,thin_msg_button,appear_wide,no_sync
-wait
+grid,thin_msg_grid,appear_wide
 rule,thin_msg,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,all,白じい
-click_tap
+wait,,disable_click
+hide,grid,thin_msg_grid
 click,page
 #
 scene,子供たちの紹介

@@ -28,6 +28,7 @@ using Expansion;
 using FileIOUtils;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using System.IO;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Logical;
 
 namespace KokoroUpTime
 {
@@ -131,6 +132,8 @@ namespace KokoroUpTime
             this.SelectGoodFeelingListBox.ItemsSource = GOOD_FEELINGS;
             this.SelectBadFeelingListBox.ItemsSource = BAD_FEELINGS;
 
+            this.checkBoxs = new CheckBox[] { this.RuleBoardCheck1Box, this.RuleBoardCheck2Box, this.RuleBoardCheck3Box };
+
             this.InitControls();
         }
         
@@ -210,7 +213,6 @@ namespace KokoroUpTime
                 ["rule_board_button"] = this.RuleBoardButton,
                 ["next_msg_button"] = this.NextMessageButton,
                 ["back_msg_button"] = this.BackMessageButton,
-                ["thin_msg_button"] = this.ThinMessageButton,
                 ["next_page_button"] = this.NextPageButton,
                 ["back_page_button"] = this.BackPageButton,
                 ["manga_flip_button"] = this.MangaFlipButton,
@@ -220,6 +222,7 @@ namespace KokoroUpTime
 
             this.gridObjects = new Dictionary<string, Grid>
             {
+                ["thin_msg_grid"] = this.ThinMessageGrid,
                 ["session_grid"] = this.SessionGrid,
                 ["challenge_grid"] = this.ChallengeGrid,
                 ["select_feeling_grid"] = this.SelectFeelingGrid,
@@ -287,6 +290,7 @@ namespace KokoroUpTime
             this.RuleBoardCheck1Box.Visibility = Visibility.Hidden;
             this.RuleBoardCheck2Box.Visibility = Visibility.Hidden;
             this.RuleBoardCheck3Box.Visibility = Visibility.Hidden;
+            this.ThinMessageGrid.Visibility = Visibility.Hidden;
             this.MangaTitleImage.Visibility = Visibility.Hidden;
             this.MangaImage.Visibility = Visibility.Hidden;
             this.ItemCenterImage.Visibility = Visibility.Hidden;
@@ -336,7 +340,6 @@ namespace KokoroUpTime
             this.IntroKimiFaceImage.Visibility = Visibility.Hidden;
             this.TeacherImage.Visibility = Visibility.Hidden;
             this.MainMessageTextBlock.Visibility = Visibility.Hidden;
-            this.ThinMessageButton.Visibility = Visibility.Hidden;
             this.ThinMessageTextBlock.Visibility = Visibility.Hidden;
             this.NextMessageButton.Visibility = Visibility.Hidden;
             this.BackMessageButton.Visibility = Visibility.Hidden;
@@ -588,9 +591,6 @@ namespace KokoroUpTime
                 // 流れる文字をTextBlockで表現するための処理
                 case "msg":
 
-                    this.NextMessageButton.Visibility = Visibility.Hidden;
-                    this.BackMessageButton.Visibility = Visibility.Hidden;
-
                     this.position = this.scenarios[this.scenarioCount][1];
 
                     var _textObject = this.textBlockObjects[this.position];
@@ -633,12 +633,7 @@ namespace KokoroUpTime
                     }
                     else
                     {
-
-                        if (__textObject.Text == "")
-                        {
-
-                        }
-                        else
+                        if (__textObject.Text != "")
                         {
                             var _texts = this.SequenceCheck(__textObject.Text);
 
@@ -690,20 +685,21 @@ namespace KokoroUpTime
                             this.ScenarioPlay();
                         };
                     }
-                    this.isClickable = true;
 
-                    break;
-
-                // 各場面に対する待ち（ページめくりボタン）
-                case "next":
-
-                    if (this.scene == "教室のルール" || (this.SelectHeartGrid.Visibility == Visibility.Visible || this.SelectFeelingGrid.Visibility == Visibility.Visible))
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
-                        this.NextPageButton.Visibility = Visibility.Visible;
-                        this.BackPageButton.Visibility = Visibility.Visible;
+                        if (this.scenarios[this.scenarioCount][2] == "disable_click")
+                        {
+                            this.isClickable = false;
+                        }
                     }
-                    
+                    else
+                    {
+                        this.isClickable = true;
+                    }
                     break;
+
+
                 // ボタン押下待ち
                 case "click":
 
@@ -799,8 +795,25 @@ namespace KokoroUpTime
                 case "flip":
 
                     this.MangaFlipButton.Visibility = Visibility.Visible;
-                    this.isClickable = true;
 
+                    Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
+
+                    if (sb != null)
+                    {
+                        // 二重終了防止策
+                        bool isDuplicate = false;
+
+                        sb.Completed += (s, e) =>
+                        {
+                            if (!isDuplicate)
+                            {
+                                this.isClickable = true;
+
+                                isDuplicate = true;
+                            }
+                        };
+                        sb.Begin(this);
+                    }
                     break;
 
                 // 各種コントロールを個別に隠す処理
@@ -825,7 +838,6 @@ namespace KokoroUpTime
 
                             this.position = this.scenarios[this.scenarioCount][2];
                             this.textBlockObjects[this.position].Visibility = Visibility.Hidden;
-                            // this.textBlockObjects[this.position].Text = "";
 
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
@@ -894,8 +906,6 @@ namespace KokoroUpTime
 
                     var rule = this.scenarios[this.scenarioCount][2];
 
-                    this.checkBoxs = new CheckBox[] { this.RuleBoardCheck1Box, this.RuleBoardCheck2Box, this.RuleBoardCheck3Box };
-
                     var checkNum = this.scenarios[this.scenarioCount][3];
 
                     object _obj;
@@ -917,11 +927,6 @@ namespace KokoroUpTime
 
                     this.ShowSentence(textObject: ruleObject, sentences: rules, mode: "msg", obj: _obj);
 
-                    break;
-
-                case "wait_tap":
-
-                    this.isClickable = false;
                     break;
 
                 // BGM
@@ -1198,7 +1203,6 @@ namespace KokoroUpTime
                     {
                         this.runs.Clear();
                     }
- 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
@@ -1334,7 +1338,7 @@ namespace KokoroUpTime
         }
 
         // 純正のメッセージ表示関数
-        void PureShowMessage(TextBlock textObject, string message, object obj=null)
+        private void PureShowMessage(TextBlock textObject, string message, object obj=null)
         {
             this.word_num = 0;
 
@@ -1664,73 +1668,251 @@ namespace KokoroUpTime
             }
         }
 
+        // 黒板ルールのためだけに追加
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+
+            if (this.checkBoxs.Contains(checkBox))
+            {
+                this.tapCount += 1;
+
+                if (this.tapCount >= this.checkBoxs.Length)
+                {
+                    foreach (CheckBox _checkBox in this.checkBoxs)
+                    {
+                        _checkBox.IsEnabled = false;
+                    }
+                    this.RuleBoardButton.IsEnabled = false;
+                    
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+            }
+        }
+
+        // 黒板ルールのためだけに追加
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+
+            if (this.checkBoxs.Contains(checkBox))
+            {
+                this.tapCount -= 1;
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            // Debug.Print(this.isClickable.ToString());
+
             // 各種ボタンが押されたときの処理
 
             Button button = sender as Button;
 
-            if (button.Name == "BackMessageButton" || button.Name == "BackPageButton")
+            if (this.isClickable)
             {
-                this.BackMessageButton.Visibility = Visibility.Hidden;
-                this.NextMessageButton.Visibility = Visibility.Hidden;
+                this.isClickable = false;
 
-                this.BackPageButton.Visibility = Visibility.Hidden;
-                this.NextPageButton.Visibility = Visibility.Hidden;
- 
-                var index = this.scenarioCount;
-                int returnCount = 0;
-
-                while (index > 0)
+                if (button.Name == "BackMessageButton")
                 {
-                    if (this.scenarios[index][0] == "#")
-                    {
-                        if (returnCount >= RETURN_COUNT)
-                        {
-                            this.scenarioCount = index;
-                            this.ScenarioPlay();
+                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                    this.NextMessageButton.Visibility = Visibility.Hidden;
 
-                            break;
-                        }
-                        returnCount += 1;
-                    }
-                    index -= 1;
+                    BackScenario();
                 }
-            }
 
-            /*
-            if (button.Name == "BackMessageButton")
-            {
-                this.BackMessageButton.Visibility = Visibility.Hidden;
-                this.NextMessageButton.Visibility = Visibility.Hidden;
-
-                for (int i = this.scenarioCount; i < this.scenarios.Count; i--)
+                if (button.Name == "BackPageButton")
                 {
-                    bool flag = false;
-                    if (this.scenarios[i][0] == "msg")
+                    this.BackPageButton.Visibility = Visibility.Hidden;
+                    this.NextPageButton.Visibility = Visibility.Hidden;
+
+                    if (this.scene == "教室のルール")
                     {
-                        string talkingCharacter = this.scenarios[i][3];
-
-                        for (int j = i - 1; j < this.scenarios.Count; j--)
+                        foreach (CheckBox _checkBox in this.checkBoxs)
                         {
-                            if (this.scenarios[j][0] == "msg" && talkingCharacter == this.scenarios[j][3])
-                            {
-                                this.scenarioCount = j;
-                                this.ScenarioPlay();
+                            _checkBox.IsChecked = false;
+                        }
+                        this.tapCount = 0;
+                    }
 
-                                flag = true;
+                    BackScenario();
+                }
+
+                void BackScenario()
+                {
+                    var index = this.scenarioCount;
+                    int returnCount = 0;
+
+                    while (index > 0)
+                    {
+                        if (this.scenarios[index][0] == "#")
+                        {
+                            if (returnCount >= RETURN_COUNT)
+                            {
+                                this.scenarioCount = index;
+                                this.ScenarioPlay();
 
                                 break;
                             }
+                            returnCount += 1;
                         }
-                    }
-                    if (flag == true)
-                    {
-                        break;
+                        index -= 1;
                     }
                 }
+
+                if (button.Name == "NextPageButton")
+                {
+                    this.BackPageButton.Visibility = Visibility.Hidden;
+                    this.NextPageButton.Visibility = Visibility.Hidden;
+
+                    if (this.scene == "教室のルール")
+                    {
+                        foreach (CheckBox _checkBox in this.checkBoxs)
+                        {
+                            _checkBox.IsChecked = false;
+                        }
+                        this.tapCount = 0;
+                    }
+
+                    if (this.SelectGoodFeelingListBox.SelectedItem != null)
+                    {
+                        if (this.scene == "キミちゃんのきもちの種類")
+                        {
+                            this.dataChapter1.KimisKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
+                        }
+                        if (this.scene == "赤丸くんのきもちの種類")
+                        {
+                            this.dataChapter1.AkamarusKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
+                        }
+
+                        if (this.scene == "青助くんのきもちの種類")
+                        {
+                            this.dataChapter1.AosukesKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
+                        }
+                    }
+
+                    if (this.SelectBadFeelingListBox.SelectedItem != null)
+                    {
+                        if (this.scene == "キミちゃんのきもちの種類")
+                        {
+                            this.dataChapter1.KimisKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
+                        }
+                        if (this.scene == "赤丸くんのきもちの種類")
+                        {
+                            this.dataChapter1.AkamarusKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
+                        }
+
+                        if (this.scene == "青助くんのきもちの種類")
+                        {
+                            this.dataChapter1.AosukesKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
+                        }
+                    }
+
+                    if (this.scene == "キミちゃんのきもちの種類" && !this.hasKimisKindOfFeelingsRecorded)
+                    {
+                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        {
+                            connection.Execute($@"UPDATE DataChapter1 SET KimisKindOfFeelings = '{this.dataChapter1.KimisKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                        }
+                        this.hasKimisKindOfFeelingsRecorded = true;
+                    }
+
+                    if (this.scene == "赤丸くんのきもちの種類" && !this.hasAkamarusKindOfFeelingsRecorded)
+                    {
+                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        {
+                            connection.Execute($@"UPDATE DataChapter1 SET AkamarusKindOfFeelings = '{this.dataChapter1.AkamarusKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                        }
+                        this.hasAkamarusKindOfFeelingsRecorded = true;
+                    }
+
+                    if (this.scene == "青助くんのきもちの種類" && !this.hasAosukesKindOfFeelingsRecorded)
+                    {
+                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        {
+                            connection.Execute($@"UPDATE DataChapter1 SET AosukesKindOfFeelings = '{this.dataChapter1.AosukesKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                        }
+                        this.hasAosukesKindOfFeelingsRecorded = true;
+                    }
+
+                    if (this.scene == "赤丸くんのきもちの大きさ" && !this.hasAkamarusSizeOfFeelingRecorded)
+                    {
+                        this.dataChapter1.AkamarusSizeOfFeeling = this.feelingSize;
+
+                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        {
+                            connection.Execute($@"UPDATE DataChapter1 SET AkamarusSizeOfFeeling = '{this.dataChapter1.AkamarusSizeOfFeeling}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                        }
+                        this.hasAkamarusSizeOfFeelingRecorded = true;
+                    }
+
+                    if (this.scene == "青助くんのきもちの大きさ" && !this.hasAosukesSizeOfFeelingRecorded)
+                    {
+                        this.dataChapter1.AosukesSizeOfFeeling = this.feelingSize;
+
+                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        {
+                            connection.Execute($@"UPDATE DataChapter1 SET AosukesSizeOfFeeling = '{this.dataChapter1.AosukesSizeOfFeeling}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                        }
+                        this.hasAosukesSizeOfFeelingRecorded = true;
+                    }
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "NextMessageButton")
+                {
+                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                    this.NextMessageButton.Visibility = Visibility.Hidden;
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "MangaFlipButton")
+                {
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "RuleBoardButton")
+                {
+                    // なぜか黒板が余計に反応してしまうための処理
+                    if (this.tapCount >= this.checkBoxs.Length)
+                    {
+                        this.RuleBoardButton.IsEnabled = true;
+                        this.isClickable = true;
+                        
+                        return;
+                    }
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "ThinMessageButton")
+                {
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "SelectFeelingCompleteButton") {
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "SelectFeelingNextButton") {
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
             }
-            */
+
+            
+
+            
 
             // FullScreen時のデバッグ用に作っておく
             if (button.Name == "ExitButton")
@@ -1756,98 +1938,6 @@ namespace KokoroUpTime
 
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
-            }
-
-            if (button.Name == "NextPageButton")
-            {
-                if(this.SelectGoodFeelingListBox.SelectedItem != null)
-                {
-                    if (this.scene == "キミちゃんのきもちの種類")
-                    {
-                        this.dataChapter1.KimisKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
-                    }
-                    if (this.scene == "赤丸くんのきもちの種類")
-                    {
-                        this.dataChapter1.AkamarusKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
-                    }
-
-                    if (this.scene == "青助くんのきもちの種類")
-                    {
-                        this.dataChapter1.AosukesKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
-                    }
-                }
-                if(this.SelectBadFeelingListBox.SelectedItem != null)
-                {
-                    if (this.scene == "キミちゃんのきもちの種類")
-                    {
-                        this.dataChapter1.KimisKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
-                    }
-                    if (this.scene == "赤丸くんのきもちの種類")
-                    {
-                        this.dataChapter1.AkamarusKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
-                    }
-
-                    if (this.scene == "青助くんのきもちの種類")
-                    {
-                        this.dataChapter1.AosukesKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
-                    }
-                }
-                
-
-                if (this.scene == "キミちゃんのきもちの種類" && !hasKimisKindOfFeelingsRecorded)
-                {
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter1 SET KimisKindOfFeelings = '{this.dataChapter1.KimisKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
-                    }
-                    this.hasKimisKindOfFeelingsRecorded = true;
-                    // 手書き用　this.AllGestureCanvas_Clear();
-                }
-
-                if (this.scene == "赤丸くんのきもちの種類" && !hasAkamarusKindOfFeelingsRecorded)
-                {
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter1 SET AkamarusKindOfFeelings = '{this.dataChapter1.AkamarusKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
-                    }
-                    this.hasAkamarusKindOfFeelingsRecorded = true;
-                    // 手書き用this.AllGestureCanvas_Clear();
-                }
-
-                if (this.scene == "青助くんのきもちの種類" && !hasAosukesKindOfFeelingsRecorded)
-                {
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter1 SET AosukesKindOfFeelings = '{this.dataChapter1.AosukesKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
-                    }
-                    this.hasAosukesKindOfFeelingsRecorded = true;
-                    // 手書き用　this.AllGestureCanvas_Clear();
-                }
-
-                if (this.scene == "赤丸くんのきもちの大きさ" && !hasAkamarusSizeOfFeelingRecorded)
-                {
-                    this.dataChapter1.AkamarusSizeOfFeeling = this.feelingSize;
-
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter1 SET AkamarusSizeOfFeeling = '{this.dataChapter1.AkamarusSizeOfFeeling}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
-                    }
-                    this.hasAkamarusSizeOfFeelingRecorded = true;
-                }
-
-                if (this.scene == "青助くんのきもちの大きさ" && !hasAosukesSizeOfFeelingRecorded)
-                {
-                    this.dataChapter1.AosukesSizeOfFeeling = this.feelingSize;
-
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter1 SET AosukesSizeOfFeeling = '{this.dataChapter1.AosukesSizeOfFeeling}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
-                    }
-                    this.hasAosukesSizeOfFeelingRecorded = true;
-                }
-
-                button.Visibility = Visibility.Hidden;
-                
             }
 
             if (button.Name == "SelectFeelingCompleteButton")
@@ -1892,26 +1982,6 @@ namespace KokoroUpTime
                 */
             }
 
-            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "RuleBoardButton" || button.Name == "ThinMessageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "SelectFeelingNextButton"))
-            {
-                this.isClickable = false;
-
-                if (button.Name == "NextMessageButton")
-                {
-                    this.BackMessageButton.Visibility = Visibility.Hidden;
-                    this.NextMessageButton.Visibility = Visibility.Hidden;
-                }
-
-                if (button.Name == "NextPageButton")
-                {
-                    this.BackPageButton.Visibility = Visibility.Hidden;
-                    this.NextPageButton.Visibility = Visibility.Hidden;
-                }
-
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
-
             if (button.Name == "ReturnToTitleButton")
             {
                 TitlePage titlePage = new TitlePage();
@@ -1923,37 +1993,6 @@ namespace KokoroUpTime
                 this.NavigationService.Navigate(titlePage);
 
                 this.StopBGM();
-            }
-        }
-
-        // 黒板ルールのためだけに追加
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = sender as CheckBox;
-
-            if (this.checkBoxs.Contains(checkBox))
-            {
-                this.tapCount += 1;
-
-                if (this.tapCount >= this.checkBoxs.Length)
-                {
-                    foreach (CheckBox _checkBox in this.checkBoxs)
-                    {
-                        _checkBox.IsEnabled = false;
-                    }
-                    this.isClickable = true;
-                }
-            }
-        }
-
-        // 黒板ルールのためだけに追加
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = sender as CheckBox;
-
-            if (this.checkBoxs.Contains(checkBox))
-            {
-                this.tapCount -= 1;
             }
         }
 
@@ -2000,6 +2039,9 @@ namespace KokoroUpTime
             sePlayer = new SoundPlayer(soundFile);
             sePlayer.Play();
         }
+
+
+
         /*
         // ジェスチャー認識キャンバスのロード
         void GestureCanvas_Loaded(object sender, RoutedEventArgs e)
@@ -2210,7 +2252,7 @@ namespace KokoroUpTime
         // ハートゲージの角度をデータバインド
         private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter1), new UIPropertyMetadata(0.0));
 
-        public double Angle
+        private double Angle
         {
             get { return (double)GetValue(AngleProperty); }
             set { SetValue(AngleProperty, value); }

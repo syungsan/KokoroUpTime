@@ -102,7 +102,7 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
-        public int hotWordCount = 0;
+        private int hotWordCount = 0;
 
         public Chapter3()
         {
@@ -729,9 +729,6 @@ namespace KokoroUpTime
                 // 流れる文字をTextBlockで表現するための処理
                 case "msg":
 
-                    this.NextMessageButton.Visibility = Visibility.Hidden;
-                    this.BackMessageButton.Visibility = Visibility.Hidden;
-
                     this.position = this.scenarios[this.scenarioCount][1];
 
                     var _textObject = this.textBlockObjects[this.position];
@@ -774,10 +771,13 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        var _texts = this.SequenceCheck(__textObject.Text);
+                        if (__textObject.Text != "")
+                        {
+                            var _texts = this.SequenceCheck(__textObject.Text);
 
-                        // xamlに直接書いたStaticな文章を表示する場合
-                        this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
+                            // xamlに直接書いたStaticな文章を表示する場合
+                            this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
+                        }
                     }
 
                     string textAnimeIsSync = "sync";
@@ -823,8 +823,18 @@ namespace KokoroUpTime
                             this.ScenarioPlay();
                         };
                     }
-                    this.isClickable = true;
 
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    {
+                        if (this.scenarios[this.scenarioCount][2] == "disable_click")
+                        {
+                            this.isClickable = false;
+                        }
+                    }
+                    else
+                    {
+                        this.isClickable = true;
+                    }
                     break;
 
                 // ボタン押下待ち
@@ -1617,6 +1627,7 @@ namespace KokoroUpTime
                         return;
                     }
                     this.runs[textObject.Name][inlineCount].Text = stns[0];
+                    this.inlineCount++;
                 }
             }
         }
@@ -1694,6 +1705,8 @@ namespace KokoroUpTime
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Debug.Print(this.isClickable.ToString());
+
             // 各種ボタンが押されたときの処理
 
             Button button = sender as Button;
@@ -1702,14 +1715,24 @@ namespace KokoroUpTime
             {
                 this.isClickable = false;
 
-                if (button.Name == "BackMessageButton" || button.Name == "BackPageButton")
+                if (button.Name == "BackMessageButton")
                 {
                     this.BackMessageButton.Visibility = Visibility.Hidden;
                     this.NextMessageButton.Visibility = Visibility.Hidden;
 
+                    BackScenario();
+                }
+
+                if (button.Name == "BackPageButton")
+                {
                     this.BackPageButton.Visibility = Visibility.Hidden;
                     this.NextPageButton.Visibility = Visibility.Hidden;
 
+                    BackScenario();
+                }
+
+                void BackScenario()
+                {
                     var index = this.scenarioCount;
                     int returnCount = 0;
 
@@ -1778,7 +1801,6 @@ namespace KokoroUpTime
 
                 if (button.Name == "FeelingNextGoButton")
                 {
-                    Debug.Print("てきとう");
                     switch (this.scene)
                     {
                         case "青助くんのきもちを考える1":
@@ -1829,6 +1851,9 @@ namespace KokoroUpTime
 
                 if (button.Name == "NextPageButton")
                 {
+                    this.BackPageButton.Visibility = Visibility.Hidden;
+                    this.NextPageButton.Visibility = Visibility.Hidden;
+
                     if (this.scene == "ホットワードボタン" && this.hotWordCount >= 4)
                     {
                         Button[] hotWordButtons = { HotWord1Button, HotWord2Button, HotWord3Button, HotWord4Button };
@@ -1848,6 +1873,9 @@ namespace KokoroUpTime
 
                 if (button.Name == "NextMessageButton")
                 {
+                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                    this.NextMessageButton.Visibility = Visibility.Hidden;
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
@@ -2188,9 +2216,9 @@ namespace KokoroUpTime
         }
 
         // ハートゲージの角度をデータバインド
-        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter1), new UIPropertyMetadata(0.0));
+        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter3), new UIPropertyMetadata(0.0));
 
-        public double Angle
+        private double Angle
         {
             get { return (double)GetValue(AngleProperty); }
             set { SetValue(AngleProperty, value); }

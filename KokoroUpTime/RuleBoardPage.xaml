@@ -55,6 +55,44 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Style x:Key="{x:Type CheckBox}" TargetType="{x:Type CheckBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Border x:Name="Border" Width="13" Height="13" CornerRadius="0" Background="Transparent" BorderThickness="1" BorderBrush="#FFFFE64A">
+                                    <Path x:Name="CheckMark" SnapsToDevicePixels="False" Stroke="#FFFFE64A" StrokeThickness="2" Data="M 3 5 L 5 8 L 13 0" Stretch="Fill"/>
+                                </Border>
+                            </BulletDecorator.Bullet>
+                            <ContentPresenter Margin="4,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" RecognizesAccessKey="True"/>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="false">
+                                <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}">
+                                <Setter TargetName="CheckMark" Property="Data" Value="M 0 7 L 7 0" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#808080" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#E0E0E0" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#FFFFEB6B" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#FFFFE64A" />
+                                <Setter Property="Foreground" Value="#888888"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <Viewbox>
@@ -66,23 +104,23 @@
             <Grid x:Name="AnyFrameGrid">
                 <Grid x:Name="RuleBoardGrid" Margin="217,48,217,120">
                     <Image x:Name="RuleBoardImage" Source="/Images/blackboard.png" Stretch="Fill" />
-                    <TextBlock x:Name="RuleBoardTitleTextBlock" Text="教室のルール" Foreground="White" FontSize="72" Margin="494,90,436,681"/>
-                    <TextBlock x:Name="RuleBoardCheck1TextBlock" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="64" Margin="494,249,239,504"/>
-                    <TextBlock x:Name="RuleBoardCheck2TextBlock" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="64" Margin="494,434,239,327"/>
-                    <TextBlock x:Name="RuleBoardCheck3TextBlock" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="64" Margin="494,617,239,145"/>
-                    <CheckBox x:Name="RuleBoardCheck1Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Margin="281,241,1172,644">
+                    <TextBlock x:Name="RuleBoardTitleTextBlock" Text="教室のルール" Foreground="White" FontSize="72" Margin="526,90,404,681"/>
+                    <TextBlock x:Name="RuleBoardCheck1TextBlock" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="60" Margin="458,261,275,492" FontFamily="/Fonts/HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体"/>
+                    <TextBlock x:Name="RuleBoardCheck2TextBlock" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="60" Margin="458,446,275,315" FontFamily="/Fonts/HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体"/>
+                    <TextBlock x:Name="RuleBoardCheck3TextBlock" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="60" Margin="458,629,275,133" FontFamily="/Fonts/HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体"/>
+                    <CheckBox x:Name="RuleBoardCheck1Box" Margin="289,233,1180,663">
                         <CheckBox.RenderTransform>
-                            <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
+                            <ScaleTransform ScaleX="9.0" ScaleY="9.0"/>
                         </CheckBox.RenderTransform>
                     </CheckBox>
-                    <CheckBox x:Name="RuleBoardCheck2Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Margin="281,423,1172,462">
+                    <CheckBox x:Name="RuleBoardCheck2Box" Margin="289,418,1180,478">
                         <CheckBox.RenderTransform>
-                            <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
+                            <ScaleTransform ScaleX="9.0" ScaleY="9.0"/>
                         </CheckBox.RenderTransform>
                     </CheckBox>
-                    <CheckBox x:Name="RuleBoardCheck3Box" FontSize="72" Foreground="#FFFFE64A" BorderBrush="#FFFFE64A" Background="#FF003300" Margin="281,596,1172,288">
+                    <CheckBox x:Name="RuleBoardCheck3Box" Margin="289,601,1180,296">
                         <CheckBox.RenderTransform>
-                            <ScaleTransform ScaleX="8.0" ScaleY="8.0"/>
+                            <ScaleTransform ScaleX="9.0" ScaleY="9.0"/>
                         </CheckBox.RenderTransform>
                     </CheckBox>
                 </Grid>
@@ -119,7 +157,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="38" RenderTransformOrigin="0.5,0.5" Margin="22,54,18,24" FontFamily="/Fonts/azuki.ttf#azuki_font">
+                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="38" RenderTransformOrigin="0.5,0.5" Margin="22,54,18,24" FontFamily="/Fonts/azuki.ttf#あずきフォント">
                         <TextBlock.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
