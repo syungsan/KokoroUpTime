@@ -150,7 +150,7 @@ hide,grid,main_msg_grid
 image,bg_image,blue_gradation.png
 grid,activity_title_grid
 image,activity_title_image,blue_title_plate.png
-text,activity_title_text,<font=#80##true>「自分」も「相手」も両方が</font>鬱<font=red#80##true##>「いいきもち」</font><font=yellow#80##true>になる方法は？</font>
+text,activity_title_text,<font=#80##true>「自分」も「相手」も両方が</font>鬱<font=red#80##true##>「いいきもち」</font><font=#80##true>になる方法は？</font>
 grid,seesaw_grid,seesaw
 click,page
 #

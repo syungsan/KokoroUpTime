@@ -1775,65 +1775,85 @@ namespace KokoroUpTime
                         this.tapCount = 0;
                     }
 
-                    if (this.SelectGoodFeelingListBox.SelectedItem != null)
+                    if(this.SelectGoodFeelingGrid.IsVisible || this.SelectBadFeelingGrid.IsVisible)
                     {
-                        if (this.scene == "キミちゃんのきもちの種類")
+                        if (this.SelectGoodFeelingListBox.SelectedItem != null)
                         {
-                            this.dataChapter1.KimisKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
-                        }
-                        if (this.scene == "赤丸くんのきもちの種類")
-                        {
-                            this.dataChapter1.AkamarusKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
+                            if (this.scene == "キミちゃんのきもちの種類")
+                            {
+                                this.dataChapter1.KimisKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
+                            }
+                            if (this.scene == "赤丸くんのきもちの種類")
+                            {
+                                this.dataChapter1.AkamarusKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
+                            }
+
+                            if (this.scene == "青助くんのきもちの種類")
+                            {
+                                this.dataChapter1.AosukesKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
+                            }
                         }
 
-                        if (this.scene == "青助くんのきもちの種類")
+                        if (this.SelectBadFeelingListBox.SelectedItem != null)
                         {
-                            this.dataChapter1.AosukesKindOfFeelings = $@"{this.SelectGoodFeelingListBox.SelectedItem},良い";
-                        }
-                    }
+                            if (this.scene == "キミちゃんのきもちの種類")
+                            {
+                                this.dataChapter1.KimisKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
+                            }
+                            if (this.scene == "赤丸くんのきもちの種類")
+                            {
+                                this.dataChapter1.AkamarusKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
+                            }
 
-                    if (this.SelectBadFeelingListBox.SelectedItem != null)
-                    {
-                        if (this.scene == "キミちゃんのきもちの種類")
-                        {
-                            this.dataChapter1.KimisKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
-                        }
-                        if (this.scene == "赤丸くんのきもちの種類")
-                        {
-                            this.dataChapter1.AkamarusKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
+                            if (this.scene == "青助くんのきもちの種類")
+                            {
+                                this.dataChapter1.AosukesKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
+                            }
                         }
 
-                        if (this.scene == "青助くんのきもちの種類")
+                        if (this.scene == "キミちゃんのきもちの種類" && !this.hasKimisKindOfFeelingsRecorded)
                         {
-                            this.dataChapter1.AosukesKindOfFeelings = $@"{this.SelectBadFeelingListBox.SelectedItem},悪い";
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"UPDATE DataChapter1 SET KimisKindOfFeelings = '{this.dataChapter1.KimisKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                            }
+                            this.hasKimisKindOfFeelingsRecorded = true;
                         }
-                    }
 
-                    if (this.scene == "キミちゃんのきもちの種類" && !this.hasKimisKindOfFeelingsRecorded)
-                    {
-                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        if (this.scene == "赤丸くんのきもちの種類" && !this.hasAkamarusKindOfFeelingsRecorded)
                         {
-                            connection.Execute($@"UPDATE DataChapter1 SET KimisKindOfFeelings = '{this.dataChapter1.KimisKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"UPDATE DataChapter1 SET AkamarusKindOfFeelings = '{this.dataChapter1.AkamarusKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                            }
+                            this.hasAkamarusKindOfFeelingsRecorded = true;
                         }
-                        this.hasKimisKindOfFeelingsRecorded = true;
-                    }
 
-                    if (this.scene == "赤丸くんのきもちの種類" && !this.hasAkamarusKindOfFeelingsRecorded)
-                    {
-                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        if (this.scene == "青助くんのきもちの種類" && !this.hasAosukesKindOfFeelingsRecorded)
                         {
-                            connection.Execute($@"UPDATE DataChapter1 SET AkamarusKindOfFeelings = '{this.dataChapter1.AkamarusKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"UPDATE DataChapter1 SET AosukesKindOfFeelings = '{this.dataChapter1.AosukesKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                            }
+                            this.hasAosukesKindOfFeelingsRecorded = true;
                         }
-                        this.hasAkamarusKindOfFeelingsRecorded = true;
-                    }
 
-                    if (this.scene == "青助くんのきもちの種類" && !this.hasAosukesKindOfFeelingsRecorded)
-                    {
-                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        if(this.SelectGoodFeelingListBox.SelectedItem == null && this.SelectBadFeelingListBox.SelectedItem == null)
                         {
-                            connection.Execute($@"UPDATE DataChapter1 SET AosukesKindOfFeelings = '{this.dataChapter1.AosukesKindOfFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                            MessageBox.Show("きもちをえらんでね");
+
+                            this.BackPageButton.Visibility = Visibility.Visible;
+                            this.NextPageButton.Visibility = Visibility.Visible;
+
+                            this.isClickable = true;
+
                         }
-                        this.hasAosukesKindOfFeelingsRecorded = true;
+                        else
+                        {
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+                        }
+                        return;
                     }
 
                     if (this.scene == "赤丸くんのきもちの大きさ" && !this.hasAkamarusSizeOfFeelingRecorded)
@@ -1860,6 +1880,7 @@ namespace KokoroUpTime
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
+
                 }
 
                 if (button.Name == "NextMessageButton")
@@ -1899,14 +1920,33 @@ namespace KokoroUpTime
 
                 if (button.Name == "SelectFeelingCompleteButton") {
 
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    if (this.ChallengeGoodFeelingListBox.SelectedItem == null && this.ChallengeBadFeelingListBox.SelectedItem == null)
+                    {
+                        MessageBox.Show("きもちをえらんでね");
+
+                        this.isClickable = true;
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
+                    
                 }
 
                 if (button.Name == "SelectFeelingNextButton") {
 
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    if (this.ChallengeGoodFeelingListBox.SelectedItem == null && this.ChallengeBadFeelingListBox.SelectedItem == null)
+                    {
+                        MessageBox.Show("きもちをえらんでね");
+
+                        this.isClickable = true;
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
                 }
             }
 
@@ -1962,18 +2002,21 @@ namespace KokoroUpTime
             {
                 if (this.scene == "チャレンジきもち選択")
                 {
-                    foreach (string selectFeeling in this.ChallengeGoodFeelingListBox.SelectedItems)
+                    if (this.ChallengeGoodFeelingListBox.SelectedItems != null)
                     {
-                        this.myKindOfGoodFeelings.Add(selectFeeling);
+                        foreach (string selectFeeling in this.ChallengeGoodFeelingListBox.SelectedItems)
+                        {
+                            this.myKindOfGoodFeelings.Add(selectFeeling);
 
+                        }
                     }
-                }
-                if (this.scene == "チャレンジきもち選択")
-                {
-                    foreach (string selectFeeling in this.ChallengeBadFeelingListBox.SelectedItems)
+                    if (this.ChallengeBadFeelingListBox.SelectedItems != null)
                     {
-                        this.myKindOfBadFeelings.Add(selectFeeling);
+                        foreach (string selectFeeling in this.ChallengeBadFeelingListBox.SelectedItems)
+                        {
+                            this.myKindOfBadFeelings.Add(selectFeeling);
 
+                        }
                     }
                 }
                 /* 手書き用

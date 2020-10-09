@@ -178,7 +178,6 @@ namespace KokoroUpTime
                 ["shiroji_small_right_down_image"] = this.ShirojiSmallRightDownImage,
                 ["children_stand_left_image"] = this.ChildrenStandLeftImage,
                 ["children_stand_right_image"] = this.ChildrenStandRightImage,
-                ["manga_flip_arrow_image_gauge"] = this.MangaFlipArrowImageGauge,
                 ["session_title_image"] = this.SessionTitleImage,
 
 
@@ -299,6 +298,7 @@ namespace KokoroUpTime
             this.ItemNamePlateCenterGrid.Visibility = Visibility.Hidden;
             this.ItemInfoPlateGrid.Visibility = Visibility.Hidden;
             this.ItemLastInfoGrid.Visibility = Visibility.Hidden;
+            this.ItemLeftLastImage.Visibility = Visibility.Hidden;
 
             this.ItemReviewGrid.Visibility = Visibility.Hidden;
             this.ActivityTitleImage.Visibility = Visibility.Hidden;
@@ -362,7 +362,6 @@ namespace KokoroUpTime
             this.BackPageButton.Visibility = Visibility.Hidden;
             this.MangaFlipButton.Visibility = Visibility.Hidden;
             this.MangaPrevBackButton.Visibility = Visibility.Hidden;
-            this.MangaFlipArrowImageGauge.Visibility = Visibility.Hidden;
 
             this.ItemCheckCentertGrid.Visibility = Visibility.Hidden;
             this.ItemCheckRightGrid.Visibility = Visibility.Hidden;
@@ -877,6 +876,7 @@ namespace KokoroUpTime
                         };
                         sb.Begin(this);
                     }
+                    break;
 
                     break;
 
@@ -1617,8 +1617,6 @@ namespace KokoroUpTime
                 // 二重終了防止策
                 bool isDuplicate = false;
 
-                this.isClickable = false;
-
                 if (isSync == "sync")
                 {
                     sb.Completed += (s, e) =>
@@ -1629,7 +1627,7 @@ namespace KokoroUpTime
                             this.ScenarioPlay();
 
                             isDuplicate = true;
-                            isClickable = true;
+                            
                         }
                     };
                     sb.Begin(this);
@@ -1687,6 +1685,8 @@ namespace KokoroUpTime
             */
             if (this.isClickable)
             {
+                this.isClickable = false;
+
                 if (button.Name == "SelectWordButton")
                 {
                     Grid btnContent = (Grid)button.Content;
@@ -1714,7 +1714,7 @@ namespace KokoroUpTime
                 }
                 if ((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton"))
                 {
-                    this.isClickable = false;
+                    
 
                     if (button.Name == "NextMessageButton")
                     {

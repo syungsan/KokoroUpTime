@@ -25,7 +25,6 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using WMPLib;
 using WpfAnimatedGif;
-using BitmapImageReader;
 
 
 
@@ -893,6 +892,8 @@ namespace KokoroUpTime
 
                     Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
 
+                    this.isClickable = false;
+
                     if (sb != null)
                     {
                         // 二重終了防止策
@@ -1178,22 +1179,11 @@ namespace KokoroUpTime
 
                     var gifImage = new BitmapImage();
 
-                    Task<BitmapImage> task = Task.Run(() =>{
-                        return BitmapImageReader.BitmapImageReader.GifImageReader_Task(gifFile);
-                     }
-                    );
-                    
-
-                    gifImage = task.Result;
-
-                    /*var gifImage = new BitmapImage();
-
                     gifImage.BeginInit();
 
                     gifImage.UriSource = new Uri($"Images/{gifFile}", UriKind.Relative);
 
                     gifImage.EndInit();
-                    */
 
                     ImageBehavior.SetAnimatedSource(gifObject, gifImage);
 
@@ -1913,7 +1903,7 @@ namespace KokoroUpTime
                 
               
             }
-            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton"))
+            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "SelectFeelingCompleteButton" || button.Name =="MangaFlipButton"))
             {
                 this.isClickable = false;
 
