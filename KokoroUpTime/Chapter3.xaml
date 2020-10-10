@@ -786,19 +786,18 @@
                 <Border x:Name="Let_sTryTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,131,0,771" Background="#FFED7D31" d:IsHidden="True">
                     <TextBlock x:Name="Let_sTryTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" Foreground="#FF4472C4" FontWeight="Normal" TextAlignment="Center" d:IsHidden="True"/>
                 </Border>
-                <Grid x:Name="HotWordButtonGrid" d:IsHidden="True">
-                    <Button x:Name="HotWord1Button" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}" Margin="519,134,519,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" d:IsHidden="True">
-                        <Image x:Name="HotWord1ButtonImage" Source="/Images/hot_word_button1.png" d:IsHidden="True"/>
-                    </Button>
-                    <Button x:Name="HotWord2Button" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}" Margin="519,353,519,0" VerticalAlignment="Top" d:IsHidden="True">
-                        <Image x:Name="HotWord2ButtonImage" Source="/Images/hot_word_button2.png" d:IsHidden="True"/>
-                    </Button>
-                    <Button x:Name="HotWord3Button" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}" Margin="519,573,519,0" VerticalAlignment="Top" d:IsHidden="True">
-                        <Image x:Name="HotWord3ButtonImage" Source="/Images/hot_word_button3.png" d:IsHidden="True"/>
-                    </Button>
-                    <Button x:Name="HotWord4Button" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}" Margin="519,789,519,0" VerticalAlignment="Top" d:IsHidden="True">
-                        <Image x:Name="HotWord4ButtonImage" Source="/Images/hot_word_button4.png" d:IsHidden="True"/>
-                    </Button>
+                <Grid x:Name="HotWordKeyButtonGrid">
+                    <ItemsControl x:Name="HotWordKeyButtonItemControl" Margin="519,134,519,128" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button x:Name="HotWordKeyButton" Margin="0,0,0,50" Height="164" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Content="{Binding}" FontSize="64" Foreground="White" FontWeight="Bold">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/Images/orange_button_plate.png"/>
+                                    </Button.Background>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Grid>
                 <Grid x:Name="HotWordCommentGrid" Height="216" Margin="41,294,1447,570" Width="432" d:IsHidden="True">
                     <Image x:Name="HotWordCommentImage" Source="/Images/small_bubble_center_down.png" d:IsHidden="True"/>
@@ -860,14 +859,28 @@
                         <Border x:Name="SelectHotWordBorder" BorderThickness="5,5,5,5" BorderBrush="#FF333399" CornerRadius="64,64,64,64" Width="805" Height="605">
                             <Grid x:Name="SelectHotWordGrid">
                                 <TextBlock x:Name="SelectHotWordTitleTextBlock" TextWrapping="Wrap" Margin="63,28,80,460" FontSize="72" FontWeight="Bold" Text="TextBlock"/>
-                                <TextBlock x:Name="SelectHotWordValueTextBlock" TextWrapping="Wrap" Margin="63,145,80,45" FontSize="72" FontWeight="Bold" Text="TextBlock"/>
+                                <TextBlock x:Name="SelectHotWordValueTitleTextBlock" TextWrapping="Wrap" Margin="63,175,80,298" FontSize="54" FontWeight="Bold" Text="TextBlock"/>
+                                <TextBlock x:Name="SelectHotWordValueTextBlock" TextWrapping="Wrap" Margin="63,335,80,45" FontSize="72" FontWeight="Bold" Text="TextBlock"/>
                             </Grid>
                         </Border>
                     </Button>
-                    <Image x:Name="HotWordArrowImage" Height="236" Width="325" Margin="798,422,798,422" Source="/Images/red_arrow_right.png"/>
+                    <Image x:Name="HotWordArrowImage" Height="236" Width="325" Margin="798,422,798,422" Source="/Images/red_arrow_right.png" d:IsHidden="True"/>
+                </Grid>
+                <Grid x:Name="HotWordValueButtonGrid" d:IsHidden="True">
+                    <ItemsControl x:Name="HotWordValueButtonItemControl" Margin="519,134,519,128" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:IsHidden="True">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button x:Name="HotWordValueButton" Margin="0,0,0,50" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Content="{Binding}" FontSize="64" Foreground="White" FontWeight="Bold">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/Images/green_button_plate.png"/>
+                                    </Button.Background>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Grid>
             </Grid>
-            <Grid x:Name="ItemGrid" Visibility="Visible">
+            <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
                 <Image x:Name="ItemCenterUpImage" HorizontalAlignment="Center" Height="691" VerticalAlignment="Top" Width="490" Source="/Images/item02_solo.png" Margin="0,55,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -1096,7 +1109,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid x:Name="ShirojiGrid" d:IsHidden="True">
+            <Grid x:Name="ShirojiGrid">
                 <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="1215,187,126,266" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -1139,7 +1152,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ShirojiRightDownSmallImage" Source="/Images/shiroji_04.png" RenderTransformOrigin="0.5,0.5" Margin="1452,446,55,187">
+                <Image x:Name="ShirojiRightDownSmallImage" Source="/Images/shiroji_04.png" RenderTransformOrigin="0.5,0.5" Margin="1452,446,55,187" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -1160,7 +1173,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ShirojiSmallLeftDownImage" Source="/Images/shiroji_02.png" RenderTransformOrigin="0.5,0.5" Margin="10,533,1473,74" d:LayoutOverrides="VerticalAlignment" d:IsHidden="True">
+                <Image x:Name="ShirojiSmallLeftDownImage" Source="/Images/shiroji_02.png" RenderTransformOrigin="0.5,0.5" Margin="10,533,1473,74" d:LayoutOverrides="VerticalAlignment">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -1452,7 +1465,7 @@
                 <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">
                     <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png" d:IsHidden="True"/>
                 </Button>
-                <Button x:Name="CompleteNextButton" HorizontalAlignment="Left" Margin="1423,906,0,0" VerticalAlignment="Top" Height="144" Width="442" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}">
+                <Button x:Name="CompleteNextButton" HorizontalAlignment="Left" Margin="1423,906,0,0" VerticalAlignment="Top" Height="144" Width="442" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">
                     <Image x:Name="CompleteNextImage" Source="/Images/next_go_button.png"/>
                 </Button>
             </Grid>

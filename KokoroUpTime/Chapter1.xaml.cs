@@ -2412,7 +2412,7 @@ namespace KokoroUpTime
             }
         }
 
-        private childItem FindVisualChild<childItem>(DependencyObject obj)where childItem : DependencyObject
+        private childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
             {

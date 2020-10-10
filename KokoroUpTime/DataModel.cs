@@ -182,6 +182,13 @@ namespace KokoroUpTime
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
+        public string SelectedPraiseHotWord { get; set; }
+
+        public string SelectedWorryHotWord { get; set; }
+
+        public string SelectedEncourageHotWord { get; set; }
+
+        public string SelectedThanksHotWord { get; set; }
 
         public string CreatedAt { get; set; }
     }

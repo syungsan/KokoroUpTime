@@ -36,6 +36,16 @@ namespace KokoroUpTime
     /// </summary>
     public partial class Chapter3 : Page
     {
+        private string[] HOT_WORD_KEYS = { "ほめる言葉", "しんぱいする言葉", "はげます言葉", "おれいの言葉" };
+
+        private Dictionary<string, string[]> HOT_WORD_VALUES = new Dictionary<string, string[]>()
+        {
+            {"ほめる言葉", new string[] { "すごい！上手だね。", "きれいな絵だね。", "いい色の使い方だね。", "とっても素敵だね。" } },
+            {"しんぱいする言葉", new string[] { "だいじょうぶ？", "カゼは治った？", "しんどくない？", "心配してたんだよ。" } },
+            {"はげます言葉", new string[] { "がんばってね！", "おうえんしてるよ。", "がんばってたの知ってるよ。", "大丈夫だよ！" } },
+            {"おれいの言葉", new string[] { "ありがとう。", "ありがとう、助かったよ。", "ありがとう、やさしいね。", "ありがとう、うれしいよ。" } }
+        };
+
         // 気持ちのリスト
         private string[] GOOD_FEELINGS = {"うれしい", "しあわせ", "たのしい", "ホッとした", "きもちいい", "まんぞく", "すき", "やる気マンマン", "かんしゃ", "わくわく", "うきうき", "ほこらしい"};
         private string[] BAD_FEELINGS = { "心配", "こまった", "不安", "こわい", "おちこみ", "がっかり", "いかり", "イライラ", "はずかしい", "ふまん", "かなしい", "おびえる"};
@@ -97,6 +107,8 @@ namespace KokoroUpTime
         // データベースに収めるデータモデルのインスタンス
         private DataChapter1 dataChapter1;
 
+        private DataChapter3 dataChapter3;
+
         public InitConfig initConfig = new InitConfig();
         public DataOption dataOption = new DataOption();
         public DataItem dataItem = new DataItem();
@@ -122,11 +134,15 @@ namespace KokoroUpTime
             // データモデルインスタンス確保
             this.dataChapter1 = new DataChapter1();
 
+            this.dataChapter3 = new DataChapter3();
+
             // xamlのItemControlに気持ちリストをデータバインド
             this.ChallengeGoodFeelingItemControl.ItemsSource = GOOD_FEELINGS;
             this.ChallengeBadFeelingItemControl.ItemsSource = BAD_FEELINGS;
             this.SelectGoodFeelingItemControl.ItemsSource = GOOD_FEELINGS;
             this.SelectBadFeelingItemControl.ItemsSource = BAD_FEELINGS;
+
+            this.HotWordKeyButtonItemControl.ItemsSource = HOT_WORD_KEYS;
 
             this.InitControls();
         }
@@ -230,7 +246,11 @@ namespace KokoroUpTime
                 ["let's_use_hot_word_msg"] = this.Let_sUseHotWordMessageTextBlock, //
 
                 ["selected_hot_word_title_text"] = this.SelectHotWordTitleTextBlock, //
+                ["selected_hot_word_value_title_text"] = this.SelectHotWordValueTitleTextBlock, //
                 ["selected_hot_word_value_text"] = this.SelectHotWordValueTextBlock, //
+
+                ["complimentary_situation_title_text"] = this.ComplimentarySituationTitleTextBlock, //
+                ["complimentary_situation_value_text"] = this.ComplimentarySituationValueTextBlock, //
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -287,10 +307,11 @@ namespace KokoroUpTime
                 ["music_info_grid"] = this.MusicInfoGrid, //
                 ["exit_back_grid"] = this.ExitBackGrid, //
 
-                ["hot_word_button_grid"] = this.HotWordButtonGrid, //
+                ["hot_word_key_button_grid"] = this.HotWordKeyButtonGrid, //
                 ["hot_word_comment_grid"] = this.HotWordCommentGrid, //
                 ["situations_grid"] = this.SituationsGrid, //
                 ["let's_use_hot_word_msg_grid"] = this.Let_sUseHotWordMessageGrid, //
+                ["hot_word_value_button_grid"] = this.HotWordValueButtonGrid, //
             };
 
             this.borderObjects = new Dictionary<string, Border>
@@ -400,9 +421,10 @@ namespace KokoroUpTime
             this.ChallengeTimeTitleBorder.Visibility = Visibility.Hidden; //
             this.ChallengeTimeTitleTextBlock.Visibility = Visibility.Hidden; //
 
-            this.HotWordButtonGrid.Visibility = Visibility.Hidden; //
+            this.HotWordKeyButtonGrid.Visibility = Visibility.Hidden; //
             this.HotWordCommentGrid.Visibility = Visibility.Hidden; //
             this.ShirojiSmallLeftDownImage.Visibility = Visibility.Hidden; //
+            this.HotWordValueButtonGrid.Visibility = Visibility.Hidden; //
 
             this.HotWordTitleImage.Visibility = Visibility.Hidden; //
 
@@ -446,6 +468,10 @@ namespace KokoroUpTime
             this.ComplimentarySituationBorder.Visibility = Visibility.Hidden; //
             this.HotWordArrowImage.Visibility = Visibility.Hidden; //
             this.ItemLeftDownImage.Visibility = Visibility.Hidden; //
+
+            this.SelectHotWordValueTitleTextBlock.Visibility = Visibility.Hidden; //
+
+            this.SelectHotWordValueTitleTextBlock.Text = ""; //
 
             this.SessionSubTitleTextBlock.Text = ""; //
             this.SessionSentenceTextBlock.Text = ""; //
@@ -1358,6 +1384,23 @@ namespace KokoroUpTime
 
         private List<List<string>> SequenceCheck(string text)
         {
+            var Matches = new Regex(@"\$(.+?)\$").Matches(text);
+
+            for (int i = 0; i < Matches.Count; i++)
+            {
+                var sequence = Matches[i].Value;
+
+                switch (sequence)
+                {
+                    case "$selected_praise_hot_word$":
+
+                        text = text.Replace("$selected_praise_hot_word$", this.dataChapter3.SelectedPraiseHotWord);
+                        break;
+
+                    default: { break; }
+                }
+            }
+
             Dictionary<string, string> imageOrTextDic = new Dictionary<string, string>()
             {
                 {"name", this.initConfig.userName},
@@ -1871,8 +1914,30 @@ namespace KokoroUpTime
                     }
                 }
 
-                if (this.scene == "ホットワードボタン")
+                if (this.scene == "さがしてみようホットワードボタン" || this.HotWordKeyButtonGrid.Visibility == Visibility.Visible)
                 {
+
+                    // foreach (var hotWordKeyButton in this.HotWordKeyButtonItemControl.GetChildren<Button>().ToList())
+                    // {
+                    //     Debug.Print(hotWordKeyButton.Content.ToString());
+                    // }
+
+                    if (button.Content.ToString() == this.scene.Replace("を選んでみよう", ""))
+                    {
+                        this.HotWordValueButtonItemControl.ItemsSource = HOT_WORD_VALUES[button.Content.ToString()];
+
+                        this.GoTo("select_hot_word_value");
+                    }
+                    else
+                    {
+                        this.GoTo($"select_other_word_{Array.IndexOf(HOT_WORD_KEYS, button.Content.ToString()) + 1}");
+                    }
+                    
+
+
+
+
+                    /*
                     Image[] hotWordButtonImages = { HotWord1ButtonImage, HotWord2ButtonImage, HotWord3ButtonImage, HotWord4ButtonImage };
 
                     for (int index = 1; index <= 4; index++)
@@ -1883,8 +1948,49 @@ namespace KokoroUpTime
 
                             hotWordButtonImages[index - 1].Source = this.Image2Gray(hotWordButtonImages[index - 1].Source);
 
-                            this.GoTo($@"hot_word_{index}");
+                            if (this.scene == "さがしてみようホットワードボタン")
+                            {
+                                this.GoTo($@"search_hot_word_{index}");
+                            }
+
+                            if (this.scene == "つかってみようホットワードボタン")
+                            {
+                                this.GoTo($@"use_hot_word_{index}");
+                            }
                         }
+                    }
+                    */
+                }
+
+                if (this.HotWordValueButtonGrid.Visibility == Visibility.Visible)
+                {
+                    var targetHotWord = this.scene.Replace("を選んでみよう", "");
+
+                    var hotWordIndex = Array.IndexOf(HOT_WORD_KEYS, targetHotWord);
+
+                    if (HOT_WORD_VALUES[targetHotWord].Contains(button.Content.ToString()))
+                    {
+                        switch (hotWordIndex)
+                        {
+                            case 0:
+                                this.dataChapter3.SelectedPraiseHotWord = button.Content.ToString();
+                                break;
+
+                            case 1:
+                                this.dataChapter3.SelectedWorryHotWord = button.Content.ToString();
+                                break;
+
+                            case 2:
+                                this.dataChapter3.SelectedEncourageHotWord = button.Content.ToString();
+                                break;
+
+                            case 3:
+                                this.dataChapter3.SelectedThanksHotWord = button.Content.ToString();
+                                break;
+
+                            default: { break; }
+                        }
+                        this.GoTo($"let's_use_selected_hot_word_{hotWordIndex + 1}");
                     }
                 }
 
@@ -1893,7 +1999,8 @@ namespace KokoroUpTime
                     this.BackPageButton.Visibility = Visibility.Hidden;
                     this.NextPageButton.Visibility = Visibility.Hidden;
 
-                    if (this.scene == "ホットワードボタン" && this.hotWordCount >= 4)
+                    /*
+                    if (this.scene == "さがしてみようホットワードボタン" && this.hotWordCount >= 4)
                     {
                         Button[] hotWordButtons = { HotWord1Button, HotWord2Button, HotWord3Button, HotWord4Button };
 
@@ -1901,13 +2008,17 @@ namespace KokoroUpTime
                         {
                             hotWordButton.IsEnabled = false;
                         }
-                        this.GoTo("hot_word_complete");
+                        this.GoTo("search_hot_word_complete");
                     }
                     else
                     {
                         this.scenarioCount += 1;
                         this.ScenarioPlay();
                     }
+                    */
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
                 }
 
                 if (button.Name == "NextMessageButton")
@@ -1933,7 +2044,7 @@ namespace KokoroUpTime
 
                 if (button.Name == "SelectHotWordButton")
                 {
-                    this.GoTo("select_hot_word_title");
+                    this.GoTo("select_hot_word_key");
                 }
             }
 
@@ -2355,6 +2466,25 @@ namespace KokoroUpTime
                 this.feelingSize = 100;
                 this.Angle = (double)this.feelingSize + 310.0f;
             }
+        }
+
+        private childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is childItem)
+                {
+                    return (childItem)child;
+                }
+                else
+                {
+                    childItem childOfChild = FindVisualChild<childItem>(child);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+            return null;
         }
     }
 }
