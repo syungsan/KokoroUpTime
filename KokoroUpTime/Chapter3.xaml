@@ -805,7 +805,7 @@
                 </Grid>
                 <Image x:Name="HotWordTitleImage" Height="238" Width="1670" Source="/Images/hot_word_1_title.png" Margin="125,101,125,741" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="GroupActivityGrid">
+            <Grid x:Name="GroupActivityGrid" d:IsHidden="True">
                 <Grid x:Name="Let_sUseHotWordGrid" d:IsHidden="True">
                     <Image x:Name="Let_sUseHotWordTitleImage" HorizontalAlignment="Center" Height="98" Margin="0,50,0,0" VerticalAlignment="Top" Width="1106" Source="/Images/let's_use_hot_word_title.png"/>
                     <Grid x:Name="SituationsGrid" Margin="175,205,330,95" d:IsHidden="True">
@@ -866,7 +866,7 @@
                     </Button>
                     <Image x:Name="HotWordArrowImage" Height="236" Width="325" Margin="798,422,798,422" Source="/Images/red_arrow_right.png" d:IsHidden="True"/>
                 </Grid>
-                <Grid x:Name="HotWordValueButtonGrid">
+                <Grid x:Name="HotWordValueButtonGrid" d:IsHidden="True">
                     <ItemsControl x:Name="HotWordValueButtonItemControl" Margin="519,134,519,128" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -879,8 +879,8 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </Grid>
-                <Grid x:Name="RolePlayButtonGrid">
-                    <ItemsControl x:Name="RolePlayButtonItemControl" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="354,150,353,150">
+                <Grid x:Name="RolePlayButtonGrid" d:IsHidden="True">
+                    <ItemsControl x:Name="RolePlayButtonItemControl" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="354,112,354,112" d:IsHidden="True">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Button x:Name="RolePlayButton" Margin="0,0,0,50" Height="164" Width="1213" Click="Button_Click" BorderBrush="{x:Null}" Content="{Binding}" FontSize="64" Foreground="White" FontWeight="Bold">
@@ -896,6 +896,9 @@
                     <Image x:Name="RolePlayInfoImage" Source="/Images/blue_roll_frame.png"/>
                     <TextBlock x:Name="RolePlayInfoTextBlock" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment" Margin="88,106,76,98" FontSize="52" Foreground="White"><Run Text="ロールプレイとは…"/><LineBreak/><Run Text="☆それぞれの役割を決めて、練習をしてみることじゃ。"/><LineBreak/><Run Text="☆今回は、あたたかい言葉をかける人と、かけられる"/><LineBreak/><Run Text="　人になってみるのじゃ。"/></TextBlock>
                 </Grid>
+                <Border x:Name="RolePlayMessageBorder" BorderThickness="1" BorderBrush="Black" Margin="0,105,0,795" Background="#FFED7D31" d:IsHidden="True">
+                    <TextBlock x:Name="RolePlayMessageTextBlock" TextWrapping="Wrap" FontSize="120" Foreground="White" TextAlignment="Center"><Run Language="ja-jp" Text="声に出してれんしゅうしてみよう！"/></TextBlock>
+                </Border>
             </Grid>
             <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
                 <Image x:Name="ItemCenterUpImage" HorizontalAlignment="Center" Height="691" VerticalAlignment="Top" Width="490" Source="/Images/item02_solo.png" Margin="0,55,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
@@ -958,12 +961,12 @@
                     </Grid>
                 </Grid>
                 <Image x:Name="ItemLeftLastImage" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Margin="354,186,0,0" d:IsHidden="True"/>
-                <Grid x:Name="ItemLastInfoGrid" Height="116" Width="490" Margin="715,380,715,584" d:IsHidden="True">
-                    <Image x:Name="ItemLastInfoImage" Source="/Images/item_last.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="ItemLastInfoTextBlock" HorizontalAlignment="Left" Margin="12,38,0,0" VerticalAlignment="Top" Height="66" Width="408" FontSize="48" FontWeight="Bold" Text="No.1  きもちセンサー" d:IsHidden="True"/>
+                <Grid x:Name="ItemLastInfoGrid" Height="116" Width="490" Margin="715,380,715,584">
+                    <Image x:Name="ItemLastInfoImage" Source="/Images/item_last.png"/>
+                    <TextBlock x:Name="ItemLastInfoTextBlock" HorizontalAlignment="Left" Margin="12,38,0,0" VerticalAlignment="Top" Height="66" Width="408" FontSize="48" FontWeight="Bold" Text="No.3  あったかスープ"/>
                 </Grid>
                 <Image x:Name="ItemCenterRightImage" Height="651" Width="463" Source="/Images/item03_solo.png" Margin="1065,105,392,324" d:IsHidden="True"/>
-                <Image x:Name="ItemLeftDownImage" HorizontalAlignment="Left" Height="589" Margin="-30,540,0,0" VerticalAlignment="Top" Width="418" Source="/Images/item03_solo.png"/>
+                <Image x:Name="ItemLeftDownImage" HorizontalAlignment="Left" Height="589" Margin="-30,540,0,0" VerticalAlignment="Top" Width="418" Source="/Images/item03_solo.png" d:IsHidden="True"/>
             </Grid>
             <Grid x:Name="SelectFeelingGrid" d:IsHidden="True">
                 <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400" d:IsHidden="True">
@@ -1047,11 +1050,13 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Image x:Name="SummaryBoardImage" Source="/Images/blackboard.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="SummarySubTitleTextBlock" Margin="118,92,118,396" Text="今日の教室で学んだこと" TextWrapping="Wrap" Foreground="White" Background="{x:Null}" FontSize="68" FontWeight="Bold" TextAlignment="Center" d:IsHidden="True"/>
-                    <TextBlock x:Name="SummarySentenceTextBlock" TextWrapping="Wrap" Foreground="#FFFFE800" FontSize="58" Margin="69,232,66,160" d:IsHidden="True">
-                        ✓ いろいろな「きもち」を発見した<LineBreak/>
-                        ✓ 「きもち」の大きさを はかってみた
+                    <TextBlock x:Name="SummarySubTitleTextBlock" Margin="118,67,118,421" Text="今日の教室で学んだこと" TextWrapping="Wrap" Foreground="White" Background="{x:Null}" FontSize="68" FontWeight="Bold" TextAlignment="Center" d:IsHidden="True"/>
+                    <TextBlock x:Name="SummarySentenceTextBlock" TextWrapping="Wrap" Foreground="#FFFFE800" FontSize="58" Margin="68,170,68,161" d:IsHidden="True">
+                        ✓ あたたかい言葉を勉強した。<LineBreak/>
+                        ✓ 友だちにあたたかい言葉を<LineBreak/>　 かける練習をした。
                     </TextBlock>
+                    <Image x:Name="SummaryItemImage" HorizontalAlignment="Left" Height="196" Margin="92,357,0,0" VerticalAlignment="Top" Width="139" Source="/Images/item03_solo.png" d:IsHidden="True"/>
+                    <TextBlock x:Name="SummaryItemInfoTextBlock" HorizontalAlignment="Left" Margin="249,416,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="111" Width="465" FontSize="36" Foreground="White" d:IsHidden="True"><Run Language="ja-jp" Text="本日の発明品"/><LineBreak/><Run Language="ja-jp" FontSize="54" FontWeight="Bold" Text="No.3 あったかスープ"/></TextBlock>
                 </Grid>
                 <Image x:Name="SummaryTitleImage" Width="401" Source="/Images/summary_title.png" Margin="760,22,759,907" Height="151" d:IsHidden="True"/>
             </Grid>
@@ -1242,11 +1247,11 @@
                 <Image x:Name="GladCommentUpImage" HorizontalAlignment="Left" Height="168" Margin="677,179,0,0" VerticalAlignment="Top" Width="170" Source="/Images/aosuke_glad.png" d:IsHidden="True"/>
                 <Image x:Name="GladCommentDownImage" HorizontalAlignment="Left" Height="168" Margin="677,412,0,0" VerticalAlignment="Top" Width="170" Source="/Images/kimi_glad.png" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="EndingGrid" d:IsHidden="True">
-                <Grid x:Name="EndingTitleGrid" Width="878" Height="427" Margin="521,202,521,451" d:IsHidden="True">
-                    <Image x:Name="EndingTitleBackImage" Source="/Images/ending_bubble.png" Stretch="Uniform" d:IsHidden="True"/>
-                    <TextBlock x:Name="EndingTitleTextBlock" HorizontalAlignment="Center" Margin="0,214,0,0" VerticalAlignment="Top" FontSize="88" FontWeight="Bold" Foreground="Black" Text="しゅうりょう！" TextAlignment="Center" d:IsHidden="True"/>
-                    <TextBlock x:Name="EndingChapterNoTextBlock" HorizontalAlignment="Center" Margin="0,97,0,0" VerticalAlignment="Top" FontSize="88" FontWeight="Bold" Text="第１回" TextAlignment="Center" d:IsHidden="True"/>
+            <Grid x:Name="EndingGrid">
+                <Grid x:Name="EndingTitleGrid" Width="878" Height="427" Margin="521,202,521,451">
+                    <Image x:Name="EndingTitleBackImage" Source="/Images/ending_bubble.png" Stretch="Uniform"/>
+                    <TextBlock x:Name="EndingTitleTextBlock" HorizontalAlignment="Center" Margin="0,214,0,0" VerticalAlignment="Top" FontSize="88" FontWeight="Bold" Foreground="Black" Text="しゅうりょう！" TextAlignment="Center"/>
+                    <TextBlock x:Name="EndingChapterNoTextBlock" HorizontalAlignment="Center" Margin="0,97,0,0" VerticalAlignment="Top" FontSize="88" FontWeight="Bold" Text="第3回" TextAlignment="Center"/>
                 </Grid>
                 <Image x:Name="EndingItemImage" HorizontalAlignment="Center" Height="489" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Margin="0,460,0,0" d:IsHidden="True"/>
                 <Image x:Name="KimiEndingImage" HorizontalAlignment="Left" Height="470" Margin="1364,10,0,0" VerticalAlignment="Top" Width="436" Source="/Images/kimi_face_02.png" d:IsHidden="True"/>
@@ -1305,12 +1310,12 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Grid x:Name="GetItemGrid" Width="286" Height="404" HorizontalAlignment="Left" Margin="32,75,0,0" VerticalAlignment="Top" d:IsHidden="True">
-                        <Image x:Name="Item01MainImage" gif:ImageBehavior.AnimatedSource="Images/item01_solo.gif" Margin="24,20,19,40" d:IsHidden="True"/>
-                        <Image x:Name="GetItemTitleImage" Height="79" Width="259" Source="/Images/item01_title.png" Margin="30,327,-3,-2" d:IsHidden="True"/>
+                    <Grid x:Name="GetItemGrid" Width="286" Height="404" HorizontalAlignment="Left" Margin="662,73,0,0" VerticalAlignment="Top" d:IsHidden="True">
+                        <Image x:Name="Item03MainImage" gif:ImageBehavior.AnimatedSource="Images/item03_solo.gif" Margin="22,30,22,30" d:IsHidden="True"/>
+                        <Image x:Name="GetItemTitleImage" Height="79" Width="259" Source="/Images/item03_title.png" Margin="10,328,17,-3" d:IsHidden="True"/>
                     </Grid>
+                    <Image x:Name="Item01MainImage" Source="/Images/item01_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="24,38,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
                     <Image x:Name="Item02MainImage" Source="/Images/item02_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="339,38,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
-                    <Image x:Name="Item03MainImage" Source="/Images/item03_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="653,38,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
                     <Image x:Name="Item04MainImage" Source="/Images/item04_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="968,38,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
                     <Image x:Name="Item05MainImage" Source="/Images/item05_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="1283,38,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
                     <Image x:Name="Item06MainImage" Source="/Images/item06_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="1598,38,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
@@ -1321,17 +1326,17 @@
                     <Image x:Name="Item11MainImage" Source="/Images/item11_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="1283,470,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
                 </Grid>
                 <Grid x:Name="ItemBookNoneGrid" d:IsHidden="True">
-                    <Image x:Name="Item02NoneImage" HorizontalAlignment="Left" Height="460" Margin="339,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item03NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item04NoneImage" HorizontalAlignment="Left" Height="460" Margin="968,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item05NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item06NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item07NoneImage" HorizontalAlignment="Left" Height="460" Margin="24,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item08NoneImage" HorizontalAlignment="Left" Height="460" Margin="339,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item09NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item10NoneImage" HorizontalAlignment="Left" Height="460" Margin="968,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item11NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
+                    <Image x:Name="Item01NoneImage" HorizontalAlignment="Left" Height="460" Margin="24,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item02NoneImage" HorizontalAlignment="Left" Height="460" Margin="339,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item04NoneImage" HorizontalAlignment="Left" Height="460" Margin="968,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item05NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item06NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item07NoneImage" HorizontalAlignment="Left" Height="460" Margin="24,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item08NoneImage" HorizontalAlignment="Left" Height="460" Margin="339,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item09NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item10NoneImage" HorizontalAlignment="Left" Height="460" Margin="968,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item11NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                 </Grid>
             </Grid>
             <Grid x:Name="SelectButtonGrid" d:IsHidden="True">
@@ -1344,7 +1349,7 @@
                     </Button>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid">
+            <Grid x:Name="SystemGrid" d:IsHidden="True">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>

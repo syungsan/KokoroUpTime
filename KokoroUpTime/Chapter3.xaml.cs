@@ -117,6 +117,8 @@ namespace KokoroUpTime
 
         private int hotWordCount = 0;
 
+        private int rolePlayButtonCount = 0;
+
         public Chapter3()
         {
             InitializeComponent();
@@ -327,6 +329,7 @@ namespace KokoroUpTime
                 ["hot_word_border"] = this.HotWordBorder, //
                 ["selected_hot_word_border"] = this.SelectHotWordBorder, //
                 ["complimentary_situation_border"] = this.ComplimentarySituationBorder, //
+                ["role_play_msg_border"] = this.RolePlayMessageBorder, //
             };
         }
 
@@ -479,6 +482,8 @@ namespace KokoroUpTime
             this.RolePlayButtonGrid.Visibility = Visibility.Hidden; //
 
             this.SelectHotWordValueTitleTextBlock.Visibility = Visibility.Hidden; //
+
+            this.RolePlayMessageBorder.Visibility = Visibility.Hidden;
 
             this.SelectHotWordValueTitleTextBlock.Text = ""; //
 
@@ -1346,11 +1351,11 @@ namespace KokoroUpTime
 
                 case "item_book":
 
-                    Image[] itemMainImages = { this.Item02MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item08MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
+                    Image[] itemMainImages = { this.Item01MainImage, this.Item02MainImage, this.Item04MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item08MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
 
-                    Image[] itemNoneImages = { this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
+                    Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
 
-                    var hasGotItems = new bool[] { this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
+                    var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
 
                     for (int i = 0; i < hasGotItems.Length; i++)
                     {
@@ -2018,6 +2023,32 @@ namespace KokoroUpTime
                     }
                 }
 
+                if (this.RolePlayButtonGrid.Visibility == Visibility.Visible)
+                {
+                    var rolePlayHotWord = button.Content.ToString().Substring(0, button.Content.ToString().Length - 11);
+
+                    if (HOT_WORD_KEYS.Contains(rolePlayHotWord))
+                    {
+                        /*
+                        var grayImageBrush = (ImageBrush)button.Background;
+
+                        var grayImage = this.Image2Gray(grayImageBrush.ImageSource);
+
+                        var imageBrash = new ImageBrush();
+
+                        imageBrash.ImageSource = grayImage;
+
+                        button.Background = imageBrash;
+                        */
+
+                        button.IsEnabled = false;
+
+                        this.rolePlayButtonCount += 1;
+
+                        this.GoTo($"role_play_hot_word_{Array.IndexOf(HOT_WORD_KEYS, rolePlayHotWord) + 1}");
+                    }
+                }
+
                 if (button.Name == "NextPageButton")
                 {
                     this.BackPageButton.Visibility = Visibility.Hidden;
@@ -2041,8 +2072,17 @@ namespace KokoroUpTime
                     }
                     */
 
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    if (this.rolePlayButtonCount >= HOT_WORD_KEYS.Length)
+                    {
+                        this.rolePlayButtonCount = 0;
+
+                        this.GoTo("role_play_hot_word_complete");
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
                 }
 
                 if (button.Name == "NextMessageButton")
