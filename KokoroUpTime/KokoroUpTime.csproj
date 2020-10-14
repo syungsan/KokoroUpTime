@@ -54,6 +54,7 @@
     <None Remove="Images\background_10.png" />
     <None Remove="Images\background_11.png" />
     <None Remove="Images\background_12.png" />
+    <None Remove="Images\background_13.png" />
     <None Remove="Images\background_ending.png" />
     <None Remove="Images\background_mokume.png" />
     <None Remove="Images\background_mokume2.PNG" />
@@ -68,6 +69,7 @@
     <None Remove="Images\blue_bubble_left_down.png" />
     <None Remove="Images\blue_gradation.png" />
     <None Remove="Images\blue_needle.png" />
+    <None Remove="Images\blue_roll_frame.png" />
     <None Remove="Images\blue_title_plate.png" />
     <None Remove="Images\branch_selection1.png" />
     <None Remove="Images\branch_selection2.png" />
@@ -220,6 +222,7 @@
     <None Remove="Images\oranger_gradation.png" />
     <None Remove="Images\orange_button_plate.png" />
     <None Remove="Images\orange_gradation.png" />
+    <None Remove="Images\orange_long_button_plate.png" />
     <None Remove="Images\orange_title_plate.png" />
     <None Remove="Images\prev_back_.png" />
     <None Remove="Images\purple_title_plate.png" />
@@ -324,6 +327,7 @@
     <Resource Include="Images\background_10.png" />
     <Resource Include="Images\background_11.png" />
     <Resource Include="Images\background_12.png" />
+    <Resource Include="Images\background_13.png" />
     <Resource Include="Images\background_ending.png" />
     <Resource Include="Images\background_mokume.png" />
     <Resource Include="Images\background_mokume2.PNG" />
@@ -337,6 +341,7 @@
     <Resource Include="Images\blue_bubble_left_down.png" />
     <Resource Include="Images\blue_gradation.png" />
     <Resource Include="Images\blue_needle.png" />
+    <Resource Include="Images\blue_roll_frame.png" />
     <Resource Include="Images\blue_title_plate.png" />
     <Resource Include="Images\branch_selection1.png" />
     <Resource Include="Images\branch_selection2.png" />
@@ -439,6 +444,7 @@
     <Resource Include="Images\normal.png" />
     <Resource Include="Images\orange_button_plate.png" />
     <Resource Include="Images\orange_gradation.png" />
+    <Resource Include="Images\orange_long_button_plate.png" />
     <Resource Include="Images\orange_title_plate.png" />
     <Resource Include="Images\prev_back_.png" />
     <Resource Include="Images\purple_title_plate.png">

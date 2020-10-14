@@ -741,7 +741,7 @@
                 </Grid>
                 <Image x:Name="ChallengeItemImage" HorizontalAlignment="Left" Height="489" Margin="1098,172,0,0" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="ChallengeTimeGrid">
+            <Grid x:Name="ChallengeTimeGrid" d:IsHidden="True">
                 <Border x:Name="ChallengeTimeTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,261,0,540" Background="#FFFFC000" d:IsHidden="True">
                     <TextBlock x:Name="ChallengeTimeTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="180" Foreground="#FF9966FF" FontWeight="Normal" TextAlignment="Center" d:IsHidden="True"/>
                 </Border>
@@ -806,7 +806,7 @@
                 <Image x:Name="HotWordTitleImage" Height="238" Width="1670" Source="/Images/hot_word_1_title.png" Margin="125,101,125,741" d:IsHidden="True"/>
             </Grid>
             <Grid x:Name="GroupActivityGrid">
-                <Grid x:Name="Let_sUseHotWordGrid">
+                <Grid x:Name="Let_sUseHotWordGrid" d:IsHidden="True">
                     <Image x:Name="Let_sUseHotWordTitleImage" HorizontalAlignment="Center" Height="98" Margin="0,50,0,0" VerticalAlignment="Top" Width="1106" Source="/Images/let's_use_hot_word_title.png"/>
                     <Grid x:Name="SituationsGrid" Margin="175,205,330,95" d:IsHidden="True">
                         <Border x:Name="Situation1Border" BorderThickness="5,5,5,5" BorderBrush="#FF333399" Margin="0,10,740,418" CornerRadius="64,64,64,64">
@@ -866,8 +866,8 @@
                     </Button>
                     <Image x:Name="HotWordArrowImage" Height="236" Width="325" Margin="798,422,798,422" Source="/Images/red_arrow_right.png" d:IsHidden="True"/>
                 </Grid>
-                <Grid x:Name="HotWordValueButtonGrid" d:IsHidden="True">
-                    <ItemsControl x:Name="HotWordValueButtonItemControl" Margin="519,134,519,128" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:IsHidden="True">
+                <Grid x:Name="HotWordValueButtonGrid">
+                    <ItemsControl x:Name="HotWordValueButtonItemControl" Margin="519,134,519,128" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Button x:Name="HotWordValueButton" Margin="0,0,0,50" Height="163" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Content="{Binding}" FontSize="64" Foreground="White" FontWeight="Bold">
@@ -878,6 +878,23 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                </Grid>
+                <Grid x:Name="RolePlayButtonGrid">
+                    <ItemsControl x:Name="RolePlayButtonItemControl" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="354,150,353,150">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button x:Name="RolePlayButton" Margin="0,0,0,50" Height="164" Width="1213" Click="Button_Click" BorderBrush="{x:Null}" Content="{Binding}" FontSize="64" Foreground="White" FontWeight="Bold">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/Images/orange_long_button_plate.png"/>
+                                    </Button.Background>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+                <Grid x:Name="RolePlayInfoGrid" Margin="97,105,590,414" d:IsHidden="True">
+                    <Image x:Name="RolePlayInfoImage" Source="/Images/blue_roll_frame.png"/>
+                    <TextBlock x:Name="RolePlayInfoTextBlock" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment" Margin="88,106,76,98" FontSize="52" Foreground="White"><Run Text="ロールプレイとは…"/><LineBreak/><Run Text="☆それぞれの役割を決めて、練習をしてみることじゃ。"/><LineBreak/><Run Text="☆今回は、あたたかい言葉をかける人と、かけられる"/><LineBreak/><Run Text="　人になってみるのじゃ。"/></TextBlock>
                 </Grid>
             </Grid>
             <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
@@ -1109,7 +1126,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid x:Name="ShirojiGrid">
+            <Grid x:Name="ShirojiGrid" d:IsHidden="True">
                 <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="1215,187,126,266" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>

@@ -37,6 +37,7 @@ namespace KokoroUpTime
     public partial class Chapter3 : Page
     {
         private string[] HOT_WORD_KEYS = { "ほめる言葉", "しんぱいする言葉", "はげます言葉", "おれいの言葉" };
+        private string[] ROLE_PLAY_WORDS = { "ほめる言葉（場面①）のれんしゅう", "しんぱいする言葉（場面②）のれんしゅう", "はげます言葉（場面③）のれんしゅう", "おれいの言葉（場面④）のれんしゅう" };
 
         private Dictionary<string, string[]> HOT_WORD_VALUES = new Dictionary<string, string[]>()
         {
@@ -143,6 +144,7 @@ namespace KokoroUpTime
             this.SelectBadFeelingItemControl.ItemsSource = BAD_FEELINGS;
 
             this.HotWordKeyButtonItemControl.ItemsSource = HOT_WORD_KEYS;
+            this.RolePlayButtonItemControl.ItemsSource = ROLE_PLAY_WORDS;
 
             this.InitControls();
         }
@@ -312,6 +314,9 @@ namespace KokoroUpTime
                 ["situations_grid"] = this.SituationsGrid, //
                 ["let's_use_hot_word_msg_grid"] = this.Let_sUseHotWordMessageGrid, //
                 ["hot_word_value_button_grid"] = this.HotWordValueButtonGrid, //
+                ["role_play_info_grid"] = this.RolePlayInfoGrid, //
+
+                ["role_play_button_grid"] = this.RolePlayButtonGrid, //
             };
 
             this.borderObjects = new Dictionary<string, Border>
@@ -468,6 +473,10 @@ namespace KokoroUpTime
             this.ComplimentarySituationBorder.Visibility = Visibility.Hidden; //
             this.HotWordArrowImage.Visibility = Visibility.Hidden; //
             this.ItemLeftDownImage.Visibility = Visibility.Hidden; //
+
+            this.RolePlayInfoGrid.Visibility = Visibility.Hidden; //
+
+            this.RolePlayButtonGrid.Visibility = Visibility.Hidden; //
 
             this.SelectHotWordValueTitleTextBlock.Visibility = Visibility.Hidden; //
 
@@ -1395,6 +1404,21 @@ namespace KokoroUpTime
                     case "$selected_praise_hot_word$":
 
                         text = text.Replace("$selected_praise_hot_word$", this.dataChapter3.SelectedPraiseHotWord);
+                        break;
+
+                    case "$selected_worry_hot_word$":
+
+                        text = text.Replace("$selected_worry_hot_word$", this.dataChapter3.SelectedWorryHotWord);
+                        break;
+
+                    case "$selected_encourage_hot_word$":
+
+                        text = text.Replace("$selected_encourage_hot_word$", this.dataChapter3.SelectedEncourageHotWord);
+                        break;
+
+                    case "$selected_thanks_hot_word$":
+
+                        text = text.Replace("$selected_thanks_hot_word$", this.dataChapter3.SelectedThanksHotWord);
                         break;
 
                     default: { break; }
