@@ -237,7 +237,7 @@ sub,search_hot_word_button
 scene,さがしてみようホットワードボタン
 reset
 image,bg_image,background_12.png
-grid,hot_word_button_grid
+grid,hot_word_key_button_grid
 image,shiroji_small_left_down_image
 grid,hot_word_comment_grid
 wait
