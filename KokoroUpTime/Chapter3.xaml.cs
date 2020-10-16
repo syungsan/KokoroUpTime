@@ -1945,7 +1945,7 @@ namespace KokoroUpTime
                     }
                 }
 
-                if (this.CHotWordKeyButtonGrid.Visibility == Visibility.Visible)
+                if (this.scene == "さがしてみようホットワードボタン" && this.CHotWordKeyButtonGrid.Visibility == Visibility.Visible)
                 {
                     var buttonText = button.GetChildren<TextBlock>().ToList()[0].Text;
 
