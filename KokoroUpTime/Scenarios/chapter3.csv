@@ -237,7 +237,7 @@ sub,search_hot_word_button
 scene,さがしてみようホットワードボタン
 reset
 image,bg_image,background_12.png
-grid,hot_word_key_button_grid
+grid,c_hot_word_key_button_grid
 image,shiroji_small_left_down_image
 grid,hot_word_comment_grid
 wait
@@ -290,7 +290,7 @@ sub,search_hot_word_complete
 scene,ホットワード全習得
 reset
 image,bg_image,background_12.png
-grid,hot_word_key_button_grid
+grid,c_hot_word_key_button_grid
 image,shiroji_left_image,shiroji_01.png
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
@@ -302,7 +302,7 @@ hide,button,next_page_button
 hide,button,back_page_button
 clear,text,main_msg
 hide,grid,main_msg_grid
-hide,grid,hot_word_key_button_grid
+hide,grid,c_hot_word_key_button_grid
 image,shiroji_left_image,shiroji_02.png
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
@@ -575,7 +575,7 @@ wait
 sub,select_hot_word_key
 reset
 image,bg_image,blue_gradation.png
-grid,hot_word_key_button_grid
+grid,g_hot_word_key_button_grid
 wait
 #
 sub,select_hot_word_value

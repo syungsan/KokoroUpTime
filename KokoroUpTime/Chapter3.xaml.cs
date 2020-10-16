@@ -115,7 +115,8 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
-        private int hotWordButtonCount = 0;
+        private int cHotWordButtonCount = 0;
+        private int gHotWordButtonCount = 0;
         private int rolePlayButtonCount = 0;
 
         public Chapter3()
@@ -144,7 +145,8 @@ namespace KokoroUpTime
             this.SelectGoodFeelingItemControl.ItemsSource = GOOD_FEELINGS;
             this.SelectBadFeelingItemControl.ItemsSource = BAD_FEELINGS;
 
-            this.HotWordKeyButtonItemControl.ItemsSource = HOT_WORD_KEYS;
+            this.CHotWordKeyButtonItemControl.ItemsSource = HOT_WORD_KEYS;
+            this.GHotWordKeyButtonItemControl.ItemsSource = HOT_WORD_KEYS;
             this.RolePlayButtonItemControl.ItemsSource = ROLE_PLAY_WORDS;
 
             this.InitControls();
@@ -310,7 +312,8 @@ namespace KokoroUpTime
                 ["music_info_grid"] = this.MusicInfoGrid, //
                 ["exit_back_grid"] = this.ExitBackGrid, //
 
-                ["hot_word_key_button_grid"] = this.HotWordKeyButtonGrid, //
+                ["c_hot_word_key_button_grid"] = this.CHotWordKeyButtonGrid, //
+                ["g_hot_word_key_button_grid"] = this.GHotWordKeyButtonGrid, //
                 ["hot_word_comment_grid"] = this.HotWordCommentGrid, //
                 ["situations_grid"] = this.SituationsGrid, //
                 ["let's_use_hot_word_msg_grid"] = this.Let_sUseHotWordMessageGrid, //
@@ -428,7 +431,8 @@ namespace KokoroUpTime
             this.ChallengeTimeTitleBorder.Visibility = Visibility.Hidden; //
             this.ChallengeTimeTitleTextBlock.Visibility = Visibility.Hidden; //
 
-            this.HotWordKeyButtonGrid.Visibility = Visibility.Hidden; //
+            this.CHotWordKeyButtonGrid.Visibility = Visibility.Hidden; //
+            this.GHotWordKeyButtonGrid.Visibility = Visibility.Hidden; //
             this.HotWordCommentGrid.Visibility = Visibility.Hidden; //
             this.ShirojiSmallLeftDownImage.Visibility = Visibility.Hidden; //
             this.HotWordValueButtonGrid.Visibility = Visibility.Hidden; //
@@ -1941,18 +1945,24 @@ namespace KokoroUpTime
                     }
                 }
 
-                if (this.scene == "さがしてみようホットワードボタン" && this.HotWordKeyButtonGrid.Visibility == Visibility.Visible)
+                if (this.CHotWordKeyButtonGrid.Visibility == Visibility.Visible)
                 {
-                    if (HOT_WORD_KEYS.Contains(button.Content.ToString()))
-                    {
-                        button.IsEnabled = false;
+                    var buttonText = button.GetChildren<TextBlock>().ToList()[0].Text;
 
-                        this.hotWordButtonCount += 1;
+                    var buttonIndex = Array.IndexOf(HOT_WORD_KEYS, buttonText);
 
-                        this.GoTo($@"search_hot_word_{Array.IndexOf(HOT_WORD_KEYS, button.Content.ToString()) + 1}");
-                    }
+                    var buttonImage = button.GetChildren<Image>().ToList()[0];
+
+                    buttonImage.Source = this.Image2Gray(buttonImage.Source);
+
+                    button.IsEnabled = false;
+
+                    this.cHotWordButtonCount += 1;
+
+                    this.GoTo($"search_hot_word_{buttonIndex + 1}");
                 }
-                else if (this.HotWordKeyButtonGrid.Visibility == Visibility.Visible)
+
+                if (this.GHotWordKeyButtonGrid.Visibility == Visibility.Visible)
                 {
                     if (button.Content.ToString() == this.scene.Replace("を選んでみよう", ""))
                     {
@@ -2029,14 +2039,14 @@ namespace KokoroUpTime
                     this.BackPageButton.Visibility = Visibility.Hidden;
                     this.NextPageButton.Visibility = Visibility.Hidden;
 
-                    if (this.hotWordButtonCount >= HOT_WORD_KEYS.Length)
+                    if (this.cHotWordButtonCount >= HOT_WORD_KEYS.Length)
                     {
-                        this.hotWordButtonCount = 0;
+                        this.cHotWordButtonCount = 0;
 
-                        foreach (var hotWordKeyButton in this.HotWordKeyButtonItemControl.GetChildren<Button>().ToList())
-                        {
-                            hotWordKeyButton.IsEnabled = true;
-                        }
+                        // foreach (var hotWordKeyButton in this.CHotWordKeyButtonItemControl.GetChildren<Button>().ToList())
+                        // {
+                        //     hotWordKeyButton.IsEnabled = true;
+                        // }
                         this.GoTo("search_hot_word_complete");
                     }
                     else if (this.rolePlayButtonCount >= HOT_WORD_KEYS.Length)

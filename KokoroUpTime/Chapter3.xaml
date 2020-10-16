@@ -786,14 +786,15 @@
                 <Border x:Name="Let_sTryTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,131,0,771" Background="#FFED7D31" d:IsHidden="True">
                     <TextBlock x:Name="Let_sTryTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" Foreground="#FF4472C4" FontWeight="Normal" TextAlignment="Center" d:IsHidden="True"/>
                 </Border>
-                <Grid x:Name="HotWordKeyButtonGrid">
-                    <ItemsControl x:Name="HotWordKeyButtonItemControl" Margin="519,134,519,128" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <Grid x:Name="CHotWordKeyButtonGrid">
+                    <ItemsControl x:Name="CHotWordKeyButtonItemControl" Margin="519,134,519,128" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Button x:Name="HotWordKeyButton" Margin="0,0,0,50" Height="164" Width="882" Click="Button_Click" BorderBrush="{x:Null}" Content="{Binding}" FontSize="64" Foreground="White" FontWeight="Bold">
-                                    <Button.Background>
-                                        <ImageBrush ImageSource="/Images/orange_button_plate.png"/>
-                                    </Button.Background>
+                                <Button x:Name="CHotWordKeyButton" Margin="0,0,0,50" Height="164" Width="882" Click="Button_Click" BorderBrush="{x:Null}">
+                                    <Grid>
+                                        <Image Source="/Images/orange_button_plate.png"/>
+                                        <TextBlock Text="{Binding}" FontSize="64" Foreground="White" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center"/>
+                                    </Grid>
                                 </Button>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -805,8 +806,8 @@
                 </Grid>
                 <Image x:Name="HotWordTitleImage" Height="238" Width="1670" Source="/Images/hot_word_1_title.png" Margin="125,101,125,741" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="GroupActivityGrid" d:IsHidden="True">
-                <Grid x:Name="Let_sUseHotWordGrid" d:IsHidden="True">
+            <Grid x:Name="GroupActivityGrid">
+                <Grid x:Name="Let_sUseHotWordGrid">
                     <Image x:Name="Let_sUseHotWordTitleImage" HorizontalAlignment="Center" Height="98" Margin="0,50,0,0" VerticalAlignment="Top" Width="1106" Source="/Images/let's_use_hot_word_title.png"/>
                     <Grid x:Name="SituationsGrid" Margin="175,205,330,95" d:IsHidden="True">
                         <Border x:Name="Situation1Border" BorderThickness="5,5,5,5" BorderBrush="#FF333399" Margin="0,10,740,418" CornerRadius="64,64,64,64">
@@ -846,25 +847,39 @@
                             </Grid>
                         </Border>
                     </Grid>
-                    <Border x:Name="ComplimentarySituationBorder" BorderThickness="5,5,5,5" BorderBrush="#FF333399" Margin="88,215,1025,250" CornerRadius="64,64,64,64">
-                        <Grid x:Name="ComplimentarySituationGrid">
-                            <TextBlock x:Name="ComplimentarySituationTitleTextBlock" TextWrapping="Wrap" Margin="63,28,430,460" FontSize="72" FontWeight="Bold">
+                    <Border x:Name="ComplimentarySituationBorder" BorderThickness="5,5,5,5" BorderBrush="#FF333399" Margin="88,215,1025,250" CornerRadius="64,64,64,64" d:IsHidden="True">
+                        <Grid x:Name="ComplimentarySituationGrid" d:IsHidden="True">
+                            <TextBlock x:Name="ComplimentarySituationTitleTextBlock" TextWrapping="Wrap" Margin="63,28,430,460" FontSize="72" FontWeight="Bold" d:IsHidden="True">
                                 <TextBlock.TextDecorations>
                                     <TextDecoration/>
                                 </TextBlock.TextDecorations><Run Language="ja-jp" Text="場面①"/></TextBlock>
-                            <TextBlock x:Name="ComplimentarySituationValueTextBlock" TextWrapping="Wrap" Margin="63,145,80,40" FontSize="72" FontWeight="Bold"><Run Text="友だちが図工の時間に"/><LineBreak/><Run Text="とても上手な絵を"/><LineBreak/><Run Text="かいていました。"/></TextBlock>
+                            <TextBlock x:Name="ComplimentarySituationValueTextBlock" TextWrapping="Wrap" Margin="63,145,80,40" FontSize="72" FontWeight="Bold" d:IsHidden="True"><Run Text="友だちが図工の時間に"/><LineBreak/><Run Text="とても上手な絵を"/><LineBreak/><Run Text="かいていました。"/></TextBlock>
                         </Grid>
                     </Border>
-                    <Button x:Name="SelectHotWordButton" Margin="1025,215,80,250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
-                        <Border x:Name="SelectHotWordBorder" BorderThickness="5,5,5,5" BorderBrush="#FF333399" CornerRadius="64,64,64,64" Width="805" Height="605">
-                            <Grid x:Name="SelectHotWordGrid">
-                                <TextBlock x:Name="SelectHotWordTitleTextBlock" TextWrapping="Wrap" Margin="63,28,80,460" FontSize="72" FontWeight="Bold" Text="TextBlock"/>
-                                <TextBlock x:Name="SelectHotWordValueTitleTextBlock" TextWrapping="Wrap" Margin="63,175,80,298" FontSize="54" FontWeight="Bold" Text="TextBlock"/>
-                                <TextBlock x:Name="SelectHotWordValueTextBlock" TextWrapping="Wrap" Margin="63,335,80,45" FontSize="72" FontWeight="Bold" Text="TextBlock"/>
+                    <Button x:Name="SelectHotWordButton" Margin="1025,215,80,250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
+                        <Border x:Name="SelectHotWordBorder" BorderThickness="5,5,5,5" BorderBrush="#FF333399" CornerRadius="64,64,64,64" Width="805" Height="605" d:IsHidden="True">
+                            <Grid x:Name="SelectHotWordGrid" d:IsHidden="True">
+                                <TextBlock x:Name="SelectHotWordTitleTextBlock" TextWrapping="Wrap" Margin="63,28,80,460" FontSize="72" FontWeight="Bold" Text="TextBlock" d:IsHidden="True"/>
+                                <TextBlock x:Name="SelectHotWordValueTitleTextBlock" TextWrapping="Wrap" Margin="63,175,80,298" FontSize="54" FontWeight="Bold" Text="TextBlock" d:IsHidden="True"/>
+                                <TextBlock x:Name="SelectHotWordValueTextBlock" TextWrapping="Wrap" Margin="63,335,80,45" FontSize="72" FontWeight="Bold" Text="TextBlock" d:IsHidden="True"/>
                             </Grid>
                         </Border>
                     </Button>
                     <Image x:Name="HotWordArrowImage" Height="236" Width="325" Margin="798,422,798,422" Source="/Images/red_arrow_right.png" d:IsHidden="True"/>
+                </Grid>
+                <Grid x:Name="GHotWordKeyButtonGrid">
+                    <ItemsControl x:Name="GHotWordKeyButtonItemControl" Margin="519,134,519,128" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button x:Name="GHotWordKeyButton" Margin="0,0,0,50" Height="164" Width="882" Click="Button_Click" BorderBrush="{x:Null}">
+                                    <Grid>
+                                        <Image Source="/Images/orange_button_plate.png"/>
+                                        <TextBlock Text="{Binding}" FontSize="64" Foreground="White" FontWeight="Bold"/>
+                                    </Grid>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Grid>
                 <Grid x:Name="HotWordValueButtonGrid" d:IsHidden="True">
                     <ItemsControl x:Name="HotWordValueButtonItemControl" Margin="519,134,519,128" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
