@@ -601,8 +601,6 @@ namespace KokoroUpTime
 
                     // 画面のフェードアウト処理とか入れる（別関数を呼び出す）
 
-                    this.StopBGM();
-
                     this.dataProgress.HasCompletedChapter3 = true;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
@@ -1964,15 +1962,19 @@ namespace KokoroUpTime
 
                 if (this.GHotWordKeyButtonGrid.Visibility == Visibility.Visible)
                 {
-                    if (button.Content.ToString() == this.scene.Replace("を選んでみよう", ""))
+                    var buttonText = button.GetChildren<TextBlock>().ToList()[0].Text;
+
+                    Debug.Print(buttonText);
+
+                    if (buttonText == this.scene.Replace("を選んでみよう", ""))
                     {
-                        this.HotWordValueButtonItemControl.ItemsSource = HOT_WORD_VALUES[button.Content.ToString()];
+                        this.HotWordValueButtonItemControl.ItemsSource = HOT_WORD_VALUES[buttonText];
 
                         this.GoTo("select_hot_word_value");
                     }
                     else
                     {
-                        this.GoTo($"select_other_word_{Array.IndexOf(HOT_WORD_KEYS, button.Content.ToString()) + 1}");
+                        this.GoTo($"select_other_word_{Array.IndexOf(HOT_WORD_KEYS, buttonText) + 1}");
                     }
                 }
 

@@ -874,7 +874,7 @@
                                 <Button x:Name="GHotWordKeyButton" Margin="0,0,0,50" Height="164" Width="882" Click="Button_Click" BorderBrush="{x:Null}">
                                     <Grid>
                                         <Image Source="/Images/orange_button_plate.png"/>
-                                        <TextBlock Text="{Binding}" FontSize="64" Foreground="White" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding}" FontSize="64" Foreground="White" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center"/>
                                     </Grid>
                                 </Button>
                             </DataTemplate>
