@@ -669,7 +669,7 @@
 
     <Viewbox>
         <Grid Height="1080" Width="1920">
-            <Grid x:Name="BaseGrid">
+            <Grid x:Name="BaseGrid" d:IsHidden="True">
                 <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/blue_gradation.png"/>
             </Grid>
             <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
@@ -697,51 +697,7 @@
                     <TextBlock x:Name="SessionStarTextBlock" HorizontalAlignment="Left" Margin="35,109,0,0" VerticalAlignment="Top" FontSize="48" RenderTransformOrigin="0.345,0.474" FontWeight="Bold" Text="☆" TextAlignment="Center"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="ChallengeGrid" d:IsHidden="True">
-
-
-
-
-                <Image x:Name="ChallengeTitleImage" HorizontalAlignment="Left" Height="88" Margin="306,13,0,0" VerticalAlignment="Top" Width="788" Source="/Images/challenge_time.png" d:IsHidden="True"/>
-                <Grid x:Name="ChallengeGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="263,120,0,0" VerticalAlignment="Top" Width="400" d:IsHidden="True">
-                    <Image x:Name="ChallengeGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <ItemsControl x:Name="ChallengeGoodFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:IsHidden="True">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <InkCanvas x:Name="ChallengeGoodFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                                    <TextBlock x:Name="ChallengeGoodFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
-                                    <TextBlock x:Name="ChallengeGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
-                                    <InkCanvas.DefaultDrawingAttributes>
-                                        <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                                    </InkCanvas.DefaultDrawingAttributes>
-                                </InkCanvas>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
-                <Grid x:Name="ChallengeBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="734,120,0,0" d:IsHidden="True">
-                    <Image x:Name="ChallengeBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <ItemsControl x:Name="ChallengeBadFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:IsHidden="True">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <InkCanvas x:Name="ChallengeBadFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                                    <TextBlock x:Name="ChallengeBadFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
-                                    <TextBlock x:Name="ChallengeBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
-                                    <InkCanvas.DefaultDrawingAttributes>
-                                        <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                                    </InkCanvas.DefaultDrawingAttributes>
-                                </InkCanvas>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
-                <Grid x:Name="ChallengeMessageBoxGrid" Height="250" Width="514" Margin="1278,136,128,694" d:IsHidden="True">
-                    <Image x:Name="ChallengeMessageBoxImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/message_box.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="ChallengeMessageBoxTextBlock" FontSize="48" Margin="36,25,36,25" d:IsHidden="True"><Run Text="自分がなったことのある"/><LineBreak /><Run Text="　　「きもち」に 〇 を"/><LineBreak /><Run Text="　　　つけてみよう！"/></TextBlock>
-                </Grid>
-                <Image x:Name="ChallengeItemImage" HorizontalAlignment="Left" Height="489" Margin="1098,172,0,0" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" d:IsHidden="True"/>
-            </Grid>
-            <Grid x:Name="ChallengeTimeGrid" d:IsHidden="True">
+            <Grid x:Name="ChallengeTimeGrid">
                 <Border x:Name="ChallengeTimeTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,261,0,540" Background="#FFFFC000" d:IsHidden="True">
                     <TextBlock x:Name="ChallengeTimeTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="180" Foreground="#FF9966FF" FontWeight="Normal" TextAlignment="Center" d:IsHidden="True"/>
                 </Border>
@@ -764,29 +720,39 @@
                         <TextBlock x:Name="ChildrenFeelingCommentTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="48" Margin="51,10,37,52" TextAlignment="Justify" FontWeight="Normal" d:IsHidden="True"/>
                     </Grid>
                     <Grid x:Name="ChildrenFeelingCommentBigGrid" Height="350" Width="1090" Margin="643,229,187,501" d:IsHidden="True">
-                        <Image x:Name="ChildrenFeelingCommentBigImage" Source="/Images/small_bubble_left_down_red.png" d:IsHidden="True"/>
-                        <TextBlock x:Name="ChildrenFeelingCommentBigTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="48" Margin="55,41,40,104" TextAlignment="Justify" FontWeight="Normal" d:IsHidden="True"/>
+                        <Image x:Name="ChildrenFeelingCommentBigImage" Source="/Images/small_bubble_left_down_red.png"/>
+                        <TextBlock x:Name="ChildrenFeelingCommentBigTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="48" Margin="55,41,40,104" TextAlignment="Justify" FontWeight="Normal"/>
                     </Grid>
-                    <Button x:Name="CheckMangaButton" Margin="1500,236,4,500" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
-                        <Image x:Name="CheckMangaImage" Source="/Images/check_manga.png" d:IsHidden="True"/>
+                    <Button x:Name="CheckMangaButton" Margin="1500,236,4,500" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                        <Image x:Name="CheckMangaImage" Source="/Images/check_manga.png"/>
                     </Button>
-                    <Button x:Name="FeelingNextGoButton" Height="143" Width="442" Background="{x:Null}" BorderBrush="{x:Null}" Margin="1459,912,19,25" Click="Button_Click" d:IsHidden="True">
+                    <Button x:Name="FeelingNextGoButton" Height="143" Width="442" Background="{x:Null}" BorderBrush="{x:Null}" Margin="1459,912,19,25" Click="Button_Click">
                         <Image x:Name="FeelingNextGoImage" Source="/Images/next_go_button.png" d:IsHidden="True"/>
                     </Button>
-                    <Button x:Name="FeelingPrevBackButton" Height="142" Width="462" Background="{x:Null}" BorderBrush="{x:Null}" Margin="16,912,1442,26" Click="Button_Click" d:IsHidden="True">
+                    <Button x:Name="FeelingPrevBackButton" Height="142" Width="462" Background="{x:Null}" BorderBrush="{x:Null}" Margin="16,912,1442,26" Click="Button_Click">
                         <Image x:Name="FeelingPrevBackImage" Source="/Images/prev_back_.png" d:IsHidden="True"/>
                     </Button>
-                    <TextBlock x:Name="KindOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="724,579,0,0" Text="きもちの種類" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" TextAlignment="Center" d:IsHidden="True"/>
-                    <TextBlock x:Name="SizeOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="1200,579,0,0" Text="きもちの大きさ" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" d:IsHidden="True"/>
-                    <Button x:Name="KindOfFeelingInputButton" Width="334" Height="175" Background="{x:Null}" BorderBrush="{x:Null}" Margin="743,680,843,225" Click="Button_Click" d:IsHidden="True">
-                        <Image x:Name="KindOfFeelingInputImage" Source="/Images/kind_of_feeling_input.png" d:IsHidden="True" />
-                    </Button>
-                    <Button x:Name="SizeOfFeelingInputButton" Content="(      )" HorizontalAlignment="Left" Margin="1244,653,0,0" VerticalAlignment="Top" FontSize="140" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True"/>
+                    <Grid x:Name="FeelingInputGrid">
+                        <TextBlock x:Name="KindOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="724,579,0,0" Text="きもちの種類" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" TextAlignment="Center"/>
+                        <TextBlock x:Name="SizeOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="1200,579,0,0" Text="きもちの大きさ" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold"/>
+                        <Button x:Name="KindOfFeelingInputButton" Width="334" Height="175" Background="{x:Null}" BorderBrush="{x:Null}" Margin="743,680,843,225" Click="Button_Click">
+                            <Grid x:Name="KindOfFeelingInputGrid">
+                                <Image x:Name="KindOfFeelingInputImage" Source="/Images/kind_of_feeling_input.png" />
+                                <TextBlock x:Name="KindOfFeelingInputTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                            </Grid>
+                        </Button>
+                        <Button x:Name="SizeOfFeelingInputButton" HorizontalAlignment="Left" Margin="1230,697,0,0" VerticalAlignment="Top" FontSize="140" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Height="141" Width="347">
+                            <Grid x:Name="SizeOfFeelingInputGrid">
+                                <Image x:Name="SizeOfFeelingInputImage" Source="/Images/size_of_feeling_input_button_fimage.png"/>
+                                <TextBlock x:Name="SizeOfFeelingInputTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                            </Grid>
+                        </Button>
+                    </Grid>
                 </Grid>
                 <Border x:Name="Let_sTryTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,131,0,771" Background="#FFED7D31" d:IsHidden="True">
                     <TextBlock x:Name="Let_sTryTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" Foreground="#FF4472C4" FontWeight="Normal" TextAlignment="Center" d:IsHidden="True"/>
                 </Border>
-                <Grid x:Name="CHotWordKeyButtonGrid">
+                <Grid x:Name="CHotWordKeyButtonGrid" d:IsHidden="True">
                     <ItemsControl x:Name="CHotWordKeyButtonItemControl" Margin="519,134,519,128" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -806,7 +772,7 @@
                 </Grid>
                 <Image x:Name="HotWordTitleImage" Height="238" Width="1670" Source="/Images/hot_word_1_title.png" Margin="125,101,125,741" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="GroupActivityGrid">
+            <Grid x:Name="GroupActivityGrid" d:IsHidden="True">
                 <Grid x:Name="Let_sUseHotWordGrid">
                     <Image x:Name="Let_sUseHotWordTitleImage" HorizontalAlignment="Center" Height="98" Margin="0,50,0,0" VerticalAlignment="Top" Width="1106" Source="/Images/let's_use_hot_word_title.png"/>
                     <Grid x:Name="SituationsGrid" Margin="175,205,330,95" d:IsHidden="True">
@@ -984,56 +950,100 @@
                 <Image x:Name="ItemLeftDownImage" HorizontalAlignment="Left" Height="589" Margin="-30,540,0,0" VerticalAlignment="Top" Width="418" Source="/Images/item03_solo.png" d:IsHidden="True"/>
             </Grid>
             <Grid x:Name="SelectFeelingGrid" d:IsHidden="True">
-                <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400" d:IsHidden="True">
-                    <Image x:Name="SelectGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <ItemsControl x:Name="SelectGoodFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:IsHidden="True">
-                        <ItemsControl.ItemTemplate>
+                <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400">
+                    <Image x:Name="SelectGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill"/>
+                    <ListBox x:Name="SelectGoodFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
+                        <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <InkCanvas x:Name="SelectGoodFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                                    <TextBlock x:Name="SelectGoodFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
-                                    <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
-                                    <InkCanvas.DefaultDrawingAttributes>
-                                        <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                                    </InkCanvas.DefaultDrawingAttributes>
-                                </InkCanvas>
+                                <Grid x:Name="SelectGoodFeelingGrid" PreviewMouseDown="selectFeeling">
+                                    <Label Width="360"/>
+                                    <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
+                                </Grid>
                             </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="5,4"/>
+                                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ContentControl}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="LightCoral"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="LightPink"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
                 </Grid>
-                <Grid x:Name="SelectBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="923,72,0,0" d:IsHidden="True">
-                    <Image x:Name="SelectBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <ItemsControl x:Name="SelectBadFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:IsHidden="True">
-                        <ItemsControl.ItemTemplate>
+                <Grid x:Name="SelectBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="923,72,0,0">
+                    <Image x:Name="SelectBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill"/>
+                    <ListBox x:Name="SelectBadFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
+                        <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <InkCanvas x:Name="SelectBadFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                                    <TextBlock x:Name="SelectBadFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
-                                    <TextBlock x:Name="SelectBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
-                                    <InkCanvas.DefaultDrawingAttributes>
-                                        <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                                    </InkCanvas.DefaultDrawingAttributes>
-                                </InkCanvas>
+                                <Grid x:Name="SelectBadFeelingGrid" PreviewMouseDown="selectFeeling" >
+                                    <Label Width="360"/>
+                                    <TextBlock x:Name="SelectBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
+                                </Grid>
                             </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="5,4"/>
+                                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ContentControl}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="LightBlue"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="LightSkyBlue"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
                 </Grid>
-                <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="727,0,0,0" VerticalAlignment="Center" Width="273" Source="/Images/item01_solo.png" RenderTransformOrigin="0.659,0.453" d:IsHidden="True"/>
+                <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="727,0,0,0" VerticalAlignment="Center" Width="273" Source="/Images/item01_solo.png" RenderTransformOrigin="0.659,0.453"/>
             </Grid>
-            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
-                <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684" d:IsHidden="True">
-                    <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center" d:IsHidden="True"/>
-                    <TextBlock x:Name="ViewSizeOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center" d:IsHidden="True"/>
+            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920">
+                <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684">
+                    <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png"/>
+                    <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center"/>
                 </Grid>
                 <Grid x:Name="ViewKindOfFeelingGrid" Margin="527,267,526,448" d:IsHidden="True">
-                    <Image x:Name="ViewKindOfFeelingImage" Source="/Images/feeling_value.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="ViewKindOfFeelingPersonTextBlock" HorizontalAlignment="Center" Margin="0,30,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="847" TextAlignment="Center" FontWeight="Bold" d:IsHidden="True"/>
-                    <TextBlock x:Name="ViewKindOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center" d:IsHidden="True"/>
+                    <Image x:Name="ViewKindOfFeelingImage" Source="/Images/feeling_value.png"/>
+                    <TextBlock x:Name="ViewKindOfFeelingPersonTextBlock" HorizontalAlignment="Center" Margin="0,30,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="847" TextAlignment="Center" FontWeight="Bold"/>
+                    <TextBlock x:Name="ViewKindOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center"/>
                 </Grid>
+                <TextBlock x:Name="ViewSizeOfFeelingTextBlock" HorizontalAlignment="Center" Margin="0,166,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center"/>
             </Grid>
-            <Grid x:Name="GaugeGrid" d:IsHidden="True">
-                <Grid x:Name="SelectHeartGrid" Margin="776,410,776,358" d:IsHidden="True">
-                    <Image x:Name="SelectHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_red.png" d:IsHidden="True"/>
-                    <Image x:Name="SelectNeedleImage" Height="213" Source="/Images/red_needle.png" RenderTransformOrigin="0.5,0.8" Margin="171,65,172,0" VerticalAlignment="Top" d:IsHidden="True">
+            <Grid x:Name="GaugeGrid">
+                <Grid x:Name="SelectHeartGrid" Margin="776,410,776,358">
+                    <Image x:Name="SelectHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_red.png"/>
+                    <Image x:Name="SelectNeedleImage" Height="213" Source="/Images/red_needle.png" RenderTransformOrigin="0.5,0.8" Margin="171,65,172,0" VerticalAlignment="Top">
                         <Image.RenderTransform>
                             <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter3}}}"/>
                         </Image.RenderTransform>
@@ -1262,7 +1272,7 @@
                 <Image x:Name="GladCommentUpImage" HorizontalAlignment="Left" Height="168" Margin="677,179,0,0" VerticalAlignment="Top" Width="170" Source="/Images/aosuke_glad.png" d:IsHidden="True"/>
                 <Image x:Name="GladCommentDownImage" HorizontalAlignment="Left" Height="168" Margin="677,412,0,0" VerticalAlignment="Top" Width="170" Source="/Images/kimi_glad.png" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="EndingGrid">
+            <Grid x:Name="EndingGrid" d:IsHidden="True">
                 <Grid x:Name="EndingTitleGrid" Width="878" Height="427" Margin="521,202,521,451">
                     <Image x:Name="EndingTitleBackImage" Source="/Images/ending_bubble.png" Stretch="Uniform"/>
                     <TextBlock x:Name="EndingTitleTextBlock" HorizontalAlignment="Center" Margin="0,214,0,0" VerticalAlignment="Top" FontSize="88" FontWeight="Bold" Foreground="Black" Text="しゅうりょう！" TextAlignment="Center"/>

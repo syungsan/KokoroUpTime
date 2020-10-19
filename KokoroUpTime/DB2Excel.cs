@@ -22,10 +22,11 @@ namespace KokoroUpTime
         private static DataProgress dataProgress = new DataProgress();
 
         private static DataChapter1 dataChapter1 = new DataChapter1();
-        private static Dictionary<string, string> chapter1Result = null;
 
         private static DataChapter2 dataChapter2 = new DataChapter2();
         private static Dictionary<string, string> chapter2Result = null;
+
+        private static DataChapter3 dataChapter3 = new DataChapter3();
 
         public static void WriteDB2Excel(string dbPath, string outputPath, string[] userInfos)
         {
@@ -84,37 +85,43 @@ namespace KokoroUpTime
 
                 var playSceneNum = allScene.IndexOf(datProgs[index]);
 
-                excel.WriteCell(playSceneNumCells[index], playSceneNum);
+                excel.WriteCell(playSceneNumCells[index], playSceneNum + 1);
 
                 excel.WriteCell(playSceneNameCells[index], datProgs[index]);
             }
 
-            // ###############################################################################
-            /*
-            //第１回に書き込み
+            //第1回に書き込み
             if(dataProgress.HasCompletedChapter1 == true)
             {
-                excel.SetSheet("第１回");
+                excel.SetSheet("第1回");
 
-                chapter1Result = new Dictionary<string, string>
+                var chapter1StrResult = new Dictionary<string, string>
                 {
-                    { "A4", dataChapter1.MyKindOfGoodFeelings},
+                    { "A4", dataChapter1.MyKindOfGoodFeelings },
                     { "B5", dataChapter1.MyKindOfBadFeelings },
-                    { "F4" , dataChapter1.KimisKindOfFeelings},
-                    { "F8" , dataChapter1.AkamarusKindOfFeelings},
-                    { "G8" , dataChapter1.AkamarusSizeOfFeeling.ToString()},
-                    { "F12" , dataChapter1.AosukesKindOfFeelings},
-                    { "G12" , dataChapter1.AosukesSizeOfFeeling.ToString()},
+                    { "F4", dataChapter1.KimisKindOfFeeling },
+                    { "F8", dataChapter1.AkamarusKindOfFeeling },
+                    { "F12", dataChapter1.AosukesKindOfFeeling },
                 };
 
+                var chapter1IntResult = new Dictionary<string, int?>
+                {
+                    { "G8", dataChapter1.AkamarusSizeOfFeeling },
+                    { "G12", dataChapter1.AosukesSizeOfFeeling },
+                };
 
-                foreach (KeyValuePair<string, string> item in chapter2Result)
+                foreach (KeyValuePair<string, string> item in chapter1StrResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+
+                foreach (KeyValuePair<string, int?> item in chapter1IntResult)
                 {
                     excel.WriteCell(item.Key, item.Value);
                 }
             }
 
-
+            /*
             // ###############################################################################
 
             //第２回に書き込み
@@ -143,6 +150,45 @@ namespace KokoroUpTime
 
             // ###############################################################################
             */
+
+            //第3回に書き込み
+            if (dataProgress.HasCompletedChapter3 == true)
+            {
+                excel.SetSheet("第3回");
+
+                var chapter3StrResult = new Dictionary<string, string>
+                {
+                    { "D3", dataChapter3.AosukesKindOfFeelingPreUseItem },
+                    { "D5", dataChapter3.KimisKindOfFeelingPreUseItem },
+                    { "D9", dataChapter3.AosukesKindOfFeelingAfterUsedItem },
+                    { "D11", dataChapter3.KimisKindOfFeelingAfterUsedItem },
+                    { "D13", dataChapter3.AkamarusKindOfFeelingAfterUsedItem },
+                    { "G2", dataChapter3.SelectedPraiseHotWord },
+                    { "G3", dataChapter3.SelectedWorryHotWord },
+                    { "G4", dataChapter3.SelectedEncourageHotWord },
+                    { "G5", dataChapter3.SelectedThanksHotWord },
+                };
+
+                var chapter3IntResult = new Dictionary<string, int?>
+                {
+                    { "D4", dataChapter3.AosukesSizeOfFeelingPreUseItem },
+                    { "D6", dataChapter3.KimisSizeOfFeelingPreUseItem },
+                    { "D10", dataChapter3.AosukesSizeOfFeelingAfterUsedItem },
+                    { "D12", dataChapter3.KimisSizeOfFeelingAfterUsedItem },
+                    { "D14", dataChapter3.AkamarusSizeOfFeelingAfterUsedItem },
+                };
+
+                foreach (KeyValuePair<string, string> item in chapter3StrResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+
+                foreach (KeyValuePair<string, int?> item in chapter3IntResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+            }
+
             // 名前を付けて保存する
             if (excel.SaveAs(outputPath) == false)
             {
@@ -168,6 +214,8 @@ namespace KokoroUpTime
                     dataOption.MessageSpeed = row.MessageSpeed;
 
                     dataOption.IsAddRubi = row.IsAddRubi;
+
+                    dataOption.Is3SecondRule = row.Is3SecondRule;
                 }
 
                 var item = connection.Query<DataItem>("SELECT * FROM DataItem WHERE Id = 1;");
@@ -197,7 +245,7 @@ namespace KokoroUpTime
                     dataItem.HasGotItem11 = row.HasGotItem11;
                 }
 
-               /* var progress = connection.Query<DataProgress>("SELECT * FROM DataProgress WHERE Id = 1;");
+                var progress = connection.Query<DataProgress>("SELECT * FROM DataProgress WHERE Id = 1;");
 
                 foreach (var row in progress)
                 {
@@ -254,25 +302,33 @@ namespace KokoroUpTime
                     dataProgress.HasCompletedChapter12 = row.HasCompletedChapter12;
                 }
 
-                var result1 = connection.Query<DataChapter1>($"SELECT * FROM DataChapter1' WHERE CreatedAt = '{dataChapter1.CreatedAt}';");
+                var resultChapter1 = connection.Query<DataChapter1>($"SELECT * FROM 'DataChapter1';");
 
-                foreach (var row in result1)
+                foreach (var row in resultChapter1)
                 {
-                    dataChapter1.MyKindOfGoodFeelings = row.MyKindOfGoodFeelings;
+                    if (row.MyKindOfGoodFeelings != null)
+                        dataChapter1.MyKindOfGoodFeelings = row.MyKindOfGoodFeelings;
 
-                    dataChapter1.MyKindOfBadFeelings = row.MyKindOfBadFeelings;
+                    if (row.MyKindOfBadFeelings != null)
+                        dataChapter1.MyKindOfBadFeelings = row.MyKindOfBadFeelings;
 
-                    dataChapter1.KimisKindOfFeelings = row.KimisKindOfFeelings;
+                    if (row.KimisKindOfFeeling != null)
+                        dataChapter1.KimisKindOfFeeling = row.KimisKindOfFeeling;
 
-                    dataChapter1.AkamarusKindOfFeelings = row.AkamarusKindOfFeelings;
+                    if (row.AkamarusKindOfFeeling != null)
+                        dataChapter1.AkamarusKindOfFeeling = row.AkamarusKindOfFeeling;
 
-                    dataChapter1.AkamarusSizeOfFeeling = row.AkamarusSizeOfFeeling;
+                    if (row.AkamarusSizeOfFeeling != null)
+                        dataChapter1.AkamarusSizeOfFeeling = row.AkamarusSizeOfFeeling;
 
-                    dataChapter1.AosukesKindOfFeelings = row.AosukesKindOfFeelings;
+                    if (row.AosukesKindOfFeeling != null)
+                        dataChapter1.AosukesKindOfFeeling = row.AosukesKindOfFeeling;
 
-                    dataChapter1.AosukesSizeOfFeeling = row.AosukesSizeOfFeeling;
+                    if (row.AosukesSizeOfFeeling != null)
+                        dataChapter1.AosukesSizeOfFeeling = row.AosukesSizeOfFeeling;
                 }
 
+                /*
                 var result2 = connection.Query<DataChapter2>($@"SELECT * FROM DataChapter2' WHERE CreatedAt = '{dataChapter2.CreatedAt}';");
 
                 foreach (var row in result2)
@@ -294,6 +350,53 @@ namespace KokoroUpTime
                     dataChapter2.MyALittlleExcitingEvents = row.MyALittlleExcitingEvents;
                 }
                 */
+
+                var resultChapter3 = connection.Query<DataChapter3>("SELECT * FROM 'DataChapter3';");
+
+                foreach (var row in resultChapter3)
+                {
+                    if (row.AosukesKindOfFeelingPreUseItem != null)
+                        dataChapter3.AosukesKindOfFeelingPreUseItem = row.AosukesKindOfFeelingPreUseItem;
+
+                    if (row.KimisKindOfFeelingPreUseItem != null)
+                        dataChapter3.KimisKindOfFeelingPreUseItem = row.KimisKindOfFeelingPreUseItem;
+
+                    if (row.AosukesKindOfFeelingAfterUsedItem != null)
+                        dataChapter3.AosukesKindOfFeelingAfterUsedItem = row.AosukesKindOfFeelingAfterUsedItem;
+
+                    if (row.KimisKindOfFeelingAfterUsedItem != null)
+                        dataChapter3.KimisKindOfFeelingAfterUsedItem = row.KimisKindOfFeelingAfterUsedItem;
+
+                    if (row.AkamarusKindOfFeelingAfterUsedItem != null)
+                        dataChapter3.AkamarusKindOfFeelingAfterUsedItem = row.AkamarusKindOfFeelingAfterUsedItem;
+
+                    if (row.AosukesSizeOfFeelingPreUseItem != null)
+                        dataChapter3.AosukesSizeOfFeelingPreUseItem = row.AosukesSizeOfFeelingPreUseItem;
+
+                    if (row.KimisSizeOfFeelingPreUseItem != null)
+                        dataChapter3.KimisSizeOfFeelingPreUseItem = row.KimisSizeOfFeelingPreUseItem;
+
+                    if (row.AosukesSizeOfFeelingAfterUsedItem != null)
+                        dataChapter3.AosukesSizeOfFeelingAfterUsedItem = row.AosukesSizeOfFeelingAfterUsedItem;
+
+                    if (row.KimisSizeOfFeelingAfterUsedItem != null)
+                        dataChapter3.KimisSizeOfFeelingAfterUsedItem = row.KimisSizeOfFeelingAfterUsedItem;
+
+                    if (row.AkamarusSizeOfFeelingAfterUsedItem != null)
+                        dataChapter3.AkamarusSizeOfFeelingAfterUsedItem = row.AkamarusSizeOfFeelingAfterUsedItem;
+
+                    if (row.SelectedPraiseHotWord != null)
+                        dataChapter3.SelectedPraiseHotWord = row.SelectedPraiseHotWord;
+
+                    if (row.SelectedWorryHotWord != null)
+                        dataChapter3.SelectedWorryHotWord = row.SelectedWorryHotWord;
+
+                    if (row.SelectedEncourageHotWord != null)
+                        dataChapter3.SelectedEncourageHotWord = row.SelectedEncourageHotWord;
+
+                    if (row.SelectedThanksHotWord != null)
+                        dataChapter3.SelectedThanksHotWord = row.SelectedThanksHotWord;
+                }
             }
         }
     }
