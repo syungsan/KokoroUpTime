@@ -148,186 +148,121 @@ namespace KokoroUpTime
 
             this.imageObjects = new Dictionary<string, Image>
             {
-                ["bg_image"] = this.BackgroundImage, //
-                ["manga_title_image"] = this.MangaTitleImage, //
-                ["manga_image"] = this.MangaImage, //
-                ["item_center_up_image"] = this.ItemCenterUpImage, //
-                ["item_center_image"] = this.ItemCenterImage, //
-                ["item_left_image"] = this.ItemLeftImage, //
-                ["item_detail_info_image"] = this.ItemDetailInfoImage, //
-                ["children_face_left_center_image"] = this.ChildrenFaceLeftCenterImage, //
-                ["children_feeling_comment_image"] = this.ChildrenFeelingCommentImage, //
-                ["children_feeling_comment_big_image"] = this.ChildrenFeelingCommentBigImage, //
-                ["shiroji_very_small_right_up_image"] = this.ShirojiVerySmallRightUpImage, //
-                ["item_center_right_image"] = this.ItemCenterRightImage, //
-
-
+                ["bg_image"] = this.BackgroundImage,
+                ["manga_title_image"] = this.MangaTitleImage,
+                ["manga_image"] = this.MangaImage,
+                ["item_center_up_image"] = this.ItemCenterUpImage,
+                ["item_center_image"] = this.ItemCenterImage,
+                ["item_left_image"] = this.ItemLeftImage,
+                ["item_detail_info_image"] = this.ItemDetailInfoImage,
+                ["children_face_left_center_image"] = this.ChildrenFaceLeftCenterImage,
+                ["children_feeling_comment_image"] = this.ChildrenFeelingCommentImage,
+                ["children_feeling_comment_big_image"] = this.ChildrenFeelingCommentBigImage,
+                ["shiroji_very_small_right_up_image"] = this.ShirojiVerySmallRightUpImage,
+                ["item_center_right_image"] = this.ItemCenterRightImage,
                 ["item_left_last_image"] = this.ItemLeftLastImage,
-                ["session_title_image"] = this.SessionTitleImage, //
-                // ["kimi_in_plate_image"] = this.KimiInPlateImage,
-                // ["kimi_plate_outer_image"] = this.KimiPlateOuterImage,
-                // ["select_heart_image"] = this.SelectHeartImage,
-                // ["select_needle_image"] = this.SelectNeedleImage,
-                // ["children_info_image"] = this.ChildrenInfoImage,
-
-                ["shiroji_ending_image"] = this.ShirojiEndingImage, //
-                ["shiroji_right_image"] = this.ShirojiRightImage, //
-                ["shiroji_right_up_image"] = this.ShirojiRightUpImage, //
-                ["shiroji_left_image"] = this.ShirojiLeftImage, //
+                ["session_title_image"] = this.SessionTitleImage,
+                ["shiroji_ending_image"] = this.ShirojiEndingImage,
+                ["shiroji_right_image"] = this.ShirojiRightImage,
+                ["shiroji_right_up_image"] = this.ShirojiRightUpImage,
+                ["shiroji_left_image"] = this.ShirojiLeftImage,
                 ["shiroji_small_right_up_image"] = this.ShirojiSmallRightUpImage,
                 ["shiroji_small_right_down_image"] = this.ShirojiSmallRightDownImage,
                 ["shiroji_right_center_image"] = this.ShirojiRightCenterImage,
                 ["shiroji_small_right_center_image"] = this.ShirojiSmallRightCenterImage,
                 ["shiroji_right_down_small_image"] = this.ShirojiRightDownSmallImage,
-
-                // ["children_stand_left_image"] = this.ChildrenStandLeftImage, //
-                // ["children_stand_right_image"] = this.ChildrenStandRightImage,
-                // ["children_stand_left_onomatopoeia_image"] = this.ChildrenStandLeftOnomatopoeiaImage,
-                // ["kimi_stand_small_left_image"] = this.KimiStandSmallLeftImage,
-                // ["intro_akamaru_face_image"] = this.IntroAkamaruFaceImage,
-                // ["intro_aosuke_face_image"] = this.IntroAosukeFaceImage,
-                // ["intro_kimi_face_image"] = this.IntroKimiFaceImage,
-                ["children_face_left_image"] = this.ChildrenFaceLeftImage, //
-                ["children_face_right_image"] = this.ChildrenFaceRightImage, //
-                // ["teacher_image"] = this.TeacherImage,
-                ["main_msg_bubble_image"] = this.MainMessageBubbleImage, //
-                ["shiroji_small_left_down_image"] = this.ShirojiSmallLeftDownImage, //
-                ["hot_word_title_image"] = this.HotWordTitleImage, //
-                ["glad_comment_up_image"] = this.GladCommentUpImage, //
-                ["glad_comment_down_image"] = this.GladCommentDownImage, //
-                ["item_left_center_small_image"] = this.ItemLeftCenterSmallImage, //
-                ["let's_use_hot_word_title_image"] = this.Let_sUseHotWordTitleImage, //
-                ["hot_word_arrow_image"] = this.HotWordArrowImage, //
-                ["item_left_down_image"] = this.ItemLeftDownImage, //
+                ["children_face_left_image"] = this.ChildrenFaceLeftImage,
+                ["children_face_right_image"] = this.ChildrenFaceRightImage,
+                ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
+                ["shiroji_small_left_down_image"] = this.ShirojiSmallLeftDownImage,
+                ["hot_word_title_image"] = this.HotWordTitleImage,
+                ["glad_comment_up_image"] = this.GladCommentUpImage,
+                ["glad_comment_down_image"] = this.GladCommentDownImage,
+                ["item_left_center_small_image"] = this.ItemLeftCenterSmallImage,
+                ["let's_use_hot_word_title_image"] = this.Let_sUseHotWordTitleImage,
+                ["hot_word_arrow_image"] = this.HotWordArrowImage,
+                ["item_left_down_image"] = this.ItemLeftDownImage,
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
             {
-                ["session_sub_title_text"] = this.SessionSubTitleTextBlock, //
-                ["session_sentence_text"] = this.SessionSentenceTextBlock, //
-                // ["view_kind_of_feeling_person_text"] = this.ViewKindOfFeelingPersonTextBlock,
-                // ["view_kind_of_feeling_text"] = this.ViewKindOfFeelingTextBlock,
-                // ["view_size_of_feeling_text"] = this.ViewSizeOfFeelingTextBlock, //
-                // ["case_of_kimi_text"] = this.CaseOfKimiTextBlock,
-                // ["kimi_scene1_text"] = this.KimiScene1TextBlock,
-                // ["kimi_kind_of_feeling_up_text"] = this.KimiKindOfFeelingUpTextBlock,
-                // ["kimi_size_of_feeling_up_text"] = this.KimiSizeOfFeelingUpTextBlock,
-                // ["kimi_scene2_text"] = this.KimiScene2TextBlock,
-                // ["kimi_kind_of_feeling_down_text"] = this.KimiKindOfFeelingDownTextBlock,
-                // ["kimi_size_of_feeling_down_text"] = this.KimiSizeOfFeelingDownTextBlock,
-                // ["compare_msg_text"] = this.CompareMessageTextBlock,
-                // ["kind_of_feeling_akamaru_text"] = this.KindOfFeelingAkamaruTextBlock,
-                // ["size_of_feeling_akamaru_text"] = this.SizeOfFeelingAkamaruTextBlock,
-                // ["kind_of_feeling_aosuke_text"] = this.KindOfFeelingAosukeTextBlock,
-                // ["size_of_feeling_aosuke_text"] = this.SizeOfFeelingAosukeTextBlock,
+                ["session_sub_title_text"] = this.SessionSubTitleTextBlock,
+                ["session_sentence_text"] = this.SessionSentenceTextBlock,
                 ["ending_msg_text"] = this.EndingMessageTextBlock,
-                // ["children_stand_left_onomatopoeia_text"] = this.ChildrenStandLeftOnomatopoeiaTextBlock,
-                // ["children_face_small_left_msg_text"] = this.ChildrenFaceSmallLeftMessageTextBlock,
-                ["main_msg"] = this.MainMessageTextBlock, //
-                // ["thin_msg"] = this.ThinMessageTextBlock,
+                ["main_msg"] = this.MainMessageTextBlock,
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
                 ["item_book_title_text"] = this.ItemBookTitleTextBlock,
-                ["challenge_time_title_text"] = this.ChallengeTimeTitleTextBlock, //
-
-                ["let_s_try_title_text"] = this.Let_sTryTitleTextBlock, //
-                ["hot_word_text"] = this.HotWordTextBlock, //
-
-
-                ["children_feeling_title_text"] = ChildrenFeelingTitleTextBlock, //
-                ["children_feeling_comment_text"] = this.ChildrenFeelingCommentTextBlock, //
-                ["children_feeling_comment_big_text"] = this.ChildrenFeelingCommentBigTextBlock, //
-                ["let's_use_hot_word_msg"] = this.Let_sUseHotWordMessageTextBlock, //
-
-                ["selected_hot_word_title_text"] = this.SelectHotWordTitleTextBlock, //
-                ["selected_hot_word_value_title_text"] = this.SelectHotWordValueTitleTextBlock, //
-                ["selected_hot_word_value_text"] = this.SelectHotWordValueTextBlock, //
-
-                ["complimentary_situation_title_text"] = this.ComplimentarySituationTitleTextBlock, //
-                ["complimentary_situation_value_text"] = this.ComplimentarySituationValueTextBlock, //
-
-                ["kind_of_feeling_input_text"] = this.KindOfFeelingInputTextBlock, //
-                ["size_of_feeling_input_text"] = this.SizeOfFeelingInputTextBlock, //
-
-
-
-
+                ["challenge_time_title_text"] = this.ChallengeTimeTitleTextBlock,
+                ["let_s_try_title_text"] = this.Let_sTryTitleTextBlock,
+                ["hot_word_text"] = this.HotWordTextBlock,
+                ["children_feeling_title_text"] = ChildrenFeelingTitleTextBlock,
+                ["children_feeling_comment_text"] = this.ChildrenFeelingCommentTextBlock,
+                ["children_feeling_comment_big_text"] = this.ChildrenFeelingCommentBigTextBlock,
+                ["let's_use_hot_word_msg"] = this.Let_sUseHotWordMessageTextBlock,
+                ["selected_hot_word_title_text"] = this.SelectHotWordTitleTextBlock,
+                ["selected_hot_word_value_title_text"] = this.SelectHotWordValueTitleTextBlock,
+                ["selected_hot_word_value_text"] = this.SelectHotWordValueTextBlock,
+                ["complimentary_situation_title_text"] = this.ComplimentarySituationTitleTextBlock,
+                ["complimentary_situation_value_text"] = this.ComplimentarySituationValueTextBlock,
+                ["kind_of_feeling_input_text"] = this.KindOfFeelingInputTextBlock,
+                ["size_of_feeling_input_text"] = this.SizeOfFeelingInputTextBlock,
             };
 
             this.buttonObjects = new Dictionary<string, Button>
             {
-                ["next_msg_button"] = this.NextMessageButton, //
-                ["back_msg_button"] = this.BackMessageButton, //
-                // ["thin_msg_button"] = this.ThinMessageButton,
-                ["next_page_button"] = this.NextPageButton, //
-                ["back_page_button"] = this.BackPageButton, //
-                ["manga_flip_button"] = this.MangaFlipButton, //
-                // ["select_feeling_complete_button"] = this.SelectFeelingCompleteButton,
-                // ["select_feeling_next_button"] = this.SelectFeelingNextButton,
-
-                ["check_manga_button"] = this.CheckMangaButton, //
-                ["feeling_next_go_button"] = this.FeelingNextGoButton, //
-                ["feeling_prev_back_button"] = this.FeelingPrevBackButton, //
-                ["manga_prev_back_button"] = this.MangaPrevBackButton, //
-                ["complete_next_button"] = this.CompleteNextButton, //
+                ["next_msg_button"] = this.NextMessageButton,
+                ["back_msg_button"] = this.BackMessageButton,
+                ["next_page_button"] = this.NextPageButton,
+                ["back_page_button"] = this.BackPageButton,
+                ["manga_flip_button"] = this.MangaFlipButton,
+                ["check_manga_button"] = this.CheckMangaButton,
+                ["feeling_next_go_button"] = this.FeelingNextGoButton,
+                ["feeling_prev_back_button"] = this.FeelingPrevBackButton,
+                ["manga_prev_back_button"] = this.MangaPrevBackButton,
+                ["complete_next_button"] = this.CompleteNextButton,
             };
 
             this.gridObjects = new Dictionary<string, Grid>
             {
-                ["memory_check_grid"] = this.MemoryCheckGrid, //
-                ["session_grid"] = this.SessionGrid, //
-                // ["challenge_time_grid"] = this.ChallengeTimeGrid, //
-                ["select_feeling_grid"] = this.SelectFeelingGrid, //
-                ["summary_grid"] = this.SummaryGrid, //
-                ["ending_grid"] = this.EndingGrid, //
-                ["item_name_plate_left_grid"] = this.ItemNamePlateLeftGrid, //
-                ["item_name_bubble_grid"] = this.ItemNameBubbleGrid, //
-                ["item_name_plate_center_grid"] = this.ItemNamePlateCenterGrid, //
-                ["item_info_plate_grid"] = this.ItemInfoPlateGrid, //
-                ["item_info_sentence_grid"] = this.ItemInfoSentenceGrid, //
-                ["item_last_info_grid"] = this.ItemLastInfoGrid, //
-
-                ["item_check_grid"] = this.ItemCheckGrid, //
-                ["children_feeling_comment_grid"] = this.ChildrenFeelingCommentGrid, //
-                ["children_feeling_comment_big_grid"] = this.ChildrenFeelingCommentBigGrid, //
-
-                // ["kimi_plate_inner_up_grid"] = this.KimiPlateInnerUpGrid,
-                // ["kimi_plate_inner_down_grid"] = this.KimiPlateInnerDownGrid,
-                // ["view_kind_of_feeling_grid"] = this.ViewKindOfFeelingGrid,
-                // ["view_size_of_feeling_grid"] = this.ViewSizeOfFeelingGrid, //
-                // ["children_face_small_left_msg_grid"] = this.ChildrenFaceSmallLeftMessageGrid,
-                ["select_heart_grid"] = this.SelectHeartGrid, //
-                // ["compare_akamaru_heart_grid"] = this.CompareAkamaruHeartGrid,
-                // ["compare_aosuke_heart_grid"] = this.CompareAosukeHeartGrid,
-                // ["akamaru_and_aosuke_compare_grid"] = this.AkamaruAndAosukeCompareGrid,
-                // ["compare_msg_grid"] = this.CompareMessageGrid,
+                ["memory_check_grid"] = this.MemoryCheckGrid,
+                ["session_grid"] = this.SessionGrid,
+                ["select_feeling_grid"] = this.SelectFeelingGrid,
+                ["summary_grid"] = this.SummaryGrid,
+                ["ending_grid"] = this.EndingGrid,
+                ["item_name_plate_left_grid"] = this.ItemNamePlateLeftGrid,
+                ["item_name_bubble_grid"] = this.ItemNameBubbleGrid,
+                ["item_name_plate_center_grid"] = this.ItemNamePlateCenterGrid,
+                ["item_info_plate_grid"] = this.ItemInfoPlateGrid,
+                ["item_info_sentence_grid"] = this.ItemInfoSentenceGrid,
+                ["item_last_info_grid"] = this.ItemLastInfoGrid,
+                ["item_check_grid"] = this.ItemCheckGrid,
+                ["children_feeling_comment_grid"] = this.ChildrenFeelingCommentGrid,
+                ["children_feeling_comment_big_grid"] = this.ChildrenFeelingCommentBigGrid,
+                ["select_heart_grid"] = this.SelectHeartGrid,
                 ["ending_msg_grid"] = this.EndingMessageGrid,
-                ["main_msg_grid"] = this.MainMessageGrid, //
-                ["music_info_grid"] = this.MusicInfoGrid, //
-                // ["exit_back_grid"] = this.ExitBackGrid, //
-
-                ["c_hot_word_key_button_grid"] = this.CHotWordKeyButtonGrid, //
-                ["g_hot_word_key_button_grid"] = this.GHotWordKeyButtonGrid, //
-                ["hot_word_comment_grid"] = this.HotWordCommentGrid, //
-                ["situations_grid"] = this.SituationsGrid, //
-                ["let's_use_hot_word_msg_grid"] = this.Let_sUseHotWordMessageGrid, //
-                ["hot_word_value_button_grid"] = this.HotWordValueButtonGrid, //
-                ["role_play_info_grid"] = this.RolePlayInfoGrid, //
-
-                ["role_play_button_grid"] = this.RolePlayButtonGrid, //
-
-                ["feeling_input_grid"] = this.FeelingInputGrid, //
+                ["main_msg_grid"] = this.MainMessageGrid,
+                ["music_info_grid"] = this.MusicInfoGrid,
+                ["c_hot_word_key_button_grid"] = this.CHotWordKeyButtonGrid,
+                ["g_hot_word_key_button_grid"] = this.GHotWordKeyButtonGrid,
+                ["hot_word_comment_grid"] = this.HotWordCommentGrid,
+                ["situations_grid"] = this.SituationsGrid,
+                ["let's_use_hot_word_msg_grid"] = this.Let_sUseHotWordMessageGrid,
+                ["hot_word_value_button_grid"] = this.HotWordValueButtonGrid,
+                ["role_play_info_grid"] = this.RolePlayInfoGrid,
+                ["role_play_button_grid"] = this.RolePlayButtonGrid,
+                ["feeling_input_grid"] = this.FeelingInputGrid,
             };
 
             this.borderObjects = new Dictionary<string, Border>
             {
-                ["challenge_time_title_border"] = this.ChallengeTimeTitleBorder, //
-                ["children_feeling_title_border"] = this.ChildrenFeelingTitleBorder, //
-                ["let_s_try_title_border"] = this.Let_sTryTitleBorder, //
-                ["hot_word_border"] = this.HotWordBorder, //
-                ["selected_hot_word_border"] = this.SelectHotWordBorder, //
-                ["complimentary_situation_border"] = this.ComplimentarySituationBorder, //
-                ["role_play_msg_border"] = this.RolePlayMessageBorder, //
+                ["challenge_time_title_border"] = this.ChallengeTimeTitleBorder,
+                ["children_feeling_title_border"] = this.ChildrenFeelingTitleBorder,
+                ["let_s_try_title_border"] = this.Let_sTryTitleBorder,
+                ["hot_word_border"] = this.HotWordBorder,
+                ["selected_hot_word_border"] = this.SelectHotWordBorder,
+                ["complimentary_situation_border"] = this.ComplimentarySituationBorder,
+                ["role_play_msg_border"] = this.RolePlayMessageBorder,
             };
         }
 
@@ -335,188 +270,113 @@ namespace KokoroUpTime
         {
             // 各種コントロールを隠すことでフルリセット
 
-            this.MemoryCheckGrid.Visibility = Visibility.Hidden; //
-            this.SessionGrid.Visibility = Visibility.Hidden; //
-            this.SelectFeelingGrid.Visibility = Visibility.Hidden; //
-            this.SummaryGrid.Visibility = Visibility.Hidden; //
-            this.EndingGrid.Visibility = Visibility.Hidden; //
-            this.ItemNamePlateLeftGrid.Visibility = Visibility.Hidden; //
-            this.ItemNameBubbleGrid.Visibility = Visibility.Hidden; //
-            this.ItemNamePlateCenterGrid.Visibility = Visibility.Hidden; //
-            this.ItemInfoPlateGrid.Visibility = Visibility.Hidden; //
+            this.MemoryCheckGrid.Visibility = Visibility.Hidden;
+            this.SessionGrid.Visibility = Visibility.Hidden;
+            this.SelectFeelingGrid.Visibility = Visibility.Hidden;
+            this.SummaryGrid.Visibility = Visibility.Hidden;
+            this.EndingGrid.Visibility = Visibility.Hidden;
+            this.ItemNamePlateLeftGrid.Visibility = Visibility.Hidden;
+            this.ItemNameBubbleGrid.Visibility = Visibility.Hidden;
+            this.ItemNamePlateCenterGrid.Visibility = Visibility.Hidden;
+            this.ItemInfoPlateGrid.Visibility = Visibility.Hidden;
             this.ItemLastInfoGrid.Visibility = Visibility.Hidden;
-            // this.ViewKindOfFeelingGrid.Visibility = Visibility.Hidden;
-            // this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
-            // this.ChildrenFaceSmallLeftMessageGrid.Visibility = Visibility.Hidden;
-            this.Let_sUseHotWordMessageGrid.Visibility = Visibility.Hidden; //
-            // this.KimiPlateInnerUpGrid.Visibility = Visibility.Hidden;
-            // this.KimiPlateInnerDownGrid.Visibility = Visibility.Hidden;
+            this.Let_sUseHotWordMessageGrid.Visibility = Visibility.Hidden;
             this.SelectHeartGrid.Visibility = Visibility.Hidden;
-            // this.CompareAkamaruHeartGrid.Visibility = Visibility.Hidden;
-            // this.CompareAosukeHeartGrid.Visibility = Visibility.Hidden;
-            // this.AkamaruAndAosukeCompareGrid.Visibility = Visibility.Hidden;
-            // this.CompareMessageGrid.Visibility = Visibility.Hidden;
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
-            this.MainMessageGrid.Visibility = Visibility.Hidden; //
-            this.MusicInfoGrid.Visibility = Visibility.Hidden; //
-            this.ExitBackGrid.Visibility = Visibility.Hidden; //
-            this.BackgroundImage.Visibility = Visibility.Hidden; //
-            this.MangaTitleImage.Visibility = Visibility.Hidden; //
-            this.MangaImage.Visibility = Visibility.Hidden; //
-            this.ItemCenterUpImage.Visibility = Visibility.Hidden; //
-            this.ItemCenterImage.Visibility = Visibility.Hidden; //
-            this.ItemLeftImage.Visibility = Visibility.Hidden; //
-            this.ItemDetailInfoImage.Visibility = Visibility.Hidden; //
-            this.ItemCheckGrid.Visibility = Visibility.Hidden; //
+            this.MainMessageGrid.Visibility = Visibility.Hidden;
+            this.MusicInfoGrid.Visibility = Visibility.Hidden;
+            this.ExitBackGrid.Visibility = Visibility.Hidden;
+            this.BackgroundImage.Visibility = Visibility.Hidden;
+            this.MangaTitleImage.Visibility = Visibility.Hidden;
+            this.MangaImage.Visibility = Visibility.Hidden;
+            this.ItemCenterUpImage.Visibility = Visibility.Hidden;
+            this.ItemCenterImage.Visibility = Visibility.Hidden;
+            this.ItemLeftImage.Visibility = Visibility.Hidden;
+            this.ItemDetailInfoImage.Visibility = Visibility.Hidden;
+            this.ItemCheckGrid.Visibility = Visibility.Hidden;
             this.ItemLeftLastImage.Visibility = Visibility.Hidden;
-            this.SessionTitleImage.Visibility = Visibility.Hidden; //
-            this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden; //
-            this.SessionSentenceTextBlock.Visibility = Visibility.Hidden; //
-            // this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
-            // this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
-            // this.KimiPlateOuterImage.Visibility = Visibility.Hidden;
-            // this.KimiInPlateImage.Visibility = Visibility.Hidden;
-            // this.CaseOfKimiTextBlock.Visibility = Visibility.Hidden;
-            // this.KimiScene1TextBlock.Visibility = Visibility.Hidden;
-            // this.KimiKindOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
-            // this.KimiSizeOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
-            // this.KimiScene2TextBlock.Visibility = Visibility.Hidden;
-            // this.KimiKindOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
-            // this.KimiSizeOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
-            // this.ViewKindOfFeelingPersonTextBlock.Visibility = Visibility.Hidden;
-            // this.ViewKindOfFeelingTextBlock.Visibility = Visibility.Hidden;
-            this.ViewSizeOfFeelingTextBlock.Visibility = Visibility.Hidden; //
-            this.ChildrenFaceLeftImage.Visibility = Visibility.Hidden; //
-            this.ChildrenFaceRightImage.Visibility = Visibility.Hidden; //
-            // this.ChildrenFaceSmallLeftMessageTextBlock.Visibility = Visibility.Hidden;
-            // this.CompareMessageTextBlock.Visibility = Visibility.Hidden;
-            // this.KindOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
-            // this.SizeOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
-            // this.KindOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
-            // this.SizeOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
-            // this.ChildrenInfoImage.Visibility = Visibility.Hidden;
+            this.SessionTitleImage.Visibility = Visibility.Hidden;
+            this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden;
+            this.SessionSentenceTextBlock.Visibility = Visibility.Hidden;
+            this.ViewSizeOfFeelingTextBlock.Visibility = Visibility.Hidden;
+            this.ChildrenFaceLeftImage.Visibility = Visibility.Hidden;
+            this.ChildrenFaceRightImage.Visibility = Visibility.Hidden;
             this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
-            this.ShirojiRightImage.Visibility = Visibility.Hidden; //
-            this.ShirojiRightUpImage.Visibility = Visibility.Hidden; //
-            this.ShirojiLeftImage.Visibility = Visibility.Hidden; //
+            this.ShirojiRightImage.Visibility = Visibility.Hidden;
+            this.ShirojiRightUpImage.Visibility = Visibility.Hidden;
+            this.ShirojiLeftImage.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightUpImage.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightDownImage.Visibility = Visibility.Hidden;
             this.ShirojiRightCenterImage.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightCenterImage.Visibility = Visibility.Hidden;
-            this.ShirojiRightDownSmallImage.Visibility = Visibility.Hidden; //
+            this.ShirojiRightDownSmallImage.Visibility = Visibility.Hidden;
             this.ShirojiEndingImage.Visibility = Visibility.Hidden;
-            // this.ChildrenStandLeftImage.Visibility = Visibility.Hidden;
-            // this.ChildrenStandRightImage.Visibility = Visibility.Hidden;
-            // this.KimiStandSmallLeftImage.Visibility = Visibility.Hidden;
-            // this.ChildrenStandLeftOnomatopoeiaImage.Visibility = Visibility.Hidden;
-            // this.ChildrenStandLeftOnomatopoeiaTextBlock.Visibility = Visibility.Hidden;
-            // this.IntroAkamaruFaceImage.Visibility = Visibility.Hidden;
-            // this.IntroAosukeFaceImage.Visibility = Visibility.Hidden;
-            // this.IntroKimiFaceImage.Visibility = Visibility.Hidden;
-            // this.TeacherImage.Visibility = Visibility.Hidden;
-            this.MainMessageTextBlock.Visibility = Visibility.Hidden; //
-            // this.ThinMessageButton.Visibility = Visibility.Hidden;
-            // this.ThinMessageTextBlock.Visibility = Visibility.Hidden;
+            this.MainMessageTextBlock.Visibility = Visibility.Hidden;
             this.NextMessageButton.Visibility = Visibility.Hidden;
             this.BackMessageButton.Visibility = Visibility.Hidden;
             this.NextPageButton.Visibility = Visibility.Hidden;
             this.BackPageButton.Visibility = Visibility.Hidden;
-            this.MangaFlipButton.Visibility = Visibility.Hidden; //
+            this.MangaFlipButton.Visibility = Visibility.Hidden;
             this.CoverLayerImage.Visibility = Visibility.Hidden;
-            this.ChallengeTimeTitleBorder.Visibility = Visibility.Hidden; //
-            this.ChallengeTimeTitleTextBlock.Visibility = Visibility.Hidden; //
-
-            this.CHotWordKeyButtonGrid.Visibility = Visibility.Hidden; //
-            this.GHotWordKeyButtonGrid.Visibility = Visibility.Hidden; //
-            this.HotWordCommentGrid.Visibility = Visibility.Hidden; //
-            this.ShirojiSmallLeftDownImage.Visibility = Visibility.Hidden; //
-            this.HotWordValueButtonGrid.Visibility = Visibility.Hidden; //
-
-            this.HotWordTitleImage.Visibility = Visibility.Hidden; //
-
-            this.Let_sTryTitleBorder.Visibility = Visibility.Hidden; //
-
-            this.ItemCenterRightImage.Visibility = Visibility.Hidden; //
-
-            this.HotWordBorder.Visibility = Visibility.Hidden; //
-
-            this.GladCommentUpImage.Visibility = Visibility.Hidden; //
-            this.GladCommentDownImage.Visibility = Visibility.Hidden; //
-
-            this.ChildrenFeelingTitleBorder.Visibility = Visibility.Hidden; //
-            this.ChildrenFaceLeftCenterImage.Visibility = Visibility.Hidden; //
-            this.ChildrenFeelingCommentGrid.Visibility = Visibility.Hidden; //
-            this.ChildrenFeelingCommentBigGrid.Visibility = Visibility.Hidden; //
-            // this.ChildrenFeelingCommentImage.Visibility = Visibility.Hidden; //
-            // this.ChildrenFeelingCommentTextBlock.Visibility = Visibility.Hidden; //
-            this.ShirojiVerySmallRightUpImage.Visibility = Visibility.Hidden; //
-            this.CheckMangaButton.Visibility = Visibility.Hidden; //
-            this.FeelingNextGoButton.Visibility = Visibility.Hidden; //
-            this.FeelingPrevBackButton.Visibility = Visibility.Hidden; //
-            
-            this.ChildrenFeelingTitleTextBlock.Visibility = Visibility.Hidden; //
-
-            this.MangaPrevBackButton.Visibility = Visibility.Hidden; //
-
-            this.CompleteNextButton.Visibility = Visibility.Hidden; //
-            this.ItemLeftCenterSmallImage.Visibility = Visibility.Hidden; //
-            this.Let_sUseHotWordMessageGrid.Visibility = Visibility.Hidden; //
-            this.SituationsGrid.Visibility = Visibility.Hidden; //
-            this.Let_sUseHotWordTitleImage.Visibility = Visibility.Hidden; //
-
-            this.SelectHotWordBorder.Visibility = Visibility.Hidden; //
-            this.SelectHotWordTitleTextBlock.Visibility = Visibility.Hidden; //
-            this.SelectHotWordValueTextBlock.Visibility = Visibility.Hidden; //
-            this.ComplimentarySituationBorder.Visibility = Visibility.Hidden; //
-            this.HotWordArrowImage.Visibility = Visibility.Hidden; //
-            this.ItemLeftDownImage.Visibility = Visibility.Hidden; //
-
-            this.RolePlayInfoGrid.Visibility = Visibility.Hidden; //
-
-            this.RolePlayButtonGrid.Visibility = Visibility.Hidden; //
-
-            this.SelectHotWordValueTitleTextBlock.Visibility = Visibility.Hidden; //
-
+            this.ChallengeTimeTitleBorder.Visibility = Visibility.Hidden;
+            this.ChallengeTimeTitleTextBlock.Visibility = Visibility.Hidden;
+            this.CHotWordKeyButtonGrid.Visibility = Visibility.Hidden;
+            this.GHotWordKeyButtonGrid.Visibility = Visibility.Hidden;
+            this.HotWordCommentGrid.Visibility = Visibility.Hidden;
+            this.ShirojiSmallLeftDownImage.Visibility = Visibility.Hidden;
+            this.HotWordValueButtonGrid.Visibility = Visibility.Hidden;
+            this.HotWordTitleImage.Visibility = Visibility.Hidden;
+            this.Let_sTryTitleBorder.Visibility = Visibility.Hidden;
+            this.ItemCenterRightImage.Visibility = Visibility.Hidden;
+            this.HotWordBorder.Visibility = Visibility.Hidden;
+            this.GladCommentUpImage.Visibility = Visibility.Hidden;
+            this.GladCommentDownImage.Visibility = Visibility.Hidden;
+            this.ChildrenFeelingTitleBorder.Visibility = Visibility.Hidden;
+            this.ChildrenFaceLeftCenterImage.Visibility = Visibility.Hidden;
+            this.ChildrenFeelingCommentGrid.Visibility = Visibility.Hidden;
+            this.ChildrenFeelingCommentBigGrid.Visibility = Visibility.Hidden;
+            this.ShirojiVerySmallRightUpImage.Visibility = Visibility.Hidden;
+            this.CheckMangaButton.Visibility = Visibility.Hidden;
+            this.FeelingNextGoButton.Visibility = Visibility.Hidden;
+            this.FeelingPrevBackButton.Visibility = Visibility.Hidden;
+            this.ChildrenFeelingTitleTextBlock.Visibility = Visibility.Hidden;
+            this.MangaPrevBackButton.Visibility = Visibility.Hidden;
+            this.CompleteNextButton.Visibility = Visibility.Hidden;
+            this.ItemLeftCenterSmallImage.Visibility = Visibility.Hidden;
+            this.Let_sUseHotWordMessageGrid.Visibility = Visibility.Hidden;
+            this.SituationsGrid.Visibility = Visibility.Hidden;
+            this.Let_sUseHotWordTitleImage.Visibility = Visibility.Hidden;
+            this.SelectHotWordBorder.Visibility = Visibility.Hidden;
+            this.SelectHotWordTitleTextBlock.Visibility = Visibility.Hidden;
+            this.SelectHotWordValueTextBlock.Visibility = Visibility.Hidden;
+            this.ComplimentarySituationBorder.Visibility = Visibility.Hidden;
+            this.HotWordArrowImage.Visibility = Visibility.Hidden;
+            this.ItemLeftDownImage.Visibility = Visibility.Hidden;
+            this.RolePlayInfoGrid.Visibility = Visibility.Hidden;
+            this.RolePlayButtonGrid.Visibility = Visibility.Hidden;
+            this.SelectHotWordValueTitleTextBlock.Visibility = Visibility.Hidden;
             this.RolePlayMessageBorder.Visibility = Visibility.Hidden;
-
-            this.SelectHotWordValueTitleTextBlock.Text = ""; //
-
-            this.SessionSubTitleTextBlock.Text = ""; //
-            this.SessionSentenceTextBlock.Text = ""; //
-            // this.ViewKindOfFeelingPersonTextBlock.Text = "";
-            // this.ViewKindOfFeelingTextBlock.Text = "";
-            this.ViewSizeOfFeelingTextBlock.Text = "";
-            // this.ChildrenFaceSmallLeftMessageTextBlock.Text = "";
-            // this.CompareMessageTextBlock.Text = "";
-            // this.KindOfFeelingAkamaruTextBlock.Text = "";
-            // this.SizeOfFeelingAkamaruTextBlock.Text = "";
-            // this.KindOfFeelingAosukeTextBlock.Text = "";
-            // this.SizeOfFeelingAosukeTextBlock.Text = "";
-            this.EndingMessageTextBlock.Text = "";
-
-            this.MainMessageTextBlock.Text = ""; //
-
-            // this.ThinMessageTextBlock.Text = "";
-            this.MusicTitleTextBlock.Text = ""; //
-            this.ComposerNameTextBlock.Text = ""; //
-
-            this.ChildrenFeelingCommentTextBlock.Text = ""; //
-            this.ChildrenFeelingCommentBigTextBlock.Text = ""; //
-            this.ChildrenFeelingTitleTextBlock.Text = ""; //
-
-            this.SelectHotWordTitleTextBlock.Text = ""; //
-            this.SelectHotWordValueTextBlock.Text = ""; //
-
-            this.KindOfFeelingInputTextBlock.Text = ""; //
-            this.SizeOfFeelingInputTextBlock.Text = ""; //
-
             this.ItemBookTitleTextBlock.Visibility = Visibility.Hidden;
             this.ItemBookMainGrid.Visibility = Visibility.Hidden;
             this.ItemBookNoneGrid.Visibility = Visibility.Hidden;
-
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
-
             this.FeelingInputGrid.Visibility = Visibility.Hidden;
+
+            this.SelectHotWordValueTitleTextBlock.Text = "";
+            this.SessionSubTitleTextBlock.Text = "";
+            this.SessionSentenceTextBlock.Text = "";
+            this.ViewSizeOfFeelingTextBlock.Text = "";
+            this.EndingMessageTextBlock.Text = "";
+            this.MainMessageTextBlock.Text = "";
+            this.MusicTitleTextBlock.Text = "";
+            this.ComposerNameTextBlock.Text = "";
+            this.ChildrenFeelingCommentTextBlock.Text = "";
+            this.ChildrenFeelingCommentBigTextBlock.Text = "";
+            this.ChildrenFeelingTitleTextBlock.Text = "";
+            this.SelectHotWordTitleTextBlock.Text = "";
+            this.SelectHotWordValueTextBlock.Text = "";
+            this.KindOfFeelingInputTextBlock.Text = "";
+            this.SizeOfFeelingInputTextBlock.Text = "";
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
