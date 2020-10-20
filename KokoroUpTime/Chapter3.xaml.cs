@@ -95,16 +95,6 @@ namespace KokoroUpTime
         // ゲームの切り替えシーン
         private string scene;
 
-        // なったことのある自分の気持ちの一時記録用
-        private List<string> myKindOfGoodFeelings = new List<string>();
-        private List<string> myKindOfBadFeelings = new List<string>();
-
-        private bool hasKimisKindOfFeelingsRecorded = false;
-        private bool hasAkamarusKindOfFeelingsRecorded = false;
-        private bool hasAosukesKindOfFeelingsRecorded = false;
-        private bool hasAkamarusSizeOfFeelingRecorded = false;
-        private bool hasAosukesSizeOfFeelingRecorded = false;
-
         // データベースに収めるデータモデルのインスタンス
         private DataChapter3 dataChapter3;
 
@@ -114,7 +104,6 @@ namespace KokoroUpTime
         public DataProgress dataProgress = new DataProgress();
 
         private int cHotWordButtonCount = 0;
-        private int gHotWordButtonCount = 0;
         private int rolePlayButtonCount = 0;
 
         public Chapter3()
@@ -135,9 +124,6 @@ namespace KokoroUpTime
             // データモデルインスタンス確保
             this.dataChapter3 = new DataChapter3();
 
-            // xamlのItemControlに気持ちリストをデータバインド
-            // this.ChallengeGoodFeelingListBox.ItemsSource = GOOD_FEELINGS;
-            // this.ChallengeBadFeelingListBox.ItemsSource = BAD_FEELINGS;
             this.SelectGoodFeelingListBox.ItemsSource = GOOD_FEELINGS;
             this.SelectBadFeelingListBox.ItemsSource = BAD_FEELINGS;
 
@@ -178,12 +164,13 @@ namespace KokoroUpTime
 
                 ["item_left_last_image"] = this.ItemLeftLastImage,
                 ["session_title_image"] = this.SessionTitleImage, //
-                ["kimi_in_plate_image"] = this.KimiInPlateImage,
-                ["kimi_plate_outer_image"] = this.KimiPlateOuterImage,
-                ["select_heart_image"] = this.SelectHeartImage,
-                ["select_needle_image"] = this.SelectNeedleImage,
-                ["children_info_image"] = this.ChildrenInfoImage,
-                ["shiroji_ending_image"] = this.ShirojiEndingImage,
+                // ["kimi_in_plate_image"] = this.KimiInPlateImage,
+                // ["kimi_plate_outer_image"] = this.KimiPlateOuterImage,
+                // ["select_heart_image"] = this.SelectHeartImage,
+                // ["select_needle_image"] = this.SelectNeedleImage,
+                // ["children_info_image"] = this.ChildrenInfoImage,
+
+                ["shiroji_ending_image"] = this.ShirojiEndingImage, //
                 ["shiroji_right_image"] = this.ShirojiRightImage, //
                 ["shiroji_right_up_image"] = this.ShirojiRightUpImage, //
                 ["shiroji_left_image"] = this.ShirojiLeftImage, //
@@ -192,16 +179,17 @@ namespace KokoroUpTime
                 ["shiroji_right_center_image"] = this.ShirojiRightCenterImage,
                 ["shiroji_small_right_center_image"] = this.ShirojiSmallRightCenterImage,
                 ["shiroji_right_down_small_image"] = this.ShirojiRightDownSmallImage,
-                ["children_stand_left_image"] = this.ChildrenStandLeftImage, //
-                ["children_stand_right_image"] = this.ChildrenStandRightImage,
-                ["children_stand_left_onomatopoeia_image"] = this.ChildrenStandLeftOnomatopoeiaImage,
-                ["kimi_stand_small_left_image"] = this.KimiStandSmallLeftImage,
-                ["intro_akamaru_face_image"] = this.IntroAkamaruFaceImage,
-                ["intro_aosuke_face_image"] = this.IntroAosukeFaceImage,
-                ["intro_kimi_face_image"] = this.IntroKimiFaceImage,
+
+                // ["children_stand_left_image"] = this.ChildrenStandLeftImage, //
+                // ["children_stand_right_image"] = this.ChildrenStandRightImage,
+                // ["children_stand_left_onomatopoeia_image"] = this.ChildrenStandLeftOnomatopoeiaImage,
+                // ["kimi_stand_small_left_image"] = this.KimiStandSmallLeftImage,
+                // ["intro_akamaru_face_image"] = this.IntroAkamaruFaceImage,
+                // ["intro_aosuke_face_image"] = this.IntroAosukeFaceImage,
+                // ["intro_kimi_face_image"] = this.IntroKimiFaceImage,
                 ["children_face_left_image"] = this.ChildrenFaceLeftImage, //
                 ["children_face_right_image"] = this.ChildrenFaceRightImage, //
-                ["teacher_image"] = this.TeacherImage,
+                // ["teacher_image"] = this.TeacherImage,
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage, //
                 ["shiroji_small_left_down_image"] = this.ShirojiSmallLeftDownImage, //
                 ["hot_word_title_image"] = this.HotWordTitleImage, //
@@ -217,26 +205,26 @@ namespace KokoroUpTime
             {
                 ["session_sub_title_text"] = this.SessionSubTitleTextBlock, //
                 ["session_sentence_text"] = this.SessionSentenceTextBlock, //
-                ["view_kind_of_feeling_person_text"] = this.ViewKindOfFeelingPersonTextBlock,
-                ["view_kind_of_feeling_text"] = this.ViewKindOfFeelingTextBlock,
-                ["view_size_of_feeling_text"] = this.ViewSizeOfFeelingTextBlock, //
-                ["case_of_kimi_text"] = this.CaseOfKimiTextBlock,
-                ["kimi_scene1_text"] = this.KimiScene1TextBlock,
-                ["kimi_kind_of_feeling_up_text"] = this.KimiKindOfFeelingUpTextBlock,
-                ["kimi_size_of_feeling_up_text"] = this.KimiSizeOfFeelingUpTextBlock,
-                ["kimi_scene2_text"] = this.KimiScene2TextBlock,
-                ["kimi_kind_of_feeling_down_text"] = this.KimiKindOfFeelingDownTextBlock,
-                ["kimi_size_of_feeling_down_text"] = this.KimiSizeOfFeelingDownTextBlock,
-                ["compare_msg_text"] = this.CompareMessageTextBlock,
-                ["kind_of_feeling_akamaru_text"] = this.KindOfFeelingAkamaruTextBlock,
-                ["size_of_feeling_akamaru_text"] = this.SizeOfFeelingAkamaruTextBlock,
-                ["kind_of_feeling_aosuke_text"] = this.KindOfFeelingAosukeTextBlock,
-                ["size_of_feeling_aosuke_text"] = this.SizeOfFeelingAosukeTextBlock,
+                // ["view_kind_of_feeling_person_text"] = this.ViewKindOfFeelingPersonTextBlock,
+                // ["view_kind_of_feeling_text"] = this.ViewKindOfFeelingTextBlock,
+                // ["view_size_of_feeling_text"] = this.ViewSizeOfFeelingTextBlock, //
+                // ["case_of_kimi_text"] = this.CaseOfKimiTextBlock,
+                // ["kimi_scene1_text"] = this.KimiScene1TextBlock,
+                // ["kimi_kind_of_feeling_up_text"] = this.KimiKindOfFeelingUpTextBlock,
+                // ["kimi_size_of_feeling_up_text"] = this.KimiSizeOfFeelingUpTextBlock,
+                // ["kimi_scene2_text"] = this.KimiScene2TextBlock,
+                // ["kimi_kind_of_feeling_down_text"] = this.KimiKindOfFeelingDownTextBlock,
+                // ["kimi_size_of_feeling_down_text"] = this.KimiSizeOfFeelingDownTextBlock,
+                // ["compare_msg_text"] = this.CompareMessageTextBlock,
+                // ["kind_of_feeling_akamaru_text"] = this.KindOfFeelingAkamaruTextBlock,
+                // ["size_of_feeling_akamaru_text"] = this.SizeOfFeelingAkamaruTextBlock,
+                // ["kind_of_feeling_aosuke_text"] = this.KindOfFeelingAosukeTextBlock,
+                // ["size_of_feeling_aosuke_text"] = this.SizeOfFeelingAosukeTextBlock,
                 ["ending_msg_text"] = this.EndingMessageTextBlock,
-                ["children_stand_left_onomatopoeia_text"] = this.ChildrenStandLeftOnomatopoeiaTextBlock,
-                ["children_face_small_left_msg_text"] = this.ChildrenFaceSmallLeftMessageTextBlock,
+                // ["children_stand_left_onomatopoeia_text"] = this.ChildrenStandLeftOnomatopoeiaTextBlock,
+                // ["children_face_small_left_msg_text"] = this.ChildrenFaceSmallLeftMessageTextBlock,
                 ["main_msg"] = this.MainMessageTextBlock, //
-                ["thin_msg"] = this.ThinMessageTextBlock,
+                // ["thin_msg"] = this.ThinMessageTextBlock,
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
                 ["item_book_title_text"] = this.ItemBookTitleTextBlock,
@@ -270,12 +258,12 @@ namespace KokoroUpTime
             {
                 ["next_msg_button"] = this.NextMessageButton, //
                 ["back_msg_button"] = this.BackMessageButton, //
-                ["thin_msg_button"] = this.ThinMessageButton,
+                // ["thin_msg_button"] = this.ThinMessageButton,
                 ["next_page_button"] = this.NextPageButton, //
                 ["back_page_button"] = this.BackPageButton, //
                 ["manga_flip_button"] = this.MangaFlipButton, //
-                ["select_feeling_complete_button"] = this.SelectFeelingCompleteButton,
-                ["select_feeling_next_button"] = this.SelectFeelingNextButton,
+                // ["select_feeling_complete_button"] = this.SelectFeelingCompleteButton,
+                // ["select_feeling_next_button"] = this.SelectFeelingNextButton,
 
                 ["check_manga_button"] = this.CheckMangaButton, //
                 ["feeling_next_go_button"] = this.FeelingNextGoButton, //
@@ -289,34 +277,34 @@ namespace KokoroUpTime
                 ["memory_check_grid"] = this.MemoryCheckGrid, //
                 ["session_grid"] = this.SessionGrid, //
                 // ["challenge_time_grid"] = this.ChallengeTimeGrid, //
-                ["select_feeling_grid"] = this.SelectFeelingGrid,
-                ["summary_grid"] = this.SummaryGrid,
-                ["ending_grid"] = this.EndingGrid,
-                ["item_name_plate_left_grid"] = this.ItemNamePlateLeftGrid, 
-                ["item_name_bubble_grid"] = this.ItemNameBubbleGrid,
-                ["item_name_plate_center_grid"] = this.ItemNamePlateCenterGrid,
-                ["item_info_plate_grid"] = this.ItemInfoPlateGrid,
-                ["item_info_sentence_grid"] = this.ItemInfoSentenceGrid,
-                ["item_last_info_grid"] = this.ItemLastInfoGrid,
+                ["select_feeling_grid"] = this.SelectFeelingGrid, //
+                ["summary_grid"] = this.SummaryGrid, //
+                ["ending_grid"] = this.EndingGrid, //
+                ["item_name_plate_left_grid"] = this.ItemNamePlateLeftGrid, //
+                ["item_name_bubble_grid"] = this.ItemNameBubbleGrid, //
+                ["item_name_plate_center_grid"] = this.ItemNamePlateCenterGrid, //
+                ["item_info_plate_grid"] = this.ItemInfoPlateGrid, //
+                ["item_info_sentence_grid"] = this.ItemInfoSentenceGrid, //
+                ["item_last_info_grid"] = this.ItemLastInfoGrid, //
 
                 ["item_check_grid"] = this.ItemCheckGrid, //
                 ["children_feeling_comment_grid"] = this.ChildrenFeelingCommentGrid, //
                 ["children_feeling_comment_big_grid"] = this.ChildrenFeelingCommentBigGrid, //
 
-                ["kimi_plate_inner_up_grid"] = this.KimiPlateInnerUpGrid,
-                ["kimi_plate_inner_down_grid"] = this.KimiPlateInnerDownGrid,
-                ["view_kind_of_feeling_grid"] = this.ViewKindOfFeelingGrid,
+                // ["kimi_plate_inner_up_grid"] = this.KimiPlateInnerUpGrid,
+                // ["kimi_plate_inner_down_grid"] = this.KimiPlateInnerDownGrid,
+                // ["view_kind_of_feeling_grid"] = this.ViewKindOfFeelingGrid,
                 // ["view_size_of_feeling_grid"] = this.ViewSizeOfFeelingGrid, //
-                ["children_face_small_left_msg_grid"] = this.ChildrenFaceSmallLeftMessageGrid,
-                ["select_heart_grid"] = this.SelectHeartGrid,
-                ["compare_akamaru_heart_grid"] = this.CompareAkamaruHeartGrid,
-                ["compare_aosuke_heart_grid"] = this.CompareAosukeHeartGrid,
-                ["akamaru_and_aosuke_compare_grid"] = this.AkamaruAndAosukeCompareGrid,
-                ["compare_msg_grid"] = this.CompareMessageGrid,
+                // ["children_face_small_left_msg_grid"] = this.ChildrenFaceSmallLeftMessageGrid,
+                ["select_heart_grid"] = this.SelectHeartGrid, //
+                // ["compare_akamaru_heart_grid"] = this.CompareAkamaruHeartGrid,
+                // ["compare_aosuke_heart_grid"] = this.CompareAosukeHeartGrid,
+                // ["akamaru_and_aosuke_compare_grid"] = this.AkamaruAndAosukeCompareGrid,
+                // ["compare_msg_grid"] = this.CompareMessageGrid,
                 ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid, //
                 ["music_info_grid"] = this.MusicInfoGrid, //
-                ["exit_back_grid"] = this.ExitBackGrid, //
+                // ["exit_back_grid"] = this.ExitBackGrid, //
 
                 ["c_hot_word_key_button_grid"] = this.CHotWordKeyButtonGrid, //
                 ["g_hot_word_key_button_grid"] = this.GHotWordKeyButtonGrid, //
@@ -349,25 +337,25 @@ namespace KokoroUpTime
 
             this.MemoryCheckGrid.Visibility = Visibility.Hidden; //
             this.SessionGrid.Visibility = Visibility.Hidden; //
-            this.SelectFeelingGrid.Visibility = Visibility.Hidden;
-            this.SummaryGrid.Visibility = Visibility.Hidden;
-            this.EndingGrid.Visibility = Visibility.Hidden;
-            this.ItemNamePlateLeftGrid.Visibility = Visibility.Hidden;
-            this.ItemNameBubbleGrid.Visibility = Visibility.Hidden;
-            this.ItemNamePlateCenterGrid.Visibility = Visibility.Hidden;
-            this.ItemInfoPlateGrid.Visibility = Visibility.Hidden;
+            this.SelectFeelingGrid.Visibility = Visibility.Hidden; //
+            this.SummaryGrid.Visibility = Visibility.Hidden; //
+            this.EndingGrid.Visibility = Visibility.Hidden; //
+            this.ItemNamePlateLeftGrid.Visibility = Visibility.Hidden; //
+            this.ItemNameBubbleGrid.Visibility = Visibility.Hidden; //
+            this.ItemNamePlateCenterGrid.Visibility = Visibility.Hidden; //
+            this.ItemInfoPlateGrid.Visibility = Visibility.Hidden; //
             this.ItemLastInfoGrid.Visibility = Visibility.Hidden;
-            this.ViewKindOfFeelingGrid.Visibility = Visibility.Hidden;
-            this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
-            this.ChildrenFaceSmallLeftMessageGrid.Visibility = Visibility.Hidden;
+            // this.ViewKindOfFeelingGrid.Visibility = Visibility.Hidden;
+            // this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
+            // this.ChildrenFaceSmallLeftMessageGrid.Visibility = Visibility.Hidden;
             this.Let_sUseHotWordMessageGrid.Visibility = Visibility.Hidden; //
-            this.KimiPlateInnerUpGrid.Visibility = Visibility.Hidden;
-            this.KimiPlateInnerDownGrid.Visibility = Visibility.Hidden;
+            // this.KimiPlateInnerUpGrid.Visibility = Visibility.Hidden;
+            // this.KimiPlateInnerDownGrid.Visibility = Visibility.Hidden;
             this.SelectHeartGrid.Visibility = Visibility.Hidden;
-            this.CompareAkamaruHeartGrid.Visibility = Visibility.Hidden;
-            this.CompareAosukeHeartGrid.Visibility = Visibility.Hidden;
-            this.AkamaruAndAosukeCompareGrid.Visibility = Visibility.Hidden;
-            this.CompareMessageGrid.Visibility = Visibility.Hidden;
+            // this.CompareAkamaruHeartGrid.Visibility = Visibility.Hidden;
+            // this.CompareAosukeHeartGrid.Visibility = Visibility.Hidden;
+            // this.AkamaruAndAosukeCompareGrid.Visibility = Visibility.Hidden;
+            // this.CompareMessageGrid.Visibility = Visibility.Hidden;
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
             this.MainMessageGrid.Visibility = Visibility.Hidden; //
             this.MusicInfoGrid.Visibility = Visibility.Hidden; //
@@ -384,29 +372,29 @@ namespace KokoroUpTime
             this.SessionTitleImage.Visibility = Visibility.Hidden; //
             this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden; //
             this.SessionSentenceTextBlock.Visibility = Visibility.Hidden; //
-            this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
-            this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
-            this.KimiPlateOuterImage.Visibility = Visibility.Hidden;
-            this.KimiInPlateImage.Visibility = Visibility.Hidden;
-            this.CaseOfKimiTextBlock.Visibility = Visibility.Hidden;
-            this.KimiScene1TextBlock.Visibility = Visibility.Hidden;
-            this.KimiKindOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
-            this.KimiSizeOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
-            this.KimiScene2TextBlock.Visibility = Visibility.Hidden;
-            this.KimiKindOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
-            this.KimiSizeOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
-            this.ViewKindOfFeelingPersonTextBlock.Visibility = Visibility.Hidden;
-            this.ViewKindOfFeelingTextBlock.Visibility = Visibility.Hidden;
+            // this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+            // this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
+            // this.KimiPlateOuterImage.Visibility = Visibility.Hidden;
+            // this.KimiInPlateImage.Visibility = Visibility.Hidden;
+            // this.CaseOfKimiTextBlock.Visibility = Visibility.Hidden;
+            // this.KimiScene1TextBlock.Visibility = Visibility.Hidden;
+            // this.KimiKindOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
+            // this.KimiSizeOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
+            // this.KimiScene2TextBlock.Visibility = Visibility.Hidden;
+            // this.KimiKindOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
+            // this.KimiSizeOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
+            // this.ViewKindOfFeelingPersonTextBlock.Visibility = Visibility.Hidden;
+            // this.ViewKindOfFeelingTextBlock.Visibility = Visibility.Hidden;
             this.ViewSizeOfFeelingTextBlock.Visibility = Visibility.Hidden; //
             this.ChildrenFaceLeftImage.Visibility = Visibility.Hidden; //
             this.ChildrenFaceRightImage.Visibility = Visibility.Hidden; //
-            this.ChildrenFaceSmallLeftMessageTextBlock.Visibility = Visibility.Hidden;
-            this.CompareMessageTextBlock.Visibility = Visibility.Hidden;
-            this.KindOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
-            this.SizeOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
-            this.KindOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
-            this.SizeOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
-            this.ChildrenInfoImage.Visibility = Visibility.Hidden;
+            // this.ChildrenFaceSmallLeftMessageTextBlock.Visibility = Visibility.Hidden;
+            // this.CompareMessageTextBlock.Visibility = Visibility.Hidden;
+            // this.KindOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
+            // this.SizeOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
+            // this.KindOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
+            // this.SizeOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
+            // this.ChildrenInfoImage.Visibility = Visibility.Hidden;
             this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
             this.ShirojiRightImage.Visibility = Visibility.Hidden; //
             this.ShirojiRightUpImage.Visibility = Visibility.Hidden; //
@@ -417,18 +405,18 @@ namespace KokoroUpTime
             this.ShirojiSmallRightCenterImage.Visibility = Visibility.Hidden;
             this.ShirojiRightDownSmallImage.Visibility = Visibility.Hidden; //
             this.ShirojiEndingImage.Visibility = Visibility.Hidden;
-            this.ChildrenStandLeftImage.Visibility = Visibility.Hidden;
-            this.ChildrenStandRightImage.Visibility = Visibility.Hidden;
-            this.KimiStandSmallLeftImage.Visibility = Visibility.Hidden;
-            this.ChildrenStandLeftOnomatopoeiaImage.Visibility = Visibility.Hidden;
-            this.ChildrenStandLeftOnomatopoeiaTextBlock.Visibility = Visibility.Hidden;
-            this.IntroAkamaruFaceImage.Visibility = Visibility.Hidden;
-            this.IntroAosukeFaceImage.Visibility = Visibility.Hidden;
-            this.IntroKimiFaceImage.Visibility = Visibility.Hidden;
-            this.TeacherImage.Visibility = Visibility.Hidden;
+            // this.ChildrenStandLeftImage.Visibility = Visibility.Hidden;
+            // this.ChildrenStandRightImage.Visibility = Visibility.Hidden;
+            // this.KimiStandSmallLeftImage.Visibility = Visibility.Hidden;
+            // this.ChildrenStandLeftOnomatopoeiaImage.Visibility = Visibility.Hidden;
+            // this.ChildrenStandLeftOnomatopoeiaTextBlock.Visibility = Visibility.Hidden;
+            // this.IntroAkamaruFaceImage.Visibility = Visibility.Hidden;
+            // this.IntroAosukeFaceImage.Visibility = Visibility.Hidden;
+            // this.IntroKimiFaceImage.Visibility = Visibility.Hidden;
+            // this.TeacherImage.Visibility = Visibility.Hidden;
             this.MainMessageTextBlock.Visibility = Visibility.Hidden; //
-            this.ThinMessageButton.Visibility = Visibility.Hidden;
-            this.ThinMessageTextBlock.Visibility = Visibility.Hidden;
+            // this.ThinMessageButton.Visibility = Visibility.Hidden;
+            // this.ThinMessageTextBlock.Visibility = Visibility.Hidden;
             this.NextMessageButton.Visibility = Visibility.Hidden;
             this.BackMessageButton.Visibility = Visibility.Hidden;
             this.NextPageButton.Visibility = Visibility.Hidden;
@@ -495,20 +483,20 @@ namespace KokoroUpTime
 
             this.SessionSubTitleTextBlock.Text = ""; //
             this.SessionSentenceTextBlock.Text = ""; //
-            this.ViewKindOfFeelingPersonTextBlock.Text = "";
-            this.ViewKindOfFeelingTextBlock.Text = "";
+            // this.ViewKindOfFeelingPersonTextBlock.Text = "";
+            // this.ViewKindOfFeelingTextBlock.Text = "";
             this.ViewSizeOfFeelingTextBlock.Text = "";
-            this.ChildrenFaceSmallLeftMessageTextBlock.Text = "";
-            this.CompareMessageTextBlock.Text = "";
-            this.KindOfFeelingAkamaruTextBlock.Text = "";
-            this.SizeOfFeelingAkamaruTextBlock.Text = "";
-            this.KindOfFeelingAosukeTextBlock.Text = "";
-            this.SizeOfFeelingAosukeTextBlock.Text = "";
+            // this.ChildrenFaceSmallLeftMessageTextBlock.Text = "";
+            // this.CompareMessageTextBlock.Text = "";
+            // this.KindOfFeelingAkamaruTextBlock.Text = "";
+            // this.SizeOfFeelingAkamaruTextBlock.Text = "";
+            // this.KindOfFeelingAosukeTextBlock.Text = "";
+            // this.SizeOfFeelingAosukeTextBlock.Text = "";
             this.EndingMessageTextBlock.Text = "";
 
             this.MainMessageTextBlock.Text = ""; //
 
-            this.ThinMessageTextBlock.Text = "";
+            // this.ThinMessageTextBlock.Text = "";
             this.MusicTitleTextBlock.Text = ""; //
             this.ComposerNameTextBlock.Text = ""; //
 
@@ -1927,7 +1915,7 @@ namespace KokoroUpTime
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Debug.Print(this.isClickable.ToString());
+            // Debug.Print(this.isClickable.ToString());
 
             // 各種ボタンが押されたときの処理
 
@@ -2371,8 +2359,6 @@ namespace KokoroUpTime
                 }
             }
 
-
-
             // FullScreen時のデバッグ用に作っておく
             if (button.Name == "ExitButton")
             {
@@ -2382,8 +2368,6 @@ namespace KokoroUpTime
 
             if (button.Name == "ExitBackYesButton")
             {
-                // Application.Current.Shutdown();
-
                 this.StopBGM();
 
                 TitlePage titlePage = new TitlePage();
@@ -2606,9 +2590,12 @@ namespace KokoroUpTime
                 selectResult = AnswerResult.Cancel;
             }
 
-            var startupPath = FileUtils.GetStartupPath();
+            if (this.dataOption.IsPlaySE)
+            {
+                var startupPath = FileUtils.GetStartupPath();
 
-            PlaySE($@"{startupPath}/Sounds/{selectResult}.wav");
+                PlaySE($@"{startupPath}/Sounds/{selectResult}.wav");
+            }
         }
 
         private void ClearSelectFeelingEllipse()

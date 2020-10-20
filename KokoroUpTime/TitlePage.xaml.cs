@@ -336,30 +336,11 @@ namespace KokoroUpTime
                 {
                     string[] userInfos;
 
-                    // int inputMethod = 0;
-
                     using (var csv = new CsvReader($"{dirPath}/user.conf"))
                     {
                         var csvs = csv.ReadToEnd();
                         userInfos = new string[3] { csvs[0][0], csvs[0][1], csvs[0][2] };
                     }
-
-                    /*
-                    string dbName = $"{userInfos[0]}.sqlite";
-                    string dbDirPath = $"./Log/{userInfos[0]}/";
-
-                    var individualDbPath = System.IO.Path.Combine(dbDirPath, dbName);
-
-                    using (var connection = new SQLiteConnection(individualDbPath))
-                    {
-                        var option = connection.Query<DataOption>("SELECT InputMethod FROM DataOption WHERE Id = 1;");
-
-                        foreach (var row in option)
-                        {
-                            inputMethod = row.InputMethod;
-                        }
-                    }
-                    */
 
                     var startupPath = FileUtils.GetStartupPath();
 
@@ -430,8 +411,6 @@ namespace KokoroUpTime
                 case "NameEntryButton":
 
                     NameInputPage nameInputPage = new NameInputPage();
-
-                    // nameInputPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                     this.NavigationService.Navigate(nameInputPage);
 
@@ -689,7 +668,6 @@ namespace KokoroUpTime
 
                     break;
 
-
                 case "ExitBackNoButton":
 
                     this.ExitBackGrid.Visibility = Visibility.Hidden;
@@ -710,7 +688,6 @@ namespace KokoroUpTime
 
                     break;
                     
-
                 case "CreditReturnButton":
 
                     Storyboard sbEnd = this.FindResource("disappear_credit") as Storyboard;
@@ -737,7 +714,6 @@ namespace KokoroUpTime
 
             switch (button.Content.ToString())
             {
-
                 case "第1回":
 
                     if (this.initConfig.userName == null)
@@ -801,7 +777,6 @@ namespace KokoroUpTime
                         this.NavigationService.Navigate(chapter4);
                     }
                     break;
-                    
             }
         }
 
