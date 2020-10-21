@@ -196,8 +196,18 @@ namespace KokoroUpTime
 
                 while (!this.hasGotItems[this.currentItemNo])
                 {
-                    this.currentItemNo += 1;
+                    if (this.currentItemNo >= this.itemDetailImages.Length - 1)
+                    {
+                        this.currentItemNo = 0;
+
+                        break;
+                    }
+                    else
+                    {
+                        this.currentItemNo += 1;
+                    }   
                 }
+
                 this.ResetDetailVisible();
 
                 this.itemDetailImages[this.currentItemNo].Visibility = Visibility.Visible;
