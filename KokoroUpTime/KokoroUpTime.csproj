@@ -4,21 +4,16 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>0.8.6.1</Version>
+    <Version>0.8.7.1</Version>
     <PackageIcon></PackageIcon>
     <ApplicationIcon>icon_sr9_icon.ico</ApplicationIcon>
-    <AssemblyVersion>0.8.7.2</AssemblyVersion>
-    <FileVersion>0.8.7.2</FileVersion>
+    <AssemblyVersion>0.8.7.1</AssemblyVersion>
+    <FileVersion>0.8.5.1</FileVersion>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>none</DebugType>
-    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
@@ -63,6 +58,7 @@
     <None Remove="Images\background_10.png" />
     <None Remove="Images\background_11.png" />
     <None Remove="Images\background_12.png" />
+    <None Remove="Images\background_13.png" />
     <None Remove="Images\background_ending.png" />
     <None Remove="Images\background_mokume.png" />
     <None Remove="Images\background_mokume2.PNG" />
@@ -77,6 +73,7 @@
     <None Remove="Images\blue_bubble_left_down.png" />
     <None Remove="Images\blue_gradation.png" />
     <None Remove="Images\blue_needle.png" />
+    <None Remove="Images\blue_roll_frame.png" />
     <None Remove="Images\blue_title_plate.png" />
     <None Remove="Images\branch_selection1.png" />
     <None Remove="Images\branch_selection2.png" />
@@ -102,12 +99,14 @@
     <None Remove="Images\feeling_value.png" />
     <None Remove="Images\good.png" />
     <None Remove="Images\good_feeling.png" />
+    <None Remove="Images\green_button_plate.png" />
     <None Remove="Images\group_activity_text.png" />
     <None Remove="Images\group_activity_title01.png" />
     <None Remove="Images\hot_word_1_title.png" />
     <None Remove="Images\hot_word_2_title.png" />
     <None Remove="Images\hot_word_3_title.png" />
     <None Remove="Images\hot_word_4_title.png" />
+    <None Remove="Images\hot_word_button.png" />
     <None Remove="Images\hot_word_button1.png" />
     <None Remove="Images\hot_word_button2.png" />
     <None Remove="Images\hot_word_button3.png" />
@@ -169,6 +168,7 @@
     <None Remove="Images\left_big_bubble.png" />
     <None Remove="Images\left_big_bubble_center_down_yellow.png" />
     <None Remove="Images\left_small_bubble_center_down_yellow.png" />
+    <None Remove="Images\let%27s_use_hot_word_title.png" />
     <None Remove="Images\long_bubble_right_up.png" />
     <None Remove="Images\frame_46-1.png" />
     <None Remove="Images\good_words_grid.png" />
@@ -230,9 +230,11 @@
     <None Remove="Images\oranger_gradation.png" />
     <None Remove="Images\orange_button_plate.png" />
     <None Remove="Images\orange_gradation.png" />
+    <None Remove="Images\orange_long_button_plate.png" />
     <None Remove="Images\orange_title_plate.png" />
     <None Remove="Images\prev_back_.png" />
     <None Remove="Images\purple_title_plate.png" />
+    <None Remove="Images\red_arrow_right.png" />
     <None Remove="Images\red_needle.png" />
     <None Remove="Images\return_to_item.png" />
     <None Remove="Images\return_to_title.png" />
@@ -251,6 +253,7 @@
     <None Remove="Images\situation_aosuke.png" />
     <None Remove="Images\situation_kimi.png" />
     <None Remove="Images\size_of_feeling_button_frame.png" />
+    <None Remove="Images\size_of_feeling_input_button_fimage.png" />
     <None Remove="Images\small_bubble_center_down.png" />
     <None Remove="Images\small_bubble_center_right_down.png" />
     <None Remove="Images\small_bubble_left.png" />
@@ -273,6 +276,7 @@
     <None Remove="Images\wish_check.png" />
     <None Remove="Images\word_art_msg_02_01.png" />
     <None Remove="Images\word_art_msg_02_02.png" />
+    <None Remove="Images\word_art_msg_04_01.png" />
     <None Remove="Images\writing_text_bubble.png" />
     <None Remove="Images\yazirusi.png" />
     <None Remove="children_stand_01.png" />
@@ -339,6 +343,7 @@
     <Resource Include="Images\background_10.png" />
     <Resource Include="Images\background_11.png" />
     <Resource Include="Images\background_12.png" />
+    <Resource Include="Images\background_13.png" />
     <Resource Include="Images\background_ending.png" />
     <Resource Include="Images\background_mokume.png" />
     <Resource Include="Images\background_mokume2.PNG" />
@@ -352,6 +357,7 @@
     <Resource Include="Images\blue_bubble_left_down.png" />
     <Resource Include="Images\blue_gradation.png" />
     <Resource Include="Images\blue_needle.png" />
+    <Resource Include="Images\blue_roll_frame.png" />
     <Resource Include="Images\blue_title_plate.png" />
     <Resource Include="Images\branch_selection1.png" />
     <Resource Include="Images\branch_selection2.png" />
@@ -372,16 +378,13 @@
     <Resource Include="Images\complete_role_play.png" />
     <Resource Include="Images\difficulty_of_action_frame.png" />
     <Resource Include="Images\good.png" />
+    <Resource Include="Images\green_button_plate.png" />
     <Resource Include="Images\group_activity_text.png" />
     <Resource Include="Images\group_activity_title01.png" />
     <Resource Include="Images\hot_word_1_title.png" />
     <Resource Include="Images\hot_word_2_title.png" />
     <Resource Include="Images\hot_word_3_title.png" />
     <Resource Include="Images\hot_word_4_title.png" />
-    <Resource Include="Images\hot_word_button1.png" />
-    <Resource Include="Images\hot_word_button2.png" />
-    <Resource Include="Images\hot_word_button3.png" />
-    <Resource Include="Images\hot_word_button4.png" />
     <Resource Include="Images\im_remember.png" />
     <Resource Include="Images\ite07_solo.gif" />
     <Resource Include="Images\item00_book.png" />
@@ -439,6 +442,7 @@
     <Resource Include="Images\large_transparent.png" />
     <Resource Include="Images\left_big_bubble.png" />
     <Resource Include="Images\left_small_bubble_center_down_yellow.png" />
+    <Resource Include="Images\let's_use_hot_word_title.png" />
     <Resource Include="Images\long_bubble_right_up.png" />
     <Resource Include="Images\manga2-1.png" />
     <Resource Include="Images\manga2-2.png" />
@@ -460,11 +464,13 @@
     <Resource Include="Images\ok_button.png" />
     <Resource Include="Images\orange_button_plate.png" />
     <Resource Include="Images\orange_gradation.png" />
+    <Resource Include="Images\orange_long_button_plate.png" />
     <Resource Include="Images\orange_title_plate.png" />
     <Resource Include="Images\prev_back_.png" />
     <Resource Include="Images\purple_title_plate.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\red_arrow_right.png" />
     <Resource Include="Images\return_to_item.png" />
     <Resource Include="Images\return_to_top.png" />
     <Resource Include="Images\short_bubble_left.png" />
@@ -473,6 +479,7 @@
     <Resource Include="Images\situation_aosuke.png" />
     <Resource Include="Images\situation_kimi.png" />
     <Resource Include="Images\size_of_feeling_button_frame.png" />
+    <Resource Include="Images\size_of_feeling_input_button_fimage.png" />
     <Resource Include="Images\small_bubble_center_down.png" />
     <Resource Include="Images\small_bubble_center_right_down.png" />
     <Resource Include="Images\small_bubble_left_blue.png" />
@@ -545,6 +552,7 @@
     <Resource Include="Images\wish_check.png" />
     <Resource Include="Images\word_art_msg_02_01.png" />
     <Resource Include="Images\word_art_msg_02_02.png" />
+    <Resource Include="Images\word_art_msg_04_01.png" />
     <Resource Include="Images\writing_text_bubble.png" />
     <Resource Include="Images\yazirusi.png" />
     <Resource Include="Images\yellow_title_plate.png" />

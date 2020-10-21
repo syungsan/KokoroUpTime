@@ -135,15 +135,15 @@ namespace KokoroUpTime
 
         public string MyKindOfBadFeelings { get; set; }
 
-        public string KimisKindOfFeelings { get; set; }
+        public string KimisKindOfFeeling { get; set; }
 
-        public string AkamarusKindOfFeelings { get; set; }
+        public string AkamarusKindOfFeeling { get; set; }
 
-        public int AkamarusSizeOfFeeling { get; set; }
+        public int? AkamarusSizeOfFeeling { get; set; }
 
-        public string AosukesKindOfFeelings { get; set; }
+        public string AosukesKindOfFeeling { get; set; }
 
-        public int AosukesSizeOfFeeling { get; set; }
+        public int? AosukesSizeOfFeeling { get; set; }
 
         public string CreatedAt { get; set; }
     }
@@ -182,6 +182,33 @@ namespace KokoroUpTime
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
+        public string AosukesKindOfFeelingPreUseItem { get; set; }
+
+        public string KimisKindOfFeelingPreUseItem { get; set; }
+
+        public string AosukesKindOfFeelingAfterUsedItem { get; set; }
+
+        public string KimisKindOfFeelingAfterUsedItem { get; set; }
+
+        public string AkamarusKindOfFeelingAfterUsedItem { get; set; }
+
+        public int? AosukesSizeOfFeelingPreUseItem { get; set; }
+
+        public int? KimisSizeOfFeelingPreUseItem { get; set; }
+
+        public int? AosukesSizeOfFeelingAfterUsedItem { get; set; }
+
+        public int? KimisSizeOfFeelingAfterUsedItem { get; set; }
+
+        public int? AkamarusSizeOfFeelingAfterUsedItem { get; set; }
+
+        public string SelectedPraiseHotWord { get; set; }
+
+        public string SelectedWorryHotWord { get; set; }
+
+        public string SelectedEncourageHotWord { get; set; }
+
+        public string SelectedThanksHotWord { get; set; }
 
         public string CreatedAt { get; set; }
     }
