@@ -222,4 +222,13 @@ namespace KokoroUpTime
 
         public string CreatedAt { get; set; }
     }
+
+    public class DataChapter5
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+
+        public string CreatedAt { get; set; }
+    }
 }
