@@ -552,13 +552,15 @@
     <Resource Include="Images\wish_check.png" />
     <Resource Include="Images\word_art_msg_02_01.png" />
     <Resource Include="Images\word_art_msg_02_02.png" />
-    <Resource Include="Images\word_art_msg_04_01.png" />
     <Resource Include="Images\writing_text_bubble.png" />
     <Resource Include="Images\yazirusi.png" />
     <Resource Include="Images\yellow_title_plate.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Chapter6.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Chapter4.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -575,6 +577,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Datas\default.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter6.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter2.csv">
@@ -640,6 +645,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Chapter6.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Chapter4.xaml">
       <SubType>Designer</SubType>
     </Page>
