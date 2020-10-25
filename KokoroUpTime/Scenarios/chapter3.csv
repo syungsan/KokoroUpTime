@@ -502,6 +502,11 @@ image,session_title_image,group_activity.png
 text,session_sub_title_text,グループ・アクティビティとは…
 text,session_sentence_text,こころあっぷタイムで考えたことを、みんなで話し合ってみる時間のことじゃ。
 grid,session_grid
+bgm,set,nijiiro_no_canvas.mp3,loop,50
+bgm,play
+text,music_title_text,虹色のキャンバス
+text,composer_name_text,しゅんじ～
+grid,music_info_grid,slide,no_sync
 image,shiroji_right_up_image,shiroji_04.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
