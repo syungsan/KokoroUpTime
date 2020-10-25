@@ -66,7 +66,7 @@ click,msg
 hide,grid,main_msg_grid
 clear,text,main_msg
 hide,image,intro_aosuke_face_image
-image,intro_akamaru_face_image,,appear_up,no_sync
+image,intro_akamaru_face_image,,float_in,no_sync
 image,main_msg_bubble_image,left_a_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
 msg,main_msg,おれの名前は 赤丸だ。小学校6年だ。好きな食べ物はカレーとコーラだ。苦手なものは犬だ。,赤丸
@@ -76,7 +76,7 @@ hide,grid,main_msg_grid
 clear,text,main_msg
 hide,image,intro_kimi_face_image
 hide,image,intro_akamaru_face_image
-image,intro_aosuke_face_image,,appear_up,no_sync
+image,intro_aosuke_face_image,,float_in,no_sync
 image,main_msg_bubble_image,left_b_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
 msg,main_msg,ぼくの名前は青助です。小学校6年生です。好きなものはテレビ。勉強もスポーツも あんまり得意じゃないんだ。,青助
@@ -87,7 +87,7 @@ clear,text,main_msg
 hide,image,intro_aosuke_face_image
 hide,image,shiroji_right_center_image
 hide,image,children_info_image
-image,intro_kimi_face_image,,appear_up,no_sync
+image,intro_kimi_face_image,,float_in,no_sync
 image,main_msg_bubble_image,left_c_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
 msg,main_msg,わたしの名前はキミです。小学６年生です。好きなものはチョコレートです。人前で話すことがとても苦手です。,キミ
@@ -100,7 +100,7 @@ hide,button,next_page_button
 hide,button,back_page_button
 hide,image,shiroji_right_image
 image,shiroji_right_center_image,,fade_in
-image,children_info_image,,appear_up
+image,children_info_image,,float_in
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,この３人とこころあっぷタイムを進めていくぞい！さて、３人は、なにかこまっていることがあるようじゃ。どんなことで、こまっているのだろう？マンガを見ながら考えてみよう！,白じい
