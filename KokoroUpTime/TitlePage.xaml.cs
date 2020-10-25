@@ -777,6 +777,23 @@ namespace KokoroUpTime
                         this.NavigationService.Navigate(chapter4);
                     }
                     break;
+                /*
+                case "第6回":
+
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        Chapter6 chapter6 = new Chapter6();
+
+                        chapter6.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                        this.NavigationService.Navigate(chapter6);
+                    }
+                    break;
+                    */
             }
         }
 

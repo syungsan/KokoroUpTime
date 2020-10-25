@@ -34,7 +34,7 @@ namespace KokoroUpTime
     /// <summary>
     /// GameWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class Chapter4 : Page
+    public partial class Chapter6 : Page
     {
         // 気持ちのリスト
         private string[] GOOD_FEELINGS = { "●　うれしい", "●　しあわせ", "●　たのしい", "●　ホッとした", "●　きもちいい", "●　まんぞく", "●　すき", "●　やる気マンマン", "●　かんしゃ", "●　わくわく", "●　うきうき", "●　ほこらしい" };
@@ -97,7 +97,7 @@ namespace KokoroUpTime
         private SoundPlayer sePlayer = null;
 
         // データベースに収めるデータモデルのインスタン
-        private DataChapter4 dataChapter4;
+        private DataChapter6 dataChapter6;
 
         // ゲームの切り替えシーン
         private string scene;
@@ -109,7 +109,7 @@ namespace KokoroUpTime
         public DataProgress dataProgress = new DataProgress();
 
 
-        public Chapter4()
+        public Chapter6()
         {
             InitializeComponent();
 
@@ -125,7 +125,7 @@ namespace KokoroUpTime
             this.MouseMove += new MouseEventHandler(OnMouseMove);
 
             // データモデルインスタンス確保
-            this.dataChapter4 = new DataChapter4();
+            this.dataChapter6 = new DataChapter6();
 
             this.SITUATIONS_SELECTION = new Dictionary<string, List<string>>
             {
@@ -403,19 +403,19 @@ namespace KokoroUpTime
             this.dataProgress = _dataProgress;
 
             // 現在時刻を取得
-            this.dataChapter4.CreatedAt = DateTime.Now.ToString();
+            this.dataChapter6.CreatedAt = DateTime.Now.ToString();
 
             // データベースのテーブル作成と現在時刻の書き込みを同時に行う
             using (var connection = new SQLiteConnection(this.initConfig.dbPath))
             {
                 // 毎回のアクセス日付を記録
-                connection.Insert(this.dataChapter4);
+                connection.Insert(this.dataChapter6);
             }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            using (var csv = new CsvReader("./Scenarios/chapter4.csv"))
+            using (var csv = new CsvReader("./Scenarios/chapter6.csv"))
             {
                 this.scenarios = csv.ReadToEnd();
             }
@@ -523,9 +523,9 @@ namespace KokoroUpTime
                     {
                         var gridStoryBoard = this.scenarios[this.scenarioCount][2];
 
-                        var gridObjectName = gridObject.Name;
+                        var gridgridObjectName = gridObject.Name;
 
-                        this.ShowAnime(storyBoard: gridStoryBoard,objectName: gridObjectName, isSync: gridAnimeIsSync);
+                        this.ShowAnime(storyBoard: gridStoryBoard,objectName:gridgridObjectName, isSync: gridAnimeIsSync);
                     }
                     else
                     {
@@ -605,7 +605,7 @@ namespace KokoroUpTime
                     {
                         var borderStoryBoard = this.scenarios[this.scenarioCount][2];
 
-                        var borderObject = borderObject.Name;
+                        var borderObjectName = borderObject.Name;
 
                         this.ShowAnime(storyBoard: borderStoryBoard,objectName: borderObjectName, isSync: borderAnimeIsSync);
                     }
@@ -638,7 +638,7 @@ namespace KokoroUpTime
 
                         var buttonObjectName = buttonObject.Name;
 
-                        this.ShowAnime(storyBoard: buttonStoryBoard,objectName: buttonObjectName, isSync: buttonAnimeIsSync);
+                        this.ShowAnime(storyBoard: buttonStoryBoard,objectName:buttonObjectName, isSync: buttonAnimeIsSync);
                     }
                     else
                     {
@@ -707,7 +707,7 @@ namespace KokoroUpTime
 
                         var textObjectName = __textObject.Name;
 
-                        this.ShowAnime(storyBoard: textStoryBoard,objectName: textObjectName, isSync: textAnimeIsSync);
+                        this.ShowAnime(storyBoard: textStoryBoard, objectName:textObjectName, isSync: textAnimeIsSync);
                     }
                     else
                     {
@@ -875,8 +875,6 @@ namespace KokoroUpTime
                         };
                         sb.Begin(this);
                     }
-                    break;
-
                     break;
 
                 // 各種コントロールを個別に隠す処理
@@ -1607,7 +1605,7 @@ namespace KokoroUpTime
             }
         }
         // アニメーション（ストーリーボード）の処理
-        private void ShowAnime(string storyBoard,string objectName, string isSync)
+        private void ShowAnime(string storyBoard, string objectName,string isSync)
         {
             Storyboard sb = this.FindResource(storyBoard) as Storyboard;
 
@@ -2036,7 +2034,7 @@ namespace KokoroUpTime
 
 
         // ハートゲージの角度をデータバインド
-        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter4), new UIPropertyMetadata(0.0));
+        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter6), new UIPropertyMetadata(0.0));
 
         public double Angle
         {

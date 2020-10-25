@@ -558,6 +558,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Chapter6.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Chapter4.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -574,6 +577,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Datas\default.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter6.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter2.csv">
@@ -639,6 +645,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Chapter6.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Chapter4.xaml">
       <SubType>Designer</SubType>
     </Page>
