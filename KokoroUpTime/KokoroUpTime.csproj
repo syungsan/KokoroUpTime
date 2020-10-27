@@ -550,8 +550,12 @@
     <Resource Include="Images\water_frame.png" />
     <Resource Include="Images\white_frame.png" />
     <Resource Include="Images\wish_check.png" />
-    <Resource Include="Images\word_art_msg_02_01.png" />
-    <Resource Include="Images\word_art_msg_02_02.png" />
+    <Resource Include="Images\word_art_msg_02_01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\word_art_msg_02_02.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\writing_text_bubble.png" />
     <Resource Include="Images\yazirusi.png" />
     <Resource Include="Images\yellow_title_plate.png" />

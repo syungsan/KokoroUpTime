@@ -1730,15 +1730,6 @@ namespace KokoroUpTime
                     this.BackPageButton.Visibility = Visibility.Hidden;
                     this.NextPageButton.Visibility = Visibility.Hidden;
 
-                    if (this.scene == "教室のルール")
-                    {
-                        foreach (CheckBox _checkBox in this.checkBoxs)
-                        {
-                            _checkBox.IsChecked = false;
-                        }
-                        this.tapCount = 0;
-                    }
-
                     BackScenario();
                 }
 
