@@ -81,7 +81,7 @@ image,bg_image,orange_gradation.png
 grid,challenge1_grid
 image,shiroji_very_small_right_image,shiroji_03.png
 grid,challenge_msg_grid,appear_expansion_slow
-wait,2
+wait,3
 grid,challenge_msg_grid,fade_out_slow
 wait
 #

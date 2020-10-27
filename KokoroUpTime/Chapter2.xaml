@@ -13,44 +13,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Animation.xaml"/>
+                <ResourceDictionary Source="Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="outline_maker:OutlineText" x:Key="Orange">
-                <Style.Setters>
-                    <Setter Property="TextAlignment" Value="Center"/>
-                    <Setter Property="Foreground" Value="#FFF8CBAD"/>
-                    <Setter Property="Outline" Value="#FFED7D31"/>
-                    <Setter Property="OutlineThickness" Value="4"/>
-                    <Setter Property="FontFamily" Value="Yu Gothic Light"/>
-                </Style.Setters>
-            </Style>
-            <Style TargetType="outline_maker:OutlineText" x:Key="Purple">
-                <Style.Setters>
-                    <Setter Property="Effect">
-                        <Setter.Value>
-                            <DropShadowEffect ShadowDepth="5" Direction="330" Color="Black" Opacity="0.5" BlurRadius="5"/>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="TextAlignment" Value="Center"/>
-                    <Setter Property="Foreground" Value="#FF9966FF"/>
-                    <Setter Property="Outline" Value="#FF9966FF"/>
-                    <Setter Property="OutlineThickness" Value="2"/>
-                    <Setter Property="FontFamily" Value="Yu Gothic Light"/>
-                </Style.Setters>
-            </Style>
-            <Style TargetType="outline_maker:OutlineText" x:Key="Yellow">
-                <Style.Setters>
-                    <Setter Property="Effect">
-                        <Setter.Value>
-                            <DropShadowEffect ShadowDepth="4" Color="#FFFFFF00" Opacity="0.5" BlurRadius="10"/>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="TextAlignment" Value="Center"/>
-                    <Setter Property="Foreground" Value="#FFFFFF00"/>
-                    <Setter Property="FontFamily" Value="Yu Gothic Light"/>
-                    <Setter Property="Outline" Value="#FF5B9BD5"/>
-                    <Setter Property="OutlineThickness" Value="1.5"/>
-                </Style.Setters>
-            </Style>
+            
         </ResourceDictionary>
     </Page.Resources>
     <Viewbox>

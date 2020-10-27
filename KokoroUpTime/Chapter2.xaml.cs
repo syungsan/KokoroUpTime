@@ -1188,16 +1188,16 @@ namespace KokoroUpTime
 
                         var _texts = this.SequenceCheck(_text);
 
-                        this.ShowSentence(textObject: (TextBlock)outLineTextObject, sentences: _texts, mode: "text");
+                        //this.ShowSentence(textObject: , sentences: _texts, mode: "text");
                     }
                     else
                     {
-                        if (__textObject.Text != "")
+                        //if (__textObject.Text != "")
                         {
-                            var _texts = this.SequenceCheck(__textObject.Text);
+                           // var _texts = this.SequenceCheck(__textObject.Text);
 
                             // xamlに直接書いたStaticな文章を表示する場合
-                            this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
+                            //this.ShowSentence(textObject: __textObject, sentences: _texts, mode: "text");
                         }
                     }
 
@@ -1213,9 +1213,9 @@ namespace KokoroUpTime
                     {
                         var textStoryBoard = this.scenarios[this.scenarioCount][4];
 
-                        var textObjectName = __textObject.Name;
+                       // var textObjectName = __textObject.Name;
 
-                        this.ShowAnime(storyBoard: textStoryBoard, objectName: textObjectName, isSync: outLineTextAnimeIsSync);
+                      //  this.ShowAnime(storyBoard: textStoryBoard, objectName: textObjectName, isSync: outLineTextAnimeIsSync);
                     }
                     else
                     {
