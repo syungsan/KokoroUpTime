@@ -77,6 +77,11 @@ namespace KokoroUpTime
             // ################################################################################
         }
 
+        private void TabTipAutomationOnTest(Exception exception)
+        {
+            MessageBox.Show(exception.Message);
+        }
+
         // ページ間参照橋渡し関数
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
         {
