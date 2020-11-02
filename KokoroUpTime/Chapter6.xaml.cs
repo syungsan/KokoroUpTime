@@ -80,15 +80,14 @@ namespace KokoroUpTime
         private Dictionary<string, TextBlock> textBlockObjects = null;
         private Dictionary<string, Button> buttonObjects = null;
         private Dictionary<string, Grid> gridObjects = null;
-        private Dictionary<string, ListBox> itemsControlObjects = null; 
+
+        //「すてきな性格」確認用のチェックボックス
+        private CheckBox[] checkBoxs;
 
         private Dictionary<string,SolidColorBrush> CharacterColor = null;
 
         private Dictionary<string, List<string>> SITUATIONS_SELECTION = null;
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
-        private string[] IMAGE_TEXTS = { "name" ,"word_art_01", "word_art_02" };
-        private string[] WORD_TEXTS = { "marker", "bold" ,"under_line"};
-
         private TextBlock  selectedWordButtonText= new TextBlock();
 
 
@@ -119,35 +118,9 @@ namespace KokoroUpTime
             // メディアプレーヤークラスのインスタンスを作成する
             this.mediaPlayer = new WindowsMediaPlayer();
 
-            // マウスイベントの設定
-            this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
-            this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
-            this.MouseMove += new MouseEventHandler(OnMouseMove);
 
             // データモデルインスタンス確保
             this.dataChapter6 = new DataChapter6();
-
-            this.SITUATIONS_SELECTION = new Dictionary<string, List<string>>
-            {
-                ["select_branch"] = new List<string>(){ "おぼえているよ", "かくにんしたいな" },
-                ["select_situation"] = new List<string>() { "場面①の赤丸くん", "場面②のキミちゃん", "場面③の青助くん" },
-                ["choice_words_akamaru"] = new List<string>() { "一緒に見せてくれる？", "ありがとう、助かるよ", "教科書を家に忘れたから" },
-                ["choice_words_kimi"] = new List<string>() { "日曜は家の用事があるの", "また別の日に遊びましょう", "ごめんね", "だから、その日は遊べないわ" },
-                ["choice_words_aosuke"] = new List<string>() { "だから貸せないんだ", "ごめんよ", "僕、まだ読み終わっていなくて", "読み終わったら貸してあげるよ" },
-               
-                ["situation_akamaru"] = new List<string>() { "①理由を言う", "②してほしいことを言う","③お礼を言う" },
-                ["situation_kimi"] = new List<string>() { "①あやまる", "②理由を言う", "③ことわる", "④代わりの言葉" },
-                ["situation_aosuke"] = new List<string>() { "①あやまる", "②理由を言う", "③ことわる","④代わりの言葉" },
-
-                ["correct_words_akamaru"] = new List<string>() { "教科書を家に忘れたから", "一緒に見せてくれる？", "ありがとう、助かるよ" },
-                ["correct_words_kimi"] = new List<string>() { "ごめんね", "日曜は家の用事があるの", "だから、その日は遊べないわ", "また別の日に遊びましょう" },
-                ["correct_words_aosuke"] = new List<string>() { "ごめんよ", "僕、まだ読み終わっていなくて", "だから貸せないんだ", "読み終わったら貸してあげるよ" },
-
-            };
-            
-
-            this.SelectGoodFeelingListBox.ItemsSource = GOOD_FEELINGS;
-            this.SelectBadFeelingListBox.ItemsSource = BAD_FEELINGS;
 
             this.InitControls();
         }
@@ -166,8 +139,6 @@ namespace KokoroUpTime
                 ["item_left_image"] = this.ItemLeftImage,
                 ["item_left_last_image"] = this.ItemLeftLastImage,
                 ["session_title_image"] = this.SessionTitleImage,
-                ["select_heart_image"] = this.SelectHeartImage,
-                ["select_needle_image"] = this.SelectNeedleImage,
                 ["children_face_left_image"] = this.ChildrenFaceLeftImage,
                 ["children_face_right_image"] = this.ChildrenFaceRightImage,
                 ["shiroji_ending_image"] = this.ShirojiEndingImage,
@@ -183,10 +154,6 @@ namespace KokoroUpTime
 
 
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
-                ["activity_title_image"] = this.ActivityTitleImage,
-                ["situation_character_image"] = this.SituationCharacterImage,
-                ["groupe_activity_character"] =this.GroupeActivityCharacter,
-                ["select_word_bubble"] =this.SelectWordBubble
 
             };
 
@@ -199,21 +166,9 @@ namespace KokoroUpTime
                 ["main_msg"] = this.MainMessageTextBlock,
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
-                ["kind_of_feeling_text"] = this.KindOfFeelingText,
-                ["size_of_feeling_text"] = this.SizeOfFeelingText,
-                ["children_text_bubble_text"] = this.ChildrenTextBubbleText,
-                ["activity_title_text"] = this.ActivityTitleText,
                 ["item_check_right_text"] = this.ItemCheckRightText,
                 ["item_check_center_text"] = this.ItemCheckCenterText,
                 ["item_book_title_text"] = this.ItemBookTitleTextBlock,
-                ["result_kind_of_feeling_text"] = this.ResultKindOfFeelingText,
-                ["result_size_of_feeling_text"] = this.ResultSizeOfFeelingText,
-                ["situation_title_text"] = this.SituationTitleText,
-                ["situation_text"] = this.SituationText,
-                ["select_word_title_text"] = this.SelectWordTitleText,
-                ["complete_role_play_text"] =this.CompleteRolePlayText,
-                ["small_situation_title_text"] =this.SmallSituationTitleText,
-                ["small_situation_text"] =this.SmallSituationText,
                 ["groupe_activity_message_text"] =this.GroupeActivityMessageTextBlock,
                 ["session_frame_text"] =this.SessionFrameText,
 
@@ -237,8 +192,6 @@ namespace KokoroUpTime
             this.gridObjects = new Dictionary<string, Grid>
             {
                 ["session_grid"] = this.SessionGrid,
-                ["challenge_time_grid"] = this.ChallengeTimeGrid,
-                ["activity_title_grid"] = this.ActivityTitleGrid,
                 ["session_frame_grid"] =this.SessionFrameGrid,
 
                 ["summary_grid"] = this.SummaryGrid,
@@ -253,35 +206,19 @@ namespace KokoroUpTime
 
 
 
-                ["select_heart_grid"] = this.SelectHeartGrid,
                 ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid,
                 ["music_info_grid"] = this.MusicInfoGrid,
                 ["branch_select_grid"] = this.BranchSelectGrid,
-                ["view_size_of_feeling_grid"] = this.ViewSizeOfFeelingGrid,
-                ["select_heart_grid"] = this.SelectHeartGrid,
-                ["select_feeling_grid"] = this.SelectFeelingGrid,
                 ["exit_back_grid"] = this.ExitBackGrid,
-                ["challenge_time_result_grid"] = this.ChallengeTimeResultGrid,
-                ["challenge_time_result_msg_grid"] = this.ChallengeTimeResultMessageGrid,
                 ["item_check_right_grid"] = this.ItemCheckRightGrid,
                 ["item_check_center_grid"] = this.ItemCheckCentertGrid,
-                ["children_text_grid"] = this.ChildrenTextGrid,
-                ["seesaw_grid"] = this.SeesawGrid,
-                ["result_feeling_grid"] = this.ResultFeelingGrid,
-                ["situation_plate_grid"] = this.SituationPlateGrid,
-                ["groupe_activity_grid"] = this.GroupeActivityGrid,
                 ["groupe_activity_message_grid"] = this.GroupeActivityMessageGrid,
-                ["small_situation_title_plate_grid"] =this.SmallSituationTitlePlateGrid,
 
 
             };
 
-            this.itemsControlObjects = new Dictionary<string, ListBox>
-            {
-                ["select_some_words_list_box"] =this.SelectSomeWordsListBox,
-                ["some_choices_list_box"] =this.SomeChoicesListBox,
-            };
+           
         }
 
         private void ResetControls()
@@ -289,7 +226,6 @@ namespace KokoroUpTime
             // 各種コントロールを隠すことでフルリセット
 
             this.SessionGrid.Visibility = Visibility.Hidden;
-            this.ChallengeTimeGrid.Visibility = Visibility.Hidden;
 
             this.SummaryGrid.Visibility = Visibility.Hidden;
             this.EndingGrid.Visibility = Visibility.Hidden;
@@ -301,18 +237,10 @@ namespace KokoroUpTime
             this.ItemLeftLastImage.Visibility = Visibility.Hidden;
 
             this.ItemReviewGrid.Visibility = Visibility.Hidden;
-            this.ActivityTitleImage.Visibility = Visibility.Hidden;
-            this.ChallengeTimeResultGrid.Visibility = Visibility.Hidden;
-            this.ChallengeTimeResultMessageGrid.Visibility = Visibility.Hidden;
-            this.ActivityTitleGrid.Visibility = Visibility.Hidden;
-            this.GroupeActivityGrid.Visibility = Visibility.Hidden;
             this.GroupeActivityMessageGrid.Visibility = Visibility.Hidden;
-            this.SmallSituationTitlePlateGrid.Visibility = Visibility.Hidden;
             this.SessionFrameGrid.Visibility = Visibility.Hidden;
             this.SessionFrameText.Visibility = Visibility.Hidden;
 
-            this.SelectHeartGrid.Visibility = Visibility.Hidden;
-            this.SeesawGrid.Visibility = Visibility.Hidden;
           
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
             this.MainMessageGrid.Visibility = Visibility.Hidden;
@@ -325,9 +253,6 @@ namespace KokoroUpTime
             this.ExitBackGrid.Visibility = Visibility.Hidden;
             this.BranchSelectGrid.Visibility = Visibility.Hidden;
 
-            //
-            this.SomeChoicesListBox.Visibility = Visibility.Hidden;
-            this.SelectSomeWordsListBox.Visibility = Visibility.Hidden;
            
             this.BackgroundImage.Visibility = Visibility.Hidden;
             this.MangaTitleImage.Visibility = Visibility.Hidden;
@@ -365,13 +290,9 @@ namespace KokoroUpTime
 
             this.ItemCheckCentertGrid.Visibility = Visibility.Hidden;
             this.ItemCheckRightGrid.Visibility = Visibility.Hidden;
-            this.SituationPlateGrid.Visibility = Visibility.Hidden;
 
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
-            this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
-            this.ResultFeelingGrid.Visibility = Visibility.Hidden;
-            this.SelectFeelingGrid.Visibility = Visibility.Hidden;
 
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
           
@@ -380,7 +301,6 @@ namespace KokoroUpTime
 
             this.SelectFeelingBackButton.Visibility = Visibility.Hidden;
             this.CompleteRolePlayButton.Visibility = Visibility.Hidden;
-            this.CompleteRolePlayText.Visibility = Visibility.Hidden;
 
             this.SessionSubTitleTextBlock.Text = "";
             this.SessionSentenceTextBlock.Text = "";
@@ -390,8 +310,6 @@ namespace KokoroUpTime
             this.MusicTitleTextBlock.Text = "";
             this.ComposerNameTextBlock.Text = "";
 
-            this.ResultKindOfFeelingText.Text = "";
-            this.ResultSizeOfFeelingText.Text = "";
 
         }
 
@@ -952,32 +870,13 @@ namespace KokoroUpTime
                         case "text":
 
                             this.position = this.scenarios[this.scenarioCount][2];
-                            if(this.position== "size_of_feeling_text")
-                            {
-                                this.textBlockObjects[this.position].Text = "(        )";
-                            }
-                            else if(this.position == "kind_of_feeling_text")
-                            {
-                                this.ClearSelectFeelingEllipse();
-
+                           
                                 this.textBlockObjects[this.position].Text = "";
-                            }
-                            else
-                            {
-                                this.textBlockObjects[this.position].Text = "";
-                            }
 
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
 
                             break;
-
-                        case "select_feeling":
-
-                            this.ClearSelectFeelingEllipse();
-
-                            break;
-
                     }
                     break;
 
@@ -1106,35 +1005,6 @@ namespace KokoroUpTime
                     }
                     break;
 
-                // ハートゲージに対する処理
-                case "gauge":
-
-                    if(this.ViewSizeOfFeelingTextBlock.Text == "")
-                    {
-                        this.ViewSizeOfFeelingTextBlock.Text = "50";
-                    }
-
-                    this.SelectHeartImage.Source = null;
-                    this.SelectNeedleImage.Source = null;
-
-                    if (this.scene == "日直を任された場面のきもち" || this.scene == "赤丸くんにたのまれた場面のきもち")
-                    {
-                        if (this.SelectGoodFeelingListBox.SelectedItem != null)
-                        {
-                            this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_red.png", UriKind.Relative));
-                            this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/red_needle.png", UriKind.Relative));
-                        }
-                        else if (this.SelectBadFeelingListBox.SelectedItem != null)
-                        {
-                            this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_blue.png", UriKind.Relative));
-                            this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/blue_needle.png", UriKind.Relative));
-                        }
-                    }
-
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-
-                    break;
 
                 case "get_item":
 
@@ -1212,24 +1082,6 @@ namespace KokoroUpTime
                     {
                         this.runs.Clear();
                     }
-
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-
-                    break;
-
-                case "list_box":
-
-                    this.position = this.scenarios[this.scenarioCount][1];
-
-                    var _itemSource = this.scenarios[this.scenarioCount][2];
-
-                    var _listBox = this.itemsControlObjects[this.position];
-
-
-                    _listBox.ItemsSource =this.SITUATIONS_SELECTION[_itemSource];
-
-                    _listBox.Visibility = Visibility.Visible;
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1729,11 +1581,6 @@ namespace KokoroUpTime
                     }
                     if (button.Name == "MangaPrevBackButton")
                     {
-                        if (this.KindOfFeelingText.Text != "" && this.SizeOfFeelingText.Text != "(        )")
-                        {
-                            this.SelectFeelingNextButton.Visibility = Visibility.Visible;
-
-                        }
                     }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1774,45 +1621,6 @@ namespace KokoroUpTime
             }
             if (button.Name == "SelectFeelingBackButton")
             {
-                this.SelectFeelingBackButton.Visibility = Visibility.Hidden;
-
-                if (this.ChallengeTimeGrid.Visibility == Visibility.Visible)
-                {
-                    this.ScenarioBack();
-                }
-
-                var challengeflag = false;
-
-                if (this.SelectFeelingGrid.Visibility == Visibility.Visible)
-                {
-                    if (this.SelectGoodFeelingListBox.SelectedItem != null)
-                    {
-                        this.KindOfFeelingText.Text = this.SelectGoodFeelingListBox.SelectedItem.ToString().Replace("●　", "");
-                    }
-                    if (this.SelectBadFeelingListBox.SelectedItem != null)
-                    {
-                        this.KindOfFeelingText.Text = this.SelectBadFeelingListBox.SelectedItem.ToString().Replace("●　", "");
-                    }
-
-                    challengeflag = true;
-                }
-                if (this.SelectHeartGrid.Visibility == Visibility.Visible && this.ViewFeelingGrid.Visibility == Visibility.Visible)
-                {
-                    this.SizeOfFeelingText.Text = "(   " + this.ViewSizeOfFeelingTextBlock.Text + "  )";
-                    challengeflag = true;
-                }
-                if (this.KindOfFeelingText.Text != "" && this.SizeOfFeelingText.Text != "(        )")
-                {
-                    this.SelectFeelingNextButton.Visibility = Visibility.Visible;
-
-                }
-                if (challengeflag)
-                {
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-                }
-
-
 
             }
             if (button.Name == "BranchButton1")
@@ -1824,134 +1632,6 @@ namespace KokoroUpTime
                 this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
-            }
-            if (button.Name == "MangaCheckButton")
-            {
-                if (this.scene == "日直を任された場面のきもち")
-                {
-                    this.GoTo("check_manga1");
-                }
-                if (this.scene == "赤丸くんにたのまれた場面のきもち")
-                {
-                    this.GoTo("check_manga2");
-                }
-            }
-            if (button.Name == "SizeOfFeelingButton")
-            {
-                if (this.KindOfFeelingText.Text == "")
-                {
-                    MessageBox.Show("先にきもちの種類をえらんでみよう！");
-                }
-                else
-                {
-                    this.GoTo("size_of_feeling");
-                }
-            }
-            if (button.Name == "KindOfFeelingButton")
-            {
-                this.GoTo("kind_of_feeling");
-            }
-            if (button.Name == "ChoicesButton")
-            {
-                if (this.scene == "グループアクティビティ")
-                {
-                    Grid btnContent = (Grid)button.Content;
-                    foreach (var Text in btnContent.Children)
-                    {
-                        if (Text is TextBlock)
-                        {
-                            string situationText = ((TextBlock)Text).Text;
-
-                            if (situationText == "場面①の赤丸くん")
-                            {
-                                this.GoTo("situation_akamaru");
-                            }
-                            if (situationText == "場面②のキミちゃん")
-                            {
-                                this.GoTo("situation_kimi");
-                            }
-                            if (situationText == "場面③の青助くん")
-                            {
-                                this.GoTo("situation_aosuke");
-                            }
-                        }
-                    }
-                }
-                else if ((this.scene == "赤丸くんの場面" || this.scene == "キミちゃんの場面" || this.scene == "青助くんの場面"))
-                {
-                    Grid btnContent = (Grid)button.Content;
-                    foreach (var Text in btnContent.Children)
-                    {
-                        if (Text is TextBlock)
-                        {
-                            selectedWordButtonText.Text = ((TextBlock)Text).Text;
-                        }
-                    }
-                    this.GoTo(this.scene);
-
-                    int checkCount = 0;
-                    int isCorrectCount = 0;
-
-                    foreach (Object itemControl in this.SelectSomeWordsListBox.Items)
-                    {
-                        this.isCorrect = false;
-
-                        ListBoxItem content = (ListBoxItem)(this.SelectSomeWordsListBox.ItemContainerGenerator.ContainerFromItem(itemControl));
-                        ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(content);
-                        DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
-                        StackPanel panel = (StackPanel)myDataTemplate.FindName("SelectWordPanel", myContentPresenter);
-                        
-                       //ItemsControlの子要素を取得
-                       foreach(var btn in panel.Children)
-                       {
-                            if(btn is Button)
-                            {
-                                Grid grid = (Grid)((Button)btn).Content;
-
-                                foreach (TextBlock checkText in grid.Children)
-                                {
-                                    //要素ごとに選択肢が選択肢が選択されたか否かを確認
-                                    if (checkText.Name == "SelectWordButtonText" && checkText.Text != "")
-                                    {
-                                        string checktag = "";
-                                        if(this.scene== "赤丸くんの場面")
-                                        {
-                                            checktag = "correct_words_akamaru";
-                                        }
-                                        else if (this.scene == "キミちゃんの場面")
-                                        {
-                                            checktag = "correct_words_kimi";
-                                        }
-                                        else if (this.scene == "青助くんの場面")
-                                        {
-                                            checktag = "correct_words_aosuke";
-                                        }
-                                        if (checkText.Text == (this.SITUATIONS_SELECTION[checktag])[checkCount])
-                                        {
-                                            isCorrectCount++;
-                                        }
-                                        checkCount++;
-                                    }
-                                    //　
-                                    else if(checkText.Text == "")
-                                    {
-                                        break;
-                                    }
-                                }
-                            }
-                            if (this.SelectSomeWordsListBox.Items.Count == checkCount)
-                            {
-                                this.OkButton.Visibility = Visibility.Visible;
-
-                                if(this.SelectSomeWordsListBox.Items.Count == isCorrectCount)
-                                {
-                                    this.isCorrect = true;
-                                }
-                            }
-                            
-                       }
-                    }
-                }
             }
             
             if (button.Name == "ReturnToTitleButton")
@@ -2033,90 +1713,7 @@ namespace KokoroUpTime
 
 
 
-        // ハートゲージの角度をデータバインド
-        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter6), new UIPropertyMetadata(0.0));
-
-        public double Angle
-        {
-            get { return (double)GetValue(AngleProperty); }
-            set { SetValue(AngleProperty, value); }
-        }
-
-        // マウスのドラッグ処理（マウスの左ボタンを押下したとき）
-        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Mouse.Capture(this);
-
-            if (this.SelectHeartGrid.Visibility == Visibility.Visible)
-            {
-                this.CalcAngle();
-
-                this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
-
-                
-            }
-        }
-
-        // マウスのドラッグ処理（マウスの左ボタンを離したとき）
-        private void OnMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Mouse.Capture(null);
-            /*
-            if(this.scene == "日直を任された場面のきもち" || this.scene == "赤丸くんにたのまれた場面のきもち")
-            {
-                this.SelectHeartGrid.Visibility = Visibility.Hidden;
-                this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
-                this.SizeOfFeelingText.Text ="(  "+ this.ViewSizeOfFeelingTextBlock.Text +"   )";
-            }
-            */
-        }
-
-        // マウスのドラッグ処理（マウスを動かしたとき）
-        private void OnMouseMove(object sender, MouseEventArgs e)
-        {
-            if (Mouse.Captured == this)
-            {
-                if (this.SelectHeartGrid.Visibility == Visibility.Visible)
-                {
-                    this.CalcAngle();
-
-                    this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
-
-                    
-                }
-            }
-        }
-
-        // ハートゲージの針の角度に関する計算
-        private void CalcAngle()
-        {
-            Point currentLocation = this.PointToScreen(Mouse.GetPosition(this));
-
-            Point knobCenter = this.SelectHeartImage.PointToScreen(new Point(this.SelectHeartImage.ActualWidth * 0.5, this.SelectHeartImage.ActualHeight * 0.8));
-
-            double radians = Math.Atan((currentLocation.Y - knobCenter.Y) / (currentLocation.X - knobCenter.X));
-
-            this.Angle = radians * 180 / Math.PI + 90;
-
-            this.feelingSize = (int)(this.Angle + 50.0f);
-
-            if (currentLocation.X - knobCenter.X < 0)
-            {
-                this.Angle += 180;
-
-                this.feelingSize = (int)(this.Angle - 310.0f);
-            }
-            if (this.feelingSize <= 0)
-            {
-                this.feelingSize = 0;
-                this.Angle = (double)this.feelingSize - 50.0f;
-            }
-            if (this.feelingSize >= 100)
-            {
-                this.feelingSize = 100;
-                this.Angle = (double)this.feelingSize + 310.0f;
-            }
-        }
+       
 
         private void GoTo(string tag)
         {
@@ -2189,105 +1786,6 @@ namespace KokoroUpTime
             wordArtImage.BeginAnimation(Image.WidthProperty, animation);
         }
 
-        private void selectFeeling(object sender, MouseButtonEventArgs e)
-        {
-            this.ClearSelectFeelingEllipse();
-
-            //XAML上で記載したListBoxのテンプレートにEllipseコントロールを追加
-            Grid feelingGrid = sender as Grid;
-
-            Color feelingColor;
-
-            if (feelingGrid.Name == "SelectGoodFeelingGrid" || feelingGrid.Name == "ChallengeGoodFeelingGrid")
-            {
-                feelingColor = (Color)ColorConverter.ConvertFromString("#FFEE2222");
-            }
-            else if (feelingGrid.Name == "SelectBadFeelingGrid" || feelingGrid.Name == "ChallengeBadFeelingGrid")
-            {
-                feelingColor = (Color)ColorConverter.ConvertFromString("#FF1E90FF");
-            }
-
-            Brush colorBrush = new SolidColorBrush { Color = feelingColor };
-            Ellipse feelingColorEllipse = new Ellipse { Stroke = colorBrush, StrokeThickness = 3, Margin = new Thickness(25, 5, 25, 0) };
-
-            AnswerResult selectResult = AnswerResult.None;
-
-            if (feelingGrid.Children.Count < 3)
-            {
-                feelingGrid.Children.Add(feelingColorEllipse);
-                selectResult = AnswerResult.Decision;
-            }
-            else
-            {
-                feelingGrid.Children.RemoveAt(2);
-                selectResult = AnswerResult.Cancel;
-            }
-
-            var startupPath = FileUtils.GetStartupPath();
-
-            this.PlaySE($@"{startupPath}/Sounds/{selectResult}.wav");
-        }
-
-        private void ClearSelectFeelingEllipse()
-        {
-            string selectFeelingName = "";
-
-                ListBoxItem myListBoxItem = null;
-
-                if (this.SelectGoodFeelingListBox.SelectedItem != null)
-                {
-                    myListBoxItem = (ListBoxItem)(this.SelectGoodFeelingListBox.ItemContainerGenerator.ContainerFromItem(this.SelectGoodFeelingListBox.SelectedItem));
-                    selectFeelingName = "SelectGoodFeelingGrid";
-
-
-                }
-                if (this.SelectBadFeelingListBox.SelectedItem != null)
-                {
-                    myListBoxItem = (ListBoxItem)(this.SelectBadFeelingListBox.ItemContainerGenerator.ContainerFromItem(this.SelectBadFeelingListBox.SelectedItem));
-                    selectFeelingName = "SelectBadFeelingGrid";
-
-
-                }
-                if (myListBoxItem != null)
-                {
-                    ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
-                    DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
-                    Grid grid = (Grid)myDataTemplate.FindName(selectFeelingName, myContentPresenter);
-                    if (grid.Children.Count == 3)
-                    {
-                        grid.Children.RemoveAt(2);
-                    }
-
-                }
-                this.SelectGoodFeelingListBox.SelectedIndex = -1;
-                this.SelectBadFeelingListBox.SelectedIndex = -1;
-        }
-
-        private childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is childItem)
-                {
-                    return (childItem)child;
-                }
-                else
-                {
-                    childItem childOfChild = FindVisualChild<childItem>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
-            }
-            return null;
-        }
-
-      
-        private void TextBoxMouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
         private void ScenarioBack()
         {
             var currentScenarioCount = this.scenarioCount;
@@ -2311,6 +1809,36 @@ namespace KokoroUpTime
             }
         }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+
+            if (this.checkBoxs.Contains(checkBox))
+            {
+                this.tapCount += 1;
+
+                if (this.tapCount >= this.checkBoxs.Length)
+                {
+                    foreach (CheckBox _checkBox in this.checkBoxs)
+                    {
+                        _checkBox.IsEnabled = false;
+                    }
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+            }
+        }
+
+        private void CheckBox_UnChecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+
+            if (this.checkBoxs.Contains(checkBox))
+            {
+                this.tapCount -= 1;
+            }
+        }
     }
 }
 

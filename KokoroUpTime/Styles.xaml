@@ -20,7 +20,7 @@
         </Setter>
     </Style>
     
-    <Style x:Key="{x:Type CheckBox}" TargetType="{x:Type CheckBox}">
+    <Style x:Key="RuleBoard" TargetType="{x:Type CheckBox}">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="Template">
@@ -59,6 +59,47 @@
         </Setter>
     </Style>
 
+    <Style x:Key="check" TargetType="{x:Type CheckBox}">
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Grid>
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Border x:Name="Border" Width="40" Height="40" CornerRadius="0" Background="Transparent" BorderThickness="4" BorderBrush="{TemplateBinding Foreground}">
+                                    <Path x:Name="CheckMark" SnapsToDevicePixels="False" Stroke="{TemplateBinding Foreground}" StrokeThickness="4" Data="M 3 5 L 5 8 L 13 0" Stretch="Fill"/>
+                                </Border>
+                            </BulletDecorator.Bullet>
+                            <ContentPresenter Margin="4,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" RecognizesAccessKey="True"/>
+                        </BulletDecorator>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="false">
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter TargetName="CheckMark" Property="Data" Value="M 0 7 L 7 0" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="#808080" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="#E0E0E0" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#FFFFEB6B" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="Border" Property="Background" Value="#EEEEEE" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#FFF9EA91" />
+                            <Setter Property="Foreground" Value="#888888"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="{x:Type outline_marker:OutlineText}" x:Key="Orange">
         <Style.Setters>
             <Setter Property="TextAlignment" Value="Center"/>
@@ -72,13 +113,13 @@
         <Style.Setters>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect ShadowDepth="5" Direction="330" Color="Black" Opacity="0.5" BlurRadius="5"/>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" Opacity="0.5" BlurRadius="5"/>
                 </Setter.Value>
             </Setter>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="Foreground" Value="#FF9966FF"/>
             <Setter Property="Outline" Value="#FF9966FF"/>
-            <Setter Property="OutlineThickness" Value="2"/>
+            <Setter Property="OutlineThickness" Value="0.5"/>
             <Setter Property="FontFamily" Value="Yu Gothic Light"/>
         </Style.Setters>
     </Style>
@@ -96,4 +137,57 @@
             <Setter Property="OutlineThickness" Value="1.5"/>
         </Style.Setters>
     </Style>
+    <Style TargetType="{x:Type outline_marker:OutlineText}" x:Key="Yeow">
+        <Style.Setters>
+          
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#FFFFFF00"/>
+            <Setter Property="FontFamily" Value="Yu Gothic Light"/>
+            <Setter Property="Outline" Value="#FF5B9BD5"/>
+            <Setter Property="OutlineThickness" Value="1.5"/>
+        </Style.Setters>
+    </Style>
+    
+   <!--Chapter6-->
+    <Style x:Key="selectableContentStyle" TargetType="{x:Type ItemsControl}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding StyleMode}" Value="1">
+                <Setter Property="ItemTemplate" Value="{StaticResource data1}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding StyleMode}" Value="2">
+                <Setter Property="ItemTemplate" Value="{StaticResource data2}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <DataTemplate x:Key="data1">
+        <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
+            <TextBlock x:Name="IndexText"  VerticalAlignment="Center">
+                                <Run Text="・ " FontSize="60"/>
+                                <Run Text="(" FontSize="80"/>
+            </TextBlock>
+            <TextBox x:Name="NameInputText" Width="250"/>
+            <TextBlock x:Name="MidpointText" Text=")さん・・・ "  VerticalAlignment="Center">
+                                <Run Text=")" FontSize="80"/>
+                                <Run Text="さん・・・ " FontSize="60"/>
+            </TextBlock>
+            <TextBox x:Name="PersonalityInputText" Text="" Height="120" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="40"/>
+        </DockPanel>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="data2">
+        <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
+            <TextBlock x:Name="IndexText"  VerticalAlignment="Center">
+                                <Run Text="・ " FontSize="60"/>
+                                <Run Text="(" FontSize="80"/>
+            </TextBlock>
+            <InkCanvas x:Name="NameInputCanvas" Width="250"/>
+            <TextBlock x:Name="MidpointText" Text=")さん・・・ "  VerticalAlignment="Center">
+                                <Run Text=")" FontSize="80"/>
+                                <Run Text="さん・・・ " FontSize="60"/>
+            </TextBlock>
+            <InkCanvas x:Name="PersonalityInputText" Height="120" VerticalAlignment="Center" />
+        </DockPanel>
+    </DataTemplate>
+
 </ResourceDictionary>

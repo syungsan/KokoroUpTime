@@ -15,7 +15,6 @@
                 <ResourceDictionary Source="Animation.xaml"/>
                 <ResourceDictionary Source="Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            
         </ResourceDictionary>
     </Page.Resources>
     <Viewbox>
@@ -206,17 +205,17 @@
                 </Button>
                 <TextBlock x:Name="GroupAvtivityExample" Text="(たとえば)みんなでご飯を食べる" Background="{x:Null}" FontSize="40" Margin="350,610,970,420" FontFamily="Yu Gothic"/>
             </Grid>
-            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
+            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920">
                 <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684">
                     <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png"/>
                     <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center"/>
                     <TextBlock x:Name="ViewSizeOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="GaugeGrid" d:IsHidden="True">
-                <Grid x:Name="SelectHeartGrid" Margin="776,410,776,358" d:IsHidden="True">
-                    <Image x:Name="SelectHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_red.png" d:IsHidden="True"/>
-                    <Image x:Name="SelectNeedleImage" Height="213" Source="/Images/red_needle.png" RenderTransformOrigin="0.5,0.8" Margin="171,65,172,0" VerticalAlignment="Top" d:IsHidden="True">
+            <Grid x:Name="GaugeGrid">
+                <Grid x:Name="SelectHeartGrid" Margin="776,410,776,358">
+                    <Image x:Name="SelectHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_red.png"/>
+                    <Image x:Name="SelectNeedleImage" Height="213" Source="/Images/red_needle.png" RenderTransformOrigin="0.5,0.8" Margin="171,65,172,0" VerticalAlignment="Top">
                         <Image.RenderTransform>
                             <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter2}}}"/>
                         </Image.RenderTransform>
