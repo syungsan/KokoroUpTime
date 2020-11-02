@@ -77,6 +77,11 @@ namespace KokoroUpTime
             // ################################################################################
         }
 
+        private void TabTipAutomationOnTest(Exception exception)
+        {
+            MessageBox.Show(exception.Message);
+        }
+
         // ページ間参照橋渡し関数
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
         {
@@ -777,10 +782,28 @@ namespace KokoroUpTime
                         this.NavigationService.Navigate(chapter4);
                     }
                     break;
-                /*
+                
+
+                case "第5回":
+
+                   if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        Chapter5 chapter5 = new Chapter5();
+
+                        chapter5.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                        this.NavigationService.Navigate(chapter5);
+                    }
+                    break;
+
+                    /*
                 case "第6回":
 
-                    if (this.initConfig.userName == null)
+                 if (this.initConfig.userName == null)
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }

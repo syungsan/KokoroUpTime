@@ -1070,11 +1070,11 @@ namespace KokoroUpTime
 
                             return;
                         }
-                    }
-                    this.NameInputGrid.Visibility = Visibility.Hidden;
 
-                    // OSKを落とすと管理者権限出ないと再表示できなくなる
-                    // this.CloseOSK();
+                        this.CloseOSK();
+                    }
+
+                    this.NameInputGrid.Visibility = Visibility.Hidden;
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1328,13 +1328,19 @@ namespace KokoroUpTime
         // TextBoxにフォーカスが当たったときに起動
         private void TriggerKeyboard(object sender, EventArgs e)
         {
-            try
+            if (!OnScreenKeyboard.IsOpened())
             {
-                OnScreenKeyboard.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                try
+                {
+                    Process.Start("./tabtip.bat");
+
+                    OnScreenKeyboard.Show();
+                }
+                catch (Exception ex)
+                {
+                    // MessageBox.Show(ex.Message);
+                    Debug.Print(ex.Message);
+                }
             }
         }
 
@@ -1345,21 +1351,18 @@ namespace KokoroUpTime
             {
                 try
                 {
+                    Process.Start("./tabtip.bat");
+
                     OnScreenKeyboard.Show();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    // MessageBox.Show(ex.Message);
+                    Debug.Print(ex.Message);
                 }
             }
         }
 
-        private void TriggerKeyboard(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        /*
         // OSKを完全に切ってしまう
         private void CloseOSK()
         {
@@ -1371,10 +1374,10 @@ namespace KokoroUpTime
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    // MessageBox.Show(ex.Message);
+                    Debug.Print(ex.Message);
                 }
             }
         }
-        */
     }
 }
