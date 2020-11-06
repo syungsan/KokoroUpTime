@@ -1,1 +1,0 @@
-new Process {StartInfo = {FileName = @"C:\Program Files\Common Files\microsoft shared\ink\TabTip.exe"}}.Start()

@@ -140,6 +140,7 @@
     <None Remove="Images\item06_book.png" />
     <None Remove="Images\item06_detail.png" />
     <None Remove="Images\item06_solo.gif" />
+    <None Remove="Images\item06_solo.png" />
     <None Remove="Images\item06_title.png" />
     <None Remove="Images\item07_book.png" />
     <None Remove="Images\item07_detail.png" />
@@ -218,6 +219,12 @@
     <None Remove="Images\manga4-2.png" />
     <None Remove="Images\manga4-3.png" />
     <None Remove="Images\manga4_title.png" />
+    <None Remove="Images\manga6-1.png" />
+    <None Remove="Images\manga6-2.png" />
+    <None Remove="Images\manga6-3.png" />
+    <None Remove="Images\manga6-4.png" />
+    <None Remove="Images\manga6-5.png" />
+    <None Remove="Images\manga6-6.png" />
     <None Remove="Images\mangaya.png" />
     <None Remove="Images\mangaya_gauge.png" />
     <None Remove="Images\mangaya_orange.png" />
@@ -417,6 +424,9 @@
     <Resource Include="Images\item06_book.png" />
     <Resource Include="Images\item06_detail.png" />
     <Resource Include="Images\item06_solo.gif" />
+    <Resource Include="Images\item06_solo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\item06_title.png" />
     <Resource Include="Images\item07_book.png" />
     <Resource Include="Images\item07_detail.png" />
@@ -460,6 +470,24 @@
     <Resource Include="Images\manga4-2.png" />
     <Resource Include="Images\manga4-3.png" />
     <Resource Include="Images\manga4_title.png" />
+    <Resource Include="Images\manga6-1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\manga6-2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\manga6-3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\manga6-4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\manga6-5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\manga6-6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\mangaya_gauge.png" />
     <Resource Include="Images\mangaya_orange.png" />
     <Resource Include="Images\message_box.png" />
@@ -567,6 +595,8 @@
 
   <ItemGroup>
     <Compile Update="Chapter6.xaml.cs">
+	<SubType>Code</SubType>
+    </Compile>
     <Compile Update="Chapter5.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -664,6 +694,8 @@
 
   <ItemGroup>
     <Page Update="Chapter6.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Chapter5.xaml">
       <SubType>Designer</SubType>
     </Page>

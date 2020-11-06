@@ -42,6 +42,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Chapter6.xaml">
+	<SubType>Designer</SubType>
+    </Page>
     <Page Update="Chapter5.xaml">
       <SubType>Designer</SubType>
     </Page>

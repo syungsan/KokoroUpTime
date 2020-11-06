@@ -2167,11 +2167,26 @@ namespace KokoroUpTime
             {
                 try
                 {
+                    Process.Start("./tabtip.bat");
+
                     OnScreenKeyboard.Show();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    // MessageBox.Show(ex.Message);
+                    Debug.Print(ex.Message);
+                }
+            }
+            else if (OnScreenKeyboard.IsOpened())
+            {
+                try
+                {
+                    OnScreenKeyboard.Close();
+                }
+                catch (Exception ex)
+                {
+                    // MessageBox.Show(ex.Message);
+                    Debug.Print(ex.Message);
                 }
             }
         }

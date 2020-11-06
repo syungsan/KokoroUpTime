@@ -36,12 +36,9 @@ namespace KokoroUpTime
     /// </summary>
     public partial class Chapter6 : Page
     {
-        // 気持ちのリスト
-        private string[] GOOD_FEELINGS = { "●　うれしい", "●　しあわせ", "●　たのしい", "●　ホッとした", "●　きもちいい", "●　まんぞく", "●　すき", "●　やる気マンマン", "●　かんしゃ", "●　わくわく", "●　うきうき", "●　ほこらしい" };
-        private string[] BAD_FEELINGS = { "●　心配", "●　こまった", "●　不安", "●　こわい", "●　おちこみ", "●　がっかり", "●　いかり", "●　イライラ", "●　はずかしい", "●　ふまん", "●　かなしい", "●　おびえる" };
-
-        //選択肢のリスト
-
+        // すてきなせいかくのリスト
+        private string[] NICE_PERSONALITY = { "●　親切にしてもらった", "●　アドバイスをくれた", "●　みんなをひっぱってくれた", "●　きりんと順番をまもってくれた", "●　みんなを笑顔にしてくれた", "●　（何か悪いことや失敗をゆるしてもらった）", "●　自分の気持ちを分かってもらった", "●　仲良くしてもらった", "●　ありがとうと言ってくれた" };
+        
         private float THREE_SECOND_RULE_TIME = 3.0f;
 
         // ゲームを進行させるシナリオ
@@ -122,6 +119,8 @@ namespace KokoroUpTime
             // データモデルインスタンス確保
             this.dataChapter6 = new DataChapter6();
 
+            this.SelectNicePersonalityListBox.ItemsSource = NICE_PERSONALITY;
+
             this.InitControls();
         }
 
@@ -149,6 +148,7 @@ namespace KokoroUpTime
                 ["shiroji_small_right_down_image"] = this.ShirojiSmallRightDownImage,
                 ["children_stand_left_image"] = this.ChildrenStandLeftImage,
                 ["children_stand_right_image"] = this.ChildrenStandRightImage,
+                ["shiroji_small_right_center_image"] =this.ShirojiSmallRightCenterImage,
                 ["session_title_image"] = this.SessionTitleImage,
 
 
@@ -166,11 +166,12 @@ namespace KokoroUpTime
                 ["main_msg"] = this.MainMessageTextBlock,
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
-                ["item_check_right_text"] = this.ItemCheckRightText,
-                ["item_check_center_text"] = this.ItemCheckCenterText,
                 ["item_book_title_text"] = this.ItemBookTitleTextBlock,
-                ["groupe_activity_message_text"] =this.GroupeActivityMessageTextBlock,
+                ["groupe_activity_msg"] =this.GroupeActivityMessageTextBlock,
                 ["session_frame_text"] =this.SessionFrameText,
+                ["large_plate_title_text"] =this.LargePlateTitleText,
+                ["small_plate_title_text"] =this.SmallPlateTitleText,
+                
 
             };
 
@@ -211,11 +212,28 @@ namespace KokoroUpTime
                 ["music_info_grid"] = this.MusicInfoGrid,
                 ["branch_select_grid"] = this.BranchSelectGrid,
                 ["exit_back_grid"] = this.ExitBackGrid,
-                ["item_check_right_grid"] = this.ItemCheckRightGrid,
-                ["item_check_center_grid"] = this.ItemCheckCentertGrid,
                 ["groupe_activity_message_grid"] = this.GroupeActivityMessageGrid,
 
+                ["large_plate_title_grid"] =this.LargePlateTitleGrid,
+                ["small_plate_title_grid"] =this.SmallPlateTitleGrid,
 
+                ["aosukes_uncomfortable_situation_grid"] =this.AosukesUncomfortableSituationGrid,
+                ["aosukes_perspnality_grid"] =this.AosukesPerspnalityGrid,
+                ["akamarus_perspnality_grid"] = this.AkamarusPersonalityGrid,
+                ["kimis_perspnality_grid"] = this.KimisPersonalityGrid,
+
+                ["challenge_time_title_grid"] = this.ChallengeTimeTitleGrid,
+                ["challenge_time_description_grid"] = this.ChallengeTimeDescriptionGrid,
+                ["challenge_time_grid"]=this.ChallengeTimeGrid,
+                ["challenge_time_message_grid"] =this.ChallengeTimeMessageGrid,
+                ["groupe_activity_grid"] =this.GroupeActivityGrid,
+                ["groupe_activity_message_grid"]=this.GroupeActivityMessageGrid,
+                ["hint_check_grid"]=this.HintCheckGrid,
+
+                ["point_check_box_grid"]=this.PointCheckBoxGrid,
+                ["point_check_box_01_grid"]=this.PointCheckBox1Grid,
+                ["point_check_box_02_grid"] = this.PointCheckBox2Grid,
+                ["point_check_box_03_grid"] = this.PointCheckBox3Grid,
             };
 
            
@@ -241,7 +259,23 @@ namespace KokoroUpTime
             this.SessionFrameGrid.Visibility = Visibility.Hidden;
             this.SessionFrameText.Visibility = Visibility.Hidden;
 
-          
+            this.LargePlateTitleGrid.Visibility = Visibility.Hidden;
+            this.SmallPlateTitleGrid.Visibility = Visibility.Hidden;
+            this.AosukesUncomfortableSituationGrid.Visibility = Visibility.Hidden;
+            this.AosukesPerspnalityGrid.Visibility = Visibility.Hidden;
+            this.AkamarusPersonalityGrid.Visibility = Visibility.Hidden;
+            this.KimisPersonalityGrid.Visibility = Visibility.Hidden;
+            this.ChallengeTimeGrid.Visibility = Visibility.Hidden;
+            this.ChallengeTimeTitleGrid.Visibility = Visibility.Hidden;
+            this.ChallengeTimeDescriptionGrid.Visibility = Visibility.Hidden;
+            this.ChallengeTimeMessageGrid.Visibility = Visibility.Hidden;
+            this.GroupeActivityGrid.Visibility = Visibility.Hidden;
+            this.GroupeActivityMessageGrid.Visibility = Visibility.Hidden;
+            this.HintCheckGrid.Visibility = Visibility.Hidden;
+            this.PointCheckBoxGrid.Visibility = Visibility.Hidden;
+
+            this.ShirojiSmallRightCenterImage.Visibility = Visibility.Hidden;
+
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
             this.MainMessageGrid.Visibility = Visibility.Hidden;
             this.MusicInfoGrid.Visibility = Visibility.Hidden;
@@ -287,9 +321,6 @@ namespace KokoroUpTime
             this.BackPageButton.Visibility = Visibility.Hidden;
             this.MangaFlipButton.Visibility = Visibility.Hidden;
             this.MangaPrevBackButton.Visibility = Visibility.Hidden;
-
-            this.ItemCheckCentertGrid.Visibility = Visibility.Hidden;
-            this.ItemCheckRightGrid.Visibility = Visibility.Hidden;
 
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
@@ -1045,9 +1076,9 @@ namespace KokoroUpTime
 
                 case "item_book":
 
-                    Image[] itemMainImages = { this.Item01MainImage, this.Item02MainImage, this.Item03MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item08MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
+                    Image[] itemMainImages = { this.Item01MainImage, this.Item02MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage, this.Item07MainImage, this.Item08MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
 
-                    Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item03NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
+                    Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
 
                     var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
 

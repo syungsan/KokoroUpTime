@@ -783,7 +783,7 @@ namespace KokoroUpTime
                     }
                     break;
                 
-
+                /*
                 case "第5回":
 
                    if (this.initConfig.userName == null)
@@ -799,8 +799,8 @@ namespace KokoroUpTime
                         this.NavigationService.Navigate(chapter5);
                     }
                     break;
-
-                    /*
+                    */
+                    
                 case "第6回":
 
                  if (this.initConfig.userName == null)
@@ -816,7 +816,7 @@ namespace KokoroUpTime
                         this.NavigationService.Navigate(chapter6);
                     }
                     break;
-                    */
+                    
             }
         }
 

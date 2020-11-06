@@ -123,32 +123,7 @@
                     </EasingDoubleKeyFrame>
                 </DoubleAnimationUsingKeyFrames>
             </Storyboard>
-            <Storyboard x:Key="float_in">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
+            
             <Style x:Key="{x:Type CheckBox}" TargetType="{x:Type CheckBox}">
                 <Setter Property="SnapsToDevicePixels" Value="true"/>
                 <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -828,7 +803,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="40,145,212,45" FontSize="44" Text="きもちセンサーをつかって、きもちの種類を選んでみよう！" FontFamily="/Fonts/azuki.ttf#あずきフォント">
+                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="40,145,212,45" FontSize="44" Text="" FontFamily="/Fonts/azuki.ttf#あずきフォント">
                         <Run x:Name="MainMessageFrontText"/>
                         <InlineUIContainer>
                             <Image x:Name="NameImage" Height="48" d:IsHidden="True"/>

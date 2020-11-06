@@ -109,7 +109,7 @@
             <Setter Property="FontFamily" Value="Yu Gothic Light"/>
         </Style.Setters>
     </Style>
-    <Style TargetType="{x:Type outline_marker:OutlineText}" x:Key="Purple">
+    <Style TargetType="{x:Type TextBlock}" x:Key="Purple">
         <Style.Setters>
             <Setter Property="Effect">
                 <Setter.Value>
@@ -118,8 +118,6 @@
             </Setter>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="Foreground" Value="#FF9966FF"/>
-            <Setter Property="Outline" Value="#FF9966FF"/>
-            <Setter Property="OutlineThickness" Value="0.5"/>
             <Setter Property="FontFamily" Value="Yu Gothic Light"/>
         </Style.Setters>
     </Style>

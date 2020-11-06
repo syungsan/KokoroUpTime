@@ -10,6 +10,7 @@ bgm,play
 text,music_title_text,もくもくStudy♪
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
+grid,main_msg_grid,appear_expansion
 msg,main_msg,それでは<image=name>【name】</image>【くん／ちゃん／さん】、鬱「こころあっぷタイム」とは何か説明していくぞい。,白じい
 click,msg,next_only
 #
@@ -102,7 +103,7 @@ image,shiroji_right_center_image,,fade_in
 image,children_info_image,,float_in
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,この３人とこころあっぷタイムを進めていくぞい！鬱さて、３人は、なにかこまっていることがあるようじゃ。鬱どんなことで、こまっているのだろう？マンガを見ながら考えてみよう！,白じい
+msg,main_msg,この３人とこころあっぷタイムを進めていくぞい！鬱さて、３人は、なにかこまっていることがあるようじゃ。鬱どんなことで、こまっているのだろう？鬱マンガを見ながら考えてみよう！,白じい
 click,page
 #
 scene,漫画購読
@@ -222,7 +223,7 @@ image,shiroji_small_right_center_image
 image,kimi_stand_small_left_image
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,授業中に先生から指名されたとき、キミちゃんはどんな「きもち」になるかの？,白じい
+msg,main_msg,授業中に先生から指名されたとき、鬱キミちゃんはどんな「きもち」になるかの？,白じい
 click,msg
 #
 msg,main_msg,きもちセンサーをつかって、きもちの種類を選んでみよう！,白じい
@@ -438,7 +439,7 @@ grid,summary_grid
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,はじめてのこころあっぷタイムは どうじゃったかな？鬱今日から、赤丸くん、青助くん、キミちゃんといっしょに「きもち」についての勉強をはじめていくぞい。,白じい
+msg,main_msg,はじめてのこころあっぷタイムは どうじゃったかな？鬱今日から、赤丸くん、青助くん、キミちゃんといっしょに鬱「きもち」についての勉強をはじめていくぞい。,白じい
 click,msg
 #
 msg,main_msg,次回のテーマは鬱<font=#68>「たのしいことを さがそう」</font>鬱じゃ！おたのしみに！,白じい

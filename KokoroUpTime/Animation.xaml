@@ -295,6 +295,32 @@
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
+    <Storyboard x:Key="float_in">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+            <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.Opacity)">
+            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+            <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
     <Storyboard x:Key="slide">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
             <EasingDoubleKeyFrame KeyTime="00:00:00" Value="520"/>
