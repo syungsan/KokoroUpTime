@@ -49,7 +49,7 @@ namespace KokoroUpTime
         private string position = "";
 
         // マウスクリックを可能にするかどうかのフラグ
-        private bool isClickable = true;
+        private bool isClickable = false;
 
         // 画面を何回タップしたか
         private int tapCount = 0;
@@ -273,6 +273,9 @@ namespace KokoroUpTime
             this.GroupeActivityMessageGrid.Visibility = Visibility.Hidden;
             this.HintCheckGrid.Visibility = Visibility.Hidden;
             this.PointCheckBoxGrid.Visibility = Visibility.Hidden;
+            this.PointCheckBox1Grid.Visibility = Visibility.Hidden;
+            this.PointCheckBox2Grid.Visibility = Visibility.Hidden;
+            this.PointCheckBox3Grid.Visibility = Visibility.Hidden;
 
             this.ShirojiSmallRightCenterImage.Visibility = Visibility.Hidden;
 
@@ -1842,23 +1845,7 @@ namespace KokoroUpTime
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox checkBox = sender as CheckBox;
-
-            if (this.checkBoxs.Contains(checkBox))
-            {
-                this.tapCount += 1;
-
-                if (this.tapCount >= this.checkBoxs.Length)
-                {
-                    foreach (CheckBox _checkBox in this.checkBoxs)
-                    {
-                        _checkBox.IsEnabled = false;
-                    }
-
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-                }
-            }
+            
         }
 
         private void CheckBox_UnChecked(object sender, RoutedEventArgs e)

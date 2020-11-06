@@ -5,7 +5,7 @@ reset
 image,bg_image,background_02.png
 image,children_face_left_image,akamaru_face_04.png,appear_up,no_sync
 image,main_msg_bubble_image,left_big_bubble_red.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,この前のこころあっぷタイムは、ゆったりんごを使って鬱リラックス方法について考えたぜ！,赤丸
 click,page,next_only
 #
@@ -63,7 +63,7 @@ text,large_plate_title_text,「かっこいいところ」や「いいところ�
 grid,large_plate_title_grid,appear_expansion
 image,shiroji_left_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,「かっこいいところ」や「いいところ」はスポーツや勉強が鬱できることだけではないようじゃ。,白じい
 click,page
 #
@@ -73,7 +73,7 @@ hide,grid,main_msg_grid
 clear,text,main_msg
 image,children_face_right_image,aosuke_face_04.png,appear_up
 image,main_msg_bubble_image,right_big_bubble_blue.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,かっこいいところやいいところはどうやってみつけたらいいの？,青助
 click,page
 #
@@ -82,7 +82,7 @@ hide,image,children_face_right_image
 hide,grid,main_msg_grid
 image,shiroji_left_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,そうじゃのう。まずは友だちのかっこいいところやいいところを鬱たくさんみつけてみるのじゃ。,白じい
 click,msg
 #
@@ -129,7 +129,7 @@ reset
 image,bg_image,background_11.png
 image,shiroji_left_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,「<font=red#60##ture>すてきなせいかく</font>」にはポイントがある。それは…,白じい
 click,msg
 #
@@ -147,7 +147,7 @@ hide,grid,main_msg_grid
 image,shiroji_left_image,shiroji_02.png,,,gray
 image,children_face_right_image,kimi_face_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble_yellow.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,白じい。鬱わたし、音楽の授業で、リコーダーの発表を赤丸くんに鬱「じょうずだね」ってほめてもらったことが、鬱すごくうれしかったわ！,キミ
 click,msg
 #
@@ -156,7 +156,7 @@ image,main_msg_bubble_image,left_big_bubble.png
 image,shiroji_left_image,shiroji_02.png
 image,children_face_right_image,kimi_face_01.png,,,gray
 image,main_msg_bubble_image,left_big_bubble.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,赤丸くんは、「友だちをほめる」という鬱<font=red#60##ture>すてきなせいかく</font>があるようじゃのう。,白じい
 click,msg
 #
@@ -165,11 +165,10 @@ hide,grid,main_msg_grid
 image,shiroji_left_image,shiroji_02.png,,,gray
 image,children_face_right_image,akamaru_face_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble_red.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,白じい！なんだか、はずかしいぜ！鬱なんだかおれもいいきもちだぜ！鬱すてきなところってほかにどんなことがあるんだろう？,赤丸
 click,page
 #
-sub,Debug
 scene,チャレンジタイム 開始
 reset
 image,bg_image,background_05.png
@@ -189,6 +188,7 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,すてきなところというのは、ほかにもいろいろなものがあるぞ。鬱いくつかの「<font=red#60##ture>すてきなせいかく</font>」を集めてみたぞい。,白じい
 click,page
 #
+hide,image,session_title_image
 hide,grid,session_frame_grid
 hide,image,shiroji_right_up_image
 hide,grid,main_msg_grid
@@ -197,24 +197,25 @@ grid,challenge_time_title_grid
 grid,challenge_time_description_grid
 grid,challenge_time_grid
 button,select_feeling_complete_button
-image.shiroji_small_right_center_image
+image,shiroji_small_right_center_image,shiroji_04.png
 wait
 hide,button,select_feeling_complete_button
 grid,challenge_time_message_grid,appear_expansion
 button,select_feeling_next_button,fade_in
 wait
 #
+clear,text,main_msg
 hide,grid,challenge_time_title_grid
 hide,grid,challenge_time_description_grid
 hide,grid,challenge_time_grid
 hide,grid,challenge_time_message_grid
 hide,button,select_feeling_next_button
-hide,image.shiroji_small_right_center_image
+hide,image,shiroji_small_right_center_image
 image,bg_image,background_07.png
 image,shiroji_left_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
-grid,main_msg_grid,appear_expansion_slow
-msg,main_msg,すてきなせいかくというのは、鬱ひとりに1つだけではないのじゃ。鬱たとえば、３人のすてきなせいかくを集めてみたぞい。,白じい
+grid,main_msg_grid,appear_expansion
+msg,main_msg,すてきなせいかくというのは、ひとりに1つだけではないのじゃ。鬱たとえば、３人のすてきなせいかくを集めてみたぞい。,白じい
 click,page
 #
 scene,３人のすてきなせいかくをみてみよう！
@@ -224,22 +225,27 @@ text,large_plate_title_text,３人のすてきなせいかくをみてみよう�
 grid,large_plate_title_grid,appear_expansion
 click,page
 #
+clear,text,main_msg
 hide,grid,large_plate_title_grid
+hide,grid,main_msg_grid
 image,shiroji_left_image,shiroji_02.png,appear_up,no_sync
-image,children_face_right_image,aosuke_face_01.png,appear_up
+image,children_face_right_image,aosuke_face_05.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,青助くんは、こまっている友だちにやさしくできるのう。鬱きちんと「ありがとう」と言っていることも知っておるぞ。鬱失敗した友だちに、「だいじょうぶだよ」と鬱声をかけてもいたのう。,白じい
+msg,main_msg,青助くんは、こまっている友だちにやさしくできるのう。鬱きちんと「ありがとう」と言っていることも知っておるぞ。鬱失敗した友だちに、「だいじょうぶだよ」と声をかけてもいたのう。,白じい
 click,msg
 #
+clear,text,main_msg
 hide,image,children_face_right_image
 image,children_face_right_image,kimi_face_01.png,appear_up
 msg,main_msg,キミちゃんは、友だちをじょうずにほめるのう。鬱まわりの人のきもちをきちんと考えることができるぞ。,白じい
 click,msg
 #
+image,children_face_right_image,kimi_face_01.png
 msg,main_msg,友だちやまわりの人に対しての思いやりもあるのう。鬱友だちにアドバイスをあげていたこともあったぞい。,白じい
 click,msg
 #
+clear,text,main_msg
 hide,image,children_face_right_image
 image,children_face_right_image,akamaru_face_01.png,appear_up
 msg,main_msg,赤丸くんは、リーダーシップがあるのじゃ。鬱すなおに友だちのいいとこを伝えることもできるのう。,白じい
@@ -250,7 +256,7 @@ click,msg
 #
 hide,image,children_face_right_image
 msg,main_msg,すてきなせいかくはこのほかにもたくさんあるのじゃ。鬱たくさんのすてきなせいかくをみつけられるとよいのう。,白じい
-click,msg
+click,page
 #
 scene,グループアクティビティ 開始
 reset
@@ -266,6 +272,10 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,これから、「いやなきもち」になったときに思い出すと鬱「いいきもち」になるような友だちやまわりの人の鬱「すてきなせいかく」をたくさんみつけてみよう！,白じい
 click,page
 #
+hide,grid,main_msg_grid
+hide,image,session_title_image
+hide,grid,session_frame_grid
+hide,image,shiroji_right_image
 grid,small_plate_title_grid
 text,small_plate_title_text,<font=#40#yellow#true#black>これまでに見つけた「</font><font=red#40#yellow#true#black>すてきなせいかく</font><font=#40#yellow#true#black>」</font>
 grid,aosukes_perspnality_grid
@@ -290,38 +300,103 @@ button,select_feeling_next_button
 button,select_feeling_back_button
 wait
 #
-image,shiroji_left_image,appear_up
+hide,grid,small_plate_title_grid
+hide,grid,hint_check_grid
+hide,grid,groupe_activity_grid
+hide,button,select_feeling_back_button
+image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,<image=name>【name】</image>のともだちには、鬱さまざまなすてきなせいかくがあるのう。鬱ともだちにすてきなせいかくをつたえてあげるとよいぞい！,白じい
+msg,main_msg,<image=name>【name】</image>のともだちには、さまざまなすてきなせいかくがあるのう。鬱ともだちにすてきなせいかくをつたえてあげるとよいぞい！,白じい
 click,page
 #
+sub,Debug
 scene,「すてきなせいかく」はいやなきもちになったときの助けになる
 reset
 image,bg_image,background_11.png
-image,shiroji_right_image,appear_up
+image,shiroji_right_image,shiroji_04.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,もうひとつ、大切なことを教えておこう。,白じい
 click,page
 #
-msg,main_msg,「すてきなせいかく」は…鬱,<font=red#60##true>いやなきもちになったときの助けになる</font>ものなのじゃ。,白じい
+msg,main_msg,「すてきなせいかく」は…、鬱<font=red#40##true>いやなきもちになったときの助けになる</font>ものなのじゃ。,白じい
 click,msg
 #
+hide,grid,aosukes_uncomfortable_situation_grid
 msg,main_msg,たとえば、青助くんのいやなきもちになった場面を見てみよう！,白じい
 click,page
 #
+clear,text,main_msg
+hide,grid,main_msg_grid
 grid,aosukes_uncomfortable_situation_grid
-image,shiroji_right_image,appear_up
+image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,<font=#40#yellow#true>青助くん！いやなきもちになったときには鬱友だちから見つけてもらった「すてきなせいかく」を鬱思い出してみるのじゃ</font>,白じい
+msg,main_msg,<font=##yellow#true>青助くん！いやなきもちになったときには友だちから見つけてもらった「すてきなせいかく」を思い出してみるのじゃ</font>,白じい
 click,page
 #
+hide,grid,main_msg_grid
 hide,grid,aosukes_uncomfortable_situation_grid
+hide,image,children_face_left_image
+clear,text,main_msg
+image,shiroji_right_image,shiroji_01.png,,gray
+image,children_face_left_image,aosuke_face_01.png,appear_up
+image,main_msg_bubble_image,left_big_bubble_blue.png
+grid,main_msg_grid,appear_expansion
+msg,main_msg,そういえば、赤丸くんが、「青助くんはやさしいね」って言ってくれたよ鬱キミちゃんは「『ありがとう』って言える青助くんはすてきだね」って鬱言ってくれたよ,青助
+click,msg
+#
+msg,main_msg,・・・白じい！なんだかすこしし元気がでてきたよ！,青助
+click,msg
+#
+image,shiroji_right_image,shiroji_01.png
+image,children_face_left_image,aosuke_face_01.png,,,gray
+image,main_msg_bubble_image,right_big_bubble.png
+msg,main_msg,友だちから見つけてもらった鬱じぶんの「<font=red###true>すてきなせいかく</font>」を思い出すと、鬱<font=##yellow#true#black>「いやなきもち」になったときに「いいきもち」になるための助けになる</font>のじゃ！,白じい
+click,msg
+#
+clear,text,main_msg
+hide,grid,main_msg_grid
 image,shiroji_right_image,,,gray
-
-
+image,children_face_left_image,aosuke_face_01.png
+image,main_msg_bubble_image,left_big_bubble_blue.png
+grid,main_msg_grid,appear_expansion
+msg,main_msg,ぼくも、もっと自分や友だちの「すてきなせいかく」を鬱たくさんみつけられるようにがんばってみるよ！,青助
+click,msg
+#
+clear,text,main_msg
+hide,grid,main_msg_grid
+image,children_face_left_image,kimi_face_01.png,appear_up
+image,main_msg_bubble_image,left_big_bubble_yellow.png
+grid,main_msg_grid,appear_expansion
+msg,main_msg,わたしも「すてきなせいかく」を身につけられるようになりたいわ！,キミ
+click,msg
+#
+clear,text,main_msg
+hide,grid,main_msg_grid
+image,children_face_left_image,akamaru_face_04.png,appear_up
+image,main_msg_bubble_image,left_big_bubble_red.png
+grid,main_msg_grid,appear_expansion
+msg,main_msg,おれもいやなきもちになったときに鬱「すてきなせいかく」を思い出せるようにしてみるよ！,赤丸
+click,msg
+#
+clear,text,main_msg
+hide,grid,main_msg_grid
+hide,image,children_face_left_image
+image,shiroji_right_image,shiroji_01.png,appear_up
+image,main_msg_bubble_image,right_big_bubble.png
+grid,main_msg_grid,appear_expansion
+msg,main_msg,それでは、ポイントをまとめておくぞい！鬱「<font=red#60##true>すてきなせいかく</font>」は・・・,白じい
+grid,point_check_box_grid
+grid,point_check_box_01_grid,float_in
+wait,1
+grid,point_check_box_02_grid,float_in
+wait,1
+grid,point_check_box_03_grid,float_in
+wait,1
+click,page
+#
 scene,まとめ
 reset
 image,bg_image,background_09.png
@@ -329,7 +404,7 @@ grid,summary_grid
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,今日のこころアップタイムはどうじゃったかな？鬱だれにでも、すてきなせいかくがあるものじゃ。鬱自分や友だちのすてきなせいかく鬱をたくさんみつけられるとよいのう！,白じい
+msg,main_msg,今日のこころアップタイムはどうじゃったかな？鬱だれにでも、すてきなせいかくがあるものじゃ。鬱自分や友だちのすてきなせいかくをたくさんみつけられるとよいのう！,白じい
 click,msg
 #
 msg,main_msg,次回のテーマは鬱「<font=#60##true#>考えをつかまえよう</font>」じゃ！。,白じい
