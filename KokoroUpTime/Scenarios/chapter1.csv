@@ -17,10 +17,10 @@ click,msg,next_only
 msg,main_msg,だれでも「こころ」を もっているんじゃが、鬱<font=####black>「こころ」の勉強</font>をすることは あまりないのじゃ。,白じい
 click,msg
 #
-msg,main_msg,楽しくなったり、うれしくなったりするだけでなく、<font=####black>だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。</font>,白じい
+msg,main_msg,楽しくなったり、うれしくなったりするだけでなく、鬱<font=####black>だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。</font>,白じい
 click,msg
 #
-msg,main_msg,こども、おとな、つよい人、よわい人、大きい人、鬱ちいさい人、<font=####black>どんな人でも、こまっていることがあるのじゃ。</font>,白じい
+msg,main_msg,こども、おとな、つよい人、よわい人、大きい人、ちいさい人、鬱<font=####black>どんな人でも、こまっていることがあるのじゃ。</font>,白じい
 click,msg
 #
 msg,main_msg,『こころあっぷタイム』は、こまっているときに、鬱<font=####black>元気になったり、リラックスできる方法を 学ぶ時間なのだ！</font> ,白じい
@@ -198,7 +198,7 @@ grid,music_info_grid,slide,no_sync
 image,shiroji_right_up_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,今度は「きもち」をみつける練習をグループでしてみるのじゃ。次の場面を見て、グループでキミちゃんのきもちを考えて、話し合ってみるのじゃ。,白じい
+msg,main_msg,今度は「きもち」をみつける練習をグループでしてみるのじゃ。鬱次の場面を見て、グループでキミちゃんのきもちを考えて、鬱話し合ってみるのじゃ。,白じい
 click,page
 #
 scene,キミちゃんドキッ！
@@ -254,7 +254,7 @@ image,shiroji_right_image,shiroji_02.png
 image,children_stand_left_image,kimi_stand_01.png
 image,main_msg_bubble_image,left_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,わたしは、しんぱいしたり、ふあんになったりすることがよくあるんだけど、場面がちがうと、きもちの「大きさ」がちがうような気がするわ。,キミ
+msg,main_msg,わたしは、しんぱいしたり、ふあんになったりすることがよくあるんだけど、鬱場面がちがうと、きもちの「大きさ」がちがうような気がするわ。,キミ
 click,msg
 #
 clear,text,main_msg
@@ -264,7 +264,7 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,キミちゃんはいいところに気がついておるぞい。鬱きもちには「大きさ」があるようじゃ。,白じい
 click,msg
 #
-msg,main_msg,きもちセンサーを使うと、きもちの「大きさ」を０から１００であらわすことができるのじゃ。鬱キミちゃんのきもちの「大きさ」をみてみよう！,白じい
+msg,main_msg,きもちセンサーを使うと、きもちの「大きさ」を鬱０から１００であらわすことができるのじゃ。鬱キミちゃんのきもちの「大きさ」をみてみよう！,白じい
 click,page
 #
 scene,キミちゃんの場面のきもち

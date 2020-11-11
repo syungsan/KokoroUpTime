@@ -148,17 +148,10 @@
     
    <!--Chapter6-->
     <Style x:Key="selectableContentStyle" TargetType="{x:Type ItemsControl}">
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding StyleMode}" Value="1">
-                <Setter Property="ItemTemplate" Value="{StaticResource data1}" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding StyleMode}" Value="2">
-                <Setter Property="ItemTemplate" Value="{StaticResource data2}" />
-            </DataTrigger>
-        </Style.Triggers>
+        
     </Style>
-    
-    <DataTemplate x:Key="data1">
+
+    <DataTemplate x:Key="HandwritingInput">
         <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
             <TextBlock x:Name="IndexText"  VerticalAlignment="Center">
                                 <Run Text="・ " FontSize="60"/>
@@ -172,8 +165,8 @@
             <TextBox x:Name="PersonalityInputText" Text="" Height="120" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="40"/>
         </DockPanel>
     </DataTemplate>
-    
-    <DataTemplate x:Key="data2">
+
+    <DataTemplate x:Key="KeyboardInput">
         <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
             <TextBlock x:Name="IndexText"  VerticalAlignment="Center">
                                 <Run Text="・ " FontSize="60"/>
@@ -188,4 +181,80 @@
         </DockPanel>
     </DataTemplate>
 
+    
+    <DataTemplate x:Key="SelectedTemplate">
+        <Grid x:Name="NicePersonalityGrid">
+            <TextBlock x:Name="NicePersonalityText" Text="{Binding}" FontSize="46" Padding="10"/>
+            <Ellipse Stroke="Red" StrokeThickness="3"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="UnSelectedTemplate">
+        <Grid x:Name="NicePersonalityGrid">
+            <TextBlock x:Name="NicePersonalityText" Text="{Binding}" FontSize="46" Padding="10"/>
+        </Grid>
+    </DataTemplate>
+
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="ListBoxItemContainerStyle">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0,4"/>
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContentTemplate" Value="{StaticResource UnSelectedTemplate}"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="ContentTemplate" Value="{StaticResource SelectedTemplate}"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="False">
+                <Setter Property="ContentTemplate" Value="{StaticResource UnSelectedTemplate}"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Transparent"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--<ListBox>
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Grid x:Name="NicePersonalityGrid">
+                    <TextBlock x:Name="NicePersonalityText" Text="{Binding}" FontSize="46" Padding="10"/>
+                </Grid>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+        <ListBox.ItemContainerStyle>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="0,4"/>
+                <Setter Property="OverridesDefaultStyle" Value="True" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ContentControl}">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="Azure"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ListBox.ItemContainerStyle>
+    </ListBox>-->
 </ResourceDictionary>

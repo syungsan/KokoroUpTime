@@ -224,7 +224,7 @@ grid,item_name_bubble_grid
 image,item_left_image,item03_solo.png
 hide,grid,item_info_sentence_grid
 grid,item_info_plate_grid
-grid,item_info_sentence_grid,appear_fade_in
+grid,item_info_sentence_grid,
 get_item
 click,page
 #

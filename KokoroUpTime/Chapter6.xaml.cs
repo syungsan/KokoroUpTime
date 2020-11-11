@@ -81,12 +81,7 @@ namespace KokoroUpTime
         //「すてきな性格」確認用のチェックボックス
         private CheckBox[] checkBoxs;
 
-        private Dictionary<string,SolidColorBrush> CharacterColor = null;
-
-        private Dictionary<string, List<string>> SITUATIONS_SELECTION = null;
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
-        private TextBlock  selectedWordButtonText= new TextBlock();
-
 
         // 音関連
         private WindowsMediaPlayer mediaPlayer;
@@ -120,7 +115,7 @@ namespace KokoroUpTime
             this.dataChapter6 = new DataChapter6();
 
             this.SelectNicePersonalityListBox.ItemsSource = NICE_PERSONALITY;
-
+           
             this.InitControls();
         }
 
@@ -1580,7 +1575,6 @@ namespace KokoroUpTime
                     {
                         if (Text is TextBlock && ((TextBlock)Text).Name == "SelectWordButtonText")
                         {
-                            selectedWordButtonText = (TextBlock)Text;
 
                         }
                     }
@@ -1856,6 +1850,74 @@ namespace KokoroUpTime
             {
                 this.tapCount -= 1;
             }
+        }
+
+        private void SelectNicePersonalityListBox_Selected(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem myListBoxItem = sender as ListBoxItem;
+
+            Ellipse selectEllipse = new Ellipse { StrokeThickness = 3, Margin = new Thickness(5, 5, 5, 0) };
+
+            AnswerResult selectResult = AnswerResult.None;
+
+            
+            if (myListBoxItem != null)
+            {
+                ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
+                DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
+                Grid grid = (Grid)myDataTemplate.FindName("NicePersonalityGrid", myContentPresenter);
+                if (grid.Children.Count < 2)
+                {
+                    grid.Children.Add(selectEllipse);
+
+                    selectResult = AnswerResult.Decision;
+                    var startupPath = FileUtils.GetStartupPath();
+                    PlaySE($@"{startupPath}/Sounds/{selectResult}.wav");
+
+                }
+
+            }
+        }
+
+        private void SelectNicePersonalityListBox_Unselected(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem myListBoxItem = sender as ListBoxItem;
+
+            if (myListBoxItem != null)
+            {
+                ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
+                DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
+                Grid grid = (Grid)myDataTemplate.FindName("NicePersonalityGrid", myContentPresenter);
+                if (grid.Children.Count == 2)
+                {
+                    grid.Children.RemoveAt(1);
+                }
+
+            }
+        }
+
+        private childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is childItem)
+                {
+                    return (childItem)child;
+                }
+                else
+                {
+                    childItem childOfChild = FindVisualChild<childItem>(child);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+            return null;
+        }
+
+        private void SelectNicePersonalityListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

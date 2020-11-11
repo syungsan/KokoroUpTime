@@ -1,6 +1,5 @@
 ﻿start
 #
-goto,Debug
 scene,前説
 reset
 image,bg_image,background_02.png
@@ -74,7 +73,6 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,きもちセンサーをつかって、チャレンジタイムにとりくんでみよう！,白じい
 click,page
 #
-sub,Debug
 scene,チャレンジタイム！パート①
 reset
 image,bg_image,orange_gradation.png

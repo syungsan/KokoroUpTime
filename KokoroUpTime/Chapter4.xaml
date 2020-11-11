@@ -46,8 +46,6 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="appear_up_intro_akamaru_face_image"/>
-        <Storyboard x:Key="appear_up_intro_aosuke_face_image"/>
         <Storyboard x:Key="appear_up_children_face_left_image">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChildrenFaceLeftImage" Storyboard.TargetProperty="(UIElement.Opacity)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
@@ -98,7 +96,6 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="appear_wide_thin_msg_button"/>
         <Storyboard x:Key="slide_music_info_grid">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MusicInfoGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="520"/>
@@ -115,8 +112,6 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="rotation_children_stand_left_onomatopoeia_text"/>
-        <Storyboard x:Key="pomp_children_stand_left_onomatopoeia_image"/>
         <Storyboard x:Key="pomp_children_stand_left_image">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChildrenStandLeftImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="1.5">
@@ -236,7 +231,6 @@
             </DoubleAnimationUsingKeyFrames>
 
         </Storyboard>
-        <Storyboard x:Key="fade_in_shiroji_right_center_image"/>
         <Storyboard x:Key="appear_expansion_slow_main_msg_grid">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.00">
@@ -288,7 +282,6 @@
             </DoubleAnimationUsingKeyFrames>
 
         </Storyboard>
-        <Storyboard x:Key="appear_up_children_info_image"/>
         <Storyboard x:Key="appear_rotation_item_center_image">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemCenterImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0"/>
@@ -339,7 +332,6 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="appear_expansion_challenge_msg_grid"/>
         <Storyboard x:Key="appear_fade_in_select_feeling_next_button">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="SelectFeelingNextButton" Storyboard.TargetProperty="(UIElement.Opacity)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0">
@@ -354,7 +346,6 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="appear_up_kimi_in_plate_image"/>
         <Storyboard x:Key="slip_down_item_center_image">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemCenterImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.0"/>
@@ -440,8 +431,6 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:03.7" Value="1500"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="wipe_in_word_art_msg"/>
-        <Storyboard x:Key="appear_expansion_goupe_activity_message_grid"/>
         <Storyboard x:Key="appear_fade_in_next_message_button">
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NextMessageButton" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>

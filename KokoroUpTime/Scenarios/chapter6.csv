@@ -169,6 +169,7 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,白じい！なんだか、はずかしいぜ！鬱なんだかおれもいいきもちだぜ！鬱すてきなところってほかにどんなことがあるんだろう？,赤丸
 click,page
 #
+sub,Debug
 scene,チャレンジタイム 開始
 reset
 image,bg_image,background_05.png
@@ -310,7 +311,6 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,<image=name>【name】</image>のともだちには、さまざまなすてきなせいかくがあるのう。鬱ともだちにすてきなせいかくをつたえてあげるとよいぞい！,白じい
 click,page
 #
-sub,Debug
 scene,「すてきなせいかく」はいやなきもちになったときの助けになる
 reset
 image,bg_image,background_11.png
