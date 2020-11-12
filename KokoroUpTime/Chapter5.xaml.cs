@@ -236,7 +236,7 @@ namespace KokoroUpTime
                 ["item_info_plate_grid"] = this.ItemInfoPlateGrid,
                 ["item_info_sentence_grid"] = this.ItemInfoSentenceGrid,
                 ["item_last_info_grid"] = this.ItemLastInfoGrid,
-                ["item_check_grid"] = this.ItemCheckGrid,
+                ["item_detail_info_grid"] = this.ItemDetailInfoGrid, //
                 ["children_feeling_comment_grid"] = this.ChildrenFeelingCommentGrid,
                 ["children_feeling_comment_big_grid"] = this.ChildrenFeelingCommentBigGrid,
                 ["select_heart_grid"] = this.SelectHeartGrid,
@@ -263,6 +263,8 @@ namespace KokoroUpTime
                 ["selected_hot_word_border"] = this.SelectHotWordBorder,
                 ["complimentary_situation_border"] = this.ComplimentarySituationBorder,
                 ["role_play_msg_border"] = this.RolePlayMessageBorder,
+
+                ["item_check_border"] = this.ItemCheckBorder,
             };
         }
 
@@ -292,8 +294,8 @@ namespace KokoroUpTime
             this.ItemCenterUpImage.Visibility = Visibility.Hidden;
             this.ItemCenterImage.Visibility = Visibility.Hidden;
             this.ItemLeftImage.Visibility = Visibility.Hidden;
-            this.ItemDetailInfoImage.Visibility = Visibility.Hidden;
-            this.ItemCheckGrid.Visibility = Visibility.Hidden;
+            // this.ItemDetailInfoImage.Visibility = Visibility.Hidden;
+            this.ItemDetailInfoGrid.Visibility = Visibility.Hidden; //
             this.ItemLeftLastImage.Visibility = Visibility.Hidden;
             this.SessionTitleImage.Visibility = Visibility.Hidden;
             this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden;
@@ -361,6 +363,8 @@ namespace KokoroUpTime
             this.ItemBookNoneGrid.Visibility = Visibility.Hidden;
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
             this.FeelingInputGrid.Visibility = Visibility.Hidden;
+
+            this.ItemCheckBorder.Visibility = Visibility.Hidden; //
 
             this.SelectHotWordValueTitleTextBlock.Text = "";
             this.SessionSubTitleTextBlock.Text = "";

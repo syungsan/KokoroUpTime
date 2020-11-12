@@ -40,9 +40,9 @@ wait
 #
 sub,remember_item
 hide,grid,memory_check_grid
-image,item_left_image,item02_solo.png
-image,item_detail_info_image,item02_info.png
-grid,item_check_grid
+image,item_left_image,item04_solo.png
+grid,item_detail_info_grid
+border,item_check_border
 click,page
 #
 sub,manga
@@ -54,11 +54,11 @@ text,music_title_text,集まれ！友達！
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
 image,manga_title_image,manga3_title.png
-image,manga_image,manga3-1.png,flip
+image,manga_image,manga5-1.png,flip
 flip
-image,manga_image,manga3-2.png,flip
+image,manga_image,manga5-2.png,flip
 flip
-image,manga_image,manga3-3.png,flip
+image,manga_image,manga5-3.png,flip
 hide,button,manga_flip_button
 click,page
 #
