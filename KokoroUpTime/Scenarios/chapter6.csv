@@ -169,7 +169,6 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,白じい！なんだか、はずかしいぜ！鬱なんだかおれもいいきもちだぜ！鬱すてきなところってほかにどんなことがあるんだろう？,赤丸
 click,page
 #
-sub,Debug
 scene,チャレンジタイム 開始
 reset
 image,bg_image,background_05.png
@@ -259,6 +258,7 @@ hide,image,children_face_right_image
 msg,main_msg,すてきなせいかくはこのほかにもたくさんあるのじゃ。鬱たくさんのすてきなせいかくをみつけられるとよいのう。,白じい
 click,page
 #
+sub,Debug
 scene,グループアクティビティ 開始
 reset
 image,bg_image,background_06.png
@@ -278,14 +278,14 @@ hide,image,session_title_image
 hide,grid,session_frame_grid
 hide,image,shiroji_right_image
 grid,small_plate_title_grid
-text,small_plate_title_text,<font=#40#yellow#true#black>これまでに見つけた「</font><font=red#40#yellow#true#black>すてきなせいかく</font><font=#40#yellow#true#black>」</font>
+text,small_plate_title_text,<font=black#63#yellow#true#black>これまでに見つけた「</font><font=red#63#yellow#true#red>すてきなせいかく</font><font=black#63#yellow#true#black>」</font>
 grid,aosukes_perspnality_grid
 grid,akamarus_perspnality_grid
 grid,kimis_perspnality_grid
-image,shiroji_small_right_down_image,appear_up
+image,shiroji_small_right_down_image,shiroji_02.png,appear_up
 grid,groupe_activity_message_grid,appear_expansion
-msg,groupe_activity_msg,上のせいかくをさんこうに、<image=name>【name】</image>のともだちの「すてきなせいかく」を考えてみよう,白じい
-click,page
+msg,groupe_activity_msg,上のせいかくをさんこうに、<image=name>【name】</image>のともだちの鬱「すてきなせいかく」を考えてみよう,白じい
+click,msg,small_next_only
 #
 msg,groupe_activity_msg,そして、書き出した場面を見てみよう！鬱上に書いてあること以外のすてきなせいかくでもいいぞい！,白じい
 click,page
@@ -294,7 +294,7 @@ scene,グループアクティビティ
 reset
 image,bg_image,background_06.png
 grid,small_plate_title_grid
-text,small_plate_title_text,<font=#40#yellow#true#black>ともだちの「すてきなせいかく」を書いてみよう！</font>
+text,small_plate_title_text,<font=#55#yellow#true#black>ともだちの「すてきなせいかく」を書いてみよう！</font>
 grid,hint_check_grid
 grid,groupe_activity_grid
 button,select_feeling_next_button
@@ -359,9 +359,9 @@ click,msg
 clear,text,main_msg
 hide,grid,main_msg_grid
 image,shiroji_right_image,,,gray
-image,children_face_left_image,aosuke_face_01.png
+image,children_face_left_image,aosuke_face_02.png
 image,main_msg_bubble_image,left_big_bubble_blue.png
-grid,main_msg_grid,appear_expansion
+grid,main_msg_grid
 msg,main_msg,ぼくも、もっと自分や友だちの「すてきなせいかく」を鬱たくさんみつけられるようにがんばってみるよ！,青助
 click,msg
 #
@@ -390,11 +390,12 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,それでは、ポイントをまとめておくぞい！鬱「<font=red#60##true>すてきなせいかく</font>」は・・・,白じい
 grid,point_check_box_grid
 grid,point_check_box_01_grid,float_in
-wait,1
+wait,0.5
 grid,point_check_box_02_grid,float_in
-wait,1
+wait,0.5
 grid,point_check_box_03_grid,float_in
-wait,1
+wait,0.5
+wait
 click,page
 #
 scene,まとめ
@@ -413,7 +414,7 @@ click,page
 scene,今回の発明品おさらい
 reset
 image,bg_image,background_10.png
-gif,item_left_last_image,item04_solo.gif
+gif,item_left_last_image,item06_solo.gif
 grid,item_last_info_grid
 image,item_left_last_image
 image,shiroji_right_image,shiroji_01.png,appear_up
@@ -442,10 +443,12 @@ end
 
 sub,check_hint
 reset
+image,bg_image,background_06.png
 grid,small_plate_title_grid
-text,small_plate_title_text,<font=#40#yellow#true#black>これまでに見つけた「</font><font=red#40#yellow#true#black>すてきなせいかく</font><font=#40#yellow#true#black>」</font>
+text,small_plate_title_text,<font=#58#yellow#true#black>これまでに見つけた「</font><font=red#58#yellow#true#black>すてきなせいかく</font><font=#58#yellow#true#black>」</font>
 grid,aosukes_perspnality_grid
 grid,akamarus_perspnality_grid
 grid,kimis_perspnality_grid
-button,return
+button,return_button
+wait
 goto,current_scene

@@ -180,8 +180,6 @@ namespace KokoroUpTime
                 ["children_stand_right_image"] = this.ChildrenStandRightImage,
                 ["session_title_image"] = this.SessionTitleImage,
 
-
-
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
                 ["activity_title_image"] = this.ActivityTitleImage,
                 ["situation_character_image"] = this.SituationCharacterImage,
@@ -525,7 +523,9 @@ namespace KokoroUpTime
 
                         var gridObjectName = gridObject.Name;
 
-                        this.ShowAnime(storyBoard: gridStoryBoard,objectName: gridObjectName, isSync: gridAnimeIsSync);
+                        string _objectsName = this.position;
+
+                        this.ShowAnime(storyBoard: gridStoryBoard,objectName: gridObjectName, objectsName: _objectsName, isSync: gridAnimeIsSync);
                     }
                     else
                     {
@@ -576,7 +576,9 @@ namespace KokoroUpTime
 
                         var imageObjectName = imageObject.Name;
 
-                        this.ShowAnime(storyBoard: imageStoryBoard, objectName:imageObjectName, isSync: imageAnimeIsSync);
+                        string _objectsName = this.position;
+
+                        this.ShowAnime(storyBoard: imageStoryBoard, objectName:imageObjectName, objectsName: _objectsName, isSync: imageAnimeIsSync);
                     }
                     else
                     {
@@ -585,37 +587,7 @@ namespace KokoroUpTime
                     }
                     break;
 
-                //ボーダーに対しての処理
-                /*case "border":
-
-                    this.position = this.scenarios[this.scenarioCount][1];
-
-                    var borderObject = this.borderObjects[this.position];
-
-                    borderObject.Visibility = Visibility.Visible;
-
-                    string borderAnimeIsSync = "sync";
-
-                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
-                    {
-                        borderAnimeIsSync = this.scenarios[this.scenarioCount][4];
-                    }
-
-                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
-                    {
-                        var borderStoryBoard = this.scenarios[this.scenarioCount][2];
-
-                        var borderObject = borderObject.Name;
-
-                        this.ShowAnime(storyBoard: borderStoryBoard,objectName: borderObjectName, isSync: borderAnimeIsSync);
-                    }
-                    else
-                    {
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-                    }
-                    break;
-                */
+                
                 // ボタンに対する処理
                 case "button":
 
@@ -638,7 +610,9 @@ namespace KokoroUpTime
 
                         var buttonObjectName = buttonObject.Name;
 
-                        this.ShowAnime(storyBoard: buttonStoryBoard,objectName: buttonObjectName, isSync: buttonAnimeIsSync);
+                        var _objectsName = this.position;
+
+                        this.ShowAnime(storyBoard: buttonStoryBoard,objectName: buttonObjectName, objectsName: _objectsName, isSync: buttonAnimeIsSync);
                     }
                     else
                     {
@@ -707,7 +681,9 @@ namespace KokoroUpTime
 
                         var textObjectName = __textObject.Name;
 
-                        this.ShowAnime(storyBoard: textStoryBoard,objectName: textObjectName, isSync: textAnimeIsSync);
+                        var _objectsName = this.position;
+
+                        this.ShowAnime(storyBoard: textStoryBoard,objectName: textObjectName, objectsName: _objectsName, isSync: textAnimeIsSync);
                     }
                     else
                     {
@@ -1607,12 +1583,21 @@ namespace KokoroUpTime
             }
         }
         // アニメーション（ストーリーボード）の処理
-        private void ShowAnime(string storyBoard,string objectName, string isSync)
+        private void ShowAnime(string storyBoard,string objectName,string objectsName, string isSync)
         {
-            Storyboard sb = this.FindResource(storyBoard) as Storyboard;
-
-            foreach (var child in sb.Children)
-                Storyboard.SetTargetName(child, objectName);
+            Storyboard sb;
+            try
+            {
+                sb = this.FindResource(storyBoard) as Storyboard;
+                foreach (var child in sb.Children)
+                    Storyboard.SetTargetName(child, objectName);
+            }
+            catch (ResourceReferenceKeyNotFoundException ex)
+            {
+                string objectsStroryBoard = $"{storyBoard}_{objectsName}";
+                sb = this.FindResource(objectsStroryBoard) as Storyboard;
+            }
+           
 
             if (sb != null)
             {

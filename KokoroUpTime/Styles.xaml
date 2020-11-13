@@ -148,10 +148,16 @@
     
    <!--Chapter6-->
     <Style x:Key="selectableContentStyle" TargetType="{x:Type ItemsControl}">
-        
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding}" Value="0">
+                <Setter Property="ItemTemplate" Value="{StaticResource HandwritingInputTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding}" Value="1">
+                <Setter Property="ItemTemplate" Value="{StaticResource KeyboardInputTemplate}"/>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
-
-    <DataTemplate x:Key="HandwritingInput">
+    <DataTemplate x:Key="HandwritingInputTemplate">
         <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
             <TextBlock x:Name="IndexText"  VerticalAlignment="Center">
                                 <Run Text="・ " FontSize="60"/>
@@ -165,8 +171,7 @@
             <TextBox x:Name="PersonalityInputText" Text="" Height="120" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="40"/>
         </DockPanel>
     </DataTemplate>
-
-    <DataTemplate x:Key="KeyboardInput">
+    <DataTemplate x:Key="KeyboardInputTemplate">
         <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
             <TextBlock x:Name="IndexText"  VerticalAlignment="Center">
                                 <Run Text="・ " FontSize="60"/>
@@ -177,24 +182,11 @@
                                 <Run Text=")" FontSize="80"/>
                                 <Run Text="さん・・・ " FontSize="60"/>
             </TextBlock>
-            <InkCanvas x:Name="PersonalityInputText" Height="120" VerticalAlignment="Center" />
+            <InkCanvas x:Name="PersonalityInputCanvas" Height="120" VerticalAlignment="Center" />
         </DockPanel>
     </DataTemplate>
 
-    
-    <DataTemplate x:Key="SelectedTemplate">
-        <Grid x:Name="NicePersonalityGrid">
-            <TextBlock x:Name="NicePersonalityText" Text="{Binding}" FontSize="46" Padding="10"/>
-            <Ellipse Stroke="Red" StrokeThickness="3"/>
-        </Grid>
-    </DataTemplate>
-
-    <DataTemplate x:Key="UnSelectedTemplate">
-        <Grid x:Name="NicePersonalityGrid">
-            <TextBlock x:Name="NicePersonalityText" Text="{Binding}" FontSize="46" Padding="10"/>
-        </Grid>
-    </DataTemplate>
-
+        
     <Style TargetType="{x:Type ListBoxItem}" x:Key="ListBoxItemContainerStyle">
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Padding" Value="0"/>
@@ -222,6 +214,19 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <DataTemplate x:Key="SelectedTemplate">
+        <Grid x:Name="NicePersonalityGrid">
+            <TextBlock x:Name="NicePersonalityText" Text="{Binding}" FontSize="46" Padding="10"/>
+            <Ellipse Stroke="Red" StrokeThickness="3"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="UnSelectedTemplate">
+        <Grid x:Name="NicePersonalityGrid">
+            <TextBlock x:Name="NicePersonalityText" Text="{Binding}" FontSize="46" Padding="10"/>
+        </Grid>
+    </DataTemplate>
+
+    
 
     <!--<ListBox>
         <ListBox.ItemTemplate>

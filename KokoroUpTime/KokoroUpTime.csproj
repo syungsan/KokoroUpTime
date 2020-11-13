@@ -245,6 +245,7 @@
     <None Remove="Images\purple_title_plate.png" />
     <None Remove="Images\red_arrow_right.png" />
     <None Remove="Images\red_needle.png" />
+    <None Remove="Images\return.png" />
     <None Remove="Images\return_to_item.png" />
     <None Remove="Images\return_to_title.png" />
     <None Remove="Images\return_to_top.png" />
@@ -507,6 +508,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\red_arrow_right.png" />
+    <Resource Include="Images\return.png" />
     <Resource Include="Images\return_to_item.png" />
     <Resource Include="Images\return_to_top.png" />
     <Resource Include="Images\short_bubble_left.png" />

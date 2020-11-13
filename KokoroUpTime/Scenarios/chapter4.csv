@@ -1,4 +1,5 @@
 start
+goto,Debug
 scene,前回のおさらい
 reset
 image,bg_image,background_02.png
@@ -466,6 +467,7 @@ grid,main_msg_grid
 msg,main_msg,キミちゃん、ありがとう。,青助
 click,msg
 #
+sub,Debug
 scene,その後
 reset
 image,bg_image,background_03.png
@@ -560,7 +562,6 @@ image,shiroji_ending_image
 grid,ending_msg_grid
 msg,ending_msg_text,よくがんばった！次はホームアクティビティにすすむぞい！
 end
-
 
 
 sub,check_manga1

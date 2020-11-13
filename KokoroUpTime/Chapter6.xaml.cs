@@ -1,27 +1,21 @@
 ﻿using CsvReadWrite;
 using Expansion;
 using FileIOUtils;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
-using Osklib;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using WMPLib;
 using WpfAnimatedGif;
@@ -99,6 +93,8 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
+        private ObservableCollection<HowToInputData> howToInputDatas = new ObservableCollection<HowToInputData>();
+
 
         public Chapter6()
         {
@@ -114,8 +110,18 @@ namespace KokoroUpTime
             // データモデルインスタンス確保
             this.dataChapter6 = new DataChapter6();
 
-            this.SelectNicePersonalityListBox.ItemsSource = NICE_PERSONALITY;
-           
+            if (this.dataOption.InputMethod == 0|| this.dataOption.InputMethod == 1)
+            {
+                for (int i = 0; i < 5; i++)
+                    howToInputDatas.Add(new HowToInputData(this.dataOption.InputMethod));
+
+                int[] di = { 0};
+
+                this.GoupeActivityItemsControl.ItemsSource = di;
+            }
+
+            this.checkBoxs = new CheckBox[] { this.PointCheckBox1, this.PointCheckBox2, this.PointCheckBox3 };
+
             this.InitControls();
         }
 
@@ -183,6 +189,7 @@ namespace KokoroUpTime
                 ["select_feeling_back_button"] = this.SelectFeelingBackButton,
                 ["complete_role_play_button"] = this.CompleteRolePlayButton,
                 ["ok_button"] =this.OkButton,
+                ["return_button"]= this.ReturnButton,
             };
 
             this.gridObjects = new Dictionary<string, Grid>
@@ -297,6 +304,7 @@ namespace KokoroUpTime
             this.SessionSentenceTextBlock.Visibility = Visibility.Hidden;
             this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
             this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
+            this.ReturnButton.Visibility = Visibility.Hidden;
             
 
             this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
@@ -319,6 +327,8 @@ namespace KokoroUpTime
             this.BackPageButton.Visibility = Visibility.Hidden;
             this.MangaFlipButton.Visibility = Visibility.Hidden;
             this.MangaPrevBackButton.Visibility = Visibility.Hidden;
+            this.GroupeActivityNextMessageButton.Visibility = Visibility.Hidden;
+            this.GroupeActivityBackMessageButton.Visibility = Visibility.Hidden;
 
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
@@ -472,7 +482,9 @@ namespace KokoroUpTime
 
                         var gridgridObjectName = gridObject.Name;
 
-                        this.ShowAnime(storyBoard: gridStoryBoard,objectName:gridgridObjectName, isSync: gridAnimeIsSync);
+                        string _objectsName = this.position;
+
+                        this.ShowAnime(storyBoard: gridStoryBoard,objectName:gridgridObjectName, objectsName:_objectsName, isSync: gridAnimeIsSync);
                     }
                     else
                     {
@@ -523,7 +535,9 @@ namespace KokoroUpTime
 
                         var imageObjectName = imageObject.Name;
 
-                        this.ShowAnime(storyBoard: imageStoryBoard, objectName:imageObjectName, isSync: imageAnimeIsSync);
+                        string _objectsName = this.position;
+
+                        this.ShowAnime(storyBoard: imageStoryBoard, objectName:imageObjectName, objectsName:_objectsName, isSync: imageAnimeIsSync);
                     }
                     else
                     {
@@ -585,7 +599,9 @@ namespace KokoroUpTime
 
                         var buttonObjectName = buttonObject.Name;
 
-                        this.ShowAnime(storyBoard: buttonStoryBoard,objectName:buttonObjectName, isSync: buttonAnimeIsSync);
+                        string _objectsName = this.position;
+
+                        this.ShowAnime(storyBoard: buttonStoryBoard,objectName:buttonObjectName, objectsName:_objectsName, isSync: buttonAnimeIsSync);
                     }
                     else
                     {
@@ -654,7 +670,9 @@ namespace KokoroUpTime
 
                         var textObjectName = __textObject.Name;
 
-                        this.ShowAnime(storyBoard: textStoryBoard, objectName:textObjectName, isSync: textAnimeIsSync);
+                        string _objectsName = this.position;
+
+                        this.ShowAnime(storyBoard: textStoryBoard, objectName:textObjectName, objectsName:_objectsName, isSync: textAnimeIsSync);
                     }
                     else
                     {
@@ -724,6 +742,21 @@ namespace KokoroUpTime
                                     }
                                 };
                             }
+                            else if (clickMethod == "small_next_only")
+                            {
+                                waitTimer.Start();
+
+                                waitTimer.Tick += (s, args) =>
+                                {
+                                    waitTimer.Stop();
+                                    waitTimer = null;
+
+                                    if (clickButton == "msg")
+                                    {
+                                        this.GroupeActivityNextMessageButton.Visibility = Visibility.Visible;
+                                    }
+                                };
+                            }
                             else if(clickMethod == "back_only")
                             {
                                 waitTimer.Start();
@@ -777,6 +810,14 @@ namespace KokoroUpTime
                                 {
                                     this.NextPageButton.Visibility = Visibility.Visible;
                                 }
+                            }
+                            else if (clickMethod == "small_next_only")
+                            {
+
+                                    if (clickButton == "msg")
+                                    {
+                                        this.GroupeActivityNextMessageButton.Visibility = Visibility.Visible;
+                                    }
                             }
                             else
                             {
@@ -910,6 +951,7 @@ namespace KokoroUpTime
                     break;
 
                 case "sub":
+
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1486,12 +1528,20 @@ namespace KokoroUpTime
             }
         }
         // アニメーション（ストーリーボード）の処理
-        private void ShowAnime(string storyBoard, string objectName,string isSync)
+        private void ShowAnime(string storyBoard, string objectName, string objectsName, string isSync)
         {
-            Storyboard sb = this.FindResource(storyBoard) as Storyboard;
-
-            foreach (var child in sb.Children)
-                Storyboard.SetTargetName(child, objectName);
+            Storyboard sb;
+            try
+            {
+                sb = this.FindResource(storyBoard) as Storyboard;
+                foreach (var child in sb.Children)
+                    Storyboard.SetTargetName(child, objectName);
+            }
+            catch (ResourceReferenceKeyNotFoundException ex)
+            {
+                string objectsStroryBoard = $"{storyBoard}_{objectsName}";
+                sb = this.FindResource(objectsStroryBoard) as Storyboard;
+            }
 
             if (sb != null)
             {
@@ -1568,48 +1618,26 @@ namespace KokoroUpTime
             {
                 this.isClickable = false;
 
-                if (button.Name == "SelectWordButton")
+                
+                if ((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton"|| button.Name == "GroupeActivityNextMessageButton"||button.Name=="ReturnButton"))
                 {
-                    Grid btnContent = (Grid)button.Content;
-                    foreach (var Text in btnContent.Children)
-                    {
-                        if (Text is TextBlock && ((TextBlock)Text).Name == "SelectWordButtonText")
-                        {
-
-                        }
-                    }
-
-                    if (this.scene == "赤丸くんの場面")
-                    {
-                        this.GoTo("select_word_akamaru");
-                    }
-                    if (this.scene == "キミちゃんの場面")
-                    {
-                        this.GoTo("select_word_kimi");
-                    }
-                    if (this.scene == "青助くんの場面")
-                    {
-                        this.GoTo("select_word_aosuke");
-                    }
-                }
-                if ((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton"))
-                {
-                    
 
                     if (button.Name == "NextMessageButton")
                     {
                         this.BackMessageButton.Visibility = Visibility.Hidden;
                         this.NextMessageButton.Visibility = Visibility.Hidden;
                     }
-
-                    if (button.Name == "NextPageButton")
+                    else if (button.Name == "NextPageButton")
                     {
                         this.BackPageButton.Visibility = Visibility.Hidden;
                         this.NextPageButton.Visibility = Visibility.Hidden;
                     }
-                    if (button.Name == "MangaPrevBackButton")
+                    else if(button.Name== "GroupeActivityNextMessageButton")
                     {
+                        this.GroupeActivityBackMessageButton.Visibility = Visibility.Hidden;
+                        this.GroupeActivityNextMessageButton.Visibility = Visibility.Hidden;
                     }
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
@@ -1637,7 +1665,7 @@ namespace KokoroUpTime
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
-            if (button.Name == "BackMessageButton" || button.Name == "BackPageButton")
+            if (button.Name == "BackMessageButton" || button.Name == "BackPageButton" ||button.Name== "GroupeActivityBackMessageButton"|| button.Name == "SelectFeelingBackButton")
             {
                 this.BackMessageButton.Visibility = Visibility.Hidden;
                 this.NextMessageButton.Visibility = Visibility.Hidden;
@@ -1645,11 +1673,10 @@ namespace KokoroUpTime
                 this.BackPageButton.Visibility = Visibility.Hidden;
                 this.NextPageButton.Visibility = Visibility.Hidden;
 
-                this.ScenarioBack();
-            }
-            if (button.Name == "SelectFeelingBackButton")
-            {
+                this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
+                this.SelectFeelingBackButton.Visibility = Visibility.Hidden;
 
+                this.ScenarioBack();
             }
             if (button.Name == "BranchButton1")
             {
@@ -1683,7 +1710,10 @@ namespace KokoroUpTime
                     this.GoTo("select_uncorrect_words");
                 }
             }
-            
+            if (button.Name == "HintCheckButton")
+            {
+                this.GoTo("check_hint");
+            }
         }
         private void SetBGM(string soundFile, bool isLoop, int volume)
         {
@@ -1839,7 +1869,24 @@ namespace KokoroUpTime
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            
+            CheckBox checkBox = sender as CheckBox;
+
+            if (this.checkBoxs.Contains(checkBox))
+            {
+                this.tapCount += 1;
+
+                if (this.tapCount >= this.checkBoxs.Length)
+                {
+
+                    foreach (CheckBox _checkBox in this.checkBoxs)
+                    {
+                        _checkBox.IsEnabled = false;
+                    }
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+            }
         }
 
         private void CheckBox_UnChecked(object sender, RoutedEventArgs e)
@@ -1851,74 +1898,20 @@ namespace KokoroUpTime
                 this.tapCount -= 1;
             }
         }
-
-        private void SelectNicePersonalityListBox_Selected(object sender, RoutedEventArgs e)
-        {
-            ListBoxItem myListBoxItem = sender as ListBoxItem;
-
-            Ellipse selectEllipse = new Ellipse { StrokeThickness = 3, Margin = new Thickness(5, 5, 5, 0) };
-
-            AnswerResult selectResult = AnswerResult.None;
-
-            
-            if (myListBoxItem != null)
-            {
-                ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
-                DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
-                Grid grid = (Grid)myDataTemplate.FindName("NicePersonalityGrid", myContentPresenter);
-                if (grid.Children.Count < 2)
-                {
-                    grid.Children.Add(selectEllipse);
-
-                    selectResult = AnswerResult.Decision;
-                    var startupPath = FileUtils.GetStartupPath();
-                    PlaySE($@"{startupPath}/Sounds/{selectResult}.wav");
-
-                }
-
-            }
-        }
-
-        private void SelectNicePersonalityListBox_Unselected(object sender, RoutedEventArgs e)
-        {
-            ListBoxItem myListBoxItem = sender as ListBoxItem;
-
-            if (myListBoxItem != null)
-            {
-                ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
-                DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
-                Grid grid = (Grid)myDataTemplate.FindName("NicePersonalityGrid", myContentPresenter);
-                if (grid.Children.Count == 2)
-                {
-                    grid.Children.RemoveAt(1);
-                }
-
-            }
-        }
-
-        private childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is childItem)
-                {
-                    return (childItem)child;
-                }
-                else
-                {
-                    childItem childOfChild = FindVisualChild<childItem>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
-            }
-            return null;
-        }
-
-        private void SelectNicePersonalityListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+       
     }
+
+
+
+    public class HowToInputData
+    {
+        public HowToInputData(int styleMode)
+        {
+            StyleMode = styleMode;
+        }
+        public int StyleMode { get; set; }
+    }
+
+
 }
 
