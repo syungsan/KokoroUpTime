@@ -1,5 +1,4 @@
 start
-goto,Debug
 scene,前回のおさらい
 reset
 image,bg_image,background_02.png
