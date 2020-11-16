@@ -219,23 +219,22 @@
                     <Run x:Name="BlackColorText" Text="に〇をつけて&#10;みよう" Foreground="Black"/>
                 </TextBlock>
             </Grid>
-            <Grid x:Name="ChallengeTimeGrid" Margin="230,190,570,40">
+            <Grid x:Name="ChallengeTimeGrid" Margin="230,190,570,40" d:IsHidden="True">
                 <Rectangle x:Name="ChallengeTimeOuterFrame" Stroke="Red" StrokeThickness="3"/>
                 <Rectangle x:Name="ChallengeTimeInnerFrame" Stroke="Red" StrokeThickness="3" Margin="6"/>
-                <ListBox x:Name="SelectNicePersonalityListBox" ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}" Margin="80,20,15,20" SelectionMode="Multiple" Background="{x:Null}" BorderBrush="{x:Null}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                <ListBox x:Name="SelectNicePersonalityListBox" ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}" ItemsSource="{Binding NICE_PERSONALITY}" Margin="80,20,15,20" SelectionMode="Multiple" Background="{x:Null}" BorderBrush="{x:Null}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
                 <Image x:Name="ChallengeTimeItemImage" Source="Images/item06_solo.png"  Margin="0,20,15,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="335" Width="276"/>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid" Margin="190,255,190,200" d:IsHidden="True">
+            <Grid x:Name="GroupeActivityGrid" Margin="190,255,190,200">
                 <Rectangle x:Name="GroupeActivityBack" Fill="White" StrokeDashArray="10 4" Stroke="Red" StrokeThickness="10" RadiusX="60" RadiusY="60"/>
-                <!--<ItemsControl x:Name="GoupeActivityItemsControl" Style="{StaticResource selectableContentStyle}" Margin="30,30">
-                   <DockPanel Width="1480" Height="130" VerticalAlignment="Top">
+                <ItemsControl x:Name="GoupeActivityItemsControl" Style="{StaticResource selectableContentStyle}" Margin="30,30">
+                    <!--<DockPanel Width="1480" Height="130" VerticalAlignment="Top">
                         <TextBlock x:Name="IndexText"  VerticalAlignment="Top"><Run Text="・ " FontSize="60"/><Run Text=" "/><Run Text="(" FontSize="80"/></TextBlock>
                         <InkCanvas x:Name="NameInputCanvas" Width="250" Height="100" VerticalAlignment="Center" Background="Transparent"/>
                         <TextBlock x:Name="MidpointText"  VerticalAlignment="Top"><Run Text=")" FontSize="80"/><Run Text=" "/><Run Text="さん・・・" FontSize="60"/></TextBlock>
                         <InkCanvas x:Name="PersonalityInputText" Height="120" VerticalAlignment="Center" Background="Transparent"/>
-                    </DockPanel>
-                </ItemsControl>-->
-                <ContentControl Style="{StaticResource selectableContentStyle}" Margin="30,30"/>
+                    </DockPanel>-->
+                </ItemsControl>
             </Grid>
             <Grid x:Name="PointCheckBoxGrid" Margin="250,100,780,480" d:IsHidden="True">
                 <Grid x:Name="PointCheckBox1Grid" Margin="0,0,0,380" Background="Orange" Height="120">

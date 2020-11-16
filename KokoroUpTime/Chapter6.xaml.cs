@@ -93,6 +93,9 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
+        private ObservableCollection<HowToInputData> howToInputDatas = new ObservableCollection<HowToInputData>();
+
+
         public Chapter6()
         {
             InitializeComponent();
@@ -107,12 +110,19 @@ namespace KokoroUpTime
             // データモデルインスタンス確保
             this.dataChapter6 = new DataChapter6();
 
-            this.SelectNicePersonalityListBox.ItemsSource = NICE_PERSONALITY;
+            if (this.dataOption.InputMethod == 0|| this.dataOption.InputMethod == 1)
+            {
+                for (int i = 0; i < 5; i++)
+                    howToInputDatas.Add(new HowToInputData(this.dataOption.InputMethod));
+
+                int[] di = { 0};
+
+                this.GoupeActivityItemsControl.ItemsSource = di;
+            }
 
             this.checkBoxs = new CheckBox[] { this.PointCheckBox1, this.PointCheckBox2, this.PointCheckBox3 };
 
             this.InitControls();
-
         }
 
         private void InitControls()
@@ -141,6 +151,8 @@ namespace KokoroUpTime
                 ["children_stand_right_image"] = this.ChildrenStandRightImage,
                 ["shiroji_small_right_center_image"] =this.ShirojiSmallRightCenterImage,
                 ["session_title_image"] = this.SessionTitleImage,
+
+
 
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
 
@@ -1069,7 +1081,7 @@ namespace KokoroUpTime
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataItem SET HasGotItem06 = 1 WHERE Id = 1;");
+                        connection.Execute($@"UPDATE DataItem SET HasGotItem04 = 1 WHERE Id = 1;");
                     }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
