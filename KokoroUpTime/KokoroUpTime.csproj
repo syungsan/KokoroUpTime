@@ -146,6 +146,7 @@
     <None Remove="Images\item05_book.png" />
     <None Remove="Images\item05_detail.png" />
     <None Remove="Images\item05_solo.gif" />
+    <None Remove="Images\item05_solo.png" />
     <None Remove="Images\item05_title.png" />
     <None Remove="Images\item06_book.png" />
     <None Remove="Images\item06_detail.png" />
@@ -434,6 +435,7 @@
     <Resource Include="Images\item05_book.png" />
     <Resource Include="Images\item05_detail.png" />
     <Resource Include="Images\item05_solo.gif" />
+    <Resource Include="Images\item05_solo.png" />
     <Resource Include="Images\item05_title.png" />
     <Resource Include="Images\item06_book.png" />
     <Resource Include="Images\item06_detail.png" />
