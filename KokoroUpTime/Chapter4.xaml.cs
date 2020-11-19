@@ -1116,6 +1116,8 @@ namespace KokoroUpTime
 
                 case "get_item":
 
+                    this.dataItem.HasGotItem04 = true;
+
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
                         connection.Execute($@"UPDATE DataItem SET HasGotItem04 = 1 WHERE Id = 1;");

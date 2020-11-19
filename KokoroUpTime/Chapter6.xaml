@@ -219,23 +219,20 @@
                     <Run x:Name="BlackColorText" Text="に〇をつけて&#10;みよう" Foreground="Black"/>
                 </TextBlock>
             </Grid>
-            <Grid x:Name="ChallengeTimeGrid" Margin="230,190,570,40">
+            <Grid x:Name="ChallengeTimeGrid" Margin="230,190,570,40" d:IsHidden="True">
                 <Rectangle x:Name="ChallengeTimeOuterFrame" Stroke="Red" StrokeThickness="3"/>
                 <Rectangle x:Name="ChallengeTimeInnerFrame" Stroke="Red" StrokeThickness="3" Margin="6"/>
-                <ListBox x:Name="SelectNicePersonalityListBox" ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}" Margin="80,20,15,20" SelectionMode="Multiple" Background="{x:Null}" BorderBrush="{x:Null}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                <Viewbox Margin="80,20,15,20" MinHeight="810" MinWidth="1025">
+                    <ListBox x:Name="SelectNicePersonalityListBox"  ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}" SelectionMode="Multiple" Background="{x:Null}" BorderBrush="{x:Null}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                </Viewbox>
                 <Image x:Name="ChallengeTimeItemImage" Source="Images/item06_solo.png"  Margin="0,20,15,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="335" Width="276"/>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid" Margin="190,255,190,200" d:IsHidden="True">
+            <Grid x:Name="GroupeActivityGrid" Margin="190,255,190,200">
+                <Button>
+                </Button>
                 <Rectangle x:Name="GroupeActivityBack" Fill="White" StrokeDashArray="10 4" Stroke="Red" StrokeThickness="10" RadiusX="60" RadiusY="60"/>
-                <!--<ItemsControl x:Name="GoupeActivityItemsControl" Style="{StaticResource selectableContentStyle}" Margin="30,30">
-                   <DockPanel Width="1480" Height="130" VerticalAlignment="Top">
-                        <TextBlock x:Name="IndexText"  VerticalAlignment="Top"><Run Text="・ " FontSize="60"/><Run Text=" "/><Run Text="(" FontSize="80"/></TextBlock>
-                        <InkCanvas x:Name="NameInputCanvas" Width="250" Height="100" VerticalAlignment="Center" Background="Transparent"/>
-                        <TextBlock x:Name="MidpointText"  VerticalAlignment="Top"><Run Text=")" FontSize="80"/><Run Text=" "/><Run Text="さん・・・" FontSize="60"/></TextBlock>
-                        <InkCanvas x:Name="PersonalityInputText" Height="120" VerticalAlignment="Center" Background="Transparent"/>
-                    </DockPanel>
-                </ItemsControl>-->
-                <ContentControl Style="{StaticResource selectableContentStyle}" Margin="30,30"/>
+                <Grid x:Name="InputNicePersonalityGrid"  Margin="35"/>
+                <ItemsControl x:Name="InputNicePersonalityItemsControl" Style="{StaticResource SelectableContentControlStyle}"/>
             </Grid>
             <Grid x:Name="PointCheckBoxGrid" Margin="250,100,780,480" d:IsHidden="True">
                 <Grid x:Name="PointCheckBox1Grid" Margin="0,0,0,380" Background="Orange" Height="120">
@@ -426,7 +423,7 @@
                     <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid">
+            <Grid x:Name="SystemGrid" d:IsHidden="True">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
@@ -446,7 +443,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="50,145,220,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/azuki.ttf#azuki_font"/>
+                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="50,145,220,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
                     <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32">
                         <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png"/>
                     </Button>
@@ -503,7 +500,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="GroupeActivityMessageTextBlock" TextWrapping="Wrap" Margin="30,100,192,20" FontSize="35" FontFamily="/Fonts/azuki.ttf#azuki_font"/>
+                    <TextBlock x:Name="GroupeActivityMessageTextBlock" TextWrapping="Wrap" Margin="30,100,192,20" FontSize="35" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
                     <Button x:Name="GroupeActivityNextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Height="80" Width="128" Margin="20,20" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                         <Image x:Name="GroupeActivityNextMessageArrowDownImage" Source="/Images/yazirusi.png"/>
                     </Button>
@@ -530,7 +527,7 @@
                 <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Margin="33,892,0,0" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
                     <Image x:Name="BackPageBeforeImage" Source="/Images/before.png"/>
                 </Button>
-                <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True">
+                <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}">
                     <Grid x:Name="MangaFlipButtonLayerGrid">
                         <Image x:Name="MangaFlipArrowImageGauge" Source="/Images/mangaya_orange.png">
                             <Image.RenderTransform>
@@ -560,7 +557,7 @@
                 <Button x:Name="SelectFeelingBackButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278"  Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" Margin="33,940,0,0" d:IsHidden="True">
                     <Image x:Name="ChallengeBackImage" Source="/Images/prev_back_.png"/>
                 </Button>
-                <Button x:Name="ReturnButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Margin="33,892,0,0" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin">
+                <Button x:Name="ReturnButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Margin="33,892,0,0" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
                     <Image x:Name="ReturnButtonImage" Source="/Images/return.png"/>
                 </Button>
                 <Grid x:Name="MusicInfoGrid" RenderTransformOrigin="0.5,0.5" Margin="1423,60,0,755" HorizontalAlignment="Left" Width="452" Height="265" d:IsHidden="True">
@@ -619,6 +616,28 @@
                         </Grid>
                     </Button>
                     <Image x:Name="HintCheckCharacterImage" Source="Images/shiroji_03.png" HorizontalAlignment="Left"/>
+                </Grid>
+                <Grid x:Name="CanvasGrid" Margin="0,732,0,0" IsVisibleChanged="CanvasGrid_IsVisibleChanged" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Border Background="#FF00DAFF" BorderBrush="{x:Null}"/>
+                    <InkCanvas x:Name="InputCanvas" EditingMode="Ink" StrokeCollected="InputCanvas_StrokeCollected" StrokeErasing="InputCanvas_StrokeErasing" Margin="5,5,215,5"/>
+                    <Button x:Name="PenButton" Height="100" Width="200" Background="AliceBlue" Margin="10,100" HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <TextBlock Text="えんぴつ"  FontSize="40" FontFamily="/Fonts/azuki.ttf#azuki_font"/>
+                    </Button>
+                    <Button x:Name="EraserButton" Height="100" Width="200" Background="AliceBlue" Margin="10,30" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <TextBlock Text="けしごむ"  FontSize="40" FontFamily="/Fonts/azuki.ttf#azuki_font"/>
+                    </Button>
+                    <Border BorderThickness="5" BorderBrush="#FF1587BB" />
+                    <Button x:Name="CanvasCloseButton" VerticalAlignment="Top" Background="#FF1A41C7" BorderBrush="{x:Null}" HorizontalAlignment="Right" Margin="10,10" Height="70" Width="80" Click="Button_Click">
+                        <TextBlock Text="×"  FontSize="60" Foreground="White" FontWeight="UltraBold" FontFamily="/Fonts/azuki.ttf#azuki_font"/>
+                    </Button>
                 </Grid>
             </Grid>
         </Grid>

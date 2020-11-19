@@ -1,4 +1,5 @@
 start
+goto,Debug
 scene,前回のおさらい
 reset
 image,bg_image,background_02.png
@@ -257,7 +258,6 @@ hide,image,children_face_right_image
 msg,main_msg,すてきなせいかくはこのほかにもたくさんあるのじゃ。鬱たくさんのすてきなせいかくをみつけられるとよいのう。,白じい
 click,page
 #
-sub,Debug
 scene,グループアクティビティ 開始
 reset
 image,bg_image,background_06.png
@@ -272,6 +272,9 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,これから、「いやなきもち」になったときに思い出すと鬱「いいきもち」になるような友だちやまわりの人の鬱「すてきなせいかく」をたくさんみつけてみよう！,白じい
 click,page
 #
+hide,grid,small_plate_title_grid
+hide,grid,hint_check_grid
+hide,grid,groupe_activity_grid
 hide,grid,main_msg_grid
 hide,image,session_title_image
 hide,grid,session_frame_grid

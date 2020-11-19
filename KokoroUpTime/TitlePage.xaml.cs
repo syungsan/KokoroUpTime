@@ -836,6 +836,7 @@ namespace KokoroUpTime
                 mainWindow.Height = SystemParameters.VirtualScreenHeight;
                 // mainWindow.Cursor = Cursors.None;
                 mainWindow.WindowState = WindowState.Maximized;
+                
 
                 this.isMaximized = true;
             }
