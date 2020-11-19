@@ -7,7 +7,7 @@
     <Version>0.8.8.1</Version>
     <PackageIcon></PackageIcon>
     <ApplicationIcon>icon_sr9_icon.ico</ApplicationIcon>
-    <AssemblyVersion>0.9.8.2</AssemblyVersion>
+    <AssemblyVersion>0.9.8.3</AssemblyVersion>
     <FileVersion>0.9.8.2</FileVersion>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
@@ -24,6 +24,8 @@
     <None Remove="Fonts\HGRPP1.TTC" />
     <None Remove="Fonts\JiyunoTsubasa.ttf" />
     <None Remove="Fonts\TanukiMagic.ttf" />
+    <None Remove="Fonts\UDDigiKyokashoN-B.ttc" />
+    <None Remove="Fonts\UDDigiKyokashoN-R.ttc" />
     <None Remove="good_words_grid.png" />
     <None Remove="Images\159474.png" />
     <None Remove="Images\activity_result_msg_04_01.png" />
@@ -320,6 +322,8 @@
     <Resource Include="Fonts\HGRPP1.TTC" />
     <Resource Include="Fonts\JiyunoTsubasa.ttf" />
     <Resource Include="Fonts\TanukiMagic.ttf" />
+    <Resource Include="Fonts\UDDigiKyokashoN-B.ttc" />
+    <Resource Include="Fonts\UDDigiKyokashoN-R.ttc" />
     <Resource Include="Images\159474.png" />
     <Resource Include="Images\activity_result_msg_04_01.png" />
     <Resource Include="Images\activity_result_msg_04_02.png" />
@@ -628,7 +632,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter2.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter5.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

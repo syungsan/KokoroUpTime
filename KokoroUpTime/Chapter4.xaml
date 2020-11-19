@@ -350,7 +350,7 @@
                 <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="5,0,0,0"/>
                 <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.92" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,63,10,20">
                     <Image.RenderTransform>
-                        <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter1}}}"/>
+                        <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter4}}}"/>
                     </Image.RenderTransform>
                 </Image>
             </Grid>
@@ -647,7 +647,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="50,145,220,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/azuki.ttf#azuki_font"/>
+                    <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="50,145,220,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
                     <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32" d:IsHidden="True">
                         <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png" d:IsHidden="True"/>
                     </Button>
@@ -683,7 +683,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="GroupeActivityMessageTextBlock" TextWrapping="Wrap" Margin="30,100,30,20" FontSize="42" FontFamily="/Fonts/azuki.ttf#azuki_font"/>
+                    <TextBlock x:Name="GroupeActivityMessageTextBlock" TextWrapping="Wrap" Margin="30,100,30,20" FontSize="42" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
                 </Grid>
                 <Grid x:Name="EndingMessageGrid" Width="1149" Height="210" Margin="210,826,561,44" d:IsHidden="True">
                     <Image x:Name="EndingShortBubbleImage" Source="/Images/short_bubble_right_up.png"/>

@@ -93,6 +93,8 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
+        private ObservableCollection<HowToInputData> HowtoInputDatas = new ObservableCollection<HowToInputData>();
+
         public Chapter6()
         {
             InitializeComponent();
@@ -107,9 +109,25 @@ namespace KokoroUpTime
             // データモデルインスタンス確保
             this.dataChapter6 = new DataChapter6();
 
+            
+
+            for(int i=0; i < 5; i++)
+            {
+                HowtoInputDatas.Add(new HowToInputData(this.dataOption.InputMethod.ToString()));
+            }
+            //this.GoupeActivityItemsControl.ItemsSource = HowtoInputDatas;
             this.SelectNicePersonalityListBox.ItemsSource = NICE_PERSONALITY;
 
             this.checkBoxs = new CheckBox[] { this.PointCheckBox1, this.PointCheckBox2, this.PointCheckBox3 };
+
+            if(this.dataOption.InputMethod == 0)
+            {
+                //手書き
+            }
+            else if(this.dataOption.InputMethod == 1)
+            {
+                //キーボード
+            }
 
             this.InitControls();
 
@@ -317,6 +335,7 @@ namespace KokoroUpTime
             this.MangaPrevBackButton.Visibility = Visibility.Hidden;
             this.GroupeActivityNextMessageButton.Visibility = Visibility.Hidden;
             this.GroupeActivityBackMessageButton.Visibility = Visibility.Hidden;
+            this.CanvasGrid.Visibility = Visibility.Hidden;
 
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
@@ -1510,6 +1529,28 @@ namespace KokoroUpTime
 
                         return;
                     }
+                    if (stns.Count > 2 && stns[1] == "image" && stns[2] == "name" && File.Exists(namePngPath))
+                    {
+                        // 実行ファイルの場所を絶対パスで取得
+                        var startupPath = FileUtils.GetStartupPath();
+
+                        var image = new BitmapImage();
+
+                        image.BeginInit();
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        image.UriSource = new Uri($@"{startupPath}/{namePngPath}", UriKind.Absolute);
+                        image.EndInit();
+
+                        image.Freeze();
+
+                        (this.imageInlines[textObject.Name][imageInlineCount].Child as Image).Source = image;
+
+                        this.imageInlineCount++;
+                        this.inlineCount++;
+
+                        return;
+                    }
                     this.runs[textObject.Name][inlineCount].Text = stns[0];
                     this.inlineCount++;
                 }
@@ -1702,6 +1743,20 @@ namespace KokoroUpTime
             {
                 this.GoTo("check_hint");
             }
+            if (button.Name == "CanvasCloseButton")
+            {
+                this.CanvasGrid.Visibility = Visibility.Hidden;
+            }
+            if(button.Name== "NameInputButton")
+            {
+                Point pt = button.PointToScreen(new Point(0.0d, 0.0d));
+
+            }
+            if (button.Name == "PersonalityInputButton")
+            {
+                Point pt = button.PointToScreen(new Point(0.0d, 0.0d));
+
+            }
         }
         private void SetBGM(string soundFile, bool isLoop, int volume)
         {
@@ -1769,11 +1824,15 @@ namespace KokoroUpTime
                 {
                     this.scenarioCount = index + 1;
                     this.ScenarioPlay();
+
+                    break;
                 }
                 if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
                 {
                     this.scenarioCount = index + 1;
                     this.ScenarioPlay();
+
+                    break;
                 }
             }
         }
@@ -1886,18 +1945,49 @@ namespace KokoroUpTime
                 this.tapCount -= 1;
             }
         }
+
+        private void InputCanvas_StrokeCollected(object sender, InkCanvasStrokeCollectedEventArgs e)
+        {
+            IInputElement focusedControl = System.Windows.Input.Keyboard.FocusedElement;
+
+            var canvas = focusedControl as InkCanvas;
+
+            canvas.Strokes = this.InputCanvas.Strokes;
+        }
        
+        private void InputCanvas_StrokeErasing(object sender, InkCanvasStrokeErasingEventArgs e)
+        {
+            IInputElement focusedControl = System.Windows.Input.Keyboard.FocusedElement;
+
+            var canvas = focusedControl as InkCanvas;
+
+            canvas.Strokes = this.InputCanvas.Strokes;
+        }
+
+        private void CanvasGrid_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if(this.CanvasGrid.Visibility == Visibility.Visible)
+            {
+                this.ShowAnime(storyBoard: "float_in", objectName: this.CanvasGrid.Name, objectsName: null, isSync: "sync");
+            }
+            else  if(this.CanvasGrid.Visibility == Visibility.Hidden)
+            {
+                this.ShowAnime(storyBoard: "float_out", objectName: this.CanvasGrid.Name, objectsName: null, isSync: "sync");
+            }
+        }
+
+        
     }
 
 
 
     public class HowToInputData
     {
-        public HowToInputData(int styleMode)
+        public HowToInputData(string styleMode)
         {
             StyleMode = styleMode;
         }
-        public int StyleMode { get; set; }
+        public string StyleMode { get; set; }
     }
 
 

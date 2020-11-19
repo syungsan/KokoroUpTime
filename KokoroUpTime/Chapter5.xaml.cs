@@ -1136,7 +1136,7 @@ namespace KokoroUpTime
 
                 case "get_item":
 
-                    this.dataItem.HasGotItem03 = true;
+                    this.dataItem.HasGotItem06 = true;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {

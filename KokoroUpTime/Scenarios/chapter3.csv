@@ -28,7 +28,7 @@ image,shiroji_right_image,shiroji_01.png,appear_up
 clear,text,main_msg
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,うきうきシューズを使うときは、3つのポイントがあったのう。みんなはおぼえておるか？フォッ、フォッ、フォッ！,白じい
+msg,main_msg,うきうきシューズを使うときは、3つのポイントがあったのう。鬱みんなはおぼえておるか？フォッ、フォッ、フォッ！,白じい
 click,page
 #
 hide,button,next_page_button
@@ -77,7 +77,7 @@ grid,music_info_grid,slide,no_sync
 image,shiroji_right_up_image,shiroji_04.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,赤丸くんは、なんだがチクチクする言葉をつかっておるのう。青助くんとキミちゃんはどんなきもちなんじゃろうか？きもちとその大きさを考えてみよう！,白じい
+msg,main_msg,赤丸くんは、なんだがチクチクする言葉をつかっておるのう。鬱青助くんとキミちゃんはどんなきもちなんじゃろうか？鬱きもちとその大きさを考えてみよう！,白じい
 click,page
 #
 scene,チャレンジタイム！パート①開始
@@ -94,7 +94,7 @@ image,bg_image,background_06.png
 image,shiroji_left_image,shiroji_02.png
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,赤丸くんは、なんだがチクチクする言葉をつかっておるのう。青助くんとキミちゃんはどんなきもちなんじゃろうか？,白じい
+msg,main_msg,赤丸くんは、なんだがチクチクする言葉をつかっておるのう。鬱青助くんとキミちゃんはどんなきもちなんじゃろうか？,白じい
 click,msg
 #
 msg,main_msg,きもちとその大きさを考えてみよう！,白じい
@@ -210,7 +210,7 @@ image,item_center_image
 image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,このすいとうの中には、<font=red#72##true>あったかいスープ</font>が入っておるんじゃ。,白じい
+msg,main_msg,このすいとうの中には、鬱<font=red#72##true>あったかいスープ</font>が入っておるんじゃ。,白じい
 click,page
 #
 scene,アイテム紹介
@@ -237,7 +237,7 @@ text,let_s_try_title_text,あたたかい言葉をさがしてみよう
 image,shiroji_left_image,shiroji_01.png
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,あたたかい言葉には、4つの種類があるぞい。鬱鬱<font=#64#yellow#true#black>☆ほめる言葉</font>　　　　<font=#64#yellow#true#black>☆しんぱいする言葉</font>鬱<font=#64#yellow#true#black>☆はげます言葉</font>　　　<font=#64#yellow#true#black>☆おれいの言葉</font>,白じい
+msg,main_msg,あたたかい言葉には、4つの種類があるぞい。鬱<font=#64#yellow#true#black>☆ほめる言葉</font>　　　　<font=#64#yellow#true#black>☆しんぱいする言葉</font>鬱<font=#64#yellow#true#black>☆はげます言葉</font>　　　<font=#64#yellow#true#black>☆おれいの言葉</font>,白じい
 click,msg
 #
 msg,main_msg,それぞれの言葉がどのようなものか、見てみようかの。,白じい
@@ -316,7 +316,7 @@ hide,grid,c_hot_word_key_button_grid
 image,shiroji_left_image,shiroji_02.png
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,赤丸くんがあったかスープを使ってみたようじゃ。青助くんとキミちゃんに、どのような「あたたかい言葉」をかけておるかいっしょにみてみよう。,白じい
+msg,main_msg,赤丸くんがあったかスープを使ってみたようじゃ。鬱青助くんとキミちゃんに、どのような「あたたかい言葉」をかけておるかいっしょにみてみよう。,白じい
 image,item_center_right_image
 click,page
 #
@@ -375,7 +375,7 @@ image,bg_image,background_06.png
 image,shiroji_left_image,shiroji_01.png
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,いいぞ、赤丸くん。<font=#72##true#black>青助くんとキミちゃんはいいきもち</font>になっておるようじゃ。それぞれのきもちをかんがえてみよう。,白じい
+msg,main_msg,いいぞ、赤丸くん。鬱<font=#72##true#black>青助くんとキミちゃんはいいきもち</font>になっておるようじゃ。鬱それぞれのきもちをかんがえてみよう。,白じい
 click,page
 #
 scene,チャレンジタイム！パート②開始
@@ -391,7 +391,7 @@ hide,border,challenge_time_title_border
 image,shiroji_left_image,shiroji_02.png
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,あたたかい言葉をつかうと、どんなきもちになるかのう？青助くんとキミちゃんのきもちをそれぞれ考えてみよう！,白じい
+msg,main_msg,あたたかい言葉をつかうと、どんなきもちになるかのう？鬱青助くんとキミちゃんのきもちをそれぞれ考えてみよう！,白じい
 click,page
 #
 sub,aosuke's_feeling_after_used_item
@@ -510,7 +510,7 @@ grid,music_info_grid,slide,no_sync
 image,shiroji_right_up_image,shiroji_04.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,みんなも赤丸くんのように、あたたかい言葉を使ってみよう！まずは、4つの場面でつかえそうなあたたかい言葉を考えてみよう！,白じい
+msg,main_msg,みんなも赤丸くんのように、あたたかい言葉を使ってみよう！鬱まずは、4つの場面でつかえそうなあたたかい言葉を考えてみよう！,白じい
 click,page
 #
 reset
@@ -653,7 +653,7 @@ image,children_face_right_image,akamaru_face_03.png
 clear,text,main_msg
 image,main_msg_bubble_image,right_big_bubble_red.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,キミちゃん！鬱その絵、<font=red#60##true>$selected_praise_hot_word$。</font>,赤丸
+msg,main_msg,キミちゃん！鬱その絵、<font=red#60##true>$selected_praise_hot_word$</font>,赤丸
 click,msg
 #
 image,children_face_right_image,akamaru_face_03.png,,,gray
@@ -685,7 +685,7 @@ image,bg_image,background_02.png
 image,children_face_left_image,kimi_face_03.png
 image,main_msg_bubble_image,left_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,昨日はカゼで学校を休んじゃったけど、今日は学校に来ることができたわ。あ！青助くん、おはよう。,キミ
+msg,main_msg,昨日はカゼで学校を休んじゃったけど、鬱今日は学校に来ることができたわ。鬱あ！青助くん、おはよう。,キミ
 click,msg
 #
 image,children_face_left_image,kimi_face_01.png,,,gray
@@ -693,7 +693,7 @@ image,children_face_right_image,aosuke_face_03.png
 clear,text,main_msg
 image,main_msg_bubble_image,right_big_bubble_blue.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,キミちゃん、おはよう。鬱昨日はカゼで休んでたね。鬱<font=blue#60##true>$selected_worry_hot_word$。</font>,青助
+msg,main_msg,キミちゃん、おはよう。鬱昨日はカゼで休んでたね。鬱<font=blue#60##true>$selected_worry_hot_word$</font>,青助
 click,msg
 #
 image,children_face_right_image,aosuke_face_03.png,,,gray
@@ -791,7 +791,7 @@ grid,role_play_info_grid
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,次に、どれか１つの場面をえらんで、友だちとロールプレイをしてみるのじゃ。,白じい
+msg,main_msg,次に、どれか１つの場面をえらんで、鬱友だちとロールプレイをしてみるのじゃ。,白じい
 click,page
 #
 sub,select_role_play_hot_word
@@ -837,7 +837,7 @@ border,role_play_msg_border
 image,children_face_left_image,kimi_face_03.png
 image,main_msg_bubble_image,left_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,昨日はカゼで学校を休んじゃったけど、今日は学校に来ることができたわ。あ！青助くん、おはよう。,キミ
+msg,main_msg,昨日はカゼで学校を休んじゃったけど、鬱今日は学校に来ることができたわ。鬱あ！青助くん、おはよう。,キミ
 click,msg
 #
 hide,border,role_play_msg_border
@@ -936,12 +936,13 @@ msg,main_msg,白じい！鬱あたたかい言葉をつかうとなんだか自�
 click,msg
 #
 hide,image,item_center_right_image
+hide,grid,main_msg_grid
 clear,text,main_msg
 image,children_face_left_image,akamaru_face_04.png,,,gray
 image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,いいぞ、赤丸くん。あたたかい言葉は言った方も言われた方も両方がいいきもちになるようじゃ。これはとてもすごいことじゃ。,白じい
+msg,main_msg,いいぞ、赤丸くん。あたたかい言葉は言った方も言われた方も鬱両方がいいきもちになるようじゃ。鬱これはとてもすごいことじゃ。,白じい
 click,msg
 #
 msg,main_msg,おたがいにあたたかい言葉をかけあうことができるとよいのう！,白じい
@@ -959,7 +960,7 @@ grid,summary_grid
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,今日のこころアップタイムはどうじゃったかな？あたたかい言葉をかけることで、友だちも自分もいいきもちになるようじゃな。,白じい
+msg,main_msg,今日のこころアップタイムはどうじゃったかな？鬱あたたかい言葉をかけることで、鬱友だちも自分もいいきもちになるようじゃな。,白じい
 click,msg
 #
 msg,main_msg,次回のテーマは鬱<font=#68>「きちんとつたえよう」</font>じゃ！鬱おたのしみに！,白じい

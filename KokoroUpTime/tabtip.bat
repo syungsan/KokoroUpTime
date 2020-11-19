@@ -1,1 +1,1 @@
-"C:\Program Files\Common Files\microsoft shared\ink\TabTip.exe"
+"C:\Windows\System32\osk.exe"

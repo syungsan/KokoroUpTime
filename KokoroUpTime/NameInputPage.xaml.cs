@@ -1328,45 +1328,57 @@ namespace KokoroUpTime
         // TextBoxにフォーカスが当たったときに起動
         private void TriggerKeyboard(object sender, EventArgs e)
         {
-            if (!OnScreenKeyboard.IsOpened())
+            #region
+            /*if (!OnScreenKeyboard.IsOpened())
             {
                 try
                 {
                     Process.Start("./tabtip.bat");
 
-                    OnScreenKeyboard.Show();
                 }
                 catch (Exception ex)
                 {
                     // MessageBox.Show(ex.Message);
                     Debug.Print(ex.Message);
                 }
+            }*/
+            #endregion
+
+            using (Process process = new Process())
+            {
+                Process.Start("./tabtip.bat");
             }
         }
 
         // TextBoxをクリックしたときに起動
         private void TextBoxMouseDown(object sender, RoutedEventArgs e)
         {
-            if (!OnScreenKeyboard.IsOpened())
+            #region
+            /*if (!OnScreenKeyboard.IsOpened())
             {
                 try
                 {
                     Process.Start("./tabtip.bat");
-
-                    OnScreenKeyboard.Show();
                 }
                 catch (Exception ex)
                 {
                     // MessageBox.Show(ex.Message);
                     Debug.Print(ex.Message);
                 }
+            }*/
+            #endregion
+
+            using (Process process = new Process())
+            {
+                Process.Start("./tabtip.bat");
             }
         }
 
         // OSKを完全に切ってしまう
         private void CloseOSK()
         {
-            if (OnScreenKeyboard.IsOpened())
+            #region
+            /*if (OnScreenKeyboard.IsOpened())
             {
                 try
                 {
@@ -1377,7 +1389,8 @@ namespace KokoroUpTime
                     // MessageBox.Show(ex.Message);
                     Debug.Print(ex.Message);
                 }
-            }
+            }*/
+            #endregion
         }
     }
 }

@@ -1216,6 +1216,22 @@ namespace KokoroUpTime
                     this.ScenarioPlay();
 
                     break;
+
+                case "goto":
+
+                    if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
+                    {
+                        var GoToLabel = this.scenarios[this.scenarioCount][1];
+                        if (GoToLabel == "current_scene")
+                        {
+                            this.GoTo(this.scene);
+                        }
+                        else
+                        {
+                            this.GoTo(GoToLabel);
+                        }
+                    }
+                    break;
             }
         }
 
@@ -2441,6 +2457,27 @@ namespace KokoroUpTime
                 }
             }
             return null;
+        }
+
+        private void GoTo(string tag)
+        {
+            foreach (var (scenario, index) in this.scenarios.Indexed())
+            {
+                if (scenario[0] == "sub" && scenario[1] == tag)
+                {
+                    this.scenarioCount = index + 1;
+                    this.ScenarioPlay();
+
+                    break;
+                }
+                if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
+                {
+                    this.scenarioCount = index + 1;
+                    this.ScenarioPlay();
+
+                    break;
+                }
+            }
         }
     }
 }
