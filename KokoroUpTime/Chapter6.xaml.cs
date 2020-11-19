@@ -1728,16 +1728,9 @@ namespace KokoroUpTime
 
                 this.NavigationService.Navigate(titlePage);
             }
-            if(button.Name == "OkButton")
+            if(button.Name == "GoupeActivity")
             {
-                if (this.isCorrect)
-                {
-                    this.GoTo("select_correct_words");
-                }
-                else
-                {
-                    this.GoTo("select_uncorrect_words");
-                }
+                
             }
             if (button.Name == "HintCheckButton")
             {
