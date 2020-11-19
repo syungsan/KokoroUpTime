@@ -34,7 +34,7 @@
                 </Grid.RenderTransform>
                 <TextBlock x:Name="LargePlateTitleText" Style="{StaticResource Purple}" FontSize="80" FontWeight="UltraBold" Text="「かっこいいところ」や「いいところ」は&#10;どのようなことだろう？" VerticalAlignment="Center"/>
             </Grid>
-            <Grid x:Name="SmallPlateTitleGrid" Margin="200,100,400,850" RenderTransformOrigin="0.5,0.5">
+            <Grid x:Name="SmallPlateTitleGrid" Margin="200,100,400,850" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -228,11 +228,24 @@
                 <Image x:Name="ChallengeTimeItemImage" Source="Images/item06_solo.png"  Margin="0,20,15,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="335" Width="276"/>
             </Grid>
             <Grid x:Name="GroupeActivityGrid" Margin="190,255,190,200">
+<<<<<<< Updated upstream
                 <Button>
                 </Button>
                 <Rectangle x:Name="GroupeActivityBack" Fill="White" StrokeDashArray="10 4" Stroke="Red" StrokeThickness="10" RadiusX="60" RadiusY="60"/>
                 <Grid x:Name="InputNicePersonalityGrid"  Margin="35"/>
                 <ItemsControl x:Name="InputNicePersonalityItemsControl" Style="{StaticResource SelectableContentControlStyle}"/>
+=======
+                <Button x:Name="GoupeActivityButton" Style="{StaticResource BorderDashArrayButton}" Click="Button_Click">
+                    <Button.Effect>
+                        <DropShadowEffect BlurRadius="60" Color="IndianRed" Direction="270" RenderingBias="Quality" ShadowDepth="30"/>
+                    </Button.Effect>
+                    <DockPanel Width="1480" Height="130" VerticalAlignment="Top">
+                        <TextBlock x:Name="IndexText"  VerticalAlignment="Top" Margin="0,0,250,0"><Run Text="・ " FontSize="60"/><Run Text=" "/><Run Text="(" FontSize="80" /></TextBlock>
+                        <TextBlock x:Name="MidpointText"  VerticalAlignment="Top"><Run Text=")" FontSize="80"/><Run Text=" "/><Run Text="さん・・・" FontSize="60"/></TextBlock>
+                    </DockPanel>
+                </Button>
+                <ContentControl Style="{StaticResource selectableContentStyle}" Margin="30,30"/>
+>>>>>>> Stashed changes
             </Grid>
             <Grid x:Name="PointCheckBoxGrid" Margin="250,100,780,480" d:IsHidden="True">
                 <Grid x:Name="PointCheckBox1Grid" Margin="0,0,0,380" Background="Orange" Height="120">
