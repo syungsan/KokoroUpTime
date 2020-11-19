@@ -40,23 +40,29 @@
     </Style>
 
     <Style TargetType="Button" x:Key="BorderDashArrayButton">
-    <Setter Property="Template">
-        <Setter.Value>
-            <ControlTemplate TargetType="Button">
-                <Grid>
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
                         <Border Background="White"
-                                CornerRadius="65"/>
+                                    CornerRadius="65"/>
                         <Rectangle  Fill="{x:Null}" 
-                                    StrokeDashArray="10 4" 
-                                    Stroke="Red" 
-                                    StrokeThickness="10" 
-                                    RadiusX="60" 
-                                    RadiusY="60"/>
+                                        StrokeDashArray="10 4" 
+                                        Stroke="Red" 
+                                        StrokeThickness="10" 
+                                        RadiusX="60" 
+                                        RadiusY="60"/>
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
-            </ControlTemplate>
-        </Setter.Value>
-    </Setter>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFE7F3FF"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="RuleBoard" TargetType="{x:Type CheckBox}">
@@ -189,8 +195,8 @@
     <DataTemplate x:Key="KeyBoardInputTemplate">
         <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
             <TextBlock x:Name="IndexText" VerticalAlignment="Center">
-                                <Run Text="・ " FontSize="60"/>
-                                <Run Text="(" FontSize="80"/>
+                                <Run Text="{Binding}" FontSize="60"/>
+                                <Run Text=" (" FontSize="80"/>
             </TextBlock>
             <Button x:Name="NameInputButton" Width="250">
                 <Viewbox MaxHeight="130" MaxWidth="250" StretchDirection="DownOnly">
@@ -227,17 +233,35 @@
         </DockPanel>
     </DataTemplate>
 
-    <Style x:Key="SelectableContentControlStyle" TargetType="{x:Type ItemsControl}">
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding}" Value="0">
-                <Setter Property="ItemTemplate" Value="{StaticResource HandWritingTemplate}"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding}" Value="1">
-                <Setter Property="ItemTemplate" Value="{StaticResource KeyBoardInputTemplate}"/>
-            </DataTrigger>
-        </Style.Triggers>
+    <Style x:Key="handWritingInputStyle" TargetType="{x:Type ListViewItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                    <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
+                        <TextBlock x:Name="IndexText" VerticalAlignment="Center">
+                                <Run Text="・" FontSize="60"/>
+                                <Run Text=" (" FontSize="80"/>
+                        </TextBlock>
+                        <Button x:Name="NameInputButton" Width="250">
+                            <Viewbox MaxHeight="130" MaxWidth="250" StretchDirection="DownOnly">
+                                <TextBlock x:Name="InputedNamteText" Width="250" FontSize="40"/>
+                            </Viewbox>
+                        </Button>
+                        <TextBlock x:Name="MidpointText" VerticalAlignment="Center">
+                                <Run Text=")" FontSize="80"/>
+                                <Run Text="さん・・・ " FontSize="60"/>
+                        </TextBlock>
+                        <Button x:Name="PersonalityInputButton"  Height="120" VerticalAlignment="Center" >
+                            <Viewbox MaxHeight="120" StretchDirection="DownOnly">
+                                <TextBlock x:Name="InputedPersonalityText" Height="120" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="40"/>
+                            </Viewbox>
+                        </Button>
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
-    
+
     <DataTemplate x:Key="SelectedTemplate">
         <Grid x:Name="NicePersonalityGrid">
             <TextBlock x:Name="NicePersonalityText" Text="{Binding}"/>

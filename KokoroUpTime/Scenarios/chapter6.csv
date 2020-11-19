@@ -292,6 +292,7 @@ click,msg,small_next_only
 msg,groupe_activity_msg,そして、書き出した場面を見てみよう！鬱上に書いてあること以外のすてきなせいかくでもいいぞい！,白じい
 click,page
 #
+sub,Debug
 scene,グループアクティビティ
 reset
 image,bg_image,background_06.png

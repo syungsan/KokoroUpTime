@@ -93,7 +93,6 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
-        private ObservableCollection<HowToInputData> HowtoInputDatas = new ObservableCollection<HowToInputData>();
 
         public Chapter6()
         {
@@ -109,12 +108,7 @@ namespace KokoroUpTime
             // データモデルインスタンス確保
             this.dataChapter6 = new DataChapter6();
 
-            
-
-            for(int i=0; i < 5; i++)
-            {
-                HowtoInputDatas.Add(new HowToInputData(this.dataOption.InputMethod.ToString()));
-            }
+           
             //this.GoupeActivityItemsControl.ItemsSource = HowtoInputDatas;
             this.SelectNicePersonalityListBox.ItemsSource = NICE_PERSONALITY;
 
@@ -1972,17 +1966,6 @@ namespace KokoroUpTime
         
     }
 
-
-
-    public class HowToInputData
-    {
-        public HowToInputData(string styleMode)
-        {
-            StyleMode = styleMode;
-        }
-        public string StyleMode { get; set; }
-    }
-
-
+    
 }
 
