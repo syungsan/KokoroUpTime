@@ -234,105 +234,11 @@
                 <Image x:Name="ChallengeTitleImage" HorizontalAlignment="Left" Height="88" Margin="306,13,0,0" VerticalAlignment="Top" Width="788" Source="/Images/challenge_time.png" d:IsHidden="True"/>
                 <Grid x:Name="ChallengeGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="263,120,0,0" VerticalAlignment="Top" Width="400" d:IsHidden="True">
                     <Image x:Name="ChallengeGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <!--<ItemsControl x:Name="ChallengeGoodFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <InkCanvas x:Name="ChallengeGoodFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                                    <TextBlock x:Name="ChallengeGoodFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
-                                    <TextBlock x:Name="ChallengeGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
-                                    <InkCanvas.DefaultDrawingAttributes>
-                                        <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                                    </InkCanvas.DefaultDrawingAttributes>
-                                </InkCanvas>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>-->
-                    <ListBox x:Name="ChallengeGoodFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Multiple" d:IsHidden="True">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid x:Name="ChallengeGoodFeelingGrid"  PreviewMouseDown="selectFeeling">
-                                    <Label Width="360"/>
-                                    <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="Margin" Value="5,4"/>
-                                <Setter Property="OverridesDefaultStyle" Value="True" />
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type ContentControl}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="LightCoral"/>
-                                    </Trigger>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="LightPink"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                    </ListBox>
+                    <ListBox x:Name="ChallengeGoodFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectGoodFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Multiple" d:IsHidden="True"/>
                 </Grid>
                 <Grid x:Name="ChallengeBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="734,120,0,0" d:IsHidden="True">
                     <Image x:Name="ChallengeBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <!--<ItemsControl x:Name="ChallengeBadFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <InkCanvas x:Name="ChallengeBadFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                                    <TextBlock x:Name="ChallengeBadFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
-                                    <TextBlock x:Name="ChallengeBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
-                                    <InkCanvas.DefaultDrawingAttributes>
-                                        <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                                    </InkCanvas.DefaultDrawingAttributes>
-                                </InkCanvas>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>-->
-                    <ListBox x:Name="ChallengeBadFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Multiple" d:IsHidden="True">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid x:Name="ChallengeBadFeelingGrid" PreviewMouseDown="selectFeeling">
-                                    <Label Width="360"/>
-                                    <TextBlock x:Name="SelectBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="Margin" Value="5,4"/>
-                                <Setter Property="OverridesDefaultStyle" Value="True"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type ContentControl}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="LightBlue"/>
-                                    </Trigger>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="LightSkyBlue"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                    </ListBox>
+                    <ListBox x:Name="ChallengeBadFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectBadFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Multiple" d:IsHidden="True"/>
                 </Grid>
                 <Grid x:Name="ChallengeMessageBoxGrid" Height="250" Width="514" Margin="1278,136,128,694" d:IsHidden="True">
                     <Image x:Name="ChallengeMessageBoxImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/message_box.png" d:IsHidden="True"/>
@@ -340,110 +246,16 @@
                 </Grid>
                 <Image x:Name="ChallengeItemImage" HorizontalAlignment="Left" Height="489" Margin="1098,172,0,0" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="SelectFeelingGrid" d:IsHidden="True">
-                <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400" d:IsHidden="True">
-                    <Image x:Name="SelectGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <!-- <ItemsControl x:Name="SelectGoodFeelingListBox" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <InkCanvas x:Name="SelectGoodFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                                    <TextBlock x:Name="SelectGoodFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
-                                    <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
-                                    <InkCanvas.DefaultDrawingAttributes>
-                                        <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                                    </InkCanvas.DefaultDrawingAttributes>
-                                </InkCanvas>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>\-->
-                    <ListBox x:Name="SelectGoodFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" d:IsHidden="True">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid x:Name="SelectGoodFeelingGrid"  PreviewMouseDown="selectFeeling">
-                                    <Label Width="360"/>
-                                    <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="Margin" Value="5,4"/>
-                                <Setter Property="OverridesDefaultStyle" Value="True" />
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type ContentControl}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="LightCoral"/>
-                                    </Trigger>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="LightPink"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                    </ListBox>
+            <Grid x:Name="SelectFeelingGrid">
+                <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400">
+                    <Image x:Name="SelectGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill"/>
+                    <ListBox x:Name="SelectGoodFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectGoodFeelingStyle}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single"/>
                 </Grid>
-                <Grid x:Name="SelectBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="923,72,0,0" d:IsHidden="True">
-                    <Image x:Name="SelectBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <!--<ItemsControl x:Name="SelectBadFeelingListBox" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <InkCanvas x:Name="SelectBadFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                                    <TextBlock x:Name="SelectBadFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
-                                    <TextBlock x:Name="SelectBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
-                                    <InkCanvas.DefaultDrawingAttributes>
-                                        <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                                    </InkCanvas.DefaultDrawingAttributes>
-                                </InkCanvas>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>-->
-                    <ListBox x:Name="SelectBadFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" d:IsHidden="True">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid x:Name="SelectBadFeelingGrid" PreviewMouseDown="selectFeeling" >
-                                    <Label Width="360"/>
-                                    <TextBlock x:Name="SelectBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="Margin" Value="5,4"/>
-                                <Setter Property="OverridesDefaultStyle" Value="True"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type ContentControl}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="LightBlue"/>
-                                    </Trigger>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="LightSkyBlue"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                    </ListBox>
+                <Grid x:Name="SelectBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="923,72,0,0">
+                    <Image x:Name="SelectBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill"/>
+                    <ListBox x:Name="SelectBadFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectBadFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single"/>
                 </Grid>
-                <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="727,0,0,0" VerticalAlignment="Center" Width="273" Source="/Images/item01_solo.png" RenderTransformOrigin="0.659,0.453" d:IsHidden="True"/>
+                <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="727,0,0,0" VerticalAlignment="Center" Width="273" Source="/Images/item01_solo.png" RenderTransformOrigin="0.659,0.453"/>
             </Grid>
             <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
                 <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684" d:IsHidden="True">
@@ -457,7 +269,7 @@
                     <TextBlock x:Name="ViewKindOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center" d:IsHidden="True"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="GaugeGrid">
+            <Grid x:Name="GaugeGrid" d:IsHidden="True">
                     <Grid x:Name="SelectHeartGrid" HorizontalAlignment="Center" Margin="400,400" d:IsHidden="True">
                         <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="5,0,0,0"/>
                         <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.92" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,63,10,20">
@@ -500,7 +312,7 @@
                 </Grid>
                 <Image x:Name="SummaryTitleImage" Width="401" Source="/Images/summary_title.png" Margin="760,22,759,907" Height="151" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="AnyFrameGrid">
+            <Grid x:Name="AnyFrameGrid" d:IsHidden="True">
                     <Grid x:Name="RuleBoardGrid" Margin="215,41,215,122">
                         <Image x:Name="RuleBoardImage" Source="/Images/blackboard.png" Stretch="Fill" />
                         <TextBlock x:Name="RuleBoardTitleTextBlock" Text="教室のルール" Foreground="White" FontSize="72" Margin="555,95,555,711"/>
@@ -781,7 +593,7 @@
                     <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid">
+            <Grid x:Name="SystemGrid" d:IsHidden="True">
                 <Grid x:Name="MainMessageGrid" Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
