@@ -460,6 +460,85 @@
                     </Grid>
                 </Border>
             </Grid>
+            <Grid x:Name="BodyImageGrid" d:IsHidden="True">
+                <Border x:Name="BodyImageOfAkamaruAngryBorder" BorderThickness="10,10,10,10" BorderBrush="Red" Margin="150,78,150,75" Background="White" CornerRadius="128,128,128,128" d:IsHidden="True">
+                    <Grid x:Name="BodyImageOfAkamaruAngryGrid">
+                        <TextBlock x:Name="BodyImageOfAkamaruAngryTextBlock" TextWrapping="Wrap" Margin="88,28,0,680" HorizontalAlignment="Left" Width="535" FontSize="60" FontWeight="Bold"><Run Language="ja-jp" Text="赤丸くんが"/><LineBreak/><Run Language="ja-jp" Text="イライラしているとき…"/></TextBlock>
+                        <Image x:Name="BodyImageOfAkamaruAngryImage" Width="564" Height="795" Source="/Images/body_image_of_akamaru_angry.png"/>
+                        <Grid x:Name="BodyImageOfAkamaruBubblesGrid">
+                            <Grid x:Name="BodyImageOfAkamaruBubble1Grid" Width="414" Height="221" Margin="134,235,1052,451">
+                                <Image x:Name="BodyImageOfAkamaruBubble1Image" Source="/Images/body_image_akamaru_bubble_left.png"/>
+                                <TextBlock x:Name="BodyImageOfAkamaruBubble1TextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Margin="30,29,114,29"><Run Language="ja-jp" Text="おこった 顔に"/><LineBreak/><Run Language="ja-jp" Text="なって いる"/></TextBlock>
+                            </Grid>
+                            <Grid x:Name="BodyImageOfAkamaruBubble2Grid" Width="414" Height="221" Margin="134,484,1052,202">
+                                <Image x:Name="BodyImageOfAkamaruBubble2Image" Source="/Images/body_image_akamaru_bubble_left.png"/>
+                                <TextBlock x:Name="BodyImageOfAkamaruBubble2TextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Margin="30,29,114,29"><Run Text="手に"/><Run Language="ja-jp" Text=" "/><Run Text="力が"/><LineBreak/><Run Text="入って"/><Run Language="ja-jp" Text=" "/><Run Text="いる"/></TextBlock>
+                            </Grid>
+                            <Grid x:Name="BodyImageOfAkamaruBubble3Grid" Width="417" Height="243" Margin="1052,82,131,582">
+                                <Image x:Name="BodyImageOfAkamaruBubble3Image" Source="/Images/body_image_akamaru_bubble_right.png"/>
+                                <TextBlock x:Name="BodyImageOfAkamaruBubble3TextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Margin="123,20,33,19"><Run Language="ja-jp" Text="あたま に"/><LineBreak/><Run Language="ja-jp" Text="血が のぼる"/><LineBreak/><Run Language="ja-jp" Text="感じが する"/></TextBlock>
+                            </Grid>
+                            <Grid x:Name="BodyImageOfAkamaruBubble4Grid" Width="417" Height="243" Margin="1052,346,131,318" d:LayoutOverrides="VerticalAlignment">
+                                <Image x:Name="BodyImageOfAkamaruBubble4Image" Source="/Images/body_image_akamaru_bubble_right.png"/>
+                                <TextBlock x:Name="BodyImageOfAkamaruBubble4TextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Margin="123,47,33,46"><Run Text="肩に"/><Run Language="ja-jp" Text=" "/><Run Text="力が"/><LineBreak/><Run Text="入って"/><Run Language="ja-jp" Text=" "/><Run Text="いる"/></TextBlock>
+                            </Grid>
+                            <Grid x:Name="BodyImageOfAkamaruBubble5Grid" Width="417" Height="243" Margin="1052,608,131,56">
+                                <Image x:Name="BodyImageOfAkamaruBubble5Image" Source="/Images/body_image_akamaru_bubble_right.png"/>
+                                <TextBlock x:Name="BodyImageOfAkamaruBubble5TextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Margin="123,47,33,58"><Run Text="足が"/><Run Language="ja-jp" Text=" "/><Run Text="ずっと"/><LineBreak/><Run Text="うごいて"/><Run Language="ja-jp" Text=" "/><Run Text="いる"/></TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Border>
+                <Border x:Name="BodyImageOfKimiFearBorder" BorderThickness="10,10,10,10" BorderBrush="#FFED7D31" Margin="150,78,150,75" Background="White" CornerRadius="128,128,128,128">
+                    <Grid x:Name="BodyImageOfKimiFearGrid">
+                        <Image x:Name="BodyImageOfKimiFearImage" Width="702" Height="839" Source="/Images/body_image_of_kimi_fear.png"/>
+                        <Grid x:Name="BodyImageOfKimiBubblesGrid">
+                            <Button x:Name="BodyImageOfKimiBubble1Button" Width="466" Height="204" Background="{x:Null}" BorderBrush="{x:Null}" Margin="129,43,1005,660" Click="Button_Click">
+                                <Grid x:Name="BodyImageOfKimiBubble1ButtonGrid">
+                                    <Image x:Name="BodyImageOfKimiBubble1ButtonImage" Source="/Images/body_image_of_kimi_bubble1.png"/>
+                                    <TextBlock x:Name="BodyImageOfKimiBubble1ButtonTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Margin="36,19,153,91" Height="90" d:LayoutOverrides="VerticalAlignment"><Run Language="ja-jp" Text="かおは？"/></TextBlock>
+                                </Grid>
+                            </Button>
+                            <Button x:Name="BodyImageOfKimiBubble2Button" Width="468" Height="178" Background="{x:Null}" BorderBrush="{x:Null}" Margin="124,268,1008,461" Click="Button_Click">
+                                <Grid x:Name="BodyImageOfKimiBubble2ButtonGrid">
+                                    <Image x:Name="BodyImageOfKimiBubble2ButtonImage" Source="/Images/body_image_of_kimi_bubble2.png"/>
+                                    <TextBlock x:Name="BodyImageOfKimiBubble2ButtonTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Margin="36,19,153,91" Height="90" d:LayoutOverrides="VerticalAlignment"><Run Language="ja-jp" Text="手は？"/></TextBlock>
+                                </Grid>
+                            </Button>
+                            <Button x:Name="BodyImageOfKimiBubble3Button" Width="471" Height="178" Background="{x:Null}" BorderBrush="{x:Null}" Margin="124,462,1005,267" Click="Button_Click">
+                                <Grid x:Name="BodyImageOfKimiBubble3ButtonGrid">
+                                    <Image x:Name="BodyImageOfKimiBubble3ButtonImage" Source="/Images/body_image_of_kimi_bubble3.png"/>
+                                    <TextBlock x:Name="BodyImageOfKimiBubble3ButtonTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Margin="36,19,153,91" Height="90" d:LayoutOverrides="VerticalAlignment"><Run Language="ja-jp" Text="おなかは？"/></TextBlock>
+                                </Grid>
+                            </Button>
+                            <Button x:Name="BodyImageOfKimiBubble4Button" Width="506" Height="178" Background="{x:Null}" BorderBrush="{x:Null}" Margin="124,648,970,81" Click="Button_Click">
+                                <Grid x:Name="BodyImageOfKimiBubble4ButtonGrid">
+                                    <Image x:Name="BodyImageOfKimiBubble4ButtonImage" Source="/Images/body_image_of_kimi_bubble4.png"/>
+                                    <TextBlock x:Name="BodyImageOfKimiBubble4ButtonTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Margin="36,19,153,91" Height="90" d:LayoutOverrides="VerticalAlignment"><Run Language="ja-jp" Text="その他には？"/></TextBlock>
+                                </Grid>
+                            </Button>
+                            <Button x:Name="BodyImageOfKimiBubble5Button" Width="453" Height="202" Background="{x:Null}" BorderBrush="{x:Null}" Margin="1028,84,119,621" Click="Button_Click">
+                                <Grid x:Name="BodyImageOfKimiBubble5ButtonGrid">
+                                    <Image x:Name="BodyImageOfKimiBubble5ButtonImage" Source="/Images/body_image_of_kimi_bubble5.png"/>
+                                    <TextBlock x:Name="BodyImageOfKimiBubble5ButtonTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Margin="140,19,49,89" Height="90" d:LayoutOverrides="VerticalAlignment"><Run Language="ja-jp" Text="あたまは"/><Run Text="？"/></TextBlock>
+                                </Grid>
+                            </Button>
+                            <Button x:Name="BodyImageOfKimiBubble6Button" Width="457" Height="202" Background="{x:Null}" BorderBrush="{x:Null}" Margin="1024,352,119,352" d:LayoutOverrides="VerticalAlignment" Click="Button_Click">
+                                <Grid x:Name="BodyImageOfKimiBubble6ButtonGrid">
+                                    <Image x:Name="BodyImageOfKimiBubble6ButtonImage" Source="/Images/body_image_of_kimi_bubble6.png"/>
+                                    <TextBlock x:Name="BodyImageOfKimiBubble6ButtonTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Margin="140,19,49,89" Height="90" d:LayoutOverrides="VerticalAlignment"><Run Language="ja-jp" Text="かたは"/><Run Text="？"/></TextBlock>
+                                </Grid>
+                            </Button>
+                            <Button x:Name="BodyImageOfKimiBubble7Button" Width="438" Height="202" Background="{x:Null}" BorderBrush="{x:Null}" Margin="1043,620,119,86" Click="Button_Click">
+                                <Grid x:Name="BodyImageOfKimiBubble7ButtonGrid">
+                                    <Image x:Name="BodyImageOfKimiBubble7ButtonImage" Source="/Images/body_image_of_kimi_bubble7.png"/>
+                                    <TextBlock x:Name="BodyImageOfKimiBubble7ButtonTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Margin="120,19,69,89" Height="90" d:LayoutOverrides="VerticalAlignment"><Run Language="ja-jp" Text="あしは"/><Run Text="？"/></TextBlock>
+                                </Grid>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
             <Grid x:Name="SessionGrid" d:IsHidden="True">
                 <Image x:Name="SessionTitleImage" Source="/Images/challenge_time.png" Margin="226,75,906,917" d:IsHidden="True"/>
                 <Grid x:Name="SessionFrameGrid" Width="1010" Height="328" Margin="226,243,684,509" d:IsHidden="True">
@@ -586,6 +665,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                 <Border x:Name="ChildrenBodyImageTitleBorder" BorderThickness="1" Margin="-10,220,10,570" Background="#FF4472C4">
                     <TextBlock x:Name="ChildrenBodyImageTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" TextAlignment="Center" d:IsHidden="True"/>
@@ -612,6 +692,11 @@
                 <Border x:Name="ChildrenBodyImageTitleBorder" BorderThickness="1" Margin="-10,220,10,570" Background="#FF4472C4" d:IsHidden="True">
                     <TextBlock x:Name="ChildrenBodyImageTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" TextAlignment="Center" d:IsHidden="True"/>
                 </Border>
+=======
+                <Border x:Name="ChildrenBodyImageTitleBorder" BorderThickness="1" Margin="-10,220,10,570" Background="#FF4472C4">
+                    <TextBlock x:Name="ChildrenBodyImageTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" TextAlignment="Center" d:IsHidden="True"/>
+                </Border>
+>>>>>>> master
                 <Grid x:Name="MyStatusInputGrid" Margin="1,1,1,1">
                     <Border x:Name="MyStatusInputBorder" BorderThickness="1" BorderBrush="Black" Margin="120,76,120,172" CornerRadius="128,128,128,128" Background="#B3EECF7D"/>
                     <TextBlock x:Name="SituationTextBlock" TextWrapping="Wrap" Margin="221,114,1508,0" Height="88" VerticalAlignment="Top" FontSize="72" FontWeight="Bold">
@@ -622,6 +707,7 @@
                         <TextBlock x:Name="ProblemTextBlock" Text="TextBlock" TextWrapping="Wrap" Margin="21,25,24,16" FontSize="54"/>
                     </Border>
                     <Image x:Name="ProblemArrowImage" Margin="799,428,967,512" Source="/Images/red_arrow_right.png" Stretch="Fill"/>
+<<<<<<< HEAD
                     <Grid x:Name="FeelingInputGrid" Margin="1,1,-3,-3">
                         <TextBlock x:Name="KindOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="904,140,0,0" Text="きもちの種類" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" TextAlignment="Center" d:LayoutOverrides="VerticalAlignment"/>
                         <TextBlock x:Name="SizeOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="1328,140,0,0" Text="きもちの大きさ" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" d:LayoutOverrides="VerticalAlignment"/>
@@ -638,6 +724,8 @@
                             </Grid>
                         </Button>
                     </Grid>
+=======
+>>>>>>> master
                     <Grid x:Name="MyBodyImageInputGrid">
                         <TextBlock x:Name="MyBodyImageTitleTextBlock" TextWrapping="Wrap" Margin="959,445,429,523" FontSize="72" FontWeight="Bold"><Run Language="ja-jp" Text="からだの変化"/></TextBlock>
                         <Button x:Name="MyBodyImageInputButton" Height="295" VerticalAlignment="Top" Margin="911,539,229,0" d:LayoutOverrides="HorizontalAlignment" Background="{x:Null}" BorderBrush="{x:Null}">
@@ -647,6 +735,7 @@
                         </Button>
                     </Grid>
                 </Grid>
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> parent of 44f8ff9... Merge branch 'master' into tadano
 =======
@@ -666,6 +755,8 @@
                     <TextBlock x:Name="ChildrenBodyImageTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" TextAlignment="Center" d:IsHidden="True"/>
                 </Border>
 >>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
+=======
+>>>>>>> master
             </Grid>
             <Grid x:Name="GroupActivityGrid" d:IsHidden="True">
                 <Grid x:Name="Let_sUseHotWordGrid" d:IsHidden="True">
@@ -840,6 +931,7 @@
 >>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
                 <Image x:Name="ItemLeftCenterSmallImage" HorizontalAlignment="Left" Height="477" Margin="10,0,0,0" VerticalAlignment="Center" Width="339" Source="/Images/item03_solo.png" d:IsHidden="True"/>
                 <Grid x:Name="ItemDetailInfoGrid" Width="780" Height="355" Margin="788,185,352,540">
+<<<<<<< HEAD
                     <Image x:Name="ItemDetailInfoImage" Source="/Images/item_review.png" Stretch="Fill"/>
                     <TextBox x:Name="ItemDetailInfoTextBox" Text="#4「はきはきスピーカー」&#xD;&#xA;上手に頼んだり、断ったり、自分の気持ちをはきはき伝えられます。&#xD;&#xA;" TextWrapping="Wrap" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="64"/>
                 </Grid>
@@ -909,6 +1001,10 @@
                     <TextBlock x:Name="ItemNameLeftTextBlock" HorizontalAlignment="Left" Margin="67,36,0,0" VerticalAlignment="Top" FontSize="80" Width="458" FontWeight="Bold" Height="115" TextAlignment="Center" d:IsHidden="True"><Run Language="ja-jp" Text="あったかスープ"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
 >>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
 =======
+=======
+                    <TextBox x:Name="ItemDetailInfoTextBox" Text="#4「はきはきスピーカー」&#xD;&#xA;上手に頼んだり、断ったり、自分の気持ちをはきはき伝えられます。&#xD;&#xA;" TextWrapping="Wrap" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="64"/>
+                </Grid>
+>>>>>>> master
                 <Border x:Name="ItemCheckBorder" BorderThickness="1" Background="#FFFFD992" Margin="715,581,279,93" CornerRadius="64,64,64,64">
                     <TextBlock x:Name="ItemCheckTextBlock" FontSize="48" Margin="49,42,50,47"><Run Text="☆"/><Run Text="じょうずにたのむ"/><Run Language="ja-jp" Text="&#x9;      "/><Run Text="☆じょうずにことわる"/><LineBreak/><Run Text="①理由を言う"/><Run Language="ja-jp" Text="&#x9;      "/><Run Text="①あやまる"/><LineBreak/><Run Text="②してほしいことを言う"/><Run Language="ja-jp" Text="    "/><Run Text="②理由を言う"/><LineBreak/><Run Text="③おれいを言う&#x9;"/><Run Language="ja-jp" Text="      "/><Run Text="③ことわる"/><LineBreak/><Run Text="&#x9;&#x9;"/><Run Language="ja-jp" Text="      "/><Run Text="④代わりの言葉"/></TextBlock>
                 </Border>
