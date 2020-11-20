@@ -436,14 +436,7 @@
     <Resource Include="Images\item05_book.png" />
     <Resource Include="Images\item05_detail.png" />
     <Resource Include="Images\item05_solo.gif" />
-<<<<<<< HEAD
-    <Resource Include="Images\item05_solo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Images\item05_solo.png" />
-    <Resource Include="Images\item05_solo.png" />
-=======
->>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
     <Resource Include="Images\item05_title.png" />
     <Resource Include="Images\item06_book.png" />
     <Resource Include="Images\item06_detail.png" />
@@ -505,9 +498,7 @@
     <Resource Include="Images\orange_long_button_plate.png" />
     <Resource Include="Images\orange_title_plate.png" />
     <Resource Include="Images\prev_back_.png" />
-    <Resource Include="Images\purple_title_plate.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Images\purple_title_plate.png" />
     <Resource Include="Images\red_arrow_right.png" />
     <Resource Include="Images\return_to_item.png" />
     <Resource Include="Images\return_to_top.png" />
