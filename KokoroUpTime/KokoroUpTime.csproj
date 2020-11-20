@@ -434,32 +434,11 @@
     <Resource Include="Images\item05_book.png" />
     <Resource Include="Images\item05_detail.png" />
     <Resource Include="Images\item05_solo.gif" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     <Resource Include="Images\item05_solo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-=======
->>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
-=======
->>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
-=======
->>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
-=======
->>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
-=======
->>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
-=======
     <Resource Include="Images\item05_solo.png" />
->>>>>>> parent of 44f8ff9... Merge branch 'master' into tadano
-=======
     <Resource Include="Images\item05_solo.png" />
->>>>>>> parent of 44f8ff9... Merge branch 'master' into tadano
     <Resource Include="Images\item05_title.png" />
     <Resource Include="Images\item06_book.png" />
     <Resource Include="Images\item06_detail.png" />
