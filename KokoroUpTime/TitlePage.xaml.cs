@@ -782,41 +782,22 @@ namespace KokoroUpTime
                         this.NavigationService.Navigate(chapter4);
                     }
                     break;
-                
-                /*
+
                 case "第5回":
 
-                   if (this.initConfig.userName == null)
+                    if (this.initConfig.userName == null)
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }
                     else
                     {
-                        Chapter5 chapter5 = new Chapter5();
+                        Chapter5 chapter4 = new Chapter5();
 
-                        chapter5.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                        chapter4.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                        this.NavigationService.Navigate(chapter5);
+                        this.NavigationService.Navigate(chapter4);
                     }
                     break;
-                    */
-                    
-                case "第6回":
-
-                 if (this.initConfig.userName == null)
-                 {
-                    MessageBox.Show("まずは名前の入力から始めてください。", "情報");
-                 }
-                 else
-                 {
-                    Chapter6 chapter6 = new Chapter6();
-
-                    chapter6.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
-
-                    this.NavigationService.Navigate(chapter6);
-                 }
-                 break;
-                    
             }
         }
 
@@ -836,7 +817,6 @@ namespace KokoroUpTime
                 mainWindow.Height = SystemParameters.VirtualScreenHeight;
                 // mainWindow.Cursor = Cursors.None;
                 mainWindow.WindowState = WindowState.Maximized;
-                
 
                 this.isMaximized = true;
             }

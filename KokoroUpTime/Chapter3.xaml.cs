@@ -505,11 +505,10 @@ namespace KokoroUpTime
                     {
                         var gridStoryBoard = this.scenarios[this.scenarioCount][2];
 
-                        var girdObjectName = gridObject.Name;
+                        // ストーリーボードの名前にコントロールの名前を付け足す
+                        gridStoryBoard += $"_{this.position}";
 
-                        string _objectsName = this.position;
-
-                        this.ShowAnime(storyBoard: gridStoryBoard, objectName: girdObjectName, objectsName:_objectsName, isSync: gridAnimeIsSync);
+                        this.ShowAnime(storyBoard: gridStoryBoard, isSync: gridAnimeIsSync);
                     }
                     else
                     {
@@ -558,11 +557,9 @@ namespace KokoroUpTime
                     {
                         var imageStoryBoard = this.scenarios[this.scenarioCount][3];
 
-                        var imageObjectName = imageObject.Name;
+                        imageStoryBoard += $"_{this.position}";
 
-                        string _objectsName  = this.position;
-
-                        this.ShowAnime(storyBoard: imageStoryBoard,objectName:imageObjectName, objectsName:_objectsName, isSync: imageAnimeIsSync);
+                        this.ShowAnime(storyBoard: imageStoryBoard, isSync: imageAnimeIsSync);
                     }
                     else
                     {
@@ -591,11 +588,9 @@ namespace KokoroUpTime
                     {
                         var borderStoryBoard = this.scenarios[this.scenarioCount][2];
 
-                        var borderObjectName = borderObject.Name;
+                        borderStoryBoard += $"_{this.position}";
 
-                        string _objectsName = this.position;
-
-                        this.ShowAnime(storyBoard: borderStoryBoard,objectName:borderObjectName, objectsName:_objectsName, isSync: borderAnimeIsSync);
+                        this.ShowAnime(storyBoard: borderStoryBoard, isSync: borderAnimeIsSync);
                     }
                     else
                     {
@@ -624,11 +619,9 @@ namespace KokoroUpTime
                     {
                         var buttonStoryBoard = this.scenarios[this.scenarioCount][2];
 
-                        var buttonObjectName = buttonObject.Name;
+                        buttonStoryBoard += $"_{this.position}";
 
-                        string _objectsName = this.position;
-
-                        this.ShowAnime(storyBoard: buttonStoryBoard, objectName:buttonObjectName, objectsName:_objectsName, isSync: buttonAnimeIsSync);
+                        this.ShowAnime(storyBoard: buttonStoryBoard, isSync: buttonAnimeIsSync);
                     }
                     else
                     {
@@ -714,11 +707,9 @@ namespace KokoroUpTime
                     {
                         var textStoryBoard = this.scenarios[this.scenarioCount][4];
 
-                        var textObjectName = __textObject.Name;
+                        textStoryBoard += $"_{this.position}";
 
-                        string _objectsName = this.position;
-
-                        this.ShowAnime(storyBoard: textStoryBoard, objectName:textObjectName, objectsName:_objectsName, isSync: textAnimeIsSync);
+                        this.ShowAnime(storyBoard: textStoryBoard, isSync: textAnimeIsSync);
                     }
                     else
                     {
@@ -1744,20 +1735,9 @@ namespace KokoroUpTime
         }
 
         // アニメーション（ストーリーボード）の処理
-        private void ShowAnime(string storyBoard, string objectName, string objectsName, string isSync)
+        private void ShowAnime(string storyBoard, string isSync)
         {
-            Storyboard sb;
-            try
-            {
-                sb = this.FindResource(storyBoard) as Storyboard;
-                foreach (var child in sb.Children)
-                    Storyboard.SetTargetName(child, objectName);
-            }
-            catch (ResourceReferenceKeyNotFoundException ex)
-            {
-                string objectsStroryBoard = $"{storyBoard}_{objectsName}";
-                sb = this.FindResource(objectsStroryBoard) as Storyboard;
-            }
+            Storyboard sb = this.FindResource(storyBoard) as Storyboard;
 
             if (sb != null)
             {

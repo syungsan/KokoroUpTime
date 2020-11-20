@@ -1,6 +1,7 @@
 ﻿using CsvReadWrite;
 using Expansion;
 using FileIOUtils;
+using Osklib;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
@@ -24,6 +26,8 @@ using WpfAnimatedGif;
 
 
 namespace KokoroUpTime
+
+
 {
     /// <summary>
     /// GameWindow.xaml の相互作用ロジック
@@ -93,7 +97,6 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
-        private ObservableCollection<HowToInputData> HowtoInputDatas = new ObservableCollection<HowToInputData>();
 
         public Chapter6()
         {
@@ -109,12 +112,7 @@ namespace KokoroUpTime
             // データモデルインスタンス確保
             this.dataChapter6 = new DataChapter6();
 
-            
-
-            for(int i=0; i < 5; i++)
-            {
-                HowtoInputDatas.Add(new HowToInputData(this.dataOption.InputMethod.ToString()));
-            }
+           
             //this.GoupeActivityItemsControl.ItemsSource = HowtoInputDatas;
             this.SelectNicePersonalityListBox.ItemsSource = NICE_PERSONALITY;
 
@@ -1646,7 +1644,6 @@ namespace KokoroUpTime
             if (this.isClickable)
             {
                 this.isClickable = false;
-
                 
                 if ((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton"|| button.Name == "GroupeActivityNextMessageButton"||button.Name=="ReturnButton"))
                 {
@@ -1670,10 +1667,24 @@ namespace KokoroUpTime
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
-                if (button.Name == "CompleteRolePlayButton")
+                else if (button.Name == "CompleteRolePlayButton")
                 {
                     this.GoTo("complete_groupe_activity");
                 }
+                else if (button.Name == "BackMessageButton" || button.Name == "BackPageButton" || button.Name == "GroupeActivityBackMessageButton" || button.Name == "SelectFeelingBackButton")
+                {
+                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                    this.NextMessageButton.Visibility = Visibility.Hidden;
+
+                    this.BackPageButton.Visibility = Visibility.Hidden;
+                    this.NextPageButton.Visibility = Visibility.Hidden;
+
+                    this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
+                    this.SelectFeelingBackButton.Visibility = Visibility.Hidden;
+
+                    this.ScenarioBack();
+                }
+                return;
             }
             // FullScreen時のデバッグ用に作っておく
             if (button.Name == "ExitButton")
@@ -1682,43 +1693,27 @@ namespace KokoroUpTime
                 this.CoverLayerImage.Visibility = Visibility.Visible;
                 this.ExitBackGrid.Visibility = Visibility.Visible;
             }
-
-            if (button.Name == "ExitBackYesButton")
+            else if (button.Name == "ExitBackYesButton")
             {
                 Application.Current.Shutdown();
             }
-
-            if (button.Name == "ExitBackNoButton")
+            else if (button.Name == "ExitBackNoButton")
             {
 
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
-            if (button.Name == "BackMessageButton" || button.Name == "BackPageButton" ||button.Name== "GroupeActivityBackMessageButton"|| button.Name == "SelectFeelingBackButton")
-            {
-                this.BackMessageButton.Visibility = Visibility.Hidden;
-                this.NextMessageButton.Visibility = Visibility.Hidden;
-
-                this.BackPageButton.Visibility = Visibility.Hidden;
-                this.NextPageButton.Visibility = Visibility.Hidden;
-
-                this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
-                this.SelectFeelingBackButton.Visibility = Visibility.Hidden;
-
-                this.ScenarioBack();
-            }
-            if (button.Name == "BranchButton1")
+            else if (button.Name == "BranchButton1")
             {
                 this.GoTo("manga");
             }
-            if (button.Name == "SelectFeelingNextButton")
+            else if (button.Name == "SelectFeelingNextButton")
             {
                 this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
-            
-            if (button.Name == "ReturnToTitleButton")
+            else if (button.Name == "ReturnToTitleButton")
             {
                 TitlePage titlePage = new TitlePage();
 
@@ -1728,34 +1723,24 @@ namespace KokoroUpTime
 
                 this.NavigationService.Navigate(titlePage);
             }
-            if(button.Name == "OkButton")
-            {
-                if (this.isCorrect)
-                {
-                    this.GoTo("select_correct_words");
-                }
-                else
-                {
-                    this.GoTo("select_uncorrect_words");
-                }
-            }
-            if (button.Name == "HintCheckButton")
+            else if (button.Name == "HintCheckButton")
             {
                 this.GoTo("check_hint");
             }
-            if (button.Name == "CanvasCloseButton")
+            else if (button.Name == "CanvasCloseButton")
             {
                 this.CanvasGrid.Visibility = Visibility.Hidden;
             }
-            if(button.Name== "NameInputButton")
+            else if(button.Name == "NameInputButton" || button.Name == "PersonalityInputButton")
             {
-                Point pt = button.PointToScreen(new Point(0.0d, 0.0d));
+                if (this.dataOption.InputMethod == 0)
+                {
+                    this.CanvasGrid.Visibility = Visibility.Visible;
+                }
+                else if (this.dataOption.InputMethod == 1)
+                {
 
-            }
-            if (button.Name == "PersonalityInputButton")
-            {
-                Point pt = button.PointToScreen(new Point(0.0d, 0.0d));
-
+                }
             }
         }
         private void SetBGM(string soundFile, bool isLoop, int volume)
@@ -1976,20 +1961,36 @@ namespace KokoroUpTime
             }
         }
 
-        
-    }
-
-
-
-    public class HowToInputData
-    {
-        public HowToInputData(string styleMode)
+        // TextBoxにフォーカスが当たったときに起動
+        private void TriggerKeyboard(object sender, KeyboardFocusChangedEventArgs e)
         {
-            StyleMode = styleMode;
+            if (!OnScreenKeyboard.IsOpened())
+            {
+                try
+                {
+                    Process.Start("./tabtip.bat");
+
+                    OnScreenKeyboard.Show();
+                }
+                catch (Exception ex)
+                {
+                    // MessageBox.Show(ex.Message);
+                    Debug.Print(ex.Message);
+                }
+            }
+            else if (OnScreenKeyboard.IsOpened())
+            {
+                try
+                {
+                    OnScreenKeyboard.Close();
+                }
+                catch (Exception ex)
+                {
+                    // MessageBox.Show(ex.Message);
+                    Debug.Print(ex.Message);
+                }
+            }
         }
-        public string StyleMode { get; set; }
     }
-
-
 }
 

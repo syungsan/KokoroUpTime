@@ -3,15 +3,15 @@
                     xmlns:local="clr-namespace:KokoroUpTime"
                     xmlns:outline_marker="clr-namespace:OutlineTextMaker">
 
-    <Style TargetType="Button" x:Key="BubbleButton">
+    <Style TargetType="{x:Type Control}" x:Key="BubbleFrame">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <Border Background="White"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="30" >
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="30" >
                         </Border>
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
@@ -19,7 +19,52 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style TargetType="{x:Type Control}" x:Key="DoublelineFrame">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"/>
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Margin="10"/>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="BorderDashArrayButton">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Background="White"
+                                    CornerRadius="65"/>
+                        <Rectangle  Fill="{x:Null}" 
+                                        StrokeDashArray="10 4" 
+                                        Stroke="Red" 
+                                        StrokeThickness="10" 
+                                        RadiusX="60" 
+                                        RadiusY="60"/>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFE7F3FF"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="RuleBoard" TargetType="{x:Type CheckBox}">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -147,58 +192,6 @@
     </Style>
     
    <!--Chapter6-->
-    <DataTemplate x:Key="KeyBoardInputTemplate">
-        <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
-            <TextBlock x:Name="IndexText" VerticalAlignment="Center">
-                                <Run Text="・ " FontSize="60"/>
-                                <Run Text="(" FontSize="80"/>
-            </TextBlock>
-            <Button x:Name="NameInputButton" Width="250">
-                <Viewbox MaxHeight="130" MaxWidth="250" StretchDirection="DownOnly">
-                    <TextBlock x:Name="InputedNamteText" Width="250" FontSize="40"/>
-                </Viewbox>
-            </Button>
-            <TextBlock x:Name="MidpointText" Text=")さん・・・ "  VerticalAlignment="Center">
-                                <Run Text=")" FontSize="80"/>
-                                <Run Text="さん・・・ " FontSize="60"/>
-            </TextBlock>
-            <Button x:Name="PersonalityInputButton"  Height="120" VerticalAlignment="Center" >
-                <Viewbox MaxHeight="120" StretchDirection="DownOnly">
-                    <TextBlock x:Name="InputedPersonalityText" Height="120" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="40"/>
-                </Viewbox>
-            </Button>
-        </DockPanel>
-    </DataTemplate>
-    <DataTemplate x:Key="HandWritingTemplate">
-        <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
-            <TextBlock x:Name="IndexText" VerticalAlignment="Center">
-                                <Run Text="・ " FontSize="60"/>
-                                <Run Text="(" FontSize="80"/>
-            </TextBlock>
-            <Button x:Name="NameInputButton" Width="250" >
-                <InkCanvas x:Name="InputedNamteText" Width="250"/>
-            </Button>
-            <TextBlock x:Name="MidpointText" Text=")さん・・・ "  VerticalAlignment="Center">
-                                <Run Text=")" FontSize="80"/>
-                                <Run Text="さん・・・ " FontSize="60"/>
-            </TextBlock>
-            <Button x:Name="PersonalityInputButton"   Height="120" VerticalAlignment="Center" >
-                <InkCanvas x:Name="InputedPersonalityText" Height="120" VerticalAlignment="Center"/>
-            </Button>
-        </DockPanel>
-    </DataTemplate>
-
-    <Style x:Key="SelectableContentControlStyle" TargetType="{x:Type ItemsControl}">
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding}" Value="0">
-                <Setter Property="ItemTemplate" Value="{StaticResource HandWritingTemplate}"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding}" Value="1">
-                <Setter Property="ItemTemplate" Value="{StaticResource KeyBoardInputTemplate}"/>
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-    
     <DataTemplate x:Key="SelectedTemplate">
         <Grid x:Name="NicePersonalityGrid">
             <TextBlock x:Name="NicePersonalityText" Text="{Binding}"/>

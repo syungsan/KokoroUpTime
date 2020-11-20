@@ -11,12 +11,58 @@
       Title="Chapter6" Loaded="Window_Loaded">
 
     <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Animation.xaml"/>
-                <ResourceDictionary Source="Styles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <Style x:Key="keyBoardInputStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
+                            <TextBlock x:Name="IndexText" VerticalAlignment="Center">
+                                <Run Text="・" FontSize="60"/>
+                                <Run Text=" (" FontSize="80"/>
+                            </TextBlock>
+                            <Viewbox MaxHeight="130" MaxWidth="250" StretchDirection="DownOnly">
+                                <TextBlock x:Name="InputedNamteText" Width="250" FontSize="40" GotKeyboardFocus="TriggerKeyboard"/>
+                            </Viewbox>
+                            <TextBlock x:Name="MidpointText" VerticalAlignment="Center">
+                                <Run Text=")" FontSize="80"/>
+                                <Run Text="さん・・・ " FontSize="60"/>
+                            </TextBlock>
+                            <Viewbox MaxHeight="120" StretchDirection="DownOnly">
+                                <TextBlock x:Name="InputedPersonalityText" Height="120" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="40" GotKeyboardFocus="TriggerKeyboard"/>
+                            </Viewbox>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="handWritingInputStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
+                            <TextBlock x:Name="IndexText" VerticalAlignment="Center">
+                                <Run Text="・" FontSize="60"/>
+                                <Run Text=" (" FontSize="80"/>
+                            </TextBlock>
+                            <Button x:Name="NameInputButton" Width="250" Click="Button_Click">
+                                <Viewbox MaxHeight="130" MaxWidth="250" StretchDirection="DownOnly">
+                                    <Image x:Name="InputedNamteCanvas" Width="250" HorizontalAlignment="Left"/>
+                                </Viewbox>
+                            </Button>
+                            <TextBlock x:Name="MidpointText" VerticalAlignment="Center">
+                                <Run Text=")" FontSize="80"/>
+                                <Run Text="さん・・・ " FontSize="60"/>
+                            </TextBlock>
+                            <Button x:Name="PersonalityInputButton"  Height="120" VerticalAlignment="Center"  Click="Button_Click">
+                                <Viewbox MaxHeight="120" StretchDirection="DownOnly">
+                                    <Image x:Name="InputedPersonalityCanvas" Height="120" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </Viewbox>
+                            </Button>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     <Viewbox>
         <Grid Height="1080" Width="1920" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -34,7 +80,7 @@
                 </Grid.RenderTransform>
                 <TextBlock x:Name="LargePlateTitleText" Style="{StaticResource Purple}" FontSize="80" FontWeight="UltraBold" Text="「かっこいいところ」や「いいところ」は&#10;どのようなことだろう？" VerticalAlignment="Center"/>
             </Grid>
-            <Grid x:Name="SmallPlateTitleGrid" Margin="200,100,400,850" RenderTransformOrigin="0.5,0.5">
+            <Grid x:Name="SmallPlateTitleGrid" Margin="200,100,400,850" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -228,11 +274,20 @@
                 <Image x:Name="ChallengeTimeItemImage" Source="Images/item06_solo.png"  Margin="0,20,15,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="335" Width="276"/>
             </Grid>
             <Grid x:Name="GroupeActivityGrid" Margin="190,255,190,200">
-                <Button>
+                <Button x:Name="GoupeActivityButton" Style="{StaticResource BorderDashArrayButton}" Click="Button_Click">
+                    <Viewbox MinWidth="1480" HorizontalAlignment="Left" Margin="30" Stretch="Fill">
+                        <ListView >
+                            <ListView.ItemContainerStyleSelector>
+                                <local:InputMethodStyleSelector HandWritingInputStyle="{StaticResource handWritingInputStyle}" KeyBoardInputStyle="{StaticResource handWritingInputStyle}"/>
+                            </ListView.ItemContainerStyleSelector>
+                            <ListBoxItem />
+                            <ListBoxItem />
+                            <ListBoxItem />
+                            <ListBoxItem />
+                            <ListBoxItem />
+                        </ListView>
+                    </Viewbox>
                 </Button>
-                <Rectangle x:Name="GroupeActivityBack" Fill="White" StrokeDashArray="10 4" Stroke="Red" StrokeThickness="10" RadiusX="60" RadiusY="60"/>
-                <Grid x:Name="InputNicePersonalityGrid"  Margin="35"/>
-                <ItemsControl x:Name="InputNicePersonalityItemsControl" Style="{StaticResource SelectableContentControlStyle}"/>
             </Grid>
             <Grid x:Name="PointCheckBoxGrid" Margin="250,100,780,480" d:IsHidden="True">
                 <Grid x:Name="PointCheckBox1Grid" Margin="0,0,0,380" Background="Orange" Height="120">
@@ -640,6 +695,7 @@
                     </Button>
                 </Grid>
             </Grid>
+            <Button Style="{StaticResource DoublelineFrame}" Background="White" BorderBrush="Black" BorderThickness="5" Margin="50"/>
         </Grid>
     </Viewbox>
 </Page>

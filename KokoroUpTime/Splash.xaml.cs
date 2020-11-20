@@ -66,21 +66,14 @@ namespace KokoroUpTime
             mainWindow.ShowActivated = true;
             mainWindow.Topmost = true;
             mainWindow.ShowInTaskbar = false;
-            // mainWindow.WindowStyle = WindowStyle.None;
-            //mainWindow.ResizeMode = ResizeMode.NoResize;
-            //mainWindow.Left = 0;
-            //mainWindow.Top = 0;
-            //mainWindow.Width = SystemParameters.VirtualScreenWidth;
-            //mainWindow.Height = SystemParameters.VirtualScreenHeight;
+            mainWindow.WindowStyle = WindowStyle.None;
+            mainWindow.ResizeMode = ResizeMode.NoResize;
+            mainWindow.Left = 0;
+            mainWindow.Top = 0;
+            mainWindow.Width = SystemParameters.VirtualScreenWidth;
+            mainWindow.Height = SystemParameters.VirtualScreenHeight;
             // mainWindow.Cursor = Cursors.None;
-            //mainWindow.WindowState = WindowState.Maximized;
-
-            //Debug用に画面を小さくしています
-            mainWindow.Width = 800;
-            mainWindow.Height = 600;
-            mainWindow.ResizeMode = ResizeMode.CanResize;
-            mainWindow.Left = 1130;
-            mainWindow.Top = 490;
+            mainWindow.WindowState = WindowState.Maximized;
         }
     }
 }

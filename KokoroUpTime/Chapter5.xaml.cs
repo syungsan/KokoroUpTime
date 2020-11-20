@@ -210,6 +210,8 @@ namespace KokoroUpTime
                 ["complimentary_situation_value_text"] = this.ComplimentarySituationValueTextBlock,
                 ["kind_of_feeling_input_text"] = this.KindOfFeelingInputTextBlock,
                 ["size_of_feeling_input_text"] = this.SizeOfFeelingInputTextBlock,
+
+                ["problem_text"] = this.ProblemTextBlock, //
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -254,10 +256,11 @@ namespace KokoroUpTime
                 ["hot_word_value_button_grid"] = this.HotWordValueButtonGrid,
                 ["role_play_info_grid"] = this.RolePlayInfoGrid,
                 ["role_play_button_grid"] = this.RolePlayButtonGrid,
-                ["feeling_input_grid"] = this.FeelingInputGrid,
+                // ["feeling_input_grid"] = this.FeelingInputGrid,
 
                 ["body_image_of_akamaru_bubbles_grid"] = this.BodyImageOfAkamaruBubblesGrid, //
                 ["body_image_of_kimi_bubbles_grid"] = this.BodyImageOfKimiBubblesGrid, //
+                ["my_status_input_grid"] = this.MyStatusInputGrid, //
             };
 
             this.borderObjects = new Dictionary<string, Border>
@@ -371,7 +374,7 @@ namespace KokoroUpTime
             this.ItemBookMainGrid.Visibility = Visibility.Hidden;
             this.ItemBookNoneGrid.Visibility = Visibility.Hidden;
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
-            this.FeelingInputGrid.Visibility = Visibility.Hidden;
+            // this.FeelingInputGrid.Visibility = Visibility.Hidden;
 
             this.MangaTitleBorder.Visibility = Visibility.Hidden;
 
@@ -384,6 +387,9 @@ namespace KokoroUpTime
             this.BodyImageOfKimiFearBorder.Visibility = Visibility.Hidden; //
             this.BodyImageOfKimiFearImage.Visibility = Visibility.Hidden; //
             this.BodyImageOfKimiBubblesGrid.Visibility = Visibility.Hidden; //
+
+            this.MyStatusInputGrid.Visibility = Visibility.Hidden; //
+            this.ProblemTextBlock.Visibility = Visibility.Hidden; //
 
             this.SelectHotWordValueTitleTextBlock.Text = "";
             this.SessionSubTitleTextBlock.Text = "";
@@ -400,6 +406,8 @@ namespace KokoroUpTime
             this.SelectHotWordValueTextBlock.Text = "";
             this.KindOfFeelingInputTextBlock.Text = "";
             this.SizeOfFeelingInputTextBlock.Text = "";
+
+            this.ProblemTextBlock.Text = "";
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
