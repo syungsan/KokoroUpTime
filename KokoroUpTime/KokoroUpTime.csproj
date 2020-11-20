@@ -138,7 +138,6 @@
     <None Remove="Images\item05_book.png" />
     <None Remove="Images\item05_detail.png" />
     <None Remove="Images\item05_solo.gif" />
-    <None Remove="Images\item05_solo.png" />
     <None Remove="Images\item05_title.png" />
     <None Remove="Images\item06_book.png" />
     <None Remove="Images\item06_detail.png" />
@@ -426,9 +425,12 @@
     <Resource Include="Images\item05_book.png" />
     <Resource Include="Images\item05_detail.png" />
     <Resource Include="Images\item05_solo.gif" />
+<<<<<<< HEAD
     <Resource Include="Images\item05_solo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+=======
+>>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
     <Resource Include="Images\item05_title.png" />
     <Resource Include="Images\item06_book.png" />
     <Resource Include="Images\item06_detail.png" />
