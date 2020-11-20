@@ -12,7 +12,10 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Media;
+<<<<<<< HEAD
 using System.Threading.Tasks;
+=======
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -68,7 +71,11 @@ namespace KokoroUpTime
 
         private List<Run> runs = new List<Run>();
         private List<InlineUIContainer> imageInlines = new List<InlineUIContainer>();
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 
         // 各種コントロールを任意の文字列で呼び出すための辞書
         private Dictionary<string, Image> imageObjects = null;
@@ -79,8 +86,13 @@ namespace KokoroUpTime
         private Dictionary<string, Ellipse> GoodEventObject = null;
 
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
+<<<<<<< HEAD
         private string[] IMAGE_TEXTS = { "name" ,"word_art_01", "word_art_02" };
         private string[] WORD_TEXTS = { "marker", "bold" ,"under_line"};
+=======
+        private string[] IMAGE_TEXTS = { "name", "word_art_01", "word_art_02" };
+        private string[] WORD_TEXTS = { "marker", "bold", "under_line" };
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 
         private Dictionary<string, SolidColorBrush> CharacterColor = null;
 
@@ -147,7 +159,11 @@ namespace KokoroUpTime
 
             this.CharacterColor = new Dictionary<string, SolidColorBrush>
             {
+<<<<<<< HEAD
                 ["白じい"] = new SolidColorBrush(Colors.Orange),
+=======
+                ["白じい"] = new SolidColorBrush(Colors.Purple),
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                 ["青助"] = new SolidColorBrush(Colors.Aqua),
                 ["赤丸"] = new SolidColorBrush(Colors.Red),
                 ["キミ"] = new SolidColorBrush(Colors.Yellow),
@@ -228,9 +244,15 @@ namespace KokoroUpTime
                 ["aosuke_kind_of_feeling_text"] =this.AosukeKindOfFeelingText,
                 ["aosuke_size_of_feeling_text"] = this.AosukeSizeOfFeelingText,
                 ["item_point_msg_text"] = this.ItemPointMessageText,
+<<<<<<< HEAD
                 ["challenge2_bubble_action_text"]=this.Challenge2BubbleActionText,
                 ["item_book_title_text"]=this.ItemBookTitleTextBlock,
                 
+=======
+                ["challenge2_bubble_action_text"] = this.Challenge2BubbleActionText,
+                ["item_book_title_text"] = this.ItemBookTitleTextBlock,
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 
                 ["GoodEventText1"] = this.GoodEventText1,
                 ["GoodEventText2"] = this.GoodEventText2,
@@ -283,9 +305,15 @@ namespace KokoroUpTime
                 ["challenge_msg_grid"] = this.ChallengeMessageGrid,
                 ["kimi_plate_inner_up_grid"] = this.KimiPlateInnerUpGrid,
                 ["kimi_plate_inner_down_grid"] = this.KimiPlateInnerDownGrid,
+<<<<<<< HEAD
                 ["item_plate_grid"]=this.ItemPlateGrid,
                 
                
+=======
+                ["item_plate_grid"] = this.ItemPlateGrid,
+
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                 ["children_face_small_left_msg_grid"] = this.ChildrenFaceSmallLeftMessageGrid,
                 ["select_heart_grid"] = this.SelectHeartGrid,
                 ["akamaru_and_aosuke_compare_grid"] = this.AkamaruAndAosukeCompareGrid,
@@ -397,7 +425,11 @@ namespace KokoroUpTime
             this.KimiScene2TextBlock.Visibility = Visibility.Hidden;
             this.KimiKindOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
             this.KimiSizeOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
+<<<<<<< HEAD
            
+=======
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
             this.ChildrenFaceSmallLeftImage.Visibility = Visibility.Hidden;
             this.ChildrenFaceSmallLeftMessageTextBlock.Visibility = Visibility.Hidden;
             this.CompareMessageTextBlock.Visibility = Visibility.Hidden;
@@ -617,7 +649,11 @@ namespace KokoroUpTime
                         gridAnimeIsSync = this.scenarios[this.scenarioCount][3];
                     }
 
+<<<<<<< HEAD
                    
+=======
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 
                     // アニメを実現するストーリーボードの指定
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
@@ -741,7 +777,11 @@ namespace KokoroUpTime
                     else
                     {
                         // xamlに直接書いたStaticな文章を表示する場合
+<<<<<<< HEAD
                        // this.ShowMessage(textObject: _textObject, messages: _textObject.Text);
+=======
+                        // this.ShowMessage(textObject: _textObject, messages: _textObject.Text);
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                     }
                     break;
 
@@ -765,6 +805,7 @@ namespace KokoroUpTime
                         var textColor = this.scenarios[this.scenarioCount][3];
 
                         SolidColorBrush textColorBrush = new SolidColorBrush(Colors.Black);
+<<<<<<< HEAD
 
                         switch (textColor)
                         {
@@ -772,6 +813,15 @@ namespace KokoroUpTime
                                 textColorBrush = new SolidColorBrush(Colors.White);
                                 break;
 
+=======
+
+                        switch (textColor)
+                        {
+                            case "white":
+                                textColorBrush = new SolidColorBrush(Colors.White);
+                                break;
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                             case "red":
                                 textColorBrush = new SolidColorBrush(Colors.Red);
                                 break;
@@ -791,9 +841,15 @@ namespace KokoroUpTime
                     if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
                     {
                         var textStoryBoard = this.scenarios[this.scenarioCount][4];
+<<<<<<< HEAD
 
                         textStoryBoard += $"_{this.position}";
 
+=======
+
+                        textStoryBoard += $"_{this.position}";
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                         this.ShowAnime(storyBoard: textStoryBoard, isSync: textAnimeIsSync);
                     }
                     else
@@ -820,6 +876,7 @@ namespace KokoroUpTime
                         }
                         if (_msgButtonVisible == "next_only")
                         {
+<<<<<<< HEAD
                             if (this.dataOption.Is3SecondRule)
                             {
                                 this.buttonTimer.Start();
@@ -834,11 +891,20 @@ namespace KokoroUpTime
                                 this.NextMessageButton.Visibility = Visibility.Visible;
                             }
                             
+=======
+                            this.buttonTimer.Start();
+                            this.buttonTimer.Tick += (s, args) =>
+                            {
+                                buttonTimer.Stop();
+                                this.NextMessageButton.Visibility = Visibility.Visible;
+                            };
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 
                         }
                     }
                     else
                     {
+<<<<<<< HEAD
                         if (this.dataOption.Is3SecondRule)
                         {
                             this.buttonTimer.Start();
@@ -880,8 +946,42 @@ namespace KokoroUpTime
                     {
                         this.NextPageButton.Visibility = Visibility.Visible;
                         this.BackPageButton.Visibility = Visibility.Visible;
+=======
+                        this.buttonTimer.Start();
+                        this.buttonTimer.Tick += (s, args) =>
+                        {
+                            this.buttonTimer.Stop();
+                            this.NextMessageButton.Visibility = Visibility.Visible;
+                            this.BackMessageButton.Visibility = Visibility.Visible;
+                        };
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                     }
 
+                    this.isClickable = true;
+
+                    break;
+
+                // 各場面に対する待ち（ページめくりボタン）
+                case "next":
+
+                    this.buttonTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+
+<<<<<<< HEAD
+                    if (sb != null)
+=======
+                    this.buttonTimer.Start();
+                    this.buttonTimer.Tick += (s, args) =>
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
+                    {
+                        this.buttonTimer.Stop();
+                        this.NextPageButton.Visibility = Visibility.Visible;
+                        this.BackPageButton.Visibility = Visibility.Visible;
+                    };
+
+
+<<<<<<< HEAD
+=======
                     this.isClickable = true;
 
                     break;
@@ -890,27 +990,11 @@ namespace KokoroUpTime
                 case "flip":
 
                     this.MangaFlipButton.Visibility = Visibility.Visible;
+                    this.isClickable = true;
 
-                    Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
-
-                    if (sb != null)
-                    {
-                        // 二重終了防止策
-                        bool isDuplicate = false;
-
-                        sb.Completed += (s, e) =>
-                        {
-                            if (!isDuplicate)
-                            {
-                                this.isClickable = true;
-
-                                isDuplicate = true;
-                            }
-                        };
-                        sb.Begin(this);
-                    }
                     break;
 
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                 // 各種コントロールを個別に隠す処理
                 case "hide":
 
@@ -987,6 +1071,7 @@ namespace KokoroUpTime
 
 
                 case "wait_tap":
+<<<<<<< HEAD
 
                     this.isClickable = false;
                 
@@ -995,6 +1080,16 @@ namespace KokoroUpTime
                     //if()
                    
 
+=======
+
+                    this.isClickable = false;
+
+                    //if()
+
+                    //if()
+
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                     break;
 
                 // BGM
@@ -1077,6 +1172,7 @@ namespace KokoroUpTime
                     }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
+<<<<<<< HEAD
 
                     break;
                 case "gauge":
@@ -1089,22 +1185,93 @@ namespace KokoroUpTime
                     break;
 
                 case "get_item":
+=======
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 
-                    this.dataItem.HasGotItem02 = true;
+                    break;
+                case "gauge":
 
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataItem SET HasGotItem02 = 1 WHERE Id = 1;");
-                    }
+                    this.ViewSizeOfFeelingTextBlock.Text = "50";
+                    this.Angle = 0;
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
                     break;
+                case "jump":
+                    string _jumptag = this.scenarios[this.scenarioCount][1];
+                    this.JumpScenario(jumptag: _jumptag);
+                    break;
 
+<<<<<<< HEAD
                 case "jump":
                     string _jumptag = this.scenarios[this.scenarioCount][1];
                     this.JumpScenario(jumptag: _jumptag);
                         break;
+=======
+                /*case "jump":
+                     for (int i = 1;i< 100; i++)
+                     {
+                         string targettag;
+                         targettag = this.scenarios[i][0];
+                         if(targettag == "scene")
+                         {
+                             targettag = this.scenarios[i][1];
+                             if
+                             {
+                                 //
+                             }
+                         }
+
+                     }
+                     break;
+                */
+
+                /*
+                var kindOfFeeling = this.scenarios[this.scenarioCount][1];
+
+                // 後々これを計算で得る
+                var feelings = new Dictionary<string, float>() { { "good", 60.0f }, { "bad", 80.0f } };
+
+                var gaugeRotation = new RotateTransform
+                {
+                    CenterX = 0.0,
+                    CenterY = this.NeedleImage.Height * 0.8f,
+                    Angle = -40.0f
+                };
+
+                this.NeedleImage.RenderTransform = gaugeRotation;
+
+                var feeling = feelings[kindOfFeeling] / 2.0f;
+
+                this.FeelingScaleText.Text = feeling.ToString();
+
+                GaugeUpdate(targetAngle: feeling);
+
+                void GaugeUpdate(float targetAngle)
+                {
+                    var timer = new DispatcherTimer();
+
+                    timer.Interval = TimeSpan.FromSeconds(0.01f);
+
+                    timer.Tick += (sender, e) =>
+                    {
+                        if (gaugeRotation.Angle < targetAngle)
+                        {
+                            gaugeRotation.Angle += 1.0f;
+
+                            this.NeedleImage.RenderTransform = gaugeRotation;
+                        }
+                        else
+                        {
+                            timer.Stop();
+                            timer = null;
+                        }
+                    };
+                    timer.Start();
+                }
+                */
+                case "gif":
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 
                 /*case "jump":
                      for (int i = 1;i< 100; i++)
@@ -1210,7 +1377,11 @@ namespace KokoroUpTime
 
                     Image[] itemNoneImages = { this.Item01NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
 
+<<<<<<< HEAD
                     var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
+=======
+                    var hasGotItems = new bool[] { this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 
                     for (int i = 0; i < hasGotItems.Length; i++)
                     {
@@ -1236,11 +1407,19 @@ namespace KokoroUpTime
 
         private List<List<string>> SequenceCheck(string text)
         {
+<<<<<<< HEAD
            
 
             // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
             text = text.Replace("鬱", "\u2028");
 
+=======
+
+
+            // 苦悶の改行処理（文章中の「鬱」を疑似改行コードとする）
+            text = text.Replace("鬱", "\u2028");
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
             text = text.Replace("】", "【");
             //セリフをテキストと記号の１次元配列に分解
             var texts = text.Split("【");
@@ -1259,7 +1438,11 @@ namespace KokoroUpTime
                         matchIndexs.Append(index);
                     }
                 }
+<<<<<<< HEAD
                 if(text2ds.Count < texts.Length)
+=======
+                if (text2ds.Count < texts.Length)
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                 {
                     foreach (var tex in texts)
                     {
@@ -1267,7 +1450,11 @@ namespace KokoroUpTime
                         text2ds.Add(tex1ds);
                     }
                 }
+<<<<<<< HEAD
                
+=======
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 
                 foreach (var matchIndex in matchIndexs)
                 {
@@ -1278,6 +1465,7 @@ namespace KokoroUpTime
             foreach (var wordText in WORD_TEXTS)
             {
                 int[] matchIndexs = { };
+<<<<<<< HEAD
 
                 foreach (var (txt, index) in texts.Indexed())
                 {
@@ -1287,6 +1475,17 @@ namespace KokoroUpTime
                     }
                 }
 
+=======
+
+                foreach (var (txt, index) in texts.Indexed())
+                {
+                    if (txt == wordText)
+                    {
+                        matchIndexs.Append(index);
+                    }
+                }
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                 foreach (var matchIndex in matchIndexs)
                 {
                     text2ds[matchIndex].Add(wordText);
@@ -1294,10 +1493,17 @@ namespace KokoroUpTime
             }
             return text2ds;
         }
+<<<<<<< HEAD
        
         void ShowMessage(TextBlock textObject, List<List<string>> messages)
         {
            
+=======
+
+        void ShowMessage(TextBlock textObject, List<List<string>> messages)
+        {
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
             textObject.Text = "";
             textObject.Visibility = Visibility.Visible;
 
@@ -1312,9 +1518,16 @@ namespace KokoroUpTime
             this.imageInlineCount = 0;
             
 
+<<<<<<< HEAD
             foreach(var run in this.runs)
             {
                 run.Text="";
+=======
+
+            foreach (var run in this.runs)
+            {
+                run.Text = "";
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
             }
 
             this.runs.Clear();
@@ -1336,9 +1549,15 @@ namespace KokoroUpTime
 
                     this.imageInlines.Add(imageInline);
                 }
+<<<<<<< HEAD
                 if(msgs[0] == "word_art_01")
                 {
                     var imageInline = new InlineUIContainer { Child = new Image { Name="WordArtMessage01" , Source = null, Height = 80 , Width=0 , Stretch=Stretch.UniformToFill} };
+=======
+                if (msgs[0] == "word_art_01")
+                {
+                    var imageInline = new InlineUIContainer { Child = new Image { Name = "WordArtMessage01", Source = null, Height = 80, Width = 0, Stretch = Stretch.UniformToFill } };
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 
                     textObject.Inlines.Add(imageInline);
 
@@ -1346,6 +1565,7 @@ namespace KokoroUpTime
                 }
                 if (msgs[0] == "word_art_02")
                 {
+<<<<<<< HEAD
                     var imageInline = new InlineUIContainer { Child = new Image {Name = "WordArtMessage02" ,Source = null, Height = 80, Width=0 ,Stretch = Stretch.UniformToFill} };
 
                     textObject.Inlines.Add(imageInline);
@@ -1364,10 +1584,31 @@ namespace KokoroUpTime
 
                     textObject.Inlines.Add(markerInline);
 
+=======
+                    var imageInline = new InlineUIContainer { Child = new Image { Name = "WordArtMessage02", Source = null, Height = 80, Width = 0, Stretch = Stretch.UniformToFill } };
+
+                    textObject.Inlines.Add(imageInline);
+
+                    this.imageInlines.Add(imageInline);
+                }
+                var run = new Run { Text = "", Foreground = new SolidColorBrush(Colors.Black) };
+
+                textObject.Inlines.Add(run);
+
+                this.runs.Add(run);
+
+                if (msgs[0] == "marker")
+                {
+                    var markerInline = new Run { Text = "", Background = this.CharacterColor[this.scenarios[this.scenarioCount][3]] };
+
+                    textObject.Inlines.Add(markerInline);
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                     this.runs.Add(markerInline);
                 }
                 if (msgs[0] == "bold")
                 {
+<<<<<<< HEAD
                     var boldInline = new Run { Text = "", FontWeight = FontWeights.UltraBold};
 
                     textObject.Inlines.Add(boldInline);
@@ -1377,6 +1618,17 @@ namespace KokoroUpTime
                 
                     
                 
+=======
+                    var boldInline = new Run { Text = "", FontWeight = FontWeights.UltraBold };
+
+                    textObject.Inlines.Add(boldInline);
+
+                    this.runs.Add(boldInline);
+                }
+
+
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
             }
 
             // 一文字ずつメッセージ表示（Inner Func）
@@ -1385,11 +1637,19 @@ namespace KokoroUpTime
                 if (this.inlineCount < messages.Count)
                 {
                     var msgs = messages[this.inlineCount];
+<<<<<<< HEAD
 
                     string namePngPath = "./temp/temp_name.png";
 
                     bool _isSync = false;
 
+=======
+
+                    string namePngPath = "./temp/temp_name.png";
+
+                    bool _isSync = false;
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                     if (msgs[0] == "name" && File.Exists(namePngPath))
                     {
                         // msgs[0].Replace("name", "");
@@ -1416,6 +1676,7 @@ namespace KokoroUpTime
                     }
                     if (msgs[0] == "word_art_01")
                     {
+<<<<<<< HEAD
                         
                         (this.imageInlines[imageInlineCount].Child as Image).Source = new BitmapImage(new Uri($"Images/word_art_msg_02_01.png", UriKind.Relative));
 
@@ -1425,6 +1686,17 @@ namespace KokoroUpTime
 
                         var _newWidth = _wordArtImage.Source.Width*expansionrate;
 
+=======
+
+                        (this.imageInlines[imageInlineCount].Child as Image).Source = new BitmapImage(new Uri($"Images/word_art_msg_02_01.png", UriKind.Relative));
+
+                        var _wordArtImage = (this.imageInlines[imageInlineCount].Child as Image);
+
+                        var expansionrate = (this.imageInlines[imageInlineCount].Child as Image).Height / (this.imageInlines[imageInlineCount].Child as Image).Source.Height;
+
+                        var _newWidth = _wordArtImage.Source.Width * expansionrate;
+
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                         this.WipeInWordArtMessage(wordArtImage: _wordArtImage, newWidth: _newWidth, TimeSpan.Parse("0:0:1"));
 
                         this.imageInlineCount++;
@@ -1454,7 +1726,11 @@ namespace KokoroUpTime
 
                         return;
                     }
+<<<<<<< HEAD
                     if (msgs[0]=="bold")
+=======
+                    if (msgs[0] == "bold")
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                     {
                         msgs[0] = "";
                         this.word_num = 0;
@@ -2168,7 +2444,11 @@ namespace KokoroUpTime
         {
             for (int i = 0; i < this.scenarios.Count; i++)
             {
+<<<<<<< HEAD
                 if (this.scenarios[i][0] == "scene" || this.scenarios[i][0]=="tag")
+=======
+                if (this.scenarios[i][0] == "scene" || this.scenarios[i][0] == "tag")
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                 {
                     if (jumptag == this.scenarios[i][1])
                     {
@@ -2215,7 +2495,11 @@ namespace KokoroUpTime
         {
             this.msgTimer.Stop();
 
+<<<<<<< HEAD
             DoubleAnimation animation = new DoubleAnimation(newWidth,duration);
+=======
+            DoubleAnimation animation = new DoubleAnimation(newWidth, duration);
+>>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 
             animation.Completed += (s, e) =>
             {
