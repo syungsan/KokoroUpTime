@@ -220,6 +220,7 @@
 =======
             </Grid>
             <Grid x:Name="BodyImageGrid">
+<<<<<<< HEAD
                 <Border x:Name="BodyImageOfAkamaruAngryBorder" BorderThickness="10,10,10,10" BorderBrush="Red" Margin="150,78,150,75" Background="White" CornerRadius="128,128,128,128" d:IsHidden="True">
                     <Grid x:Name="BodyImageOfAkamaruAngryGrid">
                         <TextBlock x:Name="BodyImageOfAkamaruAngryTextBlock" TextWrapping="Wrap" Margin="88,28,0,680" HorizontalAlignment="Left" Width="535" FontSize="60" FontWeight="Bold"><Run Language="ja-jp" Text="赤丸くんが"/><LineBreak/><Run Language="ja-jp" Text="イライラしているとき…"/></TextBlock>
@@ -379,6 +380,8 @@
                 </Border>
             </Grid>
             <Grid x:Name="BodyImageGrid">
+=======
+>>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
                 <Border x:Name="BodyImageOfAkamaruAngryBorder" BorderThickness="10,10,10,10" BorderBrush="Red" Margin="150,78,150,75" Background="White" CornerRadius="128,128,128,128" d:IsHidden="True">
                     <Grid x:Name="BodyImageOfAkamaruAngryGrid">
                         <TextBlock x:Name="BodyImageOfAkamaruAngryTextBlock" TextWrapping="Wrap" Margin="88,28,0,680" HorizontalAlignment="Left" Width="535" FontSize="60" FontWeight="Bold"><Run Language="ja-jp" Text="赤丸くんが"/><LineBreak/><Run Language="ja-jp" Text="イライラしているとき…"/></TextBlock>
@@ -476,6 +479,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <Grid x:Name="ChildrenFeelingGrid" d:IsHidden="True">
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -498,6 +502,9 @@
 >>>>>>> parent of 44f8ff9... Merge branch 'master' into tadano
 =======
 >>>>>>> parent of 44f8ff9... Merge branch 'master' into tadano
+=======
+                <Grid x:Name="ChildrenFeelingGrid">
+>>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
 =======
                 <Grid x:Name="ChildrenFeelingGrid">
 >>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
@@ -578,6 +585,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                 <Border x:Name="ChildrenBodyImageTitleBorder" BorderThickness="1" Margin="-10,220,10,570" Background="#FF4472C4">
                     <TextBlock x:Name="ChildrenBodyImageTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" TextAlignment="Center" d:IsHidden="True"/>
@@ -643,6 +651,11 @@
 >>>>>>> parent of 44f8ff9... Merge branch 'master' into tadano
 =======
 >>>>>>> parent of 44f8ff9... Merge branch 'master' into tadano
+=======
+                <Border x:Name="ChildrenBodyImageTitleBorder" BorderThickness="1" Margin="-10,220,10,570" Background="#FF4472C4">
+                    <TextBlock x:Name="ChildrenBodyImageTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" TextAlignment="Center" d:IsHidden="True"/>
+                </Border>
+>>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
 =======
                 <Border x:Name="ChildrenBodyImageTitleBorder" BorderThickness="1" Margin="-10,220,10,570" Background="#FF4472C4">
                     <TextBlock x:Name="ChildrenBodyImageTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" TextAlignment="Center" d:IsHidden="True"/>
@@ -807,6 +820,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <Image x:Name="ItemLeftImage" HorizontalAlignment="Left" Height="727" VerticalAlignment="Top" Width="513" Source="/Images/item02_solo.png" Margin="172,265,0,0" d:IsHidden="True"/>
                 <Image x:Name="ItemDetailInfoImage" HorizontalAlignment="Left" Height="269" Margin="780,265,0,0" VerticalAlignment="Top" Width="715" Source="/Images/item02_info.png" d:IsHidden="True"/>
 =======
@@ -821,11 +835,15 @@
 =======
                 <Image x:Name="ItemLeftImage" HorizontalAlignment="Left" Height="727" VerticalAlignment="Top" Width="513" Source="/Images/item04_solo.png" Margin="172,265,0,0"/>
 >>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
+=======
+                <Image x:Name="ItemLeftImage" HorizontalAlignment="Left" Height="727" VerticalAlignment="Top" Width="513" Source="/Images/item04_solo.png" Margin="172,265,0,0"/>
+>>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
                 <Image x:Name="ItemLeftCenterSmallImage" HorizontalAlignment="Left" Height="477" Margin="10,0,0,0" VerticalAlignment="Center" Width="339" Source="/Images/item03_solo.png" d:IsHidden="True"/>
                 <Grid x:Name="ItemDetailInfoGrid" Width="780" Height="355" Margin="788,185,352,540">
                     <Image x:Name="ItemDetailInfoImage" Source="/Images/item_review.png" Stretch="Fill"/>
                     <TextBox x:Name="ItemDetailInfoTextBox" Text="#4「はきはきスピーカー」&#xD;&#xA;上手に頼んだり、断ったり、自分の気持ちをはきはき伝えられます。&#xD;&#xA;" TextWrapping="Wrap" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="64"/>
                 </Grid>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -874,6 +892,14 @@
 >>>>>>> parent of 44f8ff9... Merge branch 'master' into tadano
 =======
 >>>>>>> parent of 44f8ff9... Merge branch 'master' into tadano
+=======
+                <Border x:Name="ItemCheckBorder" BorderThickness="1" Background="#FFFFD992" Margin="715,581,279,93" CornerRadius="64,64,64,64">
+                    <TextBlock x:Name="ItemCheckTextBlock" FontSize="48" Margin="49,42,50,47"><Run Text="☆"/><Run Text="じょうずにたのむ"/><Run Language="ja-jp" Text="&#x9;      "/><Run Text="☆じょうずにことわる"/><LineBreak/><Run Text="①理由を言う"/><Run Language="ja-jp" Text="&#x9;      "/><Run Text="①あやまる"/><LineBreak/><Run Text="②してほしいことを言う"/><Run Language="ja-jp" Text="    "/><Run Text="②理由を言う"/><LineBreak/><Run Text="③おれいを言う&#x9;"/><Run Language="ja-jp" Text="      "/><Run Text="③ことわる"/><LineBreak/><Run Text="&#x9;&#x9;"/><Run Language="ja-jp" Text="      "/><Run Text="④代わりの言葉"/></TextBlock>
+                </Border>
+                <Grid x:Name="ItemNamePlateLeftGrid" Width="610" Height="195" Margin="90,55,1220,830" d:IsHidden="True">
+                    <Image x:Name="ItemNamePlateLeftImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_name.png" d:IsHidden="True"/>
+                    <TextBlock x:Name="ItemNameLeftTextBlock" HorizontalAlignment="Left" Margin="67,36,0,0" VerticalAlignment="Top" FontSize="80" Width="458" FontWeight="Bold" Height="115" TextAlignment="Center" d:IsHidden="True"><Run Language="ja-jp" Text="あったかスープ"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
+>>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
 =======
                 <Border x:Name="ItemCheckBorder" BorderThickness="1" Background="#FFFFD992" Margin="715,581,279,93" CornerRadius="64,64,64,64">
                     <TextBlock x:Name="ItemCheckTextBlock" FontSize="48" Margin="49,42,50,47"><Run Text="☆"/><Run Text="じょうずにたのむ"/><Run Language="ja-jp" Text="&#x9;      "/><Run Text="☆じょうずにことわる"/><LineBreak/><Run Text="①理由を言う"/><Run Language="ja-jp" Text="&#x9;      "/><Run Text="①あやまる"/><LineBreak/><Run Text="②してほしいことを言う"/><Run Language="ja-jp" Text="    "/><Run Text="②理由を言う"/><LineBreak/><Run Text="③おれいを言う&#x9;"/><Run Language="ja-jp" Text="      "/><Run Text="③ことわる"/><LineBreak/><Run Text="&#x9;&#x9;"/><Run Language="ja-jp" Text="      "/><Run Text="④代わりの言葉"/></TextBlock>
