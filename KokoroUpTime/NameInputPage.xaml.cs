@@ -1392,5 +1392,10 @@ namespace KokoroUpTime
             }*/
             #endregion
         }
+
+        private void TriggerKeyboard(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

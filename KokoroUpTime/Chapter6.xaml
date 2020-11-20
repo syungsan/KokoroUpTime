@@ -11,7 +11,58 @@
       Title="Chapter6" Loaded="Window_Loaded">
 
     <Page.Resources>
-       
+        <Style x:Key="keyBoardInputStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
+                            <TextBlock x:Name="IndexText" VerticalAlignment="Center">
+                                <Run Text="・" FontSize="60"/>
+                                <Run Text=" (" FontSize="80"/>
+                            </TextBlock>
+                            <Viewbox MaxHeight="130" MaxWidth="250" StretchDirection="DownOnly">
+                                <TextBlock x:Name="InputedNamteText" Width="250" FontSize="40" GotKeyboardFocus="TriggerKeyboard"/>
+                            </Viewbox>
+                            <TextBlock x:Name="MidpointText" VerticalAlignment="Center">
+                                <Run Text=")" FontSize="80"/>
+                                <Run Text="さん・・・ " FontSize="60"/>
+                            </TextBlock>
+                            <Viewbox MaxHeight="120" StretchDirection="DownOnly">
+                                <TextBlock x:Name="InputedPersonalityText" Height="120" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="40" GotKeyboardFocus="TriggerKeyboard"/>
+                            </Viewbox>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="handWritingInputStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <DockPanel Width="1400" Height="130" VerticalAlignment="Top">
+                            <TextBlock x:Name="IndexText" VerticalAlignment="Center">
+                                <Run Text="・" FontSize="60"/>
+                                <Run Text=" (" FontSize="80"/>
+                            </TextBlock>
+                            <Button x:Name="NameInputButton" Width="250" Click="Button_Click">
+                                <Viewbox MaxHeight="130" MaxWidth="250" StretchDirection="DownOnly">
+                                    <Image x:Name="InputedNamteCanvas" Width="250" HorizontalAlignment="Left"/>
+                                </Viewbox>
+                            </Button>
+                            <TextBlock x:Name="MidpointText" VerticalAlignment="Center">
+                                <Run Text=")" FontSize="80"/>
+                                <Run Text="さん・・・ " FontSize="60"/>
+                            </TextBlock>
+                            <Button x:Name="PersonalityInputButton"  Height="120" VerticalAlignment="Center"  Click="Button_Click">
+                                <Viewbox MaxHeight="120" StretchDirection="DownOnly">
+                                    <Image x:Name="InputedPersonalityCanvas" Height="120" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </Viewbox>
+                            </Button>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     <Viewbox>
         <Grid Height="1080" Width="1920" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -227,7 +278,7 @@
                     <Viewbox MinWidth="1480" HorizontalAlignment="Left" Margin="30" Stretch="Fill">
                         <ListView >
                             <ListView.ItemContainerStyleSelector>
-                                <local:InputMethodStyleSelector HandWritingStyle="{StaticResource handWritingInputStyle}" KeyBoardStyle="{StaticResource handWritingInputStyle}"/>
+                                <local:InputMethodStyleSelector HandWritingInputStyle="{StaticResource handWritingInputStyle}" KeyBoardInputStyle="{StaticResource handWritingInputStyle}"/>
                             </ListView.ItemContainerStyleSelector>
                             <ListBoxItem />
                             <ListBoxItem />
@@ -644,6 +695,7 @@
                     </Button>
                 </Grid>
             </Grid>
+            <Button Style="{StaticResource DoublelineFrame}" Background="White" BorderBrush="Black" BorderThickness="5" Margin="50"/>
         </Grid>
     </Viewbox>
 </Page>
