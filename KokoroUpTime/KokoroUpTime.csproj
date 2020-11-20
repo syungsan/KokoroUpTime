@@ -427,9 +427,12 @@
     <Resource Include="Images\item05_solo.gif" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Resource Include="Images\item05_solo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+=======
+>>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
 =======
 >>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
 =======

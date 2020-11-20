@@ -400,9 +400,15 @@
             <Grid x:Name="GaugeGrid">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <Grid x:Name="SelectHeartGrid" HorizontalAlignment="Center" Margin="400,400">
                     <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="5,0,0,0"/>
                     <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.92" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,63,10,20">
+=======
+                <Grid x:Name="SelectHeartGrid" Margin="776,410,776,358">
+                    <Image x:Name="SelectHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_red.png"/>
+                    <Image x:Name="SelectNeedleImage" Height="213" Source="/Images/red_needle.png" RenderTransformOrigin="0.5,0.8" Margin="171,65,172,0" VerticalAlignment="Top">
+>>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
 =======
                 <Grid x:Name="SelectHeartGrid" Margin="776,410,776,358">
                     <Image x:Name="SelectHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_red.png"/>
@@ -613,7 +619,11 @@
                     </Image>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="55,145,266,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
+=======
+                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="55,145,266,45" FontSize="48" FontFamily="/Fonts/azuki.ttf#あずきフォント"/>
+>>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
 =======
                     <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="55,145,266,45" FontSize="48" FontFamily="/Fonts/azuki.ttf#あずきフォント"/>
 >>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
