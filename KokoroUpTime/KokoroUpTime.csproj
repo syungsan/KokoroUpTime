@@ -9,8 +9,6 @@
     <ApplicationIcon>icon_sr9_icon.ico</ApplicationIcon>
     <AssemblyVersion>0.8.8.1</AssemblyVersion>
     <FileVersion>0.8.8.1</FileVersion>
-    <AssemblyVersion>0.9.8.2</AssemblyVersion>
-    <FileVersion>0.9.8.2</FileVersion>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
@@ -148,6 +146,7 @@
     <None Remove="Images\item05_book.png" />
     <None Remove="Images\item05_detail.png" />
     <None Remove="Images\item05_solo.gif" />
+    <None Remove="Images\item05_solo.png" />
     <None Remove="Images\item05_title.png" />
     <None Remove="Images\item06_book.png" />
     <None Remove="Images\item06_detail.png" />
@@ -498,7 +497,9 @@
     <Resource Include="Images\orange_long_button_plate.png" />
     <Resource Include="Images\orange_title_plate.png" />
     <Resource Include="Images\prev_back_.png" />
-    <Resource Include="Images\purple_title_plate.png" />
+    <Resource Include="Images\purple_title_plate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\red_arrow_right.png" />
     <Resource Include="Images\return_to_item.png" />
     <Resource Include="Images\return_to_top.png" />

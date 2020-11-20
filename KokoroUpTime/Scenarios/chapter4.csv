@@ -467,7 +467,6 @@ grid,main_msg_grid
 msg,main_msg,キミちゃん、ありがとう。,青助
 click,msg
 #
-sub,Debug
 scene,その後
 reset
 image,bg_image,background_03.png

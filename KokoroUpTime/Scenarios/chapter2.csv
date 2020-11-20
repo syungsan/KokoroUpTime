@@ -111,21 +111,12 @@ reset
 image,bg_image,orange_gradation.png
 grid,challenge1_grid
 image,shiroji_very_small_right_image,shiroji_03.png
-<<<<<<< HEAD
 grid,challenge_msg_grid,appear_expansion
 wait,no_button
 hide,grid,challenge_msg_grid
 jump,会話①
 
 scene,会話①
-=======
-grid,challenge_msg_grid,appear_expansion_slow
-wait,3
-grid,challenge_msg_grid,fade_out_slow
-wait
-#
-scene,元気が出ないときはどうしよう？
->>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 reset
 image,bg_image,background_08.png
 image,children_stand_left_image,aosuke_stand_01.png,appear_up,no_sync
@@ -143,7 +134,6 @@ image,main_msg_bubble_image,right_big_bubble.png
 msg,main_msg,青助くん！それはとても重要なポイントじゃ。鬱【marker】じつは、すごく楽しいことははじめることがむずかしいことがある。【,白じい
 wait,next_only
 msg,main_msg,たとえば、元気がでないときに、みんなで遊園地に行ったり、鬱スポーツをすることはかんたんなことではないのう。,白じい
-<<<<<<< HEAD
 wait
 msg,main_msg,【marker】そういう元気が出ないときは、わしの発明品をつかえばよいぞ！。【,白じい
 wait
@@ -153,14 +143,6 @@ hide,grid,main_msg_grid
 jump,アイテム出現
 
 scene,アイテム出現
-=======
-click,msg
-#
-msg,main_msg,<font=#44#yellow>そういう元気が出ないときは、わしの発明品をつかえばよいぞ！。</font>,白じい
-click,page
-#
-scene,アイテム登場
->>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 reset
 image,bg_image,background_mokume.png
 image,shiroji_right_image,shiroji_01.png,appear_up
@@ -208,15 +190,8 @@ text,aosuke_size_of_feeling_text,(  20  )
 text,aosuke_difficulty_of_action_text,△
 grid,challenge2_cover_grid
 grid,challenge2_grid,appear_fade_in
-<<<<<<< HEAD
 button,select_feeling_next_button,appear_fade_in
 wait,no_button
-=======
-button,select_feeling_next_button,fade_in_visible_change,no_sync
-button,select_feeling_next_button,fade_in_visible_change
-wait
-#
->>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 reset
 jump,チャレンジタイムパート②「おいしいものを食べる」ときは？
 
@@ -228,18 +203,11 @@ image,challenge2_action_bubble_image,blue_bubble.png
 scene,「おいしいものを食べる」ときは？
 image,bg_image,orange_gradation.png
 grid,challenge2_grid
-<<<<<<< HEAD
 wait,no_button
 reset
 jump,チャレンジタイムパート②「全部のテストで100点をとる」ときは？
 
 scene,チャレンジタイムパート②「全部のテストで100点をとる」ときは？
-=======
-button,select_feeling_next_button,fade_in_visible_change,no_sync
-button,select_feeling_next_button,fade_in_visible_change
-wait
-#
->>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 text,challenge2_bubble_action_text,全部のテストで100点をとる
 text,aosuke_kind_of_feeling_text,うれしい
 text,aosuke_size_of_feeling_text,(      )
@@ -247,17 +215,10 @@ image,challenge2_action_bubble_image,blue_bubble.png
 scene,「全部のテストで100点をとる」ときは？
 image,bg_image,orange_gradation.png
 grid,challenge2_grid
-<<<<<<< HEAD
 wait,no_button
 reset
 jump,チャレンジタイムパート②「休み時間に友だちとおしゃべりする」ときは？
 
-=======
-button,select_feeling_next_button,fade_in_visible_changed,no_sync
-button,select_feeling_next_button,fade_in_visible_changed
-wait
-#
->>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 scene,チャレンジタイムパート②「休み時間に友だちとおしゃべりする」ときは？
 text,challenge2_bubble_action_text,休み時間に友だちとおしゃべりする
 text,aosuke_kind_of_feeling_text,楽しい
@@ -266,7 +227,6 @@ image,challenge2_action_bubble_image,blue_bubble.png
 scene,「休み時間に友だちとおしゃべりする」ときは？
 image,bg_image,orange_gradation.png
 grid,challenge2_grid
-<<<<<<< HEAD
 wait,no_button
 reset
 jump,チャレンジタイムパート②終了
@@ -280,13 +240,6 @@ grid,view_size_of_feeling_grid
 tag,かんたんにできるか
 image,bg_image,blue_gradation.png
 grid,difficulty_select_grid
-=======
-button,select_feeling_next_button,fade_in_visible_changed,no_sync
-button,select_feeling_next_button,fade_in_visible_changed
-wait
-#
-reset
->>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 
 scene,チャレンジタイムパート②終了
 reset
@@ -299,14 +252,8 @@ next
 reset
 image,bg_image,background_03.png
 grid,challenge_time_result_grid
-<<<<<<< HEAD
 grid,challenge_time_result_msg_grid,wipe_in
 next
-=======
-grid,challenge_time_result_msg_grid,wipe_in,/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-click,page
-#
->>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 jump,会話②
 
 scene,会話②
@@ -317,12 +264,7 @@ image,shiroji_right_image,shiroji_02.png,appear_up,,gray
 image,main_msg_bubble_image,left_big_bubble_blue.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,白じい！鬱友だちと話したり、遊んだりしていると、【marker】ちょっとずつ元気になってきたよ！【,青助
-<<<<<<< HEAD
 wait,next_only
-=======
-click,msg,next_only
-#
->>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 msg,main_msg,ひとりでする「ちょっぴりうきうき」もいいけど鬱友だちといっしょにできるとやっぱり楽しいね！,青助
 wait
 image,children_face_image,aosuke_face_02.png,,,gray
@@ -331,32 +273,18 @@ image,main_msg_bubble_image,right_big_bubble.png
 msg,main_msg,そのとおり！青助くんの言う通りじゃ！鬱まわりの人といっしょにできることも重要なポイントなのじゃ！,白じい
 wait,next_only
 msg,main_msg,それではうきうきシューズのポイントをまとめておくぞい！,白じい
-<<<<<<< HEAD
 next
-=======
-click,page
-#
->>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 jump,アイテムの復習
 
 scene,アイテムの復習
 reset
 image,bg_image,background_07.png
-<<<<<<< HEAD
 grid,item_plate_grid,appear_fade_in
-=======
-grid,item_plate_grid,fade_in_slow
->>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 image,shiroji_center_down_small_image,shiroji_03.png,appear_up
 grid,item_point_message_grid
 image,item_point_message_bubble_image,small_bubble_left_up.png,appear_expansion
 msg,item_point_msg_text,うきうきシューズをつかって鬱「ちょっぴりうきうき」を探すときのポイントは鬱3つあるのじゃ！,白じい
-<<<<<<< HEAD
 next
-=======
-click,page
-#
->>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 jump,グループアクティビティ
 
 scene,グループアクティビティ
@@ -379,7 +307,6 @@ image,shiroji_very_small_right_image,shiroji_03.png
 button,select_feeling_complete_button
 wait,no_nutton
 grid,goupe_activity_message_grid,appear_expansion
-<<<<<<< HEAD
 button,select_feeling_next_button,appear_fade_in
 wait,no_button
 jump,まとめ
@@ -388,82 +315,6 @@ jump,まとめ
 
 
 
-=======
-button,select_feeling_next_button,fade_in
-wait
-jump,まとめ
-
-scene,まとめ
-reset
-image,bg_image,background_09.png
-grid,summary_grid
-image,shiroji_right_image,shiroji_02.png,appear_up
-image,main_msg_bubble_image,right_big_bubble.png
-grid,main_msg_grid,appear_expansion
-msg,main_msg,今日のこころアップタイムはどうじゃったかな？鬱元気がでないときには楽しいことをさがすのは難しいことじゃが、ちょっとずつチャレンジしてみてほしい。,白じい
-click,page,next_only
-#
-msg,main_msg,次回のテーマは「【marker】あたたかい言葉をかけよう【」じゃ！。,白じい
-click,page
-#
-jump,今回の発明品おさらい
-
-scene,今回の発明品おさらい
-reset
-image,bg_image,background_10.png
-gif,item_left_last_image,item02_solo.gif
-grid,item_last_info_grid
-image,item_left_last_image
-image,shiroji_right_image,shiroji_01.png,appear_up
-image,main_msg_bubble_image,right_big_bubble.png
-grid,main_msg_grid,appear_expansion
-msg,main_msg,第2回で登場した発明品は、「うきうきシューズ」じゃ！鬱アイテム図鑑から、いつでも確認できるぞい！,白じい
-click,page
-#
-jump,アイテム図鑑
-
-scene,アイテム図鑑
-reset
-image,bg_image,background_mokume2.PNG
-text,item_book_title_text
-item_book
-click,page
-#
-jump,エンディング
-
-scene,エンディング
-reset
-image,bg_image,background_ending.png
-grid,ending_grid
-image,shiroji_ending_image
-grid,ending_msg_grid
-msg,ending_msg_text,よくがんばった！次はホームアクティビティにすすむぞい！
-end
-
-sub,kind_of_feeling
-reset
-image,bg_image,blue_gradation.png
-grid,select_feeling_grid
-button,select_feeling_back_button
-wait
-hide,image,bg_image
-hide,grid,select_feeling_grid
-goto,current_scene
-#
-sub,size_of_feeling
-reset
-gauge
-image,bg_image,blue_gradation.png
-grid,select_heart_grid
-grid,view_size_of_feeling_grid
-button,select_feeling_back_button
-wait
-hide,image,bg_image
-hide,grid,select_heart_grid
-hide,grid,view_size_of_feeling_grid
-goto,current_scene
-#
->>>>>>> parent of 0eedc50... アイテム進捗関係　修正
 
 
 

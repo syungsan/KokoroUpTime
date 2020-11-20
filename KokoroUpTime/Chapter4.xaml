@@ -899,7 +899,7 @@
                 <Image x:Name="SelectHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_red.png" d:IsHidden="True"/>
                 <Image x:Name="SelectNeedleImage" Height="213" Source="/Images/red_needle.png" RenderTransformOrigin="0.5,0.8" Margin="171,65,172,0" VerticalAlignment="Top" d:IsHidden="True">
                     <Image.RenderTransform>
-                        <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter1}}}"/>
+                        <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter4}}}"/>
                     </Image.RenderTransform>
                 </Image>
             </Grid>
@@ -1196,11 +1196,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-<<<<<<< HEAD
                     <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="50,145,220,45" FontSize="42" FontFamily="/Fonts/azuki.ttf#azuki_font"/>
-=======
-                    <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="50,145,220,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/azuki.ttf#azuki_font"/>
->>>>>>> parent of 0eedc50... アイテム進捗関係　修正
                     <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32" d:IsHidden="True">
                         <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png" d:IsHidden="True"/>
                     </Button>
