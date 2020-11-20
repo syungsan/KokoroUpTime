@@ -582,7 +582,6 @@
     <Resource Include="Images\wish_check.png" />
     <Resource Include="Images\word_art_msg_02_01.png" />
     <Resource Include="Images\word_art_msg_02_02.png" />
-    <Resource Include="Images\writing_text_bubble.png" />
     <Resource Include="Images\yazirusi.png" />
     <Resource Include="Images\yellow_title_plate.png" />
   </ItemGroup>

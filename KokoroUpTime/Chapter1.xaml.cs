@@ -210,7 +210,6 @@ namespace KokoroUpTime
 
             this.buttonObjects = new Dictionary<string, Button>
             {
-                ["rule_board_button"] = this.RuleBoardButton,
                 ["next_msg_button"] = this.NextMessageButton,
                 ["back_msg_button"] = this.BackMessageButton,
                 ["next_page_button"] = this.NextPageButton,
@@ -282,7 +281,6 @@ namespace KokoroUpTime
             this.MusicInfoGrid.Visibility = Visibility.Hidden;
             this.ExitBackGrid.Visibility = Visibility.Hidden;
             this.BackgroundImage.Visibility = Visibility.Hidden;
-            this.RuleBoardButton.Visibility = Visibility.Hidden;
             this.RuleBoardTitleTextBlock.Visibility = Visibility.Hidden;
             this.RuleBoardCheck1TextBlock.Visibility = Visibility.Hidden;
             this.RuleBoardCheck2TextBlock.Visibility = Visibility.Hidden;
@@ -1683,7 +1681,7 @@ namespace KokoroUpTime
                     {
                         _checkBox.IsEnabled = false;
                     }
-                    this.RuleBoardButton.IsEnabled = false;
+                    //this.RuleBoardButton.IsEnabled = false;
                     
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1882,7 +1880,7 @@ namespace KokoroUpTime
                     // なぜか黒板が余計に反応してしまうための処理
                     if (this.tapCount >= this.checkBoxs.Length)
                     {
-                        this.RuleBoardButton.IsEnabled = true;
+                        //this.RuleBoardButton.IsEnabled = true;
                         this.isClickable = true;
                         
                         return;
