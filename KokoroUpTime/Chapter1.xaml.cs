@@ -210,7 +210,6 @@ namespace KokoroUpTime
 
             this.buttonObjects = new Dictionary<string, Button>
             {
-                ["rule_board_button"] = this.RuleBoardButton,
                 ["next_msg_button"] = this.NextMessageButton,
                 ["back_msg_button"] = this.BackMessageButton,
                 ["next_page_button"] = this.NextPageButton,
@@ -282,7 +281,6 @@ namespace KokoroUpTime
             this.MusicInfoGrid.Visibility = Visibility.Hidden;
             this.ExitBackGrid.Visibility = Visibility.Hidden;
             this.BackgroundImage.Visibility = Visibility.Hidden;
-            this.RuleBoardButton.Visibility = Visibility.Hidden;
             this.RuleBoardTitleTextBlock.Visibility = Visibility.Hidden;
             this.RuleBoardCheck1TextBlock.Visibility = Visibility.Hidden;
             this.RuleBoardCheck2TextBlock.Visibility = Visibility.Hidden;
@@ -375,7 +373,7 @@ namespace KokoroUpTime
             this.ItemBookNoneGrid.Visibility = Visibility.Hidden;
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
 
-            this.ClearSelectFeelingEllipse();
+            this.ListBoxUnSelectedAll();
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
@@ -888,7 +886,7 @@ namespace KokoroUpTime
 
                         case "select_feeling":
 
-                            this.ClearSelectFeelingEllipse();
+                            this.ListBoxUnSelectedAll();
 
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
@@ -1683,7 +1681,7 @@ namespace KokoroUpTime
                     {
                         _checkBox.IsEnabled = false;
                     }
-                    this.RuleBoardButton.IsEnabled = false;
+                    //this.RuleBoardButton.IsEnabled = false;
                     
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1882,7 +1880,7 @@ namespace KokoroUpTime
                     // なぜか黒板が余計に反応してしまうための処理
                     if (this.tapCount >= this.checkBoxs.Length)
                     {
-                        this.RuleBoardButton.IsEnabled = true;
+                        //this.RuleBoardButton.IsEnabled = true;
                         this.isClickable = true;
                         
                         return;
@@ -2335,81 +2333,12 @@ namespace KokoroUpTime
             }
         }
 
-        private void selectFeeling(object sender, MouseButtonEventArgs e)
+        public void ListBoxUnSelectedAll()
         {
-            this.ClearSelectFeelingEllipse();
-
-            //XAML上で記載したListBoxのテンプレートにEllipseコントロールを追加
-            Grid feelingGrid = sender as Grid;
-
-            Color feelingColor;
-
-            if(feelingGrid.Name == "SelectGoodFeelingGrid"|| feelingGrid.Name == "ChallengeGoodFeelingGrid")
-            {
-                feelingColor = (Color)ColorConverter.ConvertFromString("#FFEE2222");
-            }
-            else if(feelingGrid.Name == "SelectBadFeelingGrid"|| feelingGrid.Name == "ChallengeBadFeelingGrid")
-            {
-                feelingColor = (Color)ColorConverter.ConvertFromString("#FF1E90FF");
-            }
-
-            Brush colorBrush = new SolidColorBrush { Color = feelingColor };
-            Ellipse feelingColorEllipse = new Ellipse { Stroke = colorBrush, StrokeThickness = 3, Margin = new Thickness(25, 5, 25, 0) };
-
-            AnswerResult selectResult = AnswerResult.None;
-
-            if (feelingGrid.Children.Count < 3)
-            {
-                feelingGrid.Children.Add(feelingColorEllipse);
-                selectResult = AnswerResult.Decision;
-            }
-            else
-            {
-                feelingGrid.Children.RemoveAt(2);
-                selectResult = AnswerResult.Cancel;
-            }
-
-            var startupPath = FileUtils.GetStartupPath();
-
-            PlaySE($@"{startupPath}/Sounds/{selectResult}.wav");
-        }
-
-        private void ClearSelectFeelingEllipse()
-        {
-            string selectFeelingName = "";
-
-            if (this.SelectFeelingGrid.Visibility == Visibility.Visible)
-            {
-                ListBoxItem myListBoxItem = null;
-
-                if (this.SelectGoodFeelingListBox.SelectedItem != null)
-                {
-                    myListBoxItem = (ListBoxItem)(this.SelectGoodFeelingListBox.ItemContainerGenerator.ContainerFromItem(this.SelectGoodFeelingListBox.SelectedItem));
-                    selectFeelingName = "SelectGoodFeelingGrid";
-
-
-                }
-                if (this.SelectBadFeelingListBox.SelectedItem != null)
-                {
-                    myListBoxItem = (ListBoxItem)(this.SelectBadFeelingListBox.ItemContainerGenerator.ContainerFromItem(this.SelectBadFeelingListBox.SelectedItem));
-                    selectFeelingName = "SelectBadFeelingGrid";
-
-
-                }
-                if (myListBoxItem != null)
-                {
-                    ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
-                    DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
-                    Grid grid = (Grid)myDataTemplate.FindName(selectFeelingName, myContentPresenter);
-                    if (grid.Children.Count == 3)
-                    {
-                        grid.Children.RemoveAt(2);
-                    }
-
-                }
-                this.SelectGoodFeelingListBox.SelectedIndex = -1;
-                this.SelectBadFeelingListBox.SelectedIndex = -1;
-            }
+            this.ChallengeBadFeelingListBox.SelectedIndex = -1;
+            this.ChallengeGoodFeelingListBox.SelectedIndex = -1;
+            this.SelectBadFeelingListBox.SelectedIndex = -1;
+            this.SelectGoodFeelingListBox.SelectedIndex = -1;
         }
 
         private childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject
@@ -2429,6 +2358,33 @@ namespace KokoroUpTime
                 }
             }
             return null;
+        }
+
+        private void GoTo(string tag)
+        {
+            foreach (var (scenario, index) in this.scenarios.Indexed())
+            {
+                if (scenario[0] == "sub" && scenario[1] == tag)
+                {
+                    this.scenarioCount = index + 1;
+                    this.ScenarioPlay();
+
+                    break;
+                }
+                if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
+                {
+                    this.scenarioCount = index + 1;
+                    this.ScenarioPlay();
+
+                    break;
+                }
+            }
+        }
+
+        private void SelectFeeling(object sender, SelectionChangedEventArgs e)
+        {
+            ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
+            
         }
     }
 }

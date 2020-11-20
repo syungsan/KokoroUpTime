@@ -3,10 +3,11 @@
                     xmlns:local="clr-namespace:KokoroUpTime"
                     xmlns:outline_marker="clr-namespace:OutlineTextMaker">
 
+    <!--２重枠線,角丸 （一応Button等のControlクラスを継承したコントロールに適用可能）-->
     <Style TargetType="{x:Type Control}" x:Key="BubbleFrame">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Button">
+                <ControlTemplate TargetType="{x:Type Control}">
                     <Grid>
                         <Border Background="White"
                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -19,11 +20,10 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <Style TargetType="{x:Type Control}" x:Key="DoublelineFrame">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Button">
+                <ControlTemplate TargetType="{x:Type Control}">
                     <Grid>
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -38,7 +38,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    <!--赤色破線　Buttonのみ-->
     <Style TargetType="Button" x:Key="BorderDashArrayButton">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -145,6 +145,7 @@
         </Setter>
     </Style>
 
+    <!--OutlineText用のスタイル　4種類 (下２種類は調整中)-->
     <Style TargetType="{x:Type outline_marker:OutlineText}" x:Key="Orange">
         <Style.Setters>
             <Setter Property="TextAlignment" Value="Center"/>
@@ -182,7 +183,6 @@
     </Style>
     <Style TargetType="{x:Type outline_marker:OutlineText}" x:Key="Yeow">
         <Style.Setters>
-          
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="Foreground" Value="#FFFFFF00"/>
             <Setter Property="FontFamily" Value="Yu Gothic Light"/>
@@ -190,12 +190,100 @@
             <Setter Property="OutlineThickness" Value="1.5"/>
         </Style.Setters>
     </Style>
-    
-   <!--Chapter6-->
+
+    <!--気持ちの種類選択用のListBox-->
+    <DataTemplate x:Key="SelectedBadFeelingTemplate">
+        <Grid x:Name="SelectBadFeelingGrid" >
+            <Label Width="360"/>
+            <TextBlock x:Name="SelectBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
+            <Ellipse Stroke="#FF1E90FF" StrokeThickness="3" Margin="25,5,25,0"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="UnSelectedBadFeelingTemplate">
+        <Grid x:Name="SelectBadFeelingGrid" >
+            <Label Width="360"/>
+            <TextBlock x:Name="SelectBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
+        </Grid>
+    </DataTemplate>
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="SelectBadFeelingStyle">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="5,4"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="ContentTemplate" Value="{StaticResource SelectedBadFeelingTemplate}"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="False">
+                <Setter Property="ContentTemplate" Value="{StaticResource UnSelectedBadFeelingTemplate}"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="LightSkyBlue"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="LightBlue"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <DataTemplate x:Key="SelectedGoodFeelingTemplate">
+        <Grid x:Name="SelectGoodFeelingGrid" >
+            <Label Width="360"/>
+            <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
+            <Ellipse Stroke="#FFEE2222" StrokeThickness="3" Margin="25,5,25,0"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="UnSelectedGoodFeelingTemplate">
+        <Grid x:Name="SelectGoodFeelingGrid" >
+            <Label Width="360"/>
+            <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
+        </Grid>
+    </DataTemplate>
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="SelectGoodFeelingStyle">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="5,4"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="ContentTemplate" Value="{StaticResource SelectedGoodFeelingTemplate}"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="False">
+                <Setter Property="ContentTemplate" Value="{StaticResource UnSelectedGoodFeelingTemplate}"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="LightCoral"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="LightPink"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <!--チャレンジタイム用のListBox-->
     <DataTemplate x:Key="SelectedTemplate">
         <Grid x:Name="NicePersonalityGrid">
             <TextBlock x:Name="NicePersonalityText" Text="{Binding}"/>
-            <Ellipse Stroke="Red" StrokeThickness="1"/>
+            <Ellipse Stroke="Black" StrokeThickness="1"/>
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="UnSelectedTemplate">
