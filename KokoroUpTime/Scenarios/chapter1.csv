@@ -11,16 +11,16 @@ text,music_title_text,もくもくStudy♪
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
 grid,main_msg_grid,appear_expansion
-msg,main_msg,それでは<image=name>【name】</image>【くん／ちゃん／さん】、「こころあっぷタイム」とは何か説明していくぞい。,白じい
+msg,main_msg,それでは<image=name>【name】</image>【くん／ちゃん／さん】、鬱「こころあっぷタイム」とは何か説明していくぞい。,白じい
 click,msg,next_only
 #
 msg,main_msg,だれでも「こころ」を もっているんじゃが、鬱<font=####black>「こころ」の勉強</font>をすることは あまりないのじゃ。,白じい
 click,msg
 #
-msg,main_msg,楽しくなったり、うれしくなったりするだけでなく、<font=####black>だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。</font>,白じい
+msg,main_msg,楽しくなったり、うれしくなったりするだけでなく、鬱<font=####black>だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。</font>,白じい
 click,msg
 #
-msg,main_msg,こども、おとな、つよい人、よわい人、大きい人、ちいさい人、<font=####black>どんな人でも、こまっていることがあるのじゃ。</font>,白じい
+msg,main_msg,こども、おとな、つよい人、よわい人、大きい人、ちいさい人、鬱<font=####black>どんな人でも、こまっていることがあるのじゃ。</font>,白じい
 click,msg
 #
 msg,main_msg,『こころあっぷタイム』は、こまっているときに、鬱<font=####black>元気になったり、リラックスできる方法を 学ぶ時間なのだ！</font> ,白じい
@@ -31,23 +31,23 @@ image,bg_image,background_01.png
 image,shiroji_right_image,shiroji_02.png
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid
-msg,main_msg,この教室には３つのルールがあるのじゃ。一緒に確認していくぞい。,白じい
+msg,main_msg,この教室には３つのルールがあるのじゃ。鬱一緒に確認していくぞい。,白じい
 click,msg
 #
 scene,教室のルール
 reset
 image,bg_image,background_03.png
-button,rule_board_button
-wait
+grid,rule_board_grid
+wait,0.5
 msg,rule_board_title_msg,教室のルール
-wait
+wait,1.0
 rule,rule_board_check1_msg,１．人のことを わらわない,0
-wait
+wait,0.5
 rule,rule_board_check2_msg,２．ふざけない,1
-wait
+wait,0.5
 rule,rule_board_check3_msg,３．はずかしがらない,2
-wait
-image,shiroji_small_right_down_image,,appear_up
+wait,0.5
+image,shiroji_small_right_down_image,,appear_up_low
 grid,thin_msg_grid,appear_wide
 rule,thin_msg,以上のルールは必ず守るのじゃ！ルールがわかったら□をタップしてくれるかの？,all,白じい
 wait,,disable_click
@@ -66,20 +66,20 @@ click,msg
 hide,grid,main_msg_grid
 clear,text,main_msg
 hide,image,intro_aosuke_face_image
-image,intro_akamaru_face_image,,appear_up,no_sync
+image,intro_akamaru_face_image,,float_in,no_sync
 image,main_msg_bubble_image,left_a_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
-msg,main_msg,おれの名前は 赤丸だ。小学校6年だ。好きな食べ物はカレーとコーラだ。苦手なものは犬だ。,赤丸
+msg,main_msg,おれの名前は 赤丸だ。小学校6年だ。鬱好きな食べ物はカレーとコーラだ。鬱苦手なものは犬だ。,赤丸
 click,msg
 #
 hide,grid,main_msg_grid
 clear,text,main_msg
 hide,image,intro_kimi_face_image
 hide,image,intro_akamaru_face_image
-image,intro_aosuke_face_image,,appear_up,no_sync
+image,intro_aosuke_face_image,,float_in,no_sync
 image,main_msg_bubble_image,left_b_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
-msg,main_msg,ぼくの名前は青助です。小学校6年生です。好きなものはテレビ。勉強もスポーツも あんまり得意じゃないんだ。,青助
+msg,main_msg,ぼくの名前は青助です。小学校6年生です。鬱好きなものはテレビ。鬱勉強もスポーツも あんまり得意じゃないんだ。,青助
 click,msg
 #
 hide,grid,main_msg_grid
@@ -87,10 +87,10 @@ clear,text,main_msg
 hide,image,intro_aosuke_face_image
 hide,image,shiroji_right_center_image
 hide,image,children_info_image
-image,intro_kimi_face_image,,appear_up,no_sync
+image,intro_kimi_face_image,,float_in,no_sync
 image,main_msg_bubble_image,left_c_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
-msg,main_msg,わたしの名前はキミです。小学６年生です。好きなものはチョコレートです。人前で話すことがとても苦手です。,キミ
+msg,main_msg,わたしの名前はキミです。小学６年生です。鬱好きなものはチョコレートです。鬱人前で話すことがとても苦手です。,キミ
 click,page
 #
 hide,grid,main_msg_grid
@@ -100,10 +100,10 @@ hide,button,next_page_button
 hide,button,back_page_button
 hide,image,shiroji_right_image
 image,shiroji_right_center_image,,fade_in
-image,children_info_image,,appear_up
+image,children_info_image,,float_in
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,この３人とこころあっぷタイムを進めていくぞい！さて、３人は、なにかこまっていることがあるようじゃ。どんなことで、こまっているのだろう？マンガを見ながら考えてみよう！,白じい
+msg,main_msg,この３人とこころあっぷタイムを進めていくぞい！鬱さて、３人は、なにかこまっていることがあるようじゃ。鬱どんなことで、こまっているのだろう？鬱マンガを見ながら考えてみよう！,白じい
 click,page
 #
 scene,漫画購読
@@ -150,7 +150,7 @@ grid,item_name_bubble_grid
 image,item_left_image
 hide,grid,item_info_sentence_grid
 grid,item_info_plate_grid
-grid,item_info_sentence_grid,appear_fade_in
+grid,item_info_sentence_grid,fade_in_slow
 get_item
 click,page
 #
@@ -169,7 +169,7 @@ grid,music_info_grid,slide,no_sync
 image,shiroji_right_up_image,shiroji_04.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,「きもち」には、いいきもちといやなきもちだけでなく、いろいろな種類があるぞい。自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
+msg,main_msg,「きもち」には、いいきもちといやなきもちだけでなく、鬱いろいろな種類があるぞい。鬱自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
 click,page
 #
 scene,チャレンジきもち選択
@@ -180,7 +180,7 @@ image,shiroji_very_small_right_image
 button,select_feeling_complete_button
 wait
 grid,challenge_msg_grid,appear_expansion
-button,select_feeling_next_button,appear_fade_in
+button,select_feeling_next_button,fade_in
 wait
 #
 scene,グループアクティビティ開始
@@ -198,7 +198,7 @@ grid,music_info_grid,slide,no_sync
 image,shiroji_right_up_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,今度は「きもち」をみつける練習をグループでしてみるのじゃ。次の場面を見て、グループでキミちゃんのきもちを考えて、話し合ってみるのじゃ。,白じい
+msg,main_msg,今度は「きもち」をみつける練習をグループでしてみるのじゃ。鬱次の場面を見て、グループでキミちゃんのきもちを考えて、鬱話し合ってみるのじゃ。,白じい
 click,page
 #
 scene,キミちゃんドキッ！
@@ -213,7 +213,7 @@ click,msg
 #
 image,children_stand_left_onomatopoeia_image,,pomp,no_sync
 text,children_stand_left_onomatopoeia_text,,,rotation,no_sync
-image,children_stand_left_image,,pomp
+image,children_stand_left_image,,pomp_high
 click,msg
 #
 scene,キミちゃんのきもちの種類
@@ -223,7 +223,7 @@ image,shiroji_small_right_center_image
 image,kimi_stand_small_left_image
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,授業中に先生から指名されたとき、キミちゃんはどんな「きもち」になるかの？,白じい
+msg,main_msg,授業中に先生から指名されたとき、鬱キミちゃんはどんな「きもち」になるかの？,白じい
 click,msg
 #
 msg,main_msg,きもちセンサーをつかって、きもちの種類を選んでみよう！,白じい
@@ -244,7 +244,7 @@ hide,button,back_page_button
 clear,text,main_msg
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,キミちゃんは【$kimis_kind_of_feeling$】という きもちなんじゃな。そのきもちを選んだ理由も考えて話し合ってみるのじゃ！,白じい
+msg,main_msg,キミちゃんは【$kimis_kind_of_feeling$】という きもちなんじゃな。鬱そのきもちを選んだ理由も考えて話し合ってみるのじゃ！,白じい
 click,page
 #
 scene,キミちゃんのきもちの大きさ
@@ -254,33 +254,33 @@ image,shiroji_right_image,shiroji_02.png
 image,children_stand_left_image,kimi_stand_01.png
 image,main_msg_bubble_image,left_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,わたしは、しんぱいしたり、ふあんになったりすることがよくあるんだけど、場面がちがうと、きもちの「大きさ」がちがうような気がするわ。,キミ
+msg,main_msg,わたしは、しんぱいしたり、ふあんになったりすることがよくあるんだけど、鬱場面がちがうと、きもちの「大きさ」がちがうような気がするわ。,キミ
 click,msg
 #
 clear,text,main_msg
 hide,grid,main_msg_grid
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,キミちゃんはいいところに気がついておるぞい。きもちには「大きさ」があるようじゃ。,白じい
+msg,main_msg,キミちゃんはいいところに気がついておるぞい。鬱きもちには「大きさ」があるようじゃ。,白じい
 click,msg
 #
-msg,main_msg,きもちセンサーを使うと、きもちの「大きさ」を０から１００であらわすことができるのじゃ。キミちゃんのきもちの「大きさ」をみてみよう！,白じい
+msg,main_msg,きもちセンサーを使うと、きもちの「大きさ」を鬱０から１００であらわすことができるのじゃ。鬱キミちゃんのきもちの「大きさ」をみてみよう！,白じい
 click,page
 #
 scene,キミちゃんの場面のきもち
 reset
 image,bg_image,background_07.png
-image,kimi_in_plate_image,,appear_up
-image,kimi_plate_outer_image,,appear_fade_in
+image,kimi_in_plate_image,,float_in
+image,kimi_plate_outer_image,,fade_in
 msg,case_of_kimi_text
-grid,kimi_plate_inner_up_grid,appear_fade_in
-text,kimi_scene1_text,,,appear_fade_in
-text,kimi_kind_of_feeling_up_text,,,appear_fade_in
-text,kimi_size_of_feeling_up_text,,,appear_fade_in
-grid,kimi_plate_inner_down_grid,appear_fade_in
-text,kimi_scene2_text,,,appear_fade_in
-text,kimi_kind_of_feeling_down_text,,,appear_fade_in
-text,kimi_size_of_feeling_down_text,,,appear_fade_in
+grid,kimi_plate_inner_up_grid,fade_in
+text,kimi_scene1_text,,,fade_in
+text,kimi_kind_of_feeling_up_text,,,fade_in
+text,kimi_size_of_feeling_up_text,,,fade_in
+grid,kimi_plate_inner_down_grid,fade_in
+text,kimi_scene2_text,,,fade_in
+text,kimi_kind_of_feeling_down_text,,,fade_in
+text,kimi_size_of_feeling_down_text,,,fade_in
 click,page
 #
 scene,公園で草野球
@@ -289,7 +289,7 @@ image,bg_image,background_08.png
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,赤丸くんと青助くんは、放課後、野球を するようじゃ。２人の「きもち」とその「大きさ」を 考えてみよう！,白じい
+msg,main_msg,赤丸くんと青助くんは、放課後、野球を するようじゃ。鬱２人の「きもち」とその「大きさ」を 考えてみよう！,白じい
 click,msg
 #
 clear,text,main_msg
@@ -337,7 +337,7 @@ text,view_kind_of_feeling_person_text,赤丸くんの「きもち」
 text,view_kind_of_feeling_text,$akamarus_kind_of_feeling$
 grid,view_kind_of_feeling_grid
 grid,main_msg_grid,appear_expansion
-msg,main_msg,赤丸くんは【$akamarus_kind_of_feeling$】という きもちなんじゃな。きもちの大きさは どれくらいかの？,白じい
+msg,main_msg,赤丸くんは【$akamarus_kind_of_feeling$】という きもちなんじゃな。鬱きもちの大きさは どれくらいかの？,白じい
 click,page
 #
 scene,赤丸くんのきもちの大きさ
@@ -357,7 +357,7 @@ text,view_size_of_feeling_text,$akamarus_size_of_feeling$
 grid,view_size_of_feeling_grid
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,赤丸くんのきもちは【$akamarus_size_of_feeling$】くらいの 大きさなんじゃな。次は青助くんのきもちと　その大きさを考えてみよう。,白じい
+msg,main_msg,赤丸くんのきもちは【$akamarus_size_of_feeling$】くらいの 大きさなんじゃな。鬱次は青助くんのきもちと　その大きさを考えてみよう。,白じい
 click,page
 #
 scene,青助くんのきもちの種類
@@ -388,7 +388,7 @@ text,view_kind_of_feeling_person_text,青助くんの「きもち」
 text,view_kind_of_feeling_text,$aosukes_kind_of_feeling$
 grid,view_kind_of_feeling_grid
 grid,main_msg_grid,appear_expansion
-msg,main_msg,青助くんは【$aosukes_kind_of_feeling$】という きもちなんじゃな。きもちの大きさは どれくらいかの？,白じい
+msg,main_msg,青助くんは【$aosukes_kind_of_feeling$】という きもちなんじゃな。鬱きもちの大きさは どれくらいかの？,白じい
 click,page
 #
 scene,青助くんのきもちの大きさ
@@ -408,7 +408,7 @@ text,view_size_of_feeling_text,$aosukes_size_of_feeling$
 grid,view_size_of_feeling_grid
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,青助くんのきもちは【$aosukes_size_of_feeling$】くらいの 大きさなんじゃな。ふたりのきもちと きもちの大きさを 見比べてみよう！,白じい
+msg,main_msg,青助くんのきもちは【$aosukes_size_of_feeling$】くらいの 大きさなんじゃな。鬱ふたりのきもちと きもちの大きさを 見比べてみよう！,白じい
 click,page
 #
 scene,ふたりのきもちの比較
@@ -439,7 +439,7 @@ grid,summary_grid
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,はじめてのこころあっぷタイムは どうじゃったかな？今日から、赤丸くん、青助くん、キミちゃんといっしょに「きもち」についての勉強をはじめていくぞい。,白じい
+msg,main_msg,はじめてのこころあっぷタイムは どうじゃったかな？鬱今日から、赤丸くん、青助くん、キミちゃんといっしょに鬱「きもち」についての勉強をはじめていくぞい。,白じい
 click,msg
 #
 msg,main_msg,次回のテーマは鬱<font=#68>「たのしいことを さがそう」</font>鬱じゃ！おたのしみに！,白じい

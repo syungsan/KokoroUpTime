@@ -179,10 +179,9 @@ namespace KokoroUpTime
                     {
                         var gridStoryBoard = this.scenarios[this.scenarioCount][2];
 
-                        // ストーリーボードの名前にコントロールの名前を付け足す
-                        gridStoryBoard += $"_{this.position}";
+                        var gridObjectName = gridObject.Name;
 
-                        this.ShowAnime(storyBoard: gridStoryBoard, isSync: gridAnimeIsSync);
+                        this.ShowAnime(storyBoard: gridStoryBoard,objectName:gridObjectName, isSync: gridAnimeIsSync);
                     }
                     else
                     {
@@ -221,9 +220,9 @@ namespace KokoroUpTime
                     {
                         var imageStoryBoard = this.scenarios[this.scenarioCount][3];
 
-                        imageStoryBoard += $"_{this.position}";
+                        var imageObjectName = imageObject.Name;
 
-                        this.ShowAnime(storyBoard: imageStoryBoard, isSync: imageAnimeIsSync);
+                        this.ShowAnime(storyBoard: imageStoryBoard,objectName:imageObjectName, isSync: imageAnimeIsSync);
                     }
                     else
                     {
@@ -380,9 +379,12 @@ namespace KokoroUpTime
         }
 
         // アニメーション（ストーリーボード）の処理
-        private void ShowAnime(string storyBoard, string isSync)
+        private void ShowAnime(string storyBoard,string objectName, string isSync)
         {
             Storyboard sb = this.FindResource(storyBoard) as Storyboard;
+
+            foreach (var child in sb.Children)
+                Storyboard.SetTargetName(child, objectName);
 
             if (sb != null)
             {
