@@ -1,4 +1,5 @@
 start
+goto,Debug
 scene,前回のおさらい
 reset
 image,bg_image,background_02.png
@@ -35,9 +36,9 @@ click,page,next_only
 sub,manga
 scene,漫画購読
 reset
-bgm,set,atsumare!_tomodachi!.mp3,loop,50
+bgm,set,manga.mp3,loop,50
 bgm,play
-text,music_title_text,集まれ！友達！
+text,music_title_text,まんが
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
 image,manga_title_image
@@ -46,8 +47,7 @@ flip
 image,manga_image,manga4-2.png,flip
 flip
 image,manga_image,manga4-3.png,flip
-hide,button,manga_flip_button
-click,page
+wait
 #
 scene,チャレンジタイム 開始
 reset
@@ -79,7 +79,7 @@ grid,children_text_grid
 text,children_text_bubble_text,え…、帰っちゃうの…？鬱手伝ってほしいな…
 grid,activity_title_grid
 image,activity_title_image,purple_title_plate.png
-text,activity_title_text,<font=yellow#80##true>日直の仕事をまかされた場面での鬱きもちを考えてみよう！</font>
+text,activity_title_text,<font=yellow#80####black>日直の仕事をまかされた場面での鬱きもちを考えてみよう！</font>
 button,select_feeling_back_button
 wait
 #
@@ -94,7 +94,7 @@ image,bg_image,blue_gradation.png
 grid,challenge_time_grid
 grid,activity_title_grid
 image,activity_title_image,purple_title_plate.png
-text,activity_title_text,<font=yellow#80##true>赤丸くんにたのまれた場面での鬱きもちを考えてみよう！</font>
+text,activity_title_text,<font=yellow#80####black>赤丸くんにたのまれた場面での鬱きもちを考えてみよう！</font>
 text,children_text_bubble_text,ほんとはいやだな…鬱あってるか、自信ないし…
 button,select_feeling_back_button
 wait
@@ -130,7 +130,7 @@ click,msg
 image,main_msg_bubble_image,left_big_bubble.png
 image,children_stand_right_image,kimi_stand_01.png,,,gray
 image,shiroji_left_image,shiroji_01.png
-msg,main_msg,キミちゃんのように<font=#44#yellow#true#black##>友だちとの関係を大事にする</font>ことは、鬱とてもいいことじゃ。鬱しかし、自分がいやなきもちになることは、鬱よい方法とはいえないかもしれんのう。,白じい
+msg,main_msg,キミちゃんのように<font=#60#yellow#true#black##>友だちとの関係を大事にする</font>ことは、とてもいいことじゃ。鬱しかし、自分がいやなきもちになることは、よい方法とはいえないかもしれんのう。,白じい
 click,msg
 #
 hide,grid,activity_title_grid
@@ -140,7 +140,7 @@ image,main_msg_bubble_image,left_big_bubble.png
 image,children_stand_right_image,kimi_stand_01.png,,,gray
 image,shiroji_left_image,shiroji_01.png
 grid,main_msg_grid
-msg,main_msg,<font=#44#yellow#true#black#>相手も自分もいいきもちになる方法</font>というのは鬱ないものかのう？,白じい
+msg,main_msg,<font=#60#yellow#true#black#>相手も自分もいいきもちになる方法</font>というのはないものかのう？,白じい
 click,page
 #
 hide,image,shiroji_right_image
@@ -150,7 +150,7 @@ hide,grid,main_msg_grid
 image,bg_image,blue_gradation.png
 grid,activity_title_grid
 image,activity_title_image,blue_title_plate.png
-text,activity_title_text,<font=#80##true>「自分」も「相手」も両方が</font>鬱<font=red#80##true##>「いいきもち」</font><font=#80##true>になる方法は？</font>
+text,activity_title_text,「自分」も「相手」も両方が鬱<font=red#80##true##>「いいきもち」</font>になる方法は？
 grid,seesaw_grid,seesaw
 click,page
 #
@@ -165,7 +165,7 @@ image,bg_image,background_04.png
 image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,キミちゃん！わしの発明品を使うと、鬱あいてのことを大切にしながら自分のことも大切にすることができるぞい。,白じい
+msg,main_msg,キミちゃん！わしの発明品を使うと、あいてのことを大切にしながら自分のことも大切にすることができるぞい。,白じい
 click,page
 #
 scene,アイテム登場
@@ -192,7 +192,7 @@ grid,item_name_bubble_grid
 image,item_left_image,item04_solo.png
 hide,grid,item_info_sentence_grid
 grid,item_info_plate_grid
-grid,item_info_sentence_grid,fade_in
+grid,item_info_sentence_grid,appear_fade_in
 get_item
 click,page
 #
@@ -201,7 +201,7 @@ reset
 image,bg_image,background_11.png
 grid,activity_title_grid
 image,activity_title_image,yellow_title_plate.png
-text,activity_title_text,<font=purple#80##true>きちんと伝えてみよう①</font>
+text,activity_title_text,<font=#80##true>きちんと伝えてみよう①</font>
 image,shiroji_left_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
@@ -227,7 +227,7 @@ grid,item_check_center_grid
 image,children_face_left_image,aosuke_face_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble_blue.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,キミちゃん。鬱<font=#44#blue#true#black>①今日、家の用事があるから、鬱そうじがかりをかわってもらってもいい？</font>,青助
+msg,main_msg,キミちゃん。鬱<font=#60#blue#true#black>①今日、家の用事があるから、鬱そうじがかりをかわってもらってもいい？</font>,青助
 click,msg,next_only
 #
 clear,text,main_msg
@@ -243,7 +243,7 @@ clear,text,main_msg
 image,children_face_right_image,kimi_face_03.png,,,gray
 image,children_face_left_image,aosuke_face_02.png
 image,main_msg_bubble_image,left_big_bubble_blue.png
-msg,main_msg,キミちゃん。鬱<font=#44#blue#true#black>③ありがとう。今度はボクがやるね。</font>,青助
+msg,main_msg,キミちゃん。鬱<font=#60#blue#true#black>③ありがとう。今度はボクがやるね。</font>,青助
 click,msg
 #
 clear,text,main_msg
@@ -261,7 +261,7 @@ reset
 image,bg_image,background_11.png
 grid,activity_title_grid
 image,activity_title_image,yellow_title_plate.png
-text,activity_title_text,<font=purple#80##true>きちんと伝えてみよう②</font>
+text,activity_title_text,<font=#80##true>きちんと伝えてみよう②</font>
 image,shiroji_left_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
@@ -296,14 +296,14 @@ image,children_face_left_image,aosuke_face_01.png,,,gray
 image,children_face_right_image,kimi_face_03.png,appear_up
 image,main_msg_bubble_image,right_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,<font=#44#yellow#true#black>①ごめんなさい、青助くん。鬱②わたしも明日はやくかえらないといけないの。</font>,キミ
+msg,main_msg,<font=##yellow#true#black>①ごめんなさい、青助くん。鬱②わたしも明日はやくかえらないといけないの。</font>,キミ
 click,msg
 #
 clear,text,main_msg
 image,children_face_right_image,kimi_face_03.png
 image,children_face_left_image,aosuke_face_01.png,,,gray
 image,main_msg_bubble_image,right_big_bubble_yellow.png
-msg,main_msg,<font=#44#yellow#true#black>③だから、そうじがかりは、かわれないわ。鬱④いっしょに、赤丸くんにたのんでみましょうよ。</font>,キミ
+msg,main_msg,<font=##yellow#true#black>③だから、そうじがかりは、かわれないわ。鬱④いっしょに、赤丸くんにたのんでみましょうよ。</font>,キミ
 click,msg
 #
 clear,text,main_msg
@@ -338,15 +338,14 @@ image,children_face_left_image,aosuke_face_03.png,appear_up
 image,main_msg_bubble_image,left_big_bubble_blue.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,じょうずにたのめたよ。次は、赤丸くんに聞いてみよう！,青助
-grid,result_feeling_grid
-text,result_kind_of_feeling_text,ホッとした,fade_in_slow
-text,result_size_of_feeling_text,(  65  ),fade_in_slow
+text,result_kind_of_feeling_text,ホッとした
+text,result_size_of_feeling_text,(  65  )
+grid,result_feeling_grid,appear_fade_in
 click,page
 #
 hide,image,main_msg_bubble_image
 hide,grid,result_feeling_grid
 hide,grid,main_msg_grid
-hide,image,children_face_left_image
 clear,text,main_msg
 image,bg_image,background_11.png
 image,activity_title_image,kimi_feeling_plate.png
@@ -355,11 +354,12 @@ image,children_face_left_image,kimi_face_02.png,appear_up
 image,main_msg_bubble_image,left_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,しっかりことわれたわ。鬱青助くんにもきらわれてないみたい。,キミ
-grid,result_feeling_grid
-text,result_kind_of_feeling_text,安心,fade_in_slow
-text,result_size_of_feeling_text,(  40  ),fade_in_slow
+text,result_kind_of_feeling_text,安心
+text,result_size_of_feeling_text,(  40  )
+grid,result_feeling_grid,appear_fade_in
 click,page
 #
+sub,Debug
 scene,グループアクティビティ
 reset
 image,bg_image,background_06.png
@@ -426,7 +426,7 @@ hide,image,children_face_left_image
 hide,grid,item_check_center_grid
 image,shiroji_left_image,shiroji_02.png
 image,main_msg_bubble_image,left_big_bubble.png
-msg,main_msg,さて、そうじがかりをかわってもらいたい青助くんと、鬱dmeonidmeonidemdonidedemndemoniキミちゃんのやりとりをもう一度振り返ってみるぞ。,白じい
+msg,main_msg,さて、そうじがかりをかわってもらいたい青助くんと、キミちゃんのやりとりをもう一度振り返ってみるぞ。,白じい
 click,msg
 #
 clear,text,main_msg
@@ -447,14 +447,14 @@ image,children_face_left_image,aosuke_face_01.png,,,gray
 image,children_face_right_image,kimi_face_03.png,appear_up
 image,main_msg_bubble_image,right_big_bubble_yellow.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,<font=#44#yellow#true#black>①ごめんなさい、青助くん。鬱②わたしも明日はやくかえらないといけないの。</font>,キミ
+msg,main_msg,<font=##yellow#true#black>①ごめんなさい、青助くん。鬱②わたしも明日はやくかえらないといけないの。</font>,キミ
 click,msg
 #
 clear,text,main_msg
 image,children_face_right_image,kimi_face_03.png
 image,children_face_left_image,aosuke_face_01.png,,,gray
 image,main_msg_bubble_image,right_big_bubble_yellow.png
-msg,main_msg,<font=#44#yellow#true#black>③だから、そうじがかりは、かわれないわ。鬱④いっしょに、赤丸くんにたのんでみましょうよ。</font>,キミ
+msg,main_msg,<font=##yellow#true#black>③だから、そうじがかりは、かわれないわ。鬱④いっしょに、赤丸くんにたのんでみましょうよ。</font>,キミ
 click,msg
 #
 hide,grid,challenge_time_result_grid
@@ -561,6 +561,7 @@ image,shiroji_ending_image
 grid,ending_msg_grid
 msg,ending_msg_text,よくがんばった！次はホームアクティビティにすすむぞい！
 end
+
 
 
 sub,check_manga1
