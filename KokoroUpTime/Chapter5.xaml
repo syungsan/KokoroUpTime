@@ -138,10 +138,14 @@
                     <TextBlock x:Name="ChallengeTimeTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="180" Foreground="#FF9966FF" FontWeight="Normal" TextAlignment="Center" d:IsHidden="True"/>
                 </Border>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <Grid x:Name="ChildrenFeelingGrid" d:IsHidden="True">
                     <Border x:Name="ChildrenFeelingTitleBorder" BorderThickness="1" Margin="0,45,0,860" Background="#FFED99A1" d:IsHidden="True">
                         <TextBlock x:Name="ChildrenFeelingTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" TextAlignment="Center" d:IsHidden="True"/>
                     </Border>
+=======
+                <Grid x:Name="ChildrenFeelingGrid">
+>>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
 =======
                 <Grid x:Name="ChildrenFeelingGrid">
 >>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
@@ -212,6 +216,12 @@
                 </Grid>
                 <Image x:Name="HotWordTitleImage" Height="238" Width="1670" Source="/Images/hot_word_1_title.png" Margin="125,101,125,741" d:IsHidden="True"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                <Border x:Name="ChildrenBodyImageTitleBorder" BorderThickness="1" Margin="-10,220,10,570" Background="#FF4472C4">
+                    <TextBlock x:Name="ChildrenBodyImageTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" TextAlignment="Center" d:IsHidden="True"/>
+                </Border>
+>>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
 =======
                 <Border x:Name="ChildrenBodyImageTitleBorder" BorderThickness="1" Margin="-10,220,10,570" Background="#FF4472C4">
                     <TextBlock x:Name="ChildrenBodyImageTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" TextAlignment="Center" d:IsHidden="True"/>
@@ -364,6 +374,7 @@
                     </Image.RenderTransform>
                 </Image>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <Image x:Name="ItemLeftImage" HorizontalAlignment="Left" Height="727" VerticalAlignment="Top" Width="513" Source="/Images/item02_solo.png" Margin="172,265,0,0" d:IsHidden="True"/>
                 <Image x:Name="ItemDetailInfoImage" HorizontalAlignment="Left" Height="269" Margin="780,265,0,0" VerticalAlignment="Top" Width="715" Source="/Images/item02_info.png" d:IsHidden="True"/>
                 <Image x:Name="ItemLeftCenterSmallImage" HorizontalAlignment="Left" Height="477" Margin="10,0,0,0" VerticalAlignment="Center" Width="339" Source="/Images/item03_solo.png" d:IsHidden="True"/>
@@ -375,6 +386,8 @@
 
 
 =======
+=======
+>>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
                 <Image x:Name="ItemLeftImage" HorizontalAlignment="Left" Height="727" VerticalAlignment="Top" Width="513" Source="/Images/item04_solo.png" Margin="172,265,0,0"/>
                 <Image x:Name="ItemLeftCenterSmallImage" HorizontalAlignment="Left" Height="477" Margin="10,0,0,0" VerticalAlignment="Center" Width="339" Source="/Images/item03_solo.png" d:IsHidden="True"/>
                 <Grid x:Name="ItemDetailInfoGrid" Width="780" Height="355" Margin="788,185,352,540">
@@ -384,6 +397,9 @@
                 <Border x:Name="ItemCheckBorder" BorderThickness="1" Background="#FFFFD992" Margin="715,581,279,93" CornerRadius="64,64,64,64">
                     <TextBlock x:Name="ItemCheckTextBlock" FontSize="48" Margin="49,42,50,47"><Run Text="☆"/><Run Text="じょうずにたのむ"/><Run Language="ja-jp" Text="&#x9;      "/><Run Text="☆じょうずにことわる"/><LineBreak/><Run Text="①理由を言う"/><Run Language="ja-jp" Text="&#x9;      "/><Run Text="①あやまる"/><LineBreak/><Run Text="②してほしいことを言う"/><Run Language="ja-jp" Text="    "/><Run Text="②理由を言う"/><LineBreak/><Run Text="③おれいを言う&#x9;"/><Run Language="ja-jp" Text="      "/><Run Text="③ことわる"/><LineBreak/><Run Text="&#x9;&#x9;"/><Run Language="ja-jp" Text="      "/><Run Text="④代わりの言葉"/></TextBlock>
                 </Border>
+<<<<<<< HEAD
+>>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
+=======
 >>>>>>> parent of d50f03f... Chapter5アイテムゲットまで
                 <Grid x:Name="ItemNamePlateLeftGrid" Width="610" Height="195" Margin="90,55,1220,830" d:IsHidden="True">
                     <Image x:Name="ItemNamePlateLeftImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_name.png" d:IsHidden="True"/>
