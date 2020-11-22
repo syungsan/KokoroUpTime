@@ -251,6 +251,8 @@
     <None Remove="Images\purple_title_plate.png" />
     <None Remove="Images\red_arrow_right.png" />
     <None Remove="Images\red_needle.png" />
+    <None Remove="Images\relax_female.png" />
+    <None Remove="Images\relax_male.png" />
     <None Remove="Images\return_to_item.png" />
     <None Remove="Images\return_to_title.png" />
     <None Remove="Images\return_to_top.png" />
@@ -273,6 +275,7 @@
     <None Remove="Images\small_bubble_center_right_down.png" />
     <None Remove="Images\small_bubble_left.png" />
     <None Remove="Images\small_bubble_left_blue.png" />
+    <None Remove="Images\small_bubble_left_down.png" />
     <None Remove="Images\small_bubble_left_down_blue.png" />
     <None Remove="Images\small_bubble_left_down_red.png" />
     <None Remove="Images\small_bubble_left_down_yellow.png" />
@@ -281,6 +284,8 @@
     <None Remove="Images\small_bubble_left_yellow.png" />
     <None Remove="Images\small_bubble_right_down.png" />
     <None Remove="Images\small_icon.png" />
+    <None Remove="Images\small_short_bubble_left_down_red.png" />
+    <None Remove="Images\small_short_bubble_left_down_yellow.png" />
     <None Remove="Images\SS.png" />
     <None Remove="Images\summary_title.png" />
     <None Remove="Images\teacher.png" />
@@ -501,6 +506,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\red_arrow_right.png" />
+    <Resource Include="Images\relax_female.png" />
+    <Resource Include="Images\relax_male.png" />
     <Resource Include="Images\return_to_item.png" />
     <Resource Include="Images\return_to_top.png" />
     <Resource Include="Images\short_bubble_left.png" />
@@ -513,6 +520,7 @@
     <Resource Include="Images\small_bubble_center_down.png" />
     <Resource Include="Images\small_bubble_center_right_down.png" />
     <Resource Include="Images\small_bubble_left_blue.png" />
+    <Resource Include="Images\small_bubble_left_down.png" />
     <Resource Include="Images\small_bubble_left_down_blue.png" />
     <Resource Include="Images\small_bubble_left_down_red.png" />
     <Resource Include="Images\small_bubble_left_down_yellow.png" />
@@ -572,6 +580,8 @@
     <Resource Include="Images\shiroji_04.png" />
     <Resource Include="Images\small_bubble_left.png" />
     <Resource Include="Images\small_icon.png" />
+    <Resource Include="Images\small_short_bubble_left_down_red.png" />
+    <Resource Include="Images\small_short_bubble_left_down_yellow.png" />
     <Resource Include="Images\SS.png" />
     <Resource Include="Images\summary_title.png" />
     <Resource Include="Images\teacher.png" />

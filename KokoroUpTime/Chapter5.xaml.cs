@@ -185,6 +185,9 @@ namespace KokoroUpTime
 
                 ["body_image_of_akamaru_angry_image"] = this.BodyImageOfAkamaruAngryImage,
                 ["body_image_of_kimi_fear_image"] = this.BodyImageOfKimiFearImage,
+
+                ["relax_children_image"] = this.RelaxChildrenImage, //
+                ["relax_children_bubble_image"] = this.RelaxChildrenBubbleImage, //
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -212,6 +215,10 @@ namespace KokoroUpTime
                 ["size_of_feeling_input_text"] = this.SizeOfFeelingInputTextBlock,
 
                 ["problem_text"] = this.ProblemTextBlock, //
+
+
+                ["relax_info_text"] = this.RelaxInfoTextBlock, //
+                ["relax_children_bubble_text"] = this.RelaxChildrenBubbleTextBlock, //
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -261,6 +268,10 @@ namespace KokoroUpTime
                 ["body_image_of_akamaru_bubbles_grid"] = this.BodyImageOfAkamaruBubblesGrid, //
                 ["body_image_of_kimi_bubbles_grid"] = this.BodyImageOfKimiBubblesGrid, //
                 ["my_status_input_grid"] = this.MyStatusInputGrid, //
+
+                ["relax_grid"] = this.RelaxGrid, //
+                ["relax_human_grid"] = this.RelaxHumanGrid, //
+                ["relax_children_grid"] = this.RelaxChildrenGrid, //
             };
 
             this.borderObjects = new Dictionary<string, Border>
@@ -277,6 +288,10 @@ namespace KokoroUpTime
                 ["manga_title_border"] = this.MangaTitleBorder, //
                 ["body_image_of_akamaru_angry_border"] = this.BodyImageOfAkamaruAngryBorder, //
                 ["body_image_of_kimi_fear_border"] = this.BodyImageOfKimiFearBorder, //
+
+                ["relax_title1_border"] = this.RelaxTitle1Border, //
+                ["relax_title2_border"] = this.RelaxTitle2Border, //
+                ["relax_title3_border"] = this.RelaxTitle3Border, //
             };
         }
 
@@ -391,6 +406,15 @@ namespace KokoroUpTime
             this.MyStatusInputGrid.Visibility = Visibility.Hidden; //
             this.ProblemTextBlock.Visibility = Visibility.Hidden; //
 
+
+            this.RelaxGrid.Visibility = Visibility.Hidden; //
+            // this.RelaxTitle1Border.Visibility = Visibility.Hidden; //
+            this.RelaxTitle2Border.Visibility = Visibility.Hidden; //
+            this.RelaxTitle3Border.Visibility = Visibility.Hidden; //
+            // this.RelaxInfoTextBlock.Visibility = Visibility.Hidden; //
+            // this.RelaxHumanGrid.Visibility = Visibility.Hidden; //
+            this.RelaxChildrenGrid.Visibility = Visibility.Hidden; //
+
             this.SelectHotWordValueTitleTextBlock.Text = "";
             this.SessionSubTitleTextBlock.Text = "";
             this.SessionSentenceTextBlock.Text = "";
@@ -407,7 +431,9 @@ namespace KokoroUpTime
             this.KindOfFeelingInputTextBlock.Text = "";
             this.SizeOfFeelingInputTextBlock.Text = "";
 
-            this.ProblemTextBlock.Text = "";
+            this.ProblemTextBlock.Text = ""; //
+
+            this.RelaxInfoTextBlock.Text = ""; //
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
