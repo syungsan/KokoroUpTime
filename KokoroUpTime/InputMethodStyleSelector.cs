@@ -10,13 +10,11 @@ namespace KokoroUpTime
         public Style HandWritingInputStyle { get; set; }
         public Style KeyBoardInputStyle { get; set; }
 
-        DataOption dataOption = new DataOption();
-
-        public Style SelectStyle(object item, DependencyObject container,int inputMethod)
+        public override Style SelectStyle(object item, DependencyObject container/*,int inputMethod*/)
         {
             try
             {
-                if (this.dataOption.InputMethod == 0)
+                if (/*inputMethod == 0*/true)
                     return HandWritingInputStyle; //手書き
                 else 
                     return KeyBoardInputStyle;　//キーボード

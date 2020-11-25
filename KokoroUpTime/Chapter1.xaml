@@ -1161,7 +1161,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="55,145,266,45" FontSize="48" FontFamily="/Fonts/azuki.ttf#あずきフォント" d:IsHidden="True">
+                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="55,145,266,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体　N-R" d:IsHidden="True">
                         <Run x:Name="MainMessageFrontText"/>
                         <InlineUIContainer>
                             <Image x:Name="NameImage" Height="48" d:IsHidden="True"/>
@@ -1215,7 +1215,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="38" Margin="31,33,37,31" RenderTransformOrigin="0.5,0.5" FontFamily="/Fonts/azuki.ttf#あずきフォント" d:IsHidden="True">
+                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="38" Margin="31,33,37,31" RenderTransformOrigin="0.5,0.5" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体　N-R" d:IsHidden="True">
                         <TextBlock.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>

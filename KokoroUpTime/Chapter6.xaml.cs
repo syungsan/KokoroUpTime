@@ -97,6 +97,8 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
+        public InputMethodStyleSelector styleSelector = new InputMethodStyleSelector();
+
 
         public Chapter6()
         {
@@ -126,6 +128,8 @@ namespace KokoroUpTime
             {
                 //キーボード
             }
+
+            //this.styleSelector.SelectStyle(this.NicePesonalityListView, ListViewItem,this.dataOption.InputMethod);
 
             this.InitControls();
 
@@ -235,6 +239,7 @@ namespace KokoroUpTime
                 ["groupe_activity_grid"] =this.GroupeActivityGrid,
                 ["groupe_activity_message_grid"]=this.GroupeActivityMessageGrid,
                 ["hint_check_grid"]=this.HintCheckGrid,
+                ["canvas_edit_grid"] =this.CanvasEditGrid,
 
                 ["point_check_box_grid"]=this.PointCheckBoxGrid,
                 ["point_check_box_01_grid"]=this.PointCheckBox1Grid,
@@ -333,7 +338,7 @@ namespace KokoroUpTime
             this.MangaPrevBackButton.Visibility = Visibility.Hidden;
             this.GroupeActivityNextMessageButton.Visibility = Visibility.Hidden;
             this.GroupeActivityBackMessageButton.Visibility = Visibility.Hidden;
-            this.CanvasGrid.Visibility = Visibility.Hidden;
+            this.CanvasEditGrid.Visibility = Visibility.Hidden;
 
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
@@ -1084,6 +1089,8 @@ namespace KokoroUpTime
 
                 case "get_item":
 
+                    this.dataItem.HasGotItem06 = true;
+
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
                         connection.Execute($@"UPDATE DataItem SET HasGotItem06 = 1 WHERE Id = 1;");
@@ -1684,7 +1691,7 @@ namespace KokoroUpTime
 
                     this.ScenarioBack();
                 }
-                return;
+                
             }
             // FullScreen時のデバッグ用に作っておく
             if (button.Name == "ExitButton")
@@ -1727,20 +1734,28 @@ namespace KokoroUpTime
             {
                 this.GoTo("check_hint");
             }
-            else if (button.Name == "CanvasCloseButton")
+            
+            else if(button.Name== "GroupeActivityButton")
             {
-                this.CanvasGrid.Visibility = Visibility.Hidden;
-            }
-            else if(button.Name == "NameInputButton" || button.Name == "PersonalityInputButton")
-            {
-                if (this.dataOption.InputMethod == 0)
-                {
-                    this.CanvasGrid.Visibility = Visibility.Visible;
-                }
-                else if (this.dataOption.InputMethod == 1)
-                {
+                this.GoTo("input_nice_personality");
+                button.Background = null;
+                this.GroupeActivityGrid.Width = 1920;
+                this.GroupeActivityGrid.Height = 840;
+                this.GroupeActivityGrid.VerticalAlignment = VerticalAlignment.Bottom;
 
-                }
+                this.CanvasEditGrid.Visibility = Visibility.Visible;
+            }
+            else if (button.Name == "CompleteWritingButton")
+            {
+                this.GroupeActivityButton.Background = Brushes.Transparent;
+                this.GroupeActivityGrid.Width = 1520;
+                this.GroupeActivityGrid.Height = 665;
+                this.GroupeActivityGrid.VerticalAlignment = VerticalAlignment.Center;
+                Thickness margin = new Thickness(0, 100, 0, 0);
+                this.GroupeActivityGrid.Margin = margin;
+
+                this.scenarioCount += 1;
+                this.ScenarioPlay();
             }
         }
         private void SetBGM(string soundFile, bool isLoop, int volume)
@@ -1931,35 +1946,7 @@ namespace KokoroUpTime
             }
         }
 
-        private void InputCanvas_StrokeCollected(object sender, InkCanvasStrokeCollectedEventArgs e)
-        {
-            IInputElement focusedControl = System.Windows.Input.Keyboard.FocusedElement;
-
-            var canvas = focusedControl as InkCanvas;
-
-            canvas.Strokes = this.InputCanvas.Strokes;
-        }
        
-        private void InputCanvas_StrokeErasing(object sender, InkCanvasStrokeErasingEventArgs e)
-        {
-            IInputElement focusedControl = System.Windows.Input.Keyboard.FocusedElement;
-
-            var canvas = focusedControl as InkCanvas;
-
-            canvas.Strokes = this.InputCanvas.Strokes;
-        }
-
-        private void CanvasGrid_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if(this.CanvasGrid.Visibility == Visibility.Visible)
-            {
-                this.ShowAnime(storyBoard: "float_in", objectName: this.CanvasGrid.Name, objectsName: null, isSync: "sync");
-            }
-            else  if(this.CanvasGrid.Visibility == Visibility.Hidden)
-            {
-                this.ShowAnime(storyBoard: "float_out", objectName: this.CanvasGrid.Name, objectsName: null, isSync: "sync");
-            }
-        }
 
         // TextBoxにフォーカスが当たったときに起動
         private void TriggerKeyboard(object sender, KeyboardFocusChangedEventArgs e)
@@ -1991,6 +1978,21 @@ namespace KokoroUpTime
                 }
             }
         }
+
+        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem listBoxItem = sender as ListBoxItem;
+            if (listBoxItem.Name =="PenButton")
+            {
+                
+            }
+            else if (listBoxItem.Name == "EraserButton")
+            {
+
+            }
+        }
+
+        
     }
 }
 

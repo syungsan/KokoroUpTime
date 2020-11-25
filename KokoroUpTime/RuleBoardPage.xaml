@@ -157,7 +157,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="38" RenderTransformOrigin="0.5,0.5" Margin="22,54,18,24" FontFamily="/Fonts/azuki.ttf#あずきフォント">
+                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="38" RenderTransformOrigin="0.5,0.5" Margin="22,54,18,24" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体　N-R">
                         <TextBlock.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>

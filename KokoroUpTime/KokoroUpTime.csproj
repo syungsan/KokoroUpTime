@@ -71,6 +71,7 @@
     <None Remove="Images\blackboard.png" />
     <None Remove="Images\blue_bubble.png" />
     <None Remove="Images\blue_bubble_left_down.png" />
+    <None Remove="Images\blue_explosion_bubble.png" />
     <None Remove="Images\blue_gradation.png" />
     <None Remove="Images\blue_needle.png" />
     <None Remove="Images\blue_roll_frame.png" />
@@ -151,6 +152,7 @@
     <None Remove="Images\item06_book.png" />
     <None Remove="Images\item06_detail.png" />
     <None Remove="Images\item06_solo.gif" />
+    <None Remove="Images\item06_solo.png" />
     <None Remove="Images\item06_title.png" />
     <None Remove="Images\item07_book.png" />
     <None Remove="Images\item07_detail.png" />
@@ -251,6 +253,7 @@
     <None Remove="Images\purple_title_plate.png" />
     <None Remove="Images\red_arrow_right.png" />
     <None Remove="Images\red_needle.png" />
+    <None Remove="Images\return.png" />
     <None Remove="Images\return_to_item.png" />
     <None Remove="Images\return_to_title.png" />
     <None Remove="Images\return_to_top.png" />
@@ -370,6 +373,7 @@
     <Resource Include="Images\blackboard.png" />
     <Resource Include="Images\blue_bubble.png" />
     <Resource Include="Images\blue_bubble_left_down.png" />
+    <Resource Include="Images\blue_explosion_bubble.png" />
     <Resource Include="Images\blue_gradation.png" />
     <Resource Include="Images\blue_needle.png" />
     <Resource Include="Images\blue_roll_frame.png" />
@@ -440,6 +444,7 @@
     <Resource Include="Images\item06_book.png" />
     <Resource Include="Images\item06_detail.png" />
     <Resource Include="Images\item06_solo.gif" />
+    <Resource Include="Images\item06_solo.png" />
     <Resource Include="Images\item06_title.png" />
     <Resource Include="Images\item07_book.png" />
     <Resource Include="Images\item07_detail.png" />
@@ -501,6 +506,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\red_arrow_right.png" />
+    <Resource Include="Images\return.png" />
     <Resource Include="Images\return_to_item.png" />
     <Resource Include="Images\return_to_top.png" />
     <Resource Include="Images\short_bubble_left.png" />
@@ -608,10 +614,10 @@
     <None Update="Datas\default.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scenarios\chapter2.csv">
+    <None Update="Scenarios\chapter1.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scenarios\chapter5.csv">
+    <None Update="Scenarios\chapter2.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter3.csv">
@@ -620,13 +626,16 @@
     <None Update="Scenarios\chapter4.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Scenarios\chapter5.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter6.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Scenarios\rule_board.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\name_input.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Scenarios\chapter1.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Sounds\atsumare!_tomodachi!.mp3">
