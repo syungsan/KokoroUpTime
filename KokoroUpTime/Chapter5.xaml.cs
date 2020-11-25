@@ -219,6 +219,8 @@ namespace KokoroUpTime
 
                 ["relax_info_text"] = this.RelaxInfoTextBlock, //
                 ["relax_children_bubble_text"] = this.RelaxChildrenBubbleTextBlock, //
+
+                ["relax_title_text"] = this.RelaxTitleTextBlock, //
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -292,6 +294,8 @@ namespace KokoroUpTime
                 ["relax_title1_border"] = this.RelaxTitle1Border, //
                 ["relax_title2_border"] = this.RelaxTitle2Border, //
                 ["relax_title3_border"] = this.RelaxTitle3Border, //
+
+                ["relax_title_border"] = this.RelaxTitleBorder, //
             };
         }
 
@@ -415,6 +419,9 @@ namespace KokoroUpTime
             // this.RelaxHumanGrid.Visibility = Visibility.Hidden; //
             this.RelaxChildrenGrid.Visibility = Visibility.Hidden; //
 
+            this.RelaxTitleBorder.Visibility = Visibility.Hidden; //
+            this.RelaxTitleTextBlock.Visibility = Visibility.Hidden; //
+
             this.SelectHotWordValueTitleTextBlock.Text = "";
             this.SessionSubTitleTextBlock.Text = "";
             this.SessionSentenceTextBlock.Text = "";
@@ -434,6 +441,8 @@ namespace KokoroUpTime
             this.ProblemTextBlock.Text = ""; //
 
             this.RelaxInfoTextBlock.Text = ""; //
+
+            this.RelaxTitleTextBlock.Text = ""; //
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
