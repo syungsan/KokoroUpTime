@@ -23,6 +23,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml;
 using WMPLib;
 using WpfAnimatedGif;
 using BitmapImageReader;
@@ -52,15 +53,11 @@ namespace KokoroUpTime
         // マウスクリックを可能にするかどうかのフラグ
         private bool isClickable = false;
 
-        // 画面を何回タップしたか
-        private int tapCount = 0;
-
         // 気持ちの大きさ
         private int feelingSize = 0;
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
-        private DispatcherTimer buttonTimer;
         private int word_num;
 
         private int inlineCount;
@@ -142,16 +139,6 @@ namespace KokoroUpTime
 
             // データモデルインスタンス確保
             this.dataChapter2 = new DataChapter2();
-
-            this.EditingModeItemsControl.ItemsSource = EDIT_BUTTON;
-
-            this.CharacterColor = new Dictionary<string, SolidColorBrush>
-            {
-                ["白じい"] = new SolidColorBrush(Colors.Orange),
-                ["青助"] = new SolidColorBrush(Colors.Aqua),
-                ["赤丸"] = new SolidColorBrush(Colors.Red),
-                ["キミ"] = new SolidColorBrush(Colors.Yellow),
-            };
 
             this.InitControls();
         }
@@ -335,7 +322,7 @@ namespace KokoroUpTime
             this.Challenge2Grid.Visibility = Visibility.Hidden;
             this.ChallengeTimeTitleGrid.Visibility = Visibility.Hidden;
             this.GroupeActivityGrid.Visibility = Visibility.Hidden;
-            this.CanvasGrid.Visibility = Visibility.Hidden;
+            
             this.ItemPlateGrid.Visibility = Visibility.Hidden;
             this.Challenge2CoverGrid.Visibility = Visibility.Hidden;
 
@@ -453,17 +440,12 @@ namespace KokoroUpTime
             this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
             this.DifficultySelectGrid.Visibility = Visibility.Hidden;
             this.SelectFeelingGrid.Visibility = Visibility.Hidden;
+            this.CanvasEditGrid.Visibility = Visibility.Hidden;
 
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
-            this.CanvasGrid.Visibility = Visibility.Hidden;
-            
+
             //this.GroupeActivityInputText.Visibility = Visibility.Hidden;
             this.GroupeActivityMessageGrid.Visibility = Visibility.Hidden;
-
-            this.InputTextGrid.Visibility = Visibility.Hidden;
-
-
-            this.tag = "";
 
             this.SessionSubTitleTextBlock.Text = "";
             this.SessionSentenceTextBlock.Text = "";
@@ -1571,12 +1553,19 @@ namespace KokoroUpTime
 
             if (button.Name == "ExitBackYesButton")
             {
-                Application.Current.Shutdown();
+                this.StopBGM();
+
+                TitlePage titlePage = new TitlePage();
+
+                titlePage.SetIsFirstBootFlag(false);
+
+                titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                this.NavigationService.Navigate(titlePage);
             }
 
             if (button.Name == "ExitBackNoButton")
             {
-
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
@@ -1718,9 +1707,61 @@ namespace KokoroUpTime
 
                 if (scene == "グループアクティビティ")
                 {
-                    if (this.dataOption.InputMethod == 1)
+
+                    if (this.dataOption.InputMethod == 0)
                     {
-                        this.myALittlleExcitingEvents = this.InputText.Text;
+                        // ストロークが描画されている境界を取得
+                        System.Windows.Rect rectBounds = new System.Windows.Rect(0, 0, this.InputMyALittleExcitedCanvas.ActualWidth, this.InputMyALittleExcitedCanvas.ActualHeight);
+
+                        // 描画先を作成
+                        DrawingVisual dv = new DrawingVisual();
+                        DrawingContext dc = dv.RenderOpen();
+
+                        // 描画エリアの位置補正（補正しないと黒い部分ができてしまう）
+                        dc.PushTransform(new TranslateTransform(-rectBounds.X, -rectBounds.Y));
+
+                        // 描画エリア(dc)に四角形を作成
+                        // 四角形の大きさはストロークが描画されている枠サイズとし、
+                        // 背景色はInkCanvasコントロールと同じにする
+                        dc.DrawRectangle(InputMyALittleExcitedCanvas.Background, null, rectBounds);
+
+                        // 上記で作成した描画エリア(dc)にInkCanvasのストロークを描画
+                        InputMyALittleExcitedCanvas.Strokes.Draw(dc);
+                        dc.Close();
+
+                        // ビジュアルオブジェクトをビットマップに変換する
+                        RenderTargetBitmap rtb = new RenderTargetBitmap((int)rectBounds.Width, (int)rectBounds.Height, 96, 96, PixelFormats.Pbgra32);
+                        rtb.Render(dv);
+
+                        //仮置き
+                        string nameBmp = "Chapter02_GroupeActivity_MyALittlleExcitingEvents.bmp";
+                        string dirPath = $"./Log/{this.initConfig.userName}";
+
+                        string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
+                        var startupPath = FileUtils.GetStartupPath();
+
+                        PngBitmapEncoder png = new PngBitmapEncoder();
+                        png.Frames.Add(BitmapFrame.Create(rtb));
+
+                        // ファイルのパスは仮
+                        using (var stream = File.Create($@"{startupPath}/{nameBmpPath}"))
+                        {
+                            png.Save(stream);
+                        }
+
+                        var pngmap = new BitmapImage();
+
+                        pngmap.BeginInit();
+                        pngmap.CacheOption = BitmapCacheOption.OnLoad;    //ココ
+                        pngmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;  //ココ
+                        pngmap.UriSource = new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute);
+                        pngmap.EndInit();
+
+                        pngmap.Freeze();
+                    }
+                    else if (this.dataOption.InputMethod == 1)
+                    {
+                        this.myALittlleExcitingEvents = this.InputMyALittleExcitedText.Text;
                         this.dataChapter2.MyALittlleExcitingEvents = this.myALittlleExcitingEvents;
                         
                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
@@ -1733,120 +1774,53 @@ namespace KokoroUpTime
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
-            
-            if(button.Name== "GroupeActivityWritingButton")
+
+            if (button.Name == "GroupeActivityButton")
             {
-                
-                    if (this.dataOption.InputMethod == 1)
-                    {
-                        this.InputTextGrid.Visibility = Visibility.Visible;
+                button.Background = null;
 
-                        this.ReadyKeyboard();
-                        this.InputText.Focus();
+                this.InputMyALittleExcitedGrid.Width = 1920;
+                this.InputMyALittleExcitedGrid.Height = 840;
 
-                        if (this.GroupeActivityWritingButton.Content == null)
-                        {
-                            this.GroupeActivityWritingButton.Content = new ScrollViewer { Height = 350, Width = 1300, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto };
-                            ScrollViewer scroll = this.GroupeActivityWritingButton.Content as ScrollViewer;
-                            TextBlock text = new TextBlock { Name = "GroupeActivityInputText", FontSize = 40, FontFamily = new FontFamily("Yu Gothic"), TextWrapping = TextWrapping.Wrap};
-                            text.PreviewMouseDown += new MouseButtonEventHandler(TextBoxMouseDown);
-
-                            scroll.Content = text;
-                            this.InputText.SelectAll();
-                        }
-                        else
-                        {
-                            ScrollViewer scroll = this.GroupeActivityWritingButton.Content as ScrollViewer;
-                            TextBlock text = scroll.Content as TextBlock;
-                            if (text.Text != "")
-                            {
-                                 this.InputText.Text = text.Text;
-                            }
-                    }
-                    }
-                    if (this.dataOption.InputMethod == 0)
-                    {
-                        if (this.GroupeActivityWritingButton.Content == null)
-                        {
-                            this.GroupeActivityWritingButton.Content = new Image { Name = "GroupeActivityWritingImage", Margin = new Thickness(0, 60, 0, 0) };
-                        }
-
-                        this.CanvasGrid.Visibility = Visibility.Visible;
-                        
-                    }
-                
-            }
-            if (button.Content == "えんぴつ")
-            {
-                NameCanvas.EditingMode = InkCanvasEditingMode.Ink;
-            }
-            if (button.Content == "けしごむ")
-            {
-                NameCanvas.EditingMode = InkCanvasEditingMode.EraseByPoint;
-            }
-            if (button.Content == "すべてけす")
-            {
-                NameCanvas.Strokes.Clear();
-            }
-            if (button.Content == "かんせい")
-            {
-
-                // ストロークが描画されている境界を取得
-                System.Windows.Rect rectBounds = new System.Windows.Rect(0, 0,this.NameCanvas.ActualWidth,this.NameCanvas.ActualHeight );
-
-                // 描画先を作成
-                DrawingVisual dv = new DrawingVisual();
-                DrawingContext dc = dv.RenderOpen();
-
-                // 描画エリアの位置補正（補正しないと黒い部分ができてしまう）
-                dc.PushTransform(new TranslateTransform(-rectBounds.X, -rectBounds.Y));
-
-                // 描画エリア(dc)に四角形を作成
-                // 四角形の大きさはストロークが描画されている枠サイズとし、
-                // 背景色はInkCanvasコントロールと同じにする
-                dc.DrawRectangle(NameCanvas.Background, null, rectBounds);
-
-                // 上記で作成した描画エリア(dc)にInkCanvasのストロークを描画
-                NameCanvas.Strokes.Draw(dc);
-                dc.Close();
-
-                // ビジュアルオブジェクトをビットマップに変換する
-                RenderTargetBitmap rtb = new RenderTargetBitmap((int)rectBounds.Width, (int)rectBounds.Height,96, 96,PixelFormats.Pbgra32);
-                rtb.Render(dv);
-
-                //仮置き
-                string nameBmp = "GroupeActivity02_MyALittlleExcitingEvents.bmp";
-                string dirPath = $"./Log/{this.initConfig.userName}";
-
-                string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
-                var startupPath = FileUtils.GetStartupPath();
-
-                PngBitmapEncoder png = new PngBitmapEncoder();
-                png.Frames.Add(BitmapFrame.Create(rtb));
-
-                // ファイルのパスは仮
-                using (var stream = File.Create($@"{startupPath}/{nameBmpPath}"))
+                if (this.dataOption.InputMethod == 0)
                 {
-                    png.Save(stream);
+                    // 手書き入力
+                    this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Bottom;
+
+                    this.CanvasEditGrid.Visibility = Visibility.Visible;
                 }
+                else if(this.dataOption.InputMethod == 1)
+                {
+                    //キーボード入力
+                    this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Bottom;
+                }
+                else if (true)
+                {
+                    this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Top;
+                }
+                this.InputMyALittleExcitedText.FontSize = 109;
 
-                var pngmap = new BitmapImage();
 
-                pngmap.BeginInit();
-                pngmap.CacheOption = BitmapCacheOption.OnLoad;    //ココ
-                pngmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;  //ココ
-                pngmap.UriSource = new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute);
-                pngmap.EndInit();
-
-                pngmap.Freeze();
-
-                this.GroupeActivityGrid.Visibility = Visibility.Visible;
-                this.CanvasGrid.Visibility = Visibility.Hidden;
-
-               (this.GroupeActivityWritingButton.Content as Image).Source  = new BitmapImage(new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute));
+                this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
 
             }
-            if (this.tag == "かんたんにできるか")
+            if (button.Name == "CompleteWritingButton")
+            {
+                this.GroupeActivityButton.Background = Brushes.Transparent;
+
+                this.InputMyALittleExcitedGrid.Width = 1185;
+                this.InputMyALittleExcitedGrid.Height = 518;
+                this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Bottom;
+
+                this.InputMyALittleExcitedText.FontSize = 65;
+
+                this.CanvasEditGrid.Visibility = Visibility.Hidden;
+
+                this.SelectFeelingNextButton.Visibility = Visibility.Visible;
+            }
+           
+            if (this.scene=="「休み時間に友だちとおしゃべりする」ときは？"||this.scene=="「全部のテストで100点をとる」ときは？"||this.scene=="「おいしいものを食べる」ときは？")
             {
                 this.DifficultySelectGrid.Visibility = Visibility.Hidden;
 
@@ -1885,34 +1859,6 @@ namespace KokoroUpTime
                 this.JumpScenario(_jumptag);
             }
 
-            if(button.Name== "InputTextCompleteButton")
-            {
-                if (this.InputText.Text != "")
-                {
-                    this.InputTextGrid.Visibility = Visibility.Hidden;
-                    ScrollViewer scroll = this.GroupeActivityWritingButton.Content as ScrollViewer;
-                    TextBlock text = scroll.Content as TextBlock;
-                    text.Text = this.InputText.Text;
-
-                    if (OnScreenKeyboard.IsOpened())
-                    {
-                        try
-                        {
-                            OnScreenKeyboard.Close();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("なにも書かれてないよ");
-                }
-                
-              
-            }
             if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton"))
             {
                 this.isClickable = false;
@@ -1932,6 +1878,7 @@ namespace KokoroUpTime
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
+            
             if (button.Name == "ReturnToTitleButton")
             {
                 TitlePage titlePage = new TitlePage();
@@ -2248,9 +2195,67 @@ namespace KokoroUpTime
             }
         }
 
-        private void TextBoxMouseDown(object sender, MouseButtonEventArgs e)
+        private void GoTo(string tag)
         {
-            this.Button_Click(this.GroupeActivityWritingButton, e);
+            foreach (var (scenario, index) in this.scenarios.Indexed())
+            {
+                if (scenario[0] == "sub" && scenario[1] == tag)
+                {
+                    this.scenarioCount = index + 1;
+                    this.ScenarioPlay();
+
+                    break;
+                }
+                if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
+                {
+                    this.scenarioCount = index + 1;
+                    this.ScenarioPlay();
+
+                    break;
+                }
+            }
+        }
+        private void ScenarioBack()
+        {
+            var currentScenarioCount = this.scenarioCount;
+
+            int returnCount = 0;
+
+            for (int i = currentScenarioCount; i <= currentScenarioCount; i--)
+            {
+                if (this.scenarios[i][0] == "#")
+                {
+                    returnCount += 1;
+
+                    if (returnCount == 2)
+                    {
+                        this.scenarioCount = i;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem listBoxItem = sender as ListBoxItem;
+
+            if(listBoxItem.Name== "PenButton")
+            {
+                this.InputMyALittleExcitedCanvas.EditingMode = InkCanvasEditingMode.Ink;
+            }
+            else if(listBoxItem.Name == "EraserButton")
+            {
+                this.InputMyALittleExcitedCanvas.EditingMode = InkCanvasEditingMode.EraseByPoint;
+            }
+            else if (listBoxItem.Name == "AllClearButton")
+            {
+                this.InputMyALittleExcitedCanvas.Strokes.Clear();
+
+                this.CanvasEditListBox.SelectedIndex = -1;
+            }
         }
     }
 }

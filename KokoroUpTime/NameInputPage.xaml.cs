@@ -1008,6 +1008,7 @@ namespace KokoroUpTime
 
                 if (button.Name == "DecisionButton")
                 {
+
                     DirectoryUtils.SafeCreateDirectory("./Log");
 
                     Image[] handWritingNameImages = new Image[] { this.KunHandWritingNameImage, this.ChanHandWritingNameImage, this.SanHandWritingNameImage, this.NoneHandWritingNameImage };
@@ -1043,6 +1044,22 @@ namespace KokoroUpTime
 
                         var wordUserNames = this.GetWordUserList();
 
+                        string[] NG_WORD = { "\\","/", ":", "*","?","<",">","|" };
+
+                        foreach (string word in NG_WORD)
+                        {
+                            if (this.newUserName.Contains(word))
+                            {
+                                MessageBox.Show("つぎの文字は名前には使えません。\n　\\ / : * ? < > |", "情報");
+
+                                this.isClickable = true;
+
+                                this.NameTextBox.SelectAll();
+
+                                return;
+                            }
+
+                        }
                         if (this.newUserName == "")
                         {
                             MessageBox.Show("空の名前は入力できません。", "情報");
@@ -1097,7 +1114,8 @@ namespace KokoroUpTime
                     }
                     else if (this.selectInputMethod == 1)
                     {
-                        
+                        this.NameTextBox.Text = BASE_USER_NAME;
+                        this.NameTextBox.Visibility = Visibility.Visible;
                     }
                     this.SelectInputMethodGrid.Visibility = Visibility.Hidden;
 
@@ -1326,11 +1344,13 @@ namespace KokoroUpTime
         // TextBoxにフォーカスが当たったときに起動
         private void TriggerKeyboard(object sender, EventArgs e)
         {
+            #region
             if (!OnScreenKeyboard.IsOpened())
             {
                 try
                 {
                     Process.Start("./tabtip.bat");
+                    OnScreenKeyboard.Show();
 
                     OnScreenKeyboard.Show();
                 }
@@ -1340,17 +1360,18 @@ namespace KokoroUpTime
                     Debug.Print(ex.Message);
                 }
             }
+            #endregion
         }
 
         // TextBoxをクリックしたときに起動
         private void TextBoxMouseDown(object sender, RoutedEventArgs e)
         {
+            #region
             if (!OnScreenKeyboard.IsOpened())
             {
                 try
                 {
                     Process.Start("./tabtip.bat");
-
                     OnScreenKeyboard.Show();
                 }
                 catch (Exception ex)
@@ -1359,11 +1380,13 @@ namespace KokoroUpTime
                     Debug.Print(ex.Message);
                 }
             }
+            #endregion
         }
 
         // OSKを完全に切ってしまう
         private void CloseOSK()
         {
+            #region
             if (OnScreenKeyboard.IsOpened())
             {
                 try
@@ -1376,6 +1399,7 @@ namespace KokoroUpTime
                     Debug.Print(ex.Message);
                 }
             }
+            #endregion
         }
 
         private void TriggerKeyboard(object sender, RoutedEventArgs e)

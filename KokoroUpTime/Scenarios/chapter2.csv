@@ -1,4 +1,7 @@
 ﻿start
+goto,Debug
+#
+scene,前説
 reset
 scene,まとめ
 reset
@@ -284,9 +287,9 @@ image,shiroji_center_down_small_image,shiroji_03.png,appear_up
 grid,item_point_message_grid
 image,item_point_message_bubble_image,small_bubble_left_up.png,appear_expansion
 msg,item_point_msg_text,うきうきシューズをつかって鬱「ちょっぴりうきうき」を探すときのポイントは鬱3つあるのじゃ！,白じい
-next
-jump,グループアクティビティ
-
+click,page
+#
+sub,Debug
 scene,グループアクティビティ
 reset
 image,bg_image,background_07.png

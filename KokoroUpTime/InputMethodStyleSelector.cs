@@ -16,8 +16,8 @@ namespace KokoroUpTime
             {
                 if (/*inputMethod == 0*/true)
                     return HandWritingInputStyle; //手書き
-                else 
-                    return KeyBoardInputStyle;　//キーボード
+                ////else 
+                //    return KeyBoardInputStyle;　//キーボード
             }
             catch (NullReferenceException)
             {

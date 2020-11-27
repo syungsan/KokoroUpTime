@@ -789,7 +789,7 @@
                     </Button>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid" d:IsHidden="True">
+            <Grid x:Name="SystemGrid">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
@@ -852,14 +852,14 @@
                 </Grid>
                 <Button x:Name="ExitButton" Content="おわる" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" FontSize="24" Click="Button_Click" Margin="1833,10,0,0" d:IsHidden="True"/>
                 <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
-                <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">
-                    <Border x:Name="ExitBackBorder" BorderThickness="1" BorderBrush="Black" Background="White" CornerRadius="32,32,32,32" d:IsHidden="True"/>
-                    <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Height="139" Width="459" FontSize="48" Text="本当にアプリを終了してタイトルにもどりますか？" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center" d:IsHidden="True"/>
-                    <Button x:Name="ExitBackYesButton" HorizontalAlignment="Left" Margin="33,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
-                        <Image x:Name="ExitBackYesButtonImage" Source="/Images/moya1.png" d:IsHidden="True"/>
+                <Grid x:Name="ExitBackGrid" Margin="497,215,497,190">
+                    <Border x:Name="ExitBackBorder" BorderThickness="1" BorderBrush="Black" Background="White" CornerRadius="32,32,32,32"/>
+                    <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Height="139" Width="459" FontSize="48" Text="本当にアプリを終了してタイトルにもどりますか？" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center"/>
+                    <Button x:Name="ExitBackYesButton" HorizontalAlignment="Left" Margin="33,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                        <Image x:Name="ExitBackYesButtonImage" Source="/Images/moya1.png"/>
                     </Button>
-                    <Button x:Name="ExitBackNoButton" HorizontalAlignment="Left" Margin="465,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
-                        <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png" d:IsHidden="True"/>
+                    <Button x:Name="ExitBackNoButton" HorizontalAlignment="Left" Margin="465,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                        <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
                     </Button>
                 </Grid>
                 <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">

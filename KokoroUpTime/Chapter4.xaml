@@ -1216,14 +1216,14 @@
                         <Image x:Name="BranchButton2Image" Source="/Images/branch_selection2.png" Stretch="Fill" d:IsHidden="True" />
                     </Button>
                 </Grid>
-                <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">
-                    <Image x:Name="ExitBackImage" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/white_frame.png" Stretch="Fill" d:IsHidden="True"/>
-                    <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Left" Margin="169,113,0,0" VerticalAlignment="Top" Height="100" Width="582" FontSize="48" Text="本当にアプリを終了しますか？" FontWeight="Bold" TextAlignment="Center" d:IsHidden="True"/>
-                    <Button x:Name="ExitBackYesButton" HorizontalAlignment="Left" Margin="33,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
-                        <Image x:Name="ExitBackYesButtonImage" Source="/Images/moya1.png" d:IsHidden="True"/>
+                <Grid x:Name="ExitBackGrid" Margin="497,215,497,190">
+                    <Border x:Name="ExitBackBorder" BorderThickness="1" BorderBrush="Black" Background="White" CornerRadius="32,32,32,32"/>
+                    <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Height="139" Width="459" FontSize="48" Text="本当にアプリを終了してタイトルにもどりますか？" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center"/>
+                    <Button x:Name="ExitBackYesButton" HorizontalAlignment="Left" Margin="33,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                        <Image x:Name="ExitBackYesButtonImage" Source="/Images/moya1.png"/>
                     </Button>
-                    <Button x:Name="ExitBackNoButton" HorizontalAlignment="Left" Margin="465,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
-                        <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png" d:IsHidden="True"/>
+                    <Button x:Name="ExitBackNoButton" HorizontalAlignment="Left" Margin="465,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                        <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
                     </Button>
                 </Grid>
                 <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">
