@@ -73,7 +73,7 @@
     <None Remove="Images\blackboard.png" />
     <None Remove="Images\blue_bubble.png" />
     <None Remove="Images\blue_bubble_left_down.png" />
-    <None Remove="Images\blue_explosion bubble.png" />
+    <None Remove="Images\blue_explosion_bubble.png" />
     <None Remove="Images\blue_gradation.png" />
     <None Remove="Images\blue_needle.png" />
     <None Remove="Images\blue_roll_frame.png" />
@@ -369,8 +369,8 @@
     <Resource Include="Images\blackboard.png" />
     <Resource Include="Images\blue_bubble.png" />
     <Resource Include="Images\blue_bubble_left_down.png" />
-    <Resource Include="Images\blue_explosion bubble.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Resource Include="Images\blue_explosion_bubble.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\blue_gradation.png" />
     <Resource Include="Images\blue_needle.png" />
@@ -598,7 +598,6 @@
     <Resource Include="Images\word_art_msg_02_02.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\writing_text_bubble.png" />
     <Resource Include="Images\yazirusi.png" />
     <Resource Include="Images\yellow_title_plate.png" />
   </ItemGroup>

@@ -1,4 +1,5 @@
 start
+goto,Debug
 #
 scene,前説
 reset
@@ -231,7 +232,9 @@ click,msg
 #
 hide,grid,main_msg_grid
 grid,select_feeling_grid
-click,page
+clear,select_feeling
+button,back_page_button
+wait
 #
 hide,button,select_feeling_next_button
 hide,button,select_feeling_complete_button
@@ -328,7 +331,8 @@ clear,text,main_msg
 hide,grid,main_msg_grid
 grid,select_feeling_grid
 clear,select_feeling
-click,page
+button,back_page_button
+wait
 #
 hide,grid,select_feeling_grid
 hide,button,next_page_button
@@ -379,7 +383,8 @@ clear,text,main_msg
 hide,grid,main_msg_grid
 grid,select_feeling_grid
 clear,select_feeling
-click,page
+button,back_page_button
+wait
 #
 hide,grid,select_feeling_grid
 hide,button,next_page_button

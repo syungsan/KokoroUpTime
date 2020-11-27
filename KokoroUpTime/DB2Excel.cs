@@ -24,7 +24,6 @@ namespace KokoroUpTime
         private static DataChapter1 dataChapter1 = new DataChapter1();
 
         private static DataChapter2 dataChapter2 = new DataChapter2();
-        private static Dictionary<string, string> chapter2Result = null;
 
         private static DataChapter3 dataChapter3 = new DataChapter3();
 

@@ -377,7 +377,7 @@ namespace KokoroUpTime
             this.ItemBookNoneGrid.Visibility = Visibility.Hidden;
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
 
-            this.ListBoxUnSelectedAll();
+            this.FeelingListBoxUnSelectedAll();
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
@@ -897,7 +897,7 @@ namespace KokoroUpTime
 
                         case "select_feeling":
 
-                            this.ListBoxUnSelectedAll();
+                            this.FeelingListBoxUnSelectedAll();
 
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
@@ -1951,7 +1951,15 @@ namespace KokoroUpTime
 
             if (button.Name == "ExitBackYesButton")
             {
-                Application.Current.Shutdown();
+                this.StopBGM();
+
+                TitlePage titlePage = new TitlePage();
+
+                titlePage.SetIsFirstBootFlag(false);
+
+                titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                this.NavigationService.Navigate(titlePage);
             }
 
             if (button.Name == "ExitBackNoButton")
@@ -2363,7 +2371,7 @@ namespace KokoroUpTime
             }
         }
 
-        public void ListBoxUnSelectedAll()
+        public void FeelingListBoxUnSelectedAll()
         {
             this.ChallengeBadFeelingListBox.SelectedIndex = -1;
             this.ChallengeGoodFeelingListBox.SelectedIndex = -1;
@@ -2410,11 +2418,39 @@ namespace KokoroUpTime
                 }
             }
         }
-
-        private void SelectFeeling(object sender, SelectionChangedEventArgs e)
+        private void FeelingListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
+            ListBox listBox = sender as ListBox;
+            if(this.SelectGoodFeelingListBox.SelectedItem != null&& this.SelectBadFeelingListBox.SelectedItem != null)
+            {
+                if (listBox.Name == "SelectBadFeelingListBox")
+                {
+                    if (this.SelectGoodFeelingListBox.SelectedItem != null)
+                        this.SelectGoodFeelingListBox.SelectedIndex = -1;
+                }
+                else
+                {
+                    if (this.SelectBadFeelingListBox.SelectedItem != null)
+                        this.SelectBadFeelingListBox.SelectedIndex = -1;
+                }
+                this.NextPageButton.Visibility = Visibility.Visible;
+            }
+            else if(this.SelectGoodFeelingListBox.SelectedItem != null || this.SelectBadFeelingListBox.SelectedItem != null)
+            {
+                this.NextPageButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.NextPageButton.Visibility = Visibility.Hidden;
+            }
             
         }
+
+        private void FeelingListBox_Selected(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        
     }
 }

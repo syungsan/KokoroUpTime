@@ -93,7 +93,7 @@
                     </RadioButton.LayoutTransform>
                 </RadioButton>
             </Grid>
-            <Grid x:Name="SelectUserTitleGrid" Width="782" Height="545" Margin="569,158,569,377">
+            <Grid x:Name="SelectUserTitleGrid" Width="782" Height="545" Margin="569,158,569,377" d:IsHidden="True">
                 <Image x:Name="SelectUserTitleImage" Source="/Images/hukidashi2.png" />
                 <Button x:Name="SelectUserTitleOKButton" Content="OK" HorizontalAlignment="Center" Margin="0,432,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
                 <RadioButton x:Name="KunRadioButton" HorizontalAlignment="Left" Margin="71,66,0,0" VerticalAlignment="Top">
@@ -133,7 +133,7 @@
                     <TextBlock x:Name="NoneTextBlock" TextWrapping="Wrap" FontSize="48" FontWeight="Bold" Width="530" Height="70" Text="TextBlock"/>
                 </StackPanel>
             </Grid>
-            <Grid x:Name="MakeUserNameCompleteGrid" Width="844" Height="325" Margin="410,378,666,377">
+            <Grid x:Name="MakeUserNameCompleteGrid" Width="844" Height="325" Margin="410,378,666,377" d:IsHidden="True">
                 <Button x:Name="MakeUserNameCompleteOKButton" Height="325" Width="422" Margin="0,0,412,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
                     <Image x:Name="MakeUserNameCompleteOKImage" Source="/Images/moya1.png"/>
                 </Button>
@@ -141,14 +141,14 @@
                     <Image x:Name="MakeUserNameCompleteNOImage" Source="/Images/moya2.png"/>
                 </Button>
             </Grid>
-            <Grid x:Name="NameInputGrid">
-                <Button x:Name="NameButton" Margin="100,200,900,700" Background="White" Click="Button_Click">
+            <Grid x:Name="NameInputGrid" Margin="100,200,400,700">
+                <Button x:Name="NameButton" Background="White" Margin="0,0,500,0" Click="Button_Click">
                     <Image x:Name="NameImage"/>
                 </Button>
-                <TextBox x:Name="NameTextBox" Text="TextBox" TextWrapping="Wrap" Margin="100,200,900,700" FontSize="100" Background="{x:Null}" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown"/>
-                <Button x:Name="DecisionButton" Content="けってい" FontSize="80" Background="White" Margin="1200,200,400,700" Click="Button_Click"/>
+                <TextBox x:Name="NameTextBox" MaxLength="10" Margin="0,0,500,0" TextWrapping="NoWrap"  FontSize="100" Background="{x:Null}" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown"/>
+                <Button x:Name="DecisionButton" Content="けってい" FontSize="80" Background="White" Margin="1100,0,0,0" Click="Button_Click"/>
             </Grid>
-            <Grid x:Name="CanvasGrid">
+            <Grid x:Name="CanvasGrid" d:IsHidden="True">
                 <Border x:Name="CanvasBackBorder" BorderThickness="1" BorderBrush="Black" Margin="0,300,0,0" Background="White"/>
                 <InkCanvas x:Name="NameCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,300,0,0" Background="{x:Null}">
                     <InkCanvas.DefaultDrawingAttributes>

@@ -54,8 +54,6 @@ namespace KokoroUpTime
         // マウスクリックを可能にするかどうかのフラグ
         private bool isClickable = true;
 
-        // 画面を何回タップしたか
-        private int tapCount = 0;
 
         // 気持ちの大きさ
         private int feelingSize = 0;
@@ -65,7 +63,7 @@ namespace KokoroUpTime
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
-        private DispatcherTimer buttonTimer;
+       
         private int word_num;
 
         private int inlineCount;
@@ -82,7 +80,7 @@ namespace KokoroUpTime
         private Dictionary<string, Grid> gridObjects = null;
         private Dictionary<string, ListBox> itemsControlObjects = null; 
 
-        private Dictionary<string,SolidColorBrush> CharacterColor = null;
+       
 
         private Dictionary<string, List<string>> SITUATIONS_SELECTION = null;
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
@@ -851,8 +849,6 @@ namespace KokoroUpTime
                         };
                         sb.Begin(this);
                     }
-                    break;
-
                     break;
 
                 // 各種コントロールを個別に隠す処理
@@ -1742,12 +1738,19 @@ namespace KokoroUpTime
 
             if (button.Name == "ExitBackYesButton")
             {
-                Application.Current.Shutdown();
+                this.StopBGM();
+
+                TitlePage titlePage = new TitlePage();
+
+                titlePage.SetIsFirstBootFlag(false);
+
+                titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                this.NavigationService.Navigate(titlePage);
             }
 
             if (button.Name == "ExitBackNoButton")
             {
-
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
