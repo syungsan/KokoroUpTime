@@ -2439,18 +2439,10 @@ namespace KokoroUpTime
             {
                 this.NextPageButton.Visibility = Visibility.Visible;
             }
-            else
-            {
-                this.NextPageButton.Visibility = Visibility.Hidden;
-            }
-            
-        }
 
-        private void FeelingListBox_Selected(object sender, RoutedEventArgs e)
-        {
-            
-        }
+            var startupPath = FileUtils.GetStartupPath();
 
-        
+            PlaySE($@"{startupPath}/Sounds/Decision.wav");
+        }
     }
 }

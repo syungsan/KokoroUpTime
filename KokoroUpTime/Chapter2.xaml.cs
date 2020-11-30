@@ -74,10 +74,10 @@ namespace KokoroUpTime
         private Dictionary<string, Ellipse> GoodEventObject = null;
 
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
+
+
+        //グループアクティビティ用の拡大縮小サイズ(16:7)
        
-
-        
-
 
         // 音関連
         private WindowsMediaPlayer mediaPlayer;
@@ -243,6 +243,7 @@ namespace KokoroUpTime
                 ["manga_flip_button"] = this.MangaFlipButton,
                 ["select_feeling_complete_button"] = this.SelectFeelingCompleteButton,
                 ["select_feeling_next_button"] = this.SelectFeelingNextButton,
+                
             };
 
             this.gridObjects = new Dictionary<string, Grid>
@@ -382,6 +383,8 @@ namespace KokoroUpTime
             this.KimiScene2TextBlock.Visibility = Visibility.Hidden;
             this.KimiKindOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
             this.KimiSizeOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
+            this.CompleteInputButton.Visibility = Visibility.Hidden;
+            
             
 
             this.ChildrenFaceSmallLeftImage.Visibility = Visibility.Hidden;
@@ -1238,7 +1241,7 @@ namespace KokoroUpTime
 
                     Image[] itemNoneImages = { this.Item01NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
 
-                    var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
+                    var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
 
                     for (int i = 0; i < hasGotItems.Length; i++)
                     {
@@ -1990,45 +1993,66 @@ namespace KokoroUpTime
             {
                 button.Background = null;
 
-                this.InputMyALittleExcitedGrid.Width = 1920;
-                this.InputMyALittleExcitedGrid.Height = 840;
+                int[] CanvasSize = { 1920, 840 };
+                int[] TextSIze = { 1440, 630 , 83 };//幅,高さ,フォントサイズ
 
                 if (this.dataOption.InputMethod == 0)
                 {
+                    this.InputMyALittleExcitedGrid.Width = CanvasSize[0];
+                    this.InputMyALittleExcitedGrid.Height = CanvasSize[1];
+
                     // 手書き入力
                     this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Bottom;
 
+                    this.InputMyALittleExcitedText.Visibility = Visibility.Hidden;
                     this.CanvasEditGrid.Visibility = Visibility.Visible;
+
+                    this.PenButton.IsSelected = true;
+
+                    if (this.SelectFeelingNextButton.Visibility == Visibility.Visible)
+                    {
+                        this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
+                    }
+                    else if (this.SelectFeelingCompleteButton.Visibility == Visibility.Visible)
+                    {
+                        this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                    }
                 }
                 else if(this.dataOption.InputMethod == 1)
                 {
+
+                    this.InputMyALittleExcitedGrid.Width = TextSIze[0];
+                    this.InputMyALittleExcitedGrid.Height = TextSIze[1];
                     //キーボード入力
-                    this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Bottom;
-                }
-                else if (true)
-                {
                     this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Top;
+
+                    this.InputMyALittleExcitedText.FontSize = TextSIze[2];
+                    this.InputMyALittleExcitedText.Focus();
                 }
-                this.InputMyALittleExcitedText.FontSize = 109;
 
-
-                this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
-                this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
-
+                this.CompleteInputButton.Visibility = Visibility.Visible;
             }
-            if (button.Name == "CompleteWritingButton")
+            if (button.Name == "CompleteInputButton")
             {
                 this.GroupeActivityButton.Background = Brushes.Transparent;
 
-                this.InputMyALittleExcitedGrid.Width = 1185;
-                this.InputMyALittleExcitedGrid.Height = 518;
+                int[] NormalSize = { 1200, 545, 65 };//幅,高さ,フォントサイズ
+
+                this.InputMyALittleExcitedGrid.Width = NormalSize[0];
+                this.InputMyALittleExcitedGrid.Height = NormalSize[1];
                 this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Bottom;
 
-                this.InputMyALittleExcitedText.FontSize = 65;
+                if (this.dataOption.InputMethod == 0)
+                {
+                    this.CanvasEditGrid.Visibility = Visibility.Hidden;
+                }
+                else if (this.dataOption.InputMethod == 1)
+                {
+                    this.InputMyALittleExcitedText.FontSize = NormalSize[2];
+                    this.CloseOSK();
+                }
 
-                this.CanvasEditGrid.Visibility = Visibility.Hidden;
-
-                this.SelectFeelingNextButton.Visibility = Visibility.Visible;
+                this.CompleteInputButton.Visibility = Visibility.Hidden;
             }
            
             if (this.scene=="「休み時間に友だちとおしゃべりする」ときは？"||this.scene=="「全部のテストで100点をとる」ときは？"||this.scene=="「おいしいものを食べる」ときは？")
@@ -2360,7 +2384,7 @@ namespace KokoroUpTime
             return grayBitmap;
         }
 
-        private void WipeInWordArtMessage(Image wordArtImage, double newWidth,double newHeight, TimeSpan duration)
+        private void WipeInWordArtMessage(Image wordArtImage, double newWidth, double newHeight, TimeSpan duration)
         {
             this.msgTimer.Stop();
 
@@ -2384,36 +2408,6 @@ namespace KokoroUpTime
             };
 
             wordArtImage.BeginAnimation(Image.WidthProperty, animation);
-        }
-
-        private void ReadyKeyboard()
-        {
-            if (!OnScreenKeyboard.IsOpened())
-            {
-                try
-                {
-                    Process.Start("./tabtip.bat");
-
-                    OnScreenKeyboard.Show();
-                }
-                catch (Exception ex)
-                {
-                    // MessageBox.Show(ex.Message);
-                    Debug.Print(ex.Message);
-                }
-            }
-            else if (OnScreenKeyboard.IsOpened())
-            {
-                try
-                {
-                    OnScreenKeyboard.Close();
-                }
-                catch (Exception ex)
-                {
-                    // MessageBox.Show(ex.Message);
-                    Debug.Print(ex.Message);
-                }
-            }
         }
 
         private void GoTo(string tag)
@@ -2478,5 +2472,112 @@ namespace KokoroUpTime
                 this.CanvasEditListBox.SelectedIndex = -1;
             }
         }
+
+        // TextBoxにフォーカスが当たったときに起動
+        private void TriggerKeyboard(object sender, RoutedEventArgs e)
+        {
+            #region
+            if (!OnScreenKeyboard.IsOpened())
+            {
+                try
+                {
+                    Process.Start("./tabtip.bat");
+                    OnScreenKeyboard.Show();
+
+                }
+                catch (Exception ex)
+                {
+                    // MessageBox.Show(ex.Message);
+                    Debug.Print(ex.Message);
+                }
+            }
+            #endregion
+        }
+
+        // TextBoxをクリックしたときに起動
+        private void TextBoxMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            #region
+            if (!OnScreenKeyboard.IsOpened())
+            {
+                try
+                {
+                    Process.Start("./tabtip.bat");
+                    OnScreenKeyboard.Show();
+                }
+                catch (Exception ex)
+                {
+                    // MessageBox.Show(ex.Message);
+                    Debug.Print(ex.Message);
+                }
+            }
+            #endregion
+        }
+
+        // OSKを完全に切ってしまう
+        private void CloseOSK()
+        {
+            #region
+            if (OnScreenKeyboard.IsOpened())
+            {
+                try
+                {
+                    OnScreenKeyboard.Close();
+                }
+                catch (Exception ex)
+                {
+                    // MessageBox.Show(ex.Message);
+                    Debug.Print(ex.Message);
+                }
+            }
+            #endregion
+        }
+
+        //  TextBoxに改行制限をかける
+        private void TextBoxKeyDown(object sender, KeyEventArgs e)
+        {
+            if (this.InputMyALittleExcitedText.LineCount > 5)
+            {
+                if (e.Key == Key.Enter)
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+        //TextBoxの最大行数（今回は６行）を超える入力を制限
+        private void TextBoxPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caretPosition = this.InputMyALittleExcitedText.SelectionStart;
+
+
+            while (this.InputMyALittleExcitedText.LineCount > 6)
+            {
+                caretPosition -= 1;
+                this.InputMyALittleExcitedText.Text = this.InputMyALittleExcitedText.Text.Remove(caretPosition, 1);
+            }
+
+            this.InputMyALittleExcitedText.Select(caretPosition , 0);
+        }
+
+        public static class SendKeys
+        {
+            /// <summary>
+            ///   Sends the specified key.
+            /// </summary>
+            /// <param name="key">The key.</param>
+            public static void Send(Key key)
+            {
+                if (Keyboard.PrimaryDevice != null)
+                {
+                    if (Keyboard.PrimaryDevice.ActiveSource != null)
+                    {
+                        var e1 = new KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, Key.Down) { RoutedEvent = Keyboard.KeyDownEvent};
+                        InputManager.Current.ProcessInput(e1);
+                    }
+                }
+            }
+        }
+
+        
     }
 }

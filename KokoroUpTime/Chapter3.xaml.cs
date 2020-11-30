@@ -377,6 +377,9 @@ namespace KokoroUpTime
             this.SelectHotWordValueTextBlock.Text = "";
             this.KindOfFeelingInputTextBlock.Text = "";
             this.SizeOfFeelingInputTextBlock.Text = "";
+
+            this.SelectBadFeelingListBox.SelectedIndex = -1;
+            this.SelectGoodFeelingListBox.SelectedIndex = -1;
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
@@ -941,7 +944,8 @@ namespace KokoroUpTime
 
                         case "select_feeling":
 
-                            this.ClearSelectFeelingEllipse();
+                            this.SelectBadFeelingListBox.SelectedIndex = -1;
+                            this.SelectGoodFeelingListBox.SelectedIndex = -1;
 
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
@@ -2433,82 +2437,31 @@ namespace KokoroUpTime
             Cancel,
         }
 
-        private void selectFeeling(object sender, MouseButtonEventArgs e)
+        private void FeelingListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.ClearSelectFeelingEllipse();
-
-            //XAML上で記載したListBoxのテンプレートにEllipseコントロールを追加
-            Grid feelingGrid = sender as Grid;
-
-            Color feelingColor;
-
-            if (feelingGrid.Name == "SelectGoodFeelingGrid")
+            ListBox listBox = sender as ListBox;
+            if (this.SelectGoodFeelingListBox.SelectedItem != null && this.SelectBadFeelingListBox.SelectedItem != null)
             {
-                feelingColor = (Color)ColorConverter.ConvertFromString("#FFEE2222");
-            }
-            else if (feelingGrid.Name == "SelectBadFeelingGrid")
-            {
-                feelingColor = (Color)ColorConverter.ConvertFromString("#FF1E90FF");
-            }
-
-            Brush colorBrush = new SolidColorBrush { Color = feelingColor };
-            Ellipse feelingColorEllipse = new Ellipse { Stroke = colorBrush, StrokeThickness = 3, Margin = new Thickness(25, 5, 25, 0) };
-
-            AnswerResult selectResult;
-
-            if (feelingGrid.Children.Count < 3)
-            {
-                feelingGrid.Children.Add(feelingColorEllipse);
-                selectResult = AnswerResult.Decision;
-
-                this.BackPageButton.Visibility = Visibility.Visible;
+                if (listBox.Name == "SelectBadFeelingListBox")
+                {
+                    if (this.SelectGoodFeelingListBox.SelectedItem != null)
+                        this.SelectGoodFeelingListBox.SelectedIndex = -1;
+                }
+                else
+                {
+                    if (this.SelectBadFeelingListBox.SelectedItem != null)
+                        this.SelectBadFeelingListBox.SelectedIndex = -1;
+                }
                 this.NextPageButton.Visibility = Visibility.Visible;
             }
-            else
+            else if (this.SelectGoodFeelingListBox.SelectedItem != null || this.SelectBadFeelingListBox.SelectedItem != null)
             {
-                feelingGrid.Children.RemoveAt(2);
-                selectResult = AnswerResult.Cancel;
+                this.NextPageButton.Visibility = Visibility.Visible;
             }
 
-            if (this.dataOption.IsPlaySE)
-            {
-                var startupPath = FileUtils.GetStartupPath();
+            var startupPath = FileUtils.GetStartupPath();
 
-                PlaySE($@"{startupPath}/Sounds/{selectResult}.wav");
-            }
-        }
-
-        private void ClearSelectFeelingEllipse()
-        {
-            string selectFeelingName = "";
-
-            if (this.SelectFeelingGrid.Visibility == Visibility.Visible)
-            {
-                ListBoxItem myListBoxItem = null;
-
-                if (this.SelectGoodFeelingListBox.SelectedItem != null)
-                {
-                    myListBoxItem = (ListBoxItem)(this.SelectGoodFeelingListBox.ItemContainerGenerator.ContainerFromItem(this.SelectGoodFeelingListBox.SelectedItem));
-                    selectFeelingName = "SelectGoodFeelingGrid";
-                }
-                if (this.SelectBadFeelingListBox.SelectedItem != null)
-                {
-                    myListBoxItem = (ListBoxItem)(this.SelectBadFeelingListBox.ItemContainerGenerator.ContainerFromItem(this.SelectBadFeelingListBox.SelectedItem));
-                    selectFeelingName = "SelectBadFeelingGrid";
-                }
-                if (myListBoxItem != null)
-                {
-                    ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
-                    DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
-                    Grid grid = (Grid)myDataTemplate.FindName(selectFeelingName, myContentPresenter);
-                    if (grid.Children.Count == 3)
-                    {
-                        grid.Children.RemoveAt(2);
-                    }
-                }
-                this.SelectGoodFeelingListBox.SelectedIndex = -1;
-                this.SelectBadFeelingListBox.SelectedIndex = -1;
-            }
+            PlaySE($@"{startupPath}/Sounds/Decision.wav");
         }
 
         private childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject

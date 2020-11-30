@@ -602,6 +602,8 @@ image,shiroji_small_left_down_image
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,本当にそれでいいかのう？ほめる言葉は、「すごいね」「うまいね」などがあったのう。,白じい
+grid,main_msg_grid,fade_out_slow
+clear,grid,main_msg_grid
 wait
 #
 sub,select_other_word_2
@@ -609,6 +611,8 @@ image,shiroji_small_left_down_image
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,本当にそれでいいかのう？しんぱいする言葉は、「だいじょうぶ？」「気をつけてね」などがあったのう。,白じい
+grid,main_msg_grid,fade_out_slow
+clear,grid,main_msg_grid
 wait
 #
 sub,select_other_word_3
@@ -616,6 +620,8 @@ image,shiroji_small_left_down_image
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,本当にそれでいいかのう？はげます言葉は、「がんばってね」「おうえんしてるよ」などがあったのう。,白じい
+grid,main_msg_grid,fade_out_slow
+clear,grid,main_msg_grid
 wait
 #
 sub,select_other_word_4
@@ -623,6 +629,8 @@ image,shiroji_small_left_down_image
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,本当にそれでいいかのう？おれいの言葉は、「ありがとう」「助かったよ」などがあったのう。,白じい
+grid,main_msg_grid,fade_out_slow
+clear,grid,main_msg_grid
 wait
 #
 sub,let's_use_selected_hot_word_1
