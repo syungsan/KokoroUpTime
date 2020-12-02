@@ -106,6 +106,8 @@ namespace KokoroUpTime
         private int cHotWordButtonCount = 0;
         private int rolePlayButtonCount = 0;
 
+        private bool isDeepBreath = false;
+
         public Chapter5()
         {
             InitializeComponent();
@@ -188,6 +190,10 @@ namespace KokoroUpTime
 
                 ["relax_children_image"] = this.RelaxChildrenImage, //
                 ["relax_children_bubble_image"] = this.RelaxChildrenBubbleImage, //
+
+                ["deep_breath_shiroji_image"] = this.DeepBreathShirojiImage, //
+
+                ["relax_shade_image"] = this.RelaxShadeImage, //
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -221,6 +227,8 @@ namespace KokoroUpTime
                 ["relax_children_bubble_text"] = this.RelaxChildrenBubbleTextBlock, //
 
                 ["relax_title_text"] = this.RelaxTitleTextBlock, //
+
+                ["deep_breath_msg"] = this.DeepBreathMessageTextBlock, //
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -239,6 +247,8 @@ namespace KokoroUpTime
 
             this.gridObjects = new Dictionary<string, Grid>
             {
+                ["base_grid"] = this.BaseGrid,
+
                 ["memory_check_grid"] = this.MemoryCheckGrid,
                 ["session_grid"] = this.SessionGrid,
                 ["select_feeling_grid"] = this.SelectFeelingGrid,
@@ -274,6 +284,9 @@ namespace KokoroUpTime
                 ["relax_grid"] = this.RelaxGrid, //
                 ["relax_human_grid"] = this.RelaxHumanGrid, //
                 ["relax_children_grid"] = this.RelaxChildrenGrid, //
+
+                ["deep_breath_grid"] = this.DeepBreathGrid, //
+                ["deep_breath_bubble_grid"] = this.DeepBreathBubbleGrid, //
             };
 
             this.borderObjects = new Dictionary<string, Border>
@@ -422,6 +435,13 @@ namespace KokoroUpTime
             this.RelaxTitleBorder.Visibility = Visibility.Hidden; //
             this.RelaxTitleTextBlock.Visibility = Visibility.Hidden; //
 
+            this.DeepBreathGrid.Visibility = Visibility.Hidden; //
+            this.DeepBreathShirojiImage.Visibility = Visibility.Hidden; //
+            this.DeepBreathBubbleGrid.Visibility = Visibility.Hidden; //
+            this.DeepBreathMessageTextBlock.Visibility = Visibility.Hidden; //
+
+            this.RelaxShadeImage.Visibility = Visibility.Hidden;
+
             this.SelectHotWordValueTitleTextBlock.Text = "";
             this.SessionSubTitleTextBlock.Text = "";
             this.SessionSentenceTextBlock.Text = "";
@@ -443,6 +463,10 @@ namespace KokoroUpTime
             this.RelaxInfoTextBlock.Text = ""; //
 
             this.RelaxTitleTextBlock.Text = ""; //
+
+            this.DeepBreathMessageTextBlock.Text = ""; //
+
+            this.MyBodyImageInputTextBlock.Text = ""; //
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
@@ -1278,6 +1302,84 @@ namespace KokoroUpTime
                     this.ItemBookMainGrid.Visibility = Visibility.Visible;
                     this.ItemBookNoneGrid.Visibility = Visibility.Visible;
 
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    break;
+
+                case "deep_breath":
+                    
+                    this.isDeepBreath = true;
+
+                    break;
+
+                case "fade_out":
+
+                    Storyboard mainGridFadeOutSB = this.FindResource("fade_out_main_grid") as Storyboard;
+
+                    if (mainGridFadeOutSB != null)
+                    {
+                        // 二重終了防止策
+                        bool isDuplicate = false;
+
+                        mainGridFadeOutSB.Completed += (s, e) =>
+                        {
+                            if (!isDuplicate)
+                            {
+                                this.scenarioCount += 1;
+                                this.ScenarioPlay();
+
+                                isDuplicate = true;
+                            }
+                        };
+                        mainGridFadeOutSB.Begin(this);
+                    }
+
+                    break;
+
+                case "fade_in":
+
+                    Storyboard mainGridFadeInSB = this.FindResource("fade_in_main_grid") as Storyboard;
+
+                    if (mainGridFadeInSB != null)
+                    {
+                        // 二重終了防止策
+                        bool isDuplicate = false;
+
+                        mainGridFadeInSB.Completed += (s, e) =>
+                        {
+                            if (!isDuplicate)
+                            {
+                                this.scenarioCount += 1;
+                                this.ScenarioPlay();
+
+                                isDuplicate = true;
+                            }
+                        };
+                        mainGridFadeInSB.Begin(this);
+                    }
+
+                    break;
+
+                case "base_color":
+
+
+                    var baseGridBackgroundColor = this.scenarios[this.scenarioCount][1];
+
+                    switch (baseGridBackgroundColor)
+                    {
+                        case "black":
+
+                            this.BaseGrid.Background = Brushes.Black;
+
+                            break;
+
+                        case "white":
+
+                            this.BaseGrid.Background = Brushes.White;
+
+                            break;
+                    }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
@@ -2446,6 +2548,57 @@ namespace KokoroUpTime
             Mouse.Capture(null);
 
             this.isMouseDown = false;
+
+
+            if (this.isDeepBreath && this.DeepBreathGrid.IsVisible)
+            {
+                this.isDeepBreath = false;
+
+                int deepBreathCount = 0;
+
+                string[] deepBreathWipeAnimes = { "wipe_deep_breath_count5_image", "wipe_deep_breath_count1_image", "wipe_deep_breath_count10_image" };
+
+                var maskOfCount5Image = this.DeepBreathCount5Image.OpacityMask.CloneCurrentValue();
+                var maskOfCount1Image = this.DeepBreathCount1Image.OpacityMask.CloneCurrentValue();
+                var maskOfCount10Image = this.DeepBreathCount10Image.OpacityMask.CloneCurrentValue();
+
+                DeepBreathWipeAnime();
+
+                void DeepBreathWipeAnime()
+                {
+                    Storyboard sb = this.FindResource(deepBreathWipeAnimes[deepBreathCount]) as Storyboard;
+
+                    if (sb != null)
+                    {
+                        // 二重終了防止策
+                        bool isDuplicate = false;
+
+                        sb.Completed += (s, e) =>
+                        {
+                            if (!isDuplicate)
+                            {
+                                deepBreathCount += 1;
+
+                                if (deepBreathCount < deepBreathWipeAnimes.Length)
+                                {
+                                    DeepBreathWipeAnime();
+                                }
+                                else
+                                {
+                                    this.DeepBreathCount5Image.OpacityMask = maskOfCount5Image;
+                                    this.DeepBreathCount1Image.OpacityMask = maskOfCount1Image;
+                                    this.DeepBreathCount10Image.OpacityMask = maskOfCount10Image;
+
+                                    this.scenarioCount += 1;
+                                    this.ScenarioPlay();
+                                }
+                                isDuplicate = true;
+                            }
+                        };
+                        sb.Begin(this);
+                    }
+                }
+            }
         }
 
         // マウスのドラッグ処理（マウスを動かしたとき）

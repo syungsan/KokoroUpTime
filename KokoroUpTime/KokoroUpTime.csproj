@@ -25,7 +25,10 @@
     <None Remove="Fonts\JiyunoTsubasa.ttf" />
     <None Remove="Fonts\TanukiMagic.ttf" />
     <None Remove="good_words_grid.png" />
+    <None Remove="Images\10seconds_arrow.png" />
     <None Remove="Images\159474.png" />
+    <None Remove="Images\1second_arrow.png" />
+    <None Remove="Images\5seconds_arrow.png" />
     <None Remove="Images\activity_result_msg_04_01.png" />
     <None Remove="Images\activity_result_msg_04_02.png" />
     <None Remove="Images\activity_result_msg_04_03.png" />
@@ -253,6 +256,7 @@
     <None Remove="Images\red_needle.png" />
     <None Remove="Images\relax_female.png" />
     <None Remove="Images\relax_male.png" />
+    <None Remove="Images\relax_shade.png" />
     <None Remove="Images\return_to_item.png" />
     <None Remove="Images\return_to_title.png" />
     <None Remove="Images\return_to_top.png" />
@@ -280,6 +284,7 @@
     <None Remove="Images\small_bubble_left_down_red.png" />
     <None Remove="Images\small_bubble_left_down_yellow.png" />
     <None Remove="Images\small_bubble_left_red.png" />
+    <None Remove="Images\small_bubble_left_top.png" />
     <None Remove="Images\small_bubble_left_up.png" />
     <None Remove="Images\small_bubble_left_yellow.png" />
     <None Remove="Images\small_bubble_right_down.png" />
@@ -330,7 +335,10 @@
     <Resource Include="Fonts\HGRPP1.TTC" />
     <Resource Include="Fonts\JiyunoTsubasa.ttf" />
     <Resource Include="Fonts\TanukiMagic.ttf" />
+    <Resource Include="Images\10seconds_arrow.png" />
     <Resource Include="Images\159474.png" />
+    <Resource Include="Images\1second_arrow.png" />
+    <Resource Include="Images\5seconds_arrow.png" />
     <Resource Include="Images\activity_result_msg_04_01.png" />
     <Resource Include="Images\activity_result_msg_04_02.png" />
     <Resource Include="Images\activity_result_msg_04_03.png" />
@@ -508,6 +516,7 @@
     <Resource Include="Images\red_arrow_right.png" />
     <Resource Include="Images\relax_female.png" />
     <Resource Include="Images\relax_male.png" />
+    <Resource Include="Images\relax_shade.png" />
     <Resource Include="Images\return_to_item.png" />
     <Resource Include="Images\return_to_top.png" />
     <Resource Include="Images\short_bubble_left.png" />
@@ -525,6 +534,7 @@
     <Resource Include="Images\small_bubble_left_down_red.png" />
     <Resource Include="Images\small_bubble_left_down_yellow.png" />
     <Resource Include="Images\small_bubble_left_red.png" />
+    <Resource Include="Images\small_bubble_left_top.png" />
     <Resource Include="Images\small_bubble_left_up.png" />
     <Resource Include="Images\small_bubble_left_yellow.png" />
     <Resource Include="Images\small_bubble_right_down.png" />
