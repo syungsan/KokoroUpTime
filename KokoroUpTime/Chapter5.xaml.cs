@@ -229,6 +229,9 @@ namespace KokoroUpTime
                 ["relax_title_text"] = this.RelaxTitleTextBlock, //
 
                 ["deep_breath_msg"] = this.DeepBreathMessageTextBlock, //
+
+                ["relax_method_text"] = this.RelaxMethodTextBlock, //
+                ["relax_method_msg_text"] = this.RelaxMethodMessageTextBlock, //
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -243,6 +246,9 @@ namespace KokoroUpTime
                 ["feeling_prev_back_button"] = this.FeelingPrevBackButton,
                 // ["manga_prev_back_button"] = this.MangaPrevBackButton,
                 ["complete_next_button"] = this.CompleteNextButton,
+
+                ["next_go_button"] = this.NextGoButton, //
+                ["back_go_button"] = this.BackGoButton, //
             };
 
             this.gridObjects = new Dictionary<string, Grid>
@@ -287,6 +293,8 @@ namespace KokoroUpTime
 
                 ["deep_breath_grid"] = this.DeepBreathGrid, //
                 ["deep_breath_bubble_grid"] = this.DeepBreathBubbleGrid, //
+
+                ["relax_method_grid"] = this.RelaxMethodGrid, //
             };
 
             this.borderObjects = new Dictionary<string, Border>
@@ -440,7 +448,13 @@ namespace KokoroUpTime
             this.DeepBreathBubbleGrid.Visibility = Visibility.Hidden; //
             this.DeepBreathMessageTextBlock.Visibility = Visibility.Hidden; //
 
-            this.RelaxShadeImage.Visibility = Visibility.Hidden;
+            this.RelaxShadeImage.Visibility = Visibility.Hidden; //
+
+            this.RelaxMethodGrid.Visibility = Visibility.Hidden; //
+            this.RelaxMethodTextBlock.Visibility = Visibility.Hidden; //
+            this.RelaxMethodMessageTextBlock.Visibility = Visibility.Hidden; //
+            this.NextGoButton.Visibility = Visibility.Hidden; //
+            this.BackGoButton.Visibility = Visibility.Hidden; //
 
             this.SelectHotWordValueTitleTextBlock.Text = "";
             this.SessionSubTitleTextBlock.Text = "";
@@ -467,6 +481,9 @@ namespace KokoroUpTime
             this.DeepBreathMessageTextBlock.Text = ""; //
 
             this.MyBodyImageInputTextBlock.Text = ""; //
+
+            this.RelaxMethodTextBlock.Text = ""; //
+            this.RelaxMethodMessageTextBlock.Text = ""; //
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
@@ -1990,6 +2007,14 @@ namespace KokoroUpTime
                     BackScenario();
                 }
 
+                if (button.Name == "BackGoButton")
+                {
+                    this.BackGoButton.Visibility = Visibility.Hidden;
+                    this.NextGoButton.Visibility = Visibility.Hidden;
+
+                    BackScenario();
+                }
+
                 void BackScenario()
                 {
                     var index = this.scenarioCount;
@@ -2391,6 +2416,15 @@ namespace KokoroUpTime
                 {
                     this.BackMessageButton.Visibility = Visibility.Hidden;
                     this.NextMessageButton.Visibility = Visibility.Hidden;
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "NextGoButton")
+                {
+                    this.NextGoButton.Visibility = Visibility.Hidden;
+                    this.BackGoButton.Visibility = Visibility.Hidden;
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();

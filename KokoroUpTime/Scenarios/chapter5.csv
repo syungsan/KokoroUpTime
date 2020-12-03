@@ -450,6 +450,17 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,<image=name>【name】</image>【くん／ちゃん／さん】のリラックス方法はどんなものかのう？鬱<image=name>【name】</image>【くん／ちゃん／さん】のリラックス方法を友だちに教えてみてくれ。,白じい
 click,msg
 #
+hide,image,shiroji_right_image
+hide,grid,main_msg_grid
+hide,button,next_page_button
+hide,button,back_page_button
+text,relax_method_text,<image=name>【name】</image>【くん／ちゃん／さん】のリラックス方法をたくさん書いてみよう！
+grid,relax_method_grid
+text,relax_method_msg_text,<image=name>【name】</image>【くん／ちゃん／さん】のリラックス方法を友だちに教えてあげよう！
+button,next_go_button
+button,back_go_button
+wait
+#
 reset
 image,bg_image,background_08.png
 image,children_face_left_image,kimi_face_03.png

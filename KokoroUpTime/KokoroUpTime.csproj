@@ -256,6 +256,7 @@
     <None Remove="Images\red_needle.png" />
     <None Remove="Images\relax_female.png" />
     <None Remove="Images\relax_male.png" />
+    <None Remove="Images\relax_method.png" />
     <None Remove="Images\relax_shade.png" />
     <None Remove="Images\return_to_item.png" />
     <None Remove="Images\return_to_title.png" />
@@ -516,6 +517,7 @@
     <Resource Include="Images\red_arrow_right.png" />
     <Resource Include="Images\relax_female.png" />
     <Resource Include="Images\relax_male.png" />
+    <Resource Include="Images\relax_method.png" />
     <Resource Include="Images\relax_shade.png" />
     <Resource Include="Images\return_to_item.png" />
     <Resource Include="Images\return_to_top.png" />

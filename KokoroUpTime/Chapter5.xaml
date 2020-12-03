@@ -220,7 +220,7 @@
     <Viewbox>
         <Grid x:Name="BaseGrid" Width="1920" Height="1080">
             <Grid x:Name="MainGrid">
-                <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_02.png" d:IsHidden="True"/>
+                <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_02.png"/>
                 <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
                     <Border x:Name="MangaTitleBorder" BorderThickness="6,6,6,6" BorderBrush="Black" Height="80" VerticalAlignment="Top" Margin="88,21,88,0" d:IsHidden="True">
                         <outline_maker:OutlineText x:Name="MangaTitleOutlineText" Background="{x:Null}" Foreground="#FFF8CBAD" FontSize="60" Padding="4" Margin="4,0,4,-18" OutlineThickness="4" Outline="#FFED7D31" Text="第５回　「きもちとからだはどんな関係？」" TextAlignment="Center" FontFamily="/Fonts/HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体" d:IsHidden="True"/>
@@ -345,7 +345,7 @@
                         <TextBlock x:Name="SessionStarTextBlock" HorizontalAlignment="Left" Margin="35,109,0,0" VerticalAlignment="Top" FontSize="48" RenderTransformOrigin="0.345,0.474" FontWeight="Bold" Text="☆" TextAlignment="Center" d:IsHidden="True"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="ChallengeTimeGrid">
+                <Grid x:Name="ChallengeTimeGrid" d:IsHidden="True">
                     <Border x:Name="ChallengeTimeTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,261,0,540" Background="#FFFFC000" d:IsHidden="True">
                         <TextBlock x:Name="ChallengeTimeTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="180" Foreground="#FF9966FF" FontWeight="Normal" TextAlignment="Center" d:IsHidden="True"/>
                     </Border>
@@ -532,7 +532,7 @@
                     </Grid>
                     <Image x:Name="RelaxShadeImage" Height="561" Width="745" Margin="669,38,506,481" Source="/Images/relax_shade.png" d:IsHidden="True"/>
                 </Grid>
-                <Grid x:Name="GroupActivityGrid" d:IsHidden="True">
+                <Grid x:Name="GroupActivityGrid">
                     <Grid x:Name="Let_sUseHotWordGrid" d:IsHidden="True">
                         <Image x:Name="Let_sUseHotWordTitleImage" HorizontalAlignment="Center" Height="98" Margin="0,50,0,0" VerticalAlignment="Top" Width="1106" Source="/Images/let's_use_hot_word_title.png" d:IsHidden="True"/>
                         <Grid x:Name="SituationsGrid" Margin="175,205,330,95" d:IsHidden="True">
@@ -653,8 +653,28 @@
                         <TextBlock x:Name="RolePlayInfoTextBlock" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment" Margin="88,106,76,98" FontSize="52" Foreground="White" d:IsHidden="True"><Run Text="ロールプレイとは…"/><LineBreak/><Run Text="☆それぞれの役割を決めて、練習をしてみることじゃ。"/><LineBreak/><Run Text="☆今回は、あたたかい言葉をかける人と、かけられる"/><LineBreak/><Run Text="　人になってみるのじゃ。"/></TextBlock>
                     </Grid>
                     <Border x:Name="RolePlayMessageBorder" BorderThickness="1" BorderBrush="Black" Margin="0,105,0,795" Background="#FFED7D31" d:IsHidden="True">
-                        <TextBlock x:Name="RolePlayMessageTextBlock" TextWrapping="Wrap" FontSize="120" Foreground="White" TextAlignment="Center" d:IsHidden="True"><Run Language="ja-jp" Text="声に出してれんしゅうしてみよう！"/></TextBlock>
+                        <TextBlock x:Name="RolePlayMessageTextBlock" TextWrapping="Wrap" FontSize="120" Foreground="White" TextAlignment="Center" d:IsHidden="True" Height="178" Margin="0,0,6,0" d:LayoutOverrides="VerticalAlignment, TopPosition, BottomPosition"><Run Language="ja-jp" Text="声に出してれんしゅうしてみよう！"/></TextBlock>
                     </Border>
+                    <Grid x:Name="RelaxMethodGrid">
+                        <TextBlock x:Name="RelaxMethodTextBlock" Text="TextBlock" TextWrapping="Wrap" Height="131" VerticalAlignment="Top" Margin="75,77,75,0" Background="Yellow" FontSize="72" FontWeight="Normal" TextAlignment="Center">
+                            <TextBlock.TextDecorations>
+                                <TextDecoration/>
+                            </TextBlock.TextDecorations>
+                        </TextBlock>
+                        <Button x:Name="RelaxMethodInputButton" Height="671" Width="1698" Background="Transparent" BorderBrush="{x:Null}" Margin="111,259,111,150">
+                            <Grid x:Name="RelaxMethodInputGrid">
+                                <Image x:Name="RelaxMethodInputImage" Source="/Images/relax_method.png"/>
+                                <TextBox x:Name="RelaxMethodInputTextBox" Text="TextBox" TextWrapping="Wrap" Margin="41,45,41,47" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" FontSize="48"/>
+                                <TextBlock x:Name="RelaxMethodMessageTextBlock" Text="TextBlock" TextWrapping="Wrap" Height="66" Margin="82,566,72,0" VerticalAlignment="Top" FontSize="48" TextAlignment="Right"/>
+                            </Grid>
+                        </Button>
+                        <Button x:Name="NextGoButton" Width="442" Height="143" Background="Transparent" BorderBrush="{x:Null}" Margin="1478,927,0,10" Click="Button_Click">
+                            <Image x:Name="NextGoImage" Source="/Images/next_go_button.png"/>
+                        </Button>
+                        <Button x:Name="BackGoButton" Width="462" Height="142" BorderBrush="Transparent" Background="{x:Null}" Margin="10,938,1448,0" Click="Button_Click">
+                            <Image x:Name="BackGoImage" Source="/Images/prev_back_.png"/>
+                        </Button>
+                    </Grid>
                 </Grid>
                 <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
                     <Image x:Name="ItemCenterUpImage" HorizontalAlignment="Center" Height="691" VerticalAlignment="Top" Width="490" Source="/Images/item02_solo.png" Margin="0,55,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
