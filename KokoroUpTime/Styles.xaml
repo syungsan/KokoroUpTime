@@ -4,26 +4,34 @@
                     xmlns:outline_marker="clr-namespace:OutlineTextMaker">
 
     <!--２重枠線,角丸 （一応Button等のControlクラスを継承したコントロールに適用可能）-->
-    <Style TargetType="{x:Type Control}" x:Key="BubbleFrame">
+    <Style TargetType="{x:Type Button}" x:Key="BubbleFrame">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Control}">
+                <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Border Background="White"
+                        <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="30" >
+                                CornerRadius="60" >
                         </Border>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <ContentPresenter Content="{TemplateBinding Content}"/>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFBFE6FD"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="{x:Type Control}" x:Key="DoublelineFrame">
+    <Style TargetType="{x:Type Button}" x:Key="DoublelineFrame">
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Control}">
+                <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -32,12 +40,21 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Margin="10"/>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Viewbox StretchDirection="DownOnly" Margin="20">
+                            <ContentPresenter Content="{TemplateBinding Content}"/>
+                        </Viewbox>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFBFE6FD"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
+    
+    
     <!--赤色破線　Buttonのみ-->
     <Style TargetType="Button" x:Key="BorderDashArrayButton">
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -275,6 +292,9 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="LightPink"/>
             </Trigger>
+            <!--<Trigger Property="AreAnyTouchesOver" Value="True">
+                <Setter Property="Background" Value="LightPink"/>
+            </Trigger>-->
         </Style.Triggers>
     </Style>
 

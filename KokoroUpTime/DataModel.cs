@@ -241,4 +241,58 @@ namespace KokoroUpTime
 
         public string CreatedAt { get; set; }
     }
+
+    public class DataChapter7
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+
+        public string CreatedAt { get; set; }
+    }
+
+    public class DataChapter8
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+
+        public string CreatedAt { get; set; }
+    }
+
+    public class DataChapter9
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+
+        public string CreatedAt { get; set; }
+    }
+
+    public class DataChapter10
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+
+        public string CreatedAt { get; set; }
+    }
+
+    public class DataChapter11
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+
+        public string CreatedAt { get; set; }
+    }
+
+    public class DataChapter12
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+
+        public string CreatedAt { get; set; }
+    }
 }

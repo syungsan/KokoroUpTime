@@ -595,7 +595,7 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="ItemGrid" Visibility="Visible">
+            <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
                 <Image x:Name="ItemCenterImage" HorizontalAlignment="Left" Height="512" VerticalAlignment="Top" Width="363" Source="/Images/item01_solo.png" Margin="804,266,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -683,7 +683,7 @@
                 <Image x:Name="ChallengeTimeTitleImage" Source="/Images/orange_title_plate.png" VerticalAlignment="Top" Margin="0,250,0,0" d:IsHidden="True"/>
                 <TextBlock x:Name="ChallengeTimeTitleText" Text="チャレンジタイム！パート②" FontSize="140" Foreground="BlueViolet"  VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Yu Gothic" FontWeight="UltraBlack" Margin="0,250,0,0" Width="1920" Height="188" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="Challenge1Grid" d:IsHidden="True">
+            <Grid x:Name="Challenge1Grid">
                 <Image x:Name="Challenge1Title" Source="/Images/challenge1_title.png" Margin="300,50,500,900" d:IsHidden="True"/>
                 <Image x:Name="GoodEventFrame" Source="/Images/challenge_frame1.png" Margin="200,200,400,200" Stretch="Fill" d:IsHidden="True"/>
                 <Grid x:Name="GoodEventSelectGrid" Margin="220,220,420,220" d:IsHidden="True" >
@@ -784,19 +784,19 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="Challenge2Grid" d:IsHidden="True">
-                <Image x:Name="Challenge2GridTitle" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="200,20" Source="Images/challenge2_title.png" d:IsHidden="True"/>
-                <TextBlock x:Name="Challenge2Text" Text="青助くんの楽しいことリストについて、きもちの大きさを書いてみよう&#10;次に、かんたんにできるか〇×△をつけてみよう！" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Yu Gothic" FontWeight="UltraBold" Margin="100,200" d:IsHidden="True"/>
-                <TextBlock x:Name="KindOfFeeling" Text="きもちの種類" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1037,444,569,578" d:IsHidden="True"/>
+            <Grid x:Name="Challenge2Grid">
+                <Image x:Name="Challenge2GridTitle" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="200,20" Source="Images/challenge2_title.png"/>
+                <TextBlock x:Name="Challenge2Text" Text="青助くんの楽しいことリストについて、きもちの大きさを書いてみよう&#10;次に、かんたんにできるか〇×△をつけてみよう！" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Yu Gothic" FontWeight="UltraBold" Margin="100,200"/>
+                <TextBlock x:Name="KindOfFeeling" Text="きもちの種類" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1037,444,569,578"/>
                 <TextBlock x:Name="SizeOfFeeling" Text="きもちのおおきさ" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1007,720,539,300" d:IsHidden="True"/>
                 <TextBlock x:Name="DifficultyOfAction" Text="かんたんにできるか" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1428,473,59,545" d:IsHidden="True"/>
-                <Grid x:Name="AosukeKindOfFeelingGrid" Margin="1037,507,569,416" d:IsHidden="True">
-                    <Image x:Name="KindOfFeelingButtonImage" Source="Images/kind_of_feeling_button_frame.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="AosukeKindOfFeelingText" Text="ゆったり" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" d:IsHidden="True" />
+                <Grid x:Name="AosukeKindOfFeelingGrid" Margin="1037,507,569,416">
+                    <Image x:Name="KindOfFeelingButtonImage" Source="Images/kind_of_feeling_button_frame.png"/>
+                    <TextBlock x:Name="AosukeKindOfFeelingText" Text="ゆったり" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" />
                 </Grid>
                 <Grid x:Name="AosukeSizeOfFeelingGrid"  Margin="1037,807,569,116" d:IsHidden="True">
-                    <Button x:Name="SizeOfFeelingButton" Background="Transparent" BorderBrush="Transparent" Click="Button_Click" d:IsHidden="True">
-                        <TextBlock x:Name="AosukeSizeOfFeelingText" Text="(  20  )" FontSize="93" d:IsHidden="True"/>
+                    <Button x:Name="SizeOfFeelingButton" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                        <TextBlock x:Name="AosukeSizeOfFeelingText" Text="(  20  )" FontSize="93"/>
                     </Button>
                 </Grid>
                 <Grid x:Name="AosukeDifficultyOfActionGrid" Margin="1458,540,89,215" d:IsHidden="True">
@@ -869,9 +869,9 @@
                 </Grid>
             </Grid>
             <Grid x:Name="GaugeGrid" d:IsHidden="True">
-                <Grid x:Name="SelectHeartGrid" HorizontalAlignment="Center" Margin="400,400" d:IsHidden="True">
-                    <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_red.png" Margin="5,0,0,0"/>
-                    <Image x:Name="SelectNeedleImage"  Source="/Images/red_needle.png" RenderTransformOrigin="0.5,0.92" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,63,10,20">
+                <Grid x:Name="SelectHeartGrid" Margin="400,450,400,100">
+                    <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="10,0,0,0"/>
+                    <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.87" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,120,10,20">
                         <Image.RenderTransform>
                             <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter2}}}"/>
                         </Image.RenderTransform>
@@ -1008,7 +1008,7 @@
                 </Grid>
                 <Image x:Name="EpilogueItem" Source="/Images/item02_solo.png" Margin="1288,465,12,10" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="ShirojiGrid" >
+            <Grid x:Name="ShirojiGrid" d:IsHidden="True" >
                 <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="1271,343,70,110" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -1114,7 +1114,7 @@
                     <TextBlock x:Name="ChildrenFaceSmallLeftMessageTextBlock" HorizontalAlignment="Left" Margin="19,10,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Height="125" Width="378" TextAlignment="Center" d:IsHidden="True"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid" >
+            <Grid x:Name="GroupeActivityGrid" d:IsHidden="True" >
                 <Image x:Name="GroupeActivityTitle" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Images/group_activity_title01.png" Height="155"/>
                 <TextBlock x:Name="GroupeActivityText" FontSize="37" Text="友だちと話し合って、「ちょっぴりうきうき」をたくさん書いてみよう！"  Margin="300,480,300,540" TextAlignment="Center" FontFamily="Yu Gothic"/>
                 <Grid x:Name="InputMyALittleExcitedGrid" Width="1200" Height="525"  VerticalAlignment="Bottom">

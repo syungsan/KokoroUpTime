@@ -14,7 +14,7 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,それでは<image=name>【name】</image>【くん／ちゃん／さん】、鬱「こころあっぷタイム」とは何か説明していくぞい。,白じい
 click,msg,next_only
 #
-msg,main_msg,だれでも「こころ」を もっているんじゃが、鬱<font=####black>「こころ」の勉強</font>をすることは あまりないのじゃ。,白じい
+msg,main_msg,だれでも「こころ」をもっているんじゃが、鬱<font=####black>「こころ」の勉強</font>をすることはあまりないのじゃ。,白じい
 click,msg
 #
 msg,main_msg,楽しくなったり、うれしくなったりするだけでなく、鬱<font=####black>だれにでも、心配したり、悲しんだり、怒ったりすることがあるのじゃ。</font>,白じい
@@ -23,7 +23,7 @@ click,msg
 msg,main_msg,こども、おとな、つよい人、よわい人、大きい人、ちいさい人、鬱<font=####black>どんな人でも、こまっていることがあるのじゃ。</font>,白じい
 click,msg
 #
-msg,main_msg,『こころあっぷタイム』は、こまっているときに、鬱<font=####black>元気になったり、リラックスできる方法を 学ぶ時間なのだ！</font> ,白じい
+msg,main_msg,『こころあっぷタイム』は、こまっているときに、鬱<font=####black>元気になったり、リラックスできる方法を学ぶ時間なのだ！</font>,白じい
 click,msg
 #
 reset
@@ -41,7 +41,7 @@ grid,rule_board_grid
 wait,0.5
 msg,rule_board_title_msg,教室のルール
 wait,1.0
-rule,rule_board_check1_msg,１．人のことを わらわない,0
+rule,rule_board_check1_msg,１．人のことをわらわない,0
 wait,0.5
 rule,rule_board_check2_msg,２．ふざけない,1
 wait,0.5
@@ -69,7 +69,7 @@ hide,image,intro_aosuke_face_image
 image,intro_akamaru_face_image,,float_in,no_sync
 image,main_msg_bubble_image,left_a_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
-msg,main_msg,おれの名前は 赤丸だ。小学校6年だ。鬱好きな食べ物はカレーとコーラだ。鬱苦手なものは犬だ。,赤丸
+msg,main_msg,おれの名前は赤丸だ。小学校6年だ。鬱好きな食べ物はカレーとコーラだ。鬱苦手なものは犬だ。,赤丸
 click,msg
 #
 hide,grid,main_msg_grid
@@ -79,7 +79,7 @@ hide,image,intro_akamaru_face_image
 image,intro_aosuke_face_image,,float_in,no_sync
 image,main_msg_bubble_image,left_b_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
-msg,main_msg,ぼくの名前は青助です。小学校6年生です。鬱好きなものはテレビ。鬱勉強もスポーツも あんまり得意じゃないんだ。,青助
+msg,main_msg,ぼくの名前は青助です。小学校6年生です。鬱好きなものはテレビ。鬱勉強もスポーツもあんまり得意じゃないんだ。,青助
 click,msg
 #
 hide,grid,main_msg_grid
@@ -87,6 +87,7 @@ clear,text,main_msg
 hide,image,intro_aosuke_face_image
 hide,image,shiroji_right_center_image
 hide,image,children_info_image
+image,shiroji_right_image,shiroji_02.png
 image,intro_kimi_face_image,,float_in,no_sync
 image,main_msg_bubble_image,left_c_big_bubble.png
 grid,main_msg_grid,appear_expansion_slow
@@ -126,7 +127,7 @@ image,manga_image,manga1-5.png,flip
 flip
 image,manga_image,manga1-6.png,flip
 hide,button,manga_flip_button
-click,page
+click,page,next_only
 #
 scene,アイテム出現
 reset
@@ -136,7 +137,7 @@ grid,item_name_plate_left_grid
 image,item_center_image,,appear_rotation
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,わしの作った発明品をつかって、自分のきもちを 調べてみるのじゃ！,白じい
+msg,main_msg,わしの作った発明品をつかって、自分のきもちを調べてみるのじゃ！,白じい
 click,page
 #
 scene,アイテム紹介
@@ -169,7 +170,7 @@ grid,music_info_grid,slide,no_sync
 image,shiroji_right_up_image,shiroji_04.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,「きもち」には、いいきもちといやなきもちだけでなく、鬱いろいろな種類があるぞい。鬱自分がなったことのある「きもち」に ○ をつけてみよう！,白じい
+msg,main_msg,「きもち」には、いいきもちといやなきもちだけでなく、鬱いろいろな種類があるぞい。鬱自分がなったことのある「きもち」に○をつけてみよう！,白じい
 click,page
 #
 scene,チャレンジきもち選択
@@ -224,7 +225,7 @@ image,kimi_stand_small_left_image
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,授業中に先生から指名されたとき、鬱キミちゃんはどんな「きもち」になるかの？,白じい
-click,msg
+click,msg,next_only
 #
 msg,main_msg,きもちセンサーをつかって、きもちの種類を選んでみよう！,白じい
 click,msg
@@ -246,8 +247,8 @@ hide,button,back_page_button
 clear,text,main_msg
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,キミちゃんは【$kimis_kind_of_feeling$】という きもちなんじゃな。鬱そのきもちを選んだ理由も考えて話し合ってみるのじゃ！,白じい
-click,page
+msg,main_msg,キミちゃんは【$kimis_kind_of_feeling$】というきもちなんじゃな。鬱そのきもちを選んだ理由も考えて話し合ってみるのじゃ！,白じい
+click,page,next_only
 #
 scene,キミちゃんのきもちの大きさ
 reset
@@ -283,7 +284,7 @@ grid,kimi_plate_inner_down_grid,fade_in
 text,kimi_scene2_text,,,fade_in
 text,kimi_kind_of_feeling_down_text,,,fade_in
 text,kimi_size_of_feeling_down_text,,,fade_in
-click,page
+click,page,next_only
 #
 scene,公園で草野球
 reset
@@ -291,8 +292,8 @@ image,bg_image,background_08.png
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,赤丸くんと青助くんは、放課後、野球を するようじゃ。鬱２人の「きもち」とその「大きさ」を 考えてみよう！,白じい
-click,msg
+msg,main_msg,赤丸くんと青助くんは、放課後、野球をするようじゃ。鬱２人の「きもち」とその「大きさ」を考えてみよう！,白じい
+click,msg,next_only
 #
 clear,text,main_msg
 hide,grid,main_msg_grid
@@ -321,7 +322,7 @@ image,shiroji_small_right_center_image
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,放課後に草野球をするとき、赤丸くんはどんな「きもち」になるかの？,白じい
-click,msg
+click,msg,next_only
 #
 msg,main_msg,きもちセンサーをつかって、きもちの種類を選んでみよう！,白じい
 click,msg
@@ -330,7 +331,6 @@ clear,text,main_msg
 hide,grid,main_msg_grid
 grid,select_feeling_grid
 clear,select_feeling
-button,back_page_button
 wait
 #
 hide,grid,select_feeling_grid
@@ -340,8 +340,8 @@ text,view_kind_of_feeling_person_text,赤丸くんの「きもち」
 text,view_kind_of_feeling_text,$akamarus_kind_of_feeling$
 grid,view_kind_of_feeling_grid
 grid,main_msg_grid,appear_expansion
-msg,main_msg,赤丸くんは【$akamarus_kind_of_feeling$】という きもちなんじゃな。鬱きもちの大きさは どれくらいかの？,白じい
-click,page
+msg,main_msg,赤丸くんは【$akamarus_kind_of_feeling$】というきもちなんじゃな。鬱きもちの大きさはどれくらいかの？,白じい
+click,page,next_only
 #
 scene,赤丸くんのきもちの大きさ
 reset
@@ -352,7 +352,7 @@ grid,children_face_small_left_msg_grid
 image,shiroji_small_right_center_image
 gauge
 grid,select_heart_grid
-click,page
+click,page,next_only
 #
 hide,button,next_page_button
 hide,button,back_page_button
@@ -360,8 +360,8 @@ text,view_size_of_feeling_text,$akamarus_size_of_feeling$
 grid,view_size_of_feeling_grid
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,赤丸くんのきもちは【$akamarus_size_of_feeling$】くらいの 大きさなんじゃな。鬱次は青助くんのきもちと　その大きさを考えてみよう。,白じい
-click,page
+msg,main_msg,赤丸くんのきもちは【$akamarus_size_of_feeling$】くらいの大きさなんじゃな。鬱次は青助くんのきもちと　その大きさを考えてみよう。,白じい
+click,page,next_only
 #
 scene,青助くんのきもちの種類
 reset
@@ -373,7 +373,7 @@ image,shiroji_small_right_center_image
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,放課後に草野球をするとき、青助くんはどんな「きもち」になるかの？,白じい
-click,msg
+click,msg,next_only
 #
 msg,main_msg,きもちセンサーをつかって、きもちの種類を選んでみよう！,白じい
 click,msg
@@ -382,7 +382,6 @@ clear,text,main_msg
 hide,grid,main_msg_grid
 grid,select_feeling_grid
 clear,select_feeling
-button,back_page_button
 wait
 #
 hide,grid,select_feeling_grid
@@ -392,8 +391,8 @@ text,view_kind_of_feeling_person_text,青助くんの「きもち」
 text,view_kind_of_feeling_text,$aosukes_kind_of_feeling$
 grid,view_kind_of_feeling_grid
 grid,main_msg_grid,appear_expansion
-msg,main_msg,青助くんは【$aosukes_kind_of_feeling$】という きもちなんじゃな。鬱きもちの大きさは どれくらいかの？,白じい
-click,page
+msg,main_msg,青助くんは【$aosukes_kind_of_feeling$】というきもちなんじゃな。鬱きもちの大きさはどれくらいかの？,白じい
+click,page,next_only
 #
 scene,青助くんのきもちの大きさ
 reset
@@ -404,7 +403,7 @@ grid,children_face_small_left_msg_grid
 image,shiroji_small_right_center_image
 gauge
 grid,select_heart_grid
-click,page
+click,page,next_only
 #
 hide,button,next_page_button
 hide,button,back_page_button
@@ -412,8 +411,8 @@ text,view_size_of_feeling_text,$aosukes_size_of_feeling$
 grid,view_size_of_feeling_grid
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,青助くんのきもちは【$aosukes_size_of_feeling$】くらいの 大きさなんじゃな。鬱ふたりのきもちと きもちの大きさを 見比べてみよう！,白じい
-click,page
+msg,main_msg,青助くんのきもちは【$aosukes_size_of_feeling$】くらいの大きさなんじゃな。鬱ふたりのきもちときもちの大きさを見比べてみよう！,白じい
+click,page,next_only
 #
 scene,ふたりのきもちの比較
 reset
@@ -429,7 +428,7 @@ image,shiroji_very_small_right_image
 gauge
 grid,compare_msg_grid
 msg,compare_msg_text,同じ場面でも鬱人によってきもちと大きさが鬱ことなっておるな！
-click,page
+click,page,next_only
 #
 scene,まとめ
 reset
@@ -443,10 +442,16 @@ grid,summary_grid
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,はじめてのこころあっぷタイムは どうじゃったかな？鬱今日から、赤丸くん、青助くん、キミちゃんといっしょに鬱「きもち」についての勉強をはじめていくぞい。,白じい
-click,msg
+msg,main_msg,はじめてのこころあっぷタイムはどうじゃったかな？鬱今日から、赤丸くん、青助くん、キミちゃんといっしょに鬱「きもち」についての勉強をはじめていくぞい。,白じい
+click,msg,next_only
 #
-msg,main_msg,次回のテーマは鬱<font=#68>「たのしいことを さがそう」</font>鬱じゃ！おたのしみに！,白じい
+image,bg_image,background_09.png
+hide,grid,item_last_info_grid
+hide,image,item_left_last_image
+image,shiroji_right_image,shiroji_02.png
+grid,summary_grid
+grid,main_msg_grid
+msg,main_msg,次回のテーマは鬱<font=#68>「たのしいことをさがそう」</font>鬱じゃ！おたのしみに！,白じい
 click,page
 #
 scene,今回の発明品おさらい

@@ -5,6 +5,11 @@ reset
 image,bg_image,background_02.png
 image,children_face_image,kimi_face_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble_yellow.png
+bgm,set,moku_moku_study.mp3,loop,50
+bgm,play
+text,music_title_text,もくもくStudy♪
+text,composer_name_text,しゅんじ～
+grid,music_info_grid,slide,no_sync
 grid,main_msg_grid,appear_expansion
 msg,main_msg,前のこころあっぷタイムでは、きもちセンサーをつかって鬱みんなでいっしょに勉強したね,キミ
 click,page,next_only
@@ -52,7 +57,7 @@ image,manga_image,manga2-2.png,flip
 flip
 image,manga_image,manga2-3.png,flip
 hide,button,manga_flip_button
-click,page
+click,page,next_only
 #
 scene,チャレンジタイム 開始
 reset
@@ -93,7 +98,7 @@ msg,main_msg,ねえ、白じい。鬱楽しいことはわかったんだけど�
 click,msg,next_only
 #
 image,shiroji_right_image,shiroji_04.png,,,gray
-image,children_stand_left_image
+image,children_stand_left_image,aosuke_stand_01.png
 image,main_msg_bubble_image,left_big_bubble_blue.png
 msg,main_msg,<font=#44#blue>やる気や元気がでないときって、どうしたらいいのかなぁ？</font>,青助
 click,msg
@@ -107,6 +112,11 @@ click,msg
 msg,main_msg,たとえば、元気がでないときに、みんなで遊園地に行ったり、鬱スポーツをすることはかんたんなことではないのう。,白じい
 click,msg
 #
+hide,grid,item_name_plate_left_grid
+hide,image,item_center_image,item02_solo.png
+image,bg_image,background_08.png
+image,children_stand_left_image,aosuke_stand_01.png,,,gray
+image,shiroji_right_image,shiroji_04.png
 msg,main_msg,<font=#38#yellow>そういう元気が出ないときは、わしの発明品をつかえばよいぞ！。</font>,白じい
 click,page
 #
@@ -207,7 +217,7 @@ image,shiroji_left_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,チャレンジタイムはできたかのう？鬱きもちの小ささとかんたんにできることはなんだか関係がありそうじゃのう！,白じい
-click,page
+click,page,next_only
 #
 reset
 image,bg_image,background_03.png
@@ -232,8 +242,14 @@ image,children_face_image,aosuke_face_02.png,,,gray
 image,shiroji_right_image,shiroji_02.png
 image,main_msg_bubble_image,right_big_bubble.png
 msg,main_msg,そのとおり！青助くんの言う通りじゃ！鬱まわりの人といっしょにできることも重要なポイントなのじゃ！,白じい
-click,page,next_only
+click,msg
 #
+hide,grid,item_plate_grid
+hide,image,shiroji_center_down_small_image
+hide,grid,item_point_message_grid
+image,children_face_image,aosuke_face_02.png,,,gray
+image,shiroji_right_image,shiroji_02.png
+grid,main_msg_grid
 msg,main_msg,それではうきうきシューズのポイントをまとめておくぞい！,白じい
 click,page
 #
@@ -259,6 +275,11 @@ image,activity_text_image,group_activity_text.png
 image,main_msg_bubble_image,right_big_bubble.png
 image,shiroji_right_up_image,shiroji_04.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
+bgm,set,nijiiro_no_canvas.mp3,loop,50
+bgm,play
+text,music_title_text,虹色のキャンバス
+text,composer_name_text,しゅんじ～
+grid,music_info_grid,slide,no_sync
 grid,main_msg_grid,appear_expansion
 msg,main_msg,それでは、うきうきシューズをつかって、鬱「ちょっぴりうきうき」をたくさん集めてみるのじゃ！,白じい
 click,page
@@ -274,16 +295,28 @@ wait
 grid,goupe_activity_message_grid,appear_expansion
 button,select_feeling_next_button,fade_in
 wait
+#
 scene,まとめ
 reset
 image,bg_image,background_09.png
 grid,summary_grid
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
+bgm,set,tasogare_no_oka.mp3,loop,50
+bgm,play
+text,music_title_text,たそがれの丘
+text,composer_name_text,しゅんじ～
+grid,music_info_grid,slide,no_sync
 grid,main_msg_grid,appear_expansion
 msg,main_msg,今日のこころアップタイムはどうじゃったかな？鬱元気がでないときには楽しいことをさがすのは難しいことじゃが、鬱ちょっとずつチャレンジしてみてほしい。,白じい
-click,page,next_only
+click,msg,next_only
 #
+image,bg_image,background_09.png
+hide,grid,item_last_info_grid
+hide,image,item_left_last_image
+image,shiroji_right_image,shiroji_02.png
+grid,summary_grid
+grid,main_msg_grid
 msg,main_msg,次回のテーマは「<font=#44#yellow>あたたかい言葉をかけよう</font>」じゃ！。,白じい
 click,page
 #
@@ -329,7 +362,7 @@ gauge
 image,bg_image,blue_gradation.png
 grid,select_heart_grid
 grid,view_size_of_feeling_grid
-wait
+click,page,next_only
 hide,image,bg_image
 hide,grid,select_heart_grid
 hide,grid,view_size_of_feeling_grid

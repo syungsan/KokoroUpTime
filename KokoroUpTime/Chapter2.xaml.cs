@@ -76,8 +76,8 @@ namespace KokoroUpTime
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
 
 
-        //グループアクティビティ用の拡大縮小サイズ(16:7)
-       
+        private bool isMouseDown = false;
+
 
         // 音関連
         private WindowsMediaPlayer mediaPlayer;
@@ -2113,6 +2113,14 @@ namespace KokoroUpTime
                 {
                     this.BackPageButton.Visibility = Visibility.Hidden;
                     this.NextPageButton.Visibility = Visibility.Hidden;
+                    if (this.SelectHeartGrid.IsVisible)
+                    {
+                        this.AosukeSizeOfFeelingText.Text = "(  "+ this.ViewSizeOfFeelingTextBlock.Text + "  )";
+                        if(this.AosukeSizeOfFeelingText.Text != ""&&this.AosukeDifficultyOfActionText.Text != "")
+                        {
+                            this.SelectFeelingNextButton.Visibility = Visibility.Visible;
+                        }
+                    }
                 }
 
                 this.scenarioCount += 1;
@@ -2258,10 +2266,9 @@ namespace KokoroUpTime
 
 
 
-        // ハートゲージの角度をデータバインド
         private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter2), new UIPropertyMetadata(0.0));
 
-        public double Angle
+        private double Angle
         {
             get { return (double)GetValue(AngleProperty); }
             set { SetValue(AngleProperty, value); }
@@ -2272,13 +2279,21 @@ namespace KokoroUpTime
         {
             Mouse.Capture(this);
 
-            if (this.SelectHeartGrid.Visibility == Visibility.Visible)
+            if (e.Source as FrameworkElement != null)
+            {
+                var dragObjName = (e.Source as FrameworkElement).Name;
+
+                if (dragObjName == "SelectNeedleImage")
+                {
+                    this.isMouseDown = true;
+                }
+            }
+
+            if (this.isMouseDown && this.SelectHeartGrid.IsVisible)
             {
                 this.CalcAngle();
 
                 this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
-
-
             }
         }
 
@@ -2287,36 +2302,24 @@ namespace KokoroUpTime
         {
             Mouse.Capture(null);
 
-            if (this.SelectHeartGrid.Visibility == Visibility.Visible)
-            {
-                this.SelectHeartGrid.Visibility = Visibility.Hidden;
-                this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
-                this.AosukeSizeOfFeelingText.Text = "(  " + this.ViewSizeOfFeelingTextBlock.Text + "  )";
-
-                if (this.AosukeDifficultyOfActionText.Text != "" && this.AosukeSizeOfFeelingText.Text != "")
-                {
-                    this.SelectFeelingNextButton.Visibility = Visibility.Visible;
-                }
-
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-
-            }
-
+            this.isMouseDown = false;
         }
 
         // マウスのドラッグ処理（マウスを動かしたとき）
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
+            if (!isMouseDown)
+            {
+                return;
+            }
+
             if (Mouse.Captured == this)
             {
-                if (this.SelectHeartGrid.Visibility == Visibility.Visible)
+                if (this.SelectHeartGrid.IsVisible)
                 {
                     this.CalcAngle();
 
                     this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
-
-
                 }
             }
         }
@@ -2326,7 +2329,7 @@ namespace KokoroUpTime
         {
             Point currentLocation = this.PointToScreen(Mouse.GetPosition(this));
 
-            Point knobCenter = this.SelectHeartImage.PointToScreen(new Point(this.SelectHeartImage.ActualWidth * 0.5, this.SelectHeartImage.ActualHeight * 0.8));
+            Point knobCenter = this.SelectHeartImage.PointToScreen(new Point(this.SelectHeartImage.ActualWidth * 0.5, this.SelectHeartImage.ActualHeight * 0.7));
 
             double radians = Math.Atan((currentLocation.Y - knobCenter.Y) / (currentLocation.X - knobCenter.X));
 
@@ -2340,11 +2343,13 @@ namespace KokoroUpTime
 
                 this.feelingSize = (int)(this.Angle - 310.0f);
             }
+
             if (this.feelingSize <= 0)
             {
                 this.feelingSize = 0;
                 this.Angle = (double)this.feelingSize - 50.0f;
             }
+
             if (this.feelingSize >= 100)
             {
                 this.feelingSize = 100;

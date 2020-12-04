@@ -2285,6 +2285,92 @@ namespace KokoroUpTime
         }
         */
 
+        //// ハートゲージの角度をデータバインド
+        //private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter1), new UIPropertyMetadata(0.0));
+
+        //private double Angle
+        //{
+        //    get { return (double)GetValue(AngleProperty); }
+        //    set { SetValue(AngleProperty, value); }
+        //}
+
+        //// マウスのドラッグ処理（マウスの左ボタンを押下したとき）
+        //private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    Mouse.Capture(this);
+
+        //    if (e.Source as FrameworkElement != null)
+        //    {
+        //        var dragObjName = (e.Source as FrameworkElement).Name;
+
+        //        if (dragObjName == "SelectNeedleImage")
+        //        {
+        //            this.isMouseDown = true;
+        //        }
+        //    }
+
+        //    if (this.isMouseDown && this.SelectHeartGrid.Visibility == Visibility.Visible && (this.scene == "赤丸くんのきもちの大きさ" || this.scene == "青助くんのきもちの大きさ"))
+        //    {
+        //        this.CalcAngle();
+
+        //        this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
+        //    }
+        //}
+
+        //// マウスのドラッグ処理（マウスの左ボタンを離したとき）
+        //private void OnMouseUp(object sender, MouseButtonEventArgs e)
+        //{
+        //    Mouse.Capture(null);
+        //}
+
+        //// マウスのドラッグ処理（マウスを動かしたとき）
+        //private void OnMouseMove(object sender, MouseEventArgs e)
+        //{
+
+        //    if (Mouse.Captured == this)
+        //    {
+        //        if (this.SelectHeartGrid.Visibility == Visibility.Visible && (this.scene == "赤丸くんのきもちの大きさ" || this.scene == "青助くんのきもちの大きさ"))
+        //        {
+        //            this.CalcAngle();
+
+        //            this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
+        //        }   
+        //    }
+        //}
+
+        //// ハートゲージの針の角度に関する計算
+        //private void CalcAngle()
+        //{
+        //    Point currentLocation = this.PointToScreen(Mouse.GetPosition(this));
+
+        //    Point knobCenter = this.SelectHeartImage.PointToScreen(new Point(this.SelectHeartImage.ActualWidth * 0.5, this.SelectHeartImage.ActualHeight * 0.7));
+
+        //    double radians = Math.Atan((currentLocation.Y - knobCenter.Y) / (currentLocation.X - knobCenter.X));
+
+        //    this.Angle = radians * 180 / Math.PI + 90;
+
+        //    this.feelingSize = (int)(this.Angle + 50.0f);
+
+        //    if (currentLocation.X - knobCenter.X < 0)
+        //    {
+        //        this.Angle += 180;
+
+        //        this.feelingSize = (int)(this.Angle - 310.0f);
+        //    }
+
+        //    if (this.feelingSize <= 0)
+        //    {
+        //        this.feelingSize = 0;
+        //        this.Angle = (double)this.feelingSize - 50.0f;
+        //    }
+
+        //    if (this.feelingSize >= 100)
+        //    {
+        //        this.feelingSize = 100;
+        //        this.Angle = (double)this.feelingSize + 310.0f;
+        //    }
+        //}
+
         // ハートゲージの角度をデータバインド
         private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter1), new UIPropertyMetadata(0.0));
 
@@ -2309,7 +2395,7 @@ namespace KokoroUpTime
                 }
             }
 
-            if (this.isMouseDown && this.SelectHeartGrid.Visibility == Visibility.Visible && (this.scene == "赤丸くんのきもちの大きさ" || this.scene == "青助くんのきもちの大きさ"))
+            if (this.isMouseDown && this.SelectHeartGrid.IsVisible)
             {
                 this.CalcAngle();
 
@@ -2321,23 +2407,29 @@ namespace KokoroUpTime
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(null);
+
+            this.isMouseDown = false;
         }
 
         // マウスのドラッグ処理（マウスを動かしたとき）
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-          
+            if (!isMouseDown)
+            {
+                return;
+            }
+
             if (Mouse.Captured == this)
             {
-                if (this.SelectHeartGrid.Visibility == Visibility.Visible && (this.scene == "赤丸くんのきもちの大きさ" || this.scene == "青助くんのきもちの大きさ"))
+                if (this.SelectHeartGrid.IsVisible)
                 {
                     this.CalcAngle();
 
                     this.ViewSizeOfFeelingTextBlock.Text = this.feelingSize.ToString();
-                }   
+                }
             }
         }
-        
+
         // ハートゲージの針の角度に関する計算
         private void CalcAngle()
         {
@@ -2421,28 +2513,32 @@ namespace KokoroUpTime
         private void FeelingListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBox listBox = sender as ListBox;
-            if(this.SelectGoodFeelingListBox.SelectedItem != null&& this.SelectBadFeelingListBox.SelectedItem != null)
+            if((this.SelectGoodFeelingListBox.IsVisible && this.SelectBadFeelingListBox.IsVisible))
             {
-                if (listBox.Name == "SelectBadFeelingListBox")
+                if (this.SelectGoodFeelingListBox.SelectedItem != null && this.SelectBadFeelingListBox.SelectedItem != null)
                 {
-                    if (this.SelectGoodFeelingListBox.SelectedItem != null)
-                        this.SelectGoodFeelingListBox.SelectedIndex = -1;
+                    if (listBox.Name == "SelectBadFeelingListBox")
+                    {
+                        if (this.SelectGoodFeelingListBox.SelectedItem != null)
+                            this.SelectGoodFeelingListBox.SelectedIndex = -1;
+                    }
+                    else
+                    {
+                        if (this.SelectBadFeelingListBox.SelectedItem != null)
+                            this.SelectBadFeelingListBox.SelectedIndex = -1;
+                    }
+                    this.NextPageButton.Visibility = Visibility.Visible;
                 }
-                else
+                else if (this.SelectGoodFeelingListBox.SelectedItem != null || this.SelectBadFeelingListBox.SelectedItem != null)
                 {
-                    if (this.SelectBadFeelingListBox.SelectedItem != null)
-                        this.SelectBadFeelingListBox.SelectedIndex = -1;
+                    this.NextPageButton.Visibility = Visibility.Visible;
                 }
-                this.NextPageButton.Visibility = Visibility.Visible;
-            }
-            else if(this.SelectGoodFeelingListBox.SelectedItem != null || this.SelectBadFeelingListBox.SelectedItem != null)
-            {
-                this.NextPageButton.Visibility = Visibility.Visible;
-            }
 
-            var startupPath = FileUtils.GetStartupPath();
+                var startupPath = FileUtils.GetStartupPath();
 
-            PlaySE($@"{startupPath}/Sounds/Decision.wav");
+                PlaySE($@"{startupPath}/Sounds/Decision.wav");
+            }
+            
         }
     }
 }

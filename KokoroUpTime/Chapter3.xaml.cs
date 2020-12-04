@@ -190,6 +190,7 @@ namespace KokoroUpTime
                 ["session_sentence_text"] = this.SessionSentenceTextBlock,
                 ["ending_msg_text"] = this.EndingMessageTextBlock,
                 ["main_msg"] = this.MainMessageTextBlock,
+                ["groupe_activity_msg"] =this.GroupeActivityMessageTextBlock,
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
                 ["item_book_title_text"] = this.ItemBookTitleTextBlock,
@@ -221,7 +222,8 @@ namespace KokoroUpTime
                 ["feeling_prev_back_button"] = this.FeelingPrevBackButton,
                 ["manga_prev_back_button"] = this.MangaPrevBackButton,
                 ["complete_next_button"] = this.CompleteNextButton,
-            };
+                ["select_hot_word_button"] =this.SelectHotWordButton,
+        };
 
             this.gridObjects = new Dictionary<string, Grid>
             {
@@ -240,8 +242,10 @@ namespace KokoroUpTime
                 ["children_feeling_comment_grid"] = this.ChildrenFeelingCommentGrid,
                 ["children_feeling_comment_big_grid"] = this.ChildrenFeelingCommentBigGrid,
                 ["select_heart_grid"] = this.SelectHeartGrid,
+                ["view_size_of_feeling_grid"]= this.ViewSizeOfFeelingGrid,
                 ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid,
+                ["groupe_activity_msg_grid"] =this.GroupeActivityMessageGrid,
                 ["music_info_grid"] = this.MusicInfoGrid,
                 ["c_hot_word_key_button_grid"] = this.CHotWordKeyButtonGrid,
                 ["g_hot_word_key_button_grid"] = this.GHotWordKeyButtonGrid,
@@ -260,7 +264,8 @@ namespace KokoroUpTime
                 ["children_feeling_title_border"] = this.ChildrenFeelingTitleBorder,
                 ["let_s_try_title_border"] = this.Let_sTryTitleBorder,
                 ["hot_word_border"] = this.HotWordBorder,
-                ["selected_hot_word_border"] = this.SelectHotWordBorder,
+                ["select_hot_word_button_border"] =this.SelectHotWordButtonBorder,
+               
                 ["complimentary_situation_border"] = this.ComplimentarySituationBorder,
                 ["role_play_msg_border"] = this.RolePlayMessageBorder,
             };
@@ -282,8 +287,10 @@ namespace KokoroUpTime
             this.ItemLastInfoGrid.Visibility = Visibility.Hidden;
             this.Let_sUseHotWordMessageGrid.Visibility = Visibility.Hidden;
             this.SelectHeartGrid.Visibility = Visibility.Hidden;
+            this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
             this.MainMessageGrid.Visibility = Visibility.Hidden;
+            this.GroupeActivityMessageGrid.Visibility = Visibility.Hidden;
             this.MusicInfoGrid.Visibility = Visibility.Hidden;
             this.ExitBackGrid.Visibility = Visibility.Hidden;
             this.BackgroundImage.Visibility = Visibility.Hidden;
@@ -346,7 +353,6 @@ namespace KokoroUpTime
             this.Let_sUseHotWordMessageGrid.Visibility = Visibility.Hidden;
             this.SituationsGrid.Visibility = Visibility.Hidden;
             this.Let_sUseHotWordTitleImage.Visibility = Visibility.Hidden;
-            this.SelectHotWordBorder.Visibility = Visibility.Hidden;
             this.SelectHotWordTitleTextBlock.Visibility = Visibility.Hidden;
             this.SelectHotWordValueTextBlock.Visibility = Visibility.Hidden;
             this.ComplimentarySituationBorder.Visibility = Visibility.Hidden;
@@ -361,6 +367,8 @@ namespace KokoroUpTime
             this.ItemBookNoneGrid.Visibility = Visibility.Hidden;
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
             this.FeelingInputGrid.Visibility = Visibility.Hidden;
+            this.SelectHotWordButton.Visibility = Visibility.Hidden;
+            this.SelectHotWordButtonBorder.Visibility = Visibility.Hidden;
 
             this.SelectHotWordValueTitleTextBlock.Text = "";
             this.SessionSubTitleTextBlock.Text = "";
@@ -614,8 +622,18 @@ namespace KokoroUpTime
 
                     var buttonObject = this.buttonObjects[this.position];
 
-                    buttonObject.Visibility = Visibility.Visible;
+                    if(position== "feeling_next_go_button" && Regex.IsMatch(this.scene, ".+のきもちを考える.*"))
+                    {
+                        if (this.SizeOfFeelingInputTextBlock.Text != "")
+                        {
+                            buttonObject.Visibility = Visibility.Visible;
+                        }
+                    }
+                    else
+                    {
+                        buttonObject.Visibility = Visibility.Visible;
 
+                    }
                     string buttonAnimeIsSync = "sync";
 
                     if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
@@ -859,8 +877,28 @@ namespace KokoroUpTime
                 case "flip":
 
                     this.MangaFlipButton.Visibility = Visibility.Visible;
-                    this.isClickable = true;
 
+                    Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
+
+                    this.isClickable = false;
+
+                    if (sb != null)
+                    {
+                        // 二重終了防止策
+                        bool isDuplicate = false;
+
+                        sb.Completed += (s, e) =>
+                        {
+                            if (!isDuplicate)
+                            {
+                                this.isClickable = true;
+
+                                isDuplicate = true;
+                            }
+                        };
+                        sb.Begin(this);
+                    }
+                    
                     break;
 
                 // 各種コントロールを個別に隠す処理
@@ -1967,7 +2005,13 @@ namespace KokoroUpTime
 
                     this.SizeOfFeelingInputButton.IsEnabled = false;
                 }
+                if (button.Name == "FeelingPrevBackButton")
+                {
+                    this.FeelingPrevBackButton.Visibility = Visibility.Hidden;
+                    this.FeelingNextGoButton.Visibility = Visibility.Hidden;
 
+                    BackScenario();
+                }
                 if (this.scene == "さがしてみようホットワードボタン" && this.CHotWordKeyButtonGrid.IsVisible)
                 {
                     var buttonText = button.GetChildren<TextBlock>().ToList()[0].Text;
@@ -2440,28 +2484,36 @@ namespace KokoroUpTime
         private void FeelingListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBox listBox = sender as ListBox;
-            if (this.SelectGoodFeelingListBox.SelectedItem != null && this.SelectBadFeelingListBox.SelectedItem != null)
+            if(this.SelectGoodFeelingListBox.Visibility == Visibility.Visible && this.SelectBadFeelingListBox.Visibility == Visibility.Visible)
             {
-                if (listBox.Name == "SelectBadFeelingListBox")
+                if (this.SelectGoodFeelingListBox.IsVisible && this.SelectBadFeelingListBox.IsVisible)
                 {
-                    if (this.SelectGoodFeelingListBox.SelectedItem != null)
-                        this.SelectGoodFeelingListBox.SelectedIndex = -1;
-                }
-                else
-                {
-                    if (this.SelectBadFeelingListBox.SelectedItem != null)
-                        this.SelectBadFeelingListBox.SelectedIndex = -1;
-                }
-                this.NextPageButton.Visibility = Visibility.Visible;
-            }
-            else if (this.SelectGoodFeelingListBox.SelectedItem != null || this.SelectBadFeelingListBox.SelectedItem != null)
-            {
-                this.NextPageButton.Visibility = Visibility.Visible;
-            }
+                    if (this.SelectGoodFeelingListBox.SelectedItem != null && this.SelectBadFeelingListBox.SelectedItem != null)
+                    {
+                        if (listBox.Name == "SelectBadFeelingListBox")
+                        {
+                            if (this.SelectGoodFeelingListBox.SelectedItem != null)
+                                this.SelectGoodFeelingListBox.SelectedIndex = -1;
+                        }
+                        else
+                        {
+                            if (this.SelectBadFeelingListBox.SelectedItem != null)
+                                this.SelectBadFeelingListBox.SelectedIndex = -1;
+                        }
+                        this.NextPageButton.Visibility = Visibility.Visible;
+                    }
+                    else if (this.SelectGoodFeelingListBox.SelectedItem != null || this.SelectBadFeelingListBox.SelectedItem != null)
+                    {
+                        this.NextPageButton.Visibility = Visibility.Visible;
+                    }
 
-            var startupPath = FileUtils.GetStartupPath();
+                    var startupPath = FileUtils.GetStartupPath();
 
-            PlaySE($@"{startupPath}/Sounds/Decision.wav");
+                    PlaySE($@"{startupPath}/Sounds/Decision.wav");
+                }
+                
+            }
+            
         }
 
         private childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject
