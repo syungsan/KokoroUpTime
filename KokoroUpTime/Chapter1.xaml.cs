@@ -1955,7 +1955,7 @@ namespace KokoroUpTime
 
                 TitlePage titlePage = new TitlePage();
 
-                titlePage.SetIsFirstBootFlag(false);
+                titlePage.SetReloadPageFlag(false);
 
                 titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
@@ -2022,7 +2022,7 @@ namespace KokoroUpTime
             {
                 TitlePage titlePage = new TitlePage();
 
-                titlePage.SetIsFirstBootFlag(false);
+                titlePage.SetReloadPageFlag(false);
 
                 titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 

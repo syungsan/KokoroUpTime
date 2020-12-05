@@ -43,7 +43,7 @@ namespace KokoroUpTime
         private string[] dirPaths;
 
         // 初回アクセスかどうかのフラグ
-        private bool isFirstBootFlag = true;
+        private bool isReloadPage = true;
 
         public TitlePage()
         {
@@ -85,7 +85,7 @@ namespace KokoroUpTime
         // ページ間参照橋渡し関数
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
         {
-            if (!this.isFirstBootFlag)
+            if (!this.isReloadPage)
             {
                 this.initConfig = _initConfig;
                 this.dataOption = _dataOption;
@@ -108,9 +108,9 @@ namespace KokoroUpTime
         }
 
         // 他ページから制御するフラグ
-        public void SetIsFirstBootFlag(bool flag)
+        public void SetReloadPageFlag(bool flag)
         {
-            this.isFirstBootFlag = flag;
+            this.isReloadPage = flag;
         }
 
         // xamlをロードしきったら発火
@@ -118,7 +118,7 @@ namespace KokoroUpTime
         {
             if (File.Exists("./Log/system.conf"))
             {
-                if (this.isFirstBootFlag)
+                if (this.isReloadPage)
                 {
                     this.LoadCurrentUser();
                 }
@@ -783,7 +783,6 @@ namespace KokoroUpTime
                     }
                     break;
                 
-                /*
                 case "第5回":
 
                    if (this.initConfig.userName == null)
@@ -799,7 +798,6 @@ namespace KokoroUpTime
                         this.NavigationService.Navigate(chapter5);
                     }
                     break;
-                    */
                     
                 case "第6回":
 
@@ -816,7 +814,7 @@ namespace KokoroUpTime
                     this.NavigationService.Navigate(chapter6);
                  }
                  break;
-                    
+  
             }
         }
 

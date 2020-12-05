@@ -1134,7 +1134,7 @@ namespace KokoroUpTime
 
                     TitlePage titlePage = new TitlePage();
 
-                    titlePage.SetIsFirstBootFlag(true);
+                    titlePage.SetReloadPageFlag(true);
 
                     this.NavigationService.Navigate(titlePage);
                 }

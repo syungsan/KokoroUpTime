@@ -52,7 +52,7 @@ namespace KokoroUpTime
                 TitlePage titlePage = new TitlePage();
 
                 // タイトルページのリロードなし
-                titlePage.SetIsFirstBootFlag(false);
+                titlePage.SetReloadPageFlag(false);
 
                 // データモデルの橋渡し
                 titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
