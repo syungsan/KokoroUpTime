@@ -953,6 +953,7 @@
                     <Grid x:Name="EndingMessageGrid" Width="1149" Height="210" Margin="210,826,561,44">
                         <Image x:Name="EndingShortBubbleImage" Source="/Images/short_bubble_right_up.png"/>
                         <TextBlock x:Name="EndingMessageTextBlock" HorizontalAlignment="Center" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="1060" Margin="0,105,0,0" FontSize="48"/>
+
                     </Grid>
                 </Grid>
                 <Grid x:Name="ItemBookGrid">
