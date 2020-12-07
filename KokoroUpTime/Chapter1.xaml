@@ -166,12 +166,12 @@
 
     <Viewbox>
         <Grid Height="1080" Width="1920">
-            <Grid x:Name="BaseGrid" d:IsHidden="True">
-                <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_01.png" d:IsHidden="True"/>
+            <Grid x:Name="BaseGrid">
+                <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_01.png"/>
             </Grid>
-            <Grid x:Name="MangaGrid" Visibility="Visible">
-                <Image x:Name="MangaTitleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/manga1_title.png" Margin="86,24,0,0" Height="98" Width="1752"/>
-                <Image x:Name="MangaImage" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Images/manga1-1.png" Margin="0,121,0,0" RenderTransformOrigin="0.5,0.5" Height="880" Width="1788">
+            <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
+                <Image x:Name="MangaTitleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/manga1_title.png" Margin="86,24,0,0" Height="98" Width="1752" d:IsHidden="True"/>
+                <Image x:Name="MangaImage" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Images/manga1-1.png" Margin="0,121,0,0" RenderTransformOrigin="0.5,0.5" Height="880" Width="1788" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -349,12 +349,12 @@
                                 <ScaleTransform ScaleX="9.0" ScaleY="9.0"/>
                             </CheckBox.RenderTransform>
                         </CheckBox>
-                        <CheckBox x:Name="RuleBoardCheck2Box" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="293,420,1177,476" BorderBrush="#FFFFE64A" d:IsHidden="True">
+                        <CheckBox x:Name="RuleBoardCheck2Box" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="293,420,1177,476" BorderBrush="#FFFFE64A">
                             <CheckBox.RenderTransform>
                                 <ScaleTransform ScaleX="9.0" ScaleY="9.0"/>
                             </CheckBox.RenderTransform>
                         </CheckBox>
-                        <CheckBox x:Name="RuleBoardCheck3Box" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="293,598,0,0" VerticalAlignment="Top" Width="16" HorizontalAlignment="Left" Height="16" d:IsHidden="True">
+                        <CheckBox x:Name="RuleBoardCheck3Box" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="293,598,0,0" VerticalAlignment="Top" Width="16" HorizontalAlignment="Left" Height="16">
                             <CheckBox.RenderTransform>
                                 <ScaleTransform ScaleX="9.0" ScaleY="9.0"/>
                             </CheckBox.RenderTransform>
@@ -618,8 +618,8 @@
                     <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid">
-                <Grid x:Name="MainMessageGrid" Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+            <Grid x:Name="SystemGrid" d:IsHidden="True">
+                <Grid x:Name="MainMessageGrid" Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -628,7 +628,7 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Grid.RenderTransform>
-                    <Image x:Name="MainMessageBubbleImage" Source="/Images/right_big_bubble.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                    <Image x:Name="MainMessageBubbleImage" Source="/Images/right_big_bubble.png" RenderTransformOrigin="0.5,0.5">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -638,18 +638,18 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="55,145,266,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体　N-R" d:IsHidden="True">
+                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="40,145,212,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R">
                         <Run x:Name="MainMessageFrontText"/>
                         <InlineUIContainer>
                             <Image x:Name="NameImage" Height="48" d:IsHidden="True"/>
                         </InlineUIContainer>
                         <Run x:Name="MainMessageBackText"/>
                     </TextBlock>
-                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32" d:IsHidden="True">
-                        <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png" d:IsHidden="True"/>
+                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32">
+                        <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png"/>
                     </Button>
-                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1289,142,32,187" d:IsHidden="True">
-                        <Image x:Name="BackMessageAllowUpImage" Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1289,142,32,187">
+                        <Image x:Name="BackMessageAllowUpImage" Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5">
                             <Image.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -692,7 +692,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="38" Margin="31,33,37,31" RenderTransformOrigin="0.5,0.5" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体　N-R" d:IsHidden="True">
+                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="38" Margin="31,33,37,31" RenderTransformOrigin="0.5,0.5" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" d:IsHidden="True">
                         <TextBlock.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>

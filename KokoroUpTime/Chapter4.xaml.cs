@@ -176,10 +176,7 @@ namespace KokoroUpTime
                 ["shiroji_small_right_down_image"] = this.ShirojiSmallRightDownImage,
                 ["children_stand_left_image"] = this.ChildrenStandLeftImage,
                 ["children_stand_right_image"] = this.ChildrenStandRightImage,
-                ["manga_flip_arrow_go_image"] = this.MangaFlipArrowGoImage,
                 ["session_title_image"] = this.SessionTitleImage,
-
-
 
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
                 ["activity_title_image"] = this.ActivityTitleImage,
@@ -297,6 +294,7 @@ namespace KokoroUpTime
             this.ItemNamePlateCenterGrid.Visibility = Visibility.Hidden;
             this.ItemInfoPlateGrid.Visibility = Visibility.Hidden;
             this.ItemLastInfoGrid.Visibility = Visibility.Hidden;
+            this.ItemLeftLastImage.Visibility = Visibility.Hidden;
 
             this.ItemReviewGrid.Visibility = Visibility.Hidden;
             this.ActivityTitleImage.Visibility = Visibility.Hidden;
@@ -360,7 +358,6 @@ namespace KokoroUpTime
             this.BackPageButton.Visibility = Visibility.Hidden;
             this.MangaFlipButton.Visibility = Visibility.Hidden;
             this.MangaPrevBackButton.Visibility = Visibility.Hidden;
-            this.MangaFlipArrowGoImage.Visibility = Visibility.Hidden;
 
             this.ItemCheckCentertGrid.Visibility = Visibility.Hidden;
             this.ItemCheckRightGrid.Visibility = Visibility.Hidden;
@@ -522,10 +519,11 @@ namespace KokoroUpTime
                     {
                         var gridStoryBoard = this.scenarios[this.scenarioCount][2];
 
-                        // ストーリーボードの名前にコントロールの名前を付け足す
-                        gridStoryBoard += $"_{this.position}";
+                        var gridObjectName = gridObject.Name;
 
-                        this.ShowAnime(storyBoard: gridStoryBoard, isSync: gridAnimeIsSync);
+                        string _objectsName = this.position;
+
+                        this.ShowAnime(storyBoard: gridStoryBoard,objectName: gridObjectName, objectsName: _objectsName, isSync: gridAnimeIsSync);
                     }
                     else
                     {
@@ -574,9 +572,11 @@ namespace KokoroUpTime
                     {
                         var imageStoryBoard = this.scenarios[this.scenarioCount][3];
 
-                        imageStoryBoard += $"_{this.position}";
+                        var imageObjectName = imageObject.Name;
 
-                        this.ShowAnime(storyBoard: imageStoryBoard, isSync: imageAnimeIsSync);
+                        string _objectsName = this.position;
+
+                        this.ShowAnime(storyBoard: imageStoryBoard, objectName:imageObjectName, objectsName: _objectsName, isSync: imageAnimeIsSync);
                     }
                     else
                     {
@@ -585,37 +585,7 @@ namespace KokoroUpTime
                     }
                     break;
 
-                //ボーダーに対しての処理
-                /*case "border":
-
-                    this.position = this.scenarios[this.scenarioCount][1];
-
-                    var borderObject = this.borderObjects[this.position];
-
-                    borderObject.Visibility = Visibility.Visible;
-
-                    string borderAnimeIsSync = "sync";
-
-                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
-                    {
-                        borderAnimeIsSync = this.scenarios[this.scenarioCount][4];
-                    }
-
-                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
-                    {
-                        var borderStoryBoard = this.scenarios[this.scenarioCount][2];
-
-                        borderStoryBoard += $"_{this.position}";
-
-                        this.ShowAnime(storyBoard: borderStoryBoard, isSync: borderAnimeIsSync);
-                    }
-                    else
-                    {
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-                    }
-                    break;
-                */
+                
                 // ボタンに対する処理
                 case "button":
 
@@ -636,9 +606,11 @@ namespace KokoroUpTime
                     {
                         var buttonStoryBoard = this.scenarios[this.scenarioCount][2];
 
-                        buttonStoryBoard += $"_{this.position}";
+                        var buttonObjectName = buttonObject.Name;
 
-                        this.ShowAnime(storyBoard: buttonStoryBoard, isSync: buttonAnimeIsSync);
+                        var _objectsName = this.position;
+
+                        this.ShowAnime(storyBoard: buttonStoryBoard,objectName: buttonObjectName, objectsName: _objectsName, isSync: buttonAnimeIsSync);
                     }
                     else
                     {
@@ -705,9 +677,11 @@ namespace KokoroUpTime
                     {
                         var textStoryBoard = this.scenarios[this.scenarioCount][3];
 
-                        textStoryBoard += $"_{this.position}";
+                        var textObjectName = __textObject.Name;
 
-                        this.ShowAnime(storyBoard: textStoryBoard, isSync: textAnimeIsSync);
+                        var _objectsName = this.position;
+
+                        this.ShowAnime(storyBoard: textStoryBoard,objectName: textObjectName, objectsName: _objectsName, isSync: textAnimeIsSync);
                     }
                     else
                     {
@@ -854,7 +828,28 @@ namespace KokoroUpTime
                 case "flip":
 
                     this.MangaFlipButton.Visibility = Visibility.Visible;
-                    this.isClickable = true;
+
+                    Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
+
+                    this.isClickable = false;
+
+                    if (sb != null)
+                    {
+                        // 二重終了防止策
+                        bool isDuplicate = false;
+
+                        sb.Completed += (s, e) =>
+                        {
+                            if (!isDuplicate)
+                            {
+                                this.isClickable = true;
+
+                                isDuplicate = true;
+                            }
+                        };
+                        sb.Begin(this);
+                    }
+                    break;
 
                 // 各種コントロールを個別に隠す処理
                 case "hide":
@@ -1425,6 +1420,8 @@ namespace KokoroUpTime
                             case "red": { foreground = new SolidColorBrush(Colors.Red); break; };
                             case "green": { foreground = new SolidColorBrush(Colors.Green); break; };
                             case "blue": { foreground = new SolidColorBrush(Colors.Blue); break; };
+                            case "yellow": { foreground = new SolidColorBrush(Colors.Yellow); break; };
+                            case "purple": { foreground = new SolidColorBrush(Colors.Purple); break; };
 
                             default: { break; }
                         }
@@ -1584,16 +1581,26 @@ namespace KokoroUpTime
             }
         }
         // アニメーション（ストーリーボード）の処理
-        private void ShowAnime(string storyBoard, string isSync)
+        private void ShowAnime(string storyBoard,string objectName,string objectsName, string isSync)
         {
-            Storyboard sb = this.FindResource(storyBoard) as Storyboard;
+            Storyboard sb;
+            try
+            {
+                sb = this.FindResource(storyBoard) as Storyboard;
+                foreach (var child in sb.Children)
+                    Storyboard.SetTargetName(child, objectName);
+            }
+            catch (ResourceReferenceKeyNotFoundException ex)
+            {
+                string objectsStroryBoard = $"{storyBoard}_{objectsName}";
+                sb = this.FindResource(objectsStroryBoard) as Storyboard;
+            }
+           
 
             if (sb != null)
             {
                 // 二重終了防止策
                 bool isDuplicate = false;
-
-                this.isClickable = false;
 
                 if (isSync == "sync")
                 {
@@ -1605,7 +1612,7 @@ namespace KokoroUpTime
                             this.ScenarioPlay();
 
                             isDuplicate = true;
-                            isClickable = true;
+                            
                         }
                     };
                     sb.Begin(this);
@@ -1663,6 +1670,8 @@ namespace KokoroUpTime
             */
             if (this.isClickable)
             {
+                this.isClickable = false;
+
                 if (button.Name == "SelectWordButton")
                 {
                     Grid btnContent = (Grid)button.Content;
@@ -1690,7 +1699,7 @@ namespace KokoroUpTime
                 }
                 if ((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton"))
                 {
-                    this.isClickable = false;
+                    
 
                     if (button.Name == "NextMessageButton")
                     {

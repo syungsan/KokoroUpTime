@@ -11,50 +11,10 @@
       Loaded="Window_Loaded">
 
     <Page.Resources>
-        <Storyboard x:Key="appear_up_shiroji_small_right_down_image">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiSmallRightDownImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="63">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BounceEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BounceEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiSmallRightDownImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="appear_wide_thin_msg_grid">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ThinMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.000">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <SineEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.000">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <SineEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ThinMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.000">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <SineEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.000">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <SineEase EasingMode="EaseInOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Animation.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
         <Style x:Key="{x:Type CheckBox}" TargetType="{x:Type CheckBox}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -93,13 +53,13 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        </ResourceDictionary>
     </Page.Resources>
 
     <Viewbox>
         <Grid Height="1080" Width="1920">
             <Grid x:Name="BaseGrid">
                 <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_03.png"/>
-
             </Grid>
             <Grid x:Name="AnyFrameGrid">
                 <Grid x:Name="RuleBoardGrid" Margin="217,48,217,120">
@@ -157,7 +117,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="38" RenderTransformOrigin="0.5,0.5" Margin="22,54,18,24" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体　N-R">
+                    <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="38" RenderTransformOrigin="0.5,0.5" Margin="22,54,18,24" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R">
                         <TextBlock.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>

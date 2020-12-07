@@ -455,11 +455,3 @@ grid,kimis_perspnality_grid
 button,return_button
 wait
 goto,current_scene
-
-sub,input_nice_personality
-reset
-image,bg_image,background_06.png
-grid,canvas_edit_grid
-grid,groupe_activity_grid
-wait
-goto,current_scene

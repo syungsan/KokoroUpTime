@@ -1673,6 +1673,7 @@ namespace KokoroUpTime
 
                     this.ScenarioBack();
                 }
+
             }
             // FullScreen時のデバッグ用に作っておく
             if (button.Name == "ExitButton")
@@ -1933,6 +1934,7 @@ namespace KokoroUpTime
                 this.tapCount -= 1;
             }
         }
+
 
 
         // TextBoxにフォーカスが当たったときに起動
