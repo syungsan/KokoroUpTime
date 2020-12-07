@@ -1614,7 +1614,7 @@ namespace KokoroUpTime
                         {
                             case "red": { background = new SolidColorBrush(Colors.Red); background.Opacity = 1; break; };
                             case "green": { background = new SolidColorBrush(Colors.Green); background.Opacity = 1; break; };
-                            case "blue": { background = new SolidColorBrush(Colors.Blue); background.Opacity = 1; break; };
+                            case "aqua": { background = new SolidColorBrush(Colors.Aqua); background.Opacity = 1; break; };
                             case "yellow": { background = new SolidColorBrush(Colors.Yellow); background.Opacity = 1; break; };
 
                             default: { break; }

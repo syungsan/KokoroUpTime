@@ -54,7 +54,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="55,145,266,45" FontSize="48" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
+                    <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="55,145,266,45" FontSize="40" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
                     <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32">
                         <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png"/>
                     </Button>
@@ -141,7 +141,7 @@
                     <Image x:Name="MakeUserNameCompleteNOImage" Source="/Images/moya2.png"/>
                 </Button>
             </Grid>
-            <Grid x:Name="NameInputGrid" Margin="100,200,400,700">
+            <Grid x:Name="NameInputGrid" Margin="100,200,400,700" d:IsHidden="True">
                 <Button x:Name="NameButton" Background="White" Margin="0,0,500,0" Click="Button_Click">
                     <Image x:Name="NameImage"/>
                 </Button>

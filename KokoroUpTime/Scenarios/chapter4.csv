@@ -227,7 +227,7 @@ grid,item_check_center_grid
 image,children_face_left_image,aosuke_face_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble_blue.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,キミちゃん。鬱<font=#44#blue#true#black>①今日、家の用事があるから、鬱そうじがかりをかわってもらってもいい？</font>,青助
+msg,main_msg,キミちゃん。鬱<font=#44#aqua#true#black>①今日、家の用事があるから、鬱そうじがかりをかわってもらってもいい？</font>,青助
 click,msg,next_only
 #
 clear,text,main_msg
@@ -243,7 +243,7 @@ clear,text,main_msg
 image,children_face_right_image,kimi_face_03.png,,,gray
 image,children_face_left_image,aosuke_face_02.png
 image,main_msg_bubble_image,left_big_bubble_blue.png
-msg,main_msg,キミちゃん。鬱<font=#44#blue#true#black>③ありがとう。今度はボクがやるね。</font>,青助
+msg,main_msg,キミちゃん。鬱<font=#44#aqua#true#black>③ありがとう。今度はボクがやるね。</font>,青助
 click,msg
 #
 clear,text,main_msg

@@ -103,10 +103,10 @@ namespace KokoroUpTime
         // データベースに収めるデータモデルのインスタンス
         private DataChapter1 dataChapter1;
 
-        public InitConfig initConfig = new InitConfig();
-        public DataOption dataOption = new DataOption();
-        public DataItem dataItem = new DataItem();
-        public DataProgress dataProgress = new DataProgress();
+        private InitConfig initConfig = new InitConfig();
+        private DataOption dataOption = new DataOption();
+        private DataItem dataItem = new DataItem();
+        private DataProgress dataProgress = new DataProgress();
 
         public Chapter1()
         {
@@ -1491,7 +1491,7 @@ namespace KokoroUpTime
                         {
                             case "red": { background = new SolidColorBrush(Colors.Red); background.Opacity = 1; break; };
                             case "green": { background = new SolidColorBrush(Colors.Green); background.Opacity = 1; break; };
-                            case "blue": { background = new SolidColorBrush(Colors.Blue); background.Opacity = 1; break; };
+                            case "aqua": { background = new SolidColorBrush(Colors.Aqua); background.Opacity = 1; break; };
                             case "yellow": { background = new SolidColorBrush(Colors.Yellow); background.Opacity = 1; break; };
 
                             default: { break; }
@@ -2463,7 +2463,7 @@ namespace KokoroUpTime
             }
         }
 
-        public void FeelingListBoxUnSelectedAll()
+        private void FeelingListBoxUnSelectedAll()
         {
             this.ChallengeBadFeelingListBox.SelectedIndex = -1;
             this.ChallengeGoodFeelingListBox.SelectedIndex = -1;
