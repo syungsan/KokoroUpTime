@@ -7,8 +7,7 @@
       xmlns:gif="http://wpfanimatedgif.codeplex.com"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="Chapter1"
-      Loaded="Window_Loaded">
+      Title="Chapter1" Loaded="Window_Loaded">
 
     <Page.Resources>
         <ResourceDictionary>

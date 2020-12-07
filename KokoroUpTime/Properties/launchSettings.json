@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "KokoroUpTime": {
+      "commandName": "Project",
+      "sqlDebugging": false,
+      "nativeDebugging": false
+    }
+  }
+}

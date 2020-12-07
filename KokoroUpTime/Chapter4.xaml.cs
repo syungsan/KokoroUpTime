@@ -101,10 +101,10 @@ namespace KokoroUpTime
         private string scene;
 
         // データベースに収めるデータモデルのインスタンス
-        public InitConfig initConfig = new InitConfig();
-        public DataOption dataOption = new DataOption();
-        public DataItem dataItem = new DataItem();
-        public DataProgress dataProgress = new DataProgress();
+        private InitConfig initConfig = new InitConfig();
+        private DataOption dataOption = new DataOption();
+        private DataItem dataItem = new DataItem();
+        private DataProgress dataProgress = new DataProgress();
 
 
         public Chapter4()
@@ -1438,7 +1438,7 @@ namespace KokoroUpTime
                         {
                             case "red": { background = new SolidColorBrush(Colors.Red); background.Opacity = 1; break; };
                             case "green": { background = new SolidColorBrush(Colors.Green); background.Opacity = 1; break; };
-                            case "blue": { background = new SolidColorBrush(Colors.Blue); background.Opacity = 1; break; };
+                            case "aqua": { background = new SolidColorBrush(Colors.Aqua); background.Opacity = 1; break; };
                             case "yellow": { background = new SolidColorBrush(Colors.Yellow); background.Opacity = 1; break; };
 
                             default: { break; }

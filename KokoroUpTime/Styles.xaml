@@ -333,7 +333,7 @@
                 <Setter Property="ContentTemplate" Value="{StaticResource UnSelectedTemplate}"/>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#B2E8A71C"/>
+                <Setter Property="Background" Value="#FFBFE6FD"/>
             </Trigger>
         </Style.Triggers>
     </Style>
