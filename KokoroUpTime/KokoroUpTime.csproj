@@ -24,8 +24,6 @@
     <None Remove="Fonts\HGRPP1.TTC" />
     <None Remove="Fonts\JiyunoTsubasa.ttf" />
     <None Remove="Fonts\TanukiMagic.ttf" />
-    <None Remove="Fonts\UDDigiKyokashoN-B.ttc" />
-    <None Remove="Fonts\UDDigiKyokashoN-R.ttc" />
     <None Remove="good_words_grid.png" />
     <None Remove="Images\159474.png" />
     <None Remove="Images\activity_result_msg_04_01.png" />
@@ -78,6 +76,17 @@
     <None Remove="Images\blue_needle.png" />
     <None Remove="Images\blue_roll_frame.png" />
     <None Remove="Images\blue_title_plate.png" />
+    <None Remove="Images\body_image_akamaru_bubble_left.png" />
+    <None Remove="Images\body_image_akamaru_bubble_right.png" />
+    <None Remove="Images\body_image_of_akamaru_angry.png" />
+    <None Remove="Images\body_image_of_kimi_bubble1.png" />
+    <None Remove="Images\body_image_of_kimi_bubble2.png" />
+    <None Remove="Images\body_image_of_kimi_bubble3.png" />
+    <None Remove="Images\body_image_of_kimi_bubble4.png" />
+    <None Remove="Images\body_image_of_kimi_bubble5.png" />
+    <None Remove="Images\body_image_of_kimi_bubble6.png" />
+    <None Remove="Images\body_image_of_kimi_bubble7.png" />
+    <None Remove="Images\body_image_of_kimi_fear.png" />
     <None Remove="Images\branch_selection1.png" />
     <None Remove="Images\branch_selection2.png" />
     <None Remove="Images\challenge1_title.png" />
@@ -222,12 +231,9 @@
     <None Remove="Images\manga4-2.png" />
     <None Remove="Images\manga4-3.png" />
     <None Remove="Images\manga4_title.png" />
-    <None Remove="Images\manga6-1.png" />
-    <None Remove="Images\manga6-2.png" />
-    <None Remove="Images\manga6-3.png" />
-    <None Remove="Images\manga6-4.png" />
-    <None Remove="Images\manga6-5.png" />
-    <None Remove="Images\manga6-6.png" />
+    <None Remove="Images\manga5-1.png" />
+    <None Remove="Images\manga5-2.png" />
+    <None Remove="Images\manga5-3.png" />
     <None Remove="Images\mangaya.png" />
     <None Remove="Images\mangaya_gauge.png" />
     <None Remove="Images\mangaya_orange.png" />
@@ -322,8 +328,6 @@
     <Resource Include="Fonts\HGRPP1.TTC" />
     <Resource Include="Fonts\JiyunoTsubasa.ttf" />
     <Resource Include="Fonts\TanukiMagic.ttf" />
-    <Resource Include="Fonts\UDDigiKyokashoN-B.ttc" />
-    <Resource Include="Fonts\UDDigiKyokashoN-R.ttc" />
     <Resource Include="Images\159474.png" />
     <Resource Include="Images\activity_result_msg_04_01.png" />
     <Resource Include="Images\activity_result_msg_04_02.png" />
@@ -369,13 +373,22 @@
     <Resource Include="Images\blackboard.png" />
     <Resource Include="Images\blue_bubble.png" />
     <Resource Include="Images\blue_bubble_left_down.png" />
-    <Resource Include="Images\blue_explosion_bubble.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Images\blue_explosion_bubble.png" />
     <Resource Include="Images\blue_gradation.png" />
     <Resource Include="Images\blue_needle.png" />
     <Resource Include="Images\blue_roll_frame.png" />
     <Resource Include="Images\blue_title_plate.png" />
+    <Resource Include="Images\body_image_akamaru_bubble_left.png" />
+    <Resource Include="Images\body_image_akamaru_bubble_right.png" />
+    <Resource Include="Images\body_image_of_akamaru_angry.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble1.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble2.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble3.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble4.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble5.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble6.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble7.png" />
+    <Resource Include="Images\body_image_of_kimi_fear.png" />
     <Resource Include="Images\branch_selection1.png" />
     <Resource Include="Images\branch_selection2.png" />
     <Resource Include="Images\challenge1_title.png" />
@@ -426,16 +439,12 @@
     <Resource Include="Images\item05_book.png" />
     <Resource Include="Images\item05_detail.png" />
     <Resource Include="Images\item05_solo.gif" />
-    <Resource Include="Images\item05_solo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Images\item05_solo.png" />
     <Resource Include="Images\item05_title.png" />
     <Resource Include="Images\item06_book.png" />
     <Resource Include="Images\item06_detail.png" />
     <Resource Include="Images\item06_solo.gif" />
-    <Resource Include="Images\item06_solo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Images\item06_solo.png" />
     <Resource Include="Images\item06_title.png" />
     <Resource Include="Images\item07_book.png" />
     <Resource Include="Images\item07_detail.png" />
@@ -479,24 +488,9 @@
     <Resource Include="Images\manga4-2.png" />
     <Resource Include="Images\manga4-3.png" />
     <Resource Include="Images\manga4_title.png" />
-    <Resource Include="Images\manga6-1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\manga6-2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\manga6-3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\manga6-4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\manga6-5.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\manga6-6.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Images\manga5-1.png" />
+    <Resource Include="Images\manga5-2.png" />
+    <Resource Include="Images\manga5-3.png" />
     <Resource Include="Images\mangaya_gauge.png" />
     <Resource Include="Images\mangaya_orange.png" />
     <Resource Include="Images\message_box.png" />
@@ -592,20 +586,13 @@
     <Resource Include="Images\water_frame.png" />
     <Resource Include="Images\white_frame.png" />
     <Resource Include="Images\wish_check.png" />
-    <Resource Include="Images\word_art_msg_02_01.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\word_art_msg_02_02.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Images\word_art_msg_02_01.png" />
+    <Resource Include="Images\word_art_msg_02_02.png" />
     <Resource Include="Images\yazirusi.png" />
     <Resource Include="Images\yellow_title_plate.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Chapter6.xaml.cs">
-	<SubType>Code</SubType>
-    </Compile>
     <Compile Update="Chapter5.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -627,13 +614,10 @@
     <None Update="Datas\default.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scenarios\chapter6.csv">
+    <None Update="Scenarios\chapter1.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter2.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Scenarios\chapter5.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter3.csv">
@@ -642,13 +626,16 @@
     <None Update="Scenarios\chapter4.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Scenarios\chapter5.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter6.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Scenarios\rule_board.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\name_input.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Scenarios\chapter1.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Sounds\atsumare!_tomodachi!.mp3">
@@ -702,9 +689,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Chapter6.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Chapter5.xaml">
       <SubType>Designer</SubType>
     </Page>

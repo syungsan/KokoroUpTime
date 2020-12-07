@@ -62,7 +62,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Border Background="White"
+                        <Border Background="{TemplateBinding Background}"
                                     CornerRadius="65"/>
                         <Rectangle  Fill="{x:Null}" 
                                         StrokeDashArray="10 4" 
@@ -208,6 +208,7 @@
         </Style.Setters>
     </Style>
 
+   
     <!--気持ちの種類選択用のListBox-->
     <DataTemplate x:Key="SelectedBadFeelingTemplate">
         <Grid x:Name="SelectBadFeelingGrid" >
@@ -252,7 +253,9 @@
         </Style.Triggers>
     </Style>
 
-    <DataTemplate x:Key="SelectedGoodFeelingTemplate">
+    
+
+        <DataTemplate x:Key="SelectedGoodFeelingTemplate">
         <Grid x:Name="SelectGoodFeelingGrid" >
             <Label Width="360"/>
             <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>

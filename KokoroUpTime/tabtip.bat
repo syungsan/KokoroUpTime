@@ -1,1 +1,1 @@
-"C:\Program Files/Common Files/Microsoft Shared/ink/tabtip.exe""
+"C:\Program Files/Common Files/Microsoft Shared/ink/tabtip.exe"
