@@ -22,6 +22,11 @@ namespace KokoroUpTime
         public MainWindow()
         {
             InitializeComponent();
+
+            // 画面遷移ショートカットを無効にする
+            // http://stackoverflow.com/questions/700094/disable-backspace-in-wpf
+            NavigationCommands.BrowseBack.InputGestures.Clear();
+            NavigationCommands.BrowseForward.InputGestures.Clear();
         }
     }
 }
