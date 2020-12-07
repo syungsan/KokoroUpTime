@@ -25,7 +25,10 @@
     <None Remove="Fonts\JiyunoTsubasa.ttf" />
     <None Remove="Fonts\TanukiMagic.ttf" />
     <None Remove="good_words_grid.png" />
+    <None Remove="Images\10seconds_arrow.png" />
     <None Remove="Images\159474.png" />
+    <None Remove="Images\1second_arrow.png" />
+    <None Remove="Images\5seconds_arrow.png" />
     <None Remove="Images\activity_result_msg_04_01.png" />
     <None Remove="Images\activity_result_msg_04_02.png" />
     <None Remove="Images\activity_result_msg_04_03.png" />
@@ -152,7 +155,6 @@
     <None Remove="Images\item06_book.png" />
     <None Remove="Images\item06_detail.png" />
     <None Remove="Images\item06_solo.gif" />
-    <None Remove="Images\item06_solo.png" />
     <None Remove="Images\item06_title.png" />
     <None Remove="Images\item07_book.png" />
     <None Remove="Images\item07_detail.png" />
@@ -253,7 +255,10 @@
     <None Remove="Images\purple_title_plate.png" />
     <None Remove="Images\red_arrow_right.png" />
     <None Remove="Images\red_needle.png" />
-    <None Remove="Images\return.png" />
+    <None Remove="Images\relax_female.png" />
+    <None Remove="Images\relax_male.png" />
+    <None Remove="Images\relax_method.png" />
+    <None Remove="Images\relax_shade.png" />
     <None Remove="Images\return_to_item.png" />
     <None Remove="Images\return_to_title.png" />
     <None Remove="Images\return_to_top.png" />
@@ -276,14 +281,18 @@
     <None Remove="Images\small_bubble_center_right_down.png" />
     <None Remove="Images\small_bubble_left.png" />
     <None Remove="Images\small_bubble_left_blue.png" />
+    <None Remove="Images\small_bubble_left_down.png" />
     <None Remove="Images\small_bubble_left_down_blue.png" />
     <None Remove="Images\small_bubble_left_down_red.png" />
     <None Remove="Images\small_bubble_left_down_yellow.png" />
     <None Remove="Images\small_bubble_left_red.png" />
+    <None Remove="Images\small_bubble_left_top.png" />
     <None Remove="Images\small_bubble_left_up.png" />
     <None Remove="Images\small_bubble_left_yellow.png" />
     <None Remove="Images\small_bubble_right_down.png" />
     <None Remove="Images\small_icon.png" />
+    <None Remove="Images\small_short_bubble_left_down_red.png" />
+    <None Remove="Images\small_short_bubble_left_down_yellow.png" />
     <None Remove="Images\SS.png" />
     <None Remove="Images\summary_title.png" />
     <None Remove="Images\teacher.png" />
@@ -328,7 +337,10 @@
     <Resource Include="Fonts\HGRPP1.TTC" />
     <Resource Include="Fonts\JiyunoTsubasa.ttf" />
     <Resource Include="Fonts\TanukiMagic.ttf" />
+    <Resource Include="Images\10seconds_arrow.png" />
     <Resource Include="Images\159474.png" />
+    <Resource Include="Images\1second_arrow.png" />
+    <Resource Include="Images\5seconds_arrow.png" />
     <Resource Include="Images\activity_result_msg_04_01.png" />
     <Resource Include="Images\activity_result_msg_04_02.png" />
     <Resource Include="Images\activity_result_msg_04_03.png" />
@@ -506,7 +518,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\red_arrow_right.png" />
-    <Resource Include="Images\return.png" />
+    <Resource Include="Images\relax_female.png" />
+    <Resource Include="Images\relax_male.png" />
+    <Resource Include="Images\relax_method.png" />
+    <Resource Include="Images\relax_shade.png" />
     <Resource Include="Images\return_to_item.png" />
     <Resource Include="Images\return_to_top.png" />
     <Resource Include="Images\short_bubble_left.png" />
@@ -519,10 +534,12 @@
     <Resource Include="Images\small_bubble_center_down.png" />
     <Resource Include="Images\small_bubble_center_right_down.png" />
     <Resource Include="Images\small_bubble_left_blue.png" />
+    <Resource Include="Images\small_bubble_left_down.png" />
     <Resource Include="Images\small_bubble_left_down_blue.png" />
     <Resource Include="Images\small_bubble_left_down_red.png" />
     <Resource Include="Images\small_bubble_left_down_yellow.png" />
     <Resource Include="Images\small_bubble_left_red.png" />
+    <Resource Include="Images\small_bubble_left_top.png" />
     <Resource Include="Images\small_bubble_left_up.png" />
     <Resource Include="Images\small_bubble_left_yellow.png" />
     <Resource Include="Images\small_bubble_right_down.png" />
@@ -578,6 +595,8 @@
     <Resource Include="Images\shiroji_04.png" />
     <Resource Include="Images\small_bubble_left.png" />
     <Resource Include="Images\small_icon.png" />
+    <Resource Include="Images\small_short_bubble_left_down_red.png" />
+    <Resource Include="Images\small_short_bubble_left_down_yellow.png" />
     <Resource Include="Images\SS.png" />
     <Resource Include="Images\summary_title.png" />
     <Resource Include="Images\teacher.png" />

@@ -1681,7 +1681,7 @@ namespace KokoroUpTime
                     {
                         _checkBox.IsEnabled = false;
                     }
-                    //this.RuleBoardButton.IsEnabled = false;
+                    this.RuleBoardButton.IsEnabled = false;
                     
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
