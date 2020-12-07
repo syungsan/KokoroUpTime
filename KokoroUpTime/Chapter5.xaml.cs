@@ -149,7 +149,7 @@ namespace KokoroUpTime
             this.imageObjects = new Dictionary<string, Image>
             {
                 ["bg_image"] = this.BackgroundImage,
-                ["manga_title_image"] = this.MangaTitleImage,
+                // ["manga_title_image"] = this.MangaTitleImage,
                 ["manga_image"] = this.MangaImage,
                 ["item_center_up_image"] = this.ItemCenterUpImage,
                 ["item_center_image"] = this.ItemCenterImage,
@@ -182,6 +182,9 @@ namespace KokoroUpTime
                 ["let's_use_hot_word_title_image"] = this.Let_sUseHotWordTitleImage,
                 ["hot_word_arrow_image"] = this.HotWordArrowImage,
                 ["item_left_down_image"] = this.ItemLeftDownImage,
+
+                ["body_image_of_akamaru_angry_image"] = this.BodyImageOfAkamaruAngryImage,
+                ["body_image_of_kimi_fear_image"] = this.BodyImageOfKimiFearImage,
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -196,7 +199,7 @@ namespace KokoroUpTime
                 ["challenge_time_title_text"] = this.ChallengeTimeTitleTextBlock,
                 ["let_s_try_title_text"] = this.Let_sTryTitleTextBlock,
                 ["hot_word_text"] = this.HotWordTextBlock,
-                ["children_feeling_title_text"] = ChildrenFeelingTitleTextBlock,
+                ["children_body_image_title_text"] = ChildrenBodyImageTitleTextBlock, //
                 ["children_feeling_comment_text"] = this.ChildrenFeelingCommentTextBlock,
                 ["children_feeling_comment_big_text"] = this.ChildrenFeelingCommentBigTextBlock,
                 ["let's_use_hot_word_msg"] = this.Let_sUseHotWordMessageTextBlock,
@@ -207,6 +210,8 @@ namespace KokoroUpTime
                 ["complimentary_situation_value_text"] = this.ComplimentarySituationValueTextBlock,
                 ["kind_of_feeling_input_text"] = this.KindOfFeelingInputTextBlock,
                 ["size_of_feeling_input_text"] = this.SizeOfFeelingInputTextBlock,
+
+                ["problem_text"] = this.ProblemTextBlock, //
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -219,7 +224,7 @@ namespace KokoroUpTime
                 ["check_manga_button"] = this.CheckMangaButton,
                 ["feeling_next_go_button"] = this.FeelingNextGoButton,
                 ["feeling_prev_back_button"] = this.FeelingPrevBackButton,
-                ["manga_prev_back_button"] = this.MangaPrevBackButton,
+                // ["manga_prev_back_button"] = this.MangaPrevBackButton,
                 ["complete_next_button"] = this.CompleteNextButton,
             };
 
@@ -236,7 +241,7 @@ namespace KokoroUpTime
                 ["item_info_plate_grid"] = this.ItemInfoPlateGrid,
                 ["item_info_sentence_grid"] = this.ItemInfoSentenceGrid,
                 ["item_last_info_grid"] = this.ItemLastInfoGrid,
-                ["item_check_grid"] = this.ItemCheckGrid,
+                ["item_detail_info_grid"] = this.ItemDetailInfoGrid, //
                 ["children_feeling_comment_grid"] = this.ChildrenFeelingCommentGrid,
                 ["children_feeling_comment_big_grid"] = this.ChildrenFeelingCommentBigGrid,
                 ["select_heart_grid"] = this.SelectHeartGrid,
@@ -251,18 +256,27 @@ namespace KokoroUpTime
                 ["hot_word_value_button_grid"] = this.HotWordValueButtonGrid,
                 ["role_play_info_grid"] = this.RolePlayInfoGrid,
                 ["role_play_button_grid"] = this.RolePlayButtonGrid,
-                ["feeling_input_grid"] = this.FeelingInputGrid,
+                // ["feeling_input_grid"] = this.FeelingInputGrid,
+
+                ["body_image_of_akamaru_bubbles_grid"] = this.BodyImageOfAkamaruBubblesGrid, //
+                ["body_image_of_kimi_bubbles_grid"] = this.BodyImageOfKimiBubblesGrid, //
+                ["my_status_input_grid"] = this.MyStatusInputGrid, //
             };
 
             this.borderObjects = new Dictionary<string, Border>
             {
                 ["challenge_time_title_border"] = this.ChallengeTimeTitleBorder,
-                ["children_feeling_title_border"] = this.ChildrenFeelingTitleBorder,
+                ["children_body_image_title_border"] = this.ChildrenBodyImageTitleBorder,
                 ["let_s_try_title_border"] = this.Let_sTryTitleBorder,
                 ["hot_word_border"] = this.HotWordBorder,
                 ["selected_hot_word_border"] = this.SelectHotWordBorder,
                 ["complimentary_situation_border"] = this.ComplimentarySituationBorder,
                 ["role_play_msg_border"] = this.RolePlayMessageBorder,
+
+                ["item_check_border"] = this.ItemCheckBorder, //
+                ["manga_title_border"] = this.MangaTitleBorder, //
+                ["body_image_of_akamaru_angry_border"] = this.BodyImageOfAkamaruAngryBorder, //
+                ["body_image_of_kimi_fear_border"] = this.BodyImageOfKimiFearBorder, //
             };
         }
 
@@ -287,13 +301,13 @@ namespace KokoroUpTime
             this.MusicInfoGrid.Visibility = Visibility.Hidden;
             this.ExitBackGrid.Visibility = Visibility.Hidden;
             this.BackgroundImage.Visibility = Visibility.Hidden;
-            this.MangaTitleImage.Visibility = Visibility.Hidden;
+            // this.MangaTitleImage.Visibility = Visibility.Hidden;
             this.MangaImage.Visibility = Visibility.Hidden;
             this.ItemCenterUpImage.Visibility = Visibility.Hidden;
             this.ItemCenterImage.Visibility = Visibility.Hidden;
             this.ItemLeftImage.Visibility = Visibility.Hidden;
-            this.ItemDetailInfoImage.Visibility = Visibility.Hidden;
-            this.ItemCheckGrid.Visibility = Visibility.Hidden;
+            // this.ItemDetailInfoImage.Visibility = Visibility.Hidden;
+            this.ItemDetailInfoGrid.Visibility = Visibility.Hidden; //
             this.ItemLeftLastImage.Visibility = Visibility.Hidden;
             this.SessionTitleImage.Visibility = Visibility.Hidden;
             this.SessionSubTitleTextBlock.Visibility = Visibility.Hidden;
@@ -331,7 +345,7 @@ namespace KokoroUpTime
             this.HotWordBorder.Visibility = Visibility.Hidden;
             this.GladCommentUpImage.Visibility = Visibility.Hidden;
             this.GladCommentDownImage.Visibility = Visibility.Hidden;
-            this.ChildrenFeelingTitleBorder.Visibility = Visibility.Hidden;
+            this.ChildrenBodyImageTitleBorder.Visibility = Visibility.Hidden; //
             this.ChildrenFaceLeftCenterImage.Visibility = Visibility.Hidden;
             this.ChildrenFeelingCommentGrid.Visibility = Visibility.Hidden;
             this.ChildrenFeelingCommentBigGrid.Visibility = Visibility.Hidden;
@@ -339,8 +353,8 @@ namespace KokoroUpTime
             this.CheckMangaButton.Visibility = Visibility.Hidden;
             this.FeelingNextGoButton.Visibility = Visibility.Hidden;
             this.FeelingPrevBackButton.Visibility = Visibility.Hidden;
-            this.ChildrenFeelingTitleTextBlock.Visibility = Visibility.Hidden;
-            this.MangaPrevBackButton.Visibility = Visibility.Hidden;
+            this.ChildrenBodyImageTitleTextBlock.Visibility = Visibility.Hidden; //
+            // this.MangaPrevBackButton.Visibility = Visibility.Hidden;
             this.CompleteNextButton.Visibility = Visibility.Hidden;
             this.ItemLeftCenterSmallImage.Visibility = Visibility.Hidden;
             this.Let_sUseHotWordMessageGrid.Visibility = Visibility.Hidden;
@@ -360,7 +374,22 @@ namespace KokoroUpTime
             this.ItemBookMainGrid.Visibility = Visibility.Hidden;
             this.ItemBookNoneGrid.Visibility = Visibility.Hidden;
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
-            this.FeelingInputGrid.Visibility = Visibility.Hidden;
+            // this.FeelingInputGrid.Visibility = Visibility.Hidden;
+
+            this.MangaTitleBorder.Visibility = Visibility.Hidden;
+
+            this.ItemCheckBorder.Visibility = Visibility.Hidden; //
+
+            this.BodyImageOfAkamaruAngryBorder.Visibility = Visibility.Hidden; //
+            this.BodyImageOfAkamaruAngryImage.Visibility = Visibility.Hidden; //
+            this.BodyImageOfAkamaruBubblesGrid.Visibility = Visibility.Hidden; //
+
+            this.BodyImageOfKimiFearBorder.Visibility = Visibility.Hidden; //
+            this.BodyImageOfKimiFearImage.Visibility = Visibility.Hidden; //
+            this.BodyImageOfKimiBubblesGrid.Visibility = Visibility.Hidden; //
+
+            this.MyStatusInputGrid.Visibility = Visibility.Hidden; //
+            this.ProblemTextBlock.Visibility = Visibility.Hidden; //
 
             this.SelectHotWordValueTitleTextBlock.Text = "";
             this.SessionSubTitleTextBlock.Text = "";
@@ -372,11 +401,13 @@ namespace KokoroUpTime
             this.ComposerNameTextBlock.Text = "";
             this.ChildrenFeelingCommentTextBlock.Text = "";
             this.ChildrenFeelingCommentBigTextBlock.Text = "";
-            this.ChildrenFeelingTitleTextBlock.Text = "";
+            this.ChildrenBodyImageTitleTextBlock.Text = ""; //
             this.SelectHotWordTitleTextBlock.Text = "";
             this.SelectHotWordValueTextBlock.Text = "";
             this.KindOfFeelingInputTextBlock.Text = "";
             this.SizeOfFeelingInputTextBlock.Text = "";
+
+            this.ProblemTextBlock.Text = "";
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
@@ -847,8 +878,25 @@ namespace KokoroUpTime
                 case "flip":
 
                     this.MangaFlipButton.Visibility = Visibility.Visible;
-                    this.isClickable = true;
 
+                    Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
+
+                    if (sb != null)
+                    {
+                        // 二重終了防止策
+                        bool isDuplicate = false;
+
+                        sb.Completed += (s, e) =>
+                        {
+                            if (!isDuplicate)
+                            {
+                                this.isClickable = true;
+
+                                isDuplicate = true;
+                            }
+                        };
+                        sb.Begin(this);
+                    }
                     break;
 
                 // 各種コントロールを個別に隠す処理
@@ -1136,7 +1184,7 @@ namespace KokoroUpTime
 
                 case "get_item":
 
-                    this.dataItem.HasGotItem06 = true;
+                    this.dataItem.HasGotItem03 = true;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {

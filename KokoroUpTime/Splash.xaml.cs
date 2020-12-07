@@ -76,14 +76,16 @@ namespace KokoroUpTime
             // mainWindow.Cursor = Cursors.None;
             mainWindow.WindowState = WindowState.Maximized;
             */
-
+            #region 
             
-            //Debug用の画面サイズ
+            //Debug用の画面サイズ(小さい方がやりやすい)
             mainWindow.Width = 800;
             mainWindow.Height = 600;
             mainWindow.ResizeMode = ResizeMode.CanResize;
             mainWindow.Left = 1130;
             mainWindow.Top = 490;
+            
+            #endregion
             
         }
     }
