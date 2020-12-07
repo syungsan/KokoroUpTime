@@ -210,7 +210,6 @@ namespace KokoroUpTime
 
             this.buttonObjects = new Dictionary<string, Button>
             {
-                //["rule_board_button"] = this.RuleBoardButton,
                 ["next_msg_button"] = this.NextMessageButton,
                 ["back_msg_button"] = this.BackMessageButton,
                 ["next_page_button"] = this.NextPageButton,
@@ -244,7 +243,6 @@ namespace KokoroUpTime
                 ["compare_akamaru_heart_grid"] = this.CompareAkamaruHeartGrid,
                 ["compare_aosuke_heart_grid"] = this.CompareAosukeHeartGrid,
                 ["akamaru_and_aosuke_compare_grid"] = this.AkamaruAndAosukeCompareGrid,
-                ["rule_board_grid"] = this.RuleBoardGrid,
                 ["compare_msg_grid"] = this.CompareMessageGrid,
                 ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid,
@@ -283,8 +281,6 @@ namespace KokoroUpTime
             this.MusicInfoGrid.Visibility = Visibility.Hidden;
             this.ExitBackGrid.Visibility = Visibility.Hidden;
             this.BackgroundImage.Visibility = Visibility.Hidden;
-           // this.RuleBoardButton.Visibility = Visibility.Hidden;
-            this.RuleBoardGrid.Visibility = Visibility.Hidden;
             this.RuleBoardTitleTextBlock.Visibility = Visibility.Hidden;
             this.RuleBoardCheck1TextBlock.Visibility = Visibility.Hidden;
             this.RuleBoardCheck2TextBlock.Visibility = Visibility.Hidden;
@@ -506,11 +502,10 @@ namespace KokoroUpTime
                     {
                         var gridStoryBoard = this.scenarios[this.scenarioCount][2];
 
-                        var gridObjectName = gridObject.Name;
+                        // ストーリーボードの名前にコントロールの名前を付け足す
+                        gridStoryBoard += $"_{this.position}";
 
-                        string _objectsName = this.position;
-
-                        this.ShowAnime(storyBoard: gridStoryBoard,objectName:gridObjectName,objectsName:_objectsName, isSync: gridAnimeIsSync);
+                        this.ShowAnime(storyBoard: gridStoryBoard, isSync: gridAnimeIsSync);
                     }
                     else
                     {
@@ -549,11 +544,9 @@ namespace KokoroUpTime
                     {
                         var imageStoryBoard = this.scenarios[this.scenarioCount][3];
 
-                        var imageObjectName = imageObject.Name;
+                        imageStoryBoard += $"_{this.position}";
 
-                        string _objectsName = this.position;
-
-                        this.ShowAnime(storyBoard: imageStoryBoard,objectName:imageObjectName,objectsName:_objectsName, isSync: imageAnimeIsSync);
+                        this.ShowAnime(storyBoard: imageStoryBoard, isSync: imageAnimeIsSync);
                     }
                     else
                     {
@@ -582,11 +575,9 @@ namespace KokoroUpTime
                     {
                         var buttonStoryBoard = this.scenarios[this.scenarioCount][2];
 
-                        var buttonObjectName = buttonObject.Name;
+                        buttonStoryBoard += $"_{this.position}";
 
-                        string _objectsName = this.position;
-
-                        this.ShowAnime(storyBoard: buttonStoryBoard,objectName: buttonObjectName,objectsName:_objectsName, isSync: buttonAnimeIsSync);
+                        this.ShowAnime(storyBoard: buttonStoryBoard, isSync: buttonAnimeIsSync);
                     }
                     else
                     {
@@ -661,11 +652,9 @@ namespace KokoroUpTime
                     {
                         var textStoryBoard = this.scenarios[this.scenarioCount][4];
 
-                        var textObjectName = __textObject.Name;
+                        textStoryBoard += $"_{this.position}";
 
-                        string _objectsName = this.position;
-
-                        this.ShowAnime(storyBoard: textStoryBoard, objectName:textObjectName,objectsName:_objectsName, isSync: textAnimeIsSync);
+                        this.ShowAnime(storyBoard: textStoryBoard, isSync: textAnimeIsSync);
                     }
                     else
                     {
@@ -1216,22 +1205,6 @@ namespace KokoroUpTime
                     this.ScenarioPlay();
 
                     break;
-
-                case "goto":
-
-                    if (this.scenarios[this.scenarioCount].Count > 1 && this.scenarios[this.scenarioCount][1] != "")
-                    {
-                        var GoToLabel = this.scenarios[this.scenarioCount][1];
-                        if (GoToLabel == "current_scene")
-                        {
-                            this.GoTo(this.scene);
-                        }
-                        else
-                        {
-                            this.GoTo(GoToLabel);
-                        }
-                    }
-                    break;
             }
         }
 
@@ -1635,21 +1608,9 @@ namespace KokoroUpTime
         }
 
         // アニメーション（ストーリーボード）の処理
-        private void ShowAnime(string storyBoard, string objectName, string objectsName, string isSync)
+        private void ShowAnime(string storyBoard, string isSync)
         {
-            Storyboard sb;
-
-            try
-            {
-                sb = this.FindResource(storyBoard) as Storyboard;
-                foreach (var child in sb.Children)
-                    Storyboard.SetTargetName(child, objectName);
-            }
-            catch (ResourceReferenceKeyNotFoundException ex)
-            {
-                string objectsStroryBoard = $"{storyBoard}_{objectsName}";
-                sb = this.FindResource(objectsStroryBoard) as Storyboard;
-            }
+            Storyboard sb = this.FindResource(storyBoard) as Storyboard;
 
             if (sb != null)
             {
@@ -1763,6 +1724,15 @@ namespace KokoroUpTime
                 {
                     this.BackPageButton.Visibility = Visibility.Hidden;
                     this.NextPageButton.Visibility = Visibility.Hidden;
+
+                    if (this.scene == "教室のルール")
+                    {
+                        foreach (CheckBox _checkBox in this.checkBoxs)
+                        {
+                            _checkBox.IsChecked = false;
+                        }
+                        this.tapCount = 0;
+                    }
 
                     BackScenario();
                 }
@@ -1911,7 +1881,7 @@ namespace KokoroUpTime
                     if (this.tapCount >= this.checkBoxs.Length)
                     {
                         //this.RuleBoardButton.IsEnabled = true;
-                        //this.isClickable = true;
+                        this.isClickable = true;
                         
                         return;
                     }

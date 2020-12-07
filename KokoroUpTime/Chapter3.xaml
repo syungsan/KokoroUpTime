@@ -519,7 +519,7 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Grid.RenderTransform>
-                    <Image x:Name="MainMessageBubbleImage" Source="/Images/left_big_bubble.png" RenderTransformOrigin="0.5,0.5">
+                    <Image x:Name="MainMessageBubbleImage" Source="/Images/left_big_bubble.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -620,8 +620,8 @@
                     <Button x:Name="ExitBackYesButton" HorizontalAlignment="Left" Margin="33,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
                         <Image x:Name="ExitBackYesButtonImage" Source="/Images/moya1.png"/>
                     </Button>
-                    <Button x:Name="ExitBackNoButton" HorizontalAlignment="Left" Margin="465,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
-                        <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
+                    <Button x:Name="ExitBackNoButton" HorizontalAlignment="Left" Margin="465,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
+                        <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png" d:IsHidden="True"/>
                     </Button>
                 </Grid>
                 <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">
