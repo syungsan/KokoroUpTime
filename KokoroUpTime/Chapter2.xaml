@@ -3,8 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:gif="http://wpfanimatedgif.codeplex.com"
       xmlns:local="clr-namespace:KokoroUpTime"
+      xmlns:outline_maker="clr-namespace:OutlineTextMaker"
+      xmlns:gif="http://wpfanimatedgif.codeplex.com"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="Chapter2" Loaded="Window_Loaded">
@@ -13,452 +14,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Animation.xaml"/>
+                <ResourceDictionary Source="Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-
-            <Storyboard x:Key="appear_expansion_main_msg_grid">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.00">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.00">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.00">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.00">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-
-            </Storyboard>
-            <Storyboard x:Key="fade_in_shiroji_right_center_image">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiRightCenterImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_expansion_slow_main_msg_grid">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.00">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.00">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.00">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.00">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-
-            </Storyboard>
-            <Storyboard x:Key="appear_up_children_info_image">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChildrenInfoImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChildrenInfoImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_rotation_item_center_image">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemCenterImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:02" Value="1.0"/>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemCenterImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:02" Value="1.0"/>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemCenterImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:02" Value="720"/>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemCenterImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:02" Value="1"/>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_fade_in_item_info_sentence_grid">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemInfoSentenceGrid" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_up_shiroji_right_up_image">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiRightUpImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <BounceEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <BounceEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiRightUpImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_expansion_challenge_msg_grid">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChallengeMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChallengeMessageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChallengeMessageGrid" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_fade_in_select_feeling_next_button">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="SelectFeelingNextButton" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_up_kimi_in_plate_image">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KimiInPlateImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="365">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KimiInPlateImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <ExponentialEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_fade_in_kimi_plate_outer_image">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KimiPlateOuterImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_fade_in_kimi_scene1_text">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KimiScene1TextBlock" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_fade_in_kimi_scene2_text">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KimiScene2TextBlock" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_fade_in_kimi_kind_of_feeling_up_text">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KimiKindOfFeelingUpTextBlock" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_fade_in_kimi_kind_of_feeling_down_text">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KimiKindOfFeelingDownTextBlock" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_fade_in_kimi_size_of_feeling_up_text">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KimiSizeOfFeelingUpTextBlock" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <ColorAnimationUsingKeyFrames Storyboard.TargetName="KimiSizeOfFeelingUpTextBlock" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
-                    <EasingColorKeyFrame KeyTime="00:00:00" Value="Blue"/>
-                    <EasingColorKeyFrame KeyTime="00:00:00.5000000" Value="Blue"/>
-                </ColorAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_fade_in_kimi_size_of_feeling_down_text">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KimiSizeOfFeelingDownTextBlock" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_fade_in_kimi_plate_inner_up_grid">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KimiPlateInnerUpGrid" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_fade_in_kimi_plate_inner_down_grid">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KimiPlateInnerDownGrid" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <SineEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="slip_down_item_center_image">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemCenterImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:02" Value="1"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:03" Value="0.0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:04" Value="1"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:05" Value="0.0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemCenterImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_up_children_stand_left_image">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChildrenStandLeftImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <BounceEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <BounceEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChildrenStandLeftImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
-                </DoubleAnimationUsingKeyFrames>
-
-            </Storyboard>
-            <Storyboard x:Key="appear_up_shiroji_left_image">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiLeftImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <BounceEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <BounceEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiLeftImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
             <Storyboard x:Key="appear_fade_in_challenge2_grid">
                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="AosukeSizeOfFeelingGrid" Storyboard.TargetProperty="(UIElement.Opacity)">
                     <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
@@ -499,41 +56,6 @@
                     <EasingDoubleKeyFrame KeyTime="00:00:04.2000000" Value="1"/>
                 </DoubleAnimationUsingKeyFrames>
             </Storyboard>
-            <Storyboard x:Key="appear_fade_in_item_plate_grid">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemPlateMainText" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="1"/>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            <Storyboard x:Key="appear_expansion_item_point_message_bubble_image">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemPointMessageBubbleImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ItemPointMessageBubbleImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
-                </DoubleAnimationUsingKeyFrames>
-
-            </Storyboard>
-            <Storyboard x:Key="appear_up_shiroji_center_down_small_image">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiCenterDownSmallImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiCenterDownSmallImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <BounceEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <BounceEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
             <Storyboard x:Key="wipe_in_challenge_time_result_msg_grid">
                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ChallengeTimeResultImage01" Storyboard.TargetProperty="(FrameworkElement.Width)">
                     <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
@@ -555,32 +77,12 @@
                     <EasingDoubleKeyFrame KeyTime="00:00:04" Value="1800"/>
                 </DoubleAnimationUsingKeyFrames>
             </Storyboard>
-            <Storyboard x:Key="wipe_in_word_art_msg">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiCenterDownSmallImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
-                </DoubleAnimationUsingKeyFrames>
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShirojiCenterDownSmallImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <BounceEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                    <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <BounceEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
         </ResourceDictionary>
     </Page.Resources>
-
     <Viewbox>
         <Grid Height="1080" Width="1920">
-            <Grid x:Name="BaseGrid">
+            <Grid x:Name="BaseGrid" d:IsHidden="True">
                 <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/orange_gradation.png"/>
-
             </Grid>
             <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
                 <Image x:Name="MangaTitleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/manga2_title.png" Margin="86,24,0,0" Height="98" Width="1752" d:IsHidden="True"/>
@@ -675,105 +177,26 @@
                     <TextBlock x:Name="SessionStarTextBlock" HorizontalAlignment="Left" Margin="35,109,0,0" VerticalAlignment="Top" FontSize="48" RenderTransformOrigin="0.345,0.474" FontWeight="Bold" Text="☆" TextAlignment="Center" d:IsHidden="True"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="ActivityGrid" d:IsHidden="True" >
-                <Image x:Name="ActivityTitleImage" Source="/Images/challenge_time_title.png" Margin="100,100,1000,800" VerticalAlignment="Center" d:IsHidden="True" />
-                <Image x:Name="ActivityTextImage" Source="/Images/challenge_time_text.png" Margin="100,0,700,300" VerticalAlignment="Center" Panel.ZIndex="4" d:IsHidden="True"/>
+            <Grid x:Name="ChallengeTimeTitleGrid" Height="280" VerticalAlignment="Top" Margin="0,250,0,0" d:IsHidden="True">
+                <Border x:Name="ChallengeTimeTitleBorder" Background="#FFFFC000" />
+                <TextBlock x:Name="ChallengeTimeTitleText"  Text="チャレンジタイム！パート②" FontSize="140" Foreground="#FF9966FF" FontFamily="Yu Gothic" VerticalAlignment="Center" TextAlignment="Center">
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="4" Direction="330" Color="Black" Opacity="0.5" BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
             </Grid>
-            <Grid x:Name="ChallengeTimeTitleGrid" d:IsHidden="True">
-                <Image x:Name="ChallengeTimeTitleImage" Source="/Images/orange_title_plate.png" VerticalAlignment="Top" Margin="0,250,0,0" d:IsHidden="True"/>
-                <TextBlock x:Name="ChallengeTimeTitleText" Text="チャレンジタイム！パート②" FontSize="140" Foreground="BlueViolet"  VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Yu Gothic" FontWeight="UltraBlack" Margin="0,250,0,0" Width="1920" Height="188" d:IsHidden="True"/>
-            </Grid>
-            <Grid x:Name="Challenge1Grid">
-                <Image x:Name="Challenge1Title" Source="/Images/challenge1_title.png" Margin="300,50,500,900" d:IsHidden="True"/>
-                <Image x:Name="GoodEventFrame" Source="/Images/challenge_frame1.png" Margin="200,200,400,200" Stretch="Fill" d:IsHidden="True"/>
-                <Grid x:Name="GoodEventSelectGrid" Margin="220,220,420,220" d:IsHidden="True" >
-                    <Button x:Name="GoodEventButton1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,5,640,545" HorizontalAlignment="Left" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True" >
-                            <TextBlock x:Name="GoodEventText1" Text="●野球でホームランを打つ" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle1" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-                    <Button  x:Name="GoodEventButton2" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,95,640,455" HorizontalAlignment="Left" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True">
-                            <TextBlock x:Name="GoodEventText2" Text="●友達と遊ぶ" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle2" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="GoodEventButton3" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,185,640,365" HorizontalAlignment="Left" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True" >
-                            <TextBlock x:Name="GoodEventText3" Text="●新しいゲームを買う" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle3" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="GoodEventButton4" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,275,640,275" HorizontalAlignment="Left" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True" >
-                            <TextBlock x:Name="GoodEventText4" Text="●のんびりする" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle4" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="GoodEventButton5" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,365,640,185" HorizontalAlignment="Left" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True">
-                            <TextBlock x:Name="GoodEventText5" Text="●遊園地に行く" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle5" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="GoodEventButton6" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="10,455,640,95" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True" >
-                            <TextBlock x:Name="GoodEventText6" Text="●コンサートに行く" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle6" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="GoodEventButton7" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="10,545,640,5" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True">
-                            <TextBlock x:Name="GoodEventText7" Text="●テストで100点を取る" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle7" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-
-                    <Button x:Name="GoodEventButton8" Background="{x:Null}" BorderBrush="{x:Null}" Margin="650,5,0,545" HorizontalAlignment="Left" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True" >
-                            <TextBlock x:Name="GoodEventText8" Text="●遠足に行く" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle8" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-                    <Button  x:Name="GoodEventButton9" Background="{x:Null}" BorderBrush="{x:Null}" Margin="650,95,0,455" HorizontalAlignment="Left" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True">
-                            <TextBlock x:Name="GoodEventText9" Text="●友達とおしゃべりする" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle9" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="GoodEventButton10" Background="{x:Null}" BorderBrush="{x:Null}" Margin="650,185,0,365" HorizontalAlignment="Left" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True" >
-                            <TextBlock x:Name="GoodEventText10" Text="●動物園に行く" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle10" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="GoodEventButton11" Background="{x:Null}" BorderBrush="{x:Null}" Margin="650,275,0,275" HorizontalAlignment="Left" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True" >
-                            <TextBlock x:Name="GoodEventText11" Text="●おいしいものを食べる" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle11" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="GoodEventButton12" Background="{x:Null}" BorderBrush="{x:Null}" Margin="650,365,0,185" HorizontalAlignment="Left" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True">
-                            <TextBlock x:Name="GoodEventText12" Text="●好きなスポーツをする" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle12" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="GoodEventButton13" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="650,455,0,95" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True" >
-                            <TextBlock x:Name="GoodEventText13" Text="●好きな教科の勉強をする" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle13" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="GoodEventButton14" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="650,545,0,5" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True">
-                            <TextBlock x:Name="GoodEventText14" Text="●レストランに食べに行く" FontSize="50" Padding="10,10" d:IsHidden="True"/>
-                            <Ellipse x:Name="SelectCircle14" Stroke="Black" StrokeThickness="3" d:IsHidden="True"/>
-                        </Grid>
-                    </Button>
-                </Grid>
-                <Image x:Name="Challenge1Item" Source="/Images/item01_solo.png" Margin="0,0,1600,750" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+            <Grid x:Name="Challenge1Grid" d:IsHidden="True">
+                <outline_maker:OutlineText x:Name="Challenge1Title" Style="{StaticResource Orange}" Margin="300,50,500,900" Text="チャレンジタイム！パート①" FontSize="85"/>
+                <Border x:Name="Challenge1OuterBorder" BorderBrush="#FFFE2616" BorderThickness="5" Margin="200,200,400,200">
+                    <Border x:Name="Challenge1InnerBorder" BorderBrush="#FFFE2616" BorderThickness="5" Margin="5"/>
+                </Border>
+                <Viewbox Margin="0,0,840,0" Height="640" Width="640">
+                    <ListBox x:Name="GoodEventSelectListBox1" ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}"  Background="{x:Null}" BorderBrush="{x:Null}" SelectionMode="Multiple" SelectionChanged="GoodEventSelectListBox_SelectionChanged"/>
+                </Viewbox>
+                <Viewbox Margin="440,0,0,0" Height="640" Width="640">
+                    <ListBox x:Name="GoodEventSelectListBox2" ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}"  Background="{x:Null}" BorderBrush="{x:Null}" SelectionMode="Multiple"  SelectionChanged="GoodEventSelectListBox_SelectionChanged"/>
+                </Viewbox>
+                <Image x:Name="Challenge1Item" Source="/Images/item01_solo.png" Margin="0,0,1600,750" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleX="-1"/>
@@ -785,14 +208,16 @@
                 </Image>
             </Grid>
             <Grid x:Name="Challenge2Grid">
-                <Image x:Name="Challenge2GridTitle" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="200,20" Source="Images/challenge2_title.png"/>
+                <outline_maker:OutlineText x:Name="Challenge2Title" Style="{StaticResource Orange}" VerticalAlignment="Top" Margin="200,20" Text="チャレンジタイム！パート②" FontSize="105"/>
                 <TextBlock x:Name="Challenge2Text" Text="青助くんの楽しいことリストについて、きもちの大きさを書いてみよう&#10;次に、かんたんにできるか〇×△をつけてみよう！" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Yu Gothic" FontWeight="UltraBold" Margin="100,200"/>
                 <TextBlock x:Name="KindOfFeeling" Text="きもちの種類" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1037,444,569,578"/>
                 <TextBlock x:Name="SizeOfFeeling" Text="きもちのおおきさ" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1007,720,539,300" d:IsHidden="True"/>
                 <TextBlock x:Name="DifficultyOfAction" Text="かんたんにできるか" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1428,473,59,545" d:IsHidden="True"/>
                 <Grid x:Name="AosukeKindOfFeelingGrid" Margin="1037,507,569,416">
-                    <Image x:Name="KindOfFeelingButtonImage" Source="Images/kind_of_feeling_button_frame.png"/>
-                    <TextBlock x:Name="AosukeKindOfFeelingText" Text="ゆったり" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" />
+                    <Border x:Name="KindOfFeelingGridOuterBorder" BorderBrush="#FFFF0000" BorderThickness="5">
+                        <Border x:Name="KindOfFeelingGridInnerBorder" BorderBrush="#FFFF0000" BorderThickness="5" Margin="5"/>
+                    </Border> 
+                   <TextBlock x:Name="AosukeKindOfFeelingText" Text="ゆったり" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" />
                 </Grid>
                 <Grid x:Name="AosukeSizeOfFeelingGrid"  Margin="1037,807,569,116" d:IsHidden="True">
                     <Button x:Name="SizeOfFeelingButton" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
@@ -827,9 +252,9 @@
                 <Grid x:Name="Challenge2CoverGrid" Background="Transparent" d:IsHidden="True"/>
             </Grid>
             <Grid x:Name="SelectFeelingGrid" d:IsHidden="True">
-                <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400" d:IsHidden="True">
-                    <Image x:Name="SelectGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <ItemsControl x:Name="SelectGoodFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:IsHidden="True">
+                <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400">
+                    <Image x:Name="SelectGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill"/>
+                    <ItemsControl x:Name="SelectGoodFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <InkCanvas x:Name="SelectGoodFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
@@ -843,9 +268,9 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </Grid>
-                <Grid x:Name="SelectBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="923,72,0,0" d:IsHidden="True">
-                    <Image x:Name="SelectBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <ItemsControl x:Name="SelectBadFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:IsHidden="True">
+                <Grid x:Name="SelectBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="923,72,0,0">
+                    <Image x:Name="SelectBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill"/>
+                    <ItemsControl x:Name="SelectBadFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <InkCanvas x:Name="SelectBadFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
@@ -859,34 +284,34 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </Grid>
-                <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="1427,550,0,0" VerticalAlignment="Center" Width="273" Source="/Images/item01_solo.png" RenderTransformOrigin="0.659,0.453" d:IsHidden="True"/>
+                <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="1427,550,0,0" VerticalAlignment="Center" Width="273" Source="/Images/item01_solo.png" RenderTransformOrigin="0.659,0.453"/>
             </Grid>
             <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
-                <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684" d:IsHidden="True">
-                    <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center" d:IsHidden="True"/>
-                    <TextBlock x:Name="ViewSizeOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center" d:IsHidden="True"/>
+                <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684">
+                    <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png"/>
+                    <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center"/>
+                    <TextBlock x:Name="ViewSizeOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center"/>
                 </Grid>
             </Grid>
             <Grid x:Name="GaugeGrid" d:IsHidden="True">
                 <Grid x:Name="SelectHeartGrid" Margin="400,450,400,100">
-                    <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="10,0,0,0"/>
-                    <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.87" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,120,10,20">
+                    <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_red.png" Margin="10,0,0,0"/>
+                    <Image x:Name="SelectNeedleImage"  Source="/Images/red_needle.png" RenderTransformOrigin="0.5,0.87" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,120,10,20">
                         <Image.RenderTransform>
                             <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter2}}}"/>
                         </Image.RenderTransform>
                     </Image>
                 </Grid>
             </Grid>
-            <Grid x:Name="DifficultySelectGrid" d:IsHidden="True">
-                <Button x:Name="GoodButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="400,400,1200,400" Click="Button_Click" d:IsHidden="True">
-                    <Image x:Name="GoodButtonImage" Source="/Images/good.png" Stretch="Uniform" d:IsHidden="True"/>
+            <Grid x:Name="DifficultySelectGrid" Margin="400,400" d:IsHidden="True">
+                <Button x:Name="GoodButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,800,0"  Click="Button_Click">
+                    <Image x:Name="GoodButtonImage" Source="/Images/good.png" Stretch="Uniform"/>
                 </Button>
-                <Button x:Name="BadButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="800,400" Click="Button_Click" d:IsHidden="True">
-                    <Image x:Name="BadButtonImage" Source="/Images/bad.png" Stretch="Uniform" d:IsHidden="True"/>
+                <Button x:Name="BadButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="400,0"  Click="Button_Click">
+                    <Image x:Name="BadButtonImage" Source="/Images/bad.png" Stretch="Uniform"/>
                 </Button>
-                <Button x:Name="NormalButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="1200,400,400,400" Click="Button_Click" d:IsHidden="True">
-                    <Image x:Name="NormalButtonImage" Source="/Images/normal.png" Stretch="Uniform" Width="275" d:IsHidden="True"/>
+                <Button x:Name="NormalButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="800,0,0,0"  Click="Button_Click">
+                    <Image x:Name="NormalButtonImage" Source="/Images/normal.png" Stretch="Uniform" Width="275"/>
                 </Button>
             </Grid>
             <Grid x:Name="SummaryGrid" d:IsHidden="True">
@@ -908,86 +333,15 @@
                 </Grid>
                 <Image x:Name="SummaryTitleImage" Width="401" Source="/Images/summary_title.png" Margin="760,22,759,907" Height="151" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="AnyFrameGrid" d:IsHidden="True">
-                <Image x:Name="ChildrenInfoImage" HorizontalAlignment="Left" Height="652" Margin="211,65,0,0" VerticalAlignment="Top" Width="1006" Source="/Images/SS.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <Grid x:Name="KimiPlateGrid" d:IsHidden="True">
-                    <Image x:Name="KimiPlateOuterImage" HorizontalAlignment="Center" Height="615" VerticalAlignment="Top" Width="1436" Source="/Images/kimi_plate_outer.png" Margin="0,135,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True"/>
-                    <Image x:Name="KimiInPlateImage" HorizontalAlignment="Left" Height="630" Margin="295,102,0,0" VerticalAlignment="Top" Width="255" Source="/Images/kimi_stand_01.png" d:IsHidden="True">
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <TextBlock x:Name="CaseOfKimiTextBlock" HorizontalAlignment="Left" Margin="591,170,0,0" Text="キミちゃんの場合" TextWrapping="Wrap" VerticalAlignment="Top" Height="75" Width="349" FontSize="48" FontWeight="Bold" d:IsHidden="True"/>
-                    <Grid x:Name="KimiPlateInnerUpGrid" Width="1034" Height="236" Margin="591,259,295,585" d:IsHidden="True">
-                        <Image x:Name="KimiPlateInnerUpImage" Source="/Images/kimi_plate_inner.png" d:IsHidden="True" />
-                        <TextBlock x:Name="KimiScene1TitleTextBlock" HorizontalAlignment="Left" Margin="35,14,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Text="場面 ①" d:IsHidden="True"/>
-                        <TextBlock x:Name="KimiScene1TextBlock" HorizontalAlignment="Left" Margin="35,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="429" FontSize="32" Height="99" d:IsHidden="True"><Run Text="なかのいい友だちに、"/><LineBreak /><Run Text="自分の考えていることを つたえる"/></TextBlock>
-                        <TextBlock x:Name="KimiKindOfFeelingUpTitleTextBlock" HorizontalAlignment="Left" Margin="527,14,0,0" VerticalAlignment="Top" Height="58" Width="205" FontSize="36" FontWeight="Bold" Text="きもちの種類" TextAlignment="Center" d:IsHidden="True"/>
-                        <TextBlock x:Name="KimiKindOfFeelingUpTextBlock" HorizontalAlignment="Left" Margin="517,98,0,0" Text="ふあん" TextWrapping="Wrap" VerticalAlignment="Top" Height="66" Width="220" FontSize="48" TextAlignment="Center" FontWeight="Bold" d:IsHidden="True"/>
-                        <TextBlock x:Name="KimiSizeOfFeelingUpTitleTextBlock" HorizontalAlignment="Left" Margin="775,14,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Text="きもちの大きさ" TextAlignment="Center" d:IsHidden="True"/>
-                        <TextBlock x:Name="KimiSizeOfFeelingUpTextBlock" HorizontalAlignment="Left" Margin="841,98,0,0" Text="30" TextWrapping="Wrap" VerticalAlignment="Top" Height="66" Width="90" FontSize="48" FontWeight="Bold" TextAlignment="Center" Foreground="Blue" d:IsHidden="True"/>
-                    </Grid>
-                    <Grid x:Name="KimiPlateInnerDownGrid" Width="1034" Height="236" Margin="591,497,295,347" d:IsHidden="True">
-                        <Image x:Name="KimiPlateInnerDownImage" Source="/Images/kimi_plate_inner.png" d:IsHidden="True" />
-                        <TextBlock x:Name="KimiScene2TitleTextBlock" HorizontalAlignment="Left" Margin="35,14,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Text="場面 ②" d:IsHidden="True"/>
-                        <TextBlock x:Name="KimiScene2TextBlock" HorizontalAlignment="Left" Margin="35,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="429" FontSize="32" Height="99" d:IsHidden="True"><Run Text="クラスのみんなのまえで、"/><LineBreak /><Run Text="自分の考えていることを つたえる"/></TextBlock>
-                        <TextBlock x:Name="KimiKindOfFeelingDownTitleTextBlock" HorizontalAlignment="Left" Margin="527,14,0,0" VerticalAlignment="Top" Height="58" Width="205" FontSize="36" FontWeight="Bold" Text="きもちの種類" TextAlignment="Center" d:IsHidden="True"/>
-                        <TextBlock x:Name="KimiKindOfFeelingDownTextBlock" HorizontalAlignment="Left" Margin="517,98,0,0" Text="ふあん" TextWrapping="Wrap" VerticalAlignment="Top" Height="66" Width="220" FontSize="48" TextAlignment="Center" FontWeight="Bold" d:IsHidden="True"/>
-                        <TextBlock x:Name="KimiSizeOfFeelingDownTitleTextBlock" HorizontalAlignment="Left" Margin="775,14,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Text="きもちの大きさ" TextAlignment="Center" d:IsHidden="True"/>
-                        <TextBlock x:Name="KimiSizeOfFeelingDownTextBlock" HorizontalAlignment="Left" Margin="841,98,0,0" Text="90" TextWrapping="Wrap" VerticalAlignment="Top" Height="66" Width="90" FontSize="48" FontWeight="Bold" TextAlignment="Center" Foreground="Blue" d:IsHidden="True"/>
-                    </Grid>
-                </Grid>
-                <Grid x:Name="AkamaruAndAosukeCompareGrid" d:IsHidden="True">
-                    <Image x:Name="CompareItemImage" HorizontalAlignment="Left" Height="489" Margin="10,0,0,0" VerticalAlignment="Center" Width="346" Source="/Images/item01_solo.png" d:IsHidden="True"/>
-                    <Image x:Name="CompareAkamaruImage" HorizontalAlignment="Left" Height="318" Margin="315,127,0,0" VerticalAlignment="Top" Width="295" Source="/Images/akamaru_face_03.png" d:IsHidden="True"/>
-                    <Image x:Name="CompareAosukeImage" HorizontalAlignment="Left" Height="318" Margin="315,625,0,0" VerticalAlignment="Top" Width="295" Source="/Images/aosuke_face_06.png" d:IsHidden="True"/>
-                    <Grid x:Name="CompareAkamaruBubbleGrid" Height="92" Margin="560,30,988,958" d:IsHidden="True">
-                        <Image x:Name="CompareAkamaruBubbleImage" Source="/Images/short_bubble_left.png" Stretch="Fill" d:IsHidden="True"/>
-                        <TextBlock x:Name="CompareAkamaruTextBlock" HorizontalAlignment="Left" Text="ホームラン打つぞ！" TextWrapping="Wrap" VerticalAlignment="Top" Height="72" Width="278" FontSize="32" Margin="84,20,0,0" FontWeight="Bold" d:IsHidden="True"/>
-                    </Grid>
-                    <Grid x:Name="CompareAosukeBubbleGrid" Width="477" Height="92" Margin="560,528,883,460" d:IsHidden="True">
-                        <Image x:Name="CompareAosukeBubbleImage" Source="/Images/short_bubble_left.png" d:IsHidden="True"/>
-                        <TextBlock x:Name="CompareAosukeTextBlock" HorizontalAlignment="Left" Margin="72,20,0,0" Text="ボクは野球は 苦手なんだ・・・" TextWrapping="Wrap" VerticalAlignment="Top" Height="72" Width="395" FontSize="32" FontWeight="Bold" d:IsHidden="True"/>
-                    </Grid>
-                    <Grid x:Name="CompareAkamaruValueFrameGrid" Margin="610,119,585,728" d:IsHidden="True">
-                        <Image x:Name="CompareAkamaruValueFrameImage" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Images/compare_akamaru_value_frame.png" Margin="0,38,0,0" d:IsHidden="True"/>
-                        <TextBlock x:Name="KindOfFeelingAkamaruTitleTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Text="赤丸くんの「きもち」は・・・" TextAlignment="Center" d:IsHidden="True"/>
-                        <TextBlock x:Name="SizeOfFeelingAkamaruTitleTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Margin="386,0,0,0" Text="きもちの「大きさ」は・・・" TextAlignment="Center" d:IsHidden="True"/>
-                        <TextBlock x:Name="KindOfFeelingAkamaruTextBlock" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="106" Width="300" FontSize="68" FontWeight="Bold" Margin="58,82,0,0" TextAlignment="Center" d:IsHidden="True"/>
-                        <TextBlock x:Name="SizeOfFeelingAkamaruTextBlock" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="91" Width="110" FontSize="68" FontWeight="Bold" Margin="500,81,0,0" TextAlignment="Center" d:IsHidden="True"/>
-                    </Grid>
-                    <Grid x:Name="CompareAosukeValueFrameGrid" Margin="606,619,589,228" d:IsHidden="True">
-                        <Image x:Name="CompareAosukeValueFrameImage" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Images/compare_aosuke_value_frame.png" Margin="0,38,0,0" d:IsHidden="True"/>
-                        <TextBlock x:Name="KindOfFeelingAosukeTitleTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Text="青助くんの「きもち」は・・・" TextAlignment="Center" d:IsHidden="True"/>
-                        <TextBlock x:Name="SizeOfFeelingAosukeTitleTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Margin="386,0,0,0" Text="きもちの「大きさ」は・・・" TextAlignment="Center" d:IsHidden="True"/>
-                        <TextBlock x:Name="KindOfFeelingAosukeTextBlock" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="106" Width="300" FontSize="68" FontWeight="Bold" Margin="66,82,0,0" TextAlignment="Center" d:IsHidden="True"/>
-                        <TextBlock x:Name="SizeOfFeelingAosukeTextBlock" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="91" Width="110" FontSize="68" FontWeight="Bold" Margin="490,81,0,0" TextAlignment="Center" d:IsHidden="True"/>
-                    </Grid>
-                </Grid>
-            </Grid>
             <Grid x:Name="EndingGrid" d:IsHidden="True">
-                <Grid x:Name="EndingTitleGrid" Width="878" Height="427" Margin="521,202,521,451" d:IsHidden="True">
+                <Grid x:Name="EndingTitleGrid" Width="878" Height="427" Margin="521,202,521,451">
                     <Image x:Name="EndingTitleBackImage" Source="/Images/ending_bubble.png" Stretch="Uniform" d:IsHidden="True"/>
                     <TextBlock x:Name="EndingTitleTextBlock" HorizontalAlignment="Center" Margin="0,214,0,0" VerticalAlignment="Top" FontSize="88" FontWeight="Bold" Foreground="Black" Text="しゅうりょう！" TextAlignment="Center" d:IsHidden="True"/>
                     <TextBlock x:Name="EndingChapterNoTextBlock" HorizontalAlignment="Center" Margin="0,97,0,0" VerticalAlignment="Top" FontSize="88" FontWeight="Bold" Text="第２回" TextAlignment="Center" d:IsHidden="True"/>
                 </Grid>
-                <Image x:Name="EndingItemImage" HorizontalAlignment="Center" Height="489" VerticalAlignment="Top" Width="346" Source="/Images/item02_solo.png" Margin="0,460,0,0" d:IsHidden="True"/>
-                <Image x:Name="KimiEndingImage" HorizontalAlignment="Left" Height="470" Margin="1364,10,0,0" VerticalAlignment="Top" Width="436" Source="/Images/kimi_face_02.png" d:IsHidden="True"/>
-                <Image x:Name="AosukeEndingImage" HorizontalAlignment="Left" Height="470" Margin="120,10,0,0" VerticalAlignment="Top" Width="436" Source="/Images/aosuke_face_01.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Image x:Name="EndingItemImage" HorizontalAlignment="Center" Height="489" VerticalAlignment="Top" Width="346" Source="/Images/item02_solo.png" Margin="0,460,0,0"/>
+                <Image x:Name="KimiEndingImage" HorizontalAlignment="Left" Height="470" Margin="1364,10,0,0" VerticalAlignment="Top" Width="436" Source="/Images/kimi_face_02.png"/>
+                <Image x:Name="AosukeEndingImage" HorizontalAlignment="Left" Height="470" Margin="120,10,0,0" VerticalAlignment="Top" Width="436" Source="/Images/aosuke_face_01.png" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -997,7 +351,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="AkamaruEndingImage" HorizontalAlignment="Left" Height="470" Margin="59,460,0,0" VerticalAlignment="Top" Width="436" Source="/Images/akamaru_face_04.png" d:IsHidden="True"/>
+                <Image x:Name="AkamaruEndingImage" HorizontalAlignment="Left" Height="470" Margin="59,460,0,0" VerticalAlignment="Top" Width="436" Source="/Images/akamaru_face_04.png"/>
             </Grid>
             <Grid x:Name="ChallengeTimeResultGrid" d:IsHidden="True">
                 <Grid x:Name="ChallengeTimeResultMessageGrid" d:IsHidden="True">
@@ -1006,7 +360,7 @@
                     <Image x:Name="ChallengeTimeResultImage03" Margin="100,250,100,500" Height="200" Width="400" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Left" Source="/Images/challenge_time_result_msg_02_03.png" d:IsHidden="True"/>
                     <Image x:Name="ChallengeTimeResultImage04" Margin="100,375,100,375" Height="200" Width="1800" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Left" Source="/Images/challenge_time_result_msg_02_04.png" d:IsHidden="True"/>
                 </Grid>
-                <Image x:Name="EpilogueItem" Source="/Images/item02_solo.png" Margin="1288,465,12,10" d:IsHidden="True"/>
+                <Image x:Name="EpilogueItem" Source="/Images/item02_solo.png" Margin="1288,465,12,10"/>
             </Grid>
             <Grid x:Name="ShirojiGrid" d:IsHidden="True" >
                 <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5" Source="/Images/shiroji_01.png" Width="579" Height="627" Margin="1271,343,70,110" d:IsHidden="True">
@@ -1040,17 +394,6 @@
                     </Image.RenderTransform>
                 </Image>
                 <Image x:Name="ShirojiSmallRightUpImage" HorizontalAlignment="Left" Height="410" Margin="1375,30,0,0" VerticalAlignment="Top" Width="379" Source="/Images/shiroji_03.png" Stretch="Uniform" StretchDirection="Both" d:IsHidden="True"/>
-                <Image x:Name="ShirojiSmallRightDownImage" Source="/Images/shiroji_02.png" RenderTransformOrigin="0.5,0.5" Margin="1321,580,162,27" d:IsHidden="True">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <Image x:Name="ShirojiRightCenterImage" HorizontalAlignment="Left" Height="627" VerticalAlignment="Top" Width="579" Source="/Images/shiroji_03.png" Margin="1219,96,0,0" d:IsHidden="True"/>
                 <Image x:Name="ShirojiSmallRightCenterImage" Source="/Images/shiroji_04.png" RenderTransformOrigin="0.5,0.5" Margin="1389,237,77,351" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -1061,7 +404,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ShirojiVerySmallRightImage" Source="/Images/shiroji_04.png" RenderTransformOrigin="0.5,0.5" Margin="1537,489,43,223">
+                <Image x:Name="ShirojiVerySmallRightImage" Source="/Images/shiroji_04.png" RenderTransformOrigin="0.5,0.5" Margin="1537,489,43,223" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -1084,7 +427,7 @@
                 <Image x:Name="ShirojiEndingImage" HorizontalAlignment="Left" Height="570" Margin="1204,485,0,0" VerticalAlignment="Top" Width="526" Source="/Images/shiroji_01.png" d:IsHidden="True"/>
             </Grid>
             <Grid x:Name="ChildrenStandGrid" Visibility="Visible" d:IsHidden="True">
-                <Image x:Name="ChildrenStandLeftImage" RenderTransformOrigin="0.5,0.5" Source="/Images/aosuke_stand_01.png" Width="310" Height="765" Margin="210,237,1287,78" d:IsHidden="True">
+                <Image x:Name="ChildrenStandLeftImage" RenderTransformOrigin="0.5,0.5" Source="/Images/aosuke_stand_01.png" Width="310" Height="765" Margin="210,237,1287,78">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -1094,11 +437,9 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ChildrenStandRightImage" HorizontalAlignment="Left" Height="765" Margin="1285,237,0,0" VerticalAlignment="Top" Width="310" Source="/Images/akamaru_stand_01.png" d:IsHidden="True"/>
-                <Image x:Name="KimiStandSmallLeftImage" HorizontalAlignment="Left" Height="658" Margin="53,103,0,0" VerticalAlignment="Top" Width="266" Source="/Images/kimi_stand_01.png" d:IsHidden="True"/>
             </Grid>
             <Grid x:Name="ChildrenFaceGrid" Visibility="Visible" d:IsHidden="True">
-                <Image x:Name="ChildrenFaceImage" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/kimi_face_01.png" Margin="140,175,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Image x:Name="ChildrenFaceImage" HorizontalAlignment="Left" Height="556" VerticalAlignment="Top" Width="516" Source="/Images/kimi_face_01.png" Margin="140,175,0,0" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -1108,11 +449,6 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ChildrenFaceSmallLeftImage" HorizontalAlignment="Left" Height="458" VerticalAlignment="Top" Width="425" Source="/Images/akamaru_face_03.png" Margin="45,262,0,0" d:IsHidden="True"/>
-                <Grid x:Name="ChildrenFaceSmallLeftMessageGrid" Margin="38,90,1450,806" d:IsHidden="True">
-                    <Image x:Name="ChildrenFaceSmallLeftBubbleImage" Source="/Images/face_small_bubble.png" Margin="0,0,10,4" d:IsHidden="True"/>
-                    <TextBlock x:Name="ChildrenFaceSmallLeftMessageTextBlock" HorizontalAlignment="Left" Margin="19,10,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Height="125" Width="378" TextAlignment="Center" d:IsHidden="True"/>
-                </Grid>
             </Grid>
             <Grid x:Name="GroupeActivityGrid" d:IsHidden="True" >
                 <Image x:Name="GroupeActivityTitle" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Images/group_activity_title01.png" Height="155"/>
@@ -1172,7 +508,7 @@
                     <Image x:Name="Item11NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid" d:IsHidden="True">
+            <Grid x:Name="SystemGrid">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
@@ -1241,7 +577,7 @@
                         </TextBlock>
                     </Grid>
                 </Button>
-                <Grid x:Name="ChallengeMessageGrid" Height="386" Width="648" Margin="1164,107,108,587" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Grid x:Name="ChallengeMessageGrid" Height="386" Width="648" Margin="1164,107,108,587" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -1250,7 +586,7 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Grid.RenderTransform>
-                    <Image x:Name="ChallengeSmallBubbleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/small_bubble_right_down.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                    <Image x:Name="ChallengeSmallBubbleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/small_bubble_right_down.png" RenderTransformOrigin="0.5,0.5">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -1260,7 +596,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="ChallengeMessageTextBlock" Margin="35,40,35,100" FontSize="48" TextWrapping="Wrap" d:IsHidden="True"><Run Text="楽しいことをたくさん集めてみたぞい。"/><LineBreak /><Run Text="自分のいいきもちになるものに〇をつけてみるのじゃ。" TextDecorations="BaseLine"/></TextBlock>
+                    <TextBlock x:Name="ChallengeMessageTextBlock" Margin="35,40,35,100" FontSize="48" TextWrapping="Wrap"><Run Text="楽しいことをたくさん集めてみたぞい。"/><LineBreak /><Run Text="自分のいいきもちになるものに〇をつけてみるのじゃ。" TextDecorations="BaseLine"/></TextBlock>
                 </Grid>
                 <Grid x:Name="GroupeActivityMessageGrid" Width="500" Height="400" HorizontalAlignment="Right" Margin="1164,107,5,587" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
@@ -1385,7 +721,7 @@
                         <ListBoxItem x:Name="AllClearButton" FontSize="100" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black" Margin="880,0,0,0" HorizontalAlignment="Left" Selected="ListBoxItem_Selected">すべてけす</ListBoxItem>
                     </ListBox>
                 </Grid>
-                <Button x:Name="CompleteInputButton" Click="Button_Click" Content="とじる" Height="108" FontSize="45" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" Background="White" BorderBrush="Black" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                <Button x:Name="CompleteInputButton" Click="Button_Click" Content="とじる" Height="108" FontSize="45" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" Background="White" BorderBrush="Black" HorizontalAlignment="Right" VerticalAlignment="Top" d:IsHidden="True"/>
                 <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">
                     <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png" d:IsHidden="True"/>
                 </Button>

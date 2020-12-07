@@ -39,6 +39,10 @@ namespace KokoroUpTime
         private string[] GOOD_FEELINGS = { "うれしい", "しあわせ", "たのしい", "ホッとした", "きもちいい", "まんぞく", "すき", "やる気マンマン", "かんしゃ", "わくわく", "うきうき", "ほこらしい" };
         private string[] BAD_FEELINGS = { "心配", "こまった", "不安", "こわい", "おちこみ", "がっかり", "いかり", "イライラ", "はずかしい", "ふまん", "かなしい", "おびえる" };
 
+        //ちょっぴりうきうきのリスト
+        private string[] GOOD_EVENT1 = { "●　野球でホームランをうつ", "●　友だちと遊ぶ", "●　新しいゲームを買う", "●　のんびりする", "●　遊園地に行く", "●　コンサートに行く", "●　テストで100点を取る" };
+        private string[] GOOD_EVENT2 = { "●　遠足に行く", "●　友だちとおしゃべりする", "●　動物園に行く", "●　おいしいものを食べる", "●　好きなスポーツをする", "●　好きな教科の勉強をする", "●　レストランに食べに行く" };
+
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
         private List<List<string>> scenarios = null;
@@ -91,31 +95,28 @@ namespace KokoroUpTime
 
         
         // なったことのある自分の気持ちの一時記録用
-        public List<string> mySelectGoodEvents = new List<string>();
-
-        public string aosukesSizeOfFeelingOfEating;
-        public string aosukesKindOfFeelingOfEating;
-        public string aosukesDifficultyOfEating;
-
-        public string aosukesSizeOfFeelingOfGettingHighScore;
-        public string aosukesKindOfFeelingOfGettingHighScore;
-        public string aosukesDifficultyOfGettingHighScore;
-
-        public string aosukesSizeOfFeelingOfTalkingWithFriend;
-        public string aosukesKindOfFeelingOfTalkingWithFriend;
-        public string aosukesDifficultyOfTalkingWithFriend;
-
-        public string myALittlleExcitingEvents;
+        private List<string> mySelectGoodEvents = new List<string>();
+         
+        private string aosukesSizeOfFeelingOfEating;
+        private string aosukesDifficultyOfEating;
+         
+        private string aosukesSizeOfFeelingOfGettingHighScore;
+        private string aosukesDifficultyOfGettingHighScore;
+         
+        private string aosukesSizeOfFeelingOfTalkingWithFriend;
+        private string aosukesDifficultyOfTalkingWithFriend;
+         
+        private string myALittlleExcitingEvents;
 
 
 
 
 
         // データベースに収めるデータモデルのインスタンス
-        public InitConfig initConfig = new InitConfig();
-        public DataOption dataOption = new DataOption();
-        public DataItem dataItem = new DataItem();
-        public DataProgress dataProgress = new DataProgress();
+        private InitConfig initConfig = new InitConfig();
+        private DataOption dataOption = new DataOption();
+        private DataItem dataItem = new DataItem();
+        private DataProgress dataProgress = new DataProgress();
 
 
         public Chapter2()
@@ -136,7 +137,11 @@ namespace KokoroUpTime
             // データモデルインスタンス確保
             this.dataChapter2 = new DataChapter2();
 
+            this.GoodEventSelectListBox1.ItemsSource　= GOOD_EVENT1;
+            this.GoodEventSelectListBox2.ItemsSource = GOOD_EVENT2;
+
             this.InitControls();
+            
         }
 
         private void InitControls()
@@ -153,34 +158,24 @@ namespace KokoroUpTime
                 ["item_left_image"] = this.ItemLeftImage,
                 ["item_left_last_image"] = this.ItemLeftLastImage,
                 ["session_title_image"] = this.SessionTitleImage,
-                ["kimi_in_plate_image"] = this.KimiInPlateImage,
-                ["kimi_plate_outer_image"] = this.KimiPlateOuterImage,
                 ["select_heart_image"] = this.SelectHeartImage,
                 ["select_needle_image"] = this.SelectNeedleImage,
-                ["children_info_image"] = this.ChildrenInfoImage,
                 ["shiroji_ending_image"] = this.ShirojiEndingImage,
                 ["shiroji_left_image"] = this.ShirojiLeftImage,
                 ["shiroji_right_image"] = this.ShirojiRightImage,
                 ["shiroji_right_up_image"] = this.ShirojiRightUpImage,
                 ["shiroji_small_right_up_image"] = this.ShirojiSmallRightUpImage,
-                ["shiroji_small_right_down_image"] = this.ShirojiSmallRightDownImage,
-                ["shiroji_right_center_image"] = this.ShirojiRightCenterImage,
                 ["shiroji_small_right_center_image"] = this.ShirojiSmallRightCenterImage,
                 ["shiroji_very_small_right_image"] = this.ShirojiVerySmallRightImage,
                 ["shiroji_center_down_small_image"] = this.ShirojiCenterDownSmallImage,
                 ["children_stand_left_image"] = this.ChildrenStandLeftImage,
-                ["children_stand_right_image"] = this.ChildrenStandRightImage,
-                ["kimi_stand_small_left_image"] = this.KimiStandSmallLeftImage,
 
 
                 ["children_face_image"] = this.ChildrenFaceImage,
-                ["children_face_small_left_image"] = this.ChildrenFaceSmallLeftImage,
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
                 ["item_point_message_bubble_image"] = this.ItemPointMessageBubbleImage,
                 ["item_left_last_image"] = this.ItemLeftLastImage,
                 ["challenge2_action_bubble_image"] = this.Challenge2ActionBubbleImage,
-                ["activity_title_image"] = this.ActivityTitleImage,
-                ["activity_text_image"] = this.ActivityTextImage,
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -188,20 +183,8 @@ namespace KokoroUpTime
                 ["session_sub_title_text"] = this.SessionSubTitleTextBlock,
                 ["session_sentence_text"] = this.SessionSentenceTextBlock,
 
-                ["case_of_kimi_text"] = this.CaseOfKimiTextBlock,
-                ["kimi_scene1_text"] = this.KimiScene1TextBlock,
-                ["kimi_kind_of_feeling_up_text"] = this.KimiKindOfFeelingUpTextBlock,
-                ["kimi_size_of_feeling_up_text"] = this.KimiSizeOfFeelingUpTextBlock,
-                ["kimi_scene2_text"] = this.KimiScene2TextBlock,
-                ["kimi_kind_of_feeling_down_text"] = this.KimiKindOfFeelingDownTextBlock,
-                ["kimi_size_of_feeling_down_text"] = this.KimiSizeOfFeelingDownTextBlock,
                 ["compare_msg_text"] = this.CompareMessageTextBlock,
-                ["kind_of_feeling_akamaru_text"] = this.KindOfFeelingAkamaruTextBlock,
-                ["size_of_feeling_akamaru_text"] = this.SizeOfFeelingAkamaruTextBlock,
-                ["kind_of_feeling_aosuke_text"] = this.KindOfFeelingAosukeTextBlock,
-                ["size_of_feeling_aosuke_text"] = this.SizeOfFeelingAosukeTextBlock,
                 ["ending_msg_text"] = this.EndingMessageTextBlock,
-                ["children_face_small_left_msg_text"] = this.ChildrenFaceSmallLeftMessageTextBlock,
                 ["main_msg"] = this.MainMessageTextBlock,
                 ["thin_msg"] = this.ThinMessageTextBlock,
                 ["music_title_text"] = this.MusicTitleTextBlock,
@@ -214,22 +197,6 @@ namespace KokoroUpTime
                 ["challenge2_bubble_action_text"] = this.Challenge2BubbleActionText,
                 ["item_book_title_text"] = this.ItemBookTitleTextBlock,
                 ["item_plate_main_text"] = this.ItemPlateMainText,
-
-
-                ["GoodEventText1"] = this.GoodEventText1,
-                ["GoodEventText2"] = this.GoodEventText2,
-                ["GoodEventText3"] = this.GoodEventText3,
-                ["GoodEventText4"] = this.GoodEventText4,
-                ["GoodEventText5"] = this.GoodEventText5,
-                ["GoodEventText6"] = this.GoodEventText6,
-                ["GoodEventText7"] = this.GoodEventText7,
-                ["GoodEventText8"] = this.GoodEventText8,
-                ["GoodEventText9"] = this.GoodEventText9,
-                ["GoodEventText10"] = this.GoodEventText10,
-                ["GoodEventText11"] = this.GoodEventText11,
-                ["GoodEventText12"] = this.GoodEventText12,
-                ["GoodEventText13"] = this.GoodEventText13,
-                ["GoodEventText14"] = this.GoodEventText14,
 
             };
 
@@ -250,7 +217,6 @@ namespace KokoroUpTime
             {
                 ["session_grid"] = this.SessionGrid,
                 ["challenge1_grid"] = this.Challenge1Grid,
-                ["activity_grid"] = this.ActivityGrid,
                 ["challenge_time_title_grid"] = this.ChallengeTimeTitleGrid,
                 ["group_activity_grid"] = this.GroupeActivityGrid,
                 ["item_plate_grid"] = this.ItemPlateGrid,
@@ -266,14 +232,10 @@ namespace KokoroUpTime
                 ["item_last_info_grid"] = this.ItemLastInfoGrid,
                 ["item_review_grid"] = this.ItemReviewGrid,
                 ["challenge_msg_grid"] = this.ChallengeMessageGrid,
-                ["kimi_plate_inner_up_grid"] = this.KimiPlateInnerUpGrid,
-                ["kimi_plate_inner_down_grid"] = this.KimiPlateInnerDownGrid,
             
 
 
-                ["children_face_small_left_msg_grid"] = this.ChildrenFaceSmallLeftMessageGrid,
                 ["select_heart_grid"] = this.SelectHeartGrid,
-                ["akamaru_and_aosuke_compare_grid"] = this.AkamaruAndAosukeCompareGrid,
                 ["compare_msg_grid"] = this.CompareMessageGrid,
                 ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid,
@@ -290,24 +252,6 @@ namespace KokoroUpTime
                 ["challenge_time_result_msg_grid"] = this.ChallengeTimeResultMessageGrid,
                 ["challenge2_cover_grid"] = this.Challenge2CoverGrid,
                 ["goupe_activity_message_grid"] = this.GroupeActivityMessageGrid,
-            };
-
-            GoodEventObject = new Dictionary<string, Ellipse>
-            {
-                ["GoodEventButton1"] = this.SelectCircle1,
-                ["GoodEventButton2"] = this.SelectCircle2,
-                ["GoodEventButton3"] = this.SelectCircle3,
-                ["GoodEventButton4"] = this.SelectCircle4,
-                ["GoodEventButton5"] = this.SelectCircle5,
-                ["GoodEventButton6"] = this.SelectCircle6,
-                ["GoodEventButton7"] = this.SelectCircle7,
-                ["GoodEventButton8"] = this.SelectCircle8,
-                ["GoodEventButton9"] = this.SelectCircle9,
-                ["GoodEventButton10"] = this.SelectCircle10,
-                ["GoodEventButton11"] = this.SelectCircle11,
-                ["GoodEventButton12"] = this.SelectCircle12,
-                ["GoodEventButton13"] = this.SelectCircle13,
-                ["GoodEventButton14"] = this.SelectCircle14,
             };
         }
 
@@ -336,20 +280,13 @@ namespace KokoroUpTime
             this.ItemPointMessageGrid.Visibility = Visibility.Hidden;
 
             this.ItemReviewGrid.Visibility = Visibility.Hidden;
-            this.ActivityGrid.Visibility = Visibility.Hidden;
-            this.ActivityTitleImage.Visibility = Visibility.Hidden;
-            this.ActivityTextImage.Visibility = Visibility.Hidden;
             this.ChallengeTimeResultGrid.Visibility = Visibility.Hidden;
             this.ChallengeTimeResultMessageGrid.Visibility = Visibility.Hidden;
 
 
-            this.ChildrenFaceSmallLeftMessageGrid.Visibility = Visibility.Hidden;
             this.ChallengeMessageGrid.Visibility = Visibility.Hidden;
-            this.KimiPlateInnerUpGrid.Visibility = Visibility.Hidden;
-            this.KimiPlateInnerDownGrid.Visibility = Visibility.Hidden;
             this.SelectHeartGrid.Visibility = Visibility.Hidden;
 
-            this.AkamaruAndAosukeCompareGrid.Visibility = Visibility.Hidden;
             this.CompareMessageGrid.Visibility = Visibility.Hidden;
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
             this.MainMessageGrid.Visibility = Visibility.Hidden;
@@ -374,40 +311,20 @@ namespace KokoroUpTime
             this.SessionSentenceTextBlock.Visibility = Visibility.Hidden;
             this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
             this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
-            this.KimiPlateOuterImage.Visibility = Visibility.Hidden;
-            this.KimiInPlateImage.Visibility = Visibility.Hidden;
-            this.CaseOfKimiTextBlock.Visibility = Visibility.Hidden;
-            this.KimiScene1TextBlock.Visibility = Visibility.Hidden;
-            this.KimiKindOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
-            this.KimiSizeOfFeelingUpTextBlock.Visibility = Visibility.Hidden;
-            this.KimiScene2TextBlock.Visibility = Visibility.Hidden;
-            this.KimiKindOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
-            this.KimiSizeOfFeelingDownTextBlock.Visibility = Visibility.Hidden;
             this.CompleteInputButton.Visibility = Visibility.Hidden;
             
             
 
-            this.ChildrenFaceSmallLeftImage.Visibility = Visibility.Hidden;
-            this.ChildrenFaceSmallLeftMessageTextBlock.Visibility = Visibility.Hidden;
             this.CompareMessageTextBlock.Visibility = Visibility.Hidden;
-            this.KindOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
-            this.SizeOfFeelingAkamaruTextBlock.Visibility = Visibility.Hidden;
-            this.KindOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
-            this.SizeOfFeelingAosukeTextBlock.Visibility = Visibility.Hidden;
-            this.ChildrenInfoImage.Visibility = Visibility.Hidden;
             this.EndingMessageTextBlock.Visibility = Visibility.Hidden;
             this.ShirojiRightImage.Visibility = Visibility.Hidden;
             this.ShirojiLeftImage.Visibility = Visibility.Hidden;
             this.ShirojiRightUpImage.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightUpImage.Visibility = Visibility.Hidden;
-            this.ShirojiSmallRightDownImage.Visibility = Visibility.Hidden;
-            this.ShirojiRightCenterImage.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightCenterImage.Visibility = Visibility.Hidden;
             this.ShirojiVerySmallRightImage.Visibility = Visibility.Hidden;
             this.ShirojiEndingImage.Visibility = Visibility.Hidden;
             this.ChildrenStandLeftImage.Visibility = Visibility.Hidden;
-            this.ChildrenStandRightImage.Visibility = Visibility.Hidden;
-            this.KimiStandSmallLeftImage.Visibility = Visibility.Hidden;
             this.ShirojiCenterDownSmallImage.Visibility = Visibility.Hidden;
 
 
@@ -424,21 +341,6 @@ namespace KokoroUpTime
 
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
-            this.SelectCircle1.Visibility = Visibility.Hidden;
-            this.SelectCircle2.Visibility = Visibility.Hidden;
-            this.SelectCircle3.Visibility = Visibility.Hidden;
-            this.SelectCircle4.Visibility = Visibility.Hidden;
-            this.SelectCircle5.Visibility = Visibility.Hidden;
-            this.SelectCircle6.Visibility = Visibility.Hidden;
-            this.SelectCircle7.Visibility = Visibility.Hidden;
-            this.SelectCircle8.Visibility = Visibility.Hidden;
-            this.SelectCircle9.Visibility = Visibility.Hidden;
-            this.SelectCircle10.Visibility = Visibility.Hidden;
-            this.SelectCircle11.Visibility = Visibility.Hidden;
-            this.SelectCircle12.Visibility = Visibility.Hidden;
-            this.SelectCircle13.Visibility = Visibility.Hidden;
-            this.SelectCircle14.Visibility = Visibility.Hidden;
-
             this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
             this.DifficultySelectGrid.Visibility = Visibility.Hidden;
             this.SelectFeelingGrid.Visibility = Visibility.Hidden;
@@ -452,12 +354,7 @@ namespace KokoroUpTime
             this.SessionSubTitleTextBlock.Text = "";
             this.SessionSentenceTextBlock.Text = "";
 
-            this.ChildrenFaceSmallLeftMessageTextBlock.Text = "";
             this.CompareMessageTextBlock.Text = "";
-            this.KindOfFeelingAkamaruTextBlock.Text = "";
-            this.SizeOfFeelingAkamaruTextBlock.Text = "";
-            this.KindOfFeelingAosukeTextBlock.Text = "";
-            this.SizeOfFeelingAosukeTextBlock.Text = "";
             this.EndingMessageTextBlock.Text = "";
 
             this.ThinMessageTextBlock.Text = "";
@@ -505,7 +402,6 @@ namespace KokoroUpTime
             this.ScenarioPlay();
         }
 
-
         // ゲーム進行の中核
         private void ScenarioPlay()
         {
@@ -525,7 +421,7 @@ namespace KokoroUpTime
 
                     // 画面のフェードイン処理とか入れる（別関数を呼び出す）
 
-                    this.dataProgress.CurrentChapter = 4;
+                    this.dataProgress.CurrentChapter = 2;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
@@ -542,11 +438,11 @@ namespace KokoroUpTime
 
                     this.StopBGM();
 
-                    this.dataProgress.HasCompletedChapter3 = true;
+                    this.dataProgress.HasCompletedChapter2 = true;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataProgress SET HasCompletedChapter1 = '{Convert.ToInt32(this.dataProgress.HasCompletedChapter1)}' WHERE Id = 1;");
+                        connection.Execute($@"UPDATE DataProgress SET HasCompletedChapter2 = '{Convert.ToInt32(this.dataProgress.HasCompletedChapter2)}' WHERE Id = 1;");
                     }
                     this.ReturnToTitleButton.Visibility = Visibility.Visible;
 
@@ -568,11 +464,11 @@ namespace KokoroUpTime
                     this.scene = this.scenarios[this.scenarioCount][1];
 
                     this.dataProgress.CurrentScene = this.scene;
-                    this.dataProgress.LatestChapter1Scene = this.scene;
+                    this.dataProgress.LatestChapter2Scene = this.scene;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter1Scene = '{this.dataProgress.LatestChapter1Scene}' WHERE Id = 1;");
+                        connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter2Scene = '{this.dataProgress.LatestChapter2Scene}' WHERE Id = 1;");
                     }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1515,7 +1411,7 @@ namespace KokoroUpTime
                         {
                             case "red": { background = new SolidColorBrush(Colors.Red); background.Opacity = 1; break; };
                             case "green": { background = new SolidColorBrush(Colors.Green); background.Opacity = 1; break; };
-                            case "blue": { background = new SolidColorBrush(Colors.Blue); background.Opacity = 1; break; };
+                            case "aqua": { background = new SolidColorBrush(Colors.Aqua); background.Opacity = 1; break; };
                             case "yellow": { background = new SolidColorBrush(Colors.Yellow); background.Opacity = 1; break; };
 
                             default: { break; }
@@ -1824,48 +1720,19 @@ namespace KokoroUpTime
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
-            if (button.Name.Substring(0, 9) == "GoodEvent")
-            {
-                var GoodEventObject = this.GoodEventObject[button.Name];
-                if (GoodEventObject.Visibility == Visibility.Visible)
-                {
-                    GoodEventObject.Visibility = Visibility.Hidden;
-                }
-                else
-                {
-                    GoodEventObject.Visibility = Visibility.Visible;
-                }
-                for (int i = 1; i < 15; i++)
-                {
-                    string targetbuttonname = "GoodEventButton" + i.ToString();
-                    var targetbuttonObject = this.GoodEventObject[targetbuttonname];
-
-                    if (targetbuttonObject.Visibility == Visibility.Visible)
-                    {
-                        this.SelectFeelingNextButton.Visibility = Visibility.Visible;
-                        break;
-                    }
-                    else if (targetbuttonObject.Visibility == Visibility.Hidden)
-                    {
-                        this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
-
-                    }
-                }
-
-                this.ChallengeMessageGrid.Visibility = Visibility.Hidden;
-
-            }
             if (button.Name == "SelectFeelingNextButton")
             {
                 if (scene == "チャレンジタイムパート①")
                 {
-                    for (int i = 1; i < 15; i++)
+                    if (this.GoodEventSelectListBox1.Visibility == Visibility.Visible &&this.GoodEventSelectListBox2.Visibility == Visibility.Visible )
                     {
-                        string targettextname = "GoodEventButton" + i.ToString();
-                        var targetObject = this.GoodEventObject[targettextname];
-                        if (targetObject.Visibility == Visibility.Visible)
+                        foreach(string goodevent1 in this.GoodEventSelectListBox1.SelectedItems)
                         {
-                            this.mySelectGoodEvents.Add(this.textBlockObjects["GoodEventText" + i.ToString()].Text);
+                            this.mySelectGoodEvents.Add(goodevent1);
+                        }
+                        foreach (string goodevent2 in this.GoodEventSelectListBox2.SelectedItems)
+                        {
+                            this.mySelectGoodEvents.Add(goodevent2);
                         }
                     }
                     this.dataChapter2.MySelectGoodEvents = string.Join(",", this.mySelectGoodEvents);
@@ -1875,9 +1742,6 @@ namespace KokoroUpTime
                     }
 
                 }
-
-
-
                 if (scene == "「おいしいものを食べる」ときは？")
                 {
                     this.aosukesDifficultyOfEating = this.AosukeDifficultyOfActionText.Text;
@@ -2044,6 +1908,8 @@ namespace KokoroUpTime
 
                 if (this.dataOption.InputMethod == 0)
                 {
+                    this.CompleteInputButton.Visibility = Visibility.Hidden;
+                    this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
                     this.CanvasEditGrid.Visibility = Visibility.Hidden;
                 }
                 else if (this.dataOption.InputMethod == 1)
@@ -2051,8 +1917,6 @@ namespace KokoroUpTime
                     this.InputMyALittleExcitedText.FontSize = NormalSize[2];
                     this.CloseOSK();
                 }
-
-                this.CompleteInputButton.Visibility = Visibility.Hidden;
             }
            
             if (this.scene=="「休み時間に友だちとおしゃべりする」ときは？"||this.scene=="「全部のテストで100点をとる」ときは？"||this.scene=="「おいしいものを食べる」ときは？")
@@ -2077,8 +1941,6 @@ namespace KokoroUpTime
                     this.scenarioCount +=1;
                     this.ScenarioPlay();
                 }
-
-                
 
                 if (this.AosukeDifficultyOfActionText.Text != "" && this.AosukeSizeOfFeelingText.Text != "")
                 {
@@ -2564,25 +2426,18 @@ namespace KokoroUpTime
             this.InputMyALittleExcitedText.Select(caretPosition , 0);
         }
 
-        public static class SendKeys
+        private void GoodEventSelectListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /// <summary>
-            ///   Sends the specified key.
-            /// </summary>
-            /// <param name="key">The key.</param>
-            public static void Send(Key key)
+            if(this.GoodEventSelectListBox1.SelectedItems.Count != 0 || this.GoodEventSelectListBox2.SelectedItems.Count != 0)
             {
-                if (Keyboard.PrimaryDevice != null)
-                {
-                    if (Keyboard.PrimaryDevice.ActiveSource != null)
-                    {
-                        var e1 = new KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, Key.Down) { RoutedEvent = Keyboard.KeyDownEvent};
-                        InputManager.Current.ProcessInput(e1);
-                    }
-                }
+                this.SelectFeelingNextButton.Visibility = Visibility.Visible;
             }
-        }
+            else
+            {
+                this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
+            }
 
-        
+            this.ChallengeMessageGrid.Visibility = Visibility.Hidden;
+        }
     }
 }
