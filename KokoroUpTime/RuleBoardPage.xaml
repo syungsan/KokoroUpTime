@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KokoroUpTime"
-      xmlns:gif="http://wpfanimatedgif.codeplex.com" x:Class="KokoroUpTime.RuleBoardPage"
+      xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif" x:Class="KokoroUpTime.RuleBoardPage"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="RuleBoardPage"

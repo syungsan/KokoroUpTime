@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KokoroUpTime"
-      xmlns:gif="http://wpfanimatedgif.codeplex.com"
+      xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
       xmlns:outline_maker="clr-namespace:OutlineTextMaker"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
@@ -963,7 +963,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid x:Name="GetItemGrid" Width="286" Height="404" HorizontalAlignment="Left" Margin="662,73,0,0" VerticalAlignment="Top" d:IsHidden="True">
-                            <Image x:Name="Item03MainImage" gif:ImageBehavior.AnimatedSource="Images/item03_solo.gif" Margin="22,-2,22,62" d:IsHidden="True"/>
+                            <Image x:Name="Item03MainImage" gif:AnimationBehavior.SourceUri="Images/item03_solo.gif" Margin="22,-2,22,62" d:IsHidden="True"/>
                             <Image x:Name="GetItemTitleImage" Height="79" Width="259" Source="/Images/item03_title.png" Margin="10,328,17,-3" d:IsHidden="True"/>
                         </Grid>
                         <Image x:Name="Item01MainImage" Source="/Images/item01_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="24,38,0,0" VerticalAlignment="Top" d:IsHidden="True"/>

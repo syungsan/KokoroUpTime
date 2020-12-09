@@ -23,7 +23,7 @@ using System.Media;
 using SQLite;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
-using WpfAnimatedGif;
+using XamlAnimatedGif;
 using Expansion;
 using FileIOUtils;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
@@ -1038,7 +1038,7 @@ namespace KokoroUpTime
                 // ハートゲージに対する処理
                 case "gauge":
 
-                    this.ViewSizeOfFeelingTextBlock.Text = "50";
+                    feelingSize = 50;
 
                     this.SelectHeartImage.Source = null;
                     this.SelectNeedleImage.Source = null;
@@ -1156,15 +1156,9 @@ namespace KokoroUpTime
 
                     var gifFile = this.scenarios[this.scenarioCount][2];
 
-                    var gifImage = new BitmapImage();
+                    var gifUri = new Uri($"Images/{gifFile}", UriKind.Relative);
 
-                    gifImage.BeginInit();
-
-                    gifImage.UriSource = new Uri($"Images/{gifFile}", UriKind.Relative);
-
-                    gifImage.EndInit();
-
-                    ImageBehavior.SetAnimatedSource(gifObject, gifImage);
+                    AnimationBehavior.SetSourceUri(gifObject, gifUri);
 
                     gifObject.Visibility = Visibility.Visible;
 
@@ -1966,6 +1960,8 @@ namespace KokoroUpTime
             {
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
+
+                this.isClickable = true;
             }
 
             if (button.Name == "SelectFeelingCompleteButton")
@@ -2392,6 +2388,10 @@ namespace KokoroUpTime
                 if (dragObjName == "SelectNeedleImage")
                 {
                     this.isMouseDown = true;
+                }
+                if (this.ViewSizeOfFeelingGrid.IsVisible)
+                {
+                    this.isMouseDown = false;
                 }
             }
 

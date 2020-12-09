@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KokoroUpTime"
       xmlns:outline_maker="clr-namespace:OutlineTextMaker"
-      xmlns:gif="http://wpfanimatedgif.codeplex.com"
+      xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="Chapter2" Loaded="Window_Loaded">
@@ -481,7 +481,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid x:Name="GetItemGrid" Width="286" Height="404" HorizontalAlignment="Left" Margin="339,75,0,0"  VerticalAlignment="Top">
-                        <Image x:Name="Item02MainImage" gif:ImageBehavior.AnimatedSource="Images/item02_solo.gif" Margin="24,20,19,40"/>
+                        <Image x:Name="Item02MainImage" gif:AnimationBehavior.SourceUri="Images/item02_solo.gif" Margin="24,20,19,40"/>
                         <Image x:Name="GetItemTitleImage" Height="79" Width="259" Source="/Images/item02_title.png" Margin="30,327,-3,-2"/>
                     </Grid>
                     <Image x:Name="Item01MainImage" Source="/Images/item01_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="32,38,0,0"  VerticalAlignment="Top"/>

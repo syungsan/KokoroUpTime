@@ -24,7 +24,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using WMPLib;
-using WpfAnimatedGif;
+using XamlAnimatedGif;
 
 
 
@@ -1132,15 +1132,9 @@ namespace KokoroUpTime
 
                     var gifFile = this.scenarios[this.scenarioCount][2];
 
-                    var gifImage = new BitmapImage();
+                    var gifUri = new Uri($"Images/{gifFile}", UriKind.Relative);
 
-                    gifImage.BeginInit();
-
-                    gifImage.UriSource = new Uri($"Images/{gifFile}", UriKind.Relative);
-
-                    gifImage.EndInit();
-
-                    ImageBehavior.SetAnimatedSource(gifObject, gifImage);
+                    AnimationBehavior.SetSourceUri(gifObject, gifUri);
 
                     gifObject.Visibility = Visibility.Visible;
 

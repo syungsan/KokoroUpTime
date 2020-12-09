@@ -23,7 +23,7 @@ using System.Media;
 using SQLite;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
-using WpfAnimatedGif;
+using XamlAnimatedGif;
 using FileIOUtils;
 using Expansion;
 using System.IO;
@@ -1280,15 +1280,9 @@ namespace KokoroUpTime
 
                     var gifFile = this.scenarios[this.scenarioCount][2];
 
-                    var gifImage = new BitmapImage();
+                    var gifUri = new Uri($"Images/{gifFile}", UriKind.Relative);
 
-                    gifImage.BeginInit();
-
-                    gifImage.UriSource = new Uri($"Images/{gifFile}", UriKind.Relative);
-
-                    gifImage.EndInit();
-
-                    ImageBehavior.SetAnimatedSource(gifObject, gifImage);
+                    AnimationBehavior.SetSourceUri(gifObject, gifUri);
 
                     gifObject.Visibility = Visibility.Visible;
 

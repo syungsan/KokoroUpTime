@@ -4,11 +4,11 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>0.9.9.3</Version>
+    <Version>0.9.8.4</Version>
     <PackageIcon></PackageIcon>
     <ApplicationIcon>icon_sr9_icon.ico</ApplicationIcon>
-    <AssemblyVersion>0.9.9.3</AssemblyVersion>
-    <FileVersion>0.9.9.3</FileVersion>
+    <AssemblyVersion>0.9.8.3</AssemblyVersion>
+    <FileVersion>0.9.8.4</FileVersion>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
@@ -256,6 +256,9 @@
     <None Remove="Images\moya2.png" />
     <None Remove="Images\next_go_button.png" />
     <None Remove="Images\normal.png" />
+    <None Remove="Images\ojamamushi_01.png" />
+    <None Remove="Images\ojamamushi_02.png" />
+    <None Remove="Images\ojamamushi_03.png" />
     <None Remove="Images\ok_button.png" />
     <None Remove="Images\oranger_gradation.png" />
     <None Remove="Images\orange_button_plate.png" />
@@ -342,7 +345,7 @@
     <PackageReference Include="EPPlus" Version="4.5.3.3" />
     <PackageReference Include="Osklib.Wpf" Version="1.6.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
-    <PackageReference Include="WpfAnimatedGif" Version="2.0.0" />
+    <PackageReference Include="XamlAnimatedGif" Version="1.2.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -549,6 +552,9 @@
     <Resource Include="Images\message_box.png" />
     <Resource Include="Images\next_go_button.png" />
     <Resource Include="Images\normal.png" />
+    <Resource Include="Images\ojamamushi_01.png" />
+    <Resource Include="Images\ojamamushi_02.png" />
+    <Resource Include="Images\ojamamushi_03.png" />
     <Resource Include="Images\ok_button.png" />
     <Resource Include="Images\orange_button_plate.png" />
     <Resource Include="Images\orange_gradation.png" />
@@ -659,6 +665,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Chapter8.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Chapter6.xaml.cs">
 	<SubType>Code</SubType>
     </Compile>
@@ -681,6 +690,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Datas\default.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter8.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter6.csv">
@@ -758,6 +770,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Chapter8.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Chapter6.xaml">
       <SubType>Designer</SubType>
     </Page>

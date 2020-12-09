@@ -265,7 +265,6 @@ image,item_point_message_bubble_image,small_bubble_left_up.png,appear_expansion
 msg,item_point_msg_text,うきうきシューズをつかって鬱「ちょっぴりうきうき」を探すときのポイントは鬱3つあるのじゃ！,白じい
 click,page
 #
-sub,Debug
 scene,グループアクティビティ
 reset
 image,bg_image,background_07.png

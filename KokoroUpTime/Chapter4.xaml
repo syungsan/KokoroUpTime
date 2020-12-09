@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:gif="http://wpfanimatedgif.codeplex.com"
+      xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
       xmlns:local="clr-namespace:KokoroUpTime"
       xmlns:outline_maker="clr-namespace:OutlineTextMaker"
       mc:Ignorable="d" 
@@ -531,7 +531,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid x:Name="GetItemGrid" Width="286" Height="404" HorizontalAlignment="Left" Margin="968,38,0,0"   VerticalAlignment="Top">
-                        <Image x:Name="Item04MainImage" gif:ImageBehavior.AnimatedSource="Images/item04_solo.gif" />
+                        <Image x:Name="Item04MainImage" gif:AnimationBehavior.SourceUri="Images/item04_solo.gif" />
                         <Image x:Name="GetItemTitleImage" Height="79" Width="259" Source="/Images/item04_title.png" Margin="30,327,-3,-2"/>
                     </Grid>
                     <Image x:Name="Item01MainImage" Source="/Images/item01_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="32,38,0,0"  VerticalAlignment="Top"/>

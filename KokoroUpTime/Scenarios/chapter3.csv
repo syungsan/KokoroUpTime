@@ -450,6 +450,14 @@ hide,grid,children_feeling_comment_grid
 clear,text,main_msg
 hide,button,next_msg_button
 hide,button,back_msg_button
+image,bg_image,background_02.png
+hide,border,children_feeling_title_border
+hide,grid,feeling_input_grid
+hide,button,feeling_next_go_button
+hide,button,feeling_prev_back_button
+hide,image,children_face_left_center_image
+hide,grid,children_feeling_comment_grid
+hide,grid,children_feeling_comment_grid
 image,children_face_left_image,kimi_face_02.png
 image,glad_comment_down_image,kimi_glad.png
 image,main_msg_bubble_image,left_big_bubble_yellow.png

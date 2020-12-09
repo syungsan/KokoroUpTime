@@ -207,7 +207,28 @@
             <Setter Property="OutlineThickness" Value="1.5"/>
         </Style.Setters>
     </Style>
+    <Style TargetType="{x:Type outline_marker:OutlineText}" x:Key="MangaTitle">
+        <Style.Setters>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="75"/>
+            <Setter Property="Foreground" Value="#FFF8CBAD"/>
+            <Setter Property="FontFamily" Value="/Fonts/HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体"/>
+            <Setter Property="Outline" Value="#FFED7D31"/>
+            <Setter Property="OutlineThickness" Value="4"/>
+        </Style.Setters>
+    </Style>
 
+    <Style TargetType="{x:Type TextBlock}" x:Key="ShadowText">
+        <Style.Setters>
+            <Setter Property="Effect" >
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="4" Direction="330" Color="Black" Opacity="0.5" BlurRadius="4"/>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+    
     <!--気持ちの種類選択用のListBox-->
     <DataTemplate x:Key="SelectedBadFeelingTemplate">
         <Grid x:Name="SelectBadFeelingGrid" >
