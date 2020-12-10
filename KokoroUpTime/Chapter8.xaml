@@ -55,7 +55,7 @@
             <Grid x:Name="BaseGrid">
                 <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_01.png"/>
             </Grid>
-            <Grid x:Name="LargePlateTitleGrid" Margin="0,50,0,800" RenderTransformOrigin="0.5,0.5" d:IsHidden="True" >
+            <Grid x:Name="LargePlateTitleGrid" Margin="0,50,0,800" RenderTransformOrigin="0.5,0.5" >
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -64,9 +64,7 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </Grid.RenderTransform>
-                <outline_marker:OutlineText x:Name="LargePlateTitleText">
-                    
-                </outline_marker:OutlineText>
+                <outline_marker:OutlineText x:Name="LargePlateTitleText" Style="{StaticResource Orange}"/>
             </Grid>
             <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
                 <Border x:Name="MangaTitleBorder" Margin="86,24,20,0" BorderBrush="Black" BorderThickness="6" Height="98" Width="1752" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -226,16 +224,51 @@
             </Grid>
             <Grid x:Name="ChallengeTimeGrid" Margin="200,200,200,100">
                 <Border x:Name="ChallengeTimeBorder" Background="#B2DFC37A" CornerRadius="60">
-                    <Grid>
-                        <Image x:Name="ChalengeTimeChildImage" Source="Images/kimi_face_05.png" Margin="80,300,80,50" HorizontalAlignment="Left" />
-                        <Grid x:Name="FeelingInputGrid">
-                            <Button x:Name="KindOfFeelingButton" Style="{StaticResource DoublelineFrame}" Background="Transparent" Height="150" Width="300" BorderBrush="#FF0070C0" BorderThickness="5"/>
-                            <Button x:Name="SizeOfFeelingButton" Background="Transparent" Height="150" Width="300">
-                               
-                            </Button>
+                    <Grid x:Name="ChallengeTimeTemplateGrid">
+                        <Image x:Name="ChalengeTimeChildImage" Source="Images/kimi_face_01.png" Margin="80,300,80,50" HorizontalAlignment="Left" />
+                        <Grid x:Name="ChildrenThoughtSpeechBubbleGrid" Margin="420,90,200,340">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="800"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="SpeechBubbleBorder" Height="250" Width="700" Background="White" CornerRadius="60" BorderBrush="#FFFFC000" BorderThickness="10" HorizontalAlignment="Left" Grid.Column="1">
+                                <TextBlock x:Name="ChildrensThoughtsText" Text="うまくいくときもあるし、なにをやってもだめではないかも" FontSize="35" TextWrapping="Wrap" Margin="50,50" LineHeight="60" VerticalAlignment="Center" Grid.Column="1" FontWeight="Bold" FontFamily="Yu Gothic"/>
+                            </Border>
+                            <Path   x:Name="SpeechBubbleTailMask" Stroke="White" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-10,0" Data="M205,180 l0,50"/>
+                            <Path   x:Name="SpeechBubbletail" Fill="White" Stroke="#FFFFC000" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-10,0" Data="M205,180 L60,300 205,230"/>
                         </Grid>
                     </Grid>
                 </Border>
+                <Image x:Name="OjamamushiAttachedSpeechBubbleImage" Margin="1100,50,100,580" Source="Images/ojamamushi_01.png" VerticalAlignment="Top"/>
+                <TextBlock x:Name="ChildrensThoughtsTitleText" Text="キミちゃんの考え" Margin="680,70,300,0" FontSize="60" VerticalAlignment="Top" FontFamily="MS PGothic" FontWeight="Bold"/>
+                <TextBlock x:Name="OjamamushisTitleText" Text="キミちゃんの考え" Margin="80,70,1000,0" FontSize="60" VerticalAlignment="Top" FontFamily="MS PGothic" FontWeight="Bold" d:IsHidden="True"/>
+                <Grid x:Name="FeelingInputGrid" Margin="600,400,100,50" d:IsHidden="True">
+                    <TextBlock x:Name="KindOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="70,30,0,0" Text="きもちの種類" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="55" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock x:Name="SizeOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="470,30,0,0" Text="きもちの大きさ" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="55" FontWeight="Bold"/>
+                    <Button x:Name="KindOfFeelingInputButton" Style="{StaticResource DoublelineFrame}" HorizontalAlignment="Left" Width="334" Height="175" BorderBrush="#FF4472C4" BorderThickness="5" Margin="50,100,3,25" Click="Button_Click">
+                        <TextBlock x:Name="KindOfFeelingInputTextBlock" Text="TextBlock" FontSize="68" HorizontalAlignment="Left" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </Button>
+                    <Button x:Name="SizeOfFeelingInputButton" HorizontalAlignment="Left" Margin="450,130,0,0" VerticalAlignment="Top" FontSize="140" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Height="141" Width="347">
+                        <Grid x:Name="SizeOfFeelingInputGrid">
+                            <Image x:Name="SizeOfFeelingInputImage" Source="/Images/size_of_feeling_input_button_fimage.png"/>
+                            <TextBlock x:Name="SizeOfFeelingInputTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                        </Grid>
+                    </Button>
+                </Grid>
+                <Image x:Name="AnyCharacterImage" Margin="1240,500,0,0"  Source="Images/shiroji_01.png"/>
+                <Grid x:Name="AnyCharacterSpeecBubbleGrid" Margin="600,400,100,50">
+                    <Grid x:Name="AnyCharacterSpeechBubbleGrid" Margin="420,90,200,340">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border x:Name="AnyCharacterSpeechBubbleBorder"  Background="White" CornerRadius="60" BorderBrush="#FFFFC000" BorderThickness="10" Width="100"  Height="100" Grid.Row="0">
+                            <TextBlock x:Name="AnyCharacterMessageText" Text="うまくいくときもあるし、なにをやってもだめではないかも" FontSize="35" TextWrapping="Wrap" Margin="50,50" LineHeight="60" VerticalAlignment="Center" Grid.Column="1" FontWeight="Bold" FontFamily="Yu Gothic"/>
+                        </Border>
+                        <Path   x:Name="AnyCharacterSpeechBubbleTailMask" Stroke="White" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-10,0" Data="M205,180 l0,50" Grid.Row="1"/>
+                        <Path   x:Name="AnyCharacterSpeechBubbleTail" Fill="White" Stroke="#FFFFC000" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-10,0" Data="M205,180 L60,300 205,230" Grid.Row="1"/>
+                    </Grid>
+                </Grid>
             </Grid>
             <Grid x:Name="GroupeActivityGrid" Height="665" Width="1520" Margin="0,100,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                 <Grid.RenderTransform>
@@ -304,6 +337,40 @@
                         </Grid>
                     </Border>
                 </Grid>
+            </Grid>
+            <Grid x:Name="AosukesOjamamushiSituationGrid" Margin="170,170,170,70" d:IsHidden="True">
+                
+                <Border x:Name="AosukesOjamamushiSituationBorder" Background="#B2B3DBB6" CornerRadius="60" Margin="30">
+                    <Grid>
+                        <TextBlock x:Name="AosukesSituationTitleText" Text="場面" FontSize="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,50,1200,0" FontFamily="MS PGothic" FontWeight="Bold" TextDecorations="UnderLine"/>
+                        <Border x:Name="AosukesSituationBoder" Margin="50,150,850,100" Background="White" CornerRadius="60" BorderBrush="#FF0070C0" BorderThickness="10">
+                            <TextBlock x:Name="AosukesSituationText" Margin="20" FontSize="38" LineHeight="70" FontFamily="Yu Gothic" FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Left" Text="図工の時間、一生懸命作った&#10;青助くんの作品を、赤丸くんが&#10;じっと見ていました。"/>
+                        </Border>
+                        <TextBlock x:Name="AosukesThoughtTitleText" Text="青助くんの考え" FontSize="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="800,50,0,0" FontFamily="MS PGothic" FontWeight="Bold"/>
+                        <Grid x:Name="AosukesThoughtSpeechBubbleGrid" Margin="680,150,80,370">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="800"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="AosukesThoughtSpeechBubbleBorder" Height="250" Width="650" Background="White" CornerRadius="60" BorderBrush="#FF0070C0" BorderThickness="10" HorizontalAlignment="Left" Grid.Column="1">
+                                <TextBlock x:Name="AosukesThoughtChildrensThoughtsText" Text="うまくいくときもあるし、なにをやってもだめではないかも" FontSize="35" TextWrapping="Wrap" Margin="50,50" LineHeight="60" VerticalAlignment="Center" Grid.Column="1" FontWeight="Bold" FontFamily="Yu Gothic"/>
+                            </Border>
+                            <Path   x:Name="AosukesThoughtSpeechBubbleTailMask" Stroke="White" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-10,0" Data="M105,140 l0,50"/>
+                            <Path   x:Name="AosukesThoughtSpeechBubbleTail" Fill="White" Stroke="#FF0070C0" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-10,0" Data="M105,140 L10,200 105,190"/>
+                        </Grid>
+                        <Grid x:Name="ViewAosukesFeelingGrid" Margin="800,450,20,20">
+                            <TextBlock x:Name="AosukesKindOfFeelingTitleText" Text="きもち" Margin="110,30,0,0" FontSize="40" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="MS PGothic"/>
+                            <TextBlock x:Name="AosukesSizeOfFeelingTitleText" Text="大きさ" Margin="420,30,0,0" FontSize="40" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="MS PGothic"/>
+                            <Border x:Name="KindOfFeelingOuterBorder" BorderBrush="#FF0070C0" BorderThickness="3" Margin="60,110,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                <Border x:Name="KindOfFeelingInnerBorder" BorderBrush="#FF0070C0" BorderThickness="3" Margin="5">
+                                    <TextBlock x:Name="AosukesKindOfFeelingText" Text="落ちこみ" FontSize="40" Margin="20" FontFamily="MS PGothic"/>
+                                </Border>
+                            </Border>
+                            <TextBlock x:Name="AosukesSizeOfFeelingText" Text="(   40   )" FontSize="60" Margin="380,140,0,0" FontFamily="MS PGothic"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+                <Image x:Name="AosukeImage" Source="Images/aosuke_face_04.png" Margin="1300,0,0,600"/>
             </Grid>
             <Grid x:Name="ShirojiGrid" d:IsHidden="True" >
                 <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5"  Width="579" Height="627" Margin="1271,343,70,110" Source="/Images/shiroji_01.png" d:IsHidden="True">
@@ -614,14 +681,14 @@
                 <Button x:Name="CompleteRolePlayButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="110" Width="300" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
                     <Image x:Name="CompleteRolePlayButtonImage" Source="/Images/complete_role_play.png" Stretch="Fill" d:IsHidden="True"/>
                 </Button>
-                <Grid x:Name="HintCheckGrid" Margin="1480,130,69,742" d:IsHidden="True">
-                    <Button x:Name="HintCheckButton" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" Click="Button_Click" d:IsHidden="True">
-                        <Grid d:IsHidden="True">
-                            <Image x:Name="HintCheckButtonImage" Source="Images/blue_explosion_bubble.png" d:IsHidden="True"/>
-                            <TextBlock x:Name="HintCheckButtonText" FontFamily="Yu Gothic" Foreground="White" Text="ヒント" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" d:IsHidden="True"/>
+                <Grid x:Name="HintCheckGrid" Margin="1480,130,69,742">
+                    <Button x:Name="HintCheckButton" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" Click="Button_Click">
+                        <Grid>
+                            <Image x:Name="HintCheckButtonImage" Source="Images/blue_explosion_bubble.png"/>
+                            <TextBlock x:Name="HintCheckButtonText" FontFamily="Yu Gothic" Foreground="White" Text="変わる前の&#10;気持ち" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
                         </Grid>
                     </Button>
-                    <Image x:Name="HintCheckCharacterImage" Source="Images/shiroji_03.png" HorizontalAlignment="Left" d:IsHidden="True"/>
+                    <Image x:Name="HintCheckCharacterImage" Source="Images/shiroji_03.png" HorizontalAlignment="Left" Visibility="Hidden"/>
                 </Grid>
                 <Grid x:Name="CanvasEditGrid" d:IsHidden="True" >
                     <ListBox x:Name="CanvasEditListBox" Height="240" VerticalAlignment="Top" SelectionMode="Single" d:IsHidden="True">
