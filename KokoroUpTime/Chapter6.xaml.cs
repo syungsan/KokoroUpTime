@@ -1,19 +1,24 @@
 ﻿using CsvReadWrite;
 using Expansion;
 using FileIOUtils;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using Osklib;
 using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.DirectoryServices.ActiveDirectory;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -72,8 +77,6 @@ namespace KokoroUpTime
         //「すてきな性格」確認用のチェックボックス
         private CheckBox[] checkBoxs;
 
-        private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
-
         // 音関連
         private WindowsMediaPlayer mediaPlayer;
         private SoundPlayer sePlayer = null;
@@ -92,6 +95,37 @@ namespace KokoroUpTime
 
         public InputMethodStyleSelector styleSelector = new InputMethodStyleSelector();
 
+        public class inkCanvasEditingMode : INotifyPropertyChanged
+        {
+            private InkCanvasEditingMode _inkCanvasEditingMode;
+
+            public InkCanvasEditingMode InkCanvasEditingMode
+            {
+                get { return this._inkCanvasEditingMode; }
+                set
+                {
+                    if (this._inkCanvasEditingMode != value)
+                    {
+                        this._inkCanvasEditingMode = value;
+
+                        RaiseProeprtyChanged("InkCanvasEditingMode");
+                    }
+                }
+            }
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            private void RaiseProeprtyChanged(string propertyName)
+            {
+                var h = this.PropertyChanged;
+                if (h != null) h(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        inkCanvasEditingMode EditingMode;
+
+
+        ObservableCollection<inkCanvasEditingMode> inkCanvasEditingModes;
 
         public Chapter6()
         {
@@ -112,20 +146,8 @@ namespace KokoroUpTime
             this.SelectNicePersonalityListBox.ItemsSource = NICE_PERSONALITY;
 
             this.checkBoxs = new CheckBox[] { this.PointCheckBox1, this.PointCheckBox2, this.PointCheckBox3 };
-
-            if (this.dataOption.InputMethod == 0)
-            {
-                //手書き
-            }
-            else if (this.dataOption.InputMethod == 1)
-            {
-                //キーボード
-            }
-
-            //this.styleSelector.SelectStyle(this.NicePesonalityListView, ListViewItem,this.dataOption.InputMethod);
-
+           
             this.InitControls();
-
         }
 
         private void InitControls()
@@ -135,7 +157,6 @@ namespace KokoroUpTime
             this.imageObjects = new Dictionary<string, Image>
             {
                 ["bg_image"] = this.BackgroundImage,
-                ["manga_title_image"] = this.MangaTitleImage,
                 ["manga_image"] = this.MangaImage,
                 ["item_center_image"] = this.ItemCenterImage,
                 ["item_center_up_image"] = this.ItemCenterUpImage, //
@@ -195,6 +216,8 @@ namespace KokoroUpTime
 
             this.gridObjects = new Dictionary<string, Grid>
             {
+
+                ["manga_grid"]=this.MangaGrid,
                 ["session_grid"] = this.SessionGrid,
                 ["session_frame_grid"] = this.SessionFrameGrid,
 
@@ -240,13 +263,12 @@ namespace KokoroUpTime
                 ["point_check_box_03_grid"] = this.PointCheckBox3Grid,
             };
 
-
         }
 
         private void ResetControls()
         {
             // 各種コントロールを隠すことでフルリセット
-
+            this.MangaGrid.Visibility = Visibility.Hidden;
             this.SessionGrid.Visibility = Visibility.Hidden;
 
             this.SummaryGrid.Visibility = Visibility.Hidden;
@@ -296,7 +318,6 @@ namespace KokoroUpTime
 
 
             this.BackgroundImage.Visibility = Visibility.Hidden;
-            this.MangaTitleImage.Visibility = Visibility.Hidden;
             this.MangaImage.Visibility = Visibility.Hidden;
             this.ItemCenterImage.Visibility = Visibility.Hidden;
             this.ItemCenterUpImage.Visibility = Visibility.Hidden;
@@ -332,6 +353,7 @@ namespace KokoroUpTime
             this.GroupeActivityNextMessageButton.Visibility = Visibility.Hidden;
             this.GroupeActivityBackMessageButton.Visibility = Visibility.Hidden;
             this.CanvasEditGrid.Visibility = Visibility.Hidden;
+            this.CompleteInputButton.Visibility = Visibility.Hidden;
 
             this.CoverLayerImage.Visibility = Visibility.Hidden;
 
@@ -352,8 +374,40 @@ namespace KokoroUpTime
             this.MusicTitleTextBlock.Text = "";
             this.ComposerNameTextBlock.Text = "";
 
+           
 
         }
+
+        private void SetInputMethod()
+        {
+            styleSelector.HandWritingInputStyle = FindResource("handWritingInputStyle") as Style;
+            styleSelector.KeyboardInputStyle = FindResource("keyboardInputStyle") as Style;
+
+            this.NicePesonalityListView.ItemContainerStyle = styleSelector.SelectStyle(this.dataOption.InputMethod);
+
+            if (this.dataOption.InputMethod == 0)
+            {
+                inkCanvasEditingModes = new ObservableCollection<inkCanvasEditingMode>();
+
+                EditingMode = new inkCanvasEditingMode()
+                {
+                    InkCanvasEditingMode = InkCanvasEditingMode.Ink
+                };
+
+                for (int i = 0; i < 5; i++)
+                    inkCanvasEditingModes.Add(EditingMode);
+                this.NicePesonalityListView.ItemsSource = inkCanvasEditingModes;
+
+                this.PenButton.IsSelected = true;
+
+            }
+            else if (this.dataOption.InputMethod == 1)
+            {
+                for (int i= 0;i<5;i++)
+                this.NicePesonalityListView.Items.Add(new ListViewItem());
+            }
+        }
+
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
         {
@@ -405,6 +459,8 @@ namespace KokoroUpTime
                     }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
+
+                    this.SetInputMethod();
 
                     break;
 
@@ -549,29 +605,7 @@ namespace KokoroUpTime
                     }
                     break;
 
-                //ボーダーに対しての処理
-                /*case "border":
-                    this.position = this.scenarios[this.scenarioCount][1];
-                    var borderObject = this.borderObjects[this.position];
-                    borderObject.Visibility = Visibility.Visible;
-                    string borderAnimeIsSync = "sync";
-                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
-                    {
-                        borderAnimeIsSync = this.scenarios[this.scenarioCount][4];
-                    }
-                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
-                    {
-                        var borderStoryBoard = this.scenarios[this.scenarioCount][2];
-                        var borderObjectName = borderObject.Name;
-                        this.ShowAnime(storyBoard: borderStoryBoard,objectName: borderObjectName, isSync: borderAnimeIsSync);
-                    }
-                    else
-                    {
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-                    }
-                    break;
-                */
+               
                 // ボタンに対する処理
                 case "button":
 
@@ -1469,10 +1503,6 @@ namespace KokoroUpTime
                     this.msgTimer.Stop();
                     this.msgTimer = null;
 
-                    if (obj != null)
-                    {
-                        this.MessageCallBack(obj);
-                    }
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1589,27 +1619,6 @@ namespace KokoroUpTime
             }
         }
 
-        // 黒板ルール処理のためだけの追加
-        private void MessageCallBack(object obj)
-        {
-            switch (obj)
-            {
-                case CheckBox checkBox:
-
-                    checkBox.Visibility = Visibility.Visible;
-
-                    break;
-
-                case CheckBox[] checkBoxs:
-
-                    foreach (CheckBox checkBox in checkBoxs)
-                    {
-                        checkBox.IsEnabled = true;
-                    }
-                    break;
-            }
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // 各種ボタンが押されたときの処理
@@ -1626,9 +1635,9 @@ namespace KokoroUpTime
             */
             if (this.isClickable)
             {
-                this.isClickable = false;
+                
 
-                if ((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton" || button.Name == "GroupeActivityNextMessageButton" || button.Name == "ReturnButton"))
+                if((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton" || button.Name == "GroupeActivityNextMessageButton" || button.Name == "ReturnButton"))
                 {
 
                     if (button.Name == "NextMessageButton")
@@ -1647,15 +1656,20 @@ namespace KokoroUpTime
                         this.GroupeActivityNextMessageButton.Visibility = Visibility.Hidden;
                     }
 
+                    this.isClickable = false;
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
                 else if (button.Name == "CompleteRolePlayButton")
                 {
                     this.GoTo("complete_groupe_activity");
+
+                    this.isClickable = false;
                 }
                 else if (button.Name == "BackMessageButton" || button.Name == "BackPageButton" || button.Name == "GroupeActivityBackMessageButton" || button.Name == "SelectFeelingBackButton")
                 {
+
                     this.BackMessageButton.Visibility = Visibility.Hidden;
                     this.NextMessageButton.Visibility = Visibility.Hidden;
 
@@ -1665,7 +1679,12 @@ namespace KokoroUpTime
                     this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
                     this.SelectFeelingBackButton.Visibility = Visibility.Hidden;
 
+                    this.isClickable = false;
+
                     this.ScenarioBack();
+
+                    
+
                 }
 
             }
@@ -1692,6 +1711,8 @@ namespace KokoroUpTime
             {
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
+
+                this.isClickable = true;
             }
             else if (button.Name == "BranchButton1")
             {
@@ -1720,15 +1741,36 @@ namespace KokoroUpTime
 
             else if (button.Name == "GroupeActivityButton")
             {
-                this.GoTo("input_nice_personality");
                 button.Background = null;
-                this.GroupeActivityGrid.Width = 1920;
-                this.GroupeActivityGrid.Height = 840;
-                this.GroupeActivityGrid.VerticalAlignment = VerticalAlignment.Bottom;
+                
+                if (this.dataOption.InputMethod == 0)
+                {
+                    this.GroupeActivityGrid.Width = 1920;
+                    this.GroupeActivityGrid.Height = 840;
 
-                this.CanvasEditGrid.Visibility = Visibility.Visible;
+                    this.CanvasEditGrid.Visibility = Visibility.Visible;
+                    this.GroupeActivityGrid.VerticalAlignment = VerticalAlignment.Bottom;
+                }
+                else if(this.dataOption.InputMethod == 1)
+                {
+                    this.GroupeActivityGrid.Width = 1440;
+                    this.GroupeActivityGrid.Height = 630;
+
+                    Thickness margin = new Thickness(0, 0, 0, 0);
+                    this.GroupeActivityGrid.Margin = margin;
+                    this.GroupeActivityGrid.VerticalAlignment = VerticalAlignment.Top;
+
+                    this.ReadyKeyboard();
+
+
+                }
+
+                this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
+                this.SelectFeelingBackButton.Visibility = Visibility.Hidden;
+                this.HintCheckGrid.Visibility = Visibility.Hidden;
+                this.CompleteInputButton.Visibility = Visibility.Visible;
             }
-            else if (button.Name == "CompleteWritingButton")
+            else if (button.Name == "CompleteInputButton")
             {
                 this.GroupeActivityButton.Background = Brushes.Transparent;
                 this.GroupeActivityGrid.Width = 1520;
@@ -1737,10 +1779,15 @@ namespace KokoroUpTime
                 Thickness margin = new Thickness(0, 100, 0, 0);
                 this.GroupeActivityGrid.Margin = margin;
 
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
+                this.CloseOSK();
+                this.CompleteInputButton.Visibility = Visibility.Hidden;
+                this.CanvasEditGrid.Visibility = Visibility.Hidden;
+                this.SelectFeelingNextButton.Visibility = Visibility.Visible;
+                this.SelectFeelingBackButton.Visibility = Visibility.Visible;
+                this.HintCheckGrid.Visibility = Visibility.Visible;
             }
         }
+
         private void SetBGM(string soundFile, bool isLoop, int volume)
         {
             var startupPath = FileUtils.GetStartupPath();
@@ -1795,10 +1842,6 @@ namespace KokoroUpTime
             Cancel
         }
 
-
-
-
-
         private void GoTo(string tag)
         {
             foreach (var (scenario, index) in this.scenarios.Indexed())
@@ -1850,28 +1893,6 @@ namespace KokoroUpTime
             BitmapSource grayBitmap = BitmapSource.Create(width, height, 96, 96, PixelFormats.Pbgra32, null, grayPixcels, stride);
 
             return grayBitmap;
-        }
-
-        private void WipeInWordArtMessage(Image wordArtImage, double newWidth, TimeSpan duration)
-        {
-            this.msgTimer.Stop();
-
-            DoubleAnimation animation = new DoubleAnimation(newWidth, duration);
-
-            animation.Completed += (s, e) =>
-            {
-                // 二重終了防止策
-                bool isDuplicate = false;
-
-                if (!isDuplicate)
-                {
-                    this.msgTimer.Start();
-
-                    isDuplicate = true;
-                }
-            };
-
-            wordArtImage.BeginAnimation(Image.WidthProperty, animation);
         }
 
         private void ScenarioBack()
@@ -1929,26 +1950,22 @@ namespace KokoroUpTime
             }
         }
 
-
-
         // TextBoxにフォーカスが当たったときに起動
-        private void TriggerKeyboard(object sender, KeyboardFocusChangedEventArgs e)
+        private void TriggerKeyboard(object sender, RoutedEventArgs e)
         {
-            if (!OnScreenKeyboard.IsOpened())
-            {
-                try
-                {
-                    Process.Start("./tabtip.bat");
+            this.ReadyKeyboard();
+        }
 
-                    OnScreenKeyboard.Show();
-                }
-                catch (Exception ex)
-                {
-                    // MessageBox.Show(ex.Message);
-                    Debug.Print(ex.Message);
-                }
-            }
-            else if (OnScreenKeyboard.IsOpened())
+        // TextBoxをクリックしたときに起動
+        private void TextBoxMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.ReadyKeyboard();
+        }
+        // OSKを完全に切ってしまう
+        private void CloseOSK()
+        {
+            #region
+            if (OnScreenKeyboard.IsOpened())
             {
                 try
                 {
@@ -1960,21 +1977,49 @@ namespace KokoroUpTime
                     Debug.Print(ex.Message);
                 }
             }
+            #endregion
+        }
+
+        private void ReadyKeyboard()
+        {
+            #region
+            if (!OnScreenKeyboard.IsOpened())
+            {
+                try
+                {
+                    Process.Start("./tabtip.bat");
+                    OnScreenKeyboard.Show();
+                }
+                catch (Exception ex)
+                {
+                    // MessageBox.Show(ex.Message);
+                    Debug.Print(ex.Message);
+                }
+            }
+            #endregion
         }
 
         private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
         {
             ListBoxItem listBoxItem = sender as ListBoxItem;
-            if (listBoxItem.Name == "PenButton")
-            {
-                
-            }
-            else if (listBoxItem.Name == "EraserButton")
-            {
 
+            switch (listBoxItem.Name)
+            {
+                case "PenButton":
+                    EditingMode.InkCanvasEditingMode = InkCanvasEditingMode.Ink;
+
+                    break;
+
+                case "EraserButton":
+                    EditingMode.InkCanvasEditingMode = InkCanvasEditingMode.EraseByPoint;
+
+                    break;
+
+                case "AllClearButton":
+                    this.SetInputMethod();
+
+                    break;
             }
         }
-
-
     }
 }

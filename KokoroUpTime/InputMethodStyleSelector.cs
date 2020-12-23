@@ -8,25 +8,14 @@ namespace KokoroUpTime
     public class InputMethodStyleSelector : StyleSelector
     {
         public Style HandWritingInputStyle { get; set; }
-        public Style KeyBoardInputStyle { get; set; }
+        public Style KeyboardInputStyle { get; set; }
 
-        DataOption dataOption = new DataOption();
-
-        public override Style SelectStyle(object item, DependencyObject container/*, int inputMethod*/)
+        public Style SelectStyle(int inputMethod)
         {
-            try
-            {
-                //if (this.dataOption.InputMethod == 0)
-                    return HandWritingInputStyle; //手書き
-                ////else 
-                //    return KeyBoardInputStyle;　//キーボード
-            }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("エラーが起きたため手書き入力に切り替えます");
-
-                return HandWritingInputStyle;
-            }
+            if (inputMethod == 1)
+                return KeyboardInputStyle; //キーボード
+            else
+                return HandWritingInputStyle; //手書き
         }
     }
 }

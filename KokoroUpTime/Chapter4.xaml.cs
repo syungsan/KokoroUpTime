@@ -1747,6 +1747,8 @@ namespace KokoroUpTime
             {
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
+
+                this.isClickable = true;
             }
             if (button.Name == "BackMessageButton" || button.Name == "BackPageButton")
             {

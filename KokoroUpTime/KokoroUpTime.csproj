@@ -39,6 +39,7 @@
     <None Remove="Images\akamaru_face_02.png" />
     <None Remove="Images\akamaru_face_03.png" />
     <None Remove="Images\akamaru_face_04.png" />
+    <None Remove="Images\akamaru_face_05.png" />
     <None Remove="Images\akamaru_stand_01.png" />
     <None Remove="Images\aosuke_face_01.png" />
     <None Remove="Images\aosuke_face_02.png" />
@@ -162,6 +163,7 @@
     <None Remove="Images\item06_title.png" />
     <None Remove="Images\item07_book.png" />
     <None Remove="Images\item07_detail.png" />
+    <None Remove="Images\item07_solo.png" />
     <None Remove="Images\item07_title.png" />
     <None Remove="Images\item08_book.png" />
     <None Remove="Images\item08_detail.png" />
@@ -247,6 +249,9 @@
     <None Remove="Images\manga6-4.png" />
     <None Remove="Images\manga6-5.png" />
     <None Remove="Images\manga6-6.png" />
+    <None Remove="Images\manga8-1.png" />
+    <None Remove="Images\manga8-2.png" />
+    <None Remove="Images\manga8-3.png" />
     <None Remove="Images\mangaya.png" />
     <None Remove="Images\mangaya_gauge.png" />
     <None Remove="Images\mangaya_orange.png" />
@@ -367,6 +372,7 @@
     <Resource Include="Images\akamaru_face_02.png" />
     <Resource Include="Images\akamaru_face_03.png" />
     <Resource Include="Images\akamaru_face_04.png" />
+    <Resource Include="Images\akamaru_face_05.png" />
     <Resource Include="Images\akamaru_stand_01.png" />
     <Resource Include="Images\aosuke_face_01.png" />
     <Resource Include="Images\aosuke_face_02.png" />
@@ -485,6 +491,7 @@
     <Resource Include="Images\item06_title.png" />
     <Resource Include="Images\item07_book.png" />
     <Resource Include="Images\item07_detail.png" />
+    <Resource Include="Images\item07_solo.png" />
     <Resource Include="Images\item07_title.png" />
     <Resource Include="Images\item08_book.png" />
     <Resource Include="Images\item08_detail.png" />
@@ -547,6 +554,9 @@
     <Resource Include="Images\manga6-6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\manga8-1.png" />
+    <Resource Include="Images\manga8-2.png" />
+    <Resource Include="Images\manga8-3.png" />
     <Resource Include="Images\mangaya_gauge.png" />
     <Resource Include="Images\mangaya_orange.png" />
     <Resource Include="Images\message_box.png" />

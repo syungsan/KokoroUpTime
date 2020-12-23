@@ -450,7 +450,7 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid" d:IsHidden="True" >
+            <Grid x:Name="GroupeActivityGrid" >
                 <Image x:Name="GroupeActivityTitle" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Images/group_activity_title01.png" Height="155"/>
                 <TextBlock x:Name="GroupeActivityText" FontSize="37" Text="友だちと話し合って、「ちょっぴりうきうき」をたくさん書いてみよう！"  Margin="300,480,300,540" TextAlignment="Center" FontFamily="Yu Gothic"/>
                 <Grid x:Name="InputMyALittleExcitedGrid" Width="1200" Height="525"  VerticalAlignment="Bottom">
@@ -709,19 +709,19 @@
                         <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
                     </Button>
                 </Grid>
-                <Grid x:Name="CanvasEditGrid" Height="240" VerticalAlignment="Top" d:IsHidden="True">
+                <Grid x:Name="CanvasEditGrid" Height="240" VerticalAlignment="Top">
                     <ListBox x:Name="CanvasEditListBox" SelectionMode="Single">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <Grid/>
+                                <StackPanel Orientation="Horizontal"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-                        <ListBoxItem x:Name="PenButton" FontSize="100" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10"  BorderBrush="Black" HorizontalAlignment="Left" Selected="ListBoxItem_Selected">えんぴつ</ListBoxItem>
-                        <ListBoxItem x:Name="EraserButton" FontSize="100" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black" Margin="440,0,0,0"  HorizontalAlignment="Left" Selected="ListBoxItem_Selected">けしごむ</ListBoxItem>
-                        <ListBoxItem x:Name="AllClearButton" FontSize="100" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black" Margin="880,0,0,0" HorizontalAlignment="Left" Selected="ListBoxItem_Selected">すべてけす</ListBoxItem>
+                        <ListBoxItem x:Name="PenButton" FontSize="100" Width ="560" HorizontalContentAlignment="Center" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10"  BorderBrush="Black"  Selected="ListBoxItem_Selected">えんぴつ</ListBoxItem>
+                        <ListBoxItem x:Name="EraserButton" FontSize="100" Width="560"  FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black"  HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected">けしごむ</ListBoxItem>
+                        <ListBoxItem x:Name="AllClearButton" FontSize="100" Width="560" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black" HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected">すべてけす</ListBoxItem>
                     </ListBox>
                 </Grid>
-                <Button x:Name="CompleteInputButton" Click="Button_Click" Content="とじる" Height="108" FontSize="45" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" Background="White" BorderBrush="Black" HorizontalAlignment="Right" VerticalAlignment="Top" d:IsHidden="True"/>
+                <Button x:Name="CompleteInputButton" Click="Button_Click" Content="とじる" HorizontalContentAlignment="Center" Width="240" Height="240" FontSize="65" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" Background="White" BorderBrush="Black" HorizontalAlignment="Right" VerticalAlignment="Top"/>
                 <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">
                     <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png" d:IsHidden="True"/>
                 </Button>

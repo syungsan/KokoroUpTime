@@ -36,6 +36,12 @@ namespace KokoroUpTime
     {
         // すてきなせいかくのリスト
         private string[] NICE_PERSONALITY = { "●　親切にしてもらった", "●　アドバイスをくれた", "●　みんなをひっぱってくれた", "●　きりんと順番をまもってくれた", "●　みんなを笑顔にしてくれた", "●　（何か悪いことや失敗をゆるしてもらった）", "●　自分の気持ちを分かってもらった", "●　仲良くしてもらった", "●　ありがとうと言ってくれた" };
+        private string[,] HOW_TO_USE_ITEM_TITLE = { { "おじゃま虫バスターの使い方　その①", "た", "しかめてみよう！" },
+                                                     { "おじゃま虫バスターの使い方　その②", "い", "いきもちになる考えは？" },
+                                                     { "おじゃま虫バスターの使い方　その③", "じ", "ぶんいがいの人なら？" }};
+
+        //タイトル表示用のテキスト
+        
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
 
@@ -68,11 +74,11 @@ namespace KokoroUpTime
         private Dictionary<string, TextBlock> textBlockObjects = null;
         private Dictionary<string, Button> buttonObjects = null;
         private Dictionary<string, Grid> gridObjects = null;
+        private Dictionary<string, Border> borderObjects = null;
 
-        //「すてきな性格」確認用のチェックボックス
-        private CheckBox[] checkBoxs;
-
+        //手書き入力のボタン用
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
+
 
         // 音関連
         private WindowsMediaPlayer mediaPlayer;
@@ -90,8 +96,19 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
-        public InputMethodStyleSelector styleSelector = new InputMethodStyleSelector();
+        private ObservableCollection<GroupeActivityData> _groupeactivityData;
+        private ObservableCollection<ChallengeTimeGridLayoutSelector> _challengeTimeGridLayOut;
 
+        private TitleDataTemplateSelector titleSelctor = new TitleDataTemplateSelector();
+
+        private Dictionary<string, string> CharacterColorCode = new Dictionary<string, string>()
+        {
+            ["赤丸"]= "#FFFF0000",
+            ["青助"] = "#FF0070C0",
+            ["キミ"] = "#FFFFC000",
+            ["白じい"] = "#FF000000",
+            ["モブ"] = "#FF000000",
+        };
 
         public Chapter8()
         {
@@ -119,7 +136,15 @@ namespace KokoroUpTime
                 //キーボード
             }
 
-            //this.styleSelector.SelectStyle(this.NicePesonalityListView, ListViewItem,this.dataOption.InputMethod);
+            //_groupeactivityData.Add(new GroupeActivityData("た", "しかめてみよう！", "友だちはどのようにかんがえるか聞いてみよう！", "Images/grass.png"));
+            //_groupeactivityData.Add(new GroupeActivityData("い", "いきもちになる考えは？", "「お助け虫」に進化させてみよう！", "Images/butterfly.png"));
+            //_groupeactivityData.Add(new GroupeActivityData("じ", "ぶんいがいの人なら？", "相手をはげます言葉を自分にもかけてみよう！", "Images/cheering.png"));
+
+            this.GrupeActivityItemsControl.ItemsSource = _groupeactivityData;
+
+           //this.TitleContentControl.ContentTemplateSelector = titleSelctor;
+
+           //titleSelctor.SelectTemplate("challenge_time_title",this.TitleContentControl);
 
             this.InitControls();
 
@@ -132,7 +157,6 @@ namespace KokoroUpTime
             this.imageObjects = new Dictionary<string, Image>
             {
                 ["bg_image"] = this.BackgroundImage,
-                ["manga_title_image"] = this.MangaTitleImage,
                 ["manga_image"] = this.MangaImage,
                 ["item_center_image"] = this.ItemCenterImage,
                 ["item_center_up_image"] = this.ItemCenterUpImage, //
@@ -153,7 +177,7 @@ namespace KokoroUpTime
                 ["session_title_image"] = this.SessionTitleImage,
 
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
-
+                ["chalenge_time_child_image"] = this.ChalengeTimeChildImage,
             };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
@@ -168,8 +192,9 @@ namespace KokoroUpTime
                 ["item_book_title_text"] = this.ItemBookTitleTextBlock,
                 ["groupe_activity_msg"] = this.GroupeActivityMessageTextBlock,
                 ["session_frame_text"] = this.SessionFrameText,
-              
 
+                ["ojamamushi_discription_title_text"] = this.OjamamushiDiscriptionTitleText,
+                ["childrens_thoughts_text"] =this.ChildrensThoughtsText,
 
             };
 
@@ -193,6 +218,7 @@ namespace KokoroUpTime
             {
                 ["session_grid"] = this.SessionGrid,
                 ["session_frame_grid"] = this.SessionFrameGrid,
+                ["manga_grid"]=this.MangaGrid,
 
                 ["summary_grid"] = this.SummaryGrid,
                 ["ending_grid"] = this.EndingGrid,
@@ -204,7 +230,10 @@ namespace KokoroUpTime
                 ["item_last_info_grid"] = this.ItemLastInfoGrid,
                 ["item_review_grid"] = this.ItemReviewGrid,
 
+                ["ojamamushi_discription_grid"] = this.OjamamushiDiscriptionGrid,
+                ["ojamamushi_discription_plate_grid"] = this.OjamamsuhiDiscriptionPlateGrid,
 
+                ["view_aosukes_feeling_grid"] = this.ViewAosukesFeelingGrid,
 
                 ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid,
@@ -212,8 +241,6 @@ namespace KokoroUpTime
                 ["branch_select_grid"] = this.BranchSelectGrid,
                 ["exit_back_grid"] = this.ExitBackGrid,
                 ["groupe_activity_message_grid"] = this.GroupeActivityMessageGrid,
-
-                ["large_plate_title_grid"] = this.LargePlateTitleGrid,
 
                 ["challenge_time_grid"] = this.ChallengeTimeGrid,
                 ["challenge_time_message_grid"] = this.ChallengeTimeMessageGrid,
@@ -224,7 +251,12 @@ namespace KokoroUpTime
 
             };
 
-
+            this.borderObjects = new Dictionary<string, Border>
+            {
+                ["children_speech_bubble_border"] =this.ChildrenSpeechBubbleBorder,
+                ["any_character_speech_bubble_border"]=this.AnyCharacterSpeechBubbleBorder,
+                ["challenge_speech_bubble_border"] =this.ChallengeSpeechBubbleBorder
+            };
         }
 
         private void ResetControls()
@@ -247,13 +279,14 @@ namespace KokoroUpTime
             this.SessionFrameGrid.Visibility = Visibility.Hidden;
             this.SessionFrameText.Visibility = Visibility.Hidden;
 
-            this.LargePlateTitleGrid.Visibility = Visibility.Hidden;
+
+            this.TitleGrid.Visibility = Visibility.Hidden;
             this.ChallengeTimeGrid.Visibility = Visibility.Hidden;
             this.ChallengeTimeMessageGrid.Visibility = Visibility.Hidden;
             this.GroupeActivityGrid.Visibility = Visibility.Hidden;
             this.GroupeActivityMessageGrid.Visibility = Visibility.Hidden;
             this.HintCheckGrid.Visibility = Visibility.Hidden;
-
+            
             this.ShirojiSmallRightCenterImage.Visibility = Visibility.Hidden;
 
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
@@ -264,12 +297,31 @@ namespace KokoroUpTime
             this.ItemBookNoneGrid.Visibility = Visibility.Hidden;
             this.ItemBookTitleTextBlock.Visibility = Visibility.Hidden;
 
+            this.OjamamushiDiscriptionGrid.Visibility = Visibility.Hidden;
+            this.OjamamushiDiscriptionTitleText.Visibility = Visibility.Hidden;
+            this.OjamamsuhiDiscriptionPlateGrid.Visibility = Visibility.Hidden;
+
+            this.ChallengeTimeGrid.Visibility = Visibility.Hidden;
+            this.OjamamushiAttachedSpeechBubbleImage.Visibility = Visibility.Hidden;
+            this.OjamamushisTitleText.Visibility = Visibility.Hidden;
+            this.FeelingInputGrid.Visibility = Visibility.Hidden;
+            this.AnyCharacterImage.Visibility = Visibility.Hidden;
+            this.AnyCharacterSpeecBubbleGrid.Visibility = Visibility.Hidden;
+            this.ChallengeItemImage.Visibility = Visibility.Hidden;
+            this.ChallengeSpeecBubbleGrid.Visibility = Visibility.Hidden;
+
+            this.OjamamushiGrid.Visibility = Visibility.Hidden;
+            this.HowToUseItemInformationGrid.Visibility = Visibility.Hidden;
+
+            this.AosukesOjamamushiSituationGrid.Visibility = Visibility.Hidden;
+            
+
             this.ExitBackGrid.Visibility = Visibility.Hidden;
             this.BranchSelectGrid.Visibility = Visibility.Hidden;
 
 
             this.BackgroundImage.Visibility = Visibility.Hidden;
-            this.MangaTitleImage.Visibility = Visibility.Hidden;
+            this.MangaGrid.Visibility = Visibility.Hidden;
             this.MangaImage.Visibility = Visibility.Hidden;
             this.ItemCenterImage.Visibility = Visibility.Hidden;
             this.ItemCenterUpImage.Visibility = Visibility.Hidden;
@@ -324,6 +376,9 @@ namespace KokoroUpTime
 
             this.MusicTitleTextBlock.Text = "";
             this.ComposerNameTextBlock.Text = "";
+
+            this.AnyCharacterMessageText.Text = "";
+            this.ChallengeMessageText.Text = "";
 
 
         }
@@ -523,20 +578,50 @@ namespace KokoroUpTime
                     break;
 
                 //ボーダーに対しての処理
-                /*case "border":
+                case "border":
+
                     this.position = this.scenarios[this.scenarioCount][1];
+
                     var borderObject = this.borderObjects[this.position];
+
+                    var borderBrush = this.scenarios[this.scenarioCount][2];
+
                     borderObject.Visibility = Visibility.Visible;
+
                     string borderAnimeIsSync = "sync";
-                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
+                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    {
+                        var converter = new BrushConverter();
+
+                        switch (borderBrush)
+                        {
+                            case"red":
+                                borderObject.BorderBrush=(Brush)ColorConverter.ConvertFromString("#FFFF0000");
+                                break;
+
+                            case "blue":
+                                borderObject.BorderBrush = (Brush)converter.ConvertFromString("#FF0070C0");
+                                break;
+
+                            case "yellow":
+                                borderObject.BorderBrush = (Brush)converter.ConvertFromString("#FFFFC000");
+                                break;
+
+                            case "black":
+                                borderObject.BorderBrush = (Brush)ColorConverter.ConvertFromString("#FF000000");
+                                break;
+                        }
+                    }
+                    if (this.scenarios[this.scenarioCount].Count > 4 && this.scenarios[this.scenarioCount][4] != "")
                     {
                         borderAnimeIsSync = this.scenarios[this.scenarioCount][4];
                     }
-                    if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
+                    if (this.scenarios[this.scenarioCount].Count > 3 && this.scenarios[this.scenarioCount][3] != "")
                     {
-                        var borderStoryBoard = this.scenarios[this.scenarioCount][2];
-                        var borderObjectName = borderObject.Name;
-                        this.ShowAnime(storyBoard: borderStoryBoard,objectName: borderObjectName, isSync: borderAnimeIsSync);
+                        //var borderStoryBoard = this.scenarios[this.scenarioCount][3];
+                        //var borderObjectName = borderObject.Name;
+                        ////  this.ShowAnime(storyBoard: borderStoryBoard, objectName: borderObjectName, isSync: borderAnimeIsSync);
+                        //this.ShowAnime(storyBoard: buttonStoryBoard, objectName: buttonObjectName, objectsName: _objectsName, isSync: buttonAnimeIsSync);
                     }
                     else
                     {
@@ -544,7 +629,7 @@ namespace KokoroUpTime
                         this.ScenarioPlay();
                     }
                     break;
-                */
+
                 // ボタンに対する処理
                 case "button":
 
@@ -885,12 +970,12 @@ namespace KokoroUpTime
 
                             break;
 
-                        //case "border":
-                        //    this.position = this.scenarios[this.scenarioCount][2];
-                        //    this.borderObjects[this.position].Visibility = Visibility.Hidden;
-                        //    this.scenarioCount += 1;
-                        //    this.ScenarioPlay();
-                        //    break;
+                            //case "border":
+                            //    this.position = this.scenarios[this.scenarioCount][2];
+                            //    this.borderObjects[this.position].Visibility = Visibility.Hidden;
+                            //    this.scenarioCount += 1;
+                            //    this.ScenarioPlay();
+                            //    break;
 
                     }
                     break;
@@ -1077,11 +1162,11 @@ namespace KokoroUpTime
 
                 case "item_book":
 
-                    Image[] itemMainImages = { this.Item01MainImage, this.Item02MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage,this.Item06MainImage, this.Item07MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
+                    Image[] itemMainImages = { this.Item01MainImage, this.Item02MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
 
-                    Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage,this.Item06NoneImage, this.Item07NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
+                    Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
 
-                    var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05,  this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
+                    var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
 
                     for (int i = 0; i < hasGotItems.Length; i++)
                     {
@@ -1442,10 +1527,7 @@ namespace KokoroUpTime
                     this.msgTimer.Stop();
                     this.msgTimer = null;
 
-                    if (obj != null)
-                    {
-                        this.MessageCallBack(obj);
-                    }
+                 
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1562,27 +1644,6 @@ namespace KokoroUpTime
             }
         }
 
-        // 黒板ルール処理のためだけの追加
-        private void MessageCallBack(object obj)
-        {
-            switch (obj)
-            {
-                case CheckBox checkBox:
-
-                    checkBox.Visibility = Visibility.Visible;
-
-                    break;
-
-                case CheckBox[] checkBoxs:
-
-                    foreach (CheckBox checkBox in checkBoxs)
-                    {
-                        checkBox.IsEnabled = true;
-                    }
-                    break;
-            }
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // 各種ボタンが押されたときの処理
@@ -1623,10 +1684,15 @@ namespace KokoroUpTime
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
-                else if (button.Name == "CompleteRolePlayButton")
+                else if(button.Name == "KindOfFeelingInputButton")
                 {
-                    this.GoTo("complete_groupe_activity");
+                    this.GoTo("kind_of_feeling");
                 }
+                else if (button.Name == "SizeOfFeelingInputButton")
+                {
+                    this.GoTo("size_of_feeling");
+                }
+
                 else if (button.Name == "BackMessageButton" || button.Name == "BackPageButton" || button.Name == "GroupeActivityBackMessageButton" || button.Name == "SelectFeelingBackButton")
                 {
                     this.BackMessageButton.Visibility = Visibility.Hidden;
@@ -1665,6 +1731,8 @@ namespace KokoroUpTime
             {
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
+
+                this.isClickable = true;
             }
             else if (button.Name == "BranchButton1")
             {
@@ -1691,28 +1759,6 @@ namespace KokoroUpTime
                 this.GoTo("check_hint");
             }
 
-            else if (button.Name == "GroupeActivityButton")
-            {
-                this.GoTo("input_nice_personality");
-                button.Background = null;
-                this.GroupeActivityGrid.Width = 1920;
-                this.GroupeActivityGrid.Height = 840;
-                this.GroupeActivityGrid.VerticalAlignment = VerticalAlignment.Bottom;
-
-                this.CanvasEditGrid.Visibility = Visibility.Visible;
-            }
-            else if (button.Name == "CompleteWritingButton")
-            {
-                this.GroupeActivityButton.Background = Brushes.Transparent;
-                this.GroupeActivityGrid.Width = 1520;
-                this.GroupeActivityGrid.Height = 665;
-                this.GroupeActivityGrid.VerticalAlignment = VerticalAlignment.Center;
-                Thickness margin = new Thickness(0, 100, 0, 0);
-                this.GroupeActivityGrid.Margin = margin;
-
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
         }
         private void SetBGM(string soundFile, bool isLoop, int volume)
         {
@@ -1768,10 +1814,6 @@ namespace KokoroUpTime
             Cancel
         }
 
-
-
-
-
         private void GoTo(string tag)
         {
             foreach (var (scenario, index) in this.scenarios.Indexed())
@@ -1825,28 +1867,6 @@ namespace KokoroUpTime
             return grayBitmap;
         }
 
-        private void WipeInWordArtMessage(Image wordArtImage, double newWidth, TimeSpan duration)
-        {
-            this.msgTimer.Stop();
-
-            DoubleAnimation animation = new DoubleAnimation(newWidth, duration);
-
-            animation.Completed += (s, e) =>
-            {
-                // 二重終了防止策
-                bool isDuplicate = false;
-
-                if (!isDuplicate)
-                {
-                    this.msgTimer.Start();
-
-                    isDuplicate = true;
-                }
-            };
-
-            wordArtImage.BeginAnimation(Image.WidthProperty, animation);
-        }
-
         private void ScenarioBack()
         {
             var currentScenarioCount = this.scenarioCount;
@@ -1869,41 +1889,6 @@ namespace KokoroUpTime
                 }
             }
         }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = sender as CheckBox;
-
-            if (this.checkBoxs.Contains(checkBox))
-            {
-                this.tapCount += 1;
-
-                if (this.tapCount >= this.checkBoxs.Length)
-                {
-
-                    foreach (CheckBox _checkBox in this.checkBoxs)
-                    {
-                        _checkBox.IsEnabled = false;
-                    }
-
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-                }
-            }
-        }
-
-        private void CheckBox_UnChecked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = sender as CheckBox;
-
-            if (this.checkBoxs.Contains(checkBox))
-            {
-                this.tapCount -= 1;
-            }
-        }
-
-
-
         // TextBoxにフォーカスが当たったときに起動
         private void TriggerKeyboard(object sender, KeyboardFocusChangedEventArgs e)
         {
@@ -1935,19 +1920,140 @@ namespace KokoroUpTime
             }
         }
 
-        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+        private class GroupeActivityData
         {
-            ListBoxItem listBoxItem = sender as ListBoxItem;
-            if (listBoxItem.Name == "PenButton")
+            public GroupeActivityData(string firstRedText, string subsequentBlueText, string methodBlackText, string fileName)
             {
-                
+                FirstRedText = firstRedText;
+                SubsequentBlueText = subsequentBlueText;
+                MethodBlackText = methodBlackText;
+                FileName = fileName;
             }
-            else if (listBoxItem.Name == "EraserButton")
-            {
 
-            }
+            public string FirstRedText { get; set; }
+            public string SubsequentBlueText { get; set; }
+            public string MethodBlackText { get; set; }
+            public string FileName { get; set; }
         }
 
+        
 
+        private class ChallengeTimeGridLayoutSelector
+        {
+            public ChallengeTimeGridLayoutSelector(string layoutMode, string childrenName ,string conversationCharacterName)
+            {
+                ThoughtsAndFeelingModeVisibiliy = Visibility.Hidden;
+                BeforeUsingItemModeVisibiliy = Visibility.Hidden;
+                InUseOfItemModeVisibiliy = Visibility.Hidden;
+                AfterUsingItemModeVisibiliy = Visibility.Hidden;
+
+                switch (layoutMode)
+                {
+                    case "thoughts_and_feeling":
+                        ThoughtsAndFeelingModeVisibiliy = Visibility.Visible;
+                        backgroundColor = (Brush)ColorConverter.ConvertFromString("#FFFFD966");
+                        switch (childrenName)
+                        {
+                            case "akamaru":
+                                childrenColor = (Brush)ColorConverter.ConvertFromString("#FFFF0000");
+                                childrenImagePath = "Images/akamaru_face_05.png";
+                                ojamamushiImagePath = "Images/ojamamushi_01.png";
+                                break;
+                            case "aosuke":
+                                childrenColor = (Brush)ColorConverter.ConvertFromString("#FF0070C0");
+                                childrenImagePath = "Images/aosuke_face_07.png";
+                                ojamamushiImagePath ="Images/ojamamushi_02.png";
+                                break;
+                            case "kimi":
+                                childrenColor = (Brush)ColorConverter.ConvertFromString("#FFFFC000");
+                                childrenImagePath = "Images/kimi_face_05.png";
+                                ojamamushiImagePath ="Images/ojamamushi_03.png";
+                                break;
+                        }
+                        
+                        break;
+
+                    case "before_using_item":
+                        BeforeUsingItemModeVisibiliy = Visibility.Visible;
+                        backgroundColor = (Brush)ColorConverter.ConvertFromString("#FFC8FAC8");
+                        switch (childrenName)
+                        {
+                            case "akamaru":
+                                childrenColor = (Brush)ColorConverter.ConvertFromString("#FFFF0000");
+                                childrenImagePath = "Images/akamaru_face_05.png";
+                                ojamamushiImagePath = "Images/ojamamushi_01.png";
+                                break;
+                            case "aosuke":
+                                childrenColor = (Brush)ColorConverter.ConvertFromString("#FF0070C0");
+                                childrenImagePath = "Images/aosuke_face_07.png";
+                                ojamamushiImagePath = "Images/ojamamushi_02.png";
+                                break;
+                            case "kimi":
+                                childrenColor = (Brush)ColorConverter.ConvertFromString("#FFFFC000");
+                                childrenImagePath = "Images/kimi_face_05.png";
+                                ojamamushiImagePath = "Images/ojamamushi_03.png";
+                                break;
+                        }
+                        break;
+
+                    case "in_use_of_item":
+                        BeforeUsingItemModeVisibiliy = Visibility.Visible;
+                        backgroundColor = (Brush)ColorConverter.ConvertFromString("#FFC8FAC8");
+                        switch (childrenName)
+                        {
+                            case "akamaru":
+                                childrenColor = (Brush)ColorConverter.ConvertFromString("#FFFF0000");
+                                childrenImagePath = "Images/akamaru_face_05.png";
+                                ojamamushiImagePath = "Images/ojamamushi_01.png";
+                                break;
+                            case "aosuke":
+                                childrenColor = (Brush)ColorConverter.ConvertFromString("#FF0070C0");
+                                childrenImagePath = "Images/aosuke_face_07.png";
+                                ojamamushiImagePath = "Images/ojamamushi_02.png";
+                                break;
+                            case "kimi":
+                                childrenColor = (Brush)ColorConverter.ConvertFromString("#FFFFC000");
+                                childrenImagePath = "Images/kimi_face_05.png";
+                                ojamamushiImagePath = "Images/ojamamushi_03.png";
+                                break;
+                        }
+                        break;
+
+                    case "after_using_item":
+                        AfterUsingItemModeVisibiliy = Visibility.Visible;
+                        backgroundColor = (Brush)ColorConverter.ConvertFromString("#FFC8FAC8");
+
+                        switch (childrenName)
+                        {
+                            case "akamaru":
+                                childrenColor = (Brush)ColorConverter.ConvertFromString("#FFFF0000");
+                                childrenImagePath = "Images/akamaru_face_05.png";
+                                ojamamushiImagePath = "Images/ojamamushi_01.png";
+                                break;
+                            case "aosuke":
+                                childrenColor = (Brush)ColorConverter.ConvertFromString("#FF0070C0");
+                                childrenImagePath = "Images/aosuke_face_07.png";
+                                ojamamushiImagePath = "Images/ojamamushi_02.png";
+                                break;
+                            case "kimi":
+                                childrenColor = (Brush)ColorConverter.ConvertFromString("#FFFFC000");
+                                childrenImagePath = "Images/kimi_face_05.png";
+                                ojamamushiImagePath = "Images/ojamamushi_03.png";
+                                break;
+                        }
+                        break;
+                }
+
+            }
+            public string ojamamushiImagePath { get; set; }
+            public string childrenImagePath { get; set; }
+            public Visibility ThoughtsAndFeelingModeVisibiliy { get; set; }
+            public Visibility BeforeUsingItemModeVisibiliy { get; set; }
+            public Visibility InUseOfItemModeVisibiliy { get; set; }
+            public Visibility AfterUsingItemModeVisibiliy { get; set; }
+
+            public Brush childrenColor { get; set; }
+            public Brush backgroundColor { get; set; }
+        }
     }
 }

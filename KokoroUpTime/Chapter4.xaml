@@ -212,7 +212,7 @@
                     </Button>
                 </Grid>
             </Grid>
-            <Grid x:Name="SeesawGrid"  Margin="100,350,100,100">
+            <Grid x:Name="SeesawGrid"  Margin="100,350,100,100" d:IsHidden="True">
                 <Image x:Name="YouImage" RenderTransformOrigin="0.5,0.5" Source="/Images/kimi_face_03.png" Margin="200,0,1200,150">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -259,7 +259,7 @@
                 <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="727,0,0,0" VerticalAlignment="Center" Width="273" RenderTransformOrigin="0.659,0.453"/>
             </Grid>
 
-            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920">
+            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
                 <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684" d:IsHidden="True">
                     <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png"/>
                     <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center"/>
@@ -342,7 +342,7 @@
                 </Grid>
                 <Image x:Name="EpilogueItem" Source="/Images/item04_solo.png" Margin="1288,465,12,10"/>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid" d:IsHidden="True">
+            <Grid x:Name="GroupeActivityGrid">
                 <Image x:Name="GroupeActivityCharacter" Margin="0,350,1200,250"/>
                 <Grid x:Name="SelectWordGrid" Margin="600,400,100,170">
                     <Image x:Name="SelectWordBubble" Source="/Images/small_bubble_left_red.png" Stretch="Fill"/>
@@ -460,7 +460,7 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="ChildrenFaceGrid" Visibility="Visible">
+            <Grid x:Name="ChildrenFaceGrid" Visibility="Visible" d:IsHidden="True">
                 <Image x:Name="ChildrenFaceLeftImage" Source="/Images/kimi_face_03.png" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Height="550" VerticalAlignment="Top" Width="500" Margin="200,200">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -488,10 +488,10 @@
                 <Image x:Name="SituationCharacterImage" Margin="50,250,1100,100" Source="/Images/akamaru_face_01.png"/>
                 <TextBlock x:Name="SituationText" Text="赤丸くんはじゅぎょうで使う教科書を&#10;わすれてこまっています。&#10;だれかに、教科書をかりなければなりません。" FontSize="60" FontWeight="UltraBold" FontFamily="Yu Gothic" TextWrapping="Wrap" Margin="450,250,20,50"/>
             </Grid>
-            <ListBox x:Name="SomeChoicesListBox"  VerticalAlignment="Center" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True">
+            <ListBox x:Name="SomeChoicesListBox"  VerticalAlignment="Center" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Button x:Name="ChoicesButton" Height="Auto" Width="1120"  VerticalAlignment="Top" Margin="0,0,0,10" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                        <Button x:Name="ChoicesButton" Height="Auto" Width="1120"  VerticalAlignment="Top" Margin="0,0,0,10" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" >
                             <Grid>
                                 <Image x:Name="ChoicesButtonOfImage" Source="/Images/orange_button_plate.png"  />
                                 <TextBlock x:Name="ChoicesButtonOfText" Text="{Binding}" FontSize="60" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic"/>

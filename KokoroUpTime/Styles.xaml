@@ -339,7 +339,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ContentControl}">
-                    <Border Background="{TemplateBinding Background}">
+                    <Border Background="{TemplateBinding Background}" >
                         <ContentPresenter />
                     </Border>
                 </ControlTemplate>
@@ -357,5 +357,60 @@
                 <Setter Property="Background" Value="#FFBFE6FD"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+    
+    <!--CanvasEdit用のListBox-->
+    
+    <!--MainMessage用-->
+    <Style TargetType="{x:Type ContentControl}" x:Key="Right_Main_Msg">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContentControl}" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="320"/>
+                        </Grid.RowDefinitions>
+                        <Border Background="White" CornerRadius="60" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="5"  Grid.Row="1">
+                            <ContentPresenter />
+                        </Border>
+                        <Path   Stroke="White" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-5" Data="M880,108 l365,0" Grid.Row="0"/>
+                        <Path   Fill="White" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-5" Data="M880,108 L1285,0 1246,108" Grid.Row="0"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFBFE6FD"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ContentControl}" x:Key="Left_Main_Msg">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContentControl}" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="320"/>
+                    </Grid.RowDefinitions>
+                        <Border x:Name="MainMessageBubbleBorder"  Background="White" CornerRadius="60" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="5"  Grid.Row="1">
+                            <ContentPresenter />
+                        </Border>
+                        <Path   x:Name="MainMessageBubbleTailMask" Stroke="White" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-5" Data="M255,108 l400,0" Grid.Row="0"/>
+                        <Path   x:Name="MainMessageBubbleTail" Fill="White" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-5" Data="M255,108 L233,10 655,108" Grid.Row="0"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFBFE6FD"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

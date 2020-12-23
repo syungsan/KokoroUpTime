@@ -3,9 +3,9 @@ start
 scene,前回のおさらい
 reset
 image,bg_image,background_02.png
-image,children_face_left_image,akamaru_face_03.png,appear_up,no_sync
+image,children_face_left_image,akamaru_face_03.png,appear_up
 image,main_msg_bubble_image,left_big_bubble_red.png
-grid,main_msg_grid,appear_expansion_slow
+grid,main_msg_grid,appear_expansion
 msg,main_msg,この前のこころあっぷタイムは、あったかスープをつかって鬱「あたたかい言葉」を練習したぜ,赤丸
 click,page,next_only
 #
@@ -48,7 +48,7 @@ image,manga_image,manga4-2.png,flip
 flip
 image,manga_image,manga4-3.png,flip
 hide,button,manga_flip_button
-click,page
+click,page,next_only
 #
 scene,チャレンジタイム 開始
 reset
@@ -272,9 +272,9 @@ click,msg,next_only
 hide,grid,activity_title_grid
 msg,main_msg,まずは、じょうずにことわるポイントを見てみよう！鬱４つのポイントがあるのじゃ。鬱また別の日を見てみよう。,白じい
 click,msg
-image,item_center_image,item04_solo.png
-grid,item_check_right_grid
+image,item_center_image,item04_solo.png,fade_in_slow
 text,item_check_right_text,<font=red#44##true>➢じょうずにことわる鬱①あやまる鬱②理由言う鬱③断る鬱④かわりの言葉</font>
+grid,item_check_right_grid,fade_in_slow
 click,page,next_only
 #
 hide,image,children_face_right_image
@@ -320,6 +320,8 @@ hide,image,children_face_right_image
 hide,image,children_face_left_image
 hide,grid,main_msg_grid
 hide,grid,item_check_center_grid
+hide,grid,result_feeling_grid
+hide,grid,activity_title_grid
 image,shiroji_left_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
@@ -333,6 +335,8 @@ hide,grid,result_feeling_grid
 hide,grid,main_msg_grid
 clear,text,main_msg
 clear,text,activity_title_text
+clear,text,result_kind_of_feeling_text
+clear,text,result_size_of_feeling_text
 image,activity_title_image,aosuke_feeling_plate.png
 grid,activity_title_grid,appear_expansion
 image,children_face_left_image,aosuke_face_03.png,appear_up
@@ -349,6 +353,8 @@ hide,grid,result_feeling_grid
 hide,grid,main_msg_grid
 hide,image,children_face_left_image
 clear,text,main_msg
+clear,text,result_kind_of_feeling_text
+clear,text,result_size_of_feeling_text
 image,bg_image,background_11.png
 image,activity_title_image,kimi_feeling_plate.png
 grid,activity_title_grid,appear_expansion
@@ -412,6 +418,7 @@ hide,image,shiroji_right_image
 hide,grid,main_msg_grid
 list_box,some_choices_list_box,select_situation
 wait
+#
 sub,complete_groupe_activity
 scene,グループアクティビティしゅうりょう
 reset
@@ -427,7 +434,7 @@ hide,image,children_face_left_image
 hide,grid,item_check_center_grid
 image,shiroji_left_image,shiroji_02.png
 image,main_msg_bubble_image,left_big_bubble.png
-msg,main_msg,さて、そうじがかりをかわってもらいたい青助くんと、鬱dmeonidmeonidemdonidedemndemoniキミちゃんのやりとりをもう一度振り返ってみるぞ。,白じい
+msg,main_msg,さて、そうじがかりをかわってもらいたい青助くんと、鬱キミちゃんのやりとりをもう一度振り返ってみるぞ。,白じい
 click,msg
 #
 clear,text,main_msg
@@ -481,7 +488,7 @@ hide,grid,main_msg_grid
 hide,image,children_face_right_image
 image,children_face_left_image,aosuke_face_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble_blue.png
-image,item_center_image,item04_solo.png
+image,item_center_image,item04_solo.png,fade_in
 grid,main_msg_grid,appear_expansion
 msg,main_msg,赤丸くん。お願いがあるんだけど。鬱明日、家の掃除があって早く帰らないといけないんだ。鬱そうじがかりをかわってもらえないかな？,青助
 click,msg,next_only
@@ -522,6 +529,7 @@ clear,text,main_msg
 msg,main_msg,上手にたのんだり、上手にことわったりすることは、鬱<font=#60#yellow#true#black>ふだんの友だち関係ではとても大切なことのようじゃな。</font>,白じい
 click,page
 #
+sub,Debug
 scene,まとめ
 reset
 image,bg_image,background_09.png
@@ -695,7 +703,8 @@ clear,text,groupe_activity_message_text
 image,shiroji_small_right_down_image,shiroji_02.png,appear_up
 grid,groupe_activity_message_grid,appear_expansion
 msg,groupe_activity_message_text,本当にこれでいいかのう？鬱$number_of_selects$の流れをもう一度確認してみるのじゃ。
-image,shiroji_small_right_down_image,shiroji_02.png,fade_out,no_sync
-grid,groupe_activity_message_grid,fade_out
+wait,1,disable_click
+image,shiroji_small_right_down_image,shiroji_02.png,fade_out_slow,no_sync
+grid,groupe_activity_message_grid,fade_out_slow
 goto,current_scene
 wait

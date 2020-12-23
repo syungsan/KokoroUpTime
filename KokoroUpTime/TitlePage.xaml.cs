@@ -767,54 +767,70 @@ namespace KokoroUpTime
                     }
                     break;
 
-                //case "第4回":
+                case "第4回":
 
-                //    if (this.initConfig.userName == null)
-                //    {
-                //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
-                //    }
-                //    else
-                //    {
-                //        Chapter4 chapter4 = new Chapter4();
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        Chapter4 chapter4 = new Chapter4();
 
-                //        chapter4.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                        chapter4.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                //        this.NavigationService.Navigate(chapter4);
-                //    }
-                //    break;
-                
-                //case "第5回":
+                        this.NavigationService.Navigate(chapter4);
+                    }
+                    break;
 
-                //   if (this.initConfig.userName == null)
-                //    {
-                //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
-                //    }
-                //    else
-                //    {
-                //        Chapter5 chapter5 = new Chapter5();
+                case "第5回":
 
-                //        chapter5.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        Chapter5 chapter5 = new Chapter5();
 
-                //        this.NavigationService.Navigate(chapter5);
-                //    }
-                //    break;
-                    
-                //case "第6回":
+                        chapter5.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                // if (this.initConfig.userName == null)
-                // {
-                //    MessageBox.Show("まずは名前の入力から始めてください。", "情報");
-                // }
-                // else
-                // {
-                //    Chapter6 chapter6 = new Chapter6();
+                        this.NavigationService.Navigate(chapter5);
+                    }
+                    break;
 
-                //    chapter6.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                case "第6回":
 
-                //    this.NavigationService.Navigate(chapter6);
-                // }
-                // break;
-  
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        Chapter6 chapter6 = new Chapter6();
+
+                        chapter6.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                        this.NavigationService.Navigate(chapter6);
+                    }
+                    break;
+
+                case "第8回":
+
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        Chapter8 chapter8 = new Chapter8();
+
+                        chapter8.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                        this.NavigationService.Navigate(chapter8);
+                    }
+                    break;
+
             }
         }
 
