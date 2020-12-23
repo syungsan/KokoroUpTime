@@ -2,6 +2,7 @@
 using Expansion;
 using FileIOUtils;
 using Osklib;
+using OutlineTextMaker;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -75,6 +76,7 @@ namespace KokoroUpTime
         private Dictionary<string, Button> buttonObjects = null;
         private Dictionary<string, Grid> gridObjects = null;
         private Dictionary<string, Border> borderObjects = null;
+        private Dictionary<string, OutlineText> outlineTextObjects = null;
 
         //手書き入力のボタン用
         private string[] EDIT_BUTTON = { "えんぴつ", "けしごむ", "すべてけす", "かんせい" };
@@ -99,16 +101,14 @@ namespace KokoroUpTime
         private ObservableCollection<GroupeActivityData> _groupeactivityData;
         private ObservableCollection<ChallengeTimeGridLayoutSelector> _challengeTimeGridLayOut;
 
-        private TitleDataTemplateSelector titleSelctor = new TitleDataTemplateSelector();
-
-        private Dictionary<string, string> CharacterColorCode = new Dictionary<string, string>()
-        {
-            ["赤丸"]= "#FFFF0000",
-            ["青助"] = "#FF0070C0",
-            ["キミ"] = "#FFFFC000",
-            ["白じい"] = "#FF000000",
-            ["モブ"] = "#FF000000",
-        };
+        //private Dictionary<string, string> CharacterColorCode = new Dictionary<string, string>()
+        //{
+        //    ["赤丸"]= "#FFFF0000",
+        //    ["青助"] = "#FF0070C0",
+        //    ["キミ"] = "#FFFFC000",
+        //    ["白じい"] = "#FF000000",
+        //    ["モブ"] = "#FF000000",
+        //};
 
         public Chapter8()
         {
@@ -124,30 +124,13 @@ namespace KokoroUpTime
             // データモデルインスタンス確保
             this.dataChapter8 = new DataChapter8();
 
-
-
-
-            if (this.dataOption.InputMethod == 0)
-            {
-                //手書き
-            }
-            else if (this.dataOption.InputMethod == 1)
-            {
-                //キーボード
-            }
-
             //_groupeactivityData.Add(new GroupeActivityData("た", "しかめてみよう！", "友だちはどのようにかんがえるか聞いてみよう！", "Images/grass.png"));
             //_groupeactivityData.Add(new GroupeActivityData("い", "いきもちになる考えは？", "「お助け虫」に進化させてみよう！", "Images/butterfly.png"));
             //_groupeactivityData.Add(new GroupeActivityData("じ", "ぶんいがいの人なら？", "相手をはげます言葉を自分にもかけてみよう！", "Images/cheering.png"));
 
             this.GrupeActivityItemsControl.ItemsSource = _groupeactivityData;
 
-           //this.TitleContentControl.ContentTemplateSelector = titleSelctor;
-
-           //titleSelctor.SelectTemplate("challenge_time_title",this.TitleContentControl);
-
             this.InitControls();
-
         }
 
         private void InitControls()
@@ -195,7 +178,6 @@ namespace KokoroUpTime
 
                 ["ojamamushi_discription_title_text"] = this.OjamamushiDiscriptionTitleText,
                 ["childrens_thoughts_text"] =this.ChildrensThoughtsText,
-
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -219,6 +201,10 @@ namespace KokoroUpTime
                 ["session_grid"] = this.SessionGrid,
                 ["session_frame_grid"] = this.SessionFrameGrid,
                 ["manga_grid"]=this.MangaGrid,
+                ["title_grid"]=this.TitleGrid,
+                ["how_to_use_item_title1_grid"] =this.HowToUseItemTitle1Grid,
+                ["how_to_use_item_title2_grid"] = this.HowToUseItemTitle2Grid,
+                ["how_to_use_item_title3_grid"] = this.HowToUseItemTitle3Grid,
 
                 ["summary_grid"] = this.SummaryGrid,
                 ["ending_grid"] = this.EndingGrid,
@@ -244,6 +230,7 @@ namespace KokoroUpTime
 
                 ["challenge_time_grid"] = this.ChallengeTimeGrid,
                 ["challenge_time_message_grid"] = this.ChallengeTimeMessageGrid,
+                ["feeling_input_grid"] =this.FeelingInputGrid,
                 ["groupe_activity_grid"] = this.GroupeActivityGrid,
                 ["groupe_activity_message_grid"] = this.GroupeActivityMessageGrid,
                 ["hint_check_grid"] = this.HintCheckGrid,
@@ -253,9 +240,20 @@ namespace KokoroUpTime
 
             this.borderObjects = new Dictionary<string, Border>
             {
+                ["blue_title_border"]=this.BlueTitleBorder,
+                ["yellow_title_border"]=this.YellowTitleBorder,
                 ["children_speech_bubble_border"] =this.ChildrenSpeechBubbleBorder,
                 ["any_character_speech_bubble_border"]=this.AnyCharacterSpeechBubbleBorder,
                 ["challenge_speech_bubble_border"] =this.ChallengeSpeechBubbleBorder
+            };
+
+            this.outlineTextObjects = new Dictionary<string, OutlineText>
+            {
+                ["let_sfind_ojamamushi_scene_title"] = this.Let_sFindOjamamushiSceneTitle,
+                ["kimis_thoughts_and_feeling_scene_title"] = this.KimisThoughtsAndFeelingsSceneTitle,
+                ["aosukes_thoughts_and_feelings_scene_title"] = this.AosukesThoughtsAndFeelingsSceneTitle,
+                ["akamarus_thoughts_and_feeling_scene_title"] = this.AkamarusThoughtsAndFeelingsSceneTitle,
+                ["aosukes_ojamamushi_scene_title"] = this.AosukesOjamamushiSceneTitle
             };
         }
 
@@ -281,6 +279,18 @@ namespace KokoroUpTime
 
 
             this.TitleGrid.Visibility = Visibility.Hidden;
+            this.BlueTitleBorder.Visibility = Visibility.Hidden;
+            this.Let_sFindOjamamushiSceneTitle.Visibility = Visibility.Hidden;
+            this.KimisThoughtsAndFeelingsSceneTitle.Visibility = Visibility.Hidden;
+            this.AosukesThoughtsAndFeelingsSceneTitle.Visibility = Visibility.Hidden;
+            this.AkamarusThoughtsAndFeelingsSceneTitle.Visibility = Visibility.Hidden;
+            this.AosukesOjamamushiSceneTitle.Visibility = Visibility.Hidden;
+            this.YellowTitleBorder.Visibility = Visibility.Hidden;
+            this.HowToUseItemTitle1Grid.Visibility = Visibility.Hidden;
+            this.HowToUseItemTitle2Grid.Visibility = Visibility.Hidden;
+            this.HowToUseItemTitle3Grid.Visibility = Visibility.Hidden;
+
+
             this.ChallengeTimeGrid.Visibility = Visibility.Hidden;
             this.ChallengeTimeMessageGrid.Visibility = Visibility.Hidden;
             this.GroupeActivityGrid.Visibility = Visibility.Hidden;
@@ -492,6 +502,10 @@ namespace KokoroUpTime
 
                         break;
                     }
+                    if (this.position == "feeling_input_grid")
+                    {
+                        MessageBox.Show("aaaa");
+                    }
 
                     var gridObject = this.gridObjects[this.position];
 
@@ -584,13 +598,13 @@ namespace KokoroUpTime
 
                     var borderObject = this.borderObjects[this.position];
 
-                    var borderBrush = this.scenarios[this.scenarioCount][2];
-
                     borderObject.Visibility = Visibility.Visible;
 
                     string borderAnimeIsSync = "sync";
+
                     if (this.scenarios[this.scenarioCount].Count > 2 && this.scenarios[this.scenarioCount][2] != "")
                     {
+                        var borderBrush = this.scenarios[this.scenarioCount][2];
                         var converter = new BrushConverter();
 
                         switch (borderBrush)
@@ -732,6 +746,20 @@ namespace KokoroUpTime
                         this.scenarioCount += 1;
                         this.ScenarioPlay();
                     }
+                    break;
+
+                //ボーダーに対しての処理
+                case "outline_text":
+
+                    this.position = this.scenarios[this.scenarioCount][1];
+
+                    var outlineTextObject = this.outlineTextObjects[this.position];
+
+                    outlineTextObject.Visibility = Visibility.Visible;
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
                     break;
 
                 case "wait":
@@ -970,12 +998,12 @@ namespace KokoroUpTime
 
                             break;
 
-                            //case "border":
-                            //    this.position = this.scenarios[this.scenarioCount][2];
-                            //    this.borderObjects[this.position].Visibility = Visibility.Hidden;
-                            //    this.scenarioCount += 1;
-                            //    this.ScenarioPlay();
-                            //    break;
+                        case "border":
+                            this.position = this.scenarios[this.scenarioCount][2];
+                            this.borderObjects[this.position].Visibility = Visibility.Hidden;
+                            this.scenarioCount += 1;
+                            this.ScenarioPlay();
+                            break;
 
                     }
                     break;
@@ -1658,9 +1686,50 @@ namespace KokoroUpTime
                 // 連続Backの実現にはもっと複雑な処理がいる
             }
             */
-            if (this.isClickable)
+            if (!this.isClickable)
             {
-                this.isClickable = false;
+                // FullScreen時のデバッグ用に作っておく
+                if (button.Name == "ExitButton")
+                {
+
+                    this.CoverLayerImage.Visibility = Visibility.Visible;
+                    this.ExitBackGrid.Visibility = Visibility.Visible;
+                }
+                else if (button.Name == "ExitBackYesButton")
+                {
+                    this.StopBGM();
+
+                    TitlePage titlePage = new TitlePage();
+
+                    titlePage.SetReloadPageFlag(false);
+
+                    titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                    this.NavigationService.Navigate(titlePage);
+                }
+                else if (button.Name == "ExitBackNoButton")
+                {
+                    this.ExitBackGrid.Visibility = Visibility.Hidden;
+                    this.CoverLayerImage.Visibility = Visibility.Hidden;
+
+                    this.isClickable = true;
+                }
+               
+
+                else if (button.Name == "ReturnToTitleButton")
+                {
+                    TitlePage titlePage = new TitlePage();
+
+                    titlePage.SetReloadPageFlag(false);
+
+                    titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                    this.NavigationService.Navigate(titlePage);
+                }
+            }
+            else
+            {
+                    this.isClickable = false;
 
                 if ((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton" || button.Name == "GroupeActivityNextMessageButton" || button.Name == "ReturnButton"))
                 {
@@ -1704,60 +1773,38 @@ namespace KokoroUpTime
                     this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
                     this.SelectFeelingBackButton.Visibility = Visibility.Hidden;
 
+
                     this.ScenarioBack();
+
+                }
+                else if (button.Name == "SelectFeelingNextButton")
+                {
+                    this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
+
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+                else if (button.Name == "HintCheckButton")
+                {
+                this.GoTo("check_hint");
+                }
+                else if (button.Name == "KindOfFeelingInputButton")
+                {
+                    this.GoTo("select_kind_of_feeling");
+                }
+                else if (button.Name == "SizeOfFeelingInputButton")
+                {
+                    this.GoTo("select_size_of_feeling");
+                }
+                else if (button.Name == "BranchButton1")
+                {
+                    this.GoTo("manga");
                 }
 
             }
-            // FullScreen時のデバッグ用に作っておく
-            if (button.Name == "ExitButton")
-            {
-
-                this.CoverLayerImage.Visibility = Visibility.Visible;
-                this.ExitBackGrid.Visibility = Visibility.Visible;
-            }
-            else if (button.Name == "ExitBackYesButton")
-            {
-                this.StopBGM();
-
-                TitlePage titlePage = new TitlePage();
-
-                titlePage.SetReloadPageFlag(false);
-
-                titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
-
-                this.NavigationService.Navigate(titlePage);
-            }
-            else if (button.Name == "ExitBackNoButton")
-            {
-                this.ExitBackGrid.Visibility = Visibility.Hidden;
-                this.CoverLayerImage.Visibility = Visibility.Hidden;
-
-                this.isClickable = true;
-            }
-            else if (button.Name == "BranchButton1")
-            {
-                this.GoTo("manga");
-            }
-            else if (button.Name == "SelectFeelingNextButton")
-            {
-                this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
-            else if (button.Name == "ReturnToTitleButton")
-            {
-                TitlePage titlePage = new TitlePage();
-
-                titlePage.SetReloadPageFlag(false);
-
-                titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
-
-                this.NavigationService.Navigate(titlePage);
-            }
-            else if (button.Name == "HintCheckButton")
-            {
-                this.GoTo("check_hint");
-            }
+            
+            
 
         }
         private void SetBGM(string soundFile, bool isLoop, int volume)

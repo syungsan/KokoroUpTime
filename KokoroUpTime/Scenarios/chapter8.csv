@@ -61,6 +61,9 @@ click,page,next_only
 scene,おじゃま虫を見つけよう！
 reset
 image,bg_image,background_08.png
+border,blue_title_border
+outline_text,let_sfind_ojamamushi_scene_title
+grid,title_grid
 click,page
 #
 clear,text,main_msg
@@ -115,9 +118,14 @@ hide,image,session_title_image
 hide,grid,session_frame_grid
 hide,image,shiroji_right_up_image
 hide,grid,main_msg_grid
+hide,image,shiroji_left_image
+border,yellow_title_border
+grid,title_grid
 click,page
 #
 clear,text,main_msg
+hide,border,yellow_title_border
+hide,grid,title_grid
 image,shiroji_left_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
@@ -127,12 +135,18 @@ click,page
 scene,キミちゃんの考えときもちは…
 reset
 image,bg_image,background_05.png
+border,blue_title_border
+outline_text,kimis_thoughts_and_feeling_scene_title
+grid,title_grid
 click,page
 #
+hide,border,blue_title_border
+outline_text,kimis_thoughts_and_feeling_scene_title
+grid,title_grid
 grid,challenge_time_grid
 border,children_speech_bubble_border,yellow
 text,childrens_thoughts_text,しっぱいしたらどうしよう・・・
-iamge,chalenge_time_child_image,kimi_face_05.png
+image,chalenge_time_child_image,kimi_face_05.png
 grid,feeling_input_grid
 button,back_page_button
 wait
@@ -145,6 +159,11 @@ msg,main_msg,つぎは青助くんのばあいじゃ。,白じい
 click,page
 #
 scene,青助くんの考えときもちは…
+reset
+image,bg_image,background_05.png
+border,blue_title_border
+outline_text,aosukes_thoughts_and_feeling_scene_title
+grid,title_grid
 click,page
 #
 grid,challenge_time_grid
@@ -162,6 +181,11 @@ msg,main_msg,さいごに赤丸くんのばあいじゃ。,白じい
 click,page
 #
 scene,赤丸くんの考えときもちは…
+reset
+image,bg_image,background_05.png
+border,blue_title_border
+outline_text,akamarus_thoughts_and_feeling_scene_title
+grid,title_grid
 click,page
 #
 grid,challenge_time_grid
@@ -240,8 +264,9 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,おじゃま虫バスターで青助くんのおじゃま虫を<font=red#60##true>た・い・じ</font>するのじゃ！鬱友だちと相談しながら、考えときもちを書いてみるのじゃ！,白じい
 click,page
 #
-text,,青助くんのおじゃま虫　未修整
-border,appear_expansion			   未修整
+border,blue_title_border
+outline_text,aosukes_ojamamushi_scene_title
+grid,title_grid
 click,page
 #
 grid,view_aosukes_feeling_grid 未修整

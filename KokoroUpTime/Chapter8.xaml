@@ -16,26 +16,6 @@
                 <ResourceDictionary Source="Animation.xaml"/>
                 <ResourceDictionary Source="Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <local:TitleDataTemplateSelector x:Key="MyTitleDataTemplateSelector"/>
-            <DataTemplate x:Key="ThoughtsAndFeelingTitleTemplate">
-                <Border x:Name="ThoughtsAndFeelingTitleBorder" Background="#FF4472C4" BorderBrush="#FF2F528F">
-                    <outline_marker:OutlineText x:Name="LargePlateTitleText" Text="{Binding TitleText}" FontSize="100"  Style="{StaticResource Orange}"/>
-                </Border>
-            </DataTemplate>
-            <DataTemplate x:Key="HowToUseItemTitleTemplate">
-                <Border x:Name="HowToUseItemTitleBorder" Background="#FF4472C4" BorderBrush="#FF2F528F">
-                    <Grid x:Name="HowToUseItemTitle">
-                        <outline_marker:OutlineText x:Name="UpperRowTitleText" Text="{Binding UpperRowText}" FontSize="80"  Style="{StaticResource Orange}"/>
-                        <TextBlock x:Name="RedTitleText" Text="{Binding RedText}" FontSize="100" Foreground="Red" VerticalAlignment="Bottom" Margin="580,0" TextAlignment="Left" LineHeight="125" FontFamily="MS PGothic"/>
-                        <outline_marker:OutlineText  x:Name="LowerRowTitleText" Text="{Binding LowerRowText}" FontSize="80" VerticalAlignment="Bottom"  Margin="500,0" Style="{StaticResource Orange}"/>
-                    </Grid>
-                </Border>
-            </DataTemplate>
-            <DataTemplate x:Key="ChallengeTimeTitle">
-                <Border x:Name="ChallengeTimeTitleBorder" Background="#FF4472C4" BorderBrush="#FF2F528F" d:IsHidden="True">
-                    <TextBlock x:Name="ChallengeTimeTitleText" Text="はひふへほ" FontSize="100"  Style="{StaticResource Purple}"/>
-                </Border>
-            </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
     <Viewbox>
@@ -52,11 +32,32 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </Grid.RenderTransform>
-                <Border Background="#FF4472C4" BorderBrush="#FF2F528F" BorderThickness="3">
-                    <outline_marker:OutlineText Style="{StaticResource Orange}" Text="{Binding Text}" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Border x:Name="BlueTitleBorder" Background="#FF4472C4" BorderBrush="#FF2F528F" BorderThickness="3">
+                    <Grid>
+                        <outline_marker:OutlineText x:Name="Let_sFindOjamamushiSceneTitle" Style="{StaticResource Orange}" Text="おじゃま虫をみつけよう！" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
+                        <outline_marker:OutlineText x:Name="KimisThoughtsAndFeelingsSceneTitle" Style="{StaticResource Orange}" Text="キミちゃんの考えときもちは・・・" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
+                        <outline_marker:OutlineText x:Name="AosukesThoughtsAndFeelingsSceneTitle" Style="{StaticResource Orange}" Text="青助くんの考えときもちは・・・" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
+                        <outline_marker:OutlineText x:Name="AkamarusThoughtsAndFeelingsSceneTitle" Style="{StaticResource Orange}" Text="赤丸くんの考えときもちは・・・" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
+                        <outline_marker:OutlineText x:Name="AosukesOjamamushiSceneTitle" Style="{StaticResource Orange}" Text="青助君のおじゃま虫" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
+                        <Grid x:Name="HowToUseItemTitle1Grid" d:IsHidden="True">
+                            <outline_marker:OutlineText x:Name="UpperRowTitleText1" Text="おじゃま虫バスターの使い方　その①" FontSize="80"  Style="{StaticResource Orange}"/>
+                            <TextBlock x:Name="RedTitleText1" Text="た" FontSize="100" Foreground="Red" VerticalAlignment="Bottom" Margin="580,0" TextAlignment="Left" LineHeight="125" FontFamily="MS PGothic"/>
+                            <outline_marker:OutlineText  x:Name="LowerRowTitleText1" Text="しかめてみよう！" FontSize="80" VerticalAlignment="Bottom"  Margin="70,0,0,0" Style="{StaticResource Orange}"/>
+                        </Grid>
+                        <Grid x:Name="HowToUseItemTitle2Grid" d:IsHidden="True">
+                            <outline_marker:OutlineText x:Name="UpperRowTitleText2" Text="おじゃま虫バスターの使い方　その②" FontSize="80"  Style="{StaticResource Orange}"/>
+                            <TextBlock x:Name="RedTitleText2" Text="い" FontSize="100" Foreground="Red" VerticalAlignment="Bottom" Margin="580,0" TextAlignment="Left" LineHeight="120" FontFamily="MS PGothic"/>
+                            <outline_marker:OutlineText  x:Name="LowerRowTitleText2" Text="いきもちになる考えは？" FontSize="80" VerticalAlignment="Bottom"  Margin="340,0,0,0" Style="{StaticResource Orange}"/>
+                        </Grid>
+                        <Grid x:Name="HowToUseItemTitle3Grid" d:IsHidden="True">
+                            <outline_marker:OutlineText x:Name="UpperRowTitleText3" Text="おじゃま虫バスターの使い方　その③" FontSize="80"  Style="{StaticResource Orange}"/>
+                            <TextBlock x:Name="RedTitleText3" Text="じ" FontSize="100" Foreground="Red" VerticalAlignment="Bottom" Margin="580,0" TextAlignment="Left" LineHeight="120" FontFamily="MS PGothic"/>
+                            <outline_marker:OutlineText  x:Name="LowerRowTitleText3" Text="ぶんいがいの人なら？" FontSize="80" VerticalAlignment="Bottom"  Margin="230,0,0,0" Style="{StaticResource Orange}"/>
+                        </Grid>
+                    </Grid>
                 </Border>
-                <Border  Background="#FFFFC000" BorderBrush="#FFBC8C00" BorderThickness="3">
-                    <TextBlock Style="{StaticResource ShadowText}" Text="チャレンジタイム！" Foreground="#FF9966FF" FontSize="100" TextAlignment="Center" VerticalAlignment="Center"/>
+                <Border x:Name="YellowTitleBorder"  Background="#FFFFC000" BorderBrush="#FFBC8C00" BorderThickness="3" d:IsHidden="True">
+                    <TextBlock x:Name="ChallengeTimeTitle" Style="{StaticResource ShadowText}" Text="チャレンジタイム！" Foreground="#FF9966FF" FontSize="140" TextAlignment="Center" VerticalAlignment="Center"/>
                 </Border> 
             </Grid>
             <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
@@ -241,7 +242,7 @@
                     </DockPanel>
                 </Grid>
             </Grid>
-            <Grid x:Name="ChallengeTimeGrid" Margin="200,50,200,250">
+            <Grid x:Name="ChallengeTimeGrid" Margin="200,50,200,250" d:IsHidden="True">
                 <Border x:Name="ChallengeTimeBorder" Background="#B2DFC37A" CornerRadius="60" >
                     <Grid x:Name="ChallengeTimeTemplateGrid">
                         <Image x:Name="ChalengeTimeChildImage" Source="Images/kimi_face_01.png" Margin="80,300,80,50" HorizontalAlignment="Left" />
