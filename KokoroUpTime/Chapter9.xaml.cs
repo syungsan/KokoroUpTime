@@ -33,10 +33,8 @@ namespace KokoroUpTime
     /// <summary>
     /// GameWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class Chapter8 : Page
+    public partial class Chapter9 : Page
     {
-        // すてきなせいかくのリスト
-        private string[] NICE_PERSONALITY = { "●　親切にしてもらった", "●　アドバイスをくれた", "●　みんなをひっぱってくれた", "●　きちんと順番をまもってくれた", "●　みんなを笑顔にしてくれた", "●　（何か悪いことや失敗をゆるしてもらった）", "●　自分の気持ちを分かってもらった", "●　仲良くしてもらった", "●　ありがとうと言ってくれた" };
 
         //タイトル表示用のテキスト
         private string[] GOOD_FEELINGS = { "●　うれしい", "●　しあわせ", "●　たのしい", "●　ホッとした", "●　きもちいい", "●　まんぞく", "●　すき", "●　やる気マンマン", "●　かんしゃ", "●　わくわく", "●　うきうき", "●　ほこらしい" };
@@ -89,7 +87,7 @@ namespace KokoroUpTime
         private SoundPlayer sePlayer = null;
 
         // データベースに収めるデータモデルのインスタンス
-        private DataChapter8 dataChapter8;
+        private DataChapter9 dataChapter9;
         //データモデルのプロパティのリスト
         private Dictionary<string, string> KindOfFeelings = null;
         private Dictionary<string, int?> SizeOfFeelings = null;
@@ -110,7 +108,7 @@ namespace KokoroUpTime
 
         private ObservableCollection<GroupeActivityData> _groupeactivityData = new ObservableCollection<GroupeActivityData>();
 
-        public Chapter8()
+        public Chapter9()
         {
             InitializeComponent();
 
@@ -122,7 +120,7 @@ namespace KokoroUpTime
 
 
             // データモデルインスタンス確保
-            this.dataChapter8 = new DataChapter8();
+            this.dataChapter9 = new DataChapter9();
 
             // マウスイベントの設定
             this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
@@ -140,50 +138,11 @@ namespace KokoroUpTime
 
             KindOfFeelings = new Dictionary<string, string>()
             {
-                ["aosuke_pre_use_item"] = this.dataChapter8.AosukesKindOfFeelingPreUseItem="",
-                ["kimi_pre_use_item"] = this.dataChapter8.KimisKindOfFeelingPreUseItem = "",
-                ["akamaru_pre_use_item"] = this.dataChapter8.AkamarusKindOfFeelingPreUseItem="",
-                ["aosuke_after_used_item"] = this.dataChapter8.AosukesKindOfFeelingAfterUsedItem="",
-                ["kimi_after_used_item"] = this.dataChapter8.KimisKindOfFeelingAfterUsedItem="",
-                ["akamaru_after_used_item"] = this.dataChapter8.AkamarusKindOfFeelingAfterUsedItem="",
-                ["let's_check"] = this.dataChapter8.Let_sCheckKindOfFeeling="",
-                ["positive_thinking"] = this.dataChapter8.PositiveThinkingKindOfFeeling="",
-                ["thoughts_of_others"] = this.dataChapter8.ThoughtsOfOthersKindOfFeeling=""
             };
 
             SizeOfFeelings = new Dictionary<string, int?>()
             {
-                ["aosuke_pre_use_item"] = this.dataChapter8.AosukesSizeOfFeelingPreUseItem=-1,
-                ["kimi_pre_use_item"] = this.dataChapter8.KimisSizeOfFeelingPreUseItem=-1,
-                ["akamaru_pre_use_item"] = this.dataChapter8.AkamarusSizeOfFeelingPreUseItem=-1,
-                ["aosuke_after_used_item"] = this.dataChapter8.AosukesSizeOfFeelingAfterUsedItem=-1,
-                ["kimi_after_used_item"] = this.dataChapter8.KimisSizeOfFeelingAfterUsedItem=-1,
-                ["akamaru_after_used_item"] = this.dataChapter8.AkamarusSizeOfFeelingAfterUsedItem=-1,
-                ["let's_check"] = this.dataChapter8.Let_sCheckSizeOfFeeling=-1,
-                ["positive_thinking"] = this.dataChapter8.PositiveThinkingSizeOfFeeling=-1,
-                ["thoughts_of_others"] = this.dataChapter8.ThoughtsOfOthersSizeOfFeeling=-1
             };
-
-
-            //this.dataChapter8.AosukesKindOfFeelingPreUseItem = "";
-            //this.dataChapter8.KimisKindOfFeelingPreUseItem = "";
-            //this.dataChapter8.AkamarusKindOfFeelingPreUseItem = "";
-            //this.dataChapter8.AosukesKindOfFeelingAfterUsedItem = "";
-            //this.dataChapter8.KimisKindOfFeelingAfterUsedItem = "";
-            //this.dataChapter8.AkamarusKindOfFeelingAfterUsedItem = "";
-            //this.dataChapter8.Let_sCheckKindOfFeeling = "";
-            //this.dataChapter8.PositiveThinkingKindOfFeeling = "";
-            //this.dataChapter8.ThoughtsOfOthersKindOfFeeling = "";
-            
-            //this.dataChapter8.AosukesSizeOfFeelingPreUseItem = -1;
-            //this.dataChapter8.KimisSizeOfFeelingPreUseItem = -1;
-            //this.dataChapter8.AkamarusSizeOfFeelingPreUseItem = -1;
-            //this.dataChapter8.AosukesSizeOfFeelingAfterUsedItem = -1;
-            //this.dataChapter8.KimisSizeOfFeelingAfterUsedItem = -1;
-            //this.dataChapter8.AkamarusSizeOfFeelingAfterUsedItem = -1;
-            //this.dataChapter8.Let_sCheckSizeOfFeeling = -1;
-            //this.dataChapter8.PositiveThinkingSizeOfFeeling = -1;
-            //this.dataChapter8.ThoughtsOfOthersSizeOfFeeling = -1;
 
             this.InitControls();
         }
@@ -531,19 +490,19 @@ namespace KokoroUpTime
             this.dataProgress = _dataProgress;
 
             // 現在時刻を取得
-            this.dataChapter8.CreatedAt = DateTime.Now.ToString();
+            this.dataChapter9.CreatedAt = DateTime.Now.ToString();
 
             // データベースのテーブル作成と現在時刻の書き込みを同時に行う
             using (var connection = new SQLiteConnection(this.initConfig.dbPath))
             {
                 // 毎回のアクセス日付を記録
-                connection.Insert(this.dataChapter8);
+                connection.Insert(this.dataChapter9);
             }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            using (var csv = new CsvReader("./Scenarios/chapter8.csv"))
+            using (var csv = new CsvReader("./Scenarios/chapter9.csv"))
             {
                 this.scenarios = csv.ReadToEnd();
             }
@@ -585,11 +544,11 @@ namespace KokoroUpTime
 
                     this.StopBGM();
 
-                    this.dataProgress.HasCompletedChapter8 = true;
+                    this.dataProgress.HasCompletedChapter9 = true;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataProgress SET HasCompletedChapter8 = '{Convert.ToInt32(this.dataProgress.HasCompletedChapter8)}' WHERE Id = 1;");
+                        connection.Execute($@"UPDATE DataProgress SET HasCompletedChapter9 = '{Convert.ToInt32(this.dataProgress.HasCompletedChapter9)}' WHERE Id = 1;");
                     }
                     this.ReturnToTitleButton.Visibility = Visibility.Visible;
 
@@ -611,11 +570,11 @@ namespace KokoroUpTime
                     this.scene = this.scenarios[this.scenarioCount][1];
 
                     this.dataProgress.CurrentScene = this.scene;
-                    this.dataProgress.LatestChapter8Scene = this.scene;
+                    this.dataProgress.LatestChapter9Scene = this.scene;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter8Scene = '{this.dataProgress.LatestChapter8Scene}' WHERE Id = 1;");
+                        connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter9Scene = '{this.dataProgress.LatestChapter9Scene}' WHERE Id = 1;");
                     }
 
                     if (this.scene == "キミちゃんのきもちときもちの大きさ")
@@ -2334,7 +2293,7 @@ namespace KokoroUpTime
         }
 
         // ハートゲージの角度をデータバインド
-        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter8), new UIPropertyMetadata(0.0));
+        private static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(Chapter9), new UIPropertyMetadata(0.0));
 
         private double Angle
         {

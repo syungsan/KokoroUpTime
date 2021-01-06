@@ -463,6 +463,8 @@ namespace KokoroUpTime
                 // シーン名を取得
                 case "scene":
 
+                 
+
                     this.scene = this.scenarios[this.scenarioCount][1];
 
                     this.dataProgress.CurrentScene = this.scene;

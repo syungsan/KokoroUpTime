@@ -96,6 +96,7 @@
     <None Remove="Images\body_image_of_kimi_fear.png" />
     <None Remove="Images\branch_selection1.png" />
     <None Remove="Images\branch_selection2.png" />
+    <None Remove="Images\butterfly.png" />
     <None Remove="Images\challenge1_title.png" />
     <None Remove="Images\challenge2_title.png" />
     <None Remove="Images\challenge_frame1.png" />
@@ -107,6 +108,7 @@
     <None Remove="Images\challenge_time_text.png" />
     <None Remove="Images\challenge_time_title.png" />
     <None Remove="Images\check_manga.png" />
+    <None Remove="Images\cheering.png" />
     <None Remove="Images\circle_word.PNG" />
     <None Remove="Images\compare_akamaru_value_frame.png" />
     <None Remove="Images\compare_aosuke_value_frame.png" />
@@ -118,6 +120,7 @@
     <None Remove="Images\feeling_value.png" />
     <None Remove="Images\good.png" />
     <None Remove="Images\good_feeling.png" />
+    <None Remove="Images\grass.png" />
     <None Remove="Images\green_button_plate.png" />
     <None Remove="Images\group_activity_text.png" />
     <None Remove="Images\group_activity_title01.png" />
@@ -182,6 +185,7 @@
     <None Remove="Images\item_check_back_bubble.png" />
     <None Remove="Images\item_detail_info.png" />
     <None Remove="Images\item_review.png" />
+    <None Remove="Images\kimis_friends.png" />
     <None Remove="Images\kimi_feeling_plate.png" />
     <None Remove="Images\kimi_glad.png" />
     <None Remove="Images\kimi_stand_01.png" />
@@ -249,6 +253,9 @@
     <None Remove="Images\manga6-4.png" />
     <None Remove="Images\manga6-5.png" />
     <None Remove="Images\manga6-6.png" />
+    <None Remove="Images\manga7-1.png" />
+    <None Remove="Images\manga7-2.png" />
+    <None Remove="Images\manga7-3.png" />
     <None Remove="Images\manga8-1.png" />
     <None Remove="Images\manga8-2.png" />
     <None Remove="Images\manga8-3.png" />
@@ -430,6 +437,7 @@
     <Resource Include="Images\body_image_of_kimi_fear.png" />
     <Resource Include="Images\branch_selection1.png" />
     <Resource Include="Images\branch_selection2.png" />
+    <Resource Include="Images\butterfly.png" />
     <Resource Include="Images\challenge1_title.png" />
     <Resource Include="Images\challenge2_title.png" />
     <Resource Include="Images\challenge_frame1.png" />
@@ -440,6 +448,7 @@
     <Resource Include="Images\challenge_time_text.png" />
     <Resource Include="Images\challenge_time_title.png" />
     <Resource Include="Images\check_manga.png" />
+    <Resource Include="Images\cheering.png" />
     <Resource Include="Images\circle_word.PNG" />
     <Resource Include="Images\compare_akamaru_value_frame.png" />
     <Resource Include="Images\compare_aosuke_value_frame.png" />
@@ -447,6 +456,7 @@
     <Resource Include="Images\complete_role_play.png" />
     <Resource Include="Images\difficulty_of_action_frame.png" />
     <Resource Include="Images\good.png" />
+    <Resource Include="Images\grass.png" />
     <Resource Include="Images\green_button_plate.png" />
     <Resource Include="Images\group_activity_text.png" />
     <Resource Include="Images\group_activity_title01.png" />
@@ -509,6 +519,7 @@
     <Resource Include="Images\item11_solo.gif" />
     <Resource Include="Images\item_check_back_bubble.png" />
     <Resource Include="Images\item_review.png" />
+    <Resource Include="Images\kimis_friends.png" />
     <Resource Include="Images\kimi_feeling_plate.png" />
     <Resource Include="Images\kimi_glad.png" />
     <Resource Include="Images\kimi_plate_inner.png" />
@@ -554,6 +565,9 @@
     <Resource Include="Images\manga6-6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\manga7-1.png" />
+    <Resource Include="Images\manga7-2.png" />
+    <Resource Include="Images\manga7-3.png" />
     <Resource Include="Images\manga8-1.png" />
     <Resource Include="Images\manga8-2.png" />
     <Resource Include="Images\manga8-3.png" />
@@ -675,6 +689,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Chapter7.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Chapter9.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Chapter8.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -700,6 +720,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Datas\default.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter7.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter8.csv">
@@ -780,6 +803,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Chapter7.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chapter9.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Chapter8.xaml">
       <SubType>Designer</SubType>
     </Page>

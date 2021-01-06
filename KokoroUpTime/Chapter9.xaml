@@ -1,4 +1,4 @@
-﻿<Page x:Class="KokoroUpTime.Chapter8"
+﻿<Page x:Class="KokoroUpTime.Chapter9"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,7 +8,7 @@
       xmlns:outline_marker ="clr-namespace:OutlineTextMaker"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="Chapter8" Loaded="Window_Loaded">
+      Title="Chapter9" Loaded="Window_Loaded">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -257,7 +257,7 @@
                 <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="10,0,0,0" d:IsHidden="True"/>
                 <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.87" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,120,10,20" d:IsHidden="True">
                     <Image.RenderTransform>
-                        <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter8}}}"/>
+                        <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter9}}}"/>
                     </Image.RenderTransform>
                 </Image>
             </Grid>

@@ -67,7 +67,7 @@ namespace KokoroUpTime
 
         // 気持ちの大きさ
         private int feelingSize = 0;
-
+        
         // メッセージ表示関連
         private DispatcherTimer msgTimer; //
         private int word_num; //
@@ -140,6 +140,8 @@ namespace KokoroUpTime
             this.dataChapter3.AkamarusSizeOfFeelingAfterUsedItem = -1;
 
             this.InitControls();
+
+            
         }
         
         private void InitControls()

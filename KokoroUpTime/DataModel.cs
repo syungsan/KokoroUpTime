@@ -249,6 +249,31 @@ namespace KokoroUpTime
 
 
         public string CreatedAt { get; set; }
+
+        public string KimisKindOfFeelingInviteFriends { get; set; }
+
+        public string KimisKindOfFeelingAnnouncement { get; set; }
+
+        public string YourKindOfFeelingAnnouncement { get; set; }
+
+        public string YourKindOfFeelingGreetingToFriend { get; set; }
+
+        public string YourFriendsKindOfFeelingAnnouncement { get; set; }
+
+        public string YourFriendsKindOfFeelingGreetingToAnotherFriend { get; set; }
+
+        public int? KimisSizeOfFeelingInviteFriends { get; set; }
+
+        public int? KimisSizeOfFeelingAnnouncement { get; set; }
+
+        public int? YourSizeOfFeelingAnnouncement { get; set; }
+
+        public int? YourSizeOfFeelingGreetingToFriend { get; set; }
+
+        public int? YourFriendsSizeOfFeelingAnnouncement { get; set; }
+
+        public int? YourFriendsSizeOfFeelingGreetingToAnotherFriend { get; set; }
+
     }
 
     public class DataChapter8
@@ -256,9 +281,50 @@ namespace KokoroUpTime
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-
         public string CreatedAt { get; set; }
+
+        public string AosukesKindOfFeelingPreUseItem { get; set; }
+
+        public string KimisKindOfFeelingPreUseItem { get; set; }
+
+        public string AkamarusKindOfFeelingPreUseItem { get; set; }
+
+        public string AosukesKindOfFeelingAfterUsedItem { get; set; }
+
+        public string KimisKindOfFeelingAfterUsedItem { get; set; }
+
+        public string AkamarusKindOfFeelingAfterUsedItem { get; set; }
+
+        public string Let_sCheckKindOfFeeling { get; set; }
+
+        public string PositiveThinkingKindOfFeeling { get; set; }
+
+        public string ThoughtsOfOthersKindOfFeeling { get; set; }
+
+        //public string KindOfFeeling { get; set; }
+
+        public int? AosukesSizeOfFeelingPreUseItem { get; set; }
+
+        public int? KimisSizeOfFeelingPreUseItem { get; set; }
+
+        public int? AkamarusSizeOfFeelingPreUseItem { get; set; }
+
+        public int? AosukesSizeOfFeelingAfterUsedItem { get; set; }
+
+        public int? KimisSizeOfFeelingAfterUsedItem { get; set; }
+
+        public int? AkamarusSizeOfFeelingAfterUsedItem { get; set; }
+
+        public int? Let_sCheckSizeOfFeeling { get; set; }
+
+        public int? PositiveThinkingSizeOfFeeling { get; set; }
+
+        public int? ThoughtsOfOthersSizeOfFeeling { get; set; }
+
+
+        //public int? SizeOfFeeling { get; set; }
     }
+
 
     public class DataChapter9
     {

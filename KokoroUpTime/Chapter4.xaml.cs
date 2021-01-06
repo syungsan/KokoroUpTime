@@ -450,11 +450,11 @@ namespace KokoroUpTime
 
                     this.StopBGM();
 
-                    this.dataProgress.HasCompletedChapter3 = true;
+                    this.dataProgress.HasCompletedChapter4 = true;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataProgress SET HasCompletedChapter1 = '{Convert.ToInt32(this.dataProgress.HasCompletedChapter1)}' WHERE Id = 1;");
+                        connection.Execute($@"UPDATE DataProgress SET HasCompletedChapter4 = '{Convert.ToInt32(this.dataProgress.HasCompletedChapter4)}' WHERE Id = 1;");
                     }
                     this.ReturnToTitleButton.Visibility = Visibility.Visible;
 
@@ -476,11 +476,11 @@ namespace KokoroUpTime
                     this.scene = this.scenarios[this.scenarioCount][1];
 
                     this.dataProgress.CurrentScene = this.scene;
-                    this.dataProgress.LatestChapter1Scene = this.scene;
+                    this.dataProgress.LatestChapter4Scene = this.scene;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter1Scene = '{this.dataProgress.LatestChapter1Scene}' WHERE Id = 1;");
+                        connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter4Scene = '{this.dataProgress.LatestChapter4Scene}' WHERE Id = 1;");
                     }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();

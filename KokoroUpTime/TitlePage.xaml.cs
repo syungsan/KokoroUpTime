@@ -37,9 +37,6 @@ namespace KokoroUpTime
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
 
-        public DataChapter1 dataChapter1 = new DataChapter1(); // ?
-        public DataChapter2 dataChapter2 = new DataChapter2(); // ?
-
         private string[] dirPaths;
 
         // 初回アクセスかどうかのフラグ
@@ -91,19 +88,6 @@ namespace KokoroUpTime
                 this.dataOption = _dataOption;
                 this.dataItem = _dataItem;
                 this.dataProgress = _dataProgress;
-            }
-        }
-
-        // ?
-        public void SetCurrentResult(DataChapter1 _dataChapter1, DataChapter2 _dataChapter2)
-        {
-            if (_dataChapter1 != null)
-            {
-                dataChapter1 = _dataChapter1;
-            }
-            if (_dataChapter2 != null)
-            {
-                dataChapter2 = _dataChapter2;
             }
         }
 
@@ -815,6 +799,22 @@ namespace KokoroUpTime
                     }
                     break;
 
+                case "第7回":
+
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        Chapter7 chapter7 = new Chapter7();
+
+                        chapter7.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                        this.NavigationService.Navigate(chapter7);
+                    }
+                    break;
+
                 case "第8回":
 
                     if (this.initConfig.userName == null)
@@ -830,6 +830,70 @@ namespace KokoroUpTime
                         this.NavigationService.Navigate(chapter8);
                     }
                     break;
+
+                //case "第9回":
+
+                //    if (this.initConfig.userName == null)
+                //    {
+                //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                //    }
+                //    else
+                //    {
+                //        Chapter9 chapter9 = new Chapter9();
+
+                //        chapter9.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                //        this.NavigationService.Navigate(chapter9);
+                //    }
+                //    break;
+
+                //case "第10回":
+
+                //    if (this.initConfig.userName == null)
+                //    {
+                //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                //    }
+                //    else
+                //    {
+                //        Chapter10 chapter10 = new Chapter10();
+
+                //        chapter10.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                //        this.NavigationService.Navigate(chapter10);
+                //    }
+                //    break;
+
+                //case "第11回":
+
+                //    if (this.initConfig.userName == null)
+                //    {
+                //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                //    }
+                //    else
+                //    {
+                //        Chapter11 chapter11 = new Chapter11();
+
+                //        chapter11.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                //        this.NavigationService.Navigate(chapter11);
+                //    }
+                //    break;
+
+                //case "第12回":
+
+                //    if (this.initConfig.userName == null)
+                //    {
+                //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                //    }
+                //    else
+                //    {
+                //        Chapter12 chapter12 = new Chapter12();
+
+                //        chapter12.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                //        this.NavigationService.Navigate(chapter12);
+                //    }
+                //    break;
 
             }
         }

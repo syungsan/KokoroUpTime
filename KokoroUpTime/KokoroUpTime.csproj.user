@@ -41,6 +41,12 @@
     <Page Update="Animation.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Chapter7.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chapter9.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Chapter8.xaml">
       <SubType>Designer</SubType>
     </Page>

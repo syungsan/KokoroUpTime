@@ -87,14 +87,11 @@
                     <Grid x:Name="FeelingInputGrid">
                         <TextBlock x:Name="KindOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="724,579,0,0" Text="きもちの種類" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" TextAlignment="Center"/>
                         <TextBlock x:Name="SizeOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="1200,579,0,0" Text="きもちの大きさ" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold"/>
-                        <Button x:Name="KindOfFeelingInputButton" Style="{StaticResource DoublelineFrame}" Width="334" Height="175" BorderBrush="#FF4472C4" BorderThickness="5" Margin="743,680,843,225" Click="Button_Click">
+                        <Button x:Name="KindOfFeelingInputButton" Style="{StaticResource KindOfFeelingButton}" Width="334" Height="175" BorderBrush="#FF4472C4" BorderThickness="5" Margin="743,680,843,225" Click="Button_Click">
                             <TextBlock x:Name="KindOfFeelingInputTextBlock" Text="TextBlock" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
                         </Button>
-                        <Button x:Name="SizeOfFeelingInputButton" HorizontalAlignment="Left" Margin="1230,697,0,0" VerticalAlignment="Top" FontSize="140" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Height="141" Width="347">
-                            <Grid x:Name="SizeOfFeelingInputGrid">
-                                <Image x:Name="SizeOfFeelingInputImage" Source="/Images/size_of_feeling_input_button_fimage.png"/>
+                        <Button x:Name="SizeOfFeelingInputButton" Style="{StaticResource SizeOfFeelingButton}" HorizontalAlignment="Left" Margin="1230,697,0,0" VerticalAlignment="Top" FontSize="140" Click="Button_Click" Height="141" Width="347">
                                 <TextBlock x:Name="SizeOfFeelingInputTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
-                            </Grid>
                         </Button>
                     </Grid>
                 </Grid>

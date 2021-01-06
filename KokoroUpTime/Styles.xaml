@@ -5,7 +5,7 @@
 
     <!--２重枠線,角丸 （一応Button等のControlクラスを継承したコントロールに適用可能）-->
     <Style TargetType="{x:Type Button}" x:Key="BubbleFrame">
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Background" Value="White"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -16,18 +16,18 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="60" >
                         </Border>
-                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                        <ContentPresenter />
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#FFBFE6FD"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFBFE6FD"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
-    <Style TargetType="{x:Type Button}" x:Key="DoublelineFrame">
+    <Style TargetType="{x:Type Button}" x:Key="KindOfFeelingButton">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -43,6 +43,28 @@
                         <Viewbox StretchDirection="DownOnly" Margin="20">
                             <ContentPresenter Content="{TemplateBinding Content}"/>
                         </Viewbox>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFBFE6FD"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type Button}" x:Key="SizeOfFeelingButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="SizeOfFeelingInputGrid">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"/>
+                        <Image x:Name="SizeOfFeelingInputImage" Source="/Images/size_of_feeling_input_button_fimage.png"/>
+                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

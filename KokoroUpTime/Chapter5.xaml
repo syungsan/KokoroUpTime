@@ -422,11 +422,8 @@
                                     <TextBlock x:Name="KindOfFeelingInputTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" d:IsHidden="True"/>
                                 </Grid>
                             </Button>
-                            <Button x:Name="SizeOfFeelingInputButton" HorizontalAlignment="Left" Margin="1358,260,0,0" VerticalAlignment="Top" FontSize="140" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Height="141" Width="347" d:LayoutOverrides="VerticalAlignment" d:IsHidden="True">
-                                <Grid x:Name="SizeOfFeelingInputGrid" d:IsHidden="True">
-                                    <Image x:Name="SizeOfFeelingInputImage" Source="/Images/size_of_feeling_input_button_fimage.png" d:IsHidden="True"/>
+                            <Button x:Name="SizeOfFeelingInputButton" Style="{StaticResource SizeOfFeelingButton}" HorizontalAlignment="Left" Margin="1358,260,0,0" VerticalAlignment="Top" FontSize="140" Click="Button_Click" Height="141" Width="347" d:LayoutOverrides="VerticalAlignment" d:IsHidden="True">
                                     <TextBlock x:Name="SizeOfFeelingInputTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" d:IsHidden="True"/>
-                                </Grid>
                             </Button>
                         </Grid>
                         <Grid x:Name="MyBodyImageInputGrid" d:IsHidden="True">
