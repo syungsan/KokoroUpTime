@@ -216,8 +216,8 @@
                 <Grid x:Name="AosukeKindOfFeelingGrid" Margin="1037,507,569,416">
                     <Border x:Name="KindOfFeelingGridOuterBorder" BorderBrush="#FFFF0000" BorderThickness="5">
                         <Border x:Name="KindOfFeelingGridInnerBorder" BorderBrush="#FFFF0000" BorderThickness="5" Margin="5"/>
-                    </Border> 
-                   <TextBlock x:Name="AosukeKindOfFeelingText" Text="ゆったり" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" />
+                    </Border>
+                    <TextBlock x:Name="AosukeKindOfFeelingText" Text="ゆったり" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" />
                 </Grid>
                 <Grid x:Name="AosukeSizeOfFeelingGrid"  Margin="1037,807,569,116" d:IsHidden="True">
                     <Button x:Name="SizeOfFeelingButton" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
@@ -509,7 +509,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="SystemGrid">
-                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -518,7 +518,7 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Grid.RenderTransform>
-                    <Image x:Name="MainMessageBubbleImage" Source="/Images/left_big_bubble.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                    <Image x:Name="MainMessageBubbleImage" Source="/Images/left_big_bubble_red.png" Height="380"  Stretch="Fill" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -528,11 +528,11 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="MainMessageTextBlock"  TextWrapping="Wrap" Margin="50,145,220,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" d:IsHidden="True"/>
-                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32" d:IsHidden="True">
+                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="50,145,220,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" d:IsHidden="True"/>
+                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,40" Height="80" VerticalAlignment="Bottom" HorizontalAlignment="Right" d:IsHidden="True">
                         <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png" d:IsHidden="True"/>
                     </Button>
-                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1289,142,32,187" d:IsHidden="True">
+                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,120" Height="80" VerticalAlignment="Top" HorizontalAlignment="Right" d:IsHidden="True">
                         <Image x:Name="BackMessageAllowUpImage" Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                             <Image.RenderTransform>
                                 <TransformGroup>
@@ -545,38 +545,6 @@
                         </Image>
                     </Button>
                 </Grid>
-                <Button x:Name="ThinMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Margin="215,894,215,0" Height="141" VerticalAlignment="Top" d:IsHidden="True">
-                    <Button.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Button.RenderTransform>
-                    <Grid x:Name="ThinMessageGrid" Width="1479" d:IsHidden="True">
-                        <Image x:Name="ThinMessageBubbleImage" Source="/Images/long_bubble_right_up.png" RenderTransformOrigin="0.5,0.5" Margin="0,-26,0,0" d:IsHidden="True">
-                            <Image.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Image.RenderTransform>
-                        </Image>
-                        <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="42" Margin="31,28,37,31" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
-                            <TextBlock.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </TextBlock.RenderTransform>
-                        </TextBlock>
-                    </Grid>
-                </Button>
                 <Grid x:Name="ChallengeMessageGrid" Height="386" Width="648" Margin="1164,107,108,587" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
@@ -641,11 +609,43 @@
                     <TextBlock x:Name="EndingMessageTextBlock" HorizontalAlignment="Center" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="1060" Margin="0,105,0,0" FontSize="48" d:IsHidden="True"/>
 
                 </Grid>
-                <Button x:Name="NextPageButton" Margin="1598,892,49,0" VerticalAlignment="Top" Height="149" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Width="273" d:IsHidden="True">
+                <Button x:Name="NextPageButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True" >
                     <Image x:Name="NextPageAfterImage" Source="/Images/after.png" Height="149" d:IsHidden="True"/>
                 </Button>
-                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Margin="33,892,0,0" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True" Click="Button_Click">
+                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
                     <Image x:Name="BackPageBeforeImage" Source="/Images/before.png" d:IsHidden="True"/>
+                </Button>
+                <Button x:Name="ThinMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Margin="215,894,215,0" Height="141" VerticalAlignment="Top" d:IsHidden="True">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Grid x:Name="ThinMessageGrid" Width="1479" d:IsHidden="True">
+                        <Image x:Name="ThinMessageBubbleImage" Source="/Images/long_bubble_right_up.png" RenderTransformOrigin="0.5,0.5" Margin="0,-26,0,0" d:IsHidden="True">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                        <TextBlock x:Name="ThinMessageTextBlock" Text="TextBlock" FontSize="42" Margin="31,28,37,31" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </Grid>
                 </Button>
                 <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True">
                     <Grid x:Name="MangaFlipButtonLayerGrid">

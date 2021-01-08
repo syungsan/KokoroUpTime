@@ -91,7 +91,7 @@
                             <TextBlock x:Name="KindOfFeelingInputTextBlock" Text="TextBlock" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
                         </Button>
                         <Button x:Name="SizeOfFeelingInputButton" Style="{StaticResource SizeOfFeelingButton}" HorizontalAlignment="Left" Margin="1230,697,0,0" VerticalAlignment="Top" FontSize="140" Click="Button_Click" Height="141" Width="347">
-                                <TextBlock x:Name="SizeOfFeelingInputTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                            <TextBlock x:Name="SizeOfFeelingInputTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
                         </Button>
                     </Grid>
                 </Grid>
@@ -171,9 +171,9 @@
                     <Button x:Name="SelectHotWordButton" Style="{StaticResource BubbleFrame}" Margin="1025,215,80,250"  Click="Button_Click"/>
                     <Border x:Name="SelectHotWordButtonBorder" BorderThickness="5,5,5,5" Margin="1025,215,80,250" Background="{x:Null}" BorderBrush="#FF333399" CornerRadius="60"/>
                     <Grid x:Name="SelectHotWordGrid" Margin="1025,215,80,250">
-                            <TextBlock x:Name="SelectHotWordTitleTextBlock" TextWrapping="Wrap" Margin="63,28,80,460" FontSize="72" FontWeight="Bold" Text="TextBlock"/>
-                            <TextBlock x:Name="SelectHotWordValueTitleTextBlock" TextWrapping="Wrap" Margin="63,175,80,298" FontSize="54" FontWeight="Bold" Text="TextBlock"/>
-                            <TextBlock x:Name="SelectHotWordValueTextBlock" TextWrapping="Wrap" Margin="63,335,80,45" FontSize="72" FontWeight="Bold" Text="TextBlock"/>
+                        <TextBlock x:Name="SelectHotWordTitleTextBlock" TextWrapping="Wrap" Margin="63,28,80,460" FontSize="72" FontWeight="Bold" Text="TextBlock"/>
+                        <TextBlock x:Name="SelectHotWordValueTitleTextBlock" TextWrapping="Wrap" Margin="63,175,80,298" FontSize="54" FontWeight="Bold" Text="TextBlock"/>
+                        <TextBlock x:Name="SelectHotWordValueTextBlock" TextWrapping="Wrap" Margin="63,335,80,45" FontSize="72" FontWeight="Bold" Text="TextBlock"/>
                     </Grid>
                     <Image x:Name="HotWordArrowImage" Height="236" Width="325" Margin="798,422,798,422" Source="/Images/red_arrow_right.png"/>
                     <Button x:Name="CompleteNextButton" HorizontalAlignment="Left" Margin="1423,906,0,0" VerticalAlignment="Top" Height="144" Width="442" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}">
@@ -328,7 +328,7 @@
                         </Image.RenderTransform>
                     </Image>
                 </Grid>
-                <Grid x:Name="ViewSizeOfFeelingGrid" Margin="520,30,520,680"> 
+                <Grid x:Name="ViewSizeOfFeelingGrid" Margin="520,30,520,680">
                     <Border x:Name="ViewSizeOfFeelingFrame"  BorderBrush="Black" BorderThickness="5"/>
                     <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center"/>
                     <TextBlock x:Name="ViewSizeOfFeelingTextlenticularBrackets" HorizontalAlignment="Center" Margin="0,170,0,0" VerticalAlignment="Top" FontSize="100" FontWeight="Bold" Text="【　　　　】" TextAlignment="Center"/>
@@ -507,7 +507,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="SystemGrid">
-                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -516,7 +516,7 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Grid.RenderTransform>
-                    <Image x:Name="MainMessageBubbleImage" Source="/Images/left_big_bubble.png" RenderTransformOrigin="0.5,0.5">
+                    <Image x:Name="MainMessageBubbleImage" Source="/Images/left_big_bubble_red.png" Height="380"  Stretch="Fill" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -526,12 +526,12 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="55,145,266,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
-                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32">
-                        <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png"/>
+                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="50,145,220,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" d:IsHidden="True"/>
+                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,40" Height="80" VerticalAlignment="Bottom" HorizontalAlignment="Right" d:IsHidden="True">
+                        <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png" d:IsHidden="True"/>
                     </Button>
-                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1289,142,32,187">
-                        <Image x:Name="BackMessageAllowUpImage" Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5">
+                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,120" Height="80" VerticalAlignment="Top" HorizontalAlignment="Right" d:IsHidden="True">
+                        <Image x:Name="BackMessageAllowUpImage" Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                             <Image.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -564,11 +564,11 @@
                     </Image>
                     <TextBlock x:Name="GroupeActivityMessageTextBlock" Text="本当にそれでいいかのう？&#10;ほめる言葉は、「すごいね」「うまいね」などがあったのう。" TextWrapping="Wrap" Margin="30,80,30,20" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
                 </Grid>
-                <Button x:Name="NextPageButton" Margin="1598,892,49,0" VerticalAlignment="Top" Height="149" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Width="273" d:IsHidden="True">
-                    <Image x:Name="NextPageAfterImage" Source="/Images/after.png" Height="149"/>
+                <Button x:Name="NextPageButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True" >
+                    <Image x:Name="NextPageAfterImage" Source="/Images/after.png" Height="149" d:IsHidden="True"/>
                 </Button>
-                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Margin="33,892,0,0" d:IsHidden="True">
-                    <Image x:Name="BackPageBeforeImage" Source="/Images/before.png"/>
+                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
+                    <Image x:Name="BackPageBeforeImage" Source="/Images/before.png" d:IsHidden="True"/>
                 </Button>
                 <Border x:Name="HotWordBorder" BorderThickness="1" Margin="0,438,0,438" Background="#B2FF783A" d:IsHidden="True">
                     <TextBlock x:Name="HotWordTextBlock" Text="TextBlock" TextWrapping="Wrap" Foreground="#FF0071E2" FontSize="120" TextAlignment="Center" FontWeight="Bold"/>

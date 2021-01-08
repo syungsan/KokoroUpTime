@@ -234,7 +234,6 @@ namespace KokoroUpTime
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
                 ["item_book_title_text"] = this.ItemBookTitleTextBlock,
-                ["groupe_activity_msg"] = this.GroupeActivityMessageTextBlock,
                 ["session_frame_text"] = this.SessionFrameText,
 
                 ["challenge_time_title_text"] =this.ChallengeTImeTitleText,
@@ -319,16 +318,13 @@ namespace KokoroUpTime
                 ["music_info_grid"] = this.MusicInfoGrid,
                 ["branch_select_grid"] = this.BranchSelectGrid,
                 ["exit_back_grid"] = this.ExitBackGrid,
-                ["groupe_activity_message_grid"] = this.GroupeActivityMessageGrid,
 
                 ["challenge_time_grid"] = this.ChallengeTimeGrid,
-                ["challenge_time_message_grid"] = this.ChallengeTimeMessageGrid,
                 ["feeling_input_grid"] =this.FeelingInputGrid,
                 ["select_feeling_grid"]=this.SelectFeelingGrid,
                 ["select_heart_grid"]=this.SelectHeartGrid,
                 ["view_size_of_feeling_grid"] =this.ViewSizeOfFeelingGrid,
                 ["groupe_activity_grid"] = this.GroupeActivityGrid,
-                ["groupe_activity_message_grid"] = this.GroupeActivityMessageGrid,
                 ["hint_check_grid"] = this.HintCheckGrid,
                 ["canvas_edit_grid"] = this.CanvasEditGrid,
 
@@ -371,7 +367,6 @@ namespace KokoroUpTime
             this.ItemLeftLastImage.Visibility = Visibility.Hidden;
 
             this.ItemReviewGrid.Visibility = Visibility.Hidden;
-            this.GroupeActivityMessageGrid.Visibility = Visibility.Hidden;
             this.SessionFrameGrid.Visibility = Visibility.Hidden;
             this.SessionFrameText.Visibility = Visibility.Hidden;
 
@@ -398,9 +393,7 @@ namespace KokoroUpTime
 
 
             this.ChallengeTimeGrid.Visibility = Visibility.Hidden;
-            this.ChallengeTimeMessageGrid.Visibility = Visibility.Hidden;
             this.GroupeActivityGrid.Visibility = Visibility.Hidden;
-            this.GroupeActivityMessageGrid.Visibility = Visibility.Hidden;
             this.HintCheckGrid.Visibility = Visibility.Hidden;
             this.InspirationLightImage.Visibility = Visibility.Hidden;
             this.ButterflyImage.Visibility = Visibility.Hidden;
@@ -481,8 +474,6 @@ namespace KokoroUpTime
             this.BackPageButton.Visibility = Visibility.Hidden;
             this.MangaFlipButton.Visibility = Visibility.Hidden;
             this.MangaPrevBackButton.Visibility = Visibility.Hidden;
-            this.GroupeActivityNextMessageButton.Visibility = Visibility.Hidden;
-            this.GroupeActivityBackMessageButton.Visibility = Visibility.Hidden;
             this.CanvasEditGrid.Visibility = Visibility.Hidden;
             this.CompleteInputButton.Visibility = Visibility.Hidden;
 
@@ -1010,21 +1001,6 @@ namespace KokoroUpTime
                                     }
                                 };
                             }
-                            else if (clickMethod == "small_next_only")
-                            {
-                                waitTimer.Start();
-
-                                waitTimer.Tick += (s, args) =>
-                                {
-                                    waitTimer.Stop();
-                                    waitTimer = null;
-
-                                    if (clickButton == "msg")
-                                    {
-                                        this.GroupeActivityNextMessageButton.Visibility = Visibility.Visible;
-                                    }
-                                };
-                            }
                             else if (clickMethod == "back_only")
                             {
                                 waitTimer.Start();
@@ -1096,14 +1072,6 @@ namespace KokoroUpTime
                                 else if (clickButton == "page")
                                 {
                                     this.NextPageButton.Visibility = Visibility.Visible;
-                                }
-                            }
-                            else if (clickMethod == "small_next_only")
-                            {
-
-                                if (clickButton == "msg")
-                                {
-                                    this.GroupeActivityNextMessageButton.Visibility = Visibility.Visible;
                                 }
                             }
                             else
@@ -2146,6 +2114,7 @@ namespace KokoroUpTime
                     if (button.Name == "NextMessageButton")
                     {
                         this.BackMessageButton.Visibility = Visibility.Hidden;
+          
                         this.NextMessageButton.Visibility = Visibility.Hidden;
                     }
                     else if (button.Name == "NextPageButton")
@@ -2175,11 +2144,10 @@ namespace KokoroUpTime
                             this.SizeOfFeelings[DictionaryKey] = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
                         }
                     }
-                    else if (button.Name == "GroupeActivityNextMessageButton")
-                    {
-                        this.GroupeActivityBackMessageButton.Visibility = Visibility.Hidden;
-                        this.GroupeActivityNextMessageButton.Visibility = Visibility.Hidden;
-                    }
+                 
+
+
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }

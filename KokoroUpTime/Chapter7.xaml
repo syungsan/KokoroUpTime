@@ -71,7 +71,7 @@
                         <outline_marker:OutlineText x:Name="KimisThoughtsAndFeelingsSceneTitle" Style="{StaticResource Orange}" Text="キミちゃんの考えときもちは・・・" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
                         <outline_marker:OutlineText x:Name="TheirStatePreAnnouncementSceneTitle" Style="{StaticResource Orange}" Text="発表前の2人のようすは・・・" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
                         <outline_marker:OutlineText x:Name="InviteFriendToPlaySoccerSceneTitle" Style="{StaticResource Orange}" Text="休み時間に、友だちをサッカーにさそう場面・・・" FontSize="80" VerticalAlignment="Center"  HorizontalAlignment="Center" d:IsHidden="True"/>
-                        <outline_marker:OutlineText x:Name="ChallengeTimeScene1Title" Style="{StaticResource Orange}" Text="場面①" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
+                        <outline_marker:OutlineText x:Name="ChallengeTimeScene1Title" Style="{StaticResource Orange}" Text="場面①" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <outline_marker:OutlineText x:Name="ChallengeTimeScene2Title" Style="{StaticResource Orange}" Text="場面②" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
                         <TextBlock x:Name="ChallengeTImeTitleText" Style="{StaticResource ShadowText}" Text="チャレンジタイム！" Foreground="#FF9966FF" FontSize="140" TextAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
                     </Grid>

@@ -509,7 +509,7 @@ hide,grid,main_msg_grid
 image,children_face_right_image,akamaru_face_03.png,,,gray
 image,children_face_left_image,kimi_face_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble_yellow.png
-image,item_center_image,item04_solo.png
+image,item_center_image,item04_solo.png,fade_in
 grid,main_msg_grid,appear_expansion
 msg,main_msg,赤丸くん！ありがとう。,赤丸
 click,msg

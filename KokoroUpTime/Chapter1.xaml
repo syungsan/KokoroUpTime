@@ -161,14 +161,12 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-        </ResourceDictionary>       
+        </ResourceDictionary>
     </Page.Resources>
 
     <Viewbox>
         <Grid Height="1080" Width="1920">
-            <Grid x:Name="BaseGrid">
-                <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_01.png"/>
-            </Grid>
+            <Grid x:Name="BaseGrid"/>
             <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
                 <Image x:Name="MangaTitleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/manga1_title.png" Margin="86,24,0,0" Height="98" Width="1752" d:IsHidden="True"/>
                 <Image x:Name="MangaImage" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Images/manga1-1.png" Margin="0,121,0,0" RenderTransformOrigin="0.5,0.5" Height="880" Width="1788" d:IsHidden="True">
@@ -295,14 +293,14 @@
                 </Grid>
             </Grid>
             <Grid x:Name="GaugeGrid">
-                    <Grid x:Name="SelectHeartGrid" HorizontalAlignment="Center" Margin="400,400" d:IsHidden="True">
-                        <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="5,0,0,0"/>
-                        <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.92" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,63,10,20">
-                            <Image.RenderTransform>
+                <Grid x:Name="SelectHeartGrid" HorizontalAlignment="Center" Margin="400,400" d:IsHidden="True">
+                    <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="5,0,0,0"/>
+                    <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.92" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,63,10,20">
+                        <Image.RenderTransform>
                             <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter1}}}"/>
                         </Image.RenderTransform>
-                        </Image>
-                    </Grid>
+                    </Image>
+                </Grid>
                 <Grid x:Name="CompareAkamaruHeartGrid" Margin="1012,299,613,531">
                     <Image x:Name="CompareAkamaruHeartImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/heart_red.png"/>
                     <Image x:Name="CompareAkamaruNeedleImage" Height="168" Source="/Images/red_needle.png" RenderTransformOrigin="0.5,0.96" Margin="126,53,130,0" VerticalAlignment="Top">
@@ -338,28 +336,28 @@
                 <Image x:Name="SummaryTitleImage" Width="401" Source="/Images/summary_title.png" Margin="760,22,759,907" Height="151" d:IsHidden="True"/>
             </Grid>
             <Grid x:Name="AnyFrameGrid" d:IsHidden="True">
-                    <Grid x:Name="RuleBoardGrid" Margin="215,41,215,122">
-                        <Image x:Name="RuleBoardImage" Source="/Images/blackboard.png" Stretch="Fill" />
-                        <TextBlock x:Name="RuleBoardTitleTextBlock" Text="教室のルール" Foreground="White" FontSize="72" Margin="555,95,555,711"/>
-                        <TextBlock x:Name="RuleBoardCheck1TextBlock" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="60" Margin="494,249,239,544" FontFamily="/Fonts/HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体"/>
-                        <TextBlock x:Name="RuleBoardCheck2TextBlock" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="60" Margin="494,434,239,362" FontFamily="/Fonts/HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体"/>
-                        <TextBlock x:Name="RuleBoardCheck3TextBlock" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="60" Margin="494,617,239,189" FontFamily="/Fonts/HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体"/>
-                        <CheckBox x:Name="RuleBoardCheck1Box" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="293,234,1177,664" Background="{x:Null}" BorderBrush="#FFFFE64A" Foreground="{x:Null}">
-                            <CheckBox.RenderTransform>
-                                <ScaleTransform ScaleX="9.0" ScaleY="9.0"/>
-                            </CheckBox.RenderTransform>
-                        </CheckBox>
-                        <CheckBox x:Name="RuleBoardCheck2Box" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="293,420,1177,476" BorderBrush="#FFFFE64A">
-                            <CheckBox.RenderTransform>
-                                <ScaleTransform ScaleX="9.0" ScaleY="9.0"/>
-                            </CheckBox.RenderTransform>
-                        </CheckBox>
-                        <CheckBox x:Name="RuleBoardCheck3Box" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="293,598,0,0" VerticalAlignment="Top" Width="16" HorizontalAlignment="Left" Height="16">
-                            <CheckBox.RenderTransform>
-                                <ScaleTransform ScaleX="9.0" ScaleY="9.0"/>
-                            </CheckBox.RenderTransform>
-                        </CheckBox>
-                    </Grid>
+                <Grid x:Name="RuleBoardGrid" Margin="215,41,215,122">
+                    <Image x:Name="RuleBoardImage" Source="/Images/blackboard.png" Stretch="Fill" />
+                    <TextBlock x:Name="RuleBoardTitleTextBlock" Text="教室のルール" Foreground="White" FontSize="72" Margin="555,95,555,711"/>
+                    <TextBlock x:Name="RuleBoardCheck1TextBlock" Text="１．人のことを わらわない" Foreground="#FFFFE64A" FontSize="60" Margin="494,249,239,544" FontFamily="/Fonts/HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体"/>
+                    <TextBlock x:Name="RuleBoardCheck2TextBlock" Text="２．ふざけない" Foreground="#FFFFE64A" FontSize="60" Margin="494,434,239,362" FontFamily="/Fonts/HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体"/>
+                    <TextBlock x:Name="RuleBoardCheck3TextBlock" Text="３．はずかしがらない" Foreground="#FFFFE64A" FontSize="60" Margin="494,617,239,189" FontFamily="/Fonts/HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体"/>
+                    <CheckBox x:Name="RuleBoardCheck1Box" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="293,234,1177,664" Background="{x:Null}" BorderBrush="#FFFFE64A" Foreground="{x:Null}">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="9.0" ScaleY="9.0"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+                    <CheckBox x:Name="RuleBoardCheck2Box" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="293,420,1177,476" BorderBrush="#FFFFE64A">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="9.0" ScaleY="9.0"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+                    <CheckBox x:Name="RuleBoardCheck3Box" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="293,598,0,0" VerticalAlignment="Top" Width="16" HorizontalAlignment="Left" Height="16">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="9.0" ScaleY="9.0"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+                </Grid>
                 <Image x:Name="ChildrenInfoImage" HorizontalAlignment="Left" Height="652" Margin="211,65,0,0" VerticalAlignment="Top" Width="1006" Source="/Images/SS.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -619,7 +617,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="SystemGrid" d:IsHidden="True">
-                <Grid x:Name="MainMessageGrid" Margin="210,630,210,0" Height="420" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -628,7 +626,7 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Grid.RenderTransform>
-                    <Image x:Name="MainMessageBubbleImage" Source="/Images/right_big_bubble.png" RenderTransformOrigin="0.5,0.5">
+                    <Image x:Name="MainMessageBubbleImage" Source="/Images/left_big_bubble_red.png" Height="380"  Stretch="Fill" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -638,18 +636,12 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="40,145,212,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R">
-                        <Run x:Name="MainMessageFrontText"/>
-                        <InlineUIContainer>
-                            <Image x:Name="NameImage" Height="48" d:IsHidden="True"/>
-                        </InlineUIContainer>
-                        <Run x:Name="MainMessageBackText"/>
-                    </TextBlock>
-                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1293,299,28,32">
-                        <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png"/>
+                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="50,145,220,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" d:IsHidden="True"/>
+                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,40" Height="80" VerticalAlignment="Bottom" HorizontalAlignment="Right" d:IsHidden="True">
+                        <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png" d:IsHidden="True"/>
                     </Button>
-                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="1289,142,32,187">
-                        <Image x:Name="BackMessageAllowUpImage" Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5">
+                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,120" Height="80" VerticalAlignment="Top" HorizontalAlignment="Right" d:IsHidden="True">
+                        <Image x:Name="BackMessageAllowUpImage" Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                             <Image.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -712,10 +704,10 @@
                     <TextBlock x:Name="EndingMessageTextBlock" HorizontalAlignment="Center" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="1060" Margin="0,105,0,0" FontSize="48" d:IsHidden="True"/>
 
                 </Grid>
-                <Button x:Name="NextPageButton" Margin="1598,892,49,0" VerticalAlignment="Top" Height="149" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Width="273" d:IsHidden="True">
+                <Button x:Name="NextPageButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True" >
                     <Image x:Name="NextPageAfterImage" Source="/Images/after.png" Height="149" d:IsHidden="True"/>
                 </Button>
-                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Margin="33,892,0,0" d:IsHidden="True">
+                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
                     <Image x:Name="BackPageBeforeImage" Source="/Images/before.png" d:IsHidden="True"/>
                 </Button>
                 <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True">

@@ -178,7 +178,6 @@ namespace KokoroUpTime
                 ["ojamamushi_attached_speech_bubble_image"] =this.OjamamushiAttachedSpeechBubbleImage,
                 ["challenge_item_image"] =this.ChallengeItemImage,
                 ["any_character_image"] =this.AnyCharacterImage,
-                ["how_to_use_item_1_ojamamushi_image"]=this.HowToUseItem_1OjamamushiImage,
                 ["inspiration_light_image"] =this.InspirationLightImage,
                 ["butterfly_image"] =this.ButterflyImage
             };
@@ -197,7 +196,6 @@ namespace KokoroUpTime
                 ["session_frame_text"] = this.SessionFrameText,
 
                 ["challenge_time_title_text"] =this.ChallengeTImeTitleText,
-                ["ojamamushi_discription_title_text"] = this.OjamamushiDiscriptionTitleText,
                 ["childrens_thoughts_msg"] =this.ChildrensThoughtsText,
                 ["challenge_msg_text"] = this.ChallengeMessageText,
                 ["any_character_msg_text"] =this.AnyCharacterMessageText,
@@ -236,9 +234,6 @@ namespace KokoroUpTime
                 ["session_frame_grid"] = this.SessionFrameGrid,
                 ["manga_grid"]=this.MangaGrid,
                 ["title_grid"]=this.TitleGrid,
-                ["how_to_use_item_title1_grid"] =this.HowToUseItemTitle1Grid,
-                ["how_to_use_item_title2_grid"] = this.HowToUseItemTitle2Grid,
-                ["how_to_use_item_title3_grid"] = this.HowToUseItemTitle3Grid,
 
                 ["summary_grid"] = this.SummaryGrid,
                 ["ending_grid"] = this.EndingGrid,
@@ -250,28 +245,10 @@ namespace KokoroUpTime
                 ["item_last_info_grid"] = this.ItemLastInfoGrid,
                 ["item_review_grid"] = this.ItemReviewGrid,
 
-                ["ojamamushi_discription_grid"] = this.OjamamushiDiscriptionGrid,
-                ["ojamamushi_discription_plate_grid"] = this.OjamamsuhiDiscriptionPlateGrid,
-
-                ["ojamamushi_grid"] = this.OjamamushiGrid,
-                ["kimis_ojamamushi"]=this.KimisOjamamushi,
-                ["aosukes_ojamamushi"]=this.AosukesOjamamushi,
-                ["akamarus_ojamamushi"]=this.AkamarusOjamamushi,
-
-                ["how_to_use_item_title1_grid"] =this.HowToUseItemTitle1Grid,
-                ["how_to_use_item_title2_grid"] = this.HowToUseItemTitle2Grid,
-                ["how_to_use_item_title3_grid"] = this.HowToUseItemTitle3Grid,
-
                 ["children_thought_speech_bubble_grid"] =this.ChildrenThoughtSpeechBubbleGrid,
                 ["any_character_speech_bubble_grid"] =this.AnyCharacterSpeecBubbleGrid,
                 ["challenge_speech_bubble_grid"] =this.ChallengeSpeecBubbleGrid,
 
-                ["how_to_use_item_inf_grid"] =this.HowToUseItemInformationGrid,
-                ["how_to_use_item_1_grid"] =this.HowToUseItem_1Grid,
-                ["how_to_use_item_2_grid"] = this.HowToUseItem_2Grid,
-
-                ["aosukes_ojamamushi_situation_grid"] =this.AosukesOjamamushiSituationGrid,
-                ["view_aosukes_feeling_grid"] = this.ViewAosukesFeelingGrid,
 
                 ["ending_msg_grid"] = this.EndingMessageGrid,
                 ["main_msg_grid"] = this.MainMessageGrid,
@@ -306,11 +283,6 @@ namespace KokoroUpTime
 
             this.outlineTextObjects = new Dictionary<string, OutlineText>
             {
-                ["let_sfind_ojamamushi_scene_title"] = this.Let_sFindOjamamushiSceneTitle,
-                ["kimis_thoughts_and_feeling_scene_title"] = this.KimisThoughtsAndFeelingsSceneTitle,
-                ["aosukes_thoughts_and_feeling_scene_title"] = this.AosukesThoughtsAndFeelingsSceneTitle,
-                ["akamarus_thoughts_and_feeling_scene_title"] = this.AkamarusThoughtsAndFeelingsSceneTitle,
-                ["aosukes_ojamamushi_scene_title"] = this.AosukesOjamamushiSceneTitle
             };
         }
 
@@ -338,17 +310,6 @@ namespace KokoroUpTime
             this.TitleGrid.Visibility = Visibility.Hidden;
             this.TitleBorder.Visibility = Visibility.Hidden;
             this.ChallengeTImeTitleText.Visibility = Visibility.Hidden;
-            this.Let_sFindOjamamushiSceneTitle.Visibility = Visibility.Hidden;
-            this.KimisThoughtsAndFeelingsSceneTitle.Visibility = Visibility.Hidden;
-            this.AosukesThoughtsAndFeelingsSceneTitle.Visibility = Visibility.Hidden;
-            this.AkamarusThoughtsAndFeelingsSceneTitle.Visibility = Visibility.Hidden;
-            this.AosukesOjamamushiSceneTitle.Visibility = Visibility.Hidden;
-            this.HowToUseItemTitle1Grid.Visibility = Visibility.Hidden;
-            this.HowToUseItemTitle2Grid.Visibility = Visibility.Hidden;
-            this.HowToUseItemTitle3Grid.Visibility = Visibility.Hidden;
-            this.HowToUseItem_1Grid.Visibility = Visibility.Hidden;
-            this.HowToUseItem_2Grid.Visibility = Visibility.Hidden;
-            this.HowToUseItem_1OjamamushiImage.Visibility = Visibility.Hidden;
             this.ChildrensThoughtsTitleText.Visibility = Visibility.Hidden;
 
             this.SelectFeelingGrid.Visibility = Visibility.Hidden;
@@ -374,15 +335,6 @@ namespace KokoroUpTime
             this.ItemBookNoneGrid.Visibility = Visibility.Hidden;
             this.ItemBookTitleTextBlock.Visibility = Visibility.Hidden;
 
-            this.OjamamushiDiscriptionGrid.Visibility = Visibility.Hidden;
-            this.OjamamushiDiscriptionTitleText.Visibility = Visibility.Hidden;
-            this.OjamamsuhiDiscriptionPlateGrid.Visibility = Visibility.Hidden;
-
-            this.OjamamushiGrid.Visibility = Visibility.Hidden;
-            this.KimisOjamamushi.Visibility = Visibility.Hidden;
-            this.AosukesOjamamushi.Visibility = Visibility.Hidden;
-            this.AkamarusOjamamushi.Visibility = Visibility.Hidden;
-
             this.ChallengeTimeGrid.Visibility = Visibility.Hidden;
             this.OjamamushiAttachedSpeechBubbleImage.Visibility = Visibility.Hidden;
             this.OjamamushisTitleText.Visibility = Visibility.Hidden;
@@ -394,13 +346,6 @@ namespace KokoroUpTime
             this.ChildrensThoughtsText.Visibility = Visibility.Hidden;
             this.OjamamushisTitleText.Visibility = Visibility.Hidden;
             this.ChildrenThoughtSpeechBubbleGrid.Visibility = Visibility.Hidden;
-
-            this.OjamamushiGrid.Visibility = Visibility.Hidden;
-            this.HowToUseItemInformationGrid.Visibility = Visibility.Hidden;
-
-            this.AosukesOjamamushiSituationGrid.Visibility = Visibility.Hidden;
-            this.ViewAosukesFeelingGrid.Visibility = Visibility.Hidden;
-            
 
             this.ExitBackGrid.Visibility = Visibility.Hidden;
             this.BranchSelectGrid.Visibility = Visibility.Hidden;
@@ -1387,11 +1332,11 @@ namespace KokoroUpTime
 
                 case "get_item":
 
-                    this.dataItem.HasGotItem08 = true;
+                    this.dataItem.HasGotItem09 = true;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
-                        connection.Execute($@"UPDATE DataItem SET HasGotItem08 = 1 WHERE Id = 1;");
+                        connection.Execute($@"UPDATE DataItem SET HasGotItem09 = 1 WHERE Id = 1;");
                     }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1420,9 +1365,9 @@ namespace KokoroUpTime
 
                 case "item_book":
 
-                    Image[] itemMainImages = { this.Item01MainImage, this.Item02MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
+                    Image[] itemMainImages = { this.Item01MainImage, this.Item02MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item08MainImage, this.Item10MainImage, this.Item11MainImage };
 
-                    Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
+                    Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item10NoneImage, this.Item11NoneImage };
 
                     var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
 

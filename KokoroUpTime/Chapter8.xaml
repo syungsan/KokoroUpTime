@@ -303,8 +303,8 @@
             </Grid>
             <Grid x:Name="ChallengeTimeGrid" Margin="200,50,200,250">
                 <Border x:Name="ChallengeTimeBorder" Background="#B2FFD966" CornerRadius="60" >
-                    <Grid x:Name="ChallengeTimeTemplateGrid" d:IsHidden="True">
-                        <Image x:Name="ChalengeTimeChildImage" Source="Images/akamaru_face_05.png" Margin="80,300,80,50" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                    <Grid x:Name="ChallengeTimeTemplateGrid">
+                        <Image x:Name="ChalengeTimeChildImage" Source="Images/akamaru_face_05.png" Margin="80,300,80,50" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
                             <Image.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -314,7 +314,7 @@
                                 </TransformGroup>
                             </Image.RenderTransform>
                         </Image>
-                        <Grid x:Name="ChildrenThoughtSpeechBubbleGrid" Margin="420,90,200,340" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                        <Grid x:Name="ChildrenThoughtSpeechBubbleGrid" Margin="420,90,200,340" RenderTransformOrigin="0.5,0.5">
                             <Grid.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -327,15 +327,15 @@
                                 <ColumnDefinition Width="200"/>
                                 <ColumnDefinition Width="800"/>
                             </Grid.ColumnDefinitions>
-                            <Border x:Name="ChildrenSpeechBubbleBorder" Height="250" Width="700" Background="White" CornerRadius="60" BorderBrush="#FFFFC000" BorderThickness="10" HorizontalAlignment="Left" Grid.Column="1" d:IsHidden="True">
-                                <TextBlock x:Name="ChildrensThoughtsText" Text="うまくいくときもあるし、なにをやってもだめではないかも" FontSize="35" TextWrapping="Wrap" Margin="50,50" LineHeight="60" VerticalAlignment="Center" Grid.Column="1" FontWeight="Bold" FontFamily="Yu Gothic" d:IsHidden="True"/>
+                            <Border x:Name="ChildrenSpeechBubbleBorder" Height="250" Width="700" Background="White" CornerRadius="60" BorderBrush="#FFFFC000" BorderThickness="10" HorizontalAlignment="Left" Grid.Column="1">
+                                <TextBlock x:Name="ChildrensThoughtsText" Text="うまくいくときもあるし、なにをやってもだめではないかも" FontSize="35" TextWrapping="Wrap" Margin="50,50" LineHeight="60" VerticalAlignment="Center" Grid.Column="1" FontWeight="Bold" FontFamily="Yu Gothic"/>
                             </Border>
-                            <Path   x:Name="ChildrenSpeechBubbleTailMask" Stroke="White" StrokeThickness="11" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-11,0" Data="M205,180 l0,50" d:IsHidden="True"/>
-                            <Path   x:Name="ChildrenSpeechBubbletail" Fill="White" Stroke="{Binding ElementName=ChildrenSpeechBubbleBorder,Path=BorderBrush}" StrokeThickness="11" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-10,0" Data="M205,180 L60,300 205,230" d:IsHidden="True"/>
+                            <Path   x:Name="ChildrenSpeechBubbleTailMask" Stroke="White" StrokeThickness="11" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-11,0" Data="M205,180 l0,50"/>
+                            <Path   x:Name="ChildrenSpeechBubbletail" Fill="White" Stroke="{Binding ElementName=ChildrenSpeechBubbleBorder,Path=BorderBrush}" StrokeThickness="11" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-10,0" Data="M205,180 L60,300 205,230"/>
                         </Grid>
                     </Grid>
                 </Border>
-                <Image x:Name="InspirationLightImage" Source="Images/light.png" Height="300" Width="300" Margin="0,150" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Image x:Name="InspirationLightImage" Source="Images/light.png" Height="300" Width="300" Margin="0,150" VerticalAlignment="Top" HorizontalAlignment="Left" d:IsHidden="True"/>
                 <Image x:Name="OjamamushiAttachedSpeechBubbleImage" Margin="1100,50,100,580" Source="Images/ojamamushi_01.png" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -398,7 +398,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Grid x:Name="ChallengeSpeecBubbleGrid" Margin="550,400,150,-200" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Grid x:Name="ChallengeSpeecBubbleGrid" Margin="550,400,150,-200" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -411,11 +411,11 @@
                         <RowDefinition />
                         <RowDefinition Height="170"/>
                     </Grid.RowDefinitions>
-                    <Border x:Name="ChallengeSpeechBubbleBorder"  Background="White" CornerRadius="30" BorderBrush="Black" BorderThickness="10"  Grid.Row="1" d:IsHidden="True">
-                        <TextBlock x:Name="ChallengeMessageText" Text="キミちゃん、失敗したらどうしよう&#10;sdfsdfsdf" FontSize="30" TextWrapping="Wrap" Margin="40,20"   Grid.Column="1" FontWeight="Bold" FontFamily="Yu Gothic" d:IsHidden="True"/>
+                    <Border x:Name="ChallengeSpeechBubbleBorder"  Background="White" CornerRadius="30" BorderBrush="Black" BorderThickness="10"  Grid.Row="1">
+                        <TextBlock x:Name="ChallengeMessageText" Text="キミちゃん、失敗したらどうしよう&#10;sdfsdfsdf" FontSize="30" TextWrapping="Wrap" Margin="40,20"   Grid.Column="1" FontWeight="Bold" FontFamily="Yu Gothic"/>
                     </Border>
-                    <Path   x:Name="ChallengeSpeechBubbleTailMask" Stroke="White" StrokeThickness="11" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-10" Data="M550,100 l100,0" Grid.Row="0" VerticalAlignment="Bottom" d:IsHidden="True"/>
-                    <Path   x:Name="ChallengeSpeechBubbleTail" Fill="White" Stroke="{Binding ElementName=ChallengeSpeechBubbleBorder,Path=BorderBrush}" StrokeThickness="11" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-10" Data="M550,100 L740,30 650,100" Grid.Row="0" VerticalAlignment="Bottom" d:IsHidden="True"/>
+                    <Path   x:Name="ChallengeSpeechBubbleTailMask" Stroke="White" StrokeThickness="11" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-10" Data="M550,100 l100,0" Grid.Row="0" VerticalAlignment="Bottom"/>
+                    <Path   x:Name="ChallengeSpeechBubbleTail" Fill="White" Stroke="{Binding ElementName=ChallengeSpeechBubbleBorder,Path=BorderBrush}" StrokeThickness="11" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-10" Data="M550,100 L740,30 650,100" Grid.Row="0" VerticalAlignment="Bottom"/>
                 </Grid>
             </Grid>
             <Grid x:Name="HowToUseItemInformationGrid" Margin="110,100,820,400" d:IsHidden="True">
@@ -436,7 +436,7 @@
                     </Border>
                 </Grid>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid" Margin="140,100,140,160" >
+            <Grid x:Name="GroupeActivityGrid" Margin="140,100,140,160" d:IsHidden="True" >
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform />
@@ -757,73 +757,16 @@
                         </Image>
                     </Button>
                 </Grid>
-                <Grid x:Name="ChallengeTimeMessageGrid" RenderTransformOrigin="0.5,0.5"  Background="{x:Null}" HorizontalAlignment="Right" Margin="0,130,150,540" Width="536" d:IsHidden="True">
-                    <Grid.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Grid.RenderTransform>
-                    <Image x:Name="ChallengeTimeMessageBubbleImage" Source="/Images/right_big_bubble.png"  Stretch="Fill" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <TextBlock x:Name="ChallengeTimeMessageTextBlock" TextWrapping="Wrap" Margin="30,41,30,172" FontSize="40" FontFamily="Meirio" LineHeight="80" Text="チャレンジタイムはできたかの？&#10;もう一度見直してみよう！&#10;次に進んで良いかの？" d:IsHidden="True"/>
-                </Grid>
-                <Grid x:Name="GroupeActivityMessageGrid" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom"  Margin="400,100,230,0" Height="290" Background="{x:Null}" d:IsHidden="True">
-                    <Grid.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Grid.RenderTransform>
-                    <Image x:Name="GroupeActivityMessageBubbleImage" Source="/Images/right_big_bubble.png"  Stretch="Fill" d:IsHidden="True">
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <TextBlock x:Name="GroupeActivityMessageTextBlock" TextWrapping="Wrap" Margin="30,100,192,20" FontSize="35" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" d:IsHidden="True"/>
-                    <Button x:Name="GroupeActivityNextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Height="80" Width="128" Margin="20,20" HorizontalAlignment="Right" VerticalAlignment="Bottom" d:IsHidden="True">
-                        <Image x:Name="GroupeActivityNextMessageArrowDownImage" Source="/Images/yazirusi.png" d:IsHidden="True"/>
-                    </Button>
-                    <Button x:Name="GroupeActivityBackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Height="80" Width="128" Margin="20,100"  HorizontalAlignment="Right" VerticalAlignment="Top" d:IsHidden="True">
-                        <Image x:Name="GroupeActivityBackMessageAllowUpImage" Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
-                            <Image.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="180.0"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Image.RenderTransform>
-                        </Image>
-                    </Button>
-                </Grid>
-                <Grid x:Name="EndingMessageGrid" Width="1149" Height="210" Margin="210,826,561,44" d:IsHidden="True">
-                    <Image x:Name="EndingShortBubbleImage" Source="/Images/short_bubble_right_up.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="EndingMessageTextBlock" HorizontalAlignment="Center" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="1060" Margin="0,105,0,0" FontSize="48" d:IsHidden="True"/>
-                </Grid>
                 <Button x:Name="NextPageButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True" >
                     <Image x:Name="NextPageAfterImage" Source="/Images/after.png" Height="149" d:IsHidden="True"/>
                 </Button>
                 <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
                     <Image x:Name="BackPageBeforeImage" Source="/Images/before.png" d:IsHidden="True"/>
                 </Button>
+                <Grid x:Name="EndingMessageGrid" Width="1149" Height="210" Margin="210,826,561,44">
+                    <Image x:Name="EndingShortBubbleImage" Source="/Images/short_bubble_right_up.png"/>
+                    <TextBlock x:Name="EndingMessageTextBlock" HorizontalAlignment="Center" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="1060" Margin="0,105,0,0" FontSize="48"/>
+                </Grid>
                 <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True">
                     <Grid x:Name="MangaFlipButtonLayerGrid" d:IsHidden="True">
                         <Image x:Name="MangaFlipArrowImageGauge" Source="/Images/mangaya_orange.png" d:IsHidden="True">

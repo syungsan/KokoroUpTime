@@ -120,6 +120,13 @@
     <None Remove="Images\feeling_value.png" />
     <None Remove="Images\good.png" />
     <None Remove="Images\good_feeling.png" />
+    <None Remove="Images\graph1-1.png" />
+    <None Remove="Images\graph1-2.png" />
+    <None Remove="Images\graph2-1.png" />
+    <None Remove="Images\graph2-2.png" />
+    <None Remove="Images\graph2-3.png" />
+    <None Remove="Images\graph2-4.png" />
+    <None Remove="Images\graph_axis.png" />
     <None Remove="Images\grass.png" />
     <None Remove="Images\green_button_plate.png" />
     <None Remove="Images\group_activity_text.png" />
@@ -176,6 +183,7 @@
     <None Remove="Images\item09_book.png" />
     <None Remove="Images\item09_detail.png" />
     <None Remove="Images\item09_solo.gif" />
+    <None Remove="Images\item09_solo.png" />
     <None Remove="Images\item09_title.png" />
     <None Remove="Images\item10_book.png" />
     <None Remove="Images\item10_detail.png" />
@@ -259,6 +267,9 @@
     <None Remove="Images\manga8-1.png" />
     <None Remove="Images\manga8-2.png" />
     <None Remove="Images\manga8-3.png" />
+    <None Remove="Images\manga9-1.png" />
+    <None Remove="Images\manga9-2.png" />
+    <None Remove="Images\manga9-3.png" />
     <None Remove="Images\mangaya.png" />
     <None Remove="Images\mangaya_gauge.png" />
     <None Remove="Images\mangaya_orange.png" />
@@ -456,6 +467,13 @@
     <Resource Include="Images\complete_role_play.png" />
     <Resource Include="Images\difficulty_of_action_frame.png" />
     <Resource Include="Images\good.png" />
+    <Resource Include="Images\graph1-1.png" />
+    <Resource Include="Images\graph1-2.png" />
+    <Resource Include="Images\graph2-1.png" />
+    <Resource Include="Images\graph2-2.png" />
+    <Resource Include="Images\graph2-3.png" />
+    <Resource Include="Images\graph2-4.png" />
+    <Resource Include="Images\graph_axis.png" />
     <Resource Include="Images\grass.png" />
     <Resource Include="Images\green_button_plate.png" />
     <Resource Include="Images\group_activity_text.png" />
@@ -505,12 +523,13 @@
     <Resource Include="Images\item07_title.png" />
     <Resource Include="Images\item08_book.png" />
     <Resource Include="Images\item08_detail.png" />
-    <Resource Include="Images\item08_solo.gif" />
+
+    
     <Resource Include="Images\item08_solo.png" />
     <Resource Include="Images\item08_title.png" />
     <Resource Include="Images\item09_book.png" />
     <Resource Include="Images\item09_detail.png" />
-    <Resource Include="Images\item09_solo.gif" />
+    <Resource Include="Images\item09_solo.png" />
     <Resource Include="Images\item09_title.png" />
     <Resource Include="Images\item10_book.png" />
     <Resource Include="Images\item10_detail.png" />
@@ -571,6 +590,9 @@
     <Resource Include="Images\manga8-1.png" />
     <Resource Include="Images\manga8-2.png" />
     <Resource Include="Images\manga8-3.png" />
+    <Resource Include="Images\manga9-1.png" />
+    <Resource Include="Images\manga9-2.png" />
+    <Resource Include="Images\manga9-3.png" />
     <Resource Include="Images\mangaya_gauge.png" />
     <Resource Include="Images\mangaya_orange.png" />
     <Resource Include="Images\message_box.png" />
@@ -723,6 +745,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter7.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter9.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter8.csv">

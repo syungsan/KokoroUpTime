@@ -92,7 +92,7 @@ hide,grid,item_name_plate_left_grid
 image,main_msg_bubble_image,left_big_bubble.png
 image,bg_image,background_08.png
 image,shiroji_left_image,shiroji_02.png
-msg,main_msg,今日は、勉強やスポーツではない「いいところ」や鬱「かっこいいところ」を見つけてみよう！鬱<image=name>【name】</image> やまわりの人の性格の中で「<font=red#50##true>すてきなせいかく</font>」をさがしてみよう！,白じい
+msg,main_msg,今日は、勉強やスポーツではない「いいところ」や「かっこいいところ」を鬱見つけてみよう！<image=name>【name】</image> やまわりの人の性格の中で鬱「<font=red#50##true>すてきなせいかく</font>」をさがしてみよう！,白じい
 click,page
 #
 scene,アイテム登場
@@ -336,7 +336,7 @@ image,bg_image,background_06.png
 image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,<image=name>【name】</image>のともだちには、さまざまなすてきなせいかくがあるのう。鬱ともだちにすてきなせいかくをつたえてあげるとよいぞい！,白じい
+msg,main_msg,<image=name>【name】</image>のともだちには、鬱さまざまなすてきなせいかくがあるのう。鬱ともだちにすてきなせいかくをつたえてあげるとよいぞい！,白じい
 click,page
 #
 scene,「すてきなせいかく」はいやなきもちになったときの助けになる
@@ -363,7 +363,7 @@ grid,aosukes_uncomfortable_situation_grid
 image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,<font=##yellow#true>青助くん！いやなきもちになったときには友だちから見つけてもらった「すてきなせいかく」を思い出してみるのじゃ</font>,白じい
+msg,main_msg,<font=##yellow#true>青助くん！いやなきもちになったときには友だちから見つけてもらった鬱「すてきなせいかく」を思い出してみるのじゃ</font>,白じい
 click,msg
 #
 hide,grid,main_msg_grid
@@ -385,7 +385,7 @@ click,msg
 image,shiroji_right_image,shiroji_01.png
 image,children_face_left_image,aosuke_face_01.png,,,gray
 image,main_msg_bubble_image,right_big_bubble.png
-msg,main_msg,友だちから見つけてもらった鬱じぶんの「<font=red###true>すてきなせいかく</font>」を思い出すと、鬱<font=##yellow#true#black>「いやなきもち」になったときに「いいきもち」になるための助けになる</font>のじゃ！,白じい
+msg,main_msg,友だちから見つけてもらったじぶんの「<font=red###true>すてきなせいかく</font>」を思い出すと、鬱<font=##yellow#true#black>「いやなきもち」になったときに「いいきもち」になるための助けになる</font>鬱のじゃ！,白じい
 click,msg
 #
 clear,text,main_msg
