@@ -166,7 +166,9 @@
 
     <Viewbox>
         <Grid Height="1080" Width="1920">
-            <Grid x:Name="BaseGrid"/>
+            <Grid x:Name="BaseGrid">
+                <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_01.png"/>
+            </Grid>
             <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
                 <Image x:Name="MangaTitleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/manga1_title.png" Margin="86,24,0,0" Height="98" Width="1752" d:IsHidden="True"/>
                 <Image x:Name="MangaImage" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Images/manga1-1.png" Margin="0,121,0,0" RenderTransformOrigin="0.5,0.5" Height="880" Width="1788" d:IsHidden="True">

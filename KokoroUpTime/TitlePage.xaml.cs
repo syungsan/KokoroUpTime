@@ -831,69 +831,69 @@ namespace KokoroUpTime
                     }
                     break;
 
-                //case "第9回":
+                case "第9回":
 
-                //    if (this.initConfig.userName == null)
-                //    {
-                //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
-                //    }
-                //    else
-                //    {
-                //        Chapter9 chapter9 = new Chapter9();
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        Chapter9 chapter9 = new Chapter9();
 
-                //        chapter9.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                        chapter9.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                //        this.NavigationService.Navigate(chapter9);
-                //    }
-                //    break;
+                        this.NavigationService.Navigate(chapter9);
+                    }
+                    break;
 
-                //case "第10回":
+                    //case "第10回":
 
-                //    if (this.initConfig.userName == null)
-                //    {
-                //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
-                //    }
-                //    else
-                //    {
-                //        Chapter10 chapter10 = new Chapter10();
+                    //    if (this.initConfig.userName == null)
+                    //    {
+                    //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    //    }
+                    //    else
+                    //    {
+                    //        Chapter10 chapter10 = new Chapter10();
 
-                //        chapter10.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                    //        chapter10.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                //        this.NavigationService.Navigate(chapter10);
-                //    }
-                //    break;
+                    //        this.NavigationService.Navigate(chapter10);
+                    //    }
+                    //    break;
 
-                //case "第11回":
+                    //case "第11回":
 
-                //    if (this.initConfig.userName == null)
-                //    {
-                //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
-                //    }
-                //    else
-                //    {
-                //        Chapter11 chapter11 = new Chapter11();
+                    //    if (this.initConfig.userName == null)
+                    //    {
+                    //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    //    }
+                    //    else
+                    //    {
+                    //        Chapter11 chapter11 = new Chapter11();
 
-                //        chapter11.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                    //        chapter11.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                //        this.NavigationService.Navigate(chapter11);
-                //    }
-                //    break;
+                    //        this.NavigationService.Navigate(chapter11);
+                    //    }
+                    //    break;
 
-                //case "第12回":
+                    //case "第12回":
 
-                //    if (this.initConfig.userName == null)
-                //    {
-                //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
-                //    }
-                //    else
-                //    {
-                //        Chapter12 chapter12 = new Chapter12();
+                    //    if (this.initConfig.userName == null)
+                    //    {
+                    //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    //    }
+                    //    else
+                    //    {
+                    //        Chapter12 chapter12 = new Chapter12();
 
-                //        chapter12.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                    //        chapter12.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                //        this.NavigationService.Navigate(chapter12);
-                //    }
-                //    break;
+                    //        this.NavigationService.Navigate(chapter12);
+                    //    }
+                    //    break;
 
             }
         }
