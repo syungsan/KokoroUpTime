@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:KokoroUpTime"
                     xmlns:outline_marker="clr-namespace:OutlineTextMaker">
 
-    <!--２重枠線,角丸 （一応Button等のControlクラスを継承したコントロールに適用可能）-->
+    <!--２重枠線,角丸,破線Button-->
     <Style TargetType="{x:Type Button}" x:Key="BubbleFrame">
         <Setter Property="Background" Value="White"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -29,6 +29,8 @@
     </Style>
     <Style TargetType="{x:Type Button}" x:Key="KindOfFeelingButton">
         <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="MS PGothic"/>
+        <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -41,7 +43,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Margin="10"/>
                         <Viewbox StretchDirection="DownOnly" Margin="20">
-                            <ContentPresenter Content="{TemplateBinding Content}"/>
+                            <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Viewbox>
                     </Grid>
                 </ControlTemplate>
@@ -56,6 +58,8 @@
     <Style TargetType="{x:Type Button}" x:Key="SizeOfFeelingButton">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="MS PGothic"/>
+        <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -73,12 +77,12 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#FFBFE6FD"/>
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#FFF4F4F4"/>
+            </Trigger>
         </Style.Triggers>
     </Style>
-    
-    
-    <!--赤色破線　Buttonのみ-->
-    <Style TargetType="Button" x:Key="BorderDashArrayButton">
+    <Style TargetType="{x:Type Button}" x:Key="BorderDashArrayButton">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -183,7 +187,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <!--OutlineText用のスタイル　4種類 (下２種類は調整中)-->
     <Style TargetType="{x:Type outline_marker:OutlineText}" x:Key="Orange">
         <Style.Setters>
@@ -250,7 +253,7 @@
             </Setter>
         </Style.Setters>
     </Style>
-    
+
     <!--気持ちの種類選択用のListBox-->
     <DataTemplate x:Key="SelectedBadFeelingTemplate">
         <Grid x:Name="SelectBadFeelingGrid" >
@@ -379,60 +382,5 @@
                 <Setter Property="Background" Value="#FFBFE6FD"/>
             </Trigger>
         </Style.Triggers>
-    </Style>
-    
-    <!--CanvasEdit用のListBox-->
-    
-    <!--MainMessage用-->
-    <Style TargetType="{x:Type ContentControl}" x:Key="Right_Main_Msg">
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ContentControl}" >
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition Height="320"/>
-                        </Grid.RowDefinitions>
-                        <Border Background="White" CornerRadius="60" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="5"  Grid.Row="1">
-                            <ContentPresenter />
-                        </Border>
-                        <Path   Stroke="White" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-5" Data="M880,108 l365,0" Grid.Row="0"/>
-                        <Path   Fill="White" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-5" Data="M880,108 L1285,0 1246,108" Grid.Row="0"/>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#FFBFE6FD"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="{x:Type ContentControl}" x:Key="Left_Main_Msg">
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ContentControl}" >
-                    <Grid>
-                        <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition Height="320"/>
-                    </Grid.RowDefinitions>
-                        <Border x:Name="MainMessageBubbleBorder"  Background="White" CornerRadius="60" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="5"  Grid.Row="1">
-                            <ContentPresenter />
-                        </Border>
-                        <Path   x:Name="MainMessageBubbleTailMask" Stroke="White" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-5" Data="M255,108 l400,0" Grid.Row="0"/>
-                        <Path   x:Name="MainMessageBubbleTail" Fill="White" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-5" Data="M255,108 L233,10 655,108" Grid.Row="0"/>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#FFBFE6FD"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 </ResourceDictionary>

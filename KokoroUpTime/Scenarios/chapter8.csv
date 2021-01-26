@@ -66,6 +66,7 @@ outline_text,let_sfind_ojamamushi_scene_title
 grid,title_grid
 click,page
 #
+hide,grid,title_grid
 clear,text,main_msg
 hide,grid,ojamamushi_discription_grid
 image,shiroji_left_image,shiroji_02.png,appear_up
@@ -142,6 +143,7 @@ click,page
 #
 sub,think_kimi's_feeling
 scene,キミちゃんのきもちときもちの大きさ
+reset
 image,bg_image,background_05.png
 hide,border,title_border
 outline_text,kimis_thoughts_and_feeling_scene_title
@@ -160,6 +162,7 @@ is_animation_skip,false
 click,page
 #
 clear,text,main_msg
+hide,grid,title_grid
 hide,grid,challenge_time_grid
 image,shiroji_left_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
@@ -193,6 +196,7 @@ is_animation_skip,false
 click,page
 #
 clear,text,main_msg
+hide,grid,title_grid
 hide,grid,challenge_time_grid
 image,shiroji_left_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
@@ -229,6 +233,10 @@ click,page
 clear,text,main_msg
 hide,grid,challenge_time_grid
 hide,grid,ojamamushi_discription_grid
+hide,grid,ojamamushi_grid
+hide,grid,kimis_ojamamushi
+hide,grid,aosukes_ojamamushi
+hide,grid,akamarus_ojamamushi
 image,bg_image,background_08.png
 image,shiroji_left_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
@@ -239,6 +247,9 @@ click,page
 hide,image,shiroji_right_image
 hide,image,shiroji_left_image
 hide,grid,main_msg_grid
+hide,grid,kimis_ojamamushi
+hide,grid,aosukes_ojamamushi
+hide,grid,akamarus_ojamamushi
 clear,text,main_msg
 image,bg_image,background_08.png
 grid,ojamamushi_grid,fade_in_slow
@@ -548,7 +559,6 @@ grid,hint_check_grid,float_in
 is_animation_skip,false
 click,page
 #
-sub,Debug
 scene,グループアクティビティ 開始
 reset
 image,bg_image,background_06.png
@@ -611,8 +621,7 @@ text,thoughts_of_others_size_of_feeling_input_text,$thoughts_of_others_size_of_f
 is_animation_skip,false
 click,page
 #
-
-
+sub,Debug
 scene,まとめ
 reset
 image,bg_image,background_09.png
@@ -629,7 +638,7 @@ click,page
 scene,今回の発明品おさらい
 reset
 image,bg_image,background_10.png
-gif,item_left_last_image,item06_solo.gif  未修整
+gif,item_left_last_image,item08_solo.gif 
 grid,item_last_info_grid
 image,item_left_last_image
 image,shiroji_right_image,shiroji_01.png,appear_up
@@ -712,12 +721,12 @@ goto,current_scene
 
 sub,check_aosuke's_ojamamushi
 reset
+is_animation_skip,true
 image,bg_image,background_05.png
 grid,aosukes_ojamamushi_situation_grid,fade_in
 grid,view_aosukes_feeling_grid,fade_in
 button,next_page_button
 wait
-is_animation_skip,true
 goto,current_scene
 
 sub,kind_of_feeling

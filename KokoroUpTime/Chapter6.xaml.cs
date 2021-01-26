@@ -40,7 +40,7 @@ namespace KokoroUpTime
     public partial class Chapter6 : Page
     {
         // すてきなせいかくのリスト
-        private string[] NICE_PERSONALITY = { "●　親切にしてもらった", "●　アドバイスをくれた", "●　みんなをひっぱってくれた", "●　きりんと順番をまもってくれた", "●　みんなを笑顔にしてくれた", "●　（何か悪いことや失敗をゆるしてもらった）", "●　自分の気持ちを分かってもらった", "●　仲良くしてもらった", "●　ありがとうと言ってくれた" };
+        private string[] NICE_PERSONALITY = { "●　親切にしてもらった", "●　アドバイスをくれた", "●　みんなをひっぱってくれた", "●　きちんと順番をまもってくれた", "●　みんなを笑顔にしてくれた", "●　（何か悪いことや失敗を）ゆるしてもらった", "●　自分の気持ちを分かってもらった", "●　仲良くしてもらった", "●　ありがとうと言ってくれた" };
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
 
@@ -451,7 +451,7 @@ namespace KokoroUpTime
 
                     // 画面のフェードイン処理とか入れる（別関数を呼び出す）
 
-                    this.dataProgress.CurrentChapter = 4;
+                    this.dataProgress.CurrentChapter = 6;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {

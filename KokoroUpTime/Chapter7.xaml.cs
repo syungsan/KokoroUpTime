@@ -153,6 +153,7 @@ namespace KokoroUpTime
             this.SelectGoodFeelingListBox.ItemsSource = GOOD_FEELINGS;
             this.SelectBadFeelingListBox.ItemsSource = BAD_FEELINGS;
 
+
             this.InitControls();
         }
 
@@ -270,7 +271,6 @@ namespace KokoroUpTime
                 ["select_feeling_grid"]=this.SelectFeelingGrid,
                 ["select_heart_grid"]=this.SelectHeartGrid,
                 ["view_size_of_feeling_grid"] =this.ViewSizeOfFeelingGrid,
-                ["groupe_activity_grid"] = this.GroupeActivityGrid,
                 ["groupe_activity_message_grid"] = this.GroupeActivityMessageGrid,
                 ["select_scene_grid"]=this.SelectSceneGrid,
                 ["canvas_edit_grid"] = this.CanvasEditGrid,
@@ -342,7 +342,6 @@ namespace KokoroUpTime
 
             this.ChallengeTimeGrid.Visibility = Visibility.Hidden;
             this.ChallengeTimeMessageGrid.Visibility = Visibility.Hidden;
-            this.GroupeActivityGrid.Visibility = Visibility.Hidden;
             this.GroupeActivityMessageGrid.Visibility = Visibility.Hidden;
             this.HintCheckGrid.Visibility = Visibility.Hidden;
             this.SituationBorder.Visibility = Visibility.Hidden;
@@ -466,6 +465,7 @@ namespace KokoroUpTime
             styleSelector.HandWritingInputStyle = FindResource("handWritingInputStyle") as Style;
             styleSelector.KeyboardInputStyle = FindResource("keyboardInputStyle") as Style;
 
+            this.InputContentControl.Style = styleSelector.SelectStyle(this.dataOption.InputMethod);
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
@@ -510,7 +510,7 @@ namespace KokoroUpTime
 
                     // 画面のフェードイン処理とか入れる（別関数を呼び出す）
 
-                    this.dataProgress.CurrentChapter = 4;
+                    this.dataProgress.CurrentChapter = 7;
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
@@ -1362,7 +1362,7 @@ namespace KokoroUpTime
                     this.SelectHeartImage.Source = null;
                     this.SelectNeedleImage.Source = null;
 
-                    if(this.KindOfFeelings[DictionaryKey].Split(",")[1] == "良い")
+                    if (this.KindOfFeelings[DictionaryKey].Split(",")[1] == "良い")
                     {
                         this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_red.png", UriKind.Relative));
                         this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/red_needle.png", UriKind.Relative));
@@ -1413,9 +1413,9 @@ namespace KokoroUpTime
 
                 case "item_book":
 
-                    Image[] itemMainImages = { this.Item01MainImage, this.Item02MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
+                    Image[] itemMainImages = { this.Item01MainImage, this.Item02MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage, this.Item06MainImage, this.Item08MainImage, this.Item09MainImage, this.Item10MainImage, this.Item11MainImage };
 
-                    Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
+                    Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item10NoneImage, this.Item11NoneImage };
 
                     var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
 
@@ -2096,11 +2096,56 @@ namespace KokoroUpTime
                 {
                     this.GoTo("manga");
                 }
-                else if(button.Name== "GroupeActivityInputButton")
+                else if(button.Name== "InputThoughtButton")
                 {
-                    
+                    this.CompleteInputButton.Visibility = Visibility.Visible;
+
+                    if(this.dataOption.InputMethod == 0)
+                    {
+                        this.CanvasEditGrid.Visibility = Visibility.Visible;
+
+                        foreach (var InputInkCanvas in this.InputThoughtButton.GetChildren<InkCanvas>().ToList())
+                        {
+                            InputInkCanvas.IsEnabled = false;
+                        }
+                    }
+                    else
+                    {
+                        this.ReadyKeyboard();
+                    }
+
+                    this.isClickable = true;
                 }
-                       
+                else if(button.Name == "CompleteInputButton")
+                {
+
+                    this.CanvasEditGrid.Visibility = Visibility.Hidden;
+                    this.CompleteInputButton.Visibility = Visibility.Hidden;
+
+                    
+
+                    if (this.dataOption.InputMethod == 0)
+                    {
+                        foreach (var InputInkCanvas in this.InputThoughtButton.GetChildren<InkCanvas>().ToList())
+                        {
+                            InputInkCanvas.IsEnabled = true;
+                        }
+                    }
+                    else
+                    {
+                        foreach (var InputTextBox in this.InputThoughtButton.GetChildren<TextBox>().ToList())
+                        {
+                            //InputInkCanvas.IsEnabled = false;
+                        }
+
+                        this.CloseOSK();
+                    }
+
+                    
+
+                    this.isClickable = true;
+                }
+
             }
         }
         private void SetBGM(string soundFile, bool isLoop, int volume)
@@ -2436,7 +2481,20 @@ namespace KokoroUpTime
 
                     break;
             }
+
         }
-        
-}
+
+        private void aaa(object sender)
+        {
+            if(this.dataOption.InputMethod == 1)
+            {
+
+            }
+            else
+            {
+
+            }
+
+        }
+    }
 }

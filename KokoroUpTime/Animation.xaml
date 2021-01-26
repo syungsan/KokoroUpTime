@@ -419,7 +419,37 @@
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
-    
+    <Storyboard x:Key="wipe_fast">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].(GradientStop.Offset)">
+            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="00:00:1" Value="1.0"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Offset)">
+            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="00:00:1" Value="1"/>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+    <Storyboard x:Key="wipe">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].(GradientStop.Offset)">
+            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="00:00:2" Value="1.0"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Offset)">
+            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="00:00:2" Value="1.1"/>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+    <Storyboard x:Key="wipe_slow">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].(GradientStop.Offset)">
+            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="00:00:04" Value="1.0"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Offset)">
+            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="00:00:04" Value="1"/>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+
     <!--TaegetNameを指定済みのStoryBoard-->
     <Storyboard x:Key="wipe_flip_manga_button_image">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MangaFlipArrowImageGauge" Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].(GradientStop.Offset)">

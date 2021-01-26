@@ -2418,7 +2418,6 @@ namespace KokoroUpTime
         {
             int caretPosition = this.InputMyALittleExcitedText.SelectionStart;
 
-
             while (this.InputMyALittleExcitedText.LineCount > 6)
             {
                 caretPosition -= 1;

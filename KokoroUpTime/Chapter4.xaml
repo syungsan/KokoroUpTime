@@ -250,11 +250,11 @@
             <Grid x:Name="SelectFeelingGrid" d:IsHidden="True">
                 <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400">
                     <Image x:Name="SelectGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <ListBox x:Name="SelectGoodFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectGoodFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" d:IsHidden="True" />
+                    <ListBox x:Name="SelectGoodFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectGoodFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" d:IsHidden="True" SelectionChanged="FeelingListBox_SelectionChanged"/>
                 </Grid>
                 <Grid x:Name="SelectBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="923,72,0,0">
                     <Image x:Name="SelectBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <ListBox x:Name="SelectBadFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectBadFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" d:IsHidden="True" />
+                    <ListBox x:Name="SelectBadFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectBadFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" d:IsHidden="True" SelectionChanged="FeelingListBox_SelectionChanged"/>
                 </Grid>
                 <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="727,0,0,0" VerticalAlignment="Center" Width="273" RenderTransformOrigin="0.659,0.453"/>
             </Grid>
@@ -278,9 +278,9 @@
 
                 </Grid>
             </Grid>
-            <Grid x:Name="SelectHeartGrid" HorizontalAlignment="Center" Margin="400,400" d:IsHidden="True">
-                <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="5,0,0,0"/>
-                <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.92" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,63,10,20">
+            <Grid x:Name="SelectHeartGrid" Margin="400,450,400,100" d:IsHidden="True">
+                <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="10,0,0,0" d:IsHidden="True"/>
+                <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.87" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,120,10,20" d:IsHidden="True">
                     <Image.RenderTransform>
                         <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter4}}}"/>
                     </Image.RenderTransform>
@@ -482,13 +482,13 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="SituationPlateGrid" Margin="200,200" d:IsHidden="True">
+            <Grid x:Name="SituationPlateGrid" Margin="200,200">
                 <Border x:Name="SituationPlate" Background="LightPink" CornerRadius="100"/>
                 <TextBlock x:Name="SituationTitleText" Text="場面①" FontSize="60" FontWeight="UltraBold"  FontFamily="Yu Gothic" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,50"/>
                 <Image x:Name="SituationCharacterImage" Margin="50,250,1100,100" Source="/Images/akamaru_face_01.png"/>
                 <TextBlock x:Name="SituationText" Text="赤丸くんはじゅぎょうで使う教科書を&#10;わすれてこまっています。&#10;だれかに、教科書をかりなければなりません。" FontSize="60" FontWeight="UltraBold" FontFamily="Yu Gothic" TextWrapping="Wrap" Margin="450,250,20,50"/>
             </Grid>
-            <ListBox x:Name="SomeChoicesListBox"  VerticalAlignment="Center" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}">
+            <ListBox x:Name="SomeChoicesListBox"  VerticalAlignment="Center" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Button x:Name="ChoicesButton" Height="Auto" Width="1120"  VerticalAlignment="Top" Margin="0,0,0,10" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" >
@@ -559,7 +559,7 @@
                     <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid">
+            <Grid x:Name="SystemGrid" d:IsHidden="True">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>

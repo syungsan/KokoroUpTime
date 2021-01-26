@@ -96,7 +96,7 @@
                     <Image x:Name="MangaPrevBackImage" Source="/Images/prev_back_.png" d:IsHidden="True"/>
                 </Button>
             </Grid>
-            <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
+            <Grid x:Name="ItemGrid" Visibility="Visible">
                 <Image x:Name="ItemCenterImage" HorizontalAlignment="Left" Height="512" VerticalAlignment="Top" Width="363" Source="/Images/item05_solo.png" Margin="804,266,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -156,8 +156,8 @@
                     <Image x:Name="ItemLastInfoImage" Source="/Images/item_last.png" d:IsHidden="True"/>
                     <TextBlock x:Name="ItemLastInfoTextBlock" HorizontalAlignment="Left" Margin="12,38,0,0" VerticalAlignment="Top" Height="66" Width="408" FontSize="48" FontWeight="Bold" Text="No.6  すてきステッキ" d:IsHidden="True"/>
                 </Grid>
-                <Grid x:Name="ItemReviewGrid" d:IsHidden="True">
-                    <Image x:Name="ItemLeftBigImage" Source="/Images/Item03_solo.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,200,100,200" d:IsHidden="True"/>
+                <Grid x:Name="ItemReviewGrid">
+                    <Image x:Name="ItemLeftBigImage" Source="/Images/Item05_solo.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,200,100,200" d:IsHidden="True"/>
                     <Grid x:Name="ItemReviewPlate" Margin="700,300,500,500" d:IsHidden="True">
                         <Image x:Name="ItemReviewPlateImage" Source="/Images/item_review.png"  Stretch="Fill" d:IsHidden="True"/>
                         <TextBlock x:Name="ItemReviewText1" Margin="15,15,15,180" Text="#5  「ゆったりんご」" FontSize="60" d:IsHidden="True"/>

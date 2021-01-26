@@ -222,7 +222,7 @@ reset
 image,bg_image,background_mokume.png
 image,shiroji_right_image,shiroji_01.png,appear_up
 grid,item_name_plate_left_grid
-image,item_center_image,item08_solo.png,appear_rotation
+image,item_center_image,item07_solo.png,appear_rotation
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,今回の発明品は<font=red#60##true>考えライト</font>じゃ。,白じい
@@ -230,7 +230,7 @@ click,page
 #
 hide,image,shiroji_right_image
 hide,image,shiroji_left_image
-hide,image,item_center_image,item08_solo.png
+hide,image,item_center_image,item07_solo.png
 hide,grid,item_name_plate_left_grid
 hide,grid,main_msg_grid,appear_expansion
 bgm,stop
@@ -239,7 +239,7 @@ image,bg_image,background_mokume.png
 image,shiroji_small_right_up_image
 grid,item_name_plate_center_grid
 grid,item_name_bubble_grid
-image,item_left_image,item08_solo.png
+image,item_left_image,item07_solo.png
 hide,grid,item_info_sentence_grid
 grid,item_info_plate_grid
 grid,item_info_sentence_grid,fade_in
@@ -296,6 +296,7 @@ click,page
 #
 clear,text,main_msg
 hide,grid,two_thoughts_grid
+hide,grid,title_grid
 image,bg_image,background_05.png
 image,children_face_right_image,kimi_face_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble_yellow.png
@@ -386,7 +387,6 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,今度は、鬱それぞれの場面での、友だちの考えときもちを聞いてみるのじゃ！,白じい
 click,page
 #
-sub,Debug
 scene,グループアクティビティ場面選択
 reset
 image,bg_image,background_05.png
@@ -463,10 +463,11 @@ grid,main_msg_grid
 msg,main_msg,次回のテーマは鬱「<font=#60##true#>いろいろな考えをしてみよう</font>」じゃ！。,白じい
 click,page
 #
+sub,Debug
 scene,今回の発明品おさらい
 reset
 image,bg_image,background_10.png
-gif,item_left_last_image,item06_solo.gif  未修整
+gif,item_left_last_image,item07_solo.gif
 grid,item_last_info_grid
 image,item_left_last_image
 image,shiroji_right_image,shiroji_01.png,appear_up

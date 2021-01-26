@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Windows.Ink;
 using SQLite;
 
 namespace KokoroUpTime
@@ -333,6 +333,25 @@ namespace KokoroUpTime
 
 
         public string CreatedAt { get; set; }
+
+        public string AosukesKindOfFeelingTalkToFriends { get; set; }
+
+        public string AosukesKindOfFeelingAfter10minutes { get; set; }
+
+        public string AosukesKindOfFeelingNextDay { get; set; }
+
+        public string AosukesKindOfFeelingDayAfterTomorrow { get; set; }
+
+        public int? AosukesSizeOfFeelingTalkToFriends { get; set; }
+
+        public int? AosukesSizeOfFeelingAfter10minutes { get; set; }
+
+        public int? AosukesSizeOfFeelingNextDay { get; set; }
+
+        public int? AosukesSizeOfFeelingDayAfterTomorrow { get; set; }
+
+        public string InputChallengeText { get; set; }
+
     }
 
     public class DataChapter10

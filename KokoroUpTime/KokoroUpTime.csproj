@@ -4,11 +4,11 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>0.9.8.4</Version>
+    <Version>0.9.8.5</Version>
     <PackageIcon></PackageIcon>
     <ApplicationIcon>icon_sr9_icon.ico</ApplicationIcon>
-    <AssemblyVersion>0.9.8.3</AssemblyVersion>
-    <FileVersion>0.9.8.4</FileVersion>
+    <AssemblyVersion>0.9.8.5</AssemblyVersion>
+    <FileVersion>0.9.8.5</FileVersion>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
@@ -173,6 +173,7 @@
     <None Remove="Images\item06_title.png" />
     <None Remove="Images\item07_book.png" />
     <None Remove="Images\item07_detail.png" />
+    <None Remove="Images\item07_solo.gif" />
     <None Remove="Images\item07_solo.png" />
     <None Remove="Images\item07_title.png" />
     <None Remove="Images\item08_book.png" />
@@ -187,9 +188,12 @@
     <None Remove="Images\item09_title.png" />
     <None Remove="Images\item10_book.png" />
     <None Remove="Images\item10_detail.png" />
+    <None Remove="Images\item10_solo.gif" />
+    <None Remove="Images\item10_solo.png" />
     <None Remove="Images\item11_book.png" />
     <None Remove="Images\item11_detail.png" />
     <None Remove="Images\item11_solo.gif" />
+    <None Remove="Images\item11_solo.png" />
     <None Remove="Images\item_check_back_bubble.png" />
     <None Remove="Images\item_detail_info.png" />
     <None Remove="Images\item_review.png" />
@@ -203,7 +207,9 @@
     <None Remove="Images\left_big_bubble.png" />
     <None Remove="Images\left_big_bubble_center_down_yellow.png" />
     <None Remove="Images\left_small_bubble_center_down_yellow.png" />
+    <None Remove="Images\let%27s_challenge.png" />
     <None Remove="Images\let%27s_use_hot_word_title.png" />
+    <None Remove="Images\light.png" />
     <None Remove="Images\long_bubble_right_up.png" />
     <None Remove="Images\frame_46-1.png" />
     <None Remove="Images\good_words_grid.png" />
@@ -239,6 +245,18 @@
     <None Remove="Images\manga1-4.png" />
     <None Remove="Images\manga1-5.png" />
     <None Remove="Images\manga1-6.png" />
+    <None Remove="Images\manga10-1.png" />
+    <None Remove="Images\manga10-2.png" />
+    <None Remove="Images\manga10-3.png" />
+    <None Remove="Images\manga11-1.png" />
+    <None Remove="Images\manga11-2.png" />
+    <None Remove="Images\manga11-3.png" />
+    <None Remove="Images\manga12-1.png" />
+    <None Remove="Images\manga12-2.png" />
+    <None Remove="Images\manga12-3.png" />
+    <None Remove="Images\manga12-4.png" />
+    <None Remove="Images\manga12-5.png" />
+    <None Remove="Images\manga12-6.png" />
     <None Remove="Images\manga1_title.png" />
     <None Remove="Images\manga2-1.png" />
     <None Remove="Images\manga2-2.png" />
@@ -290,6 +308,7 @@
     <None Remove="Images\orange_title_plate.png" />
     <None Remove="Images\prev_back_.png" />
     <None Remove="Images\purple_title_plate.png" />
+    <None Remove="Images\red_arrow.png" />
     <None Remove="Images\red_arrow_right.png" />
     <None Remove="Images\red_needle.png" />
     <None Remove="Images\red_needle123.png" />
@@ -519,23 +538,29 @@
     <Resource Include="Images\item06_title.png" />
     <Resource Include="Images\item07_book.png" />
     <Resource Include="Images\item07_detail.png" />
+    <Resource Include="Images\item07_solo.gif" />
     <Resource Include="Images\item07_solo.png" />
     <Resource Include="Images\item07_title.png" />
     <Resource Include="Images\item08_book.png" />
     <Resource Include="Images\item08_detail.png" />
+    <Resource Include="Images\item08_solo.gif" />
 
     
     <Resource Include="Images\item08_solo.png" />
     <Resource Include="Images\item08_title.png" />
     <Resource Include="Images\item09_book.png" />
     <Resource Include="Images\item09_detail.png" />
+    <Resource Include="Images\item09_solo.gif" />
     <Resource Include="Images\item09_solo.png" />
     <Resource Include="Images\item09_title.png" />
     <Resource Include="Images\item10_book.png" />
     <Resource Include="Images\item10_detail.png" />
+    <Resource Include="Images\item10_solo.gif" />
+    <Resource Include="Images\item10_solo.png" />
     <Resource Include="Images\item11_book.png" />
     <Resource Include="Images\item11_detail.png" />
     <Resource Include="Images\item11_solo.gif" />
+    <Resource Include="Images\item11_solo.png" />
     <Resource Include="Images\item_check_back_bubble.png" />
     <Resource Include="Images\item_review.png" />
     <Resource Include="Images\kimis_friends.png" />
@@ -549,8 +574,22 @@
     <Resource Include="Images\large_transparent.png" />
     <Resource Include="Images\left_big_bubble.png" />
     <Resource Include="Images\left_small_bubble_center_down_yellow.png" />
+    <Resource Include="Images\let's_challenge.png" />
     <Resource Include="Images\let's_use_hot_word_title.png" />
+    <Resource Include="Images\light.png" />
     <Resource Include="Images\long_bubble_right_up.png" />
+    <Resource Include="Images\manga10-1.png" />
+    <Resource Include="Images\manga10-2.png" />
+    <Resource Include="Images\manga10-3.png" />
+    <Resource Include="Images\manga11-1.png" />
+    <Resource Include="Images\manga11-2.png" />
+    <Resource Include="Images\manga11-3.png" />
+    <Resource Include="Images\manga12-1.png" />
+    <Resource Include="Images\manga12-2.png" />
+    <Resource Include="Images\manga12-3.png" />
+    <Resource Include="Images\manga12-4.png" />
+    <Resource Include="Images\manga12-5.png" />
+    <Resource Include="Images\manga12-6.png" />
     <Resource Include="Images\manga2-1.png" />
     <Resource Include="Images\manga2-2.png" />
     <Resource Include="Images\manga2-3.png" />
@@ -610,6 +649,7 @@
     <Resource Include="Images\purple_title_plate.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\red_arrow.png" />
     <Resource Include="Images\red_arrow_right.png" />
     <Resource Include="Images\red_needle123.png" />
     <Resource Include="Images\relax_female.png" />
@@ -712,6 +752,9 @@
 
   <ItemGroup>
     <Compile Update="Chapter7.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Chapter10.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Chapter9.xaml.cs">
@@ -829,6 +872,9 @@
 
   <ItemGroup>
     <Page Update="Chapter7.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chapter10.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Chapter9.xaml">

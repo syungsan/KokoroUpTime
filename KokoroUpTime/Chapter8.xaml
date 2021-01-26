@@ -301,7 +301,7 @@
                     </DockPanel>
                 </Grid>
             </Grid>
-            <Grid x:Name="ChallengeTimeGrid" Margin="200,50,200,250">
+            <Grid x:Name="ChallengeTimeGrid" Margin="200,50,200,250" d:IsHidden="True">
                 <Border x:Name="ChallengeTimeBorder" Background="#B2FFD966" CornerRadius="60" >
                     <Grid x:Name="ChallengeTimeTemplateGrid">
                         <Image x:Name="ChalengeTimeChildImage" Source="Images/akamaru_face_05.png" Margin="80,300,80,50" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
@@ -685,39 +685,39 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="ItemBookGrid" d:IsHidden="True">
-                <TextBlock x:Name="ItemBookTitleTextBlock" Margin="38,20,1387,935" Text="アイテム図鑑" TextWrapping="Wrap" FontSize="90" Foreground="White" FontWeight="Bold" d:IsHidden="True"/>
-                <Grid x:Name="ItemBookMainGrid" d:IsHidden="True">
+            <Grid x:Name="ItemBookGrid">
+                <TextBlock x:Name="ItemBookTitleTextBlock" Margin="38,20,1387,935" Text="アイテム図鑑" TextWrapping="Wrap" FontSize="90" Foreground="White" FontWeight="Bold"/>
+                <Grid x:Name="ItemBookMainGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Grid x:Name="GetItemGrid" Width="303" Height="460" HorizontalAlignment="Left" Margin="1598,38,0,0"   VerticalAlignment="Top" d:IsHidden="True">
-                        <Image x:Name="Item08MainImage" gif:AnimationBehavior.SourceUri="Images/item06_solo.gif" Margin="0,0,0,40" d:IsHidden="True"/>
-                        <Image x:Name="GetItemTitleImage" Source="/Images/item08_title.png" Margin="38,366,30,26" d:IsHidden="True"/>
+                    <Grid x:Name="GetItemGrid" Width="303" Height="460" HorizontalAlignment="Left" Margin="339,470,0,0"   VerticalAlignment="Top">
+                        <Image x:Name="Item08MainImage" gif:AnimationBehavior.SourceUri="Images/item08_solo.gif" Margin="0,0,0,40"/>
+                        <Image x:Name="GetItemTitleImage" Source="/Images/item08_title.png" Margin="38,366,30,26"/>
                     </Grid>
-                    <Image x:Name="Item01MainImage" Source="/Images/item01_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="32,38,0,0"  VerticalAlignment="Top" d:IsHidden="True"/>
-                    <Image x:Name="Item02MainImage" Source="/Images/item02_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="339,38,0,0"  VerticalAlignment="Top" d:IsHidden="True"/>
-                    <Image x:Name="Item03MainImage" Source="/Images/item03_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="653,38,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
-                    <Image x:Name="Item04MainImage" Source="/Images/item04_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="968,38,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
-                    <Image x:Name="Item05MainImage" Source="/Images/item05_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="1283,38,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
-                    <Image x:Name="Item06MainImage" Source="/Images/item08_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="339,470,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
-                    <Image x:Name="Item07MainImage" Source="/Images/item07_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="24,470,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
-                    <Image x:Name="Item09MainImage" Source="/Images/item09_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="653,470,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
-                    <Image x:Name="Item10MainImage" Source="/Images/item10_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="968,470,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
-                    <Image x:Name="Item11MainImage" Source="/Images/item11_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="1283,470,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
+                    <Image x:Name="Item01MainImage" Source="/Images/item01_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="32,38,0,0"  VerticalAlignment="Top"/>
+                    <Image x:Name="Item02MainImage" Source="/Images/item02_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="339,38,0,0"  VerticalAlignment="Top"/>
+                    <Image x:Name="Item03MainImage" Source="/Images/item03_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="653,38,0,0" VerticalAlignment="Top"/>
+                    <Image x:Name="Item04MainImage" Source="/Images/item04_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="968,38,0,0" VerticalAlignment="Top"/>
+                    <Image x:Name="Item05MainImage" Source="/Images/item05_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="1283,38,0,0" VerticalAlignment="Top"/>
+                    <Image x:Name="Item06MainImage" Source="/Images/item06_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="1598,38,0,0" VerticalAlignment="Top"/>
+                    <Image x:Name="Item07MainImage" Source="/Images/item07_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="24,470,0,0" VerticalAlignment="Top"/>
+                    <Image x:Name="Item09MainImage" Source="/Images/item09_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="653,470,0,0" VerticalAlignment="Top"/>
+                    <Image x:Name="Item10MainImage" Source="/Images/item10_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="968,470,0,0" VerticalAlignment="Top"/>
+                    <Image x:Name="Item11MainImage" Source="/Images/item11_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="1283,470,0,0" VerticalAlignment="Top"/>
                 </Grid>
-                <Grid x:Name="ItemBookNoneGrid" d:IsHidden="True">
-                    <Image x:Name="Item01NoneImage" HorizontalAlignment="Left" Height="460" Margin="32,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item02NoneImage" HorizontalAlignment="Left" Height="460" Margin="339,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item03NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item04NoneImage" HorizontalAlignment="Left" Height="460" Margin="968,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item05NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item06NoneImage" HorizontalAlignment="Left" Height="460" Margin="339,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item07NoneImage" HorizontalAlignment="Left" Height="460" Margin="24,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item09NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item10NoneImage" HorizontalAlignment="Left" Height="460" Margin="968,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item11NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
+                <Grid x:Name="ItemBookNoneGrid">
+                    <Image x:Name="Item01NoneImage" HorizontalAlignment="Left" Height="460" Margin="32,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item02NoneImage" HorizontalAlignment="Left" Height="460" Margin="339,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item03NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item04NoneImage" HorizontalAlignment="Left" Height="460" Margin="968,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item05NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item06NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item07NoneImage" HorizontalAlignment="Left" Height="460" Margin="24,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item09NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item10NoneImage" HorizontalAlignment="Left" Height="460" Margin="968,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item11NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                 </Grid>
             </Grid>
             <Grid x:Name="SystemGrid" d:IsHidden="True">
