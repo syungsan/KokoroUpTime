@@ -16,40 +16,6 @@
                 <ResourceDictionary Source="Animation.xaml"/>
                 <ResourceDictionary Source="Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type ContentControl}" x:Key="handWritingInputStyle">
-                <Setter Property="ContentTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <InkCanvas Background="Transparent" IsEnabled="True"/>
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style TargetType="{x:Type ContentControl}" x:Key="keyboardInputStyle">
-                <Setter Property="ContentTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <TextBox FontSize="50" MaxLength="38" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" GotFocus="TriggerKeyboard">
-                                <TextBox.Style>
-                                    <Style TargetType="{x:Type TextBox}">
-                                        <Setter Property="Background" Value="White"/>
-                                        <Setter Property="BorderBrush" Value="{x:Null}"/>
-                                        <Setter Property="FontSize" Value="100"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="BorderThickness" Value="0"/>
-                                            </Trigger>
-                                            <Trigger Property="IsFocused" Value="True">
-                                                <Setter Property="BorderThickness" Value="0"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBox.Style>
-                            </TextBox>
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
         </ResourceDictionary>
     </Page.Resources>
     <Viewbox>
@@ -182,7 +148,7 @@
                 </Grid>
                 <TextBlock x:Name="SessionFrameText" Text="きちんとつたえてみよう"  FontWeight="UltraBold" FontSize="70" Background="Yellow" Width="800" Height="120" Margin="10,10,680,500" Foreground="MediumPurple" FontFamily="Yu Gothic" TextAlignment="Center" d:IsHidden="True" />
             </Grid>
-            <Grid x:Name="SummaryGrid" d:IsHidden="True">
+            <Grid x:Name="SummaryGrid">
                 <Grid x:Name="SummaryBoardGrid" Margin="496,203,496,305">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -306,7 +272,7 @@
                                 </TransformGroup>
                             </TextBlock.RenderTransform>
                         </TextBlock>
-                        <Grid x:Name="ThoughtSpeechBubbleGrid" Margin="680,150,80,370" RenderTransformOrigin="0.5,0.5" >
+                        <Grid x:Name="ThoughtSpeechBubbleGrid" Width="750" Margin="680,150,80,370" RenderTransformOrigin="0.5,0.5" >
                             <Grid.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform />
@@ -317,15 +283,15 @@
                             </Grid.RenderTransform>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="800"/>
+                                <ColumnDefinition Width="650"/>
                             </Grid.ColumnDefinitions>
-                            <Border x:Name="ThoughtSpeechBubbleBorder" Height="250" Width="650" Background="White" CornerRadius="60" BorderBrush="#FF0070C0" BorderThickness="10" HorizontalAlignment="Left" Grid.Column="1">
-                                <TextBlock x:Name="ChildrensThoughtsText" Text="うまくいくときもあるし、なにをやってもだめではないかも" FontSize="35" TextWrapping="Wrap" Margin="50,30" LineHeight="60" VerticalAlignment="Center" Grid.Column="1" FontWeight="Bold" FontFamily="Yu Gothic"/>
+                            <Border x:Name="ThoughtSpeechBubbleBorder" Height="260" Width="650" Background="White" CornerRadius="60" BorderBrush="#FF0070C0" BorderThickness="10" HorizontalAlignment="Left" Grid.Column="1">
+                                <TextBlock x:Name="ChildrensThoughtsText" Text="うまくいくときもあるし、なにをやってもだめではないかも" FontSize="35" TextWrapping="Wrap" Margin="50,30" LineHeight="60" VerticalAlignment="Center" Grid.Column="1" FontWeight="Bold" FontFamily="Yu Gothic" d:IsHidden="True"/>
                             </Border>
                             <Path   x:Name="ThoughtSpeechBubbleTailMask" Stroke="White" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-10,0" Data="M105,140 l0,50"/>
                             <Path   x:Name="ThoughtSpeechBubbleTail" Fill="White" Stroke="{Binding ElementName=ThoughtSpeechBubbleBorder, Path=BorderBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-10,0" Data="M105,140 L10,200 105,190"/>
                         </Grid>
-                        <Button x:Name="InputThoughtButton" Margin="680,150,80,370" Click="Button_Click" d:IsHidden="True" >
+                        <Button x:Name="InputThoughtButton" Margin="685,150,60,370" Click="Button_Click">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Setter Property="Background" Value="{Binding InputButtonBackground}"/>
@@ -343,14 +309,19 @@
                                             <ColumnDefinition Width="100"/>
                                             <ColumnDefinition Width="800"/>
                                         </Grid.ColumnDefinitions>
-                                        <Border x:Name="ThoughtSpeechBubbleBorder" Height="250" Width="650" BorderBrush="{x:Null}" Background="{TemplateBinding Background}" CornerRadius="60" BorderThickness="10" HorizontalAlignment="Left" Grid.Column="1">
+                                        <Border x:Name="ThoughtSpeechBubbleBorder" Height="260" Width="650" BorderBrush="{x:Null}" Background="{TemplateBinding Background}" CornerRadius="60" BorderThickness="10" HorizontalAlignment="Left" Grid.Column="1">
                                             <ContentPresenter/>
                                         </Border>
                                         <Path   x:Name="ThoughtSpeechBubbleTail" Fill="{TemplateBinding Background}" Stroke="{x:Null}"  StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-10,0" Data="M110,143 L30,193 110,185"/>
                                     </Grid>
                                 </ControlTemplate>
                             </Button.Template>
-                            <ContentControl x:Name="InputContentControl" IsEnabled="{Binding InputControlIsEnabled}"/>
+                            <Grid Margin="20">
+                                <Viewbox  Stretch="Uniform">
+                                    <InkCanvas x:Name="InputThoughtCanvas"  IsEnabled="False" Background="Transparent"/>
+                                </Viewbox>
+                                <TextBlock x:Name="InputThoughtText" FontSize="40" LineHeight="33" IsEnabled="False" VerticalAlignment="Center" Background="Transparent" TextWrapping="Wrap" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
+                            </Grid>
                         </Button>
                         <Grid x:Name="FeelingInputGrid" Margin="700,400,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True" >
                             <Grid.RenderTransform>
@@ -372,7 +343,7 @@
                         </Grid>
                     </Grid>
                 </Border>
-                <Image x:Name="ChildrenImage" Source="Images/aosuke_face_04.png" Margin="1300,0,0,600" RenderTransformOrigin="0.5,0.5" >
+                <Image x:Name="ChildrenImage" Source="Images/aosuke_face_04.png" Margin="1260,0,0,650" RenderTransformOrigin="0.5,0.5" >
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -383,7 +354,7 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="TwoThoughtsGrid" Margin="170,20,170,0"   HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" d:IsHidden="True" >
+            <Grid x:Name="TwoThoughtsGrid" Margin="170,40,170,-20"   HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" d:IsHidden="True" >
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -439,13 +410,18 @@
                                     </TransformGroup>
                                 </Border.RenderTransform>
                                 <Grid x:Name="LeftChildrenThoughtBorderGrid">
-                                    <Button x:Name="LeftChildrenThoughtButton" Style="{StaticResource BubbleFrame}">
-                                        <ContentControl x:Name="LeftChildrenThoughtInputControl"/>
+                                    <Button x:Name="InputLeftChildrenThoughtButton" Style="{StaticResource BubbleFrame}" Click="Button_Click">
+                                        <Grid Margin="20">
+                                            <Viewbox>
+                                                <InkCanvas x:Name="InputLeftChildrenThoughtCanvas" IsEnabled = "False" Background="Transparent"/>
+                                            </Viewbox>
+                                            <TextBlock x:Name="InputLeftChildrenThoughtText" FontSize="37" IsEnabled="False" Background="Transparent" TextWrapping="Wrap" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
+                                        </Grid>
                                     </Button>
                                     <TextBlock x:Name="LeftChildrenThoughtText" FontFamily="Yu Gothic" Margin="20" FontSize="43" TextWrapping="Wrap" VerticalAlignment="Center" Text="やってみないとわからない！気にせずやってみるぜ！" FontWeight="Bold"/>
                                 </Grid>
                             </Border>
-                            <Image x:Name="LeftChildrenImage" Height="300" Width="200" Margin="0,-60,0,0" HorizontalAlignment="Right" VerticalAlignment="Top"  Source="Images/akamaru_face_01.png" RenderTransformOrigin="0.5,0.5" >
+                            <Image x:Name="LeftChildrenImage" Height="300" Width="200" Margin="0,-80,0,0" HorizontalAlignment="Right" VerticalAlignment="Top"  Source="Images/akamaru_face_01.png" RenderTransformOrigin="0.5,0.5" >
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -469,7 +445,16 @@
                                     <TextBlock x:Name="LeftChildrenKindOfFeelingText" Text="うきうき" FontSize="50" FontFamily="MS PGothic"/>
                                 </Button>
                                 <TextBlock x:Name="LeftChildrenSizeOfFeelingTitleText" Text="きもちの大きさ" FontSize="40" FontFamily="MS PGothic" Margin="80,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-                                <Button x:Name="LeftChildrenSizeOfFeelingButton" Style="{StaticResource SizeOfFeelingButton}" IsEnabled="False" Margin="70,60" Height="150" Width="250" BorderThickness="3" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                <Button x:Name="LeftChildrenSizeOfFeelingButton"  IsEnabled="False" Margin="70,60" Height="150" Width="250" BorderThickness="3" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource SizeOfFeelingButton}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsEnabled" Value="False">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
                                     <TextBlock x:Name="LeftChildrenSizeOfFeelingText"  Text="90" FontSize="70" FontFamily="MS PGothic"/>
                                 </Button>
                             </Grid>
@@ -503,13 +488,18 @@
                                     </TransformGroup>
                                 </Border.RenderTransform>
                                 <Grid x:Name="RightChildrenThoughtBorderGrid">
-                                    <Button x:Name="RightChildrenThoughtButton" Style="{StaticResource BubbleFrame}">
-                                        <ContentControl x:Name="RightChildrenThoughtInputControl"/>
+                                    <Button x:Name="InputRightChildrenThoughtButton" Style="{StaticResource BubbleFrame}" Click="Button_Click">
+                                        <Grid x:Name="InputRightChildrenThoughtGrid" Margin="20">
+                                            <Viewbox>
+                                                <InkCanvas x:Name="InputRightChildrenThoughtCanvas" IsEnabled="False" Background="Transparent"/>
+                                            </Viewbox>
+                                            <TextBlock x:Name="InputRightChildrenThoughtText"  FontSize="37" IsEnabled="False" Background="Transparent" TextWrapping="Wrap" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" d:IsHidden="True"/>
+                                        </Grid>
                                     </Button>
                                     <TextBlock x:Name="RightChildrenThoughtText" FontFamily="Yu Gothic" Margin="20" FontSize="43" TextWrapping="Wrap" VerticalAlignment="Center" Text="やってみないとわからない！気にせずやってみるぜ！" FontWeight="Bold"/>
                                 </Grid>
                             </Border>
-                            <Image x:Name="RightChildrenImage" Height="300" Width="200" Margin="0,-60,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Source="Images/akamaru_face_01.png"  RenderTransformOrigin="0.5,0.5" >
+                            <Image x:Name="RightChildrenImage" Height="300" Width="200" Margin="0,-80,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Source="Images/akamaru_face_01.png"  RenderTransformOrigin="0.5,0.5" >
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -519,7 +509,7 @@
                                     </TransformGroup>
                                 </Image.RenderTransform>
                             </Image>
-                            <Grid x:Name="ViewRightChildrensFeelingGrid" Margin="20,500,20,20" RenderTransformOrigin="0.5,0.5" >
+                            <Grid x:Name="ViewRightChildrensFeelingGrid" Margin="20,500,20,20" RenderTransformOrigin="0.5,0.5" d:IsHidden="True" >
                                 <Grid.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -533,7 +523,16 @@
                                     <TextBlock x:Name="RightChildrenKindOfFeelingText" Text="うきうき" FontSize="50" FontFamily="MS PGothic"/>
                                 </Button>
                                 <TextBlock x:Name="RightChildrenSizeOfFeelingTitleText" Text="きもちの大きさ" FontSize="40" FontFamily="MS PGothic" Margin="80,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-                                <Button x:Name="RightChildrenSizeOfFeelingButton" Style="{StaticResource SizeOfFeelingButton}" IsEnabled="False" Margin="70,60" Height="150" Width="250" BorderThickness="3" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                <Button x:Name="RightChildrenSizeOfFeelingButton" IsEnabled="False" Margin="70,60" Height="150" Width="250" BorderThickness="3" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource SizeOfFeelingButton}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsEnabled" Value="False">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
                                     <TextBlock x:Name="RightChildrenSizeOfFeelingText"  Text="90" FontSize="70" FontFamily="MS PGothic"/>
                                 </Button>
                             </Grid>
@@ -683,7 +682,7 @@
                     <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid">
+            <Grid x:Name="SystemGrid" d:IsHidden="True">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
@@ -785,7 +784,7 @@
                     <Image x:Name="NextPageAfterImage" Source="/Images/after.png" Height="149"/>
                 </Button>
                 <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
-                    <Image x:Name="BackPageBeforeImage" Source="/Images/before.png" d:IsHidden="True"/>
+                    <Image x:Name="BackPageBeforeImage" Source="/Images/before.png"/>
                 </Button>
                 <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True">
                     <Grid x:Name="MangaFlipButtonLayerGrid">
@@ -871,7 +870,7 @@
                         <ImageBrush/>
                     </Button.Background>
                 </Button>
-                <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
+                <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
                 <Grid x:Name="CanvasEditGrid" Height="240" Margin="0,0,240,0" VerticalAlignment="Top" d:IsHidden="True">
                     <ListBox x:Name="CanvasEditListBox" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListBox.ItemsPanel>
@@ -879,17 +878,31 @@
                                 <StackPanel Orientation="Horizontal"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-                        <ListBoxItem x:Name="PenButton" FontSize="100" Width="555"  FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black"  HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="えんぴつ"/>
+                        <ListBoxItem x:Name="PenButton" FontSize="100" Width="555"  FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black"  HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="えんぴつ">
+                            <ListBoxItem.Style>
+                                <Style TargetType="{x:Type ListBoxItem}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="False">
+                                            <Setter Property="BorderBrush" Value="Black"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBoxItem.Style>
+                        </ListBoxItem>
                         <ListBoxItem x:Name="EraserButton" FontSize="100" Width="555"  FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black"  HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="けしごむ"/>
                         <ListBoxItem x:Name="AllClearButton" FontSize="100" Width="555" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black" HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="すべてけす"/>
                     </ListBox>
                 </Grid>
                 <Button x:Name="CompleteInputButton" Click="Button_Click" Content="とじる" HorizontalContentAlignment="Center" Width="240" Height="240" FontSize="65" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" Background="White" BorderBrush="Black" HorizontalAlignment="Right" VerticalAlignment="Top" d:IsHidden="True"/>
-                <Grid x:Name="InputCanvasGrid" Width="1920" Height="840" VerticalAlignment="Bottom" d:IsHidden="True">
-                    <Border x:Name="InputThoughtBorder" Width="1920" Height="738" VerticalAlignment="Center" Background="White" CornerRadius="60" BorderBrush="#FFA9D18E" BorderThickness="29">
-                        <InkCanvas Margin="20"/>
+                <Grid x:Name="InputCanvasGrid" Width="1920" Height="840" VerticalAlignment="Bottom">
+                    <Border x:Name="InputThoughtCanvasBorder" Width="1680" Height="840" VerticalAlignment="Center" Background="White" CornerRadius="60" BorderBrush="#FFA9D18E" BorderThickness="24" d:IsHidden="True">
+                        <InkCanvas x:Name="InputThoughtCanvas1" Margin="20">
+                            <InkCanvas.DefaultDrawingAttributes>
+                                <DrawingAttributes Height="10" Width="10" Color="Black"/>
+                            </InkCanvas.DefaultDrawingAttributes>
+                        </InkCanvas>
                     </Border>
-                    <Grid x:Name="Input" Width="1920" Height="657" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center" d:IsHidden="True">
+                    <Grid x:Name="InputThoughtCanvasGrid" Width="1920" Height="666" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center">
                         <Grid.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform />
@@ -902,18 +915,22 @@
                             <ColumnDefinition Width="213"/>
                             <ColumnDefinition Width="1707"/>
                         </Grid.ColumnDefinitions>
-                        <Border x:Name="InputThougtBorder" Height="657" Width="1707" Background="White" CornerRadius="152" BorderBrush="#FFA9D18E" BorderThickness="25" HorizontalAlignment="Left" Grid.Column="1" d:IsHidden="True">
-                            <InkCanvas Margin="45" />
+                        <Border x:Name="InputThougtCanvasBorder" Height="666" Width="1707" Background="White" CornerRadius="152" BorderBrush="#FFA9D18E" BorderThickness="25" HorizontalAlignment="Left" Grid.Column="1">
+                            <InkCanvas x:Name="InputThoughtCanvas2" Margin="45">
+                                <InkCanvas.DefaultDrawingAttributes>
+                                    <DrawingAttributes Height="10" Width="10" Color="Black"/>
+                                </InkCanvas.DefaultDrawingAttributes>
+                            </InkCanvas>
                         </Border>
-                        <Path   x:Name="InputThoughtSpeechBubbleTailMask" Stroke="White" StrokeThickness="20" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-25,0" Data="M225,370 l0,126" d:IsHidden="True"/>
-                        <Path   x:Name="InputThoughtSpeechBubbleTail" Fill="White" Stroke="{Binding ElementName=InputThoughtBorder, Path=BorderBrush}" StrokeThickness="25" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-150,0" Data="M225,363 L25,505 265,480" d:IsHidden="True"/>
+                        <Path  x:Name="InputThoughtSpeechBubbleTailMask" Stroke="White" Height="666" Width="240" StrokeThickness="25"  StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-30,0" Data="M224,356 l0,128"/>
+                        <Path  x:Name="InputThoughtSpeechBubbleTail" Fill="White" Width="240" Stroke="#FFA9D18E" StrokeThickness="25" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-30,0" Data="M224,356 L40,500 224,484"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="InputTextGrid" Width="1920" Height="620" VerticalAlignment="Top">
-                    <Border x:Name="TextBorder" Width="1612" Height="620" VerticalAlignment="Bottom" Background="White" CornerRadius="106" BorderBrush="#FFA9D18E" BorderThickness="25">
-                        <TextBox Margin="30"/>
+                <Grid x:Name="InputTextGrid" Width="1920" Height="620" VerticalAlignment="Top" d:IsHidden="True">
+                    <Border x:Name="InputThoughtTextBorder" Width="1240" Height="620" VerticalAlignment="Bottom" Background="White" CornerRadius="106" BorderBrush="#FFA9D18E" BorderThickness="18" d:IsHidden="True">
+                        <TextBox x:Name="InputThoughtTextBox1" Style="{StaticResource InputTextBox}"  Margin="30"   FontSize="65" MaxLength="119" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput" />
                     </Border>
-                    <Grid x:Name="Inpt" Width="1812" Height="620" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center" d:IsHidden="True">
+                    <Grid x:Name="InputThoughtTextGrid" Width="1680" HorizontalAlignment="Left" Height="582" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,0">
                         <Grid.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform />
@@ -923,14 +940,14 @@
                             </TransformGroup>
                         </Grid.RenderTransform>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="213"/>
-                            <ColumnDefinition Width="1707"/>
+                            <ColumnDefinition Width="187"/>
+                            <ColumnDefinition Width="1493"/>
                         </Grid.ColumnDefinitions>
-                        <Border x:Name="InputThogtBorder" Height="620" Width="1611" Background="White" CornerRadius="152" BorderBrush="#FFA9D18E" BorderThickness="25" HorizontalAlignment="Left" Grid.Column="1">
-                            <InkCanvas Margin="45" />
+                        <Border x:Name="InputThougtTextBorder" Height="582" Width="1493" Background="White" CornerRadius="134" BorderBrush="#FFA9D18E" BorderThickness="24" HorizontalAlignment="Left" Grid.Column="1" >
+                            <TextBox x:Name="InputThoughtTextBox2" Style="{StaticResource InputTextBox}" Margin="45" VerticalAlignment="Center" FontSize="95" MaxLength="120" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
                         </Border>
-                        <Path   x:Name="InputThoughtpeechBubbleTailMask" Stroke="White" StrokeThickness="20" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-25,0" Data="M225,370 l0,126" d:IsHidden="True"/>
-                        <Path   x:Name="InputThoughtpeechBubbleTail" Fill="White" Stroke="{Binding ElementName=InputThoughtBorder, Path=BorderBrush}" StrokeThickness="25" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-150,0" Data="M225,363 L25,505 265,480" d:IsHidden="True"/>
+                        <Path   x:Name="InputThoughtpeechBubbleTailMask" Stroke="White" Width="233" StrokeThickness="24" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-31,0" Data="M200,313 l0,112"/>
+                        <Path   x:Name="InputThoughtpeechBubbleTail" Fill="White" Width="233" Stroke="{Binding ElementName=InputThoughtTextBorder, Path=BorderBrush}" StrokeThickness="24" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-30,0" Data="M200,313 L45,500 200,425"/>
                     </Grid>
                 </Grid>
                 <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">

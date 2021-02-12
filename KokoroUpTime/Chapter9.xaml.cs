@@ -107,7 +107,8 @@ namespace KokoroUpTime
         private ObservableCollection<AosukeSituationTextData> _aosukeSituationTextData = new ObservableCollection<AosukeSituationTextData>();
         private ObservableCollection<NotGoodEventData> _notGoodEventData = new ObservableCollection<NotGoodEventData>();
 
-        private StrokeCollection InputChallengeCanvasStrokes = new StrokeCollection() { };
+        //入力したStroke保存用
+        private StrokeCollection InputChallengeCanvasStrokes = new StrokeCollection();
 
         public Chapter9()
         {
@@ -253,6 +254,8 @@ namespace KokoroUpTime
                 ["aosuke_size_of_feeling_text_3"] = this.AosukeSizeOfFeelingText3,
                 ["aosuke_kind_of_feeling_text_4"] = this.AosukeKindOfFeelingText4,
                 ["aosuke_size_of_feeling_text_4"] = this.AosukeSizeOfFeelingText4,
+
+                ["input_challenge_text"] =this.InputChallengeText,
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -1021,6 +1024,36 @@ namespace KokoroUpTime
                                     }
                                 };
                             }
+                            else if (clickMethod == "with_next_msg")
+                            {
+                                waitTimer.Start();
+
+                                waitTimer.Tick += (s, args) =>
+                                {
+                                    waitTimer.Stop();
+                                    waitTimer = null;
+                                    if (clickButton == "page")
+                                    {
+                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                        this.NextMessageButton.Visibility = Visibility.Visible;
+                                    }
+                                };
+                            }
+                            else if (clickMethod == "with_back_msg")
+                            {
+                                waitTimer.Start();
+
+                                waitTimer.Tick += (s, args) =>
+                                {
+                                    waitTimer.Stop();
+                                    waitTimer = null;
+                                    if (clickButton == "page")
+                                    {
+                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                        this.BackMessageButton.Visibility = Visibility.Visible;
+                                    }
+                                };
+                            }
                             else
                             {
                                 waitTimer.Start();
@@ -1037,12 +1070,53 @@ namespace KokoroUpTime
                                     }
                                     else if (clickButton == "page")
                                     {
-                                        if (this.scene == "グループアクティビティ") 
+                                        if (this.scene == "ちょうせんしたいこと")
                                         {
-                                            if (this.AosukeSizeOfFeelingText1.Text != ""&& this.AosukeSizeOfFeelingText2.Text != "" && this.AosukeSizeOfFeelingText3.Text != "" && this.AosukeSizeOfFeelingText4.Text != "")
+                                            if (this.dataOption.InputMethod == 0)
                                             {
-                                                this.NextPageButton.Visibility = Visibility.Visible;
+                                                if(this.InputChallengeCanvasStrokes.Count > 1)
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                }
                                             }
+                                            else
+                                            {
+                                                if(this.InputChallengeText.Text != "")
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                }
+                                            }
+                                            this.BackPageButton.Visibility = Visibility.Visible;
+                                        }
+                                        else if (this.scene == "グループアクティビティ")
+                                        {
+                                                bool CompleteInputFlag = true;
+                                                if (CompleteInputFlag)
+                                                {
+                                                    foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
+                                                    {
+                                                        if (kvp.Value == "")
+                                                        {
+                                                            CompleteInputFlag = false;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                if (CompleteInputFlag)
+                                                {
+                                                    foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
+                                                    {
+                                                        if (kvp.Value == -1)
+                                                        {
+                                                            CompleteInputFlag = false;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                if (CompleteInputFlag)
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                }
                                             this.BackPageButton.Visibility = Visibility.Visible;
                                         }
                                         else
@@ -1067,6 +1141,22 @@ namespace KokoroUpTime
                                     this.NextPageButton.Visibility = Visibility.Visible;
                                 }
                             }
+                            else if (clickMethod == "with_next_msg")
+                            {
+                                if (clickButton == "page")
+                                {
+                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                    this.NextMessageButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                            else if (clickMethod == "with_back_msg")
+                            {
+                                if (clickButton == "page")
+                                {
+                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                    this.BackMessageButton.Visibility = Visibility.Visible;
+                                }
+                            }
                             else
                             {
                                 if (clickButton == "msg")
@@ -1076,9 +1166,50 @@ namespace KokoroUpTime
                                 }
                                 else if (clickButton == "page")
                                 {
-                                    if (this.scene == "グループアクティビティ")
+                                    if (this.scene == "ちょうせんしたいこと")
                                     {
-                                        if (this.AosukeSizeOfFeelingText1.Text != "" && this.AosukeSizeOfFeelingText2.Text != "" && this.AosukeSizeOfFeelingText3.Text != "" && this.AosukeSizeOfFeelingText4.Text != "")
+                                        if (this.dataOption.InputMethod == 0)
+                                        {
+                                            if (this.InputChallengeCanvasStrokes.Count > 1)
+                                            {
+                                                this.NextPageButton.Visibility = Visibility.Visible;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (this.InputChallengeText.Text != "")
+                                            {
+                                                this.NextPageButton.Visibility = Visibility.Visible;
+                                            }
+                                        }
+                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                    }
+                                    else if (this.scene == "グループアクティビティ")
+                                    {
+                                        bool CompleteInputFlag = true;
+                                        if (CompleteInputFlag)
+                                        {
+                                            foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
+                                            {
+                                                if (kvp.Value == "")
+                                                {
+                                                    CompleteInputFlag = false;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        if (CompleteInputFlag)
+                                        {
+                                            foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
+                                            {
+                                                if (kvp.Value == -1)
+                                                {
+                                                    CompleteInputFlag = false;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        if (CompleteInputFlag)
                                         {
                                             this.NextPageButton.Visibility = Visibility.Visible;
                                         }
@@ -1418,7 +1549,7 @@ namespace KokoroUpTime
 
                     Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item10NoneImage, this.Item11NoneImage };
 
-                    var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
+                    var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
 
                     for (int i = 0; i < hasGotItems.Length; i++)
                     {
@@ -2063,11 +2194,17 @@ namespace KokoroUpTime
                     {
                         this.BackMessageButton.Visibility = Visibility.Hidden;
                         this.NextMessageButton.Visibility = Visibility.Hidden;
+
+                        this.BackPageButton.Visibility = Visibility.Hidden;
+                        this.NextPageButton.Visibility = Visibility.Hidden;
                     }
                     else if (button.Name == "NextPageButton")
                     {
                         this.BackPageButton.Visibility = Visibility.Hidden;
                         this.NextPageButton.Visibility = Visibility.Hidden;
+
+                        this.BackMessageButton.Visibility = Visibility.Hidden;
+                        this.NextMessageButton.Visibility = Visibility.Hidden;
 
                         if (this.SelectFeelingGrid.IsVisible)
                         {
@@ -2159,11 +2296,8 @@ namespace KokoroUpTime
                 {
                     this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
 
-
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
-
-
                 }
                 else if (button.Name == "BranchButton1")
                 {
@@ -2171,16 +2305,18 @@ namespace KokoroUpTime
                 }
                 else if(button.Name == "InputChallengeButton")
                 {
-                    this.Input(button);
                     if(this.dataOption.InputMethod == 0)
                     {
+                        this.InputChallengeCanvasStrokes = this.InputChallengeCanvas.Strokes;
+                        this.ClipStrokes(this.InputCanvas, this.InputChallengeCanvasStrokes);
+                        this.InputCanvas.Strokes = this.InputChallengeCanvasStrokes;
                         this.GoTo("canvas_input");
                     }
                     else
                     {
+                        this.InputTextBox.Text = this.dataChapter9.InputChallengeText;
                         this.GoTo("keyboard_input");
                         this.InputTextBox.Focus();
-
                     }
                 }
                 else if(button.Name == "CompleteInputButton")
@@ -2189,7 +2325,8 @@ namespace KokoroUpTime
                     {
                        if(this.InputChallengeCanvasStrokes != null)
                        {
-                           this.InputChallengeCanvas.Strokes = this.InputChallengeCanvasStrokes;
+                            this.ClipStrokes(this.InputCanvas, this.InputChallengeCanvasStrokes);
+                            this.InputChallengeCanvas.Strokes = this.InputChallengeCanvasStrokes;
                        }
                     }
                     else
@@ -2506,6 +2643,34 @@ namespace KokoroUpTime
             #endregion
         }
 
+        private void TextBoxPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox text = sender as TextBox;
+
+            int caretPosition = text.SelectionStart;
+
+            while (text.LineCount > 7)
+            {
+                caretPosition -= 1;
+                text.Text = text.Text.Remove(caretPosition, 1);
+            }
+
+            text.Select(caretPosition, 0);
+        }
+
+        private void TextBoxKeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox text = sender as TextBox;
+
+            if (text.LineCount > 6)
+            {
+                if (e.Key == Key.Enter)
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
         private class AosukeSituationTextData
         {
             public AosukeSituationTextData(string underLineText, string situationText )
@@ -2538,6 +2703,7 @@ namespace KokoroUpTime
             {
                 case "PenButton":
                     this.InputCanvas.EditingMode = InkCanvasEditingMode.Ink;
+                    this.ClipStrokes(this.InputCanvas, this.InputChallengeCanvasStrokes);
                     break;
 
                 case "EraserButton":
@@ -2546,67 +2712,35 @@ namespace KokoroUpTime
 
                 case "AllClearButton":
                     this.InputCanvas.Strokes.Clear();
+
+                    this.ClipStrokes(this.InputCanvas, this.InputChallengeCanvasStrokes);
                     break;
             }
         }
-
-        private void Input(object sender)
+        private void ClipStrokes(InkCanvas inkCanvas, StrokeCollection strokes)
         {
-            Button button = sender as Button;
+            StylusPoint point1 = new StylusPoint() { X = 0, Y = 0 };
+            StylusPoint point2 = new StylusPoint() { X = inkCanvas.ActualWidth, Y = 0 };
+            StylusPoint point3 = new StylusPoint() { X = inkCanvas.ActualWidth, Y = inkCanvas.ActualHeight };
+            StylusPoint point4 = new StylusPoint() { X = 0, Y = inkCanvas.ActualHeight };
 
-            if (this.dataOption.InputMethod == 0)
-            {
-                foreach(var canvas in ((Grid)button.Content).Children)
-                {
-                    if(canvas is InkCanvas)
-                    {
-                        if(this.InputChallengeCanvasStrokes != null)
-                        {
-                            this.InputCanvas.Strokes = this.InputChallengeCanvasStrokes;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                foreach (var text in ((Grid)button.Content).Children)
-                {
-                    if (text is TextBox)
-                    {
-                        this.InputTextBox.Text = this.dataChapter9.InputChallengeText;
-                    }
-                }
-            }
+            StylusPointCollection points1 = new StylusPointCollection();
+            StylusPointCollection points2 = new StylusPointCollection();
+            points1.Add(point1);
+            points1.Add(point2);
+            points1.Add(point3);
+            points1.Add(point4);
+
+            Point[] strokePoints = (Point[])points1;
+            strokes.Clip(strokePoints);
+
+            points2.Add(point3);
+            DrawingAttributes attributes = new DrawingAttributes() { Height = 1, Width = 1, Color = Colors.Transparent };
+            Stroke stroke = new Stroke(points2) { DrawingAttributes = attributes };
+            strokes.Add(stroke);
         }
 
-        private void TextBoxPreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            TextBox text = sender as TextBox;
 
-            int caretPosition = text.SelectionStart;
 
-            while (text.LineCount > 7)
-            {
-                caretPosition -= 1;
-                text.Text = text.Text.Remove(caretPosition, 1);
-            }
-
-            text.Select(caretPosition, 0);
-        }
-
-        private void TextBoxKeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox text = sender as TextBox;
-
-            if (text.LineCount > 6)
-            {
-                if (e.Key == Key.Enter)
-                {
-                    e.Handled = true;
-                }
-            }
-        }
-
-        
     }
 }

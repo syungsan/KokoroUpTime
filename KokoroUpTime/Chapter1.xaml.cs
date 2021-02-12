@@ -2074,8 +2074,8 @@ namespace KokoroUpTime
 
 
 
-        /*
-        // ジェスチャー認識キャンバスのロード
+
+        //ジェスチャー認識キャンバスのロード
         void GestureCanvas_Loaded(object sender, RoutedEventArgs e)
         {
             var gestureCanvas = (InkCanvas)sender;
@@ -2097,129 +2097,129 @@ namespace KokoroUpTime
                 ApplicationGesture.DoubleCurlicue,
             });
         }
-        
-        // ジェスチャーキャンバスの処理
-        void GestureCanvas_Gesture(object sender, InkCanvasGestureEventArgs e)
-        {
-            // 信頼性 (RecognitionConfidence) を無視したほうが、Circle と Triangle の認識率は上がるようです。
-            var gestureResult = e.GetGestureRecognitionResults()
-                .FirstOrDefault(r => r.ApplicationGesture != ApplicationGesture.NoGesture);
 
-            var startupPath = FileUtils.GetStartupPath();
+        //// ジェスチャーキャンバスの処理
+        //void GestureCanvas_Gesture(object sender, InkCanvasGestureEventArgs e)
+        //{
+        //    // 信頼性 (RecognitionConfidence) を無視したほうが、Circle と Triangle の認識率は上がるようです。
+        //    var gestureResult = e.GetGestureRecognitionResults()
+        //        .FirstOrDefault(r => r.ApplicationGesture != ApplicationGesture.NoGesture);
 
-            if (gestureResult == null)
-            {
-                PlaySE($@"{startupPath}/Sounds/None.wav");
-                return;
-            }
+        //    var startupPath = FileUtils.GetStartupPath();
 
-            AnswerResult answerResult;
+        //    if (gestureResult == null)
+        //    {
+        //        PlaySE($@"{startupPath}/Sounds/None.wav");
+        //        return;
+        //    }
 
-            switch (gestureResult.ApplicationGesture)
-            {
-               case ApplicationGesture.Circle:
-                case ApplicationGesture.DoubleCircle:
-                    answerResult = AnswerResult.Correct;
-                    break;
-               case ApplicationGesture.Triangle:
-                    answerResult = AnswerResult.Intermediate;
-                    break;
-                case ApplicationGesture.Check:
-                case ApplicationGesture.ArrowDown:
-                case ApplicationGesture.ChevronDown:
-                case ApplicationGesture.DownUp:
-                case ApplicationGesture.Up:
-                case ApplicationGesture.Down:
-                case ApplicationGesture.Left:
-                case ApplicationGesture.Right:
-                case ApplicationGesture.Curlicue:
-                case ApplicationGesture.DoubleCurlicue:
-                    answerResult = AnswerResult.Incorrect;
-                    break;
-                    
+        //    AnswerResult answerResult;
 
-                default:
-                    throw new InvalidOperationException();
-            }
+        //    switch (gestureResult.ApplicationGesture)
+        //    {
+        //        case ApplicationGesture.Circle:
+        //        case ApplicationGesture.DoubleCircle:
+        //            answerResult = AnswerResult.Correct;
+        //            break;
+        //        case ApplicationGesture.Triangle:
+        //            answerResult = AnswerResult.Intermediate;
+        //            break;
+        //        case ApplicationGesture.Check:
+        //        case ApplicationGesture.ArrowDown:
+        //        case ApplicationGesture.ChevronDown:
+        //        case ApplicationGesture.DownUp:
+        //        case ApplicationGesture.Up:
+        //        case ApplicationGesture.Down:
+        //        case ApplicationGesture.Left:
+        //        case ApplicationGesture.Right:
+        //        case ApplicationGesture.Curlicue:
+        //        case ApplicationGesture.DoubleCurlicue:
+        //            answerResult = AnswerResult.Incorrect;
+        //            break;
 
-            PlaySE($@"{startupPath}/Sounds/{answerResult}.wav");
 
-            var gestureCanvas = (InkCanvas)sender;
+        //        default:
+        //            throw new InvalidOperationException();
+        //    }
 
-            if (gestureResult.ApplicationGesture == ApplicationGesture.Circle || gestureResult.ApplicationGesture == ApplicationGesture.DoubleCircle)
-            {
-                // 気持ち選択場面でのそれぞれの選択項目に対する処理
-                foreach (var textBlock in gestureCanvas.Children.OfType<TextBlock>())
-                {
-                    switch (textBlock.Name)
-                    {
-                        case "ChallengeGoodFeelingItemTextBlock":
+        //    PlaySE($@"{startupPath}/Sounds/{answerResult}.wav");
 
-                            if (this.scene == "チャレンジきもち選択")
-                            {
-                                this.myKindOfGoodFeelings.Add(textBlock.Text);
-                            }
-                            break;
+        //    var gestureCanvas = (InkCanvas)sender;
 
-                        case "ChallengeBadFeelingItemTextBlock":
+        //    if (gestureResult.ApplicationGesture == ApplicationGesture.Circle || gestureResult.ApplicationGesture == ApplicationGesture.DoubleCircle)
+        //    {
+        //        // 気持ち選択場面でのそれぞれの選択項目に対する処理
+        //        foreach (var textBlock in gestureCanvas.Children.OfType<TextBlock>())
+        //        {
+        //            switch (textBlock.Name)
+        //            {
+        //                case "ChallengeGoodFeelingItemTextBlock":
 
-                            if (this.scene == "チャレンジきもち選択")
-                            {
-                                this.myKindOfBadFeelings.Add(textBlock.Text);
-                            }
-                            break;
+        //                    if (this.scene == "チャレンジきもち選択")
+        //                    {
+        //                        this.myKindOfGoodFeelings.Add(textBlock.Text);
+        //                    }
+        //                    break;
 
-                        case "SelectGoodFeelingItemTextBlock":
+        //                case "ChallengeBadFeelingItemTextBlock":
 
-                            if (this.scene == "キミちゃんのきもちの種類")
-                            {
-                                this.dataChapter1.KimisKindOfFeelings = $@"{textBlock.Text},良い";
-                            }
+        //                    if (this.scene == "チャレンジきもち選択")
+        //                    {
+        //                        this.myKindOfBadFeelings.Add(textBlock.Text);
+        //                    }
+        //                    break;
 
-                            if (this.scene == "赤丸くんのきもちの種類")
-                            {
-                                this.dataChapter1.AkamarusKindOfFeelings = $@"{textBlock.Text},良い";
-                            }
+        //                case "SelectGoodFeelingItemTextBlock":
 
-                            if (this.scene == "青助くんのきもちの種類")
-                            {
-                                this.dataChapter1.AosukesKindOfFeelings = $@"{textBlock.Text},良い";
-                            }
-                            break;
+        //                    if (this.scene == "キミちゃんのきもちの種類")
+        //                    {
+        //                        this.dataChapter1.KimisKindOfFeelings = $@"{textBlock.Text},良い";
+        //                    }
 
-                        case "SelectBadFeelingItemTextBlock":
+        //                    if (this.scene == "赤丸くんのきもちの種類")
+        //                    {
+        //                        this.dataChapter1.AkamarusKindOfFeelings = $@"{textBlock.Text},良い";
+        //                    }
 
-                            if (this.scene == "キミちゃんのきもちの種類")
-                            {
-                                this.dataChapter1.KimisKindOfFeelings = $@"{textBlock.Text},悪い";
-                            }
+        //                    if (this.scene == "青助くんのきもちの種類")
+        //                    {
+        //                        this.dataChapter1.AosukesKindOfFeelings = $@"{textBlock.Text},良い";
+        //                    }
+        //                    break;
 
-                            if (this.scene == "赤丸くんのきもちの種類")
-                            {
-                                this.dataChapter1.AkamarusKindOfFeelings = $@"{textBlock.Text},悪い";
-                            }
+        //                case "SelectBadFeelingItemTextBlock":
 
-                            if (this.scene == "青助くんのきもちの種類")
-                            {
-                                this.dataChapter1.AosukesKindOfFeelings = $@"{textBlock.Text},悪い";
-                            }
-                            break;
-                    }
-                }
-            }
+        //                    if (this.scene == "キミちゃんのきもちの種類")
+        //                    {
+        //                        this.dataChapter1.KimisKindOfFeelings = $@"{textBlock.Text},悪い";
+        //                    }
 
-            if (this.scene == "キミちゃんのきもちの種類" || this.scene == "赤丸くんのきもちの種類" || this.scene == "青助くんのきもちの種類")
-            {
-                this.AllGestureCanvas_Clear();
-                gestureCanvas.Strokes.Add(e.Strokes);
-            }
-            else
-            {
-                gestureCanvas.Strokes.Clear();
-                gestureCanvas.Strokes.Add(e.Strokes);
-            }
-        }
-        */
+        //                    if (this.scene == "赤丸くんのきもちの種類")
+        //                    {
+        //                        this.dataChapter1.AkamarusKindOfFeelings = $@"{textBlock.Text},悪い";
+        //                    }
+
+        //                    if (this.scene == "青助くんのきもちの種類")
+        //                    {
+        //                        this.dataChapter1.AosukesKindOfFeelings = $@"{textBlock.Text},悪い";
+        //                    }
+        //                    break;
+        //            }
+        //        }
+        //    }
+
+        //    if (this.scene == "キミちゃんのきもちの種類" || this.scene == "赤丸くんのきもちの種類" || this.scene == "青助くんのきもちの種類")
+        //    {
+        //        this.AllGestureCanvas_Clear();
+        //        gestureCanvas.Strokes.Add(e.Strokes);
+        //    }
+        //    else
+        //    {
+        //        gestureCanvas.Strokes.Clear();
+        //        gestureCanvas.Strokes.Add(e.Strokes);
+        //    }
+        //}
+
 
         private enum AnswerResult
         {

@@ -847,21 +847,21 @@ namespace KokoroUpTime
                     }
                     break;
 
-                    //case "第10回":
+                case "第10回":
 
-                    //    if (this.initConfig.userName == null)
-                    //    {
-                    //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
-                    //    }
-                    //    else
-                    //    {
-                    //        Chapter10 chapter10 = new Chapter10();
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        Chapter10 chapter10 = new Chapter10();
 
-                    //        chapter10.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                        chapter10.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                    //        this.NavigationService.Navigate(chapter10);
-                    //    }
-                    //    break;
+                        this.NavigationService.Navigate(chapter10);
+                    }
+                    break;
 
                     //case "第11回":
 

@@ -369,12 +369,6 @@ namespace KokoroUpTime
             this.AosukeSizeOfFeelingText.Text = "";
             this.Challenge2BubbleActionText.Text = "";
             //this.GroupeActivityInputText.Text = "";
-
-
-
-
-
-
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)

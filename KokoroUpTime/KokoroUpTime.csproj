@@ -7,8 +7,8 @@
     <Version>0.9.8.5</Version>
     <PackageIcon></PackageIcon>
     <ApplicationIcon>icon_sr9_icon.ico</ApplicationIcon>
-    <AssemblyVersion>0.9.8.5</AssemblyVersion>
-    <FileVersion>0.9.8.5</FileVersion>
+    <AssemblyVersion>0.9.8.7</AssemblyVersion>
+    <FileVersion>0.9.8.7</FileVersion>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
@@ -114,6 +114,7 @@
     <None Remove="Images\compare_aosuke_value_frame.png" />
     <None Remove="Images\complete_button.png" />
     <None Remove="Images\complete_role_play.png" />
+    <None Remove="Images\difference_size_of_feeling.png" />
     <None Remove="Images\difficulty_of_action_frame.png" />
     <None Remove="Images\ending_bubble.png" />
     <None Remove="Images\face_small_bubble.png" />
@@ -183,21 +184,27 @@
     <None Remove="Images\item08_title.png" />
     <None Remove="Images\item09_book.png" />
     <None Remove="Images\item09_detail.png" />
+    <None Remove="Images\item09_item10_effect.png" />
     <None Remove="Images\item09_solo.gif" />
     <None Remove="Images\item09_solo.png" />
     <None Remove="Images\item09_title.png" />
     <None Remove="Images\item10_book.png" />
     <None Remove="Images\item10_detail.png" />
+    <None Remove="Images\item10_effect.png" />
     <None Remove="Images\item10_solo.gif" />
     <None Remove="Images\item10_solo.png" />
+    <None Remove="Images\item10_title.png" />
     <None Remove="Images\item11_book.png" />
     <None Remove="Images\item11_detail.png" />
     <None Remove="Images\item11_solo.gif" />
     <None Remove="Images\item11_solo.png" />
+    <None Remove="Images\item11_title.png" />
     <None Remove="Images\item_check_back_bubble.png" />
     <None Remove="Images\item_detail_info.png" />
+    <None Remove="Images\item_effect.png" />
     <None Remove="Images\item_review.png" />
     <None Remove="Images\kimis_friends.png" />
+    <None Remove="Images\kimi_face_06.png" />
     <None Remove="Images\kimi_feeling_plate.png" />
     <None Remove="Images\kimi_glad.png" />
     <None Remove="Images\kimi_stand_01.png" />
@@ -352,6 +359,7 @@
     <None Remove="Images\small_short_bubble_left_down_red.png" />
     <None Remove="Images\small_short_bubble_left_down_yellow.png" />
     <None Remove="Images\SS.png" />
+    <None Remove="Images\step_up.png" />
     <None Remove="Images\summary_title.png" />
     <None Remove="Images\teacher.png" />
     <None Remove="Images\title.png" />
@@ -484,6 +492,7 @@
     <Resource Include="Images\compare_aosuke_value_frame.png" />
     <Resource Include="Images\complete_button.png" />
     <Resource Include="Images\complete_role_play.png" />
+    <Resource Include="Images\difference_size_of_feeling.png" />
     <Resource Include="Images\difficulty_of_action_frame.png" />
     <Resource Include="Images\good.png" />
     <Resource Include="Images\graph1-1.png" />
@@ -550,20 +559,26 @@
     <Resource Include="Images\item08_title.png" />
     <Resource Include="Images\item09_book.png" />
     <Resource Include="Images\item09_detail.png" />
+    <Resource Include="Images\item09_item10_effect.png" />
     <Resource Include="Images\item09_solo.gif" />
     <Resource Include="Images\item09_solo.png" />
     <Resource Include="Images\item09_title.png" />
     <Resource Include="Images\item10_book.png" />
     <Resource Include="Images\item10_detail.png" />
+    <Resource Include="Images\item10_effect.png" />
     <Resource Include="Images\item10_solo.gif" />
     <Resource Include="Images\item10_solo.png" />
+    <Resource Include="Images\item10_title.png" />
     <Resource Include="Images\item11_book.png" />
     <Resource Include="Images\item11_detail.png" />
     <Resource Include="Images\item11_solo.gif" />
     <Resource Include="Images\item11_solo.png" />
+    <Resource Include="Images\item11_title.png" />
     <Resource Include="Images\item_check_back_bubble.png" />
+    <Resource Include="Images\item_effect.png" />
     <Resource Include="Images\item_review.png" />
     <Resource Include="Images\kimis_friends.png" />
+    <Resource Include="Images\kimi_face_06.png" />
     <Resource Include="Images\kimi_feeling_plate.png" />
     <Resource Include="Images\kimi_glad.png" />
     <Resource Include="Images\kimi_plate_inner.png" />
@@ -733,6 +748,7 @@
     <Resource Include="Images\small_short_bubble_left_down_red.png" />
     <Resource Include="Images\small_short_bubble_left_down_yellow.png" />
     <Resource Include="Images\SS.png" />
+    <Resource Include="Images\step_up.png" />
     <Resource Include="Images\summary_title.png" />
     <Resource Include="Images\teacher.png" />
     <Resource Include="Images\title.png" />
@@ -751,6 +767,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Chapter11.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Chapter7.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -785,6 +804,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Datas\default.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter11.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter10.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter7.csv">
@@ -871,6 +896,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Chapter11.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Chapter7.xaml">
       <SubType>Designer</SubType>
     </Page>

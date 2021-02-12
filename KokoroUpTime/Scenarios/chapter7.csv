@@ -1,6 +1,5 @@
 start
 #
-goto,Debug
 scene,前回のおさらい
 reset
 image,bg_image,background_02.png
@@ -80,6 +79,7 @@ hide,grid,session_frame_grid
 hide,image,shiroji_right_up_image
 hide,grid,main_msg_grid
 hide,image,shiroji_left_image
+hide,outline_text,kimis_thoughts_and_feeling_scene_title
 border,title_border,orange
 text,challenge_time_title_text,チャレンジタイム！パート①
 grid,title_grid
@@ -128,7 +128,7 @@ reset
 image,bg_image,background_05.png
 grid,challenge_time_grid
 border,challenge_time_border,light_orange
-text,situation_title_text,,fade_in
+text,situation_title_text
 border,situation_border,,yellow
 text,situation_text,友だちを遊びに誘うとき。
 image,children_image,kimi_face_04.png,float_in
@@ -144,6 +144,8 @@ click,page
 #
 clear,text,main_msg
 hide,grid,challenge_time_grid
+hide,image,shiroji_left_image
+hide,grid,main_msg_grid
 image,children_face_right_image,akamaru_face_04.png,appear_up
 image,main_msg_bubble_image,right_big_bubble_red.png
 grid,main_msg_grid,appear_expansion
@@ -153,6 +155,7 @@ click,page
 clear,text,main_msg
 hide,image,children_face_right_image
 hide,grid,main_msg_grid
+hide,grid,title_grid
 image,shiroji_left_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
@@ -233,6 +236,7 @@ hide,image,shiroji_left_image
 hide,image,item_center_image,item07_solo.png
 hide,grid,item_name_plate_left_grid
 hide,grid,main_msg_grid,appear_expansion
+hide,grid,session_grid
 bgm,stop
 se,play,nc211089.wav
 image,bg_image,background_mokume.png
@@ -246,7 +250,7 @@ grid,item_info_sentence_grid,fade_in
 get_item
 click,page
 #
-scene,グループアクティビティ 開始
+scene,グループアクティビティパート①　開始
 reset
 image,bg_image,background_06.png
 image,session_title_image,group_activity.png
@@ -268,16 +272,19 @@ outline_text,invite_friend_to_play_soccer_scene_title
 grid,title_grid
 click,page
 #
+sub,think_akamaru's_and_aosuke's_thought
 scene,赤丸くんと青助くんの考え
 reset
 image,bg_image,background_05.png
+grid,input_canvas_grid
 grid,two_thoughts_grid
 border,two_thoughts_border
 grid,two_thoughts_border_grid
 grid,left_childrens_thoughts_and_feeling_grid
 image,left_children_image,akamaru_face_03.png,float_in
 text,left_children_title_text,赤丸くんの考え,fade_in
-button,left_children_thought_button
+text,input_left_children_thought_text,$input_akamaru_thought_text$
+button,input_left_children_thought_button
 border,left_children_thought_border,,red,float_in
 grid,view_left_childrens_feeling_grid,float_in
 text,left_children_kind_of_feeling_text,うきうき,fade_in
@@ -285,7 +292,8 @@ text,left_children_size_of_feeling_text,90,fade_in
 grid,right_childrens_thoughts_and_feeling_grid
 image,right_children_image,aosuke_face_07.png,float_in
 text,right_children_title_text,青助くんの考え,fade_in
-button,right_children_thought_button
+text,input_right_children_thought_text,$input_aosuke_thought_text$
+button,input_right_children_thought_button
 border,right_children_thought_border,,blue,float_in
 grid,view_right_childrens_feeling_grid,float_in
 text,right_children_kind_of_feeling_text,ふあん,fade_in
@@ -325,7 +333,8 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,考えライトをつかって、鬱それぞれの場面での自分の考えと気持ちを、みつけてみるのじゃ！,白じい
 click,page
 #
-scene,チャレンジタイム！パート②場面選択
+sub,select_challenge_time_scene
+scene,チャレンジタイム！パート②　場面選択
 reset
 image,bg_image,background_05.png
 image,shiroji_left_image,shiroji_02.png
@@ -344,6 +353,7 @@ border,situation_border,,light_green,float_in
 text,thought_title_text,あなたの考え,fade_in
 border,thought_speech_bubble_border,,light_green
 grid,thought_speech_bubble_grid,appear_expansion
+text,input_thought_text,$input_thought_text$
 button,input_thought_button
 text,kind_of_feeling_input_text,$kind_of_feeling$
 text,size_of_feeling_input_text,$size_of_feeling$
@@ -364,6 +374,7 @@ border,situation_border,,light_green,float_in
 text,thought_title_text,あなたの考え,fade_in
 border,thought_speech_bubble_border,,light_green
 grid,thought_speech_bubble_grid,appear_expansion
+text,input_thought_text,$input_thought_text$
 button,input_thought_button
 text,kind_of_feeling_input_text,$kind_of_feeling$
 text,size_of_feeling_input_text,$size_of_feeling$
@@ -373,7 +384,7 @@ click,page
 goto,groupe_activity
 #
 sub,groupe_activity
-scene,グループアクティビティ ２
+scene,グループアクティビティパート② 開始
 reset
 image,bg_image,background_06.png
 image,session_title_image,group_activity.png
@@ -384,10 +395,11 @@ grid,session_grid
 image,shiroji_right_image,shiroji_04.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,今度は、鬱それぞれの場面での、友だちの考えときもちを聞いてみるのじゃ！,白じい
-click,page
+msg,main_msg,今度は、それぞれの場面での、鬱友だちの考えときもちを聞いてみるのじゃ！,白じい
+click,page,next_only
 #
-scene,グループアクティビティ場面選択
+sub,select_groupeactivity_scene
+scene,グループアクティビティパート②　場面選択
 reset
 image,bg_image,background_05.png
 image,shiroji_right_image,shiroji_04.png
@@ -395,7 +407,7 @@ grid,select_scene_grid
 wait
 #
 sub,input_friends_thoughts_and_feeling_scene1
-scene,グループアクティビティ　場面①
+scene,グループアクティビティパート②　場面①
 reset
 image,bg_image,background_05.png
 grid,challenge_time_grid
@@ -406,6 +418,7 @@ border,situation_border,,light_green,float_in
 text,thought_title_text,友だちの考え,fade_in
 border,thought_speech_bubble_border,,light_green
 grid,thought_speech_bubble_grid,appear_expansion
+text,input_thought_text,$input_thought_text$
 button,input_thought_button
 text,kind_of_feeling_input_text,$kind_of_feeling$
 text,size_of_feeling_input_text,$size_of_feeling$
@@ -415,7 +428,7 @@ click,page
 goto,end_groupeactivity
 #
 sub,input_friends_thoughts_and_feeling_scene2
-scene,グループアクティビティ　場面②
+scene,グループアクティビティパート②　場面②
 reset
 image,bg_image,background_05.png
 grid,challenge_time_grid
@@ -426,6 +439,7 @@ border,situation_border,,light_green,float_in
 text,thought_title_text,友だちの考え,fade_in
 border,thought_speech_bubble_border,,light_green
 grid,thought_speech_bubble_grid,appear_expansion
+text,input_thought_text,$input_thought_text$
 button,input_thought_button
 text,kind_of_feeling_input_text,$kind_of_feeling$
 text,size_of_feeling_input_text,$size_of_feeling$
@@ -435,13 +449,16 @@ click,page
 goto,end_groupeactivity
 #
 sub,end_groupeactivity
+clear,text,main_msg
 hide,grid,challenge_time_grid
+hide,grid,summary_grid
+hide,grid,main_msg_grid
 image,bg_image,background_05.png
 image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,友だちの考えやきもちは鬱自分の考えやきもちと、同じじゃったかのう？,白じい
-click,page
+click,page,next_only
 #
 scene,まとめ
 reset
@@ -451,7 +468,7 @@ image,shiroji_right_image,shiroji_02.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
 msg,main_msg,今日のこころアップタイムはどうじゃったかな？鬱これからも、考えライトをつかって、鬱いろいろな考えを見つけてみるとよいぞい！,白じい
-click,msg
+click,page,with_next_msg
 #
 hide,grid,item_last_info_grid
 hide,image,item_left_last_image
@@ -461,9 +478,8 @@ image,shiroji_right_image,shiroji_02.png
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid
 msg,main_msg,次回のテーマは鬱「<font=#60##true#>いろいろな考えをしてみよう</font>」じゃ！。,白じい
-click,page
+click,page,with_back_msg
 #
-sub,Debug
 scene,今回の発明品おさらい
 reset
 image,bg_image,background_10.png
@@ -516,5 +532,75 @@ click,page,next_only
 hide,grid,select_heart_grid
 is_animation_skip,true
 hide,grid,view_size_of_feeling_grid
+goto,current_scene
+#
+
+sub,canvas_input_children_thought
+image,cover_layer_image
+button,complete_input_button,fade_in,no_sync
+grid,canvas_edit_grid,fade_in,no_sync
+grid,input_canvas_grid
+border,input_thought_canvas_border,,,fade_in
+wait
+button,complete_input_button,fade_out,no_sync
+grid,canvas_edit_grid,fade_out,no_sync
+border,input_thought_canvas_border,,,fade_out
+hide,image,cover_layer_image
+hide,button,complete_input_button
+hide,grid,canvas_edit_grid
+hide,grid,input_canvas_grid
+hide,border,input_thought_canvas_border
+is_animation_skip,true
+goto,current_scene
+#
+
+sub,keyboard_input_children_thought
+image,cover_layer_image
+button,complete_input_button,fade_in,no_sync
+grid,input_text_grid
+border,input_thought_text_border,,,fade_in
+wait
+button,complete_input_button,fade_out,no_sync
+border,input_thought_text_border,,,fade_out
+hide,button,complete_input_button
+hide,border,input_thought_text_border
+hide,image,cover_layer_image
+hide,grid,input_text_grid
+is_animation_skip,true
+goto,current_scene
+#
+
+sub,canvas_input_thought
+image,cover_layer_image
+button,complete_input_button,fade_in,no_sync
+grid,canvas_edit_grid,fade_in,no_sync
+grid,input_canvas_grid
+grid,input_thought_canvas_grid,fade_in
+wait
+button,complete_input_button,fade_out,no_sync
+grid,canvas_edit_grid,fade_out,no_sync
+grid,input_thought_canvas_grid,fade_out
+hide,image,cover_layer_image
+hide,button,complete_input_button
+hide,grid,canvas_edit_grid
+hide,grid,input_canvas_grid
+hide,grid,input_thought_canvas_grid
+is_animation_skip,true
+goto,current_scene
+#
+
+sub,keyboard_input_thought
+image,cover_layer_image
+button,complete_input_button,fade_in,no_sync
+grid,input_text_grid
+grid,input_thought_text_grid,fade_in
+wait
+button,complete_input_button,fade_out,no_sync
+grid,input_thought_text_grid,fade_out
+hide,image,cover_layer_image
+hide,button,complete_input_button
+hide,grid,input_text_grid
+hide,grid,input_thought_text_grid
+is_animation_skip,true
 goto,current_scene
 #

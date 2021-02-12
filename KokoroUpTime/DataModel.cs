@@ -274,6 +274,18 @@ namespace KokoroUpTime
 
         public int? YourFriendsSizeOfFeelingGreetingToAnotherFriend { get; set; }
 
+        public string InputAkamaruThoughtText { get; set; }
+
+        public string InputAosukeThoughtText { get; set; }
+
+        public string InputYourToughtText1 { get; set; }
+
+        public string InputYourToughtText2 { get; set; }
+
+        public string InputFriendToughtText1 { get; set; }
+
+        public string InputFriendToughtText2 { get; set; }
+
     }
 
     public class DataChapter8
@@ -301,8 +313,6 @@ namespace KokoroUpTime
 
         public string ThoughtsOfOthersKindOfFeeling { get; set; }
 
-        //public string KindOfFeeling { get; set; }
-
         public int? AosukesSizeOfFeelingPreUseItem { get; set; }
 
         public int? KimisSizeOfFeelingPreUseItem { get; set; }
@@ -321,8 +331,11 @@ namespace KokoroUpTime
 
         public int? ThoughtsOfOthersSizeOfFeeling { get; set; }
 
+        public string GroupeActivityInputText1 { get; set; }
 
-        //public int? SizeOfFeeling { get; set; }
+        public string GroupeActivityInputText2 { get; set; }
+
+        public string GroupeActivityInputText3 { get; set; }
     }
 
 
@@ -361,6 +374,29 @@ namespace KokoroUpTime
 
 
         public string CreatedAt { get; set; }
+
+        public string AosukeChallengeStep1KindOfFeeling { get; set; }
+
+        public string AosukeChallengeStep2KindOfFeeling { get; set; }
+
+        public string AosukeChallengeStep3KindOfFeeling { get; set; }
+
+        public int? AosukeChallengeStep1SizeOfFeeling { get; set; }
+
+        public int? AosukeChallengeStep2SizeOfFeeling { get; set; }
+
+        public int? AosukeChallengeStep3SizeOfFeeling { get; set; }
+
+        public string ReasonDifferenceSizeOfFeelingInputText { get; set; }
+
+        public string AosukeSmallChallengeInputText {get; set;}
+
+        public string AosukeChallengeStep1InputText {get; set;}
+
+        public string AosukeChallengeStep2InputText {get; set;}
+
+        public string AosukeChallengeStep3InputText {get; set;}
+
     }
 
     public class DataChapter11
@@ -370,6 +406,20 @@ namespace KokoroUpTime
 
 
         public string CreatedAt { get; set; }
+
+        public string AkamaruOtherSolutionInputText1 { get; set; }
+
+        public string AkamaruOtherSolutionInputText2 { get; set; }
+
+        public string AkamaruOtherSolutionInputText3 { get; set; }
+
+        public string Step2AkamaruOtherSolutionInputText1 { get; set; }
+
+        public string Step2AkamaruOtherSolutionInputText2 { get; set; }
+
+        public string Step2AkamaruOtherSolutionInputText3 { get; set; }
+
+
     }
 
     public class DataChapter12

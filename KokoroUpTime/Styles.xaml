@@ -107,7 +107,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
     <Style x:Key="RuleBoard" TargetType="{x:Type CheckBox}">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -253,7 +252,6 @@
             </Setter>
         </Style.Setters>
     </Style>
-
     <!--気持ちの種類選択用のListBox-->
     <DataTemplate x:Key="SelectedBadFeelingTemplate">
         <Grid x:Name="SelectBadFeelingGrid" >
@@ -343,8 +341,6 @@
             </Trigger>-->
         </Style.Triggers>
     </Style>
-
-
     <!--チャレンジタイム用のListBox-->
     <DataTemplate x:Key="SelectedTemplate">
         <Grid x:Name="NicePersonalityGrid">
@@ -382,5 +378,49 @@
                 <Setter Property="Background" Value="#FFBFE6FD"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type TextBlock}" x:Key="OutputTextBlock">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="FontFamily" Value="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBox}" x:Key="InputTextBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="FontFamily" Value="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderThickness" Value="0"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="False">
+                <Setter Property="BorderThickness" Value="0"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!--FontSize="" MaxLength="" 
+        GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" 
+        PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" 
+        PreviewTextInput="TextBoxPreviewTextInput"-->
+
+    <Style TargetType="{x:Type InkCanvas}" x:Key="InputInkCanvas">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="DefaultDrawingAttributes">
+            <Setter.Value>
+                <DrawingAttributes Height="10" Width="10" Color="Black"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type InkCanvas}" x:Key="OutputInkCanvas">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="IsEnabled" Value="False"/>
+        <Setter Property="DefaultDrawingAttributes">
+            <Setter.Value>
+                <DrawingAttributes Height="10" Width="10" Color="Black"/>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

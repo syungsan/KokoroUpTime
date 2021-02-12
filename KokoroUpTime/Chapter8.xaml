@@ -16,39 +16,26 @@
                 <ResourceDictionary Source="Animation.xaml"/>
                 <ResourceDictionary Source="Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type ContentControl}" x:Key="handWritingInputStyle">
-                <Setter Property="ContentTemplate">
+            <Style TargetType="{x:Type Button}" x:Key="InputButton">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="Template">
                     <Setter.Value>
-                        <DataTemplate>
-                            <InkCanvas Background="Transparent" IsEnabled="True"/>
-                        </DataTemplate>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5" >
+                                <ContentPresenter />
+                                </Border>
+                        </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-            </Style>
-            <Style TargetType="{x:Type ContentControl}" x:Key="keyboardInputStyle">
-                <Setter Property="ContentTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <TextBox FontSize="50" MaxLength="38" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" GotFocus="TriggerKeyboard">
-                                <TextBox.Style>
-                                    <Style TargetType="{x:Type TextBox}">
-                                        <Setter Property="Background" Value="White"/>
-                                        <Setter Property="BorderBrush" Value="{x:Null}"/>
-                                        <Setter Property="FontSize" Value="100"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="BorderThickness" Value="0"/>
-                                            </Trigger>
-                                            <Trigger Property="IsFocused" Value="True">
-                                                <Setter Property="BorderThickness" Value="0"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBox.Style>
-                            </TextBox>
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#FFBFE6FD"/>
+                    </Trigger>
+                </Style.Triggers>
             </Style>
         </ResourceDictionary>
     </Page.Resources>
@@ -150,13 +137,13 @@
                     <Image x:Name="ItemNamePlateCenterImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_name.png" Visibility="Visible" d:IsHidden="True"/>
                     <TextBlock x:Name="ItemNameCenterTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="65" Height="105" Width="447" FontWeight="Bold" Margin="67,32,0,0" Text="おじゃま虫バスター" TextAlignment="Center" d:IsHidden="True"/>
                 </Grid>
-                <Grid x:Name="ItemInfoPlateGrid" Margin="661,463,84,250" d:IsHidden="True">
-                    <Image x:Name="ItemInfoPlateImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_detail_info.png" Visibility="Visible" Stretch="Fill" d:IsHidden="True"/>
-                    <TextBlock x:Name="ItemInfoTitleTextBlock"  FontSize="45" FontWeight="Bold" Margin="55,24,600,270" Text="おじゃま虫バスターとは・・・" FontFamily="MS PGothic" d:IsHidden="True"/>
-                    <Grid x:Name="ItemInfoSentenceGrid" Margin="55,118,41,33" d:IsHidden="True">
-                        <TextBlock x:Name="ItemInfoSentenceTextBlock1" FontSize="50" TextWrapping="Wrap" LineHeight="70" FontFamily="MS PGothic" d:IsHidden="True">
-                            <Run Text="✔ 「おじゃま虫」を発見したときにつかうのじゃ！"/>
-                            <Run Text="&#10;✔「おじゃま虫」」をたいじすることができるぞい！"/>
+                <Grid x:Name="ItemInfoPlateGrid" Margin="661,463,84,250">
+                    <Image x:Name="ItemInfoPlateImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_detail_info.png" Visibility="Visible" Stretch="Fill"/>
+                    <TextBlock x:Name="ItemInfoTitleTextBlock"  FontSize="45" FontWeight="Bold" Margin="55,24,600,270" Text="おじゃま虫バスターとは・・・" FontFamily="MS PGothic"/>
+                    <Grid x:Name="ItemInfoSentenceGrid" Margin="55,118,41,33">
+                        <TextBlock x:Name="ItemInfoSentenceTextBlock1" FontSize="50" TextWrapping="Wrap" LineHeight="70" FontFamily="MS PGothic">
+                            <Run Text="✔　「おじゃま虫」を発見したときにつかうのじゃ！"/>
+                            <Run Text="&#10;✔　「おじゃま虫」をたいじすることができるぞい！"/>
                         </TextBlock>
                     </Grid>
                 </Grid>
@@ -195,24 +182,24 @@
                 </Grid>
                 <TextBlock x:Name="SessionFrameText" Text="きちんとつたえてみよう"  FontWeight="UltraBold" FontSize="70" Background="Yellow" Width="800" Height="120" Margin="10,10,680,500" Foreground="MediumPurple" FontFamily="Yu Gothic" TextAlignment="Center" d:IsHidden="True" />
             </Grid>
-            <Grid x:Name="SummaryGrid" d:IsHidden="True">
-                <Grid x:Name="SummaryBoardGrid" Margin="496,203,496,305" d:IsHidden="True">
+            <Grid x:Name="SummaryGrid">
+                <Grid x:Name="SummaryBoardGrid" Margin="496,203,496,305">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Image x:Name="SummaryBoardImage" Source="/Images/blackboard.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="SummarySubTitleTextBlock" Margin="118,42,118,446" Text="今日の教室で学んだこと" TextWrapping="Wrap" Foreground="White" Background="{x:Null}" FontSize="68" FontWeight="Bold" TextAlignment="Center" d:IsHidden="True"/>
-                    <TextBlock x:Name="SummarySentenceTextBlock" Text="✓「おじゃま虫」を発見した・&#10;✓「おじゃま虫」をたいじする練習を&#10;　した。"  TextWrapping="Wrap" Foreground="#FFFFE800" FontSize="58" Margin="69,130,66,190" d:IsHidden="True"/>
+                    <Image x:Name="SummaryBoardImage" Source="/Images/blackboard.png"/>
+                    <TextBlock x:Name="SummarySubTitleTextBlock" Margin="118,42,118,446" Text="今日の教室で学んだこと" TextWrapping="Wrap" Foreground="White" Background="{x:Null}" FontSize="68" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock x:Name="SummarySentenceTextBlock" Text="✓「おじゃま虫」を発見した。&#10;✓「おじゃま虫」をたいじする練習を&#10;　した。"  TextWrapping="Wrap" Foreground="#FFFFE800" FontSize="58" Margin="69,130,66,190"/>
                     <Image x:Name="SummaryItemImage" Source="/Images/item08_solo.png"  Margin="-120,350,500,30" RenderTransformOrigin="0.5,0.5" d:IsHidden="True"/>
                     <TextBlock x:Name="SummaryItemText" Margin="250,400,52,75" Foreground="White" FontFamily="MS PGothic" FontWeight="Bold" d:IsHidden="True">
                         <Run x:Name="SummaryItemTitle" Text="本日の発明品" FontSize="40" />
                         <Run x:Name="SummaryItemName" Text="&#10;No.8  おじゃま虫バスター" FontSize="50"/>
                     </TextBlock>
                 </Grid>
-                <Image x:Name="SummaryTitleImage" Width="401" Source="/Images/summary_title.png" Margin="760,22,759,907" Height="151" d:IsHidden="True"/>
+                <Image x:Name="SummaryTitleImage" Width="401" Source="/Images/summary_title.png" Margin="760,22,759,907" Height="151"/>
             </Grid>
             <Grid x:Name="EndingGrid" d:IsHidden="True">
                 <Grid x:Name="EndingTitleGrid" Width="878" Height="427" Margin="521,202,521,451" d:IsHidden="True">
@@ -270,7 +257,7 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </Grid.RenderTransform>
-                <TextBlock x:Name="OjamamushiDiscriptionTitleText" Text="「おじゃま虫」とは？" Style="{StaticResource ShadowText}" FontSize="60"  Foreground="Blue" VerticalAlignment="Center" FontFamily="/Fonts/HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体" Margin="0,0,0,660" RenderTransformOrigin="0.5 0.5" d:IsHidden="True">
+                <TextBlock x:Name="OjamamushiDiscriptionTitleText" Text="「おじゃま虫」とは？" Style="{StaticResource ShadowText}" FontSize="60"  Foreground="Blue" VerticalAlignment="Center" FontFamily="/Fonts/HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体" Margin="0,0,0,660" RenderTransformOrigin="0.5 0.5">
                     <TextBlock.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -280,7 +267,7 @@
                         </TransformGroup>
                     </TextBlock.RenderTransform>
                 </TextBlock>
-                <Grid x:Name="OjamamsuhiDiscriptionPlateGrid" RenderTransformOrigin="0.5 0.5" d:IsHidden="True">
+                <Grid x:Name="OjamamsuhiDiscriptionPlateGrid" RenderTransformOrigin="0.5 0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -418,7 +405,7 @@
                     <Path   x:Name="ChallengeSpeechBubbleTail" Fill="White" Stroke="{Binding ElementName=ChallengeSpeechBubbleBorder,Path=BorderBrush}" StrokeThickness="11" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-10" Data="M550,100 L740,30 650,100" Grid.Row="0" VerticalAlignment="Bottom"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="HowToUseItemInformationGrid" Margin="110,100,820,400" d:IsHidden="True">
+            <Grid x:Name="HowToUseItemInformationGrid" Margin="110,100,820,400">
                 <Border x:Name="HowToUseItemBorder" Background="#B2A8D3AE" CornerRadius="60" d:IsHidden="True"/>
                 <Grid x:Name="HowToUseItem_1Grid" d:IsHidden="True">
                     <Image x:Name="HowToUseItem_1OjamamushiImage" Source="Images/ojamamushi_02.png" HorizontalAlignment="Right" VerticalAlignment="Top"  Height="500" Width="500" d:IsHidden="True"/>
@@ -436,7 +423,7 @@
                     </Border>
                 </Grid>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid" Margin="140,100,140,160" d:IsHidden="True" >
+            <Grid x:Name="GroupeActivityGrid" Margin="140,100,140,160" >
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform />
@@ -446,7 +433,31 @@
                     </TransformGroup>
                 </Grid.RenderTransform>
                 <Border x:Name="GroupeActivityBorder" Background="#B2CCF2C8" BorderBrush="#FFFFC000" BorderThickness="5"/>
-                <ItemsControl x:Name="GrupeActivityItemsControl" HorizontalAlignment="Left">
+                <Button x:Name="GroupeActivityInputButton1" Style="{StaticResource InputButton}"  Width="1010" Height="160" Margin="40,110,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="5" Click="Button_Click">
+                    <Grid>
+                        <Viewbox>
+                            <InkCanvas x:Name="GroupeActivityInputCanvas1" Background = "Transparent" IsEnabled = "False"/>
+                        </Viewbox>
+                        <TextBlock x:Name="GroupeActivityInputText1" Margin="10" FontSize="38" IsEnabled="False" Background="Transparent" TextWrapping="Wrap" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" VerticalAlignment="Center"  d:IsHidden="True"/>
+                    </Grid>
+                </Button>
+                <Button x:Name="GroupeActivityInputButton2" Style="{StaticResource InputButton}" Width="1010" Height="160" Margin="40,380,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="5" Click="Button_Click">
+                    <Grid>
+                        <Viewbox>
+                            <InkCanvas x:Name="GroupeActivityInputCanvas2" Background = "Transparent" IsEnabled = "False"/>
+                        </Viewbox>
+                        <TextBlock x:Name="GroupeActivityInputText2" Margin="10" FontSize="38" IsEnabled="False" Background="Transparent" TextWrapping="Wrap" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" VerticalAlignment="Center" d:IsHidden="True"/>
+                    </Grid>
+                </Button>
+                <Button x:Name="GroupeActivityInputButton3" Style="{StaticResource InputButton}" Width="1010" Height="160" Margin="40,650,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="5" Click="Button_Click">
+                    <Grid>
+                        <Viewbox>
+                            <InkCanvas x:Name="GroupeActivityInputCanvas3" Background = "Transparent" IsEnabled = "False"/>
+                        </Viewbox>
+                        <TextBlock x:Name="GroupeActivityInputText3" Margin="10" FontSize="38" IsEnabled="False" Background="Transparent" TextWrapping="Wrap" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" VerticalAlignment="Center" d:IsHidden="True"/>
+                    </Grid>
+                </Button>
+                <ItemsControl x:Name="GroupeActivityItemsControl" HorizontalAlignment="Left">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Height="270" VerticalAlignment="Top">
@@ -455,20 +466,7 @@
                             <Run Text="{Binding SubsequentBlueText}" />
                                 </TextBlock>
                                 <TextBlock Text="{Binding MethodBlackText}" FontSize="40" Margin="60,60" TextDecorations="UnderLine" FontFamily="MS PGothic" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                <Button x:Name="GroupeActivityInputButton" IsEnabled="False" Width="1010" Height="160" Margin="40,110,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource BubbleFrame}" BorderBrush="Black" BorderThickness="5" Click="Button_Click">
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="6">
-                                                <ContentPresenter />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                    <ContentControl x:Name="InputContentControl"/>
-                                </Button>
-                                <Image Source="{Binding FileName}"  Height="130" Width="130" Margin="0,0,-50,80" HorizontalAlignment="Right"/>
+                                <Image Source="{Binding FileName}"  Height="130" Width="130" Margin="0,0,-180,80" HorizontalAlignment="Right"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -507,8 +505,8 @@
                 </Grid>
             </Grid>
             <Grid x:Name="OjamamushiGrid" Margin="200,100,200,200" d:IsHidden="True">
-                <Border x:Name="OjamamushiBackBorder" Background="#B2C1EED2" BorderBrush="Blue" BorderThickness="7" d:IsHidden="True"/>
-                <Grid x:Name="KimisOjamamushi" Margin="70,20" Width="400" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Border x:Name="OjamamushiBackBorder" Background="#B2C1EED2" BorderBrush="Blue" BorderThickness="7"/>
+                <Grid x:Name="KimisOjamamushi" Margin="70,20" Width="400" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -526,7 +524,7 @@
                         </Grid>
                     </Border>
                 </Grid>
-                <Grid x:Name="AosukesOjamamushi" Margin="70,20" Width="400" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Grid x:Name="AosukesOjamamushi" Margin="70,20" Width="400" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -544,7 +542,7 @@
                         </Grid>
                     </Border>
                 </Grid>
-                <Grid x:Name="AkamarusOjamamushi" Margin="70,20" Width="400" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Grid x:Name="AkamarusOjamamushi" Margin="70,20" Width="400" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -577,7 +575,7 @@
                                 <ColumnDefinition Width="800"/>
                             </Grid.ColumnDefinitions>
                             <Border x:Name="AosukesThoughtSpeechBubbleBorder" Height="250" Width="650" Background="White" CornerRadius="60" BorderBrush="#FF0070C0" BorderThickness="10" HorizontalAlignment="Left" Grid.Column="1">
-                                <TextBlock x:Name="AosukesThoughtChildrensThoughtsText" Text="うまくいくときもあるし、なにをやってもだめではないかも" FontSize="35" TextWrapping="Wrap" Margin="50,50" LineHeight="60" VerticalAlignment="Center" Grid.Column="1" FontWeight="Bold" FontFamily="Yu Gothic"/>
+                                <TextBlock x:Name="AosukesThoughtChildrensThoughtsText" Text="ぼくの作品はひどいものだ！&#10;クラスの全員からバカだと思われる" FontSize="33" TextWrapping="Wrap" Margin="50,50" LineHeight="60" VerticalAlignment="Center" Grid.Column="1" FontWeight="Bold" FontFamily="Yu Gothic"/>
                             </Border>
                             <Path   x:Name="AosukesThoughtSpeechBubbleTailMask" Stroke="White" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-10,0" Data="M105,140 l0,50"/>
                             <Path   x:Name="AosukesThoughtSpeechBubbleTail" Fill="White" Stroke="#FF0070C0" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,-10,0" Data="M105,140 L10,200 105,190"/>
@@ -685,7 +683,7 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="ItemBookGrid">
+            <Grid x:Name="ItemBookGrid" d:IsHidden="True">
                 <TextBlock x:Name="ItemBookTitleTextBlock" Margin="38,20,1387,935" Text="アイテム図鑑" TextWrapping="Wrap" FontSize="90" Foreground="White" FontWeight="Bold"/>
                 <Grid x:Name="ItemBookMainGrid">
                     <Grid.RowDefinitions>
@@ -763,7 +761,7 @@
                 <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
                     <Image x:Name="BackPageBeforeImage" Source="/Images/before.png" d:IsHidden="True"/>
                 </Button>
-                <Grid x:Name="EndingMessageGrid" Width="1149" Height="210" Margin="210,826,561,44">
+                <Grid x:Name="EndingMessageGrid" Width="1149" Height="210" Margin="210,826,561,44" d:IsHidden="True">
                     <Image x:Name="EndingShortBubbleImage" Source="/Images/short_bubble_right_up.png"/>
                     <TextBlock x:Name="EndingMessageTextBlock" HorizontalAlignment="Center" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="1060" Margin="0,105,0,0" FontSize="48"/>
                 </Grid>
@@ -846,25 +844,45 @@
                     </Button>
                     <Image x:Name="HintCheckCharacterImage" Source="Images/shiroji_03.png" HorizontalAlignment="Left" Visibility="Hidden" d:IsHidden="True"/>
                 </Grid>
-                <Grid x:Name="CanvasEditGrid" Height="240" Margin="0,0,240,0" VerticalAlignment="Top">
+                <Button x:Name="ExitButton" Content="おわる" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" FontSize="24" Click="Button_Click" Margin="1833,10,0,0">
+                    <Button.Background>
+                        <ImageBrush/>
+                    </Button.Background>
+                </Button>
+                <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
+                <Grid x:Name="CanvasEditGrid" Height="240" Margin="0,0,240,0" VerticalAlignment="Top" d:IsHidden="True">
                     <ListBox x:Name="CanvasEditListBox" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-                        <ListBoxItem x:Name="PenButton" FontSize="100" Width="555"  FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black"  HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected">えんぴつ</ListBoxItem>
-                        <ListBoxItem x:Name="EraserButton" FontSize="100" Width="555"  FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black"  HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected">けしごむ</ListBoxItem>
-                        <ListBoxItem x:Name="AllClearButton" FontSize="100" Width="555" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black" HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected">すべてけす</ListBoxItem>
+                        <ListBoxItem x:Name="PenButton" FontSize="100" Width="555"  FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black"  HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="えんぴつ"/>
+                        <ListBoxItem x:Name="EraserButton" FontSize="100" Width="555"  FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black"  HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="けしごむ"/>
+                        <ListBoxItem x:Name="AllClearButton" FontSize="100" Width="555" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black" HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="すべてけす"/>
                     </ListBox>
                 </Grid>
                 <Button x:Name="CompleteInputButton" Click="Button_Click" Content="とじる" HorizontalContentAlignment="Center" Width="240" Height="240" FontSize="65" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" Background="White" BorderBrush="Black" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-                <Button x:Name="ExitButton" Content="おわる" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" FontSize="24" Click="Button_Click" Margin="1833,10,0,0">
-                    <Button.Background>
-                        <ImageBrush/>
-                    </Button.Background>
-                </Button>
-                <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
+                <Border x:Name="InputTextBorder" Margin="0,177,0,0" VerticalAlignment="Top"  Width="1680" HorizontalAlignment="Left" Height="266" Background="White" BorderBrush="Black" BorderThickness="10" CornerRadius="12">
+                    <TextBox x:Name="InputTextBox" Margin="10,10,15,15"  AcceptsReturn="True" FontSize="65" MaxLength="75" TextWrapping="Wrap"  BorderBrush="{x:Null}" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput" VerticalScrollBarVisibility="Disabled" VerticalAlignment="Center">
+                        <TextBox.Style>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsFocused" Value="True">
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </Border>
+                <Border x:Name="InputCanvasBorder" Margin="0,508,0,268" Width="1920" Height="304" Background="White" BorderBrush="Black" BorderThickness="10" CornerRadius="12" d:IsHidden="True">
+                    <InkCanvas x:Name="InputCanvas">
+                        <InkCanvas.DefaultDrawingAttributes>
+                            <DrawingAttributes Height="10" Width="10" Color="Black"/>
+                        </InkCanvas.DefaultDrawingAttributes>
+                    </InkCanvas>
+                </Border>
                 <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">
                     <Border x:Name="ExitBackBorder" BorderThickness="1" BorderBrush="Black" Background="White" CornerRadius="32,32,32,32" d:IsHidden="True"/>
                     <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Height="139" Width="459" FontSize="48" Text="本当にアプリを終了してタイトルにもどりますか？" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center" d:IsHidden="True"/>

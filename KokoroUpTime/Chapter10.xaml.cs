@@ -26,6 +26,7 @@ using Expansion;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
+using System.Windows.Ink;
 
 namespace KokoroUpTime
 
@@ -36,10 +37,13 @@ namespace KokoroUpTime
     /// </summary>
     public partial class Chapter10 : Page
     {
+        // すてきなせいかくのリスト
+        private string[] NICE_PERSONALITY = { "●　親切にしてもらった", "●　アドバイスをくれた", "●　みんなをひっぱってくれた", "●　きちんと順番をまもってくれた", "●　みんなを笑顔にしてくれた", "●　（何か悪いことや失敗をゆるしてもらった）", "●　自分の気持ちを分かってもらった", "●　仲良くしてもらった", "●　ありがとうと言ってくれた" };
 
         //タイトル表示用のテキスト
         private string[] GOOD_FEELINGS = { "●　うれしい", "●　しあわせ", "●　たのしい", "●　ホッとした", "●　きもちいい", "●　まんぞく", "●　すき", "●　やる気マンマン", "●　かんしゃ", "●　わくわく", "●　うきうき", "●　ほこらしい" };
         private string[] BAD_FEELINGS = { "●　心配", "●　こまった", "●　不安", "●　こわい", "●　おちこみ", "●　がっかり", "●　いかり", "●　イライラ", "●　はずかしい", "●　ふまん", "●　かなしい", "●　おびえる" };
+
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
 
@@ -72,7 +76,7 @@ namespace KokoroUpTime
         private Dictionary<string, List<Run>> runs = new Dictionary<string, List<Run>>();
         private Dictionary<string, List<InlineUIContainer>> imageInlines = new Dictionary<string, List<InlineUIContainer>>();
 
-      
+
 
         // 各種コントロールを任意の文字列で呼び出すための辞書
         private Dictionary<string, Image> imageObjects = null;
@@ -88,11 +92,22 @@ namespace KokoroUpTime
 
         // データベースに収めるデータモデルのインスタンス
         private DataChapter10 dataChapter10;
-        //データモデルのプロパティのリスト
+        //データモデルのプロパティを呼び出すための辞書
         private Dictionary<string, string> KindOfFeelings = null;
         private Dictionary<string, int?> SizeOfFeelings = null;
-        //
-        private string DictionaryKey="";
+        private Dictionary<string, StrokeCollection> InputStroke = null;
+        private Dictionary<string, string> InputText = null;
+
+        //データモデルの辞書を呼び出すためのキー
+        private string FeelingDictionaryKey = "";
+        private string InputDictionaryKey = "";
+
+        //入力したストロークを保存するためのコレクション
+        private StrokeCollection ReasonDifferenceSizeOfFrrlingInputStroke = new StrokeCollection();
+        private StrokeCollection AosukeSmallChallengeInputStroke = new StrokeCollection();
+        private StrokeCollection AosukeCahllengeStep1InputStroke = new StrokeCollection();
+        private StrokeCollection AosukeCahllengeStep2InputStroke = new StrokeCollection();
+        private StrokeCollection AosukeCahllengeStep3InputStroke = new StrokeCollection();
 
         // ゲームの切り替えシーン
         private string scene;
@@ -105,9 +120,6 @@ namespace KokoroUpTime
         public DataOption dataOption = new DataOption();
         public DataItem dataItem = new DataItem();
         public DataProgress dataProgress = new DataProgress();
-
-        private ObservableCollection<AosukeSituationTextData> _aosukeSituationTextData = new ObservableCollection<AosukeSituationTextData>();
-        private ObservableCollection<NotGoodEventData> _notGoodEventData = new ObservableCollection<NotGoodEventData>();
 
         public Chapter10()
         {
@@ -131,31 +143,35 @@ namespace KokoroUpTime
             this.SelectGoodFeelingListBox.ItemsSource = GOOD_FEELINGS;
             this.SelectBadFeelingListBox.ItemsSource = BAD_FEELINGS;
 
-            _aosukeSituationTextData.Add(new AosukeSituationTextData("", "学校の休み時間、ふだんしゃべらない友だちに\n自分から話しかけてみた"));
-            _aosukeSituationTextData.Add(new AosukeSituationTextData("その１０分後、", "\nいっしょに話していると、同じテレビ番組が好きだとわかった。"));
-            _aosukeSituationTextData.Add(new AosukeSituationTextData("次の日、", "\nまた、その友だちに青助くんから話しかけに行った。"));
-            _aosukeSituationTextData.Add(new AosukeSituationTextData("次の次の日、", "\nその友だちとはちがうほかの友だちに自分から話しかけてみた。"));
-
-            _notGoodEventData.Add(new NotGoodEventData("学校でのこと", new List<string>() { "学校に行く", "教室に入る", "移動教室に行く", "苦手な教科の授業", "班（グループ）活動", "テストを受ける", "その他の学校でのこと" }));
-            _notGoodEventData.Add(new NotGoodEventData("友だちとのこと", new List<string>() { "友だちに話しかける", "知らない友だちと仲良くなる", "友だち同士の会話に入っていく", "自分からあいさつする", "友だちに意見を言う", "その他の友だちとの関係" }));
-            _notGoodEventData.Add(new NotGoodEventData("場所", new List<string>() { "高いところ", "人がたくさんいるところ", "せまいところ", "暗いところ", "うるさいところ", "その他の場所" }));
-            _notGoodEventData.Add(new NotGoodEventData("動物、虫、自然", new List<string>() { "犬", "ネコ", "ハチ", "ムカデ", "ヘビ", "その他の虫" }));
-            _notGoodEventData.Add(new NotGoodEventData("大きな音", new List<string>() { "花火", "トイレのエアータオル", "雷", "その他の音" }));
-            _notGoodEventData.Add(new NotGoodEventData("家でのこと", new List<string>() { "一人で留守番する", "一人で別の部屋にいる\n（二階など）", "お泊りにいく", "その他の家でのこと" }));
-            _notGoodEventData.Add(new NotGoodEventData("大人とのこと", new List<string>() { "先生に質問する", "店員さんに注文する", "レジで買い物をする", "電話に出る", "親の友だちと話す", "その他の大人との関係" }));
-            _notGoodEventData.Add(new NotGoodEventData("発表", new List<string>() { "手を挙げて発表する", "自分の意見を言う", "リコーダーや歌のテスト", "体育のテスト", "日直", "音読", "その他の発表" }));
-
-            this.AosukeSituationItemControl.ItemsSource = _aosukeSituationTextData;
-            this.NotGoodEventItemsControl.ItemsSource = _notGoodEventData;
-
             KindOfFeelings = new Dictionary<string, string>()
             {
-               
+                ["challenge_step1_feeling"]=this.dataChapter10.AosukeChallengeStep1KindOfFeeling="",
+                ["challenge_step2_feeling"]=this.dataChapter10.AosukeChallengeStep2KindOfFeeling="",
+                ["challenge_step3_feeling"] =this.dataChapter10.AosukeChallengeStep3KindOfFeeling="",
             };
 
             SizeOfFeelings = new Dictionary<string, int?>()
             {
-               
+                ["challenge_step1_feeling"] = this.dataChapter10.AosukeChallengeStep1SizeOfFeeling=-1,
+                ["challenge_step2_feeling"] = this.dataChapter10.AosukeChallengeStep2SizeOfFeeling=-1,
+                ["challenge_step3_feeling"] = this.dataChapter10.AosukeChallengeStep3SizeOfFeeling=-1,
+            };
+
+            InputStroke = new Dictionary<string, StrokeCollection>()
+            { 
+                ["input_reason"]=ReasonDifferenceSizeOfFrrlingInputStroke,
+                ["input_small_challenge"]=AosukeSmallChallengeInputStroke,
+                ["input_challenge_step1"]=AosukeCahllengeStep1InputStroke,
+                ["input_challenge_step2"]=AosukeCahllengeStep2InputStroke,
+                ["input_challenge_step3"]=AosukeCahllengeStep3InputStroke,
+            };
+            InputText = new Dictionary<string, string>()
+            {
+                ["input_reason"] = this.dataChapter10.ReasonDifferenceSizeOfFeelingInputText="",
+                ["input_small_challenge"] = this.dataChapter10.AosukeSmallChallengeInputText="",
+                ["input_challenge_step1"] = this.dataChapter10.AosukeChallengeStep1InputText="",
+                ["input_challenge_step2"] = this.dataChapter10.AosukeChallengeStep2InputText="",
+                ["input_challenge_step3"] = this.dataChapter10.AosukeChallengeStep3InputText="",
             };
 
             this.InitControls();
@@ -186,33 +202,26 @@ namespace KokoroUpTime
                 ["children_stand_right_image"] = this.ChildrenStandRightImage,
                 ["shiroji_small_right_center_image"] = this.ShirojiSmallRightCenterImage,
                 ["session_title_image"] = this.SessionTitleImage,
+                ["session_title_right_image"] = this.SessionTitleRightImage,
+                ["cover_layer_image"] = this.CoverLayerImage,
 
                 ["main_msg_bubble_image"] = this.MainMessageBubbleImage,
-                ["challenge_pre_use_item_image"] =this.ChallengePreUseItemImage,
-                ["akamaru_pre_use_item_image_1"] =this.AkamaruPreUseItemImage1,
-                ["akamaru_pre_use_item_image_2"] = this.AkamaruPreUseItemImage2,
-                ["akamarus_feeling_pre_use_item_arrow_1"] = this.AkamarusFeelingPreUseItemArrow1,
-                ["akamarus_feeling_pre_use_item_arrow_2"] = this.AkamarusFeelingPreUseItemArrow2,
-                ["akamarus_feeling_pre_use_item_graph_1"] = this.AkamarusFeelingPreUseItemGraph1,
-                ["akamarus_feeling_pre_use_item_graph_2"] = this.AkamarusFeelingPreUseItemGraph2,
 
-                ["challenge_after_used_item_image_1"] = this.ChallengeAfterUsedItemImage1,
-                ["challenge_after_used_item_image_2"] = this.ChallengeAfterUsedItemImage2,
-                ["challenge_after_used_item_image_3"] = this.ChallengeAfterUsedItemImage3,
-                ["challenge_after_used_item_image_4"] = this.ChallengeAfterUsedItemImage4,
-                ["akamaru_after_used_item_image_1"] = this.AkamaruAfterUsedItemImage1,
-                ["item_right_up_image"] =this.ItemRightUpImage,
-                ["akamarus_feeling_after_used_item_arrow_1"] = this.AkamarusFeelingAfterUsedItemArrow1,
-                ["akamarus_feeling_after_used_item_arrow_2"] = this.AkamarusFeelingAfterUsedItemArrow2,
-                ["akamarus_feeling_after_used_item_arrow_3"] = this.AkamarusFeelingAfterUsedItemArrow3,
-                ["akamarus_feeling_after_used_item_arrow_4"] = this.AkamarusFeelingAfterUsedItemArrow4,
-                ["akamarus_feeling_after_used_item_graph_1"] = this.AkamarusFeelingAfterUsedItemGraph1,
-                ["akamarus_feeling_after_used_item_graph_2"] = this.AkamarusFeelingAfterUsedItemGraph2,
-                ["akamarus_feeling_after_used_item_graph_3"] = this.AkamarusFeelingAfterUsedItemGraph3,
-                ["akamarus_feeling_after_used_item_graph_4"] = this.AkamarusFeelingAfterUsedItemGraph4,
+                ["step_image"]=this.StepImage,
+                ["item10_image"] = this.Item10Image,
 
-                ["groupe_activity_aosuke_image"] =this.GroupeActivityAosukeImage,
-                ["groupe_activity_item_image"] = this.GroupeActivityItemImage,
+                ["shiroji_right_center_image"] = this.ShirojiRightCenterImage,
+                ["difference_size_of_feeling_image"] =this.DifferenceSizeOfFeelingImage,
+
+                ["aosuke_small_challenge_image"]=this.AosukeSmallChallengeImage,
+                ["aosuke_large_challenge_image"] =this.AosukeLargeChallengeImage,
+                ["item09_item10_effect_image"] =this.Item09Item10EffectImage,
+
+                ["item10_effect_image"]=this.Item10EffectImage,
+                ["item_left_large_image"]=this.ItemLeftLargeImage,
+                ["item_center_large_image"]=this.ItemCenterLargeImage,
+              
+               
 
             };
 
@@ -220,31 +229,39 @@ namespace KokoroUpTime
             {
                 ["session_sub_title_text"] = this.SessionSubTitleTextBlock,
                 ["session_sentence_text"] = this.SessionSentenceTextBlock,
+                ["session_sub_right_title_text"] = this.SessionSubTitleRightTextBlock,
+                ["session_sentence_right_text"] = this.SessionSentenceRightTextBlock,
 
                 ["ending_msg_text"] = this.EndingMessageTextBlock,
                 ["main_msg"] = this.MainMessageTextBlock,
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
                 ["item_book_title_text"] = this.ItemBookTitleTextBlock,
-                ["session_frame_text"] = this.SessionFrameText,
 
-                ["challenge_time_title_text"] =this.ChallengeTImeTitleText,
-                ["input_target_title_text"] =this.InputTargetTitleText,
+                ["challenge_time_title_text"] = this.ChallengeTImeTitleText,
 
-                ["akamarus_feeling_pre_use_item_text_1"] =this.AkamarusFeelingPreUseItemText1,
-                ["akamarus_feeling_pre_use_item_text_2"] = this.AkamarusFeelingPreUseItemText2,
+                ["aosuke_small_challenge_event_title_text"] =this.AosukeSmallChallengeEventTitleText,
+                ["aosuke_challenge_event_title_text"] = this.AosukeChallengeEventTitleText,
+                ["aosuke_small_challenge_event_input_text"] =this.AosukeSmallChallengeEventOutputText,
+                ["aosuke_kind_of_feeling_title_text1"] = this.AosukeKindOfFeelingTitleText1,
+                ["aosuke_size_of_feeling_title_text1"] = this.AosukeSizeOfFeelingTitleText1,
+                
 
-                ["akamarus_feeling_after_used_item_text_1"] = this.AkamarusFeelingAfterUsedItemText1,
-                ["akamarus_feeling_after_used_item_text_2"] = this.AkamarusFeelingAfterUsedItemText2,
+                ["item09_item10_info_sentence_text"] = this.Item09Item10InfoSentenceText,
+                ["aosuke_small_challenge_event_input_text"] =this.AosukeSmallChallengeEventOutputText,
+                ["aosuke_small_challenge_event_title_text"] =this.AosukeSmallChallengeEventTitleText,
+                ["reason_difference_size_of_feeling_input_text"] = this.ReasonDifferenceSizeOfFeelingOutputText,
+                ["aosukes_not_good_scene_step1_input_text"] = this.AosukesNotGoodSceneStep1OutputText,
+                ["aosukes_not_good_scene_step2_input_text"] = this.AosukesNotGoodSceneStep2OutputText,
+                ["aosukes_not_good_scene_step3_input_text"] = this.AosukesNotGoodSceneStep3OutputText,
+                ["aosuke_not_good_scene_step1_size_of_feeling_text"] = this.AosukeNotGoodSceneStep1SizeOfFeelingText,
+                ["aosuke_not_good_scene_step2_size_of_feeling_text"] = this.AosukeNotGoodSceneStep2SizeOfFeelingText,
+                ["aosuke_not_good_scene_step3_size_of_feeling_text"] = this.AosukeNotGoodSceneStep3SizeOfFeelingText,
+                ["aosuke_not_good_scene_step1_kind_of_feeling_text"] = this.AosukeNotGoodSceneStep1KindOfFeelingText,
+                ["aosuke_not_good_scene_step2_kind_of_feeling_text"] = this.AosukeNotGoodSceneStep2KindOfFeelingText,
+                ["aosuke_not_good_scene_step3_kind_of_feeling_text"] = this.AosukeNotGoodSceneStep3KindOfFeelingText,
 
-                ["aosuke_kind_of_feeling_text_1"] = this.AosukeKindOfFeelingText1,
-                ["aosuke_size_of_feeling_text_1"] = this.AosukeSizeOfFeelingText1,
-                ["aosuke_kind_of_feeling_text_2"] = this.AosukeKindOfFeelingText2,
-                ["aosuke_size_of_feeling_text_2"] = this.AosukeSizeOfFeelingText2,
-                ["aosuke_kind_of_feeling_text_3"] = this.AosukeKindOfFeelingText3,
-                ["aosuke_size_of_feeling_text_3"] = this.AosukeSizeOfFeelingText3,
-                ["aosuke_kind_of_feeling_text_4"] = this.AosukeKindOfFeelingText4,
-                ["aosuke_size_of_feeling_text_4"] = this.AosukeSizeOfFeelingText4,
+
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -260,22 +277,33 @@ namespace KokoroUpTime
                 ["select_feeling_back_button"] = this.SelectFeelingBackButton,
                 ["ok_button"] = this.OkButton,
                 ["return_button"] = this.ReturnButton,
+                ["complete_input_button"] = this.CompleteInputButton,
 
-                ["akamarus_kind_of_feeling_button_next_day_border"]=this.AkamarusKindOfFeelingNextDayButton,
-                ["akamarus_kind_of_feeling_button_after_three_days_border"]=this.AkamarusKindOfFeelingAfterThreeDaysButton,
-                ["akamarus_kind_of_feeling_button_after_four_days_border"]=this.AkamarusKindOfFeelingAfterFourdaysButton,
+                ["reason_difference_size_of_feeling_input_button"] =this.ReasonDifferenceSizeOfFeelingInputButton,
 
-                ["akamarus_size_of_feeling_button_next_day_border"] = this.AkamarusSizeOfFeelingNextDayButton,
-                ["akamarus_size_of_feeling_button_after_three_days_border"] = this.AkamarusSizeOfFeelingAfterThreeDaysButton,
-                ["akamarus_size_of_feeling_button_after_four_days_border"] = this.AkamarusSizeOfFeelingAfterFourdaysButton,
+                ["not_good_scene_kind_of_feeling1"] = this.NotGoodSceneKindOfFeeling1,
+                ["not_good_scene_size_of_feeling1"] = this.NotGoodSceneSizeOfFeeling1,
+                ["not_good_scene_kind_of_feeling2"] = this.NotGoodSceneKindOfFeeling2,
+                ["not_good_scene_size_of_feeling2"] = this.NotGoodSceneSizeOfFeeling2,
+                ["not_good_scene_kind_of_feeling3"] = this.NotGoodSceneKindOfFeeling3,
+                ["not_good_scene_size_of_feeling3"] = this.NotGoodSceneSizeOfFeeling3,
+                ["not_good_scene_kind_of_feeling4"] = this.NotGoodSceneKindOfFeeling4,
+                ["not_good_scene_size_of_feeling4"] = this.NotGoodSceneSizeOfFeeling4,
+
+                ["aosuke_small_challenge_event_input_button"] =this.AosukeSmallChallengeEventInputButton,
+
+                ["aosuke_kind_of_feeling"] = this.AosukeKindOfFeeling,
+                ["aosuke_size_of_feeling"] = this.AosukeSizeOfFeeling,
+
             };
 
             this.gridObjects = new Dictionary<string, Grid>
             {
                 ["session_grid"] = this.SessionGrid,
                 ["session_frame_grid"] = this.SessionFrameGrid,
-                ["manga_grid"]=this.MangaGrid,
-                ["title_grid"]=this.TitleGrid,
+                ["session_frame_right_grid"] = this.SessionFrameRightGrid,
+                ["manga_grid"] = this.MangaGrid,
+                ["title_grid"] = this.TitleGrid,
 
                 ["summary_grid"] = this.SummaryGrid,
                 ["ending_grid"] = this.EndingGrid,
@@ -293,52 +321,59 @@ namespace KokoroUpTime
                 ["branch_select_grid"] = this.BranchSelectGrid,
                 ["exit_back_grid"] = this.ExitBackGrid,
 
-                ["select_feeling_grid"]=this.SelectFeelingGrid,
-                ["select_heart_grid"]=this.SelectHeartGrid,
-                ["view_size_of_feeling_grid"] =this.ViewSizeOfFeelingGrid,
+                ["select_feeling_grid"] = this.SelectFeelingGrid,
+                ["select_heart_grid"] = this.SelectHeartGrid,
+                ["view_size_of_feeling_grid"] = this.ViewSizeOfFeelingGrid,
                 ["canvas_edit_grid"] = this.CanvasEditGrid,
 
-                ["not_good_example_grid"] =this.NotGoodExampleGrid,
-                ["not_good_example_title_grid"] = this.NotGoodExampleTitleGrid,
-                ["not_good_example_children_image_grid"] = this.NotGoodExampleChildrenImageGrid,
-                ["not_good_example_text_grid"] = this.NotGoodExampleTextGrid,
+                ["view_difference_feeling_grid"] = this.ViewDifferenceFeelingGrid,
+                ["not_good_scene_feeling_grid1"] = this.NotGoodSceneFeelingGrid1,
+                ["not_good_scene_feeling_grid2"] = this.NotGoodSceneFeelingGrid2,
+                ["not_good_scene_feeling_grid3"] = this.NotGoodSceneFeelingGrid3,
+                ["not_good_scene_feeling_grid4"] = this.NotGoodSceneFeelingGrid4,
+                ["size_of_feeling_arrow_grid"] =this.SizeOfFeelingArrowGrid,
 
-                ["input_target_grid"] =this.InputTargetGrid,
+                ["arrange_scene_in_steps_grid"] =this.ArrangeSceneInStepsGrid,
+                ["not_good_scene_step1_grid"] =this.NotGoodSceneStep1Grid,
+                ["not_good_scene_step2_grid"] = this.NotGoodSceneStep2Grid,
+                ["not_good_scene_step3_grid"] = this.NotGoodSceneStep3Grid,
+                ["not_good_scene_step4_grid"] = this.NotGoodSceneStep4Grid,
 
-                ["akamaru_after_used_item_grid"] =this.AkamarusSizeOfFeelingAfterUsedItemGrid,
-                ["change_akamarus_size_of_feeling_grid"] =this.ChangeAkamarusSizeOfFeelingGrid,
-                ["change_akamarus_size_of_feeling_pre_use_item_grid"]=this.ChangeAkamarusSizeOfFeelingPreUseItemGrid,
-                ["change_akamarus_size_of_feeling_after_used_item_grid"] = this.ChangeAkamarusSizeOfFeelingAfterUsedItemGrid,
-                ["change_aosukes_feeling_grid"] =this.ChangeAosukesFeelingGrid,
-                ["bad_feeling_event_grid"] =this.BadFeelingEventGrid,
-                ["bad_feeling_grid"] =this.BadFeelingGrid,
+                ["reason_difference_size_of_feeling_input_grid"] =this.ReasonDifferenceSizeOfFeelingInputGrid,
+                ["aosuke_challenge_input_grid"]=this.AosukeChallengeInputGrid,
+                ["aosuke_challenge_event_grid"] =this.AosukeChallengeEventGrid,
 
-                ["change_akamarus_size_of_feeling_grid"] =this.ChangeAkamarusSizeOfFeelingGrid,
-                ["change_akamarus_size_of_feeling_pre_use_item_grid"] =this.ChangeAkamarusSizeOfFeelingPreUseItemGrid,
-                ["change_akamarus_size_of_feeling_after_used_item_grid"] = this.ChangeAkamarusSizeOfFeelingAfterUsedItemGrid,
+                ["item09_item10_effect_grid"] =this.Item09Item10EffectGrid,
+                ["item09_item10_info_grid"] = this.Item09Item10InfoGrid,
 
-                ["state_of_akamaru_grid"] =this.StateOfAkamaruGird,
-                ["not_good_event_grid"] =this.NotGoodEventGrid,
-                ["input_feeling_grid"]=this.InputFeelingGrid,
+                ["input_canvas_grid"] =this.InputCanvasGrid,
+                ["input_text_grid"] = this.InputTextGrid,
+
+                ["item_name_plate_center_up_grid"] =this.ItemNamePlateCenterUpGrid,
+                ["difference_aosukes_feeling_input_grid"] =this.DifferenceAosukesFeelingInputGrid,
             };
 
             this.borderObjects = new Dictionary<string, Border>
             {
-                ["title_border"]=this.TitleBorder,
-                ["light_green_border"] =this.LightGreenBorder,
+                ["title_border"] = this.TitleBorder,
+                ["light_green_border"] = this.LightGreenBorder,
+                ["light_green_thin_border"] =this.LightGreenThinBorder,
 
-                ["state_of_akamaru_next_day_border"]=this.StateOfAkamaruNextDayBorder,
-                ["state_of_akamaru_after_three_days_border"]=this.StateOfAkamaruAfterThreeDaysBorder,
-                ["state_of_akamaru_after_four_days_border"] =this.StateOfAkamaruAfterFourdaysBorder,
+                ["aosuke_challenge_event_border"] =this.AosukeChallengeEventBorder,
+
+                ["light_green_thin_border"] =this.LightGreenThinBorder,
+                ["input_canvas_border1"] =this.InputCanvasBorder1,
+                ["input_canvas_border2"] = this.InputCanvasBorder2,
+                ["input_canvas_border3"] = this.InputCanvasBorder3,
+
+                ["input_text_box_border1"] = this.InputTextBoxBorder1,
+                ["input_text_box_border2"] = this.InputTextBoxBorder2,
+                ["input_text_box_border3"] = this.InputTextBoxBorder3,
             };
 
             this.outlineTextObjects = new Dictionary<string, OutlineText>
             {
-                ["why_is_akamaru_not_good_at_dogs_scene_title"] = this.WhyIsAkamaruNotGoodAtdogsSceneTitle,
-                ["example_scene_title"] = this.ExampleSceneTitle,
-                ["challenging_scene_title"] = this.ChallengingSceneTitle,
-                ["akamaru_using_item_scene_title"] = this.AkamaruUsingItemSceneTitle,
-                ["aosukes_feeling_scene_title"] = this.AosukesFeelingSceneTitle,
+                ["think_kimis_not_good_scene_title"] =this.ThinkKimisNotGoodSceneTitle,
             };
         }
 
@@ -359,7 +394,9 @@ namespace KokoroUpTime
 
             this.ItemReviewGrid.Visibility = Visibility.Hidden;
             this.SessionFrameGrid.Visibility = Visibility.Hidden;
-            this.SessionFrameText.Visibility = Visibility.Hidden;
+            this.SessionFrameRightGrid.Visibility = Visibility.Hidden;
+            this.SessionTitleImage.Visibility = Visibility.Hidden;
+            this.SessionTitleRightImage.Visibility = Visibility.Hidden;
 
 
             this.TitleGrid.Visibility = Visibility.Hidden;
@@ -369,72 +406,9 @@ namespace KokoroUpTime
             this.SelectFeelingGrid.Visibility = Visibility.Hidden;
             this.ViewSizeOfFeelingGrid.Visibility = Visibility.Hidden;
             this.SelectHeartGrid.Visibility = Visibility.Hidden;
-            this.WhyIsAkamaruNotGoodAtdogsSceneTitle.Visibility = Visibility.Hidden;
-            this.ExampleSceneTitle.Visibility = Visibility.Hidden;
-            this.ChallengingSceneTitle.Visibility = Visibility.Hidden;
-            this.AkamaruUsingItemSceneTitle.Visibility = Visibility.Hidden;
-            this.AosukesFeelingSceneTitle.Visibility = Visibility.Hidden;
+
 
             this.ShirojiSmallRightCenterImage.Visibility = Visibility.Hidden;
-
-            this.LightGreenBorder.Visibility = Visibility.Hidden;
-            this.NotGoodExampleGrid.Visibility = Visibility.Hidden;
-            this.NotGoodExampleTitleGrid.Visibility= Visibility.Hidden;
-            this.NotGoodExampleTextGrid.Visibility= Visibility.Hidden;
-            this.NotGoodExampleChildrenImageGrid.Visibility = Visibility.Hidden;
-            this.InputTargetGrid.Visibility = Visibility.Hidden;
-            this.AkamarusSizeOfFeelingAfterUsedItemGrid.Visibility = Visibility.Hidden;
-            
-            this.ChangeAkamarusSizeOfFeelingGrid.Visibility = Visibility.Hidden;
-            this.ChangeAkamarusSizeOfFeelingPreUseItemGrid.Visibility= Visibility.Hidden;
-            this.ChallengePreUseItemImage.Visibility = Visibility.Hidden;
-            this.AkamaruPreUseItemImage1.Visibility = Visibility.Hidden;
-            this.AkamaruPreUseItemImage2.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingPreUseItemArrow1.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingPreUseItemArrow2.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingPreUseItemGraph1.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingPreUseItemGraph2.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingPreUseItemText1.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingPreUseItemText2.Visibility = Visibility.Hidden;
-
-            this.ChangeAkamarusSizeOfFeelingAfterUsedItemGrid.Visibility = Visibility.Hidden;
-            this.ChallengeAfterUsedItemImage1.Visibility = Visibility.Hidden;
-            this.ChallengeAfterUsedItemImage2.Visibility = Visibility.Hidden;
-            this.ChallengeAfterUsedItemImage3.Visibility = Visibility.Hidden;
-            this.ChallengeAfterUsedItemImage4.Visibility = Visibility.Hidden;
-            this.AkamaruAfterUsedItemImage1.Visibility = Visibility.Hidden;
-            this.ItemRightUpImage.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingAfterUsedItemArrow1.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingAfterUsedItemArrow2.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingAfterUsedItemArrow3.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingAfterUsedItemArrow4.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingAfterUsedItemGraph1.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingAfterUsedItemGraph2.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingAfterUsedItemGraph3.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingAfterUsedItemGraph4.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingAfterUsedItemText1.Visibility = Visibility.Hidden;
-            this.AkamarusFeelingAfterUsedItemText2.Visibility = Visibility.Hidden;
-
-            this.NotGoodEventGrid.Visibility = Visibility.Hidden;
-            this.ChangeAosukesFeelingGrid.Visibility = Visibility.Hidden;
-            this.InputFeelingGrid.Visibility = Visibility.Hidden;
-            this.GroupeActivityAosukeImage.Visibility = Visibility.Hidden;
-            this.GroupeActivityItemImage.Visibility = Visibility.Hidden;
-            this.BadFeelingEventGrid.Visibility = Visibility.Hidden;
-            this.BadFeelingGrid.Visibility = Visibility.Hidden;
-
-            this.StateOfAkamaruGird.Visibility = Visibility.Hidden;
-            this.StateOfAkamaruNextDayBorder.Visibility = Visibility.Hidden;
-            this.StateOfAkamaruAfterFourdaysBorder.Visibility = Visibility.Hidden;
-            this.StateOfAkamaruAfterThreeDaysBorder.Visibility = Visibility.Hidden;
-            this.AkamarusKindOfFeelingNextDayButton.Visibility = Visibility.Hidden;
-            this.AkamarusKindOfFeelingAfterThreeDaysButton.Visibility = Visibility.Hidden;
-            this.AkamarusKindOfFeelingAfterFourdaysButton.Visibility = Visibility.Hidden;
-            this.AkamarusSizeOfFeelingNextDayButton.Visibility = Visibility.Hidden;
-            this.AkamarusSizeOfFeelingAfterThreeDaysButton.Visibility = Visibility.Hidden;
-            this.AkamarusSizeOfFeelingAfterFourdaysButton.Visibility = Visibility.Hidden;
-
-
 
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
             this.MainMessageGrid.Visibility = Visibility.Hidden;
@@ -486,13 +460,69 @@ namespace KokoroUpTime
             this.CompleteInputButton.Visibility = Visibility.Hidden;
 
             this.CoverLayerImage.Visibility = Visibility.Hidden;
-
-
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
+
+            this.LightGreenBorder.Visibility = Visibility.Hidden;
+            this.ViewDifferenceFeelingGrid.Visibility = Visibility.Hidden;
+            this.NotGoodSceneFeelingGrid1.Visibility = Visibility.Hidden;
+            this.NotGoodSceneFeelingGrid2.Visibility = Visibility.Hidden;
+            this.NotGoodSceneFeelingGrid3.Visibility = Visibility.Hidden;
+            this.NotGoodSceneFeelingGrid4.Visibility = Visibility.Hidden;
+            this.SizeOfFeelingArrowGrid.Visibility = Visibility.Hidden;
+            this.ArrangeSceneInStepsGrid.Visibility = Visibility.Hidden;
+            this.StepImage.Visibility = Visibility.Hidden;
+            this.Item10Image.Visibility = Visibility.Hidden;
+            this.NotGoodSceneStep1Grid.Visibility = Visibility.Hidden;
+            this.NotGoodSceneStep2Grid.Visibility = Visibility.Hidden;
+            this.NotGoodSceneStep3Grid.Visibility = Visibility.Hidden;
+            this.NotGoodSceneStep4Grid.Visibility = Visibility.Hidden;
+            this.ReasonDifferenceSizeOfFeelingInputGrid.Visibility = Visibility.Hidden;
+            this.DifferenceSizeOfFeelingImage.Visibility = Visibility.Hidden;
+            this.ShirojiRightCenterImage.Visibility = Visibility.Hidden;
+            this.ReasonDifferenceSizeOfFeelingInputButton.Visibility = Visibility.Hidden;
+            this.AosukeChallengeInputGrid.Visibility = Visibility.Hidden;
+            this.LightGreenThinBorder.Visibility = Visibility.Hidden;
+            this.AosukeChallengeEventGrid.Visibility = Visibility.Hidden;
+
+            this.AosukeChallengeEventTitleText.Visibility = Visibility.Hidden;
+            this.AosukeKindOfFeelingTitleText1.Visibility = Visibility.Hidden;
+            this.AosukeSizeOfFeelingTitleText1.Visibility = Visibility.Hidden;
+            this.AosukeChallengeEventBorder.Visibility = Visibility.Hidden;
+            this.AosukeLargeChallengeImage.Visibility = Visibility.Hidden;
+            this.AosukeKindOfFeeling.Visibility = Visibility.Hidden;
+            this.AosukeSizeOfFeeling.Visibility = Visibility.Hidden;
+            this.AosukeSmallChallengeEventInputButton.Visibility = Visibility.Hidden;
+            this.AosukeSmallChallengeEventTitleText.Visibility = Visibility.Hidden;
+
+            this.AosukeKindOfFeelingTitleText1.Visibility = Visibility.Hidden;
+            this.AosukeSizeOfFeelingTitleText1.Visibility = Visibility.Hidden;
+            this.AosukeSmallChallengeImage.Visibility = Visibility.Hidden;
+            this.AosukeSmallChallengeEventInputButton.Visibility = Visibility.Hidden;
+            this.AosukeLargeChallengeImage.Visibility = Visibility.Hidden;
+            this.Item09Item10EffectGrid.Visibility = Visibility.Hidden;
+            this.Item09Item10InfoGrid.Visibility = Visibility.Hidden;
+            this.Item09Item10InfoSentenceText.Visibility = Visibility.Hidden;
+            this.DifferenceAosukesFeelingInputGrid.Visibility = Visibility.Hidden;
+
+            this.Item10EffectImage.Visibility = Visibility.Hidden;
+            this.ItemLeftLargeImage.Visibility = Visibility.Hidden;
+            this.ItemCenterLargeImage.Visibility = Visibility.Hidden;
+            this.ItemNamePlateLeftGrid.Visibility = Visibility.Hidden;
+            this.ItemNamePlateCenterUpGrid.Visibility = Visibility.Hidden;
+
+            this.InputTextGrid.Visibility = Visibility.Hidden;
+            this.InputTextBoxBorder1.Visibility = Visibility.Hidden;
+            this.InputTextBoxBorder2.Visibility = Visibility.Hidden;
+            this.InputTextBoxBorder3.Visibility = Visibility.Hidden;
+            this.InputCanvasGrid.Visibility = Visibility.Hidden;
+            this.InputCanvasBorder1.Visibility = Visibility.Hidden;
+            this.InputCanvasBorder2.Visibility = Visibility.Hidden;
+            this.InputCanvasBorder3.Visibility = Visibility.Hidden;
+
+
 
 
             this.OkButton.Visibility = Visibility.Hidden;
-
             this.SelectFeelingBackButton.Visibility = Visibility.Hidden;
 
             this.SessionSubTitleTextBlock.Text = "";
@@ -507,10 +537,22 @@ namespace KokoroUpTime
 
         private void SetInputMethod()
         {
-            styleSelector.HandWritingInputStyle = FindResource("handWritingInputStyle") as Style;
-            styleSelector.KeyboardInputStyle = FindResource("keyboardInputStyle") as Style;
-
-            this.PenButton.IsSelected = true;
+            if (this.dataOption.InputMethod == 1)
+            {
+                this.ReasonDifferenceSizeOfFeelingOutputCanvas.Visibility = Visibility.Hidden;
+                this.AosukeSmallChallengeEventOutputCanvas.Visibility = Visibility.Hidden;
+                this.AosukesNotGoodSceneStep1OutputCanvas.Visibility = Visibility.Hidden;
+                this.AosukesNotGoodSceneStep2OutputCanvas.Visibility = Visibility.Hidden;
+                this.AosukesNotGoodSceneStep3OutputCanvas.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                this.ReasonDifferenceSizeOfFeelingOutputText.Visibility = Visibility.Hidden;
+                this.AosukeSmallChallengeEventOutputText.Visibility = Visibility.Hidden;
+                this.AosukesNotGoodSceneStep1OutputText.Visibility = Visibility.Hidden;
+                this.AosukesNotGoodSceneStep2OutputText.Visibility = Visibility.Hidden;
+                this.AosukesNotGoodSceneStep3OutputText.Visibility = Visibility.Hidden;
+            }
         }
 
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
@@ -527,7 +569,6 @@ namespace KokoroUpTime
             using (var connection = new SQLiteConnection(this.initConfig.dbPath))
             {
                 // 毎回のアクセス日付を記録
-                
                 connection.Insert(this.dataChapter10);
             }
         }
@@ -754,8 +795,8 @@ namespace KokoroUpTime
 
                         switch (borderBrush)
                         {
-                            case"red":
-                                borderObject.BorderBrush= (Brush)converter.ConvertFromString("#FFFF0000");
+                            case "red":
+                                borderObject.BorderBrush = (Brush)converter.ConvertFromString("#FFFF0000");
                                 break;
 
                             case "blue":
@@ -779,10 +820,11 @@ namespace KokoroUpTime
                     {
                         var borderStoryBoard = this.scenarios[this.scenarioCount][4];
                         var borderObjectName = borderObject.Name;
-                        var _objectsName = this.position;
+                        string _objectsName = this.position;
+
                         this.ShowAnime(storyBoard: borderStoryBoard, objectName: borderObjectName, objectsName: _objectsName, isSync: borderAnimeIsSync);
                     }
-                    
+
                     else
                     {
                         this.scenarioCount += 1;
@@ -901,7 +943,7 @@ namespace KokoroUpTime
                     }
                     break;
 
-                //ボーダーに対しての処理
+                //縁取り文字を表示させるための処理
                 case "outline_text":
 
                     this.position = this.scenarios[this.scenarioCount][1];
@@ -995,6 +1037,36 @@ namespace KokoroUpTime
                                     }
                                 };
                             }
+                            else if (clickMethod == "with_next_msg")
+                            {
+                                waitTimer.Start();
+
+                                waitTimer.Tick += (s, args) =>
+                                {
+                                    waitTimer.Stop();
+                                    waitTimer = null;
+                                    if (clickButton == "page")
+                                    {
+                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                        this.NextMessageButton.Visibility = Visibility.Visible;
+                                    }
+                                };
+                            }
+                            else if (clickMethod == "with_back_msg")
+                            {
+                                waitTimer.Start();
+
+                                waitTimer.Tick += (s, args) =>
+                                {
+                                    waitTimer.Stop();
+                                    waitTimer = null;
+                                    if (clickButton == "page")
+                                    {
+                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                        this.BackMessageButton.Visibility = Visibility.Visible;
+                                    }
+                                };
+                            }
                             else
                             {
                                 waitTimer.Start();
@@ -1011,19 +1083,139 @@ namespace KokoroUpTime
                                     }
                                     else if (clickButton == "page")
                                     {
-                                        if (this.scene == "グループアクティビティ") 
+                                        switch (this.scene)
                                         {
-                                            if (this.AosukeSizeOfFeelingText1.Text != ""&& this.AosukeSizeOfFeelingText2.Text != "" && this.AosukeSizeOfFeelingText3.Text != "" && this.AosukeSizeOfFeelingText4.Text != "")
-                                            {
+                                            case "チャレンジタイム！":
+                                                if (this.dataOption.InputMethod == 0)
+                                                {
+                                                    if (this.InputStroke["input_reason"].Count > 1)
+                                                    { 
+                                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                                    }
+
+                                                }
+                                                else 
+                                                {
+                                                    if (this.InputText["input_reason"] != "") 
+                                                    {
+                                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                                    }
+                                                }
+
+                                                break;
+
+                                            case "グループアクティビティ　①":
+                                                if(this.dataOption.InputMethod==0)
+                                                {
+                                                    if(this.InputStroke["input_small_challenge"].Count > 1)
+                                                    {
+                                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if(this.InputText["input_small_challenge"]!="")
+                                                    {
+                                                         this.NextPageButton.Visibility = Visibility.Visible;
+                                                    }
+                                                }
+
+                                                break;
+
+                                            case "グループアクティビティ　②":
+                                                if(this.dataOption.InputMethod==0)
+                                                {
+                                                    bool CompleteInputFlag = true;
+                                                    foreach(KeyValuePair<string ,StrokeCollection> kvp in this.InputStroke)
+                                                    {
+                                                        if(Regex.IsMatch (kvp.Key, "input_challenge_step."))
+                                                        {
+                                                            if(kvp.Value.Count <2)
+                                                            {
+                                                                CompleteInputFlag = false;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (CompleteInputFlag)
+                                                    {
+                                                        foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
+                                                        {
+                                                            if (kvp.Value == "")
+                                                            {
+                                                                CompleteInputFlag = false;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (CompleteInputFlag)
+                                                    {
+                                                        foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
+                                                        {
+                                                            if (kvp.Value == -1)
+                                                            {
+                                                                CompleteInputFlag = false;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (CompleteInputFlag)
+                                                    {
+                                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    bool CompleteInputFlag = true;
+
+                                                    foreach (KeyValuePair<string, string> kvp in this.InputText)
+                                                    {
+                                                        if (Regex.IsMatch(kvp.Key, "input_challenge_step."))
+                                                        {
+                                                            if (kvp.Value == "")
+                                                            {
+                                                                CompleteInputFlag = false;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (CompleteInputFlag)
+                                                    {
+                                                        foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
+                                                        {
+                                                            if (kvp.Value == "")
+                                                            {
+                                                                CompleteInputFlag = false;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (CompleteInputFlag)
+                                                    {
+                                                        foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
+                                                        {
+                                                            if (kvp.Value == -1)
+                                                            {
+                                                                CompleteInputFlag = false;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (CompleteInputFlag)
+                                                    {
+                                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                                    }
+                                                }
+
+                                                break;
+
+                                            default:
                                                 this.NextPageButton.Visibility = Visibility.Visible;
-                                            }
-                                            this.BackPageButton.Visibility = Visibility.Visible;
+                                                break;
+
                                         }
-                                        else
-                                        {
-                                            this.NextPageButton.Visibility = Visibility.Visible;
-                                            this.BackPageButton.Visibility = Visibility.Visible;
-                                        }
+                                        this.BackPageButton.Visibility = Visibility.Visible;
                                     }
                                 };
                             }
@@ -1041,6 +1233,22 @@ namespace KokoroUpTime
                                     this.NextPageButton.Visibility = Visibility.Visible;
                                 }
                             }
+                            else if (clickMethod == "with_next_msg")
+                            {
+                                if (clickButton == "page")
+                                {
+                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                    this.NextMessageButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                            else if (clickMethod == "with_back_msg")
+                            {
+                                if (clickButton == "page")
+                                {
+                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                    this.BackMessageButton.Visibility = Visibility.Visible;
+                                }
+                            }
                             else
                             {
                                 if (clickButton == "msg")
@@ -1050,19 +1258,139 @@ namespace KokoroUpTime
                                 }
                                 else if (clickButton == "page")
                                 {
-                                    if (this.scene == "グループアクティビティ")
+                                    switch (this.scene)
                                     {
-                                        if (this.AosukeSizeOfFeelingText1.Text != "" && this.AosukeSizeOfFeelingText2.Text != "" && this.AosukeSizeOfFeelingText3.Text != "" && this.AosukeSizeOfFeelingText4.Text != "")
-                                        {
+                                        case "チャレンジタイム！":
+                                            if (this.dataOption.InputMethod == 0)
+                                            {
+                                                if (this.InputStroke["input_reason"].Count > 1)
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                if (this.InputText["input_reason"] != "")
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                }
+                                            }
+
+                                            break;
+
+                                        case "グループアクティビティ　①":
+                                            if (this.dataOption.InputMethod == 0)
+                                            {
+                                                if (this.InputStroke["input_small_challenge"].Count > 1)
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                if (this.InputText["input_small_challenge"] != "")
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                }
+                                            }
+
+                                            break;
+
+                                        case "グループアクティビティ　②":
+                                            if (this.dataOption.InputMethod == 0)
+                                            {
+                                                bool CompleteInputFlag = true;
+                                                foreach (KeyValuePair<string, StrokeCollection> kvp in this.InputStroke)
+                                                {
+                                                    if (Regex.IsMatch(kvp.Key, "input_challenge_step."))
+                                                    {
+                                                        if (kvp.Value.Count < 2)
+                                                        {
+                                                            CompleteInputFlag = false;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                if (CompleteInputFlag)
+                                                {
+                                                    foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
+                                                    {
+                                                        if (kvp.Value == "")
+                                                        {
+                                                            CompleteInputFlag = false;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                if (CompleteInputFlag)
+                                                {
+                                                    foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
+                                                    {
+                                                        if (kvp.Value == -1)
+                                                        {
+                                                            CompleteInputFlag = false;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                if (CompleteInputFlag)
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                bool CompleteInputFlag = true;
+
+                                                foreach (KeyValuePair<string, string> kvp in this.InputText)
+                                                {
+                                                    if (Regex.IsMatch(kvp.Key, "input_challenge_step."))
+                                                    {
+                                                        if (kvp.Value == "")
+                                                        {
+                                                            CompleteInputFlag = false;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                if (CompleteInputFlag)
+                                                {
+                                                    foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
+                                                    {
+                                                        if (kvp.Value == "")
+                                                        {
+                                                            CompleteInputFlag = false;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                if (CompleteInputFlag)
+                                                {
+                                                    foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
+                                                    {
+                                                        if (kvp.Value == -1)
+                                                        {
+                                                            CompleteInputFlag = false;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                if (CompleteInputFlag)
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                }
+                                            }
+
+                                            break;
+
+                                        default:
                                             this.NextPageButton.Visibility = Visibility.Visible;
-                                        }
-                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                            break;
+
                                     }
-                                    else
-                                    {
-                                        this.NextPageButton.Visibility = Visibility.Visible;
-                                        this.BackPageButton.Visibility = Visibility.Visible;
-                                    }
+                                    this.BackPageButton.Visibility = Visibility.Visible;
                                 }
                             }
                         }
@@ -1204,8 +1532,16 @@ namespace KokoroUpTime
                         {
                             switch (this.scene)
                             {
-                                case "グループアクティビティ":
-                                    this.GoTo("input_aosuke_feeling");
+                                case "チャレンジタイム！":
+                                    this.GoTo("challenge_time");
+                                    break;
+
+                                case "グループアクティビティ　①":
+                                    this.GoTo("groupe_activity_1");
+                                    break;
+
+                                case "グループアクティビティ　②":
+                                    this.GoTo("groupe_activity_2");
                                     break;
                             }
                         }
@@ -1330,20 +1666,17 @@ namespace KokoroUpTime
                     this.SelectHeartImage.Source = null;
                     this.SelectNeedleImage.Source = null;
 
-                    if (Regex.IsMatch(this.scene , ".+のきもちときもちの大きさ.+")||this.scene=="グループアクティビティ")
+                    if (this.KindOfFeelings[FeelingDictionaryKey].Split(",")[1] == "良い")
                     {
-                        if(this.KindOfFeelings[DictionaryKey].Split(",")[1] == "良い")
-                        {
-                            this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_red.png", UriKind.Relative));
-                            this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/red_needle.png", UriKind.Relative));
-                        }
-                        else if(this.KindOfFeelings[DictionaryKey].Split(",")[1] == "悪い")
-                        {
-                            this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_blue.png", UriKind.Relative));
-                            this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/blue_needle.png", UriKind.Relative));
-                        }
+                        this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_red.png", UriKind.Relative));
+                        this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/red_needle.png", UriKind.Relative));
                     }
-                    
+                    else if (this.KindOfFeelings[FeelingDictionaryKey].Split(",")[1] == "悪い")
+                    {
+                        this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_blue.png", UriKind.Relative));
+                        this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/blue_needle.png", UriKind.Relative));
+                    }
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
@@ -1384,11 +1717,11 @@ namespace KokoroUpTime
 
                 case "item_book":
 
-                    Image[] itemMainImages = { this.Item01MainImage, this.Item02MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item08MainImage, this.Item10MainImage, this.Item11MainImage };
+                    Image[] itemMainImages = { this.Item01MainImage, this.Item02MainImage, this.Item03MainImage, this.Item04MainImage, this.Item05MainImage, this.Item06MainImage, this.Item07MainImage, this.Item08MainImage, this.Item09MainImage, this.Item11MainImage };
 
                     Image[] itemNoneImages = { this.Item01NoneImage, this.Item02NoneImage, this.Item03NoneImage, this.Item04NoneImage, this.Item05NoneImage, this.Item06NoneImage, this.Item07NoneImage, this.Item08NoneImage, this.Item09NoneImage, this.Item11NoneImage };
 
-                    var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem10, this.dataItem.HasGotItem11 };
+                    var hasGotItems = new bool[] { this.dataItem.HasGotItem01, this.dataItem.HasGotItem02, this.dataItem.HasGotItem03, this.dataItem.HasGotItem04, this.dataItem.HasGotItem05, this.dataItem.HasGotItem06, this.dataItem.HasGotItem07, this.dataItem.HasGotItem08, this.dataItem.HasGotItem09, this.dataItem.HasGotItem11 };
 
                     for (int i = 0; i < hasGotItems.Length; i++)
                     {
@@ -1429,10 +1762,10 @@ namespace KokoroUpTime
 
                 case "is_animation_skip":
 
-                 this.isAnimationSkip = Convert.ToBoolean(this.scenarios[this.scenarioCount][1]);
+                    this.isAnimationSkip = Convert.ToBoolean(this.scenarios[this.scenarioCount][1]);
 
-                 this.scenarioCount += 1;
-                 this.ScenarioPlay();
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
 
                     break;
             }
@@ -1449,103 +1782,92 @@ namespace KokoroUpTime
 
                 switch (sequence)
                 {
-                    //this.KindOfFeelingInputButton.IsEnabled = true;
 
-                    //if (text == "")
-                    //    this.SizeOfFeelingInputButton.IsEnabled = false;
-                    //else
-                    //    this.SizeOfFeelingInputButton.IsEnabled = true;
-                    case "$aosuke_kind_of_feeling_1$":
-                        this.DictionaryKey = "aosuke_feeling1";
-                        text = text.Replace("$aosuke_kind_of_feeling_1$", KindOfFeelings[DictionaryKey].Split(",")[0]);
-                        if(text!="")
-                        {
-                            this.AosukeSizeOfFeelingInputButton1.IsEnabled = true;
-                        }
-                        else if (text == "")
-                        {
-                            this.AosukeSizeOfFeelingInputButton1.IsEnabled = false;
-                        }
-                        break;
-                    case "$aosuke_kind_of_feeling_2$":
-                        this.DictionaryKey="aosuke_feeling2";
-                        text = text.Replace("$aosuke_kind_of_feeling_2$", KindOfFeelings[DictionaryKey].Split(",")[0]);
-                        if(text!="")
-                        {
-                            this.AosukeSizeOfFeelingInputButton2.IsEnabled = true;
-                        }
-                        else if(text =="")
-                        {
-                            this.AosukeSizeOfFeelingInputButton2.IsEnabled = false;
-                        }
-                        break;
-                    case "$aosuke_kind_of_feeling_3$":
-                        this.DictionaryKey="aosuke_feeling3";
-                        text = text.Replace("$aosuke_kind_of_feeling_3$", KindOfFeelings[DictionaryKey].Split(",")[0]);
-                        if(text!="")
-                        {
-                            this.AosukeSizeOfFeelingInputButton3.IsEnabled = true;
-                        }
-                        else if(text =="")
-                        {
-                            this.AosukeSizeOfFeelingInputButton3.IsEnabled = false;
-                        }
-                        break;
-                    case "$aosuke_kind_of_feeling_4$":
-                        this.DictionaryKey="aosuke_feeling4";
-                        text = text.Replace("$aosuke_kind_of_feeling_4$", KindOfFeelings[DictionaryKey].Split(",")[0]);
-                        if(text!="")
-                        {
-                            this.AosukeSizeOfFeelingInputButton4.IsEnabled = true;
-                        }
-                        else if(text =="")
-                        {
-                            this.AosukeSizeOfFeelingInputButton4.IsEnabled = false;
-                        }
+                    case "$reason_difference_size_of_feeling$":
+                        this.InputDictionaryKey = "input_reason";
+                        text = text.Replace("$reason_difference_size_of_feeling$", InputText[InputDictionaryKey]);
                         break;
 
-                    case "$aosuke_size_of_feeling_1$":
-                        this.DictionaryKey = "aosuke_feeling1";
-                        if (this.SizeOfFeelings[DictionaryKey] != -1)
+                    case "$aosuke_small_challenge$":
+                        this.InputDictionaryKey = "input_small_challenge";
+                        text = text.Replace("$aosuke_small_challenge$", InputText[InputDictionaryKey]);
+                        break;
+
+                    case "$aosuke_not_good_scene_step1$":
+                        this.InputDictionaryKey = "input_challenge_step1";
+                        text = text.Replace("$aosuke_not_good_scene_step1$", InputText[InputDictionaryKey]);
+                        break;
+
+                    case "$aosuke_not_good_scene_step2$":
+                        this.InputDictionaryKey = "input_challenge_step2";
+                        text = text.Replace("$aosuke_not_good_scene_step2$", InputText[InputDictionaryKey]);
+                        break;
+
+                    case "$aosuke_not_good_scene_step3$":
+                        this.InputDictionaryKey = "input_challenge_step3";
+                        text = text.Replace("$aosuke_not_good_scene_step3$", InputText[InputDictionaryKey]);
+                        break;
+
+                    case "$challenge_step1_kind_of_feeling$":
+                        this.FeelingDictionaryKey = "challenge_step1_feeling";
+                        text = text.Replace("$challenge_step1_kind_of_feeling$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
+                        if (text == "")
+                            this.AosukeNotGoodSceneStep1SizeOfFeelingInputButton.IsEnabled = false;
+                        else
+                            this.AosukeNotGoodSceneStep1SizeOfFeelingInputButton.IsEnabled = true;
+                        break;
+
+                    case "$challenge_step2_kind_of_feeling$":
+                        this.FeelingDictionaryKey = "challenge_step2_feeling";
+                        text = text.Replace("$challenge_step2_kind_of_feeling$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
+                        if (text == "")
+                            this.AosukeNotGoodSceneStep2SizeOfFeelingInputButton.IsEnabled = false;
+                        else
+                            this.AosukeNotGoodSceneStep2SizeOfFeelingInputButton.IsEnabled = true;
+                        break;
+
+                    case "$challenge_step3_kind_of_feeling$":
+                        this.FeelingDictionaryKey = "challenge_step3_feeling";
+                        text = text.Replace("$challenge_step3_kind_of_feeling$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
+                        if (text == "")
+                            this.AosukeNotGoodSceneStep3SizeOfFeelingInputButton.IsEnabled = false;
+                        else
+                            this.AosukeNotGoodSceneStep3SizeOfFeelingInputButton.IsEnabled = true;
+                        break;
+
+                    case "$challenge_step1_size_of_feeling$":
+                        this.FeelingDictionaryKey = "challenge_step1_feeling";
+                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_1$", this.SizeOfFeelings[DictionaryKey].ToString());
+                            text = text.Replace("$challenge_step1_size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
                         }
                         else
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_1$", "");
+                            text = text.Replace("$challenge_step1_size_of_feeling$", "");
                         }
                         break;
-                    case "$aosuke_size_of_feeling_2$":
-                        this.DictionaryKey = "aosuke_feeling2";
-                        if (this.SizeOfFeelings[DictionaryKey] != -1)
+
+                    case "$challenge_step2_size_of_feeling$":
+                        this.FeelingDictionaryKey = "challenge_step2_feeling";
+                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_2$", this.SizeOfFeelings[DictionaryKey].ToString());
+                            text = text.Replace("$challenge_step2_size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
                         }
                         else
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_2$", "");
+                            text = text.Replace("$challenge_step2_size_of_feeling$", "");
                         }
                         break;
-                    case "$aosuke_size_of_feeling_3$":
-                         this.DictionaryKey = "aosuke_feeling3";
-                        if (this.SizeOfFeelings[DictionaryKey] != -1)
+
+                    case "$challenge_step3_size_of_feeling$":
+                        this.FeelingDictionaryKey = "challenge_step3_feeling";
+                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_3$", this.SizeOfFeelings[DictionaryKey].ToString());
+                            text = text.Replace("$challenge_step3_size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
                         }
                         else
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_3$", "");
-                        }
-                        break;
-                    case "$aosuke_size_of_feeling_4$":
-                         this.DictionaryKey = "aosuke_feeling4";
-                        if (this.SizeOfFeelings[DictionaryKey] != -1)
-                        {
-                            text = text.Replace("$aosuke_size_of_feeling_4$", this.SizeOfFeelings[DictionaryKey].ToString());
-                        }
-                        else
-                        {
-                            text = text.Replace("$aosuke_size_of_feeling_4$", "");
+                            text = text.Replace("$challenge_step3_size_of_feeling$", "");
                         }
                         break;
                 }
@@ -1900,7 +2222,7 @@ namespace KokoroUpTime
         // アニメーション（ストーリーボード）の処理
         private void ShowAnime(string storyBoard, string objectName, string objectsName, string isSync)
         {
-            if(!this.isAnimationSkip)
+            if (!this.isAnimationSkip)
             {
                 Storyboard sb;
                 try
@@ -1955,7 +2277,7 @@ namespace KokoroUpTime
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
-            
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -1972,50 +2294,50 @@ namespace KokoroUpTime
                 // 連続Backの実現にはもっと複雑な処理がいる
             }
             */
-                // FullScreen時のデバッグ用に作っておく
-                if (button.Name == "ExitButton")
-                {
+            // FullScreen時のデバッグ用に作っておく
+            if (button.Name == "ExitButton")
+            {
 
-                    this.CoverLayerImage.Visibility = Visibility.Visible;
-                    this.ExitBackGrid.Visibility = Visibility.Visible;
+                this.CoverLayerImage.Visibility = Visibility.Visible;
+                this.ExitBackGrid.Visibility = Visibility.Visible;
 
-                    return;
-                }
-                else if (button.Name == "ExitBackYesButton")
-                {
-                    this.StopBGM();
+                return;
+            }
+            else if (button.Name == "ExitBackYesButton")
+            {
+                this.StopBGM();
 
-                    TitlePage titlePage = new TitlePage();
+                TitlePage titlePage = new TitlePage();
 
-                    titlePage.SetReloadPageFlag(false);
+                titlePage.SetReloadPageFlag(false);
 
-                    titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                    this.NavigationService.Navigate(titlePage);
+                this.NavigationService.Navigate(titlePage);
 
-                    return;
-                }
-                else if (button.Name == "ExitBackNoButton")
-                {
-                    this.ExitBackGrid.Visibility = Visibility.Hidden;
-                    this.CoverLayerImage.Visibility = Visibility.Hidden;
+                return;
+            }
+            else if (button.Name == "ExitBackNoButton")
+            {
+                this.ExitBackGrid.Visibility = Visibility.Hidden;
+                this.CoverLayerImage.Visibility = Visibility.Hidden;
 
-                    return;
-                }
-               
+                return;
+            }
 
-                else if (button.Name == "ReturnToTitleButton")
-                {
-                    TitlePage titlePage = new TitlePage();
 
-                    titlePage.SetReloadPageFlag(false);
+            else if (button.Name == "ReturnToTitleButton")
+            {
+                TitlePage titlePage = new TitlePage();
 
-                    titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                titlePage.SetReloadPageFlag(false);
 
-                    this.NavigationService.Navigate(titlePage);
+                titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                    return;
-                }
+                this.NavigationService.Navigate(titlePage);
+
+                return;
+            }
 
             if (this.isClickable)
             {
@@ -2028,11 +2350,17 @@ namespace KokoroUpTime
                     {
                         this.BackMessageButton.Visibility = Visibility.Hidden;
                         this.NextMessageButton.Visibility = Visibility.Hidden;
+
+                        this.BackPageButton.Visibility = Visibility.Hidden;
+                        this.NextPageButton.Visibility = Visibility.Hidden;
                     }
                     else if (button.Name == "NextPageButton")
                     {
                         this.BackPageButton.Visibility = Visibility.Hidden;
                         this.NextPageButton.Visibility = Visibility.Hidden;
+
+                        this.BackMessageButton.Visibility = Visibility.Hidden;
+                        this.NextMessageButton.Visibility = Visibility.Hidden;
 
                         if (this.SelectFeelingGrid.IsVisible)
                         {
@@ -2041,69 +2369,27 @@ namespace KokoroUpTime
 
                                 if (this.SelectGoodFeelingListBox.SelectedItem != null)
                                 {
-                                    this.KindOfFeelings[DictionaryKey] = $"{this.SelectGoodFeelingListBox.SelectedItem.ToString().Replace("●　", "")},良い";
+                                    this.KindOfFeelings[FeelingDictionaryKey] = $"{this.SelectGoodFeelingListBox.SelectedItem.ToString().Replace("●　", "")},良い";
                                 }
                                 else if (this.SelectBadFeelingListBox.SelectedItems != null)
                                 {
-                                    this.KindOfFeelings[DictionaryKey] = $"{this.SelectBadFeelingListBox.SelectedItem.ToString().Replace("●　", "")},悪い";
+                                    this.KindOfFeelings[FeelingDictionaryKey] = $"{this.SelectBadFeelingListBox.SelectedItem.ToString().Replace("●　", "")},悪い";
                                 }
-
-                              //  this.SizeOfFeelingInputButton.IsEnabled = true;
                             }
                         }
                         else if (this.SelectHeartGrid.IsVisible)
                         {
-                            this.SizeOfFeelings[DictionaryKey] = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
+                            this.SizeOfFeelings[FeelingDictionaryKey] = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
                         }
                     }
+
+
+
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
-                else if (Regex.IsMatch(button.Name, ".*KindOfFeelingInputButton.*"))
-                {
-                    this.SelectBadFeelingListBox.SelectedIndex = -1;
-                    this.SelectGoodFeelingListBox.SelectedIndex = -1;
-
-                    if (button.Name == "AosukeKindOfFeelingInputButton1")
-                    {
-                        this.DictionaryKey = "aosuke_feeling1";
-                    }
-                    else if (button.Name == "AosukeKindOfFeelingInputButton2")
-                    {
-                        this.DictionaryKey = "aosuke_feeling2";
-                    }
-                    else if (button.Name == "AosukeKindOfFeelingInputButton3")
-                    {
-                        this.DictionaryKey = "aosuke_feeling3";
-                    }
-                    else if (button.Name == "AosukeKindOfFeelingInputButton4")
-                    {
-                        this.DictionaryKey = "aosuke_feeling4";
-                    }
-
-                    this.GoTo("kind_of_feeling");
-                }
-                else if (Regex.IsMatch(button.Name, ".*SizeOfFeelingInputButton.*"))
-                {
-                    if (button.Name == "AosukeSizeOfFeelingInputButton1")
-                    {
-                        this.DictionaryKey = "aosuke_feeling1";
-                    }
-                    else if (button.Name == "AosukeSizeOfFeelingInputButton2")
-                    {
-                        this.DictionaryKey = "aosuke_feeling2";
-                    }
-                    else if (button.Name == "AosukeSizeOfFeelingInputButton3")
-                    {
-                        this.DictionaryKey = "aosuke_feeling3";
-                    }
-                    else if (button.Name == "AosukeSizeOfFeelingInputButton4")
-                    {
-                        this.DictionaryKey = "aosuke_feeling4";
-                    }
-
-                    this.GoTo("size_of_feeling");
-                }
+                
 
                 else if (button.Name == "BackMessageButton" || button.Name == "BackPageButton" || button.Name == "GroupeActivityBackMessageButton" || button.Name == "SelectFeelingBackButton")
                 {
@@ -2132,15 +2418,218 @@ namespace KokoroUpTime
 
 
                 }
+                
+                else if (button.Name == "KindOfFeelingInputButton")
+                {
+                    this.GoTo("select_kind_of_feeling");
+                }
+                else if (button.Name == "SizeOfFeelingInputButton")
+                {
+                    this.GoTo("select_size_of_feeling");
+                }
                 else if (button.Name == "BranchButton1")
                 {
                     this.GoTo("manga");
                 }
-                else if(button.Name== "GroupeActivityInputButton")
+                else if (button.Name == "ReasonDifferenceSizeOfFeelingInputButton")
                 {
-                    
+                    this.InputDictionaryKey = "input_reason";
+                    if (this.dataOption.InputMethod == 0)
+                    {
+                        this.InputStroke[this.InputDictionaryKey] = this.ReasonDifferenceSizeOfFeelingOutputCanvas.Strokes;
+
+                        this.InputCanvas1.Strokes = this.InputStroke[this.InputDictionaryKey];
+                        this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
+                        this.GoTo("canvas_input_reason_difference_size_of_feeling");
+                    }
+                    else
+                    {
+                        this.InputTextBox1.Text = this.InputText[this.InputDictionaryKey];
+                        this.GoTo("keyboard_input_reason_difference_size_of_feeling");
+                        this.InputTextBox1.Focus();
+                    }
                 }
-                       
+                else if(button.Name == "AosukeSmallChallengeEventInputButton")
+                {
+                    this.InputDictionaryKey = "input_small_challenge";
+                    if (this.dataOption.InputMethod == 0)
+                    {
+                        this.InputStroke[this.InputDictionaryKey] = this.AosukeSmallChallengeEventOutputCanvas.Strokes;
+
+                        this.InputCanvas2.Strokes = this.InputStroke[this.InputDictionaryKey];
+                        this.ClipStrokes(this.InputCanvas2, this.InputStroke[this.InputDictionaryKey]);
+                        this.GoTo("canvas_input_aosuke's_small_challenge");
+                    }
+                    else
+                    {
+                        this.InputTextBox2.Text = this.InputText[this.InputDictionaryKey];
+                        this.GoTo("keyboard_input_aosuke's_small_challenge");
+                        this.InputTextBox2.Focus();
+                    }
+                }
+                else if (button.Name == "CompleteInputButton")
+                {
+                    if (this.dataOption.InputMethod == 0)
+                    {
+                        switch (this.InputDictionaryKey)
+                        {
+                            case "input_reason":
+                                if (this.InputStroke[this.InputDictionaryKey] != null)
+                                {
+                                    this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
+                                    this.ReasonDifferenceSizeOfFeelingOutputCanvas.Strokes = this.InputStroke[this.InputDictionaryKey];
+                                }
+                                break;
+                            case "input_small_challenge":
+                                if (this.InputStroke[this.InputDictionaryKey] != null)
+                                {
+                                    this.ClipStrokes(this.InputCanvas2, this.InputStroke[this.InputDictionaryKey]);
+                                    this.AosukeSmallChallengeEventOutputCanvas.Strokes = this.InputStroke[this.InputDictionaryKey];
+                                }
+                                break;
+                            case "input_challenge_step1":
+                                if (this.InputStroke[this.InputDictionaryKey] != null)
+                                {
+                                    this.ClipStrokes(this.InputCanvas3, this.InputStroke[this.InputDictionaryKey]);
+                                    this.AosukesNotGoodSceneStep1OutputCanvas.Strokes = this.InputStroke[this.InputDictionaryKey];
+                                }
+                                break;
+                            case "input_challenge_step2":
+                                if (this.InputStroke[this.InputDictionaryKey] != null)
+                                {
+                                    this.ClipStrokes(this.InputCanvas3, this.InputStroke[this.InputDictionaryKey]);
+                                    this.AosukesNotGoodSceneStep2OutputCanvas.Strokes = this.InputStroke[this.InputDictionaryKey];
+                                }
+                                break;
+                            case "input_challenge_step3":
+                                if (this.InputStroke[this.InputDictionaryKey] != null)
+                                {
+                                    this.ClipStrokes(this.InputCanvas3, this.InputStroke[this.InputDictionaryKey]);
+                                    this.AosukesNotGoodSceneStep3OutputCanvas.Strokes = this.InputStroke[this.InputDictionaryKey];
+                                }
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (this.InputDictionaryKey)
+                        {
+                            case "input_reason":
+                                this.InputText[this.InputDictionaryKey] = this.InputTextBox1.Text;
+                                break;
+                            case "input_small_challenge":
+                                this.InputText[this.InputDictionaryKey] = this.InputTextBox2.Text;
+                                break;
+                            case "input_challenge_step1":
+                                this.InputText[this.InputDictionaryKey] = this.InputTextBox3.Text;
+                                break;
+                            case "input_challenge_step2":
+                                this.InputText[this.InputDictionaryKey] = this.InputTextBox3.Text;
+                                break;
+                            case "input_challenge_step3":
+                                this.InputText[this.InputDictionaryKey] = this.InputTextBox3.Text;
+                                break;
+                        }
+                        this.CloseOSK();
+                    }
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                }
+                else if(Regex.IsMatch(button.Name, "AosukesNotGoodSceneStep.InputButton"))
+                {
+                    switch (button.Name)
+                    {
+                        case "AosukesNotGoodSceneStep1InputButton":
+                            this.InputDictionaryKey = "input_challenge_step1";
+                            if (this.dataOption.InputMethod == 0)
+                            {
+                                this.InputStroke[this.InputDictionaryKey] = this.AosukesNotGoodSceneStep1OutputCanvas.Strokes;
+                                this.InputCanvas3.Strokes = this.InputStroke[this.InputDictionaryKey];
+                                this.ClipStrokes(this.InputCanvas3, this.InputStroke[this.InputDictionaryKey]);
+                                this.GoTo("canvas_input_aosuke's_small_challenge_step_by_step");
+                            }
+                            else
+                            {
+                                this.InputTextBox3.Text = this.InputText[this.InputDictionaryKey];
+                                this.GoTo("keyboard_input_aosuke's_small_challenge_step_by_step");
+                                this.InputTextBox3.Focus();
+                            }
+                            break;
+
+                        case "AosukesNotGoodSceneStep2InputButton":
+                            this.InputDictionaryKey = "input_challenge_step2";
+                            if (this.dataOption.InputMethod == 0)
+                            {
+                                this.InputStroke[this.InputDictionaryKey] = this.AosukesNotGoodSceneStep2OutputCanvas.Strokes;
+                                this.InputCanvas3.Strokes = this.InputStroke[this.InputDictionaryKey];
+                                this.ClipStrokes(this.InputCanvas3, this.InputStroke[this.InputDictionaryKey]);
+                                this.GoTo("canvas_input_aosuke's_small_challenge_step_by_step");
+                            }
+                            else
+                            {
+                                this.InputTextBox3.Text = this.InputText[this.InputDictionaryKey];
+                                this.GoTo("keyboard_input_aosuke's_small_challenge_step_by_step");
+                                this.InputTextBox3.Focus();
+                            }
+                            break;
+
+                        case "AosukesNotGoodSceneStep3InputButton":
+                            this.InputDictionaryKey = "input_challenge_step3";
+                            if (this.dataOption.InputMethod == 0)
+                            {
+                                this.InputStroke[this.InputDictionaryKey] = this.AosukesNotGoodSceneStep3OutputCanvas.Strokes;
+                                this.InputCanvas3.Strokes = this.InputStroke[this.InputDictionaryKey];
+                                this.ClipStrokes(this.InputCanvas3, this.InputStroke[this.InputDictionaryKey]);
+                                this.GoTo("canvas_input_aosuke's_small_challenge_step_by_step");
+                            }
+                            else
+                            {
+                                this.InputTextBox3.Text = this.InputText[this.InputDictionaryKey];
+                                this.GoTo("keyboard_input_aosuke's_small_challenge_step_by_step");
+                                this.InputTextBox3.Focus();
+                            }
+                            break;
+                    }
+                }
+                else if (Regex.IsMatch(button.Name, ".+indOfFeelingInputButton"))
+                {
+                    this.SelectBadFeelingListBox.SelectedIndex = -1;
+                    this.SelectGoodFeelingListBox.SelectedIndex = -1;
+
+                    if (button.Name == "AosukeNotGoodSceneStep3KindOfFeelingInputButton")
+                    {
+                        this.FeelingDictionaryKey = "challenge_step3_feeling";
+                    }
+                    else if (button.Name == "AosukeNotGoodSceneStep2KindOfFeelingInputButton")
+                    {
+                        this.FeelingDictionaryKey = "challenge_step2_feeling";
+                    }
+                    else if (button.Name == "AosukeNotGoodSceneStep1KindOfFeelingInputButton")
+                    {
+                        this.FeelingDictionaryKey = "challenge_step1_feeling";
+                    }
+
+                    this.GoTo("kind_of_feeling");
+                }
+                else if (Regex.IsMatch(button.Name, ".+izeOfFeelingInputButton"))
+                {
+                    if (button.Name == "AosukeNotGoodSceneStep3SizeOfFeelingInputButton")
+                    {
+                        this.FeelingDictionaryKey = "challenge_step3_feeling";
+                    }
+                    else if (button.Name == "AosukeNotGoodSceneStep2SizeOfFeelingInputButton")
+                    {
+                        this.FeelingDictionaryKey = "challenge_step2_feeling";
+                    }
+                    else if (button.Name == "AosukeNotGoodSceneStep1SizeOfFeelingInputButton")
+                    {
+                        this.FeelingDictionaryKey = "challenge_step1_feeling";
+                    }
+
+                    this.GoTo("size_of_feeling");
+                }
+                
             }
         }
         private void SetBGM(string soundFile, bool isLoop, int volume)
@@ -2400,6 +2889,12 @@ namespace KokoroUpTime
         {
             this.ReadyKeyboard();
         }
+
+        private void TextBoxMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.ReadyKeyboard();
+        }
+
         // OSKを完全に切ってしまう
         private void CloseOSK()
         {
@@ -2438,29 +2933,87 @@ namespace KokoroUpTime
             #endregion
         }
 
-        private class AosukeSituationTextData
+        private void TextBoxPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            public AosukeSituationTextData(string underLineText, string situationText )
+            TextBox text = sender as TextBox;
+
+            int caretPosition = text.SelectionStart;
+
+            int MaxLine = 0;
+
+            switch (text.Name)
             {
-                UnderLineText = underLineText;
-                SituationText = situationText;
+
+                case "InputTextBox1":
+                    MaxLine = 4;
+                    break;
+
+                case "InputTextBox2":
+                    MaxLine = 6;
+                    break;
+
+                case "InputTextBox3":
+                    MaxLine = 3;
+                    break;
+            }
+            
+
+            while (text.LineCount > MaxLine)
+            {
+                caretPosition -= 1;
+                text.Text = text.Text.Remove(caretPosition, 1);
             }
 
-            public string UnderLineText { get; set; }
-            public string SituationText { get; set; }
+            text.Select(caretPosition, 0);
         }
 
-        private class NotGoodEventData
+        private void TextBoxKeyDown(object sender, KeyEventArgs e)
         {
-            public NotGoodEventData(string headerText, List<string> notGoodEvent)
+            TextBox text = sender as TextBox;
+
+            int MaxLine = 0;
+
+            switch (text.Name)
             {
-                HeaderText = headerText;
-                NotGoodEvent = notGoodEvent;
+
+                case "InputTextBox1":
+                    MaxLine = 4;
+                    break;
+
+                case "InputTextBox2":
+                    MaxLine = 6;
+                    break;
+
+                case "InputTextBox3":
+                    MaxLine = 3;
+                    break;
             }
 
-            public string HeaderText { get; set; }
-            public List<string> NotGoodEvent { get; set; }
+            if (text.LineCount >= MaxLine)
+            {
+                if (e.Key == Key.Enter)
+                {
+                    e.Handled = true;
+                }
+            }
         }
+
+        private class GroupeActivityData
+        {
+            public GroupeActivityData(string firstRedText, string subsequentBlueText, string methodBlackText, string fileName)
+            {
+                FirstRedText = firstRedText;
+                SubsequentBlueText = subsequentBlueText;
+                MethodBlackText = methodBlackText;
+                FileName = fileName;
+            }
+
+            public string FirstRedText { get; set; }
+            public string SubsequentBlueText { get; set; }
+            public string MethodBlackText { get; set; }
+            public string FileName { get; set; }
+        }
+
 
         private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
         {
@@ -2469,18 +3022,80 @@ namespace KokoroUpTime
             switch (listBoxItem.Name)
             {
                 case "PenButton":
-
-                    break;
+                    if(this.InputDictionaryKey == "input_reason")
+                    {
+                        this.InputCanvas1.EditingMode = InkCanvasEditingMode.Ink;
+                        this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
+                    }
+                    else if(this.InputDictionaryKey == "input_small_challenge")
+                    {
+                        this.InputCanvas2.EditingMode = InkCanvasEditingMode.Ink;
+                        this.ClipStrokes(this.InputCanvas2, this.InputStroke[this.InputDictionaryKey]);
+                    }
+                    else if(Regex.IsMatch(this.InputDictionaryKey ,"input_challenge_step."))
+                    {
+                        this.InputCanvas3.EditingMode = InkCanvasEditingMode.Ink;
+                        this.ClipStrokes(this.InputCanvas3, this.InputStroke[this.InputDictionaryKey]);
+                    }
+                     break;
 
                 case "EraserButton":
+                    if (this.InputDictionaryKey == "input_reason")
+                    {
+                        this.InputCanvas1.EditingMode = InkCanvasEditingMode.EraseByPoint;
+                    }
+                    else if (this.InputDictionaryKey == "input_small_challenge")
+                    {
+                        this.InputCanvas2.EditingMode = InkCanvasEditingMode.EraseByPoint;
+                    }
+                    else if (Regex.IsMatch(this.InputDictionaryKey, "input_challenge_step."))
+                    {
+                        this.InputCanvas3.EditingMode = InkCanvasEditingMode.EraseByPoint;
+                    }
 
                     break;
 
                 case "AllClearButton":
+                    if (this.InputDictionaryKey == "input_reason")
+                    {
+                        this.InputCanvas1.Strokes.Clear();
+                        this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
+                    }
+                    else if (this.InputDictionaryKey == "input_small_challenge")
+                    {
+                        this.InputCanvas2.Strokes.Clear();
+                        this.ClipStrokes(this.InputCanvas2, this.InputStroke[this.InputDictionaryKey]);
+                    }
+                    else if (Regex.IsMatch(this.InputDictionaryKey, "input_challenge_step."))
+                    {
+                        this.InputCanvas3.Strokes.Clear();
+                        this.ClipStrokes(this.InputCanvas3, this.InputStroke[this.InputDictionaryKey]);
+                    }
 
                     break;
             }
         }
-        
-}
+        private void ClipStrokes(InkCanvas inkCanvas, StrokeCollection strokes)
+        {
+            StylusPoint point1 = new StylusPoint() { X = 0, Y = 0 };
+            StylusPoint point2 = new StylusPoint() { X = inkCanvas.ActualWidth, Y = 0 };
+            StylusPoint point3 = new StylusPoint() { X = inkCanvas.ActualWidth, Y = inkCanvas.ActualHeight };
+            StylusPoint point4 = new StylusPoint() { X = 0, Y = inkCanvas.ActualHeight };
+
+            StylusPointCollection points1 = new StylusPointCollection();
+            StylusPointCollection points2 = new StylusPointCollection();
+            points1.Add(point1);
+            points1.Add(point2);
+            points1.Add(point3);
+            points1.Add(point4);
+
+            Point[] strokePoints = (Point[])points1;
+            strokes.Clip(strokePoints);
+
+            points2.Add(point3);
+            DrawingAttributes attributes = new DrawingAttributes() { Height = 1, Width = 1, Color = Colors.Transparent };
+            Stroke stroke = new Stroke(points2) { DrawingAttributes = attributes };
+            strokes.Add(stroke);
+        }
+    }
 }

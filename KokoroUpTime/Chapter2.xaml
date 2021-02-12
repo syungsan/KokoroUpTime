@@ -81,7 +81,7 @@
     </Page.Resources>
     <Viewbox>
         <Grid Height="1080" Width="1920">
-            <Grid x:Name="BaseGrid" d:IsHidden="True">
+            <Grid x:Name="BaseGrid">
                 <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/orange_gradation.png"/>
             </Grid>
             <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
@@ -211,8 +211,8 @@
                 <outline_maker:OutlineText x:Name="Challenge2Title" Style="{StaticResource Orange}" VerticalAlignment="Top" Margin="200,20" Text="チャレンジタイム！パート②" FontSize="105"/>
                 <TextBlock x:Name="Challenge2Text" Text="青助くんの楽しいことリストについて、きもちの大きさを書いてみよう&#10;次に、かんたんにできるか〇×△をつけてみよう！" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Yu Gothic" FontWeight="UltraBold" Margin="100,200"/>
                 <TextBlock x:Name="KindOfFeeling" Text="きもちの種類" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1037,444,569,578"/>
-                <TextBlock x:Name="SizeOfFeeling" Text="きもちのおおきさ" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1007,720,539,300" d:IsHidden="True"/>
-                <TextBlock x:Name="DifficultyOfAction" Text="かんたんにできるか" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1428,473,59,545" d:IsHidden="True"/>
+                <TextBlock x:Name="SizeOfFeeling" Text="きもちのおおきさ" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1007,720,539,300"/>
+                <TextBlock x:Name="DifficultyOfAction" Text="かんたんにできるか" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1428,473,59,545"/>
                 <Grid x:Name="AosukeKindOfFeelingGrid" Margin="1037,507,569,416">
                     <Border x:Name="KindOfFeelingGridOuterBorder" BorderBrush="#FFFF0000" BorderThickness="5">
                         <Border x:Name="KindOfFeelingGridInnerBorder" BorderBrush="#FFFF0000" BorderThickness="5" Margin="5"/>
@@ -224,9 +224,9 @@
                         <TextBlock x:Name="AosukeSizeOfFeelingText" Text="(  20  )" FontSize="93"/>
                     </Button>
                 </Grid>
-                <Grid x:Name="AosukeDifficultyOfActionGrid" Margin="1458,540,89,215" d:IsHidden="True">
-                    <Image x:Name="DifficultyOfActionButtonImage" Source="/Images/difficulty_of_action_frame.png" Stretch="Fill" d:IsHidden="True" />
-                    <Button x:Name="DifficultyOfActionButton" Background="Transparent" BorderBrush="Transparent" Click="Button_Click" Margin="5.4,6.5" d:IsHidden="True">
+                <Grid x:Name="AosukeDifficultyOfActionGrid" Margin="1458,540,89,215">
+                    <Image x:Name="DifficultyOfActionButtonImage" Source="/Images/difficulty_of_action_frame.png" Stretch="Fill" />
+                    <Button x:Name="DifficultyOfActionButton" Background="Transparent" BorderBrush="Transparent" Click="Button_Click" Margin="5.4,6.5">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="46"/>
@@ -235,7 +235,7 @@
                         <TextBlock x:Name="AosukeDifficultyOfActionText" Text="△" FontSize="180" FontFamily="MSP Gothic" TextAlignment="Center" Margin="40,60" d:IsHidden="True"/>
                     </Button>
                 </Grid>
-                <Grid x:Name="Challenge2ActionBubble" Margin="202,333,928,265" d:IsHidden="True">
+                <Grid x:Name="Challenge2ActionBubble" Margin="202,333,928,265">
                     <Image x:Name="Challenge2ActionBubbleImage" Source="/Images/blue_bubble_left_down.png" d:IsHidden="True" />
                     <TextBlock x:Name="Challenge2BubbleActionText" Text="公園でお昼寝する" TextWrapping="Wrap" FontSize="70" FontFamily="Yu Gothic"  Margin="40,100,40,170" d:IsHidden="True"/>
                 </Grid>
@@ -450,7 +450,7 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid" >
+            <Grid x:Name="GroupeActivityGrid" d:IsHidden="True" >
                 <Image x:Name="GroupeActivityTitle" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Images/group_activity_title01.png" Height="155"/>
                 <TextBlock x:Name="GroupeActivityText" FontSize="37" Text="友だちと話し合って、「ちょっぴりうきうき」をたくさん書いてみよう！"  Margin="300,480,300,540" TextAlignment="Center" FontFamily="Yu Gothic"/>
                 <Grid x:Name="InputMyALittleExcitedGrid" Width="1200" Height="525"  VerticalAlignment="Bottom">
@@ -508,7 +508,7 @@
                     <Image x:Name="Item11NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid">
+            <Grid x:Name="SystemGrid" d:IsHidden="True">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>

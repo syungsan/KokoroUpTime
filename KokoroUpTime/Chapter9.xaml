@@ -72,7 +72,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ItemCenterUpImage" HorizontalAlignment="Center" Height="691" VerticalAlignment="Top" Width="490" Source="/Images/item02_solo.png" Margin="0,55,0,0" RenderTransformOrigin="0.5,0.5">
+                <Image x:Name="ItemCenterUpImage" HorizontalAlignment="Center" Height="691" VerticalAlignment="Top" Width="490" Source="/Images/item02_solo.png" Margin="0,55,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -82,7 +82,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ItemLeftImage" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Margin="187,380,0,0">
+                <Image x:Name="ItemLeftImage" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Margin="187,380,0,0" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -92,12 +92,12 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ItemLeftLastImage" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Margin="354,186,0,0" Source="/Images/item01_solo.png"/>
-                <Grid x:Name="ItemNamePlateLeftGrid" Width="610" Height="195" Margin="90,55,1220,830">
+                <Image x:Name="ItemLeftLastImage" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Margin="354,186,0,0" Source="/Images/item01_solo.png" d:IsHidden="True"/>
+                <Grid x:Name="ItemNamePlateLeftGrid" Width="610" Height="195" Margin="90,55,1220,830" d:IsHidden="True">
                     <Image x:Name="ItemNamePlateLeftImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_name.png"/>
                     <TextBlock x:Name="ItemNameLeftTextBlock" HorizontalAlignment="Left" Margin="67,36,0,0" VerticalAlignment="Top" FontSize="65" Width="458" FontWeight="Bold" Height="115" Text="勇者のマント" TextAlignment="Center"/>
                 </Grid>
-                <Grid x:Name="ItemNamePlateCenterGrid" Width="606" Height="185" Margin="705,234,609,661">
+                <Grid x:Name="ItemNamePlateCenterGrid" Width="606" Height="185" Margin="705,234,609,661" d:IsHidden="True">
                     <Image x:Name="ItemNamePlateCenterImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_name.png" Visibility="Visible"/>
                     <TextBlock x:Name="ItemNameCenterTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="65" Height="105" Width="447" FontWeight="Bold" Margin="67,32,0,0" Text="勇者のマント" TextAlignment="Center"/>
                 </Grid>
@@ -107,19 +107,19 @@
                     <Grid x:Name="ItemInfoSentenceGrid" Margin="55,118,41,33">
                         <TextBlock x:Name="ItemInfoSentenceTextBlock1" FontSize="50" TextWrapping="Wrap" LineHeight="70" FontFamily="MS PGothic">
                             <Run Text="✔ 自分の苦手なことにちょうせんするためには、&#10;    苦手なことをしっかりと知る必要があるのじゃ。"/>
-                            <Run Text="&#10;✔勇者のマントを使うと、自分の苦手なことに&#10;    ついて、もっと知ることができるぞい。"/>
+                            <Run Text="&#10;✔ 勇者のマントを使うと、自分の苦手なことに&#10;    ついて、もっと知ることができるぞい。"/>
                         </TextBlock>
                     </Grid>
                 </Grid>
-                <Grid x:Name="ItemNameBubbleGrid" Width="446" Height="240" Margin="172,140,1302,700">
+                <Grid x:Name="ItemNameBubbleGrid" Width="446" Height="240" Margin="172,140,1302,700" d:IsHidden="True">
                     <Image x:Name="ItemNameBubbleImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_bubble.png"/>
                     <TextBlock x:Name="ItemNumberTextBlock" HorizontalAlignment="Left" Margin="140,118,0,0" VerticalAlignment="Top" FontSize="48" Foreground="#FFEEEE1E" FontWeight="Bold" Text="No. 9"/>
                 </Grid>
-                <Grid x:Name="ItemLastInfoGrid" Height="116" Width="490" Margin="715,380,715,584">
+                <Grid x:Name="ItemLastInfoGrid" Height="116" Width="490" Margin="715,380,715,584" d:IsHidden="True">
                     <Image x:Name="ItemLastInfoImage" Source="/Images/item_last.png"/>
                     <TextBlock x:Name="ItemLastInfoTextBlock" HorizontalAlignment="Left" Margin="12,38,0,0" VerticalAlignment="Top" Height="66"  FontSize="45" FontWeight="Bold" Text="No.9  勇者のマント"/>
                 </Grid>
-                <Grid x:Name="ItemReviewGrid">
+                <Grid x:Name="ItemReviewGrid" d:IsHidden="True">
                     <Image x:Name="ItemLeftBigImage" Source="/Images/Item08_solo.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,200,100,200"/>
                     <Grid x:Name="ItemReviewPlate" Margin="700,300,480,550">
                         <Image x:Name="ItemReviewPlateImage" Source="/Images/item_review.png"  Stretch="Fill"/>
@@ -276,8 +276,10 @@
                 <TextBlock x:Name="InputChallengeTitleText" Text="のちょうせんしてみたいこと（苦手なこと）" FontSize="45" FontFamily="Yu Gothic" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Button x:Name="InputChallengeButton" Style="{StaticResource BubbleFrame}" Margin="100,100" BorderBrush="#FFFFC000" BorderThickness="10" Click="Button_Click">
                     <Grid x:Name="InputChallengeButtonGrid" Margin="30">
-                        <InkCanvas x:Name="InputChallengeCanvas" Background="Transparent" IsEnabled="False"/>
-                        <TextBlock x:Name="InputChallengeText" FontSize="65" TextWrapping="Wrap" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
+                        <Viewbox>
+                            <InkCanvas x:Name="InputChallengeCanvas" Style="{StaticResource OutputInkCanvas}"/>
+                        </Viewbox>
+                        <TextBlock x:Name="InputChallengeText" Style="{StaticResource OutputTextBlock}" FontSize="65"/>
                     </Grid>
                 </Button>
             </Grid>
@@ -322,8 +324,8 @@
                 </Image>
             </Grid>
             <Grid x:Name="ChangeAkamarusSizeOfFeelingGrid" Margin="130,80,130,180" d:IsHidden="True">
-                <Image x:Name="FeelingGraphAxisImage" Source="Images/graph_axis.png"/>
-                <Grid x:Name="ChangeAkamarusSizeOfFeelingPreUseItemGrid"  RenderTransformOrigin="0.5,0.5">
+                <Image x:Name="FeelingGraphAxisImage" Source="Images/graph_axis.png" />
+                <Grid x:Name="ChangeAkamarusSizeOfFeelingPreUseItemGrid" Margin="-50,50,50,50" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -332,8 +334,8 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Grid.RenderTransform>
-                    <TextBlock x:Name="AkamarusFeelingPreUseItemText1" Text="はじめは、&#10;いやなきもちが大きいが・・・" Margin="500,0" FontSize="50" FontFamily="Yu Gothic" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <TextBlock x:Name="AkamarusFeelingPreUseItemText2" Text="時間がたつと、&#10;いやなきもちがへっていく" Margin="0,200" FontSize="50" FontFamily="Yu Gothic" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                    <TextBlock x:Name="AkamarusFeelingPreUseItemText1" Text="はじめは、&#10;いやなきもちが大きいが・・・" Margin="500,-50" FontSize="50" FontFamily="Yu Gothic" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <TextBlock x:Name="AkamarusFeelingPreUseItemText2" Text="時間がたつと、&#10;いやなきもちがへっていく" Margin="0,110" FontSize="50" FontFamily="Yu Gothic" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Right"/>
                     <Image x:Name="ChallengePreUseItemImage" Source="Images/let's_challenge.png" Margin="230,-70" Height="250" Width="250" VerticalAlignment="Bottom" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
                         <Image.RenderTransform>
                             <TransformGroup>
@@ -344,7 +346,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <Image x:Name="AkamaruPreUseItemImage1" Source="Images/akamaru_face_02.png" Margin="250,0" Height="200" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <Image x:Name="AkamaruPreUseItemImage1" Source="Images/akamaru_face_02.png" Margin="250,-50" Height="200" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     <Image x:Name="AkamaruPreUseItemImage2" Source="Images/akamaru_face_01.png" Margin="100,120" Height="300" Width="300" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                     <Image x:Name="AkamarusFeelingPreUseItemGraph1"  Source="Images/graph1-1.png" Margin="250,80" Height="500" Width="800" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                         <Image.OpacityMask>
@@ -376,7 +378,7 @@
                             </LinearGradientBrush>
                         </Image.OpacityMask>
                     </Image>
-                    <Image x:Name="AkamarusFeelingPreUseItemArrow2" Source="Images/red_arrow.png" Height="400" Width="130" Margin="550,200" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                    <Image x:Name="AkamarusFeelingPreUseItemArrow2" Source="Images/red_arrow.png" Height="400" Width="130" Margin="550,120" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                         <Image.OpacityMask>
                             <LinearGradientBrush StartPoint="1,1" EndPoint="1,0">
                                 <LinearGradientBrush.GradientStops>
@@ -395,7 +397,7 @@
                         </Image.RenderTransform>
                     </Image>
                 </Grid>
-                <Grid x:Name="ChangeAkamarusSizeOfFeelingAfterUsedItemGrid" RenderTransformOrigin="0.5,0.5">
+                <Grid x:Name="ChangeAkamarusSizeOfFeelingAfterUsedItemGrid" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -579,24 +581,24 @@
                 </Grid.RowDefinitions>
                 <Border x:Name="StateOfAkamaruNextDayBorder" Background="White" BorderBrush="#FFFFC000" Width="950" BorderThickness="10" Margin="0,10" HorizontalAlignment="Left" CornerRadius="60" Grid.Row="0">
                     <TextBlock Margin="40,20" FontFamily="Yu Gothic"  FontSize="40" FontWeight="Bold">
-                        <Run Text="次の日、" TextDecorations="UnderLine"/>
-                        <Run Text="&#10;またキミちゃんの家で遊んでいるときに&#10;キミちゃんの犬があらわれた"/>
+                        <Run Text="次の日" TextDecorations="UnderLine"/>
+                        <Run Text="、&#10;またキミちゃんの家で遊んでいるときに&#10;キミちゃんの犬があらわれた"/>
                     </TextBlock>
                 </Border>
                 <Button x:Name="AkamarusKindOfFeelingNextDayButton" Style="{StaticResource KindOfFeelingButton}" IsEnabled="False"  Content="こわい" FontSize="70" Height="165" Width="330" BorderBrush="#FF0070C0" BorderThickness="5" Margin="350,0" HorizontalAlignment="Right" Grid.Row="0"/>
                 <Button x:Name="AkamarusSizeOfFeelingNextDayButton" Style="{StaticResource SizeOfFeelingButton}" IsEnabled="false" Background="Transparent" Content="７０" FontSize="70" Height="165" Width="330" Margin="0,0" HorizontalAlignment="Right" Grid.Row="0"/>
                 <Border x:Name="StateOfAkamaruAfterThreeDaysBorder" Background="White" BorderBrush="#FFFFC000" Width="950" BorderThickness="10" Margin="0,10" HorizontalAlignment="Left" CornerRadius="60" Grid.Row="1">
                     <TextBlock Margin="40,20" FontFamily="Yu Gothic" FontSize="40" FontWeight="Bold">
-                        <Run Text="3日目、" TextDecorations="UnderLine"/>
-                        <Run Text="&#10;キミちゃんとキミちゃんの犬と&#10;いっしょに公園で遊んだ"/>
+                        <Run Text="3日目" TextDecorations="UnderLine"/>
+                        <Run Text="、&#10;キミちゃんとキミちゃんの犬と&#10;いっしょに公園で遊んだ"/>
                     </TextBlock>
                 </Border>
                 <Button x:Name="AkamarusKindOfFeelingAfterThreeDaysButton" Style="{StaticResource KindOfFeelingButton}" IsEnabled="false"  Content="こわい" FontSize="70" Height="165" Width="330" BorderBrush="#FF0070C0" BorderThickness="5" Margin="350,0" HorizontalAlignment="Right" Grid.Row="1"/>
                 <Button x:Name="AkamarusSizeOfFeelingAfterThreeDaysButton" Style="{StaticResource SizeOfFeelingButton}" IsEnabled="false" Background="Transparent"  Content="５０" FontSize="70" Height="165" Width="330" Margin="0,0" HorizontalAlignment="Right" Grid.Row="1"/>
                 <Border x:Name="StateOfAkamaruAfterFourdaysBorder" Background="White" BorderBrush="#FFFFC000" Width="950" BorderThickness="10" Margin="0,10" HorizontalAlignment="Left" CornerRadius="60" Grid.Row="2">
                     <TextBlock Margin="40,20" FontFamily="Yu Gothic" FontSize="40" FontWeight="Bold">
-                        <Run Text="4日目、" TextDecorations="UnderLine"/>
-                        <Run Text="&#10;赤丸くんから、&#10;キミちゃんの犬に会いに行った。"/>
+                        <Run Text="4日目" TextDecorations="UnderLine"/>
+                        <Run Text="、&#10;赤丸くんから、&#10;キミちゃんの犬に会いに行った。"/>
                     </TextBlock>
                 </Border>
                 <Button x:Name="AkamarusKindOfFeelingAfterFourdaysButton" Style="{StaticResource KindOfFeelingButton}" IsEnabled="false"  Content="こわい" FontSize="70" Height="165" Width="330" BorderBrush="#FF0070C0" BorderThickness="5" Margin="350,0" HorizontalAlignment="Right" Grid.Row="2"/>
@@ -682,7 +684,7 @@
                                 <ListBox ItemsSource="{Binding NotGoodEvent}" SelectionMode="Multiple" FontSize="26" FontFamily="Yu Gothic" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                     <ListBox.ItemContainerStyle>
                                         <Style TargetType="{x:Type ListBoxItem}">
-                                            <Setter Property="Background" Value="#FF44FFFF"/>
+                                            <Setter Property="Background" Value="#FFCFD5EA"/>
                                             <Setter Property="BorderBrush" Value="White"/>
                                             <Setter Property="BorderThickness" Value="5"/>
                                             <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -718,7 +720,7 @@
                                                                         </ControlTemplate>
                                                                     </CheckBox.Template>
                                                                     <Viewbox StretchDirection="DownOnly">
-                                                                        <TextBlock Text="{Binding}" FontFamily="Yu Gothic" Margin="10,0,0,0"/>
+                                                                        <TextBlock Text="{Binding}" FontWeight="Bold" FontFamily="Yu Gothic" Margin="10,0,0,0"/>
                                                                     </Viewbox>
                                                                 </CheckBox>
                                                             </Border>
@@ -982,8 +984,8 @@
                         <ImageBrush/>
                     </Button.Background>
                 </Button>
-                <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5"/>
-                <Grid x:Name="CanvasEditGrid" Height="240" Margin="0,0,240,0" VerticalAlignment="Top">
+                <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
+                <Grid x:Name="CanvasEditGrid" Height="240" Margin="0,0,240,0" VerticalAlignment="Top" d:IsHidden="True">
                     <ListBox x:Name="CanvasEditListBox" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -998,11 +1000,10 @@
                 <Button x:Name="CompleteInputButton" Click="Button_Click" Content="とじる" HorizontalContentAlignment="Center" Width="240" Height="240" FontSize="65" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" Background="White" BorderBrush="Black" HorizontalAlignment="Right" VerticalAlignment="Top"/>
                 <Grid x:Name="InputGrid">
                     <Border x:Name="InputCanvasBorder" Width="1920" Height="815" BorderThickness="13" VerticalAlignment="Bottom" Background="White" BorderBrush="#FFFFC000" CornerRadius="60" d:IsHidden="True">
-                        <InkCanvas x:Name="InputCanvas" Margin="20"/>
+                        <InkCanvas x:Name="InputCanvas" Margin="20" Style="{StaticResource InputInkCanvas}" d:IsHidden="True"/>
                     </Border>
                     <Border x:Name="InputTextBorder" Width="1460" Height="620" BorderThickness="10" VerticalAlignment="Top" Background="White" BorderBrush="#FFFFC000" CornerRadius="60" Margin="0,0,30,0">
-                        <TextBox x:Name="InputTextBox" Margin="20"  AcceptsReturn="True"  FontSize="65" MaxLength="147" 
-                             TextWrapping="Wrap" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" BorderBrush="{x:Null}" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
+                        <TextBox x:Name="InputTextBox" Style="{StaticResource InputTextBox}" Margin="20"  FontSize="65" MaxLength="147" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
                     </Border>
                 </Grid>
                 <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">

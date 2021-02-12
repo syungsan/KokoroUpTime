@@ -199,8 +199,6 @@ namespace KokoroUpTime
                     if (this.currentItemNo >= this.itemDetailImages.Length - 1)
                     {
                         this.currentItemNo = 0;
-
-                        break;
                     }
                     else
                     {
