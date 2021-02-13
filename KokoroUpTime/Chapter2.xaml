@@ -220,7 +220,7 @@
                     <TextBlock x:Name="AosukeKindOfFeelingText" Text="ゆったり" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" />
                 </Grid>
                 <Grid x:Name="AosukeSizeOfFeelingGrid"  Margin="1037,807,569,116" d:IsHidden="True">
-                    <Button x:Name="SizeOfFeelingButton" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                    <Button x:Name="SizeOfFeelingButton" Style="{StaticResource SizeOfFeelingButton}" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
                         <TextBlock x:Name="AosukeSizeOfFeelingText" Text="(  20  )" FontSize="93"/>
                     </Button>
                 </Grid>

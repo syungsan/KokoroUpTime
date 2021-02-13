@@ -1234,25 +1234,30 @@ namespace KokoroUpTime
 
                     this.MangaFlipButton.Visibility = Visibility.Visible;
 
-                    Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
-
-                    this.isClickable = false;
-
-                    if (sb != null)
+                    if (this.dataOption.Is3SecondRule)
                     {
-                        // 二重終了防止策
-                        bool isDuplicate = false;
+                        Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
 
-                        sb.Completed += (s, e) =>
+                        if (sb != null)
                         {
-                            if (!isDuplicate)
-                            {
-                                this.isClickable = true;
+                            // 二重終了防止策
+                            bool isDuplicate = false;
 
-                                isDuplicate = true;
-                            }
-                        };
-                        sb.Begin(this);
+                            sb.Completed += (s, e) =>
+                            {
+                                if (!isDuplicate)
+                                {
+                                    this.isClickable = true;
+
+                                    isDuplicate = true;
+                                }
+                            };
+                            sb.Begin(this);
+                        }
+                    }
+                    else
+                    {
+                        this.isClickable = true;
                     }
                     break;
 
@@ -2104,6 +2109,10 @@ namespace KokoroUpTime
                         this.NextMessageButton.Visibility = Visibility.Hidden;
 
                     }
+                    else if (button.Name == "MangaFlipButton")
+                    {
+                        this.MangaFlipButton.Visibility = Visibility.Hidden;
+                    }
 
 
 
@@ -2168,7 +2177,7 @@ namespace KokoroUpTime
                             case "3":
                                 break;
                         }
-                        this.InputStroke[this.InputDictionaryKey] = this.ReasonDifferenceSizeOfFeelingOutputCanvas.Strokes;
+                  //  this.InputStroke[this.InputDictionaryKey] = this.ReasonDifferenceSizeOfFeelingOutputCanvas.Strokes;
 
                         this.InputCanvas1.Strokes = this.InputStroke[this.InputDictionaryKey];
                         this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);

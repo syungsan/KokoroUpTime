@@ -227,6 +227,13 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,授業中に先生から指名されたとき、鬱キミちゃんはどんな「きもち」になるかの？,白じい
 click,msg,next_only
 #
+hide,grid,select_feeling_grid
+clear,text,main_msg
+image,bg_image,water_frame.png
+image,shiroji_small_right_center_image
+image,kimi_stand_small_left_image
+image,main_msg_bubble_image,right_big_bubble.png
+grid,main_msg_grid,appear_expansion
 msg,main_msg,きもちセンサーをつかって、きもちの種類を選んでみよう！,白じい
 click,msg
 #

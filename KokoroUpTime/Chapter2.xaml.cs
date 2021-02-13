@@ -51,6 +51,8 @@ namespace KokoroUpTime
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
 
+        private bool isCompleteGroupeActivity = false;
+
         // 各種コントロールの名前を収める変数
         private string position = "";
 
@@ -845,25 +847,30 @@ namespace KokoroUpTime
 
                     this.MangaFlipButton.Visibility = Visibility.Visible;
 
-                    Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
-
-                    this.isClickable = false;
-
-                    if (sb != null)
+                    if (this.dataOption.Is3SecondRule)
                     {
-                        // 二重終了防止策
-                        bool isDuplicate = false;
+                        Storyboard sb = this.FindResource("wipe_flip_manga_button_image") as Storyboard;
 
-                        sb.Completed += (s, e) =>
+                        if (sb != null)
                         {
-                            if (!isDuplicate)
-                            {
-                                this.isClickable = true;
+                            // 二重終了防止策
+                            bool isDuplicate = false;
 
-                                isDuplicate = true;
-                            }
-                        };
-                        sb.Begin(this);
+                            sb.Completed += (s, e) =>
+                            {
+                                if (!isDuplicate)
+                                {
+                                    this.isClickable = true;
+
+                                    isDuplicate = true;
+                                }
+                            };
+                            sb.Begin(this);
+                        }
+                    }
+                    else
+                    {
+                        this.isClickable = true;
                     }
                     break;
 
@@ -1671,8 +1678,7 @@ namespace KokoroUpTime
                 this.CoverLayerImage.Visibility = Visibility.Visible;
                 this.ExitBackGrid.Visibility = Visibility.Visible;
             }
-
-            if (button.Name == "ExitBackYesButton")
+            else if (button.Name == "ExitBackYesButton")
             {
                 this.StopBGM();
 
@@ -1684,308 +1690,14 @@ namespace KokoroUpTime
 
                 this.NavigationService.Navigate(titlePage);
             }
-
-            if (button.Name == "ExitBackNoButton")
+            else if (button.Name == "ExitBackNoButton")
             {
                 this.ExitBackGrid.Visibility = Visibility.Hidden;
                 this.CoverLayerImage.Visibility = Visibility.Hidden;
 
                 this.isClickable = true;
             }
-            if (button.Name == "BackMessageButton" || button.Name == "BackPageButton" || button.Name == "GroupeActivityBackMessageButton" || button.Name == "SelectFeelingBackButton")
-            {
-                this.BackMessageButton.Visibility = Visibility.Hidden;
-                this.NextMessageButton.Visibility = Visibility.Hidden;
-
-                this.BackPageButton.Visibility = Visibility.Hidden;
-                this.NextPageButton.Visibility = Visibility.Hidden;
-
-                this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
-
-                this.ScenarioBack();
-            }
-
-            if (button.Name == "BranchButton1")
-            {
-                this.GoTo("manga");
-            }
-            if (button.Name == "BranchButton2")
-            {
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
-            if (button.Name == "SelectFeelingNextButton")
-            {
-                if (scene == "チャレンジタイムパート①")
-                {
-                    if (this.GoodEventSelectListBox1.Visibility == Visibility.Visible &&this.GoodEventSelectListBox2.Visibility == Visibility.Visible )
-                    {
-                        foreach(string goodevent1 in this.GoodEventSelectListBox1.SelectedItems)
-                        {
-                            this.mySelectGoodEvents.Add(goodevent1);
-                        }
-                        foreach (string goodevent2 in this.GoodEventSelectListBox2.SelectedItems)
-                        {
-                            this.mySelectGoodEvents.Add(goodevent2);
-                        }
-                    }
-                    this.dataChapter2.MySelectGoodEvents = string.Join(",", this.mySelectGoodEvents);
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter2 SET MySelectGoodEvents = '{this.dataChapter2.MySelectGoodEvents}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                    }
-
-                }
-                if (scene == "「おいしいものを食べる」ときは？")
-                {
-                    this.aosukesDifficultyOfEating = this.AosukeDifficultyOfActionText.Text;
-                    this.aosukesSizeOfFeelingOfEating = this.AosukeSizeOfFeelingText.Text;
-
-                    this.dataChapter2.AosukesDifficultyOfEating = this.aosukesDifficultyOfEating;
-                    this.dataChapter2.AosukesSizeOfFeelingOfEating = this.aosukesSizeOfFeelingOfEating;
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfEating = '{this.dataChapter2.AosukesSizeOfFeelingOfEating}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                        connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfEating = '{this.dataChapter2.AosukesDifficultyOfEating}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                    }
-                }
-                if (scene == "「全部のテストで100点をとる」ときは？")
-                {
-                    this.aosukesDifficultyOfGettingHighScore = this.AosukeDifficultyOfActionText.Text;
-                    this.aosukesSizeOfFeelingOfGettingHighScore = this.AosukeSizeOfFeelingText.Text;
-
-                    this.dataChapter2.AosukesDifficultyOfGettingHighScore = this.aosukesDifficultyOfGettingHighScore;
-                    this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore = this.aosukesSizeOfFeelingOfGettingHighScore;
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfGettingHighScore = '{this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                        connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfGettingHighScore = '{this.dataChapter2.AosukesDifficultyOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-
-                    }
-                }
-                if (scene == "「休み時間に友だちとおしゃべりする」ときは？")
-                {
-                    this.aosukesDifficultyOfTalkingWithFriend = this.AosukeDifficultyOfActionText.Text;
-                    this.aosukesSizeOfFeelingOfTalkingWithFriend = this.AosukeSizeOfFeelingText.Text;
-
-                    this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend = this.aosukesDifficultyOfEating;
-                    this.dataChapter2.AosukesDifficultyOfTalkingWithFriend = this.aosukesSizeOfFeelingOfEating;
-                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    {
-                        connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfTalkingWithFriend = '{this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                        connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfTalkingWithFriend = '{this.dataChapter2.AosukesDifficultyOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                    }
-                }
-
-                if (scene == "グループアクティビティ")
-                {
-
-                    if (this.dataOption.InputMethod == 0)
-                    {
-                        // ストロークが描画されている境界を取得
-                        System.Windows.Rect rectBounds = new System.Windows.Rect(0, 0, this.InputMyALittleExcitedCanvas.ActualWidth, this.InputMyALittleExcitedCanvas.ActualHeight);
-
-                        // 描画先を作成
-                        DrawingVisual dv = new DrawingVisual();
-                        DrawingContext dc = dv.RenderOpen();
-
-                        // 描画エリアの位置補正（補正しないと黒い部分ができてしまう）
-                        dc.PushTransform(new TranslateTransform(-rectBounds.X, -rectBounds.Y));
-
-                        // 描画エリア(dc)に四角形を作成
-                        // 四角形の大きさはストロークが描画されている枠サイズとし、
-                        // 背景色はInkCanvasコントロールと同じにする
-                        dc.DrawRectangle(InputMyALittleExcitedCanvas.Background, null, rectBounds);
-
-                        // 上記で作成した描画エリア(dc)にInkCanvasのストロークを描画
-                        InputMyALittleExcitedCanvas.Strokes.Draw(dc);
-                        dc.Close();
-
-                        // ビジュアルオブジェクトをビットマップに変換する
-                        RenderTargetBitmap rtb = new RenderTargetBitmap((int)rectBounds.Width, (int)rectBounds.Height, 96, 96, PixelFormats.Pbgra32);
-                        rtb.Render(dv);
-
-                        //仮置き
-                        string nameBmp = "Chapter02_GroupeActivity_MyALittlleExcitingEvents.bmp";
-                        string dirPath = $"./Log/{this.initConfig.userName}";
-
-                        string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
-                        var startupPath = FileUtils.GetStartupPath();
-
-                        PngBitmapEncoder png = new PngBitmapEncoder();
-                        png.Frames.Add(BitmapFrame.Create(rtb));
-
-                        // ファイルのパスは仮
-                        using (var stream = File.Create($@"{startupPath}/{nameBmpPath}"))
-                        {
-                            png.Save(stream);
-                        }
-
-                        var pngmap = new BitmapImage();
-
-                        pngmap.BeginInit();
-                        pngmap.CacheOption = BitmapCacheOption.OnLoad;    //ココ
-                        pngmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;  //ココ
-                        pngmap.UriSource = new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute);
-                        pngmap.EndInit();
-
-                        pngmap.Freeze();
-                    }
-                    else if (this.dataOption.InputMethod == 1)
-                    {
-                        this.myALittlleExcitingEvents = this.InputMyALittleExcitedText.Text;
-                        this.dataChapter2.MyALittlleExcitingEvents = this.myALittlleExcitingEvents;
-
-                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                        {
-                            connection.Execute($@"UPDATE DataChapter2 SET MyALittlleExcitingEvents = '{this.dataChapter2.MyALittlleExcitingEvents}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                        }
-                    }
-                }
-
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
-
-            if (button.Name == "GroupeActivityButton")
-            {
-                button.Background = null;
-
-                int[] CanvasSize = { 1920, 840 };
-                int[] TextSIze = { 1440, 630 , 83 };//幅,高さ,フォントサイズ
-
-                if (this.dataOption.InputMethod == 0)
-                {
-                    this.InputMyALittleExcitedGrid.Width = CanvasSize[0];
-                    this.InputMyALittleExcitedGrid.Height = CanvasSize[1];
-
-                    // 手書き入力
-                    this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Bottom;
-
-                    this.InputMyALittleExcitedText.Visibility = Visibility.Hidden;
-                    this.CanvasEditGrid.Visibility = Visibility.Visible;
-
-                    this.PenButton.IsSelected = true;
-
-                    if (this.SelectFeelingNextButton.Visibility == Visibility.Visible)
-                    {
-                        this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
-                    }
-                    else if (this.SelectFeelingCompleteButton.Visibility == Visibility.Visible)
-                    {
-                        this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
-                    }
-                }
-                else if(this.dataOption.InputMethod == 1)
-                {
-
-                    this.InputMyALittleExcitedGrid.Width = TextSIze[0];
-                    this.InputMyALittleExcitedGrid.Height = TextSIze[1];
-                    //キーボード入力
-                    this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Top;
-
-                    this.InputMyALittleExcitedText.FontSize = TextSIze[2];
-                    this.InputMyALittleExcitedText.Focus();
-                }
-
-                this.CompleteInputButton.Visibility = Visibility.Visible;
-            }
-            if (button.Name == "CompleteInputButton")
-            {
-                this.GroupeActivityButton.Background = Brushes.Transparent;
-
-                int[] NormalSize = { 1200, 545, 65 };//幅,高さ,フォントサイズ
-
-                this.InputMyALittleExcitedGrid.Width = NormalSize[0];
-                this.InputMyALittleExcitedGrid.Height = NormalSize[1];
-                this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Bottom;
-
-                if (this.dataOption.InputMethod == 0)
-                {
-                    this.CompleteInputButton.Visibility = Visibility.Hidden;
-                    this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
-                    this.CanvasEditGrid.Visibility = Visibility.Hidden;
-                }
-                else if (this.dataOption.InputMethod == 1)
-                {
-                    this.InputMyALittleExcitedText.FontSize = NormalSize[2];
-                    this.CloseOSK();
-                }
-
-                this.CompleteInputButton.Visibility = Visibility.Hidden;
-            }
-           
-            if (this.scene=="「休み時間に友だちとおしゃべりする」ときは？"||this.scene=="「全部のテストで100点をとる」ときは？"||this.scene=="「おいしいものを食べる」ときは？")
-            {
-                this.DifficultySelectGrid.Visibility = Visibility.Hidden;
-
-                if (button.Name == "GoodButton")
-                {
-                    this.AosukeDifficultyOfActionText.Text = "〇";
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-                }
-                if (button.Name == "BadButton")
-                {
-                    this.AosukeDifficultyOfActionText.Text = "×";
-                    this.scenarioCount +=1;
-                    this.ScenarioPlay();
-                }
-                if (button.Name == "NormalButton")
-                {
-                    this.AosukeDifficultyOfActionText.Text = "△";
-                    this.scenarioCount +=1;
-                    this.ScenarioPlay();
-                }
-
-                if (this.AosukeDifficultyOfActionText.Text != "" && this.AosukeSizeOfFeelingText.Text != "")
-                {
-                    this.SelectFeelingNextButton.Visibility = Visibility.Visible;
-                }
-            }
-            if (button.Name == "SizeOfFeelingButton")
-            {
-                this.Challenge2Grid.Visibility = Visibility.Hidden;
-                this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
-
-                this.GoTo("size_of_feeling");
-            }
-            if (button.Name == "DifficultyOfActionButton")
-            {
-                this.Challenge2Grid.Visibility = Visibility.Hidden;
-                this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
-                this.GoTo("difficulty_of_action");
-            }
-
-            if (this.isClickable && (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton"))
-            {
-                this.isClickable = false;
-
-                if (button.Name == "NextMessageButton")
-                {
-                    this.BackMessageButton.Visibility = Visibility.Hidden;
-                    this.NextMessageButton.Visibility = Visibility.Hidden;
-                }
-
-                if (button.Name == "NextPageButton")
-                {
-                    this.BackPageButton.Visibility = Visibility.Hidden;
-                    this.NextPageButton.Visibility = Visibility.Hidden;
-                    if (this.SelectHeartGrid.IsVisible)
-                    {
-                        this.AosukeSizeOfFeelingText.Text = "(  "+ this.ViewSizeOfFeelingTextBlock.Text + "  )";
-                        if(this.AosukeSizeOfFeelingText.Text != ""&&this.AosukeDifficultyOfActionText.Text != "")
-                        {
-                            this.SelectFeelingNextButton.Visibility = Visibility.Visible;
-                        }
-                    }
-                }
-
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
-            }
-            
-            if (button.Name == "ReturnToTitleButton")
+            else if (button.Name == "ReturnToTitleButton")
             {
                 TitlePage titlePage = new TitlePage();
 
@@ -1994,6 +1706,325 @@ namespace KokoroUpTime
                 titlePage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                 this.NavigationService.Navigate(titlePage);
+            }
+
+
+            if (this.isClickable)
+            {
+                this.isClickable = false;
+
+                if (button.Name == "BackMessageButton" || button.Name == "BackPageButton" || button.Name == "GroupeActivityBackMessageButton" || button.Name == "SelectFeelingBackButton")
+                {
+                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                    this.NextMessageButton.Visibility = Visibility.Hidden;
+
+                    this.BackPageButton.Visibility = Visibility.Hidden;
+                    this.NextPageButton.Visibility = Visibility.Hidden;
+
+                    this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
+
+                    this.ScenarioBack();
+                }
+
+                if (button.Name == "BranchButton1")
+                {
+                    this.GoTo("manga");
+                }
+                if (button.Name == "BranchButton2")
+                {
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+                if (button.Name == "SelectFeelingNextButton")
+                {
+                    if (scene == "チャレンジタイムパート①")
+                    {
+                        if (this.GoodEventSelectListBox1.Visibility == Visibility.Visible && this.GoodEventSelectListBox2.Visibility == Visibility.Visible)
+                        {
+                            foreach (string goodevent1 in this.GoodEventSelectListBox1.SelectedItems)
+                            {
+                                this.mySelectGoodEvents.Add(goodevent1);
+                            }
+                            foreach (string goodevent2 in this.GoodEventSelectListBox2.SelectedItems)
+                            {
+                                this.mySelectGoodEvents.Add(goodevent2);
+                            }
+                        }
+                        this.dataChapter2.MySelectGoodEvents = string.Join(",", this.mySelectGoodEvents);
+                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        {
+                            connection.Execute($@"UPDATE DataChapter2 SET MySelectGoodEvents = '{this.dataChapter2.MySelectGoodEvents}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                        }
+
+                    }
+                    if (scene == "「おいしいものを食べる」ときは？")
+                    {
+                        this.aosukesDifficultyOfEating = this.AosukeDifficultyOfActionText.Text;
+                        this.aosukesSizeOfFeelingOfEating = this.AosukeSizeOfFeelingText.Text;
+
+                        this.dataChapter2.AosukesDifficultyOfEating = this.aosukesDifficultyOfEating;
+                        this.dataChapter2.AosukesSizeOfFeelingOfEating = this.aosukesSizeOfFeelingOfEating;
+                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        {
+                            connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfEating = '{this.dataChapter2.AosukesSizeOfFeelingOfEating}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                            connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfEating = '{this.dataChapter2.AosukesDifficultyOfEating}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                        }
+                    }
+                    if (scene == "「全部のテストで100点をとる」ときは？")
+                    {
+                        this.aosukesDifficultyOfGettingHighScore = this.AosukeDifficultyOfActionText.Text;
+                        this.aosukesSizeOfFeelingOfGettingHighScore = this.AosukeSizeOfFeelingText.Text;
+
+                        this.dataChapter2.AosukesDifficultyOfGettingHighScore = this.aosukesDifficultyOfGettingHighScore;
+                        this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore = this.aosukesSizeOfFeelingOfGettingHighScore;
+                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        {
+                            connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfGettingHighScore = '{this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                            connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfGettingHighScore = '{this.dataChapter2.AosukesDifficultyOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+
+                        }
+                    }
+                    if (scene == "「休み時間に友だちとおしゃべりする」ときは？")
+                    {
+                        this.aosukesDifficultyOfTalkingWithFriend = this.AosukeDifficultyOfActionText.Text;
+                        this.aosukesSizeOfFeelingOfTalkingWithFriend = this.AosukeSizeOfFeelingText.Text;
+
+                        this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend = this.aosukesDifficultyOfEating;
+                        this.dataChapter2.AosukesDifficultyOfTalkingWithFriend = this.aosukesSizeOfFeelingOfEating;
+                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        {
+                            connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfTalkingWithFriend = '{this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                            connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfTalkingWithFriend = '{this.dataChapter2.AosukesDifficultyOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                        }
+                    }
+
+                    if (scene == "グループアクティビティ")
+                    {
+
+                        if (this.dataOption.InputMethod == 0)
+                        {
+                            // ストロークが描画されている境界を取得
+                            System.Windows.Rect rectBounds = new System.Windows.Rect(0, 0, this.InputMyALittleExcitedCanvas.ActualWidth, this.InputMyALittleExcitedCanvas.ActualHeight);
+
+                            // 描画先を作成
+                            DrawingVisual dv = new DrawingVisual();
+                            DrawingContext dc = dv.RenderOpen();
+
+                            // 描画エリアの位置補正（補正しないと黒い部分ができてしまう）
+                            dc.PushTransform(new TranslateTransform(-rectBounds.X, -rectBounds.Y));
+
+                            // 描画エリア(dc)に四角形を作成
+                            // 四角形の大きさはストロークが描画されている枠サイズとし、
+                            // 背景色はInkCanvasコントロールと同じにする
+                            dc.DrawRectangle(InputMyALittleExcitedCanvas.Background, null, rectBounds);
+
+                            // 上記で作成した描画エリア(dc)にInkCanvasのストロークを描画
+                            InputMyALittleExcitedCanvas.Strokes.Draw(dc);
+                            dc.Close();
+
+                            // ビジュアルオブジェクトをビットマップに変換する
+                            RenderTargetBitmap rtb = new RenderTargetBitmap((int)rectBounds.Width, (int)rectBounds.Height, 96, 96, PixelFormats.Pbgra32);
+                            rtb.Render(dv);
+
+                            //仮置き
+                            string nameBmp = "Chapter02_GroupeActivity_MyALittlleExcitingEvents.bmp";
+                            string dirPath = $"./Log/{this.initConfig.userName}";
+
+                            string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
+                            var startupPath = FileUtils.GetStartupPath();
+
+                            PngBitmapEncoder png = new PngBitmapEncoder();
+                            png.Frames.Add(BitmapFrame.Create(rtb));
+
+                            // ファイルのパスは仮
+                            using (var stream = File.Create($@"{startupPath}/{nameBmpPath}"))
+                            {
+                                png.Save(stream);
+                            }
+
+                            var pngmap = new BitmapImage();
+
+                            pngmap.BeginInit();
+                            pngmap.CacheOption = BitmapCacheOption.OnLoad;    //ココ
+                            pngmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;  //ココ
+                            pngmap.UriSource = new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute);
+                            pngmap.EndInit();
+
+                            pngmap.Freeze();
+                        }
+                        else if (this.dataOption.InputMethod == 1)
+                        {
+                            this.myALittlleExcitingEvents = this.InputMyALittleExcitedText.Text;
+                            this.dataChapter2.MyALittlleExcitingEvents = this.myALittlleExcitingEvents;
+
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"UPDATE DataChapter2 SET MyALittlleExcitingEvents = '{this.dataChapter2.MyALittlleExcitingEvents}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                            }
+                        }
+
+                        isCompleteGroupeActivity = true;
+                    }
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+
+                if (button.Name == "GroupeActivityButton")
+                {
+                    button.Background = null;
+
+                    int[] CanvasSize = { 1920, 840 };
+                    int[] TextSIze = { 1440, 630, 83 };//幅,高さ,フォントサイズ
+
+                    if (this.dataOption.InputMethod == 0)
+                    {
+                        this.InputMyALittleExcitedGrid.Width = CanvasSize[0];
+                        this.InputMyALittleExcitedGrid.Height = CanvasSize[1];
+
+                        // 手書き入力
+                        this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Bottom;
+
+                        this.InputMyALittleExcitedText.Visibility = Visibility.Hidden;
+                        this.CanvasEditGrid.Visibility = Visibility.Visible;
+
+                        this.PenButton.IsSelected = true;
+
+                        if (this.SelectFeelingNextButton.Visibility == Visibility.Visible)
+                        {
+                            this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
+                        }
+                        else if (this.SelectFeelingCompleteButton.Visibility == Visibility.Visible)
+                        {
+                            this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                        }
+                        else if (isCompleteGroupeActivity)
+                        {
+                            this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                            this.GroupeActivityMessageGrid.Visibility = Visibility.Hidden;
+                        }
+                    }
+                    else if (this.dataOption.InputMethod == 1)
+                    {
+
+                        this.InputMyALittleExcitedGrid.Width = TextSIze[0];
+                        this.InputMyALittleExcitedGrid.Height = TextSIze[1];
+                        //キーボード入力
+                        this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Top;
+
+                        this.InputMyALittleExcitedText.FontSize = TextSIze[2];
+                        this.InputMyALittleExcitedText.Focus();
+
+                        if (isCompleteGroupeActivity)
+                        {
+                            this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                            this.GroupeActivityMessageGrid.Visibility = Visibility.Hidden;
+                        }
+                    }
+
+                    this.CompleteInputButton.Visibility = Visibility.Visible;
+                }
+                if (button.Name == "CompleteInputButton")
+                {
+                    this.GroupeActivityButton.Background = Brushes.Transparent;
+
+                    int[] NormalSize = { 1200, 545, 65 };//幅,高さ,フォントサイズ
+
+                    this.InputMyALittleExcitedGrid.Width = NormalSize[0];
+                    this.InputMyALittleExcitedGrid.Height = NormalSize[1];
+                    this.InputMyALittleExcitedGrid.VerticalAlignment = VerticalAlignment.Bottom;
+
+                    if (this.dataOption.InputMethod == 0)
+                    {
+                        this.CompleteInputButton.Visibility = Visibility.Hidden;
+                        this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
+                        this.CanvasEditGrid.Visibility = Visibility.Hidden;
+                    }
+                    else if (this.dataOption.InputMethod == 1)
+                    {
+                        this.InputMyALittleExcitedText.FontSize = NormalSize[2];
+                        this.CloseOSK();
+                    }
+                    else if (isCompleteGroupeActivity)
+                    {
+                        this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
+                        this.GroupeActivityMessageGrid.Visibility = Visibility.Visible;
+                    }
+
+                    this.CompleteInputButton.Visibility = Visibility.Hidden;
+                }
+
+                if (this.scene == "「休み時間に友だちとおしゃべりする」ときは？" || this.scene == "「全部のテストで100点をとる」ときは？" || this.scene == "「おいしいものを食べる」ときは？")
+                {
+                    this.DifficultySelectGrid.Visibility = Visibility.Hidden;
+
+                    if (button.Name == "GoodButton")
+                    {
+                        this.AosukeDifficultyOfActionText.Text = "〇";
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
+                    if (button.Name == "BadButton")
+                    {
+                        this.AosukeDifficultyOfActionText.Text = "×";
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
+                    if (button.Name == "NormalButton")
+                    {
+                        this.AosukeDifficultyOfActionText.Text = "△";
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
+
+                    if (this.AosukeDifficultyOfActionText.Text != "" && this.AosukeSizeOfFeelingText.Text != "(    )")
+                    {
+                        this.SelectFeelingNextButton.Visibility = Visibility.Visible;
+                    }
+                }
+                if (button.Name == "SizeOfFeelingButton")
+                {
+                    this.Challenge2Grid.Visibility = Visibility.Hidden;
+                    this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
+
+                    this.GoTo("size_of_feeling");
+                }
+                if (button.Name == "DifficultyOfActionButton")
+                {
+                    this.Challenge2Grid.Visibility = Visibility.Hidden;
+                    this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
+                    this.GoTo("difficulty_of_action");
+                }
+
+                if (button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton")
+                {
+                    if (button.Name == "NextMessageButton")
+                    {
+                        this.BackMessageButton.Visibility = Visibility.Hidden;
+                        this.NextMessageButton.Visibility = Visibility.Hidden;
+                    }
+
+                    if (button.Name == "NextPageButton")
+                    {
+                        this.BackPageButton.Visibility = Visibility.Hidden;
+                        this.NextPageButton.Visibility = Visibility.Hidden;
+                        if (this.SelectHeartGrid.IsVisible)
+                        {
+                            this.AosukeSizeOfFeelingText.Text = "(  " + this.ViewSizeOfFeelingTextBlock.Text + "  )";
+                            if (this.AosukeSizeOfFeelingText.Text != "" && this.AosukeDifficultyOfActionText.Text != "")
+                            {
+                                this.SelectFeelingNextButton.Visibility = Visibility.Visible;
+                            }
+                        }
+                    }
+                    if (button.Name == "MangaFlipButton")
+                    {
+                        this.MangaFlipButton.Visibility = Visibility.Hidden;
+                    }
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
             }
         }
 

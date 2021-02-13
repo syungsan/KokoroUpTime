@@ -45,9 +45,9 @@ click,page
 sub,manga
 scene,漫画購読
 reset
-bgm,set,manga.mp3,loop,50
+bgm,set,atsumare!_tomodachi!.mp3,loop,50
 bgm,play
-text,music_title_text,まんが
+text,music_title_text,集まれ！友達！
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
 image,manga_title_image
@@ -106,7 +106,7 @@ click,msg
 image,shiroji_right_image,shiroji_04.png
 image,children_stand_left_image,aosuke_stand_01.png,,,gray
 image,main_msg_bubble_image,right_big_bubble.png
-msg,main_msg,青助くん！それはとても重要なポイントじゃ。鬱<font=#44#yellow>じつは、すごく楽しいことははじめることがむずかしいことがある。</font>,白じい
+msg,main_msg,青助くん！それはとても重要なポイントじゃ。鬱<font=#44#yellow>じつは、すごく楽しいことは鬱はじめることがむずかしいことがある。</font>,白じい
 click,msg
 #
 msg,main_msg,たとえば、元気がでないときに、みんなで遊園地に行ったり、鬱スポーツをすることはかんたんなことではないのう。,白じい
@@ -117,7 +117,7 @@ hide,image,item_center_image,item02_solo.png
 image,bg_image,background_08.png
 image,children_stand_left_image,aosuke_stand_01.png,,,gray
 image,shiroji_right_image,shiroji_04.png
-msg,main_msg,<font=#38#yellow>そういう元気が出ないときは、わしの発明品をつかえばよいぞ！。</font>,白じい
+msg,main_msg,<font=#38#yellow>そういう元気が出ないときは、わしの発明品をつかえばよいぞ！</font>,白じい
 click,page
 #
 scene,アイテム登場
@@ -162,7 +162,7 @@ image,bg_image,background_07.png
 image,shiroji_left_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,「ちょっぴりうきうき」のポイントは、鬱<image=word_art_msg_02_01.png></image>鬱<image=word_art_msg_02_02.png></image>ことが大切なのじゃ,白じい
+msg,main_msg,「ちょっぴりうきうき」のポイントは、鬱<image=word_art_msg_02_01.png></image>鬱<image=word_art_msg_02_02.png></image>ことたいせつなのじゃ！,白じい
 click,page
 #
 hide,image,shiroji_left_image
@@ -265,7 +265,7 @@ image,item_point_message_bubble_image,small_bubble_left_up.png,appear_expansion
 msg,item_point_msg_text,うきうきシューズをつかって鬱「ちょっぴりうきうき」を探すときのポイントは鬱3つあるのじゃ！,白じい
 click,page
 #
-scene,グループアクティビティ
+scene,グループアクティビティ　開始
 reset
 image,bg_image,background_07.png
 image,bg_image,background_06.png
@@ -284,6 +284,7 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,それでは、うきうきシューズをつかって、鬱「ちょっぴりうきうき」をたくさん集めてみるのじゃ！,白じい
 click,page
 #
+scene,グループアクティビティ
 reset
 image,bg_image,blue_gradation.png
 grid,group_activity_grid
@@ -317,7 +318,7 @@ hide,image,item_left_last_image
 image,shiroji_right_image,shiroji_02.png
 grid,summary_grid
 grid,main_msg_grid
-msg,main_msg,次回のテーマは「<font=#44#yellow>あたたかい言葉をかけよう</font>」じゃ！。,白じい
+msg,main_msg,次回のテーマは「<font=#44#yellow>あたたかい言葉をかけよう</font>」じゃ！,白じい
 click,page
 #
 scene,今回の発明品おさらい
