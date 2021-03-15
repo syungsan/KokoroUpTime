@@ -71,7 +71,7 @@ namespace KokoroUpTime
         private int imageInlineCount;
 
         //きもちの種類と大きさのテキストを辞書から呼ぶためのKey
-        private string DictionaryKey = "";
+        private string FeelingDictionaryKey = "";
 
         private Dictionary<string, List<Run>> runs = new Dictionary<string, List<Run>>();
         private Dictionary<string, List<InlineUIContainer>> imageInlines = new Dictionary<string, List<InlineUIContainer>>();
@@ -1498,12 +1498,12 @@ namespace KokoroUpTime
 
                     if (Regex.IsMatch(this.scene , ".+のきもちときもちの大きさ.+")||this.scene=="グループアクティビティ")
                     {
-                        if(this.KindOfFeelings[DictionaryKey].Split(",")[1] == "良い")
+                        if(this.KindOfFeelings[this.FeelingDictionaryKey].Split(",")[1] == "良い")
                         {
                             this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_red.png", UriKind.Relative));
                             this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/red_needle.png", UriKind.Relative));
                         }
-                        else if(this.KindOfFeelings[DictionaryKey].Split(",")[1] == "悪い")
+                        else if(this.KindOfFeelings[this.FeelingDictionaryKey].Split(",")[1] == "悪い")
                         {
                             this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_blue.png", UriKind.Relative));
                             this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/blue_needle.png", UriKind.Relative));
@@ -1622,8 +1622,8 @@ namespace KokoroUpTime
                     //else
                     //    this.SizeOfFeelingInputButton.IsEnabled = true;
                     case "$aosuke_kind_of_feeling_1$":
-                        this.DictionaryKey = "aosuke_feeling1";
-                        text = text.Replace("$aosuke_kind_of_feeling_1$", KindOfFeelings[DictionaryKey].Split(",")[0]);
+                        this.FeelingDictionaryKey = "aosuke_feeling1";
+                        text = text.Replace("$aosuke_kind_of_feeling_1$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
                         if(text!="")
                         {
                             this.AosukeSizeOfFeelingInputButton1.IsEnabled = true;
@@ -1634,8 +1634,8 @@ namespace KokoroUpTime
                         }
                         break;
                     case "$aosuke_kind_of_feeling_2$":
-                        this.DictionaryKey="aosuke_feeling2";
-                        text = text.Replace("$aosuke_kind_of_feeling_2$", KindOfFeelings[DictionaryKey].Split(",")[0]);
+                        this.FeelingDictionaryKey="aosuke_feeling2";
+                        text = text.Replace("$aosuke_kind_of_feeling_2$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
                         if(text!="")
                         {
                             this.AosukeSizeOfFeelingInputButton2.IsEnabled = true;
@@ -1646,8 +1646,8 @@ namespace KokoroUpTime
                         }
                         break;
                     case "$aosuke_kind_of_feeling_3$":
-                        this.DictionaryKey="aosuke_feeling3";
-                        text = text.Replace("$aosuke_kind_of_feeling_3$", KindOfFeelings[DictionaryKey].Split(",")[0]);
+                        this.FeelingDictionaryKey="aosuke_feeling3";
+                        text = text.Replace("$aosuke_kind_of_feeling_3$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
                         if(text!="")
                         {
                             this.AosukeSizeOfFeelingInputButton3.IsEnabled = true;
@@ -1658,8 +1658,8 @@ namespace KokoroUpTime
                         }
                         break;
                     case "$aosuke_kind_of_feeling_4$":
-                        this.DictionaryKey="aosuke_feeling4";
-                        text = text.Replace("$aosuke_kind_of_feeling_4$", KindOfFeelings[DictionaryKey].Split(",")[0]);
+                        this.FeelingDictionaryKey="aosuke_feeling4";
+                        text = text.Replace("$aosuke_kind_of_feeling_4$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
                         if(text!="")
                         {
                             this.AosukeSizeOfFeelingInputButton4.IsEnabled = true;
@@ -1671,10 +1671,10 @@ namespace KokoroUpTime
                         break;
 
                     case "$aosuke_size_of_feeling_1$":
-                        this.DictionaryKey = "aosuke_feeling1";
-                        if (this.SizeOfFeelings[DictionaryKey] != -1)
+                        this.FeelingDictionaryKey = "aosuke_feeling1";
+                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_1$", this.SizeOfFeelings[DictionaryKey].ToString());
+                            text = text.Replace("$aosuke_size_of_feeling_1$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
                         }
                         else
                         {
@@ -1682,10 +1682,10 @@ namespace KokoroUpTime
                         }
                         break;
                     case "$aosuke_size_of_feeling_2$":
-                        this.DictionaryKey = "aosuke_feeling2";
-                        if (this.SizeOfFeelings[DictionaryKey] != -1)
+                        this.FeelingDictionaryKey = "aosuke_feeling2";
+                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_2$", this.SizeOfFeelings[DictionaryKey].ToString());
+                            text = text.Replace("$aosuke_size_of_feeling_2$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
                         }
                         else
                         {
@@ -1693,10 +1693,10 @@ namespace KokoroUpTime
                         }
                         break;
                     case "$aosuke_size_of_feeling_3$":
-                         this.DictionaryKey = "aosuke_feeling3";
-                        if (this.SizeOfFeelings[DictionaryKey] != -1)
+                         this.FeelingDictionaryKey = "aosuke_feeling3";
+                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_3$", this.SizeOfFeelings[DictionaryKey].ToString());
+                            text = text.Replace("$aosuke_size_of_feeling_3$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
                         }
                         else
                         {
@@ -1704,10 +1704,10 @@ namespace KokoroUpTime
                         }
                         break;
                     case "$aosuke_size_of_feeling_4$":
-                         this.DictionaryKey = "aosuke_feeling4";
-                        if (this.SizeOfFeelings[DictionaryKey] != -1)
+                         this.FeelingDictionaryKey = "aosuke_feeling4";
+                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_4$", this.SizeOfFeelings[DictionaryKey].ToString());
+                            text = text.Replace("$aosuke_size_of_feeling_4$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
                         }
                         else
                         {
@@ -2218,11 +2218,11 @@ namespace KokoroUpTime
 
                                 if (this.SelectGoodFeelingListBox.SelectedItem != null)
                                 {
-                                    this.KindOfFeelings[DictionaryKey] = $"{this.SelectGoodFeelingListBox.SelectedItem.ToString().Replace("●　", "")},良い";
+                                    this.KindOfFeelings[FeelingDictionaryKey] = $"{this.SelectGoodFeelingListBox.SelectedItem.ToString().Replace("●　", "")},良い";
                                 }
                                 else if (this.SelectBadFeelingListBox.SelectedItems != null)
                                 {
-                                    this.KindOfFeelings[DictionaryKey] = $"{this.SelectBadFeelingListBox.SelectedItem.ToString().Replace("●　", "")},悪い";
+                                    this.KindOfFeelings[FeelingDictionaryKey] = $"{this.SelectBadFeelingListBox.SelectedItem.ToString().Replace("●　", "")},悪い";
                                 }
 
                               //  this.SizeOfFeelingInputButton.IsEnabled = true;
@@ -2230,7 +2230,7 @@ namespace KokoroUpTime
                         }
                         else if (this.SelectHeartGrid.IsVisible)
                         {
-                            this.SizeOfFeelings[DictionaryKey] = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
+                            this.SizeOfFeelings[FeelingDictionaryKey] = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
                         }
                     }
                     else if (button.Name == "MangaFlipButton")
@@ -2247,19 +2247,19 @@ namespace KokoroUpTime
 
                     if (button.Name == "AosukeKindOfFeelingInputButton1")
                     {
-                        this.DictionaryKey = "aosuke_feeling1";
+                        this.FeelingDictionaryKey = "aosuke_feeling1";
                     }
                     else if (button.Name == "AosukeKindOfFeelingInputButton2")
                     {
-                        this.DictionaryKey = "aosuke_feeling2";
+                        this.FeelingDictionaryKey = "aosuke_feeling2";
                     }
                     else if (button.Name == "AosukeKindOfFeelingInputButton3")
                     {
-                        this.DictionaryKey = "aosuke_feeling3";
+                        this.FeelingDictionaryKey = "aosuke_feeling3";
                     }
                     else if (button.Name == "AosukeKindOfFeelingInputButton4")
                     {
-                        this.DictionaryKey = "aosuke_feeling4";
+                        this.FeelingDictionaryKey = "aosuke_feeling4";
                     }
 
                     this.GoTo("kind_of_feeling");
@@ -2268,19 +2268,19 @@ namespace KokoroUpTime
                 {
                     if (button.Name == "AosukeSizeOfFeelingInputButton1")
                     {
-                        this.DictionaryKey = "aosuke_feeling1";
+                        this.FeelingDictionaryKey = "aosuke_feeling1";
                     }
                     else if (button.Name == "AosukeSizeOfFeelingInputButton2")
                     {
-                        this.DictionaryKey = "aosuke_feeling2";
+                        this.FeelingDictionaryKey = "aosuke_feeling2";
                     }
                     else if (button.Name == "AosukeSizeOfFeelingInputButton3")
                     {
-                        this.DictionaryKey = "aosuke_feeling3";
+                        this.FeelingDictionaryKey = "aosuke_feeling3";
                     }
                     else if (button.Name == "AosukeSizeOfFeelingInputButton4")
                     {
-                        this.DictionaryKey = "aosuke_feeling4";
+                        this.FeelingDictionaryKey = "aosuke_feeling4";
                     }
 
                     this.GoTo("size_of_feeling");

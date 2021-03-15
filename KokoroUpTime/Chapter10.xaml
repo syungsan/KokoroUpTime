@@ -80,7 +80,7 @@
                     <Image x:Name="MangaPrevBackImage" Source="/Images/prev_back_.png"/>
                 </Button>
             </Grid>
-            <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
+            <Grid x:Name="ItemGrid" Visibility="Visible">
                 <Image x:Name="ItemCenterImage" HorizontalAlignment="Left" Height="512" VerticalAlignment="Top" Width="363" Source="/Images/item05_solo.png" Margin="804,266,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -131,13 +131,13 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="Item10EffectImage" Height="700" Margin="20,10" VerticalAlignment="Top" HorizontalAlignment="Right" Source="Images\item10_effect.png"/>
+                <Image x:Name="Item10EffectImage" Height="700" Margin="20,10" VerticalAlignment="Top" HorizontalAlignment="Right" Source="Images\item10_effect.png" d:IsHidden="True"/>
                 <Image x:Name="ItemLeftLastImage" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Margin="354,186,0,0" Source="/Images/item01_solo.png" d:IsHidden="True"/>
-                <Grid x:Name="ItemNamePlateLeftGrid" Width="610" Height="195" Margin="90,55,1220,830">
+                <Grid x:Name="ItemNamePlateLeftGrid" Width="610" Height="195" Margin="90,55,1220,830" d:IsHidden="True">
                     <Image x:Name="ItemNamePlateLeftImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_name.png"/>
                     <TextBlock x:Name="ItemNameLeftTextBlock" HorizontalAlignment="Left" Margin="67,36,0,0" VerticalAlignment="Top" FontSize="65" Width="458" FontWeight="Bold" Height="115" Text="勇者のつるぎ" TextAlignment="Center"/>
                 </Grid>
-                <Grid x:Name="ItemNamePlateCenterUpGrid" Width="610" Height="195" Margin="720,55,590,830">
+                <Grid x:Name="ItemNamePlateCenterUpGrid" Width="610" Height="195" Margin="720,55,590,830" d:IsHidden="True">
                     <Image x:Name="ItemNamePlateCenterUpImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/item_name.png"/>
                     <TextBlock x:Name="ItemNameCenterUpTextBlock" HorizontalAlignment="Left" Margin="67,36,0,0" VerticalAlignment="Top" FontSize="65" Width="458" FontWeight="Bold" Height="115" Text="勇者のマント" TextAlignment="Center"/>
                 </Grid>
@@ -163,7 +163,7 @@
                     <Image x:Name="ItemLastInfoImage" Source="/Images/item_last.png"/>
                     <TextBlock x:Name="ItemLastInfoTextBlock" HorizontalAlignment="Left" Margin="12,38,0,0" VerticalAlignment="Top" Height="66"  FontSize="45" FontWeight="Bold" Text="No.10  勇者のつるぎ"/>
                 </Grid>
-                <Grid x:Name="ItemReviewGrid" d:IsHidden="True">
+                <Grid x:Name="ItemReviewGrid">
                     <Image x:Name="ItemLeftBigImage" Source="/Images/Item09_solo.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,200,100,200"/>
                     <Grid x:Name="ItemReviewPlate" Margin="700,300,480,550">
                         <Image x:Name="ItemReviewPlateImage" Source="/Images/item_review.png"  Stretch="Fill"/>
@@ -672,7 +672,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="SystemGrid" d:IsHidden="True">
-                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -786,7 +786,7 @@
                     </Button.Background>
                 </Button>
                 <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
-                <Grid x:Name="InputCanvasGrid" Margin="0,240,0,0" >
+                <Grid x:Name="InputCanvasGrid" Margin="0,240,0,0" d:IsHidden="True" >
                     <Border x:Name="InputCanvasBorder1" Background="White" BorderBrush="Black" BorderThickness="10" CornerRadius="60" Height="519" Width="1920" d:IsHidden="True">
                         <Grid x:Name="InputCanvasGrid1">
                             <TextBlock x:Name="InputCanvasTitleText1" Text="どうしてきもちの大きさがちがうと思いますか？&#10;あなたの意見を書いてみよう！" FontSize="45.4" Margin="30,15" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="Yu Gothic" FontWeight="Bold"/>
@@ -832,7 +832,7 @@
                         <ListBoxItem x:Name="AllClearButton" FontSize="100" Width="555" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black" HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="すべてけす"/>
                     </ListBox>
                 </Grid>
-                <Button x:Name="CompleteInputButton" Click="Button_Click" Content="とじる" HorizontalContentAlignment="Center" Width="240" Height="240" FontSize="65" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" Background="White" BorderBrush="Black" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                <Button x:Name="CompleteInputButton" Click="Button_Click" Content="とじる" HorizontalContentAlignment="Center" Width="240" Height="240" FontSize="65" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" Background="White" BorderBrush="Black" HorizontalAlignment="Right" VerticalAlignment="Top" d:IsHidden="True"/>
                 <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">
                     <Border x:Name="ExitBackBorder" BorderThickness="1" BorderBrush="Black" Background="White" CornerRadius="32,32,32,32"/>
                     <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Height="139" Width="459" FontSize="48" Text="本当にアプリを終了してタイトルにもどりますか？" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center"/>

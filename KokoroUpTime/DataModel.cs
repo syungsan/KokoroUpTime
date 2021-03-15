@@ -158,15 +158,15 @@ namespace KokoroUpTime
         // データベースに記録するレコードの型の宣言をしてください。
         public string MySelectGoodEvents { get; set; }
 
-        public string AosukesSizeOfFeelingOfEating { get; set; }
+        public int? AosukesSizeOfFeelingOfEating { get; set; }
 
         public string AosukesDifficultyOfEating { get; set; }
 
-        public string AosukesSizeOfFeelingOfGettingHighScore { get; set; }
+        public int? AosukesSizeOfFeelingOfGettingHighScore { get; set; }
 
         public string AosukesDifficultyOfGettingHighScore { get; set; }
 
-        public string AosukesSizeOfFeelingOfTalkingWithFriend { get; set; }
+        public int? AosukesSizeOfFeelingOfTalkingWithFriend { get; set; }
 
         public string AosukesDifficultyOfTalkingWithFriend { get; set; }
 
@@ -226,11 +226,37 @@ namespace KokoroUpTime
     
     public class DataChapter5
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+       [PrimaryKey, AutoIncrement]
+       public int Id { get; set; }
+       
+       public string CreatedAt { get; set; }
 
+       public string InputFaceImageOfKimiText{ get; set; }
 
-        public string CreatedAt { get; set; }
+       public string InputHandImageOfKimiText{ get; set; }
+
+       public string InputStomachImageOfKimiText{ get; set; }
+
+       public string InputOthersImageOfKimiText{ get; set; }
+
+       public string InputHeadImageOfKimiText{ get; set; }
+
+       public string InputShoulderImageOfKimiText{ get; set; }
+
+       public string InputLegImageOfKimiText { get; set; }
+
+       public string KindOfFeelingNotUnderstandProblem { get; set; }
+       
+       public string KindOfFeelingRecoderProblem { get; set; }
+
+       public int? SizeOfFeelingNotUnderstandProblem { get; set; }
+
+       public int? SizeOfFeelingRecoderProblem { get; set; }
+
+       public string InputMyBodyImageTextNotUnderstandProblem { get; set; }
+
+       public string InputMyBodyImageTextRecoderProblem { get; set; }
+
     }
 
     public class DataChapter6
@@ -407,17 +433,23 @@ namespace KokoroUpTime
 
         public string CreatedAt { get; set; }
 
-        public string AkamaruOtherSolutionInputText1 { get; set; }
+        public string AkamaruOtherSolutionUseItem03InputText { get; set; }
 
-        public string AkamaruOtherSolutionInputText2 { get; set; }
+        public string AkamaruOtherSolutionUseItem04InputText { get; set; }
 
-        public string AkamaruOtherSolutionInputText3 { get; set; }
+        public string AkamaruOtherSolutionUseItem05InputText { get; set; }
 
         public string Step2AkamaruOtherSolutionInputText1 { get; set; }
 
         public string Step2AkamaruOtherSolutionInputText2 { get; set; }
 
         public string Step2AkamaruOtherSolutionInputText3 { get; set; }
+
+        public string EvaluateAkamaruMethodText1 { get; set; }
+
+        public string EvaluateAkamaruMethodText2 { get; set; }
+
+        public string EvaluateAkamaruMethodText3 { get; set; }
 
 
     }

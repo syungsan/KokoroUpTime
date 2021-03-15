@@ -64,6 +64,98 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="{x:Type InkCanvas}" x:Key="GestureCanvas">
+                <Setter Property="DefaultDrawingAttributes">
+                    <Setter.Value>
+                        <DrawingAttributes Height="5" Width="5" Color="Black"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="EditingMode" Value="InkAndGesture"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
+            </Style>
+            <Style TargetType="{x:Type Image}" x:Key="ItemButtonImage">
+                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TranslateTransform/>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="AreAnyTouchesOver" Value="False">
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="10" Opacity="0.5"/>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                    <Trigger Property="AreAnyTouchesOver" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.X)" To="5" Duration="0:0:0" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.Y)" To="5" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.X)" To="-5" Duration="0:0:0" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.Y)" To="-5" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type TextBlock}" x:Key="ItemButtonText">
+                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TranslateTransform/>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="AreAnyTouchesOver" Value="False">
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="10" Opacity="0.5"/>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                    <Trigger Property="AreAnyTouchesOver" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.X)" To="5" Duration="0:0:0" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.Y)" To="5" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.X)" To="-5" Duration="0:0:0" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.Y)" To="-5" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type Button}" x:Key="InitialButton">
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ContentControl}">
+                            <Border Background="{x:Null}">
+                                <ContentPresenter/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Page.Resources>
     <Viewbox>
@@ -82,9 +174,9 @@
                 </Grid.RenderTransform>
                 <Border x:Name="TitleBorder" Background="#FF4472C4">
                     <Grid>
-                        <outline_marker:OutlineText x:Name="LetsSolveProblemsSceneTitle" Style="{StaticResource Orange}" Text="さらにいろいろな問題をかいけつしよう！" FontSize="90" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
+                        <outline_marker:OutlineText x:Name="LetsSolveProblemsSceneTitle" Style="{StaticResource Orange}" Text="さらにいろいろな問題をかいけつしよう！" FontSize="90" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <outline_marker:OutlineText x:Name="StepToSolveProblemSceneTitle" Style="{StaticResource Orange}" Text="問題をかいけつする３つのステップ" FontSize="90" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
-                        <outline_marker:OutlineText x:Name="LetsUseItemSceneTitle" Style="{StaticResource Orange}" Text="３色だんごをつかっていろいろな問題を解決しよう！" FontSize="80" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <outline_marker:OutlineText x:Name="LetsUseItemSceneTitle" Style="{StaticResource Orange}" Text="３色だんごをつかっていろいろな問題を解決しよう！" FontSize="80" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
                         <TextBlock x:Name="ChallengeTImeTitleText" Style="{StaticResource ShadowText}" Text="チャレンジタイム！" Foreground="#FF9966FF" FontSize="140" TextAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
                     </Grid>
                 </Border>
@@ -128,7 +220,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ItemLeftImage" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Margin="187,380,0,0" d:IsHidden="True">
+                <Image x:Name="ItemLeftImage" HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" Margin="187,380,0,0">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -173,8 +265,8 @@
                     <Grid x:Name="ItemInfoSentenceGrid" Margin="55,118,41,33">
                         <TextBlock x:Name="ItemInfoSentenceTextBlock1" FontSize="45" TextWrapping="Wrap" LineHeight="70" FontFamily="MS PGothic">
                             <Run Text="✔ 問題をかいけつすることは、とてもむずかしいことじゃ。"/>
-                            <Run Text="&#10;✔ 問題をかいけつするためには、３つのステップが必要&#10;    なのじゃ。"/>
-                            <Run Text="&#10;✔ ３色だんごをつかうと、その３つのステップができるよう&#10;    になるぞい！"/>
+                            <Run Text="&#10;✔ 問題をかいけつするためには、３つのステップが必要&#10;　　なのじゃ。"/>
+                            <Run Text="&#10;✔ ３色だんごをつかうと、その３つのステップができるよう&#10;　　になるぞい！"/>
                         </TextBlock>
                     </Grid>
                 </Grid>
@@ -277,22 +369,6 @@
                 </Border>
                 <Image x:Name="Step1AosukeImage" Source="Images/aosuke_face_04.png" Height="350" Width="350" Margin="0,-50" VerticalAlignment="Top" HorizontalAlignment="Right"/>
             </Grid>
-            
-            
-            
-            <Grid x:Name="ViewAkamaruMethodGrid" Margin="130,80,130,180">
-                <TextBlock x:Name="TitleText" Text="赤丸くんの方法を見てみよう！" FontSize="60" FontFamily="Yu Gothic" FontWeight="Bold"/>
-                <Image Source="Images/right_blue_arrow.png" Height="200" Width="300"/>
-                <Grid Margin="0,200,0,0">
-                    <Border Background="White" BorderBrush="Red" CornerRadius="30" BorderThickness="10" Height="180" Width="600"  HorizontalAlignment="Left">
-                        <TextBlock Text="いらいらするから&#10;ほかの友だちにいじわるする" FontSize="40" FontWeight="Bold" FontFamily="Yu Gothic" Margin="30,10"/>
-                    </Border>
-                    <Path />
-                </Grid>
-                <ListView Margin="900,200,0,0">
-                 
-                </ListView>
-            </Grid>
             <Grid x:Name="EvaluateOtherMethodsGrid" Margin="130,80,130,180" d:IsHidden="True"/>
             <Grid x:Name="Step3DecideTheBestMethodGrid" Margin="130,80,130,180" d:IsHidden="True">
                 <TextBlock Text="ステップ３：一番よいものをやってみる" FontFamily="Yu Gothic" FontWeight="Bold" FontSize="50" Foreground="#FF0070C0">
@@ -314,13 +390,14 @@
             <Border x:Name="LightGreenRightBorder" Background="#FFC8FAC8" Opacity="0.8" CornerRadius="60" Margin="700,50,100,400" d:IsHidden="True" />
             <Grid x:Name="AkamaruCurrentStatusGrid" Margin="730,80,130,430" d:IsHidden="True">
                 <Image x:Name="DogImage" Margin="50,0" Height="130" Width="130" Source="Images/dog.png" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-                <TextBlock x:Name="Text1"  Text="赤丸くんがこれまでにかいけつできたこと" FontFamily="Yu Gothic" FontWeight="bold" FontSize="45"/>
-                <Border Background="White" Margin="50,100,100,350" BorderBrush="#FFFFC000" BorderThickness="10" CornerRadius="20">
-                    <TextBlock x:Name="Text3" Text="犬と遊ぶ" FontFamily="Yu Gothic" FontWeight="bold" FontSize="45" Margin="50,20" HorizontalAlignment="Left"/>
+                <Image x:Name="AngerImage" Margin="50,50,50,0" Height="130" Width="130" Source="Images/anger.png" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="WhatAkamaruSolvedTitleText"  Text="赤丸くんがこれまでにかいけつできたこと" FontFamily="Yu Gothic" FontWeight="bold" FontSize="45"/>
+                <Border x:Name="WhatAkamaruSolvedBorder" Background="White" Margin="50,100,100,350" BorderBrush="#FFFFC000" BorderThickness="10" CornerRadius="20">
+                    <TextBlock Text="犬と遊ぶ" FontFamily="Yu Gothic" FontWeight="bold" FontSize="45" Margin="50,20" HorizontalAlignment="Left"/>
                 </Border>
-                <TextBlock x:Name="Text2" Margin="0,280,0,0" Text="赤丸くんがこれからかいけつしたいこと" FontFamily="Yu Gothic" FontWeight="bold" FontSize="45"/>
-                <Border Background="White" Margin="50,380,100,70" BorderBrush="#FFFFC000" BorderThickness="10" CornerRadius="20">
-                    <TextBlock x:Name="Tet3" Text="友だちとケンカしてイライラしたとき" FontFamily="Yu Gothic" FontWeight="bold" FontSize="45" Margin="50,20" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="WhatAkamaruWillSolveTitleText" Margin="0,280,0,0" Text="赤丸くんがこれからかいけつしたいこと" FontFamily="Yu Gothic" FontWeight="bold" FontSize="45"/>
+                <Border x:Name="WhatAkamaruWillSolveBorder" Background="White" Margin="50,380,100,70" BorderBrush="#FFFFC000" BorderThickness="10" CornerRadius="20">
+                    <TextBlock Text="友だちとケンカしてイライラしたとき" FontFamily="Yu Gothic" FontWeight="bold" FontSize="45" Margin="50,20" HorizontalAlignment="Left"/>
                 </Border>
             </Grid>
             <Grid x:Name="AkamaruFrustratedSituationGrid" Margin="730,80,130,430" VerticalAlignment="Center" d:IsHidden="True">
@@ -332,16 +409,22 @@
                 </TextBlock>
                 <Image x:Name="AkamaruOjamamushiImage" Margin="-160,-200" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="300" Width="300" Source="Images/Ojamamushi_03.png"/>
             </Grid>
-            <Border x:Name="LightGreenLeftBorder" Background="#FFC8FAC8" Opacity="0.8" CornerRadius="60" Margin="100,50,700,400" d:IsHidden="True" />
+            <Border x:Name="LightGreenLeftBorder" Background="#FFC8FAC8" Opacity="0.8" CornerRadius="60" Margin="100,50,700,400" />
             <Grid x:Name="MultipleItemsGrid" Margin="130,80,730,430" d:IsHidden="True">
-                <Image x:Name="Item03Image" Source="Images/item03_solo.png" Height="500" Width="400" Margin="50,0" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <Image x:Name="Item04Image" Source="Images/item04_solo.png" Height="500" Width="400" Margin="50,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-                <Image x:Name="Item05Image" Source="Images/item05_solo.png" Height="500" Width="400" Margin="-130" VerticalAlignment="Top" />
+                <Button x:Name="Item03Button" Background="{x:Null}" BorderBrush="{x:Null}" Height="500" Width="350" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Button_Click" Style="{StaticResource InitialButton}">
+                    <Image x:Name="Item03Image" Source="Images/item03_solo.png" Style="{StaticResource ItemButtonImage}"/>
+                </Button>
+                <Button x:Name="Item04Button" Background="{x:Null}" BorderBrush="{x:Null}" Height="500" Width="350" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="Button_Click" Style="{StaticResource InitialButton}">
+                    <Image x:Name="Item04Image" Source="Images/item04_solo.png" Style="{StaticResource ItemButtonImage}"/>
+                </Button>
+                <Button x:Name="Item05Button" Background="{x:Null}" BorderBrush="{x:Null}" Height="500" Width="350" Margin="-130" VerticalAlignment="Top" Click="Button_Click" Style="{StaticResource InitialButton}">
+                    <Image x:Name="Item05Image" Source="Images/item05_solo.png" Style="{StaticResource ItemButtonImage}"/>
+                </Button>
             </Grid>
-            <Grid x:Name="StepToSolveGrid" Margin="130,80,730,430" d:IsHidden="True">
+            <Grid x:Name="StepToSolveGrid" Margin="130,80,730,430">
                 <Image x:Name="Item11Image" Source="Images/step1.png" HorizontalAlignment="Left" Margin="0,70,0,0"/>
-                <TextBlock x:Name="HowToUseItemText" Text="３色だんごの使い方" FontSize="40" FontFamily="Yu Gothic" FontWeight="Bold" d:IsHidden="True"/>
-                <TextBlock x:Name="StepToSolveText" Text="ステップ１：おちついて問題をみつける&#10;ステップ２　&#10;ステップ３" FontSize="45" FontFamily="Yu Gothic" FontWeight="Bold" Foreground="#FF1A78B4" Margin="160,70,0,100" LineHeight="150">
+                <TextBlock x:Name="HowToUseItemText" Text="３色だんごの使い方" FontSize="40" FontFamily="Yu Gothic" FontWeight="Bold"/>
+                <TextBlock x:Name="StepToSolveText" Text="ステップ１：おちついて問題をみつける&#10;ステップ２　&#10;ステップ３" FontSize="45" FontFamily="Yu Gothic" FontWeight="Bold" Foreground="#FF1A78B4" Margin="160,130,0,0" LineHeight="140">
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="5" Opacity="0.3"/>
                     </TextBlock.Effect>
@@ -358,13 +441,14 @@
             <Border x:Name="LightGreenCenterBorder" Background="#FFC8FAC8" Opacity="0.8" CornerRadius="60" Margin="400,50,400,400" d:IsHidden="True" />
             <Grid x:Name="AkamaruProblemGrid" Margin="430,80,430,430" d:IsHidden="True">
                 <TextBlock Text="昨日、友だちとケンカしました。&#10;今日もまだ、その友だちと仲直りできていません。" FontSize="45" FontFamily="Yu Gothic" FontWeight="Bold"/>
+                <Image x:Name="AkamaruOjamamushiImage1" Source="Images/ojamamushi_03.png" Height="400" Width="400" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                 <Image x:Name="AkamaruProblemRightImage" Source="Images/item04_solo.png" Height="400" Width="400" Margin="200,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                 <Image x:Name="AkamaruProblemLeftImage" Source="Images/item05_solo.png" Height="400" Width="400" Margin="0,0,300,0" VerticalAlignment="Bottom" />
             </Grid>
             <Grid x:Name="SelectSolutionGrid" Margin="430,80,430,430" d:IsHidden="True">
                 <Button x:Name="SelectSolutionButton1" Background="Transparent" Margin="0,0,0,150">
                     <Grid Height="150" >
-                        <Image Source="Images/orange_button_plate.png"/>
+                        <Image Source="Images/orange_button_plate.png" />
                         <TextBlock Text="ケンカした友だちと仲直りする" FontSize="40" Foreground="White" FontFamily="Yu Gothic"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                 </Button>
@@ -374,13 +458,13 @@
                         <TextBlock Text="友だちが思っていたことを教えてもらう" FontSize="40" Foreground="White" FontFamily="Yu Gothic" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                 </Button>
-                <Border Margin="-200,-250" VerticalAlignment="Bottom" Height="200" Background="White" BorderBrush="Black" BorderThickness="5" CornerRadius="30" d:IsHidden="True">
+                <Border Margin="-200,-250" VerticalAlignment="Bottom" Height="200" Background="White" BorderBrush="Black" BorderThickness="5" CornerRadius="30">
                     <TextBlock Text="リラックスして、自分と相手を大切にする方法で&#10;赤丸くんの「目標」をどのように変えるとよいか、えらんでみよう！" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" FontFamily="Yu Gothic" Margin="20"/>
                 </Border>
-                <Image Margin="-350,-150" Height="350" Width="350" VerticalAlignment="Bottom" HorizontalAlignment="Right" Source="Images/angel.png" d:IsHidden="True"/>
-                <Image Margin="-180,-30" VerticalAlignment="Top" HorizontalAlignment="Left" Height="200" Width="200" Source="Images/akamaru_face_frst.png" d:IsHidden="True"/>
-                <Image Source="Images/thin_bubble_left_red.png" Height="150" VerticalAlignment="Top" Margin="0,-50" d:IsHidden="True"/>
-                <TextBlock Text="イライラしているから他の友だちにいじわるしてやれ！" FontSize="35" Margin="100,-20,0,0" FontFamily="Yu Gothic" VerticalAlignment="Top" d:IsHidden="True" />
+                <Image Margin="-350,-150" Height="350" Width="350" VerticalAlignment="Bottom" HorizontalAlignment="Right" Source="Images/angel.png"/>
+                <Image Margin="-180,-30" VerticalAlignment="Top" HorizontalAlignment="Left" Height="200" Width="200" Source="Images/akamaru_face_frst.png"/>
+                <Image Source="Images/thin_bubble_left_red.png" Height="150" VerticalAlignment="Top" Margin="0,-50"/>
+                <TextBlock Text="イライラしているから他の友だちにいじわるしてやれ！" FontSize="35" Margin="100,-20,0,0" FontFamily="Yu Gothic" VerticalAlignment="Top" />
             </Grid>
             <Grid x:Name="GrowUpChildrenGrid" Margin="430,80,430,430" d:IsHidden="True">
                 <TextBlock x:Name="GrowUpChildrenText" Text="わかったよ、白じい！&#10;３色だんごをつかって、問題をかいけつすることが大切なんだね！" Margin="0,30,0,0" FontSize="35" FontFamily="Yu Gothic" FontWeight="Bold"/>
@@ -407,17 +491,17 @@
                     </ItemsControl>
                 </Grid>
             </Border>
-            <Button x:Name="InputButton" Style="{StaticResource BubbleFrame}" BorderBrush="Black" BorderThickness="5" Margin="50,100,50,140" d:IsHidden="True">
+            <Button x:Name="InputButton" Style="{StaticResource BubbleFrame}" BorderBrush="Black" BorderThickness="5" Margin="50,100,50,140" Click="Button_Click" d:IsHidden="True">
                 <Grid x:Name="InputButtonGrid">
-                    <Grid x:Name="InputAkamaruOtherSolutionGrid" d:IsHidden="True">
+                    <Grid x:Name="InputAkamaruOtherSolutionGrid">
                         <TextBlock x:Name="InputAkamaruOtherSolutionTitle" Text="赤丸くんは、ほかにどんなかいけつの方法をえらぶことができるでしょう？&#10;あなたの考えを書いてみましょう！" FontSize="35" LineHeight="60" Margin="60,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
-                        <Viewbox Margin="30,150,30,30">
-                            <InkCanvas x:Name="OutputCanvas" Style="{StaticResource OutputInkCanvas}"/>
+                        <Viewbox Margin="30,150,30,30" d:IsHidden="True">
+                            <InkCanvas x:Name="InputAkamaruOtherSolutionCanvas" Style="{StaticResource OutputInkCanvas}"/>
                         </Viewbox>
-                        <TextBlock x:Name="OutputText" Style="{StaticResource OutputTextBlock}" Margin="30"/>
+                        <TextBlock x:Name="InputAkamaruOtherSolutionText" Style="{StaticResource OutputTextBlock}" Margin="30,150,30,30" FontSize="92"/>
                         <Image x:Name="InputItemImage" Source="Images/item03_solo.png" Height="300" Width="200" Margin="0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                     </Grid>
-                    <Grid x:Name="Step2InputManySolutionGrid">
+                    <Grid x:Name="Step2InputManySolutionGrid" d:IsHidden="True">
                         <TextBlock x:Name="Step2InputManySolutionTitleText" Text="ステップ１で決めた目標のためのかいけつ方法を、たくさん考えましょう！" FontSize="40" Margin="40,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
                         <TextBlock x:Name="Step1GoalText" Text="目標：" FontSize="50" Margin="40,120" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
                         <TextBlock x:Name="ExampleMethodText" Margin="100,220,30,30" FontFamily="MS pgothic" FontSize="50" LineHeight="85" VerticalAlignment="Top">
@@ -466,8 +550,8 @@
                                 <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0"  Height="85"/>
                                 <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0"  Height="85"/>
                                 <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0"  Height="85"/>
-                            </StackPanel>                                                   
-                            <StackPanel>                                                    
+                            </StackPanel>
+                            <StackPanel>
                                 <TextBlock Style="{StaticResource OutputTextBlock}" Margin="40,0,0,0" LineHeight="85"/>
                                 <TextBlock Style="{StaticResource OutputTextBlock}" Margin="40,0,0,0" LineHeight="85"/>
                                 <TextBlock Style="{StaticResource OutputTextBlock}" Margin="40,0,0,0" LineHeight="85"/>
@@ -575,9 +659,9 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Grid x:Name="GetItemGrid" Width="303" Height="460" HorizontalAlignment="Left" Margin="968,470,0,0"   VerticalAlignment="Top">
+                    <Grid x:Name="GetItemGrid" Width="303" Height="460" HorizontalAlignment="Left" Margin="1283,470,0,0"   VerticalAlignment="Top">
                         <Image x:Name="Item11MainImage" gif:AnimationBehavior.SourceUri="Images/item11_solo.gif" Margin="0,0,0,40"/>
-                        <Image x:Name="GetItemTitleImage" Source="/Images/item10_title.png" Margin="38,366,30,26"/>
+                        <Image x:Name="GetItemTitleImage" Source="/Images/item11_title.png" Margin="38,366,30,26"/>
                     </Grid>
                     <Image x:Name="Item01MainImage" Source="/Images/item01_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="32,38,0,0"  VerticalAlignment="Top"/>
                     <Image x:Name="Item02MainImage" Source="/Images/item02_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="339,38,0,0"  VerticalAlignment="Top"/>
@@ -588,7 +672,7 @@
                     <Image x:Name="Item07MainImage" Source="/Images/item07_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="24,470,0,0" VerticalAlignment="Top"/>
                     <Image x:Name="Item08MainImage" Source="/Images/item08_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="339,470,0,0" VerticalAlignment="Top"/>
                     <Image x:Name="Item09MainImage" Source="/Images/item09_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="653,470,0,0" VerticalAlignment="Top"/>
-                    <Image x:Name="Item10MainImage" Source="/Images/item11_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="1283,470,0,0" VerticalAlignment="Top"/>
+                    <Image x:Name="Item10MainImage" Source="/Images/item10_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="968,470,0,0" VerticalAlignment="Top"/>
                 </Grid>
                 <Grid x:Name="ItemBookNoneGrid">
                     <Image x:Name="Item01NoneImage" HorizontalAlignment="Left" Height="460" Margin="32,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
@@ -600,12 +684,62 @@
                     <Image x:Name="Item07NoneImage" HorizontalAlignment="Left" Height="460" Margin="24,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                     <Image x:Name="Item08NoneImage" HorizontalAlignment="Left" Height="460" Margin="339,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                     <Image x:Name="Item09NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
-                    <Image x:Name="Item10NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
+                    <Image x:Name="Item10NoneImage" HorizontalAlignment="Left" Height="460" Margin="968,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                     <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                 </Grid>
             </Grid>
+            <Grid x:Name="ViewAkamaruMethodGrid" Margin="130,80,130,180" d:IsHidden="True">
+                <TextBlock x:Name="TitleText" Text="赤丸くんの方法を見てみよう！" FontSize="60" FontFamily="Yu Gothic" FontWeight="Bold"/>
+                <Image Source="Images/right_blue_arrow.png" Height="200" Width="300" d:IsHidden="True"/>
+                <Grid Margin="0,200,0,0" d:IsHidden="True">
+                    <Border Background="White" BorderBrush="Red" CornerRadius="30" BorderThickness="10" Height="180" Width="600"  HorizontalAlignment="Left" d:IsHidden="True">
+                        <TextBlock Text="いらいらするから&#xA;ほかの友だちにいじわるする" FontSize="40" FontWeight="Bold" FontFamily="Yu Gothic" Margin="30,10"/>
+                    </Border>
+                    <Path />
+                </Grid>
+                <ListView Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ContentControl}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Background="White" BorderBrush="Red" CornerRadius="30" BorderThickness="10" Height="180" Width="600"  HorizontalAlignment="Left">
+                                                <TextBlock Text="{Binding}" FontSize="40" FontWeight="Bold" FontFamily="Yu Gothic" Margin="30,10"/>
+                                            </Border>
+                                            <Image Source="Images/right_blue_arrow.png" Height="200" Width="300"/>
+                                            <ListView>
+                                                <!--<ListView.ItemContainerStyle>
+                                                    <Style TargetType="{x:Type ListViewItem}">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="{x:Type ContentControl}">
+                                                                    <StackPanel Orientation="Horizontal" Background="White">
+                                                                        <Grid Background="#FFCFD5EA" Width="190" Height="190" Margin="3">
+                                                                            <TextBlock Text="{Binding EvaluationMark}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="60"/>
+                                                                            <InkCanvas x:Name="Canvas1" Style="{StaticResource GestureCanvas}" Loaded="InkCanvas_Loaded" Gesture="InkCanvas_Gesture"/>
+                                                                        </Grid>
+                                                                    </StackPanel>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </ListView.ItemContainerStyle>-->
+                                                <ListViewItem/>
+                                            </ListView>
+                                        </StackPanel>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListViewItem/>
+                    <ListViewItem/>
+                    <ListViewItem/>
+                </ListView>
+            </Grid>
             <Grid x:Name="SystemGrid" d:IsHidden="True">
-                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -699,7 +833,7 @@
                     <TextBlock x:Name="MusicTitleTextBlock" HorizontalAlignment="Center" Margin="0,70,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" Foreground="White" Width="432" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker"/>
                     <TextBlock x:Name="ComposerNameTextBlock" HorizontalAlignment="Left" Margin="105,178,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Foreground="White" Width="227" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker"/>
                 </Grid>
-                <Grid x:Name="BranchSelectGrid">
+                <Grid x:Name="BranchSelectGrid" d:IsHidden="True">
                     <Button x:Name="BranchButton1" Margin="500,200,500,700" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
                         <Image x:Name="BranchButton1Image" Source="/Images/branch_selection1.png" Stretch="Fill" />
                     </Button>
@@ -713,23 +847,23 @@
                 <Button x:Name="OkButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="110" Width="300" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
                     <Image x:Name="OkButtonImage" Source="/Images/ok_button.png" Stretch="Fill"/>
                 </Button>
+                <Grid x:Name="HintCheckGrid" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-20" d:IsHidden="True">
+                    <Button x:Name="HintCheckButton" Background="Transparent" BorderBrush="{x:Null}" Height="350" Width="350" Style="{StaticResource InitialButton}" Click="Button_Click">
+                        <Grid>
+                            <Image Source="Images/blue_explosion_bubble.png" Style="{StaticResource ItemButtonImage}"/>
+                            <TextBlock x:Name="HintCheckText" FontSize="40" Background="{x:Null}" TextAlignment="Center" Foreground="White" FontFamily="Yu Gothic" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Button>
+                </Grid>
                 <Button x:Name="ExitButton" Content="おわる" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" FontSize="24" Click="Button_Click" Margin="1833,10,0,0" d:IsHidden="True">
                     <Button.Background>
                         <ImageBrush/>
                     </Button.Background>
                 </Button>
-                <Grid x:Name="HintCheckGrid" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-20" d:IsHidden="True">
-                    <Button x:Name="HintCheckButton" Background="Transparent" Height="350" Width="350">
-                        <Grid>
-                            <Image Source="Images/blue_explosion_bubble.png"/>
-                            <TextBlock x:Name="HintCheckText" FontSize="40" TextAlignment="Center" Foreground="White" FontFamily="Yu Gothic" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Grid>
-                    </Button>
-                </Grid>
                 <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
                 <Border x:Name="InputCanvasBorder" Margin="0,240,0,0" Background="White" BorderBrush="Black" BorderThickness="5" CornerRadius="60" Width="1820" d:IsHidden="True">
                     <Grid>
-                        <Grid x:Name="InputCanvasGrid1" d:IsHidden="True">
+                        <Grid x:Name="InputCanvasGrid1">
                             <TextBlock x:Name="InputCanvasTitleText1" Text="赤丸くんは、ほかにどんなかいけつの方法をえらぶことができるでしょう？&#10;あなたの考えを書いてみましょう！" FontSize="35" LineHeight="60" Margin="60,30" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="Yu Gothic" FontWeight="Bold"/>
                             <InkCanvas x:Name="InputCanvas1" Style="{StaticResource InputInkCanvas}" Margin="30,150,30,30"/>
                         </Grid>
@@ -784,9 +918,9 @@
                 </Border>
                 <Border x:Name="InputTextBoxBorder" Background="White" BorderBrush="Black" BorderThickness="3.69" CornerRadius="44"  Width="1343" Height="620" VerticalAlignment="Top" d:IsHidden="True">
                     <Grid x:Name="InputTextBoxGrid">
-                        <Grid x:Name="InputTextBoxGrid1" d:IsHidden="True">
+                        <Grid x:Name="InputTextBoxGrid1">
                             <TextBlock x:Name="InputTextTitleText1" Text="赤丸くんは、ほかにどんなかいけつの方法をえらぶことができるでしょう？&#10;あなたの意見を書いてみよう！" FontSize="25.8" Margin="44,22" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="Yu Gothic" FontWeight="Bold"/>
-                            <TextBox x:Name="InputTextBox1" Style="{StaticResource InputTextBox}" Margin="22.1,110.7,22.1,22.1" FontSize="61" MaxLength="104" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
+                            <TextBox  x:Name="InputTextBox1" Style="{StaticResource InputTextBox}" Margin="22.1,110.7,22.1,22.1" FontSize="67" MaxLength="114" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
                         </Grid>
                         <Grid x:Name="InputTextBoxGrid2" d:IsHidden="True">
                             <TextBlock x:Name="InputTextBoxGrid2TitleText" Text="ステップ１で決めた目標のためのかいけつ方法を、たくさん考えましょう！" FontSize="29.5" Margin="29.5,22.1" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
@@ -808,7 +942,7 @@
                                 </StackPanel>
                             </Grid>
                         </Grid>
-                        <Grid x:Name="InputTextBoxGrid3">
+                        <Grid x:Name="InputTextBoxGrid3" d:IsHidden="True">
                             <TextBlock x:Name="InputTextBoxGrid3TitleText" Text="ステップ２：たくさんの方法を考える" FontSize="44.2" Margin="59,22.1" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic" Foreground="#FF0070C0">
                                 <TextBlock.Effect>
                                     <DropShadowEffect ShadowDepth="3" Opacity="0.3"/>

@@ -1,6 +1,5 @@
 start
 #
-goto,Debug
 scene,前回のおさらい
 reset
 image,bg_image,background_02.png
@@ -473,7 +472,6 @@ grid,main_msg_grid
 msg,main_msg,ありがとう、白じい！鬱ぼく、がんばってみるよ！,青助
 click,page,with_back_msg
 #
-sub,Debug
 scene,まとめ
 reset
 image,bg_image,background_09.png

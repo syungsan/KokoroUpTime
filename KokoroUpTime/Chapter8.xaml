@@ -53,7 +53,7 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </Grid.RenderTransform>
-                <Border x:Name="TitleBorder" Background="#FF4472C4" d:IsHidden="True">
+                <Border x:Name="TitleBorder" Background="#FF4472C4">
                     <Grid d:IsHidden="True">
                         <outline_marker:OutlineText x:Name="Let_sFindOjamamushiSceneTitle" Style="{StaticResource Orange}" Text="おじゃま虫をみつけよう！" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
                         <outline_marker:OutlineText x:Name="KimisThoughtsAndFeelingsSceneTitle" Style="{StaticResource Orange}" Text="キミちゃんの考えときもちは・・・" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
@@ -182,7 +182,7 @@
                 </Grid>
                 <TextBlock x:Name="SessionFrameText" Text="きちんとつたえてみよう"  FontWeight="UltraBold" FontSize="70" Background="Yellow" Width="800" Height="120" Margin="10,10,680,500" Foreground="MediumPurple" FontFamily="Yu Gothic" TextAlignment="Center" d:IsHidden="True" />
             </Grid>
-            <Grid x:Name="SummaryGrid">
+            <Grid x:Name="SummaryGrid" d:IsHidden="True">
                 <Grid x:Name="SummaryBoardGrid" Margin="496,203,496,305">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -233,16 +233,16 @@
                 <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="727,0,0,0" VerticalAlignment="Center" Width="273" RenderTransformOrigin="0.659,0.453" d:IsHidden="True"/>
             </Grid>
 
-            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
-                <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684" d:IsHidden="True">
-                    <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png" d:IsHidden="True"/>
-                    <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center" d:IsHidden="True"/>
-                    <TextBlock x:Name="ViewSizeOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="50" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center" d:IsHidden="True"/>
+            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920">
+                <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684">
+                    <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png"/>
+                    <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center"/>
+                    <TextBlock x:Name="ViewSizeOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="50" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SelectHeartGrid" Margin="400,450,400,100" d:IsHidden="True">
-                <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="10,0,0,0" d:IsHidden="True"/>
-                <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.87" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,120,10,20" d:IsHidden="True">
+            <Grid x:Name="SelectHeartGrid" Margin="400,450,400,100">
+                <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="10,0,0,0"/>
+                <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.87" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,120,10,20">
                     <Image.RenderTransform>
                         <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Chapter8}}}"/>
                     </Image.RenderTransform>
@@ -336,7 +336,7 @@
                 <TextBlock x:Name="ChildrensThoughtsTitleText" Text="キミちゃんの考え" Margin="680,70,300,0" FontSize="60" VerticalAlignment="Top" FontFamily="MS PGothic" FontWeight="Bold" d:IsHidden="True" />
                 <TextBlock x:Name="OjamamushisTitleText" Text="失敗したときのダメダメ虫" Margin="80,70,700,0" FontSize="60" VerticalAlignment="Top" FontFamily="MS PGothic" FontWeight="Bold"  TextDecorations="Underline" d:IsHidden="True"/>
                 <Image x:Name="ButterflyImage" Margin="800,400,200,50" Source="Images/butterfly.png" d:IsHidden="True"/>
-                <Grid x:Name="FeelingInputGrid" Margin="600,400,100,50">
+                <Grid x:Name="FeelingInputGrid" Margin="600,400,100,50" d:IsHidden="True">
                     <TextBlock x:Name="KindOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="70,30,0,0" Text="きもちの種類" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="55" FontWeight="Bold" TextAlignment="Center" d:IsHidden="True"/>
                     <TextBlock x:Name="SizeOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="470,30,0,0" Text="きもちの大きさ" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="55" FontWeight="Bold" d:IsHidden="True"/>
                     <Button x:Name="KindOfFeelingInputButton" Style="{StaticResource KindOfFeelingButton}" HorizontalAlignment="Left" Width="334" Height="175" BorderBrush="#FF4472C4" BorderThickness="5" Margin="50,100,3,25" Click="Button_Click">
@@ -405,7 +405,7 @@
                     <Path   x:Name="ChallengeSpeechBubbleTail" Fill="White" Stroke="{Binding ElementName=ChallengeSpeechBubbleBorder,Path=BorderBrush}" StrokeThickness="11" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,0,0,-10" Data="M550,100 L740,30 650,100" Grid.Row="0" VerticalAlignment="Bottom"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="HowToUseItemInformationGrid" Margin="110,100,820,400">
+            <Grid x:Name="HowToUseItemInformationGrid" Margin="110,100,820,400" d:IsHidden="True">
                 <Border x:Name="HowToUseItemBorder" Background="#B2A8D3AE" CornerRadius="60" d:IsHidden="True"/>
                 <Grid x:Name="HowToUseItem_1Grid" d:IsHidden="True">
                     <Image x:Name="HowToUseItem_1OjamamushiImage" Source="Images/ojamamushi_02.png" HorizontalAlignment="Right" VerticalAlignment="Top"  Height="500" Width="500" d:IsHidden="True"/>

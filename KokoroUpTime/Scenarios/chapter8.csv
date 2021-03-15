@@ -1,6 +1,5 @@
 start
 #
-goto,Debug
 scene,前回のおさらい
 reset
 image,bg_image,background_02.png
@@ -688,7 +687,6 @@ grid,main_msg_grid,appear_expansion
 msg,main_msg,おじゃま虫バスターを使ってみるのじゃ！,白じい
 click,page
 #
-sub,Debug
 sub,groupe_activity
 scene,グループアクティビティ
 reset

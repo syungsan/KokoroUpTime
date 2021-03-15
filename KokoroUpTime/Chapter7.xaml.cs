@@ -351,7 +351,7 @@ namespace KokoroUpTime
                 ["thought_speech_bubble_border"] =this.ThoughtSpeechBubbleBorder,
 
                 ["input_thought_canvas_border"] =this.InputThoughtCanvasBorder,
-                ["input_thought_text_border"]=this.InputThoughtTextBorder,
+                ["input_thought_text_border"]=this.InputThoughtTextBorder1,
             };
 
             this.outlineTextObjects = new Dictionary<string, OutlineText>
@@ -492,7 +492,7 @@ namespace KokoroUpTime
             this.InputThoughtCanvasBorder.Visibility = Visibility.Hidden;
             this.InputThoughtCanvasGrid.Visibility = Visibility.Hidden;
             this.InputTextGrid.Visibility = Visibility.Hidden;
-            this.InputThoughtTextBorder.Visibility = Visibility.Hidden;
+            this.InputThoughtTextBorder1.Visibility = Visibility.Hidden;
             this.InputThoughtTextGrid.Visibility = Visibility.Hidden;
 
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
@@ -1146,12 +1146,17 @@ namespace KokoroUpTime
                                     {
                                         if (this.scene == "発表する時のキミちゃんのきもち" || this.scene == "友だちを遊びに誘うときのキミちゃんのきもち")
                                         {
-                                            if (this.FeelingInputGrid.IsVisible)
+                                            if (this.ChallengeTimeGrid.IsVisible)
                                             {
-                                                if (this.SizeOfFeelingInputTextBlock.Text != "" && this.KindOfFeelingInputTextBlock.Text != "")
+                                                if ( this.SizeOfFeelingInputTextBlock.Text != "" && this.KindOfFeelingInputTextBlock.Text != "")
                                                 {
                                                     this.NextPageButton.Visibility = Visibility.Visible;
                                                 }
+                                                this.BackPageButton.Visibility = Visibility.Visible;
+                                            }
+                                            else
+                                            {
+                                                this.NextPageButton.Visibility = Visibility.Visible;
                                                 this.BackPageButton.Visibility = Visibility.Visible;
                                             }
                                         }
@@ -1307,9 +1312,9 @@ namespace KokoroUpTime
                                 }
                                 else if (clickButton == "page")
                                 {
-                                    if (this.scene == "発表する時のキミちゃんのきもち"|| this.scene == "友だちを遊びに誘うときのキミちゃんのきもち")
+                                    if (this.scene == "発表する時のキミちゃんのきもち" || this.scene == "友だちを遊びに誘うときのキミちゃんのきもち")
                                     {
-                                        if (this.FeelingInputGrid.IsVisible)
+                                        if (this.ChallengeTimeGrid.IsVisible)
                                         {
                                             if (this.SizeOfFeelingInputTextBlock.Text != "" && this.KindOfFeelingInputTextBlock.Text != "")
                                             {
@@ -1317,12 +1322,17 @@ namespace KokoroUpTime
                                             }
                                             this.BackPageButton.Visibility = Visibility.Visible;
                                         }
+                                        else
+                                        {
+                                            this.NextPageButton.Visibility = Visibility.Visible;
+                                            this.BackPageButton.Visibility = Visibility.Visible;
+                                        }
                                     }
-                                    if (this.scene == "赤丸くんと青助くんの考え")
+                                    else if (this.scene == "赤丸くんと青助くんの考え")
                                     {
                                         if (this.dataOption.InputMethod == 0)
                                         {
-                                            if (this.InputStroke["input_akamaru_thought"].Count > 1 && this.InputStroke["input_aosuke_thought"].Count > 1)
+                                            if (this.InputStroke["input_akamaru_thought"].Count > 1 && this.InputStroke["input_aosuke_thought"].Count > 2)
                                             {
                                                 this.NextPageButton.Visibility = Visibility.Visible;
                                             }
@@ -2524,12 +2534,12 @@ namespace KokoroUpTime
                         {
                             case "InputLeftChildrenThoughtButton":
                                 this.InputDictionaryKey = "input_akamaru_thought";
-                                this.InputThoughtTextBorder.BorderBrush = (Brush)converter.ConvertFromString("#FFFF0000");
+                                this.InputThoughtTextBorder1.BorderBrush = (Brush)converter.ConvertFromString("#FFFF0000");
                                 break;
 
                             case "InputRightChildrenThoughtButton":
                                 this.InputDictionaryKey = "input_aosuke_thought";
-                                this.InputThoughtTextBorder.BorderBrush = (Brush)converter.ConvertFromString("#FF0070C0");
+                                this.InputThoughtTextBorder1.BorderBrush = (Brush)converter.ConvertFromString("#FF0070C0");
                                 break;
                         }
                         this.InputThoughtTextBox1.Text = this.InputText[InputDictionaryKey];

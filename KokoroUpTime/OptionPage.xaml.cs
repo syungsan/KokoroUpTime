@@ -84,11 +84,11 @@ namespace KokoroUpTime
 
             if (this.dataOption.IsAddRubi == true)
             {
-                this.RubiOnButton.Foreground = new SolidColorBrush(Colors.Blue);
+                //this.RubiOnButton.Foreground = new SolidColorBrush(Colors.Blue);
             }
             else if (this.dataOption.IsAddRubi == false)
             {
-                this.RubiOffButton.Foreground = new SolidColorBrush(Colors.Blue);
+                //this.RubiOffButton.Foreground = new SolidColorBrush(Colors.Blue);
             }
 
             if (this.dataOption.InputMethod == 0)

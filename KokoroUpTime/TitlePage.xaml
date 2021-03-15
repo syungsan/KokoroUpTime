@@ -74,7 +74,7 @@
                 <outline_maker:OutlineText x:Name="CreditOutlineText" Background="{x:Null}" Foreground="White" FontSize="36" Padding="4" Margin="0" OutlineThickness="4" Outline="#FF6FD1FF" Text="作成　こころあっぷタイム編集委員会"/>
             </Button>
             <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
-            <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169">
+            <Grid x:Name="SelectUserListGrid" Margin="405,100,407,169" d:IsHidden="True">
                 <Border x:Name="SelectUserListBorder" BorderThickness="1" BorderBrush="Black" Background="#FFFFCECE" CornerRadius="32,32,32,32"/>
                 <TextBlock x:Name="SelectUserListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="なまえの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
                 <ListBox x:Name="SelectUserListBox" Margin="48,140,48,130" FontSize="48" SelectionMode="Single">
@@ -94,7 +94,7 @@
                 </ListBox>
                 <Button x:Name="SelectUserListOKButton" Content="OK" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
             </Grid>
-            <Grid x:Name="SelectDataListGrid" Margin="405,100,407,169">
+            <Grid x:Name="SelectDataListGrid" Margin="405,100,407,169" d:IsHidden="True">
                 <Border x:Name="SelectDataListBorder" BorderThickness="1" BorderBrush="Black" Background="#FFE8F9CF" CornerRadius="32,32,32,32"/>
                 <TextBlock x:Name="SelectDataListTitle" HorizontalAlignment="Center" Margin="0,36,0,0" Text="データの選択" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="52" FontWeight="Bold" TextAlignment="Center"/>
                 <ListBox x:Name="SelectDataListBox" Margin="48,140,48,130" FontSize="48" SelectionMode="Multiple">
@@ -116,7 +116,7 @@
                 <Button x:Name="SelectDataListReturnButton" Content="戻る" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
                 <Button x:Name="SelectDataListDeleteButton" Content="削除" HorizontalAlignment="Left" Margin="716,710,0,0" VerticalAlignment="Top" Height="65" Width="162" FontSize="48" FontWeight="Bold" Click="Button_Click"/>
             </Grid>
-            <Grid x:Name="ExitBackGrid" Margin="497,215,497,190">
+            <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">
                 <Border x:Name="ExitBackBorder" BorderThickness="1" BorderBrush="Black" Background="White" CornerRadius="32,32,32,32"/>
                 <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Left" Margin="169,113,0,0" VerticalAlignment="Top" Height="100" Width="582" FontSize="48" Text="本当にアプリを終了しますか？" FontWeight="Bold" TextAlignment="Center"/>
                 <Button x:Name="ExitBackYesButton" HorizontalAlignment="Left" Margin="33,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
@@ -126,7 +126,7 @@
                     <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
                 </Button>
             </Grid>
-            <Grid x:Name="CreditGrid" Margin="338,129,340,20" RenderTransformOrigin="0.5,0.5">
+            <Grid x:Name="CreditGrid" Margin="338,129,340,20" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

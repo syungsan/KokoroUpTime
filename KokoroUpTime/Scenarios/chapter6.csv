@@ -5,6 +5,10 @@ reset
 image,bg_image,background_02.png
 image,children_face_left_image,akamaru_face_04.png,appear_up
 image,main_msg_bubble_image,left_big_bubble_red.png
+bgm,set,moku_moku_study.mp3,loop,50
+bgm,play
+text,music_title_text,もくもくStudy♪
+text,composer_name_text,しゅんじ～
 grid,main_msg_grid,appear_expansion
 msg,main_msg,この前のこころあっぷタイムは、ゆったりんごを使って鬱リラックス方法について考えたぜ！,赤丸
 click,page,next_only

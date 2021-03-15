@@ -27,6 +27,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using System.Windows.Ink;
+using Microsoft.Ink;
 
 namespace KokoroUpTime
 
@@ -59,6 +60,9 @@ namespace KokoroUpTime
 
         // マウス押下中フラグ
         private bool isMouseDown = false;
+
+        //Gesture
+        string RecognizingCanvasName = "";
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
@@ -95,9 +99,7 @@ namespace KokoroUpTime
         private string InputDictionaryKey = "";
 
         //入力したストロークを保存するためのコレクション
-        private StrokeCollection AkamaruOtherSolutionsUseItemInputStroke1 = new StrokeCollection();
-        private StrokeCollection AkamaruOtherSolutionsUseItemInputStroke2 = new StrokeCollection();
-        private StrokeCollection AkamaruOtherSolutionsUseItemInputStroke3 = new StrokeCollection();
+        private StrokeCollection AkamaruOtherSolutionUseItemInputStroke = new StrokeCollection();
 
         private List<StrokeCollection> AukeCahllengeStep1InputStroke = new List<StrokeCollection>();
         private List<StrokeCollection> AoskeCahllengeStep2InputStroke = new List<StrokeCollection>();
@@ -137,9 +139,11 @@ namespace KokoroUpTime
 
             InputStroke = new Dictionary<string, StrokeCollection>()
             { 
+                ["akamaru_other_solution_use_item"]=this.AkamaruOtherSolutionUseItemInputStroke,
             };
             InputText = new Dictionary<string, string>()
             {
+                ["akamaru_other_solution_use_item"] = this.dataChapter11.AkamaruOtherSolutionUseItem03InputText,
             };
 
             this.InitControls();
@@ -177,8 +181,12 @@ namespace KokoroUpTime
                
                 ["item_left_large_image"]=this.ItemLeftLargeImage,
                 ["item_center_large_image"]=this.ItemCenterLargeImage,
-              
-               
+                ["dog_image"]=this.DogImage,
+                ["anger_image"] = this.AngerImage,
+                ["akamaru_ojamamushi_image"] =this.AkamaruOjamamushiImage,
+                ["item_11_image"]=this.Item11Image,
+
+
 
             };
 
@@ -194,8 +202,11 @@ namespace KokoroUpTime
                 ["music_title_text"] = this.MusicTitleTextBlock,
                 ["composer_name_text"] = this.ComposerNameTextBlock,
                 ["item_book_title_text"] = this.ItemBookTitleTextBlock,
+                ["hint_check_text"] = this.HintCheckText,
 
                 ["challenge_time_title_text"] = this.ChallengeTImeTitleText,
+                ["how_to_use_item_text"] =this.HowToUseItemText,
+                ["step_to_solve_text"] =this.StepToSolveText,
 
             };
 
@@ -213,6 +224,11 @@ namespace KokoroUpTime
                 ["ok_button"] = this.OkButton,
                 ["return_button"] = this.ReturnButton,
                 ["complete_input_button"] = this.CompleteInputButton,
+
+                ["item_03_button"] = this.Item03Button,
+                ["item_04_button"] = this.Item04Button,
+                ["item_05_button"] = this.Item05Button,
+                ["input_button"]=this.InputButton,
 
             };
 
@@ -239,6 +255,18 @@ namespace KokoroUpTime
                 ["music_info_grid"] = this.MusicInfoGrid,
                 ["branch_select_grid"] = this.BranchSelectGrid,
                 ["exit_back_grid"] = this.ExitBackGrid,
+                ["hint_check_grid"] =this.HintCheckGrid,
+
+                ["akamaru_current_status_grid"]=this.AkamaruCurrentStatusGrid,
+                ["akamaru_frustrated_situation_grid"] =this.AkamaruFrustratedSituationGrid,
+                ["multiple_items_grid"]=this.MultipleItemsGrid,
+                ["step_to_solve_grid"] =this.StepToSolveGrid,
+
+                ["multiple_items_grid"] =this.MultipleItemsGrid,
+
+                ["input_akamaru_other_solution_grid"] =InputAkamaruOtherSolutionGrid,
+                ["step2_input_many_aosuke_solituins_grid"] =Step2InputManyAosukeSolituinsGrid,
+                ["step2_input_many_solution_grid"] =Step2InputManySolutionGrid,
 
                 ["canvas_edit_grid"] = this.CanvasEditGrid,
 
@@ -256,6 +284,15 @@ namespace KokoroUpTime
             
                 ["input_canvas_border"] =this.InputCanvasBorder,
                 ["input_text_box_border"] = this.InputTextBoxBorder,
+                ["light_green_border"]=this.LightGreenBorder,
+                ["light_green_c_border"]=this.LightGreenCenterBorder,
+                ["light_green_l_border"]=this.LightGreenLeftBorder,
+                ["light_green_r_border"]=this.LightGreenRightBorder,
+
+                ["input_canvas_border"]=this.InputCanvasBorder,
+                ["input_text_border"] = this.InputTextBoxBorder,
+                ["what_akamaru_solved_border"]=this.WhatAkamaruSolvedBorder,
+                ["what_akamaru_will_solve_border"]=this.WhatAkamaruWillSolveBorder,
             };
 
             this.outlineTextObjects = new Dictionary<string, OutlineText>
@@ -290,7 +327,48 @@ namespace KokoroUpTime
 
             this.TitleGrid.Visibility = Visibility.Hidden;
             this.TitleBorder.Visibility = Visibility.Hidden;
+            this.LetsSolveProblemsSceneTitle.Visibility = Visibility.Hidden;
+            this.StepToSolveProblemSceneTitle.Visibility = Visibility.Hidden;
+            this.LetsUseItemSceneTitle.Visibility = Visibility.Hidden;
             this.ChallengeTImeTitleText.Visibility = Visibility.Hidden;
+
+            this.LightGreenBorder.Visibility = Visibility.Hidden;
+            this.Step1SentenceGrid.Visibility = Visibility.Hidden;
+            this.EvaluateOtherMethodsGrid.Visibility = Visibility.Hidden;
+            this.Step3DecideTheBestMethodGrid.Visibility = Visibility.Hidden;
+
+            this.LightGreenCenterBorder.Visibility = Visibility.Hidden;
+            this.AkamaruProblemGrid.Visibility = Visibility.Hidden;
+            this.SelectSolutionGrid.Visibility = Visibility.Hidden;
+
+            this.LightGreenLeftBorder.Visibility = Visibility.Hidden;
+            this.MultipleItemsGrid.Visibility = Visibility.Hidden;
+            this.Item03Button.Visibility = Visibility.Hidden;
+            this.Item04Button.Visibility = Visibility.Hidden;
+            this.Item05Button.Visibility = Visibility.Hidden;
+            this.StepToSolveGrid.Visibility = Visibility.Hidden;
+            this.SolutionGrid.Visibility = Visibility.Hidden;
+            this.GrowUpChildrenGrid.Visibility = Visibility.Hidden;
+
+            this.LightGreenRightBorder.Visibility = Visibility.Hidden;
+            this.AkamaruFrustratedSituationGrid.Visibility = Visibility.Hidden;
+            this.WhatAkamaruSolvedBorder.Visibility = Visibility.Hidden;
+            this.WhatAkamaruWillSolveBorder.Visibility = Visibility.Hidden;
+            this.DogImage.Visibility = Visibility.Hidden;
+            this.AngerImage.Visibility = Visibility.Hidden;
+            this.AkamaruCurrentStatusGrid.Visibility = Visibility.Hidden;
+            this.AkamaruFrustratedSituationGrid.Visibility = Visibility.Hidden;
+            this.AkamaruOjamamushiImage.Visibility = Visibility.Hidden;
+            this.StepToSolveGrid.Visibility = Visibility.Hidden;
+            this.MultipleItemsGrid.Visibility = Visibility.Hidden;
+            this.HowToUseItemText.Visibility = Visibility.Hidden;
+
+            this.OutputBorder.Visibility = Visibility.Hidden;
+            this.InputButton.Visibility = Visibility.Hidden;
+            this.InputAkamaruOtherSolutionGrid.Visibility = Visibility.Hidden;
+            this.Step2InputManyAosukeSolituinsGrid.Visibility = Visibility.Hidden;
+            this.Step2InputManySolutionGrid.Visibility = Visibility.Hidden;
+            this.ViewAkamaruMethodGrid.Visibility = Visibility.Hidden;
 
             this.ShirojiSmallRightCenterImage.Visibility = Visibility.Hidden;
 
@@ -342,6 +420,8 @@ namespace KokoroUpTime
             this.MangaPrevBackButton.Visibility = Visibility.Hidden;
             this.CanvasEditGrid.Visibility = Visibility.Hidden;
             this.CompleteInputButton.Visibility = Visibility.Hidden;
+            this.HintCheckGrid.Visibility = Visibility.Hidden;
+
 
             this.CoverLayerImage.Visibility = Visibility.Hidden;
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
@@ -915,20 +995,29 @@ namespace KokoroUpTime
                                     {
                                         switch (this.scene)
                                         {
-                                            case "チャレンジタイム！":
+                                            case "チャレンジタイム！　パート①":
                                                 if (this.dataOption.InputMethod == 0)
                                                 {
-                                                    if (this.InputStroke["input_reason"].Count > 1)
-                                                    { 
+                                                    if (this.InputStroke["akamaru_other_solution_use_item"].Count > 1)
+                                                    {
                                                         this.NextPageButton.Visibility = Visibility.Visible;
                                                     }
+                                                    else 
+                                                    {
+                                                        this.NextPageButton.Visibility = Visibility.Hidden;
+                                                    }
+
 
                                                 }
                                                 else 
                                                 {
-                                                    if (this.InputText["input_reason"] != "") 
+                                                    if (this.InputText["akamaru_other_solution_use_item"] != "") 
                                                     {
                                                         this.NextPageButton.Visibility = Visibility.Visible;
+                                                    }
+                                                    else
+                                                    {
+                                                        this.NextPageButton.Visibility = Visibility.Hidden;
                                                     }
                                                 }
 
@@ -1063,6 +1152,17 @@ namespace KokoroUpTime
                                     this.NextPageButton.Visibility = Visibility.Visible;
                                 }
                             }
+                            else if (clickMethod == "back_only")
+                            {
+                                if (clickButton == "msg")
+                                {
+                                    this.BackMessageButton.Visibility = Visibility.Visible;
+                                }
+                                else if (clickButton == "page")
+                                {
+                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                }
+                            }
                             else if (clickMethod == "with_next_msg")
                             {
                                 if (clickButton == "page")
@@ -1090,20 +1190,28 @@ namespace KokoroUpTime
                                 {
                                     switch (this.scene)
                                     {
-                                        case "チャレンジタイム！":
+                                        case "チャレンジタイム！　パート①":
                                             if (this.dataOption.InputMethod == 0)
                                             {
-                                                if (this.InputStroke["input_reason"].Count > 1)
+                                                if (this.InputStroke["akamaru_other_solution_use_item"].Count > 1)
                                                 {
                                                     this.NextPageButton.Visibility = Visibility.Visible;
+                                                }
+                                                else
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Hidden;
                                                 }
 
                                             }
                                             else
                                             {
-                                                if (this.InputText["input_reason"] != "")
+                                                if (this.InputText["akamaru_other_solution_use_item"] != "")
                                                 {
                                                     this.NextPageButton.Visibility = Visibility.Visible;
+                                                }
+                                                else 
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Hidden;
                                                 }
                                             }
 
@@ -1367,8 +1475,8 @@ namespace KokoroUpTime
                         {
                             switch (this.scene)
                             {
-                                case "チャレンジタイム！":
-                                    this.GoTo("challenge_time");
+                                case "チャレンジタイム！　パート①":
+                                    this.GoTo("challenge_time_part1");
                                     break;
 
                                 case "グループアクティビティ　①":
@@ -2120,7 +2228,7 @@ namespace KokoroUpTime
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
-                
+
 
                 else if (button.Name == "BackMessageButton" || button.Name == "BackPageButton" || button.Name == "GroupeActivityBackMessageButton" || button.Name == "SelectFeelingBackButton")
                 {
@@ -2149,7 +2257,7 @@ namespace KokoroUpTime
 
 
                 }
-                
+
                 else if (button.Name == "KindOfFeelingInputButton")
                 {
                     this.GoTo("select_kind_of_feeling");
@@ -2168,26 +2276,20 @@ namespace KokoroUpTime
                     {
                         switch (this.scene)
                         {
-                            case "1":
-                                break;
-
-                            case "2":
-                                break;
-
-                            case "3":
+                            case "チャレンジタイム！　パート①":
+                                this.GoTo("canvas_input_akamaru_other_solution");
                                 break;
                         }
-                  //  this.InputStroke[this.InputDictionaryKey] = this.ReasonDifferenceSizeOfFeelingOutputCanvas.Strokes;
-
-                        this.InputCanvas1.Strokes = this.InputStroke[this.InputDictionaryKey];
-                        this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
-                        this.GoTo("canvas_input_reason_difference_size_of_feeling");
                     }
                     else
                     {
-                        this.InputTextBox1.Text = this.InputText[this.InputDictionaryKey];
-                        this.GoTo("keyboard_input_reason_difference_size_of_feeling");
-                        this.InputTextBox1.Focus();
+                        switch (this.scene)
+                        {
+                            case "チャレンジタイム！　パート①":
+                                this.GoTo("keyboard_input_akamaru_other_solution");
+                                this.InputTextBox1.Focus();
+                                break;
+                        }
                     }
                 }
                 else if (button.Name == "CompleteInputButton")
@@ -2196,28 +2298,70 @@ namespace KokoroUpTime
                     {
                         switch (this.InputDictionaryKey)
                         {
-                            //case "input_reason":
-                            //    if (this.InputStroke[this.InputDictionaryKey] != null)
-                            //    {
-                            //        this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
-                            //        this.ReasonDifferenceSizeOfFeelingOutputCanvas.Strokes = this.InputStroke[this.InputDictionaryKey];
-                            //    }
-                            //    break;
+                            case "akamaru_other_solution_use_item":
+                                if (this.InputStroke[this.InputDictionaryKey] != null)
+                                {
+                                    this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
+                                    this.InputAkamaruOtherSolutionCanvas.Strokes = this.InputStroke[this.InputDictionaryKey];
+                                }
+                                break;
                         }
                     }
                     else
                     {
                         switch (this.InputDictionaryKey)
                         {
-                            //case "input_reason":
-                            //    this.InputText[this.InputDictionaryKey] = this.InputTextBox1.Text;
-                            //    break;
+                            case "akamaru_other_solution_use_item":
+                                this.InputText[this.InputDictionaryKey] = this.InputTextBox1.Text;
+                                this.InputAkamaruOtherSolutionText.Text = this.InputText[this.InputDictionaryKey];
+                                break;
                         }
                         this.CloseOSK();
                     }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
+                }
+                else if (Regex.IsMatch(button.Name, "Item0.Button"))
+                {
+                    this.InputDictionaryKey = "akamaru_other_solution_use_item";
+
+                    switch (button.Name)
+                    {
+                        case "Item03Button":
+                            this.InputItemImage.Source = new BitmapImage(new Uri($"Images/item03_solo.png", UriKind.Relative));
+                            break;
+
+                        case "Item04Button":
+                            this.InputItemImage.Source = new BitmapImage(new Uri($"Images/item04_solo.png", UriKind.Relative));
+                            break;
+
+                        case "Item05Button":
+                            this.InputItemImage.Source = new BitmapImage(new Uri($"Images/item05_solo.png", UriKind.Relative));
+
+                            break;
+
+                    }
+                    if (this.dataOption.InputMethod == 0)
+                    {
+                        this.InputCanvas1.Strokes = this.InputStroke[this.InputDictionaryKey];
+                        this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
+                    }
+                    else
+                    {
+                        this.InputTextBox1.Text = this.InputText[this.InputDictionaryKey];
+                    }
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+                else if (button.Name == "HintCheckButton")
+                {
+                    switch (this.scene)
+                    {
+                        case "チャレンジタイム！　パート①":
+                            this.GoTo("check_akamaru_situation");
+                            break;
+                    }
                 }
             }
         }
@@ -2459,7 +2603,7 @@ namespace KokoroUpTime
             {
 
                 case "InputTextBox1":
-                    MaxLine = 4;
+                    MaxLine = 6;
                     break;
 
                 case "InputTextBox2":
@@ -2491,7 +2635,7 @@ namespace KokoroUpTime
             {
 
                 case "InputTextBox1":
-                    MaxLine = 4;
+                    MaxLine = 6;
                     break;
 
                 case "InputTextBox2":
@@ -2536,7 +2680,7 @@ namespace KokoroUpTime
             switch (listBoxItem.Name)
             {
                 case "PenButton":
-                    if(this.InputDictionaryKey == "input_reason")
+                    if(this.InputDictionaryKey == "akamaru_other_solution_use_item")
                     {
                         this.InputCanvas1.EditingMode = InkCanvasEditingMode.Ink;
                         this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
@@ -2545,7 +2689,7 @@ namespace KokoroUpTime
                      break;
 
                 case "EraserButton":
-                    if (this.InputDictionaryKey == "input_reason")
+                    if (this.InputDictionaryKey == "akamaru_other_solution_use_item")
                     {
                         this.InputCanvas1.EditingMode = InkCanvasEditingMode.EraseByPoint;
                     }
@@ -2554,7 +2698,7 @@ namespace KokoroUpTime
                     break;
 
                 case "AllClearButton":
-                    if (this.InputDictionaryKey == "input_reason")
+                    if (this.InputDictionaryKey == "akamaru_other_solution_use_item")
                     {
                         this.InputCanvas1.Strokes.Clear();
                         this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
@@ -2583,9 +2727,135 @@ namespace KokoroUpTime
             strokes.Clip(strokePoints);
 
             points2.Add(point3);
-            DrawingAttributes attributes = new DrawingAttributes() { Height = 1, Width = 1, Color = Colors.Transparent };
-            Stroke stroke = new Stroke(points2) { DrawingAttributes = attributes };
+            System.Windows.Ink.DrawingAttributes attributes = new System.Windows.Ink.DrawingAttributes() { Height = 1, Width = 1, Color = Colors.Transparent };
+            System.Windows.Ink.Stroke stroke = new System.Windows.Ink.Stroke(points2) { DrawingAttributes = attributes };
             strokes.Add(stroke);
+        }
+
+        private void InkCanvas_Loaded(object sender, RoutedEventArgs e)
+        {
+            var gestureCanvas = (InkCanvas)sender;
+
+            gestureCanvas.SetEnabledGestures(new[]
+            {
+                System.Windows.Ink.ApplicationGesture.Circle,
+                System.Windows.Ink.ApplicationGesture.DoubleCircle,
+                System.Windows.Ink.ApplicationGesture.Triangle,
+
+            });
+        }
+
+        private void InkCanvas_Gesture(object sender, InkCanvasGestureEventArgs e)
+        {
+            var gestureCanvas = (InkCanvas)sender;
+            if (RecognizingCanvasName != gestureCanvas.Name)
+            {
+                
+                RecognizingCanvasName = gestureCanvas.Name;
+
+                DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.75) };
+                timer.Start();
+                timer.Tick += (s, args) =>
+                {
+                    // タイマーの停止
+                    timer.Stop();
+
+                    // 信頼性 (RecognitionConfidence) を無視したほうが、Circle と Triangle の認識率は上がるようです。
+                    var gestureResult = e.GetGestureRecognitionResults().FirstOrDefault(r => r.ApplicationGesture != System.Windows.Ink.ApplicationGesture.NoGesture);
+                
+                    if (gestureResult != null)
+                    {
+                        switch (gestureResult.ApplicationGesture)
+                        {
+                            case System.Windows.Ink.ApplicationGesture.Circle:
+                            case System.Windows.Ink.ApplicationGesture.DoubleCircle:
+                                break;
+                            case System.Windows.Ink.ApplicationGesture.Triangle:
+                                break;
+                            default:
+                                throw new InvalidOperationException();
+                        }
+
+                        if (gestureResult.ApplicationGesture == System.Windows.Ink.ApplicationGesture.Circle || gestureResult.ApplicationGesture == System.Windows.Ink.ApplicationGesture.DoubleCircle)
+                        {
+                            foreach (var textBlock in ((Grid)gestureCanvas.Parent).Children)
+                            {
+                                if (textBlock is TextBlock)
+                                {
+                                    ((TextBlock)textBlock).Text = "〇";
+                                }
+                            }
+                        }
+                        else if (gestureResult.ApplicationGesture == System.Windows.Ink.ApplicationGesture.Triangle)
+                        {
+                            foreach (var textBlock in ((Grid)gestureCanvas.Parent).Children)
+                            {
+                                if (textBlock is TextBlock)
+                                {
+                                    ((TextBlock)textBlock).Text = "△";
+                                }
+                            }
+                        }
+
+                        RecognizingCanvasName = "";
+                    }
+                    else
+                    {
+                        this.CrossMarkRecognize(gestureCanvas);
+                    }
+                    gestureCanvas.Strokes.Clear();
+                };
+            }
+        }
+
+        private void CrossMarkRecognize(InkCanvas inkCanvas)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                inkCanvas.Strokes.Save(ms);
+                var myInkCollector = new InkCollector();
+                var ink = new Ink();
+                ink.Load(ms.ToArray());
+
+                using (RecognizerContext context = new RecognizerContext())
+                {
+                    if (ink.Strokes.Count > 0)
+                    {
+                        context.Strokes = ink.Strokes;
+                        RecognitionStatus status;
+
+                        var result = context.Recognize(out status);
+
+                        var aaa = result.GetAlternatesFromSelection();
+
+                        foreach (var tet in aaa)
+                        {
+                            if (tet.ToString() == "×" || tet.ToString() == "x" || tet.ToString() == "×")
+                            {
+                                if (status == RecognitionStatus.NoError)
+                                {
+                                    foreach (var textBlock in ((Grid)inkCanvas.Parent).Children)
+                                    {
+                                        if (textBlock is TextBlock)
+                                        {
+                                            ((TextBlock)textBlock).Text = "✕";
+                                        }
+                                    }
+                                }
+                                else
+                                    Debug.Print("Recognition failed");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.Print("No stroke detected");
+                    }
+                }
+            }
+
+            RecognizingCanvasName = "";
+
         }
     }
 }

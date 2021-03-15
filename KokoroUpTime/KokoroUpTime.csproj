@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>0.9.8.5</Version>
+    <Version>0.9.8.7</Version>
     <PackageIcon></PackageIcon>
     <ApplicationIcon>icon_sr9_icon.ico</ApplicationIcon>
     <AssemblyVersion>0.9.8.7</AssemblyVersion>
@@ -40,7 +40,9 @@
     <None Remove="Images\akamaru_face_03.png" />
     <None Remove="Images\akamaru_face_04.png" />
     <None Remove="Images\akamaru_face_05.png" />
+    <None Remove="Images\akamaru_face_06.png" />
     <None Remove="Images\akamaru_stand_01.png" />
+    <None Remove="Images\anger.png" />
     <None Remove="Images\aosuke_face_01.png" />
     <None Remove="Images\aosuke_face_02.png" />
     <None Remove="Images\aosuke_face_03.png" />
@@ -116,6 +118,7 @@
     <None Remove="Images\complete_role_play.png" />
     <None Remove="Images\difference_size_of_feeling.png" />
     <None Remove="Images\difficulty_of_action_frame.png" />
+    <None Remove="Images\dog.png" />
     <None Remove="Images\ending_bubble.png" />
     <None Remove="Images\face_small_bubble.png" />
     <None Remove="Images\feeling_value.png" />
@@ -359,6 +362,9 @@
     <None Remove="Images\small_short_bubble_left_down_red.png" />
     <None Remove="Images\small_short_bubble_left_down_yellow.png" />
     <None Remove="Images\SS.png" />
+    <None Remove="Images\Step1.png" />
+    <None Remove="Images\Step2.png" />
+    <None Remove="Images\Step3.png" />
     <None Remove="Images\step_up.png" />
     <None Remove="Images\summary_title.png" />
     <None Remove="Images\teacher.png" />
@@ -392,9 +398,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+    <PackageReference Include="EPPlus" Version="5.5.4" />
     <PackageReference Include="Osklib.Wpf" Version="1.6.0" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.8.0-beta" />
     <PackageReference Include="XamlAnimatedGif" Version="1.2.3" />
   </ItemGroup>
 
@@ -418,7 +424,9 @@
     <Resource Include="Images\akamaru_face_03.png" />
     <Resource Include="Images\akamaru_face_04.png" />
     <Resource Include="Images\akamaru_face_05.png" />
+    <Resource Include="Images\akamaru_face_06.png" />
     <Resource Include="Images\akamaru_stand_01.png" />
+    <Resource Include="Images\anger.png" />
     <Resource Include="Images\aosuke_face_01.png" />
     <Resource Include="Images\aosuke_face_02.png" />
     <Resource Include="Images\aosuke_face_03.png" />
@@ -494,6 +502,7 @@
     <Resource Include="Images\complete_role_play.png" />
     <Resource Include="Images\difference_size_of_feeling.png" />
     <Resource Include="Images\difficulty_of_action_frame.png" />
+    <Resource Include="Images\dog.png" />
     <Resource Include="Images\good.png" />
     <Resource Include="Images\graph1-1.png" />
     <Resource Include="Images\graph1-2.png" />
@@ -748,6 +757,9 @@
     <Resource Include="Images\small_short_bubble_left_down_red.png" />
     <Resource Include="Images\small_short_bubble_left_down_yellow.png" />
     <Resource Include="Images\SS.png" />
+    <Resource Include="Images\step1.png" />
+    <Resource Include="Images\step2.png" />
+    <Resource Include="Images\step3.png" />
     <Resource Include="Images\step_up.png" />
     <Resource Include="Images\summary_title.png" />
     <Resource Include="Images\teacher.png" />
@@ -930,6 +942,12 @@
 
   <ItemGroup>
     <Folder Include="Datas\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Ink">
+      <HintPath>..\..\..\..\..\..\Program Files\Common Files\microsoft shared\ink\Microsoft.Ink.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

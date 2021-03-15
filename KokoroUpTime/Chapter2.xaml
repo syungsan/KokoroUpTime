@@ -210,36 +210,48 @@
             <Grid x:Name="Challenge2Grid">
                 <outline_maker:OutlineText x:Name="Challenge2Title" Style="{StaticResource Orange}" VerticalAlignment="Top" Margin="200,20" Text="チャレンジタイム！パート②" FontSize="105"/>
                 <TextBlock x:Name="Challenge2Text" Text="青助くんの楽しいことリストについて、きもちの大きさを書いてみよう&#10;次に、かんたんにできるか〇×△をつけてみよう！" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Yu Gothic" FontWeight="UltraBold" Margin="100,200"/>
-                <TextBlock x:Name="KindOfFeeling" Text="きもちの種類" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1037,444,569,578"/>
-                <TextBlock x:Name="SizeOfFeeling" Text="きもちのおおきさ" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1007,720,539,300"/>
-                <TextBlock x:Name="DifficultyOfAction" Text="かんたんにできるか" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" Margin="1428,473,59,545"/>
-                <Grid x:Name="AosukeKindOfFeelingGrid" Margin="1037,507,569,416">
-                    <Border x:Name="KindOfFeelingGridOuterBorder" BorderBrush="#FFFF0000" BorderThickness="5">
-                        <Border x:Name="KindOfFeelingGridInnerBorder" BorderBrush="#FFFF0000" BorderThickness="5" Margin="5"/>
+                
+                <Grid x:Name="AosukeKindOfFeelingGrid" Margin="1037,417,569,416">
+                    <TextBlock x:Name="KindOfFeeling" Text="きもちの種類" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" VerticalAlignment="Top"/>
+                    <Border x:Name="KindOfFeelingGridOuterBorder" BorderBrush="#FFFF0000" BorderThickness="5" Height="160" Width="315" VerticalAlignment="Bottom">
+                        <Border x:Name="KindOfFeelingGridInnerBorder" BorderBrush="#FFFF0000" BorderThickness="5" Margin="5">
+                            <TextBlock x:Name="AosukeKindOfFeelingText" Text="ゆったり" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" />
+                        </Border>
                     </Border>
-                    <TextBlock x:Name="AosukeKindOfFeelingText" Text="ゆったり" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MSP Gothic" FontWeight="UltraBold" />
                 </Grid>
-                <Grid x:Name="AosukeSizeOfFeelingGrid"  Margin="1037,807,569,116" d:IsHidden="True">
-                    <Button x:Name="SizeOfFeelingButton" Style="{StaticResource SizeOfFeelingButton}" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
-                        <TextBlock x:Name="AosukeSizeOfFeelingText" Text="(  20  )" FontSize="93"/>
+                <Grid x:Name="AosukeSizeOfFeelingGrid"  Margin="987,757,519,116">
+                    <TextBlock x:Name="SizeOfFeeling" Text="きもちのおおきさ" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center"/>
+                    <Button x:Name="SizeOfFeelingButton" Style="{StaticResource SizeOfFeelingButton}" Height="160" Width="315"  Click="Button_Click" VerticalAlignment="Bottom">
+                        <TextBlock x:Name="AosukeSizeOfFeelingText" FontSize="93"/>
                     </Button>
                 </Grid>
-                <Grid x:Name="AosukeDifficultyOfActionGrid" Margin="1458,540,89,215">
-                    <Image x:Name="DifficultyOfActionButtonImage" Source="/Images/difficulty_of_action_frame.png" Stretch="Fill" />
-                    <Button x:Name="DifficultyOfActionButton" Background="Transparent" BorderBrush="Transparent" Click="Button_Click" Margin="5.4,6.5">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="46"/>
+                <Grid x:Name="AosukeDifficultyOfActionGrid" Margin="1458,450,89,215">
+                    <TextBlock x:Name="DifficultyOfAction" Text="かんたんにできるか" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center" VerticalAlignment="Top"/>
+                    <Button x:Name="DifficultyOfActionButton"   Click="Button_Click" Height="325" Width="370" VerticalAlignment="Bottom">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BubbleFrame}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ContentControl}">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    BorderBrush="#FF4472C4"
+                                                    BorderThickness="6"
+                                                    CornerRadius="46">
+                                                <ContentPresenter />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
                             </Style>
-                        </Button.Resources>
-                        <TextBlock x:Name="AosukeDifficultyOfActionText" Text="△" FontSize="180" FontFamily="MSP Gothic" TextAlignment="Center" Margin="40,60" d:IsHidden="True"/>
+                        </Button.Style>
+                        <TextBlock x:Name="AosukeDifficultyOfActionText" Text="△" FontSize="180" FontFamily="MSP Gothic" TextAlignment="Center" Margin="40,60"/>
                     </Button>
                 </Grid>
-                <Grid x:Name="Challenge2ActionBubble" Margin="202,333,928,265">
-                    <Image x:Name="Challenge2ActionBubbleImage" Source="/Images/blue_bubble_left_down.png" d:IsHidden="True" />
-                    <TextBlock x:Name="Challenge2BubbleActionText" Text="公園でお昼寝する" TextWrapping="Wrap" FontSize="70" FontFamily="Yu Gothic"  Margin="40,100,40,170" d:IsHidden="True"/>
+                <Grid x:Name="Challenge2ActionBubbleGrid" Margin="202,333,928,265" d:IsHidden="True">
+                    <Image x:Name="Challenge2ActionBubbleImage" Source="/Images/blue_bubble_left_down.png" />
+                    <TextBlock x:Name="Challenge2BubbleActionText" Text="公園でお昼寝する" TextWrapping="Wrap" FontSize="70" FontFamily="Yu Gothic"  Margin="40,100,40,170"/>
                 </Grid>
-                <Image x:Name="AosukesmallFaceImage" HorizontalAlignment="Left" Height="321" VerticalAlignment="Top" Width="330" Source="/Images/aosuke_face_01.png" Margin="10,586,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Image x:Name="AosukeSmallFaceImage" HorizontalAlignment="Left" Height="321" VerticalAlignment="Top" Width="330" Source="/Images/aosuke_face_01.png" Margin="10,586,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -250,41 +262,6 @@
                     </Image.RenderTransform>
                 </Image>
                 <Grid x:Name="Challenge2CoverGrid" Background="Transparent" d:IsHidden="True"/>
-            </Grid>
-            <Grid x:Name="SelectFeelingGrid" d:IsHidden="True">
-                <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400">
-                    <Image x:Name="SelectGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill"/>
-                    <ItemsControl x:Name="SelectGoodFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <InkCanvas x:Name="SelectGoodFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                                    <TextBlock x:Name="SelectGoodFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
-                                    <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
-                                    <InkCanvas.DefaultDrawingAttributes>
-                                        <DrawingAttributes Color="#FFEE2222" Height="4" Width="4" StylusTip="Ellipse"/>
-                                    </InkCanvas.DefaultDrawingAttributes>
-                                </InkCanvas>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
-                <Grid x:Name="SelectBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="923,72,0,0">
-                    <Image x:Name="SelectBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill"/>
-                    <ItemsControl x:Name="SelectBadFeelingItemControl" Margin="0,108,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <InkCanvas x:Name="SelectBadFeelingCanvas" Height="74" Background="{x:Null}" Loaded="GestureCanvas_Loaded" Gesture="GestureCanvas_Gesture" EditingMode="GestureOnly">
-                                    <TextBlock x:Name="SelectBadFeelingItemMark" Text="●" FontSize="30" Margin="40,14,0,0" Width="40"/>
-                                    <TextBlock x:Name="SelectBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="100,8,0,0" FontSize="36"/>
-                                    <InkCanvas.DefaultDrawingAttributes>
-                                        <DrawingAttributes Color="#FF1E90FF" Height="4" Width="4" StylusTip="Ellipse"/>
-                                    </InkCanvas.DefaultDrawingAttributes>
-                                </InkCanvas>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
-                <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="1427,550,0,0" VerticalAlignment="Center" Width="273" Source="/Images/item01_solo.png" RenderTransformOrigin="0.659,0.453"/>
             </Grid>
             <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
                 <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684">
@@ -453,26 +430,15 @@
             <Grid x:Name="GroupeActivityGrid" d:IsHidden="True" >
                 <Image x:Name="GroupeActivityTitle" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Images/group_activity_title01.png" Height="155"/>
                 <TextBlock x:Name="GroupeActivityText" FontSize="37" Text="友だちと話し合って、「ちょっぴりうきうき」をたくさん書いてみよう！"  Margin="300,480,300,540" TextAlignment="Center" FontFamily="Yu Gothic"/>
-                <Grid x:Name="InputMyALittleExcitedGrid" Width="1200" Height="525"  VerticalAlignment="Bottom">
-                    <Border CornerRadius="60" Background="White" BorderBrush="#FF333399" BorderThickness="10"/>
-                    <Viewbox MinWidth="1200" MinHeight="525" MaxHeight="840" MaxWidth="1920" Margin="38,17.5"  Stretch="Uniform">
-                        <InkCanvas x:Name="InputMyALittleExcitedCanvas" Height="525" Width="1200"  Background="Transparent" >
-                            <InkCanvas.DefaultDrawingAttributes>
-                                <DrawingAttributes Color="Black" Width="10" Height="10"/>
-                            </InkCanvas.DefaultDrawingAttributes>
-                        </InkCanvas>
-                    </Viewbox>
-                    <TextBox x:Name="InputMyALittleExcitedText" Margin="30,40,30,30" AcceptsReturn="True"  FontSize="65" MaxLength="102" 
-                             Text="(たとえば)みんなでご飯を食べる" 
-                             TextWrapping="Wrap" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" BorderBrush="{x:Null}" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
-                    <Button x:Name="GroupeActivityButton" Margin="10" Click="Button_Click" Background="Transparent">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border CornerRadius="60" Background="{TemplateBinding Background}"/>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </Grid>
+                <Button x:Name="GroupeActivityInputButton" Style="{StaticResource BubbleFrame}" BorderBrush="#FF333399" BorderThickness="10" Width="1200" Height="525"  VerticalAlignment="Bottom" Click="Button_Click">
+                    <Grid Margin="25">
+                        <TextBlock Style="{StaticResource OutputTextBlock}" Text="（たとえばみんなでごはんを食べる）" FontSize="60" />
+                        <Grid Margin="0,65,0,0">
+                            <InkCanvas x:Name="ViewMySmallExcitedCanvas" Style="{StaticResource OutputInkCanvas}"/>
+                            <TextBlock x:Name="ViewMySmallExcitedText" Style="{StaticResource OutputTextBlock}"  FontSize="60"/>
+                        </Grid>
+                    </Grid>
+                </Button>
             </Grid>
             <Grid x:Name="ItemBookGrid" d:IsHidden="True">
                 <TextBlock x:Name="ItemBookTitleTextBlock" Margin="38,20,1387,935" Text="アイテム図鑑" TextWrapping="Wrap" FontSize="90" Foreground="White" FontWeight="Bold"/>
@@ -508,7 +474,7 @@
                     <Image x:Name="Item11NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid" d:IsHidden="True">
+            <Grid x:Name="SystemGrid">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
@@ -668,11 +634,14 @@
                         <Image x:Name="MangaFlipArrowImage" Source="/Images/mangaya.png"/>
                     </Grid>
                 </Button>
-                <Button x:Name="SelectFeelingCompleteButton" Margin="1598,892,49,0" VerticalAlignment="Top" Height="144" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}">
+                <Button x:Name="SelectFeelingCompleteButton" Margin="1598,922,49,0" VerticalAlignment="Top" Height="144" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}">
                     <Image x:Name="ChallengeCompleteImage" Source="/Images/complete_button.png"/>
                 </Button>
-                <Button x:Name="SelectFeelingNextButton" Margin="1598,894,49,0" VerticalAlignment="Top" Height="142" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}">
+                <Button x:Name="SelectFeelingNextButton" Margin="1598,924,49,0" VerticalAlignment="Top" Height="142" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}">
                     <Image x:Name="ChallengeNextImage" Source="/Images/next_go_button.png"/>
+                </Button>
+                <Button x:Name="SelectFeelingBackButton" Margin="49,924,1598,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="142" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}">
+                    <Image x:Name="ChallengebackImage" Source="/Images/prev_back_.png"/>
                 </Button>
                 <Grid x:Name="MusicInfoGrid" RenderTransformOrigin="0.5,0.5" Margin="1423,60,0,755" HorizontalAlignment="Left" Width="452" Height="265" d:IsHidden="True">
                     <Grid.RenderTransform>
@@ -709,19 +678,49 @@
                         <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
                     </Button>
                 </Grid>
-                <Grid x:Name="CanvasEditGrid" Height="240" VerticalAlignment="Top">
-                    <ListBox x:Name="CanvasEditListBox" SelectionMode="Single">
+                <Grid x:Name="CanvasEditGrid" Height="240" Margin="0,0,240,0" VerticalAlignment="Top">
+                    <ListBox x:Name="CanvasEditListBox" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-                        <ListBoxItem x:Name="PenButton" FontSize="100" Width ="560" HorizontalContentAlignment="Center" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10"  BorderBrush="Black"  Selected="ListBoxItem_Selected">えんぴつ</ListBoxItem>
-                        <ListBoxItem x:Name="EraserButton" FontSize="100" Width="560"  FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black"  HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected">けしごむ</ListBoxItem>
-                        <ListBoxItem x:Name="AllClearButton" FontSize="100" Width="560" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black" HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected">すべてけす</ListBoxItem>
+                        <ListBoxItem x:Name="PenButton" FontSize="100" Width="555"  FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black"  HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="えんぴつ"/>
+                        <ListBoxItem x:Name="EraserButton" FontSize="100" Width="555"  FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black"  HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="けしごむ"/>
+                        <ListBoxItem x:Name="AllClearButton" FontSize="100" Width="555" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black" HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="すべてけす"/>
                     </ListBox>
                 </Grid>
                 <Button x:Name="CompleteInputButton" Click="Button_Click" Content="とじる" HorizontalContentAlignment="Center" Width="240" Height="240" FontSize="65" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" Background="White" BorderBrush="Black" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                <Grid x:Name="InputTextGrid" Width="1680" Height="620" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Border x:Name="InputTextBorder" CornerRadius="60" Background="White" BorderBrush="#FF333399" BorderThickness="10" Width="1200" Height="525" RenderTransformOrigin="0.5,0.5">
+                        <Border.RenderTransform>
+                            <ScaleTransform ScaleX="1.17" ScaleY="1.17"/>
+                        </Border.RenderTransform>
+                        <Grid Margin="20">
+                            <TextBlock Style="{StaticResource OutputTextBlock}" Text="（たとえばみんなでごはんを食べる）" FontSize="60" />
+                            <Grid Margin="0,60,0,0">
+                                <TextBox x:Name="InputMySmallExcitedTextBox" Style="{StaticResource InputTextBox}"  FontSize="60" MaxLength="114" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Grid x:Name="InputCanvasGrid" Width="1920" Height="840" VerticalAlignment="Bottom" d:IsHidden="True">
+                    <Border x:Name="InputCanvasBorder" CornerRadius="60" Background="White" BorderBrush="#FF333399" BorderThickness="10" Width="1200" Height="525" RenderTransformOrigin="0.5,0.5">
+                        <Border.RenderTransform>
+                            <ScaleTransform ScaleX="1.61" ScaleY="1.61"/>
+                        </Border.RenderTransform>
+                        <Grid Margin="20">
+                            <TextBlock Style="{StaticResource OutputTextBlock}" Text="（たとえばみんなでごはんを食べる）" FontSize="65" />
+                            <Grid Margin="0,70,0,0">
+                                <InkCanvas x:Name="InputMySmallExcitedCanvas" >
+                                    <InkCanvas.DefaultDrawingAttributes>
+                                        <DrawingAttributes Height="5" Width="5" Color="Black"/>
+                                    </InkCanvas.DefaultDrawingAttributes>
+                                </InkCanvas>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
                 <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">
                     <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png" d:IsHidden="True"/>
                 </Button>
