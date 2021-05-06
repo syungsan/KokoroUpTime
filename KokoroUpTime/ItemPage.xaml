@@ -75,13 +75,13 @@
                 <Image x:Name="Item10DetailImage" Height="626" Width="1265" Source="/Images/item10_detail.png" Margin="328,227,328,227"/>
                 <Image x:Name="Item11DetailImage" Height="549" Width="1248" Source="/Images/item11_detail.png" Margin="336,266,336,266"/>
             </Grid>
-            <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}">
+            <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}">
                 <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png"/>
             </Button>
-            <Button x:Name="ReturnToItemButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}">
+            <Button x:Name="ReturnToItemButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}">
                 <Image x:Name="ReturnToItemImage" Source="/Images/return_to_item.png"/>
             </Button>
-            <Button x:Name="NextPageButton" HorizontalAlignment="Left" Margin="1635,923,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="277" Height="158" Click="Button_Click" BorderBrush="{x:Null}">
+            <Button x:Name="NextPageButton" HorizontalAlignment="Left" Margin="1635,923,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="277" Height="158" Click="Button_Click" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}">
                 <Image x:Name="NextPageImage" Source="/Images/after.png"/>
             </Button>
         </Grid>

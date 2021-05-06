@@ -1,27 +1,20 @@
 ﻿using CsvReadWrite;
 using Expansion;
 using FileIOUtils;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
-using Osklib;
 using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Media;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using WMPLib;
 using XamlAnimatedGif;
@@ -1593,7 +1586,7 @@ namespace KokoroUpTime
                 foreach (var child in sb.Children)
                     Storyboard.SetTargetName(child, objectName);
             }
-            catch (ResourceReferenceKeyNotFoundException ex)
+            catch (ResourceReferenceKeyNotFoundException)
             {
                 string objectsStroryBoard = $"{storyBoard}_{objectsName}";
                 sb = this.FindResource(objectsStroryBoard) as Storyboard;

@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Media;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -18,9 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Xml;
 using WMPLib;
 using XamlAnimatedGif;
 
@@ -50,8 +47,6 @@ namespace KokoroUpTime
         private List<List<string>> scenarios = null;
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
-
-        private bool isCompleteGroupeActivity = false;
 
         // 各種コントロールの名前を収める変数
         private string position = "";
@@ -1702,7 +1697,7 @@ namespace KokoroUpTime
                     foreach (var child in sb.Children)
                         Storyboard.SetTargetName(child, objectName);
                 }
-                catch (ResourceReferenceKeyNotFoundException ex)
+                catch (ResourceReferenceKeyNotFoundException)
                 {
                     string objectsStroryBoard = $"{storyBoard}_{objectsName}";
                     sb = this.FindResource(objectsStroryBoard) as Storyboard;
@@ -1945,8 +1940,6 @@ namespace KokoroUpTime
                                 connection.Execute($@"UPDATE DataChapter2 SET MyALittlleExcitingEvents = '{this.dataChapter2.MyALittlleExcitingEvents}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                             }
                         }
-
-                        isCompleteGroupeActivity = true;
                     }
 
                     this.scenarioCount += 1;

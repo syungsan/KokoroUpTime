@@ -49,7 +49,7 @@
                     <TextBlock x:Name="SessionStarTextBlock" HorizontalAlignment="Left" Margin="35,109,0,0" VerticalAlignment="Top" FontSize="48" RenderTransformOrigin="0.345,0.474" FontWeight="Bold" Text="☆" TextAlignment="Center"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="ChallengeTimeGrid">
+            <Grid x:Name="ChallengeTimeGrid" d:IsHidden="True">
                 <Border x:Name="ChallengeTimeTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,261,0,540" Background="#FFFFC000" d:IsHidden="True">
                     <TextBlock x:Name="ChallengeTimeTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="180" Foreground="#FF9966FF" FontWeight="Normal" TextAlignment="Center"/>
                 </Border>
@@ -498,16 +498,16 @@
             </Grid>
             <Grid x:Name="SelectButtonGrid" d:IsHidden="True">
                 <Grid x:Name="MemoryCheckGrid">
-                    <Button x:Name="ImRememberButton" Height="164" Width="882" Background="{x:Null}" BorderBrush="{x:Null}" Margin="519,335,519,581" Click="Button_Click">
+                    <Button x:Name="ImRememberButton" Height="164" Width="882" Background="{x:Null}" BorderBrush="{x:Null}" Margin="519,335,519,581" Click="Button_Click" Style="{StaticResource ShadowButton}">
                         <Image x:Name="ImRememberImage" Source="/Images/im_remember.png"/>
                     </Button>
-                    <Button x:Name="WishCheckButton" Height="164" Width="882" Background="{x:Null}" BorderBrush="{x:Null}" Margin="519,610,519,306" Click="Button_Click">
+                    <Button x:Name="WishCheckButton" Height="164" Width="882" Background="{x:Null}" BorderBrush="{x:Null}" Margin="519,610,519,306" Click="Button_Click" Style="{StaticResource ShadowButton}">
                         <Image x:Name="WishCheckImage" Source="/Images/wish_check.png"/>
                     </Button>
                 </Grid>
             </Grid>
             <Grid x:Name="SystemGrid">
-                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -527,10 +527,10 @@
                         </Image.RenderTransform>
                     </Image>
                     <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="50,145,220,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" d:IsHidden="True"/>
-                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,40" Height="80" VerticalAlignment="Bottom" HorizontalAlignment="Right" d:IsHidden="True">
+                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,40" Height="80" VerticalAlignment="Bottom" HorizontalAlignment="Right" d:IsHidden="True" Style="{StaticResource ShadowButton}">
                         <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png" d:IsHidden="True"/>
                     </Button>
-                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,120" Height="80" VerticalAlignment="Top" HorizontalAlignment="Right" d:IsHidden="True">
+                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,120" Height="80" VerticalAlignment="Top" HorizontalAlignment="Right" d:IsHidden="True" Style="{StaticResource ShadowButton}">
                         <Image x:Name="BackMessageAllowUpImage" Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                             <Image.RenderTransform>
                                 <TransformGroup>
@@ -564,10 +564,10 @@
                     </Image>
                     <TextBlock x:Name="GroupeActivityMessageTextBlock" Text="本当にそれでいいかのう？&#10;ほめる言葉は、「すごいね」「うまいね」などがあったのう。" TextWrapping="Wrap" Margin="30,80,30,20" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
                 </Grid>
-                <Button x:Name="NextPageButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True" >
+                <Button x:Name="NextPageButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True" Style="{StaticResource ShadowButton}">
                     <Image x:Name="NextPageAfterImage" Source="/Images/after.png" Height="149" d:IsHidden="True"/>
                 </Button>
-                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
+                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True" Style="{StaticResource ShadowButton}">
                     <Image x:Name="BackPageBeforeImage" Source="/Images/before.png" d:IsHidden="True"/>
                 </Button>
                 <Border x:Name="HotWordBorder" BorderThickness="1" Margin="0,438,0,438" Background="#B2FF783A" d:IsHidden="True">
@@ -588,7 +588,7 @@
                     <TextBlock x:Name="MusicTitleTextBlock" HorizontalAlignment="Center" Margin="0,70,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" Foreground="White" Width="432" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#たぬき油性マジック"/>
                     <TextBlock x:Name="ComposerNameTextBlock" HorizontalAlignment="Left" Margin="105,178,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Foreground="White" Width="227" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#たぬき油性マジック"/>
                 </Grid>
-                <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True">
+                <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True" Style="{StaticResource ShadowButton}">
                     <Grid x:Name="MangaFlipButtonLayerGrid">
                         <Image x:Name="MangaFlipArrowImageGauge" Source="/Images/mangaya_orange.png">
                             <Image.RenderTransform>
@@ -621,7 +621,7 @@
                         <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
                     </Button>
                 </Grid>
-                <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">
+                <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True" Style="{StaticResource ShadowButton}">
                     <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png"/>
                 </Button>
             </Grid>

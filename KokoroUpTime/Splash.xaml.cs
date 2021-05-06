@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 using System.Windows.Media.Animation;
 
@@ -64,24 +54,24 @@ namespace KokoroUpTime
         public void Maximize(Window mainWindow)
         {
 
-            //mainWindow.ShowActivated = true;
-            //mainWindow.Topmost = true;
-            //mainWindow.ShowInTaskbar = false;
-            //mainWindow.WindowStyle = WindowStyle.None;
-            //mainWindow.ResizeMode = ResizeMode.NoResize;
-            //mainWindow.Left = 0;
-            //mainWindow.Top = 0;
-            //mainWindow.Width = SystemParameters.VirtualScreenWidth;
-            //mainWindow.Height = SystemParameters.VirtualScreenHeight;
-            //// mainWindow.Cursor = Cursors.None;
-            //mainWindow.WindowState = WindowState.Maximized;
+            mainWindow.ShowActivated = true;
+            mainWindow.Topmost = true;
+            mainWindow.ShowInTaskbar = false;
+            mainWindow.WindowStyle = WindowStyle.None;
+            mainWindow.ResizeMode = ResizeMode.NoResize;
+            mainWindow.Left = 0;
+            mainWindow.Top = 0;
+            mainWindow.Width = SystemParameters.VirtualScreenWidth;
+            mainWindow.Height = SystemParameters.VirtualScreenHeight;
+            // mainWindow.Cursor = Cursors.None;
+            mainWindow.WindowState = WindowState.Maximized;
 
-            //Debug用の画面サイズ
-            mainWindow.Width = 800;
-            mainWindow.Height = 600;
-            mainWindow.ResizeMode = ResizeMode.CanResize;
-            mainWindow.Left = 1130;
-            mainWindow.Top = 490;
+            ////Debug用の画面サイズ
+            //mainWindow.Width = 800;
+            //mainWindow.Height = 600;
+            //mainWindow.ResizeMode = ResizeMode.CanResize;
+            //mainWindow.Left = 1130;
+            //mainWindow.Top = 490;
 
         }
     }

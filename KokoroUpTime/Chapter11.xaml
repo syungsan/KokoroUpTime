@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
       xmlns:local="clr-namespace:KokoroUpTime"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:outline_marker ="clr-namespace:OutlineTextMaker"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
@@ -74,88 +75,18 @@
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
             </Style>
-            <Style TargetType="{x:Type Image}" x:Key="ItemButtonImage">
-                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-                <Setter Property="RenderTransform">
-                    <Setter.Value>
-                        <TranslateTransform/>
-                    </Setter.Value>
-                </Setter>
-                <Style.Triggers>
-                    <Trigger Property="AreAnyTouchesOver" Value="False">
-                        <Setter Property="Effect">
-                            <Setter.Value>
-                                <DropShadowEffect BlurRadius="10" ShadowDepth="10" Opacity="0.5"/>
-                            </Setter.Value>
-                        </Setter>
-                    </Trigger>
-                    <Trigger Property="AreAnyTouchesOver" Value="True">
-                        <Trigger.EnterActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.X)" To="5" Duration="0:0:0" />
-                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.Y)" To="5" Duration="0:0:0" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.EnterActions>
-                        <Trigger.ExitActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.X)" To="-5" Duration="0:0:0" />
-                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.Y)" To="-5" Duration="0:0:0" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.ExitActions>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-            <Style TargetType="{x:Type TextBlock}" x:Key="ItemButtonText">
-                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-                <Setter Property="RenderTransform">
-                    <Setter.Value>
-                        <TranslateTransform/>
-                    </Setter.Value>
-                </Setter>
-                <Style.Triggers>
-                    <Trigger Property="AreAnyTouchesOver" Value="False">
-                        <Setter Property="Effect">
-                            <Setter.Value>
-                                <DropShadowEffect BlurRadius="10" ShadowDepth="10" Opacity="0.5"/>
-                            </Setter.Value>
-                        </Setter>
-                    </Trigger>
-                    <Trigger Property="AreAnyTouchesOver" Value="True">
-                        <Trigger.EnterActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.X)" To="5" Duration="0:0:0" />
-                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.Y)" To="5" Duration="0:0:0" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.EnterActions>
-                        <Trigger.ExitActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.X)" To="-5" Duration="0:0:0" />
-                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.Y)" To="-5" Duration="0:0:0" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.ExitActions>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-            <Style TargetType="{x:Type Button}" x:Key="InitialButton">
-                <Setter Property="OverridesDefaultStyle" Value="True"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ContentControl}">
-                            <Border Background="{x:Null}">
-                                <ContentPresenter/>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+            <DataTemplate x:Key="ViewEvaluatedAosukeMethodTextTemplate">
+                    <StackPanel Orientation="Horizontal" Height="127.5">
+                        <TextBlock Text="・" Style="{StaticResource OutputTextBlock}" FontSize="50" VerticalAlignment="Center"/>
+                        <TextBlock Style="{StaticResource OutputTextBlock}" Text="{Binding EvaluatedMethodText}" Foreground="{Binding TextColor}" Background="Transparent" FontSize="50"  Width="1775" VerticalAlignment="Center"/>
+                    </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="ViewEvaluatedAosukeMethodCanvasTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="・" Style="{StaticResource OutputTextBlock}" FontSize="50" VerticalAlignment="Center"/>
+                    <InkCanvas Strokes="{Binding EvaluatedMethodStroke}" DefaultDrawingAttributes="{Binding StrokeColor}" IsEnabled="False" Background="Transparent" Height="127.5" Width="1775"/>
+                </StackPanel>
+            </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
     <Viewbox>
@@ -351,39 +282,228 @@
                 <Image x:Name="AkamaruEndingImage" HorizontalAlignment="Left" Height="470" Margin="59,460,0,0" VerticalAlignment="Top" Width="436" Source="/Images/akamaru_face_04.png"/>
             </Grid>
             <Border x:Name="LightGreenBorder" Background="#FFC8FAC8" Opacity="0.8" CornerRadius="60" Margin="100,50,100,150" d:IsHidden="True" />
-            <Grid x:Name="Step1SentenceGrid" Margin="130,80,130,180" d:IsHidden="True">
+            <Grid x:Name="Step1AosukeBadFeelingSceneGrid" Margin="130,80,130,180" d:IsHidden="True">
                 <TextBlock x:Name="Step1TitleText" Text="ステップ１：おちついて問題をみつける" FontSize="50" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic" Foreground="#FF0070C0">
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="3" Opacity="0.3"/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <TextBlock x:Name="Step1SentenceText" FontFamily="Yu Gothic" FontWeight="Bold" FontSize="55" Margin="0,150" VerticalAlignment="Top">
+                <TextBlock x:Name="Step1BadFeelingSceneText" FontFamily="Yu Gothic" FontWeight="Bold" FontSize="55" Margin="0,150" VerticalAlignment="Top">
                     <Run Text="今日は朝から体育館で朝会がありました。"/>
                     <Run Text="&#10;青助くんが、クラスの列にならんでいると、"/>
                     <Run Text="&#10;「ちゃんとならんで！」とクラスの学級委員に注意されました"/>
                     <Run Text="&#10;しかし、青助くんは、ちゃんとならんでいたつもりです。"/>
                     <Run Text="&#10;青助くんはいやなきもちになりました。"/>
                 </TextBlock>
-                <Border Background="White" BorderBrush="Black" Margin="10" BorderThickness="10" CornerRadius="30" Height="150" Width="1610" VerticalAlignment="Bottom">
+                <Border x:Name="Step1AosukeGoalBorder" Background="White" BorderBrush="Black" Margin="10" BorderThickness="10" CornerRadius="30" Height="150" Width="1610" VerticalAlignment="Bottom">
                     <TextBlock Text="目標：自分の考えを伝える！" FontWeight="Bold" FontFamily="Yu Gothic" FontSize="60" VerticalAlignment="Center" Margin="30"/>
                 </Border>
                 <Image x:Name="Step1AosukeImage" Source="Images/aosuke_face_04.png" Height="350" Width="350" Margin="0,-50" VerticalAlignment="Top" HorizontalAlignment="Right"/>
             </Grid>
-            <Grid x:Name="EvaluateOtherMethodsGrid" Margin="130,80,130,180" d:IsHidden="True"/>
-            <Grid x:Name="Step3DecideTheBestMethodGrid" Margin="130,80,130,180" d:IsHidden="True">
-                <TextBlock Text="ステップ３：一番よいものをやってみる" FontFamily="Yu Gothic" FontWeight="Bold" FontSize="50" Foreground="#FF0070C0">
+            <Grid x:Name="ExampleEvaluateAkamaruMethodsGrid" Margin="130,80,130,180" d:IsHidden="True">
+                    <TextBlock x:Name="ExampleEvaluateAkamaruMethodTitleText" Text="赤丸くんの方法を見てみよう！" FontSize="55" FontFamily="Yu Gothic" FontWeight="Bold"/>
+                    <Border x:Name="ExampleAkamaruMethodBorder" Margin="0,200" Background="White" BorderBrush="Red" BorderThickness="5" CornerRadius="30" Height="180" Width="700" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <TextBlock Text="イライラするから&#10;ほかの友だちにいじわるする" Margin="20" FontSize="40" FontFamily="Yu Gothic" FontWeight="Bold"/>
+                    </Border>
+                    <Image x:Name="ExampleArrowImage" Source="Images/blue_right_arrow.png" Height="150" Margin="0,240,0,0" HorizontalAlignment="Center"/>
+                    <Grid  x:Name="ExampleEvaluateGrid" Margin="0,260,0,0" HorizontalAlignment="Right">
+                    <StackPanel  Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Border Height="180" Width="180" Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
+                                <TextBlock Text="問題は&#10;かいけつ&#10;するか" FontFamily="Yu Gothic" Foreground="White" FontSize="34" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Height="180" Width="180" Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
+                                <TextBlock Text="自分は&#10;できるか" FontFamily="Yu Gothic" Foreground="White" FontSize="34" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Height="180" Width="180" Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
+                                <TextBlock Text="自分の&#10;きもち" FontFamily="Yu Gothic" Foreground="White" FontSize="34" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Height="180" Width="180" Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
+                                <TextBlock Text="相手の&#10;きもち" FontFamily="Yu Gothic" Foreground="White" FontSize="34" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Height="180" Width="180" Background="#FFCFD5EA" BorderBrush="White" BorderThickness="3">
+                                <TextBlock Text="✕" FontFamily="MS PGothic" FontSize="80" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Height="180" Width="180" Background="#FFCFD5EA" BorderBrush="White" BorderThickness="3">
+                                <TextBlock Text="〇" FontFamily="MS PGothic" FontSize="80"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Height="180" Width="180" Background="#FFCFD5EA" BorderBrush="White" BorderThickness="3">
+                                <TextBlock Text="△" FontFamily="MS PGothic" FontSize="80"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Height="180" Width="180" Background="#FFCFD5EA" BorderBrush="White" BorderThickness="3">
+                                <TextBlock Text="✕" FontFamily="MS PGothic" FontSize="80"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+                    </Grid>
+            <Grid x:Name="Step3EvaluateAkamaruMethodGrid" Margin="130,80,130,180" d:IsHidden="True">
+                    <TextBlock x:Name="EvaluateAkamaruMethodTitleText" Text="他の方法について、一番良い方法を探てみよう！" FontSize="45" FontFamily="Yu Gothic" FontWeight="Bold" d:IsHidden="True"/>
+                    <TextBlock x:Name="EvaluateAkamaruMethodText" Text="下のマスをタップして&#10;〇△✕のどれかをつけてみよう！" FontSize="35" Margin="200,50" FontFamily="Yu Gothic" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                    <Grid x:Name="EvaluateAkamaruMethodGrid" Margin="0,100,40,0" VerticalAlignment="Bottom">
+                    <StackPanel Orientation="Vertical" >
+                        <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Border Height="150" Width="170" Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
+                                <TextBlock Text="問題は&#10;かいけつ&#10;するか" FontFamily="Yu Gothic" Foreground="White" FontSize="30" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Height="150" Width="170" Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
+                                <TextBlock Text="自分は&#10;できるか" FontFamily="Yu Gothic" Foreground="White" FontSize="30" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Height="150" Width="170" Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
+                                <TextBlock Text="自分の&#10;きもち" FontFamily="Yu Gothic" Foreground="White" FontSize="30" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Height="150" Width="170" Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
+                                <TextBlock Text="相手の&#10;きもち" FontFamily="Yu Gothic" Foreground="White" FontSize="30" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                        <ListView x:Name="EvaluateAkamaruMethodListView" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="{x:Null}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ContentControl}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Border Margin="0,0,0,20" Background="White" BorderBrush="Red" BorderThickness="5" CornerRadius="30" Height="150" Width="700" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                        <TextBlock Text="{Binding}" Margin="20,10" FontSize="40" FontFamily="Yu Gothic" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                                    </Border>
+                                                    <Image Source="Images/blue_right_arrow.png" Height="150" Margin="20,0,0,0" HorizontalAlignment="Center"/>
+                                                    <Border Height="170" Width="170" Background="#FFCFD5EA" BorderBrush="White" BorderThickness="3" Margin="32,0,0,0" VerticalAlignment="Top">
+                                                        <Grid>
+                                                            <Button x:Name="EvaluateAkamaruButton1" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                                                                <TextBlock x:Name="AkamaruMethodValueText1" FontFamily="MS PGothic" FontSize="80" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Button>
+                                                            <!--<InkCanvas x:Name="EvaluateAkamaruCanvas1" Background="Transparent" Style="{StaticResource GestureCanvas}" Gesture="InkCanvas_Gesture" Loaded="InkCanvas_Loaded"/>-->
+                                                        </Grid>
+                                                    </Border>
+                                                    <Border Height="170" Width="170" Background="#FFCFD5EA" BorderBrush="White" BorderThickness="3" VerticalAlignment="Top">
+                                                        <Grid>
+                                                            <Button x:Name="EvaluateAkamaruButton2" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                                                                <TextBlock x:Name="AkamaruMethodValueText2" FontFamily="MS PGothic" FontSize="80" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Button>
+                                                            <!--<InkCanvas x:Name="EvaluateAkamaruCanvas2" Background="Transparent" Style="{StaticResource GestureCanvas}" Gesture="InkCanvas_Gesture" Loaded="InkCanvas_Loaded"/>-->
+                                                        </Grid>
+                                                    </Border>
+                                                    <Border Height="170" Width="170" Background="#FFCFD5EA" BorderBrush="White" BorderThickness="3" VerticalAlignment="Top">
+                                                        <Grid>
+                                                            <Button x:Name="EvaluateAkamaruButton3" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                                                                <TextBlock x:Name="AkamaruMethodValueText3" FontFamily="MS PGothic" FontSize="80" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Button>
+                                                            <!--<InkCanvas x:Name="EvaluateAkamaruCanvas3" Background="Transparent" Style="{StaticResource GestureCanvas}" Gesture="InkCanvas_Gesture" Loaded="InkCanvas_Loaded"/>-->
+                                                        </Grid>
+                                                    </Border>
+                                                    <Border Height="170" Width="170" Background="#FFCFD5EA" BorderBrush="White" BorderThickness="3" VerticalAlignment="Top">
+                                                        <Grid>
+                                                            <Button x:Name="EvaluateAkamaruButton4" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                                                                <TextBlock x:Name="AkamaruMethodValueText4" FontFamily="MS PGothic" FontSize="80" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Button>
+                                                            <!--<InkCanvas x:Name="EvaluateAkamaruCanvas4" Background="Transparent" Style="{StaticResource GestureCanvas}" Gesture="InkCanvas_Gesture" Loaded="InkCanvas_Loaded"/>-->
+                                                        </Grid>
+                                                    </Border>
+                                                </StackPanel>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <sys:String>その友だちには、　　　　　　　　　　　　　　　　　　もう近づかない</sys:String>
+                            <sys:String>先生に言って、　　　　　　　　　　　　　　　　　その友だちをおこってもらう</sys:String>
+                            <sys:String>もう一度、　　　　　　　　　　　　　　きちんとあやまってみる</sys:String>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+                </Grid>
+            <Grid x:Name="Step3EvaluateAosukeMethodGrid" Margin="130,80,130,160" d:IsHidden="True">
+                <TextBlock x:Name="EvaluateAosukeMethodTitleText" Text="ステップ３：一番よいものをやってみる" FontFamily="Yu Gothic" FontWeight="Bold" FontSize="50" Foreground="#FF0070C0">
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="3" Opacity="0.2"/>
                     </TextBlock.Effect>
                 </TextBlock>
                 <TextBlock Text="いくつかの方法について、&#10;考えてみよう！" Margin="0,150" FontFamily="Yu Gothic" FontWeight="Bold" FontSize="55" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <Border Margin="0,200" Background="White" BorderBrush="Black" BorderThickness="5" CornerRadius="30" Height="150" Width="900" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                    <TextBlock Style="{StaticResource OutputTextBlock}" Text="あああ&#10;あああ" FontSize="49" Margin="20" VerticalAlignment="Center"/>
-                </Border>
-                <Button Background="Transparent" Height="150" Width="300" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                    <Grid>
+                <Grid x:Name="EvaluateAosukeMethodGrid" Margin="0,200" VerticalAlignment="Bottom">
+                    <StackPanel Orientation="Vertical" >
+                        <TextBlock Text="下のマスをタップして&#10;〇△✕のどれかをつけてみよう！" Margin="200,0" FontSize="35" FontFamily="Yu Gothic" FontWeight="Bold" HorizontalAlignment="Right"/>
+                        <StackPanel Margin="40,0"  HorizontalAlignment="Right" Orientation="Horizontal">
+                        <Border Height="150" Width="170" Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
+                            <TextBlock Text="問題は&#10;かいけつ&#10;するか" FontFamily="Yu Gothic" Foreground="White" FontSize="30" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border Height="150" Width="170" Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
+                            <TextBlock Text="自分は&#10;できるか" FontFamily="Yu Gothic" Foreground="White" FontSize="30" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border Height="150" Width="170" Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
+                            <TextBlock Text="自分の&#10;きもち" FontFamily="Yu Gothic" Foreground="White" FontSize="30" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border Height="150" Width="170" Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
+                            <TextBlock Text="相手の&#10;きもち" FontFamily="Yu Gothic" Foreground="White" FontSize="30" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                    <ListView x:Name="EvaluateAosukeMethodListView" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="{x:Null}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ContentControl}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Margin="3,0"  Background="White" BorderBrush="Black" BorderThickness="5" CornerRadius="30">
+                                                    <Viewbox Height="127.5" Width="870" Margin="10,0">
+                                                        <Grid Height="127.5" Width="1775">
+                                                            <TextBlock x:Name="AosukeMethodText" Style="{StaticResource OutputTextBlock}" Text="{Binding MethodText}"  FontSize="60" Background="Transparent"/>
+                                                            <InkCanvas x:Name="AosukeMethodCanvas" Strokes="{Binding MethodStroke}" Style="{StaticResource OutputInkCanvas}" Background="Transparent" />
+                                                        </Grid>
+                                                    </Viewbox>
+                                                </Border>
+                                                <Border Height="170" Width="170" Background="#FFCFD5EA" BorderBrush="White" BorderThickness="3" Margin="32,0,0,0" VerticalAlignment="Top">
+                                                    <Grid>
+                                                        <Button x:Name="EvaluateAosukeButton1" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                                                            <TextBlock x:Name="AosukeMethodValueText1" Text="{Binding MethodValueText1}" FontFamily="MS PGothic" FontSize="80" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Button>
+                                                        <!--<InkCanvas x:Name="EvaluateAosukeCanvas1" Background="Transparent" Style="{StaticResource GestureCanvas}" Gesture="InkCanvas_Gesture" Loaded="InkCanvas_Loaded"/>-->
+                                                    </Grid>
+                                                </Border>
+                                                <Border Height="170" Width="170" Background="#FFCFD5EA" BorderBrush="White" BorderThickness="3" VerticalAlignment="Top">
+                                                    <Grid>
+                                                        <Button x:Name="EvaluateAkamaruButton2" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                                                            <TextBlock x:Name="AosukeMethodValueText2" Text="{Binding MethodValueText2}" FontFamily="MS PGothic" FontSize="80" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Button>
+                                                        <!--<InkCanvas x:Name="EvaluateAosukeCanvas2" Background="Transparent" Style="{StaticResource GestureCanvas}" Gesture="InkCanvas_Gesture" Loaded="InkCanvas_Loaded"/>-->
+                                                        </Grid>
+                                                </Border>
+                                                <Border Height="170" Width="170" Background="#FFCFD5EA" BorderBrush="White" BorderThickness="3" VerticalAlignment="Top">
+                                                    <Grid>
+                                                        <Button x:Name="EvaluateAkamaruButton3" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                                                            <TextBlock x:Name="AosukeMethodValueText3" Text="{Binding MethodValueText3}" FontFamily="MS PGothic" FontSize="80" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Button>
+                                                        <!--<InkCanvas x:Name="EvaluateAosukeCanvas3" Background="Transparent" Style="{StaticResource GestureCanvas}" Gesture="InkCanvas_Gesture" Loaded="InkCanvas_Loaded"/>-->
+                                                    </Grid>
+                                                </Border>
+                                                <Border Height="170" Width="170" Background="#FFCFD5EA" BorderBrush="White" BorderThickness="3" VerticalAlignment="Top">
+                                                    <Grid>
+                                                        <Button x:Name="EvaluateAkamaruButton4" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                                                            <TextBlock x:Name="AosukeMethodValueText4" Text="{Binding MethodValueText4}" FontFamily="MS PGothic" FontSize="80" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        </Button>
+                                                        <!--<InkCanvas x:Name="EvaluateAosukeCanvas4" Background="Transparent" Style="{StaticResource GestureCanvas}" Gesture="InkCanvas_Gesture" Loaded="InkCanvas_Loaded"/>-->
+                                                        </Grid>
+                                                </Border>
+                                            </StackPanel>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+            <Button x:Name="NextMethodButton" Background="Transparent" Height="150" Width="300" VerticalAlignment="Bottom" HorizontalAlignment="Right" Style="{StaticResource ShadowButton}" Click="Button_Click">
+                <Grid Style="{StaticResource ShadowButtonGrid}">
+                    <Image Source="Images/orange_button_plate.png" Stretch="Fill"/>
+                    <TextBlock Text="次の方法" FontSize="50" FontFamily="Yu Gothic" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Grid>
+            </Button>
+                <Button x:Name="BackMethodButton" Background="Transparent" Height="150" Width="300" VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{StaticResource ShadowButton}" Click="Button_Click">
+                    <Grid Style="{StaticResource ShadowButtonGrid}">
                         <Image Source="Images/orange_button_plate.png" Stretch="Fill"/>
-                        <TextBlock Text="次の方法" FontSize="50" FontFamily="Yu Gothic" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="前の方法" FontSize="50" FontFamily="Yu Gothic" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                 </Button>
             </Grid>
@@ -409,19 +529,19 @@
                 </TextBlock>
                 <Image x:Name="AkamaruOjamamushiImage" Margin="-160,-200" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="300" Width="300" Source="Images/Ojamamushi_03.png"/>
             </Grid>
-            <Border x:Name="LightGreenLeftBorder" Background="#FFC8FAC8" Opacity="0.8" CornerRadius="60" Margin="100,50,700,400" />
+            <Border x:Name="LightGreenLeftBorder" Background="#FFC8FAC8" Opacity="0.8" CornerRadius="60" Margin="100,50,700,400" d:IsHidden="True" />
             <Grid x:Name="MultipleItemsGrid" Margin="130,80,730,430" d:IsHidden="True">
-                <Button x:Name="Item03Button" Background="{x:Null}" BorderBrush="{x:Null}" Height="500" Width="350" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Button_Click" Style="{StaticResource InitialButton}">
-                    <Image x:Name="Item03Image" Source="Images/item03_solo.png" Style="{StaticResource ItemButtonImage}"/>
+                <Button x:Name="Item03Button" Background="{x:Null}" BorderBrush="{x:Null}" Height="500" Width="350" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Button_Click" Style="{StaticResource ShadowButton}">
+                    <Image x:Name="Item03Image" Source="Images/item03_solo.png"/>
                 </Button>
-                <Button x:Name="Item04Button" Background="{x:Null}" BorderBrush="{x:Null}" Height="500" Width="350" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="Button_Click" Style="{StaticResource InitialButton}">
-                    <Image x:Name="Item04Image" Source="Images/item04_solo.png" Style="{StaticResource ItemButtonImage}"/>
+                <Button x:Name="Item04Button" Background="{x:Null}" BorderBrush="{x:Null}" Height="500" Width="350" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="Button_Click" Style="{StaticResource ShadowButton}">
+                    <Image x:Name="Item04Image" Source="Images/item04_solo.png"/>
                 </Button>
-                <Button x:Name="Item05Button" Background="{x:Null}" BorderBrush="{x:Null}" Height="500" Width="350" Margin="-130" VerticalAlignment="Top" Click="Button_Click" Style="{StaticResource InitialButton}">
-                    <Image x:Name="Item05Image" Source="Images/item05_solo.png" Style="{StaticResource ItemButtonImage}"/>
+                <Button x:Name="Item05Button" Background="{x:Null}" BorderBrush="{x:Null}" Height="500" Width="350" Margin="-130" VerticalAlignment="Top" Click="Button_Click" Style="{StaticResource ShadowButton}">
+                    <Image x:Name="Item05Image" Source="Images/item05_solo.png"/>
                 </Button>
             </Grid>
-            <Grid x:Name="StepToSolveGrid" Margin="130,80,730,430">
+            <Grid x:Name="StepToSolveGrid" Margin="130,80,730,430" d:IsHidden="True">
                 <Image x:Name="Item11Image" Source="Images/step1.png" HorizontalAlignment="Left" Margin="0,70,0,0"/>
                 <TextBlock x:Name="HowToUseItemText" Text="３色だんごの使い方" FontSize="40" FontFamily="Yu Gothic" FontWeight="Bold"/>
                 <TextBlock x:Name="StepToSolveText" Text="ステップ１：おちついて問題をみつける&#10;ステップ２　&#10;ステップ３" FontSize="45" FontFamily="Yu Gothic" FontWeight="Bold" Foreground="#FF1A78B4" Margin="160,130,0,0" LineHeight="140">
@@ -445,24 +565,24 @@
                 <Image x:Name="AkamaruProblemRightImage" Source="Images/item04_solo.png" Height="400" Width="400" Margin="200,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                 <Image x:Name="AkamaruProblemLeftImage" Source="Images/item05_solo.png" Height="400" Width="400" Margin="0,0,300,0" VerticalAlignment="Bottom" />
             </Grid>
-            <Grid x:Name="SelectSolutionGrid" Margin="430,80,430,430" d:IsHidden="True">
-                <Button x:Name="SelectSolutionButton1" Background="Transparent" Margin="0,0,0,150">
-                    <Grid Height="150" >
-                        <Image Source="Images/orange_button_plate.png" />
+            <Grid x:Name="SelectAkamaruGoalGrid" Margin="430,80,430,430" d:IsHidden="True">
+                <Button x:Name="SelectAkamaruGoalButton1" Background="Transparent" Margin="0,0,0,150" Height="150" HorizontalAlignment="Center" Style="{StaticResource ShadowButton}" Click="Button_Click">
+                    <Grid Height="150" Style="{StaticResource ShadowButtonGrid}">
+                        <Image Source="Images/orange_button_plate.png"/>
                         <TextBlock Text="ケンカした友だちと仲直りする" FontSize="40" Foreground="White" FontFamily="Yu Gothic"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                 </Button>
-                <Button x:Name="SelectSolutionButton2" Background="Transparent" Margin="0,350,0,0">
-                    <Grid Height="150" >
+                <Button x:Name="SelectAkamaruGoalButton2" Background="Transparent" Margin="0,350,0,0" Height="150" HorizontalAlignment="Center" Style="{StaticResource ShadowButton}" Click="Button_Click">
+                    <Grid Height="150" Style="{StaticResource ShadowButtonGrid}" >
                         <Image Source="Images/orange_button_plate.png"/>
                         <TextBlock Text="友だちが思っていたことを教えてもらう" FontSize="40" Foreground="White" FontFamily="Yu Gothic" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                 </Button>
-                <Border Margin="-200,-250" VerticalAlignment="Bottom" Height="200" Background="White" BorderBrush="Black" BorderThickness="5" CornerRadius="30">
+                <Border x:Name="SelectAkamaruGoalBorder" Margin="-200,-250" VerticalAlignment="Bottom" Height="200" Background="White" BorderBrush="Black" BorderThickness="5" CornerRadius="30">
                     <TextBlock Text="リラックスして、自分と相手を大切にする方法で&#10;赤丸くんの「目標」をどのように変えるとよいか、えらんでみよう！" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" FontFamily="Yu Gothic" Margin="20"/>
                 </Border>
-                <Image Margin="-350,-150" Height="350" Width="350" VerticalAlignment="Bottom" HorizontalAlignment="Right" Source="Images/angel.png"/>
-                <Image Margin="-180,-30" VerticalAlignment="Top" HorizontalAlignment="Left" Height="200" Width="200" Source="Images/akamaru_face_frst.png"/>
+                <Image x:Name="AngelImage" Margin="-350,-150" Height="350" Width="350" VerticalAlignment="Bottom" HorizontalAlignment="Right" Source="Images/angel.png"/>
+                <Image Margin="-180,-30" VerticalAlignment="Top" HorizontalAlignment="Left" Height="200" Width="200" Source="Images/akamaru_face_06.png"/>
                 <Image Source="Images/thin_bubble_left_red.png" Height="150" VerticalAlignment="Top" Margin="0,-50"/>
                 <TextBlock Text="イライラしているから他の友だちにいじわるしてやれ！" FontSize="35" Margin="100,-20,0,0" FontFamily="Yu Gothic" VerticalAlignment="Top" />
             </Grid>
@@ -472,98 +592,136 @@
                 <Image x:Name="AkamaruImage" Source="Images/akamaru_face_04.png" Height="300" Width="300" Margin="0,100,250,0"/>
                 <Image x:Name="KimiImage" Source="Images/kimi_face_03.png" Height="300" Width="300" Margin="350,100,0,0"/>
             </Grid>
-            <Border x:Name="OutputBorder" Margin="100,50,700,400" Background="White" BorderBrush="Black" BorderThickness="5" CornerRadius="60" d:IsHidden="True" >
+            <Border x:Name="ViewInputAosukeMethodBorder" Margin="10,10,10,140" BorderBrush="Black" BorderThickness="5" Background="White" CornerRadius="60" RenderTransformOrigin="0,0" d:IsHidden="True">
+                <Border.RenderTransform>
+                    <ScaleTransform ScaleX="0.65" ScaleY="0.65"/>
+                </Border.RenderTransform>
                 <Grid>
-                    <TextBlock Text="ステップ２：たくさんの方法を考える" FontSize="40" FontFamily="Yu Gothic" Foreground="#FF0070C0" FontWeight="Bold" Margin="50,20" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <TextBlock Text="ステップ２：たくさんの方法を考える" FontSize="50" Margin="80,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic" Foreground="#FF0070C0">
                         <TextBlock.Effect>
-                            <DropShadowEffect ShadowDepth="3" Opacity="0.2"/>
+                            <DropShadowEffect ShadowDepth="3" Opacity="0.3"/>
                         </TextBlock.Effect>
                     </TextBlock>
-                    <ItemsControl Margin="50,100,30,30">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Style="{StaticResource OutputTextBlock}">
-                                    <Run Text="・"/>
-                                    <Run Text="{Binding Text}" Foreground="{Binding TextColor}"/>
-                                </TextBlock>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    <ItemsControl x:Name="ViewInputAosukeMethodItemsControl" Margin="50,100,30,30"/>
                 </Grid>
             </Border>
-            <Button x:Name="InputButton" Style="{StaticResource BubbleFrame}" BorderBrush="Black" BorderThickness="5" Margin="50,100,50,140" Click="Button_Click" d:IsHidden="True">
-                <Grid x:Name="InputButtonGrid">
-                    <Grid x:Name="InputAkamaruOtherSolutionGrid">
-                        <TextBlock x:Name="InputAkamaruOtherSolutionTitle" Text="赤丸くんは、ほかにどんなかいけつの方法をえらぶことができるでしょう？&#10;あなたの考えを書いてみましょう！" FontSize="35" LineHeight="60" Margin="60,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
-                        <Viewbox Margin="30,150,30,30" d:IsHidden="True">
-                            <InkCanvas x:Name="InputAkamaruOtherSolutionCanvas" Style="{StaticResource OutputInkCanvas}"/>
-                        </Viewbox>
-                        <TextBlock x:Name="InputAkamaruOtherSolutionText" Style="{StaticResource OutputTextBlock}" Margin="30,150,30,30" FontSize="92"/>
-                        <Image x:Name="InputItemImage" Source="Images/item03_solo.png" Height="300" Width="200" Margin="0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-                    </Grid>
-                    <Grid x:Name="Step2InputManySolutionGrid" d:IsHidden="True">
-                        <TextBlock x:Name="Step2InputManySolutionTitleText" Text="ステップ１で決めた目標のためのかいけつ方法を、たくさん考えましょう！" FontSize="40" Margin="40,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
-                        <TextBlock x:Name="Step1GoalText" Text="目標：" FontSize="50" Margin="40,120" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
-                        <TextBlock x:Name="ExampleMethodText" Margin="100,220,30,30" FontFamily="MS pgothic" FontSize="50" LineHeight="85" VerticalAlignment="Top">
+            <Border x:Name="InputButtonBorder" Margin="10,10,10,140" BorderBrush="Black" BorderThickness="5" Background="White" CornerRadius="60" d:IsHidden="True">
+                <Grid x:Name="InputButtonBorderGrid">
+                    <Button x:Name="InputButton1" Style="{StaticResource BubbleFrame}" Click="Button_Click">
+                        <Grid x:Name="InputButton1Grid">
+                            <Grid x:Name="InputAkamaruOtherSolutionGrid">
+                                <TextBlock x:Name="InputAkamaruOtherSolutionTitle" Text="赤丸くんは、ほかにどんなかいけつの方法をえらぶことができるでしょう？&#10;あなたの考えを書いてみましょう！" FontSize="35" LineHeight="60" Margin="60,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
+                                <InkCanvas x:Name="OutputCanvas1" Style="{StaticResource OutputInkCanvas}" Margin="30,150,30,30"/>
+                                <TextBlock x:Name="OutputText1" Style="{StaticResource OutputTextBlock}" Margin="30,150,30,30" FontSize="92"/>
+                                <Image x:Name="InputItemImage" Source="Images/item05_solo.png" Height="300" Width="200" Margin="0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <Grid x:Name="Step2InputAosukeManySolutionsGrid" d:IsHidden="True">
+                                <TextBlock x:Name="Step2AosukeTitleText" Text="ステップ２：たくさんの方法を考える" FontSize="50" Margin="80,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic" Foreground="#FF0070C0">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect ShadowDepth="3" Opacity="0.3"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                                <Grid x:Name="Step2AosukeSolutionGrid"  Margin="60,130,30,10">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                            <InkCanvas x:Name="OutputCanvas3_1" Style="{StaticResource OutputInkCanvas}" Height="127.5" Width="1775"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                            <InkCanvas x:Name="OutputCanvas3_2" Style="{StaticResource OutputInkCanvas}" Height="127.5" Width="1775"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                            <InkCanvas x:Name="OutputCanvas3_3" Style="{StaticResource OutputInkCanvas}" Height="127.5" Width="1775"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                            <InkCanvas x:Name="OutputCanvas3_4" Style="{StaticResource OutputInkCanvas}" Height="127.5" Width="1775"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                            <InkCanvas x:Name="OutputCanvas3_5" Style="{StaticResource OutputInkCanvas}" Height="127.5" Width="1775"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                            <InkCanvas x:Name="OutputCanvas3_6" Style="{StaticResource OutputInkCanvas}" Height="127.5" Width="1775"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal" Height="127.5">
+                                            <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="OutputText3_1" Style="{StaticResource OutputTextBlock}" VerticalAlignment="Center" FontSize="50" Width="1775"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Height="127.5" >
+                                            <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="OutputText3_2" Style="{StaticResource OutputTextBlock}" VerticalAlignment="Center" FontSize="50" Width="1775"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Height="127.5">
+                                            <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="OutputText3_3" Style="{StaticResource OutputTextBlock}" VerticalAlignment="Center" FontSize="50" Width="1775"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Height="127.5">
+                                            <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="OutputText3_4" Style="{StaticResource OutputTextBlock}" VerticalAlignment="Center" FontSize="50" Width="1775"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Height="127.5">
+                                            <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="OutputText3_5" Style="{StaticResource OutputTextBlock}" VerticalAlignment="Center" FontSize="50" Width="1775"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Height="127.5">
+                                            <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="OutputText3_6" Style="{StaticResource OutputTextBlock}" VerticalAlignment="Center" FontSize="50" Width="1775"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Button>
+                    <Grid x:Name="Step2InputAkamaruManySolutionGrid" d:IsHidden="True">
+                        <TextBlock x:Name="Step2InputAkamaruManySolutionTitleText" Text="ステップ１で決めた目標のためのかいけつ方法を、たくさん考えましょう！" FontSize="40" Margin="40,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
+                        <TextBlock x:Name="Step1AkamaruGoalText" Text="目標：" FontSize="50" Margin="40,120" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
+                        <TextBlock x:Name="Step2ExampleAkamaruMethodText" Margin="100,220,30,30" FontFamily="MS pgothic" FontSize="50" LineHeight="90" VerticalAlignment="Top">
                             <Run Text="・ イライラするから、ほかの友だちにいじわるする"/>
                             <Run Text="&#10;・ その友だちには、ぜったいにちかづかない"/>
                             <Run Text="&#10;・ 先生に言ってその友達をおこってもらう"/>
                             <Run Text="&#10;・ 自分の悪かったことについて、きちんとあやまる"/>
-                            <Run Text="&#10;・ "/>
-                            <Run Text="&#10;・ "/>
-                            <Run Text="&#10;・ "/>
                         </TextBlock>
-                        <Grid x:Name="Step2InputManySolutionGridGrid" Margin="100,545,30,30" Background="Transparent">
-                            <StackPanel d:IsHidden="True">
-                                <InkCanvas x:Name="OutputCanvas1" Style="{StaticResource OutputInkCanvas}" Margin="35,0,0,0" Height="85"/>
-                                <InkCanvas x:Name="OutputCanvas2" Style="{StaticResource OutputInkCanvas}" Margin="35,0,0,0" Height="85"/>
-                                <InkCanvas x:Name="OutputCanvas3" Style="{StaticResource OutputInkCanvas}" Margin="35,0,0,0" Height="85"/>
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="OutputText1" Style="{StaticResource OutputTextBlock}" Margin="35,0,0,0" LineHeight="85"/>
-                                <TextBlock x:Name="OutputText2" Style="{StaticResource OutputTextBlock}" Margin="35,0,0,0" LineHeight="85"/>
-                                <TextBlock x:Name="OutputText3" Style="{StaticResource OutputTextBlock}" Margin="35,0,0,0" LineHeight="85"/>
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
-                    <Grid x:Name="Step2InputManyAosukeSolituinsGrid" d:IsHidden="True">
-                        <TextBlock x:Name="aTet" Text="ステップ２：たくさんの方法を考える" FontSize="60" Margin="80,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic" Foreground="#FF0070C0">
-                            <TextBlock.Effect>
-                                <DropShadowEffect ShadowDepth="3" Opacity="0.3"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-                        <TextBlock x:Name="ExamplethodText" Margin="100,170,30,30" FontFamily="MS pgothic" FontSize="50" LineHeight="85" VerticalAlignment="Top">
-                            <Run Text="・ イ"/>
-                            <Run Text="&#10;・ "/>
-                            <Run Text="&#10;・ "/>
-                            <Run Text="&#10;・ "/>
-                            <Run Text="&#10;・ "/>
-                            <Run Text="&#10;・ "/>
-                            <Run Text="&#10;・ "/>
-                        </TextBlock>
-                        <Grid  Margin="100,150,30,30" d:IsHidden="True">
-                            <StackPanel d:IsHidden="True" >
-                                <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0"  Height="85"/>
-                                <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0"  Height="85"/>
-                                <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0"  Height="85"/>
-                                <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0"  Height="85"/>
-                                <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0"  Height="85"/>
-                                <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0"  Height="85"/>
-                                <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0"  Height="85"/>
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock Style="{StaticResource OutputTextBlock}" Margin="40,0,0,0" LineHeight="85"/>
-                                <TextBlock Style="{StaticResource OutputTextBlock}" Margin="40,0,0,0" LineHeight="85"/>
-                                <TextBlock Style="{StaticResource OutputTextBlock}" Margin="40,0,0,0" LineHeight="85"/>
-                                <TextBlock Style="{StaticResource OutputTextBlock}" Margin="40,0,0,0" LineHeight="85"/>
-                                <TextBlock Style="{StaticResource OutputTextBlock}" Margin="40,0,0,0" LineHeight="85"/>
-                                <TextBlock Style="{StaticResource OutputTextBlock}" Margin="40,0,0,0" LineHeight="85"/>
-                                <TextBlock Style="{StaticResource OutputTextBlock}" Margin="40,0,0,0" LineHeight="85"/>
-                            </StackPanel>
-                        </Grid>
+                        <Button x:Name="InputButton2" Margin="100,550,590,10" Background="Transparent" BorderBrush="{x:Null}" Click="Button_Click">
+                            <Grid>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                        <InkCanvas x:Name="OutputCanvas2_1" Style="{StaticResource OutputInkCanvas}" Margin="35,0,0,0" Height="120" Width="1680"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                        <InkCanvas x:Name="OutputCanvas2_2" Style="{StaticResource OutputInkCanvas}" Margin="35,0,0,0" Height="120" Width="1680"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                        <InkCanvas x:Name="OutputCanvas2_3" Style="{StaticResource OutputInkCanvas}" Margin="35,0,0,0" Height="120" Width="1680"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Height="120">
+                                        <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                        <TextBlock x:Name="OutputText2_1" Style="{StaticResource OutputTextBlock}" Margin="35,0,0,0" FontSize="50"  VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Height="120">
+                                        <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                        <TextBlock x:Name="OutputText2_2" Style="{StaticResource OutputTextBlock}" Margin="35,0,0,0" FontSize="50"  VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Height="120">
+                                        <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                        <TextBlock x:Name="OutputText2_3" Style="{StaticResource OutputTextBlock}" Margin="35,0,0,0" FontSize="50"  VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </Button>
                     </Grid>
                 </Grid>
-            </Button>
+            </Border>
             <Grid x:Name="ShirojiGrid" d:IsHidden="True" >
                 <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5"  Width="579" Height="627" Margin="1271,343,70,110" Source="/Images/shiroji_04.png">
                     <Image.RenderTransform>
@@ -688,58 +846,8 @@
                     <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="ViewAkamaruMethodGrid" Margin="130,80,130,180" d:IsHidden="True">
-                <TextBlock x:Name="TitleText" Text="赤丸くんの方法を見てみよう！" FontSize="60" FontFamily="Yu Gothic" FontWeight="Bold"/>
-                <Image Source="Images/right_blue_arrow.png" Height="200" Width="300" d:IsHidden="True"/>
-                <Grid Margin="0,200,0,0" d:IsHidden="True">
-                    <Border Background="White" BorderBrush="Red" CornerRadius="30" BorderThickness="10" Height="180" Width="600"  HorizontalAlignment="Left" d:IsHidden="True">
-                        <TextBlock Text="いらいらするから&#xA;ほかの友だちにいじわるする" FontSize="40" FontWeight="Bold" FontFamily="Yu Gothic" Margin="30,10"/>
-                    </Border>
-                    <Path />
-                </Grid>
-                <ListView Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ContentControl}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Border Background="White" BorderBrush="Red" CornerRadius="30" BorderThickness="10" Height="180" Width="600"  HorizontalAlignment="Left">
-                                                <TextBlock Text="{Binding}" FontSize="40" FontWeight="Bold" FontFamily="Yu Gothic" Margin="30,10"/>
-                                            </Border>
-                                            <Image Source="Images/right_blue_arrow.png" Height="200" Width="300"/>
-                                            <ListView>
-                                                <!--<ListView.ItemContainerStyle>
-                                                    <Style TargetType="{x:Type ListViewItem}">
-                                                        <Setter Property="Template">
-                                                            <Setter.Value>
-                                                                <ControlTemplate TargetType="{x:Type ContentControl}">
-                                                                    <StackPanel Orientation="Horizontal" Background="White">
-                                                                        <Grid Background="#FFCFD5EA" Width="190" Height="190" Margin="3">
-                                                                            <TextBlock Text="{Binding EvaluationMark}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="60"/>
-                                                                            <InkCanvas x:Name="Canvas1" Style="{StaticResource GestureCanvas}" Loaded="InkCanvas_Loaded" Gesture="InkCanvas_Gesture"/>
-                                                                        </Grid>
-                                                                    </StackPanel>
-                                                                </ControlTemplate>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Style>
-                                                </ListView.ItemContainerStyle>-->
-                                                <ListViewItem/>
-                                            </ListView>
-                                        </StackPanel>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListViewItem/>
-                    <ListViewItem/>
-                    <ListViewItem/>
-                </ListView>
-            </Grid>
-            <Grid x:Name="SystemGrid" d:IsHidden="True">
-                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+            <Grid x:Name="SystemGrid">
+                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -759,34 +867,25 @@
                         </Image.RenderTransform>
                     </Image>
                     <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="50,145,220,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
-                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,40" Height="80" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,40" Height="80" VerticalAlignment="Bottom" HorizontalAlignment="Right" Style="{StaticResource ShadowButton}">
                         <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png"/>
                     </Button>
-                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,120" Height="80" VerticalAlignment="Top" HorizontalAlignment="Right">
-                        <Image x:Name="BackMessageAllowUpImage" Source="Images/yazirusi.png" RenderTransformOrigin="0.5,0.5">
-                            <Image.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="180.0"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Image.RenderTransform>
-                        </Image>
+                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,120" Height="80" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ShadowButton}">
+                        <Image x:Name="BackMessageAllowUpImage" Source="Images/yazirusi_up.png" RenderTransformOrigin="0.5,0.5"/>
                     </Button>
                 </Grid>
                 <Grid x:Name="EndingMessageGrid" Width="1149" Height="210" Margin="210,826,561,44" d:IsHidden="True">
                     <Image x:Name="EndingShortBubbleImage" Source="/Images/short_bubble_right_up.png"/>
                     <TextBlock x:Name="EndingMessageTextBlock" HorizontalAlignment="Center" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="1060" Margin="0,105,0,0" FontSize="48"/>
                 </Grid>
-                <Button x:Name="NextPageButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True" >
+                <Button x:Name="NextPageButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click"  Style="{StaticResource ShadowButton}">
                     <Image x:Name="NextPageAfterImage" Source="/Images/after.png" Height="149"/>
                 </Button>
-                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
+                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" Style="{StaticResource ShadowButton}">
                     <Image x:Name="BackPageBeforeImage" Source="/Images/before.png"/>
                 </Button>
-                <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True">
-                    <Grid x:Name="MangaFlipButtonLayerGrid">
+                <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True" Style="{StaticResource ShadowButton}">
+                    <Grid x:Name="MangaFlipButtonLayerGrid" Style="{StaticResource ShadowButtonGrid}">
                         <Image x:Name="MangaFlipArrowImageGauge" Source="/Images/mangaya_orange.png">
                             <Image.RenderTransform>
                                 <TransformGroup>
@@ -806,16 +905,16 @@
                         <Image x:Name="MangaFlipArrowImage" Source="/Images/mangaya.png"/>
                     </Grid>
                 </Button>
-                <Button x:Name="SelectFeelingCompleteButton" Margin="1598,940,49,0" VerticalAlignment="Top" Height="144" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">
+                <Button x:Name="SelectFeelingCompleteButton" Margin="1598,940,49,0" VerticalAlignment="Top" Height="144" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True" Style="{StaticResource ShadowButton}">
                     <Image x:Name="ChallengeCompleteImage" Source="/Images/complete_button.png"/>
                 </Button>
-                <Button x:Name="SelectFeelingNextButton" Margin="1598,940,49,0" VerticalAlignment="Top" Height="142" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">
+                <Button x:Name="SelectFeelingNextButton" Margin="1598,940,49,0" VerticalAlignment="Top" Height="142" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True" Style="{StaticResource ShadowButton}">
                     <Image x:Name="ChallengeNextImage" Source="/Images/next_go_button.png"/>
                 </Button>
-                <Button x:Name="SelectFeelingBackButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278"  Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" Margin="33,940,0,0" d:IsHidden="True">
-                    <Image x:Name="ChallengeBackImage" Source="/Images/prev_back_.png"/>
+                <Button x:Name="SelectFeelingBackButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278"  Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" Margin="33,940,0,0" d:IsHidden="True" Style="{StaticResource ShadowButton}">
+                    <Image x:Name="ChallengeBackImage" Source="/Images/prev_back_.png" />
                 </Button>
-                <Button x:Name="ReturnButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Margin="33,892,0,0" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True">
+                <Button x:Name="ReturnButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="278" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Margin="33,892,0,0" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True" Style="{StaticResource ShadowButton}">
                     <Image x:Name="ReturnButtonImage" Source="/Images/return.png"/>
                 </Button>
                 <Grid x:Name="MusicInfoGrid" RenderTransformOrigin="0.5,0.5" Margin="1423,60,0,755" HorizontalAlignment="Left" Width="452" Height="265" d:IsHidden="True">
@@ -834,24 +933,38 @@
                     <TextBlock x:Name="ComposerNameTextBlock" HorizontalAlignment="Left" Margin="105,178,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Foreground="White" Width="227" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker"/>
                 </Grid>
                 <Grid x:Name="BranchSelectGrid" d:IsHidden="True">
-                    <Button x:Name="BranchButton1" Margin="500,200,500,700" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                    <Button x:Name="BranchButton1" Margin="500,200,500,700" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Style="{StaticResource ShadowButton}">
                         <Image x:Name="BranchButton1Image" Source="/Images/branch_selection1.png" Stretch="Fill" />
                     </Button>
-                    <Button x:Name="BranchButton2" Margin="500,700,500,200" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                    <Button x:Name="BranchButton2" Margin="500,700,500,200" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Style="{StaticResource ShadowButton}">
                         <Image x:Name="BranchButton2Image" Source="/Images/branch_selection2.png" Stretch="Fill" />
                     </Button>
                 </Grid>
-                <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}" d:IsHidden="True">
+                <Grid x:Name="ConfirmButtonGrid" Margin="0,100" VerticalAlignment="Top" HorizontalAlignment="Center" d:IsHidden="True">
+                    <Button x:Name="DecideAosukeMethodButton" Background="Transparent" Margin="0,0,0,150" Height="150" HorizontalAlignment="Center" Style="{StaticResource ShadowButton}" Click="Button_Click">
+                        <Grid Height="150" Style="{StaticResource ShadowButtonGrid}">
+                            <Image Source="Images/orange_button_plate.png"/>
+                            <TextBlock Text="この方法をやってみる" FontSize="50" Foreground="White" FontFamily="Yu Gothic"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="RetryButton" Background="Transparent" Margin="0,350,0,0" Height="150" HorizontalAlignment="Center" Style="{StaticResource ShadowButton}" Click="Button_Click">
+                        <Grid Height="150" Style="{StaticResource ShadowButtonGrid}" >
+                            <Image Source="Images/orange_button_plate.png"/>
+                            <TextBlock Text="もう一度やり直す" FontSize="50" Foreground="White" FontFamily="Yu Gothic" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Button>
+                </Grid>
+                <Button x:Name="ReturnToTitleButton" HorizontalAlignment="Left" Margin="9,935,0,0" VerticalAlignment="Top" Background="{x:Null}" Width="302" Height="144" Click="Button_Click" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}" d:IsHidden="True">
                     <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png"/>
                 </Button>
-                <Button x:Name="OkButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="110" Width="300" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
+                <Button x:Name="OkButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="110" Width="300" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True" Style="{StaticResource ShadowButton}">
                     <Image x:Name="OkButtonImage" Source="/Images/ok_button.png" Stretch="Fill"/>
                 </Button>
-                <Grid x:Name="HintCheckGrid" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-20" d:IsHidden="True">
-                    <Button x:Name="HintCheckButton" Background="Transparent" BorderBrush="{x:Null}" Height="350" Width="350" Style="{StaticResource InitialButton}" Click="Button_Click">
-                        <Grid>
-                            <Image Source="Images/blue_explosion_bubble.png" Style="{StaticResource ItemButtonImage}"/>
-                            <TextBlock x:Name="HintCheckText" FontSize="40" Background="{x:Null}" TextAlignment="Center" Foreground="White" FontFamily="Yu Gothic" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Grid x:Name="HintCheckGrid" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="70,0" Height="200" Width="200" d:IsHidden="True">
+                    <Button x:Name="HintCheckButton" Background="Transparent" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}" Click="Button_Click">
+                        <Grid Style="{StaticResource ShadowButtonGrid}">
+                            <Image Source="Images/blue_explosion_bubble.png" />
+                            <TextBlock x:Name="HintCheckText" FontSize="25" Background="{x:Null}" TextAlignment="Center" Foreground="White" FontFamily="Yu Gothic" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -861,116 +974,174 @@
                     </Button.Background>
                 </Button>
                 <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
-                <Border x:Name="InputCanvasBorder" Margin="0,240,0,0" Background="White" BorderBrush="Black" BorderThickness="5" CornerRadius="60" Width="1820" d:IsHidden="True">
-                    <Grid>
-                        <Grid x:Name="InputCanvasGrid1">
-                            <TextBlock x:Name="InputCanvasTitleText1" Text="赤丸くんは、ほかにどんなかいけつの方法をえらぶことができるでしょう？&#10;あなたの考えを書いてみましょう！" FontSize="35" LineHeight="60" Margin="60,30" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="Yu Gothic" FontWeight="Bold"/>
-                            <InkCanvas x:Name="InputCanvas1" Style="{StaticResource InputInkCanvas}" Margin="30,150,30,30"/>
+                <Border x:Name="InputCanvasBorder" VerticalAlignment="Bottom" Background="White" BorderBrush="Black" BorderThickness="5" CornerRadius="60" Width="1900" Height="930" RenderTransformOrigin="0.5,1" d:IsHidden="True">
+                    <Border.RenderTransform>
+                        <ScaleTransform ScaleX="0.90" ScaleY="0.90"/>
+                    </Border.RenderTransform>
+                    <Grid >
+                        <Grid x:Name="InputCanvasGrid1" d:IsHidden="True">
+                            <TextBlock x:Name="InputCanvasTitleText1" Text="赤丸くんは、ほかにどんなかいけつの方法をえらぶことができるでしょう？&#10;あなたの考えを書いてみましょう！" FontSize="35" LineHeight="60" Margin="60,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
+                            <Image x:Name="InputCanvasGrid1Image" Source="{Binding ElementName=InputItemImage, Path=Source}" Height="300" Width="200" Margin="0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                            <InkCanvas  x:Name="InputCanvas1" Style="{StaticResource InputInkCanvas}" Margin="30,150,30,30"/>
                         </Grid>
-                        <Grid x:Name="InputCanvasGrid2" d:IsHidden="True">
-                            <TextBlock x:Name="InputCanvasGrid2TitleText" Text="ステップ１で決めた目標のためのかいけつ方法を、たくさん考えましょう！" FontSize="40" Margin="40,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
-                            <TextBlock x:Name="InputCanvasGrid2GoalText" Text="目標：" FontSize="50" Margin="40,120" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
-                            <TextBlock x:Name="InputCanvasGrid2ExampleMethodText" Margin="100,220,30,30" FontFamily="MS pgothic" FontSize="50" LineHeight="85" VerticalAlignment="Top">
-                                <Run Text="・ イライラするから、ほかの友だちにいじわるする"/>
-                                <Run Text="&#10;・ その友だちには、ぜったいにちかづかない"/>
-                                <Run Text="&#10;・ 先生に言ってその友達をおこってもらう"/>
-                                <Run Text="&#10;・ 自分の悪かったことについて、きちんとあやまる"/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                            </TextBlock>
-                            <Grid x:Name="InputCanvas2GridGrid" Margin="100,545,30,30" Background="Transparent">
-                                <StackPanel d:IsHidden="True">
-                                    <InkCanvas Style="{StaticResource InputInkCanvas}" Margin="35,0,0,0" Height="85"/>
-                                    <InkCanvas Style="{StaticResource InputInkCanvas}" Margin="35,0,0,0" Height="85"/>
-                                    <InkCanvas Style="{StaticResource InputInkCanvas}" Margin="35,0,0,0" Height="85"/>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-                        <Grid x:Name="InputCanvasGrid3" d:IsHidden="True">
-                            <TextBlock x:Name="InputCanvasGrid3TitleText" Text="ステップ２：たくさんの方法を考える" FontSize="50" Margin="80,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic" Foreground="#FF0070C0">
+                        <Grid x:Name="InputCanvasGrid3" RenderTransformOrigin="0.5,0.5">
+                            <TextBlock Text="ステップ２：たくさんの方法を考える" FontSize="50" Margin="80,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic" Foreground="#FF0070C0">
                                 <TextBlock.Effect>
                                     <DropShadowEffect ShadowDepth="3" Opacity="0.3"/>
                                 </TextBlock.Effect>
                             </TextBlock>
-                            <TextBlock x:Name="nputCanvasGrid3ExamplethodText" Margin="100,170,30,30" FontFamily="MS PGothic" FontSize="50" LineHeight="85" VerticalAlignment="Top">
-                                <Run Text="・ "/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                            </TextBlock>
-                            <Grid  Margin="100,150,30,30" >
-                                <StackPanel >
-                                    <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0" Height="85"/>
-                                    <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0" Height="85"/>
-                                    <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0" Height="85"/>
-                                    <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0" Height="85"/>
-                                    <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0" Height="85"/>
-                                    <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0" Height="85"/>
-                                    <InkCanvas Style="{StaticResource OutputInkCanvas}" Margin="40,0,0,0" Height="85"/>
+                            <StackPanel Margin="60,130,30,10">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                    <InkCanvas x:Name="InputCanvas3_1" Style="{StaticResource InputInkCanvas}" Height="127.5" Width="1775">
+                                        <InkCanvas.DefaultDrawingAttributes>
+                                            <DrawingAttributes Height="5" Width="5" Color="Black"/>
+                                        </InkCanvas.DefaultDrawingAttributes>
+                                    </InkCanvas>
                                 </StackPanel>
-                            </Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                    <InkCanvas x:Name="InputCanvas3_2" Style="{StaticResource InputInkCanvas}" Height="127.5" Width="1775">
+                                        <InkCanvas.DefaultDrawingAttributes>
+                                            <DrawingAttributes Height="5" Width="5" Color="Black"/>
+                                        </InkCanvas.DefaultDrawingAttributes>
+                                    </InkCanvas>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                    <InkCanvas x:Name="InputCanvas3_3" Style="{StaticResource InputInkCanvas}" Height="127.5" Width="1775">
+                                        <InkCanvas.DefaultDrawingAttributes>
+                                            <DrawingAttributes Height="5" Width="5" Color="Black"/>
+                                        </InkCanvas.DefaultDrawingAttributes>
+                                    </InkCanvas>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                    <InkCanvas x:Name="InputCanvas3_4" Style="{StaticResource InputInkCanvas}" Height="127.5" Width="1775">
+                                        <InkCanvas.DefaultDrawingAttributes>
+                                            <DrawingAttributes Height="5" Width="5" Color="Black"/>
+                                        </InkCanvas.DefaultDrawingAttributes>
+                                    </InkCanvas>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                    <InkCanvas x:Name="InputCanvas3_5" Style="{StaticResource InputInkCanvas}" Height="127.5" Width="1775">
+                                        <InkCanvas.DefaultDrawingAttributes>
+                                            <DrawingAttributes Height="5" Width="5" Color="Black"/>
+                                        </InkCanvas.DefaultDrawingAttributes>
+                                    </InkCanvas>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                    <InkCanvas x:Name="InputCanvas3_6" Style="{StaticResource InputInkCanvas}" Height="127.5" Width="1775">
+                                        <InkCanvas.DefaultDrawingAttributes>
+                                            <DrawingAttributes Height="5" Width="5" Color="Black"/>
+                                        </InkCanvas.DefaultDrawingAttributes>
+                                    </InkCanvas>
+                                </StackPanel>
+                            </StackPanel>
                         </Grid>
                     </Grid>
                 </Border>
-                <Border x:Name="InputTextBoxBorder" Background="White" BorderBrush="Black" BorderThickness="3.69" CornerRadius="44"  Width="1343" Height="620" VerticalAlignment="Top" d:IsHidden="True">
+                <Grid x:Name="InputCanvasGrid2" Width="1200" Height="360" Background="White" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                    <Grid.RenderTransform>
+                        <ScaleTransform ScaleX="1.6" ScaleY="1.6"/>
+                    </Grid.RenderTransform>
+                    <Grid>
+                        <StackPanel >
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                <InkCanvas x:Name="InputCanvas2_1" Style="{StaticResource InputInkCanvas}" Margin="35,0,0,0" Height="120" Width="1150">
+                                    <InkCanvas.DefaultDrawingAttributes>
+                                        <DrawingAttributes Height="5" Width="5" Color="Black"/>
+                                    </InkCanvas.DefaultDrawingAttributes>
+                                </InkCanvas>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                <InkCanvas x:Name="InputCanvas2_2" Style="{StaticResource InputInkCanvas}" Margin="35,0,0,0" Height="120" Width="1150">
+                                    <InkCanvas.DefaultDrawingAttributes>
+                                        <DrawingAttributes Height="5" Width="5" Color="Black"/>
+                                    </InkCanvas.DefaultDrawingAttributes>
+                                </InkCanvas>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                <InkCanvas x:Name="InputCanvas2_3" Style="{StaticResource InputInkCanvas}" Margin="35,0,0,0" Height="120" Width="1150">
+                                    <InkCanvas.DefaultDrawingAttributes>
+                                        <DrawingAttributes Height="5" Width="5" Color="Black"/>
+                                    </InkCanvas.DefaultDrawingAttributes>
+                                </InkCanvas>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Border x:Name="InputTextBoxBorder" Background="White" BorderBrush="Black" BorderThickness="5" CornerRadius="60" Width="1900" Height="930" RenderTransformOrigin="0.4,0" VerticalAlignment="Top" d:IsHidden="True">
+                    <Border.RenderTransform>
+                        <ScaleTransform ScaleX="0.65" ScaleY="0.65"/>
+                    </Border.RenderTransform>
                     <Grid x:Name="InputTextBoxGrid">
                         <Grid x:Name="InputTextBoxGrid1">
-                            <TextBlock x:Name="InputTextTitleText1" Text="赤丸くんは、ほかにどんなかいけつの方法をえらぶことができるでしょう？&#10;あなたの意見を書いてみよう！" FontSize="25.8" Margin="44,22" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="Yu Gothic" FontWeight="Bold"/>
-                            <TextBox  x:Name="InputTextBox1" Style="{StaticResource InputTextBox}" Margin="22.1,110.7,22.1,22.1" FontSize="67" MaxLength="114" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
+                            <TextBlock x:Name="InputTextTitleText1" Text="赤丸くんは、ほかにどんなかいけつの方法をえらぶことができるでしょう？&#10;あなたの考えを書いてみましょう！" FontSize="35" LineHeight="60" Margin="60,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
+                            <Image x:Name="InputTextBoxGrid1Image" Source="{Binding ElementName=InputItemImage, Path=Source}" Height="300" Width="200" Margin="0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                            <TextBox  x:Name="InputTextBox1" Style="{StaticResource InputTextBox}" Margin="30,150,30,30" FontSize="92" MaxLength="114" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
                         </Grid>
-                        <Grid x:Name="InputTextBoxGrid2" d:IsHidden="True">
-                            <TextBlock x:Name="InputTextBoxGrid2TitleText" Text="ステップ１で決めた目標のためのかいけつ方法を、たくさん考えましょう！" FontSize="29.5" Margin="29.5,22.1" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
-                            <TextBlock x:Name="InputTextBoxGrid2GoalText" Text="目標：" FontSize="37" Margin="29.5,88.5" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
-                            <TextBlock x:Name="InputTextBoxGrid2ExampleMethodText" Margin="73.8,162.36,22.1,22.1" FontFamily="MS pgothic" FontSize="36.9" LineHeight="62.7" VerticalAlignment="Top">
-                                <Run Text="・ イライラするから、ほかの友だちにいじわるする"/>
-                                <Run Text="&#10;・ その友だちには、ぜったいにちかづかない"/>
-                                <Run Text="&#10;・ 先生に言ってその友達をおこってもらう"/>
-                                <Run Text="&#10;・ 自分の悪かったことについて、きちんとあやまる"/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                            </TextBlock>
-                            <Grid x:Name="InputTextBox2GridGrid" Margin="100,545,30,30" Background="Transparent">
-                                <StackPanel d:IsHidden="True">
-                                    <TextBox Style="{StaticResource InputTextBox}" Margin="25.8,0,0,0" Height="62.7"/>
-                                    <TextBox Style="{StaticResource InputTextBox}" Margin="25.8,0,0,0" Height="62.7"/>
-                                    <TextBox Style="{StaticResource InputTextBox}" Margin="25.8,0,0,0" Height="62.7"/>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-                        <Grid x:Name="InputTextBoxGrid3" d:IsHidden="True">
-                            <TextBlock x:Name="InputTextBoxGrid3TitleText" Text="ステップ２：たくさんの方法を考える" FontSize="44.2" Margin="59,22.1" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic" Foreground="#FF0070C0">
+                        <Grid x:Name="InputTextBoxGrid3" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                            <TextBlock Text="ステップ２：たくさんの方法を考える" FontSize="50" Margin="80,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic" Foreground="#FF0070C0">
                                 <TextBlock.Effect>
                                     <DropShadowEffect ShadowDepth="3" Opacity="0.3"/>
                                 </TextBlock.Effect>
                             </TextBlock>
-                            <TextBlock x:Name="InputTextBoxGrid3ExamplethodText" Margin="73.8,125,22.1,22.1" FontFamily="MS pgothic" FontSize="36.9" LineHeight="62.7" VerticalAlignment="Top">
-                                <Run Text="・ "/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                                <Run Text="&#10;・ "/>
-                            </TextBlock>
-                            <Grid  Margin="100,150,30,30" d:IsHidden="True">
-                                <StackPanel>
-                                    <TextBox Style="{StaticResource InputTextBox}" Margin="29.5,0,0,0" FontSize="36.9" Height="62.7"/>
-                                    <TextBox Style="{StaticResource InputTextBox}" Margin="29.5,0,0,0" FontSize="36.9" Height="62.7"/>
-                                    <TextBox Style="{StaticResource InputTextBox}" Margin="29.5,0,0,0" FontSize="36.9" Height="62.7"/>
-                                    <TextBox Style="{StaticResource InputTextBox}" Margin="29.5,0,0,0" FontSize="36.9" Height="62.7"/>
-                                    <TextBox Style="{StaticResource InputTextBox}" Margin="29.5,0,0,0" FontSize="36.9" Height="62.7"/>
-                                    <TextBox Style="{StaticResource InputTextBox}" Margin="29.5,0,0,0" FontSize="36.9" Height="62.7"/>
-                                    <TextBox Style="{StaticResource InputTextBox}" Margin="29.5,0,0,0" FontSize="36.9" Height="62.7"/>
+                            <StackPanel Margin="60,130,30,10">
+                                <StackPanel Orientation="Horizontal" Height="127.5">
+                                    <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="InputTextBox3_1" Style="{StaticResource InputTextBox}" VerticalAlignment="Center" FontSize="50" Width="1775" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
                                 </StackPanel>
-                            </Grid>
+                                <StackPanel Orientation="Horizontal" Height="127.5">
+                                    <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="InputTextBox3_2" Style="{StaticResource InputTextBox}" VerticalAlignment="Center" FontSize="50" Width="1775" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Height="127.5">
+                                    <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="InputTextBox3_3" Style="{StaticResource InputTextBox}" VerticalAlignment="Center" FontSize="50" Width="1775" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Height="127.5">
+                                    <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="InputTextBox3_4" Style="{StaticResource InputTextBox}" VerticalAlignment="Center" FontSize="50" Width="1775" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Height="127.5">
+                                    <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="InputTextBox3_5" Style="{StaticResource InputTextBox}" VerticalAlignment="Center" FontSize="50" Width="1775" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Height="127.5">
+                                    <TextBlock Text="・" FontFamily="MS pgothic" FontSize="50" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="InputTextBox3_6" Style="{StaticResource InputTextBox}" VerticalAlignment="Center" FontSize="50" Width="1775" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
+                                </StackPanel>
+                            </StackPanel>
                         </Grid>
                     </Grid>
                 </Border>
+                <Grid x:Name="InputTextBoxGrid2" Width="1050" Height="360" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0" d:IsHidden="True">
+                    <Grid.RenderTransform>
+                        <ScaleTransform ScaleX="1.6" ScaleY="1.6"/>
+                    </Grid.RenderTransform>
+                    <Grid>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Height="120">
+                                <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                <TextBox x:Name="InputTextBox2_1" Style="{StaticResource InputTextBox}" Width="1050" FontSize="50" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Height="120">
+                                <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                <TextBox x:Name="InputTextBox2_2" Style="{StaticResource InputTextBox}" Width="1050" FontSize="50" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Height="120">
+                                <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                <TextBox x:Name="InputTextBox2_3" Style="{StaticResource InputTextBox}" Width="1050" FontSize="50" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
                 <Grid x:Name="CanvasEditGrid" Height="240" Margin="0,0,240,0" VerticalAlignment="Top" d:IsHidden="True">
                     <ListBox x:Name="CanvasEditListBox" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListBox.ItemsPanel>

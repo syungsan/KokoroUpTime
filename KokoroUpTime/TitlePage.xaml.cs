@@ -1,23 +1,15 @@
-﻿using System;
+﻿using CsvReadWrite;
+using FileIOUtils;
+using SQLite;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using System.Reflection;
-using CsvReadWrite;
-using System.IO;
-using SQLite;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using FileIOUtils;
 
 namespace KokoroUpTime
 {
@@ -920,21 +912,21 @@ namespace KokoroUpTime
                     }
                     break;
 
-                    //case "第12回":
+                case "第12回":
 
-                    //    if (this.initConfig.userName == null)
-                    //    {
-                    //        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
-                    //    }
-                    //    else
-                    //    {
-                    //        Chapter12 chapter12 = new Chapter12();
+                    if (this.initConfig.userName == null)
+                    {
+                        MessageBox.Show("まずは名前の入力から始めてください。", "情報");
+                    }
+                    else
+                    {
+                        Chapter12 chapter12 = new Chapter12();
 
-                    //        chapter12.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                        chapter12.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                    //        this.NavigationService.Navigate(chapter12);
-                    //    }
-                    //    break;
+                        this.NavigationService.Navigate(chapter12);
+                    }
+                    break;
 
             }
         }

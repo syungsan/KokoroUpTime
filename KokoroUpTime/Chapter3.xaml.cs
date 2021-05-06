@@ -1,33 +1,24 @@
-﻿using System;
+﻿using CsvReadWrite;
+using Expansion;
+using FileIOUtils;
+using SQLite;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Media;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using CsvReadWrite;
-using System.Diagnostics;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using System.Linq;
-using System.Security.AccessControl;
 using WMPLib;
-using System.Windows.Ink;
-using System.Media;
-using SQLite;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using XamlAnimatedGif;
-using FileIOUtils;
-using Expansion;
-using System.IO;
-using System.Threading;
 
 namespace KokoroUpTime
 {
@@ -1795,7 +1786,7 @@ namespace KokoroUpTime
                 foreach (var child in sb.Children)
                     Storyboard.SetTargetName(child, objectName);
             }
-            catch (ResourceReferenceKeyNotFoundException ex)
+            catch (ResourceReferenceKeyNotFoundException)
             {
                 string objectsStroryBoard = $"{storyBoard}_{objectsName}";
                 sb = this.FindResource(objectsStroryBoard) as Storyboard;
