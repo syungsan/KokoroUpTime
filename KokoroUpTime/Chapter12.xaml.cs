@@ -58,10 +58,6 @@ namespace KokoroUpTime
 
         Dictionary<string, SelectedItemMethodTextData> ITEM_METHOD_TEXT;
 
-
-       
-
-
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
         private List<List<string>> scenarios = null;
@@ -2112,14 +2108,15 @@ namespace KokoroUpTime
                             this.InputCanvas.Strokes = this.ITEM_METHOD_STROKE[this.InputDictionaryKey].ItemMethodStroke;
                         }
 
-                        if (this.ITEM_METHOD_STROKE[this.InputDictionaryKey].SelectedItemImageSource != ""&& this.ITEM_METHOD_STROKE[this.InputDictionaryKey].ItemMethodStroke.Count>0)
+                        this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                        foreach (SelectedItemMethodStrokeData data in this.ITEM_METHOD_STROKE.Values)
                         {
-                            this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
+                            if (data.ItemMethodStroke.Count >0 && data.SelectedItemImageSource !="")
+                            {
+                                this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
+                            }
                         }
-                        else
-                        {
-                            this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
-                        }
+                        
                     }
                     else
                     {
@@ -2128,13 +2125,13 @@ namespace KokoroUpTime
                         ((Grid)(this.InputItemMethodItemsControl.GetChildren<Button>().ToList()[0].Content)).Children.OfType<TextBlock>().ToList()[0].Text = this.ITEM_METHOD_TEXT[this.InputDictionaryKey].ItemMethodText;
                         this.CloseOSK();
 
-                        if (this.ITEM_METHOD_TEXT[this.InputDictionaryKey].SelectedItemImageSource != "" && this.ITEM_METHOD_TEXT[this.InputDictionaryKey].ItemMethodText !="")
+                        this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                        foreach (SelectedItemMethodTextData data in this.ITEM_METHOD_TEXT.Values)
                         {
-                            this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
-                        }
-                        else
-                        {
-                            this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                            if (data.ItemMethodText !="" && data.SelectedItemImageSource.ToString() != "")
+                            {
+                                this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
+                            }
                         }
                     }
                     this.scenarioCount += 1;
@@ -2667,14 +2664,14 @@ namespace KokoroUpTime
                 datas.Add(this.ITEM_METHOD_STROKE[this.InputDictionaryKey]);
 
                 this.InputItemMethodItemsControl.ItemsSource = datas;
-               
-                if(this.ITEM_METHOD_STROKE[this.InputDictionaryKey].ItemMethodStroke.Count > 0)
+
+                this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                foreach (SelectedItemMethodStrokeData data in this.ITEM_METHOD_STROKE.Values)
                 {
-                    this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                    if(data.ItemMethodStroke.Count > 0)
+                    {
+                        this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
+                    }
                 }
             }
             else
@@ -2693,14 +2690,13 @@ namespace KokoroUpTime
 
                 this.InputItemMethodItemsControl.ItemsSource = datas;
 
-                
-                if (this.ITEM_METHOD_TEXT[this.InputDictionaryKey].ItemMethodText != "")
+                this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                foreach (SelectedItemMethodTextData data in this.ITEM_METHOD_TEXT.Values)
                 {
-                    this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                    if (data.ItemMethodText !="")
+                    {
+                        this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
+                    }
                 }
             }
         }
