@@ -2799,11 +2799,12 @@ namespace KokoroUpTime
 
         private void OperationArea_MouseLeave(object sender, MouseEventArgs e)
         {
-
             if (this._isMouseDown && this.dragObject!=null)
             {
-                double offsetX = _initialPoint.X - _currentPoint.X;
-                double offsetY = _initialPoint.Y - _currentPoint.Y;
+                Point _leavePoint = this.dragObject.TranslatePoint(new Point(0.0d, 0.0d), this.MainGrid);
+
+                double offsetX = _initialPoint.X - _leavePoint.X;
+                double offsetY = _initialPoint.Y - _leavePoint.Y;
 
                 Matrix matrix = (this.dragObject.RenderTransform as MatrixTransform).Matrix;
                 matrix.Translate(offsetX, offsetY);
@@ -2811,17 +2812,34 @@ namespace KokoroUpTime
 
                 this.dragObject = null;
             }
-            
+
+            this.isMouseDown = false;
             e.Handled = true;
+        }
+
+        private void OperationArea_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (this.isMouseDown)
+            {
+                Point _dropPoint = this.dragObject.TranslatePoint(new Point(0.0d, 0.0d), this.MainGrid);
+                Point _questionPanelPoint = this.ItemQuestionStackPanel.TranslatePoint(new Point(0.0d, 0.0d), this.MainGrid);
+
+                double offsetX = _initialPoint.X - _dropPoint.X;
+                double offsetY = _initialPoint.Y - _dropPoint.Y;
+
+                Matrix matrix = (this.dragObject.RenderTransform as MatrixTransform).Matrix;
+                matrix.Translate(offsetX, offsetY);
+                this.dragObject.RenderTransform = new MatrixTransform(matrix);
+            }
+            this.isMouseDown = false;
         }
 
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
+            this.dragObject = sender as FrameworkElement;
+
             //// マウス押下中フラグを上げる
             _isMouseDown = true;
-
-
-            this.dragObject = sender as FrameworkElement;
 
             this._startPoint = e.GetPosition(this.MainGrid);
             this._initialPoint = this.dragObject.TranslatePoint(new Point(0.0d, 0.0d), this.MainGrid);
@@ -2833,8 +2851,7 @@ namespace KokoroUpTime
         private void Button_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             // マウス押下中フラグを落とす
-
-            if (this._isMouseDown && this.dragObject != null)
+            if (this._isMouseDown && this.dragObject !=null)
             {
                 //
                 Point _dropPoint = this.dragObject.TranslatePoint(new Point(0.0d, 0.0d), this.MainGrid);
@@ -3076,5 +3093,7 @@ namespace KokoroUpTime
 
             return iscorrect;
         }
+
+        
     }
 }

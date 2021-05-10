@@ -230,20 +230,24 @@
                 </Grid>
             </Grid>
             <Grid x:Name="ChallengeGrid" d:IsHidden="True">
-                <Image x:Name="ChallengeTitleImage" HorizontalAlignment="Left" Height="88" Margin="306,13,0,0" VerticalAlignment="Top" Width="788" Source="/Images/challenge_time.png" d:IsHidden="True"/>
-                <Grid x:Name="ChallengeGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="263,120,0,0" VerticalAlignment="Top" Width="400" d:IsHidden="True">
-                    <Image x:Name="ChallengeGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <ListBox x:Name="ChallengeGoodFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectGoodFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Multiple" d:IsHidden="True"/>
+                <Image x:Name="ChallengeTitleImage" HorizontalAlignment="Left" Height="88" Margin="306,13,0,0" VerticalAlignment="Top" Width="788" Source="/Images/challenge_time.png"/>
+                <Grid x:Name="ChallengeGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="263,120,0,0" VerticalAlignment="Top" Width="400">
+                    <Image x:Name="ChallengeGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill"/>
+                    <ListBox x:Name="ChallengeGoodFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectGoodFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Multiple" SelectionChanged="FeelingListBox_SelectionChanged"/>
+                    <!--Selected="ChallengeFeelingListBox_Selected" Unselected="ChallengeFeelingListBox_Unselected"--> 
+
+
                 </Grid>
-                <Grid x:Name="ChallengeBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="734,120,0,0" d:IsHidden="True">
-                    <Image x:Name="ChallengeBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <ListBox x:Name="ChallengeBadFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectBadFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Multiple" d:IsHidden="True"/>
+                <Grid x:Name="ChallengeBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="734,120,0,0">
+                    <Image x:Name="ChallengeBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill"/>
+                    <ListBox x:Name="ChallengeBadFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectBadFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Multiple" SelectionChanged="FeelingListBox_SelectionChanged"/>
+                    <!--Selected="ChallengeFeelingListBox_Selected" Unselected="ChallengeFeelingListBox_Unselected"--> 
                 </Grid>
-                <Grid x:Name="ChallengeMessageBoxGrid" Height="250" Width="514" Margin="1278,136,128,694" d:IsHidden="True">
+                <Grid x:Name="ChallengeMessageBoxGrid" Height="250" Width="514" Margin="1278,136,128,694">
                     <Image x:Name="ChallengeMessageBoxImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/message_box.png" d:IsHidden="True"/>
                     <TextBlock x:Name="ChallengeMessageBoxTextBlock" FontSize="48" Margin="36,25,36,25" d:IsHidden="True"><Run Text="自分がなったことのある"/><LineBreak /><Run Text="　　「きもち」に 〇 を"/><LineBreak /><Run Text="　　　つけてみよう！"/></TextBlock>
                 </Grid>
-                <Image x:Name="ChallengeItemImage" HorizontalAlignment="Left" Height="489" Margin="1098,172,0,0" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png" d:IsHidden="True"/>
+                <Image x:Name="ChallengeItemImage" HorizontalAlignment="Left" Height="489" Margin="1098,172,0,0" VerticalAlignment="Top" Width="346" Source="/Images/item01_solo.png"/>
             </Grid>
             <Grid x:Name="SelectFeelingGrid">
                 <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400">
@@ -282,7 +286,7 @@
                 </Grid>
                 <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="727,0,0,0" VerticalAlignment="Center" Width="273" Source="/Images/item01_solo.png" RenderTransformOrigin="0.659,0.453"/>
             </Grid>
-            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920">
+            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
                 <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684">
                     <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png"/>
                     <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center"/>
@@ -294,7 +298,7 @@
                     <TextBlock x:Name="ViewKindOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="GaugeGrid">
+            <Grid x:Name="GaugeGrid" d:IsHidden="True">
                 <Grid x:Name="SelectHeartGrid" HorizontalAlignment="Center" Margin="400,400" d:IsHidden="True">
                     <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="5,0,0,0"/>
                     <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.92" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,63,10,20">

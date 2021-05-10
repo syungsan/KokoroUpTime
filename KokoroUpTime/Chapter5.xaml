@@ -545,7 +545,7 @@
                     <Image x:Name="RelaxShadeImage" Height="561" Width="745" Margin="669,38,506,481" Source="/Images/relax_shade.png" d:IsHidden="True"/>
                 </Grid>
               
-                <Grid x:Name="GroupActivityGrid" d:IsHidden="True">
+                <Grid x:Name="GroupActivityGrid">
                     <Grid x:Name="Let_sUseHotWordGrid" d:IsHidden="True">
                         <Image x:Name="Let_sUseHotWordTitleImage" HorizontalAlignment="Center" Height="98" Margin="0,50,0,0" VerticalAlignment="Top" Width="1106" Source="/Images/let's_use_hot_word_title.png"/>
                         <Grid x:Name="SituationsGrid" Margin="175,205,330,95">
@@ -669,11 +669,16 @@
                         <TextBlock x:Name="RolePlayMessageTextBlock" TextWrapping="Wrap" FontSize="120" Foreground="White" TextAlignment="Center" Height="178" Margin="0,0,6,0" d:LayoutOverrides="VerticalAlignment, TopPosition, BottomPosition"><Run Language="ja-jp" Text="声に出してれんしゅうしてみよう！"/></TextBlock>
                     </Border>
                     <Grid x:Name="RelaxMethodGrid">
-                        <TextBlock x:Name="RelaxMethodTextBlock" Text="TextBlock" TextWrapping="Wrap" Height="131" VerticalAlignment="Top" Margin="75,77,75,0" Background="Yellow" FontSize="72" FontWeight="Normal" TextAlignment="Center">
-                            <TextBlock.TextDecorations>
-                                <TextDecoration/>
-                            </TextBlock.TextDecorations>
-                        </TextBlock>
+                        <Border Background="Yellow" VerticalAlignment="Top" Margin="75,77,75,0" Height="131">
+                            <Viewbox  StretchDirection="DownOnly">
+                                <TextBlock x:Name="RelaxMethodTextBlock" Text="TextBlock" TextWrapping="Wrap" Background="Yellow" FontSize="72" FontWeight="Normal" TextAlignment="Center">
+                                    <TextBlock.TextDecorations>
+                                        <TextDecoration/>
+                                    </TextBlock.TextDecorations>
+                                </TextBlock>
+                            </Viewbox>
+                        </Border>
+                            
                         <Button x:Name="RelaxMethodInputButton" Height="670" Width="1700" Background="{x:Null}" BorderBrush="{x:Null}" Margin="111,259,111,150" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"  Click="Button_Click">
                             <Button.Style>
                                 <Style TargetType="{x:Type  Button}">

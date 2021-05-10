@@ -290,7 +290,10 @@
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="LightSkyBlue"/>
             </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
+            <!--<Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="LightBlue"/>
+            </Trigger>-->
+            <Trigger Property="AreAnyTouchesOver" Value="True">
                 <Setter Property="Background" Value="LightBlue"/>
             </Trigger>
         </Style.Triggers>
@@ -333,12 +336,12 @@
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="LightCoral"/>
             </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="LightPink"/>
-            </Trigger>
-            <!--<Trigger Property="AreAnyTouchesOver" Value="True">
+            <!--<Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="LightPink"/>
             </Trigger>-->
+            <Trigger Property="AreAnyTouchesOver" Value="True">
+                <Setter Property="Background" Value="LightPink"/>
+            </Trigger>
         </Style.Triggers>
     </Style>
     <!--チャレンジタイム用のListBox-->
@@ -374,7 +377,10 @@
             <Trigger Property="IsSelected" Value="False">
                 <Setter Property="ContentTemplate" Value="{StaticResource UnSelectedTemplate}"/>
             </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
+            <!--<Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFBFE6FD"/>
+            </Trigger>-->
+            <Trigger Property="AreAnyTouchesOver" Value="True">
                 <Setter Property="Background" Value="#FFBFE6FD"/>
             </Trigger>
         </Style.Triggers>

@@ -44,7 +44,7 @@
                 <Button x:Name="Item10MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="968,510,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
                     <Image x:Name="Item10MainImage" Source="/Images/item10_book.png"/>
                 </Button>
-                <Button x:Name="Item11MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="1283,510,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Button x:Name="Item11MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="1293,510,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
                     <Image x:Name="Item11MainImage" Source="/Images/item11_book.png"/>
                 </Button>
             </Grid>
@@ -60,7 +60,6 @@
                 <Image x:Name="Item09NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,510,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                 <Image x:Name="Item10NoneImage" HorizontalAlignment="Left" Height="460" Margin="968,510,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                 <Image x:Name="Item11NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,510,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
-                <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,510,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
             </Grid>
             <Grid x:Name="ItemDetailGrid">
                 <Image x:Name="Item01DetailImage" HorizontalAlignment="Center" Height="587" VerticalAlignment="Center" Width="1304" Source="/Images/item01_detail.png"/>

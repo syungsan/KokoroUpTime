@@ -2331,9 +2331,14 @@ namespace KokoroUpTime
                             {
                                 if(this.dataOption.InputMethod == 0)
                                 {
+
+                                    this.CountNumberOfCorrect(null, (StrokeCollection)this._methodstrokedata.First().MethodStroke);
+
                                     this._evaluatedmethodstrokedata.Clear();
                                     foreach (StrokeCollection strokes in this.AOSUKE_METHOD_STROKE_VALUES.Keys)
                                     {
+                                        this.DecideBestMethod(null, strokes);
+
                                         if(this.AOSUKE_METHOD_STROKE_VALUES[strokes][5] == "BestMethod")
                                         {
                                             foreach(System.Windows.Ink.Stroke stroke in strokes)
@@ -2355,9 +2360,13 @@ namespace KokoroUpTime
                                 }
                                 else
                                 {
+                                    this.CountNumberOfCorrect((string)this._methodtextdata.First().MethodText, null);
+
                                     this._evaluatedmethodtextdata.Clear();
                                     foreach (string text in this.AOSUKE_METHOD_TEXT_VALUES.Keys)
                                     {
+                                        this.DecideBestMethod(text, null);
+
                                         if (this.AOSUKE_METHOD_TEXT_VALUES[text][5] == "BestMethod")
                                         {
                                             this._evaluatedmethodtextdata.Add(new EvaluatedMethodTextData(text,Brushes.Red));
@@ -3257,7 +3266,6 @@ namespace KokoroUpTime
         private  void CountNumberOfCorrect(string methodText,StrokeCollection methodStrokes)
         {
             int countnumber1 = 0;
-            bool isMaximize = true;
             if (this.dataOption.InputMethod == 0)
             {
                 foreach(string text1 in this.AOSUKE_METHOD_STROKE_VALUES[methodStrokes])
@@ -3269,12 +3277,35 @@ namespace KokoroUpTime
                 }
                 this.AOSUKE_METHOD_STROKE_VALUES[methodStrokes][4] = countnumber1.ToString();
 
+                
+
+            }
+            else
+            {
+                foreach (string text1 in this.AOSUKE_METHOD_TEXT_VALUES[methodText])
+                {
+                    if (text1 == "〇")
+                    {
+                        countnumber1++;
+                    }
+                }
+                this.AOSUKE_METHOD_TEXT_VALUES[methodText][4] = countnumber1.ToString();
+
+                
+            }
+        }
+
+        private void DecideBestMethod(string methodText, StrokeCollection methodStrokes)
+        {
+            bool isMaximize = true;
+            if(this.dataOption.InputMethod == 0)
+            {
                 foreach (string[] text2 in this.AOSUKE_METHOD_STROKE_VALUES.Values)
                 {
                     if (text2[4] != "")
                     {
-                        int countnumber2 = int.Parse(text2[4]);
-                        if (countnumber2 > countnumber1)
+                        int numberOfCorrect = int.Parse(text2[4]);
+                        if (numberOfCorrect > int.Parse(this.AOSUKE_METHOD_STROKE_VALUES[methodStrokes][4]))
                         {
                             isMaximize = false;
                             break;
@@ -3289,25 +3320,15 @@ namespace KokoroUpTime
                 {
                     this.AOSUKE_METHOD_STROKE_VALUES[methodStrokes][5] = "NotBestMethod";
                 }
-
             }
             else
             {
-                foreach (string text1 in this.AOSUKE_METHOD_TEXT_VALUES[methodText])
-                {
-                    if (text1 == "〇")
-                    {
-                        countnumber1++;
-                    }
-                }
-                this.AOSUKE_METHOD_TEXT_VALUES[methodText][4] = countnumber1.ToString();
-
                 foreach (string[] text2 in this.AOSUKE_METHOD_TEXT_VALUES.Values)
                 {
                     if (text2[4] != "")
                     {
-                        int countnumber2 = int.Parse(text2[4]);
-                        if (countnumber2 > countnumber1)
+                        int numberOfCorrect = int.Parse(text2[4]);
+                        if (numberOfCorrect > int.Parse(this.AOSUKE_METHOD_TEXT_VALUES[methodText][4]))
                         {
                             isMaximize = false;
                             break;
@@ -3323,14 +3344,13 @@ namespace KokoroUpTime
                     this.AOSUKE_METHOD_TEXT_VALUES[methodText][5] = "NotBestMethod";
                 }
             }
+            
         }
 
         private void IsVisibileMethodButton()
         {
             if (this.dataOption.InputMethod == 0)
             {
-                
-
                 if ((StrokeCollection)this._methodstrokedata.First().MethodStroke == this.AOSUKE_METHOD_STROKE_VALUES.Reverse().FirstOrDefault().Key && this.AOSUKE_METHOD_STROKE_VALUES.Count > 1)
                 {
                     this.NextMethodButton.Visibility = Visibility.Hidden;
@@ -3384,9 +3404,10 @@ namespace KokoroUpTime
             if(this.dataOption.InputMethod == 0)
             {
                 this.CountNumberOfCorrect(null, (StrokeCollection)this._methodstrokedata.First().MethodStroke);
-                
-                if(Direction == "next")
+
+                if (Direction == "next")
                 {
+
                     foreach (StrokeCollection stroke in this.AOSUKE_METHOD_STROKE_VALUES.Keys)
                     {
                         if (checkflag)
@@ -3406,6 +3427,7 @@ namespace KokoroUpTime
                 }
                 else if (Direction == "prev")
                 {
+
                     foreach (StrokeCollection stroke in this.AOSUKE_METHOD_STROKE_VALUES.Keys.Reverse())
                     {
                         if (checkflag)
@@ -3426,7 +3448,7 @@ namespace KokoroUpTime
                 
             }
             else
-            {
+            { 
                 this.CountNumberOfCorrect((string)this._methodtextdata.First().MethodText, null);
 
                 if (Direction =="next")
@@ -3556,11 +3578,15 @@ namespace KokoroUpTime
             if (this.dataOption.InputMethod == 0)
             {
                 this.AOSUKE_METHOD_STROKE_VALUES.Clear();
-                foreach (StrokeCollection stroke in this.Step2AosukeMethodInputStrokes)
+                foreach (StrokeCollection strokes in this.Step2AosukeMethodInputStrokes)
                 {
-                    if (stroke.Count > 0 && !this.AOSUKE_METHOD_STROKE_VALUES.ContainsKey(stroke))
+                    foreach (System.Windows.Ink.Stroke stroke in strokes)
                     {
-                        this.AOSUKE_METHOD_STROKE_VALUES.Add(stroke, new string[] { "", "", "", "", "", "NotBestMethod" });
+                        stroke.DrawingAttributes.Color = Colors.Black;
+                    }
+                    if (strokes.Count > 0 && !this.AOSUKE_METHOD_STROKE_VALUES.ContainsKey(strokes))
+                    {
+                        this.AOSUKE_METHOD_STROKE_VALUES.Add(strokes, new string[] { "", "", "", "", "", "NotBestMethod" });
                     }
                 }
 
@@ -3576,6 +3602,7 @@ namespace KokoroUpTime
                 this.AOSUKE_METHOD_TEXT_VALUES.Clear();
                 foreach (string text in this.Step2AosukeMethodInputText)
                 {
+                    
                     if (text != "" && !this.AOSUKE_METHOD_TEXT_VALUES.ContainsKey(text))
                     {
                         this.AOSUKE_METHOD_TEXT_VALUES.Add(text, new string[] { "", "", "", "", "", "NotBestMethod" });

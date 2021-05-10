@@ -737,6 +737,55 @@ namespace KokoroUpTime
                                     }
                                 };
                             }
+                            else if (clickMethod == "back_only")
+                            {
+                                waitTimer.Start();
+
+                                waitTimer.Tick += (s, args) =>
+                                {
+                                    waitTimer.Stop();
+                                    waitTimer = null;
+
+                                    if (clickButton == "msg")
+                                    {
+                                        this.BackMessageButton.Visibility = Visibility.Visible;
+                                    }
+                                    else if (clickButton == "page")
+                                    {
+                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                    }
+                                };
+                            }
+                            else if (clickMethod == "with_next_msg")
+                            {
+                                waitTimer.Start();
+
+                                waitTimer.Tick += (s, args) =>
+                                {
+                                    waitTimer.Stop();
+                                    waitTimer = null;
+                                    if (clickButton == "page")
+                                    {
+                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                        this.NextMessageButton.Visibility = Visibility.Visible;
+                                    }
+                                };
+                            }
+                            else if (clickMethod == "with_back_msg")
+                            {
+                                waitTimer.Start();
+
+                                waitTimer.Tick += (s, args) =>
+                                {
+                                    waitTimer.Stop();
+                                    waitTimer = null;
+                                    if (clickButton == "page")
+                                    {
+                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                        this.BackMessageButton.Visibility = Visibility.Visible;
+                                    }
+                                };
+                            }
                             else
                             {
                                 waitTimer.Start();
@@ -770,6 +819,34 @@ namespace KokoroUpTime
                                 else if (clickButton == "page")
                                 {
                                     this.NextPageButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                            else if (clickMethod == "back_only")
+                            {
+                                if (clickButton == "msg")
+                                {
+                                    this.BackMessageButton.Visibility = Visibility.Visible;
+                                }
+                                else if (clickButton == "page")
+                                {
+                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                            else if (clickMethod == "with_next_msg")
+                            {
+                                   
+                                if (clickButton == "page")
+                                {
+                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                    this.NextMessageButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                            else if (clickMethod == "with_back_msg")
+                            {
+                                if (clickButton == "page")
+                                {
+                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                    this.BackMessageButton.Visibility = Visibility.Visible;
                                 }
                             }
                             else
@@ -1748,11 +1825,17 @@ namespace KokoroUpTime
                     this.BackMessageButton.Visibility = Visibility.Hidden;
                     this.NextMessageButton.Visibility = Visibility.Hidden;
 
+                    this.BackPageButton.Visibility = Visibility.Hidden;
+                    this.NextPageButton.Visibility = Visibility.Hidden;
+
                     BackScenario();
                 }
 
                 if (button.Name == "BackPageButton")
                 {
+                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                    this.NextMessageButton.Visibility = Visibility.Hidden;
+
                     this.BackPageButton.Visibility = Visibility.Hidden;
                     this.NextPageButton.Visibility = Visibility.Hidden;
 
@@ -1783,8 +1866,13 @@ namespace KokoroUpTime
 
                 if (button.Name == "NextPageButton")
                 {
+                    this.BackMessageButton.Visibility = Visibility.Hidden;
+                    this.NextMessageButton.Visibility = Visibility.Hidden;
+
                     this.BackPageButton.Visibility = Visibility.Hidden;
                     this.NextPageButton.Visibility = Visibility.Hidden;
+
+
 
                     if (this.scene == "教室のルール")
                     {
@@ -1886,6 +1974,9 @@ namespace KokoroUpTime
                 {
                     this.BackMessageButton.Visibility = Visibility.Hidden;
                     this.NextMessageButton.Visibility = Visibility.Hidden;
+
+                    this.BackPageButton.Visibility = Visibility.Hidden;
+                    this.NextPageButton.Visibility = Visibility.Hidden;
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -2384,7 +2475,7 @@ namespace KokoroUpTime
             {
                 var dragObjName = (e.Source as FrameworkElement).Name;
 
-                if (dragObjName == "SelectNeedleImage")
+                if (dragObjName == "SelectNeedleImage" || dragObjName == "SelectHeartImage")
                 {
                     this.isMouseDown = true;
                 }
@@ -2511,8 +2602,9 @@ namespace KokoroUpTime
         }
         private void FeelingListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var startupPath = FileUtils.GetStartupPath();
             ListBox listBox = sender as ListBox;
-            if((this.SelectGoodFeelingListBox.IsVisible && this.SelectBadFeelingListBox.IsVisible))
+            if((this.SelectFeelingGrid.IsVisible))
             {
                 if (this.SelectGoodFeelingListBox.SelectedItem != null && this.SelectBadFeelingListBox.SelectedItem != null)
                 {
@@ -2532,12 +2624,35 @@ namespace KokoroUpTime
                 {
                     this.NextPageButton.Visibility = Visibility.Visible;
                 }
-
-                var startupPath = FileUtils.GetStartupPath();
-
                 PlaySE($@"{startupPath}/Sounds/Decision.wav");
+            }
+            else if (this.ChallengeGrid.IsVisible)
+            {
+                if(e.AddedItems.Count > 0)
+                {
+                    PlaySE($@"{startupPath}/Sounds/Decision.wav");
+                }
+                else if(e.RemovedItems.Count >0)
+                {
+                    PlaySE($@"{startupPath}/Sounds/Cancel.wav");
+                }
+
             }
             
         }
+
+        //private void ChallengeGoodFeelingListBox_Unselected(object sender, RoutedEventArgs e)
+        //{
+        //    var startupPath = FileUtils.GetStartupPath();
+
+        //    PlaySE($@"{startupPath}/Sounds/Cancel.wav");
+        //}
+
+        //private void ChallengeGoodFeelingListBox_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    var startupPath = FileUtils.GetStartupPath();
+
+        //    PlaySE($@"{startupPath}/Sounds/Decision.wav");
+        //}
     }
 }
