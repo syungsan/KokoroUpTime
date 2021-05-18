@@ -586,8 +586,16 @@ namespace KokoroUpTime
 
                     this.SetInputMethod();
 
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    //前回のつづきからスタート
+                    if (this.dataProgress.CurrentScene != null)
+                    {
+                        this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
 
                     break;
 
@@ -1572,28 +1580,28 @@ namespace KokoroUpTime
                             switch (this.scene)
                             {
                                 case "発表する時のキミちゃんのきもち":
-                                    this.GoTo("think_kimi's_feeling_1");
+                                    this.GoTo("think_kimi's_feeling_1","sub");
                                     break;
                                 case "友だちを遊びに誘うときのキミちゃんのきもち":
-                                    this.GoTo("think_kimi's_feeling_2");
+                                    this.GoTo("think_kimi's_feeling_2","sub");
                                     break;
                                 case "赤丸君とキミちゃんの考え":
-                                    this.GoTo("think_akamaru_and_kimi's_thought");
+                                    this.GoTo("think_akamaru_and_kimi's_thought","sub");
                                     break;
                                 case "赤丸くんと青助くんの考え":
-                                    this.GoTo("think_akamaru's_and_aosuke's_thought");
+                                    this.GoTo("think_akamaru's_and_aosuke's_thought","sub");
                                     break;
                                 case "チャレンジタイム！パート②　場面①":
-                                    this.GoTo("input_your_thoughts_and_feeling_scene1");
+                                    this.GoTo("input_your_thoughts_and_feeling_scene1","sub");
                                     break;
                                 case "チャレンジタイム！パート②　場面②":
-                                    this.GoTo("input_your_thoughts_and_feeling_scene2");
+                                    this.GoTo("input_your_thoughts_and_feeling_scene2","sub");
                                     break;
                                 case "グループアクティビティパート②　場面①":
-                                    this.GoTo("input_friends_thoughts_and_feeling_scene1");
+                                    this.GoTo("input_friends_thoughts_and_feeling_scene1","sub");
                                     break;
                                 case "グループアクティビティパート②　場面②":
-                                    this.GoTo("input_friends_thoughts_and_feeling_scene2");
+                                    this.GoTo("input_friends_thoughts_and_feeling_scene2","sub");
                                     break;
 
 
@@ -1601,7 +1609,7 @@ namespace KokoroUpTime
                         }
                         else
                         {
-                            this.GoTo(GoToLabel);
+                            this.GoTo(GoToLabel,"sub");
                         }
                     }
                     break;
@@ -2405,11 +2413,11 @@ namespace KokoroUpTime
                     this.SelectBadFeelingListBox.SelectedIndex = -1;
                     this.SelectGoodFeelingListBox.SelectedIndex = -1;
 
-                    this.GoTo("kind_of_feeling");
+                    this.GoTo("kind_of_feeling","sub");
                 }
                 else if (button.Name == "SizeOfFeelingInputButton")
                 {
-                    this.GoTo("size_of_feeling");
+                    this.GoTo("size_of_feeling","sub");
                 }
 
                 else if (button.Name == "BackMessageButton" || button.Name == "BackPageButton" || button.Name == "GroupeActivityBackMessageButton" || button.Name == "SelectFeelingBackButton")
@@ -2426,19 +2434,19 @@ namespace KokoroUpTime
 
                     if (this.scene == "チャレンジタイム！パート②　場面①")
                     {
-                        this.GoTo("select_challenge_time_scene");
+                        this.GoTo("select_challenge_time_scene","sub");
                     }
                     else if(this.scene == "チャレンジタイム！パート②　場面②")
                     {
-                        this.GoTo("select_challenge_time_scene");
+                        this.GoTo("select_challenge_time_scene","sub");
                     }
                     else if(this.scene== "グループアクティビティパート②　場面①")
                     {
-                        this.GoTo("select_groupeactivity_scene");
+                        this.GoTo("select_groupeactivity_scene","sub");
                     }
                     else if(this.scene == "グループアクティビティパート②　場面②")
                     {
-                        this.GoTo("select_groupeactivity_scene");
+                        this.GoTo("select_groupeactivity_scene","sub");
                     }
                     else
                     {
@@ -2464,36 +2472,36 @@ namespace KokoroUpTime
                     {
                         if (button.Name == "SelectScene1Button")
                         {
-                            this.GoTo("input_your_thoughts_and_feeling_scene1");
+                            this.GoTo("input_your_thoughts_and_feeling_scene1","sub");
                         }
                         else if (button.Name == "SelectScene2Button")
                         {
-                            this.GoTo("input_your_thoughts_and_feeling_scene2");
+                            this.GoTo("input_your_thoughts_and_feeling_scene2","sub");
                         }
                     }
                     else if (this.scene == "グループアクティビティパート②　場面選択")
                     {
                         if (button.Name == "SelectScene1Button")
                         {
-                            this.GoTo("input_friends_thoughts_and_feeling_scene1");
+                            this.GoTo("input_friends_thoughts_and_feeling_scene1","sub");
                         }
                         else if (button.Name == "SelectScene2Button")
                         {
-                            this.GoTo("input_friends_thoughts_and_feeling_scene2");
+                            this.GoTo("input_friends_thoughts_and_feeling_scene2","sub");
                         }
                     }
                 }
                 else if (button.Name == "KindOfFeelingInputButton")
                 {
-                    this.GoTo("select_kind_of_feeling");
+                    this.GoTo("select_kind_of_feeling","sub");
                 }
                 else if (button.Name == "SizeOfFeelingInputButton")
                 {
-                    this.GoTo("select_size_of_feeling");
+                    this.GoTo("select_size_of_feeling","sub");
                 }
                 else if (button.Name == "BranchButton1")
                 {
-                    this.GoTo("manga");
+                    this.GoTo("manga","sub");
                 }
                 else if (Regex.IsMatch(button.Name, "Input.*ChildrenThoughtButton"))
                 {
@@ -2521,7 +2529,7 @@ namespace KokoroUpTime
                         }
                       
                         this.InputThoughtCanvas1.Strokes = this.InputStroke[InputDictionaryKey];
-                        this.GoTo("canvas_input_children_thought");
+                        this.GoTo("canvas_input_children_thought","sub");
                     }
                     else
                     {
@@ -2538,7 +2546,7 @@ namespace KokoroUpTime
                                 break;
                         }
                         this.InputThoughtTextBox1.Text = this.InputText[InputDictionaryKey];
-                        this.GoTo("keyboard_input_children_thought");
+                        this.GoTo("keyboard_input_children_thought","sub");
                         this.InputThoughtTextBox1.Focus();
                     }
                 }
@@ -2547,12 +2555,12 @@ namespace KokoroUpTime
                     if (this.dataOption.InputMethod == 0)
                     {
                         this.InputThoughtCanvas2.Strokes = this.InputStroke[InputDictionaryKey];
-                        this.GoTo("canvas_input_thought");
+                        this.GoTo("canvas_input_thought","sub");
                     }
                     else
                     {
                         this.InputThoughtTextBox2.Text = this.InputText[InputDictionaryKey];
-                        this.GoTo("keyboard_input_thought");
+                        this.GoTo("keyboard_input_thought","sub");
                         this.InputThoughtTextBox2.Focus();
                     }
                    
@@ -2790,25 +2798,42 @@ namespace KokoroUpTime
             Cancel
         }
 
-        private void GoTo(string tag)
+        private void GoTo(string tag, string tagType)
         {
-            foreach (var (scenario, index) in this.scenarios.Indexed())
+            if (tagType == "sub")
             {
-                if (scenario[0] == "sub" && scenario[1] == tag)
+                foreach (var (scenario, index) in this.scenarios.Indexed())
                 {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                    if (scenario[0] == "sub" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
-                }
-                if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
-                {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                        break;
+                    }
+                    if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
+                        break;
+                    }
                 }
             }
+            else if (tagType == "scene")
+            {
+                foreach (var (scenario, index) in this.scenarios.Indexed())
+                {
+                    if (scenario[0] == "scene" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                }
+            }
+
         }
 
         private BitmapSource Image2Gray(ImageSource originalImageSource)

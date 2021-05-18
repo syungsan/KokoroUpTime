@@ -432,8 +432,17 @@ namespace KokoroUpTime
                     {
                         connection.Execute($@"UPDATE DataProgress SET CurrentChapter = '{this.dataProgress.CurrentChapter}' WHERE Id = 1;");
                     }
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+
+                    //前回のつづきからスタート
+                    if (this.dataProgress.CurrentScene != null)
+                    {
+                        this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
 
                     break;
 
@@ -971,11 +980,11 @@ namespace KokoroUpTime
                         var GoToLabel = this.scenarios[this.scenarioCount][1];
                         if (GoToLabel =="current_scene")
                         {
-                            this.GoTo(this.scene);
+                            this.GoTo(this.scene,"sub");
                         }
                         else
                         {
-                            this.GoTo(GoToLabel);
+                            this.GoTo(GoToLabel,"sub");
                         }
                     }
                     break;
@@ -1682,15 +1691,15 @@ namespace KokoroUpTime
 
                     if (this.scene == "赤丸くんの場面")
                     {
-                        this.GoTo("select_word_akamaru");
+                        this.GoTo("select_word_akamaru","sub");
                     }
                     if (this.scene == "キミちゃんの場面")
                     {
-                        this.GoTo("select_word_kimi");
+                        this.GoTo("select_word_kimi","sub");
                     }
                     if (this.scene == "青助くんの場面")
                     {
-                        this.GoTo("select_word_aosuke");
+                        this.GoTo("select_word_aosuke","sub");
                     }
                 }
                 if ((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton"))
@@ -1725,7 +1734,7 @@ namespace KokoroUpTime
                 }
                 if (button.Name == "CompleteRolePlayButton")
                 {
-                    this.GoTo("complete_groupe_activity");
+                    this.GoTo("complete_groupe_activity","sub");
                 }
             }
             // FullScreen時のデバッグ用に作っておく
@@ -1811,7 +1820,7 @@ namespace KokoroUpTime
             }
             if (button.Name == "BranchButton1")
             {
-                this.GoTo("manga");
+                this.GoTo("manga","sub");
             }
             if (button.Name == "SelectFeelingNextButton")
             {
@@ -1823,11 +1832,11 @@ namespace KokoroUpTime
             {
                 if (this.scene == "日直を任された場面のきもち")
                 {
-                    this.GoTo("check_manga1");
+                    this.GoTo("check_manga1","sub");
                 }
                 if (this.scene == "赤丸くんにたのまれた場面のきもち")
                 {
-                    this.GoTo("check_manga2");
+                    this.GoTo("check_manga2","sub");
                 }
             }
             if (button.Name == "SizeOfFeelingButton")
@@ -1838,12 +1847,12 @@ namespace KokoroUpTime
                 }
                 else
                 {
-                    this.GoTo("size_of_feeling");
+                    this.GoTo("size_of_feeling","sub");
                 }
             }
             if (button.Name == "KindOfFeelingButton")
             {
-                this.GoTo("kind_of_feeling");
+                this.GoTo("kind_of_feeling","sub");
             }
             if (button.Name == "ChoicesButton")
             {
@@ -1858,15 +1867,15 @@ namespace KokoroUpTime
 
                             if (situationText == "場面①の赤丸くん")
                             {
-                                this.GoTo("situation_akamaru");
+                                this.GoTo("situation_akamaru","sub");
                             }
                             if (situationText == "場面②のキミちゃん")
                             {
-                                this.GoTo("situation_kimi");
+                                this.GoTo("situation_kimi","sub");
                             }
                             if (situationText == "場面③の青助くん")
                             {
-                                this.GoTo("situation_aosuke");
+                                this.GoTo("situation_aosuke","sub");
                             }
                         }
                     }
@@ -1881,7 +1890,7 @@ namespace KokoroUpTime
                             selectedWordButtonText.Text = ((TextBlock)Text).Text;
                         }
                     }
-                    this.GoTo(this.scene);
+                    this.GoTo(this.scene,"sub");
 
                     int checkCount = 0;
                     int isCorrectCount = 0;
@@ -1962,11 +1971,11 @@ namespace KokoroUpTime
             {
                 if (this.isCorrect)
                 {
-                    this.GoTo("select_correct_words");
+                    this.GoTo("select_correct_words","sub");
                 }
                 else
                 {
-                    this.GoTo("select_uncorrect_words");
+                    this.GoTo("select_uncorrect_words","sub");
                 }
             }
             
@@ -2112,21 +2121,42 @@ namespace KokoroUpTime
             }
         }
 
-        private void GoTo(string tag)
+        private void GoTo(string tag, string tagType)
         {
-            foreach (var (scenario, index) in this.scenarios.Indexed())
+            if (tagType == "sub")
             {
-                if (scenario[0] == "sub" && scenario[1] == tag)
+                foreach (var (scenario, index) in this.scenarios.Indexed())
                 {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
-                }
-                if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
-                {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                    if (scenario[0] == "sub" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                    if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
                 }
             }
+            else if (tagType == "scene")
+            {
+                foreach (var (scenario, index) in this.scenarios.Indexed())
+                {
+                    if (scenario[0] == "scene" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                }
+            }
+
         }
 
         private BitmapSource Image2Gray(ImageSource originalImageSource)

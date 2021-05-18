@@ -1,6 +1,5 @@
 start
 #
-goto,think_aosuke_method
 scene,前回のおさらい
 reset
 image,bg_image,background_02.png

@@ -254,17 +254,48 @@
     </Style>
     <!--気持ちの種類選択用のListBox-->
     <DataTemplate x:Key="SelectedBadFeelingTemplate">
-        <Grid x:Name="SelectBadFeelingGrid" >
-            <Label Width="360"/>
-            <TextBlock x:Name="SelectBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
-            <Ellipse Stroke="#FF1E90FF" StrokeThickness="3" Margin="25,5,25,0"/>
-        </Grid>
+        <Border>
+            <Grid x:Name="SelectBadFeelingGrid" >
+                <Label Width="360"/>
+                <TextBlock x:Name="SelectBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
+                <Ellipse Stroke="#FF1E90FF" StrokeThickness="3" Margin="25,5,25,0"/>
+            </Grid>
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </Trigger>
+                        <Trigger Property="AreAnyTouchesOver" Value="True">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+        
     </DataTemplate>
     <DataTemplate x:Key="UnSelectedBadFeelingTemplate">
-        <Grid x:Name="SelectBadFeelingGrid" >
-            <Label Width="360"/>
-            <TextBlock x:Name="SelectBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
-        </Grid>
+        <Border>
+            <Grid x:Name="SelectBadFeelingGrid" >
+                <Label Width="360"/>
+                <TextBlock x:Name="SelectBadFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
+            </Grid>
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </Trigger>
+                        <Trigger Property="AreAnyTouchesOver" Value="True">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
     </DataTemplate>
     <Style TargetType="{x:Type ListBoxItem}" x:Key="SelectBadFeelingStyle">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -290,27 +321,52 @@
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="LightSkyBlue"/>
             </Trigger>
-            <!--<Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="LightBlue"/>
-            </Trigger>-->
-            <Trigger Property="AreAnyTouchesOver" Value="True">
-                <Setter Property="Background" Value="LightBlue"/>
-            </Trigger>
+            
         </Style.Triggers>
     </Style>
 
     <DataTemplate x:Key="SelectedGoodFeelingTemplate">
-        <Grid x:Name="SelectGoodFeelingGrid" >
-            <Label Width="360"/>
-            <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
-            <Ellipse Stroke="#FFEE2222" StrokeThickness="3" Margin="25,5,25,0"/>
-        </Grid>
+        <Border>
+            <Grid x:Name="SelectGoodFeelingGrid" >
+                <Label Width="360"/>
+                <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
+                <Ellipse Stroke="#FFEE2222" StrokeThickness="3" Margin="25,5,25,0"/>
+            </Grid>
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="LightPink"/>
+                        </Trigger>
+                        <Trigger Property="AreAnyTouchesOver" Value="True">
+                            <Setter Property="Background" Value="LightPink"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="UnSelectedGoodFeelingTemplate">
-        <Grid x:Name="SelectGoodFeelingGrid" >
-            <Label Width="360"/>
-            <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
-        </Grid>
+        <Border>
+            <Grid x:Name="SelectGoodFeelingGrid" >
+                <Label Width="360"/>
+                <TextBlock x:Name="SelectGoodFeelingItemTextBlock" Text="{Binding}" TextWrapping="Wrap" Margin="40,10,0,0" FontSize="36" HorizontalAlignment="Left"/>
+            </Grid>
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="LightPink"/>
+                        </Trigger>
+                        <Trigger Property="AreAnyTouchesOver" Value="True">
+                            <Setter Property="Background" Value="LightPink"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
     </DataTemplate>
     <Style TargetType="{x:Type ListBoxItem}" x:Key="SelectGoodFeelingStyle">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -336,24 +392,48 @@
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="LightCoral"/>
             </Trigger>
-            <!--<Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="LightPink"/>
-            </Trigger>-->
-            <Trigger Property="AreAnyTouchesOver" Value="True">
-                <Setter Property="Background" Value="LightPink"/>
-            </Trigger>
         </Style.Triggers>
     </Style>
     <!--チャレンジタイム用のListBox-->
     <DataTemplate x:Key="SelectedTemplate">
-        <Grid x:Name="NicePersonalityGrid">
-            <TextBlock x:Name="NicePersonalityText" Text="{Binding}"/>
-            <Ellipse Stroke="Black" StrokeThickness="1"/>
-        </Grid>
+        <Border>
+            <Grid x:Name="NicePersonalityGrid">
+                <TextBlock x:Name="NicePersonalityText" Text="{Binding}"/>
+                <Ellipse Stroke="Black" StrokeThickness="1"/>
+            </Grid>
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFBFE6FD"/>
+                        </Trigger>
+                        <Trigger Property="AreAnyTouchesOver" Value="True">
+                            <Setter Property="Background" Value="#FFBFE6FD"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="UnSelectedTemplate">
         <Grid x:Name="NicePersonalityGrid">
-            <TextBlock x:Name="NicePersonalityText" Text="{Binding}"/>
+            <Border >
+                <TextBlock x:Name="NicePersonalityText" Text="{Binding}"/>
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFBFE6FD"/>
+                            </Trigger>
+                            <Trigger Property="AreAnyTouchesOver" Value="True">
+                                <Setter Property="Background" Value="#FFBFE6FD"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
         </Grid>
     </DataTemplate>
     <Style TargetType="{x:Type ListBoxItem}" x:Key="ListBoxItemContainerStyle">
@@ -376,12 +456,6 @@
             </Trigger>
             <Trigger Property="IsSelected" Value="False">
                 <Setter Property="ContentTemplate" Value="{StaticResource UnSelectedTemplate}"/>
-            </Trigger>
-            <!--<Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FFBFE6FD"/>
-            </Trigger>-->
-            <Trigger Property="AreAnyTouchesOver" Value="True">
-                <Setter Property="Background" Value="#FFBFE6FD"/>
             </Trigger>
         </Style.Triggers>
     </Style>

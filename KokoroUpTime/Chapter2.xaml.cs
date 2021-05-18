@@ -21,11 +21,6 @@ using System.Windows.Threading;
 using WMPLib;
 using XamlAnimatedGif;
 
-
-
-
-
-
 namespace KokoroUpTime
 {
     /// <summary>
@@ -33,6 +28,7 @@ namespace KokoroUpTime
     /// </summary>
     public partial class Chapter2 : Page
     {
+        Chapter1 Chapter1 = new Chapter1();
 
         // 気持ちのリスト
         private string[] GOOD_FEELINGS = { "うれしい", "しあわせ", "たのしい", "ホッとした", "きもちいい", "まんぞく", "すき", "やる気マンマン", "かんしゃ", "わくわく", "うきうき", "ほこらしい" };
@@ -145,7 +141,6 @@ namespace KokoroUpTime
             this.GoodEventSelectListBox2.ItemsSource = GOOD_EVENT2;
 
             this.InitControls();
-            
         }
 
         private void InitControls()
@@ -445,7 +440,6 @@ namespace KokoroUpTime
             // メッセージ表示関連
             this.word_num = 0;
 
-
             switch (tag)
             {
                 case "start":
@@ -461,18 +455,17 @@ namespace KokoroUpTime
 
                     this.SetInputMethod();
 
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-
-                    break;
-
-                case "continue":
-                    if (this.dataProgress.CurrentScene != null && this.dataProgress.CurrentChapter == 2)
+                    //前回のつづきからスタート
+                    if (this.dataProgress.CurrentScene != null)
                     {
-                        this.GoTo(this.dataProgress.CurrentScene);
+                        this.GoTo(this.dataProgress.CurrentScene, "scene");
                     }
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
+
                     break;
 
                 case "end":
@@ -1059,11 +1052,11 @@ namespace KokoroUpTime
                         var GoToLabel = this.scenarios[this.scenarioCount][1];
                         if (GoToLabel == "current_scene")
                         {
-                            this.GoTo(this.scene);
+                            this.GoTo(this.scene,"sub");
                         }
                         else
                         {
-                            this.GoTo(GoToLabel);
+                            this.GoTo(GoToLabel,"sub");
                         }
                     }
                     break;
@@ -1876,7 +1869,7 @@ namespace KokoroUpTime
                 }
                 else if (button.Name == "BranchButton1")
                 {
-                    this.GoTo("manga");
+                    this.GoTo("manga","sub");
                 }
                 else if (button.Name == "SelectFeelingNextButton")
                 {
@@ -1952,14 +1945,14 @@ namespace KokoroUpTime
                         this.MySmallExcitedStroke = this.ViewMySmallExcitedCanvas.Strokes;
                         this.InputMySmallExcitedCanvas.Strokes = this.MySmallExcitedStroke;
 
-                        this.GoTo("canvas_input_a_little_exicited");
+                        this.GoTo("canvas_input_a_little_exicited","sub");
                     }
                     else
                     {
                         this.dataChapter2.MyALittlleExcitingEvents = this.ViewMySmallExcitedText.Text;
                         this.InputMySmallExcitedTextBox.Text = this.dataChapter2.MyALittlleExcitingEvents;
 
-                        this.GoTo("keyboard_input_a_little_exicited");
+                        this.GoTo("keyboard_input_a_little_exicited","sub");
                         this.InputMySmallExcitedTextBox.Focus();
                     }
                 }
@@ -2003,11 +1996,11 @@ namespace KokoroUpTime
                 }
                 else if (button.Name == "SizeOfFeelingButton")
                 {
-                    this.GoTo("size_of_feeling");
+                    this.GoTo("size_of_feeling" ,"sub");
                 }
                 else if (button.Name == "DifficultyOfActionButton")
                 {
-                    this.GoTo("difficulty_of_action");
+                    this.GoTo("difficulty_of_action" ,"sub");
                 }
                
             }
@@ -2216,25 +2209,42 @@ namespace KokoroUpTime
             wordArtImage.BeginAnimation(Image.WidthProperty, animation);
         }
 
-        private void GoTo(string tag)
+        private void GoTo(string tag, string tagType)
         {
-            foreach (var (scenario, index) in this.scenarios.Indexed())
+            if (tagType == "sub")
             {
-                if (scenario[0] == "sub" && scenario[1] == tag)
+                foreach (var (scenario, index) in this.scenarios.Indexed())
                 {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                    if (scenario[0] == "sub" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
-                }
-                if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
-                {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                        break;
+                    }
+                    if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
+                        break;
+                    }
                 }
             }
+            else if (tagType == "scene")
+            {
+                foreach (var (scenario, index) in this.scenarios.Indexed())
+                {
+                    if (scenario[0] == "scene" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                }
+            }
+
         }
         private void ScenarioBack()
         {
@@ -2376,6 +2386,16 @@ namespace KokoroUpTime
             }
 
             this.ChallengeMessageGrid.Visibility = Visibility.Hidden;
+
+            var startupPath = FileUtils.GetStartupPath();
+            if (e.AddedItems.Count > 0)
+            {
+                PlaySE($@"{startupPath}/Sounds/Decision.wav");
+            }
+            else if (e.RemovedItems.Count > 0)
+            {
+                PlaySE($@"{startupPath}/Sounds/Cancel.wav");
+            }
         }
 
         private void ConvertStrokeToBitmapImage()

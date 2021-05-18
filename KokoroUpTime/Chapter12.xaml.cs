@@ -495,8 +495,16 @@ namespace KokoroUpTime
 
 
 
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    //前回のつづきからスタート
+                    if (this.dataProgress.CurrentScene != null)
+                    {
+                        this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
 
                     break;
 
@@ -1175,21 +1183,21 @@ namespace KokoroUpTime
                             switch (this.scene)
                             {
                                 case "チャレンジタイム！　パート①":
-                                    this.GoTo("challenge_time_part1");
+                                    this.GoTo("challenge_time_part1","sub");
                                     break;
 
                                 case "チャレンジタイム！　パート②":
-                                    this.GoTo("think_akamaru_method");
+                                    this.GoTo("think_akamaru_method","sub");
                                     break;
 
                                 case "グループアクティビティ":
-                                    this.GoTo("groupe_activity");
+                                    this.GoTo("groupe_activity","sub");
                                     break;
                             }
                         }
                         else
                         {
-                            this.GoTo(GoToLabel);
+                            this.GoTo(GoToLabel,"sub");
                         }
                     }
                     break;
@@ -1514,7 +1522,7 @@ namespace KokoroUpTime
                         }
                         else
                         {
-                            this.GoTo("uncorrect_scene");
+                            this.GoTo("uncorrect_scene","sub");
                         }
                     }
                     else
@@ -1528,7 +1536,7 @@ namespace KokoroUpTime
                         }
                         else
                         {
-                            this.GoTo("uncorrect_scene");
+                            this.GoTo("uncorrect_scene","sub");
                         }
                     }
 
@@ -2089,15 +2097,15 @@ namespace KokoroUpTime
 
                 else if (button.Name == "KindOfFeelingInputButton")
                 {
-                    this.GoTo("select_kind_of_feeling");
+                    this.GoTo("select_kind_of_feeling","sub");
                 }
                 else if (button.Name == "SizeOfFeelingInputButton")
                 {
-                    this.GoTo("select_size_of_feeling");
+                    this.GoTo("select_size_of_feeling","sub");
                 }
                 else if (button.Name == "BranchButton1")
                 {
-                    this.GoTo("manga");
+                    this.GoTo("manga","sub");
                 }
                 else if (button.Name == "CompleteInputButton")
                 {
@@ -2143,12 +2151,12 @@ namespace KokoroUpTime
                     switch (this.scene)
                     {
                         case "チャレンジタイム！　パート①":
-                            this.GoTo("check_akamaru_situation");
+                            this.GoTo("check_akamaru_situation","sub");
                             break;
 
                         case "チャレンジタイム！　パート②":
                         case "グループアクティビティ":
-                            this.GoTo("check_tips_for_thinking");
+                            this.GoTo("check_tips_for_thinking","sub");
                             break;
                     }
                 }
@@ -2180,11 +2188,11 @@ namespace KokoroUpTime
                 {
                     if (this.scene =="アイテムの総復習①"|| this.scene == "アイテムの総復習②")
                     {
-                        this.GoTo("check_item_book_challenge_time");
+                        this.GoTo("check_item_book_challenge_time","sub");
                     }
                     else if(this.scene == "グループアクティビティ")
                     {
-                        this.GoTo("check_item_book_groupe_activity");
+                        this.GoTo("check_item_book_groupe_activity","sub");
                     }
 
                 }
@@ -2193,11 +2201,11 @@ namespace KokoroUpTime
                     switch (this.scene)
                     {
                         case"アイテムの総復習①":
-                            this.GoTo("item_question1");
+                            this.GoTo("item_question1","sub");
                             break;
 
                         case "アイテムの総復習②":
-                            this.GoTo("item_question2");
+                            this.GoTo("item_question2","sub");
                             break;
                     }
                 }
@@ -2205,7 +2213,7 @@ namespace KokoroUpTime
                 {
                     if(this.scene == "グループアクティビティ")
                     {
-                        this.GoTo("groupe_activity");
+                        this.GoTo("groupe_activity","sub");
                     }
                 }
                 else if (button.Name == "ReturnButton")
@@ -2331,12 +2339,12 @@ namespace KokoroUpTime
                     {
                         this.ITEM_METHOD_STROKE[this.InputDictionaryKey].ItemMethodStroke = ((Grid)(this.InputItemMethodItemsControl.GetChildren<Button>().ToList()[0].Content)).Children.OfType<InkCanvas>().ToList()[0].Strokes;
                         this.InputCanvas.Strokes = this.ITEM_METHOD_STROKE[this.InputDictionaryKey].ItemMethodStroke;
-                        this.GoTo("canvas_input_item_method");
+                        this.GoTo("canvas_input_item_method","sub");
                     }
                     else
                     {
                         this.InputTextBox.Text = this.ITEM_METHOD_TEXT[this.InputDictionaryKey].ItemMethodText;
-                        this.GoTo("keyboard_input_item_method");
+                        this.GoTo("keyboard_input_item_method","sub");
                         this.InputTextBox.Focus();
                     }
                 }
@@ -2444,25 +2452,42 @@ namespace KokoroUpTime
             Cancel
         }
 
-        private void GoTo(string tag)
+        private void GoTo(string tag, string tagType)
         {
-            foreach (var (scenario, index) in this.scenarios.Indexed())
+            if (tagType == "sub")
             {
-                if (scenario[0] == "sub" && scenario[1] == tag)
+                foreach (var (scenario, index) in this.scenarios.Indexed())
                 {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                    if (scenario[0] == "sub" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
-                }
-                if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
-                {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                        break;
+                    }
+                    if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
+                        break;
+                    }
                 }
             }
+            else if (tagType == "scene")
+            {
+                foreach (var (scenario, index) in this.scenarios.Indexed())
+                {
+                    if (scenario[0] == "scene" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                }
+            }
+
         }
 
         private BitmapSource Image2Gray(ImageSource originalImageSource)

@@ -453,8 +453,16 @@ namespace KokoroUpTime
                     {
                         connection.Execute($@"UPDATE DataProgress SET CurrentChapter = '{this.dataProgress.CurrentChapter}' WHERE Id = 1;");
                     }
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    //前回のつづきからスタート
+                    if (this.dataProgress.CurrentScene != null)
+                    {
+                        this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
 
                     this.SetInputMethod();
 
@@ -992,11 +1000,11 @@ namespace KokoroUpTime
                         var GoToLabel = this.scenarios[this.scenarioCount][1];
                         if (GoToLabel == "current_scene")
                         {
-                            this.GoTo(this.scene);
+                            this.GoTo(this.scene,"sub");
                         }
                         else
                         {
-                            this.GoTo(GoToLabel);
+                            this.GoTo(GoToLabel,"sub");
                         }
                     }
                     break;
@@ -1668,7 +1676,7 @@ namespace KokoroUpTime
                 }
                 else if (button.Name == "CompleteRolePlayButton")
                 {
-                    this.GoTo("complete_groupe_activity");
+                    this.GoTo("complete_groupe_activity","sub");
 
                     this.isClickable = false;
                 }
@@ -1721,7 +1729,7 @@ namespace KokoroUpTime
             }
             else if (button.Name == "BranchButton1")
             {
-                this.GoTo("manga");
+                this.GoTo("manga","sub");
             }
             else if (button.Name == "SelectFeelingNextButton")
             {
@@ -1741,7 +1749,7 @@ namespace KokoroUpTime
             }
             else if (button.Name == "HintCheckButton")
             {
-                this.GoTo("check_hint");
+                this.GoTo("check_hint","sub");
             }
 
             else if (button.Name == "GroupeActivityButton")
@@ -1847,25 +1855,42 @@ namespace KokoroUpTime
             Cancel
         }
 
-        private void GoTo(string tag)
+        private void GoTo(string tag, string tagType)
         {
-            foreach (var (scenario, index) in this.scenarios.Indexed())
+            if (tagType == "sub")
             {
-                if (scenario[0] == "sub" && scenario[1] == tag)
+                foreach (var (scenario, index) in this.scenarios.Indexed())
                 {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                    if (scenario[0] == "sub" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
-                }
-                if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
-                {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                        break;
+                    }
+                    if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
+                        break;
+                    }
                 }
             }
+            else if (tagType == "scene")
+            {
+                foreach (var (scenario, index) in this.scenarios.Indexed())
+                {
+                    if (scenario[0] == "scene" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                }
+            }
+
         }
 
         private BitmapSource Image2Gray(ImageSource originalImageSource)

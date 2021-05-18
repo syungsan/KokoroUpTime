@@ -431,8 +431,16 @@ namespace KokoroUpTime
                     {
                         connection.Execute($@"UPDATE DataProgress SET CurrentChapter = '{this.dataProgress.CurrentChapter}' WHERE Id = 1;");
                     }
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    //前回のつづきからスタート
+                    if (this.dataProgress.CurrentScene != null)
+                    {
+                        this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
 
                     break;
 
@@ -1002,7 +1010,7 @@ namespace KokoroUpTime
                     {
                         var GoToLabel = this.scenarios[this.scenarioCount][1];
 
-                        this.GoTo(GoToLabel);
+                        this.GoTo(GoToLabel,"sub");
                     }
                     break;
 
@@ -1878,12 +1886,12 @@ namespace KokoroUpTime
 
                 if (button.Name == "WishCheckButton")
                 {
-                    this.GoTo("remember_item");
+                    this.GoTo("remember_item","sub");
                 }
 
                 if (button.Name == "ImRememberButton")
                 {
-                    this.GoTo("manga");
+                    this.GoTo("manga","sub");
                 }
 
                 if (button.Name == "CheckMangaButton")
@@ -1892,12 +1900,12 @@ namespace KokoroUpTime
                     {
                         case "キミちゃんのきもちを考える1":
 
-                            this.GoTo("manga_kimi_part");
+                            this.GoTo("manga_kimi_part","sub");
                             break;
 
                         case "青助くんのきもちを考える1":
 
-                            this.GoTo("manga_aosuke_part");
+                            this.GoTo("manga_aosuke_part","sub");
                             break;
 
                         default: { break; }
@@ -1910,12 +1918,12 @@ namespace KokoroUpTime
                     {
                         case "キミちゃんのきもちを考える1":
 
-                            this.GoTo("think_kimi's_feeling_1");
+                            this.GoTo("think_kimi's_feeling_1","sub");
                             break;
 
                         case "青助くんのきもちを考える1":
 
-                            this.GoTo("think_aosuke's_feeling_1");
+                            this.GoTo("think_aosuke's_feeling_1","sub");
                             break;
 
                         default: { break; }
@@ -1924,12 +1932,12 @@ namespace KokoroUpTime
 
                 if (button.Name == "KindOfFeelingInputButton")
                 {
-                    this.GoTo("select_kind_of_feeling");
+                    this.GoTo("select_kind_of_feeling","sub");
                 }
 
                 if (button.Name == "SizeOfFeelingInputButton")
                 {
-                    this.GoTo("select_size_of_feeling");
+                    this.GoTo("select_size_of_feeling","sub");
                 }
 
                 if (button.Name == "FeelingNextGoButton")
@@ -1943,7 +1951,7 @@ namespace KokoroUpTime
                                 connection.Execute($@"UPDATE DataChapter3 SET AosukesKindOfFeelingPreUseItem = '{this.dataChapter3.AosukesKindOfFeelingPreUseItem}' WHERE CreatedAt = '{this.dataChapter3.CreatedAt}';");
                                 connection.Execute($@"UPDATE DataChapter3 SET AosukesSizeOfFeelingPreUseItem = '{this.dataChapter3.AosukesSizeOfFeelingPreUseItem}' WHERE CreatedAt = '{this.dataChapter3.CreatedAt}';");
                             }
-                            this.GoTo("think_kimi's_feeling_1");
+                            this.GoTo("think_kimi's_feeling_1","sub");
 
                             break;
 
@@ -1954,7 +1962,7 @@ namespace KokoroUpTime
                                 connection.Execute($@"UPDATE DataChapter3 SET KimisKindOfFeelingPreUseItem = '{this.dataChapter3.KimisKindOfFeelingPreUseItem}' WHERE CreatedAt = '{this.dataChapter3.CreatedAt}';");
                                 connection.Execute($@"UPDATE DataChapter3 SET KimisSizeOfFeelingPreUseItem = '{this.dataChapter3.KimisSizeOfFeelingPreUseItem}' WHERE CreatedAt = '{this.dataChapter3.CreatedAt}';");
                             }
-                            this.GoTo("chiku_chiku_kotoba");
+                            this.GoTo("chiku_chiku_kotoba","sub");
 
                             break;
 
@@ -1965,7 +1973,7 @@ namespace KokoroUpTime
                                 connection.Execute($@"UPDATE DataChapter3 SET AosukesKindOfFeelingAfterUsedItem = '{this.dataChapter3.AosukesKindOfFeelingAfterUsedItem}' WHERE CreatedAt = '{this.dataChapter3.CreatedAt}';");
                                 connection.Execute($@"UPDATE DataChapter3 SET AosukesSizeOfFeelingAfterUsedItem = '{this.dataChapter3.AosukesSizeOfFeelingAfterUsedItem}' WHERE CreatedAt = '{this.dataChapter3.CreatedAt}';");
                             }
-                            this.GoTo("kimi's_feeling_after_used_item");
+                            this.GoTo("kimi's_feeling_after_used_item","sub");
 
                             break;
 
@@ -1976,7 +1984,7 @@ namespace KokoroUpTime
                                 connection.Execute($@"UPDATE DataChapter3 SET KimisKindOfFeelingAfterUsedItem = '{this.dataChapter3.KimisKindOfFeelingAfterUsedItem}' WHERE CreatedAt = '{this.dataChapter3.CreatedAt}';");
                                 connection.Execute($@"UPDATE DataChapter3 SET KimisSizeOfFeelingAfterUsedItem = '{this.dataChapter3.KimisSizeOfFeelingAfterUsedItem}' WHERE CreatedAt = '{this.dataChapter3.CreatedAt}';");
                             }
-                            this.GoTo("akamaru's_feeling_after_used_item");
+                            this.GoTo("akamaru's_feeling_after_used_item","sub");
 
                             break;
 
@@ -1987,7 +1995,7 @@ namespace KokoroUpTime
                                 connection.Execute($@"UPDATE DataChapter3 SET AkamarusKindOfFeelingAfterUsedItem = '{this.dataChapter3.AkamarusKindOfFeelingAfterUsedItem}' WHERE CreatedAt = '{this.dataChapter3.CreatedAt}';");
                                 connection.Execute($@"UPDATE DataChapter3 SET AkamarusSizeOfFeelingAfterUsedItem = '{this.dataChapter3.AkamarusSizeOfFeelingAfterUsedItem}' WHERE CreatedAt = '{this.dataChapter3.CreatedAt}';");
                             }
-                            this.GoTo("group_activity_start");
+                            this.GoTo("group_activity_start","sub");
 
                             break;
 
@@ -2017,7 +2025,7 @@ namespace KokoroUpTime
 
                     this.cHotWordButtonCount += 1;
 
-                    this.GoTo($"search_hot_word_{buttonIndex + 1}");
+                    this.GoTo($"search_hot_word_{buttonIndex + 1}","sub");
                 }
 
                 if (this.GHotWordKeyButtonGrid.IsVisible)
@@ -2030,11 +2038,11 @@ namespace KokoroUpTime
                     {
                         this.HotWordValueButtonItemControl.ItemsSource = HOT_WORD_VALUES[buttonText];
 
-                        this.GoTo("select_hot_word_value");
+                        this.GoTo("select_hot_word_value","sub");
                     }
                     else
                     {
-                        this.GoTo($"select_other_word_{Array.IndexOf(HOT_WORD_KEYS, buttonText) + 1}");
+                        this.GoTo($"select_other_word_{Array.IndexOf(HOT_WORD_KEYS, buttonText) + 1}","sub");
                     }
                 }
 
@@ -2090,7 +2098,7 @@ namespace KokoroUpTime
 
                             default: { break; }
                         }
-                        this.GoTo($"let's_use_selected_hot_word_{hotWordIndex + 1}");
+                        this.GoTo($"let's_use_selected_hot_word_{hotWordIndex + 1}","sub");
                     }
                 }
 
@@ -2104,7 +2112,7 @@ namespace KokoroUpTime
 
                         this.rolePlayButtonCount += 1;
 
-                        this.GoTo($"role_play_hot_word_{Array.IndexOf(HOT_WORD_KEYS, rolePlayHotWord) + 1}");
+                        this.GoTo($"role_play_hot_word_{Array.IndexOf(HOT_WORD_KEYS, rolePlayHotWord) + 1}","sub");
                     }
                 }
 
@@ -2117,13 +2125,13 @@ namespace KokoroUpTime
                     {
                         this.cHotWordButtonCount = 0;
 
-                        this.GoTo("search_hot_word_complete");
+                        this.GoTo("search_hot_word_complete","sub");
                     }
                     else if (this.rolePlayButtonCount >= HOT_WORD_KEYS.Length)
                     {
                         this.rolePlayButtonCount = 0;
 
-                        this.GoTo("role_play_hot_word_complete");
+                        this.GoTo("role_play_hot_word_complete","sub");
                     }
                     else if (this.SelectGoodFeelingGrid.IsVisible && this.SelectBadFeelingGrid.IsVisible)
                     {
@@ -2140,7 +2148,7 @@ namespace KokoroUpTime
                             }
                             this.SizeOfFeelingInputButton.IsEnabled = true;
 
-                            this.GoTo("think_aosuke's_feeling_1");
+                            this.GoTo("think_aosuke's_feeling_1","sub");
                         }
 
                         if (this.scene == "キミちゃんのきもちを考える1")
@@ -2156,7 +2164,7 @@ namespace KokoroUpTime
                             }
                             this.SizeOfFeelingInputButton.IsEnabled = true;
 
-                            this.GoTo("think_kimi's_feeling_1");
+                            this.GoTo("think_kimi's_feeling_1","sub");
                         }
 
                         if (this.scene == "青助くんのきもちを考える2")
@@ -2172,7 +2180,7 @@ namespace KokoroUpTime
                             }
                             this.SizeOfFeelingInputButton.IsEnabled = true;
 
-                            this.GoTo("think_aosuke's_feeling_2");
+                            this.GoTo("think_aosuke's_feeling_2","sub");
                         }
 
                         if (this.scene == "キミちゃんのきもちを考える2")
@@ -2188,7 +2196,7 @@ namespace KokoroUpTime
                             }
                             this.SizeOfFeelingInputButton.IsEnabled = true;
 
-                            this.GoTo("think_kimi's_feeling_2");
+                            this.GoTo("think_kimi's_feeling_2","sub");
                         }
 
                         if (this.scene == "赤丸くんのきもちを考える")
@@ -2204,7 +2212,7 @@ namespace KokoroUpTime
                             }
                             this.SizeOfFeelingInputButton.IsEnabled = true;
 
-                            this.GoTo("think_akamaru's_feeling");
+                            this.GoTo("think_akamaru's_feeling","sub");
                         }
                     }
                     else if (this.SelectHeartGrid.IsVisible)
@@ -2213,35 +2221,35 @@ namespace KokoroUpTime
                         {
                             this.dataChapter3.AosukesSizeOfFeelingPreUseItem = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
 
-                            this.GoTo("think_aosuke's_feeling_1");
+                            this.GoTo("think_aosuke's_feeling_1","sub");
                         }
 
                         if (this.scene == "キミちゃんのきもちを考える1")
                         {
                             this.dataChapter3.KimisSizeOfFeelingPreUseItem = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
 
-                            this.GoTo("think_kimi's_feeling_1");
+                            this.GoTo("think_kimi's_feeling_1","sub");
                         }
 
                         if (this.scene == "青助くんのきもちを考える2")
                         {
                             this.dataChapter3.AosukesSizeOfFeelingAfterUsedItem = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
 
-                            this.GoTo("think_aosuke's_feeling_2");
+                            this.GoTo("think_aosuke's_feeling_2","sub");
                         }
 
                         if (this.scene == "キミちゃんのきもちを考える2")
                         {
                             this.dataChapter3.KimisSizeOfFeelingAfterUsedItem = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
 
-                            this.GoTo("think_kimi's_feeling_2");
+                            this.GoTo("think_kimi's_feeling_2","sub");
                         }
 
                         if (this.scene == "赤丸くんのきもちを考える")
                         {
                             this.dataChapter3.AkamarusSizeOfFeelingAfterUsedItem = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
 
-                            this.GoTo("think_akamaru's_feeling");
+                            this.GoTo("think_akamaru's_feeling","sub");
                         }
                     }
                     else
@@ -2275,7 +2283,7 @@ namespace KokoroUpTime
 
                 if (button.Name == "SelectHotWordButton")
                 {
-                    this.GoTo("select_hot_word_key");
+                    this.GoTo("select_hot_word_key","sub");
                 }
             }
 
@@ -2321,16 +2329,42 @@ namespace KokoroUpTime
             }
         }
 
-        private void GoTo(string tag)
+        private void GoTo(string tag, string tagType)
         {
-            foreach (var (scenario, index) in this.scenarios.Indexed())
+            if (tagType == "sub")
             {
-                if (scenario[0] == "sub" && scenario[1] == tag)
+                foreach (var (scenario, index) in this.scenarios.Indexed())
                 {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                    if (scenario[0] == "sub" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                    if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
                 }
             }
+            else if (tagType == "scene")
+            {
+                foreach (var (scenario, index) in this.scenarios.Indexed())
+                {
+                    if (scenario[0] == "scene" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                }
+            }
+
         }
 
         private void SetBGM(string soundFile, bool isLoop, int volume)

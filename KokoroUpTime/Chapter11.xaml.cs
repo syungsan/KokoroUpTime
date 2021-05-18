@@ -615,8 +615,16 @@ namespace KokoroUpTime
 
                     this.SetInputMethod();
 
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    //前回のつづきからスタート
+                    if (this.dataProgress.CurrentScene != null)
+                    {
+                        this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
 
                     break;
 
@@ -1589,21 +1597,21 @@ namespace KokoroUpTime
                             switch (this.scene)
                             {
                                 case "チャレンジタイム！　パート①":
-                                    this.GoTo("challenge_time_part1");
+                                    this.GoTo("challenge_time_part1","sub");
                                     break;
 
                                 case "チャレンジタイム！　パート②":
-                                    this.GoTo("think_akamaru_method");
+                                    this.GoTo("think_akamaru_method","sub");
                                     break;
 
                                 case "グループアクティビティ":
-                                    this.GoTo("think_aosuke_method");
+                                    this.GoTo("think_aosuke_method","sub");
                                     break;
                             }
                         }
                         else
                         {
-                            this.GoTo(GoToLabel);
+                            this.GoTo(GoToLabel,"sub");
                         }
                     }
                     break;
@@ -2421,15 +2429,15 @@ namespace KokoroUpTime
 
                 else if (button.Name == "KindOfFeelingInputButton")
                 {
-                    this.GoTo("select_kind_of_feeling");
+                    this.GoTo("select_kind_of_feeling","sub");
                 }
                 else if (button.Name == "SizeOfFeelingInputButton")
                 {
-                    this.GoTo("select_size_of_feeling");
+                    this.GoTo("select_size_of_feeling","sub");
                 }
                 else if (button.Name == "BranchButton1")
                 {
-                    this.GoTo("manga");
+                    this.GoTo("manga","sub");
                 }
                 else if (Regex.IsMatch(button.Name, "InputButton."))
                 {
@@ -2438,15 +2446,15 @@ namespace KokoroUpTime
                         switch (this.scene)
                         {
                             case "チャレンジタイム！　パート①":
-                                this.GoTo("canvas_input_akamaru_other_solution");
+                                this.GoTo("canvas_input_akamaru_other_solution","sub");
                                 break;
 
                             case "チャレンジタイム！　パート②":
-                                this.GoTo("canvas_input_akamaru_many_solution");
+                                this.GoTo("canvas_input_akamaru_many_solution","sub");
                                 break;
 
                             case "グループアクティビティ":
-                                this.GoTo("canvas_input_aosuke_many_solution");
+                                this.GoTo("canvas_input_aosuke_many_solution","sub");
                                 break;
                         }
                     }
@@ -2455,17 +2463,17 @@ namespace KokoroUpTime
                         switch (this.scene)
                         {
                             case "チャレンジタイム！　パート①":
-                                this.GoTo("keyboard_input_akamaru_other_solution");
+                                this.GoTo("keyboard_input_akamaru_other_solution","sub");
                                 this.InputTextBox1.Focus();
                                 break;
 
                             case "チャレンジタイム！　パート②":
-                                this.GoTo("keyboard_input_akamaru_many_solution");
+                                this.GoTo("keyboard_input_akamaru_many_solution","sub");
                                 this.InputTextBox2_1.Focus();
                                 break;
 
                             case "グループアクティビティ":
-                                this.GoTo("keyboard_input_aosuke_many_solution");
+                                this.GoTo("keyboard_input_aosuke_many_solution","sub");
                                  this.InputTextBox3_1.Focus();
                                 break;
                         }
@@ -2556,12 +2564,12 @@ namespace KokoroUpTime
                     switch (this.scene)
                     {
                         case "チャレンジタイム！　パート①":
-                            this.GoTo("check_akamaru_situation");
+                            this.GoTo("check_akamaru_situation","sub");
                             break;
 
                         case "チャレンジタイム！　パート②":
                         case "グループアクティビティ":
-                            this.GoTo("check_tips_for_thinking");
+                            this.GoTo("check_tips_for_thinking","sub");
                             break;
                     }
                 }
@@ -2627,7 +2635,7 @@ namespace KokoroUpTime
                 else if(button.Name == "RetryButton")
                 {
                     this.InitializedAosukeMethodListView();
-                    this.GoTo("evaluate_aosuke_method");
+                    this.GoTo("evaluate_aosuke_method","sub");
                 }
             }
         }
@@ -2733,25 +2741,42 @@ namespace KokoroUpTime
             Cancel
         }
 
-        private void GoTo(string tag)
+        private void GoTo(string tag, string tagType)
         {
-            foreach (var (scenario, index) in this.scenarios.Indexed())
+            if (tagType == "sub")
             {
-                if (scenario[0] == "sub" && scenario[1] == tag)
+                foreach (var (scenario, index) in this.scenarios.Indexed())
                 {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                    if (scenario[0] == "sub" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
-                }
-                if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
-                {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                        break;
+                    }
+                    if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
+                        break;
+                    }
                 }
             }
+            else if (tagType == "scene")
+            {
+                foreach (var (scenario, index) in this.scenarios.Indexed())
+                {
+                    if (scenario[0] == "scene" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                }
+            }
+
         }
 
         private BitmapSource Image2Gray(ImageSource originalImageSource)
