@@ -29,6 +29,7 @@ using FileIOUtils;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using System.IO;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Logical;
+using OfficeOpenXml;
 
 namespace KokoroUpTime
 {
