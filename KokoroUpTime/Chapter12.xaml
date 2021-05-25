@@ -1,0 +1,776 @@
+﻿<Page x:Class="KokoroUpTime.Chapter12"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
+      xmlns:local="clr-namespace:KokoroUpTime"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:outline_marker ="clr-namespace:OutlineTextMaker"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="Chapter12" Loaded="Window_Loaded">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Animation.xaml"/>
+                <ResourceDictionary Source="Styles.xaml"/>
+                <ResourceDictionary>
+                    <DataTemplate x:Key="BothInCorrect">
+                        <Grid Width="320" Height="480" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Image  Height="230" VerticalAlignment="Top" Source="{Binding ItemImageSource}"/>
+                            <Border x:Name="ItemReviewBorder" Background="White" Opacity="0.7" BorderThickness="0,0,0,0" Height="130" Width="300" Margin="5,340,5,5">
+                                <Grid>
+                                    <Rectangle Stroke="Black" StrokeDashArray="5" StrokeThickness="3"/>
+                                    <TextBlock Text="？？？" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic" Margin="3"/>
+                                </Grid>
+                            </Border>
+                            <Border x:Name="ItemNameBorder" Background="White" Opacity="0.8" Height="100" Width="250" CornerRadius="120" Margin="30,214,30,166" BorderBrush="Black" BorderThickness="3">
+                                <TextBlock Text="？？？" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic"/>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate x:Key="CorrectItemName">
+                        <Grid Width="310" Height="480" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Image  Height="230" VerticalAlignment="Top" Source="{Binding ItemImageSource}"/>
+                            <Border x:Name="ItemReviewBorder" Background="White" Opacity="0.8" BorderThickness="0,0,0,0" Height="130" Width="300" Margin="5,340,5,5">
+                                <Grid>
+                                    <Rectangle Stroke="Black" StrokeDashArray="5" StrokeThickness="3"/>
+                                    <TextBlock Text="？？？" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic" Margin="3"/>
+                                </Grid>
+                            </Border>
+                            <Border x:Name="ItemNameBorder" Background="White" Height="100" Width="250" CornerRadius="120" Margin="30,214,30,166" BorderBrush="Red" BorderThickness="3">
+                                <TextBlock Text="{Binding ItemName}" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" FontFamily="Yu Gothic"/>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate x:Key="CorrectItemReview">
+                        <Grid Width="310" Height="480" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Image  Height="230" VerticalAlignment="Top" Source="{Binding itemImageSource}"/>
+                            <Border x:Name="ItemReviewBorder" Background="White"  Height="130" Width="300" Margin="5,340,5,5">
+                                <Grid>
+                                    <Rectangle Stroke="Red" StrokeDashArray="5" StrokeThickness="3"/>
+                                    <TextBlock Text="{Binding ItemReviewtext}" Foreground="Red" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic" Margin="3"/>
+                                </Grid>
+                            </Border>
+                            <Border x:Name="ItemNameBorder" Background="White" Opacity="0.8" Height="100" Width="250" CornerRadius="120" Margin="30,214,30,166" BorderBrush="Black" BorderThickness="3">
+                                <TextBlock Text="？？？" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic"/>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate x:Key="BothCorrect">
+                        <Grid Width="310" Height="480" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Image  Height="230" VerticalAlignment="Top" Source="{Binding ItemImageSource}"/>
+                            <Border x:Name="ItemReviewBorder" Background="White" Height="130" Width="300" Margin="5,340,5,5">
+                                <Grid>
+                                    <Rectangle Stroke="Red" StrokeDashArray="5" StrokeThickness="3"/>
+                                    <TextBlock Text="{Binding ItemReviewText}" Foreground="Red" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic" Margin="3"/>
+                                </Grid>
+                            </Border>
+                            <Border x:Name="ItemNameBorder" Background="White" Height="100" Width="250" CornerRadius="120" Margin="30,214,30,166" BorderBrush="Red" BorderThickness="3">
+                                <TextBlock Text="{Binding ItemName}" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic"/>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                    <Style TargetType="{x:Type Button}" x:Key="ItemBorder01">
+                        <Setter Property="FontSize" Value="25" />
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontFamily" Value="Yu Gothic"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ContentControl}">
+                                    <Border  Background="White" Height="100" Width="250" CornerRadius="100" BorderBrush="Black" BorderThickness="3">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Viewbox x:Name="Viewbox">
+        <Grid x:Name="MainGrid" Height="1080" Width="1920" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <Grid x:Name="BaseGrid">
+                <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_mokume2.png"/>
+            </Grid>
+            <Grid x:Name="TitleGrid"  Margin="0,50,0,800" RenderTransformOrigin="0.5,0.5" Visibility="Visible" d:IsHidden="True">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Border x:Name="TitleBorder" Background="#FF4472C4">
+                    <Grid>
+                        <outline_marker:OutlineText x:Name="LetsSolveProblemsSceneTitle" Style="{StaticResource Orange}" Text="さらにいろいろな問題をかいけつしよう！" FontSize="90" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <outline_marker:OutlineText x:Name="StepToSolveProblemSceneTitle" Style="{StaticResource Orange}" Text="問題をかいけつする３つのステップ" FontSize="90" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
+                        <outline_marker:OutlineText x:Name="LetsUseItemSceneTitle" Style="{StaticResource Orange}" Text="３色だんごをつかっていろいろな問題を解決しよう！" FontSize="80" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"/>
+                        <TextBlock x:Name="ChallengeTImeTitleText" Style="{StaticResource ShadowText}" Text="チャレンジタイム！" Foreground="#FF9966FF" FontSize="140" TextAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
+                <Border x:Name="MangaTitleBorder" Margin="86,24,20,0" BorderBrush="Black" BorderThickness="6" Height="98" Width="1752" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <outline_marker:OutlineText x:Name="MangaTitleOutlinetext" Text="第１２回　学んだことをまとめよう！" Style="{StaticResource MangaTitle}" />
+                </Border>
+                <Image x:Name="MangaImage" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Images/manga1-1.png" Margin="0,121,0,0" RenderTransformOrigin="0.5,0.5" Height="880" Width="1788">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Button x:Name="MangaPrevBackButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,989,1616,-2" Click="Button_Click">
+                    <Image x:Name="MangaPrevBackImage" Source="/Images/prev_back_.png"/>
+                </Button>
+            </Grid>
+            <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
+                <Image x:Name="ItemCenterUpImage" HorizontalAlignment="Center" Height="691" VerticalAlignment="Top" Width="490" Source="/Images/item02_solo.png" Margin="0,55,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="ItemReviewImage" HorizontalAlignment="Center" Height="780" VerticalAlignment="Center" Width="1529" Source="/Images/item02_review.png"/>
+            </Grid>
+            <Grid x:Name="SessionGrid" d:IsHidden="True">
+                <Image x:Name="SessionTitleImage" Source="/Images/challenge_time.png" Margin="226,75,906,917" d:IsHidden="True"/>
+                <Grid x:Name="SessionFrameGrid" Width="1010" Height="328" Margin="226,243,684,509" d:IsHidden="True">
+                    <Image x:Name="SessionFrameImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/white_frame.png" Stretch="Fill"/>
+                    <TextBlock x:Name="SessionSubTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" FontSize="48" FontWeight="Bold" Margin="44,32,0,0" HorizontalAlignment="Left" Width="745"/>
+                    <TextBlock x:Name="SessionSentenceTextBlock" HorizontalAlignment="Left" Margin="89,112,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="168" Width="865" FontSize="48"/>
+                    <TextBlock x:Name="SessionStarTextBlock" HorizontalAlignment="Left" Margin="35,109,0,0" VerticalAlignment="Top" FontSize="48" RenderTransformOrigin="0.345,0.474" FontWeight="Bold" Text="☆" TextAlignment="Center"/>
+                </Grid>
+                <Image x:Name="SessionTitleRightImage" Source="/Images/challenge_time.png" Margin="726,75,406,917"/>
+                <Grid x:Name="SessionFrameRightGrid" Width="1010" Height="328" Margin="726,243,184,509">
+                    <Image x:Name="SessionFrameRightImage" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/white_frame.png" Stretch="Fill"/>
+                    <TextBlock x:Name="SessionSubTitleRightTextBlock" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" FontSize="48" FontWeight="Bold" Margin="44,32,0,0" HorizontalAlignment="Left" Width="745"/>
+                    <TextBlock x:Name="SessionSentenceRightTextBlock" HorizontalAlignment="Left" Margin="89,112,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="168" Width="865" FontSize="48"/>
+                    <TextBlock x:Name="SessionStarRightTextBlock" HorizontalAlignment="Left" Margin="35,109,0,0" VerticalAlignment="Top" FontSize="48" RenderTransformOrigin="0.345,0.474" FontWeight="Bold" Text="☆" TextAlignment="Center"/>
+                </Grid>
+            </Grid>
+            <Grid x:Name="EndingGrid" d:IsHidden="True">
+                <Image x:Name="EndingTitleImage" Source="Images/title.png" VerticalAlignment="Top" HorizontalAlignment="Center" Height="150" Margin="0,100"/>
+                <Image x:Name="KimiEndingImage" Width="200" Height="600"  Source="/Images/kimi_stand_01.png" Margin="860,278,860,202"/>
+                <Image x:Name="AosukeEndingImage" Width="200" Height="600" Source="/Images/aosuke_stand_01.png" Margin="1220,278,500,202"/>
+                <Image x:Name="AkamaruEndingImage" Width="200" Height="600" Source="/Images/akamaru_stand_01.png" Margin="506,278,1214,202"/>
+                <Button x:Name="ReturnToTitleButton" Height="200" Width="400" Style="{StaticResource ShadowButton}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,50" Click="Button_Click">
+                    <Grid>
+                        <Image Source="Images/menu_bubble.png" Stretch="Fill"/>
+                        <TextBlock  Text="スタート画面へ" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                    </Grid>
+                </Button>
+            </Grid>
+            <Grid x:Name="ChallengeTimeGrid" MouseMove="OperationArea_MouseMove" MouseLeave="OperationArea_MouseLeave" MouseUp="OperationArea_MouseUp">
+                <StackPanel x:Name="ItemQuestionStackPanel" Orientation="Horizontal" VerticalAlignment="Top" Height="480">
+                    <Grid x:Name="ItemQuestionGrid01"  Width="320" Height="480" VerticalAlignment="Top">
+                        <Image x:Name="ItemQuestionImage01" Height="220" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                        <Border x:Name="ItemReviewBorder01" Background="White" BorderBrush="Black" Opacity="0.7" BorderThickness="0,0,0,0" Height="130" Width="300" Margin="5,340,5,5" >
+                            <Grid>
+                                <Rectangle Stroke="{Binding ElementName=ItemReviewBorder01 ,Path=BorderBrush}" StrokeDashArray="5" StrokeThickness="3"/>
+                                <TextBlock x:Name="ItemReviewText01" Foreground="{Binding ElementName =ItemReviewBorder01, Path=BorderBrush}" Text="？？？" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic" Margin="3"/>
+                            </Grid>
+                        </Border>
+                        <Border x:Name="ItemNameBorder01" Background="White" Opacity="0.8" Height="100" Width="250" CornerRadius="120" Margin="30,214,30,166" BorderBrush="Black" BorderThickness="3">
+                            <TextBlock x:Name="ItemNameText01" Text="？？？" Foreground="{Binding ElementName =ItemNameBorder01, Path=BorderBrush}" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic"/>
+                        </Border>
+                    </Grid>
+                    <Grid x:Name="ItemQuestionGrid02" Width="320" Height="480" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Image  x:Name="ItemQuestionImage02" Height="220" VerticalAlignment="Top"/>
+                        <Border x:Name="ItemReviewBorder02" Background="White" BorderBrush="Black" Opacity="0.7" BorderThickness="0,0,0,0" Height="130" Width="300" Margin="5,340,5,5" >
+                            <Grid>
+                                <Rectangle Stroke="{Binding ElementName=ItemReviewBorder02 ,Path=BorderBrush}" StrokeDashArray="5" StrokeThickness="3"/>
+                                <TextBlock x:Name="ItemReviewText02" Foreground="{Binding ElementName =ItemReviewBorder02, Path=BorderBrush}" Text="？？？" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic" Margin="3"/>
+                            </Grid>
+                        </Border>
+                        <Border x:Name="ItemNameBorder02" Background="White" Opacity="0.8" Height="100" Width="250" CornerRadius="120" Margin="30,214,30,166" BorderBrush="Black" BorderThickness="3">
+                            <TextBlock x:Name="ItemNameText02" Foreground="{Binding ElementName =ItemNameBorder02, Path=BorderBrush}" Text="？？？" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic"/>
+                        </Border>
+                    </Grid>
+                    <Grid x:Name="ItemQuestionGrid03" Width="320" Height="480" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Image x:Name="ItemQuestionImage03"  Height="220" VerticalAlignment="Top"/>
+                        <Border x:Name="ItemReviewBorder03" Background="White" Opacity="0.7" BorderThickness="0,0,0,0" Height="130" Width="300" Margin="5,340,5,5" >
+                            <Grid>
+                                <Rectangle Stroke="{Binding ElementName=ItemReviewBorder03 ,Path=BorderBrush}" StrokeDashArray="5" StrokeThickness="3"/>
+                                <TextBlock x:Name="ItemReviewText03" Foreground="{Binding ElementName =ItemReviewBorder03, Path=BorderBrush}" Text="？？？" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic" Margin="3"/>
+                            </Grid>
+                        </Border>
+                        <Border x:Name="ItemNameBorder03" Background="White" Opacity="0.8" Height="100" Width="250" CornerRadius="120" Margin="30,214,30,166" BorderBrush="Black" BorderThickness="3">
+                            <TextBlock x:Name="ItemNameText03" Foreground="{Binding ElementName =ItemNameBorder03, Path=BorderBrush}" Text="？？？" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic"/>
+                        </Border>
+                    </Grid>
+                    <Grid x:Name="ItemQuestionGrid04" Width="320" Height="480" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Image x:Name="ItemQuestionImage04"  Height="220" VerticalAlignment="Top"/>
+                        <Border x:Name="ItemReviewBorder04" Background="White" BorderBrush="Black" Opacity="0.7" BorderThickness="0,0,0,0" Height="130" Width="300" Margin="5,340,5,5" >
+                            <Grid>
+                                <Rectangle Stroke="{Binding ElementName=ItemReviewBorder04 ,Path=BorderBrush}" StrokeDashArray="5" StrokeThickness="3"/>
+                                <TextBlock x:Name="ItemReviewText04" Foreground="{Binding ElementName =ItemReviewBorder04, Path=BorderBrush}" Text="？？？" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic" Margin="3"/>
+                            </Grid>
+                        </Border>
+                        <Border x:Name="ItemNameBorder04" Background="White" Opacity="0.8" Height="100" Width="250" CornerRadius="120" Margin="30,214,30,166" BorderBrush="Black" BorderThickness="3">
+                            <TextBlock x:Name="ItemNameText04" Foreground="{Binding ElementName =ItemNameBorder04, Path=BorderBrush}" Text="？？？" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic"/>
+                        </Border>
+                    </Grid>
+                    <Grid x:Name="ItemQuestionGrid05" Width="320" Height="480" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Image x:Name="ItemQuestionImage05" Height="220" VerticalAlignment="Top"/>
+                        <Border x:Name="ItemReviewBorder05" Background="White" BorderBrush="Black" Opacity="0.7" BorderThickness="0,0,0,0" Height="130" Width="300" Margin="5,340,5,5" >
+                            <Grid>
+                                <Rectangle Stroke="{Binding ElementName=ItemReviewBorder05 ,Path=BorderBrush}" StrokeDashArray="5" StrokeThickness="3"/>
+                                <TextBlock x:Name="ItemReviewText05" Foreground="{Binding ElementName =ItemReviewBorder05, Path=BorderBrush}" Text="？？？" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic" Margin="3"/>
+                            </Grid>
+                        </Border>
+                        <Border x:Name="ItemNameBorder05" Background="White" Opacity="0.8" Height="100" Width="250" CornerRadius="120" Margin="30,214,30,166" BorderBrush="Black" BorderThickness="3">
+                            <TextBlock x:Name="ItemNameText05" Foreground="{Binding ElementName =ItemNameBorder05, Path=BorderBrush}" Text="？？？" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic"/>
+                        </Border>
+                    </Grid>
+                    <Grid x:Name="ItemQuestionGrid06" Width="320" Height="480" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Image x:Name="ItemQuestionImage06" Height="220" VerticalAlignment="Top"/>
+                        <Border x:Name="ItemReviewBorder06" Background="White" BorderBrush="Black" Opacity="0.7" BorderThickness="0,0,0,0" Height="130" Width="300" Margin="5,340,5,5" >
+                            <Grid>
+                                <Rectangle Stroke="{Binding ElementName=ItemReviewBorder06 ,Path=BorderBrush}" StrokeDashArray="5" StrokeThickness="3"/>
+                                <TextBlock x:Name="ItemReviewText06" Foreground="{Binding ElementName =ItemReviewBorder06, Path=BorderBrush}" Text="？？？" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic" Margin="3"/>
+                            </Grid>
+                        </Border>
+                        <Border x:Name="ItemNameBorder06" Background="White" Opacity="0.8" Height="100" Width="250" CornerRadius="120" Margin="30,214,30,166" BorderBrush="Black" BorderThickness="3">
+                            <TextBlock x:Name="ItemNameText06" Foreground="{Binding ElementName =ItemNameBorder06, Path=BorderBrush}" Text="？？？" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic"/>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+                <!--<ItemsControl x:Name="ItemListView" Height="480" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="{x:Type ContentPresenter}">
+                            <Setter Property="VerticalAlignment" Value="Top"/>
+                            <Setter Property="OverridesDefaultStyle" Value="True" />
+                            <Setter Property="ContentTemplate" Value="{StaticResource BothCorrect}"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=IsCorrectItemName}" Value="False"/>
+                                        <Condition Binding="{Binding Path=IsCorrectItemReview}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="ContentTemplate" Value="{StaticResource BothInCorrect}"/>
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=IsCorrectItemName}" Value="True"/>
+                                        <Condition Binding="{Binding Path=IsCorrectItemReview}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="ContentTemplate" Value="{StaticResource CorrectItemName}"/>
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=IsCorrectItemName}" Value="False"/>
+                                        <Condition Binding="{Binding Path=IsCorrectItemReview}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="ContentTemplate" Value="{StaticResource CorrectItemReview}"/>
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=IsCorrectItemName}" Value="True"/>
+                                        <Condition Binding="{Binding Path=IsCorrectItemReview}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="ContentTemplate" Value="{StaticResource BothCorrect}"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                </ItemsControl>-->
+                <Border Height="500" BorderBrush="Black" BorderThickness="5" CornerRadius="50" Margin="62,540,960,40"/>
+                <Border Height="500" BorderBrush="Black" BorderThickness="5" CornerRadius="50" Margin="993,540,10,40"/>
+                <Border Height="100" Width="250" CornerRadius="100" Background="White" Margin="386,490,1284,490" BorderBrush="Black" BorderThickness="3">
+                    <TextBlock Text="なまえ"  FontSize="45" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="MS PGothic"/>
+                </Border>
+                <Border Height="100" Width="230" Background="White" Margin="1326,475,294,475">
+                    <Grid>
+                        <Rectangle Stroke="Black" StrokeDashArray="5" StrokeThickness="3"/>
+                        <TextBlock Text="せつめい" FontSize="30" FontWeight="Black" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Yu Gothic" Margin="3"/>
+                    </Grid>
+                </Border>
+                <Grid x:Name="ItemNameButtonGrid" Margin="62,540,960,40">
+                    <Button x:Name="ItemNameButton01" Style="{StaticResource ItemBorder01}" Content="きもちセンサー" Height="100" Width="250" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp" Margin="141,200,507,200"/>
+                    <Button x:Name="ItemNameButton02" Style="{StaticResource ItemBorder01}" Content="うきうきシューズ" Height="100" Width="250" Margin="533,320,115,80" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp"/>
+                    <Button x:Name="ItemNameButton03" Style="{StaticResource ItemBorder01}" Content="あったかスープ" Height="100" Width="250" Margin="533,70,115,330" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp"/>
+                    <Button x:Name="ItemNameButton04" Style="{StaticResource ItemBorder01}" Content="はきはきスピーカー" Height="100" Width="250" Margin="141,320,507,80" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp"/>
+                    <Button x:Name="ItemNameButton05" Style="{StaticResource ItemBorder01}" Content="ゆったりんご" Height="100" Width="250" Margin="533,200,115,200" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp"/>
+                    <Button x:Name="ItemNameButton06" Style="{StaticResource ItemBorder01}" Content="すてきステッキ" Height="100" Width="250" Margin="141,70,507,330" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp"/>
+                </Grid>
+                <Grid x:Name="ItemReviewButtonGrid" Margin="993,540,10,40">
+                    <Button x:Name="ItemReviewButton01" Style="{StaticResource ItemBorder02}" Content="問題をかいけつするための&#10;ステップを見つけられます。" Height="130" Width="300" Margin="528,197,89,173" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp"/>
+                    <Button x:Name="ItemReviewButton02" Style="{StaticResource ItemBorder02}" Content="ちょっぴりうきうきする活動を&#10;見つけられます" Height="130" Width="300" Margin="528,55,89,315" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp"/>
+                    <Button x:Name="ItemReviewButton03" Style="{StaticResource ItemBorder02}" Content="自分に合った&#10;リラックスの方法を&#10;見つけられます。" Height="130" Width="300" Margin="528,332,89,38" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp"/>
+                    <Button x:Name="ItemReviewButton04" Style="{StaticResource ItemBorder02}" Content="周りの人に温かい言葉を&#10;かけられるようになります。" Height="130" Width="300" Margin="158,332,458,38" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp"/>
+                    <Button x:Name="ItemReviewButton05" Style="{StaticResource ItemBorder02}" Content="自分や周りの人の素敵な性格を&#10;見つけられます" Height="130" Width="300" Margin="158,197,458,173" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp"/>
+                    <Button x:Name="ItemReviewButton06" Style="{StaticResource ItemBorder02}" Content="上手に頼んだり断ったり、&#10;自分の気持ちを&#10;はきはき伝えられます。" Height="130" Width="300" Margin="158,62,458,308" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp"/>
+                </Grid>
+            </Grid>
+            <Grid x:Name="GroupeActivityGrid" d:IsHidden="True">
+                <Border CornerRadius="30" Margin="320,5,320,862" >
+                    <Border.Background>
+                        <SolidColorBrush Color="#FFFFD966" Opacity="0.8"/>
+                    </Border.Background>
+                    <Border Background="White" CornerRadius="30" BorderBrush="#FFFFC000" BorderThickness="3" Margin="66,24,66,24">
+                        <TextBlock x:Name="SelectedSceneTitle" Text="場面３　友だちと意見が合わず1人でいる" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60" FontFamily="MS PGothic"/>
+                    </Border>
+                </Border>
+                <Border CornerRadius="30" Margin="38,230,497,130" >
+                    <Border.Background>
+                        <SolidColorBrush Color="#FFFFD966" Opacity="0.8"/>
+                    </Border.Background>
+                    <Grid>
+                        <Button x:Name="BackItemMethodButton" HorizontalAlignment="Left" Width="113" RenderTransformOrigin="0.5,0.5" Click="Button_Click">
+                            <Button.RenderTransform>
+                                <ScaleTransform ScaleX="-1"/>
+                            </Button.RenderTransform>
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="OverridesDefaultStyle" Value="True"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ContentControl}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0,28,28,0">
+                                                    <ContentPresenter/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFE7F3FF"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Path Data="M10,0 l100,70 -100,70" StrokeThickness="10"  Fill="White" VerticalAlignment="Center"/>
+                        </Button>
+                        <Button x:Name="NextItemMethodButton" HorizontalAlignment="Right" Width="113" Click="Button_Click">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="OverridesDefaultStyle" Value="True"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ContentControl}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0,28,28,0">
+                                                    <ContentPresenter/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFE7F3FF"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Path Data="M10,0 l100,70 -100,70" StrokeThickness="10"  Fill="White" VerticalAlignment="Center"/>
+                        </Button>
+                        <Border Background="White" CornerRadius="30" BorderBrush="#FFFFC000" BorderThickness="3" Width="1159" Height="648" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <ItemsControl x:Name="InputItemMethodItemsControl">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <TextBlock Text="{Binding SelectedItemTitle}" FontSize="50" FontFamily="MS PGothic" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,91,0,0"/>
+                                            <Image x:Name="SelectItemImage" Source="{Binding SelectedItemImageSource}" Height="200" Width="200" Margin="260,15" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                            <Rectangle Height="200" Width="200" StrokeDashArray="4" Fill="{x:Null}" StrokeThickness="4" Stroke="#FFFFC000" Margin="234,16,719,426" />
+                                            <TextBlock Text="使い方：" FontSize="50" FontFamily="MS PGothic" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="39,227,0,0"/>
+                                            <Button x:Name="InputButton" Background="Transparent" Height="405" Width="910" BorderThickness="3" BorderBrush="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10" Click="Button_Click">
+                                                <Grid Margin="10">
+                                                    <TextBlock x:Name ="ViewTextBlock" FontSize="54" Height="405" Width="910" Style="{StaticResource OutputTextBlock}" Text="{Binding ItemMethodText}"/>
+                                                    <InkCanvas x:Name ="ViewCanvas" Height="405" Width="910" Style="{StaticResource OutputInkCanvas}" Strokes="{Binding ItemMethodStroke}"/>
+                                                </Grid>
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <!--<Grid>
+                                <TextBlock Text="{Binding SelectedItemTitle}" FontSize="50" FontFamily="MS PGothic" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,91,0,0"/>
+                                <Image x:Name="SelectItemImage" Source="{Binding SelectedItemImageSource}" Height="200" Width="200" Margin="260,15" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                <Rectangle Height="200" Width="200" StrokeDashArray="4" Fill="{x:Null}" StrokeThickness="4" Stroke="#FFFFC000" Margin="234,16,719,426" />
+                                <TextBlock Text="使い方：" FontSize="50" FontFamily="MS PGothic" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="39,227,0,0"/>
+                                <Button x:Name="InputButton" Background="Transparent" Height="405" Width="910" BorderThickness="3" BorderBrush="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10" Click="Button_Click">
+                                    <Grid>
+                                        <TextBlock Style="{StaticResource OutputTextBlock}" Text="{Binding ItemMethodText}"/>
+                                        <InkCanvas Style="{StaticResource OutputInkCanvas}" Strokes="{Binding ItemMethodStroke}"/>
+                                    </Grid>
+                                </Button>
+                            </Grid>-->
+                        </Border>
+                    </Grid>
+                </Border>
+                <Border CornerRadius="30" Margin="1461,230,10,210" >
+                    <Border.Background>
+                        <SolidColorBrush Color="#FFFFD966" Opacity="0.8"/>
+                    </Border.Background>
+                    <Grid x:Name="SelectItemImageGrid">
+                        <TextBlock Text="発明品をえらんでね" FontFamily="MS PGothic" FontWeight="Bold"  VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="30" Margin="0,10,0,0"/>
+                        <Image MouseDown="Image_MouseDown" Source="Images/item01_solo.png" Height="130" Width="130" Margin="6,66,294,424"/>
+                        <Image MouseDown="Image_MouseDown" Source="Images/item02_solo.png" Height="130" Width="130" Margin="106,66,110,424"/>
+                        <Image MouseDown="Image_MouseDown" Source="Images/item03_solo.png" Height="130" Width="130" Margin="256,66,0,424"/>
+                        <Image MouseDown="Image_MouseDown" Source="Images/item04_solo.png" Height="130" Width="130" Margin="6,200,294,260"/>
+                        <Image MouseDown="Image_MouseDown" Source="Images/item05_solo.png" Height="130" Width="130" Margin="106,200,110,260"/>
+                        <Image MouseDown="Image_MouseDown" Source="Images/item06_solo.png" Height="130" Width="130" Margin="256,200,0,260"/>
+                        <Image MouseDown="Image_MouseDown" Source="Images/item07_solo.png" Height="130" Width="130" Margin="6,360,294,130"/>
+                        <Image MouseDown="Image_MouseDown" Source="Images/item08_solo.png" Height="130" Width="130" Margin="106,360,110,130"/>
+                        <Image MouseDown="Image_MouseDown" Source="Images/item09_solo.png" Height="130" Width="130" Margin="256,360,0,130"/>
+                        <Image MouseDown="Image_MouseDown" Source="Images/item10_solo.png" Height="130" Width="130" Margin="0,500,150,0"/>
+                        <Image MouseDown="Image_MouseDown" Source="Images/item11_solo.png" Height="130" Width="130" Margin="206,500,100,0"/>
+                    </Grid>
+                </Border>
+                <Button x:Name="CheckItemBookSmallButton" Style="{StaticResource ShadowButton}" Height="194" Width="258" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="38,10,0,0" Click="Button_Click">
+                    <Image Source="Images/item_book.png"/>
+                </Button>
+            </Grid>
+            <Grid x:Name="ShirojiGrid" d:IsHidden="True" >
+                <Image x:Name="ShirojiRightImage" RenderTransformOrigin="0.5,0.5"  Width="579" Height="627" Margin="1271,343,70,110" Source="/Images/shiroji_04.png" d:IsHidden="True">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="ShirojiLeftImage" RenderTransformOrigin="0.5,0.5" Width="579" Height="627" Source="/Images/shiroji_04.png" Margin="71,343,1270,110" d:IsHidden="True">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="ShirojiRightUpImage" HorizontalAlignment="Left" Height="627" VerticalAlignment="Top" Width="579" Source="/Images/shiroji_04.png" RenderTransformOrigin="0.5,0.5" Margin="1128,62,0,0" d:IsHidden="True">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="ShirojiSmallRightUpImage" HorizontalAlignment="Left" Height="293" Margin="1560,51,0,0" VerticalAlignment="Top" Width="265" Source="/Images/shiroji_04.png" Stretch="Uniform" StretchDirection="Both"/>
+                <Image x:Name="ShirojiSmallRightCenterImage" HorizontalAlignment="Right" Source="Images/shiroji_04.png" Margin="0,490,0,130" Width="320" d:IsHidden="True"/>
+            </Grid>
+            <Grid x:Name="ChildrenStandGrid" Visibility="Visible" d:IsHidden="True">
+                <Image x:Name="ChildrenStandLeftImage" RenderTransformOrigin="0.5,0.5" Source="/Images/aosuke_stand_01.png" Width="310" Height="765" Margin="210,237,1287,78">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="ChildrenStandRightImage" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Height="765" Margin="1285,237,0,0" VerticalAlignment="Top" Width="310" Source="/Images/akamaru_stand_01.png">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </Grid>
+            <Grid x:Name="ChildrenFaceGrid" Visibility="Visible" d:IsHidden="True">
+                <Image x:Name="ChildrenFaceLeftImage" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Height="550" VerticalAlignment="Top" Width="500" Margin="200,200">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="ChildrenFaceRightImage" HorizontalAlignment="Right" Height="550" VerticalAlignment="Top" Width="500"  Margin="100,200" Source="/Images/akamaru_face_03.png" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </Grid>
+            <Grid x:Name="ItemBookGrid" d:IsHidden="True" >
+                <TextBlock x:Name="ItemBookTitleTextBlock" Margin="38,20,1387,935" Text="アイテム図鑑" TextWrapping="Wrap" FontSize="90" Foreground="White" FontWeight="Bold"/>
+                <Grid x:Name="ItemMainGrid">
+                    <Button x:Name="Item01MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="24,38,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Image x:Name="Item01MainImage" Source="/Images/item01_book.png"/>
+                    </Button>
+                    <Button x:Name="Item02MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="339,38,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Image x:Name="Item02MainImage" Source="/Images/item02_book.png"/>
+                    </Button>
+                    <Button x:Name="Item03MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="653,38,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Image x:Name="Item03MainImage" Source="/Images/item03_book.png"/>
+                    </Button>
+                    <Button x:Name="Item04MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="968,38,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Image x:Name="Item04MainImage" Source="/Images/item04_book.png"/>
+                    </Button>
+                    <Button x:Name="Item05MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="1283,38,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Image x:Name="Item05MainImage" Source="/Images/item05_book.png"/>
+                    </Button>
+                    <Button x:Name="Item06MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="1598,38,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Image x:Name="Item06MainImage" Source="/Images/item06_book.png"/>
+                    </Button>
+                    <Button x:Name="Item07MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="24,510,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Image x:Name="Item07MainImage" Source="/Images/item07_book.png"/>
+                    </Button>
+                    <Button x:Name="Item08MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="339,510,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Image x:Name="Item08MainImage" Source="/Images/item08_book.png"/>
+                    </Button>
+                    <Button x:Name="Item09MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="653,510,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Image x:Name="Item09MainImage" Source="/Images/item09_book.png"/>
+                    </Button>
+                    <Button x:Name="Item10MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="968,510,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Image x:Name="Item10MainImage" Source="/Images/item10_book.png"/>
+                    </Button>
+                    <Button x:Name="Item11MainButton" Width="303" Height="460" Click="Button_Click" HorizontalAlignment="Left" Margin="1283,510,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Image x:Name="Item11MainImage" Source="/Images/item11_book.png"/>
+                    </Button>
+                </Grid>
+            </Grid>
+            <Grid x:Name="AwardGrid" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="335,0" Height="900" d:IsHidden="True">
+                <Image Source="Images/award.png" />
+                <Glyphs Fill="Black"  FontUri="C:\Windows\Fonts\msgothic.ttc" UnicodeString="修了証書"  IsSideways="True" FontRenderingEmSize="60" Margin="30,0" HorizontalAlignment="Right" Width="240" Height="60" RenderTransformOrigin="0.5,0.5">
+                    <Glyphs.RenderTransform>
+                        <RotateTransform Angle="90"/>
+                    </Glyphs.RenderTransform>
+                </Glyphs>
+                <Viewbox Height="100" Width="700" StretchDirection="DownOnly" Margin="0,411,-108,389" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
+                    <Viewbox.RenderTransform>
+                        <RotateTransform Angle="90"/>
+                    </Viewbox.RenderTransform>
+                    <Grid Height="100" Width="700" >
+                        <Image x:Name="AwardNameImage" Height="100" Width="600" Margin="100,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <Glyphs x:Name="AwardName" Fill="Black"  FontUri="C:\Windows\Fonts\msgothic.ttc" UnicodeString="どの"  HorizontalAlignment="Right" VerticalAlignment="Center"  IsSideways="True" FontRenderingEmSize="45" />
+                    </Grid>
+                </Viewbox>
+                <Glyphs Fill="Black"  FontUri="C:\Windows\Fonts\msgothic.ttc" UnicodeString="あなたはこころアップタイムにおいて"  IsSideways="True" FontRenderingEmSize="35" Height="60" Width="600" Margin="200,300" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
+                    <Glyphs.RenderTransform>
+                        <RotateTransform Angle="90"/>
+                    </Glyphs.RenderTransform>
+                </Glyphs>
+                <Glyphs Fill="Black"  FontUri="C:\Windows\Fonts\msgothic.ttc" UnicodeString="全過程を修了されましたので"  IsSideways="True" FontRenderingEmSize="35" Height="60" Width="470" Margin="0,360,0,480" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Glyphs.RenderTransform>
+                        <RotateTransform Angle="90"/>
+                    </Glyphs.RenderTransform>
+                </Glyphs>
+                <Glyphs Fill="Black"  FontUri="C:\Windows\Fonts\msgothic.ttc" UnicodeString="ここに修了証を授与いたします"  IsSideways="True" FontRenderingEmSize="35" Margin="250,380" VerticalAlignment="Top" HorizontalAlignment="Left" Height="60" Width="510" RenderTransformOrigin="0.5,0.5">
+                    <Glyphs.RenderTransform>
+                        <RotateTransform Angle="90"/>
+                    </Glyphs.RenderTransform>
+                </Glyphs>
+                <Glyphs x:Name="AwardDate" Fill="Black"  FontUri="C:\Windows\Fonts\msgothic.ttc" UnicodeString="令和年月日"  IsSideways="True" FontRenderingEmSize="35" Height="60" Width="400" RenderTransformOrigin="0.5,0.5" Margin="105,304,745,536">
+                    <Glyphs.RenderTransform>
+                        <RotateTransform Angle="90"/>
+                    </Glyphs.RenderTransform>
+                </Glyphs>
+                <Glyphs Fill="Black"  FontUri="C:\Windows\Fonts\msgothic.ttc" UnicodeString="こころあっぷタイム　編集委員会"  IsSideways="True" FontRenderingEmSize="35" Height="60" Width="570" RenderTransformOrigin="0.5,0.5" Margin="-122,488,802,352">
+                    <Glyphs.RenderTransform>
+                        <RotateTransform Angle="90"/>
+                    </Glyphs.RenderTransform>
+                </Glyphs>
+            </Grid>
+            <Grid x:Name="SystemGrid" d:IsHidden="True">
+                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Image x:Name="MainMessageBubbleImage" Source="/Images/left_big_bubble_red.png" Height="380"  Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock x:Name="MainMessageTextBlock" TextWrapping="Wrap" Margin="50,145,220,45" FontSize="35" LineHeight="50" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R"/>
+                    <Button x:Name="NextMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,40" Height="80" VerticalAlignment="Bottom" HorizontalAlignment="Right" Style="{StaticResource ShadowButton}">
+                        <Image x:Name="NextMessageArrowDownImage" Source="/Images/yazirusi.png"/>
+                    </Button>
+                    <Button x:Name="BackMessageButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Margin="30,120" Height="80" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ShadowButton}">
+                        <Image x:Name="BackMessageAllowUpImage" Source="Images/yazirusi_up.png" RenderTransformOrigin="0.5,0.5"/>
+
+
+                    </Button>
+                </Grid>
+                <Grid x:Name="GroupeActivityMessageGrid" Margin="912,154,69,528" d:IsHidden="True">
+                    <Image x:Name="ShortBubbleImage" Source="/Images/small_bubble_right_down.png" Margin="334,0,0,0"/>
+                    <TextBlock x:Name="GroupeActivityMessageTextBlock" HorizontalAlignment="Left" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="61" Width="502" Margin="386,71,0,0" FontSize="48"/>
+                </Grid>
+                <Grid x:Name="SelectSceneMessageGrid" Margin="245,50,345,840" d:IsHidden="True" >
+                    <Image x:Name="SelectSceneShortBubbleImage" Source="/Images/short_bubble_right.png"/>
+                    <TextBlock x:Name="SelectSceneMessageTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Text="場面を１つえらんで、発明品と使い方をかんがえるのじゃ！" TextWrapping="Wrap" Height="61" Width="1153"  FontSize="40" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" Margin="36,0"/>
+                </Grid>
+                <Button x:Name="NextPageButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click"  Style="{StaticResource ShadowButton}" d:IsHidden="True">
+                    <Image x:Name="NextPageAfterImage" Source="/Images/after.png" Height="149"/>
+                </Button>
+                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" Style="{StaticResource ShadowButton}" d:IsHidden="True">
+                    <Image x:Name="BackPageBeforeImage" Source="/Images/before.png"/>
+                </Button>
+                <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}" d:IsHidden="True">
+                    <Grid x:Name="MangaFlipButtonLayerGrid" Style="{StaticResource ShadowButtonGrid}">
+                        <Image x:Name="MangaFlipArrowImageGauge" Source="/Images/mangaya_orange.png">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.OpacityMask>
+                                <LinearGradientBrush EndPoint="0,0" StartPoint="1,0">
+                                    <GradientStop x:Name="BlackStop" Color="Black" Offset="1"/>
+                                    <GradientStop x:Name="TransparentStop" Color="Transparent" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Image.OpacityMask>
+                        </Image>
+                        <Image x:Name="MangaFlipArrowImage" Source="/Images/mangaya.png"/>
+                    </Grid>
+                </Button>
+                <Button x:Name="SelectFeelingCompleteButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="80" Width="230" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}">
+                    <Image x:Name="ChallengeCompleteImage" Source="/Images/complete_button.png"/>
+                </Button>
+                <Button x:Name="SelectFeelingNextButton" Margin="1598,940,49,0" VerticalAlignment="Top" Height="142" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}" d:IsHidden="True">
+                    <Image x:Name="ChallengeNextImage" Source="/Images/next_go_button.png"/>
+                </Button>
+                <Button x:Name="SelectFeelingBackButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="80" Width="230"  Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}">
+                    <Image x:Name="ChallengeBackImage" Source="/Images/prev_back_.png" />
+                </Button>
+                <Button x:Name="ToChallengeTimeButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click"  Style="{StaticResource ShadowButton}" d:IsHidden="True">
+                    <Image x:Name="ToChallengeTimeImage" Source="/Images/to_challenge_time.png" Height="149"/>
+                </Button>
+                <Button x:Name="ToGroupeActivityButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click"  Style="{StaticResource ShadowButton}" d:IsHidden="True">
+                    <Image x:Name="ToGroupeActivityImage" Source="/Images/to_groupe_activity.png" Height="149"/>
+                </Button>
+                <Button x:Name="ReturnButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="144" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Style="{StaticResource ShadowButton}" d:IsHidden="True">
+                    <Image x:Name="ReturnButtonImage" Source="/Images/return.png"/>
+                </Button>
+                <Grid x:Name="MusicInfoGrid" RenderTransformOrigin="0.5,0.5" Margin="1423,60,0,755" HorizontalAlignment="Left" Width="452" Height="265" d:IsHidden="True">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Image x:Name="MusicInfoBackImage" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Images/frame_46-1.png"/>
+                    <TextBlock x:Name="BGMTextBlock" HorizontalAlignment="Left" Margin="173,24,0,0" VerticalAlignment="Top" Height="70" Width="109" Foreground="White" FontSize="36" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" Text="BGM♪" TextAlignment="Center"/>
+                    <TextBlock x:Name="WriterArrangerTextBlock" HorizontalAlignment="Left" Margin="122,135,0,0" VerticalAlignment="Top" Height="70" Width="212" Foreground="White" FontSize="36" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker" Text="作曲・編曲" TextAlignment="Center"/>
+                    <TextBlock x:Name="MusicTitleTextBlock" HorizontalAlignment="Center" Margin="0,70,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" Foreground="White" Width="432" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker"/>
+                    <TextBlock x:Name="ComposerNameTextBlock" HorizontalAlignment="Left" Margin="105,178,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Foreground="White" Width="227" TextAlignment="Center" FontFamily="/Fonts/TanukiMagic.ttf#Tanuki Permanent Marker"/>
+                </Grid>
+                <Grid x:Name="BranchSelectGrid" d:IsHidden="True">
+                    <Button x:Name="BranchButton1" Margin="500,200,500,700" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Style="{StaticResource ShadowButton}">
+                        <Image x:Name="BranchButton1Image" Source="/Images/branch_selection1.png" Stretch="Fill" />
+                    </Button>
+                    <Button x:Name="BranchButton2" Margin="500,700,500,200" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Style="{StaticResource ShadowButton}">
+                        <Image x:Name="BranchButton2Image" Source="/Images/branch_selection2.png" Stretch="Fill" />
+                    </Button>
+                </Grid>
+                <Grid x:Name="SelectSceneGrid" Margin="0,284,0,190" HorizontalAlignment="Center" d:IsHidden="True">
+                    <Button x:Name="SelectSceneButton1" Background="Transparent" VerticalAlignment="Top" Height="150" Width="1050" HorizontalAlignment="Center" Style="{StaticResource ShadowButton}" Click="Button_Click">
+                        <Grid Style="{StaticResource ShadowButtonGrid}">
+                            <Image Source="Images/orange_button_plate.png" Stretch="Fill"/>
+                            <TextBlock Text="場面１　遊ぶ約束が重なってしまった" FontSize="50" Foreground="White" FontFamily="Yu Gothic"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="45,0,0,0"/>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="SelectSceneButton2" Background="Transparent" VerticalAlignment="Center" Height="150"  Width="1050" HorizontalAlignment="Center" Style="{StaticResource ShadowButton}" Click="Button_Click">
+                        <Grid Height="150" Style="{StaticResource ShadowButtonGrid}" >
+                            <Image Source="Images/orange_button_plate.png" Stretch="Fill"/>
+                            <TextBlock Text="場面２　苦手な教科で前に出て発表する" FontSize="50" Foreground="White" FontFamily="Yu Gothic" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="45,0,0,0"/>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="SelectSceneButton3" Background="Transparent" VerticalAlignment="Bottom" Height="150"  Width="1050" HorizontalAlignment="Center" Style="{StaticResource ShadowButton}" Click="Button_Click">
+                        <Grid Height="150" Style="{StaticResource ShadowButtonGrid}" >
+                            <Image Source="Images/orange_button_plate.png" Stretch="Fill"/>
+                            <TextBlock Text="場面３　友だちと意見が合わず一人でいる" FontSize="50" Foreground="White" FontFamily="Yu Gothic" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="45,0,0,0"/>
+                        </Grid>
+                    </Button>
+                </Grid>
+                <Button x:Name="CheckItemBookLargeButton" Background="Transparent" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}" Click="Button_Click" d:IsHidden="True">
+                    <Image Source="Images/item_book.png" Margin="838,228,305,378" />
+                </Button>
+                <Button x:Name="ExitButton" Content="おわる" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" FontSize="24" Click="Button_Click" Margin="1833,10,0,0" d:IsHidden="True">
+                    <Button.Background>
+                        <ImageBrush/>
+                    </Button.Background>
+                </Button>
+                <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
+                <Border x:Name="InputTextBorder" Background="White" Height="405" Width="910" BorderThickness="3" BorderBrush="Black" RenderTransformOrigin="0.5,0" VerticalAlignment="Top" d:IsHidden="True">
+                    <Border.RenderTransform>
+                        <ScaleTransform ScaleX="1.55" ScaleY="1.55"/>
+                    </Border.RenderTransform>
+                    <TextBox x:Name="InputTextBox" Height="405" Width="910" Style="{StaticResource InputTextBox}"  Margin="10" FontSize="54" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput"/>
+                </Border>
+                <Border x:Name="InputCanvasBorder" Background="White" Height="405" Width="910" BorderThickness="3" BorderBrush="Black" RenderTransformOrigin="0.5,1" VerticalAlignment="Bottom" d:IsHidden="True">
+                    <Border.RenderTransform>
+                        <ScaleTransform ScaleX="2.08" ScaleY="2.08"/>
+                    </Border.RenderTransform>
+                    <InkCanvas x:Name="InputCanvas" Height="405" Width="910" Style="{StaticResource InputInkCanvas}" Margin="10"/>
+                </Border>
+                <Grid x:Name="CanvasEditGrid" Height="240" Margin="0,0,240,0" VerticalAlignment="Top" d:IsHidden="True">
+                    <ListBox x:Name="CanvasEditListBox" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBoxItem x:Name="PenButton" FontSize="100" Width="555"  FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black"  HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="えんぴつ"/>
+                        <ListBoxItem x:Name="EraserButton" FontSize="100" Width="555"  FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black"  HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="けしごむ"/>
+                        <ListBoxItem x:Name="AllClearButton" FontSize="100" Width="555" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" BorderBrush="Black" HorizontalContentAlignment="Center" Selected="ListBoxItem_Selected" Content="すべてけす"/>
+                    </ListBox>
+                </Grid>
+                <Button x:Name="CompleteInputButton" Click="Button_Click" Content="とじる" HorizontalContentAlignment="Center" Width="240" Height="240" FontSize="65" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" Background="White" BorderBrush="Black" HorizontalAlignment="Right" VerticalAlignment="Top" d:IsHidden="True"/>
+                <Grid x:Name="ExitBackGrid" Margin="497,215,497,190" d:IsHidden="True">
+                    <Border x:Name="ExitBackBorder" BorderThickness="1" BorderBrush="Black" Background="White" CornerRadius="32,32,32,32"/>
+                    <TextBlock x:Name="ExitBackTitleTextBlock" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Height="139" Width="459" FontSize="48" Text="本当にアプリを終了してタイトルにもどりますか？" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center"/>
+                    <Button x:Name="ExitBackYesButton" HorizontalAlignment="Left" Margin="33,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                        <Image x:Name="ExitBackYesButtonImage" Source="/Images/moya1.png"/>
+                    </Button>
+                    <Button x:Name="ExitBackNoButton" HorizontalAlignment="Left" Margin="465,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                        <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png"/>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</Page>
+    
+    

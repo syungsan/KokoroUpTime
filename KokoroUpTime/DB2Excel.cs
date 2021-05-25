@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-
-using System.Windows;
-using SQLite;
-using CsvReadWrite;
-using System.IO;
+﻿using CsvReadWrite;
 using ExcelManage;
 using Expansion;
-using System.Diagnostics;
+using SQLite;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows;
 
 namespace KokoroUpTime
 {

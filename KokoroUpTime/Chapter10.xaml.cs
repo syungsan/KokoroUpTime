@@ -6,15 +6,14 @@ using OutlineTextMaker;
 using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Media;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -22,11 +21,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WMPLib;
 using XamlAnimatedGif;
-using Expansion;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
-using System.Windows.Ink;
 
 namespace KokoroUpTime
 
@@ -606,8 +600,16 @@ namespace KokoroUpTime
 
                     this.SetInputMethod();
 
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    //前回のつづきからスタート
+                    if (this.dataProgress.CurrentScene != null)
+                    {
+                        this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
 
                     break;
 
@@ -1538,21 +1540,21 @@ namespace KokoroUpTime
                             switch (this.scene)
                             {
                                 case "チャレンジタイム！":
-                                    this.GoTo("challenge_time");
+                                    this.GoTo("challenge_time","sub");
                                     break;
 
                                 case "グループアクティビティ　①":
-                                    this.GoTo("groupe_activity_1");
+                                    this.GoTo("groupe_activity_1","sub");
                                     break;
 
                                 case "グループアクティビティ　②":
-                                    this.GoTo("groupe_activity_2");
+                                    this.GoTo("groupe_activity_2","sub");
                                     break;
                             }
                         }
                         else
                         {
-                            this.GoTo(GoToLabel);
+                            this.GoTo(GoToLabel,"sub");
                         }
                     }
                     break;
@@ -2236,7 +2238,7 @@ namespace KokoroUpTime
                     foreach (var child in sb.Children)
                         Storyboard.SetTargetName(child, objectName);
                 }
-                catch (ResourceReferenceKeyNotFoundException ex)
+                catch (ResourceReferenceKeyNotFoundException)
                 {
                     string objectsStroryBoard = $"{storyBoard}_{objectsName}";
                     sb = this.FindResource(objectsStroryBoard) as Storyboard;
@@ -2430,15 +2432,15 @@ namespace KokoroUpTime
                 
                 else if (button.Name == "KindOfFeelingInputButton")
                 {
-                    this.GoTo("select_kind_of_feeling");
+                    this.GoTo("select_kind_of_feeling","sub");
                 }
                 else if (button.Name == "SizeOfFeelingInputButton")
                 {
-                    this.GoTo("select_size_of_feeling");
+                    this.GoTo("select_size_of_feeling","sub");
                 }
                 else if (button.Name == "BranchButton1")
                 {
-                    this.GoTo("manga");
+                    this.GoTo("manga","sub");
                 }
                 else if (button.Name == "ReasonDifferenceSizeOfFeelingInputButton")
                 {
@@ -2449,12 +2451,12 @@ namespace KokoroUpTime
 
                         this.InputCanvas1.Strokes = this.InputStroke[this.InputDictionaryKey];
                         this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
-                        this.GoTo("canvas_input_reason_difference_size_of_feeling");
+                        this.GoTo("canvas_input_reason_difference_size_of_feeling","sub");
                     }
                     else
                     {
                         this.InputTextBox1.Text = this.InputText[this.InputDictionaryKey];
-                        this.GoTo("keyboard_input_reason_difference_size_of_feeling");
+                        this.GoTo("keyboard_input_reason_difference_size_of_feeling","sub");
                         this.InputTextBox1.Focus();
                     }
                 }
@@ -2467,12 +2469,12 @@ namespace KokoroUpTime
 
                         this.InputCanvas2.Strokes = this.InputStroke[this.InputDictionaryKey];
                         this.ClipStrokes(this.InputCanvas2, this.InputStroke[this.InputDictionaryKey]);
-                        this.GoTo("canvas_input_aosuke's_small_challenge");
+                        this.GoTo("canvas_input_aosuke's_small_challenge","sub");
                     }
                     else
                     {
                         this.InputTextBox2.Text = this.InputText[this.InputDictionaryKey];
-                        this.GoTo("keyboard_input_aosuke's_small_challenge");
+                        this.GoTo("keyboard_input_aosuke's_small_challenge","sub");
                         this.InputTextBox2.Focus();
                     }
                 }
@@ -2556,12 +2558,12 @@ namespace KokoroUpTime
                                 this.InputStroke[this.InputDictionaryKey] = this.AosukesNotGoodSceneStep1OutputCanvas.Strokes;
                                 this.InputCanvas3.Strokes = this.InputStroke[this.InputDictionaryKey];
                                 this.ClipStrokes(this.InputCanvas3, this.InputStroke[this.InputDictionaryKey]);
-                                this.GoTo("canvas_input_aosuke's_small_challenge_step_by_step");
+                                this.GoTo("canvas_input_aosuke's_small_challenge_step_by_step","sub");
                             }
                             else
                             {
                                 this.InputTextBox3.Text = this.InputText[this.InputDictionaryKey];
-                                this.GoTo("keyboard_input_aosuke's_small_challenge_step_by_step");
+                                this.GoTo("keyboard_input_aosuke's_small_challenge_step_by_step","sub");
                                 this.InputTextBox3.Focus();
                             }
                             break;
@@ -2573,12 +2575,12 @@ namespace KokoroUpTime
                                 this.InputStroke[this.InputDictionaryKey] = this.AosukesNotGoodSceneStep2OutputCanvas.Strokes;
                                 this.InputCanvas3.Strokes = this.InputStroke[this.InputDictionaryKey];
                                 this.ClipStrokes(this.InputCanvas3, this.InputStroke[this.InputDictionaryKey]);
-                                this.GoTo("canvas_input_aosuke's_small_challenge_step_by_step");
+                                this.GoTo("canvas_input_aosuke's_small_challenge_step_by_step","sub");
                             }
                             else
                             {
                                 this.InputTextBox3.Text = this.InputText[this.InputDictionaryKey];
-                                this.GoTo("keyboard_input_aosuke's_small_challenge_step_by_step");
+                                this.GoTo("keyboard_input_aosuke's_small_challenge_step_by_step","sub");
                                 this.InputTextBox3.Focus();
                             }
                             break;
@@ -2590,12 +2592,12 @@ namespace KokoroUpTime
                                 this.InputStroke[this.InputDictionaryKey] = this.AosukesNotGoodSceneStep3OutputCanvas.Strokes;
                                 this.InputCanvas3.Strokes = this.InputStroke[this.InputDictionaryKey];
                                 this.ClipStrokes(this.InputCanvas3, this.InputStroke[this.InputDictionaryKey]);
-                                this.GoTo("canvas_input_aosuke's_small_challenge_step_by_step");
+                                this.GoTo("canvas_input_aosuke's_small_challenge_step_by_step","sub");
                             }
                             else
                             {
                                 this.InputTextBox3.Text = this.InputText[this.InputDictionaryKey];
-                                this.GoTo("keyboard_input_aosuke's_small_challenge_step_by_step");
+                                this.GoTo("keyboard_input_aosuke's_small_challenge_step_by_step","sub");
                                 this.InputTextBox3.Focus();
                             }
                             break;
@@ -2619,7 +2621,7 @@ namespace KokoroUpTime
                         this.FeelingDictionaryKey = "challenge_step1_feeling";
                     }
 
-                    this.GoTo("kind_of_feeling");
+                    this.GoTo("kind_of_feeling","sub");
                 }
                 else if (Regex.IsMatch(button.Name, ".+izeOfFeelingInputButton"))
                 {
@@ -2636,7 +2638,7 @@ namespace KokoroUpTime
                         this.FeelingDictionaryKey = "challenge_step1_feeling";
                     }
 
-                    this.GoTo("size_of_feeling");
+                    this.GoTo("size_of_feeling","sub");
                 }
                 
             }
@@ -2818,25 +2820,42 @@ namespace KokoroUpTime
             Cancel
         }
 
-        private void GoTo(string tag)
+        private void GoTo(string tag, string tagType)
         {
-            foreach (var (scenario, index) in this.scenarios.Indexed())
+            if (tagType == "sub")
             {
-                if (scenario[0] == "sub" && scenario[1] == tag)
+                foreach (var (scenario, index) in this.scenarios.Indexed())
                 {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                    if (scenario[0] == "sub" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
-                }
-                if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
-                {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                        break;
+                    }
+                    if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
+                        break;
+                    }
                 }
             }
+            else if (tagType == "scene")
+            {
+                foreach (var (scenario, index) in this.scenarios.Indexed())
+                {
+                    if (scenario[0] == "scene" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                }
+            }
+
         }
 
         private BitmapSource Image2Gray(ImageSource originalImageSource)

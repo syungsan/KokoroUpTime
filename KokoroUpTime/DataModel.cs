@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Ink;
-using SQLite;
+﻿using SQLite;
 
 namespace KokoroUpTime
 {
@@ -433,25 +429,17 @@ namespace KokoroUpTime
 
         public string CreatedAt { get; set; }
 
-        public string AkamaruOtherSolutionUseItem03InputText { get; set; }
+        public string AkamaruOtherSolutionUseItemInputText { get; set; }
 
-        public string AkamaruOtherSolutionUseItem04InputText { get; set; }
+        public string SelectedAkamaruGoalText { get; set; }
 
-        public string AkamaruOtherSolutionUseItem05InputText { get; set; }
-
-        public string Step2AkamaruOtherSolutionInputText1 { get; set; }
-
-        public string Step2AkamaruOtherSolutionInputText2 { get; set; }
-
-        public string Step2AkamaruOtherSolutionInputText3 { get; set; }
+        public string Step2AkamaruManyMethodInputText1 { get; set; }
+        public string Step2AkamaruManyMethodInputText2 { get; set; }
+        public string Step2AkamaruManyMethodInputText3 { get; set; }
 
         public string EvaluateAkamaruMethodText1 { get; set; }
-
         public string EvaluateAkamaruMethodText2 { get; set; }
-
         public string EvaluateAkamaruMethodText3 { get; set; }
-
-
     }
 
     public class DataChapter12
@@ -461,5 +449,9 @@ namespace KokoroUpTime
 
 
         public string CreatedAt { get; set; }
+
+        public string ItemMethodInputText1 { get; set; }
+        public string ItemMethodInputText2 { get; set; }
+        public string ItemMethodInputText3 { get; set; }
     }
 }

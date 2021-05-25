@@ -128,7 +128,7 @@
                         </TextBlock.RenderTransform>
                     </TextBlock>
                 </Grid>
-                <Button x:Name="ReturnToTopButton" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" Width="215" Height="189" Click="Button_Click" BorderBrush="{x:Null}" Margin="0,881,0,0">
+                <Button x:Name="ReturnToTopButton" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" Width="215" Height="189" Click="Button_Click" BorderBrush="{x:Null}" Margin="0,881,0,0" Style="{StaticResource ShadowButton}">
                     <Image x:Name="ReturnToTopImage" Source="/Images/return_to_top.png" Height="189" Width="215"/>
                 </Button>
             </Grid>

@@ -410,6 +410,64 @@
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
+    <Storyboard x:Key="pulse" AutoReverse="True" RepeatBehavior="1x">
+        <ColorAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)">
+            <EasingColorKeyFrame KeyTime="00:00:00" Value="Transparent">
+                <EasingColorKeyFrame.EasingFunction>
+                    <ExponentialEase EasingMode="EaseInOut"/>
+                </EasingColorKeyFrame.EasingFunction>
+            </EasingColorKeyFrame>
+            <EasingColorKeyFrame KeyTime="00:00:01" Value="#FFBFE6FD"/>
+        </ColorAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.00">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <ExponentialEase EasingMode="EaseInOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+            <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.02">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <ExponentialEase EasingMode="EaseInOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.0">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <ExponentialEase EasingMode="EaseInOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+            <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.02">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <ExponentialEase EasingMode="EaseInOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.0">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <ExponentialEase EasingMode="EaseInOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+            <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.02">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <ExponentialEase EasingMode="EaseInOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.0">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <ExponentialEase EasingMode="EaseInOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+            <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.02">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <ExponentialEase EasingMode="EaseInOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
     <Storyboard x:Key="slide">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetName="{Binding}" Storyboard.TargetProperty="(UIElement.Opacity)">
             <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.0">

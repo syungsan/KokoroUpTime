@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using OfficeOpenXml;
+﻿using OfficeOpenXml;
+using System;
 using System.IO;
 
 namespace ExcelManage

@@ -7,12 +7,16 @@
     <Version>1.0.0</Version>
     <PackageIcon></PackageIcon>
     <ApplicationIcon>icon_sr9_icon.ico</ApplicationIcon>
-    <AssemblyVersion>0.1.0.0</AssemblyVersion>
-    <FileVersion>0.1.0.0</FileVersion>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
@@ -42,6 +46,7 @@
     <None Remove="Images\akamaru_face_05.png" />
     <None Remove="Images\akamaru_face_06.png" />
     <None Remove="Images\akamaru_stand_01.png" />
+    <None Remove="Images\angel.png" />
     <None Remove="Images\anger.png" />
     <None Remove="Images\aosuke_face_01.png" />
     <None Remove="Images\aosuke_face_02.png" />
@@ -53,6 +58,7 @@
     <None Remove="Images\aosuke_feeling_plate.png" />
     <None Remove="Images\aosuke_glad.png" />
     <None Remove="Images\aosuke_stand_01.png" />
+    <None Remove="Images\award.png" />
     <None Remove="Images\background_00.png" />
     <None Remove="Images\background_01.png" />
     <None Remove="Images\background_02.png" />
@@ -83,6 +89,7 @@
     <None Remove="Images\blue_gradation.png" />
     <None Remove="Images\blue_needle.png" />
     <None Remove="Images\blue_needle123.png" />
+    <None Remove="Images\blue_right_arrow.png" />
     <None Remove="Images\blue_roll_frame.png" />
     <None Remove="Images\blue_title_plate.png" />
     <None Remove="Images\body_image_akamaru_bubble_left.png" />
@@ -149,59 +156,71 @@
     <None Remove="Images\item00_book.png" />
     <None Remove="Images\item01_book.png" />
     <None Remove="Images\item01_detail.png" />
+    <None Remove="Images\item01_review.png" />
     <None Remove="Images\item01_solo.gif" />
     <None Remove="Images\item01_title.png" />
     <None Remove="Images\item02_book.png" />
     <None Remove="Images\item02_detail.png" />
     <None Remove="Images\item02_info.png" />
+    <None Remove="Images\item02_review.png" />
     <None Remove="Images\item02_solo.gif" />
     <None Remove="Images\item02_title.png" />
     <None Remove="Images\item03_book.png" />
     <None Remove="Images\item03_detail.png" />
+    <None Remove="Images\item03_review.png" />
     <None Remove="Images\item03_solo.gif" />
     <None Remove="Images\item03_title.png" />
     <None Remove="Images\item04_book.png" />
     <None Remove="Images\item04_detail.png" />
+    <None Remove="Images\item04_review.png" />
     <None Remove="Images\item04_solo.gif" />
     <None Remove="Images\item04_solo.png" />
     <None Remove="Images\item04_title.png" />
     <None Remove="Images\item05_book.png" />
     <None Remove="Images\item05_detail.png" />
+    <None Remove="Images\item05_review.png" />
     <None Remove="Images\item05_solo.gif" />
     <None Remove="Images\item05_solo.png" />
     <None Remove="Images\item05_title.png" />
     <None Remove="Images\item06_book.png" />
     <None Remove="Images\item06_detail.png" />
+    <None Remove="Images\item06_review.png" />
     <None Remove="Images\item06_solo.gif" />
     <None Remove="Images\item06_solo.png" />
     <None Remove="Images\item06_title.png" />
     <None Remove="Images\item07_book.png" />
     <None Remove="Images\item07_detail.png" />
+    <None Remove="Images\item07_review.png" />
     <None Remove="Images\item07_solo.gif" />
     <None Remove="Images\item07_solo.png" />
     <None Remove="Images\item07_title.png" />
     <None Remove="Images\item08_book.png" />
     <None Remove="Images\item08_detail.png" />
+    <None Remove="Images\item08_review.png" />
     <None Remove="Images\item08_solo.gif" />
     <None Remove="Images\item08_solo.png" />
     <None Remove="Images\item08_title.png" />
     <None Remove="Images\item09_book.png" />
     <None Remove="Images\item09_detail.png" />
     <None Remove="Images\item09_item10_effect.png" />
+    <None Remove="Images\item09_review.png" />
     <None Remove="Images\item09_solo.gif" />
     <None Remove="Images\item09_solo.png" />
     <None Remove="Images\item09_title.png" />
     <None Remove="Images\item10_book.png" />
     <None Remove="Images\item10_detail.png" />
     <None Remove="Images\item10_effect.png" />
+    <None Remove="Images\item10_review.png" />
     <None Remove="Images\item10_solo.gif" />
     <None Remove="Images\item10_solo.png" />
     <None Remove="Images\item10_title.png" />
     <None Remove="Images\item11_book.png" />
     <None Remove="Images\item11_detail.png" />
+    <None Remove="Images\item11_review.png" />
     <None Remove="Images\item11_solo.gif" />
     <None Remove="Images\item11_solo.png" />
     <None Remove="Images\item11_title.png" />
+    <None Remove="Images\item_book.png" />
     <None Remove="Images\item_check_back_bubble.png" />
     <None Remove="Images\item_detail_info.png" />
     <None Remove="Images\item_effect.png" />
@@ -216,6 +235,7 @@
     <None Remove="Images\large_transparent.png" />
     <None Remove="Images\left_big_bubble.png" />
     <None Remove="Images\left_big_bubble_center_down_yellow.png" />
+    <None Remove="Images\left_big_bubble_excellent.png" />
     <None Remove="Images\left_small_bubble_center_down_yellow.png" />
     <None Remove="Images\let%27s_challenge.png" />
     <None Remove="Images\let%27s_use_hot_word_title.png" />
@@ -339,6 +359,7 @@
     <None Remove="Images\shiroji_03.png" />
     <None Remove="Images\shiroji_04.png" />
     <None Remove="Images\short_bubble_left.png" />
+    <None Remove="Images\short_bubble_right.png" />
     <None Remove="Images\short_bubble_right_up.png" />
     <None Remove="Images\simple_goldfish.png" />
     <None Remove="Images\situation_aosuke.png" />
@@ -364,11 +385,16 @@
     <None Remove="Images\SS.png" />
     <None Remove="Images\Step1.png" />
     <None Remove="Images\Step2.png" />
+    <None Remove="Images\step2_only.png" />
     <None Remove="Images\Step3.png" />
+    <None Remove="Images\step3_only.png" />
     <None Remove="Images\step_up.png" />
     <None Remove="Images\summary_title.png" />
     <None Remove="Images\teacher.png" />
+    <None Remove="Images\thin_bubble_left_red.png" />
     <None Remove="Images\title.png" />
+    <None Remove="Images\to_challenge_time.png" />
+    <None Remove="Images\to_groupe_activity.png" />
     <None Remove="Images\very_short_bubble_right_up.png" />
     <None Remove="Images\water_frame.png" />
     <None Remove="Images\white_frame.png" />
@@ -379,6 +405,7 @@
     <None Remove="Images\writing_text_bubble.png" />
     <None Remove="Images\yazirusi.png" />
     <None Remove="children_stand_01.png" />
+    <None Remove="Images\yazirusi_up.png" />
     <None Remove="Images\yellow_title_plate.png" />
     <None Remove="shiroji_02.png" />
     <None Remove="shiroji_04.png" />
@@ -394,13 +421,14 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Lcid>0</Lcid>
       <Isolated>false</Isolated>
+      <EmbedInteropTypes>false</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPPlus" Version="5.5.4" />
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
     <PackageReference Include="Osklib.Wpf" Version="1.6.0" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.8.0-beta" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="XamlAnimatedGif" Version="1.2.3" />
   </ItemGroup>
 
@@ -426,6 +454,7 @@
     <Resource Include="Images\akamaru_face_05.png" />
     <Resource Include="Images\akamaru_face_06.png" />
     <Resource Include="Images\akamaru_stand_01.png" />
+    <Resource Include="Images\angel.png" />
     <Resource Include="Images\anger.png" />
     <Resource Include="Images\aosuke_face_01.png" />
     <Resource Include="Images\aosuke_face_02.png" />
@@ -437,6 +466,7 @@
     <Resource Include="Images\aosuke_feeling_plate.png" />
     <Resource Include="Images\aosuke_glad.png" />
     <Resource Include="Images\aosuke_stand_01.png" />
+    <Resource Include="Images\award.png" />
     <Resource Include="Images\background_00.png" />
     <Resource Include="Images\background_01.png" />
     <Resource Include="Images\background_02.png" />
@@ -468,6 +498,7 @@
     <Resource Include="Images\blue_gradation.png" />
     <Resource Include="Images\blue_needle.png" />
     <Resource Include="Images\blue_needle123.png" />
+    <Resource Include="Images\blue_right_arrow.png" />
     <Resource Include="Images\blue_roll_frame.png" />
     <Resource Include="Images\blue_title_plate.png" />
     <Resource Include="Images\body_image_akamaru_bubble_left.png" />
@@ -524,24 +555,29 @@
     <Resource Include="Images\item00_book.png" />
     <Resource Include="Images\item01_book.png" />
     <Resource Include="Images\item01_detail.png" />
+    <Resource Include="Images\item01_review.png" />
     <Resource Include="Images\item01_solo.gif" />
     <Resource Include="Images\item01_title.png" />
     <Resource Include="Images\item02_book.png" />
     <Resource Include="Images\item02_detail.png" />
     <Resource Include="Images\item02_info.png" />
+    <Resource Include="Images\item02_review.png" />
     <Resource Include="Images\item02_solo.gif" />
     <Resource Include="Images\item02_title.png" />
     <Resource Include="Images\item03_book.png" />
     <Resource Include="Images\item03_detail.png" />
+    <Resource Include="Images\item03_review.png" />
     <Resource Include="Images\item03_solo.gif" />
     <Resource Include="Images\item03_title.png" />
     <Resource Include="Images\item04_book.png" />
     <Resource Include="Images\item04_detail.png" />
+    <Resource Include="Images\item04_review.png" />
     <Resource Include="Images\item04_solo.gif" />
     <Resource Include="Images\item04_solo.png" />
     <Resource Include="Images\item04_title.png" />
     <Resource Include="Images\item05_book.png" />
     <Resource Include="Images\item05_detail.png" />
+    <Resource Include="Images\item05_review.png" />
     <Resource Include="Images\item05_solo.gif" />
     <Resource Include="Images\item05_solo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -549,6 +585,7 @@
     <Resource Include="Images\item05_title.png" />
     <Resource Include="Images\item06_book.png" />
     <Resource Include="Images\item06_detail.png" />
+    <Resource Include="Images\item06_review.png" />
     <Resource Include="Images\item06_solo.gif" />
     <Resource Include="Images\item06_solo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -556,11 +593,13 @@
     <Resource Include="Images\item06_title.png" />
     <Resource Include="Images\item07_book.png" />
     <Resource Include="Images\item07_detail.png" />
+    <Resource Include="Images\item07_review.png" />
     <Resource Include="Images\item07_solo.gif" />
     <Resource Include="Images\item07_solo.png" />
     <Resource Include="Images\item07_title.png" />
     <Resource Include="Images\item08_book.png" />
     <Resource Include="Images\item08_detail.png" />
+    <Resource Include="Images\item08_review.png" />
     <Resource Include="Images\item08_solo.gif" />
 
     
@@ -569,20 +608,24 @@
     <Resource Include="Images\item09_book.png" />
     <Resource Include="Images\item09_detail.png" />
     <Resource Include="Images\item09_item10_effect.png" />
+    <Resource Include="Images\item09_review.png" />
     <Resource Include="Images\item09_solo.gif" />
     <Resource Include="Images\item09_solo.png" />
     <Resource Include="Images\item09_title.png" />
     <Resource Include="Images\item10_book.png" />
     <Resource Include="Images\item10_detail.png" />
     <Resource Include="Images\item10_effect.png" />
+    <Resource Include="Images\item10_review.png" />
     <Resource Include="Images\item10_solo.gif" />
     <Resource Include="Images\item10_solo.png" />
     <Resource Include="Images\item10_title.png" />
     <Resource Include="Images\item11_book.png" />
     <Resource Include="Images\item11_detail.png" />
+    <Resource Include="Images\item11_review.png" />
     <Resource Include="Images\item11_solo.gif" />
     <Resource Include="Images\item11_solo.png" />
     <Resource Include="Images\item11_title.png" />
+    <Resource Include="Images\item_book.png" />
     <Resource Include="Images\item_check_back_bubble.png" />
     <Resource Include="Images\item_effect.png" />
     <Resource Include="Images\item_review.png" />
@@ -597,6 +640,7 @@
     <Resource Include="Images\kind_of_feeling_input.png" />
     <Resource Include="Images\large_transparent.png" />
     <Resource Include="Images\left_big_bubble.png" />
+    <Resource Include="Images\left_big_bubble_excellent.png" />
     <Resource Include="Images\left_small_bubble_center_down_yellow.png" />
     <Resource Include="Images\let's_challenge.png" />
     <Resource Include="Images\let's_use_hot_word_title.png" />
@@ -684,6 +728,7 @@
     <Resource Include="Images\return_to_item.png" />
     <Resource Include="Images\return_to_top.png" />
     <Resource Include="Images\short_bubble_left.png" />
+    <Resource Include="Images\short_bubble_right.png" />
     <Resource Include="Images\short_bubble_right_up.png" />
     <Resource Include="Images\simple_goldfish.png" />
     <Resource Include="Images\situation_aosuke.png" />
@@ -759,11 +804,16 @@
     <Resource Include="Images\SS.png" />
     <Resource Include="Images\step1.png" />
     <Resource Include="Images\step2.png" />
+    <Resource Include="Images\step2_only.png" />
     <Resource Include="Images\step3.png" />
+    <Resource Include="Images\step3_only.png" />
     <Resource Include="Images\step_up.png" />
     <Resource Include="Images\summary_title.png" />
     <Resource Include="Images\teacher.png" />
+    <Resource Include="Images\thin_bubble_left_red.png" />
     <Resource Include="Images\title.png" />
+    <Resource Include="Images\to_challenge_time.png" />
+    <Resource Include="Images\to_groupe_activity.png" />
     <Resource Include="Images\very_short_bubble_right_up.png" />
     <Resource Include="Images\water_frame.png" />
     <Resource Include="Images\white_frame.png" />
@@ -775,10 +825,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\yazirusi.png" />
+    <Resource Include="Images\yazirusi_up.png" />
     <Resource Include="Images\yellow_title_plate.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Chapter12.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Chapter11.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -816,6 +870,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Datas\default.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter12.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scenarios\chapter11.csv">
@@ -908,6 +965,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Chapter12.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Chapter11.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -942,12 +1003,6 @@
 
   <ItemGroup>
     <Folder Include="Datas\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.Ink">
-      <HintPath>..\..\..\..\..\..\Program Files\Common Files\microsoft shared\ink\Microsoft.Ink.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

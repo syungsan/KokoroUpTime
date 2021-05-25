@@ -1,34 +1,26 @@
-﻿using System;
+﻿using CsvReadWrite;
+using Expansion;
+using FileIOUtils;
+using Osklib;
+using SQLite;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Media;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using CsvReadWrite;
-using System.Diagnostics;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using System.Linq;
-using System.Security.AccessControl;
 using WMPLib;
-using System.Windows.Ink;
-using System.Media;
-using SQLite;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using XamlAnimatedGif;
-using FileIOUtils;
-using Expansion;
-using System.IO;
-using System.Threading;
-using Osklib;
 
 namespace KokoroUpTime
 {
@@ -667,9 +659,17 @@ namespace KokoroUpTime
                     }
 
                     this.SetInputMethod();
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
 
+                    //前回のつづきからスタート
+                    if (this.dataProgress.CurrentScene != null)
+                    {
+                        this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
                     break;
 
                 case "end":
@@ -1523,24 +1523,24 @@ namespace KokoroUpTime
                             switch (this.scene)
                             {
                                 case "キミちゃんのからだの変化":
-                                    this.GoTo("kimi's_body_image");
+                                    this.GoTo("kimi's_body_image","sub");
                                     break;
 
                                 case "わからない問題":
-                                    this.GoTo("not_understand_problem");
+                                    this.GoTo("not_understand_problem","sub");
                                     break;
 
                                 case "リコーダー問題":
-                                    this.GoTo("recoder_problem");
+                                    this.GoTo("recoder_problem","sub");
                                     break;
 
                                 case "グループアクティビティ":
-                                    this.GoTo("groupe_activity");
+                                    this.GoTo("groupe_activity","sub");
                                     break;
                             }
                         }
 
-                        this.GoTo(GoToLabel);
+                        this.GoTo(GoToLabel,"sub");
                     }
             
                     break;
@@ -1874,7 +1874,6 @@ namespace KokoroUpTime
                             this.SizeOfFeelingInputButton.IsEnabled = false;
                         else
                             this.SizeOfFeelingInputButton.IsEnabled = true;
-                        break;
                         break;
 
                     case "$size_of_feeling$":
@@ -2249,7 +2248,7 @@ namespace KokoroUpTime
                     foreach (var child in sb.Children)
                         Storyboard.SetTargetName(child, objectName);
                 }
-                catch (ResourceReferenceKeyNotFoundException ex)
+                catch (ResourceReferenceKeyNotFoundException)
                 {
                     string objectsStroryBoard = $"{storyBoard}_{objectsName}";
                     sb = this.FindResource(objectsStroryBoard) as Storyboard;
@@ -2362,12 +2361,12 @@ namespace KokoroUpTime
 
                 if (button.Name == "WishCheckButton")
                 {
-                    this.GoTo("remember_item");
+                    this.GoTo("remember_item","sub");
                 }
 
                 if (button.Name == "ImRememberButton")
                 {
-                    this.GoTo("manga");
+                    this.GoTo("manga","sub");
                 }
 
                 if (button.Name == "CheckMangaButton")
@@ -2376,12 +2375,12 @@ namespace KokoroUpTime
                     {
                         case "キミちゃんのきもちを考える1":
 
-                            this.GoTo("manga_kimi_part");
+                            this.GoTo("manga_kimi_part","sub");
                             break;
 
                         case "青助くんのきもちを考える1":
 
-                            this.GoTo("manga_aosuke_part");
+                            this.GoTo("manga_aosuke_part","sub");
                             break;
 
                         default: { break; }
@@ -2394,12 +2393,12 @@ namespace KokoroUpTime
                     {
                         case "キミちゃんのきもちを考える1":
 
-                            this.GoTo("think_kimi's_feeling_1");
+                            this.GoTo("think_kimi's_feeling_1","sub");
                             break;
 
                         case "青助くんのきもちを考える1":
 
-                            this.GoTo("think_aosuke's_feeling_1");
+                            this.GoTo("think_aosuke's_feeling_1","sub");
                             break;
 
                         default: { break; }
@@ -2411,12 +2410,12 @@ namespace KokoroUpTime
                     this.SelectBadFeelingListBox.SelectedIndex = -1;
                     this.SelectGoodFeelingListBox.SelectedIndex = -1;
 
-                    this.GoTo("kind_of_feeling");
+                    this.GoTo("kind_of_feeling","sub");
                 }
 
                 if (button.Name == "SizeOfFeelingInputButton")
                 {
-                    this.GoTo("size_of_feeling");
+                    this.GoTo("size_of_feeling","sub");
                 }
 
                 if (button.Name == "FeelingNextGoButton")
@@ -2445,7 +2444,7 @@ namespace KokoroUpTime
 
                     this.cHotWordButtonCount += 1;
 
-                    this.GoTo($"search_hot_word_{buttonIndex + 1}");
+                    this.GoTo($"search_hot_word_{buttonIndex + 1}","sub");
                 }
 
                 if (this.GHotWordKeyButtonGrid.IsVisible)
@@ -2458,11 +2457,11 @@ namespace KokoroUpTime
                     {
                         this.HotWordValueButtonItemControl.ItemsSource = HOT_WORD_VALUES[buttonText];
 
-                        this.GoTo("select_hot_word_value");
+                        this.GoTo("select_hot_word_value","sub");
                     }
                     else
                     {
-                        this.GoTo($"select_other_word_{Array.IndexOf(HOT_WORD_KEYS, buttonText) + 1}");
+                        this.GoTo($"select_other_word_{Array.IndexOf(HOT_WORD_KEYS, buttonText) + 1}","sub");
                     }
                 }
 
@@ -2480,7 +2479,7 @@ namespace KokoroUpTime
 
                             default: { break; }
                         }
-                        this.GoTo($"let's_use_selected_hot_word_{hotWordIndex + 1}");
+                        this.GoTo($"let's_use_selected_hot_word_{hotWordIndex + 1}","sub");
                     }
                 }
 
@@ -2494,7 +2493,7 @@ namespace KokoroUpTime
 
                         this.rolePlayButtonCount += 1;
 
-                        this.GoTo($"role_play_hot_word_{Array.IndexOf(HOT_WORD_KEYS, rolePlayHotWord) + 1}");
+                        this.GoTo($"role_play_hot_word_{Array.IndexOf(HOT_WORD_KEYS, rolePlayHotWord) + 1}","sub");
                     }
                 }
 
@@ -2509,13 +2508,13 @@ namespace KokoroUpTime
                     {
                         this.cHotWordButtonCount = 0;
 
-                        this.GoTo("search_hot_word_complete");
+                        this.GoTo("search_hot_word_complete","sub");
                     }
                     else if (this.rolePlayButtonCount >= HOT_WORD_KEYS.Length)
                     {
                         this.rolePlayButtonCount = 0;
 
-                        this.GoTo("role_play_hot_word_complete");
+                        this.GoTo("role_play_hot_word_complete","sub");
                     }
                     if (this.SelectFeelingGrid.IsVisible)
                     {
@@ -2596,7 +2595,7 @@ namespace KokoroUpTime
                             var canvas = FindName($"BodyImageOfKimiCanvas{number}") as InkCanvas;
                             this.InputStroke[this.InputDictionaryKey] = canvas.Strokes;
                             this.LeftBodyImageOfKimiCanvas.Strokes = this.InputStroke[this.InputDictionaryKey];
-                            this.GoTo("canvas_input_kimi's_body_image_left");
+                            this.GoTo("canvas_input_kimi's_body_image_left","sub");
                         }
                         else
                         {
@@ -2607,7 +2606,7 @@ namespace KokoroUpTime
                             var canvas = FindName($"BodyImageOfKimiCanvas{number}") as InkCanvas;
                             this.InputStroke[this.InputDictionaryKey] = canvas.Strokes;
                             this.RightBodyImageOfKimiCanvas.Strokes = this.InputStroke[this.InputDictionaryKey]; 
-                            this.GoTo("canvas_input_kimi's_body_image_right");
+                            this.GoTo("canvas_input_kimi's_body_image_right","sub");
                         }
                     }
                     else
@@ -2619,7 +2618,7 @@ namespace KokoroUpTime
                             this.LeftTextBoxSpeechBubbleTailMask.Data = ((System.Windows.Shapes.Path)FindName($"SpeechBubbleTailMask{number}")).Data;
 
                             this.LeftBodyImageOfKimiTextBox.Text= this.InputText[this.InputDictionaryKey];
-                            this.GoTo("keyboard_input_kimi's_body_image_left");
+                            this.GoTo("keyboard_input_kimi's_body_image_left","sub");
                             this.LeftBodyImageOfKimiTextBox.Focus();
 
                         }
@@ -2630,7 +2629,7 @@ namespace KokoroUpTime
                             this.RightTextBoxSpeechBubbleTailMask.Data = ((System.Windows.Shapes.Path)FindName($"SpeechBubbleTailMask{number}")).Data;
 
                             this.RightBodyImageOfKimiTextBox.Text = this.InputText[this.InputDictionaryKey];
-                            this.GoTo("keyboard_input_kimi's_body_image_right");
+                            this.GoTo("keyboard_input_kimi's_body_image_right","sub");
                             this.RightBodyImageOfKimiTextBox.Focus();
                         }
                     }
@@ -2642,13 +2641,13 @@ namespace KokoroUpTime
                     {
                         this.InputStroke[this.InputDictionaryKey] = this.MyBodyImageInputInkCanvas.Strokes;
                         this.InputMyBodyImageCanvas.Strokes = this.InputStroke[this.InputDictionaryKey];
-                        this.GoTo("canvas_input_my_body_image");
+                        this.GoTo("canvas_input_my_body_image","sub");
                     }
                     else
                     {
                         this.InputText[this.InputDictionaryKey] = this.MyBodyImageInputTextBlock.Text;
                         this.InputMyBodyImageTextBox.Text = this.InputText[this.InputDictionaryKey];
-                        this.GoTo("keyboard_input_my_body_image");
+                        this.GoTo("keyboard_input_my_body_image","sub");
                         this.InputMyBodyImageTextBox.Focus();
                     }
 
@@ -2873,7 +2872,7 @@ namespace KokoroUpTime
 
                 if (button.Name == "SelectHotWordButton")
                 {
-                    this.GoTo("select_hot_word_key");
+                    this.GoTo("select_hot_word_key","sub");
                 }
             }
 
@@ -2919,16 +2918,42 @@ namespace KokoroUpTime
             }
         }
 
-        private void GoTo(string tag)
+        private void GoTo(string tag, string tagType)
         {
-            foreach (var (scenario, index) in this.scenarios.Indexed())
+            if (tagType == "sub")
             {
-                if (scenario[0] == "sub" && scenario[1] == tag)
+                foreach (var (scenario, index) in this.scenarios.Indexed())
                 {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                    if (scenario[0] == "sub" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                    if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
                 }
             }
+            else if (tagType == "scene")
+            {
+                foreach (var (scenario, index) in this.scenarios.Indexed())
+                {
+                    if (scenario[0] == "scene" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                }
+            }
+
         }
 
         private void SetBGM(string soundFile, bool isLoop, int volume)
@@ -3582,11 +3607,11 @@ namespace KokoroUpTime
         {
             if (this.dataOption.InputMethod == 0)
             {
-                this.GoTo("canvas_input_relax_method");
+                this.GoTo("canvas_input_relax_method","sub");
             }
             else
             {
-                this.GoTo("keyboard_input_relax_method");
+                this.GoTo("keyboard_input_relax_method","sub");
                 foreach (TextBox text1 in this.RelaxMethodInputTextListView.GetChildren<TextBox>().ToList())
                 {
                     text1.Focus();

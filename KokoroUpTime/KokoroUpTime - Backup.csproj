@@ -1,0 +1,1008 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Version>0.9.9.0</Version>
+    <PackageIcon></PackageIcon>
+    <ApplicationIcon>icon_sr9_icon.ico</ApplicationIcon>
+    <AssemblyVersion>0.9.9.0</AssemblyVersion>
+    <FileVersion>0.9.9.0</FileVersion>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="badMindSelectFrame.png" />
+    <None Remove="bad_words_grid.png" />
+    <None Remove="big_heart.png" />
+    <None Remove="Fonts\azuki.ttf" />
+    <None Remove="Fonts\HGRPP1.TTC" />
+    <None Remove="Fonts\JiyunoTsubasa.ttf" />
+    <None Remove="Fonts\TanukiMagic.ttf" />
+    <None Remove="Fonts\UDDigiKyokashoN-B.ttc" />
+    <None Remove="Fonts\UDDigiKyokashoN-R.ttc" />
+    <None Remove="good_words_grid.png" />
+    <None Remove="Images\10seconds_arrow.png" />
+    <None Remove="Images\159474.png" />
+    <None Remove="Images\1second_arrow.png" />
+    <None Remove="Images\5seconds_arrow.png" />
+    <None Remove="Images\activity_result_msg_04_01.png" />
+    <None Remove="Images\activity_result_msg_04_02.png" />
+    <None Remove="Images\activity_result_msg_04_03.png" />
+    <None Remove="Images\after.png" />
+    <None Remove="Images\akamaru_face_01.png" />
+    <None Remove="Images\akamaru_face_02.png" />
+    <None Remove="Images\akamaru_face_03.png" />
+    <None Remove="Images\akamaru_face_04.png" />
+    <None Remove="Images\akamaru_face_05.png" />
+    <None Remove="Images\akamaru_face_06.png" />
+    <None Remove="Images\akamaru_stand_01.png" />
+    <None Remove="Images\angel.png" />
+    <None Remove="Images\anger.png" />
+    <None Remove="Images\aosuke_face_01.png" />
+    <None Remove="Images\aosuke_face_02.png" />
+    <None Remove="Images\aosuke_face_03.png" />
+    <None Remove="Images\aosuke_face_04.png" />
+    <None Remove="Images\aosuke_face_05.png" />
+    <None Remove="Images\aosuke_face_06.png" />
+    <None Remove="Images\aosuke_face_07.png" />
+    <None Remove="Images\aosuke_feeling_plate.png" />
+    <None Remove="Images\aosuke_glad.png" />
+    <None Remove="Images\aosuke_stand_01.png" />
+    <None Remove="Images\award.png" />
+    <None Remove="Images\background_00.png" />
+    <None Remove="Images\background_01.png" />
+    <None Remove="Images\background_02.png" />
+    <None Remove="Images\background_03.png" />
+    <None Remove="Images\background_04.png" />
+    <None Remove="Images\background_05.png" />
+    <None Remove="Images\background_06.png" />
+    <None Remove="Images\background_07.png" />
+    <None Remove="Images\background_08.png" />
+    <None Remove="Images\background_09.png" />
+    <None Remove="Images\background_10.png" />
+    <None Remove="Images\background_11.png" />
+    <None Remove="Images\background_12.png" />
+    <None Remove="Images\background_13.png" />
+    <None Remove="Images\background_ending.png" />
+    <None Remove="Images\background_mokume.png" />
+    <None Remove="Images\background_mokume2.PNG" />
+    <None Remove="Images\background_option.png" />
+    <None Remove="Images\bad.png" />
+    <None Remove="Images\bad_feeling.png" />
+    <None Remove="Images\bad_words_grid.png" />
+    <None Remove="Images\before.png" />
+    <None Remove="Images\big_heart.png" />
+    <None Remove="Images\blackboard.png" />
+    <None Remove="Images\blue_bubble.png" />
+    <None Remove="Images\blue_bubble_left_down.png" />
+    <None Remove="Images\blue_explosion_bubble.png" />
+    <None Remove="Images\blue_gradation.png" />
+    <None Remove="Images\blue_needle.png" />
+    <None Remove="Images\blue_needle123.png" />
+    <None Remove="Images\blue_right_arrow.png" />
+    <None Remove="Images\blue_roll_frame.png" />
+    <None Remove="Images\blue_title_plate.png" />
+    <None Remove="Images\body_image_akamaru_bubble_left.png" />
+    <None Remove="Images\body_image_akamaru_bubble_right.png" />
+    <None Remove="Images\body_image_of_akamaru_angry.png" />
+    <None Remove="Images\body_image_of_kimi_bubble1.png" />
+    <None Remove="Images\body_image_of_kimi_bubble2.png" />
+    <None Remove="Images\body_image_of_kimi_bubble3.png" />
+    <None Remove="Images\body_image_of_kimi_bubble4.png" />
+    <None Remove="Images\body_image_of_kimi_bubble5.png" />
+    <None Remove="Images\body_image_of_kimi_bubble6.png" />
+    <None Remove="Images\body_image_of_kimi_bubble7.png" />
+    <None Remove="Images\body_image_of_kimi_fear.png" />
+    <None Remove="Images\branch_selection1.png" />
+    <None Remove="Images\branch_selection2.png" />
+    <None Remove="Images\butterfly.png" />
+    <None Remove="Images\challenge1_title.png" />
+    <None Remove="Images\challenge2_title.png" />
+    <None Remove="Images\challenge_frame1.png" />
+    <None Remove="Images\challenge_time.png" />
+    <None Remove="Images\challenge_time_result_msg_02_01.png" />
+    <None Remove="Images\challenge_time_result_msg_02_02.png" />
+    <None Remove="Images\challenge_time_result_msg_02_03.png" />
+    <None Remove="Images\challenge_time_result_msg_02_04.png" />
+    <None Remove="Images\challenge_time_text.png" />
+    <None Remove="Images\challenge_time_title.png" />
+    <None Remove="Images\check_manga.png" />
+    <None Remove="Images\cheering.png" />
+    <None Remove="Images\circle_word.PNG" />
+    <None Remove="Images\compare_akamaru_value_frame.png" />
+    <None Remove="Images\compare_aosuke_value_frame.png" />
+    <None Remove="Images\complete_button.png" />
+    <None Remove="Images\complete_role_play.png" />
+    <None Remove="Images\difference_size_of_feeling.png" />
+    <None Remove="Images\difficulty_of_action_frame.png" />
+    <None Remove="Images\dog.png" />
+    <None Remove="Images\ending_bubble.png" />
+    <None Remove="Images\face_small_bubble.png" />
+    <None Remove="Images\feeling_value.png" />
+    <None Remove="Images\good.png" />
+    <None Remove="Images\good_feeling.png" />
+    <None Remove="Images\graph1-1.png" />
+    <None Remove="Images\graph1-2.png" />
+    <None Remove="Images\graph2-1.png" />
+    <None Remove="Images\graph2-2.png" />
+    <None Remove="Images\graph2-3.png" />
+    <None Remove="Images\graph2-4.png" />
+    <None Remove="Images\graph_axis.png" />
+    <None Remove="Images\grass.png" />
+    <None Remove="Images\green_button_plate.png" />
+    <None Remove="Images\group_activity_text.png" />
+    <None Remove="Images\group_activity_title01.png" />
+    <None Remove="Images\hot_word_1_title.png" />
+    <None Remove="Images\hot_word_2_title.png" />
+    <None Remove="Images\hot_word_3_title.png" />
+    <None Remove="Images\hot_word_4_title.png" />
+    <None Remove="Images\hot_word_button.png" />
+    <None Remove="Images\hot_word_button1.png" />
+    <None Remove="Images\hot_word_button2.png" />
+    <None Remove="Images\hot_word_button3.png" />
+    <None Remove="Images\hot_word_button4.png" />
+    <None Remove="Images\im_remember.png" />
+    <None Remove="Images\ite07_solo.gif" />
+    <None Remove="Images\item00_book.png" />
+    <None Remove="Images\item01_book.png" />
+    <None Remove="Images\item01_detail.png" />
+    <None Remove="Images\item01_review.png" />
+    <None Remove="Images\item01_solo.gif" />
+    <None Remove="Images\item01_title.png" />
+    <None Remove="Images\item02_book.png" />
+    <None Remove="Images\item02_detail.png" />
+    <None Remove="Images\item02_info.png" />
+    <None Remove="Images\item02_review.png" />
+    <None Remove="Images\item02_solo.gif" />
+    <None Remove="Images\item02_title.png" />
+    <None Remove="Images\item03_book.png" />
+    <None Remove="Images\item03_detail.png" />
+    <None Remove="Images\item03_review.png" />
+    <None Remove="Images\item03_solo.gif" />
+    <None Remove="Images\item03_title.png" />
+    <None Remove="Images\item04_book.png" />
+    <None Remove="Images\item04_detail.png" />
+    <None Remove="Images\item04_review.png" />
+    <None Remove="Images\item04_solo.gif" />
+    <None Remove="Images\item04_solo.png" />
+    <None Remove="Images\item04_title.png" />
+    <None Remove="Images\item05_book.png" />
+    <None Remove="Images\item05_detail.png" />
+    <None Remove="Images\item05_review.png" />
+    <None Remove="Images\item05_solo.gif" />
+    <None Remove="Images\item05_solo.png" />
+    <None Remove="Images\item05_title.png" />
+    <None Remove="Images\item06_book.png" />
+    <None Remove="Images\item06_detail.png" />
+    <None Remove="Images\item06_review.png" />
+    <None Remove="Images\item06_solo.gif" />
+    <None Remove="Images\item06_solo.png" />
+    <None Remove="Images\item06_title.png" />
+    <None Remove="Images\item07_book.png" />
+    <None Remove="Images\item07_detail.png" />
+    <None Remove="Images\item07_review.png" />
+    <None Remove="Images\item07_solo.gif" />
+    <None Remove="Images\item07_solo.png" />
+    <None Remove="Images\item07_title.png" />
+    <None Remove="Images\item08_book.png" />
+    <None Remove="Images\item08_detail.png" />
+    <None Remove="Images\item08_review.png" />
+    <None Remove="Images\item08_solo.gif" />
+    <None Remove="Images\item08_solo.png" />
+    <None Remove="Images\item08_title.png" />
+    <None Remove="Images\item09_book.png" />
+    <None Remove="Images\item09_detail.png" />
+    <None Remove="Images\item09_item10_effect.png" />
+    <None Remove="Images\item09_review.png" />
+    <None Remove="Images\item09_solo.gif" />
+    <None Remove="Images\item09_solo.png" />
+    <None Remove="Images\item09_title.png" />
+    <None Remove="Images\item10_book.png" />
+    <None Remove="Images\item10_detail.png" />
+    <None Remove="Images\item10_effect.png" />
+    <None Remove="Images\item10_review.png" />
+    <None Remove="Images\item10_solo.gif" />
+    <None Remove="Images\item10_solo.png" />
+    <None Remove="Images\item10_title.png" />
+    <None Remove="Images\item11_book.png" />
+    <None Remove="Images\item11_detail.png" />
+    <None Remove="Images\item11_review.png" />
+    <None Remove="Images\item11_solo.gif" />
+    <None Remove="Images\item11_solo.png" />
+    <None Remove="Images\item11_title.png" />
+    <None Remove="Images\item_book.png" />
+    <None Remove="Images\item_check_back_bubble.png" />
+    <None Remove="Images\item_detail_info.png" />
+    <None Remove="Images\item_effect.png" />
+    <None Remove="Images\item_review.png" />
+    <None Remove="Images\kimis_friends.png" />
+    <None Remove="Images\kimi_face_06.png" />
+    <None Remove="Images\kimi_feeling_plate.png" />
+    <None Remove="Images\kimi_glad.png" />
+    <None Remove="Images\kimi_stand_01.png" />
+    <None Remove="Images\kind_of_feeling_button_frame.png" />
+    <None Remove="Images\kind_of_feeling_input.png" />
+    <None Remove="Images\large_transparent.png" />
+    <None Remove="Images\left_big_bubble.png" />
+    <None Remove="Images\left_big_bubble_center_down_yellow.png" />
+    <None Remove="Images\left_big_bubble_excellent.png" />
+    <None Remove="Images\left_small_bubble_center_down_yellow.png" />
+    <None Remove="Images\let%27s_challenge.png" />
+    <None Remove="Images\let%27s_use_hot_word_title.png" />
+    <None Remove="Images\light.png" />
+    <None Remove="Images\long_bubble_right_up.png" />
+    <None Remove="Images\frame_46-1.png" />
+    <None Remove="Images\good_words_grid.png" />
+    <None Remove="Images\gray_frame.png" />
+    <None Remove="Images\group_activity.png" />
+    <None Remove="Images\heart_blue.png" />
+    <None Remove="Images\heart_red.png" />
+    <None Remove="Images\hukidashi2.png" />
+    <None Remove="Images\item01_solo.png" />
+    <None Remove="Images\item02_solo.png" />
+    <None Remove="Images\item03_solo.png" />
+    <None Remove="Images\item_bubble.png" />
+    <None Remove="Images\item_last.png" />
+    <None Remove="Images\item_name.png" />
+    <None Remove="Images\kimi_face_01.png" />
+    <None Remove="Images\kimi_face_02.png" />
+    <None Remove="Images\kimi_face_03.png" />
+    <None Remove="Images\kimi_face_04.png" />
+    <None Remove="Images\kimi_face_05.png" />
+    <None Remove="Images\kimi_plate_inner.png" />
+    <None Remove="Images\kimi_plate_outer.png" />
+    <None Remove="Images\children_stand_01.png" />
+    <None Remove="Images\left_a_big_bubble.png" />
+    <None Remove="Images\left_big_bubble_blue.png" />
+    <None Remove="Images\left_big_bubble_red.png" />
+    <None Remove="Images\left_big_bubble_yellow.png" />
+    <None Remove="Images\left_b_big_bubble.png" />
+    <None Remove="Images\left_c_big_bubble.png" />
+    <None Remove="Images\long_bubble.png" />
+    <None Remove="Images\manga1-1.png" />
+    <None Remove="Images\manga1-2.png" />
+    <None Remove="Images\manga1-3.png" />
+    <None Remove="Images\manga1-4.png" />
+    <None Remove="Images\manga1-5.png" />
+    <None Remove="Images\manga1-6.png" />
+    <None Remove="Images\manga10-1.png" />
+    <None Remove="Images\manga10-2.png" />
+    <None Remove="Images\manga10-3.png" />
+    <None Remove="Images\manga11-1.png" />
+    <None Remove="Images\manga11-2.png" />
+    <None Remove="Images\manga11-3.png" />
+    <None Remove="Images\manga12-1.png" />
+    <None Remove="Images\manga12-2.png" />
+    <None Remove="Images\manga12-3.png" />
+    <None Remove="Images\manga12-4.png" />
+    <None Remove="Images\manga12-5.png" />
+    <None Remove="Images\manga12-6.png" />
+    <None Remove="Images\manga1_title.png" />
+    <None Remove="Images\manga2-1.png" />
+    <None Remove="Images\manga2-2.png" />
+    <None Remove="Images\manga2-3.png" />
+    <None Remove="Images\manga2_title.png" />
+    <None Remove="Images\manga3-1.png" />
+    <None Remove="Images\manga3-2.png" />
+    <None Remove="Images\manga3-3.png" />
+    <None Remove="Images\manga3_title.png" />
+    <None Remove="Images\manga4-1.png" />
+    <None Remove="Images\manga4-2.png" />
+    <None Remove="Images\manga4-3.png" />
+    <None Remove="Images\manga4_title.png" />
+    <None Remove="Images\manga5-1.png" />
+    <None Remove="Images\manga5-2.png" />
+    <None Remove="Images\manga5-3.png" />
+    <None Remove="Images\manga6-1.png" />
+    <None Remove="Images\manga6-2.png" />
+    <None Remove="Images\manga6-3.png" />
+    <None Remove="Images\manga6-4.png" />
+    <None Remove="Images\manga6-5.png" />
+    <None Remove="Images\manga6-6.png" />
+    <None Remove="Images\manga7-1.png" />
+    <None Remove="Images\manga7-2.png" />
+    <None Remove="Images\manga7-3.png" />
+    <None Remove="Images\manga8-1.png" />
+    <None Remove="Images\manga8-2.png" />
+    <None Remove="Images\manga8-3.png" />
+    <None Remove="Images\manga9-1.png" />
+    <None Remove="Images\manga9-2.png" />
+    <None Remove="Images\manga9-3.png" />
+    <None Remove="Images\mangaya.png" />
+    <None Remove="Images\mangaya_gauge.png" />
+    <None Remove="Images\mangaya_orange.png" />
+    <None Remove="Images\menu_bubble.png" />
+    <None Remove="Images\message_box.png" />
+    <None Remove="Images\moya1.png" />
+    <None Remove="Images\moya2.png" />
+    <None Remove="Images\next_go_button.png" />
+    <None Remove="Images\normal.png" />
+    <None Remove="Images\ojamamushi_01.png" />
+    <None Remove="Images\ojamamushi_02.png" />
+    <None Remove="Images\ojamamushi_03.png" />
+    <None Remove="Images\ok_button.png" />
+    <None Remove="Images\oranger_gradation.png" />
+    <None Remove="Images\orange_button_plate.png" />
+    <None Remove="Images\orange_gradation.png" />
+    <None Remove="Images\orange_long_button_plate.png" />
+    <None Remove="Images\orange_title_plate.png" />
+    <None Remove="Images\prev_back_.png" />
+    <None Remove="Images\purple_title_plate.png" />
+    <None Remove="Images\red_arrow.png" />
+    <None Remove="Images\red_arrow_right.png" />
+    <None Remove="Images\red_needle.png" />
+    <None Remove="Images\red_needle123.png" />
+    <None Remove="Images\relax_female.png" />
+    <None Remove="Images\relax_male.png" />
+    <None Remove="Images\relax_method.png" />
+    <None Remove="Images\relax_shade.png" />
+    <None Remove="Images\return.png" />
+    <None Remove="Images\return_to_item.png" />
+    <None Remove="Images\return_to_title.png" />
+    <None Remove="Images\return_to_top.png" />
+    <None Remove="Images\right_big_bubble.png" />
+    <None Remove="Images\right_big_bubble_blue.png" />
+    <None Remove="Images\right_big_bubble_red.png" />
+    <None Remove="Images\right_big_bubble_yellow.png" />
+    <None Remove="Images\shiroji_01.png" />
+    <None Remove="Images\shiroji_02.png" />
+    <None Remove="Images\shiroji_03.png" />
+    <None Remove="Images\shiroji_04.png" />
+    <None Remove="Images\short_bubble_left.png" />
+    <None Remove="Images\short_bubble_right.png" />
+    <None Remove="Images\short_bubble_right_up.png" />
+    <None Remove="Images\simple_goldfish.png" />
+    <None Remove="Images\situation_aosuke.png" />
+    <None Remove="Images\situation_kimi.png" />
+    <None Remove="Images\size_of_feeling_button_frame.png" />
+    <None Remove="Images\size_of_feeling_input_button_fimage.png" />
+    <None Remove="Images\small_bubble_center_down.png" />
+    <None Remove="Images\small_bubble_center_right_down.png" />
+    <None Remove="Images\small_bubble_left.png" />
+    <None Remove="Images\small_bubble_left_blue.png" />
+    <None Remove="Images\small_bubble_left_down.png" />
+    <None Remove="Images\small_bubble_left_down_blue.png" />
+    <None Remove="Images\small_bubble_left_down_red.png" />
+    <None Remove="Images\small_bubble_left_down_yellow.png" />
+    <None Remove="Images\small_bubble_left_red.png" />
+    <None Remove="Images\small_bubble_left_top.png" />
+    <None Remove="Images\small_bubble_left_up.png" />
+    <None Remove="Images\small_bubble_left_yellow.png" />
+    <None Remove="Images\small_bubble_right_down.png" />
+    <None Remove="Images\small_icon.png" />
+    <None Remove="Images\small_short_bubble_left_down_red.png" />
+    <None Remove="Images\small_short_bubble_left_down_yellow.png" />
+    <None Remove="Images\SS.png" />
+    <None Remove="Images\Step1.png" />
+    <None Remove="Images\Step2.png" />
+    <None Remove="Images\step2_only.png" />
+    <None Remove="Images\Step3.png" />
+    <None Remove="Images\step3_only.png" />
+    <None Remove="Images\step_up.png" />
+    <None Remove="Images\summary_title.png" />
+    <None Remove="Images\teacher.png" />
+    <None Remove="Images\thin_bubble_left_red.png" />
+    <None Remove="Images\title.png" />
+    <None Remove="Images\to_challenge_time.png" />
+    <None Remove="Images\to_groupe_activity.png" />
+    <None Remove="Images\very_short_bubble_right_up.png" />
+    <None Remove="Images\water_frame.png" />
+    <None Remove="Images\white_frame.png" />
+    <None Remove="Images\wish_check.png" />
+    <None Remove="Images\word_art_msg_02_01.png" />
+    <None Remove="Images\word_art_msg_02_02.png" />
+    <None Remove="Images\word_art_msg_04_01.png" />
+    <None Remove="Images\writing_text_bubble.png" />
+    <None Remove="Images\yazirusi.png" />
+    <None Remove="children_stand_01.png" />
+    <None Remove="Images\yazirusi_up.png" />
+    <None Remove="Images\yellow_title_plate.png" />
+    <None Remove="shiroji_02.png" />
+    <None Remove="shiroji_04.png" />
+    <None Remove="teacher.png" />
+    <None Remove="TitlePage.xaml.cs~RF30db7df.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="WMPLib.dll">
+      <Guid>6bf52a50-394a-11d3-b153-00c04f79faa6</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>false</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+    <PackageReference Include="Osklib.Wpf" Version="1.6.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="XamlAnimatedGif" Version="1.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\azuki.ttf" />
+    <Resource Include="Fonts\HGRPP1.TTC" />
+    <Resource Include="Fonts\JiyunoTsubasa.ttf" />
+    <Resource Include="Fonts\TanukiMagic.ttf" />
+    <Resource Include="Fonts\UDDigiKyokashoN-B.ttc" />
+    <Resource Include="Fonts\UDDigiKyokashoN-R.ttc" />
+    <Resource Include="Images\10seconds_arrow.png" />
+    <Resource Include="Images\159474.png" />
+    <Resource Include="Images\1second_arrow.png" />
+    <Resource Include="Images\5seconds_arrow.png" />
+    <Resource Include="Images\activity_result_msg_04_01.png" />
+    <Resource Include="Images\activity_result_msg_04_02.png" />
+    <Resource Include="Images\activity_result_msg_04_03.png" />
+    <Resource Include="Images\after.png" />
+    <Resource Include="Images\akamaru_face_01.png" />
+    <Resource Include="Images\akamaru_face_02.png" />
+    <Resource Include="Images\akamaru_face_03.png" />
+    <Resource Include="Images\akamaru_face_04.png" />
+    <Resource Include="Images\akamaru_face_05.png" />
+    <Resource Include="Images\akamaru_face_06.png" />
+    <Resource Include="Images\akamaru_stand_01.png" />
+    <Resource Include="Images\angel.png" />
+    <Resource Include="Images\anger.png" />
+    <Resource Include="Images\aosuke_face_01.png" />
+    <Resource Include="Images\aosuke_face_02.png" />
+    <Resource Include="Images\aosuke_face_03.png" />
+    <Resource Include="Images\aosuke_face_04.png" />
+    <Resource Include="Images\aosuke_face_05.png" />
+    <Resource Include="Images\aosuke_face_06.png" />
+    <Resource Include="Images\aosuke_face_07.png" />
+    <Resource Include="Images\aosuke_feeling_plate.png" />
+    <Resource Include="Images\aosuke_glad.png" />
+    <Resource Include="Images\aosuke_stand_01.png" />
+    <Resource Include="Images\award.png" />
+    <Resource Include="Images\background_00.png" />
+    <Resource Include="Images\background_01.png" />
+    <Resource Include="Images\background_02.png" />
+    <Resource Include="Images\background_03.png" />
+    <Resource Include="Images\background_04.png" />
+    <Resource Include="Images\background_05.png" />
+    <Resource Include="Images\background_06.png" />
+    <Resource Include="Images\background_07.png" />
+    <Resource Include="Images\background_08.png" />
+    <Resource Include="Images\background_09.png" />
+    <Resource Include="Images\background_10.png" />
+    <Resource Include="Images\background_11.png" />
+    <Resource Include="Images\background_12.png" />
+    <Resource Include="Images\background_13.png" />
+    <Resource Include="Images\background_ending.png" />
+    <Resource Include="Images\background_mokume.png" />
+    <Resource Include="Images\background_mokume2.PNG" />
+    <Resource Include="Images\background_option.png" />
+    <Resource Include="Images\bad.png" />
+    <Resource Include="Images\bad_feeling.png" />
+    <Resource Include="Images\before.png" />
+    <Resource Include="Images\big_heart.png" />
+    <Resource Include="Images\blackboard.png" />
+    <Resource Include="Images\blue_bubble.png" />
+    <Resource Include="Images\blue_bubble_left_down.png" />
+    <Resource Include="Images\blue_explosion_bubble.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\blue_gradation.png" />
+    <Resource Include="Images\blue_needle.png" />
+    <Resource Include="Images\blue_needle123.png" />
+    <Resource Include="Images\blue_right_arrow.png" />
+    <Resource Include="Images\blue_roll_frame.png" />
+    <Resource Include="Images\blue_title_plate.png" />
+    <Resource Include="Images\body_image_akamaru_bubble_left.png" />
+    <Resource Include="Images\body_image_akamaru_bubble_right.png" />
+    <Resource Include="Images\body_image_of_akamaru_angry.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble1.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble2.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble3.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble4.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble5.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble6.png" />
+    <Resource Include="Images\body_image_of_kimi_bubble7.png" />
+    <Resource Include="Images\body_image_of_kimi_fear.png" />
+    <Resource Include="Images\branch_selection1.png" />
+    <Resource Include="Images\branch_selection2.png" />
+    <Resource Include="Images\butterfly.png" />
+    <Resource Include="Images\challenge1_title.png" />
+    <Resource Include="Images\challenge2_title.png" />
+    <Resource Include="Images\challenge_frame1.png" />
+    <Resource Include="Images\challenge_time_result_msg_02_01.png" />
+    <Resource Include="Images\challenge_time_result_msg_02_02.png" />
+    <Resource Include="Images\challenge_time_result_msg_02_03.png" />
+    <Resource Include="Images\challenge_time_result_msg_02_04.png" />
+    <Resource Include="Images\challenge_time_text.png" />
+    <Resource Include="Images\challenge_time_title.png" />
+    <Resource Include="Images\check_manga.png" />
+    <Resource Include="Images\cheering.png" />
+    <Resource Include="Images\circle_word.PNG" />
+    <Resource Include="Images\compare_akamaru_value_frame.png" />
+    <Resource Include="Images\compare_aosuke_value_frame.png" />
+    <Resource Include="Images\complete_button.png" />
+    <Resource Include="Images\complete_role_play.png" />
+    <Resource Include="Images\difference_size_of_feeling.png" />
+    <Resource Include="Images\difficulty_of_action_frame.png" />
+    <Resource Include="Images\dog.png" />
+    <Resource Include="Images\good.png" />
+    <Resource Include="Images\graph1-1.png" />
+    <Resource Include="Images\graph1-2.png" />
+    <Resource Include="Images\graph2-1.png" />
+    <Resource Include="Images\graph2-2.png" />
+    <Resource Include="Images\graph2-3.png" />
+    <Resource Include="Images\graph2-4.png" />
+    <Resource Include="Images\graph_axis.png" />
+    <Resource Include="Images\grass.png" />
+    <Resource Include="Images\green_button_plate.png" />
+    <Resource Include="Images\group_activity_text.png" />
+    <Resource Include="Images\group_activity_title01.png" />
+    <Resource Include="Images\hot_word_1_title.png" />
+    <Resource Include="Images\hot_word_2_title.png" />
+    <Resource Include="Images\hot_word_3_title.png" />
+    <Resource Include="Images\hot_word_4_title.png" />
+    <Resource Include="Images\im_remember.png" />
+    <Resource Include="Images\ite07_solo.gif" />
+    <Resource Include="Images\item00_book.png" />
+    <Resource Include="Images\item01_book.png" />
+    <Resource Include="Images\item01_detail.png" />
+    <Resource Include="Images\item01_review.png" />
+    <Resource Include="Images\item01_solo.gif" />
+    <Resource Include="Images\item01_title.png" />
+    <Resource Include="Images\item02_book.png" />
+    <Resource Include="Images\item02_detail.png" />
+    <Resource Include="Images\item02_info.png" />
+    <Resource Include="Images\item02_review.png" />
+    <Resource Include="Images\item02_solo.gif" />
+    <Resource Include="Images\item02_title.png" />
+    <Resource Include="Images\item03_book.png" />
+    <Resource Include="Images\item03_detail.png" />
+    <Resource Include="Images\item03_review.png" />
+    <Resource Include="Images\item03_solo.gif" />
+    <Resource Include="Images\item03_title.png" />
+    <Resource Include="Images\item04_book.png" />
+    <Resource Include="Images\item04_detail.png" />
+    <Resource Include="Images\item04_review.png" />
+    <Resource Include="Images\item04_solo.gif" />
+    <Resource Include="Images\item04_solo.png" />
+    <Resource Include="Images\item04_title.png" />
+    <Resource Include="Images\item05_book.png" />
+    <Resource Include="Images\item05_detail.png" />
+    <Resource Include="Images\item05_review.png" />
+    <Resource Include="Images\item05_solo.gif" />
+    <Resource Include="Images\item05_solo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\item05_title.png" />
+    <Resource Include="Images\item06_book.png" />
+    <Resource Include="Images\item06_detail.png" />
+    <Resource Include="Images\item06_review.png" />
+    <Resource Include="Images\item06_solo.gif" />
+    <Resource Include="Images\item06_solo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\item06_title.png" />
+    <Resource Include="Images\item07_book.png" />
+    <Resource Include="Images\item07_detail.png" />
+    <Resource Include="Images\item07_review.png" />
+    <Resource Include="Images\item07_solo.gif" />
+    <Resource Include="Images\item07_solo.png" />
+    <Resource Include="Images\item07_title.png" />
+    <Resource Include="Images\item08_book.png" />
+    <Resource Include="Images\item08_detail.png" />
+    <Resource Include="Images\item08_review.png" />
+    <Resource Include="Images\item08_solo.gif" />
+
+    
+    <Resource Include="Images\item08_solo.png" />
+    <Resource Include="Images\item08_title.png" />
+    <Resource Include="Images\item09_book.png" />
+    <Resource Include="Images\item09_detail.png" />
+    <Resource Include="Images\item09_item10_effect.png" />
+    <Resource Include="Images\item09_review.png" />
+    <Resource Include="Images\item09_solo.gif" />
+    <Resource Include="Images\item09_solo.png" />
+    <Resource Include="Images\item09_title.png" />
+    <Resource Include="Images\item10_book.png" />
+    <Resource Include="Images\item10_detail.png" />
+    <Resource Include="Images\item10_effect.png" />
+    <Resource Include="Images\item10_review.png" />
+    <Resource Include="Images\item10_solo.gif" />
+    <Resource Include="Images\item10_solo.png" />
+    <Resource Include="Images\item10_title.png" />
+    <Resource Include="Images\item11_book.png" />
+    <Resource Include="Images\item11_detail.png" />
+    <Resource Include="Images\item11_review.png" />
+    <Resource Include="Images\item11_solo.gif" />
+    <Resource Include="Images\item11_solo.png" />
+    <Resource Include="Images\item11_title.png" />
+    <Resource Include="Images\item_book.png" />
+    <Resource Include="Images\item_check_back_bubble.png" />
+    <Resource Include="Images\item_effect.png" />
+    <Resource Include="Images\item_review.png" />
+    <Resource Include="Images\kimis_friends.png" />
+    <Resource Include="Images\kimi_face_06.png" />
+    <Resource Include="Images\kimi_feeling_plate.png" />
+    <Resource Include="Images\kimi_glad.png" />
+    <Resource Include="Images\kimi_plate_inner.png" />
+    <Resource Include="Images\kimi_plate_outer.png" />
+    <Resource Include="Images\kimi_stand_01.png" />
+    <Resource Include="Images\kind_of_feeling_button_frame.png" />
+    <Resource Include="Images\kind_of_feeling_input.png" />
+    <Resource Include="Images\large_transparent.png" />
+    <Resource Include="Images\left_big_bubble.png" />
+    <Resource Include="Images\left_big_bubble_excellent.png" />
+    <Resource Include="Images\left_small_bubble_center_down_yellow.png" />
+    <Resource Include="Images\let's_challenge.png" />
+    <Resource Include="Images\let's_use_hot_word_title.png" />
+    <Resource Include="Images\light.png" />
+    <Resource Include="Images\long_bubble_right_up.png" />
+    <Resource Include="Images\manga10-1.png" />
+    <Resource Include="Images\manga10-2.png" />
+    <Resource Include="Images\manga10-3.png" />
+    <Resource Include="Images\manga11-1.png" />
+    <Resource Include="Images\manga11-2.png" />
+    <Resource Include="Images\manga11-3.png" />
+    <Resource Include="Images\manga12-1.png" />
+    <Resource Include="Images\manga12-2.png" />
+    <Resource Include="Images\manga12-3.png" />
+    <Resource Include="Images\manga12-4.png" />
+    <Resource Include="Images\manga12-5.png" />
+    <Resource Include="Images\manga12-6.png" />
+    <Resource Include="Images\manga2-1.png" />
+    <Resource Include="Images\manga2-2.png" />
+    <Resource Include="Images\manga2-3.png" />
+    <Resource Include="Images\manga2_title.png" />
+    <Resource Include="Images\manga3-1.png" />
+    <Resource Include="Images\manga3-2.png" />
+    <Resource Include="Images\manga3-3.png" />
+    <Resource Include="Images\manga3_title.png" />
+    <Resource Include="Images\manga4-1.png" />
+    <Resource Include="Images\manga4-2.png" />
+    <Resource Include="Images\manga4-3.png" />
+    <Resource Include="Images\manga4_title.png" />
+    <Resource Include="Images\manga5-1.png" />
+    <Resource Include="Images\manga5-2.png" />
+    <Resource Include="Images\manga5-3.png" />
+    <Resource Include="Images\manga6-1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\manga6-2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\manga6-3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\manga6-4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\manga6-5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\manga6-6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\manga7-1.png" />
+    <Resource Include="Images\manga7-2.png" />
+    <Resource Include="Images\manga7-3.png" />
+    <Resource Include="Images\manga8-1.png" />
+    <Resource Include="Images\manga8-2.png" />
+    <Resource Include="Images\manga8-3.png" />
+    <Resource Include="Images\manga9-1.png" />
+    <Resource Include="Images\manga9-2.png" />
+    <Resource Include="Images\manga9-3.png" />
+    <Resource Include="Images\mangaya_gauge.png" />
+    <Resource Include="Images\mangaya_orange.png" />
+    <Resource Include="Images\message_box.png" />
+    <Resource Include="Images\next_go_button.png" />
+    <Resource Include="Images\normal.png" />
+    <Resource Include="Images\ojamamushi_01.png" />
+    <Resource Include="Images\ojamamushi_02.png" />
+    <Resource Include="Images\ojamamushi_03.png" />
+    <Resource Include="Images\ok_button.png" />
+    <Resource Include="Images\orange_button_plate.png" />
+    <Resource Include="Images\orange_gradation.png" />
+    <Resource Include="Images\orange_long_button_plate.png" />
+    <Resource Include="Images\orange_title_plate.png" />
+    <Resource Include="Images\prev_back_.png" />
+    <Resource Include="Images\purple_title_plate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\red_arrow.png" />
+    <Resource Include="Images\red_arrow_right.png" />
+    <Resource Include="Images\red_needle123.png" />
+    <Resource Include="Images\relax_female.png" />
+    <Resource Include="Images\relax_male.png" />
+    <Resource Include="Images\relax_method.png" />
+    <Resource Include="Images\relax_shade.png" />
+    <Resource Include="Images\return.png" />
+    <Resource Include="Images\return_to_item.png" />
+    <Resource Include="Images\return_to_top.png" />
+    <Resource Include="Images\short_bubble_left.png" />
+    <Resource Include="Images\short_bubble_right.png" />
+    <Resource Include="Images\short_bubble_right_up.png" />
+    <Resource Include="Images\simple_goldfish.png" />
+    <Resource Include="Images\situation_aosuke.png" />
+    <Resource Include="Images\situation_kimi.png" />
+    <Resource Include="Images\size_of_feeling_button_frame.png" />
+    <Resource Include="Images\size_of_feeling_input_button_fimage.png" />
+    <Resource Include="Images\small_bubble_center_down.png" />
+    <Resource Include="Images\small_bubble_center_right_down.png" />
+    <Resource Include="Images\small_bubble_left_blue.png" />
+    <Resource Include="Images\small_bubble_left_down.png" />
+    <Resource Include="Images\small_bubble_left_down_blue.png" />
+    <Resource Include="Images\small_bubble_left_down_red.png" />
+    <Resource Include="Images\small_bubble_left_down_yellow.png" />
+    <Resource Include="Images\small_bubble_left_red.png" />
+    <Resource Include="Images\small_bubble_left_top.png" />
+    <Resource Include="Images\small_bubble_left_up.png" />
+    <Resource Include="Images\small_bubble_left_yellow.png" />
+    <Resource Include="Images\small_bubble_right_down.png" />
+    <Resource Include="Images\challenge_time.png" />
+    <Resource Include="Images\ending_bubble.png" />
+    <Resource Include="Images\face_small_bubble.png" />
+    <Resource Include="Images\feeling_value.png" />
+    <Resource Include="Images\frame_46-1.png" />
+    <Resource Include="Images\good_feeling.png" />
+    <Resource Include="Images\gray_frame.png" />
+    <Resource Include="Images\group_activity.png" />
+    <Resource Include="Images\heart_blue.png" />
+    <Resource Include="Images\heart_red.png" />
+    <Resource Include="Images\hukidashi2.png" />
+    <Resource Include="Images\item01_solo.png" />
+    <Resource Include="Images\item02_solo.png" />
+    <Resource Include="Images\item03_solo.png" />
+    <Resource Include="Images\item_bubble.png" />
+    <Resource Include="Images\item_detail_info.png" />
+    <Resource Include="Images\item_last.png" />
+    <Resource Include="Images\item_name.png" />
+    <Resource Include="Images\kimi_face_01.png" />
+    <Resource Include="Images\kimi_face_02.png" />
+    <Resource Include="Images\kimi_face_03.png" />
+    <Resource Include="Images\kimi_face_04.png" />
+    <Resource Include="Images\kimi_face_05.png" />
+    <Resource Include="Images\left_a_big_bubble.png" />
+    <Resource Include="Images\left_big_bubble_blue.png" />
+    <Resource Include="Images\left_big_bubble_red.png" />
+    <Resource Include="Images\left_big_bubble_yellow.png" />
+    <Resource Include="Images\left_b_big_bubble.png" />
+    <Resource Include="Images\left_c_big_bubble.png" />
+    <Resource Include="Images\manga1-1.png" />
+    <Resource Include="Images\manga1-2.png" />
+    <Resource Include="Images\manga1-3.png" />
+    <Resource Include="Images\manga1-4.png" />
+    <Resource Include="Images\manga1-5.png" />
+    <Resource Include="Images\manga1-6.png" />
+    <Resource Include="Images\manga1_title.png" />
+    <Resource Include="Images\mangaya.png" />
+    <Resource Include="Images\menu_bubble.png" />
+    <Resource Include="Images\moya1.png" />
+    <Resource Include="Images\moya2.png" />
+    <Resource Include="Images\red_needle.png" />
+    <Resource Include="Images\return_to_title.png" />
+    <Resource Include="Images\right_big_bubble.png" />
+    <Resource Include="Images\right_big_bubble_blue.png" />
+    <Resource Include="Images\right_big_bubble_red.png" />
+    <Resource Include="Images\right_big_bubble_yellow.png" />
+    <Resource Include="Images\shiroji_01.png" />
+    <Resource Include="Images\shiroji_02.png" />
+    <Resource Include="Images\shiroji_03.png" />
+    <Resource Include="Images\shiroji_04.png" />
+    <Resource Include="Images\small_bubble_left.png" />
+    <Resource Include="Images\small_icon.png" />
+    <Resource Include="Images\small_short_bubble_left_down_red.png" />
+    <Resource Include="Images\small_short_bubble_left_down_yellow.png" />
+    <Resource Include="Images\SS.png" />
+    <Resource Include="Images\step1.png" />
+    <Resource Include="Images\step2.png" />
+    <Resource Include="Images\step2_only.png" />
+    <Resource Include="Images\step3.png" />
+    <Resource Include="Images\step3_only.png" />
+    <Resource Include="Images\step_up.png" />
+    <Resource Include="Images\summary_title.png" />
+    <Resource Include="Images\teacher.png" />
+    <Resource Include="Images\thin_bubble_left_red.png" />
+    <Resource Include="Images\title.png" />
+    <Resource Include="Images\to_challenge_time.png" />
+    <Resource Include="Images\to_groupe_activity.png" />
+    <Resource Include="Images\very_short_bubble_right_up.png" />
+    <Resource Include="Images\water_frame.png" />
+    <Resource Include="Images\white_frame.png" />
+    <Resource Include="Images\wish_check.png" />
+    <Resource Include="Images\word_art_msg_02_01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\word_art_msg_02_02.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\yazirusi.png" />
+    <Resource Include="Images\yazirusi_up.png" />
+    <Resource Include="Images\yellow_title_plate.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Chapter12.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Chapter11.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Chapter7.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Chapter10.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Chapter9.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Chapter8.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Chapter6.xaml.cs">
+	<SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Chapter5.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Chapter4.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Chapter3.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="NameInputPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Datas\default.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Datas\default.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter12.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter11.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter10.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter7.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter9.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter8.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter6.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter2.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter5.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter3.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter4.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\rule_board.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\name_input.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\chapter1.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\atsumare!_tomodachi!.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\cancel.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\Correct.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\decision.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\Incorrect.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\Intermediate.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\kokoro_up_time.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\manga.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\moku_moku_study.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\nc211089.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\nijiiro_no_canvas.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\None.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\tasogare_no_oka.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\もくもくStudy♪.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\放課後♪TeaTime.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="tabtip.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Chapter12.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chapter11.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chapter7.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chapter10.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chapter9.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chapter8.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chapter6.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chapter5.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chapter4.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chapter3.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="NameInputPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Datas\" />
+  </ItemGroup>
+
+</Project>

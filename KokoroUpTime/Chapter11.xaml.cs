@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -22,12 +23,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WMPLib;
 using XamlAnimatedGif;
-using Expansion;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
-using System.Windows.Ink;
-using Microsoft.Ink;
 
 namespace KokoroUpTime
 
@@ -55,14 +50,11 @@ namespace KokoroUpTime
         //アニメーションを表示させるか否か
         private bool isAnimationSkip = false;
 
-        // 気持ちの大きさ
-        private int feelingSize = 0;
-
         // マウス押下中フラグ
         private bool isMouseDown = false;
 
-        //Gesture
-        string RecognizingCanvasName = "";
+        ////Gesture
+        //string RecognizingCanvasName = "";
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
@@ -88,22 +80,24 @@ namespace KokoroUpTime
 
         // データベースに収めるデータモデルのインスタンス
         private DataChapter11 dataChapter11;
-        //データモデルのプロパティを呼び出すための辞書
-        private Dictionary<string, string> KindOfFeelings = null;
-        private Dictionary<string, int?> SizeOfFeelings = null;
-        private Dictionary<string, StrokeCollection> InputStroke = null;
-        private Dictionary<string, string> InputText = null;
-
-        //データモデルの辞書を呼び出すためのキー
-        private string FeelingDictionaryKey = "";
-        private string InputDictionaryKey = "";
 
         //入力したストロークを保存するためのコレクション
         private StrokeCollection AkamaruOtherSolutionUseItemInputStroke = new StrokeCollection();
+        private StrokeCollection[] Step2AkamaruMethodInputStrokes = new StrokeCollection[] { new StrokeCollection(), new StrokeCollection(), new StrokeCollection(), };
+        private StrokeCollection[] Step2AosukeMethodInputStrokes = new StrokeCollection[] { new StrokeCollection(), new StrokeCollection(), new StrokeCollection(), new StrokeCollection(), new StrokeCollection(), new StrokeCollection()};
 
-        private List<StrokeCollection> AukeCahllengeStep1InputStroke = new List<StrokeCollection>();
-        private List<StrokeCollection> AoskeCahllengeStep2InputStroke = new List<StrokeCollection>();
+        private string[] Step2AkamaruMethodInputText = new string[] { "","","" };
+        private string[] Step2AosukeMethodInputText = new string[] { "","","","","","" };
 
+        private Dictionary<string, string[]> AKAMARU_METHOD_TEXT_VALUES;
+
+        private Dictionary<string, string[]> AOSUKE_METHOD_TEXT_VALUES;
+        private Dictionary<StrokeCollection, string[]> AOSUKE_METHOD_STROKE_VALUES;
+
+        private ObservableCollection<MethodStrokeValueData> _methodstrokedata;
+        private ObservableCollection<MethodTextValueData> _methodtextdata;
+        private ObservableCollection<EvaluatedMethodStrokeData> _evaluatedmethodstrokedata;
+        private ObservableCollection<EvaluatedMethodTextData> _evaluatedmethodtextdata;
 
 
         // ゲームの切り替えシーン
@@ -137,13 +131,17 @@ namespace KokoroUpTime
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
 
-            InputStroke = new Dictionary<string, StrokeCollection>()
-            { 
-                ["akamaru_other_solution_use_item"]=this.AkamaruOtherSolutionUseItemInputStroke,
-            };
-            InputText = new Dictionary<string, string>()
+            if (this.dataChapter11.SelectedAkamaruGoalText == null)
             {
-                ["akamaru_other_solution_use_item"] = this.dataChapter11.AkamaruOtherSolutionUseItem03InputText,
+                this.dataChapter11.SelectedAkamaruGoalText = "";
+            }
+
+            this.AKAMARU_METHOD_TEXT_VALUES = new Dictionary<string, string[]>()
+            {
+                [(string)this.EvaluateAkamaruMethodListView.Items[0]] = new string[] { "", "", "", "" },
+                [(string)this.EvaluateAkamaruMethodListView.Items[1]] = new string[] { "", "", "", "" },
+                [(string)this.EvaluateAkamaruMethodListView.Items[2]] = new string[] { "", "", "", "" },
+
             };
 
             this.InitControls();
@@ -184,11 +182,16 @@ namespace KokoroUpTime
                 ["dog_image"]=this.DogImage,
                 ["anger_image"] = this.AngerImage,
                 ["akamaru_ojamamushi_image"] =this.AkamaruOjamamushiImage,
+                ["akamaru_ojamamushi_image_1"] = this.AkamaruOjamamushiImage1,
                 ["item_11_image"]=this.Item11Image,
+                ["akamaru_problem_right_image"]=this.AkamaruProblemRightImage,
+                ["akamaru_problem_left_image"]=this.AkamaruProblemLeftImage,
+                ["angel_image"]=this.AngelImage,
+                ["step1_aosuke_image"]=this.Step1AosukeImage,
 
 
 
-            };
+        };
 
             this.textBlockObjects = new Dictionary<string, TextBlock>
             {
@@ -208,6 +211,18 @@ namespace KokoroUpTime
                 ["how_to_use_item_text"] =this.HowToUseItemText,
                 ["step_to_solve_text"] =this.StepToSolveText,
 
+                ["solution_title_text"] = this.SolutionTitleText,
+                ["solution_text"] = this.SolutionText,
+
+                ["s2_input_aka_many_solutions_title_text"]=this.Step2InputAkamaruManySolutionTitleText,
+                ["s1_aka_goal_text"]=this.Step1AkamaruGoalText,
+                ["s2_exa_aka_method_text"]=this.Step2ExampleAkamaruMethodText,
+                ["evaluate_akamaru_method_text"]=this.EvaluateAkamaruMethodText,
+                ["step1_bad_feeling_scene_text"] = this.Step1BadFeelingSceneText,
+                ["evaluate_aosuke_method_title_text"] = this.EvaluateAosukeMethodTitleText,
+
+                ["how_to_use_item_text"] =this.HowToUseItemText,
+                ["grow_up_children_text"] = this.GrowUpChildrenText,
             };
 
             this.buttonObjects = new Dictionary<string, Button>
@@ -228,7 +243,13 @@ namespace KokoroUpTime
                 ["item_03_button"] = this.Item03Button,
                 ["item_04_button"] = this.Item04Button,
                 ["item_05_button"] = this.Item05Button,
-                ["input_button"]=this.InputButton,
+               
+                ["select_akamaru_goal_button_1"] =this.SelectAkamaruGoalButton1,
+                ["select_akamaru_goal_button_2"] = this.SelectAkamaruGoalButton2,
+                ["next_method_button"] = this.NextMethodButton,
+                ["back_method_button"] = this.BackMethodButton,
+
+                ["input_button2"] = this.InputButton2,
 
             };
 
@@ -261,12 +282,23 @@ namespace KokoroUpTime
                 ["akamaru_frustrated_situation_grid"] =this.AkamaruFrustratedSituationGrid,
                 ["multiple_items_grid"]=this.MultipleItemsGrid,
                 ["step_to_solve_grid"] =this.StepToSolveGrid,
-
+                ["akamaru_problem_grid"] =this.AkamaruProblemGrid,
+                ["select_akamaru_goal_grid"]=this.SelectAkamaruGoalGrid,
                 ["multiple_items_grid"] =this.MultipleItemsGrid,
-
-                ["input_akamaru_other_solution_grid"] =InputAkamaruOtherSolutionGrid,
-                ["step2_input_many_aosuke_solituins_grid"] =Step2InputManyAosukeSolituinsGrid,
-                ["step2_input_many_solution_grid"] =Step2InputManySolutionGrid,
+                ["solution_grid"]=this.SolutionGrid,
+                ["input_akamaru_other_solution_grid"] =this.InputAkamaruOtherSolutionGrid,
+                ["step2_input_aosuke_many_solutions_grid"] =this.Step2InputAosukeManySolutionsGrid,
+                ["step2_aosuke_solution_grid"] = this.Step2AosukeSolutionGrid,
+                ["step2_input_akamaru_many_solution_grid"] =this.Step2InputAkamaruManySolutionGrid,
+                ["example_step3_evaluate_akamaru_methods_grid"] =this.ExampleEvaluateAkamaruMethodsGrid,
+                ["example_evaluate_grid"] =this.ExampleEvaluateGrid,
+                ["step3_evaluate_akamaru_methods_grid"] =this.Step3EvaluateAkamaruMethodGrid,
+                ["evaluate_akamaru_method_grid"]=this.EvaluateAkamaruMethodGrid,
+                ["step3_evaluate_aosuke_methods_grid"] = this.Step3EvaluateAosukeMethodGrid,
+                ["evaluate_aosuke_method_grid"] = this.EvaluateAosukeMethodGrid,
+                ["step1_aosukes_bad_feeling_scene_grid"]=this.Step1AosukeBadFeelingSceneGrid,
+                ["confirm_button_grid"]=this.ConfirmButtonGrid,
+                ["grow_up_children_grid"] = this.GrowUpChildrenGrid,
 
                 ["canvas_edit_grid"] = this.CanvasEditGrid,
 
@@ -293,6 +325,12 @@ namespace KokoroUpTime
                 ["input_text_border"] = this.InputTextBoxBorder,
                 ["what_akamaru_solved_border"]=this.WhatAkamaruSolvedBorder,
                 ["what_akamaru_will_solve_border"]=this.WhatAkamaruWillSolveBorder,
+                ["select_akamaru_goal_border"] =this.SelectAkamaruGoalBorder,
+                ["example_akamaru_method_border"]=this.ExampleAkamaruMethodBorder,
+                ["step1_aosuke_goal_border"] = this.Step1AosukeGoalBorder,
+                ["view_input_aosuke_method_border"] = this.ViewInputAosukeMethodBorder,
+
+                ["input_button_border"] = this.InputButtonBorder,
             };
 
             this.outlineTextObjects = new Dictionary<string, OutlineText>
@@ -333,13 +371,35 @@ namespace KokoroUpTime
             this.ChallengeTImeTitleText.Visibility = Visibility.Hidden;
 
             this.LightGreenBorder.Visibility = Visibility.Hidden;
-            this.Step1SentenceGrid.Visibility = Visibility.Hidden;
-            this.EvaluateOtherMethodsGrid.Visibility = Visibility.Hidden;
-            this.Step3DecideTheBestMethodGrid.Visibility = Visibility.Hidden;
+            this.Step1AosukeBadFeelingSceneGrid.Visibility = Visibility.Hidden;
+            this.Step1AosukeImage.Visibility = Visibility.Hidden;
+            this.Step1BadFeelingSceneText.Visibility = Visibility.Hidden;
+            this.Step1AosukeGoalBorder.Visibility = Visibility.Hidden;
+            this.ExampleEvaluateAkamaruMethodsGrid.Visibility =Visibility.Hidden;
+            this.ExampleEvaluateGrid.Visibility = Visibility.Hidden;
+            this.Step3EvaluateAkamaruMethodGrid.Visibility = Visibility.Hidden;
+            this.EvaluateAkamaruMethodText.Visibility = Visibility.Hidden;
+            this.EvaluateAkamaruMethodGrid.Visibility = Visibility.Hidden;
+            this.Step3EvaluateAosukeMethodGrid.Visibility = Visibility.Hidden;
+            this.EvaluateAosukeMethodTitleText.Visibility = Visibility.Hidden; 
+            this.EvaluateAosukeMethodGrid.Visibility = Visibility.Hidden; 
+            this.NextMethodButton.Visibility = Visibility.Hidden;
+            this.BackMethodButton.Visibility = Visibility.Hidden;
 
             this.LightGreenCenterBorder.Visibility = Visibility.Hidden;
             this.AkamaruProblemGrid.Visibility = Visibility.Hidden;
-            this.SelectSolutionGrid.Visibility = Visibility.Hidden;
+            this.AkamaruOjamamushiImage1.Visibility = Visibility.Hidden;
+            this.AkamaruProblemRightImage.Visibility = Visibility.Hidden;
+            this.AkamaruProblemLeftImage.Visibility = Visibility.Hidden;
+            this.SelectAkamaruGoalGrid.Visibility = Visibility.Hidden;
+            this.SelectAkamaruGoalButton1.Visibility = Visibility.Hidden;
+            this.SelectAkamaruGoalButton2.Visibility = Visibility.Hidden;
+            this.SelectAkamaruGoalBorder.Visibility = Visibility.Hidden;
+            this.AngelImage.Visibility = Visibility.Hidden;
+            this.GrowUpChildrenGrid.Visibility = Visibility.Hidden;
+            this.GrowUpChildrenText.Visibility = Visibility.Hidden;
+
+
 
             this.LightGreenLeftBorder.Visibility = Visibility.Hidden;
             this.MultipleItemsGrid.Visibility = Visibility.Hidden;
@@ -363,13 +423,20 @@ namespace KokoroUpTime
             this.MultipleItemsGrid.Visibility = Visibility.Hidden;
             this.HowToUseItemText.Visibility = Visibility.Hidden;
 
-            this.OutputBorder.Visibility = Visibility.Hidden;
-            this.InputButton.Visibility = Visibility.Hidden;
+            this.ViewInputAosukeMethodBorder.Visibility = Visibility.Hidden;
+            this.InputButtonBorder.Visibility = Visibility.Hidden;
             this.InputAkamaruOtherSolutionGrid.Visibility = Visibility.Hidden;
-            this.Step2InputManyAosukeSolituinsGrid.Visibility = Visibility.Hidden;
-            this.Step2InputManySolutionGrid.Visibility = Visibility.Hidden;
-            this.ViewAkamaruMethodGrid.Visibility = Visibility.Hidden;
+            this.Step2InputAosukeManySolutionsGrid.Visibility = Visibility.Hidden;
+            this.Step2AosukeSolutionGrid.Visibility = Visibility.Hidden;
+            this.EvaluateAosukeMethodTitleText.Visibility = Visibility.Hidden;
+            this.NextMethodButton.Visibility = Visibility.Hidden;
+            this.Step2InputAkamaruManySolutionGrid.Visibility = Visibility.Hidden;
+            this.Step2InputAkamaruManySolutionTitleText.Visibility = Visibility.Hidden;
+            this.Step1AkamaruGoalText.Visibility=Visibility.Hidden;
+            this.Step2ExampleAkamaruMethodText.Visibility=Visibility.Hidden;
+            this.InputButton2.Visibility = Visibility.Hidden;
 
+            this.ConfirmButtonGrid.Visibility = Visibility.Hidden;
             this.ShirojiSmallRightCenterImage.Visibility = Visibility.Hidden;
 
             this.EndingMessageGrid.Visibility = Visibility.Hidden;
@@ -440,8 +507,6 @@ namespace KokoroUpTime
             this.InputCanvasBorder.Visibility = Visibility.Hidden;
 
 
-
-
             this.OkButton.Visibility = Visibility.Hidden;
             this.SelectFeelingBackButton.Visibility = Visibility.Hidden;
 
@@ -459,9 +524,43 @@ namespace KokoroUpTime
         {
             if (this.dataOption.InputMethod == 0)
             {
+                this.OutputText1.Visibility = Visibility.Hidden;
+                this.OutputText2_1.Visibility = Visibility.Hidden;
+                this.OutputText2_2.Visibility = Visibility.Hidden;
+                this.OutputText2_3.Visibility = Visibility.Hidden;
+                this.OutputText3_1.Visibility = Visibility.Hidden;
+                this.OutputText3_2.Visibility = Visibility.Hidden;
+                this.OutputText3_3.Visibility = Visibility.Hidden;
+                this.OutputText3_4.Visibility = Visibility.Hidden;
+                this.OutputText3_5.Visibility = Visibility.Hidden;
+                this.OutputText3_6.Visibility = Visibility.Hidden;
+
+                this.ViewInputAosukeMethodItemsControl.ItemTemplate = this.FindResource("ViewEvaluatedAosukeMethodCanvasTemplate") as DataTemplate;
+                this.AOSUKE_METHOD_STROKE_VALUES = new Dictionary<StrokeCollection, string[]>();
+                this._methodstrokedata = new ObservableCollection<MethodStrokeValueData>();
+                this._evaluatedmethodstrokedata = new ObservableCollection<EvaluatedMethodStrokeData>();
+
             }
             else
             {
+                this.OutputCanvas1.Visibility = Visibility.Hidden;
+                this.OutputCanvas2_1.Visibility = Visibility.Hidden;
+                this.OutputCanvas2_2.Visibility = Visibility.Hidden;
+                this.OutputCanvas2_3.Visibility = Visibility.Hidden;
+                this.OutputCanvas3_1.Visibility = Visibility.Hidden;
+                this.OutputCanvas3_2.Visibility = Visibility.Hidden;
+                this.OutputCanvas3_3.Visibility = Visibility.Hidden;
+                this.OutputCanvas3_4.Visibility = Visibility.Hidden;
+                this.OutputCanvas3_5.Visibility = Visibility.Hidden;
+                this.OutputCanvas3_6.Visibility = Visibility.Hidden;
+
+                this.dataChapter11.AkamaruOtherSolutionUseItemInputText = "";
+
+                this.ViewInputAosukeMethodItemsControl.ItemTemplate = this.FindResource("ViewEvaluatedAosukeMethodTextTemplate") as DataTemplate;
+                this.AOSUKE_METHOD_TEXT_VALUES = new Dictionary<string, string[]>();
+                this._methodtextdata = new ObservableCollection<MethodTextValueData>();
+                this._evaluatedmethodtextdata = new ObservableCollection<EvaluatedMethodTextData>();
+
             }
         }
 
@@ -516,8 +615,16 @@ namespace KokoroUpTime
 
                     this.SetInputMethod();
 
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    //前回のつづきからスタート
+                    if (this.dataProgress.CurrentScene != null)
+                    {
+                        this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
 
                     break;
 
@@ -749,7 +856,14 @@ namespace KokoroUpTime
 
                     var buttonObject = this.buttonObjects[this.position];
 
-                    buttonObject.Visibility = Visibility.Visible;
+                    if(Regex.IsMatch(this.position, ".*_method_button"))
+                    {
+                        this.IsVisibileMethodButton();
+                    }
+                    else
+                    {
+                        buttonObject.Visibility = Visibility.Visible;
+                    }
 
                     string buttonAnimeIsSync = "sync";
 
@@ -993,148 +1107,151 @@ namespace KokoroUpTime
                                     }
                                     else if (clickButton == "page")
                                     {
-                                        switch (this.scene)
+                                        if(this.scene == "チャレンジタイム！　パート①"　&& this.InputAkamaruOtherSolutionGrid.IsVisible)
                                         {
-                                            case "チャレンジタイム！　パート①":
+                                            if (this.dataOption.InputMethod == 0)
+                                            {
+                                                if(this.AkamaruOtherSolutionUseItemInputStroke.Count > 0)
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                                }
+                                                else
+                                                {
+                                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (this.dataChapter11.AkamaruOtherSolutionUseItemInputText != "")
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                                }
+                                                else
+                                                {
+                                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                                }
+                                            }
+                                        }
+                                        else if(this.scene == "チャレンジタイム！　パート②")
+                                        {
+                                            bool checkFlag = false;
+                                            
+                                            if (this.Step2InputAkamaruManySolutionGrid.IsVisible)
+                                            {
                                                 if (this.dataOption.InputMethod == 0)
                                                 {
-                                                    if (this.InputStroke["akamaru_other_solution_use_item"].Count > 1)
+                                                    foreach (StrokeCollection strokes in this.Step2AkamaruMethodInputStrokes)
+                                                    {
+                                                        if(strokes.Count > 0)
+                                                        {
+                                                            checkFlag = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                    if (checkFlag)
                                                     {
                                                         this.NextPageButton.Visibility = Visibility.Visible;
-                                                    }
-                                                    else 
-                                                    {
-                                                        this.NextPageButton.Visibility = Visibility.Hidden;
-                                                    }
-
-
-                                                }
-                                                else 
-                                                {
-                                                    if (this.InputText["akamaru_other_solution_use_item"] != "") 
-                                                    {
-                                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                                        this.BackPageButton.Visibility = Visibility.Visible;
                                                     }
                                                     else
                                                     {
-                                                        this.NextPageButton.Visibility = Visibility.Hidden;
-                                                    }
-                                                }
-
-                                                break;
-
-                                            case "グループアクティビティ　①":
-                                                if(this.dataOption.InputMethod==0)
-                                                {
-                                                    if(this.InputStroke["input_small_challenge"].Count > 1)
-                                                    {
-                                                        this.NextPageButton.Visibility = Visibility.Visible;
-                                                    }
-
-                                                }
-                                                else
-                                                {
-                                                    if(this.InputText["input_small_challenge"]!="")
-                                                    {
-                                                         this.NextPageButton.Visibility = Visibility.Visible;
-                                                    }
-                                                }
-
-                                                break;
-
-                                            case "グループアクティビティ　②":
-                                                if(this.dataOption.InputMethod==0)
-                                                {
-                                                    bool CompleteInputFlag = true;
-                                                    foreach(KeyValuePair<string ,StrokeCollection> kvp in this.InputStroke)
-                                                    {
-                                                        if(Regex.IsMatch (kvp.Key, "input_challenge_step."))
-                                                        {
-                                                            if(kvp.Value.Count <2)
-                                                            {
-                                                                CompleteInputFlag = false;
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                    if (CompleteInputFlag)
-                                                    {
-                                                        foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
-                                                        {
-                                                            if (kvp.Value == "")
-                                                            {
-                                                                CompleteInputFlag = false;
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                    if (CompleteInputFlag)
-                                                    {
-                                                        foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
-                                                        {
-                                                            if (kvp.Value == -1)
-                                                            {
-                                                                CompleteInputFlag = false;
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                    if (CompleteInputFlag)
-                                                    {
-                                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                                        this.BackPageButton.Visibility = Visibility.Visible;
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    bool CompleteInputFlag = true;
-
-                                                    foreach (KeyValuePair<string, string> kvp in this.InputText)
+                                                    foreach (string text in this.Step2AkamaruMethodInputText)
                                                     {
-                                                        if (Regex.IsMatch(kvp.Key, "input_challenge_step."))
+                                                        if (text != "")
                                                         {
-                                                            if (kvp.Value == "")
-                                                            {
-                                                                CompleteInputFlag = false;
-                                                                break;
-                                                            }
+                                                            checkFlag = true;
+                                                            break;
                                                         }
                                                     }
-                                                    if (CompleteInputFlag)
-                                                    {
-                                                        foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
-                                                        {
-                                                            if (kvp.Value == "")
-                                                            {
-                                                                CompleteInputFlag = false;
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                    if (CompleteInputFlag)
-                                                    {
-                                                        foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
-                                                        {
-                                                            if (kvp.Value == -1)
-                                                            {
-                                                                CompleteInputFlag = false;
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                    if (CompleteInputFlag)
+                                                    if (checkFlag)
                                                     {
                                                         this.NextPageButton.Visibility = Visibility.Visible;
+                                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                                    }
+                                                    else
+                                                    {
+                                                        this.BackPageButton.Visibility = Visibility.Visible;
                                                     }
                                                 }
-
-                                                break;
-
-                                            default:
+                                            }
+                                            else if (this.EvaluateAkamaruMethodListView.IsVisible)
+                                            {
+                                                this.CheckFillInTheBlanks("赤丸");
+                                            }
+                                            else
+                                            {
                                                 this.NextPageButton.Visibility = Visibility.Visible;
-                                                break;
-
+                                                this.BackPageButton.Visibility = Visibility.Visible;
+                                            }
                                         }
-                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                        else if(this.scene == "グループアクティビティ")
+                                        {
+                                            if (this.Step2InputAosukeManySolutionsGrid.IsVisible)
+                                            {
+                                                bool checkFlag = false;
+                                                if(this.dataOption.InputMethod == 0)
+                                                {
+                                                    foreach(StrokeCollection strokes in this.Step2AosukeMethodInputStrokes)
+                                                    {
+                                                        if(strokes.Count > 0)
+                                                        {
+                                                            checkFlag = true;
+                                                        }
+                                                    }
+                                                    if (checkFlag)
+                                                    {
+                                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                                    }
+                                                    else
+                                                    {
+                                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                                    }
+                                                    
+                                                }
+                                                
+                                                else
+                                                {
+                                                    foreach (string text in this.Step2AosukeMethodInputText)
+                                                    {
+                                                        if (text !="")
+                                                        {
+                                                            checkFlag = true;
+                                                        }
+                                                    }
+                                                    if (checkFlag)
+                                                    {
+                                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                                    }
+                                                    else
+                                                    {
+                                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                                    }
+                                                }
+                                            }
+                                            else if (this.EvaluateAosukeMethodListView.IsVisible)
+                                            {
+                                                this.CheckFillInTheBlanks("青助");
+                                            }
+                                            else
+                                            {
+                                                this.NextPageButton.Visibility = Visibility.Visible;
+                                                this.BackPageButton.Visibility = Visibility.Visible;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            this.NextPageButton.Visibility = Visibility.Visible;
+                                            this.BackPageButton.Visibility = Visibility.Visible;
+                                        }
                                     }
                                 };
                             }
@@ -1188,147 +1305,151 @@ namespace KokoroUpTime
                                 }
                                 else if (clickButton == "page")
                                 {
-                                    switch (this.scene)
+                                    if (this.scene == "チャレンジタイム！　パート①" && this.InputAkamaruOtherSolutionGrid.IsVisible)
                                     {
-                                        case "チャレンジタイム！　パート①":
+                                        if (this.dataOption.InputMethod == 0)
+                                        {
+                                            if (this.AkamaruOtherSolutionUseItemInputStroke.Count > 0)
+                                            {
+                                                this.NextPageButton.Visibility = Visibility.Visible;
+                                                this.BackPageButton.Visibility = Visibility.Visible;
+                                            }
+                                            else
+                                            {
+                                                this.BackPageButton.Visibility = Visibility.Visible;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (this.dataChapter11.AkamaruOtherSolutionUseItemInputText != "")
+                                            {
+                                                this.NextPageButton.Visibility = Visibility.Visible;
+                                                this.BackPageButton.Visibility = Visibility.Visible;
+                                            }
+                                            else
+                                            {
+                                                this.BackPageButton.Visibility = Visibility.Visible;
+                                            }
+                                        }
+                                    }
+                                    else if (this.scene == "チャレンジタイム！　パート②")
+                                    {
+                                        bool checkFlag = false;
+
+                                        if (this.Step2InputAkamaruManySolutionGrid.IsVisible)
+                                        {
                                             if (this.dataOption.InputMethod == 0)
                                             {
-                                                if (this.InputStroke["akamaru_other_solution_use_item"].Count > 1)
+                                                foreach (StrokeCollection strokes in this.Step2AkamaruMethodInputStrokes)
+                                                {
+                                                    if (strokes.Count > 0)
+                                                    {
+                                                        checkFlag = true;
+                                                        break;
+                                                    }
+                                                }
+                                                if (checkFlag)
                                                 {
                                                     this.NextPageButton.Visibility = Visibility.Visible;
+                                                    this.BackPageButton.Visibility = Visibility.Visible;
                                                 }
                                                 else
                                                 {
-                                                    this.NextPageButton.Visibility = Visibility.Hidden;
-                                                }
-
-                                            }
-                                            else
-                                            {
-                                                if (this.InputText["akamaru_other_solution_use_item"] != "")
-                                                {
-                                                    this.NextPageButton.Visibility = Visibility.Visible;
-                                                }
-                                                else 
-                                                {
-                                                    this.NextPageButton.Visibility = Visibility.Hidden;
-                                                }
-                                            }
-
-                                            break;
-
-                                        case "グループアクティビティ　①":
-                                            if (this.dataOption.InputMethod == 0)
-                                            {
-                                                if (this.InputStroke["input_small_challenge"].Count > 1)
-                                                {
-                                                    this.NextPageButton.Visibility = Visibility.Visible;
-                                                }
-
-                                            }
-                                            else
-                                            {
-                                                if (this.InputText["input_small_challenge"] != "")
-                                                {
-                                                    this.NextPageButton.Visibility = Visibility.Visible;
-                                                }
-                                            }
-
-                                            break;
-
-                                        case "グループアクティビティ　②":
-                                            if (this.dataOption.InputMethod == 0)
-                                            {
-                                                bool CompleteInputFlag = true;
-                                                foreach (KeyValuePair<string, StrokeCollection> kvp in this.InputStroke)
-                                                {
-                                                    if (Regex.IsMatch(kvp.Key, "input_challenge_step."))
-                                                    {
-                                                        if (kvp.Value.Count < 2)
-                                                        {
-                                                            CompleteInputFlag = false;
-                                                            break;
-                                                        }
-                                                    }
-                                                }
-                                                if (CompleteInputFlag)
-                                                {
-                                                    foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
-                                                    {
-                                                        if (kvp.Value == "")
-                                                        {
-                                                            CompleteInputFlag = false;
-                                                            break;
-                                                        }
-                                                    }
-                                                }
-                                                if (CompleteInputFlag)
-                                                {
-                                                    foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
-                                                    {
-                                                        if (kvp.Value == -1)
-                                                        {
-                                                            CompleteInputFlag = false;
-                                                            break;
-                                                        }
-                                                    }
-                                                }
-                                                if (CompleteInputFlag)
-                                                {
-                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                    this.BackPageButton.Visibility = Visibility.Visible;
                                                 }
                                             }
                                             else
                                             {
-                                                bool CompleteInputFlag = true;
-
-                                                foreach (KeyValuePair<string, string> kvp in this.InputText)
+                                                foreach (string text in this.Step2AkamaruMethodInputText)
                                                 {
-                                                    if (Regex.IsMatch(kvp.Key, "input_challenge_step."))
+                                                    if (text != "")
                                                     {
-                                                        if (kvp.Value == "")
-                                                        {
-                                                            CompleteInputFlag = false;
-                                                            break;
-                                                        }
+                                                        checkFlag = true;
+                                                        break;
                                                     }
                                                 }
-                                                if (CompleteInputFlag)
-                                                {
-                                                    foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
-                                                    {
-                                                        if (kvp.Value == "")
-                                                        {
-                                                            CompleteInputFlag = false;
-                                                            break;
-                                                        }
-                                                    }
-                                                }
-                                                if (CompleteInputFlag)
-                                                {
-                                                    foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
-                                                    {
-                                                        if (kvp.Value == -1)
-                                                        {
-                                                            CompleteInputFlag = false;
-                                                            break;
-                                                        }
-                                                    }
-                                                }
-                                                if (CompleteInputFlag)
+                                                if (checkFlag)
                                                 {
                                                     this.NextPageButton.Visibility = Visibility.Visible;
+                                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                                }
+                                                else
+                                                {
+                                                    this.BackPageButton.Visibility = Visibility.Visible;
                                                 }
                                             }
-
-                                            break;
-
-                                        default:
+                                        }
+                                        else if (this.EvaluateAkamaruMethodListView.IsVisible)
+                                        {
+                                            this.CheckFillInTheBlanks("赤丸");
+                                        }
+                                        else
+                                        {
                                             this.NextPageButton.Visibility = Visibility.Visible;
-                                            break;
-
+                                            this.BackPageButton.Visibility = Visibility.Visible;
+                                        }
                                     }
-                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                    else if (this.scene == "グループアクティビティ")
+                                    {
+                                        if (this.Step2InputAosukeManySolutionsGrid.IsVisible)
+                                        {
+                                            bool checkFlag = false;
+                                            if (this.dataOption.InputMethod == 0)
+                                            {
+                                                foreach (StrokeCollection strokes in this.Step2AosukeMethodInputStrokes)
+                                                {
+                                                    if (strokes.Count > 0)
+                                                    {
+                                                        checkFlag = true;
+                                                    }
+                                                }
+                                                if (checkFlag)
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                                }
+                                                else
+                                                {
+                                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                                }
+
+                                            }
+
+                                            else
+                                            {
+                                                foreach (string text in this.Step2AosukeMethodInputText)
+                                                {
+                                                    if (text != "")
+                                                    {
+                                                        checkFlag = true;
+                                                    }
+                                                }
+                                                if (checkFlag)
+                                                {
+                                                    this.NextPageButton.Visibility = Visibility.Visible;
+                                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                                }
+                                                else
+                                                {
+                                                    this.BackPageButton.Visibility = Visibility.Visible;
+                                                }
+                                            }
+                                        }
+                                        else if (this.EvaluateAosukeMethodListView.IsVisible)
+                                        {
+                                            this.CheckFillInTheBlanks("青助");
+                                        }
+                                        else
+                                        {
+                                            this.NextPageButton.Visibility = Visibility.Visible;
+                                            this.BackPageButton.Visibility = Visibility.Visible;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        this.NextPageButton.Visibility = Visibility.Visible;
+                                        this.BackPageButton.Visibility = Visibility.Visible;
+                                    }
                                 }
                             }
                         }
@@ -1476,21 +1597,21 @@ namespace KokoroUpTime
                             switch (this.scene)
                             {
                                 case "チャレンジタイム！　パート①":
-                                    this.GoTo("challenge_time_part1");
+                                    this.GoTo("challenge_time_part1","sub");
                                     break;
 
-                                case "グループアクティビティ　①":
-                                    this.GoTo("groupe_activity_1");
+                                case "チャレンジタイム！　パート②":
+                                    this.GoTo("think_akamaru_method","sub");
                                     break;
 
-                                case "グループアクティビティ　②":
-                                    this.GoTo("groupe_activity_2");
+                                case "グループアクティビティ":
+                                    this.GoTo("think_aosuke_method","sub");
                                     break;
                             }
                         }
                         else
                         {
-                            this.GoTo(GoToLabel);
+                            this.GoTo(GoToLabel,"sub");
                         }
                     }
                     break;
@@ -1698,29 +1819,11 @@ namespace KokoroUpTime
                 switch (sequence)
                 {
 
-                    case "$reason_difference_size_of_feeling$":
-                        this.InputDictionaryKey = "input_reason";
-                        text = text.Replace("$reason_difference_size_of_feeling$", InputText[InputDictionaryKey]);
-                        break;
-
-                    //case "$challenge_step3_kind_of_feeling$":
-                    //    this.FeelingDictionaryKey = "challenge_step3_feeling";
-                    //    text = text.Replace("$challenge_step3_kind_of_feeling$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
-                    //    if (text == "")
-                    //        this.AosukeNotGoodSceneStep3SizeOfFeelingInputButton.IsEnabled = false;
-                    //    else
-                    //        this.AosukeNotGoodSceneStep3SizeOfFeelingInputButton.IsEnabled = true;
-                    //    break;
-
-                    case "$challenge_step1_size_of_feeling$":
-                        this.FeelingDictionaryKey = "challenge_step1_feeling";
-                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
+                    case "$selected_akamaru_goal$":
+                        if(this.dataChapter11.SelectedAkamaruGoalText != "")
                         {
-                            text = text.Replace("$challenge_step1_size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
-                        }
-                        else
-                        {
-                            text = text.Replace("$challenge_step1_size_of_feeling$", "");
+                            text = "目標："+this.dataChapter11.SelectedAkamaruGoalText;
+
                         }
                         break;
 
@@ -1895,6 +1998,7 @@ namespace KokoroUpTime
                             case "blue": { foreground = new SolidColorBrush(Colors.Blue); break; };
                             case "yellow": { foreground = new SolidColorBrush(Colors.Yellow); break; };
                             case "purple": { foreground = new SolidColorBrush(Colors.Purple); break; };
+                            case "gray": { foreground = new SolidColorBrush(Colors.Gray); break; };
 
                             default: { break; }
                         }
@@ -2085,7 +2189,7 @@ namespace KokoroUpTime
                     foreach (var child in sb.Children)
                         Storyboard.SetTargetName(child, objectName);
                 }
-                catch (ResourceReferenceKeyNotFoundException ex)
+                catch (ResourceReferenceKeyNotFoundException)
                 {
                     string objectsStroryBoard = $"{storyBoard}_{objectsName}";
                     sb = this.FindResource(objectsStroryBoard) as Storyboard;
@@ -2197,7 +2301,7 @@ namespace KokoroUpTime
             {
                 this.isClickable = false;
 
-                if ((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton" || button.Name == "GroupeActivityNextMessageButton" || button.Name == "ReturnButton"))
+                if ((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton" || button.Name == "GroupeActivityNextMessageButton" || button.Name == "ReturnButton"||button.Name== "DecideAosukeMethodButton"))
                 {
 
                     if (button.Name == "NextMessageButton")
@@ -2216,14 +2320,79 @@ namespace KokoroUpTime
                         this.BackMessageButton.Visibility = Visibility.Hidden;
                         this.NextMessageButton.Visibility = Visibility.Hidden;
 
+                        if(this.scene == "チャレンジタイム！　パート①")
+                        {
+
+                        }
+                        else if(this.scene== "チャレンジタイム！　パート②")
+                        {
+                            
+                            
+                        }
+                        else if (this.scene == "グループアクティビティ")
+                        {
+                            if (this.Step2InputAosukeManySolutionsGrid.IsVisible)
+                            {
+                                this.InitializedAosukeMethodListView();
+                            }
+                            else if (this.EvaluateAosukeMethodListView.IsVisible)
+                            {
+                                if(this.dataOption.InputMethod == 0)
+                                {
+
+                                    this.CountNumberOfCorrect(null, (StrokeCollection)this._methodstrokedata.First().MethodStroke);
+
+                                    this._evaluatedmethodstrokedata.Clear();
+                                    foreach (StrokeCollection strokes in this.AOSUKE_METHOD_STROKE_VALUES.Keys)
+                                    {
+                                        this.DecideBestMethod(null, strokes);
+
+                                        if(this.AOSUKE_METHOD_STROKE_VALUES[strokes][5] == "BestMethod")
+                                        {
+                                            foreach(System.Windows.Ink.Stroke stroke in strokes)
+                                            {
+                                                stroke.DrawingAttributes.Color = Colors.Red;
+                                            }
+                                            this._evaluatedmethodstrokedata.Add(new EvaluatedMethodStrokeData(strokes));
+                                        }
+                                        else
+                                        {
+                                            foreach (System.Windows.Ink.Stroke stroke in strokes)
+                                            {
+                                                stroke.DrawingAttributes.Color = Colors.Gray;
+                                            }
+                                            this._evaluatedmethodstrokedata.Add(new EvaluatedMethodStrokeData(strokes));
+                                        }
+                                    }
+                                    this.ViewInputAosukeMethodItemsControl.ItemsSource = this._evaluatedmethodstrokedata;
+                                }
+                                else
+                                {
+                                    this.CountNumberOfCorrect((string)this._methodtextdata.First().MethodText, null);
+
+                                    this._evaluatedmethodtextdata.Clear();
+                                    foreach (string text in this.AOSUKE_METHOD_TEXT_VALUES.Keys)
+                                    {
+                                        this.DecideBestMethod(text, null);
+
+                                        if (this.AOSUKE_METHOD_TEXT_VALUES[text][5] == "BestMethod")
+                                        {
+                                            this._evaluatedmethodtextdata.Add(new EvaluatedMethodTextData(text,Brushes.Red));
+                                        }
+                                        else
+                                        {
+                                            this._evaluatedmethodtextdata.Add(new EvaluatedMethodTextData(text, Brushes.Gray));
+                                        }
+                                    }
+                                    this.ViewInputAosukeMethodItemsControl.ItemsSource = this._evaluatedmethodtextdata;
+                                }
+                            }
+                        }
                     }
                     else if (button.Name == "MangaFlipButton")
                     {
                         this.MangaFlipButton.Visibility = Visibility.Hidden;
                     }
-
-
-
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -2260,24 +2429,32 @@ namespace KokoroUpTime
 
                 else if (button.Name == "KindOfFeelingInputButton")
                 {
-                    this.GoTo("select_kind_of_feeling");
+                    this.GoTo("select_kind_of_feeling","sub");
                 }
                 else if (button.Name == "SizeOfFeelingInputButton")
                 {
-                    this.GoTo("select_size_of_feeling");
+                    this.GoTo("select_size_of_feeling","sub");
                 }
                 else if (button.Name == "BranchButton1")
                 {
-                    this.GoTo("manga");
+                    this.GoTo("manga","sub");
                 }
-                else if (button.Name == "InputButton")
+                else if (Regex.IsMatch(button.Name, "InputButton."))
                 {
                     if (this.dataOption.InputMethod == 0)
                     {
                         switch (this.scene)
                         {
                             case "チャレンジタイム！　パート①":
-                                this.GoTo("canvas_input_akamaru_other_solution");
+                                this.GoTo("canvas_input_akamaru_other_solution","sub");
+                                break;
+
+                            case "チャレンジタイム！　パート②":
+                                this.GoTo("canvas_input_akamaru_many_solution","sub");
+                                break;
+
+                            case "グループアクティビティ":
+                                this.GoTo("canvas_input_aosuke_many_solution","sub");
                                 break;
                         }
                     }
@@ -2286,8 +2463,18 @@ namespace KokoroUpTime
                         switch (this.scene)
                         {
                             case "チャレンジタイム！　パート①":
-                                this.GoTo("keyboard_input_akamaru_other_solution");
+                                this.GoTo("keyboard_input_akamaru_other_solution","sub");
                                 this.InputTextBox1.Focus();
+                                break;
+
+                            case "チャレンジタイム！　パート②":
+                                this.GoTo("keyboard_input_akamaru_many_solution","sub");
+                                this.InputTextBox2_1.Focus();
+                                break;
+
+                            case "グループアクティビティ":
+                                this.GoTo("keyboard_input_aosuke_many_solution","sub");
+                                 this.InputTextBox3_1.Focus();
                                 break;
                         }
                     }
@@ -2296,24 +2483,53 @@ namespace KokoroUpTime
                 {
                     if (this.dataOption.InputMethod == 0)
                     {
-                        switch (this.InputDictionaryKey)
+                        switch (this.scene)
                         {
-                            case "akamaru_other_solution_use_item":
-                                if (this.InputStroke[this.InputDictionaryKey] != null)
+                            case "チャレンジタイム！　パート①":
+                                this.AkamaruOtherSolutionUseItemInputStroke = this.InputCanvas1.Strokes;
+                                this.OutputCanvas1.Strokes = this.AkamaruOtherSolutionUseItemInputStroke;
+                                break;
+
+                            case "チャレンジタイム！　パート②":
+                                for (int i = 0; i < this.Step2AkamaruMethodInputStrokes.Length; i++)
                                 {
-                                    this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
-                                    this.InputAkamaruOtherSolutionCanvas.Strokes = this.InputStroke[this.InputDictionaryKey];
+                                    this.Step2AkamaruMethodInputStrokes[i] = ((InkCanvas)this.FindName($"InputCanvas2_{ i + 1}")).Strokes;
+                                    ((InkCanvas)this.FindName($"OutputCanvas2_{ i + 1}")).Strokes = this.Step2AkamaruMethodInputStrokes[i];
+                                }
+                                break;
+
+                            case "グループアクティビティ":
+                                for (int i = 0; i < this.Step2AosukeMethodInputStrokes.Length; i++)
+                                {
+                                    this.Step2AosukeMethodInputStrokes[i] = ((InkCanvas)this.FindName($"InputCanvas3_{ i + 1}")).Strokes;
+                                    ((InkCanvas)this.FindName($"OutputCanvas3_{ i + 1}")).Strokes = this.Step2AosukeMethodInputStrokes[i];
                                 }
                                 break;
                         }
                     }
                     else
                     {
-                        switch (this.InputDictionaryKey)
+                        switch (this.scene)
                         {
-                            case "akamaru_other_solution_use_item":
-                                this.InputText[this.InputDictionaryKey] = this.InputTextBox1.Text;
-                                this.InputAkamaruOtherSolutionText.Text = this.InputText[this.InputDictionaryKey];
+                            case "チャレンジタイム！　パート①":
+                                this.dataChapter11.AkamaruOtherSolutionUseItemInputText = this.InputTextBox1.Text;
+                                this.OutputText1.Text = this.dataChapter11.AkamaruOtherSolutionUseItemInputText;
+                                break;
+
+                            case "チャレンジタイム！　パート②":
+                                for (int i = 0; i < this.Step2AkamaruMethodInputText.Length; i++)
+                                {
+                                    this.Step2AkamaruMethodInputText[i] = ((TextBox)this.FindName($"InputTextBox2_{ i + 1}")).Text;
+                                    ((TextBlock)this.FindName($"OutputText2_{ i + 1}")).Text = this.Step2AkamaruMethodInputText[i];
+                                }
+                                break;
+
+                            case "グループアクティビティ":
+                                for(int i=0;i < this.Step2AosukeMethodInputText.Length ; i++)
+                                {
+                                    this.Step2AosukeMethodInputText[i] = ((TextBox)this.FindName($"InputTextBox3_{ i+1}")).Text;
+                                    ((TextBlock)this.FindName($"OutputText3_{ i + 1}")).Text = this.Step2AosukeMethodInputText[i];
+                                }
                                 break;
                         }
                         this.CloseOSK();
@@ -2324,8 +2540,6 @@ namespace KokoroUpTime
                 }
                 else if (Regex.IsMatch(button.Name, "Item0.Button"))
                 {
-                    this.InputDictionaryKey = "akamaru_other_solution_use_item";
-
                     switch (button.Name)
                     {
                         case "Item03Button":
@@ -2342,15 +2556,6 @@ namespace KokoroUpTime
                             break;
 
                     }
-                    if (this.dataOption.InputMethod == 0)
-                    {
-                        this.InputCanvas1.Strokes = this.InputStroke[this.InputDictionaryKey];
-                        this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
-                    }
-                    else
-                    {
-                        this.InputTextBox1.Text = this.InputText[this.InputDictionaryKey];
-                    }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
@@ -2359,9 +2564,78 @@ namespace KokoroUpTime
                     switch (this.scene)
                     {
                         case "チャレンジタイム！　パート①":
-                            this.GoTo("check_akamaru_situation");
+                            this.GoTo("check_akamaru_situation","sub");
+                            break;
+
+                        case "チャレンジタイム！　パート②":
+                        case "グループアクティビティ":
+                            this.GoTo("check_tips_for_thinking","sub");
                             break;
                     }
+                }
+                else if (Regex.IsMatch(button.Name, "SelectAkamaruGoalButton."))
+                {
+                    if (button.Name == "SelectAkamaruGoalButton1")
+                    {
+                        this.dataChapter11.SelectedAkamaruGoalText = "ケンカした友だちと仲直りする";
+                    }
+                    else if (button.Name == "SelectAkamaruGoalButton2")
+                    {
+                        this.dataChapter11.SelectedAkamaruGoalText = "友だちが思っていたことを教えてもらう";
+                    }
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+                else if (Regex.IsMatch(button.Name, "Evaluate.+Button[1-4]"))
+                {
+                    TextBlock textBlock = button.Content as TextBlock;
+                        switch (textBlock.Text)
+                        {
+                            case "":
+                            case "✕":
+                                textBlock.Text = "〇";
+                                break;
+
+                            case "〇":
+                                textBlock.Text = "△";
+                                break;
+                            case "△":
+                                textBlock.Text = "✕";
+                                break;
+                        }
+                           
+                        if (this.scene == "グループアクティビティ")
+                        {
+                            this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAosukeMethodListView);
+                        }
+                        else if (this.scene == "チャレンジタイム！　パート②")
+                        {
+                            this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAkamaruMethodListView);
+                        }
+
+                        this.isClickable = true;
+                }
+                else if (button.Name == "NextMethodButton")
+                {
+                    this.MovetoNextOrPreviousMethod("next");
+                    this.IsVisibileMethodButton();
+                    this.isClickable = true;
+                }
+                else if (button.Name == "BackMethodButton")
+                {
+                    this.MovetoNextOrPreviousMethod("prev");
+                    this.IsVisibileMethodButton();
+                    this.isClickable = true;
+                }
+                else if(button.Name == "DecideAosukeMethodButton")
+                {
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                }
+                else if(button.Name == "RetryButton")
+                {
+                    this.InitializedAosukeMethodListView();
+                    this.GoTo("evaluate_aosuke_method","sub");
                 }
             }
         }
@@ -2467,25 +2741,42 @@ namespace KokoroUpTime
             Cancel
         }
 
-        private void GoTo(string tag)
+        private void GoTo(string tag, string tagType)
         {
-            foreach (var (scenario, index) in this.scenarios.Indexed())
+            if (tagType == "sub")
             {
-                if (scenario[0] == "sub" && scenario[1] == tag)
+                foreach (var (scenario, index) in this.scenarios.Indexed())
                 {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                    if (scenario[0] == "sub" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
-                }
-                if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
-                {
-                    this.scenarioCount = index + 1;
-                    this.ScenarioPlay();
+                        break;
+                    }
+                    if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
 
-                    break;
+                        break;
+                    }
                 }
             }
+            else if (tagType == "scene")
+            {
+                foreach (var (scenario, index) in this.scenarios.Indexed())
+                {
+                    if (scenario[0] == "scene" && scenario[1] == tag)
+                    {
+                        this.scenarioCount = index + 1;
+                        this.ScenarioPlay();
+
+                        break;
+                    }
+                }
+            }
+
         }
 
         private BitmapSource Image2Gray(ImageSource originalImageSource)
@@ -2606,12 +2897,19 @@ namespace KokoroUpTime
                     MaxLine = 6;
                     break;
 
-                case "InputTextBox2":
-                    MaxLine = 6;
+                case "InputTextBox2_1":
+                case "InputTextBox2_2":
+                case "InputTextBox2_3":
+                    MaxLine = 2;
                     break;
 
-                case "InputTextBox3":
-                    MaxLine = 3;
+                case "InputTextBox3_1":
+                case "InputTextBox3_2":
+                case "InputTextBox3_3":
+                case "InputTextBox3_4":
+                case "InputTextBox3_5":
+                case "InputTextBox3_6":
+                    MaxLine = 2;
                     break;
             }
             
@@ -2638,12 +2936,20 @@ namespace KokoroUpTime
                     MaxLine = 6;
                     break;
 
-                case "InputTextBox2":
-                    MaxLine = 6;
+                case "InputTextBox2_1":
+                case "InputTextBox2_2":
+                case "InputTextBox2_3":
+                    MaxLine = 2;
                     break;
 
-                case "InputTextBox3":
-                    MaxLine = 3;
+
+                case "InputTextBox3_1":
+                case "InputTextBox3_2":
+                case "InputTextBox3_3":
+                case "InputTextBox3_4":
+                case "InputTextBox3_5":
+                case "InputTextBox3_6":
+                    MaxLine = 2;
                     break;
             }
 
@@ -2656,22 +2962,66 @@ namespace KokoroUpTime
             }
         }
 
-        private class GroupeActivityData
+        private class MethodTextValueData
         {
-            public GroupeActivityData(string firstRedText, string subsequentBlueText, string methodBlackText, string fileName)
+            public MethodTextValueData(string methodText, string[] methodValueText)
             {
-                FirstRedText = firstRedText;
-                SubsequentBlueText = subsequentBlueText;
-                MethodBlackText = methodBlackText;
-                FileName = fileName;
+                MethodText = methodText;
+                MethodValueText1 = methodValueText[0];
+                MethodValueText2 = methodValueText[1];
+                MethodValueText3 = methodValueText[2];
+                MethodValueText4 = methodValueText[3];
             }
 
-            public string FirstRedText { get; set; }
-            public string SubsequentBlueText { get; set; }
-            public string MethodBlackText { get; set; }
-            public string FileName { get; set; }
+            public string MethodText { get; set; }
+            public string MethodValueText1 { get; set; }
+            public string MethodValueText2 { get; set; }
+            public string MethodValueText3 { get; set; }
+            public string MethodValueText4 { get; set; }
         }
 
+        private class MethodStrokeValueData
+        {
+            public MethodStrokeValueData(StrokeCollection methodStroke, string[] methodValueText)
+            {
+                MethodStroke = methodStroke;
+                MethodValueText1 = methodValueText[0];
+                MethodValueText2 = methodValueText[1];
+                MethodValueText3 = methodValueText[2];
+                MethodValueText4 = methodValueText[3];
+            }
+
+            public StrokeCollection MethodStroke { get; set; }
+            public string MethodValueText1 { get; set; }
+            public string MethodValueText2 { get; set; }
+            public string MethodValueText3 { get; set; }
+            public string MethodValueText4 { get; set; }
+        }
+
+        private class EvaluatedMethodTextData
+        {
+            private string text;
+            private SolidColorBrush red;
+
+            public EvaluatedMethodTextData(string evaluatedMethodText, SolidColorBrush textColor)
+            {
+                EvaluatedMethodText = evaluatedMethodText;
+                TextColor = textColor;
+            }
+            public string EvaluatedMethodText { get; set; }
+            public SolidColorBrush TextColor { get; set; }
+
+        }
+
+        private class EvaluatedMethodStrokeData
+        {
+            public EvaluatedMethodStrokeData(StrokeCollection evaluatedMethodStroke)
+            {
+                EvaluatedMethodStroke = evaluatedMethodStroke;
+            }
+
+            public StrokeCollection EvaluatedMethodStroke { get; set; }
+        }
 
         private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
         {
@@ -2680,182 +3030,616 @@ namespace KokoroUpTime
             switch (listBoxItem.Name)
             {
                 case "PenButton":
-                    if(this.InputDictionaryKey == "akamaru_other_solution_use_item")
+                    if (this.InputCanvasGrid1.IsVisible)
                     {
                         this.InputCanvas1.EditingMode = InkCanvasEditingMode.Ink;
-                        this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
                     }
-                   
-                     break;
+                    if (this.InputCanvasGrid2.IsVisible)
+                    {
+                        this.InputCanvas2_1.EditingMode = InkCanvasEditingMode.Ink;
+                        this.InputCanvas2_2.EditingMode = InkCanvasEditingMode.Ink;
+                        this.InputCanvas2_3.EditingMode = InkCanvasEditingMode.Ink;
+                    }
+                    if (this.InputCanvasGrid3.IsVisible)
+                    {
+                        this.InputCanvas3_1.EditingMode = InkCanvasEditingMode.Ink;
+                        this.InputCanvas3_2.EditingMode = InkCanvasEditingMode.Ink;
+                        this.InputCanvas3_3.EditingMode = InkCanvasEditingMode.Ink;
+                        this.InputCanvas3_4.EditingMode = InkCanvasEditingMode.Ink;
+                        this.InputCanvas3_5.EditingMode = InkCanvasEditingMode.Ink;
+                        this.InputCanvas3_6.EditingMode = InkCanvasEditingMode.Ink;
+                    }
+
+                    break;
 
                 case "EraserButton":
-                    if (this.InputDictionaryKey == "akamaru_other_solution_use_item")
+                    if (this.InputCanvasGrid1.IsVisible)
                     {
                         this.InputCanvas1.EditingMode = InkCanvasEditingMode.EraseByPoint;
                     }
-                  
+                    if (this.InputCanvasGrid2.IsVisible)
+                    {
+                        this.InputCanvas2_1.EditingMode = InkCanvasEditingMode.EraseByPoint;
+                        this.InputCanvas2_2.EditingMode = InkCanvasEditingMode.EraseByPoint;
+                        this.InputCanvas2_3.EditingMode = InkCanvasEditingMode.EraseByPoint;
+                    }
+                    if (this.InputCanvasGrid3.IsVisible)
+                    {
+                        this.InputCanvas3_1.EditingMode = InkCanvasEditingMode.EraseByPoint;
+                        this.InputCanvas3_2.EditingMode = InkCanvasEditingMode.EraseByPoint;
+                        this.InputCanvas3_3.EditingMode = InkCanvasEditingMode.EraseByPoint;
+                        this.InputCanvas3_4.EditingMode = InkCanvasEditingMode.EraseByPoint;
+                        this.InputCanvas3_5.EditingMode = InkCanvasEditingMode.EraseByPoint;
+                        this.InputCanvas3_6.EditingMode = InkCanvasEditingMode.EraseByPoint;
+                    }
+
 
                     break;
 
                 case "AllClearButton":
-                    if (this.InputDictionaryKey == "akamaru_other_solution_use_item")
+                    if (this.InputCanvasGrid1.IsVisible)
                     {
                         this.InputCanvas1.Strokes.Clear();
-                        this.ClipStrokes(this.InputCanvas1, this.InputStroke[this.InputDictionaryKey]);
+                    }
+                    if (this.InputCanvasGrid2.IsVisible)
+                    {
+                        this.InputCanvas2_1.Strokes.Clear();
+                        this.InputCanvas2_2.Strokes.Clear();
+                        this.InputCanvas2_3.Strokes.Clear();
+                    }
+                    if (this.InputCanvasGrid3.IsVisible)
+                    {
+                        this.InputCanvas3_1.Strokes.Clear();
+                        this.InputCanvas3_2.Strokes.Clear();
+                        this.InputCanvas3_3.Strokes.Clear();
+                        this.InputCanvas3_4.Strokes.Clear();
+                        this.InputCanvas3_5.Strokes.Clear();
+                        this.InputCanvas3_6.Strokes.Clear();
                     }
 
                     break;
             }
         }
 
-        //InkCanvas外にはみ出したストロークを削除します
-        private void ClipStrokes(InkCanvas inkCanvas, StrokeCollection strokes)
+        //private void InkCanvas_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    var gestureCanvas = (InkCanvas)sender;
+
+        //    gestureCanvas.SetEnabledGestures(new[]
+        //    {
+        //        System.Windows.Ink.ApplicationGesture.Circle,
+        //        System.Windows.Ink.ApplicationGesture.DoubleCircle,
+        //        System.Windows.Ink.ApplicationGesture.Triangle,
+
+        //    });
+        //}
+
+        //private void InkCanvas_Gesture(object sender, InkCanvasGestureEventArgs e)
+        //{
+        //    try
+        //    {
+
+        //        var gestureCanvas = (InkCanvas)sender;
+        //        if (RecognizingCanvasName != gestureCanvas.Name)
+        //        {
+        //            RecognizingCanvasName = gestureCanvas.Name;
+
+        //            DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        //            timer.Start();
+        //            timer.Tick += (s, args) =>
+        //            {
+        //                // タイマーの停止
+        //                timer.Stop();
+
+        //                // 信頼性 (RecognitionConfidence) を無視したほうが、Circle と Triangle の認識率は上がるようです。
+        //                var gestureResult = e.GetGestureRecognitionResults().FirstOrDefault(r => r.ApplicationGesture != System.Windows.Ink.ApplicationGesture.NoGesture);
+
+        //                if (gestureResult != null)
+        //                {
+        //                    switch (gestureResult.ApplicationGesture)
+        //                    {
+        //                        case System.Windows.Ink.ApplicationGesture.Circle:
+        //                        case System.Windows.Ink.ApplicationGesture.DoubleCircle:
+        //                            break;
+        //                        case System.Windows.Ink.ApplicationGesture.Triangle:
+        //                            break;
+        //                        default:
+        //                            throw new InvalidOperationException();
+        //                    }
+
+        //                    if (gestureResult.ApplicationGesture == System.Windows.Ink.ApplicationGesture.Circle || gestureResult.ApplicationGesture == System.Windows.Ink.ApplicationGesture.DoubleCircle)
+        //                    {
+        //                        foreach (var textBlock in ((Grid)gestureCanvas.Parent).Children)
+        //                        {
+        //                            if (textBlock is TextBlock)
+        //                            {
+        //                                ((TextBlock)textBlock).Text = "〇";
+        //                                gestureCanvas.Strokes.Clear();
+        //                                if (this.scene == "グループアクティビティ")
+        //                                {
+        //                                    this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAosukeMethodListView);
+        //                                }
+        //                                else if (this.scene == "チャレンジタイム！　パート②")
+        //                                {
+        //                                    this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAkamaruMethodListView);
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+        //                    else if (gestureResult.ApplicationGesture == System.Windows.Ink.ApplicationGesture.Triangle)
+        //                    {
+        //                        foreach (var textBlock in ((Grid)gestureCanvas.Parent).Children)
+        //                        {
+        //                            if (textBlock is TextBlock)
+        //                            {
+        //                                ((TextBlock)textBlock).Text = "△";
+        //                                gestureCanvas.Strokes.Clear();
+
+        //                                if (this.EvaluateAosukeMethodListView.IsVisible)
+        //                                {
+        //                                    this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAosukeMethodListView);
+        //                                }
+        //                                else if (this.EvaluateAkamaruMethodListView.IsVisible)
+        //                                {
+        //                                    this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAkamaruMethodListView);
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+
+        //                    RecognizingCanvasName = "";
+        //                }
+        //                else
+        //                {
+        //                    this.CrossMarkRecognize(gestureCanvas);
+        //                    gestureCanvas.Strokes.Clear();
+
+
+        //                }
+        //            };
+        //        }
+        //    }
+        //    catch (Exception e1)
+        //    {
+        //        MessageBox.Show(e1.ToString());
+        //    }
+        //}
+
+        //private void CrossMarkRecognize(InkCanvas inkCanvas)
+        //{
+        //    try
+        //    {
+        //        using (MemoryStream ms = new MemoryStream())
+        //        {
+        //            inkCanvas.Strokes.Save(ms);
+        //            var myInkCollector = new InkCollector();
+        //            var ink = new Ink();
+        //            ink.Load(ms.ToArray());
+
+        //            using (RecognizerContext context = new RecognizerContext())
+        //            {
+        //                if (ink.Strokes.Count > 0)
+        //                {
+        //                    context.Strokes = ink.Strokes;
+        //                    RecognitionStatus status;
+
+        //                    var result = context.Recognize(out status);
+
+        //                    var aaa = result.GetAlternatesFromSelection();
+
+        //                    foreach (var tet in aaa)
+        //                    {
+        //                        if (tet.ToString() == "×" || tet.ToString() == "x" || tet.ToString() == "×")
+        //                        {
+        //                            if (status == RecognitionStatus.NoError)
+        //                            {
+        //                                foreach (var textBlock in ((Grid)inkCanvas.Parent).Children)
+        //                                {
+        //                                    if (textBlock is TextBlock)
+        //                                    {
+        //                                        ((TextBlock)textBlock).Text = "✕";
+
+        //                                        if (this.scene == "グループアクティビティ")
+        //                                        {
+        //                                            this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAosukeMethodListView);
+        //                                        }
+        //                                        else if (this.scene == "チャレンジタイム！　パート②")
+        //                                        {
+        //                                            this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAkamaruMethodListView);
+        //                                        }
+        //                                    }
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e2)
+        //    {
+        //        MessageBox.Show(e2.ToString());
+        //    }
+            
+
+        //    RecognizingCanvasName = "";
+        //}
+
+        private void WriteMethodValueData(TextBlock textBlock, ListView listView)
         {
-            StylusPoint point1 = new StylusPoint() { X = 0, Y = 0 };
-            StylusPoint point2 = new StylusPoint() { X = inkCanvas.ActualWidth, Y = 0 };
-            StylusPoint point3 = new StylusPoint() { X = inkCanvas.ActualWidth, Y = inkCanvas.ActualHeight };
-            StylusPoint point4 = new StylusPoint() { X = 0, Y = inkCanvas.ActualHeight };
-
-            StylusPointCollection points1 = new StylusPointCollection();
-            StylusPointCollection points2 = new StylusPointCollection();
-            points1.Add(point1);
-            points1.Add(point2);
-            points1.Add(point3);
-            points1.Add(point4);
-
-            Point[] strokePoints = (Point[])points1;
-            strokes.Clip(strokePoints);
-
-            points2.Add(point3);
-            System.Windows.Ink.DrawingAttributes attributes = new System.Windows.Ink.DrawingAttributes() { Height = 1, Width = 1, Color = Colors.Transparent };
-            System.Windows.Ink.Stroke stroke = new System.Windows.Ink.Stroke(points2) { DrawingAttributes = attributes };
-            strokes.Add(stroke);
-        }
-
-        private void InkCanvas_Loaded(object sender, RoutedEventArgs e)
-        {
-            var gestureCanvas = (InkCanvas)sender;
-
-            gestureCanvas.SetEnabledGestures(new[]
+            int number = int.Parse(textBlock.Name.Substring(textBlock.Name.Length - 1));
+            if (listView.Name == "EvaluateAosukeMethodListView")
             {
-                System.Windows.Ink.ApplicationGesture.Circle,
-                System.Windows.Ink.ApplicationGesture.DoubleCircle,
-                System.Windows.Ink.ApplicationGesture.Triangle,
-
-            });
-        }
-
-        private void InkCanvas_Gesture(object sender, InkCanvasGestureEventArgs e)
-        {
-            var gestureCanvas = (InkCanvas)sender;
-            if (RecognizingCanvasName != gestureCanvas.Name)
-            {
-                
-                RecognizingCanvasName = gestureCanvas.Name;
-
-                DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.75) };
-                timer.Start();
-                timer.Tick += (s, args) =>
+                if (this.dataOption.InputMethod == 0)
                 {
-                    // タイマーの停止
-                    timer.Stop();
+                    this.AOSUKE_METHOD_STROKE_VALUES[(StrokeCollection)this._methodstrokedata.First().MethodStroke][number - 1] = textBlock.Text;
+                }
+                else
+                {
+                    this.AOSUKE_METHOD_TEXT_VALUES[(string)this._methodtextdata.First().MethodText][number-1] = textBlock.Text;
+                }
+                this.CheckFillInTheBlanks("青助");
+            }
+            else if(listView.Name == "EvaluateAkamaruMethodListView")
+            {
+                this.AKAMARU_METHOD_TEXT_VALUES[(string)textBlock.DataContext.ToString()][number - 1] = textBlock.Text;
+                this.CheckFillInTheBlanks("赤丸");
+            }
 
-                    // 信頼性 (RecognitionConfidence) を無視したほうが、Circle と Triangle の認識率は上がるようです。
-                    var gestureResult = e.GetGestureRecognitionResults().FirstOrDefault(r => r.ApplicationGesture != System.Windows.Ink.ApplicationGesture.NoGesture);
+        }
+
+        private  void CountNumberOfCorrect(string methodText,StrokeCollection methodStrokes)
+        {
+            int countnumber1 = 0;
+            if (this.dataOption.InputMethod == 0)
+            {
+                foreach(string text1 in this.AOSUKE_METHOD_STROKE_VALUES[methodStrokes])
+                {
+                    if(text1 == "〇")
+                    {
+                        countnumber1++;
+                    }
+                }
+                this.AOSUKE_METHOD_STROKE_VALUES[methodStrokes][4] = countnumber1.ToString();
+
                 
-                    if (gestureResult != null)
-                    {
-                        switch (gestureResult.ApplicationGesture)
-                        {
-                            case System.Windows.Ink.ApplicationGesture.Circle:
-                            case System.Windows.Ink.ApplicationGesture.DoubleCircle:
-                                break;
-                            case System.Windows.Ink.ApplicationGesture.Triangle:
-                                break;
-                            default:
-                                throw new InvalidOperationException();
-                        }
 
-                        if (gestureResult.ApplicationGesture == System.Windows.Ink.ApplicationGesture.Circle || gestureResult.ApplicationGesture == System.Windows.Ink.ApplicationGesture.DoubleCircle)
-                        {
-                            foreach (var textBlock in ((Grid)gestureCanvas.Parent).Children)
-                            {
-                                if (textBlock is TextBlock)
-                                {
-                                    ((TextBlock)textBlock).Text = "〇";
-                                }
-                            }
-                        }
-                        else if (gestureResult.ApplicationGesture == System.Windows.Ink.ApplicationGesture.Triangle)
-                        {
-                            foreach (var textBlock in ((Grid)gestureCanvas.Parent).Children)
-                            {
-                                if (textBlock is TextBlock)
-                                {
-                                    ((TextBlock)textBlock).Text = "△";
-                                }
-                            }
-                        }
-
-                        RecognizingCanvasName = "";
-                    }
-                    else
+            }
+            else
+            {
+                foreach (string text1 in this.AOSUKE_METHOD_TEXT_VALUES[methodText])
+                {
+                    if (text1 == "〇")
                     {
-                        this.CrossMarkRecognize(gestureCanvas);
+                        countnumber1++;
                     }
-                    gestureCanvas.Strokes.Clear();
-                };
+                }
+                this.AOSUKE_METHOD_TEXT_VALUES[methodText][4] = countnumber1.ToString();
+
+                
             }
         }
 
-        private void CrossMarkRecognize(InkCanvas inkCanvas)
+        private void DecideBestMethod(string methodText, StrokeCollection methodStrokes)
         {
-            using (MemoryStream ms = new MemoryStream())
+            bool isMaximize = true;
+            if(this.dataOption.InputMethod == 0)
             {
-                inkCanvas.Strokes.Save(ms);
-                var myInkCollector = new InkCollector();
-                var ink = new Ink();
-                ink.Load(ms.ToArray());
-
-                using (RecognizerContext context = new RecognizerContext())
+                foreach (string[] text2 in this.AOSUKE_METHOD_STROKE_VALUES.Values)
                 {
-                    if (ink.Strokes.Count > 0)
+                    if (text2[4] != "")
                     {
-                        context.Strokes = ink.Strokes;
-                        RecognitionStatus status;
-
-                        var result = context.Recognize(out status);
-
-                        var aaa = result.GetAlternatesFromSelection();
-
-                        foreach (var tet in aaa)
+                        int numberOfCorrect = int.Parse(text2[4]);
+                        if (numberOfCorrect > int.Parse(this.AOSUKE_METHOD_STROKE_VALUES[methodStrokes][4]))
                         {
-                            if (tet.ToString() == "×" || tet.ToString() == "x" || tet.ToString() == "×")
-                            {
-                                if (status == RecognitionStatus.NoError)
-                                {
-                                    foreach (var textBlock in ((Grid)inkCanvas.Parent).Children)
-                                    {
-                                        if (textBlock is TextBlock)
-                                        {
-                                            ((TextBlock)textBlock).Text = "✕";
-                                        }
-                                    }
-                                }
-                                else
-                                    Debug.Print("Recognition failed");
-                            }
+                            isMaximize = false;
+                            break;
                         }
                     }
-                    else
+                }
+                if (isMaximize)
+                {
+                    this.AOSUKE_METHOD_STROKE_VALUES[methodStrokes][5] = "BestMethod";
+                }
+                else
+                {
+                    this.AOSUKE_METHOD_STROKE_VALUES[methodStrokes][5] = "NotBestMethod";
+                }
+            }
+            else
+            {
+                foreach (string[] text2 in this.AOSUKE_METHOD_TEXT_VALUES.Values)
+                {
+                    if (text2[4] != "")
                     {
-                        Debug.Print("No stroke detected");
+                        int numberOfCorrect = int.Parse(text2[4]);
+                        if (numberOfCorrect > int.Parse(this.AOSUKE_METHOD_TEXT_VALUES[methodText][4]))
+                        {
+                            isMaximize = false;
+                            break;
+                        }
+                    }
+                }
+                if (isMaximize)
+                {
+                    this.AOSUKE_METHOD_TEXT_VALUES[methodText][5] = "BestMethod";
+                }
+                else
+                {
+                    this.AOSUKE_METHOD_TEXT_VALUES[methodText][5] = "NotBestMethod";
+                }
+            }
+            
+        }
+
+        private void IsVisibileMethodButton()
+        {
+            if (this.dataOption.InputMethod == 0)
+            {
+                if ((StrokeCollection)this._methodstrokedata.First().MethodStroke == this.AOSUKE_METHOD_STROKE_VALUES.Reverse().FirstOrDefault().Key && this.AOSUKE_METHOD_STROKE_VALUES.Count > 1)
+                {
+                    this.NextMethodButton.Visibility = Visibility.Hidden;
+                    this.BackMethodButton.Visibility = Visibility.Visible;
+                }
+                else if((StrokeCollection) this._methodstrokedata.First().MethodStroke == this.AOSUKE_METHOD_STROKE_VALUES.FirstOrDefault().Key &&this.AOSUKE_METHOD_STROKE_VALUES.Count > 1)
+                {
+                    this.NextMethodButton.Visibility = Visibility.Visible;
+                    this.BackMethodButton.Visibility = Visibility.Hidden;
+                }
+                else if (this.AOSUKE_METHOD_STROKE_VALUES.Count <= 1)
+                {
+                    this.NextMethodButton.Visibility = Visibility.Hidden;
+                    this.BackMethodButton.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    this.NextMethodButton.Visibility = Visibility.Visible;
+                    this.BackMethodButton.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                
+                if ((string)this._methodtextdata.First().MethodText == this.AOSUKE_METHOD_TEXT_VALUES.Reverse().FirstOrDefault().Key && this.AOSUKE_METHOD_TEXT_VALUES.Count > 1)
+                {
+                    this.NextMethodButton.Visibility = Visibility.Hidden;
+                    this.BackMethodButton.Visibility = Visibility.Visible;
+                }
+                else if ((string)this._methodtextdata.First().MethodText == this.AOSUKE_METHOD_TEXT_VALUES.FirstOrDefault().Key && this.AOSUKE_METHOD_TEXT_VALUES.Count > 1)
+                {
+                    this.NextMethodButton.Visibility = Visibility.Visible;
+                    this.BackMethodButton.Visibility = Visibility.Hidden;
+                }
+                else if (this.AOSUKE_METHOD_TEXT_VALUES.Count <= 1)
+                {
+                    this.NextMethodButton.Visibility = Visibility.Hidden;
+                    this.BackMethodButton.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    this.NextMethodButton.Visibility = Visibility.Visible;
+                    this.BackMethodButton.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void MovetoNextOrPreviousMethod(string Direction)
+        {
+            bool checkflag = false;
+            if(this.dataOption.InputMethod == 0)
+            {
+                this.CountNumberOfCorrect(null, (StrokeCollection)this._methodstrokedata.First().MethodStroke);
+
+                if (Direction == "next")
+                {
+
+                    foreach (StrokeCollection stroke in this.AOSUKE_METHOD_STROKE_VALUES.Keys)
+                    {
+                        if (checkflag)
+                        {
+                            this._methodstrokedata = new ObservableCollection<MethodStrokeValueData>()
+                            {
+                                new MethodStrokeValueData(stroke,this.AOSUKE_METHOD_STROKE_VALUES[stroke])
+                            };
+                            this.EvaluateAosukeMethodListView.ItemsSource = _methodstrokedata;
+                            break;
+                        }
+                        if ((StrokeCollection)this._methodstrokedata.First().MethodStroke == stroke)
+                        {
+                            checkflag = true;
+                        }
+                    }
+                }
+                else if (Direction == "prev")
+                {
+
+                    foreach (StrokeCollection stroke in this.AOSUKE_METHOD_STROKE_VALUES.Keys.Reverse())
+                    {
+                        if (checkflag)
+                        {
+                            this._methodstrokedata = new ObservableCollection<MethodStrokeValueData>()
+                            {
+                                new MethodStrokeValueData(stroke,this.AOSUKE_METHOD_STROKE_VALUES[stroke])
+                            };
+                            this.EvaluateAosukeMethodListView.ItemsSource = _methodstrokedata;
+                            break;
+                        }
+                        if ((StrokeCollection)this._methodstrokedata.First().MethodStroke == stroke)
+                        {
+                            checkflag = true;
+                        }
+                    }
+                }
+                
+            }
+            else
+            { 
+                this.CountNumberOfCorrect((string)this._methodtextdata.First().MethodText, null);
+
+                if (Direction =="next")
+                {
+                    foreach (string text in this.AOSUKE_METHOD_TEXT_VALUES.Keys)
+                    {
+                        if (checkflag)
+                        {
+                            this._methodtextdata = new ObservableCollection<MethodTextValueData>()
+                        {
+                            new MethodTextValueData(text,this.AOSUKE_METHOD_TEXT_VALUES[text])
+                        };
+                            this.EvaluateAosukeMethodListView.ItemsSource = _methodtextdata;
+                            break;
+                        }
+                        if ((string)this._methodtextdata.First().MethodText == text)
+                        {
+                            checkflag = true;
+                        }
+                    }
+                }
+                else if(Direction == "prev")
+                {
+                    foreach (string text in this.AOSUKE_METHOD_TEXT_VALUES.Keys.Reverse())
+                    {
+                        if (checkflag)
+                        {
+                            this._methodtextdata = new ObservableCollection<MethodTextValueData>()
+                        {
+                            new MethodTextValueData(text,this.AOSUKE_METHOD_TEXT_VALUES[text])
+                        };
+                            this.EvaluateAosukeMethodListView.ItemsSource = _methodtextdata;
+                            break;
+                        }
+                        if ((string)this._methodtextdata.First().MethodText == text)
+                        {
+                            checkflag = true;
+                        }
                     }
                 }
             }
+        }
 
-            RecognizingCanvasName = "";
+        private void CheckFillInTheBlanks(string characterName)
+        {
+            bool checkFlag = true;
+            if (characterName == "赤丸")
+            {
+                foreach (string[] texts in this.AKAMARU_METHOD_TEXT_VALUES.Values)
+                {
+                    foreach (string text in texts)
+                    {
+                        if (text == "")
+                        {
+                            checkFlag = false;
+                            break;
+                        }
+                    }
+                }
+                if (checkFlag)
+                {
+                    this.NextPageButton.Visibility = Visibility.Visible;
+                    this.BackPageButton.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    this.NextPageButton.Visibility = Visibility.Hidden;
+                    this.BackPageButton.Visibility = Visibility.Visible;
+                }
+            }
+            else if(characterName =="青助")
+            {
+                if (this.dataOption.InputMethod == 0)
+                {
+                    foreach (string[] texts in this.AOSUKE_METHOD_STROKE_VALUES.Values)
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            if (texts[i] == "")
+                            {
+                                checkFlag = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (checkFlag)
+                    {
+                        this.NextPageButton.Visibility = Visibility.Visible;
+                        this.BackPageButton.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        this.NextPageButton.Visibility = Visibility.Hidden;
+                        this.BackPageButton.Visibility = Visibility.Visible;
+                    }
 
+                }
+                else
+                {
+                    foreach (string[] texts in this.AOSUKE_METHOD_TEXT_VALUES.Values)
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            if (texts[i] == "")
+                            {
+                                checkFlag = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (checkFlag)
+                    {
+                        this.NextPageButton.Visibility = Visibility.Visible;
+                        this.BackPageButton.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        this.NextPageButton.Visibility = Visibility.Hidden;
+                        this.BackPageButton.Visibility = Visibility.Visible;
+                    }
+                }
+            }
+        }
+
+        private void InitializedAosukeMethodListView()
+        {
+            if (this.dataOption.InputMethod == 0)
+            {
+                this.AOSUKE_METHOD_STROKE_VALUES.Clear();
+                foreach (StrokeCollection strokes in this.Step2AosukeMethodInputStrokes)
+                {
+                    foreach (System.Windows.Ink.Stroke stroke in strokes)
+                    {
+                        stroke.DrawingAttributes.Color = Colors.Black;
+                    }
+                    if (strokes.Count > 0 && !this.AOSUKE_METHOD_STROKE_VALUES.ContainsKey(strokes))
+                    {
+                        this.AOSUKE_METHOD_STROKE_VALUES.Add(strokes, new string[] { "", "", "", "", "", "NotBestMethod" });
+                    }
+                }
+
+                this._methodstrokedata = new ObservableCollection<MethodStrokeValueData>()
+                {
+                    new MethodStrokeValueData(this.AOSUKE_METHOD_STROKE_VALUES.FirstOrDefault().Key,this.AOSUKE_METHOD_STROKE_VALUES.FirstOrDefault().Value)
+                };
+                this.EvaluateAosukeMethodListView.ItemsSource = _methodstrokedata;
+
+            }
+            else
+            {
+                this.AOSUKE_METHOD_TEXT_VALUES.Clear();
+                foreach (string text in this.Step2AosukeMethodInputText)
+                {
+                    
+                    if (text != "" && !this.AOSUKE_METHOD_TEXT_VALUES.ContainsKey(text))
+                    {
+                        this.AOSUKE_METHOD_TEXT_VALUES.Add(text, new string[] { "", "", "", "", "", "NotBestMethod" });
+                    }
+                }
+
+                this._methodtextdata = new ObservableCollection<MethodTextValueData>()
+                {
+                    new MethodTextValueData(this.AOSUKE_METHOD_TEXT_VALUES.FirstOrDefault().Key,this.AOSUKE_METHOD_TEXT_VALUES.FirstOrDefault().Value)
+                };
+                this.EvaluateAosukeMethodListView.ItemsSource = _methodtextdata;
+            }
         }
     }
 }
