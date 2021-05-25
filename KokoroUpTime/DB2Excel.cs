@@ -120,35 +120,44 @@ namespace KokoroUpTime
                 }
             }
 
-            /*
+
             // ###############################################################################
 
             //第２回に書き込み
             if (dataProgress.HasCompletedChapter2 == true)
             {
-                excel.SetSheet("第２回");
+                excel.SetSheet("第2回");
 
-                chapter2Result = new Dictionary<string, string>
+                var chapter2StrResult = new Dictionary<string, string>
                 {
                     {"A4" , dataChapter2.MySelectGoodEvents},
-                    {"E5" , dataChapter2.AosukesSizeOfFeelingOfEating},
                     {"F5" , dataChapter2.AosukesDifficultyOfEating},
-                    {"E6" , dataChapter2.AosukesSizeOfFeelingOfGettingHighScore},
                     {"F6" , dataChapter2.AosukesDifficultyOfGettingHighScore},
-                    {"E7" , dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend},
                     {"F7" , dataChapter2.AosukesDifficultyOfTalkingWithFriend},
                     {"H4" , dataChapter2.MyALittlleExcitingEvents},
                 };
 
-                foreach (KeyValuePair<string, string> item in chapter2Result)
+                var chapter2IntResult = new Dictionary<string, int?>
                 {
-                        excel.WriteCell(item.Key, item.Value);
+                    {"E5" , dataChapter2.AosukesSizeOfFeelingOfEating},
+                    {"E6" , dataChapter2.AosukesSizeOfFeelingOfGettingHighScore},
+                    {"E7" , dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend},
+                };
+
+                foreach (KeyValuePair<string, string> item in chapter2StrResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+
+                foreach (KeyValuePair<string, int?> item in chapter2IntResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
                 }
 
             }
 
             // ###############################################################################
-            */
+
 
             //第3回に書き込み
             if (dataProgress.HasCompletedChapter3 == true)

@@ -20,11 +20,13 @@ namespace ExcelManage
         /// </summary>
         public void Open(string filePath)
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             try
             {
                 // Excelファイルを開く
                 var fileInfo = new FileInfo(filePath);
                 _excelPackage = new ExcelPackage(fileInfo);
+
 
                 this.SetSheet();
             }
