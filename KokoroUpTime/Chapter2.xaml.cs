@@ -28,8 +28,6 @@ namespace KokoroUpTime
     /// </summary>
     public partial class Chapter2 : Page
     {
-        Chapter1 Chapter1 = new Chapter1();
-
         // 気持ちのリスト
         private string[] GOOD_FEELINGS = { "うれしい", "しあわせ", "たのしい", "ホッとした", "きもちいい", "まんぞく", "すき", "やる気マンマン", "かんしゃ", "わくわく", "うきうき", "ほこらしい" };
         private string[] BAD_FEELINGS = { "心配", "こまった", "不安", "こわい", "おちこみ", "がっかり", "いかり", "イライラ", "はずかしい", "ふまん", "かなしい", "おびえる" };
@@ -43,6 +41,8 @@ namespace KokoroUpTime
         private List<List<string>> scenarios = null;
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
+
+        LogManager logManager;
 
         // 各種コントロールの名前を収める変数
         private string position = "";
@@ -119,22 +119,25 @@ namespace KokoroUpTime
             this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
+            this.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(OnPreviewMouseLeftButtonDown);
+
+            logManager = new LogManager();
 
             // データモデルインスタンス確保
             this.dataChapter2 = new DataChapter2();
 
             DifficultyOfActions = new Dictionary<string, string>()
             {
-                ["eating"] = this.dataChapter2.AosukesDifficultyOfEating="",
-                ["high_score"] = this.dataChapter2.AosukesDifficultyOfGettingHighScore="",
-                ["talking"] = this.dataChapter2.AosukesDifficultyOfTalkingWithFriend="",
+                ["eating"] = "",
+                ["high_score"] =  "",
+                ["talking"] =  "",
             };
 
             SizeOfFeelings = new Dictionary<string, int?>()
             {
-                ["eating"] = this.dataChapter2.AosukesSizeOfFeelingOfEating = -1,
-                ["high_score"]=this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore=-1,
-                ["talking"]=this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend=-1,
+                ["eating"] = -1,
+                ["high_score"] = -1,
+                [ "talking"] = -1,
             };
 
             this.GoodEventSelectListBox1.ItemsSource　= GOOD_EVENT1;
@@ -455,6 +458,8 @@ namespace KokoroUpTime
 
                     this.SetInputMethod();
 
+                    logManager.StartLog(this.initConfig,this.dataProgress);
+
                     //前回のつづきからスタート
                     if (this.dataProgress.CurrentScene != null)
                     {
@@ -510,7 +515,7 @@ namespace KokoroUpTime
                         this.DifficultyDictionaryKey = "eating";
                         this.FeelingDictionaryKey = "eating";
                     }
-                    else if (this.scene == "チャレンジタイムパート②「全部のテストで１００点をとる」ときは？")
+                    else if (this.scene == "チャレンジタイムパート②「全部のテストで100点をとる」ときは？")
                     {
                         this.DifficultyDictionaryKey="high_score";
                         this.FeelingDictionaryKey="high_score";
@@ -669,7 +674,7 @@ namespace KokoroUpTime
 
                     if(this.position == "select_feeling_next_button")
                     {
-                        if(this.scene == "チャレンジタイムパート②「おいしいものを食べる」ときは？"|| this.scene == "チャレンジタイムパート②「全部のテストで１００点をとる」ときは？" || this.scene == "チャレンジタイムパート②「休み時間に友だちとおしゃべりする」ときは？")
+                        if(this.scene == "チャレンジタイムパート②「おいしいものを食べる」ときは？"|| this.scene == "チャレンジタイムパート②「全部のテストで100点をとる」ときは？" || this.scene == "チャレンジタイムパート②「休み時間に友だちとおしゃべりする」ときは？")
                         {
                             if(this.DifficultyOfActions[this.DifficultyDictionaryKey] !=""&& this.SizeOfFeelings[this.FeelingDictionaryKey] != -1)
                             {
@@ -1842,7 +1847,7 @@ namespace KokoroUpTime
                         this.BackMessageButton.Visibility = Visibility.Hidden;
                         this.NextMessageButton.Visibility = Visibility.Hidden;
 
-                        if (this.SelectHeartGrid.IsVisible)
+                        if (this.SelectHeartGrid.Visibility == Visibility.Visible)
                         {
                             this.SizeOfFeelings[FeelingDictionaryKey] = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
                         }
@@ -1850,6 +1855,29 @@ namespace KokoroUpTime
                     else if (button.Name == "MangaFlipButton")
                     {
                         this.MangaFlipButton.Visibility = Visibility.Hidden;
+                    }
+
+                    else if (button.Name == "SelectFeelingCompleteButton")
+                    {
+                        if(this.GroupeActivityGrid.Visibility == Visibility.Visible)
+                        {
+                            if (this.dataOption.InputMethod == 0)
+                            {
+                                this.ConvertStrokeToBitmapImage();
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfGettingHighScore = '{this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                                }
+                            }
+                            else
+                            {
+                                this.dataChapter2.MyALittlleExcitingEvents = this.ViewMySmallExcitedText.Text;
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfGettingHighScore = '{this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                                }
+                            }
+                        }
                     }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -1873,7 +1901,7 @@ namespace KokoroUpTime
                 }
                 else if (button.Name == "SelectFeelingNextButton")
                 {
-                    if (scene == "チャレンジタイムパート①")
+                    if (scene == "チャレンジタイム！パート①")
                     {
                         if (this.GoodEventSelectListBox1.Visibility == Visibility.Visible && this.GoodEventSelectListBox2.Visibility == Visibility.Visible)
                         {
@@ -1895,6 +1923,8 @@ namespace KokoroUpTime
                     }
                     else if (scene == "チャレンジタイムパート②「おいしいものを食べる」ときは？")
                     {
+                        this.dataChapter2.AosukesSizeOfFeelingOfEating = this.SizeOfFeelings[FeelingDictionaryKey];
+                        this.dataChapter2.AosukesDifficultyOfEating = this.DifficultyOfActions[DifficultyDictionaryKey];
                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                         {
                             connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfEating = '{this.dataChapter2.AosukesSizeOfFeelingOfEating}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
@@ -1903,6 +1933,8 @@ namespace KokoroUpTime
                     }
                     else if (scene == "チャレンジタイムパート②「全部のテストで100点をとる」ときは？")
                     {
+                        this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore = this.SizeOfFeelings[FeelingDictionaryKey];
+                        this.dataChapter2.AosukesDifficultyOfGettingHighScore = this.DifficultyOfActions[DifficultyDictionaryKey];
                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                         {
                             connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfGettingHighScore = '{this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
@@ -1912,6 +1944,8 @@ namespace KokoroUpTime
                     }
                     else if (scene == "チャレンジタイムパート②「休み時間に友だちとおしゃべりする」ときは？")
                     {
+                        this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend = this.SizeOfFeelings[FeelingDictionaryKey];
+                        this.dataChapter2.AosukesDifficultyOfTalkingWithFriend = this.DifficultyOfActions[DifficultyDictionaryKey];
                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                         {
                             connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfTalkingWithFriend = '{this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
@@ -2224,7 +2258,7 @@ namespace KokoroUpTime
                     }
                     if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
                     {
-                        this.scenarioCount = index + 1;
+                        this.scenarioCount = index;
                         this.ScenarioPlay();
 
                         break;
@@ -2237,7 +2271,7 @@ namespace KokoroUpTime
                 {
                     if (scenario[0] == "scene" && scenario[1] == tag)
                     {
-                        this.scenarioCount = index + 1;
+                        this.scenarioCount = index;
                         this.ScenarioPlay();
 
                         break;
@@ -2449,6 +2483,18 @@ namespace KokoroUpTime
 
             pngmap.Freeze();
         }
-        
+
+        // マウスのドラッグ処理（マウスの左ボタンを押そうとしたとき）
+        private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            string objName = "None";
+
+            if (e.Source as FrameworkElement != null)
+            {
+                objName = (e.Source as FrameworkElement).Name;
+            }
+
+            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
+        }
     }
 }

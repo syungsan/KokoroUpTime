@@ -188,15 +188,15 @@
                 <Image x:Name="AkamaruEndingImage" HorizontalAlignment="Left" Height="470" Margin="59,460,0,0" VerticalAlignment="Top" Width="436" Source="/Images/akamaru_face_04.png"/>
             </Grid>
             <Grid x:Name="SelectFeelingGrid" d:IsHidden="True">
-                <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400" d:IsHidden="True">
-                    <Image x:Name="SelectGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <ListBox x:Name="SelectGoodFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectGoodFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" SelectionChanged="FeelingListBox_SelectionChanged" d:IsHidden="True"/>
+                <Grid x:Name="SelectGoodFeelingGrid" HorizontalAlignment="Left" Height="928" Margin="452,72,0,0" VerticalAlignment="Top" Width="400">
+                    <Image x:Name="SelectGoodFeelingImage" Source="/Images/good_feeling.png" Stretch="Fill"/>
+                    <ListBox x:Name="SelectGoodFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectGoodFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" SelectionChanged="FeelingListBox_SelectionChanged"/>
                 </Grid>
-                <Grid x:Name="SelectBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="923,72,0,0" d:IsHidden="True">
-                    <Image x:Name="SelectBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill" d:IsHidden="True"/>
-                    <ListBox x:Name="SelectBadFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectBadFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single"  SelectionChanged="FeelingListBox_SelectionChanged" d:IsHidden="True"/>
+                <Grid x:Name="SelectBadFeelingGrid" HorizontalAlignment="Left" Height="928" VerticalAlignment="Top" Width="400" Margin="923,72,0,0">
+                    <Image x:Name="SelectBadFeelingImage" Source="/Images/bad_feeling.png" Stretch="Fill"/>
+                    <ListBox x:Name="SelectBadFeelingListBox" Margin="20,108,20,15" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource SelectBadFeelingStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single"  SelectionChanged="FeelingListBox_SelectionChanged"/>
                 </Grid>
-                <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="727,0,0,0" VerticalAlignment="Center" Width="273" RenderTransformOrigin="0.659,0.453" d:IsHidden="True"/>
+                <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="727,0,0,0" VerticalAlignment="Center" Width="273" RenderTransformOrigin="0.659,0.453"/>
             </Grid>
 
             <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
@@ -214,7 +214,7 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="ChallengeTimeGrid" Margin="170,20,170,220" RenderTransformOrigin="0.5,0.5" d:IsHidden="True" >
+            <Grid x:Name="ChallengeTimeGrid" Margin="170,20,170,220" RenderTransformOrigin="0.5,0.5" >
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -894,7 +894,7 @@
                     </ListBox>
                 </Grid>
                 <Button x:Name="CompleteInputButton" Click="Button_Click" Content="とじる" HorizontalContentAlignment="Center" Width="240" Height="240" FontSize="65" FontFamily="/Fonts/azuki.ttf#あずきフォント" BorderThickness="10" Background="White" BorderBrush="Black" HorizontalAlignment="Right" VerticalAlignment="Top" d:IsHidden="True"/>
-                <Grid x:Name="InputCanvasGrid" Width="1920" Height="840" VerticalAlignment="Bottom" d:IsHidden="True">
+                <Grid x:Name="InputCanvasGrid" Width="1920" Height="840" VerticalAlignment="Bottom">
                     <Border x:Name="InputThoughtCanvasBorder" Width="1680" Height="840" VerticalAlignment="Center" Background="White" CornerRadius="60" BorderBrush="#FFA9D18E" BorderThickness="24" d:IsHidden="True">
                         <InkCanvas x:Name="InputThoughtCanvas1" Margin="20">
                             <InkCanvas.DefaultDrawingAttributes>

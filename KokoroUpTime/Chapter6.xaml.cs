@@ -40,6 +40,8 @@ namespace KokoroUpTime
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
 
+        LogManager logManager;
+
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
         private List<List<string>> scenarios = null;
@@ -132,6 +134,10 @@ namespace KokoroUpTime
 
             // メディアプレーヤークラスのインスタンスを作成する
             this.mediaPlayer = new WindowsMediaPlayer();
+
+            this.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(OnPreviewMouseLeftButtonDown);
+
+            logManager = new LogManager();
 
 
             // データモデルインスタンス確保
@@ -465,6 +471,8 @@ namespace KokoroUpTime
                     }
 
                     this.SetInputMethod();
+
+                    logManager.StartLog(this.initConfig, this.dataProgress);
 
                     break;
 
@@ -2050,6 +2058,19 @@ namespace KokoroUpTime
 
                     break;
             }
+        }
+
+        // マウスのドラッグ処理（マウスの左ボタンを押そうとしたとき）
+        private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            string objName = "None";
+
+            if (e.Source as FrameworkElement != null)
+            {
+                objName = (e.Source as FrameworkElement).Name;
+            }
+
+            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
     }
 }

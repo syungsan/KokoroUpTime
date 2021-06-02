@@ -47,6 +47,7 @@ namespace KokoroUpTime
         // マウスクリックを可能にするかどうかのフラグ
         private bool isClickable = true;
 
+        LogManager logManager;
 
         // 気持ちの大きさ
         private int feelingSize = 0;
@@ -114,6 +115,9 @@ namespace KokoroUpTime
             this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
+            this.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(OnPreviewMouseLeftButtonDown);
+
+            logManager = new LogManager();
 
             // データモデルインスタンス確保
             this.dataChapter4 = new DataChapter4();
@@ -433,6 +437,7 @@ namespace KokoroUpTime
                         connection.Execute($@"UPDATE DataProgress SET CurrentChapter = '{this.dataProgress.CurrentChapter}' WHERE Id = 1;");
                     }
 
+                    logManager.StartLog(this.initConfig,this.dataProgress);
                     //前回のつづきからスタート
                     if (this.dataProgress.CurrentScene != null)
                     {
@@ -1824,6 +1829,28 @@ namespace KokoroUpTime
             }
             if (button.Name == "SelectFeelingNextButton")
             {
+                if(this.scene == "日直を任された場面のきもち")
+                {
+                    this.dataChapter4.KimisKindOfFeelingAskedForWork = this.KindOfFeelingText.Text;
+                    this.dataChapter4.KimisSizeOfFeelingAskedForWork = int.Parse(this.SizeOfFeelingText.Text);
+
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataChapter4 SET KimisKindOfFeelingAskedForWork = '{this.dataChapter4.KimisKindOfFeelingAskedForWork}'WHERE CreatedAt = '{this.dataChapter4.CreatedAt}';");
+                        connection.Execute($@"UPDATE DataChapter4 SET KimisSizeOfFeelingAskedForWork = '{this.dataChapter4.KimisSizeOfFeelingAskedForWork}'WHERE CreatedAt = '{this.dataChapter4.CreatedAt}';");
+                    }
+                }
+                if(this.scene == "赤丸くんにたのまれた場面のきもち")
+                {
+                    this.dataChapter4.KimisKindOfFeelingAskedByAkamaru = this.KindOfFeelingText.Text;
+                    this.dataChapter4.KimisSizeOfFeelingAskedByAkamaru = int.Parse(this.SizeOfFeelingText.Text);
+
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataChapter4 SET KimisKindOfFeelingAskedByAkamaru = '{this.dataChapter4.KimisKindOfFeelingAskedByAkamaru}'WHERE CreatedAt = '{this.dataChapter4.CreatedAt}';");
+                        connection.Execute($@"UPDATE DataChapter4 SET KimisSizeOfFeelingAskedByAkamaru = '{this.dataChapter4.KimisSizeOfFeelingAskedByAkamaru}'WHERE CreatedAt = '{this.dataChapter4.CreatedAt}';");
+                    }
+                }
                 this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
@@ -2261,10 +2288,18 @@ namespace KokoroUpTime
             return null;
         }
 
-      
-        private void TextBoxMouseDown(object sender, MouseButtonEventArgs e)
-        {
 
+        // マウスのドラッグ処理（マウスの左ボタンを押そうとしたとき）
+        private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            string objName = "None";
+
+            if (e.Source as FrameworkElement != null)
+            {
+                objName = (e.Source as FrameworkElement).Name;
+            }
+
+            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
 
         private void ScenarioBack()

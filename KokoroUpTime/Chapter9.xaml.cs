@@ -39,6 +39,8 @@ namespace KokoroUpTime
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
 
+        LogManager logManager;
+
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
         private List<List<string>> scenarios = null;
@@ -123,6 +125,9 @@ namespace KokoroUpTime
             this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
+            this.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(OnPreviewMouseLeftButtonDown);
+
+            logManager = new LogManager();
 
             this.SelectGoodFeelingListBox.ItemsSource = GOOD_FEELINGS;
             this.SelectBadFeelingListBox.ItemsSource = BAD_FEELINGS;
@@ -588,6 +593,8 @@ namespace KokoroUpTime
                     }
 
                     this.SetInputMethod();
+
+                    logManager.StartLog(this.initConfig, this.dataProgress);
 
                     //前回のつづきからスタート
                     if (this.dataProgress.CurrentScene != null)
@@ -2768,7 +2775,18 @@ namespace KokoroUpTime
             strokes.Add(stroke);
         }
 
+        // マウスのドラッグ処理（マウスの左ボタンを押そうとしたとき）
+        private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            string objName = "None";
 
+            if (e.Source as FrameworkElement != null)
+            {
+                objName = (e.Source as FrameworkElement).Name;
+            }
+
+            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
+        }
 
     }
 }

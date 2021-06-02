@@ -58,6 +58,8 @@ namespace KokoroUpTime
 
         Dictionary<string, SelectedItemMethodTextData> ITEM_METHOD_TEXT;
 
+        LogManager logManager;
+
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
         private List<List<string>> scenarios = null;
@@ -138,6 +140,9 @@ namespace KokoroUpTime
             this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
+            this.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(OnPreviewMouseLeftButtonDown);
+
+            logManager = new LogManager();
 
             this.InitControls();
         }
@@ -430,6 +435,8 @@ namespace KokoroUpTime
 
                     this.SetInputMethod();
 
+                    logManager.StartLog(this.initConfig, this.dataProgress);
+
                     var startupPath1 = FileUtils.GetStartupPath();
                     string namePngPath1 = $"./Log/{this.initConfig.userName}/name.png";
 
@@ -452,8 +459,8 @@ namespace KokoroUpTime
                     {
                         this.AwardName.UnicodeString = $"{this.initConfig.userName}どの";
                     }
-                    string[] sss = Regex.Match(this.initConfig.accessDateTime, "[0-9][0-9][0-9][0-9]/[0-9][0-9]/[0-9][0-9]").ToString().Split("/");
-                    DateTime dateTime = new DateTime(int.Parse(sss[0]), int.Parse(sss[1]), int.Parse(sss[2]));
+                    string[] text = Regex.Match(this.initConfig.accessDateTime, "[0-9][0-9][0-9][0-9]/[0-9][0-9]/[0-9][0-9]").ToString().Split("/");
+                    DateTime dateTime = new DateTime(int.Parse(text[0]), int.Parse(text[1]), int.Parse(text[2]));
                     JapaneseCalendar calendar = new JapaneseCalendar();
                     var cultureJp = new CultureInfo("ja-JP", false);
                     cultureJp.DateTimeFormat.Calendar = calendar;
@@ -3119,6 +3126,18 @@ namespace KokoroUpTime
             return iscorrect;
         }
 
-        
+        // マウスのドラッグ処理（マウスの左ボタンを押そうとしたとき）
+        private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            string objName = "None";
+
+            if (e.Source as FrameworkElement != null)
+            {
+                objName = (e.Source as FrameworkElement).Name;
+            }
+
+            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
+        }
+
     }
 }

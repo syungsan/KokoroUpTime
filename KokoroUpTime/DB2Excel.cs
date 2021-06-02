@@ -17,10 +17,17 @@ namespace KokoroUpTime
         private static DataProgress dataProgress = new DataProgress();
 
         private static DataChapter1 dataChapter1 = new DataChapter1();
-
         private static DataChapter2 dataChapter2 = new DataChapter2();
-
         private static DataChapter3 dataChapter3 = new DataChapter3();
+        private static DataChapter4 dataChapter4 = new DataChapter4();
+        private static DataChapter5 dataChapter5 = new DataChapter5();
+        private static DataChapter6 dataChapter6 = new DataChapter6();
+        private static DataChapter7 dataChapter7 = new DataChapter7();
+        private static DataChapter8 dataChapter8 = new DataChapter8();
+        private static DataChapter9 dataChapter9 = new DataChapter9();
+        private static DataChapter10 dataChapter10 = new DataChapter10();
+        private static DataChapter11 dataChapter11 = new DataChapter11();
+        private static DataChapter12 dataChapter12 = new DataChapter12();
 
         public static void WriteDB2Excel(string dbPath, string outputPath, string[] userInfos)
         {
@@ -85,7 +92,7 @@ namespace KokoroUpTime
             }
 
             //第1回に書き込み
-            if(dataProgress.HasCompletedChapter1 == true)
+            if (dataProgress.HasCompletedChapter1 == true)
             {
                 excel.SetSheet("第1回");
 
@@ -187,6 +194,98 @@ namespace KokoroUpTime
                 }
 
                 foreach (KeyValuePair<string, int?> item in chapter3IntResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+            }
+
+            //第7回に書き込み
+            if (dataProgress.HasCompletedChapter7 == true)
+            {
+                excel.SetSheet("第7回");
+
+                var chapter7StrResult = new Dictionary<string, string>
+                {
+                    { "C4", dataChapter7.KimisKindOfFeelingAnnouncement },
+                    { "C5", dataChapter7.KimisKindOfFeelingInviteFriends },
+                    { "G4", dataChapter7.InputAkamaruThoughtText },
+                    { "H4", dataChapter7.InputAosukeThoughtText },
+                    { "J4", dataChapter7.ChallengeTimeSelectedScene},
+                    { "O4", dataChapter7.GroupeActivitySelectedScene},
+                };
+
+                var chapter7IntResult = new Dictionary<string, int?>
+                {
+                   { "D4", dataChapter7.KimisSizeOfFeelingAnnouncement },
+                   { "D5", dataChapter7.KimisSizeOfFeelingInviteFriends },
+                };
+
+                if (dataChapter7.ChallengeTimeSelectedScene == "音楽の発表で、みんなの前で失敗してしまいました。友だちの１人が、こっちを見て笑っていました。")
+                {
+                    if(false)//this.dataOption.InputMethod == 0))
+                    {
+                       
+                    }
+                    else
+                    {
+                        chapter7StrResult.Add("K4", dataChapter7.InputYourToughtText1);
+                    }
+
+                    chapter7StrResult.Add("L4", dataChapter7.YourKindOfFeelingAnnouncement);
+                    chapter7IntResult.Add("M4", dataChapter7.YourSizeOfFeelingAnnouncement);
+
+                }
+                else
+                {
+                    if (false)
+                    {
+                       
+                    }
+                    else
+                    {
+                        chapter7StrResult.Add("K4", dataChapter7.InputYourToughtText2);
+                    }
+
+                    chapter7StrResult.Add("L4", dataChapter7.YourKindOfFeelingGreetingToFriend);
+                    chapter7IntResult.Add("M4", dataChapter7.YourSizeOfFeelingGreetingToFriend);
+                }
+
+                if (dataChapter7.GroupeActivitySelectedScene == "音楽の発表で、みんなの前で失敗してしまいました。友だちの１人が、こっちを見て笑っていました。")
+                {
+                    if (false)//this.dataOption.InputMethod == 0))
+                    {
+
+                    }
+                    else
+                    {
+                        chapter7StrResult.Add("P4", dataChapter7.InputFriendToughtText1);
+                    }
+
+                    chapter7StrResult.Add("Q4", dataChapter7.YourFriendsKindOfFeelingAnnouncement);
+                    chapter7IntResult.Add("R4", dataChapter7.YourFriendsSizeOfFeelingAnnouncement);
+
+                }
+                else
+                {
+                    if (false)
+                    {
+
+                    }
+                    else
+                    {
+                        chapter7StrResult.Add("P4", dataChapter7.InputFriendToughtText2);
+                    }
+
+                    chapter7StrResult.Add("Q4", dataChapter7.YourFriendsKindOfFeelingGreetingToAnotherFriend);
+                    chapter7IntResult.Add("R4", dataChapter7.YourFriendsSizeOfFeelingGreetingToAnotherFriend);
+                }
+
+                foreach (KeyValuePair<string, string> item in chapter7StrResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+
+                foreach (KeyValuePair<string, int?> item in chapter7IntResult)
                 {
                     excel.WriteCell(item.Key, item.Value);
                 }
@@ -331,10 +430,10 @@ namespace KokoroUpTime
                         dataChapter1.AosukesSizeOfFeeling = row.AosukesSizeOfFeeling;
                 }
 
-                /*
-                var result2 = connection.Query<DataChapter2>($@"SELECT * FROM DataChapter2' WHERE CreatedAt = '{dataChapter2.CreatedAt}';");
 
-                foreach (var row in result2)
+                var resultChapter2 = connection.Query<DataChapter2>($"SELECT * FROM 'DataChapter2';");
+
+                foreach (var row in resultChapter2)
                 {
                     dataChapter2.MySelectGoodEvents = row.MySelectGoodEvents;
 
@@ -352,7 +451,7 @@ namespace KokoroUpTime
 
                     dataChapter2.MyALittlleExcitingEvents = row.MyALittlleExcitingEvents;
                 }
-                */
+
 
                 var resultChapter3 = connection.Query<DataChapter3>("SELECT * FROM 'DataChapter3';");
 
@@ -400,7 +499,87 @@ namespace KokoroUpTime
                     if (row.SelectedThanksHotWord != null)
                         dataChapter3.SelectedThanksHotWord = row.SelectedThanksHotWord;
                 }
+
+
+
+                var resultChapter4 = connection.Query<DataChapter4>("SELECT * FROM 'DataChapter4';");
+
+                foreach (var row in resultChapter4)
+                {
+                    if (row.KimisKindOfFeelingAskedForWork != null)
+                        dataChapter4.KimisKindOfFeelingAskedForWork = row.KimisKindOfFeelingAskedForWork;
+
+                    if (row.KimisKindOfFeelingAskedByAkamaru != null)
+                        dataChapter4.KimisKindOfFeelingAskedByAkamaru = row.KimisKindOfFeelingAskedByAkamaru;
+
+                    if (row.KimisSizeOfFeelingAskedForWork != null)
+                        dataChapter4.KimisSizeOfFeelingAskedForWork = row.KimisSizeOfFeelingAskedForWork;
+
+                    if (row.KimisSizeOfFeelingAskedByAkamaru != null)
+                        dataChapter4.KimisSizeOfFeelingAskedByAkamaru = row.KimisSizeOfFeelingAskedByAkamaru;
+
+                }
+
+                var resultChapter7 = connection.Query<DataChapter7>("SELECT * FROM 'DataChapter7';");
+
+                foreach (var row in resultChapter7)
+                {
+                    if (row.KimisKindOfFeelingInviteFriends != null)
+                        dataChapter7.KimisKindOfFeelingInviteFriends = row.KimisKindOfFeelingInviteFriends;
+
+                    if (row.KimisKindOfFeelingAnnouncement != null)
+                        dataChapter7.KimisKindOfFeelingAnnouncement = row.KimisKindOfFeelingAnnouncement;
+
+                    if (row.YourKindOfFeelingAnnouncement != null)
+                        dataChapter7.YourKindOfFeelingAnnouncement = row.YourKindOfFeelingAnnouncement;
+
+                    if (row.YourKindOfFeelingGreetingToFriend != null)
+                        dataChapter7.YourKindOfFeelingGreetingToFriend = row.YourFriendsKindOfFeelingGreetingToAnotherFriend;
+
+                    if (row.YourFriendsKindOfFeelingAnnouncement != null)
+                        dataChapter7.YourFriendsKindOfFeelingAnnouncement = row.YourFriendsKindOfFeelingAnnouncement;
+
+                    if (row.YourFriendsKindOfFeelingGreetingToAnotherFriend != null)
+                        dataChapter7.YourFriendsKindOfFeelingGreetingToAnotherFriend = row.YourFriendsKindOfFeelingGreetingToAnotherFriend;
+
+                    if (row.KimisSizeOfFeelingInviteFriends != null)
+                        dataChapter7.KimisSizeOfFeelingInviteFriends = row.KimisSizeOfFeelingInviteFriends;
+
+                    if (row.KimisSizeOfFeelingAnnouncement != null)
+                        dataChapter7.KimisSizeOfFeelingAnnouncement = row.KimisSizeOfFeelingAnnouncement;
+
+                    if (row.YourSizeOfFeelingAnnouncement != null)
+                        dataChapter7.YourSizeOfFeelingAnnouncement = row.YourSizeOfFeelingAnnouncement;
+
+                    if (row.YourSizeOfFeelingGreetingToFriend != null)
+                        dataChapter7.YourSizeOfFeelingGreetingToFriend = row.YourSizeOfFeelingGreetingToFriend;
+
+                    if (row.YourFriendsSizeOfFeelingAnnouncement != null)
+                        dataChapter7.YourFriendsSizeOfFeelingAnnouncement = row.YourFriendsSizeOfFeelingAnnouncement;
+
+                    if (row.YourFriendsSizeOfFeelingGreetingToAnotherFriend != null)
+                        dataChapter7.YourFriendsSizeOfFeelingGreetingToAnotherFriend = row.YourFriendsSizeOfFeelingGreetingToAnotherFriend;
+
+                    if (row.InputAkamaruThoughtText != null)
+                        dataChapter7.InputAkamaruThoughtText = row.InputAkamaruThoughtText;
+
+                    if (row.InputAosukeThoughtText != null)
+                        dataChapter7.InputAosukeThoughtText = row.InputAosukeThoughtText;
+
+                    if (row.InputYourToughtText1 != null)
+                        dataChapter7.InputYourToughtText1 = row.InputYourToughtText1;
+
+                    if (row.InputYourToughtText2 != null)
+                        dataChapter7.InputYourToughtText2 = row.InputYourToughtText2;
+
+                    if (row.InputFriendToughtText1 != null)
+                        dataChapter7.InputFriendToughtText1 = row.InputFriendToughtText1;
+
+                    if (row.InputFriendToughtText2 != null)
+                        dataChapter7.InputFriendToughtText2 = row.InputFriendToughtText2;
+                }
             }
         }
     }
 }
+

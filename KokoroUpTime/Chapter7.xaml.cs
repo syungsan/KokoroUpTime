@@ -22,6 +22,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WMPLib;
 using XamlAnimatedGif;
+using FileIOUtils;
 
 namespace KokoroUpTime
 
@@ -41,6 +42,8 @@ namespace KokoroUpTime
 
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
+
+        LogManager logManager;
 
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
@@ -131,6 +134,7 @@ namespace KokoroUpTime
             // メディアプレーヤークラスのインスタンスを作成する
             this.mediaPlayer = new WindowsMediaPlayer();
 
+            this.logManager = new LogManager();
 
             // データモデルインスタンス確保
             this.dataChapter7 = new DataChapter7();
@@ -139,6 +143,9 @@ namespace KokoroUpTime
             this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
+            this.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(OnPreviewMouseLeftButtonDown);
+
+
 
 
             KindOfFeelings = new Dictionary<string, string>()
@@ -565,8 +572,8 @@ namespace KokoroUpTime
 
         private void ScenarioPlay()
         {
-            // デバッグのためシナリオのインデックスを出力
-            Debug.Print((this.scenarioCount + 1).ToString());
+            //// デバッグのためシナリオのインデックスを出力
+            //Debug.Print((this.scenarioCount + 1).ToString());
 
             // 処理分岐のフラグ
             var tag = this.scenarios[this.scenarioCount][0];
@@ -585,6 +592,8 @@ namespace KokoroUpTime
                     }
 
                     this.SetInputMethod();
+
+                    logManager.StartLog(this.initConfig, this.dataProgress);
 
                     //前回のつづきからスタート
                     if (this.dataProgress.CurrentScene != null)
@@ -619,7 +628,7 @@ namespace KokoroUpTime
                 case "reset":
 
                     this.ResetControls();
-
+                  
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
@@ -1167,7 +1176,7 @@ namespace KokoroUpTime
                                         {
                                             if(this.dataOption.InputMethod == 0)
                                             {
-                                                if (this.InputStroke["input_akamaru_thought"].Count > 1 && this.InputStroke["input_aosuke_thought"].Count > 2)
+                                                if (this.InputStroke["input_akamaru_thought"].Count > 1 && this.InputStroke["input_aosuke_thought"].Count > 1)
                                                 {
                                                     this.NextPageButton.Visibility = Visibility.Visible;
                                                 }
@@ -2250,6 +2259,7 @@ namespace KokoroUpTime
                     sb = this.FindResource(objectsStroryBoard) as Storyboard;
                 }
 
+
                 if (sb != null)
                 {
                     // 二重終了防止策
@@ -2373,6 +2383,8 @@ namespace KokoroUpTime
                         this.BackMessageButton.Visibility = Visibility.Hidden;
                         this.NextMessageButton.Visibility = Visibility.Hidden;
 
+
+
                         if (this.SelectFeelingGrid.IsVisible)
                         {
                             if (this.SelectBadFeelingListBox.SelectedItem != null || this.SelectGoodFeelingListBox.SelectedItem != null)
@@ -2394,6 +2406,166 @@ namespace KokoroUpTime
                         {
                             this.SizeOfFeelings[FeelingDictionaryKey] = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
                         }
+
+                        if (this.scene == "発表する時のキミちゃんのきもち")
+                        {
+                            if(this.ChallengeTimeGrid.Visibility == Visibility.Visible)
+                            {
+                                this.dataChapter7.KimisKindOfFeelingAnnouncement = this.KindOfFeelings[FeelingDictionaryKey];
+                                this.dataChapter7.KimisSizeOfFeelingAnnouncement = this.SizeOfFeelings[FeelingDictionaryKey];
+
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter7 SET KimisKindOfFeelingAnnouncement = '{this.dataChapter7.KimisKindOfFeelingAnnouncement.Split(",")[0]}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter7 SET KimisSizeOfFeelingAnnouncement = '{this.dataChapter7.KimisSizeOfFeelingAnnouncement}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                }
+                            }
+                        }
+                        else if (this.scene == "友だちを遊びに誘うときのキミちゃんのきもち")
+                        {
+                            if (this.ChallengeTimeGrid.Visibility == Visibility.Visible)
+                            {
+                                this.dataChapter7.KimisKindOfFeelingInviteFriends = this.KindOfFeelings[FeelingDictionaryKey];
+                                this.dataChapter7.KimisSizeOfFeelingInviteFriends = this.SizeOfFeelings[FeelingDictionaryKey];
+
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter7 SET KimisKindOfFeelingInviteFriends = '{this.dataChapter7.KimisKindOfFeelingInviteFriends.Split(",")[0]}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter7 SET KimisSizeOfFeelingInviteFriends = '{this.dataChapter7.KimisSizeOfFeelingInviteFriends}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                }
+                            }
+                            
+                        }
+                        else if (this.scene == "赤丸くんと青助くんの考え")
+                        {
+                            if(this.TwoThoughtsGrid.Visibility == Visibility.Visible)
+                            {
+                                if (this.dataOption.InputMethod == 0)
+                                {
+                                    this.ConvertStrokeToBitmapImage(this.InputLeftChildrenThoughtCanvas, this.InputLeftChildrenThoughtCanvas.Strokes,"groupe_activity_akamaru's_thought");
+                                    this.ConvertStrokeToBitmapImage(this.InputRightChildrenThoughtCanvas,this.InputRightChildrenThoughtCanvas.Strokes, "groupe_activity_aosuke's_thought");
+                                }
+                                else
+                                {
+
+                                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                    {
+                                        connection.Execute($@"UPDATE DataChapter7 SET KimisKindOfFeelingInviteFriends = '{this.dataChapter7.InputAkamaruThoughtText}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                        connection.Execute($@"UPDATE DataChapter7 SET KimisSizeOfFeelingInviteFriends = '{this.dataChapter7.InputAosukeThoughtText}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    }
+                                }
+                            }
+                        }
+                        else if (this.scene == "チャレンジタイム！パート②　場面①")
+                        {
+                            if (this.ChallengeTimeGrid.Visibility == Visibility.Visible)
+                            {
+                                if (this.dataOption.InputMethod == 0)
+                                {
+                                        this.ConvertStrokeToBitmapImage(this.InputThoughtCanvas2, this.InputThoughtCanvas2.Strokes, "challenge_time_2_your_thought");
+                                }
+                                else
+                                {
+                                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                    {
+                                        connection.Execute($@"UPDATE DataChapter7 SET InputYourToughtText1 = '{this.dataChapter7.InputYourToughtText1}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    }
+                                }
+
+                                this.dataChapter7.YourKindOfFeelingAnnouncement = this.KindOfFeelings[FeelingDictionaryKey];
+                                this.dataChapter7.YourSizeOfFeelingAnnouncement = this.SizeOfFeelings[FeelingDictionaryKey];
+
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter7 SET YourKindOfFeelingAnnouncement = '{this.dataChapter7.YourKindOfFeelingAnnouncement.Split(",")[0]}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter7 SET YourSizeOfFeelingAnnouncement = '{this.dataChapter7.YourSizeOfFeelingAnnouncement}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter7 SET ChallengeTimeSelectedScene = '{this.dataChapter7.ChallengeTimeSelectedScene}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                }
+                            }
+                        }
+                        else if (this.scene == "チャレンジタイム！パート②　場面②")
+                        {
+                            if (this.ChallengeTimeGrid.Visibility == Visibility.Visible)
+                            {
+                                if (this.dataOption.InputMethod == 0)
+                                {
+                                    this.ConvertStrokeToBitmapImage(this.InputThoughtCanvas2, this.InputThoughtCanvas2.Strokes, "challenge_time_2_your_thought");
+                                }
+                                else
+                                {
+                                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                    {
+                                        connection.Execute($@"UPDATE DataChapter7 SET InputYourToughtText2 = '{this.dataChapter7.InputYourToughtText2}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    }
+                                }
+
+                                this.dataChapter7.YourKindOfFeelingGreetingToFriend = this.KindOfFeelings[FeelingDictionaryKey];
+                                this.dataChapter7.YourSizeOfFeelingGreetingToFriend = this.SizeOfFeelings[FeelingDictionaryKey];
+
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter7 SET YourKindOfFeelingGreetingToFriend = '{this.dataChapter7.YourKindOfFeelingGreetingToFriend.Split(",")[0]}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter7 SET YourSizeOfFeelingGreetingToFriend = '{this.dataChapter7.YourSizeOfFeelingGreetingToFriend}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter7 SET ChallengeTimeSelectedScene = '{this.dataChapter7.ChallengeTimeSelectedScene}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                }
+                            }
+                        }
+                        else if (this.scene == "グループアクティビティパート②　場面①")
+                        {
+                            if (this.ChallengeTimeGrid.Visibility == Visibility.Visible)
+                            {
+                                if (this.dataOption.InputMethod == 0)
+                                {
+                                    this.ConvertStrokeToBitmapImage(this.InputThoughtCanvas2, this.InputThoughtCanvas2.Strokes, "groupe_activity_2_your_friend's_thought");
+                                }
+                                else
+                                {
+                                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                    {
+                                        connection.Execute($@"UPDATE DataChapter7 SET InputFriendToughtText1 = '{this.dataChapter7.InputFriendToughtText1}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    }
+
+                                }
+
+                                this.dataChapter7.YourFriendsKindOfFeelingAnnouncement = this.KindOfFeelings[FeelingDictionaryKey];
+                                this.dataChapter7.YourFriendsSizeOfFeelingAnnouncement = this.SizeOfFeelings[FeelingDictionaryKey];
+
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter7 SET YourFriendsKindOfFeelingAnnouncement = '{this.dataChapter7.YourFriendsKindOfFeelingAnnouncement.Split(",")[0]}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter7 SET YourFriendsSizeOfFeelingAnnouncement = '{this.dataChapter7.YourFriendsSizeOfFeelingAnnouncement}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter7 SET GroupeActivitySelectedScene = '{this.dataChapter7.GroupeActivitySelectedScene}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                }
+                            }
+                        }
+                        else if (this.scene == "グループアクティビティパート②　場面②")
+                        {
+                            if (this.ChallengeTimeGrid.Visibility == Visibility.Visible)
+                            {
+                                if (this.dataOption.InputMethod == 0)
+                                {
+                                    this.ConvertStrokeToBitmapImage(this.InputThoughtCanvas2, this.InputThoughtCanvas2.Strokes, "groupe_activity_2_your_friend's_thought");
+                                }
+                                else
+                                {
+                                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                    {
+                                        connection.Execute($@"UPDATE DataChapter7 SET InputFriendToughtText2 = '{this.dataChapter7.InputFriendToughtText2}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    }
+                                }
+
+                                this.dataChapter7.YourFriendsKindOfFeelingGreetingToAnotherFriend = this.KindOfFeelings[FeelingDictionaryKey];
+                                this.dataChapter7.YourFriendsSizeOfFeelingGreetingToAnotherFriend = this.SizeOfFeelings[FeelingDictionaryKey];
+
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter7 SET YourFriendsKindOfFeelingGreetingToAnotherFriend = '{this.dataChapter7.YourFriendsKindOfFeelingGreetingToAnotherFriend.Split(",")[0]}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter7 SET YourFriendsSizeOfFeelingGreetingToAnotherFriend = '{this.dataChapter7.YourFriendsSizeOfFeelingGreetingToAnotherFriend}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter7 SET GroupeActivitySelectedScene = '{this.dataChapter7.GroupeActivitySelectedScene}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                }
+                            }
+                        }
+
 
                     }
                     else if (button.Name == "GroupeActivityNextMessageButton")
@@ -2472,10 +2644,13 @@ namespace KokoroUpTime
                     {
                         if (button.Name == "SelectScene1Button")
                         {
+                            this.dataChapter7.ChallengeTimeSelectedScene = "音楽の発表で、みんなの前で失敗してしまいました。友だちの１人が、こっちを見て笑っていました。";
+
                             this.GoTo("input_your_thoughts_and_feeling_scene1","sub");
                         }
                         else if (button.Name == "SelectScene2Button")
                         {
+                            this.dataChapter7.ChallengeTimeSelectedScene = "クラスの友だちに、「おはよう」と言いましたが、返事が返ってきませんでした。";
                             this.GoTo("input_your_thoughts_and_feeling_scene2","sub");
                         }
                     }
@@ -2483,10 +2658,12 @@ namespace KokoroUpTime
                     {
                         if (button.Name == "SelectScene1Button")
                         {
+                            this.dataChapter7.GroupeActivitySelectedScene = "音楽の発表で、みんなの前で失敗してしまいました。友だちの１人が、こっちを見て笑っていました。";
                             this.GoTo("input_friends_thoughts_and_feeling_scene1","sub");
                         }
                         else if (button.Name == "SelectScene2Button")
                         {
+                            this.dataChapter7.GroupeActivitySelectedScene = "クラスの友だちに、「おはよう」と言いましたが、返事が返ってきませんでした。";
                             this.GoTo("input_friends_thoughts_and_feeling_scene2","sub");
                         }
                     }
@@ -2509,8 +2686,6 @@ namespace KokoroUpTime
 
                     if (this.dataOption.InputMethod == 0)
                     {
-                        
-
                         switch (button.Name)
                         {
                             case "InputLeftChildrenThoughtButton":
@@ -2813,7 +2988,7 @@ namespace KokoroUpTime
                     }
                     if (this.scene == tag && (scenario[0] == "scene" && scenario[1] == tag))
                     {
-                        this.scenarioCount = index + 1;
+                        this.scenarioCount = index+1;
                         this.ScenarioPlay();
 
                         break;
@@ -2826,7 +3001,7 @@ namespace KokoroUpTime
                 {
                     if (scenario[0] == "scene" && scenario[1] == tag)
                     {
-                        this.scenarioCount = index + 1;
+                        this.scenarioCount = index;
                         this.ScenarioPlay();
 
                         break;
@@ -3075,6 +3250,75 @@ namespace KokoroUpTime
             DrawingAttributes attributes = new DrawingAttributes() { Height = 1, Width = 1, Color = Colors.Transparent };
             Stroke stroke = new Stroke(points2) { DrawingAttributes = attributes };
             strokes.Add(stroke);
+        }
+
+        private void ConvertStrokeToBitmapImage(InkCanvas canvas, StrokeCollection strokes ,string nameBmp)
+        {
+            // ストロークが描画されているCanvasのサイズを取得
+            System.Windows.Rect rectBounds = new System.Windows.Rect(0, 0, canvas.ActualWidth, canvas.ActualHeight);
+
+            // 描画先を作成
+            DrawingVisual dv = new DrawingVisual();
+            DrawingContext dc = dv.RenderOpen();
+
+            // 描画エリアの位置補正（補正しないと黒い部分ができてしまう）
+            dc.PushTransform(new TranslateTransform(-rectBounds.X, -rectBounds.Y));
+
+            // 描画エリア(dc)に四角形を作成
+            // 四角形の大きさはストロークが描画されている枠サイズとし、
+            // 背景色はInkCanvasコントロールと同じにする
+            dc.DrawRectangle(canvas.Background, null, rectBounds);
+
+            // 上記で作成した描画エリア(dc)にInkCanvasのストロークを描画
+            strokes.Draw(dc);
+            dc.Close();
+
+            // ビジュアルオブジェクトをビットマップに変換する
+            RenderTargetBitmap rtb = new RenderTargetBitmap((int)rectBounds.Width, (int)rectBounds.Height, 96, 96, PixelFormats.Pbgra32);
+            rtb.Render(dv);
+
+            //仮置き
+            string dirPath = $"./Log/{this.initConfig.userName}/第7回";
+
+            string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
+            var startupPath = FileUtils.GetStartupPath();
+
+            PngBitmapEncoder png = new PngBitmapEncoder();
+            png.Frames.Add(BitmapFrame.Create(rtb));
+
+            if (!Directory.Exists(dirPath))
+            {
+                DirectoryUtils.SafeCreateDirectory(dirPath);
+            }
+            
+            // ファイルのパスは仮
+            using (var stream = File.Create($@"{startupPath}/{nameBmpPath}"))
+            {
+                png.Save(stream);
+            }
+
+            var pngmap = new BitmapImage();
+
+            pngmap.BeginInit();
+            pngmap.CacheOption = BitmapCacheOption.OnLoad;    //ココ
+            pngmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;  //ココ
+            pngmap.UriSource = new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute);
+            pngmap.EndInit();
+
+            pngmap.Freeze();
+        }
+
+        // マウスのドラッグ処理（マウスの左ボタンを押そうとしたとき）
+        private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            string objName="None";
+
+            if (e.Source as FrameworkElement != null)
+            {
+                objName = (e.Source as FrameworkElement).Name;
+            }
+
+            logManager.SaveLog(this.initConfig, this.dataProgress, objName,Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
     }
 }

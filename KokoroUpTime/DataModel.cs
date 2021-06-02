@@ -147,6 +147,17 @@ namespace KokoroUpTime
     // チャプター2のログカラム
     public class DataChapter2
     {
+        public DataChapter2()
+        {
+            MySelectGoodEvents = "";
+            AosukesSizeOfFeelingOfEating = -1;
+            AosukesDifficultyOfEating = "";
+            AosukesSizeOfFeelingOfGettingHighScore = -1;
+            AosukesDifficultyOfGettingHighScore = "";
+            AosukesSizeOfFeelingOfTalkingWithFriend = -1;
+            AosukesDifficultyOfTalkingWithFriend = "";
+            MyALittlleExcitingEvents = "";
+        }
         // このレコードは定石
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -176,9 +187,10 @@ namespace KokoroUpTime
     public class DataChapter3
     {
         [PrimaryKey, AutoIncrement]
+
         public int Id { get; set; }
 
-        public string AosukesKindOfFeelingPreUseItem { get; set; }
+        public  string AosukesKindOfFeelingPreUseItem { get; set; }
 
         public string KimisKindOfFeelingPreUseItem { get; set; }
 
@@ -217,9 +229,16 @@ namespace KokoroUpTime
 
 
         public string CreatedAt { get; set; }
+
+        public string KimisKindOfFeelingAskedForWork { get; set; }
+        public string KimisKindOfFeelingAskedByAkamaru { get; set; }
+
+        public int? KimisSizeOfFeelingAskedForWork { get; set; }
+        public int? KimisSizeOfFeelingAskedByAkamaru { get; set; }
+
+
     }
 
-    
     public class DataChapter5
     {
        [PrimaryKey, AutoIncrement]
@@ -272,6 +291,10 @@ namespace KokoroUpTime
 
         public string CreatedAt { get; set; }
 
+        public string ChallengeTimeSelectedScene { get; set; }
+        
+        public string GroupeActivitySelectedScene { get; set; }
+
         public string KimisKindOfFeelingInviteFriends { get; set; }
 
         public string KimisKindOfFeelingAnnouncement { get; set; }
@@ -298,15 +321,27 @@ namespace KokoroUpTime
 
         public string InputAkamaruThoughtText { get; set; }
 
+        //public byte[] InputAkamaruThoughtStroke { get; set; }
+
         public string InputAosukeThoughtText { get; set; }
+
+        //public byte[] InputAosukeThoughtStroke { get; set; }
 
         public string InputYourToughtText1 { get; set; }
 
+        //public byte[] InputYourToughtStroke1 { get; set; }
+
         public string InputYourToughtText2 { get; set; }
+
+        //public byte[] InputYourToughtStroke2 { get; set; }
 
         public string InputFriendToughtText1 { get; set; }
 
+        //public byte[] InputFriendToughtStroke1 { get; set; }
+
         public string InputFriendToughtText2 { get; set; }
+
+        //public byte[] InputFriendToughtStroke2 { get; set; }
 
     }
 
@@ -359,7 +394,6 @@ namespace KokoroUpTime
 
         public string GroupeActivityInputText3 { get; set; }
     }
-
 
     public class DataChapter9
     {
@@ -423,9 +457,20 @@ namespace KokoroUpTime
 
     public class DataChapter11
     {
+
+        public DataChapter11()
+        {
+            AkamaruOtherSolutionUseItemInputText = "";
+            SelectedAkamaruGoalText="";
+            Step2AkamaruManyMethodInputText1="";
+            Step2AkamaruManyMethodInputText2="";
+            Step2AkamaruManyMethodInputText3="";
+            EvaluateAkamaruMethodText1="";
+            EvaluateAkamaruMethodText2="";
+            EvaluateAkamaruMethodText3="";
+        }
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-
 
         public string CreatedAt { get; set; }
 
@@ -454,4 +499,24 @@ namespace KokoroUpTime
         public string ItemMethodInputText2 { get; set; }
         public string ItemMethodInputText3 { get; set; }
     }
+
+    //public class LogData
+    //{
+    //    [PrimaryKey, AutoIncrement]
+    //    public int Id { get; set; }
+
+    //    public string[] Chapter1Log { get; set; }
+    //    public string[] Chapter2Log { get; set; }
+    //    public string[] Chapter3Log { get; set; }
+    //    public string[] Chapter4Log { get; set; }
+    //    public string[] Chapter5Log { get; set; }
+    //    public string[] Chapter6Log { get; set; }
+    //    public string[] Chapter7Log { get; set; }
+    //    public string[] Chapter8Log { get; set; }
+    //    public string[] Chapter9Log { get; set; }
+    //    public string[] Chapter10Log { get; set; }
+    //    public string[] Chapter11Log { get; set; }
+    //    public string[] Chapter12Log { get; set; }
+
+    //}
 }
