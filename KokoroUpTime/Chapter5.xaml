@@ -183,7 +183,7 @@
                         </Grid>
                     </Button>
                 </Grid>
-                <Grid x:Name="BodyImageGrid" d:IsHidden="True">
+                <Grid x:Name="BodyImageGrid">
                     <Border x:Name="BodyImageOfAkamaruAngryBorder" BorderThickness="10,10,10,10" BorderBrush="Red" Margin="150,78,150,75" Background="White" CornerRadius="128,128,128,128" d:IsHidden="True">
                         <Grid x:Name="BodyImageOfAkamaruAngryGrid">
                             <TextBlock x:Name="BodyImageOfAkamaruAngryTextBlock" TextWrapping="Wrap" Margin="88,28,0,680" HorizontalAlignment="Left" Width="535" FontSize="60" FontWeight="Bold"><Run Language="ja-jp" Text="赤丸くんが"/><LineBreak/><Run Language="ja-jp" Text="イライラしているとき…"/></TextBlock>
@@ -212,7 +212,7 @@
                             </Grid>
                         </Grid>
                     </Border>
-                    <Border x:Name="BodyImageOfKimiFearBorder" BorderThickness="10,10,10,10" BorderBrush="#FFED7D31" Margin="150,55,150,100" Background="White" CornerRadius="128,128,128,128" d:IsHidden="True">
+                    <Border x:Name="BodyImageOfKimiFearBorder" BorderThickness="10,10,10,10" BorderBrush="#FFED7D31" Margin="150,55,150,100" Background="White" CornerRadius="128,128,128,128">
                         <Grid x:Name="BodyImageOfKimiFearGrid">
                             <Image x:Name="BodyImageOfKimiFearImage" Width="702" Height="839" Source="/Images/body_image_of_kimi_fear.png"/>
                             <Grid x:Name="BodyImageOfKimiBubblesGrid">
@@ -355,11 +355,11 @@
                         <TextBlock x:Name="SessionStarTextBlock" HorizontalAlignment="Left" Margin="35,109,0,0" VerticalAlignment="Top" FontSize="48" RenderTransformOrigin="0.345,0.474" FontWeight="Bold" Text="☆" TextAlignment="Center"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="ChallengeTimeGrid" d:IsHidden="True">
-                    <Border x:Name="ChallengeTimeTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,50,0,800" RenderTransformOrigin="0.5,0.5" Background="#FFFFC000" d:IsHidden="True">
+                <Grid x:Name="ChallengeTimeGrid">
+                    <Border x:Name="ChallengeTimeTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,50,0,800" RenderTransformOrigin="0.5,0.5" Background="#FFFFC000">
                         <TextBlock x:Name="ChallengeTimeTitleTextBlock" Style="{StaticResource Purple}" Text="TextBlock" TextWrapping="Wrap" FontSize="140" TextAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
-                    <Grid x:Name="ChildrenFeelingGrid" d:IsHidden="True">
+                    <Grid x:Name="ChildrenFeelingGrid">
                         <Image x:Name="ShirojiVerySmallRightUpImage" Source="/Images/shiroji_03.png" RenderTransformOrigin="0.5,0.5" Margin="1338,152,242,560">
                             <Image.RenderTransform>
                                 <TransformGroup>
@@ -388,10 +388,10 @@
                             <Image x:Name="FeelingPrevBackImage" Source="/Images/prev_back_.png"/>
                         </Button>
                     </Grid>
-                    <Border x:Name="Let_sTryTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,131,0,771" Background="#FFED7D31" d:IsHidden="True">
+                    <Border x:Name="Let_sTryTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,131,0,771" Background="#FFED7D31">
                         <TextBlock x:Name="Let_sTryTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" Foreground="#FF4472C4" FontWeight="Normal" TextAlignment="Center"/>
                     </Border>
-                    <Grid x:Name="CHotWordKeyButtonGrid" d:IsHidden="True">
+                    <Grid x:Name="CHotWordKeyButtonGrid">
                         <ItemsControl x:Name="CHotWordKeyButtonItemControl" Margin="519,134,519,128" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -405,11 +405,11 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </Grid>
-                    <Grid x:Name="HotWordCommentGrid" Height="216" Margin="41,294,1447,570" Width="432" d:IsHidden="True">
+                    <Grid x:Name="HotWordCommentGrid" Height="216" Margin="41,294,1447,570" Width="432">
                         <Image x:Name="HotWordCommentImage" Source="/Images/small_bubble_center_down.png"/>
                         <TextBlock x:Name="HotWordCommentTextBlock" Text="タップして例を確認するのじゃ！" TextWrapping="Wrap" FontSize="48" Margin="35,13,32,61"/>
                     </Grid>
-                    <Image x:Name="HotWordTitleImage" Height="238" Width="1670" Source="/Images/hot_word_1_title.png" Margin="125,101,125,741" d:IsHidden="True"/>
+                    <Image x:Name="HotWordTitleImage" Height="238" Width="1670" Source="/Images/hot_word_1_title.png" Margin="125,101,125,741"/>
                     <Border x:Name="ChildrenBodyImageTitleBorder" BorderThickness="1" Margin="-10,50,10,740" Background="#FF4472C4" d:IsHidden="True">
                         <TextBlock x:Name="ChildrenBodyImageTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" VerticalAlignment="Center" TextAlignment="Center"/>
                     </Border>
@@ -545,7 +545,7 @@
                     <Image x:Name="RelaxShadeImage" Height="561" Width="745" Margin="669,38,506,481" Source="/Images/relax_shade.png" d:IsHidden="True"/>
                 </Grid>
               
-                <Grid x:Name="GroupActivityGrid">
+                <Grid x:Name="GroupActivityGrid" d:IsHidden="True">
                     <Grid x:Name="Let_sUseHotWordGrid" d:IsHidden="True">
                         <Image x:Name="Let_sUseHotWordTitleImage" HorizontalAlignment="Center" Height="98" Margin="0,50,0,0" VerticalAlignment="Top" Width="1106" Source="/Images/let's_use_hot_word_title.png"/>
                         <Grid x:Name="SituationsGrid" Margin="175,205,330,95">
@@ -1015,13 +1015,13 @@
                             </Image>
                         </Button>
                     </Grid>
-                    <Button x:Name="NextPageButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True"  Style="{StaticResource ShadowButton}">
+                    <Button x:Name="NextPageButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click"  Style="{StaticResource ShadowButton}" d:IsHidden="True">
                         <Image x:Name="NextPageAfterImage" Source="/Images/after.png" Height="149"/>
                     </Button>
                     <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" d:IsHidden="True" Style="{StaticResource ShadowButton}">
                         <Image x:Name="BackPageBeforeImage" Source="/Images/before.png"/>
                     </Button>
-                    <Border x:Name="HotWordBorder" BorderThickness="1" Margin="0,438,0,438" Background="#B2FF783A">
+                    <Border x:Name="HotWordBorder" BorderThickness="1" Margin="0,438,0,438" Background="#B2FF783A" d:IsHidden="True">
                         <TextBlock x:Name="HotWordTextBlock" Text="TextBlock" TextWrapping="Wrap" Foreground="#FF0071E2" FontSize="120" TextAlignment="Center" FontWeight="Bold"/>
                     </Border>
                     <Grid x:Name="MusicInfoGrid" RenderTransformOrigin="0.5,0.5" Margin="1423,60,0,755" HorizontalAlignment="Left" Width="452" Height="265" d:IsHidden="True">
@@ -1129,8 +1129,8 @@
                             <TextBlock x:Name="InputKeyboardRelaxMethodMessageTextBlock" Text="{Binding Text, ElementName=RelaxMethodMessageTextBlock}" Height="66" VerticalAlignment="Bottom" FontSize="53" TextAlignment="Right" Margin="80,20"/>
                         </Grid>
                     </Grid>
-                    <Grid x:Name="InputCanvasGrid" Width="1920" Height="840" VerticalAlignment="Top" Margin="0,240,0,0" d:IsHidden="True">
-                        <Border x:Name="InputMyBodyImageCanvasBorder" Width="1920" Height="726" VerticalAlignment="Center" Background="White" CornerRadius="60" BorderBrush="#FFA9D18E" BorderThickness="24.6" d:IsHidden="True">
+                    <Grid x:Name="InputCanvasGrid" Width="1920" Height="840" VerticalAlignment="Top" Margin="0,240,0,0">
+                        <Border x:Name="InputMyBodyImageCanvasBorder" Width="1920" Height="726" VerticalAlignment="Center" Background="White" CornerRadius="60" BorderBrush="#FFA9D18E" BorderThickness="24.6">
                             <InkCanvas x:Name="InputMyBodyImageCanvas" Style="{StaticResource InputInkCanvas}" Height="615" Width="1797" Margin="37"/>
                         </Border>
                         <Grid x:Name="LeftBodyImageOfKimiBubbleCanvasGrid" Height="210"  HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">

@@ -569,7 +569,7 @@ namespace KokoroUpTime
             }
         }
 
-        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress, bool isCreateNewTable)
         {
             this.initConfig = _initConfig;
             this.dataOption = _dataOption;
@@ -578,12 +578,33 @@ namespace KokoroUpTime
 
             // 現在時刻を取得
             this.dataChapter11.CreatedAt = DateTime.Now.ToString();
-
-            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+            if (isCreateNewTable)
             {
-                // 毎回のアクセス日付を記録
-                connection.Insert(this.dataChapter11);
+                // データベースのテーブル作成と現在時刻の書き込みを同時に行う
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    // 毎回のアクセス日付を記録
+                    connection.Insert(this.dataChapter11);
+                }
+            }
+            else
+            {
+                string lastCreatedAt = "";
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    var chapter11 = connection.Query<DataChapter11>($"SELECT * FROM DataChapter11 ORDER BY Id ASC LIMIT 1;");
+
+                    foreach (var row in chapter11)
+                    {
+                        lastCreatedAt = row.CreatedAt;
+                    }
+                }
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    connection.Execute($@"UPDATE DataChapter11 SET CreatedAt = '{this.dataChapter11.CreatedAt}'WHERE CreatedAt = '{lastCreatedAt}';");
+                }
             }
         }
 
@@ -2395,6 +2416,141 @@ namespace KokoroUpTime
                                 }
                             }
                         }
+
+                        if (this.InputButtonBorder.Visibility == Visibility)
+                        {
+                            if (this.dataOption.InputMethod == 0)
+                            {
+                                StrokeConverter strokeConverter = new StrokeConverter();
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas1, this.AkamaruOtherSolutionUseItemInputStroke, "challenge_time_part_1_input_akamaru_other_solution", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
+                            }
+                            else
+                            {
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"Update DataChapter11 SET AkamaruOtherSolutionUseItemInputText ='{this.dataChapter11.AkamaruOtherSolutionUseItemInputText}' WHERE CreatedAt = '{this.dataChapter11.CreatedAt}'");
+                                }
+                            }
+                        }
+                        else if (this.Step2InputAkamaruManySolutionGrid.Visibility == Visibility.Visible)
+                        {
+                            if (this.dataOption.InputMethod == 0)
+                            {
+                                StrokeConverter strokeConverter = new StrokeConverter();
+                                if (this.Step2AkamaruMethodInputStrokes[0].Count > 0)
+                                {
+                                    strokeConverter.ConvertToBmpImage(this.InputCanvas2_1, this.Step2AkamaruMethodInputStrokes[0], "challenge_time_part_2_input_akamaru_method1", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
+                                }
+                                if (this.Step2AkamaruMethodInputStrokes[1].Count > 0)
+                                {
+                                    strokeConverter.ConvertToBmpImage(this.InputCanvas2_2, this.Step2AkamaruMethodInputStrokes[1], "challenge_time_part_2_input_akamaru_method2", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
+                                }
+                                if (this.Step2AkamaruMethodInputStrokes[2].Count > 0)
+                                {
+                                    strokeConverter.ConvertToBmpImage(this.InputCanvas2_3, this.Step2AkamaruMethodInputStrokes[2], "challenge_time_part_2_input_akamaru_method3", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
+                                }
+                            }
+                            else
+                            {
+                                if (this.Step2AkamaruMethodInputText[0] != "")
+                                {
+                                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                    {
+                                        connection.Execute($@"Update DataChapter11 SET Step2AkamaruManyMethodInputText1 ='{this.dataChapter11.Step2AkamaruManyMethodInputText1}' WHERE CreatedAt = '{this.dataChapter11.CreatedAt}'");
+                                    }
+                                }
+                                if (this.Step2AkamaruMethodInputText[1] != "")
+                                {
+                                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                    {
+                                        connection.Execute($@"Update DataChapter11 SET Step2AkamaruManyMethodInputText2 ='{this.dataChapter11.Step2AkamaruManyMethodInputText2}' WHERE CreatedAt = '{this.dataChapter11.CreatedAt}'");
+                                    }
+                                }
+                                if (this.Step2AkamaruMethodInputText[2] != "")
+                                {
+                                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                    {
+                                        connection.Execute($@"Update DataChapter11 SET Step2AkamaruManyMethodInputText3 ='{this.dataChapter11.Step2AkamaruManyMethodInputText3}' WHERE CreatedAt = '{this.dataChapter11.CreatedAt}'");
+                                    }
+                                }
+
+                            }
+                        }
+                        else if (this.Step3EvaluateAkamaruMethodGrid.Visibility == Visibility.Visible)
+                        {
+
+                            this.dataChapter11.EvaluateAkamaruMethodText1 = "";
+                            this.dataChapter11.EvaluateAkamaruMethodText2 = "";
+                            this.dataChapter11.EvaluateAkamaruMethodText3 = "";
+
+                            foreach (var text in this.AKAMARU_METHOD_TEXT_VALUES[(string)this.EvaluateAkamaruMethodListView.Items[0]])
+                            {
+                                this.dataChapter11.EvaluateAkamaruMethodText1 += $"{text},";
+                            }
+                            foreach (var text in this.AKAMARU_METHOD_TEXT_VALUES[(string)this.EvaluateAkamaruMethodListView.Items[1]])
+                            {
+                                this.dataChapter11.EvaluateAkamaruMethodText2 += $"{text},";
+                            }
+                            foreach (var text in this.AKAMARU_METHOD_TEXT_VALUES[(string)this.EvaluateAkamaruMethodListView.Items[2]])
+                            {
+                                this.dataChapter11.EvaluateAkamaruMethodText3 += $"{text},";
+                            }
+                        }
+                        else if (this.Step2InputAosukeManySolutionsGrid.Visibility == Visibility.Visible)
+                        {
+                            if(this.dataOption.InputMethod == 0)
+                            {
+                                StrokeConverter strokeConverter = new StrokeConverter();
+                                for (int i=0;i< this.Step2AosukeMethodInputStrokes.Length;i++)
+                                {
+                                    strokeConverter.ConvertToBmpImage(this.InputCanvas3_1,this.Step2AosukeMethodInputStrokes[i], $"challenge_time_input_aosuke's_method_{i+1}", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
+                                }
+
+                            }
+                            else
+                            {
+                                this.dataChapter11.EvaluateAosukeMethodText = "";
+                                foreach (var text in this.Step2AosukeMethodInputText)
+                                {
+                                    this.dataChapter11.EvaluateAosukeMethodText += $"{text},";
+                                }
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"Update DataChapter11 SET EvaluateAosukeMethodText ='{this.dataChapter11.EvaluateAosukeMethodText}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
+                                }
+                            }
+                        }
+                        else if (this.Step3EvaluateAosukeMethodGrid.Visibility == Visibility.Visible)
+                        {
+                            this.dataChapter11.EvaluationAosukeMethodText = "";
+                            if (this.dataOption.InputMethod == 0)
+                            {
+                                foreach(var text in this.AOSUKE_METHOD_STROKE_VALUES.Values)
+                                {
+                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[0]},";
+                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[1]},";
+                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[2]},";
+                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[3]};";
+                                }
+
+                            }
+                            else
+                            {
+                                foreach (var text in this.AOSUKE_METHOD_TEXT_VALUES.Values)
+                                {
+                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[0]},";
+                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[1]},";
+                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[2]},";
+                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[3]};";
+                                }
+
+                            }
+
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"Update DataChapter11 SET EvaluationAosukeMethodText ='{this.dataChapter11.EvaluationAosukeMethodText}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
+                            }
+                        }
                     }
                     else if (button.Name == "MangaFlipButton")
                     {
@@ -2590,6 +2746,12 @@ namespace KokoroUpTime
                     {
                         this.dataChapter11.SelectedAkamaruGoalText = "友だちが思っていたことを教えてもらう";
                     }
+
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                    {
+                        connection.Execute($@"Update DataChapter11 SET SelectedAkamaruGoalText = '{this.dataChapter11.SelectedAkamaruGoalText}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
+                    }
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
@@ -2776,7 +2938,7 @@ namespace KokoroUpTime
                 {
                     if (scenario[0] == "scene" && scenario[1] == tag)
                     {
-                        this.scenarioCount = index + 1;
+                        this.scenarioCount = index;
                         this.ScenarioPlay();
 
                         break;

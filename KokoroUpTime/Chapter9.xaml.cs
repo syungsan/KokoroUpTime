@@ -22,6 +22,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WMPLib;
 using XamlAnimatedGif;
+using System.Reflection;
 
 namespace KokoroUpTime
 
@@ -37,6 +38,7 @@ namespace KokoroUpTime
         private string[] GOOD_FEELINGS = { "●　うれしい", "●　しあわせ", "●　たのしい", "●　ホッとした", "●　きもちいい", "●　まんぞく", "●　すき", "●　やる気マンマン", "●　かんしゃ", "●　わくわく", "●　うきうき", "●　ほこらしい" };
         private string[] BAD_FEELINGS = { "●　心配", "●　こまった", "●　不安", "●　こわい", "●　おちこみ", "●　がっかり", "●　いかり", "●　イライラ", "●　はずかしい", "●　ふまん", "●　かなしい", "●　おびえる" };
 
+        private Dictionary<string, List<string>> NOT_GOOD_EVENT;
         private float THREE_SECOND_RULE_TIME = 3.0f;
 
         LogManager logManager;
@@ -88,8 +90,8 @@ namespace KokoroUpTime
         // データベースに収めるデータモデルのインスタンス
         private DataChapter9 dataChapter9;
         //データモデルのプロパティのリスト
-        private Dictionary<string, string> KindOfFeelings = null;
-        private Dictionary<string, int?> SizeOfFeelings = null;
+        private Dictionary<string, PropertyInfo> KindOfFeelings = null;
+        private Dictionary<string, PropertyInfo> SizeOfFeelings = null;
         
         // ゲームの切り替えシーン
         private string scene;
@@ -132,37 +134,56 @@ namespace KokoroUpTime
             this.SelectGoodFeelingListBox.ItemsSource = GOOD_FEELINGS;
             this.SelectBadFeelingListBox.ItemsSource = BAD_FEELINGS;
 
+            NOT_GOOD_EVENT = new Dictionary<string, List<string>>()
+            {
+                ["学校でのこと"] = new List<string>() { "学校に行く", "教室に入る", "移動教室に行く", "苦手な教科の授業", "班（グループ）活動", "テストを受ける", "その他の学校でのこと" },
+                ["友だちとのこと"] =  new List<string>() { "友だちに話しかける", "知らない友だちと仲良くなる", "友だち同士の会話に入っていく", "自分からあいさつする", "友だちに意見を言う", "その他の友だちとの関係" },
+                ["場所"] =  new List<string>() { "高いところ", "人がたくさんいるところ", "せまいところ", "暗いところ", "うるさいところ", "その他の場所" },
+                ["動物、虫、自然"] =  new List<string>() { "犬", "ネコ", "ハチ", "ムカデ", "ヘビ", "その他の虫" },
+                ["大きな音"] =  new List<string>() { "花火", "トイレのエアータオル", "雷", "その他の音" },
+                ["家でのこと"] =  new List<string>() { "一人で留守番する", "一人で別の部屋にいる\n（二階など）", "お泊りにいく", "その他の家でのこと" },
+                ["大人とのこと"] = new  List<string>() { "先生に質問する", "店員さんに注文する", "レジで買い物をする", "電話に出る", "親の友だちと話す", "その他の大人との関係" },
+                ["発表"] =  new List<string>() { "手を挙げて発表する", "自分の意見を言う", "リコーダーや歌のテスト", "体育のテスト", "日直", "音読", "その他の発表" },
+            };
+
+
             _aosukeSituationTextData.Add(new AosukeSituationTextData("", "学校の休み時間、ふだんしゃべらない友だちに\n自分から話しかけてみた"));
             _aosukeSituationTextData.Add(new AosukeSituationTextData("その１０分後、", "\nいっしょに話していると、同じテレビ番組が好きだとわかった。"));
             _aosukeSituationTextData.Add(new AosukeSituationTextData("次の日、", "\nまた、その友だちに青助くんから話しかけに行った。"));
             _aosukeSituationTextData.Add(new AosukeSituationTextData("次の次の日、", "\nその友だちとはちがうほかの友だちに自分から話しかけてみた。"));
 
-            _notGoodEventData.Add(new NotGoodEventData("学校でのこと", new List<string>() { "学校に行く", "教室に入る", "移動教室に行く", "苦手な教科の授業", "班（グループ）活動", "テストを受ける", "その他の学校でのこと" }));
-            _notGoodEventData.Add(new NotGoodEventData("友だちとのこと", new List<string>() { "友だちに話しかける", "知らない友だちと仲良くなる", "友だち同士の会話に入っていく", "自分からあいさつする", "友だちに意見を言う", "その他の友だちとの関係" }));
-            _notGoodEventData.Add(new NotGoodEventData("場所", new List<string>() { "高いところ", "人がたくさんいるところ", "せまいところ", "暗いところ", "うるさいところ", "その他の場所" }));
-            _notGoodEventData.Add(new NotGoodEventData("動物、虫、自然", new List<string>() { "犬", "ネコ", "ハチ", "ムカデ", "ヘビ", "その他の虫" }));
-            _notGoodEventData.Add(new NotGoodEventData("大きな音", new List<string>() { "花火", "トイレのエアータオル", "雷", "その他の音" }));
-            _notGoodEventData.Add(new NotGoodEventData("家でのこと", new List<string>() { "一人で留守番する", "一人で別の部屋にいる\n（二階など）", "お泊りにいく", "その他の家でのこと" }));
-            _notGoodEventData.Add(new NotGoodEventData("大人とのこと", new List<string>() { "先生に質問する", "店員さんに注文する", "レジで買い物をする", "電話に出る", "親の友だちと話す", "その他の大人との関係" }));
-            _notGoodEventData.Add(new NotGoodEventData("発表", new List<string>() { "手を挙げて発表する", "自分の意見を言う", "リコーダーや歌のテスト", "体育のテスト", "日直", "音読", "その他の発表" }));
+           
+            foreach(KeyValuePair<string, List<string>> keyValuePair in this.NOT_GOOD_EVENT)
+            {
+                _notGoodEventData.Add(new NotGoodEventData(keyValuePair.Key, keyValuePair.Value));
+            }
+
+            //_notGoodEventData.Add(new NotGoodEventData("学校でのこと", new List<string>() { "学校に行く", "教室に入る", "移動教室に行く", "苦手な教科の授業", "班（グループ）活動", "テストを受ける", "その他の学校でのこと" }));
+            //_notGoodEventData.Add(new NotGoodEventData("友だちとのこと", new List<string>() { "友だちに話しかける", "知らない友だちと仲良くなる", "友だち同士の会話に入っていく", "自分からあいさつする", "友だちに意見を言う", "その他の友だちとの関係" }));
+            //_notGoodEventData.Add(new NotGoodEventData("場所", new List<string>() { "高いところ", "人がたくさんいるところ", "せまいところ", "暗いところ", "うるさいところ", "その他の場所" }));
+            //_notGoodEventData.Add(new NotGoodEventData("動物、虫、自然", new List<string>() { "犬", "ネコ", "ハチ", "ムカデ", "ヘビ", "その他の虫" }));
+            //_notGoodEventData.Add(new NotGoodEventData("大きな音", new List<string>() { "花火", "トイレのエアータオル", "雷", "その他の音" }));
+            //_notGoodEventData.Add(new NotGoodEventData("家でのこと", new List<string>() { "一人で留守番する", "一人で別の部屋にいる\n（二階など）", "お泊りにいく", "その他の家でのこと" }));
+            //_notGoodEventData.Add(new NotGoodEventData("大人とのこと", new List<string>() { "先生に質問する", "店員さんに注文する", "レジで買い物をする", "電話に出る", "親の友だちと話す", "その他の大人との関係" }));
+            //_notGoodEventData.Add(new NotGoodEventData("発表", new List<string>() { "手を挙げて発表する", "自分の意見を言う", "リコーダーや歌のテスト", "体育のテスト", "日直", "音読", "その他の発表" }));
 
             this.AosukeSituationItemControl.ItemsSource = _aosukeSituationTextData;
             this.NotGoodEventItemsControl.ItemsSource = _notGoodEventData;
 
-            KindOfFeelings = new Dictionary<string, string>()
+            KindOfFeelings = new Dictionary<string, PropertyInfo>()
             {
-                ["aosuke_feeling1"] = this.dataChapter9.AosukesKindOfFeelingTalkToFriends="",
-                ["aosuke_feeling2"] = this.dataChapter9.AosukesKindOfFeelingAfter10minutes="",
-                ["aosuke_feeling3"] = this.dataChapter9.AosukesKindOfFeelingNextDay="",
-                ["aosuke_feeling4"] = this.dataChapter9.AosukesKindOfFeelingDayAfterTomorrow="",
+                ["aosuke_feeling1"] = typeof(DataChapter9).GetProperty("AosukesKindOfFeelingTalkToFriends"),
+                ["aosuke_feeling2"] = typeof(DataChapter9).GetProperty("AosukesKindOfFeelingAfter10minutes"),
+                ["aosuke_feeling3"] = typeof(DataChapter9).GetProperty("AosukesKindOfFeelingNextDay"),
+                ["aosuke_feeling4"] = typeof(DataChapter9).GetProperty("AosukesKindOfFeelingDayAfterTomorrow"),
             };
 
-            SizeOfFeelings = new Dictionary<string, int?>()
+            SizeOfFeelings = new Dictionary<string, PropertyInfo>()
             {
-                ["aosuke_feeling1"] = this.dataChapter9.AosukesSizeOfFeelingTalkToFriends=-1,
-                ["aosuke_feeling2"] = this.dataChapter9.AosukesSizeOfFeelingAfter10minutes=-1,
-                ["aosuke_feeling3"] = this.dataChapter9.AosukesSizeOfFeelingNextDay=-1,
-                ["aosuke_feeling4"] = this.dataChapter9.AosukesSizeOfFeelingDayAfterTomorrow=-1,
+                ["aosuke_feeling1"] = typeof(DataChapter9).GetProperty("AosukesSizeOfFeelingTalkToFriends"),
+                ["aosuke_feeling2"] = typeof(DataChapter9).GetProperty("AosukesSizeOfFeelingAfter10minutes"),
+                ["aosuke_feeling3"] = typeof(DataChapter9).GetProperty("AosukesSizeOfFeelingNextDay"),
+                ["aosuke_feeling4"] = typeof(DataChapter9).GetProperty("AosukesSizeOfFeelingDayAfterTomorrow"),
             };
             this.dataChapter9.InputChallengeText = "";
 
@@ -542,7 +563,7 @@ namespace KokoroUpTime
             this.PenButton.IsSelected = true;
         }
 
-        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress, bool isCreateNewTable)
         {
             this.initConfig = _initConfig;
             this.dataOption = _dataOption;
@@ -551,13 +572,33 @@ namespace KokoroUpTime
 
             // 現在時刻を取得
             this.dataChapter9.CreatedAt = DateTime.Now.ToString();
-
-            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+            if (isCreateNewTable)
             {
-                // 毎回のアクセス日付を記録
-                
-                connection.Insert(this.dataChapter9);
+                // データベースのテーブル作成と現在時刻の書き込みを同時に行う
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    // 毎回のアクセス日付を記録
+                    connection.Insert(this.dataChapter9);
+                }
+            }
+            else
+            {
+                string lastCreatedAt = "";
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    var chapter9 = connection.Query<DataChapter9>($"SELECT * FROM DataChapter9 ORDER BY Id ASC LIMIT 1;");
+
+                    foreach (var row in chapter9)
+                    {
+                        lastCreatedAt = row.CreatedAt;
+                    }
+                }
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    connection.Execute($@"UPDATE DataChapter9 SET CreatedAt = '{this.dataChapter9.CreatedAt}'WHERE CreatedAt = '{lastCreatedAt}';");
+                }
             }
         }
 
@@ -1102,9 +1143,9 @@ namespace KokoroUpTime
                                                 bool CompleteInputFlag = true;
                                                 if (CompleteInputFlag)
                                                 {
-                                                    foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
+                                                    foreach (KeyValuePair<string, PropertyInfo> kvp in this.KindOfFeelings)
                                                     {
-                                                        if (kvp.Value == "")
+                                                        if ((string)kvp.Value.GetValue(this.dataChapter9) == "")
                                                         {
                                                             CompleteInputFlag = false;
                                                             break;
@@ -1113,9 +1154,9 @@ namespace KokoroUpTime
                                                 }
                                                 if (CompleteInputFlag)
                                                 {
-                                                    foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
+                                                    foreach (KeyValuePair<string, PropertyInfo> kvp in this.SizeOfFeelings)
                                                     {
-                                                        if (kvp.Value == -1)
+                                                        if ((int)kvp.Value.GetValue(this.dataChapter9) == -1)
                                                         {
                                                             CompleteInputFlag = false;
                                                             break;
@@ -1198,9 +1239,9 @@ namespace KokoroUpTime
                                         bool CompleteInputFlag = true;
                                         if (CompleteInputFlag)
                                         {
-                                            foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
+                                            foreach (KeyValuePair<string, PropertyInfo> kvp in this.KindOfFeelings)
                                             {
-                                                if (kvp.Value == "")
+                                                if ((string)kvp.Value.GetValue(this.dataChapter9) == "")
                                                 {
                                                     CompleteInputFlag = false;
                                                     break;
@@ -1209,9 +1250,9 @@ namespace KokoroUpTime
                                         }
                                         if (CompleteInputFlag)
                                         {
-                                            foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
+                                            foreach (KeyValuePair<string, PropertyInfo> kvp in this.SizeOfFeelings)
                                             {
-                                                if (kvp.Value == -1)
+                                                if ((int)kvp.Value.GetValue(this.dataChapter9) == -1)
                                                 {
                                                     CompleteInputFlag = false;
                                                     break;
@@ -1507,12 +1548,12 @@ namespace KokoroUpTime
 
                     if (Regex.IsMatch(this.scene , ".+のきもちときもちの大きさ.+")||this.scene=="グループアクティビティ")
                     {
-                        if(this.KindOfFeelings[this.FeelingDictionaryKey].Split(",")[1] == "良い")
+                        if(((string)this.KindOfFeelings[this.FeelingDictionaryKey].GetValue(this.dataChapter9)).Split(",")[1] == "良い")
                         {
                             this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_red.png", UriKind.Relative));
                             this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/red_needle.png", UriKind.Relative));
                         }
-                        else if(this.KindOfFeelings[this.FeelingDictionaryKey].Split(",")[1] == "悪い")
+                        else if(((string)this.KindOfFeelings[this.FeelingDictionaryKey].GetValue(this.dataChapter9)).Split(",")[1] == "悪い")
                         {
                             this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_blue.png", UriKind.Relative));
                             this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/blue_needle.png", UriKind.Relative));
@@ -1632,7 +1673,7 @@ namespace KokoroUpTime
                     //    this.SizeOfFeelingInputButton.IsEnabled = true;
                     case "$aosuke_kind_of_feeling_1$":
                         this.FeelingDictionaryKey = "aosuke_feeling1";
-                        text = text.Replace("$aosuke_kind_of_feeling_1$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
+                        text = text.Replace("$aosuke_kind_of_feeling_1$", ((string)KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter9)).Split(",")[0]);
                         if(text!="")
                         {
                             this.AosukeSizeOfFeelingInputButton1.IsEnabled = true;
@@ -1644,7 +1685,7 @@ namespace KokoroUpTime
                         break;
                     case "$aosuke_kind_of_feeling_2$":
                         this.FeelingDictionaryKey="aosuke_feeling2";
-                        text = text.Replace("$aosuke_kind_of_feeling_2$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
+                        text = text.Replace("$aosuke_kind_of_feeling_2$", ((string)KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter9)).Split(",")[0]);
                         if(text!="")
                         {
                             this.AosukeSizeOfFeelingInputButton2.IsEnabled = true;
@@ -1656,7 +1697,7 @@ namespace KokoroUpTime
                         break;
                     case "$aosuke_kind_of_feeling_3$":
                         this.FeelingDictionaryKey="aosuke_feeling3";
-                        text = text.Replace("$aosuke_kind_of_feeling_3$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
+                        text = text.Replace("$aosuke_kind_of_feeling_3$", ((string)KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter9)).Split(",")[0]);
                         if(text!="")
                         {
                             this.AosukeSizeOfFeelingInputButton3.IsEnabled = true;
@@ -1668,7 +1709,7 @@ namespace KokoroUpTime
                         break;
                     case "$aosuke_kind_of_feeling_4$":
                         this.FeelingDictionaryKey="aosuke_feeling4";
-                        text = text.Replace("$aosuke_kind_of_feeling_4$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
+                        text = text.Replace("$aosuke_kind_of_feeling_4$", ((string)KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter9)).Split(",")[0]);
                         if(text!="")
                         {
                             this.AosukeSizeOfFeelingInputButton4.IsEnabled = true;
@@ -1681,9 +1722,9 @@ namespace KokoroUpTime
 
                     case "$aosuke_size_of_feeling_1$":
                         this.FeelingDictionaryKey = "aosuke_feeling1";
-                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
+                        if ((int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter9) != -1)
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_1$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
+                            text = text.Replace("$aosuke_size_of_feeling_1$", this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter9).ToString());
                         }
                         else
                         {
@@ -1692,9 +1733,9 @@ namespace KokoroUpTime
                         break;
                     case "$aosuke_size_of_feeling_2$":
                         this.FeelingDictionaryKey = "aosuke_feeling2";
-                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
+                        if ((int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter9) != -1)
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_2$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
+                            text = text.Replace("$aosuke_size_of_feeling_2$", this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter9).ToString());
                         }
                         else
                         {
@@ -1703,9 +1744,9 @@ namespace KokoroUpTime
                         break;
                     case "$aosuke_size_of_feeling_3$":
                          this.FeelingDictionaryKey = "aosuke_feeling3";
-                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
+                        if ((int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter9) != -1)
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_3$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
+                            text = text.Replace("$aosuke_size_of_feeling_3$", this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter9).ToString());
                         }
                         else
                         {
@@ -1714,9 +1755,9 @@ namespace KokoroUpTime
                         break;
                     case "$aosuke_size_of_feeling_4$":
                          this.FeelingDictionaryKey = "aosuke_feeling4";
-                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
+                        if ((int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter9) != -1)
                         {
-                            text = text.Replace("$aosuke_size_of_feeling_4$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
+                            text = text.Replace("$aosuke_size_of_feeling_4$", this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter9).ToString());
                         }
                         else
                         {
@@ -2227,19 +2268,75 @@ namespace KokoroUpTime
 
                                 if (this.SelectGoodFeelingListBox.SelectedItem != null)
                                 {
-                                    this.KindOfFeelings[FeelingDictionaryKey] = $"{this.SelectGoodFeelingListBox.SelectedItem.ToString().Replace("●　", "")},良い";
+                                    this.KindOfFeelings[FeelingDictionaryKey].SetValue(this.dataChapter9, $"{this.SelectGoodFeelingListBox.SelectedItem.ToString().Replace("●　", "")},良い");
                                 }
                                 else if (this.SelectBadFeelingListBox.SelectedItems != null)
                                 {
-                                    this.KindOfFeelings[FeelingDictionaryKey] = $"{this.SelectBadFeelingListBox.SelectedItem.ToString().Replace("●　", "")},悪い";
+                                    this.KindOfFeelings[FeelingDictionaryKey].SetValue(this.dataChapter9, $"{this.SelectBadFeelingListBox.SelectedItem.ToString().Replace("●　", "")},悪い");
                                 }
-
-                              //  this.SizeOfFeelingInputButton.IsEnabled = true;
                             }
                         }
                         else if (this.SelectHeartGrid.IsVisible)
                         {
-                            this.SizeOfFeelings[FeelingDictionaryKey] = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
+                            this.SizeOfFeelings[FeelingDictionaryKey].SetValue(this.dataChapter9, int.Parse(this.ViewSizeOfFeelingTextBlock.Text));
+                        }
+                        else if(this.NotGoodEventGrid.Visibility == Visibility.Visible)
+                        {
+                            foreach (var listbox in this.NotGoodEventItemsControl.GetChildren<ListBox>())
+                            {
+                                
+                                foreach (var border in ((StackPanel)listbox.Parent).Children)
+                                {
+                                    if(border is Border)
+                                    {
+                                        var text = ((Border)border).Child;
+                                        if (text is TextBlock)
+                                        {
+                                            this.dataChapter9.CheckedNotGoodEvent += $"{((TextBlock)text).Text}:"; 
+                                        }
+                                    }
+                                }
+                                foreach(var text in listbox.SelectedItems)
+                                {
+                                    this.dataChapter9.CheckedNotGoodEvent += $"{text},";
+                                }
+                            }
+
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($"Update DataChapter9 SET CheckedNotGoodEvent ='{this.dataChapter9.CheckedNotGoodEvent}' WHERE CreatedAt = '{this.dataChapter9.CreatedAt}' ;");
+                            }
+                        }
+                        else if(this.InputChallengeGrid.Visibility == Visibility.Visible)
+                        {
+                            if(this.dataOption.InputMethod == 0)
+                            {
+                                StrokeConverter strokeConverter = new StrokeConverter();
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas,this.InputChallengeCanvasStrokes,"challenge_time_input_challege_event",this.initConfig.userName, this.dataProgress.CurrentChapter);
+                            }
+                            else
+                            {
+                                this.dataChapter9.InputChallengeText = this.InputTextBox.Text;
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($"Update DataChapter9 SET InputChallengeText ='{this.dataChapter9.InputChallengeText}' WHERE CreatedAt = '{this.dataChapter9.CreatedAt}' ;");
+                                }
+                            }
+                        }
+                        else if(this.ChangeAosukesFeelingGrid.Visibility == Visibility.Visible)
+                        {
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($"Update DataChapter9 SET AosukesKindOfFeelingTalkToFriends ='{this.dataChapter9.AosukesKindOfFeelingTalkToFriends}' WHERE CreatedAt = '{this.dataChapter9.CreatedAt}' ;");
+                                connection.Execute($"Update DataChapter9 SET AosukesKindOfFeelingAfter10minutes ='{this.dataChapter9.AosukesKindOfFeelingAfter10minutes}' WHERE CreatedAt = '{this.dataChapter9.CreatedAt}' ;");
+                                connection.Execute($"Update DataChapter9 SET AosukesKindOfFeelingNextDay ='{this.dataChapter9.AosukesKindOfFeelingNextDay}' WHERE CreatedAt = '{this.dataChapter9.CreatedAt}' ;");
+                                connection.Execute($"Update DataChapter9 SET AosukesKindOfFeelingDayAfterTomorrow ='{this.dataChapter9.AosukesKindOfFeelingDayAfterTomorrow}' WHERE CreatedAt = '{this.dataChapter9.CreatedAt}' ;");
+
+                                connection.Execute($"Update DataChapter9 SET AosukesSizeOfFeelingTalkToFriends ='{this.dataChapter9.AosukesSizeOfFeelingTalkToFriends}' WHERE CreatedAt = '{this.dataChapter9.CreatedAt}' ;");
+                                connection.Execute($"Update DataChapter9 SET AosukesSizeOfFeelingAfter10minutes ='{this.dataChapter9.AosukesSizeOfFeelingAfter10minutes}' WHERE CreatedAt = '{this.dataChapter9.CreatedAt}' ;");
+                                connection.Execute($"Update DataChapter9 SET AosukesSizeOfFeelingNextDay ='{this.dataChapter9.AosukesSizeOfFeelingNextDay}' WHERE CreatedAt = '{this.dataChapter9.CreatedAt}' ;");
+                                connection.Execute($"Update DataChapter9 SET AosukesSizeOfFeelingDayAfterTomorrow ='{this.dataChapter9.AosukesSizeOfFeelingDayAfterTomorrow}' WHERE CreatedAt = '{this.dataChapter9.CreatedAt}' ;");
+                            }
                         }
                     }
                     else if (button.Name == "MangaFlipButton")
@@ -2565,7 +2662,7 @@ namespace KokoroUpTime
                 {
                     if (scenario[0] == "scene" && scenario[1] == tag)
                     {
-                        this.scenarioCount = index + 1;
+                        this.scenarioCount = index;
                         this.ScenarioPlay();
 
                         break;

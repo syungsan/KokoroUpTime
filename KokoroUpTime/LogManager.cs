@@ -38,7 +38,7 @@ namespace KokoroUpTime
         {
             this.startupPath = FileUtils.GetStartupPath();
             this.dirPath = $"./Log/{initConfig.userName}/Chapter{dataProgress.CurrentChapter.ToString()}";
-            this.logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter{dataProgress.CurrentChapter.ToString()}Log {DateTime.Now.ToString().Replace("/", "").Replace(":", "")}.csv");
+            this.logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter{dataProgress.CurrentChapter.ToString()}Log_{DateTime.Now.ToString("yyyy-MMdd-HHmmss ")}.csv");
 
             this.stopwatch = new Stopwatch();
             try

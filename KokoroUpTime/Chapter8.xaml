@@ -233,14 +233,14 @@
                 <Image x:Name="SelectItemFeelingImage" HorizontalAlignment="Left" Height="386" Margin="727,0,0,0" VerticalAlignment="Center" Width="273" RenderTransformOrigin="0.659,0.453" d:IsHidden="True"/>
             </Grid>
 
-            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920">
+            <Grid x:Name="ViewFeelingGrid" HorizontalAlignment="Center" Width="1920" d:IsHidden="True">
                 <Grid x:Name="ViewSizeOfFeelingGrid" Margin="527,31,526,684">
                     <Image x:Name="ViewSizeOfFeelingImage" Source="/Images/feeling_value.png"/>
                     <TextBlock x:Name="ViewSizeOfFeelingTitleTextBlock" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" Text="きもちの 「大きさ」" TextAlignment="Center"/>
                     <TextBlock x:Name="ViewSizeOfFeelingTextBlock" HorizontalAlignment="Left" Margin="174,174,0,0" Text="50" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" Width="540" TextAlignment="Center"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SelectHeartGrid" Margin="400,450,400,100">
+            <Grid x:Name="SelectHeartGrid" Margin="400,450,400,100" d:IsHidden="True">
                 <Image x:Name="SelectHeartImage" HorizontalAlignment="Center" Source="/Images/heart_blue.png" Margin="10,0,0,0"/>
                 <Image x:Name="SelectNeedleImage"  Source="/Images/blue_needle.png" RenderTransformOrigin="0.5,0.87" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,120,10,20">
                     <Image.RenderTransform>
@@ -322,7 +322,7 @@
                         </Grid>
                     </Grid>
                 </Border>
-                <Image x:Name="InspirationLightImage" Source="Images/light.png" Height="300" Width="300" Margin="0,150" VerticalAlignment="Top" HorizontalAlignment="Left" d:IsHidden="True"/>
+                <Image x:Name="InspirationLightImage" Source="Images/light.png" Height="300" Width="300" Margin="0,150" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                 <Image x:Name="OjamamushiAttachedSpeechBubbleImage" Margin="1100,50,100,580" Source="Images/ojamamushi_01.png" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -333,10 +333,10 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <TextBlock x:Name="ChildrensThoughtsTitleText" Text="キミちゃんの考え" Margin="680,70,300,0" FontSize="60" VerticalAlignment="Top" FontFamily="MS PGothic" FontWeight="Bold" d:IsHidden="True" />
-                <TextBlock x:Name="OjamamushisTitleText" Text="失敗したときのダメダメ虫" Margin="80,70,700,0" FontSize="60" VerticalAlignment="Top" FontFamily="MS PGothic" FontWeight="Bold"  TextDecorations="Underline" d:IsHidden="True"/>
-                <Image x:Name="ButterflyImage" Margin="800,400,200,50" Source="Images/butterfly.png" d:IsHidden="True"/>
-                <Grid x:Name="FeelingInputGrid" Margin="600,400,100,50" d:IsHidden="True">
+                <TextBlock x:Name="ChildrensThoughtsTitleText" Text="キミちゃんの考え" Margin="680,70,300,0" FontSize="60" VerticalAlignment="Top" FontFamily="MS PGothic" FontWeight="Bold" />
+                <TextBlock x:Name="OjamamushisTitleText" Text="失敗したときのダメダメ虫" Margin="80,70,700,0" FontSize="60" VerticalAlignment="Top" FontFamily="MS PGothic" FontWeight="Bold"  TextDecorations="Underline"/>
+                <Image x:Name="ButterflyImage" Margin="800,400,200,50" Source="Images/butterfly.png"/>
+                <Grid x:Name="FeelingInputGrid" Margin="600,400,100,50">
                     <TextBlock x:Name="KindOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="70,30,0,0" Text="きもちの種類" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="55" FontWeight="Bold" TextAlignment="Center" d:IsHidden="True"/>
                     <TextBlock x:Name="SizeOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="470,30,0,0" Text="きもちの大きさ" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="55" FontWeight="Bold" d:IsHidden="True"/>
                     <Button x:Name="KindOfFeelingInputButton" Style="{StaticResource KindOfFeelingButton}" HorizontalAlignment="Left" Width="334" Height="175" BorderBrush="#FF4472C4" BorderThickness="5" Margin="50,100,3,25" Click="Button_Click">
@@ -346,7 +346,7 @@
                         <TextBlock x:Name="SizeOfFeelingInputTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
                     </Button>
                 </Grid>
-                <Image x:Name="AnyCharacterImage" Margin="900,450,-450,-250" Height="300" Width="250"  Source="Images/shiroji_01.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Image x:Name="AnyCharacterImage" Margin="900,450,-450,-250" Height="300" Width="250"  Source="Images/shiroji_01.png" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -356,7 +356,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Grid x:Name="AnyCharacterSpeecBubbleGrid" Margin="760,410,160,60" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Grid x:Name="AnyCharacterSpeecBubbleGrid" Margin="760,410,160,60" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -375,7 +375,7 @@
                     <Path   x:Name="AnyCharacterSpeechBubbleTailMask" Stroke="White" StrokeThickness="11" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,-9,0,0" Data="M303,0 l170,0" Grid.Row="1" d:IsHidden="True"/>
                     <Path   x:Name="AnyCharacterSpeechBubbleTail" Fill="White" Stroke="{Binding ElementName=AnyCharacterSpeechBubbleBorder,Path=BorderBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Margin="0,-5,0,0" Data="M298,0 L530,50 480,0" Grid.Row="1" d:IsHidden="True"/>
                 </Grid>
-                <Image x:Name="ChallengeItemImage" Margin="1250,300,100,200" Height="250" Width="250"  Source="Images/item08_solo.png" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+                <Image x:Name="ChallengeItemImage" Margin="1250,300,100,200" Height="250" Width="250"  Source="Images/item08_solo.png" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -423,7 +423,7 @@
                     </Border>
                 </Grid>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid" Margin="140,100,140,160" d:IsHidden="True" >
+            <Grid x:Name="GroupeActivityGrid" Margin="140,100,140,160" >
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform />
@@ -718,7 +718,7 @@
                     <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid">
+            <Grid x:Name="SystemGrid" d:IsHidden="True">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>

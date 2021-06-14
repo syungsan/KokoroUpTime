@@ -388,7 +388,7 @@ namespace KokoroUpTime
 
         }
 
-        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress, bool isCreateNewTable)
         {
             this.initConfig = _initConfig;
             this.dataOption = _dataOption;
@@ -397,12 +397,33 @@ namespace KokoroUpTime
 
             // 現在時刻を取得
             this.dataChapter4.CreatedAt = DateTime.Now.ToString();
-
-            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+            if (isCreateNewTable)
             {
-                // 毎回のアクセス日付を記録
-                connection.Insert(this.dataChapter4);
+                // データベースのテーブル作成と現在時刻の書き込みを同時に行う
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    // 毎回のアクセス日付を記録
+                    connection.Insert(this.dataChapter4);
+                }
+            }
+            else
+            {
+                string lastCreatedAt = "";
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    var chapter4 = connection.Query<DataChapter4>($"SELECT * FROM DataChapter4 ORDER BY Id ASC LIMIT 1;");
+
+                    foreach (var row in chapter4)
+                    {
+                        lastCreatedAt = row.CreatedAt;
+                    }
+                }
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    connection.Execute($@"UPDATE DataChapter4 SET CreatedAt = '{this.dataChapter4.CreatedAt}'WHERE CreatedAt = '{lastCreatedAt}';");
+                }
             }
         }
 
@@ -1832,7 +1853,7 @@ namespace KokoroUpTime
                 if(this.scene == "日直を任された場面のきもち")
                 {
                     this.dataChapter4.KimisKindOfFeelingAskedForWork = this.KindOfFeelingText.Text;
-                    this.dataChapter4.KimisSizeOfFeelingAskedForWork = int.Parse(this.SizeOfFeelingText.Text);
+                    this.dataChapter4.KimisSizeOfFeelingAskedForWork = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
@@ -1843,7 +1864,7 @@ namespace KokoroUpTime
                 if(this.scene == "赤丸くんにたのまれた場面のきもち")
                 {
                     this.dataChapter4.KimisKindOfFeelingAskedByAkamaru = this.KindOfFeelingText.Text;
-                    this.dataChapter4.KimisSizeOfFeelingAskedByAkamaru = int.Parse(this.SizeOfFeelingText.Text);
+                    this.dataChapter4.KimisSizeOfFeelingAskedByAkamaru = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
 
                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                     {
@@ -2176,7 +2197,7 @@ namespace KokoroUpTime
                 {
                     if (scenario[0] == "scene" && scenario[1] == tag)
                     {
-                        this.scenarioCount = index + 1;
+                        this.scenarioCount = index;
                         this.ScenarioPlay();
 
                         break;

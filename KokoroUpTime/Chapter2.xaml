@@ -7,7 +7,6 @@
       xmlns:outline_maker="clr-namespace:OutlineTextMaker"
       xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
       mc:Ignorable="d" 
-      d:DesignHeight="1080" d:DesignWidth="1920"
       Title="Chapter2" Loaded="Window_Loaded">
 
     <Page.Resources>

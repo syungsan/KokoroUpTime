@@ -500,8 +500,6 @@ namespace KokoroUpTime
                         dataChapter3.SelectedThanksHotWord = row.SelectedThanksHotWord;
                 }
 
-
-
                 var resultChapter4 = connection.Query<DataChapter4>("SELECT * FROM 'DataChapter4';");
 
                 foreach (var row in resultChapter4)
@@ -524,6 +522,7 @@ namespace KokoroUpTime
 
                 foreach (var row in resultChapter7)
                 {
+                   
                     if (row.KimisKindOfFeelingInviteFriends != null)
                         dataChapter7.KimisKindOfFeelingInviteFriends = row.KimisKindOfFeelingInviteFriends;
 

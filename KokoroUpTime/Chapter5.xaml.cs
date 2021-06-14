@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -106,10 +107,10 @@ namespace KokoroUpTime
         private int rolePlayButtonCount = 0;
 
         //データモデルのプロパティを呼び出すための辞書
-        private Dictionary<string, string> KindOfFeelings = null;
-        private Dictionary<string, int?> SizeOfFeelings = null;
+        private Dictionary<string, PropertyInfo> KindOfFeelings = null;
+        private Dictionary<string, PropertyInfo> SizeOfFeelings = null;
         private Dictionary<string, StrokeCollection> InputStroke = null;
-        private Dictionary<string, string> InputText = null;
+        private Dictionary<string, PropertyInfo> InputText = null;
 
         private string FeelingDictionaryKey = "";
         private string InputDictionaryKey = "";
@@ -160,17 +161,17 @@ namespace KokoroUpTime
 
             this.SizeOfFeelingInputButton.IsEnabled = false;
 
-            KindOfFeelings = new Dictionary<string, string>()
+            KindOfFeelings = new Dictionary<string, PropertyInfo>()
             {
-               ["not_understand_problem"]=this.dataChapter5.KindOfFeelingNotUnderstandProblem="",
-               ["recoder_problem"] =this.dataChapter5.KindOfFeelingRecoderProblem="",
+               ["not_understand_problem"]=typeof(DataChapter5).GetProperty("KindOfFeelingNotUnderstandProblem"),
+               ["recoder_problem"] =typeof(DataChapter5).GetProperty("KindOfFeelingRecorderProblem"),
             };
 
-            SizeOfFeelings = new Dictionary<string, int?>()
+            SizeOfFeelings = new Dictionary<string, PropertyInfo>()
             {
-                ["not_understand_problem"] = this.dataChapter5.SizeOfFeelingNotUnderstandProblem = -1,
-                ["recoder_problem"] = this.dataChapter5.SizeOfFeelingRecoderProblem = -1,
-            };
+                ["not_understand_problem"] = typeof(DataChapter5).GetProperty("SizeOfFeelingNotUnderstandProblem"),
+                ["recoder_problem"] = typeof(DataChapter5).GetProperty("SizeOfFeelingRecorderProblem"),
+            };                                                         
 
             this.DataContext = this.dataChapter5;
             
@@ -597,24 +598,24 @@ namespace KokoroUpTime
                     InkCanvas canvas = FindName($"BodyImageOfKimiCanvas{i.ToString()}") as InkCanvas;
                     canvas.Visibility = Visibility.Hidden;
                 }
-                InputText = new Dictionary<string, string>()
+                InputText = new Dictionary<string, PropertyInfo>()
                 {
-                    ["face_image_of_kimi"] = this.dataChapter5.InputFaceImageOfKimiText = "",
-                    ["hand_image_of_kimi"] = this.dataChapter5.InputHandImageOfKimiText = "",
-                    ["stomach_image_of_kimi"] = this.dataChapter5.InputStomachImageOfKimiText = "",
-                    ["others_image_of_kimi"] = this.dataChapter5.InputOthersImageOfKimiText = "",
-                    ["head_image_of_kimi"] = this.dataChapter5.InputHeadImageOfKimiText = "",
-                    ["shoulder_image_of_kimi"] = this.dataChapter5.InputShoulderImageOfKimiText = "",
-                    ["leg_image_of_kimi"] = this.dataChapter5.InputLegImageOfKimiText = "",
-                    ["not_understand_problem"] = this.dataChapter5.InputMyBodyImageTextNotUnderstandProblem = "",
-                    ["recoder_problem"] = this.dataChapter5.InputMyBodyImageTextRecoderProblem = "",
+                    ["face_image_of_kimi"] = typeof(DataChapter5).GetProperty("InputFaceImageOfKimiText"),
+                    ["hand_image_of_kimi"] = typeof(DataChapter5).GetProperty("InputHandImageOfKimiText"),
+                    ["stomach_image_of_kimi"] = typeof(DataChapter5).GetProperty("InputStomachImageOfKimiText"),
+                    ["others_image_of_kimi"] = typeof(DataChapter5).GetProperty("InputOthersImageOfKimiText"),
+                    ["head_image_of_kimi"] = typeof(DataChapter5).GetProperty("InputHeadImageOfKimiText"),
+                    ["shoulder_image_of_kimi"] = typeof(DataChapter5).GetProperty("InputShoulderImageOfKimiText"),
+                    ["leg_image_of_kimi"] = typeof(DataChapter5).GetProperty("InputLegImageOfKimiText"),
+                    ["not_understand_problem"] = typeof(DataChapter5).GetProperty("InputMyBodyImageTextNotUnderstandProblem"),
+                    ["recorder_problem"] = typeof(DataChapter5).GetProperty("InputMyBodyImageTextRecorderProblem"),
                 };
 
                 InputRelaxMethodText = new List<string>();
             }
         }
 
-        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress, bool isCreateNewTable)
         {
             this.initConfig = _initConfig;
             this.dataOption = _dataOption;
@@ -623,12 +624,33 @@ namespace KokoroUpTime
 
             // 現在時刻を取得
             this.dataChapter5.CreatedAt = DateTime.Now.ToString();
-
-            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+            if (isCreateNewTable)
             {
-                // 毎回のアクセス日付を記録
-                connection.Insert(this.dataChapter5);
+                // データベースのテーブル作成と現在時刻の書き込みを同時に行う
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    // 毎回のアクセス日付を記録
+                    connection.Insert(this.dataChapter5);
+                }
+            }
+            else
+            {
+                string lastCreatedAt = "";
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    var chapter5 = connection.Query<DataChapter5>($"SELECT * FROM DataChapter5 ORDER BY Id ASC LIMIT 1;");
+
+                    foreach (var row in chapter5)
+                    {
+                        lastCreatedAt = row.CreatedAt;
+                    }
+                }
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    connection.Execute($@"UPDATE DataChapter5 SET CreatedAt = '{this.dataChapter5.CreatedAt}'WHERE CreatedAt = '{lastCreatedAt}';");
+                }
             }
         }
 
@@ -738,7 +760,7 @@ namespace KokoroUpTime
                                 if (list[i-1] != null)
                                 {
                                     TextBlock text = FindName($"BodyImageOfKimiTextBlock{i.ToString()}") as TextBlock;
-                                    text.Text = list[i-1];
+                                    text.Text = (string)list[i-1].GetValue(this.dataChapter5);
                                 }
                             }
                         }
@@ -755,7 +777,7 @@ namespace KokoroUpTime
                         }
                         else
                         {
-                            this.MyBodyImageInputTextBlock.Text = this.InputText[this.InputDictionaryKey];
+                            this.MyBodyImageInputTextBlock.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
                         }
                     }
                     else if (this.scene == "リコーダー問題")
@@ -768,7 +790,7 @@ namespace KokoroUpTime
                         }
                         else
                         {
-                            this.MyBodyImageInputTextBlock.Text = this.InputText[this.InputDictionaryKey];
+                            this.MyBodyImageInputTextBlock.Text =(string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
                         }
                     }
 
@@ -1213,7 +1235,7 @@ namespace KokoroUpTime
                                                 bool isVisible = true;
                                                 for (int i = 0; i < 7; i++)
                                                 {
-                                                    if (list[i] == null || list[i] == "")
+                                                    if (list[i] == null || (string)list[i].GetValue(this.dataChapter5) == "")
                                                     {
                                                         isVisible = false;
                                                     }
@@ -1228,7 +1250,7 @@ namespace KokoroUpTime
                                                 }
                                                 this.BackPageButton.Visibility = Visibility.Visible;
 
-                                                if (this.InputStroke[this.InputDictionaryKey].Count > 1 && (this.KindOfFeelings[this.InputDictionaryKey] != "" && this.SizeOfFeelings[this.InputDictionaryKey] != -1))
+                                                if (this.InputStroke[this.InputDictionaryKey].Count > 1 && ((string)this.KindOfFeelings[this.InputDictionaryKey].GetValue(this.dataChapter5) != "" && (int)this.SizeOfFeelings[this.InputDictionaryKey].GetValue(this.dataChapter5) != -1))
                                                 {
                                                     this.NextPageButton.Visibility = Visibility.Visible;
                                                 }
@@ -1241,7 +1263,7 @@ namespace KokoroUpTime
                                             {
                                                 if (this.InputStroke[this.InputDictionaryKey]!=null)
                                                 {
-                                                    if (this.InputStroke[this.InputDictionaryKey].Count > 1 && (this.KindOfFeelings[this.InputDictionaryKey] != "" && this.SizeOfFeelings[this.InputDictionaryKey] != -1))
+                                                    if (this.InputStroke[this.InputDictionaryKey].Count > 1 && ((string)this.KindOfFeelings[this.InputDictionaryKey].GetValue(this.dataChapter5) != "" && (int)this.SizeOfFeelings[this.InputDictionaryKey].GetValue(this.dataChapter5) != -1))
                                                     {
                                                         this.NextPageButton.Visibility = Visibility.Visible;
                                                     }
@@ -1252,7 +1274,7 @@ namespace KokoroUpTime
                                             {
                                                 if (this.InputText[this.InputDictionaryKey] !=null)
                                                 {
-                                                    if (this.InputText[this.InputDictionaryKey] != "" && (this.KindOfFeelings[this.InputDictionaryKey] != "" && this.SizeOfFeelings[this.InputDictionaryKey] != -1))
+                                                    if ((string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5) != "" && ((string)this.KindOfFeelings[this.InputDictionaryKey].GetValue(this.dataChapter5) != "" && (int)this.SizeOfFeelings[this.InputDictionaryKey].GetValue(this.dataChapter5) != -1))
                                                     {
                                                         this.NextPageButton.Visibility = Visibility.Visible;
                                                     }
@@ -1336,7 +1358,7 @@ namespace KokoroUpTime
                                             bool isVisible = true;
                                             for (int i = 0; i < 7; i++)
                                             {
-                                                if (list[i] == null || list[i] == "")
+                                                if (list[i] == null || (string)list[i].GetValue(this.dataChapter5) == "")
                                                 {
                                                     isVisible = false;
                                                 }
@@ -1358,7 +1380,7 @@ namespace KokoroUpTime
                                         {
                                             if (this.InputStroke[this.InputDictionaryKey] != null)
                                             {
-                                                if (this.InputStroke[this.InputDictionaryKey].Count > 1 && (this.KindOfFeelings[this.InputDictionaryKey] != "" && this.SizeOfFeelings[this.InputDictionaryKey] != -1))
+                                                if (this.InputStroke[this.InputDictionaryKey].Count > 1 && ((string)this.KindOfFeelings[this.InputDictionaryKey].GetValue(this.dataChapter5) != "" && (int)this.SizeOfFeelings[this.InputDictionaryKey].GetValue(this.dataChapter5) != -1))
                                                 {
                                                     this.NextPageButton.Visibility = Visibility.Visible;
                                                 }
@@ -1369,7 +1391,7 @@ namespace KokoroUpTime
                                         {
                                             if (this.InputText[this.InputDictionaryKey] != null)
                                             {
-                                                if (this.InputText[this.InputDictionaryKey] != "" && (this.KindOfFeelings[this.InputDictionaryKey] != "" && this.SizeOfFeelings[this.InputDictionaryKey] != -1))
+                                                if ((string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5) != "" && ((string)this.KindOfFeelings[this.InputDictionaryKey].GetValue(this.dataChapter5) != "" && (int)this.SizeOfFeelings[this.InputDictionaryKey].GetValue(this.dataChapter5) != -1))
                                                 {
                                                     this.NextPageButton.Visibility = Visibility.Visible;
                                                 }
@@ -1662,12 +1684,12 @@ namespace KokoroUpTime
                     this.SelectHeartImage.Source = null;
                     this.SelectNeedleImage.Source = null;
 
-                    if (this.KindOfFeelings[FeelingDictionaryKey].Split(",")[1] == "良い")
+                    if (((string)this.KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter5)).Split(",")[1] == "良い")
                     {
                         this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_red.png", UriKind.Relative));
                         this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/red_needle.png", UriKind.Relative));
                     }
-                    else if (this.KindOfFeelings[FeelingDictionaryKey].Split(",")[1] == "悪い")
+                    else if (((string)this.KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter5)).Split(",")[1] == "悪い")
                     {
                         this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_blue.png", UriKind.Relative));
                         this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/blue_needle.png", UriKind.Relative));
@@ -1873,7 +1895,7 @@ namespace KokoroUpTime
                 switch (sequence)
                 {
                     case "$kind_of_feeling$":
-                        text = text.Replace("$kind_of_feeling$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
+                        text = text.Replace("$kind_of_feeling$", ((string)KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter5)).Split(",")[0]);
 
                         this.KindOfFeelingInputButton.IsEnabled = true;
 
@@ -1884,15 +1906,23 @@ namespace KokoroUpTime
                         break;
 
                     case "$size_of_feeling$":
+                        try
+                        {
+                            if ((int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter5) != -1)
+                            {
+                                text = text.Replace("$size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter5).ToString());
+                            }
+                            else
+                            {
+                                text = text.Replace("$size_of_feeling$", "");
+                            }
+                        }
+                        catch
+                        {
 
-                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
-                        {
-                            text = text.Replace("$size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
                         }
-                        else
-                        {
-                            text = text.Replace("$size_of_feeling$", "");
-                        }
+
+                        
 
                         break;
                 }
@@ -2527,14 +2557,22 @@ namespace KokoroUpTime
                     {
                         if (this.SelectBadFeelingListBox.SelectedItem != null || this.SelectGoodFeelingListBox.SelectedItem != null)
                         {
-
                             if (this.SelectGoodFeelingListBox.SelectedItem != null)
                             {
-                                this.KindOfFeelings[FeelingDictionaryKey] = $"{this.SelectGoodFeelingListBox.SelectedItem.ToString().Replace("●　", "")},良い";
+                                this.KindOfFeelings[FeelingDictionaryKey].SetValue(this.dataChapter5, $"{this.SelectGoodFeelingListBox.SelectedItem.ToString().Replace("●　", "")},良い");
                             }
                             else if (this.SelectBadFeelingListBox.SelectedItems != null)
                             {
-                                this.KindOfFeelings[FeelingDictionaryKey] = $"{this.SelectBadFeelingListBox.SelectedItem.ToString().Replace("●　", "")},悪い";
+                                this.KindOfFeelings[FeelingDictionaryKey].SetValue(this.dataChapter5, $"{this.SelectBadFeelingListBox.SelectedItem.ToString().Replace("●　", "")},悪い");
+                            }
+
+                            if(this.scene == "リコーダー問題")
+                            {
+                                this.dataChapter5.KindOfFeelingRecorderProblem = (string)this.KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter5);
+                            }
+                            else if (this.scene == "わからない問題")
+                            {
+                                this.dataChapter5.KindOfFeelingNotUnderstandProblem = (string)this.KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter5);
                             }
 
                             this.SizeOfFeelingInputButton.IsEnabled = true;
@@ -2545,7 +2583,147 @@ namespace KokoroUpTime
                     }
                     else if (this.SelectHeartGrid.IsVisible)
                     {
-                        this.SizeOfFeelings[FeelingDictionaryKey] = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
+                        this.SizeOfFeelings[FeelingDictionaryKey].SetValue(this.dataChapter5, int.Parse(this.ViewSizeOfFeelingTextBlock.Text));
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
+                    else if (this.BodyImageOfKimiFearBorder.Visibility == Visibility.Visible)
+                    {
+                        if (this.dataOption.InputMethod == 0)
+                        {
+                            StrokeConverter strokeConverter = new StrokeConverter();
+
+                            strokeConverter.ConvertToBmpImage(LeftBodyImageOfKimiCanvas,this.InputFaceImageOfKimiStroke,"challenge_time_face_image_of_kimi",this.initConfig.userName,this.dataProgress.CurrentChapter);
+                            strokeConverter.ConvertToBmpImage(LeftBodyImageOfKimiCanvas, this.InputHandImageOfKimiStroke, "challengetime_hand_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                            strokeConverter.ConvertToBmpImage(LeftBodyImageOfKimiCanvas, this.InputStomachImageOfKimiStroke, "challengetime_stomach_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                            strokeConverter.ConvertToBmpImage(LeftBodyImageOfKimiCanvas, this.InputOthersImageOfKimiStroke, "challengetime_others_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
+
+                            strokeConverter.ConvertToBmpImage(RightBodyImageOfKimiCanvas, this.InputHeadImageOfKimiStroke, "challenge_time_head_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                            strokeConverter.ConvertToBmpImage(RightBodyImageOfKimiCanvas, this.InputShoulderImageOfKimiStroke, "challenge_time_shoulder_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                            strokeConverter.ConvertToBmpImage(RightBodyImageOfKimiCanvas, this.InputLegImageOfKimiStroke, "challenge_time_face_leg_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                        }
+                        else
+                        {
+                            this.dataChapter5.InputFaceImageOfKimiText = (string)this.InputText["face_image_of_kimi"].GetValue(this.dataChapter5);
+                            this.dataChapter5.InputHandImageOfKimiText = (string)this.InputText["hand_image_of_kimi"].GetValue(this.dataChapter5);
+                            this.dataChapter5.InputStomachImageOfKimiText = (string)this.InputText["stomach_image_of_kimi"].GetValue(this.dataChapter5);
+                            this.dataChapter5.InputOthersImageOfKimiText = (string)this.InputText["others_image_of_kimi"].GetValue(this.dataChapter5);
+                            this.dataChapter5.InputHeadImageOfKimiText = (string)this.InputText["head_image_of_kimi"].GetValue(this.dataChapter5);
+                            this.dataChapter5.InputShoulderImageOfKimiText = (string)this.InputText["shoulder_image_of_kimi"].GetValue(this.dataChapter5);
+                            this.dataChapter5.InputLegImageOfKimiText = (string)this.InputText["leg_image_of_kimi"].GetValue(this.dataChapter5);
+
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"Update DataChapter5 SET InputFaceImageOfKimiText ='{this.dataChapter5.InputFaceImageOfKimiText}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
+                            }
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"Update DataChapter5 SET InputHandImageOfKimiText ='{this.dataChapter5.InputHandImageOfKimiText}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
+                            }
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"Update DataChapter5 SET InputStomachImageOfKimiText ='{this.dataChapter5.InputFaceImageOfKimiText}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
+                            }
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"Update DataChapter5 SET InputOthersImageOfKimiText ='{this.dataChapter5.InputOthersImageOfKimiText}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
+                            }
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"Update DataChapter5 SET InputHeadImageOfKimiText ='{this.dataChapter5.InputHeadImageOfKimiText}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
+                            }
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"Update DataChapter5 SET InputShoulderImageOfKimiText ='{this.dataChapter5.InputShoulderImageOfKimiText}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
+                            }
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"Update DataChapter5 SET InputLegImageOfKimiText ='{this.dataChapter5.InputLegImageOfKimiText}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
+                            }
+                        }
+
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
+                    else if (this.MyStatusInputGrid.Visibility == Visibility.Visible)
+                    {
+                        if (this.scene =="リコーダー問題")
+                        {
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"Update DataChapter5 SET KindOfFeelingRecorderProblem ='{this.dataChapter5.KindOfFeelingRecorderProblem}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
+                            }
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"Update DataChapter5 SET SizeOfFeelingRecorderProblem ='{this.dataChapter5.SizeOfFeelingRecorderProblem}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
+                            }
+
+                            if(this.dataOption.InputMethod == 0)
+                            {
+                                StrokeConverter strokeConverter = new StrokeConverter(); 
+                                strokeConverter.ConvertToBmpImage(InputMyBodyImageCanvas, this.InputStroke[this.InputDictionaryKey], "challenge_time_", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                            }
+                            else
+                            {
+                                this.dataChapter5.InputMyBodyImageTextRecorderProblem = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"Update DataChapter5 SET InputMyBodyImageTextRecoderProblem ='{this.dataChapter5.InputMyBodyImageTextRecorderProblem}' WHERE CreatedAt='{this.dataChapter5.CreatedAt}';");
+                                }
+                            }
+                        }
+                        else if (this.scene == "わからない問題")
+                        {
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"Update DataChapter5 SET KindOfFeelingNotUnderstandProblem ='{this.dataChapter5.KindOfFeelingNotUnderstandProblem}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
+                            }
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"Update DataChapter5 SET SizeOfFeelingNotUnderstandProblem ='{this.dataChapter5.SizeOfFeelingNotUnderstandProblem}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
+                            }
+
+                            if (this.dataOption.InputMethod == 0)
+                            {
+                                StrokeConverter strokeConverter = new StrokeConverter();
+                                strokeConverter.ConvertToBmpImage(InputMyBodyImageCanvas, this.InputStroke[this.InputDictionaryKey], "challenge_time_", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                            }
+                            else
+                            {
+                                this.dataChapter5.InputMyBodyImageTextNotUnderstandProblem = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"Update DataChapter5 SET InputMyBodyImageTextNotUnderstandProblem ='{this.dataChapter5.InputMyBodyImageTextNotUnderstandProblem}' WHERE CreatedAt='{this.dataChapter5.CreatedAt}';");
+                                }
+                            }
+                        }
+
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
+                    else if (this.RelaxMethodGrid.Visibility == Visibility.Visible)
+                    {
+                        int number = 1;
+                        if(this.dataOption.InputMethod == 0)
+                        {
+                            foreach(var canvas in this.RelaxMethodInputCanvasListView.GetChildren<InkCanvas>())
+                            {
+                                StrokeConverter strokeConverter = new StrokeConverter();
+                                strokeConverter.ConvertToBmpImage(canvas,canvas.Strokes,$"groupe_avtivity_relax_method_{number}",this.initConfig.userName,this.dataProgress.CurrentChapter);
+                            }
+                        }
+                        else
+                        {
+                            foreach (var text in this.InputRelaxMethodText)
+                            {
+                                this.dataChapter5.InputRelaxMethodText = $"{text},";
+                            }
+
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($"Update DataChapter5 SET InputRelaxMethodText ='{this.dataChapter5.InputRelaxMethodText}' WHERE CreatedAt ={this.dataChapter5.CreatedAt};");
+                            }
+                        }
                         this.scenarioCount += 1;
                         this.ScenarioPlay();
                     }
@@ -2624,7 +2802,7 @@ namespace KokoroUpTime
                             this.LeftTextBoxSpeechBubbleTail.Data = ((System.Windows.Shapes.Path)FindName($"SpeechBubbleTail{number}")).Data;
                             this.LeftTextBoxSpeechBubbleTailMask.Data = ((System.Windows.Shapes.Path)FindName($"SpeechBubbleTailMask{number}")).Data;
 
-                            this.LeftBodyImageOfKimiTextBox.Text= this.InputText[this.InputDictionaryKey];
+                            this.LeftBodyImageOfKimiTextBox.Text= (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
                             this.GoTo("keyboard_input_kimi's_body_image_left","sub");
                             this.LeftBodyImageOfKimiTextBox.Focus();
 
@@ -2635,7 +2813,7 @@ namespace KokoroUpTime
                             this.RightTextBoxSpeechBubbleTail.Data = ((System.Windows.Shapes.Path)FindName($"SpeechBubbleTail{number}")).Data;
                             this.RightTextBoxSpeechBubbleTailMask.Data = ((System.Windows.Shapes.Path)FindName($"SpeechBubbleTailMask{number}")).Data;
 
-                            this.RightBodyImageOfKimiTextBox.Text = this.InputText[this.InputDictionaryKey];
+                            this.RightBodyImageOfKimiTextBox.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
                             this.GoTo("keyboard_input_kimi's_body_image_right","sub");
                             this.RightBodyImageOfKimiTextBox.Focus();
                         }
@@ -2652,8 +2830,8 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        this.InputText[this.InputDictionaryKey] = this.MyBodyImageInputTextBlock.Text;
-                        this.InputMyBodyImageTextBox.Text = this.InputText[this.InputDictionaryKey];
+                        this.InputText[this.InputDictionaryKey].SetValue(this.dataChapter5, this.MyBodyImageInputTextBlock.Text);
+                        this.InputMyBodyImageTextBox.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
                         this.GoTo("keyboard_input_my_body_image","sub");
                         this.InputMyBodyImageTextBox.Focus();
                     }
@@ -2765,23 +2943,23 @@ namespace KokoroUpTime
                         {
                             if (this.LeftBodyImageOfKimiBubbleTextBoxGrid.IsVisible)
                             {
-                                this.InputText[this.InputDictionaryKey] = this.LeftBodyImageOfKimiTextBox.Text;
+                                this.InputText[this.InputDictionaryKey].SetValue(this.dataChapter5,this.LeftBodyImageOfKimiTextBox.Text);
                                 switch (this.InputDictionaryKey)
                                 {
                                     case "face_image_of_kimi":
-                                        this.BodyImageOfKimiTextBlock1.Text = this.InputText[this.InputDictionaryKey];
+                                        this.BodyImageOfKimiTextBlock1.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
                                         break;
 
                                     case "hand_image_of_kimi":
-                                        this.BodyImageOfKimiTextBlock2.Text = this.InputText[this.InputDictionaryKey];
+                                        this.BodyImageOfKimiTextBlock2.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
                                         break;
 
                                     case "stomach_image_of_kimi":
-                                        this.BodyImageOfKimiTextBlock3.Text = this.InputText[this.InputDictionaryKey];
+                                        this.BodyImageOfKimiTextBlock3.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
                                         break;
 
                                     case "others_image_of_kimi":
-                                        this.BodyImageOfKimiTextBlock4.Text = this.InputText[this.InputDictionaryKey];
+                                        this.BodyImageOfKimiTextBlock4.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
                                         break;
                                 }
 
@@ -2790,21 +2968,21 @@ namespace KokoroUpTime
                             }
                             else if (this.RightBodyImageOfKimiBubbleTextBoxGrid.IsVisible)
                             {
-                                this.InputText[this.InputDictionaryKey] = this.RightBodyImageOfKimiTextBox.Text;
-                                this.MyBodyImageInputTextBlock.Text = this.InputText[this.InputDictionaryKey];
+                                this.InputText[this.InputDictionaryKey].SetValue(this.dataChapter5,this.RightBodyImageOfKimiTextBox.Text);
+                                this.MyBodyImageInputTextBlock.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
 
                                 switch (this.InputDictionaryKey)
                                 {
                                     case "head_image_of_kimi":
-                                        this.BodyImageOfKimiTextBlock5.Text = this.InputText[this.InputDictionaryKey];
+                                        this.BodyImageOfKimiTextBlock5.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
                                         break;
 
                                     case "shoulder_image_of_kimi":
-                                        this.BodyImageOfKimiTextBlock6.Text = this.InputText[this.InputDictionaryKey];
+                                        this.BodyImageOfKimiTextBlock6.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
                                         break;
 
                                     case "leg_image_of_kimi":
-                                        this.BodyImageOfKimiTextBlock7.Text = this.InputText[this.InputDictionaryKey];
+                                        this.BodyImageOfKimiTextBlock7.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
                                         break;
 
                                 }
@@ -2826,8 +3004,8 @@ namespace KokoroUpTime
                         }
                         else
                         {
-                            this.InputText[this.InputDictionaryKey] = this.InputMyBodyImageTextBox.Text;
-                            this.MyBodyImageInputTextBlock.Text = this.InputText[this.InputDictionaryKey];
+                            this.InputText[this.InputDictionaryKey].SetValue(this.dataChapter5,this.InputMyBodyImageTextBox.Text);
+                            this.MyBodyImageInputTextBlock.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
 
                             this.CloseOSK();
                         }
@@ -2953,7 +3131,7 @@ namespace KokoroUpTime
                 {
                     if (scenario[0] == "scene" && scenario[1] == tag)
                     {
-                        this.scenarioCount = index + 1;
+                        this.scenarioCount = index;
                         this.ScenarioPlay();
 
                         break;

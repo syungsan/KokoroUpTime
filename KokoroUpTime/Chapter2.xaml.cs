@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Media;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -74,8 +75,8 @@ namespace KokoroUpTime
         private Dictionary<string, Grid> gridObjects = null;
 
         //データモデルのプロパティのリスト
-        private Dictionary<string, int?> SizeOfFeelings = null;
-        private Dictionary<string, string> DifficultyOfActions = null;
+        private Dictionary<string, PropertyInfo> SizeOfFeelings = null;
+        private Dictionary<string, PropertyInfo> DifficultyOfActions = null;
 
         private string FeelingDictionaryKey = "";
         private string DifficultyDictionaryKey = "";
@@ -126,19 +127,20 @@ namespace KokoroUpTime
             // データモデルインスタンス確保
             this.dataChapter2 = new DataChapter2();
 
-            DifficultyOfActions = new Dictionary<string, string>()
+            DifficultyOfActions = new Dictionary<string, PropertyInfo>()
             {
-                ["eating"] = "",
-                ["high_score"] =  "",
-                ["talking"] =  "",
+                ["eating"] = typeof(DataChapter2).GetProperty("AosukesDifficultyOfEating"),
+                ["high_score"] = typeof(DataChapter2).GetProperty("AosukesDifficultyOfGettingHighScore"),
+                ["talking"] =  typeof(DataChapter2).GetProperty("AosukesDifficultyOfTalkingWithFriend"),
             };
 
-            SizeOfFeelings = new Dictionary<string, int?>()
+            SizeOfFeelings = new Dictionary<string, PropertyInfo>()
             {
-                ["eating"] = -1,
-                ["high_score"] = -1,
-                [ "talking"] = -1,
+                ["eating"] = typeof(DataChapter2).GetProperty("AosukesSizeOfFeelingOfEating"),
+                ["high_score"] = typeof(DataChapter2).GetProperty("AosukesSizeOfFeelingOfGettingHighScore"),
+                ["talking"] = typeof(DataChapter2).GetProperty("AosukesSizeOfFeelingOfTalkingWithFriend"),
             };
+       
 
             this.GoodEventSelectListBox1.ItemsSource　= GOOD_EVENT1;
             this.GoodEventSelectListBox2.ItemsSource = GOOD_EVENT2;
@@ -404,7 +406,7 @@ namespace KokoroUpTime
             }
         }
 
-        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress,bool isCreateNewTable)
         {
             this.initConfig = _initConfig;
             this.dataOption = _dataOption;
@@ -413,13 +415,35 @@ namespace KokoroUpTime
 
             // 現在時刻を取得
             this.dataChapter2.CreatedAt = DateTime.Now.ToString();
-
-            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+            if (isCreateNewTable)
             {
-                // 毎回のアクセス日付を記録
-                connection.Insert(this.dataChapter2);
+                // データベースのテーブル作成と現在時刻の書き込みを同時に行う
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    // 毎回のアクセス日付を記録
+                    connection.Insert(this.dataChapter2);
+                }
             }
+            else
+            {
+                string lastCreatedAt=""; 
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    var chapter2  = connection.Query<DataChapter2>($"SELECT * FROM DataChapter2 ORDER BY Id ASC LIMIT 1;");
+
+                    foreach (var row in chapter2)
+                    {
+                        lastCreatedAt = row.CreatedAt;
+                    }
+                }
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    connection.Execute($@"UPDATE DataChapter2 SET CreatedAt = '{this.dataChapter2.CreatedAt}'WHERE CreatedAt = '{lastCreatedAt}';");
+                }
+            }
+               
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -676,7 +700,7 @@ namespace KokoroUpTime
                     {
                         if(this.scene == "チャレンジタイムパート②「おいしいものを食べる」ときは？"|| this.scene == "チャレンジタイムパート②「全部のテストで100点をとる」ときは？" || this.scene == "チャレンジタイムパート②「休み時間に友だちとおしゃべりする」ときは？")
                         {
-                            if(this.DifficultyOfActions[this.DifficultyDictionaryKey] !=""&& this.SizeOfFeelings[this.FeelingDictionaryKey] != -1)
+                            if((string)this.DifficultyOfActions[this.DifficultyDictionaryKey].GetValue(this.dataChapter2) !=""&& (int)this.SizeOfFeelings[this.FeelingDictionaryKey].GetValue(this.dataChapter2) != -1)
                             {
                                 buttonObject.Visibility = Visibility.Visible;
                             }
@@ -1304,15 +1328,15 @@ namespace KokoroUpTime
 
                     case "$difficulty_of_action$":
 
-                        text = text.Replace("$difficulty_of_action$", this.DifficultyOfActions[FeelingDictionaryKey].Split(",")[0]);
+                        text = text.Replace("$difficulty_of_action$", ((string)this.DifficultyOfActions[FeelingDictionaryKey].GetValue(this.dataChapter2)).Split(",")[0]);
 
                         break;
 
                     case "$size_of_feeling$":
 
-                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
+                        if ((int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter2) != -1)
                         {
-                            text = text.Replace("$size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
+                            text = text.Replace("$size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter2).ToString());
                         }
                         else
                         {
@@ -1849,7 +1873,7 @@ namespace KokoroUpTime
 
                         if (this.SelectHeartGrid.Visibility == Visibility.Visible)
                         {
-                            this.SizeOfFeelings[FeelingDictionaryKey] = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
+                            this.SizeOfFeelings[FeelingDictionaryKey].SetValue(this.dataChapter2, int.Parse(this.ViewSizeOfFeelingTextBlock.Text));
                         }
                     }
                     else if (button.Name == "MangaFlipButton")
@@ -1863,18 +1887,15 @@ namespace KokoroUpTime
                         {
                             if (this.dataOption.InputMethod == 0)
                             {
-                                this.ConvertStrokeToBitmapImage();
-                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                                {
-                                    connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfGettingHighScore = '{this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                                }
+                                StrokeConverter strokeConverter = new StrokeConverter();
+                                strokeConverter.ConvertToBmpImage(this.InputMySmallExcitedCanvas, this.MySmallExcitedStroke, "groupe_activity_exciting_event_stroke", this.initConfig.userName,this.dataProgress.CurrentChapter);
+
                             }
-                            else
+                            else if (this.dataOption.InputMethod == 1)
                             {
-                                this.dataChapter2.MyALittlleExcitingEvents = this.ViewMySmallExcitedText.Text;
                                 using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                                 {
-                                    connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfGettingHighScore = '{this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter2 SET MyALittlleExcitingEvents = '{this.dataChapter2.MyALittlleExcitingEvents}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                                 }
                             }
                         }
@@ -1901,7 +1922,7 @@ namespace KokoroUpTime
                 }
                 else if (button.Name == "SelectFeelingNextButton")
                 {
-                    if (scene == "チャレンジタイム！パート①")
+                    if (this.scene == "チャレンジタイム！パート①")
                     {
                         if (this.GoodEventSelectListBox1.Visibility == Visibility.Visible && this.GoodEventSelectListBox2.Visibility == Visibility.Visible)
                         {
@@ -1921,20 +1942,21 @@ namespace KokoroUpTime
                         }
 
                     }
-                    else if (scene == "チャレンジタイムパート②「おいしいものを食べる」ときは？")
+                    else if (this.scene == "チャレンジタイムパート②「おいしいものを食べる」ときは？")
                     {
-                        this.dataChapter2.AosukesSizeOfFeelingOfEating = this.SizeOfFeelings[FeelingDictionaryKey];
-                        this.dataChapter2.AosukesDifficultyOfEating = this.DifficultyOfActions[DifficultyDictionaryKey];
+                        this.dataChapter2.AosukesSizeOfFeelingOfEating = (int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter2);
+                        this.dataChapter2.AosukesDifficultyOfEating = (string)this.DifficultyOfActions[DifficultyDictionaryKey].GetValue(this.dataChapter2);
+
                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                         {
                             connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfEating = '{this.dataChapter2.AosukesSizeOfFeelingOfEating}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                             connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfEating = '{this.dataChapter2.AosukesDifficultyOfEating}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                         }
                     }
-                    else if (scene == "チャレンジタイムパート②「全部のテストで100点をとる」ときは？")
+                    else if (this.scene == "チャレンジタイムパート②「全部のテストで100点をとる」ときは？")
                     {
-                        this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore = this.SizeOfFeelings[FeelingDictionaryKey];
-                        this.dataChapter2.AosukesDifficultyOfGettingHighScore = this.DifficultyOfActions[DifficultyDictionaryKey];
+                        this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore = (int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter2);
+                        this.dataChapter2.AosukesDifficultyOfGettingHighScore = (string)this.DifficultyOfActions[DifficultyDictionaryKey].GetValue(this.dataChapter2);
                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                         {
                             connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfGettingHighScore = '{this.dataChapter2.AosukesSizeOfFeelingOfGettingHighScore}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
@@ -1942,33 +1964,16 @@ namespace KokoroUpTime
 
                         }
                     }
-                    else if (scene == "チャレンジタイムパート②「休み時間に友だちとおしゃべりする」ときは？")
+                    else if (this.scene == "チャレンジタイムパート②「休み時間に友だちとおしゃべりする」ときは？")
                     {
-                        this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend = this.SizeOfFeelings[FeelingDictionaryKey];
-                        this.dataChapter2.AosukesDifficultyOfTalkingWithFriend = this.DifficultyOfActions[DifficultyDictionaryKey];
+                        this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend = (int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter2);
+                        this.dataChapter2.AosukesDifficultyOfTalkingWithFriend = (string)this.DifficultyOfActions[DifficultyDictionaryKey].GetValue(this.dataChapter2);
                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                         {
                             connection.Execute($@"UPDATE DataChapter2 SET AosukesSizeOfFeelingOfTalkingWithFriend = '{this.dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                             connection.Execute($@"UPDATE DataChapter2 SET AosukesDifficultyOfTalkingWithFriend = '{this.dataChapter2.AosukesDifficultyOfTalkingWithFriend}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
                         }
                     }
-
-                    else if (scene == "グループアクティビティ")
-                    {
-
-                        if (this.dataOption.InputMethod == 0)
-                        {
-                           
-                        }
-                        else if (this.dataOption.InputMethod == 1)
-                        {
-                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                            {
-                                connection.Execute($@"UPDATE DataChapter2 SET MyALittlleExcitingEvents = '{this.dataChapter2.MyALittlleExcitingEvents}'WHERE CreatedAt = '{this.dataChapter2.CreatedAt}';");
-                            }
-                        }
-                    }
-
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
@@ -2009,22 +2014,22 @@ namespace KokoroUpTime
                 }
                 else if (button.Name == "GoodButton")
                 {
-                    this.DifficultyOfActions[this.DifficultyDictionaryKey] = "〇";
-                    this.AosukeDifficultyOfActionText.Text = this.DifficultyOfActions[this.DifficultyDictionaryKey];
+                    this.DifficultyOfActions[this.DifficultyDictionaryKey].SetValue(this.dataChapter2, "〇");
+                    this.AosukeDifficultyOfActionText.Text = (string)this.DifficultyOfActions[this.DifficultyDictionaryKey].GetValue(this.dataChapter2);
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
                 else if (button.Name == "BadButton")
                 {
-                    this.DifficultyOfActions[this.DifficultyDictionaryKey] = "×";
-                    this.AosukeDifficultyOfActionText.Text = this.DifficultyOfActions[this.DifficultyDictionaryKey];
+                    this.DifficultyOfActions[this.DifficultyDictionaryKey].SetValue(this.dataChapter2, "×");
+                    this.AosukeDifficultyOfActionText.Text = (string)this.DifficultyOfActions[this.DifficultyDictionaryKey].GetValue(this.dataChapter2);
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
                 else if (button.Name == "NormalButton")
                 {
-                    this.DifficultyOfActions[this.DifficultyDictionaryKey] = "△";
-                    this.AosukeDifficultyOfActionText.Text = this.DifficultyOfActions[this.DifficultyDictionaryKey];
+                    this.DifficultyOfActions[this.DifficultyDictionaryKey].SetValue(this.dataChapter2, "△");
+                    this.AosukeDifficultyOfActionText.Text = (string)this.DifficultyOfActions[this.DifficultyDictionaryKey].GetValue(this.dataChapter2);
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
@@ -2430,58 +2435,6 @@ namespace KokoroUpTime
             {
                 PlaySE($@"{startupPath}/Sounds/Cancel.wav");
             }
-        }
-
-        private void ConvertStrokeToBitmapImage()
-        {
-            // ストロークが描画されている境界を取得
-            System.Windows.Rect rectBounds = new System.Windows.Rect(0, 0, this.InputMySmallExcitedCanvas.ActualWidth, this.InputMySmallExcitedCanvas.ActualHeight);
-
-            // 描画先を作成
-            DrawingVisual dv = new DrawingVisual();
-            DrawingContext dc = dv.RenderOpen();
-
-            // 描画エリアの位置補正（補正しないと黒い部分ができてしまう）
-            dc.PushTransform(new TranslateTransform(-rectBounds.X, -rectBounds.Y));
-
-            // 描画エリア(dc)に四角形を作成
-            // 四角形の大きさはストロークが描画されている枠サイズとし、
-            // 背景色はInkCanvasコントロールと同じにする
-            dc.DrawRectangle(InputMySmallExcitedCanvas.Background, null, rectBounds);
-
-            // 上記で作成した描画エリア(dc)にInkCanvasのストロークを描画
-            InputMySmallExcitedCanvas.Strokes.Draw(dc);
-            dc.Close();
-
-            // ビジュアルオブジェクトをビットマップに変換する
-            RenderTargetBitmap rtb = new RenderTargetBitmap((int)rectBounds.Width, (int)rectBounds.Height, 96, 96, PixelFormats.Pbgra32);
-            rtb.Render(dv);
-
-            //仮置き
-            string nameBmp = "Chapter02_GroupeActivity_MyALittlleExcitingEvents.bmp";
-            string dirPath = $"./Log/{this.initConfig.userName}";
-
-            string nameBmpPath = System.IO.Path.Combine(dirPath, nameBmp);
-            var startupPath = FileUtils.GetStartupPath();
-
-            PngBitmapEncoder png = new PngBitmapEncoder();
-            png.Frames.Add(BitmapFrame.Create(rtb));
-
-            // ファイルのパスは仮
-            using (var stream = File.Create($@"{startupPath}/{nameBmpPath}"))
-            {
-                png.Save(stream);
-            }
-
-            var pngmap = new BitmapImage();
-
-            pngmap.BeginInit();
-            pngmap.CacheOption = BitmapCacheOption.OnLoad;    //ココ
-            pngmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;  //ココ
-            pngmap.UriSource = new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute);
-            pngmap.EndInit();
-
-            pngmap.Freeze();
         }
 
         // マウスのドラッグ処理（マウスの左ボタンを押そうとしたとき）

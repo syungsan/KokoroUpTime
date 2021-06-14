@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Media;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -90,10 +91,10 @@ namespace KokoroUpTime
         // データベースに収めるデータモデルのインスタンス
         private DataChapter8 dataChapter8;
         //データモデルのプロパティを呼び出すための辞書
-        private Dictionary<string, string> KindOfFeelings = null;
-        private Dictionary<string, int?> SizeOfFeelings = null;
+        private Dictionary<string, PropertyInfo> KindOfFeelings = null;
+        private Dictionary<string, PropertyInfo> SizeOfFeelings = null;
         private Dictionary<string, StrokeCollection> InputStroke = null;
-        private Dictionary<string, string> InputText = null;
+        private Dictionary<string, PropertyInfo> InputText = null;
 
         //データモデルの辞書を呼び出すためのキー
         private string FeelingDictionaryKey="";
@@ -152,30 +153,30 @@ namespace KokoroUpTime
             this.SelectBadFeelingListBox.ItemsSource = BAD_FEELINGS;
             this.GroupeActivityItemsControl.ItemsSource = _groupeactivityData;
 
-            KindOfFeelings = new Dictionary<string, string>()
+            KindOfFeelings = new Dictionary<string, PropertyInfo>()
             {
-                ["aosuke_pre_use_item"] = this.dataChapter8.AosukesKindOfFeelingPreUseItem="",
-                ["kimi_pre_use_item"] = this.dataChapter8.KimisKindOfFeelingPreUseItem = "",
-                ["akamaru_pre_use_item"] = this.dataChapter8.AkamarusKindOfFeelingPreUseItem="",
-                ["aosuke_after_used_item"] = this.dataChapter8.AosukesKindOfFeelingAfterUsedItem="",
-                ["kimi_after_used_item"] = this.dataChapter8.KimisKindOfFeelingAfterUsedItem="",
-                ["akamaru_after_used_item"] = this.dataChapter8.AkamarusKindOfFeelingAfterUsedItem="",
-                ["let's_check"] = this.dataChapter8.Let_sCheckKindOfFeeling="",
-                ["positive_thinking"] = this.dataChapter8.PositiveThinkingKindOfFeeling="",
-                ["thoughts_of_others"] = this.dataChapter8.ThoughtsOfOthersKindOfFeeling=""
+                ["aosuke_pre_use_item"] = typeof(DataChapter8).GetProperty("AosukesKindOfFeelingPreUseItem"),
+                ["kimi_pre_use_item"] = typeof(DataChapter8).GetProperty("KimisKindOfFeelingPreUseItem"),
+                ["akamaru_pre_use_item"] = typeof(DataChapter8).GetProperty("AkamarusKindOfFeelingPreUseItem"),
+                ["aosuke_after_used_item"] = typeof(DataChapter8).GetProperty("AosukesKindOfFeelingAfterUsedItem"),
+                ["kimi_after_used_item"] = typeof(DataChapter8).GetProperty("KimisKindOfFeelingAfterUsedItem"),
+                ["akamaru_after_used_item"] = typeof(DataChapter8).GetProperty("AkamarusKindOfFeelingAfterUsedItem"),
+                ["let's_check"] = typeof(DataChapter8).GetProperty("Let_sCheckKindOfFeeling"),
+                ["positive_thinking"] = typeof(DataChapter8).GetProperty("PositiveThinkingKindOfFeeling"),
+                ["thoughts_of_others"] = typeof(DataChapter8).GetProperty("ThoughtsOfOthersKindOfFeeling")
             };
 
-            SizeOfFeelings = new Dictionary<string, int?>()
+            SizeOfFeelings = new Dictionary<string, PropertyInfo>()
             {
-                ["aosuke_pre_use_item"] = this.dataChapter8.AosukesSizeOfFeelingPreUseItem=-1,
-                ["kimi_pre_use_item"] = this.dataChapter8.KimisSizeOfFeelingPreUseItem=-1,
-                ["akamaru_pre_use_item"] = this.dataChapter8.AkamarusSizeOfFeelingPreUseItem=-1,
-                ["aosuke_after_used_item"] = this.dataChapter8.AosukesSizeOfFeelingAfterUsedItem=-1,
-                ["kimi_after_used_item"] = this.dataChapter8.KimisSizeOfFeelingAfterUsedItem=-1,
-                ["akamaru_after_used_item"] = this.dataChapter8.AkamarusSizeOfFeelingAfterUsedItem=-1,
-                ["let's_check"] = this.dataChapter8.Let_sCheckSizeOfFeeling=-1,
-                ["positive_thinking"] = this.dataChapter8.PositiveThinkingSizeOfFeeling=-1,
-                ["thoughts_of_others"] = this.dataChapter8.ThoughtsOfOthersSizeOfFeeling=-1
+                ["aosuke_pre_use_item"] = typeof(DataChapter8).GetProperty("AosukesSizeOfFeelingPreUseItem"),
+                ["kimi_pre_use_item"] = typeof(DataChapter8).GetProperty("KimisSizeOfFeelingPreUseItem"),
+                ["akamaru_pre_use_item"] = typeof(DataChapter8).GetProperty("AkamarusSizeOfFeelingPreUseItem"),
+                ["aosuke_after_used_item"] = typeof(DataChapter8).GetProperty("AosukesSizeOfFeelingAfterUsedItem"),
+                ["kimi_after_used_item"] = typeof(DataChapter8).GetProperty("KimisSizeOfFeelingAfterUsedItem"),
+                ["akamaru_after_used_item"] = typeof(DataChapter8).GetProperty("AkamarusSizeOfFeelingAfterUsedItem"),
+                ["let's_check"] = typeof(DataChapter8).GetProperty("Let_sCheckSizeOfFeeling"),
+                ["positive_thinking"] = typeof(DataChapter8).GetProperty("PositiveThinkingSizeOfFeeling"),
+                ["thoughts_of_others"] = typeof(DataChapter8).GetProperty("ThoughtsOfOthersSizeOfFeeling")
             };
 
             InputStroke = new Dictionary<string, StrokeCollection>()
@@ -184,11 +185,11 @@ namespace KokoroUpTime
                 ["groupe_activity_input2"] = this.GroupeActivityInputStroke2,
                 ["groupe_activity_input3"] = this.GroupeActivityInputStroke3,
             };
-            InputText = new Dictionary<string, string>()
+            InputText = new Dictionary<string, PropertyInfo>()
             {
-                ["groupe_activity_input1"] = this.dataChapter8.GroupeActivityInputText1,
-                ["groupe_activity_input2"] = this.dataChapter8.GroupeActivityInputText2,
-                ["groupe_activity_input3"] = this.dataChapter8.GroupeActivityInputText3,
+                ["groupe_activity_input1"] = typeof(DataChapter8).GetProperty("GroupeActivityInputText1"),
+                ["groupe_activity_input2"] = typeof(DataChapter8).GetProperty("GroupeActivityInputText2"),
+                ["groupe_activity_input3"] = typeof(DataChapter8).GetProperty("GroupeActivityInputText3"),
             };
 
             this.InitControls();
@@ -526,7 +527,7 @@ namespace KokoroUpTime
             }
         }
 
-        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress, bool isCreateNewTable)
         {
             this.initConfig = _initConfig;
             this.dataOption = _dataOption;
@@ -535,12 +536,33 @@ namespace KokoroUpTime
 
             // 現在時刻を取得
             this.dataChapter8.CreatedAt = DateTime.Now.ToString();
-
-            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+            if (isCreateNewTable)
             {
-                // 毎回のアクセス日付を記録
-                connection.Insert(this.dataChapter8);
+                // データベースのテーブル作成と現在時刻の書き込みを同時に行う
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    // 毎回のアクセス日付を記録
+                    connection.Insert(this.dataChapter8);
+                }
+            }
+            else
+            {
+                string lastCreatedAt = "";
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    var chapter8 = connection.Query<DataChapter8>($"SELECT * FROM DataChapter8 ORDER BY Id ASC LIMIT 1;");
+
+                    foreach (var row in chapter8)
+                    {
+                        lastCreatedAt = row.CreatedAt;
+                    }
+                }
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    connection.Execute($@"UPDATE DataChapter8 SET CreatedAt = '{this.dataChapter8.CreatedAt}'WHERE CreatedAt = '{lastCreatedAt}';");
+                }
             }
         }
 
@@ -1114,11 +1136,11 @@ namespace KokoroUpTime
                                                 }
                                                 if (CompleteInputFlag)
                                                 {
-                                                    foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
+                                                    foreach (KeyValuePair<string, PropertyInfo> kvp in this.KindOfFeelings)
                                                     {
                                                         if (kvp.Key == "let's_check" || kvp.Key == "positive_thinking" || kvp.Key == "thoughts_of_others")
                                                         {
-                                                            if (kvp.Value == "")
+                                                            if ((string)kvp.Value.GetValue(this.dataChapter8) == "")
                                                             {
                                                                 CompleteInputFlag = false;
                                                                 break;
@@ -1128,11 +1150,11 @@ namespace KokoroUpTime
                                                 }
                                                 if (CompleteInputFlag)
                                                 {
-                                                    foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
+                                                    foreach (KeyValuePair<string, PropertyInfo> kvp in this.SizeOfFeelings)
                                                     {
                                                         if (kvp.Key == "let's_check" || kvp.Key == "positive_thinking" || kvp.Key == "thoughts_of_others")
                                                         {
-                                                            if (kvp.Value == -1)
+                                                            if ((int)kvp.Value.GetValue(this.dataChapter8) == -1)
                                                             {
                                                                 CompleteInputFlag = false;
                                                                 break;
@@ -1149,11 +1171,11 @@ namespace KokoroUpTime
                                             {
                                                 bool CompleteInputFlag = true;
 
-                                                foreach (KeyValuePair<string, string> kvp in this.InputText)
+                                                foreach (KeyValuePair<string, PropertyInfo> kvp in this.InputText)
                                                 {
                                                     if (Regex.IsMatch(kvp.Key, "groupe_activity_input."))
                                                     {
-                                                        if (kvp.Value == "")
+                                                        if ((string)kvp.Value.GetValue(this.dataChapter8) == "")
                                                         {
                                                             CompleteInputFlag = false;
                                                             break;
@@ -1163,11 +1185,11 @@ namespace KokoroUpTime
                                                 if (CompleteInputFlag)
                                                 {
                                                     
-                                                    foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
+                                                    foreach (KeyValuePair<string, PropertyInfo> kvp in this.KindOfFeelings)
                                                     {
                                                         if (kvp.Key == "let's_check" || kvp.Key == "positive_thinking" || kvp.Key == "thoughts_of_others")
                                                         {
-                                                            if (kvp.Value == "")
+                                                            if ((string)kvp.Value.GetValue(this.dataChapter8) == "")
                                                             {
                                                                 CompleteInputFlag = false;
                                                                 break;
@@ -1177,11 +1199,11 @@ namespace KokoroUpTime
                                                 }
                                                 if (CompleteInputFlag)
                                                 {
-                                                    foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
+                                                    foreach (KeyValuePair<string, PropertyInfo> kvp in this.SizeOfFeelings)
                                                     {
                                                         if (kvp.Key == "let's_check" || kvp.Key == "positive_thinking" || kvp.Key == "thoughts_of_others")
                                                         {
-                                                            if (kvp.Value == -1)
+                                                            if ((int)kvp.Value.GetValue(this.dataChapter8) == -1)
                                                             {
                                                                 CompleteInputFlag = false;
                                                                 break;
@@ -1271,11 +1293,11 @@ namespace KokoroUpTime
                                             }
                                             if (CompleteInputFlag)
                                             {
-                                                foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
+                                                foreach (KeyValuePair<string, PropertyInfo> kvp in this.KindOfFeelings)
                                                 {
                                                     if (kvp.Key == "let's_check" || kvp.Key == "positive_thinking" || kvp.Key == "thoughts_of_others")
                                                     {
-                                                        if (kvp.Value == "")
+                                                        if ((string)kvp.Value.GetValue(this.dataChapter8) == "")
                                                         {
                                                             CompleteInputFlag = false;
                                                             break;
@@ -1285,11 +1307,11 @@ namespace KokoroUpTime
                                             }
                                             if (CompleteInputFlag)
                                             {
-                                                foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
+                                                foreach (KeyValuePair<string, PropertyInfo> kvp in this.SizeOfFeelings)
                                                 {
                                                     if (kvp.Key == "let's_check" || kvp.Key == "positive_thinking" || kvp.Key == "thoughts_of_others")
                                                     {
-                                                        if (kvp.Value == -1)
+                                                        if ((int)kvp.Value.GetValue(this.dataChapter8) == -1)
                                                         {
                                                             CompleteInputFlag = false;
                                                             break;
@@ -1306,11 +1328,11 @@ namespace KokoroUpTime
                                         {
                                             bool CompleteInputFlag = true;
 
-                                            foreach (KeyValuePair<string, string> kvp in this.InputText)
+                                            foreach (KeyValuePair<string, PropertyInfo> kvp in this.InputText)
                                             {
                                                 if (Regex.IsMatch(kvp.Key, "groupe_activity_input."))
                                                 {
-                                                    if (kvp.Value == "")
+                                                    if ((string)kvp.Value.GetValue(this.dataChapter8) == "")
                                                     {
                                                         CompleteInputFlag = false;
                                                         break;
@@ -1320,11 +1342,11 @@ namespace KokoroUpTime
                                             if (CompleteInputFlag)
                                             {
 
-                                                foreach (KeyValuePair<string, string> kvp in this.KindOfFeelings)
+                                                foreach (KeyValuePair<string, PropertyInfo> kvp in this.KindOfFeelings)
                                                 {
                                                     if (kvp.Key == "let's_check" || kvp.Key == "positive_thinking" || kvp.Key == "thoughts_of_others")
                                                     {
-                                                        if (kvp.Value == "")
+                                                        if ((string)kvp.Value.GetValue(this.dataChapter8) == "")
                                                         {
                                                             CompleteInputFlag = false;
                                                             break;
@@ -1334,11 +1356,11 @@ namespace KokoroUpTime
                                             }
                                             if (CompleteInputFlag)
                                             {
-                                                foreach (KeyValuePair<string, int?> kvp in this.SizeOfFeelings)
+                                                foreach (KeyValuePair<string, PropertyInfo> kvp in this.SizeOfFeelings)
                                                 {
                                                     if (kvp.Key == "let's_check" || kvp.Key == "positive_thinking" || kvp.Key == "thoughts_of_others")
                                                     {
-                                                        if (kvp.Value == -1)
+                                                        if ((int)kvp.Value.GetValue(this.dataChapter8) == -1)
                                                         {
                                                             CompleteInputFlag = false;
                                                             break;
@@ -1651,12 +1673,12 @@ namespace KokoroUpTime
                     this.SelectHeartImage.Source = null;
                     this.SelectNeedleImage.Source = null;
 
-                    if (this.KindOfFeelings[FeelingDictionaryKey].Split(",")[1] == "良い")
+                    if (((string)this.KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8)).Split(",")[1] == "良い")
                     {
                         this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_red.png", UriKind.Relative));
                         this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/red_needle.png", UriKind.Relative));
                     }
-                    else if (this.KindOfFeelings[FeelingDictionaryKey].Split(",")[1] == "悪い")
+                    else if (((string)this.KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8)).Split(",")[1] == "悪い")
                     {
                         this.SelectHeartImage.Source = new BitmapImage(new Uri(@"./Images/heart_blue.png", UriKind.Relative));
                         this.SelectNeedleImage.Source = new BitmapImage(new Uri(@"./Images/blue_needle.png", UriKind.Relative));
@@ -1770,7 +1792,7 @@ namespace KokoroUpTime
 
                     case "$kind_of_feeling$":
 
-                        text = text.Replace("$kind_of_feeling$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
+                        text = text.Replace("$kind_of_feeling$", ((string)KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8)).Split(",")[0]);
 
                         this.KindOfFeelingInputButton.IsEnabled = true;
 
@@ -1797,7 +1819,7 @@ namespace KokoroUpTime
                         }
 
 
-                        text = text.Replace("$kind_of_feeling_before_change$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
+                        text = text.Replace("$kind_of_feeling_before_change$", ((string)KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8)).Split(",")[0]);
 
                         this.KindOfFeelingInputButton.IsEnabled = false;
 
@@ -1807,7 +1829,7 @@ namespace KokoroUpTime
 
                         this.FeelingDictionaryKey = "let's_check";
 
-                        text = text.Replace("$let's_check_kind_of_feeling$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
+                        text = text.Replace("$let's_check_kind_of_feeling$", ((string)KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8)).Split(",")[0]);
 
                         if(text != "")
                         {
@@ -1823,7 +1845,7 @@ namespace KokoroUpTime
 
                         this.FeelingDictionaryKey = "positive_thinking";
 
-                        text = text.Replace("$positive_thinking_kind_of_feeling$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
+                        text = text.Replace("$positive_thinking_kind_of_feeling$", ((string)KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8)).Split(",")[0]);
 
                         if (text != "")
                         {
@@ -1840,7 +1862,7 @@ namespace KokoroUpTime
 
                         this.FeelingDictionaryKey = "thoughts_of_others";
 
-                        text = text.Replace("$thoughts_of_others_kind_of_feeling$", KindOfFeelings[FeelingDictionaryKey].Split(",")[0]);
+                        text = text.Replace("$thoughts_of_others_kind_of_feeling$", ((string)KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8)).Split(",")[0]);
 
                         if (text != "")
                         {
@@ -1854,9 +1876,9 @@ namespace KokoroUpTime
 
                     case "$size_of_feeling$":
 
-                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
+                        if ((int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8) != -1)
                         {
-                            text = text.Replace("$size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
+                            text = text.Replace("$size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8).ToString());
                         }
                         else 
                         {
@@ -1880,9 +1902,9 @@ namespace KokoroUpTime
                             this.FeelingDictionaryKey = "kimi_pre_use_item";
                         }
 
-                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
+                        if ((int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8) != -1)
                         {
-                            text = text.Replace("$size_of_feeling_before_change$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
+                            text = text.Replace("$size_of_feeling_before_change$", this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8).ToString());
                         }
                         else
                         {
@@ -1897,9 +1919,9 @@ namespace KokoroUpTime
 
                         this.FeelingDictionaryKey = "let's_check";
 
-                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
+                        if ((int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8) != -1)
                         {
-                            text = text.Replace("$let's_check_size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
+                            text = text.Replace("$let's_check_size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8).ToString());
                         }
                         else
                         {
@@ -1912,9 +1934,9 @@ namespace KokoroUpTime
 
                         this.FeelingDictionaryKey = "positive_thinking";
 
-                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
+                        if ((int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8) != -1)
                         {
-                            text = text.Replace("$positive_thinking_size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
+                            text = text.Replace("$positive_thinking_size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8).ToString());
                         }
                         else
                         {
@@ -1926,9 +1948,9 @@ namespace KokoroUpTime
 
                         this.FeelingDictionaryKey = "thoughts_of_others";
 
-                        if (this.SizeOfFeelings[FeelingDictionaryKey] != -1)
+                        if ((int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8) != -1)
                         {
-                            text = text.Replace("$thoughts_of_others_size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].ToString());
+                            text = text.Replace("$thoughts_of_others_size_of_feeling$", this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8).ToString());
                         }
                         else
                         {
@@ -2434,11 +2456,11 @@ namespace KokoroUpTime
 
                                 if (this.SelectGoodFeelingListBox.SelectedItem != null)
                                 {
-                                    this.KindOfFeelings[FeelingDictionaryKey] = $"{this.SelectGoodFeelingListBox.SelectedItem.ToString().Replace("●　", "")},良い";
+                                    this.KindOfFeelings[FeelingDictionaryKey].SetValue(this.dataChapter8,$"{this.SelectGoodFeelingListBox.SelectedItem.ToString().Replace("●　", "")},良い");
                                 }
                                 else if (this.SelectBadFeelingListBox.SelectedItems != null)
                                 {
-                                    this.KindOfFeelings[FeelingDictionaryKey] = $"{this.SelectBadFeelingListBox.SelectedItem.ToString().Replace("●　", "")},悪い";
+                                    this.KindOfFeelings[FeelingDictionaryKey].SetValue(this.dataChapter8,$"{this.SelectBadFeelingListBox.SelectedItem.ToString().Replace("●　", "")},悪い");
                                 }
 
                                 this.SizeOfFeelingInputButton.IsEnabled = true;
@@ -2446,8 +2468,114 @@ namespace KokoroUpTime
                         }
                         else if (this.SelectHeartGrid.IsVisible)
                         {
-                            this.SizeOfFeelings[FeelingDictionaryKey] = int.Parse(this.ViewSizeOfFeelingTextBlock.Text);
+                            this.SizeOfFeelings[FeelingDictionaryKey].SetValue(this.dataChapter8,int.Parse(this.ViewSizeOfFeelingTextBlock.Text));
                         }
+                        else if (this.FeelingInputGrid.Visibility == Visibility.Visible)
+                        {
+                            if(this.scene == "キミちゃんのきもちときもちの大きさ")
+                            {
+                                this.dataChapter8.KimisKindOfFeelingPreUseItem = (string)this.KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8);
+                                this.dataChapter8.KimisSizeOfFeelingPreUseItem = (int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8);
+                                
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter8 SET KimisKindOfFeelingPreUseItem ='{this.dataChapter8.KimisKindOfFeelingPreUseItem.Split(",")[0]}'WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter8 SET KimisSizeOfFeelingPreUseItem ='{this.dataChapter8.KimisSizeOfFeelingPreUseItem}'WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                }
+                            }
+                            else if(this.scene == "青助くんのきもちときもちの大きさ")
+                            {
+                                this.dataChapter8.AosukesKindOfFeelingPreUseItem = (string)this.KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8);
+                                this.dataChapter8.AosukesSizeOfFeelingPreUseItem = (int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8);
+
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter8 SET AosukesKindOfFeelingPreUseItem ='{this.dataChapter8.AosukesKindOfFeelingPreUseItem.Split(",")[0]}'WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter8 SET AosukesSizeOfFeelingPreUseItem ='{this.dataChapter8.AosukesSizeOfFeelingPreUseItem}'WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                }
+                            }
+                            else if (this.scene == "赤丸くんのきもちときもちの大きさ")
+                            {
+                                this.dataChapter8.AkamarusKindOfFeelingPreUseItem = (string)this.KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8);
+                                this.dataChapter8.AkamarusSizeOfFeelingPreUseItem = (int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8);
+
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter8 SET AkamarusKindOfFeelingPreUseItem ='{this.dataChapter8.AkamarusKindOfFeelingPreUseItem.Split(",")[0]}'WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter8 SET AkamarusSizeOfFeelingPreUseItem ='{this.dataChapter8.AkamarusSizeOfFeelingPreUseItem}'WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                }
+                            }
+                            else if(this.scene == "青助くんのきもちときもちの大きさの変化")
+                            {
+                                this.dataChapter8.AosukesKindOfFeelingAfterUsedItem = (string)this.KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8);
+                                this.dataChapter8.AosukesSizeOfFeelingAfterUsedItem = (int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8);
+
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter8 SET AosukesKindOfFeelingAfterUsedItem ='{this.dataChapter8.AosukesKindOfFeelingAfterUsedItem.Split(",")[0]}'WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter8 SET AosukesSizeOfFeelingAfterUsedItem ='{this.dataChapter8.AosukesSizeOfFeelingAfterUsedItem}'WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                }
+                            }
+                            else if (this.scene == "赤丸くんのきもちときもちの大きさの変化")
+                            {
+                                this.dataChapter8.AkamarusKindOfFeelingAfterUsedItem = (string)this.KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8);
+                                this.dataChapter8.AkamarusSizeOfFeelingAfterUsedItem = (int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8);
+
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter8 SET AkamarusKindOfFeelingAfterUsedItem ='{this.dataChapter8.AkamarusKindOfFeelingAfterUsedItem.Split(",")[0]}'WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter8 SET AkamarusSizeOfFeelingAfterUsedItem ='{this.dataChapter8.AkamarusSizeOfFeelingAfterUsedItem}'WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                }
+                            }
+                            if (this.scene == "キミちゃんのきもちときもちの大きさの変化")
+                            {
+                                this.dataChapter8.KimisKindOfFeelingAfterUsedItem = (string)this.KindOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8);
+                                this.dataChapter8.KimisSizeOfFeelingAfterUsedItem = (int)this.SizeOfFeelings[FeelingDictionaryKey].GetValue(this.dataChapter8);
+
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter8 SET KimisKindOfFeelingAfterUsedItem ='{this.dataChapter8.KimisKindOfFeelingAfterUsedItem.Split(",")[0]}'WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                    connection.Execute($@"UPDATE DataChapter8 SET KimisSizeOfFeelingAfterUsedItem ='{this.dataChapter8.KimisSizeOfFeelingAfterUsedItem}'WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                }
+                            }
+                        }
+                        else if(this.GroupeActivityGrid.Visibility == Visibility.Visible)
+                        {
+                            if(this.dataOption.InputMethod == 0)
+                            {
+                                StrokeConverter strokeConverter = new StrokeConverter();
+
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas, this.GroupeActivityInputStroke1, "groupe_activity_input_stroke_1", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas, this.GroupeActivityInputStroke2, "groupe_activity_input_stroke_2", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas, this.GroupeActivityInputStroke3, "groupe_activity_input_stroke_3", this.initConfig.dbPath, this.dataProgress.CurrentChapter);
+                            }
+                            else
+                            {
+                                this.dataChapter8.GroupeActivityInputText1 = (string)this.InputText["groupe_activity_input1"].GetValue(this.dataChapter8);
+                                this.dataChapter8.GroupeActivityInputText2 = (string)this.InputText["groupe_activity_input2"].GetValue(this.dataChapter8);
+                                this.dataChapter8.GroupeActivityInputText3 = (string)this.InputText["groupe_activity_input3"].GetValue(this.dataChapter8);
+
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"Update DataChapter8 SET GroupeActivityInputText1 = '{this.dataChapter8.GroupeActivityInputText1}' WHERE CreatedAt={this.dataChapter8.CreatedAt};");
+                                    connection.Execute($@"Update DataChapter8 SET GroupeActivityInputText2 = '{this.dataChapter8.GroupeActivityInputText2}' WHERE CreatedAt={this.dataChapter8.CreatedAt};");
+                                    connection.Execute($@"Update DataChapter8 SET GroupeActivityInputText3 = '{this.dataChapter8.GroupeActivityInputText3}' WHERE CreatedAt={this.dataChapter8.CreatedAt};");
+                                }
+                            }
+
+
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"Update DataChapter8 SET Let_sCheckKindOfFeeling ='{this.dataChapter8.Let_sCheckKindOfFeeling}' WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                connection.Execute($@"Update DataChapter8 SET PositiveThinkingKindOfFeeling ='{this.dataChapter8.PositiveThinkingKindOfFeeling}' WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                connection.Execute($@"Update DataChapter8 SET ThoughtsOfOthersKindOfFeeling ='{this.dataChapter8.ThoughtsOfOthersKindOfFeeling}' WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+
+                                connection.Execute($@"Update DataChapter8 SET Let_sCheckSizeOfFeeling ='{this.dataChapter8.Let_sCheckSizeOfFeeling}' WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                connection.Execute($@"Update DataChapter8 SET PositiveThinkingSizeOfFeeling ='{this.dataChapter8.PositiveThinkingSizeOfFeeling}' WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                                connection.Execute($@"Update DataChapter8 SET ThoughtsOfOthersSizeOfFeeling ='{this.dataChapter8.ThoughtsOfOthersSizeOfFeeling}' WHERE CreatedAt ='{this.dataChapter8.CreatedAt}';");
+                            }
+                        }
+
                     }
                     else if (button.Name == "MangaFlipButton")
                     {
@@ -2592,21 +2720,21 @@ namespace KokoroUpTime
                         {
                             case "GroupeActivityInputButton1":
                                 this.InputDictionaryKey = "groupe_activity_input1";
-                                this.InputText[this.InputDictionaryKey] = this.GroupeActivityInputText1.Text;
+                           //     this.InputText[this.InputDictionaryKey].SetValue(this.dataChapter8,this.GroupeActivityInputText1.Text);
                                 break;
 
                             case "GroupeActivityInputButton2":
                                 this.InputDictionaryKey = "groupe_activity_input2";
-                                this.InputText[this.InputDictionaryKey] = this.GroupeActivityInputText2.Text;
+                             //   this.InputText[this.InputDictionaryKey].SetValue(this.dataChapter8,this.GroupeActivityInputText2.Text);
                                 break;
 
                             case "GroupeActivityInputButton3":
                                 this.InputDictionaryKey = "groupe_activity_input3";
-                                this.InputText[this.InputDictionaryKey] = this.GroupeActivityInputText3.Text;
+                               // this.InputText[this.InputDictionaryKey].SetValue(this.dataChapter8,this.GroupeActivityInputText3.Text);
                                 break;
                         };
                         
-                        this.InputTextBox.Text = this.InputText[this.InputDictionaryKey];
+                        this.InputTextBox.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter8);
                         this.GoTo("keyboard_input","sub");
                         this.InputTextBox.Focus();
                     }
@@ -2647,21 +2775,21 @@ namespace KokoroUpTime
                         switch (this.InputDictionaryKey)
                         {
                             case "groupe_activity_input1":
-                                this.InputText[this.InputDictionaryKey] = this.InputTextBox.Text;
-                                this.GroupeActivityInputText1.Text = this.InputText[this.InputDictionaryKey];
+                                this.InputText[this.InputDictionaryKey].SetValue(this.dataChapter8 ,this.InputTextBox.Text);
+                                this.GroupeActivityInputText1.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter8);
 
 
                                 break;
 
                             case "groupe_activity_input2":
-                                this.InputText[this.InputDictionaryKey] = this.InputTextBox.Text;
-                                this.GroupeActivityInputText2.Text = this.InputText[this.InputDictionaryKey];
+                                this.InputText[this.InputDictionaryKey].SetValue(this.dataChapter8 ,this.InputTextBox.Text);
+                                this.GroupeActivityInputText2.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter8);
 
                                 break;
 
                             case "groupe_activity_input3":
-                                this.InputText[this.InputDictionaryKey] = this.InputTextBox.Text;
-                                this.GroupeActivityInputText3.Text = this.InputText[this.InputDictionaryKey];
+                                this.InputText[this.InputDictionaryKey].SetValue(this.dataChapter8 ,this.InputTextBox.Text);
+                                this.GroupeActivityInputText3.Text = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter8);
                                 break;
                         }
                         this.CloseOSK();
@@ -2878,7 +3006,7 @@ namespace KokoroUpTime
                 {
                     if (scenario[0] == "scene" && scenario[1] == tag)
                     {
-                        this.scenarioCount = index + 1;
+                        this.scenarioCount = index;
                         this.ScenarioPlay();
 
                         break;

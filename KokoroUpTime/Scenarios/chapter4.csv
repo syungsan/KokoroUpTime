@@ -1,3 +1,4 @@
+reset
 start
 #
 scene,前回のおさらい
@@ -88,6 +89,7 @@ text,activity_title_text,<font=yellow#80##true>日直の仕事をまかされた
 button,select_feeling_back_button
 wait
 #
+reset
 clear,text,kind_of_feeling_text
 clear,text,size_of_feeling_text
 hide,image,children_stand_right_image
