@@ -1,0 +1,43 @@
+time,107
+bgm,set,bokura_no_tabidachi.mp3,100
+bgm,play
+illust,shiroji_01.png
+illust,shiroji_02.png
+illust,shiroji_03.png
+illust,shiroji_04.png
+illust,relax_female.png
+illust,relax_male.png
+margin,100
+text,スタッフ,120,#FF0000,0,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,プログラマー,80,#0000FF,6,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,システム・コーディング,80,#00FF00,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,多々納 俊治,80,#00FF00,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,BGM,80,#00FF00,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,しゅんじ～こと 多々納 俊治,80,#00FF00,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,ホルン奏者,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,Produced by Adachi Laboratory,80,#FF0000,7,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+run

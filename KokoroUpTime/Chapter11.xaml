@@ -605,17 +605,17 @@
                     <ItemsControl x:Name="ViewInputAosukeMethodItemsControl" Margin="50,100,30,30"/>
                 </Grid>
             </Border>
-            <Border x:Name="InputButtonBorder" Margin="10,10,10,140" BorderBrush="Black" BorderThickness="5" Background="White" CornerRadius="60" d:IsHidden="True">
+            <Border x:Name="InputButtonBorder" Margin="10,10,10,140" BorderBrush="Black" BorderThickness="5" Background="White" CornerRadius="60">
                 <Grid x:Name="InputButtonBorderGrid">
                     <Button x:Name="InputButton1" Style="{StaticResource BubbleFrame}" Click="Button_Click">
                         <Grid x:Name="InputButton1Grid">
-                            <Grid x:Name="InputAkamaruOtherSolutionGrid">
+                            <Grid x:Name="InputAkamaruOtherSolutionGrid" d:IsHidden="True">
                                 <TextBlock x:Name="InputAkamaruOtherSolutionTitle" Text="赤丸くんは、ほかにどんなかいけつの方法をえらぶことができるでしょう？&#10;あなたの考えを書いてみましょう！" FontSize="35" LineHeight="60" Margin="60,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
                                 <InkCanvas x:Name="OutputCanvas1" Style="{StaticResource OutputInkCanvas}" Margin="30,150,30,30"/>
                                 <TextBlock x:Name="OutputText1" Style="{StaticResource OutputTextBlock}" Margin="30,150,30,30" FontSize="92"/>
                                 <Image x:Name="InputItemImage" Source="Images/item05_solo.png" Height="300" Width="200" Margin="0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                             </Grid>
-                            <Grid x:Name="Step2InputAosukeManySolutionsGrid" d:IsHidden="True">
+                            <Grid x:Name="Step2InputAosukeManySolutionsGrid">
                                 <TextBlock x:Name="Step2AosukeTitleText" Text="ステップ２：たくさんの方法を考える" FontSize="50" Margin="80,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic" Foreground="#FF0070C0">
                                     <TextBlock.Effect>
                                         <DropShadowEffect ShadowDepth="3" Opacity="0.3"/>
@@ -846,8 +846,8 @@
                     <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid">
-                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <Grid x:Name="SystemGrid" d:IsHidden="True">
+                <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -878,10 +878,10 @@
                     <Image x:Name="EndingShortBubbleImage" Source="/Images/short_bubble_right_up.png"/>
                     <TextBlock x:Name="EndingMessageTextBlock" HorizontalAlignment="Center" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="1060" Margin="0,105,0,0" FontSize="48"/>
                 </Grid>
-                <Button x:Name="NextPageButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click"  Style="{StaticResource ShadowButton}">
+                <Button x:Name="NextPageButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click"  Style="{StaticResource ShadowButton}" d:IsHidden="True">
                     <Image x:Name="NextPageAfterImage" Source="/Images/after.png" Height="149"/>
                 </Button>
-                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" Style="{StaticResource ShadowButton}">
+                <Button x:Name="BackPageButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:LayoutOverrides="HorizontalAlignment, LeftMargin, RightMargin" Style="{StaticResource ShadowButton}" d:IsHidden="True">
                     <Image x:Name="BackPageBeforeImage" Source="/Images/before.png"/>
                 </Button>
                 <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" d:IsHidden="True" Style="{StaticResource ShadowButton}">
@@ -974,17 +974,17 @@
                     </Button.Background>
                 </Button>
                 <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
-                <Border x:Name="InputCanvasBorder" VerticalAlignment="Bottom" Background="White" BorderBrush="Black" BorderThickness="5" CornerRadius="60" Width="1900" Height="930" RenderTransformOrigin="0.5,1" d:IsHidden="True">
+                <Border x:Name="InputCanvasBorder" VerticalAlignment="Bottom" Background="White" BorderBrush="Black" BorderThickness="5" CornerRadius="60" Width="1900" Height="930" RenderTransformOrigin="0.5,1">
                     <Border.RenderTransform>
                         <ScaleTransform ScaleX="0.90" ScaleY="0.90"/>
                     </Border.RenderTransform>
                     <Grid >
-                        <Grid x:Name="InputCanvasGrid1" d:IsHidden="True">
+                        <Grid x:Name="InputCanvasGrid1">
                             <TextBlock x:Name="InputCanvasTitleText1" Text="赤丸くんは、ほかにどんなかいけつの方法をえらぶことができるでしょう？&#10;あなたの考えを書いてみましょう！" FontSize="35" LineHeight="60" Margin="60,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
                             <Image x:Name="InputCanvasGrid1Image" Source="{Binding ElementName=InputItemImage, Path=Source}" Height="300" Width="200" Margin="0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                             <InkCanvas  x:Name="InputCanvas1" Style="{StaticResource InputInkCanvas}" Margin="30,150,30,30"/>
                         </Grid>
-                        <Grid x:Name="InputCanvasGrid3" RenderTransformOrigin="0.5,0.5">
+                        <Grid x:Name="InputCanvasGrid3" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                             <TextBlock Text="ステップ２：たくさんの方法を考える" FontSize="50" Margin="80,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic" Foreground="#FF0070C0">
                                 <TextBlock.Effect>
                                     <DropShadowEffect ShadowDepth="3" Opacity="0.3"/>

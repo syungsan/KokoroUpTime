@@ -80,7 +80,7 @@
                     <Image x:Name="MangaPrevBackImage" Source="/Images/prev_back_.png"/>
                 </Button>
             </Grid>
-            <Grid x:Name="ItemGrid" Visibility="Visible">
+            <Grid x:Name="ItemGrid" Visibility="Visible" d:IsHidden="True">
                 <Image x:Name="ItemCenterImage" HorizontalAlignment="Left" Height="512" VerticalAlignment="Top" Width="363" Source="/Images/item05_solo.png" Margin="804,266,0,0" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -476,7 +476,7 @@
                     <Image x:Name="ShirojiRightDownImage" Source="Images\shiroji_03.png" Margin="-200,-100" VerticalAlignment="Top" HorizontalAlignment="Right" Height="400"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="DifferenceAosukesFeelingInputGrid" Margin="130,80,130,180" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+            <Grid x:Name="DifferenceAosukesFeelingInputGrid" Margin="130,80,130,180" RenderTransformOrigin="0.5,0.5">
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

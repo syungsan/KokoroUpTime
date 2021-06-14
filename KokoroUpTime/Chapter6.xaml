@@ -23,11 +23,11 @@
                             <DockPanel Width="1480">
                                 <TextBlock x:Name="IndexText" Text="・(" FontSize="60" VerticalAlignment="Center"/>
                                 <Border Height="120">
-                                    <TextBox x:Name="NameInputTextBlock" FontSize="50" Width="260" MinHeight="60" MaxLength="10" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" Background="{x:Null}" GotFocus="TriggerKeyboard" />
+                                    <TextBox x:Name="NameInputTextBox" FontSize="50" Width="260" MinHeight="60" MaxLength="10" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" Background="{x:Null}" GotFocus="TriggerKeyboard" />
                                 </Border>
                                 <TextBlock x:Name="MidpointText" Text=")さん・・・" FontSize="60" VerticalAlignment="Center"/>
                                 <Border Height="130">
-                                    <TextBox x:Name="PersonalityInputTextBlock" FontSize="55" Width="950" MinHeight="70" TextWrapping="Wrap" Text="" MaxLength="34" VerticalAlignment="Center" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" Background="{x:Null}" GotFocus="TriggerKeyboard"/>
+                                    <TextBox x:Name="PersonalityInputTextBox" FontSize="55" Width="950" MinHeight="70" TextWrapping="Wrap" Text="" MaxLength="34" VerticalAlignment="Center" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" Background="{x:Null}" GotFocus="TriggerKeyboard"/>
                                 </Border>
                             </DockPanel>
                         </ControlTemplate>
@@ -40,9 +40,9 @@
                         <ControlTemplate TargetType="{x:Type ListViewItem}">
                             <DockPanel Width="1480">
                                 <TextBlock x:Name="IndexText" Text="・(" FontSize="60" VerticalAlignment="Center" Background="White"/>
-                                <InkCanvas Width="240" Height="130" Background="TransParent" EditingMode="{Binding InkCanvasEditingMode}"/>
+                                <InkCanvas x:Name="NameInputCanvas" Width="240" Height="130" Background="TransParent" EditingMode="{Binding InkCanvasEditingMode}"/>
                                 <TextBlock x:Name="MidpointText" Text=")さん・・・" FontSize="60" VerticalAlignment="Center" Background="White"/>
-                                <InkCanvas  Height="130" VerticalAlignment="Bottom" Background="TransParent" EditingMode="{Binding InkCanvasEditingMode}"/>
+                                <InkCanvas x:Name="PersonalityInputCanvas"  Height="130" VerticalAlignment="Bottom" Background="TransParent" EditingMode="{Binding InkCanvasEditingMode}"/>
                             </DockPanel>
                         </ControlTemplate>
                     </Setter.Value>
@@ -254,12 +254,12 @@
                 </TextBlock>
             </Grid>
             <Grid x:Name="ChallengeTimeGrid" Margin="230,190,570,40" d:IsHidden="True">
-                <Rectangle x:Name="ChallengeTimeOuterFrame" Stroke="Red" StrokeThickness="3" d:IsHidden="True"/>
-                <Rectangle x:Name="ChallengeTimeInnerFrame" Stroke="Red" StrokeThickness="3" Margin="6" d:IsHidden="True"/>
-                <Viewbox Margin="80,20,15,20" MinHeight="810" MinWidth="1025" d:IsHidden="True">
-                    <ListBox x:Name="SelectNicePersonalityListBox"  ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}" SelectionMode="Multiple" Background="{x:Null}" BorderBrush="{x:Null}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" d:IsHidden="True"/>
+                <Rectangle x:Name="ChallengeTimeOuterFrame" Stroke="Red" StrokeThickness="3"/>
+                <Rectangle x:Name="ChallengeTimeInnerFrame" Stroke="Red" StrokeThickness="3" Margin="6"/>
+                <Viewbox Margin="80,20,15,20" MinHeight="810" MinWidth="1025">
+                    <ListBox x:Name="SelectNicePersonalityListBox"  ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}" SelectionMode="Multiple" Background="{x:Null}" BorderBrush="{x:Null}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
                 </Viewbox>
-                <Image x:Name="ChallengeTimeItemImage" Source="Images/item06_solo.png"  Margin="0,20,15,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="335" Width="276" d:IsHidden="True"/>
+                <Image x:Name="ChallengeTimeItemImage" Source="Images/item06_solo.png"  Margin="0,20,15,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="335" Width="276"/>
             </Grid>
             <Grid x:Name="GroupeActivityGrid" Height="665" Width="1520" Margin="0,100,0,0" RenderTransformOrigin="0.5,0.5">
                 <Grid.RenderTransform>

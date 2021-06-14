@@ -366,6 +366,7 @@
     <None Remove="Images\situation_kimi.png" />
     <None Remove="Images\size_of_feeling_button_frame.png" />
     <None Remove="Images\size_of_feeling_input_button_fimage.png" />
+    <None Remove="Images\skip.png" />
     <None Remove="Images\small_bubble_center_down.png" />
     <None Remove="Images\small_bubble_center_right_down.png" />
     <None Remove="Images\small_bubble_left.png" />
@@ -735,6 +736,7 @@
     <Resource Include="Images\situation_kimi.png" />
     <Resource Include="Images\size_of_feeling_button_frame.png" />
     <Resource Include="Images\size_of_feeling_input_button_fimage.png" />
+    <Resource Include="Images\skip.png" />
     <Resource Include="Images\small_bubble_center_down.png" />
     <Resource Include="Images\small_bubble_center_right_down.png" />
     <Resource Include="Images\small_bubble_left_blue.png" />
@@ -872,6 +874,9 @@
     <None Update="Datas\default.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Datas\ending.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Scenarios\chapter12.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -915,6 +920,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Sounds\atsumare!_tomodachi!.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\bokura_no_tabidachi.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Sounds\cancel.wav">

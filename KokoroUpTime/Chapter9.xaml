@@ -604,7 +604,7 @@
                 <Button x:Name="AkamarusKindOfFeelingAfterFourdaysButton" Style="{StaticResource KindOfFeelingButton}" IsEnabled="false"  Content="こわい" FontSize="70" Height="165" Width="330" BorderBrush="#FF0070C0" BorderThickness="5" Margin="350,0" HorizontalAlignment="Right" Grid.Row="2"/>
                 <Button x:Name="AkamarusSizeOfFeelingAfterFourdaysButton" Style="{StaticResource SizeOfFeelingButton}" IsEnabled="false" Background="Transparent" Content="３０" FontSize="70" Height="165" Width="330" Margin="0,0" HorizontalAlignment="Right" Grid.Row="2"/>
             </Grid>
-            <Grid x:Name="ChangeAosukesFeelingGrid" Margin="130,80,130,180" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+            <Grid x:Name="ChangeAosukesFeelingGrid" Margin="130,80,130,180" RenderTransformOrigin="0.5,0.5">
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -679,7 +679,7 @@
                         <DataTemplate>
                             <StackPanel Width="400" Height="450" Margin="10,0">
                                 <Border Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
-                                    <TextBlock Text="{Binding HeaderText}" Margin="5" FontSize="45" Foreground="White" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="HeaderText" Text="{Binding HeaderText}" Margin="5" FontSize="45" Foreground="White" FontWeight="Bold" VerticalAlignment="Center"/>
                                 </Border>
                                 <ListBox ItemsSource="{Binding NotGoodEvent}" SelectionMode="Multiple" FontSize="26" FontFamily="Yu Gothic" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                     <ListBox.ItemContainerStyle>
@@ -870,7 +870,7 @@
                     <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="SystemGrid">
+            <Grid x:Name="SystemGrid" d:IsHidden="True">
                 <Grid x:Name="MainMessageGrid"  Margin="210,630,210,0" Height="380" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>

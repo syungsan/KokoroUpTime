@@ -11,7 +11,7 @@ bgm,play
 text,music_title_text,もくもくStudy♪
 text,composer_name_text,しゅんじ～
 grid,music_info_grid,slide,no_sync
-msg,main_msg,前回のこころあっぷタイムでは、うきうきシューズをつかって、みんなでいっしょに勉強したね,青助
+msg,main_msg,前回のこころあっぷタイムでは、うきうきシューズをつかって、鬱みんなでいっしょに勉強したね,青助
 click,page,next_only
 #
 hide,image,shiroji_right_image
@@ -304,7 +304,7 @@ hide,grid,c_hot_word_key_button_grid
 image,shiroji_left_image,shiroji_02.png
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,赤丸くんがあったかスープを使ってみたようじゃ。鬱青助くんとキミちゃんに、どのような「あたたかい言葉」をかけておるかいっしょにみてみよう。,白じい
+msg,main_msg,赤丸くんがあったかスープを使ってみたようじゃ。鬱青助くんとキミちゃんに、どのような「あたたかい言葉」をかけておるか鬱いっしょにみてみよう。,白じい
 image,item_center_right_image
 click,page
 #
@@ -1025,7 +1025,7 @@ grid,item_last_info_grid
 image,shiroji_right_image,shiroji_01.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,第3回で登場した発明品は、「あったかスープ」じゃ！アイテム図鑑から、いつでも確認できるぞい！,白じい
+msg,main_msg,第3回で登場した発明品は、「あったかスープ」じゃ！アイテム図鑑から、鬱いつでも確認できるぞい！,白じい
 click,page
 #
 scene,アイテム図鑑

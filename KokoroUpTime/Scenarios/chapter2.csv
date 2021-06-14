@@ -1,4 +1,5 @@
-﻿start
+﻿reset
+start
 #
 scene,前説
 reset
@@ -203,11 +204,11 @@ button,select_feeling_back_button
 wait
 #
 sub,getting_high_score
-scene,チャレンジタイムパート②「全部のテストで１００点をとる」ときは？
+scene,チャレンジタイムパート②「全部のテストで100点をとる」ときは？
 reset
 image,bg_image,orange_gradation.png
 grid,challenge2_grid
-text,challenge2_bubble_action_text,全部のテストで１００点をとる
+text,challenge2_bubble_action_text,全部のテストで100点をとる
 grid,challenge2_action_bubble_grid
 image,aosuke_small_face_image,aosuke_face_01.png
 grid,aosuke_kind_of_feeling_grid

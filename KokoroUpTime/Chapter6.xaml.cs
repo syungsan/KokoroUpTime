@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -39,6 +40,8 @@ namespace KokoroUpTime
         private string[] NICE_PERSONALITY = { "●　親切にしてもらった", "●　アドバイスをくれた", "●　みんなをひっぱってくれた", "●　きちんと順番をまもってくれた", "●　みんなを笑顔にしてくれた", "●　（何か悪いことや失敗を）ゆるしてもらった", "●　自分の気持ちを分かってもらった", "●　仲良くしてもらった", "●　ありがとうと言ってくれた" };
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
+
+        LogManager logManager;
 
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
@@ -132,6 +135,10 @@ namespace KokoroUpTime
 
             // メディアプレーヤークラスのインスタンスを作成する
             this.mediaPlayer = new WindowsMediaPlayer();
+
+            this.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(OnPreviewMouseLeftButtonDown);
+
+            logManager = new LogManager();
 
 
             // データモデルインスタンス確保
@@ -405,7 +412,7 @@ namespace KokoroUpTime
         }
 
 
-        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress, bool isCreateNewTable)
         {
             this.initConfig = _initConfig;
             this.dataOption = _dataOption;
@@ -414,12 +421,33 @@ namespace KokoroUpTime
 
             // 現在時刻を取得
             this.dataChapter6.CreatedAt = DateTime.Now.ToString();
-
-            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+            if (isCreateNewTable)
             {
-                // 毎回のアクセス日付を記録
-                connection.Insert(this.dataChapter6);
+                // データベースのテーブル作成と現在時刻の書き込みを同時に行う
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    // 毎回のアクセス日付を記録
+                    connection.Insert(this.dataChapter6);
+                }
+            }
+            else
+            {
+                string lastCreatedAt = "";
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    var chapter6 = connection.Query<DataChapter6>($"SELECT * FROM DataChapter6 ORDER BY Id ASC LIMIT 1;");
+
+                    foreach (var row in chapter6)
+                    {
+                        lastCreatedAt = row.CreatedAt;
+                    }
+                }
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    connection.Execute($@"UPDATE DataChapter6 SET CreatedAt = '{this.dataChapter6.CreatedAt}'WHERE CreatedAt = '{lastCreatedAt}';");
+                }
             }
         }
 
@@ -465,6 +493,8 @@ namespace KokoroUpTime
                     }
 
                     this.SetInputMethod();
+
+                    logManager.StartLog(this.initConfig, this.dataProgress);
 
                     break;
 
@@ -1645,7 +1675,6 @@ namespace KokoroUpTime
             if (this.isClickable)
             {
                 
-
                 if((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton" || button.Name == "GroupeActivityNextMessageButton" || button.Name == "ReturnButton"))
                 {
 
@@ -1667,6 +1696,69 @@ namespace KokoroUpTime
                     else if (button.Name == "MangaFlipButton")
                     {
                         this.MangaFlipButton.Visibility = Visibility.Hidden;
+                    }
+                    else if(button.Name == "SelectFeelingCompleteButton")
+                    {
+                        if(this.ChallengeTimeGrid.Visibility == Visibility.Visible)
+                        {
+                            this.dataChapter6.SelectedNicePersonality="";
+                            foreach (var text in this.SelectNicePersonalityListBox.SelectedItems)
+                            {
+                                this.dataChapter6.SelectedNicePersonality += $"{text} ";
+                            }
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"UPDATE DataChapter6 SET SelectedNicePersonality = '{this.dataChapter6.SelectedNicePersonality}' WHERE CreatedAt = '{this.dataChapter6.CreatedAt}';");
+                            }
+                        }
+                    }
+                    else if(button.Name == "SelectFeelingNextButton")
+                    {
+                        if (this.GroupeActivityGrid.Visibility == Visibility.Visible)
+                        {
+
+                            if (this.dataOption.InputMethod==0)
+                            {
+                                int number = 1;
+                                foreach (var canvas in this.NicePesonalityListView.GetChildren<InkCanvas>())
+                                {
+                                    StrokeConverter strokeConverter = new StrokeConverter();
+                                    if (canvas.Name == "NameInputCanvas")
+                                    {
+                                        strokeConverter.ConvertToBmpImage(canvas, canvas.Strokes, $"groupe_activity_friends_name_{number}",this.initConfig.userName,this.dataProgress.CurrentChapter);
+                                    }
+                                    else if (canvas.Name == "PersonalityInputCanvas")
+                                    {
+                                        strokeConverter.ConvertToBmpImage(canvas, canvas.Strokes, $"groupe_activity_friends_personality_{number}",this.initConfig.userName,this.dataProgress.CurrentChapter);
+                                    }
+
+                                    number++;
+                                }
+                            }
+                            else
+                            {
+                                this.dataChapter6.InputFriendsNicePersonality = "";
+
+
+                                foreach (var text in this.NicePesonalityListView.GetChildren<TextBox>())
+                                {
+                                    if (text.Name == "NameInputTextBox")
+                                    {
+                                        this.dataChapter6.InputFriendsNicePersonality += $"{text}さん,";
+                                    }
+                                    else if (text.Name == "PersonalityInputTextBox")
+                                    {
+                                        this.dataChapter6.InputFriendsNicePersonality += $"{text};";
+                                    }
+                                }
+
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter6 SET InputFriendsNicePersonality = '{this.dataChapter6.InputFriendsNicePersonality}' WHERE CreatedAt = '{this.dataChapter6.CreatedAt}';");
+                                }
+                            }
+                            
+                        }
                     }
 
                     this.isClickable = false;
@@ -1883,7 +1975,7 @@ namespace KokoroUpTime
                 {
                     if (scenario[0] == "scene" && scenario[1] == tag)
                     {
-                        this.scenarioCount = index + 1;
+                        this.scenarioCount = index;
                         this.ScenarioPlay();
 
                         break;
@@ -2050,6 +2142,19 @@ namespace KokoroUpTime
 
                     break;
             }
+        }
+
+        // マウスのドラッグ処理（マウスの左ボタンを押そうとしたとき）
+        private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            string objName = "None";
+
+            if (e.Source as FrameworkElement != null)
+            {
+                objName = (e.Source as FrameworkElement).Name;
+            }
+
+            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
     }
 }

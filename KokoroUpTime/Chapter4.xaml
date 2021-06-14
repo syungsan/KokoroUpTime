@@ -183,7 +183,7 @@
                 </Grid>
                 <TextBlock x:Name="SessionFrameText" Text="きちんとつたえてみよう"  FontWeight="UltraBold" FontSize="70" Background="Yellow" Width="800" Height="120" Margin="10,10,680,500" Foreground="MediumPurple" FontFamily="Yu Gothic" TextAlignment="Center" />
             </Grid>
-            <Grid x:Name="ChallengeTimeGrid" d:IsHidden="True">
+            <Grid x:Name="ChallengeTimeGrid">
 
                 <Grid x:Name="MangaCheckGrid" Margin="1600,300,50,600">
                     <Button x:Name="MangaCheckButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="100,0,0,0" Click="Button_Click" d:IsHidden="True">
@@ -342,7 +342,7 @@
                 </Grid>
                 <Image x:Name="EpilogueItem" Source="/Images/item04_solo.png" Margin="1288,465,12,10"/>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid">
+            <Grid x:Name="GroupeActivityGrid" d:IsHidden="True">
                 <Image x:Name="GroupeActivityCharacter" Margin="0,350,1200,250"/>
                 <Grid x:Name="SelectWordGrid" Margin="600,400,100,170">
                     <Image x:Name="SelectWordBubble" Source="/Images/small_bubble_left_red.png" Stretch="Fill"/>
@@ -482,7 +482,7 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid x:Name="SituationPlateGrid" Margin="200,200">
+            <Grid x:Name="SituationPlateGrid" Margin="200,200" d:IsHidden="True">
                 <Border x:Name="SituationPlate" Background="LightPink" CornerRadius="100"/>
                 <TextBlock x:Name="SituationTitleText" Text="場面①" FontSize="60" FontWeight="UltraBold"  FontFamily="Yu Gothic" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,50"/>
                 <Image x:Name="SituationCharacterImage" Margin="50,250,1100,100" Source="/Images/akamaru_face_01.png"/>

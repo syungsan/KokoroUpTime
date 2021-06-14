@@ -618,7 +618,7 @@ image,shiroji_right_image,shiroji_04.png,appear_up
 image,main_msg_bubble_image,right_big_bubble.png
 image,item_center_image,item09_solo.png,fade_in_slow
 grid,main_msg_grid,appear_expansion
-msg,main_msg,３人とも、苦手な場面についてよくわかってきたようじゃ。鬱それでは次回からは、自分の苦手な場面にちょうせんする方法をおしえていくぞい！,白じい
+msg,main_msg,３人とも、苦手な場面についてよくわかってきたようじゃ。鬱それでは次回からは、自分の苦手な場面にちょうせんする方法を鬱おしえていくぞい！,白じい
 click,page
 #
 scene,まとめ
@@ -635,7 +635,7 @@ hide,grid,item_last_info_grid
 hide,image,item_left_last_image
 image,bg_image,background_09.png
 grid,summary_grid
-image,shiroji_right_image,shiroji_02.png,appear_up
+image,shiroji_right_image,shiroji_02.png
 image,main_msg_bubble_image,right_big_bubble.png
 grid,main_msg_grid
 msg,main_msg,次回のテーマは鬱「<font=#60##true#>苦手なことにちょうせんしよう！</font>」じゃ！,白じい

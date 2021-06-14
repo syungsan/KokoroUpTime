@@ -46,6 +46,8 @@ namespace KokoroUpTime
 
         private int RETURN_COUNT = 1;
 
+        LogManager logManager;
+
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0; //
         private List<List<string>> scenarios = null; //
@@ -111,6 +113,9 @@ namespace KokoroUpTime
             this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
+            this.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(OnPreviewMouseLeftButtonDown);
+
+            logManager = new LogManager();
 
             // データモデルインスタンス確保
             this.dataChapter3 = new DataChapter3();
@@ -383,7 +388,7 @@ namespace KokoroUpTime
             this.SelectGoodFeelingListBox.SelectedIndex = -1;
         }
 
-        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress,bool isCreateNewTable)
         {
             this.initConfig = _initConfig;
             this.dataOption = _dataOption;
@@ -392,12 +397,33 @@ namespace KokoroUpTime
 
             // 現在時刻を取得
             this.dataChapter3.CreatedAt = DateTime.Now.ToString();
-
-            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+            if (isCreateNewTable)
             {
-                // 毎回のアクセス日付を記録
-                connection.Insert(this.dataChapter3);
+                // データベースのテーブル作成と現在時刻の書き込みを同時に行う
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    // 毎回のアクセス日付を記録
+                    connection.Insert(this.dataChapter3);
+                }
+            }
+            else
+            {
+                string lastCreatedAt = "";
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    var chapter3 = connection.Query<DataChapter3>($"SELECT * FROM DataChapter3 ORDER BY Id ASC LIMIT 1;");
+
+                    foreach (var row in chapter3)
+                    {
+                        lastCreatedAt = row.CreatedAt;
+                    }
+                }
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    connection.Execute($@"UPDATE DataChapter3 SET CreatedAt = '{this.dataChapter3.CreatedAt}'WHERE CreatedAt = '{lastCreatedAt}';");
+                }
             }
         }
 
@@ -431,6 +457,8 @@ namespace KokoroUpTime
                     {
                         connection.Execute($@"UPDATE DataProgress SET CurrentChapter = '{this.dataProgress.CurrentChapter}' WHERE Id = 1;");
                     }
+
+                    logManager.StartLog(this.initConfig, this.dataProgress);
                     //前回のつづきからスタート
                     if (this.dataProgress.CurrentScene != null)
                     {
@@ -2357,7 +2385,7 @@ namespace KokoroUpTime
                 {
                     if (scenario[0] == "scene" && scenario[1] == tag)
                     {
-                        this.scenarioCount = index + 1;
+                        this.scenarioCount = index;
                         this.ScenarioPlay();
 
                         break;
@@ -2561,6 +2589,19 @@ namespace KokoroUpTime
                 }
             }
             return null;
+        }
+
+        // マウスのドラッグ処理（マウスの左ボタンを押そうとしたとき）
+        private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            string objName = "None";
+
+            if (e.Source as FrameworkElement != null)
+            {
+                objName = (e.Source as FrameworkElement).Name;
+            }
+
+            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
     }
 }

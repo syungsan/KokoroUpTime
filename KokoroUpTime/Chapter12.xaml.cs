@@ -24,6 +24,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WMPLib;
 using XamlAnimatedGif;
+using System.Reflection;
 
 namespace KokoroUpTime
 
@@ -57,6 +58,8 @@ namespace KokoroUpTime
         Dictionary<string, SelectedItemMethodStrokeData> ITEM_METHOD_STROKE;
 
         Dictionary<string, SelectedItemMethodTextData> ITEM_METHOD_TEXT;
+
+        LogManager logManager;
 
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
@@ -138,6 +141,9 @@ namespace KokoroUpTime
             this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
+            this.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(OnPreviewMouseLeftButtonDown);
+
+            logManager = new LogManager();
 
             this.InitControls();
         }
@@ -379,7 +385,7 @@ namespace KokoroUpTime
             }
         }
 
-        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress)
+        public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress, bool isCreateNewTable)
         {
             this.initConfig = _initConfig;
             this.dataOption = _dataOption;
@@ -388,12 +394,33 @@ namespace KokoroUpTime
 
             // 現在時刻を取得
             this.dataChapter12.CreatedAt = DateTime.Now.ToString();
-
-            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+            if (isCreateNewTable)
             {
-                // 毎回のアクセス日付を記録
-                connection.Insert(this.dataChapter12);
+                // データベースのテーブル作成と現在時刻の書き込みを同時に行う
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    // 毎回のアクセス日付を記録
+                    connection.Insert(this.dataChapter12);
+                }
+            }
+            else
+            {
+                string lastCreatedAt = "";
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    var chapter12 = connection.Query<DataChapter12>($"SELECT * FROM DataChapter12 ORDER BY Id ASC LIMIT 1;");
+
+                    foreach (var row in chapter12)
+                    {
+                        lastCreatedAt = row.CreatedAt;
+                    }
+                }
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    connection.Execute($@"UPDATE DataChapter12 SET CreatedAt = '{this.dataChapter12.CreatedAt}'WHERE CreatedAt = '{lastCreatedAt}';");
+                }
             }
         }
 
@@ -430,6 +457,8 @@ namespace KokoroUpTime
 
                     this.SetInputMethod();
 
+                    logManager.StartLog(this.initConfig, this.dataProgress);
+
                     var startupPath1 = FileUtils.GetStartupPath();
                     string namePngPath1 = $"./Log/{this.initConfig.userName}/name.png";
 
@@ -452,8 +481,8 @@ namespace KokoroUpTime
                     {
                         this.AwardName.UnicodeString = $"{this.initConfig.userName}どの";
                     }
-                    string[] sss = Regex.Match(this.initConfig.accessDateTime, "[0-9][0-9][0-9][0-9]/[0-9][0-9]/[0-9][0-9]").ToString().Split("/");
-                    DateTime dateTime = new DateTime(int.Parse(sss[0]), int.Parse(sss[1]), int.Parse(sss[2]));
+                    string[] text = Regex.Match(this.initConfig.accessDateTime, "[0-9][0-9][0-9][0-9]/[0-9][0-9]/[0-9][0-9]").ToString().Split("/");
+                    DateTime dateTime = new DateTime(int.Parse(text[0]), int.Parse(text[1]), int.Parse(text[2]));
                     JapaneseCalendar calendar = new JapaneseCalendar();
                     var cultureJp = new CultureInfo("ja-JP", false);
                     cultureJp.DateTimeFormat.Calendar = calendar;
@@ -2050,6 +2079,18 @@ namespace KokoroUpTime
                         this.BackMessageButton.Visibility = Visibility.Hidden;
                         this.NextMessageButton.Visibility = Visibility.Hidden;
 
+
+                        if (this.scene == "修了証書授与")
+                        {
+                            this.StopBGM();
+
+                            EndingPage endingPage = new EndingPage();
+
+                            endingPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+
+                            this.NavigationService.Navigate(endingPage);
+                        }
+
                     }
                     else if (button.Name == "MangaFlipButton")
                     {
@@ -2088,11 +2129,167 @@ namespace KokoroUpTime
                 {
                     this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
 
+                    if (this.GroupeActivityGrid.Visibility == Visibility.Visible)
+                    {
+                        if (this.dataOption.InputMethod == 0)
+                        {
+                            foreach (SelectedItemMethodStrokeData data in this.ITEM_METHOD_STROKE.Values)
+                            {
+                                PropertyInfo property;
+                                string itemName ="";
+                                int count = 1;
+                                switch (data.SelectedItemImageSource)
+                                {
+                                    case "Images/item01_solo.png":
+                                        itemName = "きもちセンサー";
+                                        break;
+                                    case "Images/item02_solo.png":
+                                        itemName = "うきうきシューズ";
+                                        break;
+                                    case "Images/item03_solo.png":
+                                        itemName = "あったかスープ";
+                                        break;
+                                    case "Images/item04_solo.png":
+                                        itemName = "はきはきスピーカー";
+                                        break;
+                                    case "Images/item05_solo.png":
+                                        itemName = "ゆったりんご";
+                                        break;
+                                    case "Images/item06_solo.png":
+                                        itemName = "すてきステッキ";
+                                        break;
+                                    case "Images/item07_solo.png":
+                                        itemName = "考えライト";
+                                        break;
+                                    case "Images/item08_solo.png":
+                                        itemName = "おじゃま虫バスター";
+                                        break;
+                                    case "Images/item09_solo.png":
+                                        itemName = "勇者のマント";
+                                        break;
+                                    case "Images/item10_solo.png":
+                                        itemName = "勇者のつるぎ";
+                                        break;
+                                    case "Images/item11_solo.png":
+                                        itemName = "3色だんご";
+                                        break;
+                                }
 
+                                switch (data.SelectedItemTitle)
+                                {
+                                    case "発明品①":
+                                        property = typeof(SelectedItemMethodStrokeData).GetProperty("SelectedItem1");
+                                        property.SetValue(this.dataChapter12, itemName);
+                                        break;
+
+                                    case "発明品②":
+                                        property = typeof(SelectedItemMethodStrokeData).GetProperty("SelectedItem2");
+                                        property.SetValue(this.dataChapter12, itemName);
+                                        break;
+
+                                    case "発明品③":
+                                        property = typeof(SelectedItemMethodStrokeData).GetProperty("SelectedItem3");
+                                        property.SetValue(this.dataChapter12, itemName);
+                                        break;
+                                }
+
+                                StrokeConverter strokeConverter = new StrokeConverter();
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas,data.ItemMethodStroke,$"groupe_activity_item_method_stroke{count}",this.initConfig.userName,this.dataProgress.CurrentChapter);
+                                count++;
+                            }
+                        }
+                        else
+                        {
+                            foreach (SelectedItemMethodTextData data in this.ITEM_METHOD_TEXT.Values)
+                            {
+                                PropertyInfo selectedItemProperty;
+                                PropertyInfo itemMethodInputTextProperty;
+
+                                string itemName = "";
+
+                                switch (data.SelectedItemImageSource)
+                                {
+                                    case "Images/item01_solo.png":
+                                        itemName = "きもちセンサー";
+                                        break;
+                                    case "Images/item02_solo.png":
+                                        itemName = "うきうきシューズ";
+                                        break;
+                                    case "Images/item03_solo.png":
+                                        itemName = "あったかスープ";
+                                        break;
+                                    case "Images/item04_solo.png":
+                                        itemName = "はきはきスピーカー";
+                                        break;
+                                    case "Images/item05_solo.png":
+                                        itemName = "ゆったりんご";
+                                        break;
+                                    case "Images/item06_solo.png":
+                                        itemName = "すてきステッキ";
+                                        break;
+                                    case "Images/item07_solo.png":
+                                        itemName = "考えライト";
+                                        break;
+                                    case "Images/item08_solo.png":
+                                        itemName = "おじゃま虫バスター";
+                                        break;
+                                    case "Images/item09_solo.png":
+                                        itemName = "勇者のマント";
+                                        break;
+                                    case "Images/item10_solo.png":
+                                        itemName = "勇者のつるぎ";
+                                        break;
+                                    case "Images/item11_solo.png":
+                                        itemName = "3色だんご";
+                                        break;
+                                }
+
+                                switch (data.SelectedItemTitle)
+                                {
+                                    case "発明品①":
+                                        selectedItemProperty = typeof(SelectedItemMethodStrokeData).GetProperty("SelectedItem1");
+                                        selectedItemProperty.SetValue(this.dataChapter12, itemName);
+
+                                        selectedItemProperty = typeof(SelectedItemMethodStrokeData).GetProperty("ItemMethodInputText1");
+                                        selectedItemProperty.SetValue(this.dataChapter12, data.ItemMethodText);
+
+                                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                        {
+                                            connection.Execute($@"UPDATE DataChapter12 SET ItemMethodInputText1 = '{this.dataChapter12.ItemMethodInputText1}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
+                                        }
+                                        break;
+
+                                    case "発明品②":
+                                        selectedItemProperty = typeof(SelectedItemMethodStrokeData).GetProperty("SelectedItem2");
+                                        selectedItemProperty.SetValue(this.dataChapter12, itemName);
+
+                                        selectedItemProperty = typeof(SelectedItemMethodStrokeData).GetProperty("ItemMethodInputText2");
+                                        selectedItemProperty.SetValue(this.dataChapter12, data.ItemMethodText);
+
+                                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                        {
+                                            connection.Execute($@"UPDATE DataChapter12 SET ItemMethodInputText2 = '{this.dataChapter12.ItemMethodInputText2}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
+                                        }
+                                        break;
+
+                                    case "発明品③":
+                                        selectedItemProperty = typeof(SelectedItemMethodStrokeData).GetProperty("SelectedItem3");
+                                        selectedItemProperty.SetValue(this.dataChapter12, itemName);
+
+                                        selectedItemProperty = typeof(SelectedItemMethodStrokeData).GetProperty("ItemMethodInputText3");
+                                        selectedItemProperty.SetValue(this.dataChapter12, data.ItemMethodText);
+
+                                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                        {
+                                            connection.Execute($@"UPDATE DataChapter12 SET ItemMethodInputText3 = '{this.dataChapter12.ItemMethodInputText3}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
+                                        }
+                                        break;
+                                }
+                            }
+                        }
+                    }
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
-
-
                 }
 
                 else if (button.Name == "KindOfFeelingInputButton")
@@ -2165,6 +2362,13 @@ namespace KokoroUpTime
                     foreach(var Text in ((Grid)button.Content).Children.OfType<TextBlock>())
                     {
                         this.SelectedSceneTitle.Text = Text.Text;
+                        this.dataChapter12.SelectedSceneText = Text.Text;
+                        
+                    }
+
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataChapter12 SET SelectedSceneText = '{this.dataChapter12.SelectedSceneText}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
                     }
 
                     this.scenarioCount += 1;
@@ -2480,7 +2684,7 @@ namespace KokoroUpTime
                 {
                     if (scenario[0] == "scene" && scenario[1] == tag)
                     {
-                        this.scenarioCount = index + 1;
+                        this.scenarioCount = index;
                         this.ScenarioPlay();
 
                         break;
@@ -3119,6 +3323,18 @@ namespace KokoroUpTime
             return iscorrect;
         }
 
-        
+        // マウスのドラッグ処理（マウスの左ボタンを押そうとしたとき）
+        private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            string objName = "None";
+
+            if (e.Source as FrameworkElement != null)
+            {
+                objName = (e.Source as FrameworkElement).Name;
+            }
+
+            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
+        }
+
     }
 }

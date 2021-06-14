@@ -1,6 +1,9 @@
 ﻿using OfficeOpenXml;
+using OfficeOpenXml.Drawing;
 using System;
+using System.Drawing;
 using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace ExcelManage
 {
@@ -22,6 +25,7 @@ namespace ExcelManage
                 // Excelファイルを開く
                 var fileInfo = new FileInfo(filePath);
                 _excelPackage = new ExcelPackage(fileInfo);
+
 
                 this.SetSheet();
             }
@@ -56,6 +60,16 @@ namespace ExcelManage
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// 画像を貼り付ける
+        /// </summary>
+        /// <param name="adress"></param>
+        /// <param name="bitmapImage"></param>
+        public void WritePicture(string adress,string FileName, string ImagePath)
+        {
+            var picture =_excelWorksheet.Drawings.AddPicture(FileName, Image.FromFile(ImagePath));
         }
 
         /*
@@ -130,5 +144,6 @@ namespace ExcelManage
             // レンジ読取
             return (object[,])_excelWorksheet.Cells[addresso].Value;
         }
+
     }
 }

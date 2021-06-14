@@ -229,11 +229,9 @@ image,bg_image,background_mokume2.png
 grid,award_grid,fade_in_slow
 click,page
 #
-scene,エンディング
-reset
-image,bg_image,background_00.png
-grid,ending_grid
-end
+
+
+
 
 
 

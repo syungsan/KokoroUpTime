@@ -36,6 +36,8 @@ namespace KokoroUpTime
 
         private int RETURN_COUNT = 1;
 
+        LogManager logManager;
+
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
         private List<List<string>> scenarios = null;
@@ -113,6 +115,9 @@ namespace KokoroUpTime
             this.MouseLeftButtonDown += new MouseButtonEventHandler(OnMouseLeftButtonDown);
             this.MouseUp += new MouseButtonEventHandler(OnMouseUp);
             this.MouseMove += new MouseEventHandler(OnMouseMove);
+            this.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(OnPreviewMouseLeftButtonDown);
+
+            logManager = new LogManager();
 
             // データモデルインスタンス確保
             this.dataChapter1 = new DataChapter1();
@@ -378,7 +383,7 @@ namespace KokoroUpTime
             this.dataItem = _dataItem;
             this.dataProgress = _dataProgress;
 
-            // 現在時刻を取得
+             // 現在時刻を取得
             this.dataChapter1.CreatedAt = DateTime.Now.ToString();
 
             // データベースのテーブル作成と現在時刻の書き込みを同時に行う
@@ -2669,18 +2674,17 @@ namespace KokoroUpTime
             
         }
 
-        //private void ChallengeGoodFeelingListBox_Unselected(object sender, RoutedEventArgs e)
-        //{
-        //    var startupPath = FileUtils.GetStartupPath();
+        // マウスのドラッグ処理（マウスの左ボタンを押そうとしたとき）
+        private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            string objName = "None";
 
-        //    PlaySE($@"{startupPath}/Sounds/Cancel.wav");
-        //}
+            if (e.Source as FrameworkElement != null)
+            {
+                objName = (e.Source as FrameworkElement).Name;
+            }
 
-        //private void ChallengeGoodFeelingListBox_Selected(object sender, RoutedEventArgs e)
-        //{
-        //    var startupPath = FileUtils.GetStartupPath();
-
-        //    PlaySE($@"{startupPath}/Sounds/Decision.wav");
-        //}
+            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
+        }
     }
 }

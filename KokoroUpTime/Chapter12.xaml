@@ -173,7 +173,7 @@
                     </Grid>
                 </Button>
             </Grid>
-            <Grid x:Name="ChallengeTimeGrid" MouseMove="OperationArea_MouseMove" MouseLeave="OperationArea_MouseLeave" MouseUp="OperationArea_MouseUp">
+            <Grid x:Name="ChallengeTimeGrid" MouseMove="OperationArea_MouseMove" MouseLeave="OperationArea_MouseLeave" MouseUp="OperationArea_MouseUp" d:IsHidden="True">
                 <StackPanel x:Name="ItemQuestionStackPanel" Orientation="Horizontal" VerticalAlignment="Top" Height="480">
                     <Grid x:Name="ItemQuestionGrid01"  Width="320" Height="480" VerticalAlignment="Top">
                         <Image x:Name="ItemQuestionImage01" Height="220" VerticalAlignment="Top" HorizontalAlignment="Center"/>
@@ -320,7 +320,7 @@
                     <Button x:Name="ItemReviewButton06" Style="{StaticResource ItemBorder02}" Content="上手に頼んだり断ったり、&#10;自分の気持ちを&#10;はきはき伝えられます。" Height="130" Width="300" Margin="158,62,458,308" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid" d:IsHidden="True">
+            <Grid x:Name="GroupeActivityGrid">
                 <Border CornerRadius="30" Margin="320,5,320,862" >
                     <Border.Background>
                         <SolidColorBrush Color="#FFFFD966" Opacity="0.8"/>
@@ -663,13 +663,13 @@
                         <Image x:Name="MangaFlipArrowImage" Source="/Images/mangaya.png"/>
                     </Grid>
                 </Button>
-                <Button x:Name="SelectFeelingCompleteButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="80" Width="230" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}">
+                <Button x:Name="SelectFeelingCompleteButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="80" Width="230" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}" d:IsHidden="True">
                     <Image x:Name="ChallengeCompleteImage" Source="/Images/complete_button.png"/>
                 </Button>
                 <Button x:Name="SelectFeelingNextButton" Margin="1598,940,49,0" VerticalAlignment="Top" Height="142" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}" d:IsHidden="True">
                     <Image x:Name="ChallengeNextImage" Source="/Images/next_go_button.png"/>
                 </Button>
-                <Button x:Name="SelectFeelingBackButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="80" Width="230"  Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}">
+                <Button x:Name="SelectFeelingBackButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="80" Width="230"  Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}" d:IsLocked="True">
                     <Image x:Name="ChallengeBackImage" Source="/Images/prev_back_.png" />
                 </Button>
                 <Button x:Name="ToChallengeTimeButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="250" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click"  Style="{StaticResource ShadowButton}" d:IsHidden="True">
@@ -704,7 +704,7 @@
                         <Image x:Name="BranchButton2Image" Source="/Images/branch_selection2.png" Stretch="Fill" />
                     </Button>
                 </Grid>
-                <Grid x:Name="SelectSceneGrid" Margin="0,284,0,190" HorizontalAlignment="Center" d:IsHidden="True">
+                <Grid x:Name="SelectSceneGrid" Margin="0,284,0,190" HorizontalAlignment="Center">
                     <Button x:Name="SelectSceneButton1" Background="Transparent" VerticalAlignment="Top" Height="150" Width="1050" HorizontalAlignment="Center" Style="{StaticResource ShadowButton}" Click="Button_Click">
                         <Grid Style="{StaticResource ShadowButtonGrid}">
                             <Image Source="Images/orange_button_plate.png" Stretch="Fill"/>
