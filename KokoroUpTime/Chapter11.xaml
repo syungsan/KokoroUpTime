@@ -530,7 +530,7 @@
                 <Image x:Name="AkamaruOjamamushiImage" Margin="-160,-200" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="300" Width="300" Source="Images/Ojamamushi_03.png"/>
             </Grid>
             <Border x:Name="LightGreenLeftBorder" Background="#FFC8FAC8" Opacity="0.8" CornerRadius="60" Margin="100,50,700,400" d:IsHidden="True" />
-            <Grid x:Name="MultipleItemsGrid" Margin="130,80,730,430" d:IsHidden="True">
+            <Grid x:Name="MultipleItemsGrid" Margin="130,80,730,430">
                 <Button x:Name="Item03Button" Background="{x:Null}" BorderBrush="{x:Null}" Height="500" Width="350" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Button_Click" Style="{StaticResource ShadowButton}">
                     <Image x:Name="Item03Image" Source="Images/item03_solo.png"/>
                 </Button>
@@ -605,7 +605,7 @@
                     <ItemsControl x:Name="ViewInputAosukeMethodItemsControl" Margin="50,100,30,30"/>
                 </Grid>
             </Border>
-            <Border x:Name="InputButtonBorder" Margin="10,10,10,140" BorderBrush="Black" BorderThickness="5" Background="White" CornerRadius="60">
+            <Border x:Name="InputButtonBorder" Margin="10,10,10,140" BorderBrush="Black" BorderThickness="5" Background="White" CornerRadius="60" d:IsHidden="True">
                 <Grid x:Name="InputButtonBorderGrid">
                     <Button x:Name="InputButton1" Style="{StaticResource BubbleFrame}" Click="Button_Click">
                         <Grid x:Name="InputButton1Grid">

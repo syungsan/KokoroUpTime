@@ -37,6 +37,9 @@ namespace KokoroUpTime
             RenderTargetBitmap rtb = new RenderTargetBitmap((int)rectBounds.Width, (int)rectBounds.Height, 96, 96, PixelFormats.Pbgra32);
             rtb.Render(dv);
 
+            //isf形式で保存
+            nameBmp += ".isf";
+
             //仮置き
             string dirPath = $"./Log/{userName}/Chapter{currentChapter}";
 
@@ -57,7 +60,7 @@ namespace KokoroUpTime
             }
 
 
-            // ファイルのパスは仮
+            // ファイルのパスは仮(ISF形式で保存)
             using (var stream = File.Create($@"{startupPath}/{nameBmpPath}"))
             {
                 png.Save(stream);

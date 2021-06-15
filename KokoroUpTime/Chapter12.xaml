@@ -173,7 +173,7 @@
                     </Grid>
                 </Button>
             </Grid>
-            <Grid x:Name="ChallengeTimeGrid" MouseMove="OperationArea_MouseMove" MouseLeave="OperationArea_MouseLeave" MouseUp="OperationArea_MouseUp" d:IsHidden="True">
+            <Grid x:Name="ChallengeTimeGrid" MouseMove="OperationArea_MouseMove" MouseLeave="OperationArea_MouseLeave" MouseUp="OperationArea_MouseUp">
                 <StackPanel x:Name="ItemQuestionStackPanel" Orientation="Horizontal" VerticalAlignment="Top" Height="480">
                     <Grid x:Name="ItemQuestionGrid01"  Width="320" Height="480" VerticalAlignment="Top">
                         <Image x:Name="ItemQuestionImage01" Height="220" VerticalAlignment="Top" HorizontalAlignment="Center"/>
@@ -320,7 +320,7 @@
                     <Button x:Name="ItemReviewButton06" Style="{StaticResource ItemBorder02}" Content="上手に頼んだり断ったり、&#10;自分の気持ちを&#10;はきはき伝えられます。" Height="130" Width="300" Margin="158,62,458,308" PreviewMouseDown="Button_PreviewMouseDown" PreviewMouseUp="Button_PreviewMouseUp"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="GroupeActivityGrid">
+            <Grid x:Name="GroupeActivityGrid" d:IsHidden="True">
                 <Border CornerRadius="30" Margin="320,5,320,862" >
                     <Border.Background>
                         <SolidColorBrush Color="#FFFFD966" Opacity="0.8"/>

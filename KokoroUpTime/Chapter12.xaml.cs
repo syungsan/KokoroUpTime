@@ -338,6 +338,7 @@ namespace KokoroUpTime
             this.ReturnToTitleButton.Visibility = Visibility.Hidden;
 
             this.SelectFeelingBackButton.Visibility = Visibility.Hidden;
+            this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
             this.ToGroupeActivityButton.Visibility = Visibility.Hidden;
             this.ToChallengeTimeButton.Visibility = Visibility.Hidden;
                 
@@ -1502,12 +1503,12 @@ namespace KokoroUpTime
                         {
                             if(data.SelectedItemImageSource !="" && data.ItemMethodStroke.Count > 0)
                             {
-                                this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
+                                this.SelectFeelingNextButton.Visibility = Visibility.Visible;
                                 break;
                             }
                             else
                             {
-                                this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                                this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
                             }
                         }
                     }
@@ -1522,12 +1523,12 @@ namespace KokoroUpTime
                         {
                             if (data.SelectedItemImageSource != "" && data.ItemMethodText !="")
                             {
-                                this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
+                                this.SelectFeelingNextButton.Visibility = Visibility.Visible;
                                 break;
                             }
                             else
                             {
-                                this.SelectFeelingCompleteButton.Visibility = Visibility.Hidden;
+                                this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
                             }
                         }
                     }
@@ -2133,11 +2134,11 @@ namespace KokoroUpTime
                     {
                         if (this.dataOption.InputMethod == 0)
                         {
+                            int count = 1;
                             foreach (SelectedItemMethodStrokeData data in this.ITEM_METHOD_STROKE.Values)
                             {
-                                PropertyInfo property;
                                 string itemName ="";
-                                int count = 1;
+                            
                                 switch (data.SelectedItemImageSource)
                                 {
                                     case "Images/item01_solo.png":
@@ -2178,18 +2179,27 @@ namespace KokoroUpTime
                                 switch (data.SelectedItemTitle)
                                 {
                                     case "発明品①":
-                                        property = typeof(SelectedItemMethodStrokeData).GetProperty("SelectedItem1");
-                                        property.SetValue(this.dataChapter12, itemName);
+                                        this.dataChapter12.SelectedItem1 = itemName;
+                                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                        {
+                                            connection.Execute($@"UPDATE DataChapter12 SET SelectedItem1 = '{this.dataChapter12.SelectedItem1}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
+                                        }
                                         break;
 
                                     case "発明品②":
-                                        property = typeof(SelectedItemMethodStrokeData).GetProperty("SelectedItem2");
-                                        property.SetValue(this.dataChapter12, itemName);
+                                        this.dataChapter12.SelectedItem1 = itemName;
+                                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                        {
+                                            connection.Execute($@"UPDATE DataChapter12 SET SelectedItem2 = '{this.dataChapter12.SelectedItem2}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
+                                        }
                                         break;
 
                                     case "発明品③":
-                                        property = typeof(SelectedItemMethodStrokeData).GetProperty("SelectedItem3");
-                                        property.SetValue(this.dataChapter12, itemName);
+                                        this.dataChapter12.SelectedItem1 = itemName;
+                                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                        {
+                                            connection.Execute($@"UPDATE DataChapter12 SET SelectedItem3 = '{this.dataChapter12.SelectedItem3}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
+                                        }
                                         break;
                                 }
 
@@ -2202,7 +2212,6 @@ namespace KokoroUpTime
                         {
                             foreach (SelectedItemMethodTextData data in this.ITEM_METHOD_TEXT.Values)
                             {
-                                PropertyInfo selectedItemProperty;
                                 PropertyInfo itemMethodInputTextProperty;
 
                                 string itemName = "";
@@ -2247,41 +2256,43 @@ namespace KokoroUpTime
                                 switch (data.SelectedItemTitle)
                                 {
                                     case "発明品①":
-                                        selectedItemProperty = typeof(SelectedItemMethodStrokeData).GetProperty("SelectedItem1");
-                                        selectedItemProperty.SetValue(this.dataChapter12, itemName);
+                                        this.dataChapter12.SelectedItem1 = itemName;
 
-                                        selectedItemProperty = typeof(SelectedItemMethodStrokeData).GetProperty("ItemMethodInputText1");
-                                        selectedItemProperty.SetValue(this.dataChapter12, data.ItemMethodText);
+                                        itemMethodInputTextProperty = typeof(SelectedItemMethodStrokeData).GetProperty("ItemMethodInputText1");
+                                        itemMethodInputTextProperty.SetValue(this.dataChapter12, data.ItemMethodText);
 
                                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                                         {
                                             connection.Execute($@"UPDATE DataChapter12 SET ItemMethodInputText1 = '{this.dataChapter12.ItemMethodInputText1}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
+                                            connection.Execute($@"UPDATE DataChapter12 SET SelectedItem1 = '{this.dataChapter12.SelectedItem1}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
                                         }
                                         break;
 
                                     case "発明品②":
-                                        selectedItemProperty = typeof(SelectedItemMethodStrokeData).GetProperty("SelectedItem2");
-                                        selectedItemProperty.SetValue(this.dataChapter12, itemName);
+                                        this.dataChapter12.SelectedItem2 = itemName;
 
-                                        selectedItemProperty = typeof(SelectedItemMethodStrokeData).GetProperty("ItemMethodInputText2");
-                                        selectedItemProperty.SetValue(this.dataChapter12, data.ItemMethodText);
+
+                                        itemMethodInputTextProperty = typeof(SelectedItemMethodStrokeData).GetProperty("ItemMethodInputText2");
+                                        itemMethodInputTextProperty.SetValue(this.dataChapter12, data.ItemMethodText);
 
                                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                                         {
                                             connection.Execute($@"UPDATE DataChapter12 SET ItemMethodInputText2 = '{this.dataChapter12.ItemMethodInputText2}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
+                                            connection.Execute($@"UPDATE DataChapter12 SET SelectedItem2 = '{this.dataChapter12.SelectedItem2}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
                                         }
                                         break;
 
                                     case "発明品③":
-                                        selectedItemProperty = typeof(SelectedItemMethodStrokeData).GetProperty("SelectedItem3");
-                                        selectedItemProperty.SetValue(this.dataChapter12, itemName);
+                                        this.dataChapter12.SelectedItem3 = itemName;
 
-                                        selectedItemProperty = typeof(SelectedItemMethodStrokeData).GetProperty("ItemMethodInputText3");
-                                        selectedItemProperty.SetValue(this.dataChapter12, data.ItemMethodText);
+                                        itemMethodInputTextProperty = typeof(SelectedItemMethodStrokeData).GetProperty("ItemMethodInputText3");
+                                        itemMethodInputTextProperty.SetValue(this.dataChapter12, data.ItemMethodText);
 
                                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                                         {
                                             connection.Execute($@"UPDATE DataChapter12 SET ItemMethodInputText3 = '{this.dataChapter12.ItemMethodInputText3}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
+                                            connection.Execute($@"UPDATE DataChapter12 SET SelectedItem3 = '{this.dataChapter12.SelectedItem3}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
+
                                         }
                                         break;
                                 }
@@ -2318,7 +2329,7 @@ namespace KokoroUpTime
                         {
                             if (data.ItemMethodStroke.Count >0 && data.SelectedItemImageSource !="")
                             {
-                                this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
+                                this.SelectFeelingNextButton.Visibility = Visibility.Visible;
                             }
                         }
                         
@@ -2335,7 +2346,7 @@ namespace KokoroUpTime
                         {
                             if (data.ItemMethodText !="" && data.SelectedItemImageSource.ToString() != "")
                             {
-                                this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
+                                this.SelectFeelingNextButton.Visibility = Visibility.Visible;
                             }
                         }
                     }
@@ -2899,7 +2910,7 @@ namespace KokoroUpTime
                 {
                     if(data.ItemMethodStroke.Count > 0)
                     {
-                        this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
+                        this.SelectFeelingNextButton.Visibility = Visibility.Visible;
                     }
                 }
             }
@@ -2924,7 +2935,7 @@ namespace KokoroUpTime
                 {
                     if (data.ItemMethodText !="")
                     {
-                        this.SelectFeelingCompleteButton.Visibility = Visibility.Visible;
+                        this.SelectFeelingNextButton.Visibility = Visibility.Visible;
                     }
                 }
             }
@@ -3067,6 +3078,8 @@ namespace KokoroUpTime
         {
             this.dragObject = sender as FrameworkElement;
 
+            Panel.SetZIndex(this.dragObject, 0);
+
             //// マウス押下中フラグを上げる
             _isMouseDown = true;
 
@@ -3082,6 +3095,7 @@ namespace KokoroUpTime
             // マウス押下中フラグを落とす
             if (this._isMouseDown && this.dragObject !=null)
             {
+                Panel.SetZIndex(this.dragObject,Panel.GetZIndex(this.ItemNameButtonGrid)-1);
                 //
                 Point _dropPoint = this.dragObject.TranslatePoint(new Point(0.0d, 0.0d), this.MainGrid);
                 Point _questionPanelPoint = this.ItemQuestionStackPanel.TranslatePoint(new Point(0.0d, 0.0d), this.MainGrid);

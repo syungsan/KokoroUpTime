@@ -54,6 +54,19 @@ namespace KokoroUpTime
         public void Maximize(Window mainWindow)
         {
 
+           
+
+#if DEBUG
+
+            //Debug用の画面サイズ
+            mainWindow.Width = 800;
+            mainWindow.Height = 600;
+            mainWindow.ResizeMode = ResizeMode.CanResize;
+            mainWindow.Left = 1130;
+            mainWindow.Top = 490;
+
+#else
+
             mainWindow.ShowActivated = true;
             mainWindow.Topmost = true;
             mainWindow.ShowInTaskbar = false;
@@ -66,12 +79,8 @@ namespace KokoroUpTime
             // mainWindow.Cursor = Cursors.None;
             mainWindow.WindowState = WindowState.Maximized;
 
-            ////Debug用の画面サイズ
-            //mainWindow.Width = 800;
-            //mainWindow.Height = 600;
-            //mainWindow.ResizeMode = ResizeMode.CanResize;
-            //mainWindow.Left = 1130;
-            //mainWindow.Top = 490;
+#endif
+
 
         }
     }

@@ -100,11 +100,6 @@ namespace KokoroUpTime
         private string FeelingDictionaryKey="";
         private string InputDictionaryKey = "";
 
-        //入力したストロークを保存するためのコレクション
-        private StrokeCollection GroupeActivityInputStroke1 = new StrokeCollection();
-        private StrokeCollection GroupeActivityInputStroke2 = new StrokeCollection();
-        private StrokeCollection GroupeActivityInputStroke3 = new StrokeCollection();
-
         // ゲームの切り替えシーン
         private string scene;
 
@@ -181,9 +176,9 @@ namespace KokoroUpTime
 
             InputStroke = new Dictionary<string, StrokeCollection>()
             {
-                ["groupe_activity_input1"] = this.GroupeActivityInputStroke1,
-                ["groupe_activity_input2"] = this.GroupeActivityInputStroke2,
-                ["groupe_activity_input3"] = this.GroupeActivityInputStroke3,
+                ["groupe_activity_input1"] = new StrokeCollection(){},
+                ["groupe_activity_input2"] = new StrokeCollection(){},
+                ["groupe_activity_input3"] = new StrokeCollection(){},
             };
             InputText = new Dictionary<string, PropertyInfo>()
             {
@@ -2545,9 +2540,9 @@ namespace KokoroUpTime
                             {
                                 StrokeConverter strokeConverter = new StrokeConverter();
 
-                                strokeConverter.ConvertToBmpImage(this.InputCanvas, this.GroupeActivityInputStroke1, "groupe_activity_input_stroke_1", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
-                                strokeConverter.ConvertToBmpImage(this.InputCanvas, this.GroupeActivityInputStroke2, "groupe_activity_input_stroke_2", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
-                                strokeConverter.ConvertToBmpImage(this.InputCanvas, this.GroupeActivityInputStroke3, "groupe_activity_input_stroke_3", this.initConfig.dbPath, this.dataProgress.CurrentChapter);
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas, this.InputStroke["groupe_activity_input1"], "groupe_activity_input_stroke_1", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas, this.InputStroke["groupe_activity_input2"], "groupe_activity_input_stroke_2", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas, this.InputStroke["groupe_activity_input3"], "groupe_activity_input_stroke_3", this.initConfig.userName, this.dataProgress.CurrentChapter);
                             }
                             else
                             {

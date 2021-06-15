@@ -132,33 +132,22 @@ namespace KokoroUpTime
     // チャプター1のログカラム
     public class DataChapter1
     {
-
-        public DataChapter1()
-        {
-             MyKindOfGoodFeelings = "";
-             MyKindOfBadFeelings ="";
-             KimisKindOfFeeling ="";
-             AkamarusKindOfFeeling ="";
-             AkamarusSizeOfFeeling =-1;
-             AosukesKindOfFeeling ="";
-             AosukesSizeOfFeeling =-1;
-        }        
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string MyKindOfGoodFeelings { get; set; }
+        public string MyKindOfGoodFeelings { get; set; } = "";
 
-        public string MyKindOfBadFeelings { get; set; }
+        public string MyKindOfBadFeelings { get; set; }="";
 
-        public string KimisKindOfFeeling { get; set; }
+        public string KimisKindOfFeeling { get; set; }="";
 
-        public string AkamarusKindOfFeeling { get; set; }
+        public string AkamarusKindOfFeeling { get; set; }="";
 
-        public int AkamarusSizeOfFeeling { get; set; }
+        public int AkamarusSizeOfFeeling { get; set; } = -1;
 
-        public string AosukesKindOfFeeling { get; set; }
+        public string AosukesKindOfFeeling { get; set; }="";
 
-        public int AosukesSizeOfFeeling { get; set; }
+        public int AosukesSizeOfFeeling { get; set; }=-1;
 
         public string CreatedAt { get; set; }
     }
@@ -166,33 +155,22 @@ namespace KokoroUpTime
     // チャプター2のログカラム
     public class DataChapter2 :BaseDataChapter
     {
-        public DataChapter2()
-        {
-            MySelectGoodEvents = "";
-            AosukesSizeOfFeelingOfEating = -1;
-            AosukesDifficultyOfEating = "";
-            AosukesSizeOfFeelingOfGettingHighScore = -1;
-            AosukesDifficultyOfGettingHighScore = "";
-            AosukesSizeOfFeelingOfTalkingWithFriend = -1;
-            AosukesDifficultyOfTalkingWithFriend = "";
-            MyALittlleExcitingEvents = "";
-        }
         // このレコードは定石
         [PrimaryKey, AutoIncrement]
         // データベースに記録するレコードの型の宣言をしてください。
-        public string MySelectGoodEvents { get; set; }
+        public string MySelectGoodEvents { get; set; } = "";
 
-        public int AosukesSizeOfFeelingOfEating { get; set; }
+        public int AosukesSizeOfFeelingOfEating { get; set; } = -1;
 
-        public string AosukesDifficultyOfEating { get; set; }
+        public string AosukesDifficultyOfEating { get; set; }="";
 
-        public int AosukesSizeOfFeelingOfGettingHighScore { get; set; }
+        public int AosukesSizeOfFeelingOfGettingHighScore { get; set; }=-1;
 
-        public string AosukesDifficultyOfGettingHighScore { get; set; }
+        public string AosukesDifficultyOfGettingHighScore { get; set; }="";
 
-        public int AosukesSizeOfFeelingOfTalkingWithFriend { get; set; }
+        public int AosukesSizeOfFeelingOfTalkingWithFriend { get; set; }=-1;
 
-        public string AosukesDifficultyOfTalkingWithFriend { get; set; }
+        public string AosukesDifficultyOfTalkingWithFriend { get; set; }="";
 
         public string MyALittlleExcitingEvents { get; set; }
     }
@@ -200,54 +178,37 @@ namespace KokoroUpTime
     // チャプター3のログカラム
     public class DataChapter3
     {
-        public DataChapter3()
-        {
-            AosukesKindOfFeelingPreUseItem = "";
-            KimisKindOfFeelingPreUseItem="";
-            AosukesKindOfFeelingAfterUsedItem="";
-            KimisKindOfFeelingAfterUsedItem="";
-            AkamarusKindOfFeelingAfterUsedItem="";
-            AosukesSizeOfFeelingPreUseItem=-1;
-            KimisSizeOfFeelingPreUseItem=-1;
-            AosukesSizeOfFeelingAfterUsedItem=-1;
-            KimisSizeOfFeelingAfterUsedItem=-1;
-            AkamarusSizeOfFeelingAfterUsedItem=-1;
-            SelectedPraiseHotWord="";
-            SelectedWorryHotWord="";
-            SelectedEncourageHotWord="";
-            SelectedThanksHotWord="";
-        }
         [PrimaryKey, AutoIncrement]
 
         public int Id { get; set; }
 
-        public  string AosukesKindOfFeelingPreUseItem { get; set; }
+        public string AosukesKindOfFeelingPreUseItem { get; set; } = "";
 
-        public string KimisKindOfFeelingPreUseItem { get; set; }
+        public string KimisKindOfFeelingPreUseItem { get; set; }="";
 
-        public string AosukesKindOfFeelingAfterUsedItem { get; set; }
+        public string AosukesKindOfFeelingAfterUsedItem { get; set; }="";
 
-        public string KimisKindOfFeelingAfterUsedItem { get; set; }
+        public string KimisKindOfFeelingAfterUsedItem { get; set; }="";
 
-        public string AkamarusKindOfFeelingAfterUsedItem { get; set; }
+        public string AkamarusKindOfFeelingAfterUsedItem { get; set; }="";
 
-        public int AosukesSizeOfFeelingPreUseItem { get; set; }
+        public int AosukesSizeOfFeelingPreUseItem { get; set; } = -1;
 
-        public int KimisSizeOfFeelingPreUseItem { get; set; }
+        public int KimisSizeOfFeelingPreUseItem { get; set; }=-1;
 
-        public int AosukesSizeOfFeelingAfterUsedItem { get; set; }
+        public int AosukesSizeOfFeelingAfterUsedItem { get; set; }=-1;
 
-        public int KimisSizeOfFeelingAfterUsedItem { get; set; }
+        public int KimisSizeOfFeelingAfterUsedItem { get; set; }=-1;
 
-        public int AkamarusSizeOfFeelingAfterUsedItem { get; set; }
+        public int AkamarusSizeOfFeelingAfterUsedItem { get; set; }=-1;
 
-        public string SelectedPraiseHotWord { get; set; }
+        public string SelectedPraiseHotWord { get; set; }="";
 
-        public string SelectedWorryHotWord { get; set; }
+        public string SelectedWorryHotWord { get; set; }="";
 
-        public string SelectedEncourageHotWord { get; set; }
+        public string SelectedEncourageHotWord { get; set; }="";
 
-        public string SelectedThanksHotWord { get; set; }
+        public string SelectedThanksHotWord { get; set; }="";
 
         public string CreatedAt { get; set; }
     }
@@ -255,23 +216,14 @@ namespace KokoroUpTime
     // チャプター4のログカラム
     public class DataChapter4
     {
-        public DataChapter4()
-        {
-            KimisKindOfFeelingAskedForWork = "";
-            KimisKindOfFeelingAskedByAkamaru="";
-
-            KimisSizeOfFeelingAskedForWork=-1;
-            KimisSizeOfFeelingAskedByAkamaru=-1;
-        }
-
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string KimisKindOfFeelingAskedForWork { get; set; }
-        public string KimisKindOfFeelingAskedByAkamaru { get; set; }
+        public string KimisKindOfFeelingAskedForWork { get; set; } = "";
+        public string KimisKindOfFeelingAskedByAkamaru { get; set; }="";
 
-        public int KimisSizeOfFeelingAskedForWork { get; set; }
-        public int KimisSizeOfFeelingAskedByAkamaru { get; set; }
+        public int KimisSizeOfFeelingAskedForWork { get; set; } = -1;
+        public int KimisSizeOfFeelingAskedByAkamaru { get; set; }=-1;
 
         public string CreatedAt { get; set; }
     }
@@ -279,54 +231,36 @@ namespace KokoroUpTime
     // チャプター5のログカラム
     public class DataChapter5
     {
-        public DataChapter5()
-        {
-            InputFaceImageOfKimiText = "";
-            InputHandImageOfKimiText = "";
-            InputStomachImageOfKimiText = "";
-            InputOthersImageOfKimiText = "";
-            InputHeadImageOfKimiText = "";
-            InputShoulderImageOfKimiText = "";
-            InputLegImageOfKimiText = "";
-            KindOfFeelingNotUnderstandProblem = "";
-            KindOfFeelingRecorderProblem = "";
-            SizeOfFeelingNotUnderstandProblem = -1;
-            SizeOfFeelingRecorderProblem = -1;
-            InputMyBodyImageTextNotUnderstandProblem = "";
-            InputMyBodyImageTextRecorderProblem = "";
-            InputRelaxMethodText = "";
-        }
-
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string InputFaceImageOfKimiText { get; set; }
+        public string InputFaceImageOfKimiText { get; set; } = "";
 
-        public string InputHandImageOfKimiText { get; set; }
+        public string InputHandImageOfKimiText { get; set; }="";
 
-        public string InputStomachImageOfKimiText { get; set; }
+        public string InputStomachImageOfKimiText { get; set; }="";
 
-        public string InputOthersImageOfKimiText { get; set; }
+        public string InputOthersImageOfKimiText { get; set; }="";
 
-        public string InputHeadImageOfKimiText { get; set; }
+        public string InputHeadImageOfKimiText { get; set; }="";
 
-        public string InputShoulderImageOfKimiText { get; set; }
+        public string InputShoulderImageOfKimiText { get; set; }="";
 
-        public string InputLegImageOfKimiText { get; set; }
+        public string InputLegImageOfKimiText { get; set; }="";
 
-        public string KindOfFeelingNotUnderstandProblem { get; set; }
+        public string KindOfFeelingNotUnderstandProblem { get; set; }="";
 
-        public string KindOfFeelingRecorderProblem { get; set; }
+        public string KindOfFeelingRecorderProblem { get; set; }="";
 
-        public int? SizeOfFeelingNotUnderstandProblem { get; set; }
+        public int? SizeOfFeelingNotUnderstandProblem { get; set; } = -1;
 
-        public int? SizeOfFeelingRecorderProblem { get; set; }
+        public int? SizeOfFeelingRecorderProblem { get; set; }=-1;
 
-        public string InputMyBodyImageTextNotUnderstandProblem { get; set; }
+        public string InputMyBodyImageTextNotUnderstandProblem { get; set; } = "";
 
-        public string InputMyBodyImageTextRecorderProblem { get; set; }
+        public string InputMyBodyImageTextRecorderProblem { get; set; }="";
 
-        public string InputRelaxMethodText { get; set; }
+        public string InputRelaxMethodText { get; set; }="";
 
        public string CreatedAt { get; set; }
     }
@@ -334,17 +268,11 @@ namespace KokoroUpTime
     // チャプター6のログカラム
     public class DataChapter6
     {
-        public DataChapter6()
-        {
-            SelectedNicePersonality = "";
-            InputFriendsNicePersonality ="";
-        }
-
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string SelectedNicePersonality { get; set; }
-        public string InputFriendsNicePersonality { get; set; }
+        public string SelectedNicePersonality { get; set; } = "";
+        public string InputFriendsNicePersonality { get; set; }="";
 
         public string CreatedAt { get; set; }
     }
@@ -352,72 +280,48 @@ namespace KokoroUpTime
     // チャプター7のログカラム
     public class DataChapter7
     {
-        public DataChapter7()
-        {
-             ChallengeTimeSelectedScene = "";
-             GroupeActivitySelectedScene ="";
-             KimisKindOfFeelingInviteFriends ="";
-             KimisKindOfFeelingAnnouncement ="";
-             YourKindOfFeelingAnnouncement ="";
-             YourKindOfFeelingGreetingToFriend ="";
-             YourFriendsKindOfFeelingAnnouncement=""; 
-             YourFriendsKindOfFeelingGreetingToAnotherFriend ="";
-             KimisSizeOfFeelingInviteFriends =-1;
-             KimisSizeOfFeelingAnnouncement =-1;
-             YourSizeOfFeelingAnnouncement =-1;
-             YourSizeOfFeelingGreetingToFriend =-1;
-             YourFriendsSizeOfFeelingAnnouncement =-1;
-             YourFriendsSizeOfFeelingGreetingToAnotherFriend =-1;
-             InputAkamaruThoughtText ="";
-             InputAosukeThoughtText ="";
-             InputYourToughtText1 ="";
-             InputYourToughtText2 ="";
-             InputFriendToughtText1 ="";
-             InputFriendToughtText2 ="";
-        }
-
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string ChallengeTimeSelectedScene { get; set; }
+        public string ChallengeTimeSelectedScene { get; set; } = "";
         
-        public string GroupeActivitySelectedScene { get; set; }
+        public string GroupeActivitySelectedScene { get; set; }="";
 
-        public string KimisKindOfFeelingInviteFriends { get; set; }
+        public string KimisKindOfFeelingInviteFriends { get; set; }="";
 
-        public string KimisKindOfFeelingAnnouncement { get; set; }
+        public string KimisKindOfFeelingAnnouncement { get; set; }="";
 
-        public string YourKindOfFeelingAnnouncement { get; set; }
+        public string YourKindOfFeelingAnnouncement { get; set; }="";
 
-        public string YourKindOfFeelingGreetingToFriend { get; set; }
+        public string YourKindOfFeelingGreetingToFriend { get; set; }="";
 
-        public string YourFriendsKindOfFeelingAnnouncement { get; set; }
+        public string YourFriendsKindOfFeelingAnnouncement { get; set; }="";
 
-        public string YourFriendsKindOfFeelingGreetingToAnotherFriend { get; set; }
+        public string YourFriendsKindOfFeelingGreetingToAnotherFriend { get; set; }="";
 
-        public int? KimisSizeOfFeelingInviteFriends { get; set; }
+        public int? KimisSizeOfFeelingInviteFriends { get; set; } = -1;
 
-        public int? KimisSizeOfFeelingAnnouncement { get; set; }
+        public int? KimisSizeOfFeelingAnnouncement { get; set; }=-1;
 
-        public int? YourSizeOfFeelingAnnouncement { get; set; }
+        public int? YourSizeOfFeelingAnnouncement { get; set; }=-1;
 
-        public int? YourSizeOfFeelingGreetingToFriend { get; set; }
+        public int? YourSizeOfFeelingGreetingToFriend { get; set; }=-1;
 
-        public int? YourFriendsSizeOfFeelingAnnouncement { get; set; }
+        public int? YourFriendsSizeOfFeelingAnnouncement { get; set; }=-1;
 
-        public int? YourFriendsSizeOfFeelingGreetingToAnotherFriend { get; set; }
+        public int? YourFriendsSizeOfFeelingGreetingToAnotherFriend { get; set; }=-1;
 
-        public string InputAkamaruThoughtText { get; set; }
+        public string InputAkamaruThoughtText { get; set; } = "";
 
-        public string InputAosukeThoughtText { get; set; }
+        public string InputAosukeThoughtText { get; set; }="";
 
-        public string InputYourToughtText1 { get; set; }
+        public string InputYourToughtText1 { get; set; }="";
 
-        public string InputYourToughtText2 { get; set; }
+        public string InputYourToughtText2 { get; set; }="";
 
-        public string InputFriendToughtText1 { get; set; }
+        public string InputFriendToughtText1 { get; set; }="";
 
-        public string InputFriendToughtText2 { get; set; }
+        public string InputFriendToughtText2 { get; set; }="";
 
         public string CreatedAt { get; set; }
     }
@@ -425,74 +329,50 @@ namespace KokoroUpTime
     // チャプター8のログカラム
     public class DataChapter8
     {
-        public DataChapter8()
-        {
-            AosukesKindOfFeelingPreUseItem = "";
-            KimisKindOfFeelingPreUseItem ="";
-            AkamarusKindOfFeelingPreUseItem ="";
-            AosukesKindOfFeelingAfterUsedItem ="";
-            KimisKindOfFeelingAfterUsedItem ="";
-            AkamarusKindOfFeelingAfterUsedItem ="";
-            Let_sCheckKindOfFeeling ="";
-            PositiveThinkingKindOfFeeling ="";
-            ThoughtsOfOthersKindOfFeeling ="";
-            AosukesSizeOfFeelingPreUseItem =-1;
-            KimisSizeOfFeelingPreUseItem =-1;
-            AkamarusSizeOfFeelingPreUseItem =-1;
-            AosukesSizeOfFeelingAfterUsedItem =-1;
-            KimisSizeOfFeelingAfterUsedItem =-1;
-            AkamarusSizeOfFeelingAfterUsedItem =-1;
-            Let_sCheckSizeOfFeeling =-1;
-            PositiveThinkingSizeOfFeeling =-1;
-            ThoughtsOfOthersSizeOfFeeling =-1;
-            GroupeActivityInputText1 ="";
-            GroupeActivityInputText2 ="";
-            GroupeActivityInputText3 ="";
-        }
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string AosukesKindOfFeelingPreUseItem { get; set; }
+        public string AosukesKindOfFeelingPreUseItem { get; set; } = "";
 
-        public string KimisKindOfFeelingPreUseItem { get; set; }
+        public string KimisKindOfFeelingPreUseItem { get; set; }="";
 
-        public string AkamarusKindOfFeelingPreUseItem { get; set; }
+        public string AkamarusKindOfFeelingPreUseItem { get; set; }="";
 
-        public string AosukesKindOfFeelingAfterUsedItem { get; set; }
+        public string AosukesKindOfFeelingAfterUsedItem { get; set; }="";
 
-        public string KimisKindOfFeelingAfterUsedItem { get; set; }
+        public string KimisKindOfFeelingAfterUsedItem { get; set; }="";
 
-        public string AkamarusKindOfFeelingAfterUsedItem { get; set; }
+        public string AkamarusKindOfFeelingAfterUsedItem { get; set; }="";
 
-        public string Let_sCheckKindOfFeeling { get; set; }
+        public string Let_sCheckKindOfFeeling { get; set; }="";
 
-        public string PositiveThinkingKindOfFeeling { get; set; }
+        public string PositiveThinkingKindOfFeeling { get; set; }="";
 
-        public string ThoughtsOfOthersKindOfFeeling { get; set; }
+        public string ThoughtsOfOthersKindOfFeeling { get; set; }="";
 
-        public int AosukesSizeOfFeelingPreUseItem { get; set; }
+        public int AosukesSizeOfFeelingPreUseItem { get; set; } = -1;
 
-        public int KimisSizeOfFeelingPreUseItem { get; set; }
+        public int KimisSizeOfFeelingPreUseItem { get; set; }=-1;
 
-        public int AkamarusSizeOfFeelingPreUseItem { get; set; }
+        public int AkamarusSizeOfFeelingPreUseItem { get; set; }=-1;
 
-        public int AosukesSizeOfFeelingAfterUsedItem { get; set; }
+        public int AosukesSizeOfFeelingAfterUsedItem { get; set; }=-1;
 
-        public int KimisSizeOfFeelingAfterUsedItem { get; set; }
+        public int KimisSizeOfFeelingAfterUsedItem { get; set; }=-1;
 
-        public int AkamarusSizeOfFeelingAfterUsedItem { get; set; }
+        public int AkamarusSizeOfFeelingAfterUsedItem { get; set; }=-1;
 
-        public int Let_sCheckSizeOfFeeling { get; set; }
+        public int Let_sCheckSizeOfFeeling { get; set; }=-1;
 
-        public int PositiveThinkingSizeOfFeeling { get; set; }
+        public int PositiveThinkingSizeOfFeeling { get; set; }=-1;
 
-        public int ThoughtsOfOthersSizeOfFeeling { get; set; }
+        public int ThoughtsOfOthersSizeOfFeeling { get; set; }=-1;
 
-        public string GroupeActivityInputText1 { get; set; }
+        public string GroupeActivityInputText1 { get; set; } = "";
 
-        public string GroupeActivityInputText2 { get; set; }
+        public string GroupeActivityInputText2 { get; set; }="";
 
-        public string GroupeActivityInputText3 { get; set; }
+        public string GroupeActivityInputText3 { get; set; }="";
 
         public string CreatedAt { get; set; }
     }
@@ -500,42 +380,29 @@ namespace KokoroUpTime
     // チャプター9のログカラム
     public class DataChapter9
     {
-        public DataChapter9()
-        {
-            CheckedNotGoodEvent = "";
-            AosukesKindOfFeelingTalkToFriends ="";
-            AosukesKindOfFeelingAfter10minutes ="";
-            AosukesKindOfFeelingNextDay ="";
-            AosukesKindOfFeelingDayAfterTomorrow ="";
-            AosukesSizeOfFeelingTalkToFriends = -1;
-            AosukesSizeOfFeelingAfter10minutes = -1;
-            AosukesSizeOfFeelingNextDay = -1;
-            AosukesSizeOfFeelingDayAfterTomorrow = -1;
-            InputChallengeText ="";
-        }
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string CheckedNotGoodEvent {get; set;}
+        public string CheckedNotGoodEvent { get; set; } = "";
 
-        public string AosukesKindOfFeelingTalkToFriends { get; set; }
+        public string AosukesKindOfFeelingTalkToFriends { get; set; }="";
 
-        public string AosukesKindOfFeelingAfter10minutes { get; set; }
+        public string AosukesKindOfFeelingAfter10minutes { get; set; }="";
 
-        public string AosukesKindOfFeelingNextDay { get; set; }
+        public string AosukesKindOfFeelingNextDay { get; set; }="";
 
-        public string AosukesKindOfFeelingDayAfterTomorrow { get; set; }
+        public string AosukesKindOfFeelingDayAfterTomorrow { get; set; }="";
 
-        public int AosukesSizeOfFeelingTalkToFriends { get; set; }
+        public int AosukesSizeOfFeelingTalkToFriends { get; set; } = -1;
 
-        public int AosukesSizeOfFeelingAfter10minutes { get; set; }
+        public int AosukesSizeOfFeelingAfter10minutes { get; set; }=-1;
 
-        public int AosukesSizeOfFeelingNextDay { get; set; }
+        public int AosukesSizeOfFeelingNextDay { get; set; }=-1;
 
-        public int AosukesSizeOfFeelingDayAfterTomorrow { get; set; }
+        public int AosukesSizeOfFeelingDayAfterTomorrow { get; set; }=-1;
 
-        public string InputChallengeText { get; set; }
+        public string InputChallengeText { get; set; }="";
 
         public string CreatedAt { get; set; }
 
@@ -544,46 +411,30 @@ namespace KokoroUpTime
     // チャプター10のログカラム
     public class DataChapter10
     {
-        public DataChapter10()
-        {
-            AosukeChallengeStep1KindOfFeeling = "";
-            AosukeChallengeStep2KindOfFeeling ="";
-            AosukeChallengeStep3KindOfFeeling ="";
-            AosukeChallengeStep1SizeOfFeeling = -1;
-            AosukeChallengeStep2SizeOfFeeling = -1;
-            AosukeChallengeStep3SizeOfFeeling = -1;
-            ReasonDifferenceSizeOfFeelingInputText ="";
-            AosukeSmallChallengeInputText ="";
-            AosukeChallengeStep1InputText ="";
-            AosukeChallengeStep2InputText ="";
-            AosukeChallengeStep3InputText ="";
-        }
-
-
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string AosukeChallengeStep1KindOfFeeling { get; set; }
+        public string AosukeChallengeStep1KindOfFeeling { get; set; } = "";
 
-        public string AosukeChallengeStep2KindOfFeeling { get; set; }
+        public string AosukeChallengeStep2KindOfFeeling { get; set; }="";
 
-        public string AosukeChallengeStep3KindOfFeeling { get; set; }
+        public string AosukeChallengeStep3KindOfFeeling { get; set; }="";
 
-        public int AosukeChallengeStep1SizeOfFeeling { get; set; }
+        public int AosukeChallengeStep1SizeOfFeeling { get; set; }=-1;
 
-        public int AosukeChallengeStep2SizeOfFeeling { get; set; }
+        public int AosukeChallengeStep2SizeOfFeeling { get; set; }=-1;
 
-        public int AosukeChallengeStep3SizeOfFeeling { get; set; }
+        public int AosukeChallengeStep3SizeOfFeeling { get; set; }=-1;
 
-        public string ReasonDifferenceSizeOfFeelingInputText { get; set; }
+        public string ReasonDifferenceSizeOfFeelingInputText { get; set; }="";
 
-        public string AosukeSmallChallengeInputText {get; set;}
+        public string AosukeSmallChallengeInputText {get; set;}="";
 
-        public string AosukeChallengeStep1InputText {get; set;}
+        public string AosukeChallengeStep1InputText {get; set;}="";
 
-        public string AosukeChallengeStep2InputText {get; set;}
+        public string AosukeChallengeStep2InputText {get; set;}="";
 
-        public string AosukeChallengeStep3InputText {get; set;}
+        public string AosukeChallengeStep3InputText {get; set;}="";
 
         public string CreatedAt { get; set; }
 
@@ -592,34 +443,24 @@ namespace KokoroUpTime
     // チャプター11のログカラム
     public class DataChapter11
     {
-        public DataChapter11()
-        {
-            AkamaruOtherSolutionUseItemInputText = "";
-            SelectedAkamaruGoalText = "";
-            Step2AkamaruManyMethodInputText1 = "";
-            Step2AkamaruManyMethodInputText2 = "";
-            Step2AkamaruManyMethodInputText3 = "";
-            EvaluateAkamaruMethodText1 = "";
-            EvaluateAkamaruMethodText2 = "";
-            EvaluateAkamaruMethodText3 = "";
-        }
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string AkamaruOtherSolutionUseItemInputText { get; set; }
+        public string SelectedItem { get; set; } = "";
+        public string AkamaruOtherSolutionUseItemInputText { get; set; }="";
 
-        public string SelectedAkamaruGoalText { get; set; }
+        public string SelectedAkamaruGoalText { get; set; }="";
 
-        public string Step2AkamaruManyMethodInputText1 { get; set; }
-        public string Step2AkamaruManyMethodInputText2 { get; set; }
-        public string Step2AkamaruManyMethodInputText3 { get; set; }
+        public string Step2AkamaruManyMethodInputText1 { get; set; }="";
+        public string Step2AkamaruManyMethodInputText2 { get; set; }="";
+        public string Step2AkamaruManyMethodInputText3 { get; set; }="";
 
-        public string EvaluateAkamaruMethodText1 { get; set; }
-        public string EvaluateAkamaruMethodText2 { get; set; }
-        public string EvaluateAkamaruMethodText3 { get; set; }
+        public string EvaluationAkamaruMethodText1 { get; set; }="";
+        public string EvaluationAkamaruMethodText2 { get; set; }="";
+        public string EvaluationAkamaruMethodText3 { get; set; }="";
 
-        public string EvaluateAosukeMethodText { get; set; }
-        public string EvaluationAosukeMethodText { get; set; }
+        public string EvaluateAosukeMethodText { get; set; }="";
+        public string EvaluationAosukeMethodText { get; set; }="";
 
         public string CreatedAt { get; set; }
 
@@ -628,28 +469,18 @@ namespace KokoroUpTime
     // チャプター12のログカラム
     public class DataChapter12
     {
-        public DataChapter12()
-        {
-            SelectedSceneText = "";
-            ItemMethodInputText1 = "";
-            ItemMethodInputText2 = "";
-            ItemMethodInputText3 = "";
-            SelectedItem1 = "";
-            SelectedItem2 = "";
-            SelectedItem3 = "";
-    }
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string SelectedSceneText { get; set; }
+        public string SelectedSceneText { get; set; }="";
 
-        public string SelectedItem1 { get; set; }
-        public string SelectedItem2 { get; set; }
-        public string SelectedItem3 { get; set; }
+        public string SelectedItem1 { get; set; }="";
+        public string SelectedItem2 { get; set; }="";
+        public string SelectedItem3 { get; set; } = "";
 
-        public string ItemMethodInputText1 { get; set; }
-        public string ItemMethodInputText2 { get; set; }
-        public string ItemMethodInputText3 { get; set; }
+        public string ItemMethodInputText1 { get; set; }="";
+        public string ItemMethodInputText2 { get; set; }="";
+        public string ItemMethodInputText3 { get; set; }="";
 
         public string CreatedAt { get; set; }
     }

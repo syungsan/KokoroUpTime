@@ -73,6 +73,13 @@ namespace KokoroUpTime
         {
             InitializeComponent();
 
+            #if DEBUG
+                //Debug時の設定
+                this.INIT_MESSAGE_SPEED = 1000.0f;
+                this.IS_3_SECOND_RULE = false;
+            #endif
+
+
             // Hide host's navigation UI
             this.ShowsNavigationUI = false;
 

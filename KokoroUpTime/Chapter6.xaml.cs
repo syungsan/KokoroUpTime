@@ -1675,7 +1675,7 @@ namespace KokoroUpTime
             if (this.isClickable)
             {
                 
-                if((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton" || button.Name == "GroupeActivityNextMessageButton" || button.Name == "ReturnButton"))
+                if((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton" || button.Name == "GroupeActivityNextMessageButton" || button.Name == "ReturnButton" || button.Name == "SelectFeelingNextButton"))
                 {
 
                     if (button.Name == "NextMessageButton")
@@ -1730,9 +1730,9 @@ namespace KokoroUpTime
                                     else if (canvas.Name == "PersonalityInputCanvas")
                                     {
                                         strokeConverter.ConvertToBmpImage(canvas, canvas.Strokes, $"groupe_activity_friends_personality_{number}",this.initConfig.userName,this.dataProgress.CurrentChapter);
+                                        number++;
                                     }
 
-                                    number++;
                                 }
                             }
                             else

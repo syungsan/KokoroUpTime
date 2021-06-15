@@ -96,6 +96,7 @@ namespace KokoroUpTime
         private Dictionary<string, string[]> AOSUKE_METHOD_TEXT_VALUES;
         private Dictionary<StrokeCollection, string[]> AOSUKE_METHOD_STROKE_VALUES;
 
+
         private ObservableCollection<MethodStrokeValueData> _methodstrokedata;
         private ObservableCollection<MethodTextValueData> _methodtextdata;
         private ObservableCollection<EvaluatedMethodStrokeData> _evaluatedmethodstrokedata;
@@ -2348,81 +2349,90 @@ namespace KokoroUpTime
                         this.BackMessageButton.Visibility = Visibility.Hidden;
                         this.NextMessageButton.Visibility = Visibility.Hidden;
 
-                        if(this.scene == "チャレンジタイム！　パート①")
+                        if (this.Step2InputAosukeManySolutionsGrid.IsVisible)
                         {
+                            this.InitializedAosukeMethodListView();
 
-                        }
-                        else if(this.scene== "チャレンジタイム！　パート②")
-                        {
-                            
-                            
-                        }
-                        else if (this.scene == "グループアクティビティ")
-                        {
-                            if (this.Step2InputAosukeManySolutionsGrid.IsVisible)
+                            if (this.dataOption.InputMethod == 0)
                             {
-                                this.InitializedAosukeMethodListView();
-                            }
-                            else if (this.EvaluateAosukeMethodListView.IsVisible)
-                            {
-                                if(this.dataOption.InputMethod == 0)
+                                StrokeConverter strokeConverter = new StrokeConverter();
+                                for (int i = 0; i < this.Step2AosukeMethodInputStrokes.Length; i++)
                                 {
-
-                                    this.CountNumberOfCorrect(null, (StrokeCollection)this._methodstrokedata.First().MethodStroke);
-
-                                    this._evaluatedmethodstrokedata.Clear();
-                                    foreach (StrokeCollection strokes in this.AOSUKE_METHOD_STROKE_VALUES.Keys)
-                                    {
-                                        this.DecideBestMethod(null, strokes);
-
-                                        if(this.AOSUKE_METHOD_STROKE_VALUES[strokes][5] == "BestMethod")
-                                        {
-                                            foreach(System.Windows.Ink.Stroke stroke in strokes)
-                                            {
-                                                stroke.DrawingAttributes.Color = Colors.Red;
-                                            }
-                                            this._evaluatedmethodstrokedata.Add(new EvaluatedMethodStrokeData(strokes));
-                                        }
-                                        else
-                                        {
-                                            foreach (System.Windows.Ink.Stroke stroke in strokes)
-                                            {
-                                                stroke.DrawingAttributes.Color = Colors.Gray;
-                                            }
-                                            this._evaluatedmethodstrokedata.Add(new EvaluatedMethodStrokeData(strokes));
-                                        }
-                                    }
-                                    this.ViewInputAosukeMethodItemsControl.ItemsSource = this._evaluatedmethodstrokedata;
+                                    strokeConverter.ConvertToBmpImage(this.InputCanvas3_1, this.Step2AosukeMethodInputStrokes[i], $"groupe_activity_input_aosuke's_method_{i + 1}", this.initConfig.userName, this.dataProgress.CurrentChapter);
                                 }
-                                else
+
+                            }
+                            else
+                            {
+                                this.dataChapter11.EvaluateAosukeMethodText = "";
+                                foreach (var text in this.Step2AosukeMethodInputText)
                                 {
-                                    this.CountNumberOfCorrect((string)this._methodtextdata.First().MethodText, null);
-
-                                    this._evaluatedmethodtextdata.Clear();
-                                    foreach (string text in this.AOSUKE_METHOD_TEXT_VALUES.Keys)
-                                    {
-                                        this.DecideBestMethod(text, null);
-
-                                        if (this.AOSUKE_METHOD_TEXT_VALUES[text][5] == "BestMethod")
-                                        {
-                                            this._evaluatedmethodtextdata.Add(new EvaluatedMethodTextData(text,Brushes.Red));
-                                        }
-                                        else
-                                        {
-                                            this._evaluatedmethodtextdata.Add(new EvaluatedMethodTextData(text, Brushes.Gray));
-                                        }
-                                    }
-                                    this.ViewInputAosukeMethodItemsControl.ItemsSource = this._evaluatedmethodtextdata;
+                                    this.dataChapter11.EvaluateAosukeMethodText += $"{text},";
+                                }
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"Update DataChapter11 SET EvaluateAosukeMethodText ='{this.dataChapter11.EvaluateAosukeMethodText}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
                                 }
                             }
                         }
+                        else if (this.EvaluateAosukeMethodListView.IsVisible)
+                        {
+                            if(this.dataOption.InputMethod == 0)
+                            {
 
-                        if (this.InputButtonBorder.Visibility == Visibility)
+                                this.CountNumberOfCorrect(null, (StrokeCollection)this._methodstrokedata.First().MethodStroke);
+
+                                this._evaluatedmethodstrokedata.Clear();
+                                foreach (StrokeCollection strokes in this.AOSUKE_METHOD_STROKE_VALUES.Keys)
+                                {
+                                    this.DecideBestMethod(null, strokes);
+
+                                    if(this.AOSUKE_METHOD_STROKE_VALUES[strokes][5] == "BestMethod")
+                                    {
+                                        foreach(System.Windows.Ink.Stroke stroke in strokes)
+                                        {
+                                            stroke.DrawingAttributes.Color = Colors.Red;
+                                        }
+                                        this._evaluatedmethodstrokedata.Add(new EvaluatedMethodStrokeData(strokes));
+                                    }
+                                    else
+                                    {
+                                        foreach (System.Windows.Ink.Stroke stroke in strokes)
+                                        {
+                                            stroke.DrawingAttributes.Color = Colors.Gray;
+                                        }
+                                        this._evaluatedmethodstrokedata.Add(new EvaluatedMethodStrokeData(strokes));
+                                    }
+                                }
+                                this.ViewInputAosukeMethodItemsControl.ItemsSource = this._evaluatedmethodstrokedata;
+                            }
+                            else
+                            {
+                                this.CountNumberOfCorrect((string)this._methodtextdata.First().MethodText, null);
+
+                                this._evaluatedmethodtextdata.Clear();
+                                foreach (string text in this.AOSUKE_METHOD_TEXT_VALUES.Keys)
+                                {
+                                    this.DecideBestMethod(text, null);
+
+                                    if (this.AOSUKE_METHOD_TEXT_VALUES[text][5] == "BestMethod")
+                                    {
+                                        this._evaluatedmethodtextdata.Add(new EvaluatedMethodTextData(text,Brushes.Red));
+                                    }
+                                    else
+                                    {
+                                        this._evaluatedmethodtextdata.Add(new EvaluatedMethodTextData(text, Brushes.Gray));
+                                    }
+                                }
+                                this.ViewInputAosukeMethodItemsControl.ItemsSource = this._evaluatedmethodtextdata;
+                            }
+                        }
+                        else if (this.InputAkamaruOtherSolutionGrid.IsVisible)
                         {
                             if (this.dataOption.InputMethod == 0)
                             {
                                 StrokeConverter strokeConverter = new StrokeConverter();
-                                strokeConverter.ConvertToBmpImage(this.InputCanvas1, this.AkamaruOtherSolutionUseItemInputStroke, "challenge_time_part_1_input_akamaru_other_solution", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas1, this.AkamaruOtherSolutionUseItemInputStroke, "challenge_time_part_1_input_akamaru_other_solution", this.initConfig.userName,this.dataProgress.CurrentChapter);
                             }
                             else
                             {
@@ -2432,22 +2442,22 @@ namespace KokoroUpTime
                                 }
                             }
                         }
-                        else if (this.Step2InputAkamaruManySolutionGrid.Visibility == Visibility.Visible)
+                        else if (this.Step2InputAkamaruManySolutionGrid.IsVisible)
                         {
                             if (this.dataOption.InputMethod == 0)
                             {
                                 StrokeConverter strokeConverter = new StrokeConverter();
                                 if (this.Step2AkamaruMethodInputStrokes[0].Count > 0)
                                 {
-                                    strokeConverter.ConvertToBmpImage(this.InputCanvas2_1, this.Step2AkamaruMethodInputStrokes[0], "challenge_time_part_2_input_akamaru_method1", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
+                                    strokeConverter.ConvertToBmpImage(this.InputCanvas2_1, this.Step2AkamaruMethodInputStrokes[0], "challenge_time_part_2_input_akamaru_method1", this.initConfig.userName,this.dataProgress.CurrentChapter);
                                 }
                                 if (this.Step2AkamaruMethodInputStrokes[1].Count > 0)
                                 {
-                                    strokeConverter.ConvertToBmpImage(this.InputCanvas2_2, this.Step2AkamaruMethodInputStrokes[1], "challenge_time_part_2_input_akamaru_method2", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
+                                    strokeConverter.ConvertToBmpImage(this.InputCanvas2_2, this.Step2AkamaruMethodInputStrokes[1], "challenge_time_part_2_input_akamaru_method2", this.initConfig.userName,this.dataProgress.CurrentChapter);
                                 }
                                 if (this.Step2AkamaruMethodInputStrokes[2].Count > 0)
                                 {
-                                    strokeConverter.ConvertToBmpImage(this.InputCanvas2_3, this.Step2AkamaruMethodInputStrokes[2], "challenge_time_part_2_input_akamaru_method3", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
+                                    strokeConverter.ConvertToBmpImage(this.InputCanvas2_3, this.Step2AkamaruMethodInputStrokes[2], "challenge_time_part_2_input_akamaru_method3", this.initConfig.userName,this.dataProgress.CurrentChapter);
                                 }
                             }
                             else
@@ -2479,45 +2489,28 @@ namespace KokoroUpTime
                         else if (this.Step3EvaluateAkamaruMethodGrid.Visibility == Visibility.Visible)
                         {
 
-                            this.dataChapter11.EvaluateAkamaruMethodText1 = "";
-                            this.dataChapter11.EvaluateAkamaruMethodText2 = "";
-                            this.dataChapter11.EvaluateAkamaruMethodText3 = "";
+                            this.dataChapter11.EvaluationAkamaruMethodText1 = "";
+                            this.dataChapter11.EvaluationAkamaruMethodText2 = "";
+                            this.dataChapter11.EvaluationAkamaruMethodText3 = "";
 
                             foreach (var text in this.AKAMARU_METHOD_TEXT_VALUES[(string)this.EvaluateAkamaruMethodListView.Items[0]])
                             {
-                                this.dataChapter11.EvaluateAkamaruMethodText1 += $"{text},";
+                                this.dataChapter11.EvaluationAkamaruMethodText1 += $"{text},";
                             }
                             foreach (var text in this.AKAMARU_METHOD_TEXT_VALUES[(string)this.EvaluateAkamaruMethodListView.Items[1]])
                             {
-                                this.dataChapter11.EvaluateAkamaruMethodText2 += $"{text},";
+                                this.dataChapter11.EvaluationAkamaruMethodText2 += $"{text},";
                             }
                             foreach (var text in this.AKAMARU_METHOD_TEXT_VALUES[(string)this.EvaluateAkamaruMethodListView.Items[2]])
                             {
-                                this.dataChapter11.EvaluateAkamaruMethodText3 += $"{text},";
+                                this.dataChapter11.EvaluationAkamaruMethodText3 += $"{text},";
                             }
-                        }
-                        else if (this.Step2InputAosukeManySolutionsGrid.Visibility == Visibility.Visible)
-                        {
-                            if(this.dataOption.InputMethod == 0)
-                            {
-                                StrokeConverter strokeConverter = new StrokeConverter();
-                                for (int i=0;i< this.Step2AosukeMethodInputStrokes.Length;i++)
-                                {
-                                    strokeConverter.ConvertToBmpImage(this.InputCanvas3_1,this.Step2AosukeMethodInputStrokes[i], $"challenge_time_input_aosuke's_method_{i+1}", this.initConfig.dbPath,this.dataProgress.CurrentChapter);
-                                }
 
-                            }
-                            else
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                             {
-                                this.dataChapter11.EvaluateAosukeMethodText = "";
-                                foreach (var text in this.Step2AosukeMethodInputText)
-                                {
-                                    this.dataChapter11.EvaluateAosukeMethodText += $"{text},";
-                                }
-                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                                {
-                                    connection.Execute($@"Update DataChapter11 SET EvaluateAosukeMethodText ='{this.dataChapter11.EvaluateAosukeMethodText}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
-                                }
+                                connection.Execute($@"Update DataChapter11 SET EvaluationAkamaruMethodText1 ='{this.dataChapter11.EvaluationAkamaruMethodText1}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
+                                connection.Execute($@"Update DataChapter11 SET EvaluationAkamaruMethodText2 ='{this.dataChapter11.EvaluationAkamaruMethodText2}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
+                                connection.Execute($@"Update DataChapter11 SET EvaluationAkamaruMethodText3 ='{this.dataChapter11.EvaluationAkamaruMethodText3}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
                             }
                         }
                         else if (this.Step3EvaluateAosukeMethodGrid.Visibility == Visibility.Visible)
@@ -2707,18 +2700,26 @@ namespace KokoroUpTime
                     {
                         case "Item03Button":
                             this.InputItemImage.Source = new BitmapImage(new Uri($"Images/item03_solo.png", UriKind.Relative));
+                            this.dataChapter11.SelectedItem = "あったかスープ";
                             break;
 
                         case "Item04Button":
                             this.InputItemImage.Source = new BitmapImage(new Uri($"Images/item04_solo.png", UriKind.Relative));
+                            this.dataChapter11.SelectedItem = "はきはきスピーカー";
                             break;
 
                         case "Item05Button":
                             this.InputItemImage.Source = new BitmapImage(new Uri($"Images/item05_solo.png", UriKind.Relative));
-
+                            this.dataChapter11.SelectedItem = "ゆったりんご";
                             break;
 
                     }
+
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataChapter11 SET SelectedItem = '{this.dataChapter11.SelectedItem}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
+                    }
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
