@@ -1614,7 +1614,13 @@ namespace KokoroUpTime
         // アニメーション（ストーリーボード）の処理
         private void ShowAnime(string storyBoard,string objectName,string objectsName, string isSync)
         {
+#if DEBUG
+            this.scenarioCount += 1;
+            this.ScenarioPlay();
+#else
+
             Storyboard sb;
+
             try
             {
                 sb = this.FindResource(storyBoard) as Storyboard;
@@ -1626,7 +1632,6 @@ namespace KokoroUpTime
                 string objectsStroryBoard = $"{storyBoard}_{objectsName}";
                 sb = this.FindResource(objectsStroryBoard) as Storyboard;
             }
-           
 
             if (sb != null)
             {
@@ -1643,7 +1648,6 @@ namespace KokoroUpTime
                             this.ScenarioPlay();
 
                             isDuplicate = true;
-                            
                         }
                     };
                     sb.Begin(this);
@@ -1658,10 +1662,10 @@ namespace KokoroUpTime
                         this.ScenarioPlay();
 
                         isDuplicate = true;
-                        isClickable = true;
                     }
                 }
             }
+#endif
         }
 
         // 黒板ルール処理のためだけの追加

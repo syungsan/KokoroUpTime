@@ -55,7 +55,11 @@ namespace KokoroUpTime
         private bool isClickable = false;
 
         //アニメーションを表示させるか否か
+#if DEBUG
+        private readonly bool isAnimationSkip = true;
+#else
         private bool isAnimationSkip = false;
+#endif
 
         // 気持ちの大きさ
         private int feelingSize = 0;
@@ -1797,8 +1801,10 @@ namespace KokoroUpTime
                     break;
 
                 case "is_animation_skip":
-
+#if DEBUG
+#else
                     this.isAnimationSkip = Convert.ToBoolean(this.scenarios[this.scenarioCount][1]);
+#endif
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -3023,7 +3029,7 @@ namespace KokoroUpTime
         // OSKを完全に切ってしまう
         private void CloseOSK()
         {
-            #region
+#region
             if (OnScreenKeyboard.IsOpened())
             {
                 try
@@ -3036,12 +3042,12 @@ namespace KokoroUpTime
                     Debug.Print(ex.Message);
                 }
             }
-            #endregion
+#endregion
         }
 
         private void ReadyKeyboard()
         {
-            #region
+#region
             if (!OnScreenKeyboard.IsOpened())
             {
                 try
@@ -3055,7 +3061,7 @@ namespace KokoroUpTime
                     Debug.Print(ex.Message);
                 }
             }
-            #endregion
+#endregion
         }
 
         private void TextBoxPreviewTextInput(object sender, TextCompositionEventArgs e)

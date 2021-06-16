@@ -434,7 +434,7 @@
                         <TextBlock Style="{StaticResource OutputTextBlock}" Text="（たとえばみんなでごはんを食べる）" FontSize="60" />
                         <Grid Margin="0,65,0,0">
                             <InkCanvas x:Name="ViewMySmallExcitedCanvas" Style="{StaticResource OutputInkCanvas}"/>
-                            <TextBlock x:Name="ViewMySmallExcitedText" Style="{StaticResource OutputTextBlock}"  FontSize="60"/>
+                            <TextBlock x:Name="ViewMySmallExcitedText" Style="{StaticResource OutputTextBlock}"  FontSize="61"/>
                         </Grid>
                     </Grid>
                 </Button>

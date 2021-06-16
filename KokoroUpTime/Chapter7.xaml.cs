@@ -2268,7 +2268,11 @@ namespace KokoroUpTime
         // アニメーション（ストーリーボード）の処理
         private void ShowAnime(string storyBoard, string objectName, string objectsName, string isSync)
         {
-            if(!this.isAnimationSkip)
+#if DEBUG
+            this.scenarioCount += 1;
+            this.ScenarioPlay();
+#else
+            if (!this.isAnimationSkip)
             {
                 Storyboard sb;
                 try
@@ -2282,7 +2286,6 @@ namespace KokoroUpTime
                     string objectsStroryBoard = $"{storyBoard}_{objectsName}";
                     sb = this.FindResource(objectsStroryBoard) as Storyboard;
                 }
-
 
                 if (sb != null)
                 {
@@ -2307,12 +2310,14 @@ namespace KokoroUpTime
                     else if (isSync == "no_sync")
                     {
                         sb.Begin(this);
+
                         if (!isDuplicate)
                         {
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
 
                             isDuplicate = true;
+                            isClickable = true;
                         }
                     }
                 }
@@ -2322,7 +2327,7 @@ namespace KokoroUpTime
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
-            
+#endif
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -2475,8 +2480,8 @@ namespace KokoroUpTime
 
                                     using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                                     {
-                                        connection.Execute($@"UPDATE DataChapter7 SET KimisKindOfFeelingInviteFriends = '{this.dataChapter7.InputAkamaruThoughtText}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
-                                        connection.Execute($@"UPDATE DataChapter7 SET KimisSizeOfFeelingInviteFriends = '{this.dataChapter7.InputAosukeThoughtText}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                        connection.Execute($@"UPDATE DataChapter7 SET InputAkamaruThoughtText = '{this.dataChapter7.InputAkamaruThoughtText}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
+                                        connection.Execute($@"UPDATE DataChapter7 SET InputAosukeThoughtText = '{this.dataChapter7.InputAosukeThoughtText}'WHERE CreatedAt = '{this.dataChapter7.CreatedAt}';");
                                     }
                                 }
                             }
@@ -3154,7 +3159,7 @@ namespace KokoroUpTime
             }
             else
             {
-                MaxLine = 4;
+                MaxLine = 6;
             }
 
             while (text.LineCount > MaxLine)
@@ -3179,7 +3184,7 @@ namespace KokoroUpTime
             }
             else
             {
-                MaxLine = 4;
+                MaxLine = 6;
             }
 
             if (text.LineCount >= MaxLine)

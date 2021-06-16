@@ -185,7 +185,7 @@ image,children_face_right_image,akamaru_face_02.png,,,gray
 image,shiroji_left_image,shiroji_01.png
 image,main_msg_bubble_image,left_big_bubble.png
 grid,main_msg_grid,appear_expansion
-msg,main_msg,赤丸くんが言っているように、<font=##yellow#true#black>チクチク言葉というのは自分でも気がつかないうちに使っていることがあるようじゃのう。</font>,白じい
+msg,main_msg,赤丸くんが言っているように、<font=##yellow#true#black>チクチク言葉というのは鬱自分でも気がつかないうちに使っていることがあるようじゃのう。</font>,白じい
 click,msg
 #
 msg,main_msg,そんなときは、わしの発明品を使うとよいぞ！,白じい

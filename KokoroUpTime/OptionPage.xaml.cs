@@ -157,7 +157,11 @@ namespace KokoroUpTime
                     this.MessageSpeedMiddleButton.Foreground = new SolidColorBrush(Colors.White);
                     this.MessageSpeedSlowButton.Foreground = new SolidColorBrush(Colors.White);
 
-                    this.dataOption.MessageSpeed = MESSAGE_SPEEDS[2];
+                    #if DEBUG
+                        this.dataOption.MessageSpeed = 1000000.0f;
+                    #else
+                        this.dataOption.MessageSpeed = MESSAGE_SPEEDS[2];
+                    #endif
                 }
             }
 

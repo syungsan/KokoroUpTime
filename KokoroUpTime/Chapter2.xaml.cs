@@ -55,7 +55,12 @@ namespace KokoroUpTime
         private int feelingSize = 0;
 
         //アニメーションをスキップするかどうかのフラグ
+#if DEBUG
+        private readonly bool isAnimationSkip = false;
+#else
         private bool isAnimationSkip = false;
+#endif
+
 
         // メッセージ表示関連
         private DispatcherTimer msgTimer;
@@ -1273,8 +1278,10 @@ namespace KokoroUpTime
 
                 case "is_animation_skip":
 
-                    this.isAnimationSkip = Convert.ToBoolean(this.scenarios[this.scenarioCount][1]);
-
+#if DEBUG
+#else
+     this.isAnimationSkip = Convert.ToBoolean(this.scenarios[this.scenarioCount][1]);
+#endif
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
@@ -2331,7 +2338,7 @@ namespace KokoroUpTime
         // TextBoxにフォーカスが当たったときに起動
         private void TriggerKeyboard(object sender, RoutedEventArgs e)
         {
-            #region
+#region
             if (!OnScreenKeyboard.IsOpened())
             {
                 try
@@ -2346,13 +2353,13 @@ namespace KokoroUpTime
                     Debug.Print(ex.Message);
                 }
             }
-            #endregion
+#endregion
         }
 
         // TextBoxをクリックしたときに起動
         private void TextBoxMouseDown(object sender, MouseButtonEventArgs e)
         {
-            #region
+#region
             if (!OnScreenKeyboard.IsOpened())
             {
                 try
@@ -2366,13 +2373,13 @@ namespace KokoroUpTime
                     Debug.Print(ex.Message);
                 }
             }
-            #endregion
+#endregion
         }
 
         // OSKを完全に切ってしまう
         private void CloseOSK()
         {
-            #region
+#region
             if (OnScreenKeyboard.IsOpened())
             {
                 try
@@ -2385,7 +2392,7 @@ namespace KokoroUpTime
                     Debug.Print(ex.Message);
                 }
             }
-            #endregion
+#endregion
         }
 
         //  TextBoxに改行制限をかける

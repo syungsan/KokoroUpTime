@@ -2121,7 +2121,11 @@ namespace KokoroUpTime
         // アニメーション（ストーリーボード）の処理
         private void ShowAnime(string storyBoard, string objectName, string objectsName, string isSync)
         {
-            if(!this.isAnimationSkip)
+#if DEBUG
+            this.scenarioCount += 1;
+            this.ScenarioPlay();
+#else
+            if (!this.isAnimationSkip)
             {
                 Storyboard sb;
                 try
@@ -2176,7 +2180,8 @@ namespace KokoroUpTime
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
-            
+#endif
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

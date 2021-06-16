@@ -36,7 +36,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Button x:Name="MangaPrevBackButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,989,1616,-2" Click="Button_Click">
+                <Button x:Name="MangaPrevBackButton" Style="{StaticResource ShadowButton}" Margin="0,989,1616,-2" Click="Button_Click">
                     <Image x:Name="MangaPrevBackImage" Source="/Images/prev_back_.png"/>
                 </Button>
             </Grid>
@@ -75,13 +75,13 @@
                         <Image x:Name="ChildrenFeelingCommentBigImage" Source="/Images/small_bubble_left_down_red.png"/>
                         <TextBlock x:Name="ChildrenFeelingCommentBigTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="48" Margin="55,41,40,104" TextAlignment="Justify" FontWeight="Normal"/>
                     </Grid>
-                    <Button x:Name="CheckMangaButton" Margin="1500,236,4,500" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
+                    <Button x:Name="CheckMangaButton" Margin="1500,236,4,500" Style="{StaticResource ShadowButton}" Click="Button_Click" d:IsHidden="True">
                         <Image x:Name="CheckMangaImage" Source="/Images/check_manga.png"/>
                     </Button>
-                    <Button x:Name="FeelingNextGoButton" Height="143" Width="442" Background="{x:Null}" BorderBrush="{x:Null}" Margin="1459,912,19,25" Click="Button_Click" d:IsHidden="True">
+                    <Button x:Name="FeelingNextGoButton" Height="143" Width="442" Style="{StaticResource ShadowButton}" Margin="1459,912,19,25" Click="Button_Click" d:IsHidden="True">
                         <Image x:Name="FeelingNextGoImage" Source="/Images/next_go_button.png"/>
                     </Button>
-                    <Button x:Name="FeelingPrevBackButton" Height="142" Width="462" Background="{x:Null}" BorderBrush="{x:Null}" Margin="16,912,1442,26" Click="Button_Click" d:IsHidden="True">
+                    <Button x:Name="FeelingPrevBackButton" Height="142" Width="462" Style="{StaticResource ShadowButton}" Margin="16,912,1442,26" Click="Button_Click" d:IsHidden="True">
                         <Image x:Name="FeelingPrevBackImage" Source="/Images/prev_back_.png"/>
                     </Button>
                     <Grid x:Name="FeelingInputGrid">
@@ -102,7 +102,7 @@
                     <ItemsControl x:Name="CHotWordKeyButtonItemControl" Margin="519,134,519,128" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Button x:Name="CHotWordKeyButton" Margin="0,0,0,50" Height="164" Width="882" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+                                <Button x:Name="CHotWordKeyButton" Margin="0,0,0,50" Height="164" Width="882" Click="Button_Click" Style="{StaticResource ShadowButton}">
                                     <Grid>
                                         <Image Source="/Images/orange_button_plate.png"/>
                                         <TextBlock Text="{Binding}" FontSize="64" Foreground="White" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center"/>
@@ -176,7 +176,7 @@
                         <TextBlock x:Name="SelectHotWordValueTextBlock" TextWrapping="Wrap" Margin="63,335,80,45" FontSize="72" FontWeight="Bold" Text="TextBlock"/>
                     </Grid>
                     <Image x:Name="HotWordArrowImage" Height="236" Width="325" Margin="798,422,798,422" Source="/Images/red_arrow_right.png"/>
-                    <Button x:Name="CompleteNextButton" HorizontalAlignment="Left" Margin="1423,906,0,0" VerticalAlignment="Top" Height="144" Width="442" Background="{x:Null}" Click="Button_Click" BorderBrush="{x:Null}">
+                    <Button x:Name="CompleteNextButton" HorizontalAlignment="Left" Margin="1423,906,0,0" VerticalAlignment="Top" Height="144" Width="442"  Click="Button_Click" Style="{StaticResource ShadowButton}">
                         <Image x:Name="CompleteNextImage" Source="/Images/next_go_button.png"/>
                     </Button>
                     <Grid x:Name="Let_sUseHotWordMessageGrid" Margin="1407,135,-2,638" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
@@ -196,7 +196,7 @@
                     <ItemsControl x:Name="GHotWordKeyButtonItemControl" Margin="519,100,519,150" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Button x:Name="GHotWordKeyButton" Margin="0,0,0,50" Height="164" Width="882" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+                                <Button x:Name="GHotWordKeyButton" Margin="0,0,0,50" Height="164" Width="882" Click="Button_Click" Style="{StaticResource ShadowButton}">
                                     <Grid>
                                         <Image Source="/Images/orange_button_plate.png"/>
                                         <TextBlock Text="{Binding}" FontSize="64" Foreground="White" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center"/>

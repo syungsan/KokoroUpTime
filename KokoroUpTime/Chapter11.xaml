@@ -605,11 +605,11 @@
                     <ItemsControl x:Name="ViewInputAosukeMethodItemsControl" Margin="50,100,30,30"/>
                 </Grid>
             </Border>
-            <Border x:Name="InputButtonBorder" Margin="10,10,10,140" BorderBrush="Black" BorderThickness="5" Background="White" CornerRadius="60" d:IsHidden="True">
+            <Border x:Name="InputButtonBorder" Margin="10,10,10,140" BorderBrush="Black" BorderThickness="5" Background="White" CornerRadius="60">
                 <Grid x:Name="InputButtonBorderGrid">
                     <Button x:Name="InputButton1" Style="{StaticResource BubbleFrame}" Click="Button_Click">
                         <Grid x:Name="InputButton1Grid">
-                            <Grid x:Name="InputAkamaruOtherSolutionGrid" d:IsHidden="True">
+                            <Grid x:Name="InputAkamaruOtherSolutionGrid">
                                 <TextBlock x:Name="InputAkamaruOtherSolutionTitle" Text="赤丸くんは、ほかにどんなかいけつの方法をえらぶことができるでしょう？&#10;あなたの考えを書いてみましょう！" FontSize="35" LineHeight="60" Margin="60,30" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Yu Gothic"/>
                                 <InkCanvas x:Name="OutputCanvas1" Style="{StaticResource OutputInkCanvas}" Margin="30,150,30,30"/>
                                 <TextBlock x:Name="OutputText1" Style="{StaticResource OutputTextBlock}" Margin="30,150,30,30" FontSize="92"/>
@@ -689,10 +689,10 @@
                         </TextBlock>
                         <Button x:Name="InputButton2" Margin="100,550,590,10" Background="Transparent" BorderBrush="{x:Null}" Click="Button_Click">
                             <Grid>
-                                <StackPanel>
+                                <StackPanel Visibility="Hidden">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
-                                        <InkCanvas x:Name="OutputCanvas2_1" Style="{StaticResource OutputInkCanvas}" Margin="35,0,0,0" Height="120" Width="1680"/>
+                                        <InkCanvas x:Name="OutputCanvas2_1" Style="{StaticResource OutputInkCanvas}" Margin="35,0,0,0" Height="120" Width="1680" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
@@ -703,19 +703,19 @@
                                         <InkCanvas x:Name="OutputCanvas2_3" Style="{StaticResource OutputInkCanvas}" Margin="35,0,0,0" Height="120" Width="1680"/>
                                     </StackPanel>
                                 </StackPanel>
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal" Height="120">
-                                        <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
-                                        <TextBlock x:Name="OutputText2_1" Style="{StaticResource OutputTextBlock}" Margin="35,0,0,0" FontSize="50"  VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Height="120">
-                                        <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
-                                        <TextBlock x:Name="OutputText2_2" Style="{StaticResource OutputTextBlock}" Margin="35,0,0,0" FontSize="50"  VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Height="120">
-                                        <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
-                                        <TextBlock x:Name="OutputText2_3" Style="{StaticResource OutputTextBlock}" Margin="35,0,0,0" FontSize="50"  VerticalAlignment="Center"/>
-                                    </StackPanel>
+                                <StackPanel >
+                                        <StackPanel Orientation="Horizontal" Height="120">
+                                            <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                            <TextBlock x:Name="OutputText2_1" Style="{StaticResource OutputTextBlock}" Margin="0,0,0,0" FontSize="58"  VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Height="120">
+                                            <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                            <TextBlock x:Name="OutputText2_2" Style="{StaticResource OutputTextBlock}" Margin="0,0,0,0" FontSize="58"  VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Height="120">
+                                            <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
+                                            <TextBlock x:Name="OutputText2_3" Style="{StaticResource OutputTextBlock}" Margin="0,0,0,0" FontSize="58"  VerticalAlignment="Center"/>
+                                        </StackPanel>
                                 </StackPanel>
                             </Grid>
                         </Button>
@@ -962,7 +962,7 @@
                 </Button>
                 <Grid x:Name="HintCheckGrid" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="70,0" Height="200" Width="200" d:IsHidden="True">
                     <Button x:Name="HintCheckButton" Background="Transparent" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}" Click="Button_Click">
-                        <Grid Style="{StaticResource ShadowButtonGrid}">
+                        <Grid>
                             <Image Source="Images/blue_explosion_bubble.png" />
                             <TextBlock x:Name="HintCheckText" FontSize="25" Background="{x:Null}" TextAlignment="Center" Foreground="White" FontFamily="Yu Gothic" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>

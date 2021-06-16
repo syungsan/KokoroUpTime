@@ -50,7 +50,12 @@ namespace KokoroUpTime
         private bool isClickable = false;
 
         //アニメーションを表示させるか否か
+#if DEBUG
+        private readonly bool isAnimationSkip = true;
+#else
         private bool isAnimationSkip = false;
+
+#endif
 
         // マウス押下中フラグ
         private bool isMouseDown = false;
@@ -90,6 +95,8 @@ namespace KokoroUpTime
 
         private string[] Step2AkamaruMethodInputText = new string[] { "","","" };
         private string[] Step2AosukeMethodInputText = new string[] { "","","","","","" };
+
+        
 
         private Dictionary<string, string[]> AKAMARU_METHOD_TEXT_VALUES;
 
@@ -255,6 +262,7 @@ namespace KokoroUpTime
                 ["next_method_button"] = this.NextMethodButton,
                 ["back_method_button"] = this.BackMethodButton,
 
+                ["input_button1"] = this.InputButton1,
                 ["input_button2"] = this.InputButton2,
 
             };
@@ -440,6 +448,7 @@ namespace KokoroUpTime
             this.Step2InputAkamaruManySolutionTitleText.Visibility = Visibility.Hidden;
             this.Step1AkamaruGoalText.Visibility=Visibility.Hidden;
             this.Step2ExampleAkamaruMethodText.Visibility=Visibility.Hidden;
+            this.InputButton1.Visibility = Visibility.Hidden;
             this.InputButton2.Visibility = Visibility.Hidden;
 
             this.ConfirmButtonGrid.Visibility = Visibility.Hidden;
@@ -1827,8 +1836,10 @@ namespace KokoroUpTime
 
                 case "is_animation_skip":
 
+#if DEBUG
+#else
                     this.isAnimationSkip = Convert.ToBoolean(this.scenarios[this.scenarioCount][1]);
-
+#endif
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
 
@@ -2330,7 +2341,7 @@ namespace KokoroUpTime
             {
                 this.isClickable = false;
 
-                if ((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton" || button.Name == "GroupeActivityNextMessageButton" || button.Name == "ReturnButton"||button.Name== "DecideAosukeMethodButton"))
+                if ((button.Name == "NextMessageButton" || button.Name == "NextPageButton" || button.Name == "MangaFlipButton" || button.Name == "SelectFeelingCompleteButton" || button.Name == "BranchButton2" || button.Name == "MangaPrevBackButton" || button.Name == "GroupeActivityNextMessageButton" || button.Name == "ReturnButton"))
                 {
 
                     if (button.Name == "NextMessageButton")
@@ -2364,14 +2375,14 @@ namespace KokoroUpTime
                             }
                             else
                             {
-                                this.dataChapter11.EvaluateAosukeMethodText = "";
-                                foreach (var text in this.Step2AosukeMethodInputText)
+                                this.dataChapter11.Step2AosukeManyMethodInputText = "";
+                                foreach (var text in this.AOSUKE_METHOD_TEXT_VALUES.Keys)
                                 {
-                                    this.dataChapter11.EvaluateAosukeMethodText += $"{text},";
+                                    this.dataChapter11.Step2AosukeManyMethodInputText += $"{text},";
                                 }
                                 using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                                 {
-                                    connection.Execute($@"Update DataChapter11 SET EvaluateAosukeMethodText ='{this.dataChapter11.EvaluateAosukeMethodText}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
+                                    connection.Execute($@"Update DataChapter11 SET Step2AosukeManyMethodInputText ='{this.dataChapter11.Step2AosukeManyMethodInputText}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
                                 }
                             }
                         }
@@ -2462,31 +2473,19 @@ namespace KokoroUpTime
                             }
                             else
                             {
-                                if (this.Step2AkamaruMethodInputText[0] != "")
+                                this.dataChapter11.Step2AkamaruManyMethodInputText = "";
+                                foreach (var text in this.Step2AkamaruMethodInputText)
                                 {
-                                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                                    {
-                                        connection.Execute($@"Update DataChapter11 SET Step2AkamaruManyMethodInputText1 ='{this.dataChapter11.Step2AkamaruManyMethodInputText1}' WHERE CreatedAt = '{this.dataChapter11.CreatedAt}'");
-                                    }
-                                }
-                                if (this.Step2AkamaruMethodInputText[1] != "")
-                                {
-                                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                                    {
-                                        connection.Execute($@"Update DataChapter11 SET Step2AkamaruManyMethodInputText2 ='{this.dataChapter11.Step2AkamaruManyMethodInputText2}' WHERE CreatedAt = '{this.dataChapter11.CreatedAt}'");
-                                    }
-                                }
-                                if (this.Step2AkamaruMethodInputText[2] != "")
-                                {
-                                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                                    {
-                                        connection.Execute($@"Update DataChapter11 SET Step2AkamaruManyMethodInputText3 ='{this.dataChapter11.Step2AkamaruManyMethodInputText3}' WHERE CreatedAt = '{this.dataChapter11.CreatedAt}'");
-                                    }
+                                    this.dataChapter11.Step2AkamaruManyMethodInputText += $"{text},";
                                 }
 
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"Update DataChapter11 SET Step2AkamaruManyMethodInputText ='{this.dataChapter11.Step2AkamaruManyMethodInputText}' WHERE CreatedAt = '{this.dataChapter11.CreatedAt}'");
+                                }
                             }
                         }
-                        else if (this.Step3EvaluateAkamaruMethodGrid.Visibility == Visibility.Visible)
+                        else if (this.Step3EvaluateAkamaruMethodGrid.IsVisible)
                         {
 
                             this.dataChapter11.EvaluationAkamaruMethodText1 = "";
@@ -2511,37 +2510,6 @@ namespace KokoroUpTime
                                 connection.Execute($@"Update DataChapter11 SET EvaluationAkamaruMethodText1 ='{this.dataChapter11.EvaluationAkamaruMethodText1}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
                                 connection.Execute($@"Update DataChapter11 SET EvaluationAkamaruMethodText2 ='{this.dataChapter11.EvaluationAkamaruMethodText2}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
                                 connection.Execute($@"Update DataChapter11 SET EvaluationAkamaruMethodText3 ='{this.dataChapter11.EvaluationAkamaruMethodText3}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
-                            }
-                        }
-                        else if (this.Step3EvaluateAosukeMethodGrid.Visibility == Visibility.Visible)
-                        {
-                            this.dataChapter11.EvaluationAosukeMethodText = "";
-                            if (this.dataOption.InputMethod == 0)
-                            {
-                                foreach(var text in this.AOSUKE_METHOD_STROKE_VALUES.Values)
-                                {
-                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[0]},";
-                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[1]},";
-                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[2]},";
-                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[3]};";
-                                }
-
-                            }
-                            else
-                            {
-                                foreach (var text in this.AOSUKE_METHOD_TEXT_VALUES.Values)
-                                {
-                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[0]},";
-                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[1]},";
-                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[2]},";
-                                    this.dataChapter11.EvaluationAosukeMethodText += $"{text[3]};";
-                                }
-
-                            }
-
-                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                            {
-                                connection.Execute($@"Update DataChapter11 SET EvaluationAosukeMethodText ='{this.dataChapter11.EvaluationAosukeMethodText}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
                             }
                         }
                     }
@@ -2599,39 +2567,32 @@ namespace KokoroUpTime
                 {
                     if (this.dataOption.InputMethod == 0)
                     {
-                        switch (this.scene)
+                        if (this.InputAkamaruOtherSolutionGrid.IsVisible)
                         {
-                            case "チャレンジタイム！　パート①":
-                                this.GoTo("canvas_input_akamaru_other_solution","sub");
-                                break;
-
-                            case "チャレンジタイム！　パート②":
-                                this.GoTo("canvas_input_akamaru_many_solution","sub");
-                                break;
-
-                            case "グループアクティビティ":
-                                this.GoTo("canvas_input_aosuke_many_solution","sub");
-                                break;
+                            this.GoTo("canvas_input_akamaru_other_solution", "sub");
+                        }
+                        else if (this.InputButton2.IsVisible)
+                        {
+                            this.GoTo("canvas_input_akamaru_many_solution", "sub");
+                        }
+                        else if (this.Step2InputAosukeManySolutionsGrid.IsVisible)
+                        {
+                            this.GoTo("canvas_input_aosuke_many_solution", "sub");
                         }
                     }
                     else
                     {
-                        switch (this.scene)
+                        if (this.InputAkamaruOtherSolutionGrid.IsVisible)
                         {
-                            case "チャレンジタイム！　パート①":
-                                this.GoTo("keyboard_input_akamaru_other_solution","sub");
-                                this.InputTextBox1.Focus();
-                                break;
-
-                            case "チャレンジタイム！　パート②":
-                                this.GoTo("keyboard_input_akamaru_many_solution","sub");
-                                this.InputTextBox2_1.Focus();
-                                break;
-
-                            case "グループアクティビティ":
-                                this.GoTo("keyboard_input_aosuke_many_solution","sub");
-                                 this.InputTextBox3_1.Focus();
-                                break;
+                            this.GoTo("keyboard_input_akamaru_other_solution", "sub");
+                        }
+                        else if (this.InputButton2.IsVisible)
+                        {
+                            this.GoTo("keyboard_input_akamaru_many_solution", "sub");
+                        }
+                        else if (this.Step2InputAosukeManySolutionsGrid.IsVisible)
+                        {
+                            this.GoTo("keyboard_input_aosuke_many_solution", "sub");
                         }
                     }
                 }
@@ -2639,54 +2600,50 @@ namespace KokoroUpTime
                 {
                     if (this.dataOption.InputMethod == 0)
                     {
-                        switch (this.scene)
+                        if (this.InputAkamaruOtherSolutionGrid.IsVisible)
                         {
-                            case "チャレンジタイム！　パート①":
-                                this.AkamaruOtherSolutionUseItemInputStroke = this.InputCanvas1.Strokes;
-                                this.OutputCanvas1.Strokes = this.AkamaruOtherSolutionUseItemInputStroke;
-                                break;
-
-                            case "チャレンジタイム！　パート②":
-                                for (int i = 0; i < this.Step2AkamaruMethodInputStrokes.Length; i++)
-                                {
-                                    this.Step2AkamaruMethodInputStrokes[i] = ((InkCanvas)this.FindName($"InputCanvas2_{ i + 1}")).Strokes;
-                                    ((InkCanvas)this.FindName($"OutputCanvas2_{ i + 1}")).Strokes = this.Step2AkamaruMethodInputStrokes[i];
-                                }
-                                break;
-
-                            case "グループアクティビティ":
-                                for (int i = 0; i < this.Step2AosukeMethodInputStrokes.Length; i++)
-                                {
-                                    this.Step2AosukeMethodInputStrokes[i] = ((InkCanvas)this.FindName($"InputCanvas3_{ i + 1}")).Strokes;
-                                    ((InkCanvas)this.FindName($"OutputCanvas3_{ i + 1}")).Strokes = this.Step2AosukeMethodInputStrokes[i];
-                                }
-                                break;
+                            this.AkamaruOtherSolutionUseItemInputStroke = this.InputCanvas1.Strokes;
+                            this.OutputCanvas1.Strokes = this.AkamaruOtherSolutionUseItemInputStroke;
+                        }
+                        else if (this.InputButton2.IsVisible)
+                        {
+                            for (int i = 0; i < this.Step2AkamaruMethodInputStrokes.Length; i++)
+                            {
+                                this.Step2AkamaruMethodInputStrokes[i] = ((InkCanvas)this.FindName($"InputCanvas2_{ i + 1}")).Strokes;
+                                ((InkCanvas)this.FindName($"OutputCanvas2_{ i + 1}")).Strokes = this.Step2AkamaruMethodInputStrokes[i];
+                            }
+                        }
+                        else if (this.Step2InputAosukeManySolutionsGrid.IsVisible)
+                        {
+                            for (int i = 0; i < this.Step2AosukeMethodInputStrokes.Length; i++)
+                            {
+                                this.Step2AosukeMethodInputStrokes[i] = ((InkCanvas)this.FindName($"InputCanvas3_{ i + 1}")).Strokes;
+                                ((InkCanvas)this.FindName($"OutputCanvas3_{ i + 1}")).Strokes = this.Step2AosukeMethodInputStrokes[i];
+                            }
                         }
                     }
                     else
                     {
-                        switch (this.scene)
+                        if (this.InputAkamaruOtherSolutionGrid.IsVisible)
                         {
-                            case "チャレンジタイム！　パート①":
-                                this.dataChapter11.AkamaruOtherSolutionUseItemInputText = this.InputTextBox1.Text;
-                                this.OutputText1.Text = this.dataChapter11.AkamaruOtherSolutionUseItemInputText;
-                                break;
-
-                            case "チャレンジタイム！　パート②":
-                                for (int i = 0; i < this.Step2AkamaruMethodInputText.Length; i++)
-                                {
-                                    this.Step2AkamaruMethodInputText[i] = ((TextBox)this.FindName($"InputTextBox2_{ i + 1}")).Text;
-                                    ((TextBlock)this.FindName($"OutputText2_{ i + 1}")).Text = this.Step2AkamaruMethodInputText[i];
-                                }
-                                break;
-
-                            case "グループアクティビティ":
-                                for(int i=0;i < this.Step2AosukeMethodInputText.Length ; i++)
-                                {
-                                    this.Step2AosukeMethodInputText[i] = ((TextBox)this.FindName($"InputTextBox3_{ i+1}")).Text;
-                                    ((TextBlock)this.FindName($"OutputText3_{ i + 1}")).Text = this.Step2AosukeMethodInputText[i];
-                                }
-                                break;
+                            this.dataChapter11.AkamaruOtherSolutionUseItemInputText = this.InputTextBox1.Text;
+                            this.OutputText1.Text = this.dataChapter11.AkamaruOtherSolutionUseItemInputText;
+                        }
+                        else if (this.InputButton2.IsVisible)
+                        {
+                            for (int i = 0; i < this.Step2AkamaruMethodInputText.Length; i++)
+                            {
+                                this.Step2AkamaruMethodInputText[i] = ((TextBox)this.FindName($"InputTextBox2_{ i + 1}")).Text;
+                                ((TextBlock)this.FindName($"OutputText2_{ i + 1}")).Text = this.Step2AkamaruMethodInputText[i];
+                            }
+                        }
+                        else if (this.Step2InputAosukeManySolutionsGrid.IsVisible)
+                        {
+                            for (int i = 0; i < this.Step2AosukeMethodInputText.Length; i++)
+                            {
+                                this.Step2AosukeMethodInputText[i] = ((TextBox)this.FindName($"InputTextBox3_{ i + 1}")).Text;
+                                ((TextBlock)this.FindName($"OutputText3_{ i + 1}")).Text = this.Step2AosukeMethodInputText[i];
+                            }
                         }
                         this.CloseOSK();
                     }
@@ -2799,6 +2756,35 @@ namespace KokoroUpTime
                 }
                 else if(button.Name == "DecideAosukeMethodButton")
                 {
+                    this.dataChapter11.EvaluationAosukeMethodText = "";
+                    if (this.dataOption.InputMethod == 0)
+                    {
+                        foreach (var text in this.AOSUKE_METHOD_STROKE_VALUES.Values)
+                        {
+                            this.dataChapter11.EvaluationAosukeMethodText += $"{text[0]},";
+                            this.dataChapter11.EvaluationAosukeMethodText += $"{text[1]},";
+                            this.dataChapter11.EvaluationAosukeMethodText += $"{text[2]},";
+                            this.dataChapter11.EvaluationAosukeMethodText += $"{text[3]};";
+                        }
+
+                    }
+                    else
+                    {
+                        foreach (var text in this.AOSUKE_METHOD_TEXT_VALUES.Values)
+                        {
+                            this.dataChapter11.EvaluationAosukeMethodText += $"{text[0]},";
+                            this.dataChapter11.EvaluationAosukeMethodText += $"{text[1]},";
+                            this.dataChapter11.EvaluationAosukeMethodText += $"{text[2]},";
+                            this.dataChapter11.EvaluationAosukeMethodText += $"{text[3]};";
+                        }
+
+                    }
+
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                    {
+                        connection.Execute($@"Update DataChapter11 SET EvaluationAosukeMethodText ='{this.dataChapter11.EvaluationAosukeMethodText}' WHERE CreatedAt='{this.dataChapter11.CreatedAt}';");
+                    }
+
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
                 }
@@ -3017,7 +3003,7 @@ namespace KokoroUpTime
         // OSKを完全に切ってしまう
         private void CloseOSK()
         {
-            #region
+#region
             if (OnScreenKeyboard.IsOpened())
             {
                 try
@@ -3030,12 +3016,12 @@ namespace KokoroUpTime
                     Debug.Print(ex.Message);
                 }
             }
-            #endregion
+#endregion
         }
 
         private void ReadyKeyboard()
         {
-            #region
+#region
             if (!OnScreenKeyboard.IsOpened())
             {
                 try
@@ -3049,7 +3035,7 @@ namespace KokoroUpTime
                     Debug.Print(ex.Message);
                 }
             }
-            #endregion
+#endregion
         }
 
         private void TextBoxPreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -3064,7 +3050,7 @@ namespace KokoroUpTime
             {
 
                 case "InputTextBox1":
-                    MaxLine = 6;
+                    MaxLine = 7;
                     break;
 
                 case "InputTextBox2_1":
@@ -3103,7 +3089,7 @@ namespace KokoroUpTime
             {
 
                 case "InputTextBox1":
-                    MaxLine = 6;
+                    MaxLine = 7;
                     break;
 
                 case "InputTextBox2_1":

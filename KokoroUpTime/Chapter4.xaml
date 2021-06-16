@@ -80,7 +80,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Button x:Name="MangaPrevBackButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,989,1616,-2" Click="Button_Click">
+                <Button x:Name="MangaPrevBackButton" Style="{StaticResource ShadowButton}" Margin="0,979,1616,-2" Click="Button_Click">
                     <Image x:Name="MangaPrevBackImage" Source="/Images/prev_back_.png"/>
                 </Button>
             </Grid>
@@ -184,17 +184,16 @@
                 <TextBlock x:Name="SessionFrameText" Text="きちんとつたえてみよう"  FontWeight="UltraBold" FontSize="70" Background="Yellow" Width="800" Height="120" Margin="10,10,680,500" Foreground="MediumPurple" FontFamily="Yu Gothic" TextAlignment="Center" />
             </Grid>
             <Grid x:Name="ChallengeTimeGrid">
-
-                <Grid x:Name="MangaCheckGrid" Margin="1600,300,50,600">
-                    <Button x:Name="MangaCheckButton" Background="{x:Null}" BorderBrush="{x:Null}" Margin="100,0,0,0" Click="Button_Click" d:IsHidden="True">
-                        <Image x:Name="MangaCheckButtonImage"  Source="/Images/Check_Manga.png" Stretch="Fill" d:IsHidden="True"/>
+                <Grid x:Name="MangaCheckGrid" Margin="1300,250,50,550">
+                    <Button x:Name="MangaCheckButton" Style="{StaticResource ShadowButton}" Margin="230,0,0,0" Click="Button_Click" d:IsHidden="True">
+                        <Image x:Name="MangaCheckButtonImage"  Source="/Images/Check_Manga.png"  d:IsHidden="True"/>
                     </Button>
-                    <Image x:Name="MangaCheckShirojiImage" Source="/Images/shiroji_03.png" Margin="0,0,130,0" Stretch="Fill" d:IsHidden="True"/>
+                    <Image x:Name="MangaCheckShirojiImage" Source="/Images/shiroji_03.png" Margin="0,0,240,0" d:IsHidden="True"/>
                 </Grid>
-                <Image x:Name="ChildrenFaceCenterLeftImage" Source="/Images/kimi_face_05.png" Margin="280,400,1200,270"/>
-                <Grid x:Name="ChildrenTextGrid" Margin="680,430,800,500">
+                <Image x:Name="ChildrenFaceCenterLeftImage" Source="/Images/kimi_face_05.png" Margin="130,300,1100,240"/>
+                <Grid x:Name="ChildrenTextGrid" Margin="680,380,600,500">
                     <Image x:Name="ChildrenTextBubbleImage" Source="/Images/left_small_bubble_center_down_yellow.png" Stretch="Fill" d:IsHidden="True"/>
-                    <TextBlock x:Name="ChildrenTextBubbleText" Text="" FontSize="30" FontFamily="Yu Gothic" Margin="25,15,15,40" d:IsHidden="True"/>
+                    <TextBlock x:Name="ChildrenTextBubbleText" Text="" FontSize="40" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" Margin="45,40,15,40" d:IsHidden="True"/>
                 </Grid>
                 <Grid x:Name="KindOfFeelingGrid" Margin="870,586,750,250">
                     <TextBlock x:Name="KindOfFeelingTitleText" Text="きもちの種類" FontSize="50" FontFamily="MS PGothic" TextAlignment="Center"/>
@@ -675,10 +674,10 @@
                 <Button x:Name="ExitButton" Content="おわる" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" FontSize="24" Click="Button_Click" Margin="1833,10,0,0" d:IsHidden="True"/>
                 <Image x:Name="CoverLayerImage" HorizontalAlignment="Center" Height="1080" VerticalAlignment="Center" Width="1920" Source="/Images/gray_frame.png" Stretch="Fill" Opacity="0.5" d:IsHidden="True"/>
                 <Grid x:Name="BranchSelectGrid" d:IsHidden="True">
-                    <Button x:Name="BranchButton1" Margin="500,200,500,700" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
+                    <Button x:Name="BranchButton1" Margin="500,200,500,700" Style="{StaticResource ShadowButton}"  Click="Button_Click" d:IsHidden="True">
                         <Image x:Name="BranchButton1Image" Source="/Images/branch_selection1.png" Stretch="Fill" d:IsHidden="True" />
                     </Button>
-                    <Button x:Name="BranchButton2" Margin="500,700,500,200" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
+                    <Button x:Name="BranchButton2" Margin="500,700,500,200" Style="{StaticResource ShadowButton}" Click="Button_Click" d:IsHidden="True">
                         <Image x:Name="BranchButton2Image" Source="/Images/branch_selection2.png" Stretch="Fill" d:IsHidden="True" />
                     </Button>
                 </Grid>

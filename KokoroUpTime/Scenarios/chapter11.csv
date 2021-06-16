@@ -209,6 +209,7 @@ grid,input_akamaru_other_solution_grid
 border,input_button_border,,,fade_in
 text,hint_check_text,赤丸くんの鬱場面
 grid,hint_check_grid,float_in
+button,input_button1
 is_animation_skip,false
 click,page
 #
@@ -587,6 +588,7 @@ grid,step2_input_aosuke_many_solutions_grid,fade_in
 grid,step2_aosuke_solution_grid,fade_in
 text,hint_check_text,考える鬱コツ
 grid,hint_check_grid,float_in
+button,input_button1
 is_animation_skip,false
 click,page
 #

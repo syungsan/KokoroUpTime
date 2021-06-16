@@ -2304,7 +2304,11 @@ namespace KokoroUpTime
         // アニメーション（ストーリーボード）の処理
         private void ShowAnime(string storyBoard, string objectName, string objectsName, string isSync)
         {
-            if(!this.isAnimationSkip)
+#if DEBUG
+            this.scenarioCount += 1;
+            this.ScenarioPlay();
+#else
+            if (!this.isAnimationSkip)
             {
                 Storyboard sb;
                 try
@@ -2359,7 +2363,8 @@ namespace KokoroUpTime
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
-            
+#endif
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -2552,9 +2557,9 @@ namespace KokoroUpTime
 
                                 using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                                 {
-                                    connection.Execute($@"Update DataChapter8 SET GroupeActivityInputText1 = '{this.dataChapter8.GroupeActivityInputText1}' WHERE CreatedAt={this.dataChapter8.CreatedAt};");
-                                    connection.Execute($@"Update DataChapter8 SET GroupeActivityInputText2 = '{this.dataChapter8.GroupeActivityInputText2}' WHERE CreatedAt={this.dataChapter8.CreatedAt};");
-                                    connection.Execute($@"Update DataChapter8 SET GroupeActivityInputText3 = '{this.dataChapter8.GroupeActivityInputText3}' WHERE CreatedAt={this.dataChapter8.CreatedAt};");
+                                    connection.Execute($@"Update DataChapter8 SET GroupeActivityInputText1 = '{this.dataChapter8.GroupeActivityInputText1}' WHERE CreatedAt='{this.dataChapter8.CreatedAt}';");
+                                    connection.Execute($@"Update DataChapter8 SET GroupeActivityInputText2 = '{this.dataChapter8.GroupeActivityInputText2}' WHERE CreatedAt='{this.dataChapter8.CreatedAt}';");
+                                    connection.Execute($@"Update DataChapter8 SET GroupeActivityInputText3 = '{this.dataChapter8.GroupeActivityInputText3}' WHERE CreatedAt='{this.dataChapter8.CreatedAt}';");
                                 }
                             }
 

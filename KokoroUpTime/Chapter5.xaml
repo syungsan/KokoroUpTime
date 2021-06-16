@@ -88,7 +88,7 @@
                             <Border Height="170" Width="1560" Background="{x:Null}" BorderBrush="Black" BorderThickness="2">
                                 <StackPanel   Orientation="Horizontal" Background="Transparent" MouseDown="StackPanel_MouseDown"  >
                                     <TextBlock Text="{Binding}" FontSize="90" FontFamily="Yu Gothic" VerticalAlignment="Center" />
-                                    <TextBlock Style="{StaticResource OutputTextBlock}" FontSize="81" Width="1471" VerticalAlignment="Center" />
+                                    <TextBlock x:Name="OutputRelaxMethodText" Style="{StaticResource OutputTextBlock}" FontSize="60" Width="1471" VerticalAlignment="Center" />
                                 </StackPanel>
                             </Border>
                         </ControlTemplate>
@@ -161,7 +161,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,989,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <Button x:Name="MangaFlipButton" HorizontalAlignment="Left" Margin="1479,979,0,0" VerticalAlignment="Top" Height="84" Width="372" Click="Button_Click" Style="{StaticResource ShadowButton}">
                         <Grid x:Name="MangaFlipButtonLayerGrid">
                             <Image x:Name="MangaFlipArrowImageGauge" Source="/Images/mangaya_orange.png">
                                 <Image.RenderTransform>
@@ -428,11 +428,8 @@
                         <Grid x:Name="FeelingInputGrid" Margin="1,1,-3,-3">
                             <TextBlock x:Name="KindOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="904,140,0,0" Text="きもちの種類" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" TextAlignment="Center" d:LayoutOverrides="VerticalAlignment"/>
                             <TextBlock x:Name="SizeOfFeelingTitleTextBlock" HorizontalAlignment="Left" Margin="1328,140,0,0" Text="きもちの大きさ" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontWeight="Bold" d:LayoutOverrides="VerticalAlignment"/>
-                            <Button x:Name="KindOfFeelingInputButton" Width="334" Height="175" Background="{x:Null}" BorderBrush="{x:Null}" Margin="923,243,663,662" Click="Button_Click">
-                                <Grid x:Name="KindOfFeelingInputGrid">
-                                    <Image x:Name="KindOfFeelingInputImage" Source="/Images/kind_of_feeling_button_frame.png" />
-                                    <TextBlock x:Name="KindOfFeelingInputTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
-                                </Grid>
+                            <Button x:Name="KindOfFeelingInputButton" Width="334" Height="175" BorderBrush="Red" BorderThickness="4" Style="{StaticResource KindOfFeelingButton}" Margin="923,243,663,662" Click="Button_Click">
+                                <TextBlock x:Name="KindOfFeelingInputTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
                             </Button>
                             <Button x:Name="SizeOfFeelingInputButton" Style="{StaticResource SizeOfFeelingButton}" HorizontalAlignment="Left" Margin="1358,260,0,0" VerticalAlignment="Top" FontSize="140" Click="Button_Click" Height="141" Width="347" d:LayoutOverrides="VerticalAlignment">
                                 <TextBlock x:Name="SizeOfFeelingInputTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="68" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
@@ -703,10 +700,10 @@
                                 <TextBlock x:Name="RelaxMethodMessageTextBlock" Text="TextBlock" TextWrapping="Wrap" Height="66" Margin="82,0,72,10" VerticalAlignment="Bottom" FontSize="48" TextAlignment="Right"/>
                             </Grid>
                         </Button>
-                        <Button x:Name="NextGoButton" Width="442" Height="143" Background="Transparent" BorderBrush="{x:Null}" Margin="1478,927,0,10" Click="Button_Click">
+                        <Button x:Name="NextGoButton" Width="442" Height="143" Style="{StaticResource ShadowButton}" Margin="1478,927,0,10" Click="Button_Click">
                             <Image x:Name="NextGoImage" Source="/Images/next_go_button.png"/>
                         </Button>
-                        <Button x:Name="BackGoButton" Width="462" Height="142" BorderBrush="Transparent" Background="{x:Null}" Margin="10,938,1448,0" Click="Button_Click">
+                        <Button x:Name="BackGoButton" Width="462" Height="142"  Style="{StaticResource ShadowButton}" Margin="10,938,1448,0" Click="Button_Click">
                             <Image x:Name="BackGoImage" Source="/Images/prev_back_.png"/>
                         </Button>
                     </Grid>
@@ -964,13 +961,13 @@
                 </Grid>
                 <Grid x:Name="SelectButtonGrid" d:IsHidden="True">
                     <Grid x:Name="MemoryCheckGrid">
-                        <Button x:Name="ImRememberButton" Height="164" Width="882" Background="{x:Null}" BorderBrush="{x:Null}" Margin="519,335,519,581" Click="Button_Click">
+                        <Button x:Name="ImRememberButton" Height="164" Width="882" Style="{StaticResource ShadowButton}" Margin="519,335,519,581" Click="Button_Click">
                             <Grid x:Name="ImRememberGrid">
                                 <Image x:Name="ImRememberImage" Source="/Images/orange_button_plate.png"/>
                                 <TextBlock x:Name="ImRememberTextBlock" Text="おぼえているよ" TextWrapping="Wrap" Foreground="White" FontSize="68" TextAlignment="Center" VerticalAlignment="Top" Margin="0,27,0,0"/>
                             </Grid>
                         </Button>
-                        <Button x:Name="WishCheckButton" Height="164" Width="882" Background="{x:Null}" BorderBrush="{x:Null}" Margin="519,610,519,306" Click="Button_Click">
+                        <Button x:Name="WishCheckButton" Height="164" Width="882" Style="{StaticResource ShadowButton}" Margin="519,610,519,306" Click="Button_Click">
                             <Grid x:Name="WishCheckGrid">
                                 <Image x:Name="WishCheckImage" Source="/Images/orange_button_plate.png"/>
                                 <TextBlock x:Name="WishCheckTextBlock" Text="かくにんしたいな" TextWrapping="Wrap" Foreground="White" FontSize="68" TextAlignment="Center" VerticalAlignment="Top" Margin="0,27,0,0"/>
@@ -1110,7 +1107,7 @@
                                                             <Border Height="160" Width="1430" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="Black" BorderThickness="2">
                                                                 <StackPanel Orientation="Horizontal" >
                                                                     <TextBlock Text="{Binding}" FontSize="83" FontFamily="Yu Gothic" VerticalAlignment="Center"/>
-                                                                    <TextBox x:Name="RelaxMethodInputTextBox" Style="{StaticResource InputTextBox}"  FontSize="74"  Width="1350" VerticalAlignment="Center" MaxLength="36" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput" TextChanged="TextBox_TextChanged"/>
+                                                                    <TextBox x:Name="RelaxMethodInputTextBox" Style="{StaticResource InputTextBox}"  FontSize="55"  Width="1350" VerticalAlignment="Center" MaxLength="36" GotFocus="TriggerKeyboard" PreviewMouseDown="TextBoxMouseDown" PreviewKeyDown="TextBoxKeyDown" PreviewKeyUp="TextBoxKeyDown" PreviewTextInput="TextBoxPreviewTextInput" TextChanged="TextBox_TextChanged"/>
                                                                 </StackPanel>
                                                             </Border>
                                                         </ControlTemplate>

@@ -1722,6 +1722,11 @@ namespace KokoroUpTime
         // アニメーション（ストーリーボード）の処理
         private void ShowAnime(string storyBoard, string objectName, string objectsName, string isSync)
         {
+#if DEBUG
+            this.scenarioCount += 1;
+            this.ScenarioPlay();
+#else
+
             Storyboard sb;
 
             try
@@ -1768,6 +1773,7 @@ namespace KokoroUpTime
                     }
                 }
             }
+#endif
         }
 
         // 黒板ルール処理のためだけの追加

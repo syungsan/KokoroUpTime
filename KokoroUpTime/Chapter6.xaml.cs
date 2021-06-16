@@ -1609,53 +1609,60 @@ namespace KokoroUpTime
         // アニメーション（ストーリーボード）の処理
         private void ShowAnime(string storyBoard, string objectName, string objectsName, string isSync)
         {
-            Storyboard sb;
-            try
-            {
-                sb = this.FindResource(storyBoard) as Storyboard;
-                foreach (var child in sb.Children)
-                    Storyboard.SetTargetName(child, objectName);
-            }
-            catch (ResourceReferenceKeyNotFoundException)
-            {
-                string objectsStroryBoard = $"{storyBoard}_{objectsName}";
-                sb = this.FindResource(objectsStroryBoard) as Storyboard;
-            }
-
-            if (sb != null)
-            {
-                // 二重終了防止策
-                bool isDuplicate = false;
-
-                if (isSync == "sync")
+#if DEBUG
+            this.scenarioCount += 1;
+            this.ScenarioPlay();
+#else
+           
+                Storyboard sb;
+                try
                 {
-                    sb.Completed += (s, e) =>
+                    sb = this.FindResource(storyBoard) as Storyboard;
+                    foreach (var child in sb.Children)
+                        Storyboard.SetTargetName(child, objectName);
+                }
+                catch (ResourceReferenceKeyNotFoundException)
+                {
+                    string objectsStroryBoard = $"{storyBoard}_{objectsName}";
+                    sb = this.FindResource(objectsStroryBoard) as Storyboard;
+                }
+
+                if (sb != null)
+                {
+                    // 二重終了防止策
+                    bool isDuplicate = false;
+
+                    if (isSync == "sync")
                     {
+                        sb.Completed += (s, e) =>
+                        {
+                            if (!isDuplicate)
+                            {
+                                this.scenarioCount += 1;
+                                this.ScenarioPlay();
+
+                                isDuplicate = true;
+
+                            }
+                        };
+                        sb.Begin(this);
+                    }
+                    else if (isSync == "no_sync")
+                    {
+                        sb.Begin(this);
+
                         if (!isDuplicate)
                         {
                             this.scenarioCount += 1;
                             this.ScenarioPlay();
 
                             isDuplicate = true;
-
+                            isClickable = true;
                         }
-                    };
-                    sb.Begin(this);
-                }
-                else if (isSync == "no_sync")
-                {
-                    sb.Begin(this);
-
-                    if (!isDuplicate)
-                    {
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-
-                        isDuplicate = true;
-                        isClickable = true;
                     }
                 }
             }
+#endif
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -1697,23 +1704,9 @@ namespace KokoroUpTime
                     {
                         this.MangaFlipButton.Visibility = Visibility.Hidden;
                     }
-                    else if(button.Name == "SelectFeelingCompleteButton")
-                    {
-                        if(this.ChallengeTimeGrid.Visibility == Visibility.Visible)
-                        {
-                            this.dataChapter6.SelectedNicePersonality="";
-                            foreach (var text in this.SelectNicePersonalityListBox.SelectedItems)
-                            {
-                                this.dataChapter6.SelectedNicePersonality += $"{text} ";
-                            }
-                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                            {
-                                connection.Execute($@"UPDATE DataChapter6 SET SelectedNicePersonality = '{this.dataChapter6.SelectedNicePersonality}' WHERE CreatedAt = '{this.dataChapter6.CreatedAt}';");
-                            }
-                        }
-                    }
                     else if(button.Name == "SelectFeelingNextButton")
                     {
+                        this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
                         if (this.GroupeActivityGrid.Visibility == Visibility.Visible)
                         {
 
@@ -1744,11 +1737,11 @@ namespace KokoroUpTime
                                 {
                                     if (text.Name == "NameInputTextBox")
                                     {
-                                        this.dataChapter6.InputFriendsNicePersonality += $"{text}さん,";
+                                        this.dataChapter6.InputFriendsNicePersonality += $"{text.Text}さん,";
                                     }
                                     else if (text.Name == "PersonalityInputTextBox")
                                     {
-                                        this.dataChapter6.InputFriendsNicePersonality += $"{text};";
+                                        this.dataChapter6.InputFriendsNicePersonality += $"{text.Text};";
                                     }
                                 }
 
@@ -1757,7 +1750,20 @@ namespace KokoroUpTime
                                     connection.Execute($@"UPDATE DataChapter6 SET InputFriendsNicePersonality = '{this.dataChapter6.InputFriendsNicePersonality}' WHERE CreatedAt = '{this.dataChapter6.CreatedAt}';");
                                 }
                             }
+
                             
+                        }
+                        if (this.ChallengeTimeGrid.Visibility == Visibility.Visible)
+                        {
+                            this.dataChapter6.SelectedNicePersonality = "";
+                            foreach (var text in this.SelectNicePersonalityListBox.SelectedItems)
+                            {
+                                this.dataChapter6.SelectedNicePersonality += $"{text} ";
+                            }
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"UPDATE DataChapter6 SET SelectedNicePersonality = '{this.dataChapter6.SelectedNicePersonality}' WHERE CreatedAt = '{this.dataChapter6.CreatedAt}';");
+                            }
                         }
                     }
 
@@ -1822,12 +1828,6 @@ namespace KokoroUpTime
             else if (button.Name == "BranchButton1")
             {
                 this.GoTo("manga","sub");
-            }
-            else if (button.Name == "SelectFeelingNextButton")
-            {
-                this.SelectFeelingNextButton.Visibility = Visibility.Hidden;
-                this.scenarioCount += 1;
-                this.ScenarioPlay();
             }
             else if (button.Name == "ReturnToTitleButton")
             {

@@ -72,7 +72,12 @@ namespace KokoroUpTime
         private bool isClickable = false;
 
         //アニメーションを表示させるか否か
+#if DEBUG
+        private readonly bool isAnimationSkip = true;
+#else
         private bool isAnimationSkip = false;
+
+#endif
 
         // マウス押下中フラグ
         private bool isMouseDown = false;
@@ -1373,7 +1378,11 @@ namespace KokoroUpTime
 
                 case "is_animation_skip":
 
-                    this.isAnimationSkip = Convert.ToBoolean(this.scenarios[this.scenarioCount][1]);
+                    #if DEBUG
+                    #else
+                        this.isAnimationSkip = Convert.ToBoolean(this.scenarios[this.scenarioCount][1]);
+                    #endif
+
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -2258,7 +2267,7 @@ namespace KokoroUpTime
                                     case "発明品①":
                                         this.dataChapter12.SelectedItem1 = itemName;
 
-                                        itemMethodInputTextProperty = typeof(SelectedItemMethodStrokeData).GetProperty("ItemMethodInputText1");
+                                        itemMethodInputTextProperty = typeof(DataChapter12).GetProperty("ItemMethodInputText1");
                                         itemMethodInputTextProperty.SetValue(this.dataChapter12, data.ItemMethodText);
 
                                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
@@ -2272,7 +2281,7 @@ namespace KokoroUpTime
                                         this.dataChapter12.SelectedItem2 = itemName;
 
 
-                                        itemMethodInputTextProperty = typeof(SelectedItemMethodStrokeData).GetProperty("ItemMethodInputText2");
+                                        itemMethodInputTextProperty = typeof(DataChapter12).GetProperty("ItemMethodInputText2");
                                         itemMethodInputTextProperty.SetValue(this.dataChapter12, data.ItemMethodText);
 
                                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
@@ -2285,7 +2294,7 @@ namespace KokoroUpTime
                                     case "発明品③":
                                         this.dataChapter12.SelectedItem3 = itemName;
 
-                                        itemMethodInputTextProperty = typeof(SelectedItemMethodStrokeData).GetProperty("ItemMethodInputText3");
+                                        itemMethodInputTextProperty = typeof(DataChapter12).GetProperty("ItemMethodInputText3");
                                         itemMethodInputTextProperty.SetValue(this.dataChapter12, data.ItemMethodText);
 
                                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))

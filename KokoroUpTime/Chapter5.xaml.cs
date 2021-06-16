@@ -125,7 +125,7 @@ namespace KokoroUpTime
         private StrokeCollection InputShoulderImageOfKimiStroke = null;
         private StrokeCollection InputLegImageOfKimiStroke = null;
         private StrokeCollection InputMyBodyImageStrokeNotUnderstandProblem = null;
-        private StrokeCollection InputMyBodyImageStrokeRecoderProblem = null;
+        private StrokeCollection InputMyBodyImageStrokeRecorderProblem = null;
         private List<StrokeCollection> InputRelaxMethodStrokes = null;
         
 
@@ -164,13 +164,13 @@ namespace KokoroUpTime
             KindOfFeelings = new Dictionary<string, PropertyInfo>()
             {
                ["not_understand_problem"]=typeof(DataChapter5).GetProperty("KindOfFeelingNotUnderstandProblem"),
-               ["recoder_problem"] =typeof(DataChapter5).GetProperty("KindOfFeelingRecorderProblem"),
+               ["recorder_problem"] =typeof(DataChapter5).GetProperty("KindOfFeelingRecorderProblem"),
             };
 
             SizeOfFeelings = new Dictionary<string, PropertyInfo>()
             {
                 ["not_understand_problem"] = typeof(DataChapter5).GetProperty("SizeOfFeelingNotUnderstandProblem"),
-                ["recoder_problem"] = typeof(DataChapter5).GetProperty("SizeOfFeelingRecorderProblem"),
+                ["recorder_problem"] = typeof(DataChapter5).GetProperty("SizeOfFeelingRecorderProblem"),
             };                                                         
 
             this.DataContext = this.dataChapter5;
@@ -581,7 +581,7 @@ namespace KokoroUpTime
                     ["shoulder_image_of_kimi"] = this.InputShoulderImageOfKimiStroke=new StrokeCollection(),
                     ["leg_image_of_kimi"] = this.InputLegImageOfKimiStroke=new StrokeCollection(),
                     ["not_understand_problem"] = this.InputMyBodyImageStrokeNotUnderstandProblem=new StrokeCollection(),
-                    ["recoder_problem"] = this.InputMyBodyImageStrokeRecoderProblem=new StrokeCollection(),
+                    ["recorder_problem"] = this.InputMyBodyImageStrokeRecorderProblem=new StrokeCollection(),
                 };
 
                 this.InputRelaxMethodStrokes = new List<StrokeCollection>();
@@ -782,8 +782,8 @@ namespace KokoroUpTime
                     }
                     else if (this.scene == "リコーダー問題")
                     {
-                        this.FeelingDictionaryKey = "recoder_problem";
-                        this.InputDictionaryKey = "recoder_problem";
+                        this.FeelingDictionaryKey = "recorder_problem";
+                        this.InputDictionaryKey = "recorder_problem";
                         if (this.dataOption.InputMethod == 0)
                         {
                             this.MyBodyImageInputInkCanvas.Strokes = this.InputStroke[this.InputDictionaryKey];
@@ -1560,7 +1560,7 @@ namespace KokoroUpTime
                                     break;
 
                                 case "リコーダー問題":
-                                    this.GoTo("recoder_problem","sub");
+                                    this.GoTo("recorder_problem","sub");
                                     break;
 
                                 case "グループアクティビティ":
@@ -2276,6 +2276,10 @@ namespace KokoroUpTime
         // アニメーション（ストーリーボード）の処理
         private void ShowAnime(string storyBoard, string objectName, string objectsName, string isSync)
         {
+#if DEBUG
+            this.scenarioCount += 1;
+            this.ScenarioPlay();
+#else
             if (!this.isAnimationSkip)
             {
                 Storyboard sb;
@@ -2331,6 +2335,7 @@ namespace KokoroUpTime
                 this.scenarioCount += 1;
                 this.ScenarioPlay();
             }
+#endif
 
         }
 
@@ -2622,7 +2627,7 @@ namespace KokoroUpTime
                             }
                             using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                             {
-                                connection.Execute($@"Update DataChapter5 SET InputStomachImageOfKimiText ='{this.dataChapter5.InputFaceImageOfKimiText}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
+                                connection.Execute($@"Update DataChapter5 SET InputStomachImageOfKimiText ='{this.dataChapter5.InputStomachImageOfKimiText}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
                             }
                             using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                             {
@@ -2668,7 +2673,7 @@ namespace KokoroUpTime
                                 this.dataChapter5.InputMyBodyImageTextRecorderProblem = (string)this.InputText[this.InputDictionaryKey].GetValue(this.dataChapter5);
                                 using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                                 {
-                                    connection.Execute($@"Update DataChapter5 SET InputMyBodyImageTextRecoderProblem ='{this.dataChapter5.InputMyBodyImageTextRecorderProblem}' WHERE CreatedAt='{this.dataChapter5.CreatedAt}';");
+                                    connection.Execute($@"Update DataChapter5 SET InputMyBodyImageTextRecorderProblem ='{this.dataChapter5.InputMyBodyImageTextRecorderProblem}' WHERE CreatedAt='{this.dataChapter5.CreatedAt}';");
                                 }
                             }
                         }
@@ -2714,9 +2719,11 @@ namespace KokoroUpTime
                         }
                         else
                         {
-                            foreach (var text in this.InputRelaxMethodText)
+                            this.dataChapter5.InputRelaxMethodText = "";
+
+                            foreach (var text in this.RelaxMethodInputTextListView.GetChildren<TextBlock>())
                             {
-                                this.dataChapter5.InputRelaxMethodText = $"{text},";
+                                this.dataChapter5.InputRelaxMethodText += $"{text},";
                             }
 
                             using (var connection = new SQLiteConnection(this.initConfig.dbPath))
@@ -3403,7 +3410,7 @@ namespace KokoroUpTime
         // OSKを完全に切ってしまう
         private void CloseOSK()
         {
-            #region
+#region
             if (OnScreenKeyboard.IsOpened())
             {
                 try
@@ -3416,12 +3423,12 @@ namespace KokoroUpTime
                     Debug.Print(ex.Message);
                 }
             }
-            #endregion
+#endregion
         }
 
         private void ReadyKeyboard()
         {
-            #region
+#region
             if (!OnScreenKeyboard.IsOpened())
             {
                 try
@@ -3435,7 +3442,7 @@ namespace KokoroUpTime
                     Debug.Print(ex.Message);
                 }
             }
-            #endregion
+#endregion
         }
 
         private void TextBoxPreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -3659,18 +3666,35 @@ namespace KokoroUpTime
                 {
                     this.InputRelaxMethodText.Add(text1.Text);
                 }
+                //foreach (var panel in this.RelaxMethodInputListView.GetChildren<ListViewItem>().ToList())
+                //{
+
+                //    foreach (var aaa in this.RelaxMethodInputTextListView.Items)
+                //    {
+                //        try
+                //        {
+                //            Debug.Print(aaa.ToString());
+                //        }
+                //        catch
+                //        {
+
+                //        }
+                //    }
+                //    Debug.Print(index.ToString());
+                //    index++;
+                //}
                 foreach (TextBlock text2 in this.RelaxMethodInputListView.GetChildren<TextBlock>().ToList())
                 {
-                    if(this.RELAX_METHOD_COUNT.Contains(text2.Text) == false)
+                    if (this.RELAX_METHOD_COUNT.Contains(text2.Text) == false)
                     {
                         if (this.InputRelaxMethodText[index] != text2.Text)
                         {
                             text2.Text = this.InputRelaxMethodText[index];
-                            
+
                         }
                         index++;
                     }
-                        
+
                 }
             }
         }

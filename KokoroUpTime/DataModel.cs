@@ -451,15 +451,13 @@ namespace KokoroUpTime
 
         public string SelectedAkamaruGoalText { get; set; }="";
 
-        public string Step2AkamaruManyMethodInputText1 { get; set; }="";
-        public string Step2AkamaruManyMethodInputText2 { get; set; }="";
-        public string Step2AkamaruManyMethodInputText3 { get; set; }="";
+        public string Step2AkamaruManyMethodInputText { get; set; }="";
 
         public string EvaluationAkamaruMethodText1 { get; set; }="";
         public string EvaluationAkamaruMethodText2 { get; set; }="";
         public string EvaluationAkamaruMethodText3 { get; set; }="";
 
-        public string EvaluateAosukeMethodText { get; set; }="";
+        public string Step2AosukeManyMethodInputText { get; set; }="";
         public string EvaluationAosukeMethodText { get; set; }="";
 
         public string CreatedAt { get; set; }

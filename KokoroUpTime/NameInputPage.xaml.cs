@@ -75,7 +75,7 @@ namespace KokoroUpTime
 
             #if DEBUG
                 //Debug時の設定
-                this.INIT_MESSAGE_SPEED = 1000.0f;
+                this.INIT_MESSAGE_SPEED = 100000.0f;
                 this.IS_3_SECOND_RULE = false;
             #endif
 

@@ -70,7 +70,7 @@ image,manga_image,manga5-2.png,flip
 flip
 image,manga_image,manga5-3.png,flip
 hide,button,manga_flip_button
-click,page
+click,page,next_only
 #
 scene,赤丸くんのからだの変化
 reset
@@ -210,7 +210,7 @@ text,size_of_feeling_input_text,$size_of_feeling$
 is_animation_skip,false
 click,page
 #
-sub,recoder_problem
+sub,recorder_problem
 scene,リコーダー問題
 reset
 image,bg_image,background_05.png
