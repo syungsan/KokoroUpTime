@@ -56,7 +56,7 @@ namespace KokoroUpTime
 
         //アニメーションをスキップするかどうかのフラグ
 #if DEBUG
-        private readonly bool isAnimationSkip = false;
+        private readonly bool isAnimationSkip = true;
 #else
         private bool isAnimationSkip = false;
 #endif

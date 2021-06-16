@@ -2605,7 +2605,7 @@ namespace KokoroUpTime
                             this.AkamaruOtherSolutionUseItemInputStroke = this.InputCanvas1.Strokes;
                             this.OutputCanvas1.Strokes = this.AkamaruOtherSolutionUseItemInputStroke;
                         }
-                        else if (this.InputButton2.IsVisible)
+                        else if (this.Step2InputAkamaruManySolutionGrid.IsVisible)
                         {
                             for (int i = 0; i < this.Step2AkamaruMethodInputStrokes.Length; i++)
                             {

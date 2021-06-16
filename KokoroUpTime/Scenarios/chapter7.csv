@@ -414,7 +414,7 @@ image,bg_image,background_05.png
 grid,challenge_time_grid
 border,challenge_time_border,light_orange
 text,situation_title_text,,fade_in
-text,situation_text,クラスの友だちに、鬱「おはよう」と言いましたが、鬱返事が返ってきませんでした。
+text,situation_text,音楽の発表で、みんなの前で鬱失敗してしまいました。鬱友だちの１人が、こっちを見て鬱笑っていました。
 border,situation_border,,light_green,float_in
 text,thought_title_text,友だちの考え,fade_in
 border,thought_speech_bubble_border,,light_green

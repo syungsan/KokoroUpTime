@@ -5,6 +5,8 @@ using SQLite;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Reflection;
+using System.Linq;
 
 namespace KokoroUpTime
 {
@@ -98,12 +100,24 @@ namespace KokoroUpTime
 
                 var chapter1StrResult = new Dictionary<string, string>
                 {
-                    { "A4", dataChapter1.MyKindOfGoodFeelings },
-                    { "B5", dataChapter1.MyKindOfBadFeelings },
                     { "F4", dataChapter1.KimisKindOfFeeling },
                     { "F8", dataChapter1.AkamarusKindOfFeeling },
                     { "F12", dataChapter1.AosukesKindOfFeeling },
                 };
+
+                
+                IEnumerable<string> goodFeelings = dataChapter1.MyKindOfGoodFeelings.Split(",");
+                foreach (var goodfeel in goodFeelings.Select((Value, Index)=> new {Value ,Index}))
+                {
+                    chapter1StrResult.Add($"A{4+goodfeel.Index}", goodfeel.Value);
+                }
+
+                IEnumerable<string> badFeelings = dataChapter1.MyKindOfBadFeelings.Split(",");
+                foreach (var badfeel in badFeelings.Select((Value, Index) => new { Value, Index }))
+                {
+                    chapter1StrResult.Add($"B{4 + badfeel.Index}", badfeel.Value);
+                }
+
 
                 var chapter1IntResult = new Dictionary<string, int?>
                 {
@@ -125,7 +139,7 @@ namespace KokoroUpTime
 
             // ###############################################################################
 
-            //第２回に書き込み
+            //第2回に書き込み
             if (dataProgress.HasCompletedChapter2 == true)
             {
                 excel.SetSheet("第2回");
@@ -146,6 +160,13 @@ namespace KokoroUpTime
                     {"E7" , dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend},
                 };
 
+                IEnumerable<string> goodEvents = dataChapter2.MySelectGoodEvents.Split(",");
+                foreach (var goodEvent in goodEvents.Select((Value, Index) => new { Value, Index }))
+                {
+                    chapter2StrResult.Add($"A{4 + goodEvent.Index}", goodEvent.Value);
+                }
+
+
                 foreach (KeyValuePair<string, string> item in chapter2StrResult)
                 {
                     excel.WriteCell(item.Key, item.Value);
@@ -154,6 +175,11 @@ namespace KokoroUpTime
                 foreach (KeyValuePair<string, int?> item in chapter2IntResult)
                 {
                     excel.WriteCell(item.Key, item.Value);
+                }
+
+                if (false)
+                {
+                    //画像貼り付け
                 }
 
             }
@@ -199,6 +225,106 @@ namespace KokoroUpTime
                 }
             }
 
+            //第4回に書き込み
+            if (dataProgress.HasCompletedChapter4 == true)
+            {
+                excel.SetSheet("第4回");
+
+                var chapter4StrResult = new Dictionary<string, string>
+                {
+                    { "B4", dataChapter4.KimisKindOfFeelingAskedForWork },
+                    { "B5", dataChapter4.KimisKindOfFeelingAskedByAkamaru },
+                };
+
+                var chapter4IntResult = new Dictionary<string, int?>
+                {
+                   { "C4", dataChapter4.KimisSizeOfFeelingAskedForWork },
+                   { "C3", dataChapter4.KimisSizeOfFeelingAskedByAkamaru },
+                };
+
+                foreach (KeyValuePair<string, string> item in chapter4StrResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+
+                foreach (KeyValuePair<string, int?> item in chapter4IntResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+            }
+
+            //第5回に書き込み
+            if (dataProgress.HasCompletedChapter5 == true)
+            {
+                excel.SetSheet("第5回");
+
+                var chapter5StrResult = new Dictionary<string, string>
+                {
+                    { "B4", dataChapter5.InputFaceImageOfKimiText },
+                    { "B5", dataChapter5.InputHeadImageOfKimiText },
+                    { "B6", dataChapter5.InputHandImageOfKimiText },
+                    { "B7", dataChapter5.InputShoulderImageOfKimiText },
+                    { "B8", dataChapter5.InputStomachImageOfKimiText },
+                    { "B9", dataChapter5.InputLegImageOfKimiText },
+                    { "B10", dataChapter5.InputOthersImageOfKimiText },
+
+                    { "E4", dataChapter5.KindOfFeelingNotUnderstandProblem },
+                    { "E5", dataChapter5.KindOfFeelingRecorderProblem },
+
+                    { "G4", dataChapter5.InputMyBodyImageTextNotUnderstandProblem },
+                    { "G5", dataChapter5.InputMyBodyImageTextRecorderProblem },
+                };
+
+                var chapter5IntResult = new Dictionary<string, int?>
+                {
+                    { "F4", dataChapter5.SizeOfFeelingNotUnderstandProblem },
+                    { "F5", dataChapter5.SizeOfFeelingRecorderProblem },
+                };
+
+                IEnumerable<string> relaxMethods = dataChapter5.InputRelaxMethodText.Split(",");
+                foreach (var relaxMethod in relaxMethods.Select((Value, Index) => new { Value, Index }))
+                {
+                    chapter5IntResult.Add($"I{4 + relaxMethod.Index}", relaxMethod.Index+1);
+                    chapter5StrResult.Add($"J{4 + relaxMethod.Index}", relaxMethod.Value);
+                }
+
+                foreach (KeyValuePair<string, string> item in chapter5StrResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+
+                foreach (KeyValuePair<string, int?> item in chapter5IntResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+            }
+
+            //第6回に書き込み
+            if (dataProgress.HasCompletedChapter6 == true)
+            {
+                excel.SetSheet("第6回");
+
+                var chapter6StrResult = new Dictionary<string, string>();
+
+                IEnumerable<string> nicePersonalities = dataChapter6.SelectedNicePersonality.Split(",");
+                foreach (var nicePersonality in nicePersonalities.Select((Value, Index) => new { Value, Index }))
+                {
+                    chapter6StrResult.Add($"A{3 + nicePersonality.Index}", nicePersonality.Value);
+                }
+
+                IEnumerable<string> friendsNicePersonalities = dataChapter6.InputFriendsNicePersonality.Split(";");
+                foreach (var friendsNicePersonality in friendsNicePersonalities.Select((Value, Index) => new { Value, Index }))
+                {
+                    chapter6StrResult.Add($"C{4 + friendsNicePersonality.Index}", friendsNicePersonality.Value.Split(",")[0]);
+                    chapter6StrResult.Add($"D{4 + friendsNicePersonality.Index}", friendsNicePersonality.Value.Split(",")[1]);
+                }
+
+                foreach (KeyValuePair<string, string> item in chapter6StrResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+            }
+
             //第7回に書き込み
             if (dataProgress.HasCompletedChapter7 == true)
             {
@@ -210,8 +336,8 @@ namespace KokoroUpTime
                     { "C5", dataChapter7.KimisKindOfFeelingInviteFriends },
                     { "G4", dataChapter7.InputAkamaruThoughtText },
                     { "H4", dataChapter7.InputAosukeThoughtText },
-                    { "J4", dataChapter7.ChallengeTimeSelectedScene},
-                    { "O4", dataChapter7.GroupeActivitySelectedScene},
+                    { "A9", dataChapter7.ChallengeTimeSelectedScene},
+                    { "F8", dataChapter7.GroupeActivitySelectedScene},
                 };
 
                 var chapter7IntResult = new Dictionary<string, int?>
@@ -228,11 +354,11 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        chapter7StrResult.Add("K4", dataChapter7.InputYourToughtText1);
+                        chapter7StrResult.Add("B9", dataChapter7.InputYourToughtText1);
                     }
 
-                    chapter7StrResult.Add("L4", dataChapter7.YourKindOfFeelingAnnouncement);
-                    chapter7IntResult.Add("M4", dataChapter7.YourSizeOfFeelingAnnouncement);
+                    chapter7StrResult.Add("C9", dataChapter7.YourKindOfFeelingAnnouncement);
+                    chapter7IntResult.Add("D9", dataChapter7.YourSizeOfFeelingAnnouncement);
 
                 }
                 else
@@ -243,11 +369,11 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        chapter7StrResult.Add("K4", dataChapter7.InputYourToughtText2);
+                        chapter7StrResult.Add("B9", dataChapter7.InputYourToughtText2);
                     }
 
-                    chapter7StrResult.Add("L4", dataChapter7.YourKindOfFeelingGreetingToFriend);
-                    chapter7IntResult.Add("M4", dataChapter7.YourSizeOfFeelingGreetingToFriend);
+                    chapter7StrResult.Add("C9", dataChapter7.YourKindOfFeelingGreetingToFriend);
+                    chapter7IntResult.Add("D9", dataChapter7.YourSizeOfFeelingGreetingToFriend);
                 }
 
                 if (dataChapter7.GroupeActivitySelectedScene == "音楽の発表で、みんなの前で失敗してしまいました。友だちの１人が、こっちを見て笑っていました。")
@@ -258,11 +384,11 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        chapter7StrResult.Add("P4", dataChapter7.InputFriendToughtText1);
+                        chapter7StrResult.Add("G8", dataChapter7.InputFriendToughtText1);
                     }
 
-                    chapter7StrResult.Add("Q4", dataChapter7.YourFriendsKindOfFeelingAnnouncement);
-                    chapter7IntResult.Add("R4", dataChapter7.YourFriendsSizeOfFeelingAnnouncement);
+                    chapter7StrResult.Add("H8", dataChapter7.YourFriendsKindOfFeelingAnnouncement);
+                    chapter7IntResult.Add("I8", dataChapter7.YourFriendsSizeOfFeelingAnnouncement);
 
                 }
                 else
@@ -273,11 +399,11 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        chapter7StrResult.Add("P4", dataChapter7.InputFriendToughtText2);
+                        chapter7StrResult.Add("G8", dataChapter7.InputFriendToughtText2);
                     }
 
-                    chapter7StrResult.Add("Q4", dataChapter7.YourFriendsKindOfFeelingGreetingToAnotherFriend);
-                    chapter7IntResult.Add("R4", dataChapter7.YourFriendsSizeOfFeelingGreetingToAnotherFriend);
+                    chapter7StrResult.Add("H8", dataChapter7.YourFriendsKindOfFeelingGreetingToAnotherFriend);
+                    chapter7IntResult.Add("I8", dataChapter7.YourFriendsSizeOfFeelingGreetingToAnotherFriend);
                 }
 
                 foreach (KeyValuePair<string, string> item in chapter7StrResult)
@@ -578,6 +704,87 @@ namespace KokoroUpTime
                         dataChapter7.InputFriendToughtText2 = row.InputFriendToughtText2;
                 }
             }
+        }
+
+        private void LoadDataChapter<TDataChapter>(TDataChapter _dataChapter,string dbPath)
+        {
+            //DataChapterの型を取得
+            var typeOfDataChapter = _dataChapter.GetType();
+
+            //取得したDataChapterの全Propertyを取得
+            PropertyInfo[] dataChapterPropertyInfos = typeOfDataChapter.GetProperties();
+
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                string chapterNumber = typeOfDataChapter.Name.Replace("DataChapter", "");
+                switch (chapterNumber)
+                {
+                    case "1":
+                        var resultChapter1 = connection.Query<DataChapter1>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+
+                        foreach (var dataChapterProp in dataChapterPropertyInfos)
+                        {
+                            var dbProp = typeof(DataChapter1).GetProperty(dataChapterProp.Name);
+
+                            if (dataChapterProp.Name =="MyKindOfGoodFeelings"|| dataChapterProp.Name == "MyKindOfBadFeelings")
+                            {
+
+                                //配列に直さないといけない場合
+                            }
+                            else if (false)
+                            {
+                                //手書き入力をロードする場合
+                            }
+                            else if (false)
+                            {
+                                //ListBoxに直さないといけない場合
+                            }
+                            else
+                            {
+                                dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter1));
+                            }
+
+                        }
+
+                        break;
+                    case "2":
+                        var resultChapter2 = connection.Query<DataChapter2>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        break;
+                    case "3":
+                        var resultChapter3 = connection.Query<DataChapter3>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        break;
+                    case "4":
+                        var resultChapter4 = connection.Query<DataChapter4>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        break;
+                    case "5":
+                        var resultChapter5 = connection.Query<DataChapter5>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        break;
+                    case "6":
+                        var resultChapter6 = connection.Query<DataChapter1>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        break;
+                    case "7":
+                        var resultChapter7 = connection.Query<DataChapter1>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        break;
+                    case "8":
+                        var resultChapter8 = connection.Query<DataChapter1>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        break;
+                    case "9":
+                        var resultChapter9 = connection.Query<DataChapter1>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        break;
+                    case "10":
+                        var resultChapter10 = connection.Query<DataChapter1>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        break;
+                    case "11":
+                        var resultChapter11 = connection.Query<DataChapter1>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        break;
+                    case "12":
+                        var resultChapter12 = connection.Query<DataChapter1>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        break;
+                }
+            }
+
+
+
         }
     }
 }

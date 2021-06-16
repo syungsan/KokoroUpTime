@@ -689,7 +689,7 @@
                         </TextBlock>
                         <Button x:Name="InputButton2" Margin="100,550,590,10" Background="Transparent" BorderBrush="{x:Null}" Click="Button_Click">
                             <Grid>
-                                <StackPanel Visibility="Hidden">
+                                <StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock FontFamily="MS pgothic" Text="・" FontSize="50" Margin="0,35"/>
                                         <InkCanvas x:Name="OutputCanvas2_1" Style="{StaticResource OutputInkCanvas}" Margin="35,0,0,0" Height="120" Width="1680" />

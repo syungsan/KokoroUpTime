@@ -827,7 +827,7 @@
                 <Button x:Name="OkButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="110" Width="300" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True" Style="{StaticResource ShadowButton}">
                     <Image x:Name="OkButtonImage" Source="/Images/ok_button.png" Stretch="Fill" d:IsHidden="True"/>
                 </Button>
-                <Grid x:Name="HintCheckGrid" Margin="1480,10,20,862" RenderTransformOrigin="0.5,0.5" d:IsHidden="True" Style="{StaticResource ShadowButtonGrid}">
+                <Grid x:Name="HintCheckGrid" Margin="1480,10,20,862" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -836,7 +836,7 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Grid.RenderTransform>
-                    <Button x:Name="HintCheckButton" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" Click="Button_Click" d:IsHidden="True">
+                    <Button x:Name="HintCheckButton" Background="{x:Null}" BorderBrush="{x:Null}" Style="{StaticResource ShadowButton}"  HorizontalAlignment="Right" Click="Button_Click" d:IsHidden="True">
                         <Grid d:IsHidden="True">
                             <Image x:Name="HintCheckButtonImage" Source="Images/blue_explosion_bubble.png" d:IsHidden="True"/>
                             <TextBlock x:Name="HintCheckButtonText" FontFamily="Yu Gothic" Foreground="White" Text="変わる前の&#xA;気持ち" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" d:IsHidden="True"/>

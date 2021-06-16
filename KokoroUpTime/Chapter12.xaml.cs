@@ -2196,7 +2196,7 @@ namespace KokoroUpTime
                                         break;
 
                                     case "発明品②":
-                                        this.dataChapter12.SelectedItem1 = itemName;
+                                        this.dataChapter12.SelectedItem2 = itemName;
                                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                                         {
                                             connection.Execute($@"UPDATE DataChapter12 SET SelectedItem2 = '{this.dataChapter12.SelectedItem2}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");
@@ -2204,7 +2204,7 @@ namespace KokoroUpTime
                                         break;
 
                                     case "発明品③":
-                                        this.dataChapter12.SelectedItem1 = itemName;
+                                        this.dataChapter12.SelectedItem3 = itemName;
                                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                                         {
                                             connection.Execute($@"UPDATE DataChapter12 SET SelectedItem3 = '{this.dataChapter12.SelectedItem3}' WHERE CreatedAt = '{this.dataChapter12.CreatedAt}';");

@@ -2605,7 +2605,7 @@ namespace KokoroUpTime
 
                             strokeConverter.ConvertToBmpImage(RightBodyImageOfKimiCanvas, this.InputHeadImageOfKimiStroke, "challenge_time_head_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
                             strokeConverter.ConvertToBmpImage(RightBodyImageOfKimiCanvas, this.InputShoulderImageOfKimiStroke, "challenge_time_shoulder_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
-                            strokeConverter.ConvertToBmpImage(RightBodyImageOfKimiCanvas, this.InputLegImageOfKimiStroke, "challenge_time_face_leg_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                            strokeConverter.ConvertToBmpImage(RightBodyImageOfKimiCanvas, this.InputLegImageOfKimiStroke, "challenge_time_leg_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
                         }
                         else
                         {
@@ -2666,7 +2666,7 @@ namespace KokoroUpTime
                             if(this.dataOption.InputMethod == 0)
                             {
                                 StrokeConverter strokeConverter = new StrokeConverter(); 
-                                strokeConverter.ConvertToBmpImage(InputMyBodyImageCanvas, this.InputStroke[this.InputDictionaryKey], "challenge_time_", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                                strokeConverter.ConvertToBmpImage(InputMyBodyImageCanvas, this.InputStroke[this.InputDictionaryKey], "challenge_time_recorder_problem_input_stroke", this.initConfig.userName,this.dataProgress.CurrentChapter);
                             }
                             else
                             {
@@ -2691,7 +2691,7 @@ namespace KokoroUpTime
                             if (this.dataOption.InputMethod == 0)
                             {
                                 StrokeConverter strokeConverter = new StrokeConverter();
-                                strokeConverter.ConvertToBmpImage(InputMyBodyImageCanvas, this.InputStroke[this.InputDictionaryKey], "challenge_time_", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                                strokeConverter.ConvertToBmpImage(InputMyBodyImageCanvas, this.InputStroke[this.InputDictionaryKey], "challenge_time_Not_Understand_problem_input_stroke", this.initConfig.userName,this.dataProgress.CurrentChapter);
                             }
                             else
                             {
@@ -2706,40 +2706,16 @@ namespace KokoroUpTime
                         this.scenarioCount += 1;
                         this.ScenarioPlay();
                     }
-                    else if (this.RelaxMethodGrid.Visibility == Visibility.Visible)
-                    {
-                        int number = 1;
-                        if(this.dataOption.InputMethod == 0)
-                        {
-                            foreach(var canvas in this.RelaxMethodInputCanvasListView.GetChildren<InkCanvas>())
-                            {
-                                StrokeConverter strokeConverter = new StrokeConverter();
-                                strokeConverter.ConvertToBmpImage(canvas,canvas.Strokes,$"groupe_avtivity_relax_method_{number}",this.initConfig.userName,this.dataProgress.CurrentChapter);
-                            }
-                        }
-                        else
-                        {
-                            this.dataChapter5.InputRelaxMethodText = "";
-
-                            foreach (var text in this.RelaxMethodInputTextListView.GetChildren<TextBlock>())
-                            {
-                                this.dataChapter5.InputRelaxMethodText += $"{text},";
-                            }
-
-                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                            {
-                                connection.Execute($"Update DataChapter5 SET InputRelaxMethodText ='{this.dataChapter5.InputRelaxMethodText}' WHERE CreatedAt ={this.dataChapter5.CreatedAt};");
-                            }
-                        }
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-                    }
                     else
                     {
                         this.scenarioCount += 1;
                         this.ScenarioPlay();
                     }
                 }
+
+                
+   
+
                 if (Regex.IsMatch(button.Name, "BodyImageOfKimiBubble.Button"))
                 {
                     string number = button.Name.Substring(21, 1);
@@ -3045,8 +3021,40 @@ namespace KokoroUpTime
                     this.NextGoButton.Visibility = Visibility.Hidden;
                     this.BackGoButton.Visibility = Visibility.Hidden;
 
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
+                    if (this.RelaxMethodGrid.Visibility == Visibility.Visible)
+                    {
+                        int number = 1;
+                        if (this.dataOption.InputMethod == 0)
+                        {
+                            foreach (var canvas in this.RelaxMethodInputCanvasListView.GetChildren<InkCanvas>())
+                            {
+                                StrokeConverter strokeConverter = new StrokeConverter();
+                                strokeConverter.ConvertToBmpImage(canvas, canvas.Strokes, $"groupe_avtivity_relax_method_{number}", this.initConfig.userName, this.dataProgress.CurrentChapter);
+                                number ++;
+                            }
+                        }
+                        else
+                        {
+                            this.dataChapter5.InputRelaxMethodText = "";
+
+                            foreach (var text in this.RelaxMethodInputTextListView.GetChildren<TextBlock>())
+                            {
+                                this.dataChapter5.InputRelaxMethodText += $"{text.Text},";
+                            }
+
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($"Update DataChapter5 SET InputRelaxMethodText ='{this.dataChapter5.InputRelaxMethodText}' WHERE CreatedAt ='{this.dataChapter5.CreatedAt}';");
+                            }
+                        }
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
                 }
 
                 if (button.Name == "MangaFlipButton")

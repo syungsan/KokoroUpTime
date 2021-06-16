@@ -2445,7 +2445,7 @@ namespace KokoroUpTime
                             if (this.dataOption.InputMethod == 0)
                             {
                                 StrokeConverter strokeConverter = new StrokeConverter();
-                                strokeConverter.ConvertToBmpImage(this.InputCanvas2, this.InputStroke["input_small_challenge"], "challenge_time_input_aosuke's_small_challenge", this.initConfig.userName, this.dataProgress.CurrentChapter);
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas2, this.InputStroke["input_small_challenge"], "groupe_activity_input_aosuke's_small_challenge", this.initConfig.userName, this.dataProgress.CurrentChapter);
                             }
                             else
                             {
@@ -2462,9 +2462,9 @@ namespace KokoroUpTime
                             if (this.dataOption.InputMethod == 0)
                             {
                                 StrokeConverter strokeConverter = new StrokeConverter();
-                                strokeConverter.ConvertToBmpImage(this.InputCanvas3, this.InputStroke["input_challenge_step1"], "challenge_time_input_aosuke's_challenge_step_1", this.initConfig.userName,this.dataProgress.CurrentChapter);
-                                strokeConverter.ConvertToBmpImage(this.InputCanvas3, this.InputStroke["input_challenge_step2"], "challenge_time_input_aosuke's_challenge_step_2", this.initConfig.userName,this.dataProgress.CurrentChapter);
-                                strokeConverter.ConvertToBmpImage(this.InputCanvas3, this.InputStroke["input_challenge_step3"], "challenge_time_input_aosuke's_challenge_step_3", this.initConfig.userName, this.dataProgress.CurrentChapter);
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas3, this.InputStroke["input_challenge_step1"], "groupe_activity_input_aosuke's_challenge_step_1", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas3, this.InputStroke["input_challenge_step2"], "groupe_activity_input_aosuke's_challenge_step_2", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                                strokeConverter.ConvertToBmpImage(this.InputCanvas3, this.InputStroke["input_challenge_step3"], "groupe_activity_input_aosuke's_challenge_step_3", this.initConfig.userName, this.dataProgress.CurrentChapter);
                             }
                             else
                             {

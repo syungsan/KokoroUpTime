@@ -3154,7 +3154,7 @@ namespace KokoroUpTime
 
             if (text.Name == "InputThoughtTextBox1")
             {
-                MaxLine = 5;
+                MaxLine = 7;
 
             }
             else
@@ -3179,7 +3179,7 @@ namespace KokoroUpTime
 
             if (text.Name == "InputThoughtTextBox1")
             {
-                MaxLine = 5;
+                MaxLine = 7;
 
             }
             else

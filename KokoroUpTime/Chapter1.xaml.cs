@@ -424,10 +424,11 @@ namespace KokoroUpTime
                     {
                         connection.Execute($@"UPDATE DataProgress SET CurrentChapter = '{this.dataProgress.CurrentChapter}' WHERE Id = 1;");
                     }
-                    
+
+                    logManager.StartLog(this.initConfig, this.dataProgress);
 
                     //前回のつづきからスタート
-                    if(this.dataProgress.CurrentScene != null)
+                    if (this.dataProgress.CurrentScene != null)
                     {
                         this.GoTo(this.dataProgress.CurrentScene,"scene");
                     }
