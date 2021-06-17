@@ -587,7 +587,7 @@ namespace KokoroUpTime
 
                 using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                 {
-                    var chapter9 = connection.Query<DataChapter9>($"SELECT * FROM DataChapter9 ORDER BY Id ASC LIMIT 1;");
+                    var chapter9 = connection.Query<DataChapter9>($"SELECT * FROM DataChapter9 ORDER BY Id DESC LIMIT 1;");
 
                     foreach (var row in chapter9)
                     {
@@ -2289,7 +2289,10 @@ namespace KokoroUpTime
                         {
                             foreach (var listbox in this.NotGoodEventItemsControl.GetChildren<ListBox>())
                             {
-                                
+                                foreach (var text in listbox.SelectedItems)
+                                {
+                                    this.dataChapter9.CheckedNotGoodEvent += $"{text},";
+                                }
                                 foreach (var border in ((StackPanel)listbox.Parent).Children)
                                 {
                                     if(border is Border)
@@ -2297,14 +2300,11 @@ namespace KokoroUpTime
                                         var text = ((Border)border).Child;
                                         if (text is TextBlock)
                                         {
-                                            this.dataChapter9.CheckedNotGoodEvent += $"{((TextBlock)text).Text}:"; 
+                                            this.dataChapter9.CheckedNotGoodEvent += $"{((TextBlock)text).Text};"; 
                                         }
                                     }
                                 }
-                                foreach(var text in listbox.SelectedItems)
-                                {
-                                    this.dataChapter9.CheckedNotGoodEvent += $"{text},";
-                                }
+                               
                             }
 
                             using (var connection = new SQLiteConnection(this.initConfig.dbPath))

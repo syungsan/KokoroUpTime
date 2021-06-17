@@ -153,11 +153,13 @@ namespace KokoroUpTime
     }
 
     // チャプター2のログカラム
-    public class DataChapter2 :BaseDataChapter
+    public class DataChapter2
     {
         // このレコードは定石
         [PrimaryKey, AutoIncrement]
         // データベースに記録するレコードの型の宣言をしてください。
+        public int Id { get; set; }
+
         public string MySelectGoodEvents { get; set; } = "";
 
         public int AosukesSizeOfFeelingOfEating { get; set; } = -1;
@@ -172,7 +174,10 @@ namespace KokoroUpTime
 
         public string AosukesDifficultyOfTalkingWithFriend { get; set; }="";
 
-        public string MyALittlleExcitingEvents { get; set; }
+        public string MyALittlleExcitingEvents { get; set; } = "";
+        
+        public string CreatedAt { get; set; }
+
     }
 
     // チャプター3のログカラム

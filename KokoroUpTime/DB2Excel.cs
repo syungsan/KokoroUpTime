@@ -7,6 +7,8 @@ using System.IO;
 using System.Windows;
 using System.Reflection;
 using System.Linq;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace KokoroUpTime
 {
@@ -105,19 +107,24 @@ namespace KokoroUpTime
                     { "F12", dataChapter1.AosukesKindOfFeeling },
                 };
 
-                
-                IEnumerable<string> goodFeelings = dataChapter1.MyKindOfGoodFeelings.Split(",");
-                foreach (var goodfeel in goodFeelings.Select((Value, Index)=> new {Value ,Index}))
+
+                if (dataChapter1.MyKindOfGoodFeelings !="")
                 {
-                    chapter1StrResult.Add($"A{4+goodfeel.Index}", goodfeel.Value);
+                    IEnumerable<string> goodFeelings = dataChapter1.MyKindOfGoodFeelings.Split(",");
+                    foreach (var goodfeel in goodFeelings.Select((Value, Index) => new { Value, Index }))
+                    {
+                        chapter1StrResult.Add($"A{4 + goodfeel.Index}", goodfeel.Value);
+                    }
                 }
 
-                IEnumerable<string> badFeelings = dataChapter1.MyKindOfBadFeelings.Split(",");
-                foreach (var badfeel in badFeelings.Select((Value, Index) => new { Value, Index }))
+                if (dataChapter1.MyKindOfBadFeelings != "")
                 {
-                    chapter1StrResult.Add($"B{4 + badfeel.Index}", badfeel.Value);
+                    IEnumerable<string> badFeelings = dataChapter1.MyKindOfBadFeelings.Split(",");
+                    foreach (var badfeel in badFeelings.Select((Value, Index) => new { Value, Index }))
+                    {
+                        chapter1StrResult.Add($"B{4 + badfeel.Index}", badfeel.Value);
+                    }
                 }
-
 
                 var chapter1IntResult = new Dictionary<string, int?>
                 {
@@ -160,11 +167,19 @@ namespace KokoroUpTime
                     {"E7" , dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend},
                 };
 
-                IEnumerable<string> goodEvents = dataChapter2.MySelectGoodEvents.Split(",");
-                foreach (var goodEvent in goodEvents.Select((Value, Index) => new { Value, Index }))
+                if (dataChapter2.MySelectGoodEvents =="")
                 {
-                    chapter2StrResult.Add($"A{4 + goodEvent.Index}", goodEvent.Value);
+                    //画像貼り付け
                 }
+                else
+                {
+                    IEnumerable<string> goodEvents = dataChapter2.MySelectGoodEvents.Split(",");
+                    foreach (var goodEvent in goodEvents.Select((Value, Index) => new { Value, Index }))
+                    {
+                        chapter2StrResult.Add($"A{4 + goodEvent.Index}", goodEvent.Value);
+                    }
+                }
+                
 
 
                 foreach (KeyValuePair<string, string> item in chapter2StrResult)
@@ -177,11 +192,7 @@ namespace KokoroUpTime
                     excel.WriteCell(item.Key, item.Value);
                 }
 
-                if (false)
-                {
-                    //画像貼り付け
-                }
-
+               
             }
 
             // ###############################################################################
@@ -281,12 +292,20 @@ namespace KokoroUpTime
                     { "F5", dataChapter5.SizeOfFeelingRecorderProblem },
                 };
 
-                IEnumerable<string> relaxMethods = dataChapter5.InputRelaxMethodText.Split(",");
-                foreach (var relaxMethod in relaxMethods.Select((Value, Index) => new { Value, Index }))
+                if (dataChapter5.InputRelaxMethodText =="")
                 {
-                    chapter5IntResult.Add($"I{4 + relaxMethod.Index}", relaxMethod.Index+1);
-                    chapter5StrResult.Add($"J{4 + relaxMethod.Index}", relaxMethod.Value);
+                    //画像貼り付け
                 }
+                else
+                {
+                    IEnumerable<string> relaxMethods = dataChapter5.InputRelaxMethodText.Split(",");
+                    foreach (var relaxMethod in relaxMethods.Select((Value, Index) => new { Value, Index }))
+                    {
+                        chapter5IntResult.Add($"I{4 + relaxMethod.Index}", relaxMethod.Index + 1);
+                        chapter5StrResult.Add($"J{4 + relaxMethod.Index}", relaxMethod.Value);
+                    }
+                }
+                
 
                 foreach (KeyValuePair<string, string> item in chapter5StrResult)
                 {
@@ -306,17 +325,36 @@ namespace KokoroUpTime
 
                 var chapter6StrResult = new Dictionary<string, string>();
 
-                IEnumerable<string> nicePersonalities = dataChapter6.SelectedNicePersonality.Split(",");
-                foreach (var nicePersonality in nicePersonalities.Select((Value, Index) => new { Value, Index }))
+
+                if (dataChapter6.SelectedNicePersonality !="")
                 {
-                    chapter6StrResult.Add($"A{3 + nicePersonality.Index}", nicePersonality.Value);
+                    IEnumerable<string> nicePersonalities = dataChapter6.SelectedNicePersonality.Split(",");
+                    foreach (var nicePersonality in nicePersonalities.Select((Value, Index) => new { Value, Index }))
+                    {
+                        chapter6StrResult.Add($"A{3 + nicePersonality.Index}", nicePersonality.Value);
+                    }
                 }
 
-                IEnumerable<string> friendsNicePersonalities = dataChapter6.InputFriendsNicePersonality.Split(";");
-                foreach (var friendsNicePersonality in friendsNicePersonalities.Select((Value, Index) => new { Value, Index }))
+
+                if (dataChapter6.InputFriendsNicePersonality == "")
                 {
-                    chapter6StrResult.Add($"C{4 + friendsNicePersonality.Index}", friendsNicePersonality.Value.Split(",")[0]);
-                    chapter6StrResult.Add($"D{4 + friendsNicePersonality.Index}", friendsNicePersonality.Value.Split(",")[1]);
+
+                }
+                else
+                {
+                    IEnumerable<string> friendsNicePersonalities = dataChapter6.InputFriendsNicePersonality.Split(";");
+                    foreach (var friendsNicePersonality in friendsNicePersonalities.Select((Value, Index) => new { Value, Index }))
+                    {
+                        if (Regex.IsMatch(friendsNicePersonality.Value,".*さん"))
+                        {
+                            chapter6StrResult.Add($"C{4 + friendsNicePersonality.Index}", friendsNicePersonality.Value.Split(",")[0]);
+                        }
+                        else if (friendsNicePersonality.Value　!="")
+                        {
+                            chapter6StrResult.Add($"D{4 + friendsNicePersonality.Index}", friendsNicePersonality.Value.Split(",")[1]);
+                        }
+
+                    }
                 }
 
                 foreach (KeyValuePair<string, string> item in chapter6StrResult)
@@ -348,7 +386,7 @@ namespace KokoroUpTime
 
                 if (dataChapter7.ChallengeTimeSelectedScene == "音楽の発表で、みんなの前で失敗してしまいました。友だちの１人が、こっちを見て笑っていました。")
                 {
-                    if(false)//this.dataOption.InputMethod == 0))
+                    if(dataChapter7.InputYourToughtText1 == "")//this.dataOption.InputMethod == 0))
                     {
                        
                     }
@@ -363,7 +401,7 @@ namespace KokoroUpTime
                 }
                 else
                 {
-                    if (false)
+                    if (dataChapter7.InputYourToughtText2== "")
                     {
                        
                     }
@@ -378,7 +416,7 @@ namespace KokoroUpTime
 
                 if (dataChapter7.GroupeActivitySelectedScene == "音楽の発表で、みんなの前で失敗してしまいました。友だちの１人が、こっちを見て笑っていました。")
                 {
-                    if (false)//this.dataOption.InputMethod == 0))
+                    if (dataChapter7.InputFriendToughtText1 == "")//this.dataOption.InputMethod == 0))
                     {
 
                     }
@@ -393,7 +431,7 @@ namespace KokoroUpTime
                 }
                 else
                 {
-                    if (false)
+                    if (dataChapter7.InputFriendToughtText2 == "")
                     {
 
                     }
@@ -416,6 +454,316 @@ namespace KokoroUpTime
                     excel.WriteCell(item.Key, item.Value);
                 }
             }
+
+
+            //第8回に書き込み
+            if (dataProgress.HasCompletedChapter8 == true)
+            {
+                excel.SetSheet("第8回");
+
+                var chapter8StrResult = new Dictionary<string, string>
+                {
+                    { "C4", dataChapter8.KimisKindOfFeelingPreUseItem },
+                    { "C5", dataChapter8.AosukesKindOfFeelingPreUseItem },
+                    { "C6", dataChapter8.AkamarusKindOfFeelingPreUseItem },
+                    { "E4", dataChapter8.KimisKindOfFeelingAfterUsedItem },
+                    { "E5", dataChapter8.AosukesKindOfFeelingAfterUsedItem },
+                    { "E6", dataChapter8.AkamarusKindOfFeelingAfterUsedItem },
+                    { "J4", dataChapter8.Let_sCheckKindOfFeeling },
+                    { "J5", dataChapter8.PositiveThinkingKindOfFeeling },
+                    { "J6", dataChapter8.ThoughtsOfOthersKindOfFeeling },
+                };
+
+                var chapter8IntResult = new Dictionary<string, int?>
+                {
+                    { "D4", dataChapter8.KimisSizeOfFeelingPreUseItem },
+                    { "D5", dataChapter8.AosukesSizeOfFeelingPreUseItem },
+                    { "D6", dataChapter8.AkamarusSizeOfFeelingPreUseItem },
+                    { "F4", dataChapter8.KimisSizeOfFeelingAfterUsedItem },
+                    { "F5", dataChapter8.AosukesSizeOfFeelingAfterUsedItem },
+                    { "F6", dataChapter8.AkamarusSizeOfFeelingAfterUsedItem },
+                    { "J4", dataChapter8.Let_sCheckSizeOfFeeling },
+                    { "J5", dataChapter8.PositiveThinkingSizeOfFeeling },
+                    { "J6", dataChapter8.ThoughtsOfOthersSizeOfFeeling },
+                };
+
+
+                for (int i = 0;i<3;i++)
+                {
+                    var PlopInfo = typeof(DataChapter8).GetProperty($"GroupeActivityInputText{i + 1}");
+                    if ((string)PlopInfo.GetValue(dataChapter8) == "")
+                    {
+                        //画像挿入
+                    }
+                    else
+                    {
+                        chapter8StrResult.Add($"I{i + 1}", (string)PlopInfo.GetValue(dataChapter8));
+                    }
+                }
+               
+
+
+                foreach (KeyValuePair<string, string> item in chapter8StrResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+
+                foreach (KeyValuePair<string, int?> item in chapter8IntResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+            }
+
+
+            //第9回に書き込み
+            if (dataProgress.HasCompletedChapter9 == true)
+            {
+                excel.SetSheet("第9回");
+
+                var chapter9StrResult = new Dictionary<string, string>
+                {
+                    { "M4", dataChapter9.AosukesKindOfFeelingTalkToFriends },
+                    { "M5", dataChapter9.AosukesKindOfFeelingAfter10minutes },
+                    { "M6", dataChapter9.AosukesKindOfFeelingNextDay },
+                    { "M7", dataChapter9.AosukesKindOfFeelingDayAfterTomorrow },
+                };
+
+                var chapter9IntResult = new Dictionary<string, int?>
+                {
+                    { "N4", dataChapter9.AosukesSizeOfFeelingTalkToFriends },
+                    { "N5", dataChapter9.AosukesSizeOfFeelingAfter10minutes },
+                    { "N6", dataChapter9.AosukesSizeOfFeelingNextDay },
+                    { "N7", dataChapter9.AosukesSizeOfFeelingDayAfterTomorrow },
+                };
+
+
+                if(dataChapter9.InputChallengeText == "")
+                {
+                    //画像貼り付け
+                }
+                else
+                {
+                    chapter9StrResult.Add("J3",dataChapter9.InputChallengeText);
+                }
+
+
+                if (dataChapter9.CheckedNotGoodEvent != "")
+                {
+                    foreach (var notGoodEvents in dataChapter9.CheckedNotGoodEvent.Split(";").Select((Value, Index) => new { Value, Index }))
+                    {
+                        if (notGoodEvents.Value.Contains(","))
+                        {
+                            char charCellColumn = 'B';
+                            int intCellColumn = (int)charCellColumn;
+                            foreach (var notGoodEvent in notGoodEvents.Value.Split(",").Select((Value, Index) => new { Value, Index }))
+                            {
+                                intCellColumn++;
+                                if (notGoodEvent.Index != notGoodEvents.Value.Split(",").Length - 1)
+                                {
+                                    chapter9StrResult.Add($"{(char)intCellColumn}{4 + notGoodEvents.Index}", notGoodEvent.Value);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+
+                foreach (KeyValuePair<string, string> item in chapter9StrResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+
+                foreach (KeyValuePair<string, int?> item in chapter9IntResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+            }
+
+            //第10回に書き込み
+            if (dataProgress.HasCompletedChapter10 == true)
+            {
+                excel.SetSheet("第10回");
+
+                var chapter10StrResult = new Dictionary<string, string>
+                {
+                    { "F5", dataChapter10.AosukeChallengeStep1KindOfFeeling },
+                    { "F6", dataChapter10.AosukeChallengeStep2KindOfFeeling },
+                    { "F7", dataChapter10.AosukeChallengeStep3KindOfFeeling },
+                };
+
+                var chapter10IntResult = new Dictionary<string, int?>
+                {
+                    { "G5", dataChapter10.AosukeChallengeStep1SizeOfFeeling },
+                    { "G6", dataChapter10.AosukeChallengeStep2SizeOfFeeling },
+                    { "G7", dataChapter10.AosukeChallengeStep3SizeOfFeeling },
+                };
+
+                if(dataChapter10.ReasonDifferenceSizeOfFeelingInputText == "")
+                {
+                    //画像貼り付け
+                }
+                else
+                {
+                    chapter10StrResult.Add("A3",dataChapter10.ReasonDifferenceSizeOfFeelingInputText);
+                }
+
+                if (dataChapter10.AosukeSmallChallengeInputText == "")
+                {
+                    //画像貼り付け
+                }
+                else
+                {
+                    chapter10StrResult.Add("C4", dataChapter10.AosukeSmallChallengeInputText);
+                }
+
+                for (int i=0;i < 3; i++)
+                {
+                    string aosukeChallengeStepInputText = (string)typeof(DataChapter10).GetProperty($"AosukeChallengeStep{i+1}InputText").GetValue(dataChapter10);
+                    if (aosukeChallengeStepInputText == "")
+                    {
+                        //画像貼り付け
+                    }
+                    else
+                    {
+                        chapter10StrResult.Add($"E{5+i}", aosukeChallengeStepInputText);
+                    }
+                }
+
+                foreach (KeyValuePair<string, string> item in chapter10StrResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+
+                foreach (KeyValuePair<string, int?> item in chapter10IntResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+            }
+
+            //第11回に書き込み
+            if (dataProgress.HasCompletedChapter11 == true)
+            {
+                excel.SetSheet("第11回");
+
+                var chapter11StrResult = new Dictionary<string, string>
+                {
+                    { "A4", dataChapter11.SelectedItem },
+                    { "D4", dataChapter11.SelectedAkamaruGoalText },
+                };
+
+                if(dataChapter11.AkamaruOtherSolutionUseItemInputText == "")
+                {
+                    //画像貼り付け
+                }
+                else
+                {
+                    chapter11StrResult.Add("B4",dataChapter11.AkamaruOtherSolutionUseItemInputText);
+                }
+
+                if (dataChapter11.Step2AkamaruManyMethodInputText =="")
+                {
+                    //画像貼り付け
+                }
+                else
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        chapter11StrResult.Add($"E{4 + i}", dataChapter11.Step2AkamaruManyMethodInputText.Split(",")[i]);
+                    }
+                }
+
+
+
+                if (dataChapter11.EvaluationAkamaruMethodText1 != ""&&(dataChapter11.EvaluationAkamaruMethodText2 != "" && dataChapter11.EvaluationAkamaruMethodText3 !=""))
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        char charCellColumn = 'H';
+                        int intCellColumn = (int)charCellColumn;
+
+                        intCellColumn += i;
+
+                        chapter11StrResult.Add($"{(char)intCellColumn}5", dataChapter11.EvaluationAkamaruMethodText1.Split(",")[i]);
+                        chapter11StrResult.Add($"{(char)intCellColumn}6", dataChapter11.EvaluationAkamaruMethodText2.Split(",")[i]);
+                        chapter11StrResult.Add($"{(char)intCellColumn}7", dataChapter11.EvaluationAkamaruMethodText3.Split(",")[i]);
+                    }
+                }
+                
+
+                if (dataChapter11.Step2AosukeManyMethodInputText=="")
+                {
+
+                }
+                else
+                {
+                    foreach (var aosukeMethod in dataChapter11.Step2AosukeManyMethodInputText.Split(",").Select((Value, Index) => new { Value, Index }))
+                    {
+                        chapter11StrResult.Add($"M{aosukeMethod.Index}", aosukeMethod.Value);
+                    }
+                }
+
+
+                if (dataChapter11.EvaluationAosukeMethodText !="")
+                {
+                    foreach (var evaluations in dataChapter11.EvaluationAosukeMethodText.Split(";").Select((Value, Index) => new { Value, Index }))
+                    {
+                        if (evaluations.Value !="")
+                        {
+                            foreach (var evaluation in evaluations.Value.Split(",").Select((Value, Index) => new { Value, Index }))
+                            {
+                                char charCellColumn = 'N';
+                                int intCellColumn = (int)charCellColumn;
+                                intCellColumn += evaluation.Index;
+
+                                chapter11StrResult.Add($"{(char)intCellColumn}{4 + evaluations.Index}", evaluation.Value);
+
+                            }
+                        }
+                        
+                    }
+                }
+
+                foreach (KeyValuePair<string, string> item in chapter11StrResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+            }
+
+            //第12回に書き込み
+            if (dataProgress.HasCompletedChapter12 == true)
+            {
+                excel.SetSheet("第12回");
+
+                var chapter12StrResult = new Dictionary<string, string>
+                {
+
+                    { "A4", dataChapter12.SelectedSceneText },
+                    { "B4", dataChapter12.SelectedItem1 },
+                    { "B5", dataChapter12.SelectedItem2 },
+                    { "B6", dataChapter12.SelectedItem3 },
+                };
+
+                for(int i = 0; i < 3; i++)
+                {
+                    string itemMethodText = (string)typeof(DataChapter12).GetProperty($"ItemMethodInputText{i + 1}").GetValue(dataChapter12);
+                    if(itemMethodText == "")
+                    {
+                        //画像貼り付けかも・・
+                    }
+                    else
+                    {
+                        chapter12StrResult.Add($"C{4+i}",itemMethodText);
+                    }
+                }
+
+
+                foreach (KeyValuePair<string, string> item in chapter12StrResult)
+                {
+                    excel.WriteCell(item.Key, item.Value);
+                }
+            }
+
+
 
             // 名前を付けて保存する
             if (excel.SaveAs(outputPath) == false)
@@ -530,179 +878,327 @@ namespace KokoroUpTime
                     dataProgress.HasCompletedChapter12 = row.HasCompletedChapter12;
                 }
 
-                var resultChapter1 = connection.Query<DataChapter1>($"SELECT * FROM 'DataChapter1';");
-
-                foreach (var row in resultChapter1)
+                var resultChapter1 = connection.Query<DataChapter1>($"SELECT * FROM 'DataChapter1' ORDER BY Id DESC LIMIT 1;");
+                var typeOfDataChapter1 = dataChapter1.GetType();
+                var dataChapterPropertyInfos1 = typeOfDataChapter1.GetProperties();
+                if (resultChapter1.Count != 0)
                 {
-                    if (row.MyKindOfGoodFeelings != null)
-                        dataChapter1.MyKindOfGoodFeelings = row.MyKindOfGoodFeelings;
-
-                    if (row.MyKindOfBadFeelings != null)
-                        dataChapter1.MyKindOfBadFeelings = row.MyKindOfBadFeelings;
-
-                    if (row.KimisKindOfFeeling != null)
-                        dataChapter1.KimisKindOfFeeling = row.KimisKindOfFeeling;
-
-                    if (row.AkamarusKindOfFeeling != null)
-                        dataChapter1.AkamarusKindOfFeeling = row.AkamarusKindOfFeeling;
-
-                    if (row.AkamarusSizeOfFeeling != null)
-                        dataChapter1.AkamarusSizeOfFeeling = row.AkamarusSizeOfFeeling;
-
-                    if (row.AosukesKindOfFeeling != null)
-                        dataChapter1.AosukesKindOfFeeling = row.AosukesKindOfFeeling;
-
-                    if (row.AosukesSizeOfFeeling != null)
-                        dataChapter1.AosukesSizeOfFeeling = row.AosukesSizeOfFeeling;
+                    foreach (var dataChapterProp in dataChapterPropertyInfos1)
+                    {
+                        var dbProp = typeof(DataChapter1).GetProperty(dataChapterProp.Name);
+                        dataChapterProp.SetValue(dataChapter1, dbProp.GetValue(resultChapter1[0]));
+                    }
                 }
 
-
-                var resultChapter2 = connection.Query<DataChapter2>($"SELECT * FROM 'DataChapter2';");
-
-                foreach (var row in resultChapter2)
+                var resultChapter2 = connection.Query<DataChapter2>($"SELECT * FROM 'DataChapter2' ORDER BY Id DESC LIMIT 1;");
+                var typeOfDataChapter2 = dataChapter2.GetType();
+                var dataChapterPropertyInfos2 = typeOfDataChapter2.GetProperties();
+                if (resultChapter2.Count != 0)
                 {
-                    dataChapter2.MySelectGoodEvents = row.MySelectGoodEvents;
-
-                    dataChapter2.AosukesSizeOfFeelingOfEating = row.AosukesSizeOfFeelingOfEating;
-
-                    dataChapter2.AosukesDifficultyOfEating = row.AosukesDifficultyOfEating;
-
-                    dataChapter2.AosukesSizeOfFeelingOfGettingHighScore = row.AosukesSizeOfFeelingOfGettingHighScore;
-
-                    dataChapter2.AosukesDifficultyOfGettingHighScore = row.AosukesDifficultyOfGettingHighScore;
-
-                    dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend = row.AosukesSizeOfFeelingOfTalkingWithFriend;
-
-                    dataChapter2.AosukesDifficultyOfTalkingWithFriend = row.AosukesDifficultyOfTalkingWithFriend;
-
-                    dataChapter2.MyALittlleExcitingEvents = row.MyALittlleExcitingEvents;
+                    foreach (var dataChapterProp in dataChapterPropertyInfos2)
+                    {
+                        var dbProp = typeof(DataChapter2).GetProperty(dataChapterProp.Name);
+                        dataChapterProp.SetValue(dataChapter2, dbProp.GetValue(resultChapter2[0]));
+                    }
                 }
 
-
-                var resultChapter3 = connection.Query<DataChapter3>("SELECT * FROM 'DataChapter3';");
-
-                foreach (var row in resultChapter3)
+                var resultChapter3 = connection.Query<DataChapter3>($"SELECT * FROM 'DataChapter3' ORDER BY Id DESC LIMIT 1;");
+                var typeOfDataChapter3 = dataChapter3.GetType();
+                var dataChapterPropertyInfos3 = typeOfDataChapter3.GetProperties();
+                if(resultChapter3.Count != 0)
                 {
-                    if (row.AosukesKindOfFeelingPreUseItem != null)
-                        dataChapter3.AosukesKindOfFeelingPreUseItem = row.AosukesKindOfFeelingPreUseItem;
+                    foreach (var dataChapterProp in dataChapterPropertyInfos3)
+                    {
+                        var dbProp = typeof(DataChapter3).GetProperty(dataChapterProp.Name);
+                        dataChapterProp.SetValue(dataChapter3, dbProp.GetValue(resultChapter3[0]));
+                    }
+                }
+                
 
-                    if (row.KimisKindOfFeelingPreUseItem != null)
-                        dataChapter3.KimisKindOfFeelingPreUseItem = row.KimisKindOfFeelingPreUseItem;
-
-                    if (row.AosukesKindOfFeelingAfterUsedItem != null)
-                        dataChapter3.AosukesKindOfFeelingAfterUsedItem = row.AosukesKindOfFeelingAfterUsedItem;
-
-                    if (row.KimisKindOfFeelingAfterUsedItem != null)
-                        dataChapter3.KimisKindOfFeelingAfterUsedItem = row.KimisKindOfFeelingAfterUsedItem;
-
-                    if (row.AkamarusKindOfFeelingAfterUsedItem != null)
-                        dataChapter3.AkamarusKindOfFeelingAfterUsedItem = row.AkamarusKindOfFeelingAfterUsedItem;
-
-                    if (row.AosukesSizeOfFeelingPreUseItem != null)
-                        dataChapter3.AosukesSizeOfFeelingPreUseItem = row.AosukesSizeOfFeelingPreUseItem;
-
-                    if (row.KimisSizeOfFeelingPreUseItem != null)
-                        dataChapter3.KimisSizeOfFeelingPreUseItem = row.KimisSizeOfFeelingPreUseItem;
-
-                    if (row.AosukesSizeOfFeelingAfterUsedItem != null)
-                        dataChapter3.AosukesSizeOfFeelingAfterUsedItem = row.AosukesSizeOfFeelingAfterUsedItem;
-
-                    if (row.KimisSizeOfFeelingAfterUsedItem != null)
-                        dataChapter3.KimisSizeOfFeelingAfterUsedItem = row.KimisSizeOfFeelingAfterUsedItem;
-
-                    if (row.AkamarusSizeOfFeelingAfterUsedItem != null)
-                        dataChapter3.AkamarusSizeOfFeelingAfterUsedItem = row.AkamarusSizeOfFeelingAfterUsedItem;
-
-                    if (row.SelectedPraiseHotWord != null)
-                        dataChapter3.SelectedPraiseHotWord = row.SelectedPraiseHotWord;
-
-                    if (row.SelectedWorryHotWord != null)
-                        dataChapter3.SelectedWorryHotWord = row.SelectedWorryHotWord;
-
-                    if (row.SelectedEncourageHotWord != null)
-                        dataChapter3.SelectedEncourageHotWord = row.SelectedEncourageHotWord;
-
-                    if (row.SelectedThanksHotWord != null)
-                        dataChapter3.SelectedThanksHotWord = row.SelectedThanksHotWord;
+                var resultChapter4 = connection.Query<DataChapter4>($"SELECT * FROM 'DataChapter4' ORDER BY Id DESC LIMIT 1;");
+                var typeOfDataChapter4 = dataChapter4.GetType();
+                var dataChapter4PropertyInfos = typeOfDataChapter4.GetProperties();
+                if (resultChapter4.Count != 0)
+                {
+                    foreach (var dataChapterProp in dataChapter4PropertyInfos)
+                    {
+                        var dbProp = typeof(DataChapter4).GetProperty(dataChapterProp.Name);
+                        dataChapterProp.SetValue(dataChapter4, dbProp.GetValue(resultChapter4[0]));
+                    }
                 }
 
-                var resultChapter4 = connection.Query<DataChapter4>("SELECT * FROM 'DataChapter4';");
-
-                foreach (var row in resultChapter4)
+                var resultChapter5 = connection.Query<DataChapter5>($"SELECT * FROM 'DataChapter5' ORDER BY Id DESC LIMIT 1;");
+                var typeOfDataChapter5 = dataChapter5.GetType();
+                var dataChapter5PropertyInfos = typeOfDataChapter5.GetProperties();
+                if (resultChapter5.Count != 0)
                 {
-                    if (row.KimisKindOfFeelingAskedForWork != null)
-                        dataChapter4.KimisKindOfFeelingAskedForWork = row.KimisKindOfFeelingAskedForWork;
-
-                    if (row.KimisKindOfFeelingAskedByAkamaru != null)
-                        dataChapter4.KimisKindOfFeelingAskedByAkamaru = row.KimisKindOfFeelingAskedByAkamaru;
-
-                    if (row.KimisSizeOfFeelingAskedForWork != null)
-                        dataChapter4.KimisSizeOfFeelingAskedForWork = row.KimisSizeOfFeelingAskedForWork;
-
-                    if (row.KimisSizeOfFeelingAskedByAkamaru != null)
-                        dataChapter4.KimisSizeOfFeelingAskedByAkamaru = row.KimisSizeOfFeelingAskedByAkamaru;
-
+                    foreach (var dataChapterProp in dataChapter5PropertyInfos)
+                    {
+                        var dbProp = typeof(DataChapter5).GetProperty(dataChapterProp.Name);
+                        dataChapterProp.SetValue(dataChapter5, dbProp.GetValue(resultChapter5[0]));
+                    }
                 }
 
-                var resultChapter7 = connection.Query<DataChapter7>("SELECT * FROM 'DataChapter7';");
-
-                foreach (var row in resultChapter7)
+                var resultChapter6 = connection.Query<DataChapter6>($"SELECT * FROM 'DataChapter6' ORDER BY Id DESC LIMIT 1;");
+                var typeOfDataChapter6 = dataChapter6.GetType();
+                var dataChapterPropertyInfos6 = typeOfDataChapter6.GetProperties();
+                if (resultChapter6.Count !=0)
                 {
-                   
-                    if (row.KimisKindOfFeelingInviteFriends != null)
-                        dataChapter7.KimisKindOfFeelingInviteFriends = row.KimisKindOfFeelingInviteFriends;
-
-                    if (row.KimisKindOfFeelingAnnouncement != null)
-                        dataChapter7.KimisKindOfFeelingAnnouncement = row.KimisKindOfFeelingAnnouncement;
-
-                    if (row.YourKindOfFeelingAnnouncement != null)
-                        dataChapter7.YourKindOfFeelingAnnouncement = row.YourKindOfFeelingAnnouncement;
-
-                    if (row.YourKindOfFeelingGreetingToFriend != null)
-                        dataChapter7.YourKindOfFeelingGreetingToFriend = row.YourFriendsKindOfFeelingGreetingToAnotherFriend;
-
-                    if (row.YourFriendsKindOfFeelingAnnouncement != null)
-                        dataChapter7.YourFriendsKindOfFeelingAnnouncement = row.YourFriendsKindOfFeelingAnnouncement;
-
-                    if (row.YourFriendsKindOfFeelingGreetingToAnotherFriend != null)
-                        dataChapter7.YourFriendsKindOfFeelingGreetingToAnotherFriend = row.YourFriendsKindOfFeelingGreetingToAnotherFriend;
-
-                    if (row.KimisSizeOfFeelingInviteFriends != null)
-                        dataChapter7.KimisSizeOfFeelingInviteFriends = row.KimisSizeOfFeelingInviteFriends;
-
-                    if (row.KimisSizeOfFeelingAnnouncement != null)
-                        dataChapter7.KimisSizeOfFeelingAnnouncement = row.KimisSizeOfFeelingAnnouncement;
-
-                    if (row.YourSizeOfFeelingAnnouncement != null)
-                        dataChapter7.YourSizeOfFeelingAnnouncement = row.YourSizeOfFeelingAnnouncement;
-
-                    if (row.YourSizeOfFeelingGreetingToFriend != null)
-                        dataChapter7.YourSizeOfFeelingGreetingToFriend = row.YourSizeOfFeelingGreetingToFriend;
-
-                    if (row.YourFriendsSizeOfFeelingAnnouncement != null)
-                        dataChapter7.YourFriendsSizeOfFeelingAnnouncement = row.YourFriendsSizeOfFeelingAnnouncement;
-
-                    if (row.YourFriendsSizeOfFeelingGreetingToAnotherFriend != null)
-                        dataChapter7.YourFriendsSizeOfFeelingGreetingToAnotherFriend = row.YourFriendsSizeOfFeelingGreetingToAnotherFriend;
-
-                    if (row.InputAkamaruThoughtText != null)
-                        dataChapter7.InputAkamaruThoughtText = row.InputAkamaruThoughtText;
-
-                    if (row.InputAosukeThoughtText != null)
-                        dataChapter7.InputAosukeThoughtText = row.InputAosukeThoughtText;
-
-                    if (row.InputYourToughtText1 != null)
-                        dataChapter7.InputYourToughtText1 = row.InputYourToughtText1;
-
-                    if (row.InputYourToughtText2 != null)
-                        dataChapter7.InputYourToughtText2 = row.InputYourToughtText2;
-
-                    if (row.InputFriendToughtText1 != null)
-                        dataChapter7.InputFriendToughtText1 = row.InputFriendToughtText1;
-
-                    if (row.InputFriendToughtText2 != null)
-                        dataChapter7.InputFriendToughtText2 = row.InputFriendToughtText2;
+                    foreach (var dataChapterProp in dataChapterPropertyInfos6)
+                    {
+                        var dbProp = typeof(DataChapter6).GetProperty(dataChapterProp.Name);
+                        dataChapterProp.SetValue(dataChapter6, dbProp.GetValue(resultChapter6[0]));
+                    }
                 }
+                
+
+                var resultChapter7 = connection.Query<DataChapter7>($"SELECT * FROM 'DataChapter7' ORDER BY Id DESC LIMIT 1;");
+                var typeOfDataChapter7 = dataChapter7.GetType();
+                var dataChapter7PropertyInfos = typeOfDataChapter7.GetProperties();
+                if (resultChapter7.Count != 0)
+                {
+                    foreach (var dataChapterProp in dataChapter7PropertyInfos)
+                    {
+                        var dbProp = typeof(DataChapter7).GetProperty(dataChapterProp.Name);
+                        dataChapterProp.SetValue(dataChapter7, dbProp.GetValue(resultChapter7[0]));
+                    }
+                }
+                
+
+                var resultChapter8 = connection.Query<DataChapter8>($"SELECT * FROM 'DataChapter8' ORDER BY Id DESC LIMIT 1;");
+                var typeOfDataChapter8 = dataChapter8.GetType();
+                var dataChapter8PropertyInfos = typeOfDataChapter8.GetProperties();
+                if (resultChapter7.Count != 0)
+                {
+                    foreach (var dataChapterProp in dataChapter8PropertyInfos)
+                    {
+                        var dbProp = typeof(DataChapter8).GetProperty(dataChapterProp.Name);
+                        dataChapterProp.SetValue(dataChapter8, dbProp.GetValue(resultChapter8[0]));
+                    }
+                }
+                
+
+                var resultChapter9 = connection.Query<DataChapter9>($"SELECT * FROM 'DataChapter9' ORDER BY Id DESC LIMIT 1;");
+                var typeOfDataChapter9 = dataChapter9.GetType();
+                var dataChapter9PropertyInfos = typeOfDataChapter9.GetProperties();
+                if (resultChapter9.Count !=0)
+                {
+                    foreach (var dataChapterProp in dataChapter9PropertyInfos)
+                    {
+                        var dbProp = typeof(DataChapter9).GetProperty(dataChapterProp.Name);
+                        dataChapterProp.SetValue(dataChapter9, dbProp.GetValue(resultChapter9[0]));
+                    }
+                }
+
+                var resultChapter10 = connection.Query<DataChapter10>($"SELECT * FROM 'DataChapter10' ORDER BY Id DESC LIMIT 1;");
+                var typeOfDataChapter10 = dataChapter10.GetType();
+                var dataChapter10PropertyInfos = typeOfDataChapter10.GetProperties();
+                if (resultChapter10.Count != 0)
+                {
+                    foreach (var dataChapterProp in dataChapter10PropertyInfos)
+                    {
+                        var dbProp = typeof(DataChapter10).GetProperty(dataChapterProp.Name);
+                        dataChapterProp.SetValue(dataChapter10, dbProp.GetValue(resultChapter10[0]));
+                    }
+                }
+               
+
+                var resultChapter11 = connection.Query<DataChapter11>($"SELECT * FROM 'DataChapter11' ORDER BY Id DESC LIMIT 1;");
+                var typeOfDataChapter11 = dataChapter11.GetType();
+                var dataChapter11PropertyInfos = typeOfDataChapter11.GetProperties();
+                if (resultChapter11.Count !=0)
+                {
+                    foreach (var dataChapterProp in dataChapter11PropertyInfos)
+                    {
+                        var dbProp = typeof(DataChapter11).GetProperty(dataChapterProp.Name);
+                        dataChapterProp.SetValue(dataChapter11, dbProp.GetValue(resultChapter11[0]));
+                    }
+                }
+
+                var resultChapter12 = connection.Query<DataChapter12>($"SELECT * FROM 'DataChapter12' ORDER BY Id DESC LIMIT 1;");
+                var typeOfDataChapter12 = dataChapter12.GetType();
+                var dataChapter12PropertyInfos = typeOfDataChapter12.GetProperties();
+                if (resultChapter12.Count !=0)
+                {
+                    foreach (var dataChapterProp in dataChapter12PropertyInfos)
+                    {
+                        var dbProp = typeof(DataChapter12).GetProperty(dataChapterProp.Name);
+                        dataChapterProp.SetValue(dataChapter12, dbProp.GetValue(resultChapter12[0]));
+                    }
+                }
+                
+
+                //foreach (var row in resultChapter1)
+                //{
+                //    if (row.MyKindOfGoodFeelings != null)
+                //        dataChapter1.MyKindOfGoodFeelings = row.MyKindOfGoodFeelings;
+
+                //    if (row.MyKindOfBadFeelings != null)
+                //        dataChapter1.MyKindOfBadFeelings = row.MyKindOfBadFeelings;
+
+                //    if (row.KimisKindOfFeeling != null)
+                //        dataChapter1.KimisKindOfFeeling = row.KimisKindOfFeeling;
+
+                //    if (row.AkamarusKindOfFeeling != null)
+                //        dataChapter1.AkamarusKindOfFeeling = row.AkamarusKindOfFeeling;
+
+                //    if (row.AkamarusSizeOfFeeling != null)
+                //        dataChapter1.AkamarusSizeOfFeeling = row.AkamarusSizeOfFeeling;
+
+                //    if (row.AosukesKindOfFeeling != null)
+                //        dataChapter1.AosukesKindOfFeeling = row.AosukesKindOfFeeling;
+
+                //    if (row.AosukesSizeOfFeeling != null)
+                //        dataChapter1.AosukesSizeOfFeeling = row.AosukesSizeOfFeeling;
+                //}
+
+
+                //var resultChapter2 = connection.Query<DataChapter2>($"SELECT * FROM 'DataChapter2';");
+
+                //foreach (var row in resultChapter2)
+                //{
+                //    dataChapter2.MySelectGoodEvents = row.MySelectGoodEvents;
+
+                //    dataChapter2.AosukesSizeOfFeelingOfEating = row.AosukesSizeOfFeelingOfEating;
+
+                //    dataChapter2.AosukesDifficultyOfEating = row.AosukesDifficultyOfEating;
+
+                //    dataChapter2.AosukesSizeOfFeelingOfGettingHighScore = row.AosukesSizeOfFeelingOfGettingHighScore;
+
+                //    dataChapter2.AosukesDifficultyOfGettingHighScore = row.AosukesDifficultyOfGettingHighScore;
+
+                //    dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend = row.AosukesSizeOfFeelingOfTalkingWithFriend;
+
+                //    dataChapter2.AosukesDifficultyOfTalkingWithFriend = row.AosukesDifficultyOfTalkingWithFriend;
+
+                //    dataChapter2.MyALittlleExcitingEvents = row.MyALittlleExcitingEvents;
+                //}
+
+
+                //var resultChapter3 = connection.Query<DataChapter3>("SELECT * FROM 'DataChapter3';");
+
+                //foreach (var row in resultChapter3)
+                //{
+                //    if (row.AosukesKindOfFeelingPreUseItem != null)
+                //        dataChapter3.AosukesKindOfFeelingPreUseItem = row.AosukesKindOfFeelingPreUseItem;
+
+                //    if (row.KimisKindOfFeelingPreUseItem != null)
+                //        dataChapter3.KimisKindOfFeelingPreUseItem = row.KimisKindOfFeelingPreUseItem;
+
+                //    if (row.AosukesKindOfFeelingAfterUsedItem != null)
+                //        dataChapter3.AosukesKindOfFeelingAfterUsedItem = row.AosukesKindOfFeelingAfterUsedItem;
+
+                //    if (row.KimisKindOfFeelingAfterUsedItem != null)
+                //        dataChapter3.KimisKindOfFeelingAfterUsedItem = row.KimisKindOfFeelingAfterUsedItem;
+
+                //    if (row.AkamarusKindOfFeelingAfterUsedItem != null)
+                //        dataChapter3.AkamarusKindOfFeelingAfterUsedItem = row.AkamarusKindOfFeelingAfterUsedItem;
+
+                //    if (row.AosukesSizeOfFeelingPreUseItem != null)
+                //        dataChapter3.AosukesSizeOfFeelingPreUseItem = row.AosukesSizeOfFeelingPreUseItem;
+
+                //    if (row.KimisSizeOfFeelingPreUseItem != null)
+                //        dataChapter3.KimisSizeOfFeelingPreUseItem = row.KimisSizeOfFeelingPreUseItem;
+
+                //    if (row.AosukesSizeOfFeelingAfterUsedItem != null)
+                //        dataChapter3.AosukesSizeOfFeelingAfterUsedItem = row.AosukesSizeOfFeelingAfterUsedItem;
+
+                //    if (row.KimisSizeOfFeelingAfterUsedItem != null)
+                //        dataChapter3.KimisSizeOfFeelingAfterUsedItem = row.KimisSizeOfFeelingAfterUsedItem;
+
+                //    if (row.AkamarusSizeOfFeelingAfterUsedItem != null)
+                //        dataChapter3.AkamarusSizeOfFeelingAfterUsedItem = row.AkamarusSizeOfFeelingAfterUsedItem;
+
+                //    if (row.SelectedPraiseHotWord != null)
+                //        dataChapter3.SelectedPraiseHotWord = row.SelectedPraiseHotWord;
+
+                //    if (row.SelectedWorryHotWord != null)
+                //        dataChapter3.SelectedWorryHotWord = row.SelectedWorryHotWord;
+
+                //    if (row.SelectedEncourageHotWord != null)
+                //        dataChapter3.SelectedEncourageHotWord = row.SelectedEncourageHotWord;
+
+                //    if (row.SelectedThanksHotWord != null)
+                //        dataChapter3.SelectedThanksHotWord = row.SelectedThanksHotWord;
+                //}
+
+                //var resultChapter4 = connection.Query<DataChapter4>("SELECT * FROM 'DataChapter4';");
+
+                //foreach (var row in resultChapter4)
+                //{
+                //    if (row.KimisKindOfFeelingAskedForWork != null)
+                //        dataChapter4.KimisKindOfFeelingAskedForWork = row.KimisKindOfFeelingAskedForWork;
+
+                //    if (row.KimisKindOfFeelingAskedByAkamaru != null)
+                //        dataChapter4.KimisKindOfFeelingAskedByAkamaru = row.KimisKindOfFeelingAskedByAkamaru;
+
+                //    if (row.KimisSizeOfFeelingAskedForWork != null)
+                //        dataChapter4.KimisSizeOfFeelingAskedForWork = row.KimisSizeOfFeelingAskedForWork;
+
+                //    if (row.KimisSizeOfFeelingAskedByAkamaru != null)
+                //        dataChapter4.KimisSizeOfFeelingAskedByAkamaru = row.KimisSizeOfFeelingAskedByAkamaru;
+
+                //}
+
+                //var resultChapter7 = connection.Query<DataChapter7>("SELECT * FROM 'DataChapter7';");
+
+                //foreach (var row in resultChapter7)
+                //{
+
+                //    if (row.KimisKindOfFeelingInviteFriends != null)
+                //        dataChapter7.KimisKindOfFeelingInviteFriends = row.KimisKindOfFeelingInviteFriends;
+
+                //    if (row.KimisKindOfFeelingAnnouncement != null)
+                //        dataChapter7.KimisKindOfFeelingAnnouncement = row.KimisKindOfFeelingAnnouncement;
+
+                //    if (row.YourKindOfFeelingAnnouncement != null)
+                //        dataChapter7.YourKindOfFeelingAnnouncement = row.YourKindOfFeelingAnnouncement;
+
+                //    if (row.YourKindOfFeelingGreetingToFriend != null)
+                //        dataChapter7.YourKindOfFeelingGreetingToFriend = row.YourFriendsKindOfFeelingGreetingToAnotherFriend;
+
+                //    if (row.YourFriendsKindOfFeelingAnnouncement != null)
+                //        dataChapter7.YourFriendsKindOfFeelingAnnouncement = row.YourFriendsKindOfFeelingAnnouncement;
+
+                //    if (row.YourFriendsKindOfFeelingGreetingToAnotherFriend != null)
+                //        dataChapter7.YourFriendsKindOfFeelingGreetingToAnotherFriend = row.YourFriendsKindOfFeelingGreetingToAnotherFriend;
+
+                //    if (row.KimisSizeOfFeelingInviteFriends != null)
+                //        dataChapter7.KimisSizeOfFeelingInviteFriends = row.KimisSizeOfFeelingInviteFriends;
+
+                //    if (row.KimisSizeOfFeelingAnnouncement != null)
+                //        dataChapter7.KimisSizeOfFeelingAnnouncement = row.KimisSizeOfFeelingAnnouncement;
+
+                //    if (row.YourSizeOfFeelingAnnouncement != null)
+                //        dataChapter7.YourSizeOfFeelingAnnouncement = row.YourSizeOfFeelingAnnouncement;
+
+                //    if (row.YourSizeOfFeelingGreetingToFriend != null)
+                //        dataChapter7.YourSizeOfFeelingGreetingToFriend = row.YourSizeOfFeelingGreetingToFriend;
+
+                //    if (row.YourFriendsSizeOfFeelingAnnouncement != null)
+                //        dataChapter7.YourFriendsSizeOfFeelingAnnouncement = row.YourFriendsSizeOfFeelingAnnouncement;
+
+                //    if (row.YourFriendsSizeOfFeelingGreetingToAnotherFriend != null)
+                //        dataChapter7.YourFriendsSizeOfFeelingGreetingToAnotherFriend = row.YourFriendsSizeOfFeelingGreetingToAnotherFriend;
+
+                //    if (row.InputAkamaruThoughtText != null)
+                //        dataChapter7.InputAkamaruThoughtText = row.InputAkamaruThoughtText;
+
+                //    if (row.InputAosukeThoughtText != null)
+                //        dataChapter7.InputAosukeThoughtText = row.InputAosukeThoughtText;
+
+                //    if (row.InputYourToughtText1 != null)
+                //        dataChapter7.InputYourToughtText1 = row.InputYourToughtText1;
+
+                //    if (row.InputYourToughtText2 != null)
+                //        dataChapter7.InputYourToughtText2 = row.InputYourToughtText2;
+
+                //    if (row.InputFriendToughtText1 != null)
+                //        dataChapter7.InputFriendToughtText1 = row.InputFriendToughtText1;
+
+                //    if (row.InputFriendToughtText2 != null)
+                //        dataChapter7.InputFriendToughtText2 = row.InputFriendToughtText2;
+                //}
             }
         }
 

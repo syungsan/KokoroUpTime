@@ -415,7 +415,7 @@ namespace KokoroUpTime
 
                 using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                 {
-                    var chapter12 = connection.Query<DataChapter12>($"SELECT * FROM DataChapter12 ORDER BY Id ASC LIMIT 1;");
+                    var chapter12 = connection.Query<DataChapter12>($"SELECT * FROM DataChapter12 ORDER BY Id DESC LIMIT 1;");
 
                     foreach (var row in chapter12)
                     {

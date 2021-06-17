@@ -436,7 +436,7 @@ namespace KokoroUpTime
 
                 using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                 {
-                    var chapter6 = connection.Query<DataChapter6>($"SELECT * FROM DataChapter6 ORDER BY Id ASC LIMIT 1;");
+                    var chapter6 = connection.Query<DataChapter6>($"SELECT * FROM DataChapter6 ORDER BY Id DESC LIMIT 1;");
 
                     foreach (var row in chapter6)
                     {
@@ -1758,7 +1758,7 @@ namespace KokoroUpTime
                             this.dataChapter6.SelectedNicePersonality = "";
                             foreach (var text in this.SelectNicePersonalityListBox.SelectedItems)
                             {
-                                this.dataChapter6.SelectedNicePersonality += $"{text} ";
+                                this.dataChapter6.SelectedNicePersonality += $"{text}, ";
                             }
                             using (var connection = new SQLiteConnection(this.initConfig.dbPath))
                             {
