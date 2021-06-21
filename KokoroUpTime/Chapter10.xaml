@@ -668,7 +668,6 @@
                     <Image x:Name="Item08NoneImage" HorizontalAlignment="Left" Height="460" Margin="339,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                     <Image x:Name="Item09NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                     <Image x:Name="Item11NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
-                    <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png"/>
                 </Grid>
             </Grid>
             <Grid x:Name="SystemGrid" d:IsHidden="True">

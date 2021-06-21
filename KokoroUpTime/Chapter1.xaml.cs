@@ -1942,33 +1942,42 @@ namespace KokoroUpTime
 
                     if (this.scene == "キミちゃんのきもちの種類" && !this.hasKimisKindOfFeelingRecorded)
                     {
-                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        if (this.SelectGoodFeelingGrid.IsVisible && this.SelectBadFeelingGrid.IsVisible)
                         {
-                            connection.Execute($@"UPDATE DataChapter1 SET KimisKindOfFeeling = '{this.dataChapter1.KimisKindOfFeeling}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"UPDATE DataChapter1 SET KimisKindOfFeeling = '{this.dataChapter1.KimisKindOfFeeling}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                            }
+                            this.hasKimisKindOfFeelingRecorded = true;
                         }
-                        this.hasKimisKindOfFeelingRecorded = true;
                     }
-
                     if (this.scene == "赤丸くんのきもちの種類" && !this.hasAkamarusKindOfFeelingRecorded)
                     {
-                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        if (this.SelectGoodFeelingGrid.IsVisible && this.SelectBadFeelingGrid.IsVisible)
                         {
-                            connection.Execute($@"UPDATE DataChapter1 SET AkamarusKindOfFeeling = '{this.dataChapter1.AkamarusKindOfFeeling}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"UPDATE DataChapter1 SET AkamarusKindOfFeeling = '{this.dataChapter1.AkamarusKindOfFeeling}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                            }
+                            this.hasAkamarusKindOfFeelingRecorded = true;
                         }
-                        this.hasAkamarusKindOfFeelingRecorded = true;
                     }
 
                     if (this.scene == "青助くんのきもちの種類" && !this.hasAosukesKindOfFeelingRecorded)
                     {
-                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        if (this.SelectGoodFeelingGrid.IsVisible && this.SelectBadFeelingGrid.IsVisible)
                         {
-                            connection.Execute($@"UPDATE DataChapter1 SET AosukesKindOfFeeling = '{this.dataChapter1.AosukesKindOfFeeling}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"UPDATE DataChapter1 SET AosukesKindOfFeeling = '{this.dataChapter1.AosukesKindOfFeeling}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
+                            }
+                            this.hasAosukesKindOfFeelingRecorded = true;
                         }
-                        this.hasAosukesKindOfFeelingRecorded = true;
                     }
 
                     if (this.scene == "赤丸くんのきもちの大きさ" && !this.hasAkamarusSizeOfFeelingRecorded)
                     {
+
                         this.dataChapter1.AkamarusSizeOfFeeling = this.feelingSize;
 
                         using (var connection = new SQLiteConnection(this.initConfig.dbPath))
@@ -2080,15 +2089,18 @@ namespace KokoroUpTime
             if (button.Name == "SelectFeelingCompleteButton")
             {
                 if (this.scene == "チャレンジきもち選択")
-
-                this.ExitBackGrid.Visibility = Visibility.Hidden;
-                this.CoverLayerImage.Visibility = Visibility.Hidden;
-            }
-
-            if (button.Name == "SelectFeelingCompleteButton")
-            {
-                if (this.scene == "チャレンジきもち選択")
                 {
+                    foreach (string selectFeeling in this.ChallengeGoodFeelingListBox.SelectedItems)
+                    {
+                        this.myKindOfGoodFeelings.Add(selectFeeling);
+
+                    }
+                    foreach (string selectFeeling in this.ChallengeBadFeelingListBox.SelectedItems)
+                    {
+                        this.myKindOfBadFeelings.Add(selectFeeling);
+
+                    }
+
                     // 配列をコンマで結合して文字列として扱う
                     this.dataChapter1.MyKindOfGoodFeelings = string.Join(",", this.myKindOfGoodFeelings);
                     this.dataChapter1.MyKindOfBadFeelings = string.Join(",", this.myKindOfBadFeelings);
@@ -2099,34 +2111,11 @@ namespace KokoroUpTime
                         connection.Execute($@"UPDATE DataChapter1 SET MyKindOfGoodFeelings = '{this.dataChapter1.MyKindOfGoodFeelings}', MyKindOfBadFeelings = '{this.dataChapter1.MyKindOfBadFeelings}' WHERE CreatedAt = '{this.dataChapter1.CreatedAt}';");
                     }
                 }
-                
-                //手書き用this.AllGestureCanvas_Enabled(false);
+
+                this.ExitBackGrid.Visibility = Visibility.Hidden;
+                this.CoverLayerImage.Visibility = Visibility.Hidden;
             }
-
-            if (button.Name == "SelectFeelingNextButton")
-            {
-                if (this.scene == "チャレンジきもち選択")
-                {
-                    foreach (string selectFeeling in this.ChallengeGoodFeelingListBox.SelectedItems)
-                    {
-                        this.myKindOfGoodFeelings.Add(selectFeeling);
-
-                    }
-                }
-                if (this.scene == "チャレンジきもち選択")
-                {
-                    foreach (string selectFeeling in this.ChallengeBadFeelingListBox.SelectedItems)
-                    {
-                        this.myKindOfBadFeelings.Add(selectFeeling);
-
-                    }
-                }
-                /* 手書き用
-                this.AllGestureCanvas_Clear();
-                this.AllGestureCanvas_Enabled(true);
-                */
-            }
-
+            
             if (button.Name == "ReturnToTitleButton")
             {
                 TitlePage titlePage = new TitlePage();

@@ -1,8 +1,11 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.Drawing;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace ExcelManage
@@ -14,12 +17,14 @@ namespace ExcelManage
         /// </summary>
         private ExcelPackage _excelPackage = null;
         private ExcelWorksheet _excelWorksheet = null;
+        private ExcelRange _excelRange = null;
 
         /// <summary>
         /// Excelワークブックを開く
         /// </summary>
         public void Open(string filePath)
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             try
             {
                 // Excelファイルを開く
@@ -67,9 +72,17 @@ namespace ExcelManage
         /// </summary>
         /// <param name="adress"></param>
         /// <param name="bitmapImage"></param>
-        public void WritePicture(string adress,string FileName, string ImagePath)
+        public void PastePicture(string adress,string FileName,string ImagePath)
         {
             var picture =_excelWorksheet.Drawings.AddPicture(FileName, Image.FromFile(ImagePath));
+
+            int column = Regex.Match(adress, @"[A-Z]+").ToString()[0] - 'A';
+            int row = int.Parse(Regex.Match(adress, @"\d+").ToString())-1;
+
+            picture.SetPosition(row,0,column,0);
+            picture.ChangeCellAnchor(eEditAs.TwoCell);
+            picture.AdjustPositionAndSize();
+
         }
 
         /*
@@ -92,6 +105,17 @@ namespace ExcelManage
         /// <param name="address">address("A1"形式)</param>
         /// <param name="value">value</param>
         public void WriteCell(string address, object value)
+        {
+            // 値を書込
+            _excelWorksheet.Cells[address].Value = value;
+        }
+
+        /// <summary>
+        /// セル書込("A1"形式)
+        /// </summary>
+        /// <param name="address">address("A1"形式)</param>
+        /// <param name="value">value</param>
+        public void WriteCell(string address, object value,string asdasd)
         {
             // 値を書込
             _excelWorksheet.Cells[address].Value = value;
@@ -145,5 +169,95 @@ namespace ExcelManage
             return (object[,])_excelWorksheet.Cells[addresso].Value;
         }
 
+        /// <summary>
+        /// セルの幅を自動で合わせる
+        /// </summary>
+        /// <param name=""></param>
+        /// <param name="adress">幅を合わせるセル名</param>
+        public void AutoFitColumns(string adress = "AllRange")
+        {
+          
+            if (adress =="AllRange")
+            {
+                _excelWorksheet.Cells.AutoFitColumns();
+            }
+            else
+            {
+                _excelWorksheet.Cells[adress].AutoFitColumns();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum InsertMode { ShiftRight, ShiftDown, EntierRow, EntierColumn }
+        public enum DeleteMode { ShiftLeft, ShiftUp, EntireRow, EntireColumn }
+
+        private const string ERROR_MESSAGE = "データの消失を防ぐため、空白でないセルをワークシートの外に移動することはできません。新しいセルを挿入する別の場所を選択するか、ワークシートの末尾からデータを削除してください。\n\nワークシートの外に移動できるセルにデータがない場合は、どのセルが空白でないと見なされるかをリセットできます。これを行うには、Ctrl+End キーを押してワークシート上の最後の空白でないセルに移動します。次に、このセルと、データの最後の行および列とこのセルの間のセルをすべて削除し、保存します。";
+
+        /// <summary>
+        /// セルの挿入
+        /// </summary>
+        /// <param name="range">セルの範囲</param>
+        /// <param name="mode"></param>
+        public void InsertCells(ExcelRange range, InsertMode mode)
+        {
+            switch (mode)
+            {
+                // Shift cells right
+                case InsertMode.ShiftRight:
+                    var endCol1 = _excelWorksheet.Dimension.End.Column + (range.End.Column - range.Start.Column + 1);
+                    if (16384 < endCol1)
+                    {
+                        MessageBox.Show(ERROR_MESSAGE, "Warning");
+                        break;
+                    }
+                    using (var rg = _excelWorksheet.Cells[range.Start.Row, range.Start.Column, range.End.Row, _excelWorksheet.Dimension.End.Column])
+                    {
+                        rg.Copy(_excelWorksheet.Cells[range.Start.Row, range.End.Column + 1]);
+                        range.Clear();
+                    }
+                    break;
+
+                // Shift cells down
+                case InsertMode.ShiftDown:
+                    var endRow = _excelWorksheet.Dimension.End.Row + range.End.Row - range.Start.Row + 1;
+                    if (1048576 < endRow)
+                    {
+                        MessageBox.Show(ERROR_MESSAGE, "Warning");
+                        break;
+                    }
+                    using (var rg = _excelWorksheet.Cells[range.Start.Row, range.Start.Column, _excelWorksheet.Dimension.End.Row, range.End.Column])
+                    {
+                        rg.Copy(_excelWorksheet.Cells[range.End.Row + 1, range.Start.Column]);
+                        range.Clear();
+                    }
+                    break;
+
+                // Entire row
+                case InsertMode.EntierRow:
+                    var h = range.End.Row - range.Start.Row + 1;
+                    var endCol2 = _excelWorksheet.Dimension.End.Column + h;
+                    if (16384 < endCol2)
+                    {
+                        MessageBox.Show(ERROR_MESSAGE, "Warning");
+                        break;
+                    }
+                    _excelWorksheet.InsertRow(range.Start.Row, h);
+                    break;
+
+                // Entire column
+                case InsertMode.EntierColumn:
+                    var w = range.End.Column - range.Start.Column + 1;
+                    var endRow2 = _excelWorksheet.Dimension.End.Row + w;
+                    if (1048576 < endRow2)
+                    {
+                        MessageBox.Show(ERROR_MESSAGE, "Warning");
+                        break;
+                    }
+                    _excelWorksheet.InsertColumn(range.Start.Column, w);
+                    break;
+            }
+        }
     }
 }

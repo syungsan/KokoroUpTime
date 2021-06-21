@@ -587,9 +587,9 @@
             <Grid x:Name="AnyCharaGrid" d:IsHidden="True">
                 <Image x:Name="TeacherImage" HorizontalAlignment="Left" Height="924" Margin="1358,86,0,0" VerticalAlignment="Top" Width="290" Source="/Images/teacher.png" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="ItemBookGrid" d:IsHidden="True">
-                <TextBlock x:Name="ItemBookTitleTextBlock" Margin="38,20,1387,935" Text="アイテム図鑑" TextWrapping="Wrap" FontSize="90" Foreground="White" FontWeight="Bold" d:IsHidden="True"/>
-                <Grid x:Name="ItemBookMainGrid" d:IsHidden="True">
+            <Grid x:Name="ItemBookGrid">
+                <TextBlock x:Name="ItemBookTitleTextBlock" Margin="38,20,1387,935" Text="アイテム図鑑" TextWrapping="Wrap" FontSize="90" Foreground="White" FontWeight="Bold"/>
+                <Grid x:Name="ItemBookMainGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
@@ -608,7 +608,7 @@
                     <Image x:Name="Item10MainImage" Source="/Images/item10_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="968,470,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
                     <Image x:Name="Item11MainImage" Source="/Images/item11_book.png" Width="303" Height="460" HorizontalAlignment="Left" Margin="1283,470,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
                 </Grid>
-                <Grid x:Name="ItemBookNoneGrid" d:IsHidden="True">
+                <Grid x:Name="ItemBookNoneGrid">
                     <Image x:Name="Item02NoneImage" HorizontalAlignment="Left" Height="460" Margin="339,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                     <Image x:Name="Item03NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                     <Image x:Name="Item04NoneImage" HorizontalAlignment="Left" Height="460" Margin="968,38,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
@@ -619,7 +619,6 @@
                     <Image x:Name="Item09NoneImage" HorizontalAlignment="Left" Height="460" Margin="653,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                     <Image x:Name="Item10NoneImage" HorizontalAlignment="Left" Height="460" Margin="968,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                     <Image x:Name="Item11NoneImage" HorizontalAlignment="Left" Height="460" Margin="1283,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
-                    <Image x:Name="Item12NoneImage" HorizontalAlignment="Left" Height="460" Margin="1598,470,0,0" VerticalAlignment="Top" Width="303" Source="/Images/item00_book.png" d:IsHidden="True"/>
                 </Grid>
             </Grid>
             <Grid x:Name="SystemGrid">

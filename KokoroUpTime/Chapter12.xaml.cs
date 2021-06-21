@@ -2092,6 +2092,8 @@ namespace KokoroUpTime
 
                         if (this.scene == "修了証書授与")
                         {
+                            this.dataProgress.HasCompletedChapter12 = true;
+
                             this.StopBGM();
 
                             EndingPage endingPage = new EndingPage();
@@ -2099,6 +2101,8 @@ namespace KokoroUpTime
                             endingPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                             this.NavigationService.Navigate(endingPage);
+
+
                         }
 
                     }

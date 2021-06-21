@@ -9,11 +9,14 @@ using System.Reflection;
 using System.Linq;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using FileIOUtils;
+using OfficeOpenXml;
 
 namespace KokoroUpTime
 {
     class DB2Excel
     {
+
         // 一応データモデルの使用
         // private static InitConfig initConfig = new InitConfig();
         private static DataOption dataOption = new DataOption();
@@ -67,6 +70,7 @@ namespace KokoroUpTime
 
             var excel = new ExcelManager();
             excel.Open(outputPath);
+          
 
             // まとめシートに書き込み #######################################################
 
@@ -94,6 +98,10 @@ namespace KokoroUpTime
 
                 excel.WriteCell(playSceneNameCells[index], datProgs[index]);
             }
+
+
+            string startupPath = FileUtils.GetStartupPath();
+            string dirPath = $"./Log/{userInfos[0]}";
 
             //第1回に書き込み
             if (dataProgress.HasCompletedChapter1 == true)
@@ -134,17 +142,39 @@ namespace KokoroUpTime
 
                 foreach (KeyValuePair<string, string> item in chapter1StrResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value.Contains(",良い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",良い", ""));
+                    }
+                    else if (item.Value.Contains(",悪い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",悪い", ""));
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+
+                    }
+
+                    //if (item.Value.Contains("●"))
+                    //{
+                    //    excel.WriteCell(item.Key, item.Value.Replace("●　", ""));
+                    //}
                 }
 
                 foreach (KeyValuePair<string, int?> item in chapter1IntResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value ==-1)
+                    {
+                        excel.WriteCell(item.Key, null);
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+                    }
                 }
+                excel.AutoFitColumns();
             }
-
-
-            // ###############################################################################
 
             //第2回に書き込み
             if (dataProgress.HasCompletedChapter2 == true)
@@ -153,7 +183,6 @@ namespace KokoroUpTime
 
                 var chapter2StrResult = new Dictionary<string, string>
                 {
-                    {"A4" , dataChapter2.MySelectGoodEvents},
                     {"F5" , dataChapter2.AosukesDifficultyOfEating},
                     {"F6" , dataChapter2.AosukesDifficultyOfGettingHighScore},
                     {"F7" , dataChapter2.AosukesDifficultyOfTalkingWithFriend},
@@ -167,36 +196,68 @@ namespace KokoroUpTime
                     {"E7" , dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend},
                 };
 
-                if (dataChapter2.MySelectGoodEvents =="")
-                {
-                    //画像貼り付け
-                }
-                else
+                if (dataChapter2.MySelectGoodEvents !="")
                 {
                     IEnumerable<string> goodEvents = dataChapter2.MySelectGoodEvents.Split(",");
                     foreach (var goodEvent in goodEvents.Select((Value, Index) => new { Value, Index }))
                     {
-                        chapter2StrResult.Add($"A{4 + goodEvent.Index}", goodEvent.Value);
+                        chapter2StrResult.Add($"A{3 + goodEvent.Index}", goodEvent.Value);
                     }
                 }
-                
+
+                if (dataChapter2.MyALittlleExcitingEvents =="")
+                {
+                    excel.WriteCell($"A19", "");
+
+                    string logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter2/groupe_activity_exciting_event_stroke.isf");
+                    if (File.Exists(logDataPath))
+                    {
+                      excel.PastePicture($"A19","groupe_activity_exciting_event_stroke.png", logDataPath);
+                    }
+                }
+                else
+                {
+                    chapter2StrResult.Add($"A19", dataChapter2.MyALittlleExcitingEvents);
+                }
+
 
 
                 foreach (KeyValuePair<string, string> item in chapter2StrResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value.Contains(",良い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",良い", ""));
+                    }
+                    else if (item.Value.Contains(",悪い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",悪い", ""));
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+
+                    }
+
+                    //if (item.Value.Contains("●"))
+                    //{
+                    //    excel.WriteCell(item.Key, item.Value.Replace("●　", ""));
+                    //}
                 }
 
                 foreach (KeyValuePair<string, int?> item in chapter2IntResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value == -1)
+                    {
+                        excel.WriteCell(item.Key, null);
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+                    }
                 }
-
-               
+                excel.AutoFitColumns();
+                
             }
-
-            // ###############################################################################
-
 
             //第3回に書き込み
             if (dataProgress.HasCompletedChapter3 == true)
@@ -227,13 +288,33 @@ namespace KokoroUpTime
 
                 foreach (KeyValuePair<string, string> item in chapter3StrResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value.Contains(",良い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",良い", ""));
+                    }
+                    else if (item.Value.Contains(",悪い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",悪い", ""));
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+
+                    }
                 }
 
                 foreach (KeyValuePair<string, int?> item in chapter3IntResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value == -1)
+                    {
+                        excel.WriteCell(item.Key, null);
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+                    }
                 }
+                excel.AutoFitColumns();
             }
 
             //第4回に書き込み
@@ -250,18 +331,44 @@ namespace KokoroUpTime
                 var chapter4IntResult = new Dictionary<string, int?>
                 {
                    { "C4", dataChapter4.KimisSizeOfFeelingAskedForWork },
-                   { "C3", dataChapter4.KimisSizeOfFeelingAskedByAkamaru },
+                   { "C5", dataChapter4.KimisSizeOfFeelingAskedByAkamaru },
                 };
 
                 foreach (KeyValuePair<string, string> item in chapter4StrResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value.Contains(",良い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",良い", ""));
+                    }
+                    else if (item.Value.Contains(",悪い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",悪い", ""));
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+
+                    }
+
+                    //if (item.Value.Contains("●"))
+                    //{
+                    //    excel.WriteCell(item.Key, item.Value.Replace("●　", ""));
+                    //}
                 }
 
                 foreach (KeyValuePair<string, int?> item in chapter4IntResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value == -1)
+                    {
+                        excel.WriteCell(item.Key, null);
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+                    }
                 }
+                excel.AutoFitColumns();
+
             }
 
             //第5回に書き込み
@@ -305,17 +412,42 @@ namespace KokoroUpTime
                         chapter5StrResult.Add($"J{4 + relaxMethod.Index}", relaxMethod.Value);
                     }
                 }
-                
+
 
                 foreach (KeyValuePair<string, string> item in chapter5StrResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value.Contains(",良い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",良い", ""));
+                    }
+                    else if (item.Value.Contains(",悪い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",悪い", ""));
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+
+                    }
+
+                    //if (item.Value.Contains("●"))
+                    //{
+                    //    excel.WriteCell(item.Key, item.Value.Replace("●　", ""));
+                    //}
                 }
 
                 foreach (KeyValuePair<string, int?> item in chapter5IntResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value == -1)
+                    {
+                        excel.WriteCell(item.Key, null);
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+                    }
                 }
+                excel.AutoFitColumns();
             }
 
             //第6回に書き込み
@@ -345,22 +477,33 @@ namespace KokoroUpTime
                     IEnumerable<string> friendsNicePersonalities = dataChapter6.InputFriendsNicePersonality.Split(";");
                     foreach (var friendsNicePersonality in friendsNicePersonalities.Select((Value, Index) => new { Value, Index }))
                     {
-                        if (Regex.IsMatch(friendsNicePersonality.Value,".*さん"))
+                        if (friendsNicePersonality.Value !="")
                         {
                             chapter6StrResult.Add($"C{4 + friendsNicePersonality.Index}", friendsNicePersonality.Value.Split(",")[0]);
-                        }
-                        else if (friendsNicePersonality.Value　!="")
-                        {
                             chapter6StrResult.Add($"D{4 + friendsNicePersonality.Index}", friendsNicePersonality.Value.Split(",")[1]);
                         }
-
+                           
                     }
                 }
 
                 foreach (KeyValuePair<string, string> item in chapter6StrResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value.Contains(",良い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",良い", ""));
+                    }
+                    else if (item.Value.Contains(",悪い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",悪い", ""));
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+
+                    }
                 }
+                excel.AutoFitColumns();
+
             }
 
             //第7回に書き込み
@@ -446,15 +589,39 @@ namespace KokoroUpTime
 
                 foreach (KeyValuePair<string, string> item in chapter7StrResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value.Contains(",良い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",良い", ""));
+                    }
+                    else if (item.Value.Contains(",悪い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",悪い", ""));
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+
+                    }
+
+                    //if (item.Value.Contains("●"))
+                    //{
+                    //    excel.WriteCell(item.Key, item.Value.Replace("●　", ""));
+                    //}
                 }
 
                 foreach (KeyValuePair<string, int?> item in chapter7IntResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value == -1)
+                    {
+                        excel.WriteCell(item.Key, null);
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+                    }
                 }
+                excel.AutoFitColumns();
             }
-
 
             //第8回に書き込み
             if (dataProgress.HasCompletedChapter8 == true)
@@ -482,9 +649,9 @@ namespace KokoroUpTime
                     { "F4", dataChapter8.KimisSizeOfFeelingAfterUsedItem },
                     { "F5", dataChapter8.AosukesSizeOfFeelingAfterUsedItem },
                     { "F6", dataChapter8.AkamarusSizeOfFeelingAfterUsedItem },
-                    { "J4", dataChapter8.Let_sCheckSizeOfFeeling },
-                    { "J5", dataChapter8.PositiveThinkingSizeOfFeeling },
-                    { "J6", dataChapter8.ThoughtsOfOthersSizeOfFeeling },
+                    { "K4", dataChapter8.Let_sCheckSizeOfFeeling },
+                    { "K5", dataChapter8.PositiveThinkingSizeOfFeeling },
+                    { "K6", dataChapter8.ThoughtsOfOthersSizeOfFeeling },
                 };
 
 
@@ -497,23 +664,48 @@ namespace KokoroUpTime
                     }
                     else
                     {
-                        chapter8StrResult.Add($"I{i + 1}", (string)PlopInfo.GetValue(dataChapter8));
+                        chapter8StrResult.Add($"I{4 + i}", (string)PlopInfo.GetValue(dataChapter8));
                     }
                 }
-               
+
 
 
                 foreach (KeyValuePair<string, string> item in chapter8StrResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value.Contains(",良い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",良い", ""));
+                    }
+                    else if (item.Value.Contains(",悪い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",悪い", ""));
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+
+                    }
+
+                    //if (item.Value.Contains("●"))
+                    //{
+                    //    excel.WriteCell(item.Key, item.Value.Replace("●　", ""));
+                    //}
                 }
 
                 foreach (KeyValuePair<string, int?> item in chapter8IntResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value == -1)
+                    {
+                        excel.WriteCell(item.Key, null);
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+                    }
                 }
-            }
 
+                excel.AutoFitColumns();
+            }
 
             //第9回に書き込み
             if (dataProgress.HasCompletedChapter9 == true)
@@ -553,30 +745,54 @@ namespace KokoroUpTime
                     {
                         if (notGoodEvents.Value.Contains(","))
                         {
-                            char charCellColumn = 'B';
-                            int intCellColumn = (int)charCellColumn;
+                            int cellColumn = 'B';
                             foreach (var notGoodEvent in notGoodEvents.Value.Split(",").Select((Value, Index) => new { Value, Index }))
                             {
-                                intCellColumn++;
+                                cellColumn++;
                                 if (notGoodEvent.Index != notGoodEvents.Value.Split(",").Length - 1)
                                 {
-                                    chapter9StrResult.Add($"{(char)intCellColumn}{4 + notGoodEvents.Index}", notGoodEvent.Value);
+                                    chapter9StrResult.Add($"{(char)cellColumn}{4 + notGoodEvent.Index}", notGoodEvent.Value);
                                 }
                             }
                         }
                     }
                 }
-                
+
 
                 foreach (KeyValuePair<string, string> item in chapter9StrResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value.Contains(",良い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",良い", ""));
+                    }
+                    else if (item.Value.Contains(",悪い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",悪い", ""));
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+
+                    }
+
+                    //if (item.Value.Contains("●"))
+                    //{
+                    //    excel.WriteCell(item.Key, item.Value.Replace("●　", ""));
+                    //}
                 }
 
                 foreach (KeyValuePair<string, int?> item in chapter9IntResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value == -1)
+                    {
+                        excel.WriteCell(item.Key, null);
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+                    }
                 }
+                excel.AutoFitColumns();
             }
 
             //第10回に書き込み
@@ -631,13 +847,38 @@ namespace KokoroUpTime
 
                 foreach (KeyValuePair<string, string> item in chapter10StrResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value.Contains(",良い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",良い", ""));
+                    }
+                    else if (item.Value.Contains(",悪い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",悪い", ""));
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+
+                    }
+
+                    //if (item.Value.Contains("●"))
+                    //{
+                    //    excel.WriteCell(item.Key, item.Value.Replace("●　", ""));
+                    //}
                 }
 
                 foreach (KeyValuePair<string, int?> item in chapter10IntResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value == -1)
+                    {
+                        excel.WriteCell(item.Key, null);
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+                    }
                 }
+                excel.AutoFitColumns();
             }
 
             //第11回に書き込み
@@ -678,14 +919,13 @@ namespace KokoroUpTime
                 {
                     for (int i = 0; i < 4; i++)
                     {
-                        char charCellColumn = 'H';
-                        int intCellColumn = (int)charCellColumn;
+                        int cellColumn = 'H';
 
-                        intCellColumn += i;
+                        cellColumn += i;
 
-                        chapter11StrResult.Add($"{(char)intCellColumn}5", dataChapter11.EvaluationAkamaruMethodText1.Split(",")[i]);
-                        chapter11StrResult.Add($"{(char)intCellColumn}6", dataChapter11.EvaluationAkamaruMethodText2.Split(",")[i]);
-                        chapter11StrResult.Add($"{(char)intCellColumn}7", dataChapter11.EvaluationAkamaruMethodText3.Split(",")[i]);
+                        chapter11StrResult.Add($"{(char)cellColumn}5", dataChapter11.EvaluationAkamaruMethodText1.Split(",")[i]);
+                        chapter11StrResult.Add($"{(char)cellColumn}6", dataChapter11.EvaluationAkamaruMethodText2.Split(",")[i]);
+                        chapter11StrResult.Add($"{(char)cellColumn}7", dataChapter11.EvaluationAkamaruMethodText3.Split(",")[i]);
                     }
                 }
                 
@@ -698,7 +938,7 @@ namespace KokoroUpTime
                 {
                     foreach (var aosukeMethod in dataChapter11.Step2AosukeManyMethodInputText.Split(",").Select((Value, Index) => new { Value, Index }))
                     {
-                        chapter11StrResult.Add($"M{aosukeMethod.Index}", aosukeMethod.Value);
+                        chapter11StrResult.Add($"M{4+aosukeMethod.Index}", aosukeMethod.Value);
                     }
                 }
 
@@ -711,11 +951,10 @@ namespace KokoroUpTime
                         {
                             foreach (var evaluation in evaluations.Value.Split(",").Select((Value, Index) => new { Value, Index }))
                             {
-                                char charCellColumn = 'N';
-                                int intCellColumn = (int)charCellColumn;
-                                intCellColumn += evaluation.Index;
+                                int cellColumn = 'N';
+                                cellColumn += evaluation.Index;
 
-                                chapter11StrResult.Add($"{(char)intCellColumn}{4 + evaluations.Index}", evaluation.Value);
+                                chapter11StrResult.Add($"{(char)cellColumn}{4 + evaluations.Index}", evaluation.Value);
 
                             }
                         }
@@ -725,8 +964,22 @@ namespace KokoroUpTime
 
                 foreach (KeyValuePair<string, string> item in chapter11StrResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value.Contains(",良い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",良い", ""));
+                    }
+                    else if (item.Value.Contains(",悪い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",悪い", ""));
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+                    }
                 }
+
+                excel.AutoFitColumns();
+
             }
 
             //第12回に書き込み
@@ -759,10 +1012,24 @@ namespace KokoroUpTime
 
                 foreach (KeyValuePair<string, string> item in chapter12StrResult)
                 {
-                    excel.WriteCell(item.Key, item.Value);
+                    if (item.Value.Contains(",良い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",良い", ""));
+                    }
+                    else if (item.Value.Contains(",悪い"))
+                    {
+                        excel.WriteCell(item.Key, item.Value.Replace(",悪い", ""));
+                    }
+                    else
+                    {
+                        excel.WriteCell(item.Key, item.Value);
+                    }
                 }
+
+                excel.AutoFitColumns();
             }
 
+            
 
 
             // 名前を付けて保存する
@@ -886,7 +1153,10 @@ namespace KokoroUpTime
                     foreach (var dataChapterProp in dataChapterPropertyInfos1)
                     {
                         var dbProp = typeof(DataChapter1).GetProperty(dataChapterProp.Name);
-                        dataChapterProp.SetValue(dataChapter1, dbProp.GetValue(resultChapter1[0]));
+                        if (dbProp.GetValue(resultChapter1[0]) != null)
+                        {
+                            dataChapterProp.SetValue(dataChapter1, dbProp.GetValue(resultChapter1[0]));
+                        }
                     }
                 }
 
@@ -898,7 +1168,10 @@ namespace KokoroUpTime
                     foreach (var dataChapterProp in dataChapterPropertyInfos2)
                     {
                         var dbProp = typeof(DataChapter2).GetProperty(dataChapterProp.Name);
-                        dataChapterProp.SetValue(dataChapter2, dbProp.GetValue(resultChapter2[0]));
+                        if (dbProp.GetValue(resultChapter2[0]) != null)
+                        {
+                            dataChapterProp.SetValue(dataChapter2, dbProp.GetValue(resultChapter2[0]));
+                        }
                     }
                 }
 
@@ -910,7 +1183,10 @@ namespace KokoroUpTime
                     foreach (var dataChapterProp in dataChapterPropertyInfos3)
                     {
                         var dbProp = typeof(DataChapter3).GetProperty(dataChapterProp.Name);
-                        dataChapterProp.SetValue(dataChapter3, dbProp.GetValue(resultChapter3[0]));
+                        if (dbProp.GetValue(resultChapter3[0]) != null)
+                        {
+                            dataChapterProp.SetValue(dataChapter3, dbProp.GetValue(resultChapter3[0]));
+                        }
                     }
                 }
                 
@@ -923,7 +1199,10 @@ namespace KokoroUpTime
                     foreach (var dataChapterProp in dataChapter4PropertyInfos)
                     {
                         var dbProp = typeof(DataChapter4).GetProperty(dataChapterProp.Name);
-                        dataChapterProp.SetValue(dataChapter4, dbProp.GetValue(resultChapter4[0]));
+                        if (dbProp.GetValue(resultChapter4[0]) !=null)
+                        {
+                            dataChapterProp.SetValue(dataChapter4, dbProp.GetValue(resultChapter4[0]));
+                        }
                     }
                 }
 
@@ -935,7 +1214,10 @@ namespace KokoroUpTime
                     foreach (var dataChapterProp in dataChapter5PropertyInfos)
                     {
                         var dbProp = typeof(DataChapter5).GetProperty(dataChapterProp.Name);
-                        dataChapterProp.SetValue(dataChapter5, dbProp.GetValue(resultChapter5[0]));
+                        if (dbProp.GetValue(resultChapter5[0]) != null)
+                        {
+                            dataChapterProp.SetValue(dataChapter5, dbProp.GetValue(resultChapter5[0]));
+                        }
                     }
                 }
 
@@ -947,7 +1229,10 @@ namespace KokoroUpTime
                     foreach (var dataChapterProp in dataChapterPropertyInfos6)
                     {
                         var dbProp = typeof(DataChapter6).GetProperty(dataChapterProp.Name);
-                        dataChapterProp.SetValue(dataChapter6, dbProp.GetValue(resultChapter6[0]));
+                        if (dbProp.GetValue(resultChapter6[0]) != null)
+                        {
+                            dataChapterProp.SetValue(dataChapter6, dbProp.GetValue(resultChapter6[0]));
+                        }
                     }
                 }
                 
@@ -960,7 +1245,10 @@ namespace KokoroUpTime
                     foreach (var dataChapterProp in dataChapter7PropertyInfos)
                     {
                         var dbProp = typeof(DataChapter7).GetProperty(dataChapterProp.Name);
-                        dataChapterProp.SetValue(dataChapter7, dbProp.GetValue(resultChapter7[0]));
+                        if (dbProp.GetValue(resultChapter7[0]) != null)
+                        {
+                            dataChapterProp.SetValue(dataChapter7, dbProp.GetValue(resultChapter7[0]));
+                        }
                     }
                 }
                 
@@ -973,7 +1261,10 @@ namespace KokoroUpTime
                     foreach (var dataChapterProp in dataChapter8PropertyInfos)
                     {
                         var dbProp = typeof(DataChapter8).GetProperty(dataChapterProp.Name);
-                        dataChapterProp.SetValue(dataChapter8, dbProp.GetValue(resultChapter8[0]));
+                        if (dbProp.GetValue(resultChapter8[0]) != null)
+                        {
+                            dataChapterProp.SetValue(dataChapter8, dbProp.GetValue(resultChapter8[0]));
+                        }
                     }
                 }
                 
@@ -986,7 +1277,10 @@ namespace KokoroUpTime
                     foreach (var dataChapterProp in dataChapter9PropertyInfos)
                     {
                         var dbProp = typeof(DataChapter9).GetProperty(dataChapterProp.Name);
-                        dataChapterProp.SetValue(dataChapter9, dbProp.GetValue(resultChapter9[0]));
+                        if (dbProp.GetValue(resultChapter9[0]) != null)
+                        {
+                            dataChapterProp.SetValue(dataChapter9, dbProp.GetValue(resultChapter9[0]));
+                        }
                     }
                 }
 
@@ -998,7 +1292,10 @@ namespace KokoroUpTime
                     foreach (var dataChapterProp in dataChapter10PropertyInfos)
                     {
                         var dbProp = typeof(DataChapter10).GetProperty(dataChapterProp.Name);
-                        dataChapterProp.SetValue(dataChapter10, dbProp.GetValue(resultChapter10[0]));
+                        if (dbProp.GetValue(resultChapter10[0]) != null)
+                        {
+                            dataChapterProp.SetValue(dataChapter10, dbProp.GetValue(resultChapter10[0]));
+                        }
                     }
                 }
                
@@ -1011,7 +1308,10 @@ namespace KokoroUpTime
                     foreach (var dataChapterProp in dataChapter11PropertyInfos)
                     {
                         var dbProp = typeof(DataChapter11).GetProperty(dataChapterProp.Name);
-                        dataChapterProp.SetValue(dataChapter11, dbProp.GetValue(resultChapter11[0]));
+                        if (dbProp.GetValue(resultChapter11[0]) != null)
+                        {
+                            dataChapterProp.SetValue(dataChapter11, dbProp.GetValue(resultChapter11[0]));
+                        }
                     }
                 }
 
@@ -1023,182 +1323,12 @@ namespace KokoroUpTime
                     foreach (var dataChapterProp in dataChapter12PropertyInfos)
                     {
                         var dbProp = typeof(DataChapter12).GetProperty(dataChapterProp.Name);
-                        dataChapterProp.SetValue(dataChapter12, dbProp.GetValue(resultChapter12[0]));
+                        if (dbProp.GetValue(resultChapter12[0]) != null)
+                        {
+                            dataChapterProp.SetValue(dataChapter12, dbProp.GetValue(resultChapter12[0]));
+                        }
                     }
                 }
-                
-
-                //foreach (var row in resultChapter1)
-                //{
-                //    if (row.MyKindOfGoodFeelings != null)
-                //        dataChapter1.MyKindOfGoodFeelings = row.MyKindOfGoodFeelings;
-
-                //    if (row.MyKindOfBadFeelings != null)
-                //        dataChapter1.MyKindOfBadFeelings = row.MyKindOfBadFeelings;
-
-                //    if (row.KimisKindOfFeeling != null)
-                //        dataChapter1.KimisKindOfFeeling = row.KimisKindOfFeeling;
-
-                //    if (row.AkamarusKindOfFeeling != null)
-                //        dataChapter1.AkamarusKindOfFeeling = row.AkamarusKindOfFeeling;
-
-                //    if (row.AkamarusSizeOfFeeling != null)
-                //        dataChapter1.AkamarusSizeOfFeeling = row.AkamarusSizeOfFeeling;
-
-                //    if (row.AosukesKindOfFeeling != null)
-                //        dataChapter1.AosukesKindOfFeeling = row.AosukesKindOfFeeling;
-
-                //    if (row.AosukesSizeOfFeeling != null)
-                //        dataChapter1.AosukesSizeOfFeeling = row.AosukesSizeOfFeeling;
-                //}
-
-
-                //var resultChapter2 = connection.Query<DataChapter2>($"SELECT * FROM 'DataChapter2';");
-
-                //foreach (var row in resultChapter2)
-                //{
-                //    dataChapter2.MySelectGoodEvents = row.MySelectGoodEvents;
-
-                //    dataChapter2.AosukesSizeOfFeelingOfEating = row.AosukesSizeOfFeelingOfEating;
-
-                //    dataChapter2.AosukesDifficultyOfEating = row.AosukesDifficultyOfEating;
-
-                //    dataChapter2.AosukesSizeOfFeelingOfGettingHighScore = row.AosukesSizeOfFeelingOfGettingHighScore;
-
-                //    dataChapter2.AosukesDifficultyOfGettingHighScore = row.AosukesDifficultyOfGettingHighScore;
-
-                //    dataChapter2.AosukesSizeOfFeelingOfTalkingWithFriend = row.AosukesSizeOfFeelingOfTalkingWithFriend;
-
-                //    dataChapter2.AosukesDifficultyOfTalkingWithFriend = row.AosukesDifficultyOfTalkingWithFriend;
-
-                //    dataChapter2.MyALittlleExcitingEvents = row.MyALittlleExcitingEvents;
-                //}
-
-
-                //var resultChapter3 = connection.Query<DataChapter3>("SELECT * FROM 'DataChapter3';");
-
-                //foreach (var row in resultChapter3)
-                //{
-                //    if (row.AosukesKindOfFeelingPreUseItem != null)
-                //        dataChapter3.AosukesKindOfFeelingPreUseItem = row.AosukesKindOfFeelingPreUseItem;
-
-                //    if (row.KimisKindOfFeelingPreUseItem != null)
-                //        dataChapter3.KimisKindOfFeelingPreUseItem = row.KimisKindOfFeelingPreUseItem;
-
-                //    if (row.AosukesKindOfFeelingAfterUsedItem != null)
-                //        dataChapter3.AosukesKindOfFeelingAfterUsedItem = row.AosukesKindOfFeelingAfterUsedItem;
-
-                //    if (row.KimisKindOfFeelingAfterUsedItem != null)
-                //        dataChapter3.KimisKindOfFeelingAfterUsedItem = row.KimisKindOfFeelingAfterUsedItem;
-
-                //    if (row.AkamarusKindOfFeelingAfterUsedItem != null)
-                //        dataChapter3.AkamarusKindOfFeelingAfterUsedItem = row.AkamarusKindOfFeelingAfterUsedItem;
-
-                //    if (row.AosukesSizeOfFeelingPreUseItem != null)
-                //        dataChapter3.AosukesSizeOfFeelingPreUseItem = row.AosukesSizeOfFeelingPreUseItem;
-
-                //    if (row.KimisSizeOfFeelingPreUseItem != null)
-                //        dataChapter3.KimisSizeOfFeelingPreUseItem = row.KimisSizeOfFeelingPreUseItem;
-
-                //    if (row.AosukesSizeOfFeelingAfterUsedItem != null)
-                //        dataChapter3.AosukesSizeOfFeelingAfterUsedItem = row.AosukesSizeOfFeelingAfterUsedItem;
-
-                //    if (row.KimisSizeOfFeelingAfterUsedItem != null)
-                //        dataChapter3.KimisSizeOfFeelingAfterUsedItem = row.KimisSizeOfFeelingAfterUsedItem;
-
-                //    if (row.AkamarusSizeOfFeelingAfterUsedItem != null)
-                //        dataChapter3.AkamarusSizeOfFeelingAfterUsedItem = row.AkamarusSizeOfFeelingAfterUsedItem;
-
-                //    if (row.SelectedPraiseHotWord != null)
-                //        dataChapter3.SelectedPraiseHotWord = row.SelectedPraiseHotWord;
-
-                //    if (row.SelectedWorryHotWord != null)
-                //        dataChapter3.SelectedWorryHotWord = row.SelectedWorryHotWord;
-
-                //    if (row.SelectedEncourageHotWord != null)
-                //        dataChapter3.SelectedEncourageHotWord = row.SelectedEncourageHotWord;
-
-                //    if (row.SelectedThanksHotWord != null)
-                //        dataChapter3.SelectedThanksHotWord = row.SelectedThanksHotWord;
-                //}
-
-                //var resultChapter4 = connection.Query<DataChapter4>("SELECT * FROM 'DataChapter4';");
-
-                //foreach (var row in resultChapter4)
-                //{
-                //    if (row.KimisKindOfFeelingAskedForWork != null)
-                //        dataChapter4.KimisKindOfFeelingAskedForWork = row.KimisKindOfFeelingAskedForWork;
-
-                //    if (row.KimisKindOfFeelingAskedByAkamaru != null)
-                //        dataChapter4.KimisKindOfFeelingAskedByAkamaru = row.KimisKindOfFeelingAskedByAkamaru;
-
-                //    if (row.KimisSizeOfFeelingAskedForWork != null)
-                //        dataChapter4.KimisSizeOfFeelingAskedForWork = row.KimisSizeOfFeelingAskedForWork;
-
-                //    if (row.KimisSizeOfFeelingAskedByAkamaru != null)
-                //        dataChapter4.KimisSizeOfFeelingAskedByAkamaru = row.KimisSizeOfFeelingAskedByAkamaru;
-
-                //}
-
-                //var resultChapter7 = connection.Query<DataChapter7>("SELECT * FROM 'DataChapter7';");
-
-                //foreach (var row in resultChapter7)
-                //{
-
-                //    if (row.KimisKindOfFeelingInviteFriends != null)
-                //        dataChapter7.KimisKindOfFeelingInviteFriends = row.KimisKindOfFeelingInviteFriends;
-
-                //    if (row.KimisKindOfFeelingAnnouncement != null)
-                //        dataChapter7.KimisKindOfFeelingAnnouncement = row.KimisKindOfFeelingAnnouncement;
-
-                //    if (row.YourKindOfFeelingAnnouncement != null)
-                //        dataChapter7.YourKindOfFeelingAnnouncement = row.YourKindOfFeelingAnnouncement;
-
-                //    if (row.YourKindOfFeelingGreetingToFriend != null)
-                //        dataChapter7.YourKindOfFeelingGreetingToFriend = row.YourFriendsKindOfFeelingGreetingToAnotherFriend;
-
-                //    if (row.YourFriendsKindOfFeelingAnnouncement != null)
-                //        dataChapter7.YourFriendsKindOfFeelingAnnouncement = row.YourFriendsKindOfFeelingAnnouncement;
-
-                //    if (row.YourFriendsKindOfFeelingGreetingToAnotherFriend != null)
-                //        dataChapter7.YourFriendsKindOfFeelingGreetingToAnotherFriend = row.YourFriendsKindOfFeelingGreetingToAnotherFriend;
-
-                //    if (row.KimisSizeOfFeelingInviteFriends != null)
-                //        dataChapter7.KimisSizeOfFeelingInviteFriends = row.KimisSizeOfFeelingInviteFriends;
-
-                //    if (row.KimisSizeOfFeelingAnnouncement != null)
-                //        dataChapter7.KimisSizeOfFeelingAnnouncement = row.KimisSizeOfFeelingAnnouncement;
-
-                //    if (row.YourSizeOfFeelingAnnouncement != null)
-                //        dataChapter7.YourSizeOfFeelingAnnouncement = row.YourSizeOfFeelingAnnouncement;
-
-                //    if (row.YourSizeOfFeelingGreetingToFriend != null)
-                //        dataChapter7.YourSizeOfFeelingGreetingToFriend = row.YourSizeOfFeelingGreetingToFriend;
-
-                //    if (row.YourFriendsSizeOfFeelingAnnouncement != null)
-                //        dataChapter7.YourFriendsSizeOfFeelingAnnouncement = row.YourFriendsSizeOfFeelingAnnouncement;
-
-                //    if (row.YourFriendsSizeOfFeelingGreetingToAnotherFriend != null)
-                //        dataChapter7.YourFriendsSizeOfFeelingGreetingToAnotherFriend = row.YourFriendsSizeOfFeelingGreetingToAnotherFriend;
-
-                //    if (row.InputAkamaruThoughtText != null)
-                //        dataChapter7.InputAkamaruThoughtText = row.InputAkamaruThoughtText;
-
-                //    if (row.InputAosukeThoughtText != null)
-                //        dataChapter7.InputAosukeThoughtText = row.InputAosukeThoughtText;
-
-                //    if (row.InputYourToughtText1 != null)
-                //        dataChapter7.InputYourToughtText1 = row.InputYourToughtText1;
-
-                //    if (row.InputYourToughtText2 != null)
-                //        dataChapter7.InputYourToughtText2 = row.InputYourToughtText2;
-
-                //    if (row.InputFriendToughtText1 != null)
-                //        dataChapter7.InputFriendToughtText1 = row.InputFriendToughtText1;
-
-                //    if (row.InputFriendToughtText2 != null)
-                //        dataChapter7.InputFriendToughtText2 = row.InputFriendToughtText2;
-                //}
             }
         }
 
@@ -1279,7 +1409,7 @@ namespace KokoroUpTime
                 }
             }
 
-
+            
 
         }
     }
