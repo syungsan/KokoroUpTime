@@ -2691,7 +2691,7 @@ namespace KokoroUpTime
                             if (this.dataOption.InputMethod == 0)
                             {
                                 StrokeConverter strokeConverter = new StrokeConverter();
-                                strokeConverter.ConvertToBmpImage(InputMyBodyImageCanvas, this.InputStroke[this.InputDictionaryKey], "challenge_time_Not_Understand_problem_input_stroke", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                                strokeConverter.ConvertToBmpImage(InputMyBodyImageCanvas, this.InputStroke[this.InputDictionaryKey], "challenge_time_not_understand_problem_input_stroke", this.initConfig.userName,this.dataProgress.CurrentChapter);
                             }
                             else
                             {
@@ -3511,6 +3511,11 @@ namespace KokoroUpTime
                 case "RightBodyImageOfKimiTextBox":
                     MaxLineCount = 3;
                     break;
+            }
+
+            if (e.Key == Key.OemComma)
+            {
+                e.Handled = true;
             }
             if (text.LineCount > MaxLineCount-1)
             {

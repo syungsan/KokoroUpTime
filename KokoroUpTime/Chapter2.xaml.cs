@@ -2398,6 +2398,11 @@ namespace KokoroUpTime
         //  TextBoxに改行制限をかける
         private void TextBoxKeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.OemComma)
+            {
+                e.Handled = true;
+            }
+
             if (this.InputMySmallExcitedTextBox.LineCount > 5)
             {
                 if (e.Key == Key.Enter)

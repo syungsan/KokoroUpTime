@@ -2861,6 +2861,10 @@ namespace KokoroUpTime
                     break;
             }
 
+            if (e.Key == Key.OemComma)
+            {
+                e.Handled = true;
+            }
             if (text.LineCount >= MaxLine)
             {
                 if (e.Key == Key.Enter)

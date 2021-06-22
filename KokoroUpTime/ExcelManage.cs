@@ -72,7 +72,7 @@ namespace ExcelManage
         /// </summary>
         /// <param name="adress"></param>
         /// <param name="bitmapImage"></param>
-        public void PastePicture(string adress,string FileName,string ImagePath)
+        public void PastePicture(string adress,string FileName,string ImagePath,int percent)
         {
             var picture =_excelWorksheet.Drawings.AddPicture(FileName, Image.FromFile(ImagePath));
 
@@ -80,6 +80,7 @@ namespace ExcelManage
             int row = int.Parse(Regex.Match(adress, @"\d+").ToString())-1;
 
             picture.SetPosition(row,0,column,0);
+            picture.SetSize(percent);
             picture.ChangeCellAnchor(eEditAs.TwoCell);
             picture.AdjustPositionAndSize();
 
@@ -200,8 +201,9 @@ namespace ExcelManage
         /// </summary>
         /// <param name="range">セルの範囲</param>
         /// <param name="mode"></param>
-        public void InsertCells(ExcelRange range, InsertMode mode)
+        public void InsertCells(string excelRange, InsertMode mode)
         {
+            ExcelRange range = _excelWorksheet.Cells[excelRange]; 
             switch (mode)
             {
                 // Shift cells right
@@ -258,6 +260,18 @@ namespace ExcelManage
                     _excelWorksheet.InsertColumn(range.Start.Column, w);
                     break;
             }
+        }
+
+        public void DrawBorder(string adress, bool isLeft=false, bool isTop=false, bool isRight =false, bool isBottom=false )
+        {
+            if(isLeft)
+                _excelWorksheet.Cells[adress].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thick;
+            if (isTop)
+                _excelWorksheet.Cells[adress].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thick;
+            if (isRight)
+                _excelWorksheet.Cells[adress].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thick;
+            if (isBottom)
+                _excelWorksheet.Cells[adress].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thick;
         }
     }
 }
