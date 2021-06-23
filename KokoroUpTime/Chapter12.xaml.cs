@@ -1504,9 +1504,10 @@ namespace KokoroUpTime
                     if (this.dataOption.InputMethod == 0)
                     {
                         ObservableCollection<SelectedItemMethodStrokeData> datas = new ObservableCollection<SelectedItemMethodStrokeData>();
-                        datas.Add(this.ITEM_METHOD_STROKE[this.InputDictionaryKey]);
+                        datas.Add(this.ITEM_METHOD_STROKE["item_method1"]);
 
                         this.InputItemMethodItemsControl.ItemsSource = datas;
+                        this.BackItemMethodButton.Visibility = Visibility.Hidden;
 
                         foreach(SelectedItemMethodStrokeData data in this.ITEM_METHOD_STROKE.Values)
                         {

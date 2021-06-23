@@ -331,6 +331,7 @@ namespace KokoroUpTime
                 {
                     { "B4", dataChapter4.KimisKindOfFeelingAskedForWork },
                     { "B5", dataChapter4.KimisKindOfFeelingAskedByAkamaru },
+                    { "E4",dataChapter4.SelectedScene}
                 };
 
                 var chapter4IntResult = new Dictionary<string, int?>

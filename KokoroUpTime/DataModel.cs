@@ -230,6 +230,8 @@ namespace KokoroUpTime
         public int KimisSizeOfFeelingAskedForWork { get; set; } = -1;
         public int KimisSizeOfFeelingAskedByAkamaru { get; set; }=-1;
 
+        public string SelectedScene { get; set; } = "";
+
         public string CreatedAt { get; set; }
     }
 

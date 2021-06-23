@@ -681,7 +681,7 @@
                                 <Border Background="#FF4472C4" BorderBrush="White" BorderThickness="3">
                                     <TextBlock x:Name="HeaderText" Text="{Binding HeaderText}" Margin="5" FontSize="45" Foreground="White" FontWeight="Bold" VerticalAlignment="Center"/>
                                 </Border>
-                                <ListBox ItemsSource="{Binding NotGoodEvent}" SelectionMode="Multiple" FontSize="26" FontFamily="Yu Gothic" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ListBox ItemsSource="{Binding NotGoodEvent}" SelectionMode="Multiple" FontSize="26" FontFamily="Yu Gothic" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="ListBox_SelectionChanged">
                                     <ListBox.ItemContainerStyle>
                                         <Style TargetType="{x:Type ListBoxItem}">
                                             <Setter Property="Background" Value="#FFCFD5EA"/>

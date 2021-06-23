@@ -1919,16 +1919,34 @@ namespace KokoroUpTime
 
                             if (situationText == "場面①の赤丸くん")
                             {
+                                this.dataChapter4.SelectedScene = "赤丸くんはじゅぎょうで使う教科書を鬱わすれてこまっています。だれかに、教科書をかりなければなりません";
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter4 SET SelectedScene = '{this.dataChapter4.SelectedScene}'WHERE CreatedAt = '{this.dataChapter4.CreatedAt}';");
+                                }
+
                                 this.GoTo("situation_akamaru","sub");
                             }
                             if (situationText == "場面②のキミちゃん")
                             {
+                                this.dataChapter4.SelectedScene = "キミちゃんは、友だちに「日曜日に遊鬱ぼうよ」と言われました。しかし、鬱その日は家の用事があり、どうしても行くことができません。";
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter4 SET SelectedScene = '{this.dataChapter4.SelectedScene}'WHERE CreatedAt = '{this.dataChapter4.CreatedAt}';");
+                                }
                                 this.GoTo("situation_kimi","sub");
                             }
                             if (situationText == "場面③の青助くん")
                             {
+                                this.dataChapter4.SelectedScene = "青助くんは、友だちにマンガをかして鬱ほしいといわれました。しかし、鬱青助くんはまだそのマンガを読み終わっていません。";
+                                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                                {
+                                    connection.Execute($@"UPDATE DataChapter4 SET SelectedScene = '{this.dataChapter4.SelectedScene}'WHERE CreatedAt = '{this.dataChapter4.CreatedAt}';");
+                                }
                                 this.GoTo("situation_aosuke","sub");
                             }
+
+
                         }
                     }
                 }

@@ -2895,5 +2895,17 @@ namespace KokoroUpTime
             logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
 
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var startupPath = FileUtils.GetStartupPath();
+            if (e.AddedItems.Count > 0)
+            {
+                PlaySE($@"{startupPath}/Sounds/Decision.wav");
+            }
+            else if (e.RemovedItems.Count > 0)
+            {
+                PlaySE($@"{startupPath}/Sounds/Cancel.wav");
+            }
+        }
     }
 }

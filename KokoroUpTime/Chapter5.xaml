@@ -694,7 +694,7 @@
                             </Button.Style>
                             <Grid x:Name="RelaxMethodInputGrid" Background="Transparent">
                                 <Rectangle x:Name="RelaxMethodInputRectangle" Fill="White" RadiusX="110" RadiusY="110" Stroke="Red" StrokeThickness="10" StrokeDashArray="10,4"/>
-                                <ListView x:Name="RelaxMethodInputListView" Height="545" Width="1570"  BorderBrush="{x:Null}" Margin="50,35" VerticalAlignment="Top" HorizontalAlignment="Left"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListView x:Name="RelaxMethodInputListView" VirtualizingPanel.IsVirtualizing="False" Height="545" Width="1570"  BorderBrush="{x:Null}" Margin="50,35" VerticalAlignment="Top" HorizontalAlignment="Left"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                     <sys:String>①</sys:String>
                                 </ListView>
                                 <TextBlock x:Name="RelaxMethodMessageTextBlock" Text="TextBlock" TextWrapping="Wrap" Height="66" Margin="82,0,72,10" VerticalAlignment="Bottom" FontSize="48" TextAlignment="Right"/>

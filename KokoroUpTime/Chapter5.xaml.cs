@@ -128,7 +128,7 @@ namespace KokoroUpTime
         private StrokeCollection InputMyBodyImageStrokeRecorderProblem = null;
         private List<StrokeCollection> InputRelaxMethodStrokes = null;
         
-
+        
         private bool isDeepBreath = false;
 
         public Chapter5()
@@ -174,8 +174,6 @@ namespace KokoroUpTime
             };                                                         
 
             this.DataContext = this.dataChapter5;
-            
-
 
             this.InitControls();
         }
@@ -3664,6 +3662,7 @@ namespace KokoroUpTime
                     this.ClipStrokes(canvas1, canvas1.Strokes);
                     this.InputRelaxMethodStrokes.Add(canvas1.Strokes);
                 }
+
                 foreach (Viewbox viewbox in this.RelaxMethodInputListView.GetChildren<Viewbox>().ToList())
                 {
                     InkCanvas canvas2 = viewbox.Child as InkCanvas;
@@ -3859,5 +3858,7 @@ namespace KokoroUpTime
 
             logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
+
+       
     }
 }
