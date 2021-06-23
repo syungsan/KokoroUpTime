@@ -1,0 +1,11 @@
+﻿RecordingDate,2021/06/16 15:31:50
+WindowSize,800×600
+
+PlayScene,TapObjectName,TapPointX,TapPointY,TapTime[ms],isClickable
+グループアクティビティ,RelaxMethodInputListView,375,211,79809,True
+グループアクティビティ,RelaxMethodInputCanvasListView,346,210,80557,True
+グループアクティビティ,InputCanvasPlusButton,290,312,81127,True
+グループアクティビティ,RelaxMethodInputCanvasListView,296,296,81681,True
+グループアクティビティ,CompleteInputButton,724,138,86517,True
+グループアクティビティ,ExitButton,768,72,89888,True
+グループアクティビティ,ExitBackYesButtonImage,333,304,90675,False

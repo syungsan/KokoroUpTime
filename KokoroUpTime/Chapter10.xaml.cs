@@ -24,8 +24,6 @@ using XamlAnimatedGif;
 using System.Reflection;
 
 namespace KokoroUpTime
-
-
 {
     /// <summary>
     /// GameWindow.xaml の相互作用ロジック
@@ -128,7 +126,7 @@ namespace KokoroUpTime
 
             // Hide host's navigation UI
             this.ShowsNavigationUI = false;
-
+            
             // メディアプレーヤークラスのインスタンスを作成する
             this.mediaPlayer = new WindowsMediaPlayer();
 

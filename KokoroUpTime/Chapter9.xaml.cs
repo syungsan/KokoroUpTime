@@ -2287,6 +2287,7 @@ namespace KokoroUpTime
                         }
                         else if(this.NotGoodEventGrid.Visibility == Visibility.Visible)
                         {
+                            dataChapter9.CheckedNotGoodEvent = "";
                             foreach (var listbox in this.NotGoodEventItemsControl.GetChildren<ListBox>())
                             {
                                 foreach (var text in listbox.SelectedItems)

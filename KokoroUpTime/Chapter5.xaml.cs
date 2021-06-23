@@ -2599,9 +2599,9 @@ namespace KokoroUpTime
                             StrokeConverter strokeConverter = new StrokeConverter();
 
                             strokeConverter.ConvertToBmpImage(LeftBodyImageOfKimiCanvas,this.InputFaceImageOfKimiStroke,"challenge_time_face_image_of_kimi",this.initConfig.userName,this.dataProgress.CurrentChapter);
-                            strokeConverter.ConvertToBmpImage(LeftBodyImageOfKimiCanvas, this.InputHandImageOfKimiStroke, "challengetime_hand_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
-                            strokeConverter.ConvertToBmpImage(LeftBodyImageOfKimiCanvas, this.InputStomachImageOfKimiStroke, "challengetime_stomach_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
-                            strokeConverter.ConvertToBmpImage(LeftBodyImageOfKimiCanvas, this.InputOthersImageOfKimiStroke, "challengetime_others_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                            strokeConverter.ConvertToBmpImage(LeftBodyImageOfKimiCanvas, this.InputHandImageOfKimiStroke, "challenge_time_hand_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                            strokeConverter.ConvertToBmpImage(LeftBodyImageOfKimiCanvas, this.InputStomachImageOfKimiStroke, "challenge_time_stomach_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
+                            strokeConverter.ConvertToBmpImage(LeftBodyImageOfKimiCanvas, this.InputOthersImageOfKimiStroke, "challenge_time_others_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
 
                             strokeConverter.ConvertToBmpImage(RightBodyImageOfKimiCanvas, this.InputHeadImageOfKimiStroke, "challenge_time_head_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);
                             strokeConverter.ConvertToBmpImage(RightBodyImageOfKimiCanvas, this.InputShoulderImageOfKimiStroke, "challenge_time_shoulder_image_of_kimi", this.initConfig.userName,this.dataProgress.CurrentChapter);

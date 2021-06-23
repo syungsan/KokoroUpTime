@@ -2090,15 +2090,15 @@ namespace KokoroUpTime
             {
                 if (this.scene == "チャレンジきもち選択")
                 {
+                    this.myKindOfGoodFeelings.Clear();
+                    this.myKindOfBadFeelings.Clear();
                     foreach (string selectFeeling in this.ChallengeGoodFeelingListBox.SelectedItems)
                     {
                         this.myKindOfGoodFeelings.Add(selectFeeling);
-
                     }
                     foreach (string selectFeeling in this.ChallengeBadFeelingListBox.SelectedItems)
                     {
                         this.myKindOfBadFeelings.Add(selectFeeling);
-
                     }
 
                     // 配列をコンマで結合して文字列として扱う

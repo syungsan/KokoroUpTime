@@ -76,13 +76,12 @@ namespace ExcelManage
         {
             var picture =_excelWorksheet.Drawings.AddPicture(FileName, Image.FromFile(ImagePath));
 
-            int column = Regex.Match(adress, @"[A-Z]+").ToString()[0] - 'A';
+            int column = Regex.Match(adress, @"[a-zA-Z]+").ToString().ToUpper()[0] - 'A';
             int row = int.Parse(Regex.Match(adress, @"\d+").ToString())-1;
 
-            picture.SetPosition(row,0,column,0);
+            picture.ChangeCellAnchor(eEditAs.OneCell);
+            picture.SetPosition(row,5,column,5);
             picture.SetSize(percent);
-            picture.ChangeCellAnchor(eEditAs.TwoCell);
-            picture.AdjustPositionAndSize();
 
         }
 
@@ -265,13 +264,13 @@ namespace ExcelManage
         public void DrawBorder(string adress, bool isLeft=false, bool isTop=false, bool isRight =false, bool isBottom=false )
         {
             if(isLeft)
-                _excelWorksheet.Cells[adress].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thick;
+                _excelWorksheet.Cells[adress].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
             if (isTop)
-                _excelWorksheet.Cells[adress].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thick;
+                _excelWorksheet.Cells[adress].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
             if (isRight)
-                _excelWorksheet.Cells[adress].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thick;
+                _excelWorksheet.Cells[adress].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
             if (isBottom)
-                _excelWorksheet.Cells[adress].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thick;
+                _excelWorksheet.Cells[adress].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
         }
     }
 }

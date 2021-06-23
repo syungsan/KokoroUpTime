@@ -1,0 +1,10 @@
+﻿RecordingDate,2021/06/16 15:43:03
+WindowSize,800×600
+
+PlayScene,TapObjectName,TapPointX,TapPointY,TapTime[ms],isClickable
+まとめ,BackPageBeforeImage,78,471,1291,True
+まとめ,BackgroundImage,78,471,1469,False
+まとめ,BackgroundImage,78,471,1641,True
+まとめ,BackgroundImage,78,471,2031,True
+まとめ,ExitButton,755,65,3226,True
+まとめ,ExitBackYesButtonImage,329,324,3890,True

@@ -1,0 +1,94 @@
+﻿RecordingDate,2021/06/16 15:43:10
+WindowSize,800×600
+
+PlayScene,TapObjectName,TapPointX,TapPointY,TapTime[ms],isClickable
+前回のおさらい,NextPageAfterImage,745,479,1313,True
+前回のおさらい,NextPageAfterImage,745,479,1483,True
+前回のおさらい,NextPageAfterImage,745,479,1639,True
+前回のおさらい,BackgroundImage,745,479,1820,True
+前回のおさらい,BranchButton1Image,472,162,2709,True
+漫画購読,MangaFlipArrowImage,700,482,3443,True
+漫画購読,MangaFlipArrowImage,700,482,3606,True
+漫画購読,NextPageAfterImage,700,482,3777,True
+チャレンジタイム 開始,NextPageAfterImage,700,482,3947,True
+チャレンジタイム 開始,NextPageAfterImage,702,482,4317,True
+チャレンジタイム 開始,BackgroundImage,702,482,4480,False
+チャレンジタイム 開始,NextPageAfterImage,702,482,4900,True
+キミちゃんの考えときもちは…,NextPageAfterImage,702,482,5072,True
+発表する時のキミちゃんのきもち,KindOfFeelingInputButton,458,351,6079,True
+発表する時のキミちゃんのきもち,SelectBadFeelingListBox,446,356,6541,True
+発表する時のキミちゃんのきもち,NextPageAfterImage,709,464,7132,True
+発表する時のキミちゃんのきもち,SizeOfFeelingInputButton,643,348,7600,True
+発表する時のキミちゃんのきもち,NextPageAfterImage,722,471,8263,True
+発表する時のキミちゃんのきもち,NextPageAfterImage,722,471,8433,True
+友だちを遊びに誘うときのキミちゃんのきもち,BackgroundImage,722,471,8607,False
+友だちを遊びに誘うときのキミちゃんのきもち,KindOfFeelingInputButton,479,349,9435,True
+友だちを遊びに誘うときのキミちゃんのきもち,SelectBadFeelingListBox,460,356,9917,True
+友だちを遊びに誘うときのキミちゃんのきもち,NextPageAfterImage,711,468,10675,True
+友だちを遊びに誘うときのキミちゃんのきもち,SizeOfFeelingInputButton,626,353,11329,True
+友だちを遊びに誘うときのキミちゃんのきもち,NextPageAfterImage,733,488,11875,True
+友だちを遊びに誘うときのキミちゃんのきもち,NextPageAfterImage,733,488,12054,True
+友だちを遊びに誘うときのキミちゃんのきもち,BackgroundImage,733,488,12218,False
+友だちを遊びに誘うときのキミちゃんのきもち,NextPageAfterImage,733,488,12402,True
+友だちを遊びに誘うときのキミちゃんのきもち,NextPageAfterImage,733,488,12591,True
+発表前の２人のようすは,NextPageAfterImage,733,488,12763,True
+赤丸君とキミちゃんの考え,NextPageAfterImage,733,488,12961,True
+赤丸君とキミちゃんの考え,NextPageAfterImage,733,488,13162,True
+赤丸君とキミちゃんの考え,NextPageAfterImage,729,481,13726,True
+アイテム登場,BackgroundImage,729,481,13904,False
+アイテム登場,NextPageAfterImage,729,481,14089,True
+アイテム登場,NextPageAfterImage,729,481,14261,True
+グループアクティビティパート①　開始,BackgroundImage,729,481,14462,False
+グループアクティビティパート①　開始,NextPageAfterImage,729,481,14644,True
+休み時間に、友だちをサッカーにさそう場面・・・,NextPageAfterImage,729,481,14817,True
+赤丸くんと青助くんの考え,BackgroundImage,729,481,15003,True
+赤丸くんと青助くんの考え,BackgroundImage,729,481,15181,True
+赤丸くんと青助くんの考え,,281,202,15823,True
+赤丸くんと青助くんの考え,InputThoughtCanvas1,347,276,16144,True
+赤丸くんと青助くんの考え,CompleteInputButton,769,115,16985,True
+赤丸くんと青助くんの考え,InputRightChildrenThoughtGrid,606,175,17407,True
+赤丸くんと青助くんの考え,InputThoughtCanvas1,580,222,17634,True
+赤丸くんと青助くんの考え,CompleteInputButton,711,123,18241,True
+赤丸くんと青助くんの考え,NextPageAfterImage,718,469,18951,True
+赤丸くんと青助くんの考え,NextPageAfterImage,718,469,19113,False
+赤丸くんと青助くんの考え,NextPageAfterImage,718,469,19288,True
+チャレンジタイム！パート②,NextPageAfterImage,718,469,19466,True
+チャレンジタイム！パート②,NextPageAfterImage,718,469,19638,True
+チャレンジタイム！パート②　場面選択,BackgroundImage,718,469,19839,True
+チャレンジタイム！パート②　場面選択,BackgroundImage,718,469,20097,True
+チャレンジタイム！パート②　場面選択,Scene1Text,448,142,20790,True
+チャレンジタイム！パート②　場面①,BackPageBeforeImage,66,489,22257,True
+チャレンジタイム！パート②　場面選択,Scene2Text,347,271,22923,True
+チャレンジタイム！パート②　場面②,BackPageBeforeImage,80,476,24104,True
+チャレンジタイム！パート②　場面選択,SelectScene1Button,335,166,25041,True
+チャレンジタイム！パート②　場面①,,518,191,25687,True
+チャレンジタイム！パート②　場面①,InputThoughtCanvas2,501,259,26318,True
+チャレンジタイム！パート②　場面①,CompleteInputButton,709,118,27057,True
+チャレンジタイム！パート②　場面①,KindOfFeelingInputButton,504,323,27651,True
+チャレンジタイム！パート②　場面①,SelectBadFeelingListBox,497,339,28063,True
+チャレンジタイム！パート②　場面①,NextPageAfterImage,765,485,28617,True
+チャレンジタイム！パート②　場面①,SizeOfFeelingInputButton,647,337,29165,True
+チャレンジタイム！パート②　場面①,NextPageAfterImage,728,466,29703,True
+チャレンジタイム！パート②　場面①,NextPageAfterImage,728,466,29866,True
+グループアクティビティパート② 開始,NextPageAfterImage,721,465,30967,True
+グループアクティビティパート②　場面選択,Scene1Text,424,136,33245,True
+グループアクティビティパート②　場面①,BackPageBeforeImage,82,465,35142,True
+グループアクティビティパート②　場面選択,Scene2Text,359,276,35794,True
+グループアクティビティパート②　場面②,BackPageBeforeImage,80,463,37022,True
+グループアクティビティパート②　場面選択,Scene1Text,370,149,45577,True
+グループアクティビティパート②　場面①,,526,205,212981,True
+グループアクティビティパート②　場面①,InputThoughtCanvas2,488,271,213441,True
+グループアクティビティパート②　場面①,CompleteInputButton,743,104,214168,True
+グループアクティビティパート②　場面①,KindOfFeelingInputButton,512,332,214845,True
+グループアクティビティパート②　場面①,SelectBadFeelingListBox,454,330,215337,True
+グループアクティビティパート②　場面①,NextPageAfterImage,696,455,216023,True
+グループアクティビティパート②　場面①,SizeOfFeelingInputButton,659,330,216725,True
+グループアクティビティパート②　場面①,NextPageAfterImage,722,469,217567,True
+グループアクティビティパート②　場面①,NextPageAfterImage,720,467,218245,True
+グループアクティビティパート②　場面①,NextPageAfterImage,720,467,218861,True
+まとめ,BackgroundImage,720,467,219039,False
+まとめ,NextMessageArrowDownImage,655,440,219806,True
+まとめ,NextPageAfterImage,703,469,220805,True
+今回の発明品おさらい,NextPageAfterImage,701,458,222669,True
+アイテム図鑑,NextPageAfterImage,706,471,223847,True
+エンディング,ReturnToTitleImage,80,478,224891,False

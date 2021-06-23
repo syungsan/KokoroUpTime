@@ -1933,6 +1933,7 @@ namespace KokoroUpTime
                     {
                         if (this.GoodEventSelectListBox1.Visibility == Visibility.Visible && this.GoodEventSelectListBox2.Visibility == Visibility.Visible)
                         {
+                            this.mySelectGoodEvents.Clear();
                             foreach (string goodevent1 in this.GoodEventSelectListBox1.SelectedItems)
                             {
                                 this.mySelectGoodEvents.Add(goodevent1);
