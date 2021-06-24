@@ -3159,7 +3159,7 @@ namespace KokoroUpTime
             }
             else
             {
-                MaxLine = 6;
+                MaxLine = 4;
             }
 
             while (text.LineCount > MaxLine)
@@ -3184,7 +3184,7 @@ namespace KokoroUpTime
             }
             else
             {
-                MaxLine = 6;
+                MaxLine = 4;
             }
 
             if (e.Key == Key.OemComma)

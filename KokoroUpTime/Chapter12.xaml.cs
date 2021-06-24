@@ -2095,6 +2095,11 @@ namespace KokoroUpTime
                         {
                             this.dataProgress.HasCompletedChapter12 = true;
 
+                            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                            {
+                                connection.Execute($@"UPDATE DataProgress SET HasCompletedChapter12 = '{Convert.ToInt32(this.dataProgress.HasCompletedChapter12)}' WHERE Id = 1;");
+                            }
+
                             this.StopBGM();
 
                             EndingPage endingPage = new EndingPage();

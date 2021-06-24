@@ -702,13 +702,13 @@ namespace KokoroUpTime
                     break;
 
                 case "AnotherButton":
-
+#if DEBUG
                     EndingPage endingPage = new EndingPage();
 
                     endingPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                     this.NavigationService.Navigate(endingPage);
-
+#endif
                     break;
             }
 
@@ -719,50 +719,50 @@ namespace KokoroUpTime
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }
-                    else if (this.dataProgress.CurrentChapter == 1)
-                    {
-                        MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //else if (this.dataProgress.CurrentChapter == 1)
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            Chapter1 chapter1 = new Chapter1();
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        Chapter1 chapter1 = new Chapter1();
 
-                            chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                    //        chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                            this.NavigationService.Navigate(chapter1);
-                        }
-                        else if (result == MessageBoxResult.No)
-                        {
-                            result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //        this.NavigationService.Navigate(chapter1);
+                    //    }
+                    //    else if (result == MessageBoxResult.No)
+                    //    {
+                    //        result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                this.dataProgress.CurrentChapter = 0;
-                                this.dataProgress.CurrentScene = null;
+                    //        if (result == MessageBoxResult.Yes)
+                    //        {
+                    //            this.dataProgress.CurrentChapter = 0;
+                    //            this.dataProgress.CurrentScene = null;
 
-                                Chapter1 chapter1 = new Chapter1();
+                    //            Chapter1 chapter1 = new Chapter1();
 
-                                chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                    //            chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                                this.NavigationService.Navigate(chapter1);
-                            }
-                        }
-                    }
-                    else if (this.dataProgress.CurrentChapter != 1 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
-                    {
-                        MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第1回をプレイしますか？", "確認", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            this.dataProgress.CurrentChapter = 0;
-                            this.dataProgress.CurrentScene = null;
+                    //            this.NavigationService.Navigate(chapter1);
+                    //        }
+                    //    }
+                    //}
+                    //else if (this.dataProgress.CurrentChapter != 1 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第1回をプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        this.dataProgress.CurrentChapter = 0;
+                    //        this.dataProgress.CurrentScene = null;
 
-                            Chapter1 chapter1 = new Chapter1();
+                    //        Chapter1 chapter1 = new Chapter1();
 
-                            chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                    //        chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
-                            this.NavigationService.Navigate(chapter1);
-                        }
-                    }
+                    //        this.NavigationService.Navigate(chapter1);
+                    //    }
+                    //}
                     else
                     {
                         Chapter1 chapter1 = new Chapter1();
@@ -779,50 +779,50 @@ namespace KokoroUpTime
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }
-                    else if (this.dataProgress.CurrentChapter == 2)
-                    {
-                        MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //else if (this.dataProgress.CurrentChapter == 2)
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            Chapter2 chapter2 = new Chapter2();
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        Chapter2 chapter2 = new Chapter2();
 
-                            chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress,false);
+                    //        chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress,false);
 
-                            this.NavigationService.Navigate(chapter2);
-                        }
-                        else if (result == MessageBoxResult.No)
-                        {
-                            result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //        this.NavigationService.Navigate(chapter2);
+                    //    }
+                    //    else if (result == MessageBoxResult.No)
+                    //    {
+                    //        result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                this.dataProgress.CurrentChapter = 0;
-                                this.dataProgress.CurrentScene = null;
+                    //        if (result == MessageBoxResult.Yes)
+                    //        {
+                    //            this.dataProgress.CurrentChapter = 0;
+                    //            this.dataProgress.CurrentScene = null;
 
-                                Chapter2 chapter2 = new Chapter2();
+                    //            Chapter2 chapter2 = new Chapter2();
 
-                                chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress,true);
+                    //            chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress,true);
 
-                                this.NavigationService.Navigate(chapter2);
-                            }
-                        }
-                    }
-                    else if (this.dataProgress.CurrentChapter != 2 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
-                    {
-                        MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第2回をプレイしますか？", "確認", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            this.dataProgress.CurrentChapter = 0;
-                            this.dataProgress.CurrentScene = null;
+                    //            this.NavigationService.Navigate(chapter2);
+                    //        }
+                    //    }
+                    //}
+                    //else if (this.dataProgress.CurrentChapter != 2 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第2回をプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        this.dataProgress.CurrentChapter = 0;
+                    //        this.dataProgress.CurrentScene = null;
 
-                            Chapter2 chapter2 = new Chapter2();
+                    //        Chapter2 chapter2 = new Chapter2();
 
-                            chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress,true);
+                    //        chapter2.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress,true);
 
-                            this.NavigationService.Navigate(chapter2);
-                        }
-                    }
+                    //        this.NavigationService.Navigate(chapter2);
+                    //    }
+                    //}
                     else
                     {
                         Chapter2 chapter2 = new Chapter2();
@@ -839,50 +839,50 @@ namespace KokoroUpTime
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }
-                    else if (this.dataProgress.CurrentChapter == 3)
-                    {
-                        MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //else if (this.dataProgress.CurrentChapter == 3)
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            Chapter3 chapter3 = new Chapter3();
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        Chapter3 chapter3 = new Chapter3();
 
-                            chapter3.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
+                    //        chapter3.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
 
-                            this.NavigationService.Navigate(chapter3);
-                        }
-                        else if (result == MessageBoxResult.No)
-                        {
-                            result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //        this.NavigationService.Navigate(chapter3);
+                    //    }
+                    //    else if (result == MessageBoxResult.No)
+                    //    {
+                    //        result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                this.dataProgress.CurrentChapter = 0;
-                                this.dataProgress.CurrentScene = null;
+                    //        if (result == MessageBoxResult.Yes)
+                    //        {
+                    //            this.dataProgress.CurrentChapter = 0;
+                    //            this.dataProgress.CurrentScene = null;
 
-                                Chapter3 chapter3 = new Chapter3();
+                    //            Chapter3 chapter3 = new Chapter3();
 
-                                chapter3.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //            chapter3.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                                this.NavigationService.Navigate(chapter3);
-                            }
-                        }
-                    }
-                    else if (this.dataProgress.CurrentChapter != 3 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
-                    {
-                        MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第3回をプレイしますか？", "確認", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            this.dataProgress.CurrentChapter = 0;
-                            this.dataProgress.CurrentScene = null;
+                    //            this.NavigationService.Navigate(chapter3);
+                    //        }
+                    //    }
+                    //}
+                    //else if (this.dataProgress.CurrentChapter != 3 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第3回をプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        this.dataProgress.CurrentChapter = 0;
+                    //        this.dataProgress.CurrentScene = null;
 
-                            Chapter3 chapter3 = new Chapter3();
+                    //        Chapter3 chapter3 = new Chapter3();
 
-                            chapter3.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //        chapter3.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                            this.NavigationService.Navigate(chapter3);
-                        }
-                    }
+                    //        this.NavigationService.Navigate(chapter3);
+                    //    }
+                    //}
                     else
                     {
                         Chapter3 chapter3 = new Chapter3();
@@ -900,50 +900,50 @@ namespace KokoroUpTime
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }
-                    else if (this.dataProgress.CurrentChapter == 4)
-                    {
-                        MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //else if (this.dataProgress.CurrentChapter == 4)
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            Chapter4 chapter4 = new Chapter4();
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        Chapter4 chapter4 = new Chapter4();
 
-                            chapter4.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
+                    //        chapter4.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
 
-                            this.NavigationService.Navigate(chapter4);
-                        }
-                        else if (result == MessageBoxResult.No)
-                        {
-                            result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //        this.NavigationService.Navigate(chapter4);
+                    //    }
+                    //    else if (result == MessageBoxResult.No)
+                    //    {
+                    //        result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                this.dataProgress.CurrentChapter = 0;
-                                this.dataProgress.CurrentScene = null;
+                    //        if (result == MessageBoxResult.Yes)
+                    //        {
+                    //            this.dataProgress.CurrentChapter = 0;
+                    //            this.dataProgress.CurrentScene = null;
 
-                                Chapter4 chapter4 = new Chapter4();
+                    //            Chapter4 chapter4 = new Chapter4();
 
-                                chapter4.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //            chapter4.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                                this.NavigationService.Navigate(chapter4);
-                            }
-                        }
-                    }
-                    else if (this.dataProgress.CurrentChapter != 4 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
-                    {
-                        MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第4回をプレイしますか？", "確認", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            this.dataProgress.CurrentChapter = 0;
-                            this.dataProgress.CurrentScene = null;
+                    //            this.NavigationService.Navigate(chapter4);
+                    //        }
+                    //    }
+                    //}
+                    //else if (this.dataProgress.CurrentChapter != 4 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第4回をプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        this.dataProgress.CurrentChapter = 0;
+                    //        this.dataProgress.CurrentScene = null;
 
-                            Chapter4 chapter4 = new Chapter4();
+                    //        Chapter4 chapter4 = new Chapter4();
 
-                            chapter4.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //        chapter4.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                            this.NavigationService.Navigate(chapter4);
-                        }
-                    }
+                    //        this.NavigationService.Navigate(chapter4);
+                    //    }
+                    //}
                     else
                     {
                         Chapter4 chapter4 = new Chapter4();
@@ -960,50 +960,50 @@ namespace KokoroUpTime
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }
-                    else if (this.dataProgress.CurrentChapter == 5)
-                    {
-                        MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //else if (this.dataProgress.CurrentChapter == 5)
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            Chapter5 chapter5 = new Chapter5();
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        Chapter5 chapter5 = new Chapter5();
 
-                            chapter5.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
+                    //        chapter5.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
 
-                            this.NavigationService.Navigate(chapter5);
-                        }
-                        else if (result == MessageBoxResult.No)
-                        {
-                            result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //        this.NavigationService.Navigate(chapter5);
+                    //    }
+                    //    else if (result == MessageBoxResult.No)
+                    //    {
+                    //        result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                this.dataProgress.CurrentChapter = 0;
-                                this.dataProgress.CurrentScene = null;
+                    //        if (result == MessageBoxResult.Yes)
+                    //        {
+                    //            this.dataProgress.CurrentChapter = 0;
+                    //            this.dataProgress.CurrentScene = null;
 
-                                Chapter5 chapter5 = new Chapter5();
+                    //            Chapter5 chapter5 = new Chapter5();
 
-                                chapter5.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //            chapter5.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                                this.NavigationService.Navigate(chapter5);
-                            }
-                        }
-                    }
-                    else if (this.dataProgress.CurrentChapter != 5 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
-                    {
-                        MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第5回をプレイしますか？", "確認", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            this.dataProgress.CurrentChapter = 0;
-                            this.dataProgress.CurrentScene = null;
+                    //            this.NavigationService.Navigate(chapter5);
+                    //        }
+                    //    }
+                    //}
+                    //else if (this.dataProgress.CurrentChapter != 5 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第5回をプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        this.dataProgress.CurrentChapter = 0;
+                    //        this.dataProgress.CurrentScene = null;
 
-                            Chapter5 chapter5 = new Chapter5();
+                    //        Chapter5 chapter5 = new Chapter5();
 
-                            chapter5.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //        chapter5.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                            this.NavigationService.Navigate(chapter5);
-                        }
-                    }
+                    //        this.NavigationService.Navigate(chapter5);
+                    //    }
+                    //}
                     else
                     {
                         Chapter5 chapter5 = new Chapter5();
@@ -1020,50 +1020,50 @@ namespace KokoroUpTime
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }
-                    else if (this.dataProgress.CurrentChapter == 6)
-                    {
-                        MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //else if (this.dataProgress.CurrentChapter == 6)
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            Chapter6 chapter6 = new Chapter6();
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        Chapter6 chapter6 = new Chapter6();
 
-                            chapter6.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
+                    //        chapter6.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
 
-                            this.NavigationService.Navigate(chapter6);
-                        }
-                        else if (result == MessageBoxResult.No)
-                        {
-                            result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //        this.NavigationService.Navigate(chapter6);
+                    //    }
+                    //    else if (result == MessageBoxResult.No)
+                    //    {
+                    //        result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                this.dataProgress.CurrentChapter = 0;
-                                this.dataProgress.CurrentScene = null;
+                    //        if (result == MessageBoxResult.Yes)
+                    //        {
+                    //            this.dataProgress.CurrentChapter = 0;
+                    //            this.dataProgress.CurrentScene = null;
 
-                                Chapter6 chapter6 = new Chapter6();
+                    //            Chapter6 chapter6 = new Chapter6();
 
-                                chapter6.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //            chapter6.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                                this.NavigationService.Navigate(chapter6);
-                            }
-                        }
-                    }
-                    else if (this.dataProgress.CurrentChapter != 6 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
-                    {
-                        MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第6回をプレイしますか？", "確認", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            this.dataProgress.CurrentChapter = 0;
-                            this.dataProgress.CurrentScene = null;
+                    //            this.NavigationService.Navigate(chapter6);
+                    //        }
+                    //    }
+                    //}
+                    //else if (this.dataProgress.CurrentChapter != 6 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第6回をプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        this.dataProgress.CurrentChapter = 0;
+                    //        this.dataProgress.CurrentScene = null;
 
-                            Chapter6 chapter6 = new Chapter6();
+                    //        Chapter6 chapter6 = new Chapter6();
 
-                            chapter6.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //        chapter6.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                            this.NavigationService.Navigate(chapter6);
-                        }
-                    }
+                    //        this.NavigationService.Navigate(chapter6);
+                    //    }
+                    //}
                     else
                     {
                         Chapter6 chapter6 = new Chapter6();
@@ -1080,50 +1080,50 @@ namespace KokoroUpTime
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }
-                    else if (this.dataProgress.CurrentChapter == 7)
-                    {
-                        MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //else if (this.dataProgress.CurrentChapter == 7)
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            Chapter7 chapter7 = new Chapter7();
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        Chapter7 chapter7 = new Chapter7();
 
-                            chapter7.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
+                    //        chapter7.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
 
-                            this.NavigationService.Navigate(chapter7);
-                        }
-                        else if (result == MessageBoxResult.No)
-                        {
-                            result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //        this.NavigationService.Navigate(chapter7);
+                    //    }
+                    //    else if (result == MessageBoxResult.No)
+                    //    {
+                    //        result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                this.dataProgress.CurrentChapter = 0;
-                                this.dataProgress.CurrentScene = null;
+                    //        if (result == MessageBoxResult.Yes)
+                    //        {
+                    //            this.dataProgress.CurrentChapter = 0;
+                    //            this.dataProgress.CurrentScene = null;
 
-                                Chapter7 chapter7 = new Chapter7();
+                    //            Chapter7 chapter7 = new Chapter7();
 
-                                chapter7.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //            chapter7.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                                this.NavigationService.Navigate(chapter7);
-                            }
-                        }
-                    }
-                    else if (this.dataProgress.CurrentChapter != 7 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
-                    {
-                        MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第7回をプレイしますか？", "確認", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            this.dataProgress.CurrentChapter = 0;
-                            this.dataProgress.CurrentScene = null;
+                    //            this.NavigationService.Navigate(chapter7);
+                    //        }
+                    //    }
+                    //}
+                    //else if (this.dataProgress.CurrentChapter != 7 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第7回をプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        this.dataProgress.CurrentChapter = 0;
+                    //        this.dataProgress.CurrentScene = null;
 
-                            Chapter7 chapter7 = new Chapter7();
+                    //        Chapter7 chapter7 = new Chapter7();
 
-                            chapter7.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //        chapter7.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                            this.NavigationService.Navigate(chapter7);
-                        }
-                    }
+                    //        this.NavigationService.Navigate(chapter7);
+                    //    }
+                    //}
                     else
                     {
                         Chapter7 chapter7 = new Chapter7();
@@ -1140,50 +1140,50 @@ namespace KokoroUpTime
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }
-                    else if (this.dataProgress.CurrentChapter == 8)
-                    {
-                        MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //else if (this.dataProgress.CurrentChapter == 8)
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            Chapter8 chapter8 = new Chapter8();
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        Chapter8 chapter8 = new Chapter8();
 
-                            chapter8.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
+                    //        chapter8.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
 
-                            this.NavigationService.Navigate(chapter8);
-                        }
-                        else if (result == MessageBoxResult.No)
-                        {
-                            result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //        this.NavigationService.Navigate(chapter8);
+                    //    }
+                    //    else if (result == MessageBoxResult.No)
+                    //    {
+                    //        result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                this.dataProgress.CurrentChapter = 0;
-                                this.dataProgress.CurrentScene = null;
+                    //        if (result == MessageBoxResult.Yes)
+                    //        {
+                    //            this.dataProgress.CurrentChapter = 0;
+                    //            this.dataProgress.CurrentScene = null;
 
-                                Chapter8 chapter8 = new Chapter8();
+                    //            Chapter8 chapter8 = new Chapter8();
 
-                                chapter8.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //            chapter8.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                                this.NavigationService.Navigate(chapter8);
-                            }
-                        }
-                    }
-                    else if (this.dataProgress.CurrentChapter != 8 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
-                    {
-                        MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第8回をプレイしますか？", "確認", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            this.dataProgress.CurrentChapter = 0;
-                            this.dataProgress.CurrentScene = null;
+                    //            this.NavigationService.Navigate(chapter8);
+                    //        }
+                    //    }
+                    //}
+                    //else if (this.dataProgress.CurrentChapter != 8 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第8回をプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        this.dataProgress.CurrentChapter = 0;
+                    //        this.dataProgress.CurrentScene = null;
 
-                            Chapter8 chapter8 = new Chapter8();
+                    //        Chapter8 chapter8 = new Chapter8();
 
-                            chapter8.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //        chapter8.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                            this.NavigationService.Navigate(chapter8);
-                        }
-                    }
+                    //        this.NavigationService.Navigate(chapter8);
+                    //    }
+                    //}
                     else
                     {
                         Chapter8 chapter8 = new Chapter8();
@@ -1200,50 +1200,50 @@ namespace KokoroUpTime
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }
-                    else if (this.dataProgress.CurrentChapter == 9)
-                    {
-                        MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //else if (this.dataProgress.CurrentChapter == 9)
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            Chapter9 chapter9 = new Chapter9();
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        Chapter9 chapter9 = new Chapter9();
 
-                            chapter9.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
+                    //        chapter9.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
 
-                            this.NavigationService.Navigate(chapter9);
-                        }
-                        else if (result == MessageBoxResult.No)
-                        {
-                            result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //        this.NavigationService.Navigate(chapter9);
+                    //    }
+                    //    else if (result == MessageBoxResult.No)
+                    //    {
+                    //        result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                this.dataProgress.CurrentChapter = 0;
-                                this.dataProgress.CurrentScene = null;
+                    //        if (result == MessageBoxResult.Yes)
+                    //        {
+                    //            this.dataProgress.CurrentChapter = 0;
+                    //            this.dataProgress.CurrentScene = null;
 
-                                Chapter9 chapter9 = new Chapter9();
+                    //            Chapter9 chapter9 = new Chapter9();
 
-                                chapter9.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //            chapter9.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                                this.NavigationService.Navigate(chapter9);
-                            }
-                        }
-                    }
-                    else if (this.dataProgress.CurrentChapter != 9 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
-                    {
-                        MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第9回をプレイしますか？", "確認", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            this.dataProgress.CurrentChapter = 0;
-                            this.dataProgress.CurrentScene = null;
+                    //            this.NavigationService.Navigate(chapter9);
+                    //        }
+                    //    }
+                    //}
+                    //else if (this.dataProgress.CurrentChapter != 9 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第9回をプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        this.dataProgress.CurrentChapter = 0;
+                    //        this.dataProgress.CurrentScene = null;
 
-                            Chapter9 chapter9 = new Chapter9();
+                    //        Chapter9 chapter9 = new Chapter9();
 
-                            chapter9.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //        chapter9.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                            this.NavigationService.Navigate(chapter9);
-                        }
-                    }
+                    //        this.NavigationService.Navigate(chapter9);
+                    //    }
+                    //}
                     else
                     {
                         Chapter9 chapter9 = new Chapter9();
@@ -1260,50 +1260,50 @@ namespace KokoroUpTime
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }
-                    else if (this.dataProgress.CurrentChapter == 10)
-                    {
-                        MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //else if (this.dataProgress.CurrentChapter == 10)
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            Chapter10 chapter10 = new Chapter10();
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        Chapter10 chapter10 = new Chapter10();
 
-                            chapter10.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
+                    //        chapter10.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
 
-                            this.NavigationService.Navigate(chapter10);
-                        }
-                        else if (result == MessageBoxResult.No)
-                        {
-                            result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //        this.NavigationService.Navigate(chapter10);
+                    //    }
+                    //    else if (result == MessageBoxResult.No)
+                    //    {
+                    //        result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                this.dataProgress.CurrentChapter = 0;
-                                this.dataProgress.CurrentScene = null;
+                    //        if (result == MessageBoxResult.Yes)
+                    //        {
+                    //            this.dataProgress.CurrentChapter = 0;
+                    //            this.dataProgress.CurrentScene = null;
 
-                                Chapter10 chapter10 = new Chapter10();
+                    //            Chapter10 chapter10 = new Chapter10();
 
-                                chapter10.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //            chapter10.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                                this.NavigationService.Navigate(chapter10);
-                            }
-                        }
-                    }
-                    else if (this.dataProgress.CurrentChapter != 10 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
-                    {
-                        MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第10回をプレイしますか？", "確認", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            this.dataProgress.CurrentChapter = 0;
-                            this.dataProgress.CurrentScene = null;
+                    //            this.NavigationService.Navigate(chapter10);
+                    //        }
+                    //    }
+                    //}
+                    //else if (this.dataProgress.CurrentChapter != 10 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第10回をプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        this.dataProgress.CurrentChapter = 0;
+                    //        this.dataProgress.CurrentScene = null;
 
-                            Chapter10 chapter10 = new Chapter10();
+                    //        Chapter10 chapter10 = new Chapter10();
 
-                            chapter10.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //        chapter10.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                            this.NavigationService.Navigate(chapter10);
-                        }
-                    }
+                    //        this.NavigationService.Navigate(chapter10);
+                    //    }
+                    //}
                     else
                     {
                         Chapter10 chapter10 = new Chapter10();
@@ -1320,50 +1320,50 @@ namespace KokoroUpTime
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }
-                    else if (this.dataProgress.CurrentChapter == 11)
-                    {
-                        MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //else if (this.dataProgress.CurrentChapter == 11)
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            Chapter11 chapter11 = new Chapter11();
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        Chapter11 chapter11 = new Chapter11();
 
-                            chapter11.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
+                    //        chapter11.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
 
-                            this.NavigationService.Navigate(chapter11);
-                        }
-                        else if (result == MessageBoxResult.No)
-                        {
-                            result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //        this.NavigationService.Navigate(chapter11);
+                    //    }
+                    //    else if (result == MessageBoxResult.No)
+                    //    {
+                    //        result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                this.dataProgress.CurrentChapter = 0;
-                                this.dataProgress.CurrentScene = null;
+                    //        if (result == MessageBoxResult.Yes)
+                    //        {
+                    //            this.dataProgress.CurrentChapter = 0;
+                    //            this.dataProgress.CurrentScene = null;
 
-                                Chapter11 chapter11 = new Chapter11();
+                    //            Chapter11 chapter11 = new Chapter11();
 
-                                chapter11.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //            chapter11.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                                this.NavigationService.Navigate(chapter11);
-                            }
-                        }
-                    }
-                    else if (this.dataProgress.CurrentChapter != 11 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
-                    {
-                        MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第11回をプレイしますか？", "確認", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            this.dataProgress.CurrentChapter = 0;
-                            this.dataProgress.CurrentScene = null;
+                    //            this.NavigationService.Navigate(chapter11);
+                    //        }
+                    //    }
+                    //}
+                    //else if (this.dataProgress.CurrentChapter != 11 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第11回をプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        this.dataProgress.CurrentChapter = 0;
+                    //        this.dataProgress.CurrentScene = null;
 
-                            Chapter11 chapter11 = new Chapter11();
+                    //        Chapter11 chapter11 = new Chapter11();
 
-                            chapter11.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //        chapter11.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                            this.NavigationService.Navigate(chapter11);
-                        }
-                    }
+                    //        this.NavigationService.Navigate(chapter11);
+                    //    }
+                    //}
                     else
                     {
                         Chapter11 chapter11 = new Chapter11();
@@ -1380,50 +1380,50 @@ namespace KokoroUpTime
                     {
                         MessageBox.Show("まずは名前の入力から始めてください。", "情報");
                     }
-                    else if (this.dataProgress.CurrentChapter == 12)
-                    {
-                        MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //else if (this.dataProgress.CurrentChapter == 12)
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show("前回のつづきからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            Chapter12 chapter12 = new Chapter12();
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        Chapter12 chapter12 = new Chapter12();
 
-                            chapter12.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
+                    //        chapter12.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, false);
 
-                            this.NavigationService.Navigate(chapter12);
-                        }
-                        else if (result == MessageBoxResult.No)
-                        {
-                            result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //        this.NavigationService.Navigate(chapter12);
+                    //    }
+                    //    else if (result == MessageBoxResult.No)
+                    //    {
+                    //        result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回をはじめからプレイしますか？", "確認", MessageBoxButton.YesNo);
 
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                this.dataProgress.CurrentChapter = 0;
-                                this.dataProgress.CurrentScene = null;
+                    //        if (result == MessageBoxResult.Yes)
+                    //        {
+                    //            this.dataProgress.CurrentChapter = 0;
+                    //            this.dataProgress.CurrentScene = null;
 
-                                Chapter12 chapter12 = new Chapter12();
+                    //            Chapter12 chapter12 = new Chapter12();
 
-                                chapter12.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //            chapter12.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                                this.NavigationService.Navigate(chapter12);
-                            }
-                        }
-                    }
-                    else if (this.dataProgress.CurrentChapter != 12 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
-                    {
-                        MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第12回をプレイしますか？", "確認", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            this.dataProgress.CurrentChapter = 0;
-                            this.dataProgress.CurrentScene = null;
+                    //            this.NavigationService.Navigate(chapter12);
+                    //        }
+                    //    }
+                    //}
+                    //else if (this.dataProgress.CurrentChapter != 12 && (this.dataProgress.CurrentChapter != 0 && this.dataProgress.CurrentScene != null))
+                    //{
+                    //    MessageBoxResult result = MessageBox.Show($"第{this.dataProgress.CurrentChapter}回のプレイを中止し、\n新しく第12回をプレイしますか？", "確認", MessageBoxButton.YesNo);
+                    //    if (result == MessageBoxResult.Yes)
+                    //    {
+                    //        this.dataProgress.CurrentChapter = 0;
+                    //        this.dataProgress.CurrentScene = null;
 
-                            Chapter12 chapter12 = new Chapter12();
+                    //        Chapter12 chapter12 = new Chapter12();
 
-                            chapter12.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
+                    //        chapter12.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress, true);
 
-                            this.NavigationService.Navigate(chapter12);
-                        }
-                    }
+                    //        this.NavigationService.Navigate(chapter12);
+                    //    }
+                    //}
                     else
                     {
                         Chapter12 chapter12 = new Chapter12();

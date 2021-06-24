@@ -2632,6 +2632,7 @@ namespace KokoroUpTime
         private void FeelingListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var startupPath = FileUtils.GetStartupPath();
+
             ListBox listBox = sender as ListBox;
             if((this.SelectFeelingGrid.IsVisible))
             {

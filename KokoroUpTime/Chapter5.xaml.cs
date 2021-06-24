@@ -3035,7 +3035,7 @@ namespace KokoroUpTime
                         {
                             this.dataChapter5.InputRelaxMethodText = "";
 
-                            foreach (var text in this.RelaxMethodInputTextListView.GetChildren<TextBlock>())
+                            foreach (var text in this.RelaxMethodInputTextListView.GetChildren<TextBox>())
                             {
                                 this.dataChapter5.InputRelaxMethodText += $"{text.Text},";
                             }

@@ -23,11 +23,11 @@
                             <DockPanel Width="1480">
                                 <TextBlock x:Name="IndexText" Text="・(" FontSize="60" Margin="0,18"/>
                                 <Border Height="120">
-                                    <TextBox x:Name="NameInputTextBox" FontSize="50" Width="260" MinHeight="60" MaxLength="10" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" Background="{x:Null}" GotFocus="TriggerKeyboard" />
+                                    <TextBox x:Name="NameInputTextBox" FontSize="50" Width="260" MinHeight="60" MaxLength="10" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" Background="{x:Null}" GotFocus="TriggerKeyboard" BorderBrush="{x:Null}" />
                                 </Border>
                                 <TextBlock x:Name="MidpointText" Text=")さん・・・" FontSize="60" Margin="0,18"/>
                                 <Border Height="130">
-                                    <TextBox x:Name="PersonalityInputTextBox" FontSize="55" Width="950" MinHeight="70" TextWrapping="Wrap" Text="" MaxLength="34" VerticalAlignment="Center" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" Background="{x:Null}" GotFocus="TriggerKeyboard"/>
+                                    <TextBox x:Name="PersonalityInputTextBox" FontSize="55" Width="950" MinHeight="70" TextWrapping="Wrap" Text="" MaxLength="34" VerticalAlignment="Center" FontFamily="/Fonts/UDDigiKyokashoN-R.ttc#UD デジタル 教科書体 N-R" Background="{x:Null}" GotFocus="TriggerKeyboard" BorderBrush="{x:Null}"/>
                                 </Border>
                             </DockPanel>
                         </ControlTemplate>

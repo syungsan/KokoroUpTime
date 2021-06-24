@@ -104,7 +104,7 @@ namespace KokoroUpTime
             string dirPath = $"./Log/{userInfos[0]}";
 
             //第1回に書き込み
-            if (dataProgress.HasCompletedChapter1 == true)
+            if (true) //dataProgress.HasCompletedChapter1 == true)
             {
                 excel.SetSheet("第1回");
 
@@ -121,7 +121,6 @@ namespace KokoroUpTime
                     IEnumerable<string> goodFeelings = dataChapter1.MyKindOfGoodFeelings.Split(",");
                     foreach (var goodfeel in goodFeelings.Select((Value, Index) => new { Value, Index }))
                     {
-                        excel.InsertCells("A4", ExcelManager.InsertMode.ShiftDown);
                         excel.DrawBorder($"A{4 + goodfeel.Index}", true, true, true, true);
                         chapter1StrResult.Add($"A{4 + goodfeel.Index}", goodfeel.Value);
                     }
@@ -132,7 +131,6 @@ namespace KokoroUpTime
                     IEnumerable<string> badFeelings = dataChapter1.MyKindOfBadFeelings.Split(",");
                     foreach (var badfeel in badFeelings.Select((Value, Index) => new { Value, Index }))
                     {
-                        excel.InsertCells("B4",ExcelManager.InsertMode.ShiftDown);
                         excel.DrawBorder($"B{4 + badfeel.Index}", true, true, true, true);
                         chapter1StrResult.Add($"B{4 + badfeel.Index}", badfeel.Value);
                     }
@@ -181,7 +179,7 @@ namespace KokoroUpTime
             }
 
             //第2回に書き込み
-            if (dataProgress.HasCompletedChapter2 == true)
+            if (true) //dataProgress.HasCompletedChapter2 == true)
             {
                 excel.SetSheet("第2回");
 
@@ -190,7 +188,6 @@ namespace KokoroUpTime
                     {"F5" , dataChapter2.AosukesDifficultyOfEating},
                     {"F6" , dataChapter2.AosukesDifficultyOfGettingHighScore},
                     {"F7" , dataChapter2.AosukesDifficultyOfTalkingWithFriend},
-                    {"H4" , dataChapter2.MyALittlleExcitingEvents},
                 };
 
                 var chapter2IntResult = new Dictionary<string, int?>
@@ -265,7 +262,7 @@ namespace KokoroUpTime
             }
 
             //第3回に書き込み
-            if (dataProgress.HasCompletedChapter3 == true)
+            if (true) //dataProgress.HasCompletedChapter3 == true)
             {
                 excel.SetSheet("第3回");
 
@@ -323,7 +320,7 @@ namespace KokoroUpTime
             }
 
             //第4回に書き込み
-            if (dataProgress.HasCompletedChapter4 == true)
+            if (true) //dataProgress.HasCompletedChapter4 == true)
             {
                 excel.SetSheet("第4回");
 
@@ -378,7 +375,7 @@ namespace KokoroUpTime
             }
 
             //第5回に書き込み
-            if (dataProgress.HasCompletedChapter5 == true)
+            if (true) //dataProgress.HasCompletedChapter5 == true)
             {
                 excel.SetSheet("第5回");
 
@@ -403,49 +400,49 @@ namespace KokoroUpTime
                     string logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter5/challenge_time_face_image_of_kimi.isf");
                     if (File.Exists(logDataPath))
                     {
-                        excel.PastePicture($"B4", $"challenge_time_face_image_of_kimi.png", logDataPath, 40);
+                        excel.PastePicture($"B4", $"challenge_time_face_image_of_kimi.png", logDataPath, 60);
                     }
 
                     excel.WriteCell($"B5", "");
                     logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter5/challenge_time_head_image_of_kimi.isf");
                     if (File.Exists(logDataPath))
                     {
-                        excel.PastePicture($"B5", $"challenge_time_head_image_of_kimi.png", logDataPath, 40);
+                        excel.PastePicture($"B5", $"challenge_time_head_image_of_kimi.png", logDataPath, 60);
                     }
 
                     excel.WriteCell($"B6", "");
                     logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter5/challenge_time_hand_image_of_kimi.isf");
                     if (File.Exists(logDataPath))
                     {
-                        excel.PastePicture($"B6", $"challenge_time_hand_image_of_kimi.png", logDataPath, 40);
+                        excel.PastePicture($"B6", $"challenge_time_hand_image_of_kimi.png", logDataPath, 60);
                     }
 
                     excel.WriteCell($"B7", "");
                     logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter5/challenge_time_shoulder_image_of_kimi.isf");
                     if (File.Exists(logDataPath))
                     {
-                        excel.PastePicture($"B7", $"challenge_time_shoulder_image_of_kimi.png", logDataPath, 40);
+                        excel.PastePicture($"B7", $"challenge_time_shoulder_image_of_kimi.png", logDataPath, 60);
                 　　}
 
                     excel.WriteCell($"B8", "");
                     logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter5/challenge_time_stomach_image_of_kimi.isf");
                     if (File.Exists(logDataPath))
                     {
-                        excel.PastePicture($"B8", $"challenge_time_stomach_image_of_kimi.png", logDataPath, 40);
+                        excel.PastePicture($"B8", $"challenge_time_stomach_image_of_kimi.png", logDataPath, 60);
                     }
 
                     excel.WriteCell($"B9", "");
                     logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter5/challenge_time_leg_image_of_kimi.isf");
                     if (File.Exists(logDataPath))
                     {
-                        excel.PastePicture($"B9", $"challenge_time_leg_image_of_kimi.png", logDataPath, 40);
+                        excel.PastePicture($"B9", $"challenge_time_leg_image_of_kimi.png", logDataPath, 60);
                     }
 
                     excel.WriteCell($"B10", "");
                     logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter5/challenge_time_others_image_of_kimi.isf");
                     if (File.Exists(logDataPath))
                     {
-                        excel.PastePicture($"B10", $"challenge_time_others_image_of_kimi.png", logDataPath, 40);
+                        excel.PastePicture($"B10", $"challenge_time_others_image_of_kimi.png", logDataPath, 60);
                     }
                 }
                 else
@@ -485,13 +482,15 @@ namespace KokoroUpTime
 
                 if (dataChapter5.InputRelaxMethodText =="")
                 {
-                    for (int i=0;i<5;i++)
+                    for (int i=0;i<6;i++)
                     {
                         string logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter5/groupe_avtivity_relax_method_{i+1}.isf");
-                        excel.WriteCell($"C10", "");
 
                         if (File.Exists(logDataPath))
                         {
+                            excel.WriteCell($"I{4 + i}", "");
+                            excel.WriteCell($"J{4 + i}", "");
+
                             excel.DrawBorder($"I{4 + i}", true, true, true, true);
                             excel.DrawBorder($"J{4 + i}", true, true, true, true);
                             chapter5IntResult.Add($"I{4 + i}", i + 1);
@@ -504,12 +503,14 @@ namespace KokoroUpTime
                     IEnumerable<string> relaxMethods = dataChapter5.InputRelaxMethodText.Split(",");
                     foreach (var relaxMethod in relaxMethods.Select((Value, Index) => new { Value, Index }))
                     {
+                        if (relaxMethod.Index < 6)
+                        {
+                            excel.DrawBorder($"I{4 + relaxMethod.Index}", true, true, true, true);
+                            excel.DrawBorder($"J{4 + relaxMethod.Index}", true, true, true, true);
 
-                        excel.DrawBorder($"I{4 + relaxMethod.Index}", true, true, true, true);
-                        excel.DrawBorder($"J{4 + relaxMethod.Index}", true, true, true, true);
-
-                        chapter5IntResult.Add($"I{4 + relaxMethod.Index}", relaxMethod.Index + 1);
-                        chapter5StrResult.Add($"J{4 + relaxMethod.Index}", relaxMethod.Value);
+                            chapter5IntResult.Add($"I{4 + relaxMethod.Index}", relaxMethod.Index + 1);
+                            chapter5StrResult.Add($"J{4 + relaxMethod.Index}", relaxMethod.Value);
+                        }
                     }
                 }
 
@@ -551,7 +552,7 @@ namespace KokoroUpTime
             }
 
             //第6回に書き込み
-            if (dataProgress.HasCompletedChapter6 == true)
+            if (true) //dataProgress.HasCompletedChapter6 == true)
             {
                 excel.SetSheet("第6回");
 
@@ -559,12 +560,11 @@ namespace KokoroUpTime
 
                 if (dataChapter6.SelectedNicePersonality !="")
                 {
-                    IEnumerable<string> nicePersonalities = dataChapter6.SelectedNicePersonality.Split(",");
+                    IEnumerable<string> nicePersonalities = dataChapter6.SelectedNicePersonality.TrimEnd(',',' ').Split(",");
                     foreach (var nicePersonality in nicePersonalities.Select((Value, Index) => new { Value, Index }))
                     {
-                        excel.InsertCells("A4", ExcelManager.InsertMode.ShiftDown);
-                        excel.DrawBorder($"A{3 + nicePersonality.Index}", true, true, true, true);
-                        chapter6StrResult.Add($"A{3 + nicePersonality.Index}", nicePersonality.Value);
+                        excel.DrawBorder($"A{4 + nicePersonality.Index}", true, true, true, true);
+                        chapter6StrResult.Add($"A{4 + nicePersonality.Index}", nicePersonality.Value);
                     }
                 }
 
@@ -626,7 +626,7 @@ namespace KokoroUpTime
             }
 
             //第7回に書き込み
-            if (dataProgress.HasCompletedChapter7 == true)
+            if (true) //dataProgress.HasCompletedChapter7 == true)
             {
                 excel.SetSheet("第7回");
 
@@ -793,7 +793,7 @@ namespace KokoroUpTime
             }
 
             //第8回に書き込み
-            if (dataProgress.HasCompletedChapter8 == true)
+            if (true) //dataProgress.HasCompletedChapter8 == true)
             {
                 excel.SetSheet("第8回");
 
@@ -883,7 +883,7 @@ namespace KokoroUpTime
             }
 
             //第9回に書き込み
-            if (dataProgress.HasCompletedChapter9 == true)
+            if (true) //dataProgress.HasCompletedChapter9 == true)
             {
                 excel.SetSheet("第9回");
 
@@ -920,20 +920,20 @@ namespace KokoroUpTime
                 }
 
                 //CheckedNotGoodevent = 選択項目1,選択項目2,...,選択項目n,場面;の文字列となっている
-                if (false)
+                if (dataChapter9.CheckedNotGoodEvent != "")
                 {
                     foreach (var notGoodEvents in dataChapter9.CheckedNotGoodEvent.Split(";").Select((Value, Index) => new { Value, Index }))
                     {
                         if (notGoodEvents.Value.Contains(","))
                         {
-                            int cellColumn = 'B';
-                            foreach (var notGoodEvent in notGoodEvents.Value.Split(",").Select((Value, Index) => new { Value, Index }))
+                            int cellColumn = 'A';
+                            foreach (var notGoodEvent in notGoodEvents.Value.TrimEnd(',').Split(",").Select((Value, Index) => new { Value, Index }))
                             {
                                 cellColumn++;
                                 if (notGoodEvent.Index != notGoodEvents.Value.Split(",").Length - 1)
                                 {
-                                    excel.DrawBorder($"{(char)cellColumn}{4 + notGoodEvents.Index}",false,false,false, true);
-                                    chapter9StrResult.Add($"{(char)(cellColumn+ notGoodEvent.Index)}{4 + notGoodEvents.Index}", notGoodEvent.Value);
+                                    excel.DrawBorder($"{(char)cellColumn}{4 + notGoodEvents.Index}",false,true,true, true);
+                                    chapter9StrResult.Add($"{(char)(cellColumn)}{4 + notGoodEvents.Index}", notGoodEvent.Value);
                                 }
                             }
                         }
@@ -978,7 +978,7 @@ namespace KokoroUpTime
             }
 
             //第10回に書き込み
-            if (dataProgress.HasCompletedChapter10 == true)
+            if (true) //dataProgress.HasCompletedChapter10 == true)
             {
                 excel.SetSheet("第10回");
 
@@ -1015,10 +1015,10 @@ namespace KokoroUpTime
                 {
                     excel.WriteCell($"A6", "");
 
-                    string logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter10/challenge_time_input_aosuke's_small_challenge.isf");
+                    string logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter10/groupe_activity_input_aosuke's_small_challenge.isf");
                     if (File.Exists(logDataPath))
                     {
-                        excel.PastePicture($"A6", $"challenge_time_input_aosuke's_small_challenge.png", logDataPath, 30);
+                        excel.PastePicture($"A6", $"groupe_activity_input_aosuke's_small_challenge.png", logDataPath, 30);
                     }
                 }
                 else
@@ -1033,10 +1033,10 @@ namespace KokoroUpTime
                     {
                         excel.WriteCell($"A{13-i}", "");
 
-                        string logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter10/challenge_time_input_aosuke's_challenge_step_{i+1}.isf");
+                        string logDataPath = Path.Combine(startupPath, $"{dirPath}/Chapter10/groupe_activity_input_aosuke's_challenge_step_{i+1}.isf");
                         if (File.Exists(logDataPath))
                         {
-                            excel.PastePicture($"A{13 - i}", $"challenge_time_input_aosuke's_challenge_step_{i+1}.png", logDataPath, 30);
+                            excel.PastePicture($"A{13 - i}", $"groupe_activity_input_aosuke's_challenge_step_{i+1}.png", logDataPath, 30);
                         }
                     }
                     else
@@ -1082,7 +1082,7 @@ namespace KokoroUpTime
             }
 
             //第11回に書き込み
-            if (dataProgress.HasCompletedChapter11 == true)
+            if (true) //dataProgress.HasCompletedChapter11 == true)
             {
                 excel.SetSheet("第11回");
 
@@ -1126,7 +1126,8 @@ namespace KokoroUpTime
                 {
                     for (int i = 0; i < 3; i++)
                     {
-                        chapter11StrResult.Add($"E{4 + i}", dataChapter11.Step2AkamaruManyMethodInputText.Split(",")[i]);
+                        excel.DrawBorder($"A{8 + i}", true, true, true, true);
+                        chapter11StrResult.Add($"A{8 + i}", dataChapter11.Step2AkamaruManyMethodInputText.Split(",")[i]);
                     }
                 }
 
@@ -1163,9 +1164,10 @@ namespace KokoroUpTime
                 }
                 else
                 {
-                    foreach (var aosukeMethod in dataChapter11.Step2AosukeManyMethodInputText.Split(",").Select((Value, Index) => new { Value, Index }))
+                    foreach (var aosukeMethod in dataChapter11.Step2AosukeManyMethodInputText.Trim(',').Split(",").Select((Value, Index) => new { Value, Index }))
                     {
-                        chapter11StrResult.Add($"A{21+aosukeMethod.Index}", aosukeMethod.Value);
+                        excel.DrawBorder($"A{21 + aosukeMethod.Index}", true, true, true, true);
+                        chapter11StrResult.Add($"A{21 + aosukeMethod.Index}", aosukeMethod.Value);
                     }
                 }
 
@@ -1211,7 +1213,7 @@ namespace KokoroUpTime
             }
 
             //第12回に書き込み
-            if (true)//dataProgress.HasCompletedChapter12 == true)
+            if (true) //dataProgress.HasCompletedChapter12 == true)
             {
                 excel.SetSheet("第12回");
 

@@ -2740,7 +2740,10 @@ namespace KokoroUpTime
                             this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAkamaruMethodListView);
                         }
 
-                        this.isClickable = true;
+                        var startupPath = FileUtils.GetStartupPath();
+                        PlaySE($@"{startupPath}/Sounds/Decision.wav");
+
+                    this.isClickable = true;
                 }
                 else if (button.Name == "NextMethodButton")
                 {
