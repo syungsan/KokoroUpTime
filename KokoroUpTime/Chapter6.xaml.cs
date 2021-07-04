@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -409,7 +410,6 @@ namespace KokoroUpTime
             }
         }
 
-
         public void SetNextPage(InitConfig _initConfig, DataOption _dataOption, DataItem _dataItem, DataProgress _dataProgress, bool isCreateNewTable)
         {
             this.initConfig = _initConfig;
@@ -455,7 +455,17 @@ namespace KokoroUpTime
             {
                 this.scenarios = csv.ReadToEnd();
             }
+            using (var csv = new CsvReader("./Chapter6Log_2021-0625-141249.csv"))
+            {
+                this.log = csv.ReadToEnd();
+            }
+            while (log[logCount][0] != "PlayScene")
+            {
+                logCount++;
+            }
+            logCount++;
             this.ScenarioPlay();
+            this.aaa();
         }
 
 
@@ -479,20 +489,24 @@ namespace KokoroUpTime
                     {
                         connection.Execute($@"UPDATE DataProgress SET CurrentChapter = '{this.dataProgress.CurrentChapter}' WHERE Id = 1;");
                     }
-                    //前回のつづきからスタート
-                    if (this.dataProgress.CurrentScene != null)
-                    {
-                        this.GoTo(this.dataProgress.CurrentScene, "scene");
-                    }
-                    else
-                    {
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-                    }
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    ////前回のつづきからスタート
+                    //if (this.dataProgress.CurrentScene != null)
+                    //{
+                    //    this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    //}
+                    //else
+                    //{
+                    //    this.scenarioCount += 1;
+                    //    this.ScenarioPlay();
+                    //}
 
                     this.SetInputMethod();
 
-                    logManager.StartLog(this.initConfig, this.dataProgress);
+                    logManager.StartLog(this.initConfig, this.dataProgress,this.MainGrid);
 
                     break;
 
@@ -2152,7 +2166,7 @@ namespace KokoroUpTime
                 objName = (e.Source as FrameworkElement).Name;
             }
 
-            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
+                        logManager.SaveLog(objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
 
         private void SelectNicePersonalityListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

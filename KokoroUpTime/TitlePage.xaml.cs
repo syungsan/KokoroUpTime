@@ -31,6 +31,8 @@ namespace KokoroUpTime
 
         private string[] dirPaths;
 
+        private enum exportResult { SUCESS, FAILURE};
+
         // 初回アクセスかどうかのフラグ
         private bool isReloadPage = true;
 
@@ -440,6 +442,8 @@ namespace KokoroUpTime
                         {
                             DirectoryUtils.SafeCreateDirectory("./temp");
 
+                            exportResult _exportResult = exportResult.SUCESS;
+
                             // 複数選択可能
                             foreach (var item in this.SelectDataListBox.SelectedItems)
                             {
@@ -479,6 +483,7 @@ namespace KokoroUpTime
                                 catch (Exception error)
                                 {
                                     MessageBox.Show(error.Message, "失敗！");
+                                    _exportResult = exportResult.FAILURE;
                                 }
 
                                 if (Directory.Exists("./temp"))
@@ -487,8 +492,9 @@ namespace KokoroUpTime
                                 }
                             }
 
+                            if(_exportResult == exportResult.SUCESS)
                             // 処理が重くなったら後々プログレスバーをつける
-                            MessageBox.Show("全てのデータの出力が完成しました。", "情報");
+                                MessageBox.Show("全てのデータの出力が完成しました。", "情報");
                         }
                     }
                     else

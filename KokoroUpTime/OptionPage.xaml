@@ -10,7 +10,7 @@
       Loaded="Window_Loaded">
 
     <Viewbox>
-        <Grid Height="1080" Width="1920">
+        <Grid x:Name="MainGrid" Height="1080" Width="1920">
             <Image x:Name="BackgroundImage" Height="1080" Width="1920" Source="/Images/background_option.png" Stretch="Fill"/>
             <TextBlock x:Name="OptionTitleTextBlock" Text="オプション" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="94" FontWeight="Bold" Foreground="White" Margin="0,40,0,0"/>
             <TextBlock x:Name="SETextBlock" Text="効果音♪" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="311,187,0,785" FontSize="82" FontWeight="Bold"/>

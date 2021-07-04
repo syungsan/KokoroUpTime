@@ -144,8 +144,8 @@
     </Page.Resources>
 
     <Viewbox>
-        <Grid x:Name="BaseGrid" Width="1920" Height="1080">
-            <Grid x:Name="MainGrid">
+        <Grid x:Name="MainGrid" Width="1920" Height="1080">
+            <Grid x:Name="BaseGrid">
                 <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_02.png"/>
                 <Grid x:Name="MangaGrid" Visibility="Visible" d:IsHidden="True">
                     <Border x:Name="MangaTitleBorder" BorderThickness="6,6,6,6" BorderBrush="Black" Height="80" VerticalAlignment="Top" Margin="88,21,88,0">

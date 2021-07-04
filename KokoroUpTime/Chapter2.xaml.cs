@@ -487,18 +487,35 @@ namespace KokoroUpTime
 
                     this.SetInputMethod();
 
-                    logManager.StartLog(this.initConfig,this.dataProgress);
+                    logManager.StartLog(this.initConfig,this.dataProgress,this.MainGrid);
 
-                    //前回のつづきからスタート
-                    if (this.dataProgress.CurrentScene != null)
-                    {
-                        this.GoTo(this.dataProgress.CurrentScene, "scene");
-                    }
-                    else
-                    {
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-                    }
+                    ////前回のつづきからスタート
+                    //if (this.dataProgress.CurrentScene != null)
+                    //{
+                    //
+                    //    LoadManager loadManager = new LoadManager();
+                    //    loadManager.LoadDataChapterFromDB(this.dataChapter2, this.initConfig.dbPath);
+                    //    loadManager.ToListBox(this.GoodEventSelectListBox1,this.dataChapter2.MySelectGoodEvents);
+                    //    loadManager.ToListBox(this.GoodEventSelectListBox2,this.dataChapter2.MySelectGoodEvents);
+                    //    if (this.dataChapter2.MyALittlleExcitingEvents =="")
+                    //    {
+                    //        string dirPath = $"./Log/{this.initConfig.userName}/Chapter2/";
+                    //        loadManager.ToIncCanvas(this.ViewMySmallExcitedCanvas, $"{dirPath}/groupe_activity_exciting_event_stroke.isf");
+                    //    }
+                    //    else
+                    //    {
+                    //        loadManager.ToTextBlock(this.ViewMySmallExcitedText, this.dataChapter2.MyALittlleExcitingEvents);
+                    //    }
+                    //    this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    //}
+                    //else
+                    //{
+                    //    this.scenarioCount += 1;
+                    //    this.ScenarioPlay();
+                    //}
+
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
 
                     break;
 
@@ -2460,7 +2477,7 @@ namespace KokoroUpTime
                 objName = (e.Source as FrameworkElement).Name;
             }
 
-            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
+                        logManager.SaveLog(objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
     }
 }

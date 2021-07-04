@@ -10,7 +10,7 @@
       Loaded="Window_Loaded">
 
     <Viewbox>
-        <Grid Height="1080" Width="1920">
+        <Grid x:Name="MainGrid" Height="1080" Width="1920">
             <Image x:Name="BackgroundImage" Source="/Images/background_mokume2.PNG" Stretch="Fill"/>
             <TextBlock x:Name="TitleTextBlock" Margin="38,20,1387,935" Text="アイテム図鑑" TextWrapping="Wrap" FontSize="90" Foreground="White" FontWeight="Bold"/>
             <Grid x:Name="ItemMainGrid">

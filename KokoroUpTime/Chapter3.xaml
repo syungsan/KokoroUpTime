@@ -6,9 +6,9 @@
       xmlns:local="clr-namespace:KokoroUpTime"
       xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
       mc:Ignorable="d" 
-      d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="Chapter3"
-      Loaded="Window_Loaded">
+      d:DesignHeight="1080" d:DesignWidth="1920">
+    <!--Title="Chapter3"
+      Loaded="Window_Loaded">-->
 
     <Page.Resources>
         <ResourceDictionary>
@@ -20,7 +20,7 @@
     </Page.Resources>
 
     <Viewbox>
-        <Grid Height="1080" Width="1920">
+        <Grid x:Name="MainGrid" Height="1080" Width="1920">
             <Grid x:Name="BaseGrid">
                 <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/blue_gradation.png"/>
             </Grid>

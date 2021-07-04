@@ -51,7 +51,7 @@
         </ResourceDictionary>
     </Page.Resources>
     <Viewbox>
-        <Grid Height="1080" Width="1920" ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <Grid x:Name="MainGrid" Height="1080" Width="1920" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <Grid x:Name="BaseGrid" d:IsHidden="True">
                 <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/orange_gradation.png" d:IsHidden="True"/>
             </Grid>
@@ -683,6 +683,48 @@
                     <Button x:Name="ExitBackNoButton" HorizontalAlignment="Left" Margin="465,280,0,0" VerticalAlignment="Top" Height="325" Width="422" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" d:IsHidden="True">
                         <Image x:Name="ExitBackNoButtonImage" Source="/Images/moya2.png" d:IsHidden="True"/>
                     </Button>
+                </Grid>
+            </Grid>
+            <Grid>
+                <Grid x:Name="LogViewerGrid"  Background="White" Visibility="Hidden">
+                    <Grid x:Name="AutoPlayGrid" Background="Transparent">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <TextBlock Text="シーン：" FontSize="50"/>
+                            <TextBlock Text="{Binding CurrentSceneText}" FontSize="50"/>
+                            <TextBlock Text="記録日：" FontSize="50"/>
+                            <TextBlock Text="{Binding RecodingDateText}" FontSize="50"/>
+                            <TextBlock Text="画面解像度：" FontSize="50"/>
+                            <TextBlock Text="{Binding WindowSize}" FontSize="50"/>
+                        </StackPanel>
+                        <ItemsControl>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="local:Item">
+                                    <!--  ここに表示したい UserControl を設定する。今回は別途作るのがめんどいので WPF のコントロールを直接並べてます  -->
+                                    <Border
+                                Width="10"
+                                Height="10"
+                                Background="{Binding PointColor}"
+                                CornerRadius="110">
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemContainerStyle>
+                                <Style TargetType="ContentPresenter">
+                                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                        </ItemsControl>
+                        <StackPanel>
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Height="50" Width="100" Content="非表示"/>
+                            <ListBox x:Name="LogListBox" HorizontalAlignment="Right" Width="200" Background="Transparent"/>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

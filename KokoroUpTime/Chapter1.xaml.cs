@@ -425,18 +425,23 @@ namespace KokoroUpTime
                         connection.Execute($@"UPDATE DataProgress SET CurrentChapter = '{this.dataProgress.CurrentChapter}' WHERE Id = 1;");
                     }
 
-                    logManager.StartLog(this.initConfig, this.dataProgress);
+                    logManager.StartLog(this.initConfig, this.dataProgress,this.MainGrid);
 
-                    //前回のつづきからスタート
-                    if (this.dataProgress.CurrentScene != null)
-                    {
-                        this.GoTo(this.dataProgress.CurrentScene,"scene");
-                    }
-                    else
-                    {
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-                    }
+                    ////前回のつづきからスタート
+                    //if (this.dataProgress.CurrentScene != null)
+                    //{
+                          LoadManager loadManager = new LoadManager();
+                          loadManager.LoadDataChapterFromDB(this.dataChapter1, "");
+                          loadManager.ToListBox(this.ChallengeGoodFeelingListBox,this.dataChapter1.MyKindOfGoodFeelings.Split(",").ToList());
+                          loadManager.ToListBox(this.ChallengeBadFeelingListBox, this.dataChapter1.MyKindOfBadFeelings.Split(",").ToList());
+
+                    //    this.GoTo(this.dataProgress.CurrentScene,"scene");
+                    //}
+                    //else
+                    //{
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+                    //}
 
 
                     break;
@@ -2681,7 +2686,7 @@ namespace KokoroUpTime
                 objName = (e.Source as FrameworkElement).Name;
             }
 
-            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
+                        logManager.SaveLog(objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
     }
 }

@@ -1,8 +1,0 @@
-﻿RecordingDate,2021/06/16 14:18:40
-WindowSize,1936×1056
-
-PlayScene,TapObjectName,TapPointX,TapPointY,TapTime[ms],isClickable
-前説,NextPageAfterImage,1698,954,2016,True
-前説,NextPageAfterImage,1698,954,2174,True
-前説,ExitButton,1828,27,6605,True
-前説,ExitBackYesButtonImage,721,645,7223,True

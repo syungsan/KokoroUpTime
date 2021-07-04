@@ -44,7 +44,7 @@
                 </Button>
             </Grid>
 
-            <Grid x:Name="EndingGrid" Height="1080" Width="1920" d:IsHidden="True">
+            <Grid x:Name="EndingGrid" Height="1080" Width="1920">
                 <Grid.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="White"/>
@@ -53,7 +53,7 @@
                 </Grid.Background>
                 <Image x:Name="EndingImage" HorizontalAlignment="Left" Height="1065" Margin="10,10,0,0" VerticalAlignment="Top" Width="950" Source="/Images/shiroji_01.png"/>
                 <Grid x:Name="StaffRollGrid" Margin="640,0,0,0"/>
-                <Button x:Name="SkipButton" HorizontalAlignment="Left" Margin="10,994,0,0" VerticalAlignment="Top" Height="76" Width="160" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click">
+                <Button x:Name="SkipButton" HorizontalAlignment="Left" Margin="10,994,0,0" VerticalAlignment="Top" Height="76" Width="160" Style="{StaticResource ShadowButton}" Click="Button_Click">
                     <Image x:Name="SkipImage" Source="/Images/skip.png" />
                 </Button>
             </Grid>

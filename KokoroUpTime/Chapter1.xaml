@@ -165,7 +165,7 @@
     </Page.Resources>
 
     <Viewbox>
-        <Grid Height="1080" Width="1920">
+        <Grid x:Name="MainGrid" Height="1080" Width="1920">
             <Grid x:Name="BaseGrid">
                 <Image x:Name="BackgroundImage" Stretch="Fill" Source="/Images/background_01.png"/>
             </Grid>
@@ -773,6 +773,7 @@
                     <Image x:Name="ReturnToTitleImage" Source="/Images/return_to_title.png" d:IsHidden="True"/>
                 </Button>
             </Grid>
+            
         </Grid>
     </Viewbox>
 </Page>

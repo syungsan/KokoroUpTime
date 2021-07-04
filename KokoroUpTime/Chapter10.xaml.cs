@@ -629,18 +629,21 @@ namespace KokoroUpTime
 
                     this.SetInputMethod();
 
-                    logManager.StartLog(this.initConfig, this.dataProgress);
+                    logManager.StartLog(this.initConfig, this.dataProgress,this.MainGrid);
 
-                    //前回のつづきからスタート
-                    if (this.dataProgress.CurrentScene != null)
-                    {
-                        this.GoTo(this.dataProgress.CurrentScene, "scene");
-                    }
-                    else
-                    {
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-                    }
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    ////前回のつづきからスタート
+                    //if (this.dataProgress.CurrentScene != null)
+                    //{
+                    //    this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    //}
+                    //else
+                    //{
+                    //    this.scenarioCount += 1;
+                    //    this.ScenarioPlay();
+                    //}
 
                     break;
 
@@ -3241,7 +3244,7 @@ namespace KokoroUpTime
                 objName = (e.Source as FrameworkElement).Name;
             }
 
-            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
+                        logManager.SaveLog(objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
     }
 }

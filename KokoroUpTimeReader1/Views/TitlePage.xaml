@@ -1,0 +1,10 @@
+﻿<Page x:Class="KokoroUpTimeReader1.Views.TitlePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:prism="http://prismlibrary.com/"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      Title="{Binding TitlePageTitle}" Height="1080" Width="1920">
+    <Grid>
+        <ContentControl prism:RegionManager.RegionName="ContentRegion"/>
+    </Grid>
+</Page>

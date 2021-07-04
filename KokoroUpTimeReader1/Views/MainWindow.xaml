@@ -1,0 +1,12 @@
+﻿<Window x:Class="KokoroUpTimeReader1.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="1080" Width="1920" >
+    <Grid>
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+        <ListBox HorizontalAlignment="Right" Background="AliceBlue" Height="100" Width="100"/>
+        <MediaElement Height="100"/>
+    </Grid>
+</Window>

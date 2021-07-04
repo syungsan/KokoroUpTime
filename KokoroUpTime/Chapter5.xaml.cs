@@ -378,7 +378,6 @@ namespace KokoroUpTime
                 ["input_my_body_image_text_border"] = this.InputMyBodyImageTextBorder,
             };
         }
-
         private void ResetControls()
         {
             // 各種コントロールを隠すことでフルリセット
@@ -555,7 +554,6 @@ namespace KokoroUpTime
             this.RelaxMethodTextBlock.Text = ""; //
             this.RelaxMethodMessageTextBlock.Text = ""; //
         }
-
         private void SetInputMethod()
         {
             if (this.dataOption.InputMethod == 0)
@@ -568,7 +566,6 @@ namespace KokoroUpTime
                     TextBlock textBlock = FindName($"BodyImageOfKimiTextBlock{i.ToString()}") as TextBlock;
                     textBlock.Visibility = Visibility.Hidden;
                 }
-
                 InputStroke = new Dictionary<string, StrokeCollection>()
                 {
                     ["face_image_of_kimi"] = this.InputFaceImageOfKimiStroke =new StrokeCollection(),
@@ -685,18 +682,39 @@ namespace KokoroUpTime
 
                     this.SetInputMethod();
 
-                    logManager.StartLog(this.initConfig, this.dataProgress);
+                    logManager.StartLog(this.initConfig, this.dataProgress,this.MainGrid);
 
-                    //前回のつづきからスタート
-                    if (this.dataProgress.CurrentScene != null)
-                    {
-                        this.GoTo(this.dataProgress.CurrentScene, "scene");
-                    }
-                    else
-                    {
-                        this.scenarioCount += 1;
-                        this.ScenarioPlay();
-                    }
+                    this.scenarioCount += 1;
+                    this.ScenarioPlay();
+
+                    ////前回のつづきからスタート
+                    //if (this.dataProgress.CurrentScene != null)
+                    //{
+                    string dirPath = $"./Log/{this.initConfig.userName}/Chapter5/";
+
+                    LoadManager loadManager = new LoadManager();
+                    loadManager.LoadDataChapterFromDB(this.dataChapter5, this.initConfig.dbPath);
+                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas1, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
+                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas2, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
+                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas3, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
+                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas4, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
+                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas5, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
+                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas6, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
+                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas7, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
+
+                    loadManager.ToIncCanvas(this.InputMyBodyImageCanvas, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
+
+                    loadManager.ToListView(this.RelaxMethodInputListView, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
+
+
+
+                    //    this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    //}
+                    //else
+                    //{
+                    //    this.scenarioCount += 1;
+                    //    this.ScenarioPlay();
+                    //}
                     break;
 
                 case "end":
@@ -3856,8 +3874,9 @@ namespace KokoroUpTime
                 objName = (e.Source as FrameworkElement).Name;
             }
 
-            logManager.SaveLog(this.initConfig, this.dataProgress, objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
+                        logManager.SaveLog(objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
+
 
        
     }
