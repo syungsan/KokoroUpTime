@@ -499,8 +499,8 @@ namespace KokoroUpTime
                     //    loadManager.ToListBox(this.GoodEventSelectListBox2,this.dataChapter2.MySelectGoodEvents);
                     //    if (this.dataChapter2.MyALittlleExcitingEvents =="")
                     //    {
-                    //        string dirPath = $"./Log/{this.initConfig.userName}/Chapter2/";
-                    //        loadManager.ToIncCanvas(this.ViewMySmallExcitedCanvas, $"{dirPath}/groupe_activity_exciting_event_stroke.isf");
+                    //        string dirPath = $"./Log/{this.initConfig.userName}/Chapter2";
+                    //        loadManager.ToInkCanvas(this.ViewMySmallExcitedCanvas, $"{dirPath}/groupe_activity_exciting_event_stroke.isf");
                     //    }
                     //    else
                     //    {

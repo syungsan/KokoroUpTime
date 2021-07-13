@@ -690,24 +690,22 @@ namespace KokoroUpTime
                     ////前回のつづきからスタート
                     //if (this.dataProgress.CurrentScene != null)
                     //{
-                    string dirPath = $"./Log/{this.initConfig.userName}/Chapter5/";
+                    
 
-                    LoadManager loadManager = new LoadManager();
-                    loadManager.LoadDataChapterFromDB(this.dataChapter5, this.initConfig.dbPath);
-                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas1, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
-                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas2, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
-                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas3, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
-                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas4, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
-                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas5, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
-                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas6, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
-                    loadManager.ToIncCanvas(this.BodyImageOfKimiCanvas7, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
+                    //}
+                    //else
+                    //{
+                    //    loadManager.ToTextBlock(this.BodyImageOfKimiTextBlock1, this.dataChapter5.InputFaceImageOfKimiText);
+                    //    loadManager.ToTextBlock(this.BodyImageOfKimiTextBlock2, this.dataChapter5.InputHandImageOfKimiText);
+                    //    loadManager.ToTextBlock(this.BodyImageOfKimiTextBlock3, this.dataChapter5.InputStomachImageOfKimiText);
+                    //    loadManager.ToTextBlock(this.BodyImageOfKimiTextBlock4, this.dataChapter5.InputOthersImageOfKimiText);
+                    //    loadManager.ToTextBlock(this.BodyImageOfKimiTextBlock5, this.dataChapter5.InputHeadImageOfKimiText);
+                    //    loadManager.ToTextBlock(this.BodyImageOfKimiTextBlock6, this.dataChapter5.InputShoulderImageOfKimiText);
+                    //    loadManager.ToTextBlock(this.BodyImageOfKimiTextBlock7, this.dataChapter5.InputLegImageOfKimiText);
 
-                    loadManager.ToIncCanvas(this.InputMyBodyImageCanvas, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
-
-                    loadManager.ToListView(this.RelaxMethodInputListView, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
-
-
-
+                    //    loadManager.ToListView(this.RelaxMethodInputListView, this.InputRelaxMethodText);
+                    //    loadManager.ToListView(this.RelaxMethodInputTextListView, this.InputRelaxMethodText);
+                    //}
                     //    this.GoTo(this.dataProgress.CurrentScene, "scene");
                     //}
                     //else
@@ -3877,7 +3875,45 @@ namespace KokoroUpTime
                         logManager.SaveLog(objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
 
+        private void SetData()
+        {
+            string dirPath = $"./Log/{this.initConfig.userName}/Chapter5/";
 
-       
+            LoadManager loadManager = new LoadManager();
+            loadManager.LoadDataChapterFromDB(this.dataChapter5, this.initConfig.dbPath);
+
+            //ToDo 各回の入力方法をきろくする？
+            if (this.dataChapter5.InputFaceImageOfKimiText == "")
+            {
+                loadManager.ToStroke(this.InputStroke["face_image_of_kimi"], $"{dirPath}/challenge_time_face_image_of_kimi.isf");
+                loadManager.ToStroke(this.InputStroke["hand_image_of_kimi"], $"{dirPath}/challenge_time_hand_image_of_kimi.isf");
+                loadManager.ToStroke(this.InputStroke["stomach_image_of_kimi"], $"{dirPath}/challenge_time_stomach_image_of_kimi.isf");
+                loadManager.ToStroke(this.InputStroke["others_image_of_kimi"], $"{dirPath}/challenge_time_others_image_of_kimi.isf");
+                loadManager.ToStroke(this.InputStroke["head_image_of_kimi"], $"{dirPath}/challenge_time_head_image_of_kimi.isf");
+                loadManager.ToStroke(this.InputStroke["shoulder_image_of_kimi"], $"{dirPath}/challenge_time_shoulder_image_of_kimi.isf");
+                loadManager.ToStroke(this.InputStroke["leg_image_of_kimi"], $"{dirPath}/challenge_time_leg_image_of_kimi.isf");
+                loadManager.ToStroke(this.InputStroke["not_understand_problem"], $"{dirPath}/challenge_time_not_understand_problem_input_stroke.isf");
+                loadManager.ToStroke(this.InputStroke["recoder_problem"], $"{dirPath}/challenge_time_recorder_problem_input_stroke.isf");
+
+                loadManager.ToInkCanvas(this.MyBodyImageInputInkCanvas, $"{dirPath}/challenge_time_face_image_of_kimi.isf");
+
+
+                for (int i = 0; i < 6; i++)
+                {
+                    if (File.Exists($"{dirPath}/groupe_avtivity_relax_method_{i + 1}.isf"))
+                    {
+                        loadManager.ToStroke(this.InputRelaxMethodStrokes[i], $"{dirPath}/groupe_avtivity_relax_method_{i + 1}.isf");
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                loadManager.ToListView(this.RelaxMethodInputListView, this.InputRelaxMethodStrokes);
+                loadManager.ToListView(this.RelaxMethodInputCanvasListView, this.InputRelaxMethodStrokes);
+            }
+
+        }
+
     }
 }

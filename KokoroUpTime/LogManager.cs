@@ -27,11 +27,11 @@ namespace KokoroUpTime
             {
                 using (StreamWriter file = new StreamWriter($@"{logDataPath}", true, Encoding.UTF8))
                 {
-                    file.WriteLine(string.Format("{0},{1},{2},{3},{4},{5},{6}", this.dataProgress.CurrentScene, objName, tapPointX, tapPointY, (stopwatch.ElapsedMilliseconds / 100).ToString(), isClickable));
+                    file.WriteLine(string.Format("{0},{1},{2},{3},{4},{5}", this.dataProgress.CurrentScene, objName, tapPointX, tapPointY, (stopwatch.ElapsedMilliseconds / 100).ToString(), isClickable));
                 }
 
-                Debug.Print(string.Format("{0},{1},{2},{3},{4},{5},{6}", this.dataProgress.CurrentScene, objName, tapPointX, tapPointY, (stopwatch.ElapsedMilliseconds / 100).ToString(), isClickable));
-                this.CaptureGameScreen();
+                Debug.Print(string.Format("{0},{1},{2},{3},{4},{5}", this.dataProgress.CurrentScene, objName, tapPointX, tapPointY, (stopwatch.ElapsedMilliseconds / 100).ToString(), isClickable));
+               // this.CaptureGameScreen();
 
                 logCount++;
             }
@@ -83,50 +83,50 @@ namespace KokoroUpTime
             
         }
 
-        private void CaptureGameScreen()
-        {
-            var visual = gameScreen;
-            var bounds = VisualTreeHelper.GetDescendantBounds((Visual)visual);
+        //private void CaptureGameScreen()
+        //{
+        //    var visual = gameScreen;
+        //    var bounds = VisualTreeHelper.GetDescendantBounds((Visual)visual);
 
-            var bitmap = new RenderTargetBitmap((int)bounds.Width, (int)bounds.Height, 96.0, 96.0, PixelFormats.Pbgra32);
-            var dv = new DrawingVisual();
-            using (var dc = dv.RenderOpen())
-            {
-                var vb = new VisualBrush((Visual)visual);
-                dc.DrawRectangle(vb, null, bounds);
-            }
-            bitmap.Render(dv);
+        //    var bitmap = new RenderTargetBitmap((int)bounds.Width, (int)bounds.Height, 96.0, 96.0, PixelFormats.Pbgra32);
+        //    var dv = new DrawingVisual();
+        //    using (var dc = dv.RenderOpen())
+        //    {
+        //        var vb = new VisualBrush((Visual)visual);
+        //        dc.DrawRectangle(vb, null, bounds);
+        //    }
+        //    bitmap.Render(dv);
            
-            string folderPath = $"{this.dirPath}/Capture";
-            string nameBmp = $"capture_screen_{logCount}.png";
-            string nameBmpPath = System.IO.Path.Combine(folderPath, nameBmp);
-            var startupPath = FileUtils.GetStartupPath();
+        //    string folderPath = $"{this.dirPath}/Capture";
+        //    string nameBmp = $"capture_screen_{logCount}.png";
+        //    string nameBmpPath = System.IO.Path.Combine(folderPath, nameBmp);
+        //    var startupPath = FileUtils.GetStartupPath();
 
-            if (!Directory.Exists(folderPath))
-            {
-                DirectoryUtils.SafeCreateDirectory(folderPath);
-            }
-            if (File.Exists($@"{startupPath}/{nameBmpPath}"))
-            {
-                File.Delete($@"{startupPath}/{nameBmpPath}");
-            }
+        //    if (!Directory.Exists(folderPath))
+        //    {
+        //        DirectoryUtils.SafeCreateDirectory(folderPath);
+        //    }
+        //    if (File.Exists($@"{startupPath}/{nameBmpPath}"))
+        //    {
+        //        File.Delete($@"{startupPath}/{nameBmpPath}");
+        //    }
 
-            PngBitmapEncoder png = new PngBitmapEncoder();
-            png.Frames.Add(BitmapFrame.Create(bitmap));
+        //    PngBitmapEncoder png = new PngBitmapEncoder();
+        //    png.Frames.Add(BitmapFrame.Create(bitmap));
 
-            // ファイルのパスは仮(ISF形式で保存)
-            using (var stream = File.Create($@"{startupPath}/{nameBmpPath}"))
-            {
-                png.Save(stream);
-            }
+        //    // ファイルのパスは仮(ISF形式で保存)
+        //    using (var stream = File.Create($@"{startupPath}/{nameBmpPath}"))
+        //    {
+        //        png.Save(stream);
+        //    }
 
-            var pngmap = new BitmapImage();
-            pngmap.BeginInit();
-            pngmap.CacheOption = BitmapCacheOption.OnLoad;    //ココ
-            pngmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;  //ココ
-            pngmap.UriSource = new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute);
-            pngmap.EndInit();
-            pngmap.Freeze();
-        }
+        //    var pngmap = new BitmapImage();
+        //    pngmap.BeginInit();
+        //    pngmap.CacheOption = BitmapCacheOption.OnLoad;    //ココ
+        //    pngmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;  //ココ
+        //    pngmap.UriSource = new Uri($@"{startupPath}/{nameBmpPath}", UriKind.Absolute);
+        //    pngmap.EndInit();
+        //    pngmap.Freeze();
+        //}
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows.Controls;
+using System.Windows.Ink;
 
 namespace KokoroUpTime
 {
@@ -26,100 +27,100 @@ namespace KokoroUpTime
                 switch (chapterNumber)
                 {
                     case "1":
-                        var resultChapter1 = connection.Query<DataChapter1>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        var resultChapter1 = connection.Query<DataChapter1>($"SELECT * FROM '{typeOfDataChapter.Name}' ORDER BY Id DESC LIMIT 1;");
                         foreach (var dataChapterProp in dataChapterPropertyInfos)
                         {
                             var dbProp = typeof(DataChapter1).GetProperty(dataChapterProp.Name);
-                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter1));
+                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter1[0]));
                         }
                         break;
                     case "2":
-                        var resultChapter2 = connection.Query<DataChapter2>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        var resultChapter2 = connection.Query<DataChapter2>($"SELECT * FROM '{typeOfDataChapter.Name}' ORDER BY Id DESC LIMIT 1;");
                         foreach (var dataChapterProp in dataChapterPropertyInfos)
                         {
                             var dbProp = typeof(DataChapter2).GetProperty(dataChapterProp.Name);
-                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter2));
+                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter2[0]));
                         }
                         break;
                     case "3":
-                        var resultChapter3 = connection.Query<DataChapter3>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        var resultChapter3 = connection.Query<DataChapter3>($"SELECT * FROM '{typeOfDataChapter.Name}' ORDER BY Id DESC LIMIT 1;");
                         foreach (var dataChapterProp in dataChapterPropertyInfos)
                         {
                             var dbProp = typeof(DataChapter3).GetProperty(dataChapterProp.Name);
-                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter3));
+                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter3[0]));
                         }
                         break;
                     case "4":
-                        var resultChapter4 = connection.Query<DataChapter4>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        var resultChapter4 = connection.Query<DataChapter4>($"SELECT * FROM '{typeOfDataChapter.Name}' ORDER BY Id DESC LIMIT 1;");
                         foreach (var dataChapterProp in dataChapterPropertyInfos)
                         {
                             var dbProp = typeof(DataChapter4).GetProperty(dataChapterProp.Name);
-                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter4));
+                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter4[0]));
                         }
                         break;
                     case "5":
-                        var resultChapter5 = connection.Query<DataChapter5>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        var resultChapter5 = connection.Query<DataChapter5>($"SELECT * FROM '{typeOfDataChapter.Name}' ORDER BY Id DESC LIMIT 1;");
                         foreach (var dataChapterProp in dataChapterPropertyInfos)
                         {
                             var dbProp = typeof(DataChapter5).GetProperty(dataChapterProp.Name);
-                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter5));
+                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter5[0]));
                         }
 
                         break;
                     case "6":
-                        var resultChapter6 = connection.Query<DataChapter6>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        var resultChapter6 = connection.Query<DataChapter6>($"SELECT * FROM '{typeOfDataChapter.Name}' ORDER BY Id DESC LIMIT 1;");
                         foreach (var dataChapterProp in dataChapterPropertyInfos)
                         {
                             var dbProp = typeof(DataChapter6).GetProperty(dataChapterProp.Name);
-                            dataChapterProp.SetValue(_dataChapter, ((string)dbProp.GetValue(resultChapter6)).Split(";").ToList());
+                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter6[0]));
                         }
                         break;
                     case "7":
-                        var resultChapter7 = connection.Query<DataChapter7>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        var resultChapter7 = connection.Query<DataChapter7>($"SELECT * FROM '{typeOfDataChapter.Name}' ORDER BY Id DESC LIMIT 1;");
                         foreach (var dataChapterProp in dataChapterPropertyInfos)
                         {
                             var dbProp = typeof(DataChapter7).GetProperty(dataChapterProp.Name);
-                            dataChapterProp.SetValue(_dataChapter, ((string)dbProp.GetValue(resultChapter7)).Split(";").ToList());
+                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter7[0]));
                         }
                         break;
                     case "8":
-                        var resultChapter8 = connection.Query<DataChapter8>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        var resultChapter8 = connection.Query<DataChapter8>($"SELECT * FROM '{typeOfDataChapter.Name}' ORDER BY Id DESC LIMIT 1;");
                         foreach (var dataChapterProp in dataChapterPropertyInfos)
                         {
                             var dbProp = typeof(DataChapter8).GetProperty(dataChapterProp.Name);
-                            dataChapterProp.SetValue(_dataChapter, ((string)dbProp.GetValue(resultChapter8)).Split(";").ToList());
+                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter8[0]));
                         }
                         break;
                     case "9":
-                        var resultChapter9 = connection.Query<DataChapter9>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        var resultChapter9 = connection.Query<DataChapter9>($"SELECT * FROM '{typeOfDataChapter.Name}' ORDER BY Id DESC LIMIT 1;");
                         foreach (var dataChapterProp in dataChapterPropertyInfos)
                         {
                             var dbProp = typeof(DataChapter9).GetProperty(dataChapterProp.Name);
-                            dataChapterProp.SetValue(_dataChapter, ((string)dbProp.GetValue(resultChapter9)).Split(";").ToList());
+                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter9[0]));
                         }
                         break;
                     case "10":
-                        var resultChapter10 = connection.Query<DataChapter10>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        var resultChapter10 = connection.Query<DataChapter10>($"SELECT * FROM '{typeOfDataChapter.Name}' ORDER BY Id DESC LIMIT 1;");
                         foreach (var dataChapterProp in dataChapterPropertyInfos)
                         {
                             var dbProp = typeof(DataChapter10).GetProperty(dataChapterProp.Name);
-                            dataChapterProp.SetValue(_dataChapter, ((string)dbProp.GetValue(resultChapter10)).Split(";").ToList());
+                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter10[0]));
                         }
                         break;
                     case "11":
-                        var resultChapter11 = connection.Query<DataChapter11>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        var resultChapter11 = connection.Query<DataChapter11>($"SELECT * FROM '{typeOfDataChapter.Name}' ORDER BY Id DESC LIMIT 1;");
                         foreach (var dataChapterProp in dataChapterPropertyInfos)
                         {
                             var dbProp = typeof(DataChapter11).GetProperty(dataChapterProp.Name);
-                            dataChapterProp.SetValue(_dataChapter, ((string)dbProp.GetValue(resultChapter11)).Split(";").ToList());
+                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter11[0]));
                         }
                         break;
                     case "12":
-                        var resultChapter12 = connection.Query<DataChapter12>($"SELECT * FROM '{typeOfDataChapter.Name}';");
+                        var resultChapter12 = connection.Query<DataChapter12>($"SELECT * FROM '{typeOfDataChapter.Name}' ORDER BY Id DESC LIMIT 1;");
                         foreach (var dataChapterProp in dataChapterPropertyInfos)
                         {
                             var dbProp = typeof(DataChapter12).GetProperty(dataChapterProp.Name);
-                            dataChapterProp.SetValue(_dataChapter, ((string)dbProp.GetValue(resultChapter12)).Split(";").ToList());
+                            dataChapterProp.SetValue(_dataChapter, dbProp.GetValue(resultChapter12[0]));
                         }
                         break;
                 }
@@ -158,7 +159,7 @@ namespace KokoroUpTime
                 }
             }
         }
-        public void ToIncCanvas(InkCanvas canvas, string path)
+        public void ToInkCanvas(InkCanvas canvas, string path)
         {
             if (File.Exists(path))
             {
@@ -173,17 +174,62 @@ namespace KokoroUpTime
         {
             textBlock.Text = data;
         }
-        public void ToListView(ListView listView, string data)
+        public void ToListView(ListView listView, string isfPath)
         {
-
+            if (File.Exists(isfPath))
+            {
+                using (var fs = new FileStream(isfPath, FileMode.Open))
+                {
+                    listView.Items.Add(new StrokeCollection(fs));
+                }
+            }
+        }
+        public void ToListView(ListView listView, StrokeCollection stroke)
+        {
+            listView.Items.Add(stroke);
+        }
+        public void ToListView(ListView listView, List<StrokeCollection> strokes)
+        {
+            foreach (var stroke in strokes)
+            {
+                listView.Items.Add(stroke);
+            }
+        }
+        public void ToListView(ListView listView, List<string> texts)
+        {
+            foreach (var text in texts)
+            {
+                listView.Items.Add(text);
+            }
+        }
+        public void ToListViewChapter6(ListView listView, string isfPath)
+        {
+            if (File.Exists(isfPath))
+            {
+                using (var fs = new FileStream(isfPath, FileMode.Open))
+                {
+                    listView.Items.Add(new StrokeCollection(fs));
+                }
+            }
+        }
+        public void ToListViewChapter6(ListView listView, StrokeCollection stroke)
+        {
+            listView.Items.Add(stroke);
         }
         public void ToItemsControl(ItemsControl itemsControl, string data)
         {
 
         }
-        public void To()
+        public void ToStroke(StrokeCollection strokes, string isfPath)
         {
-
+            if (File.Exists(isfPath))
+            {
+                using (var fs = new FileStream(isfPath, FileMode.Open))
+                {
+                    strokes = new StrokeCollection(fs);
+                }
+            }
+            
         }
     }
 }

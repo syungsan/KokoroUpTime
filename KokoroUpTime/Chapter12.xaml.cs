@@ -534,6 +534,7 @@ namespace KokoroUpTime
                     //if (this.dataProgress.CurrentScene != null)
                     //{
                     //    this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    //    this.SetData();
                     //}
                     //else
                     //{
@@ -2102,7 +2103,7 @@ namespace KokoroUpTime
                             {
                                 connection.Execute($@"UPDATE DataProgress SET HasCompletedChapter12 = '{Convert.ToInt32(this.dataProgress.HasCompletedChapter12)}' WHERE Id = 1;");
                             }
-
+#if DEBUG
                             this.StopBGM();
 
                             EndingPage endingPage = new EndingPage();
@@ -2110,7 +2111,7 @@ namespace KokoroUpTime
                             endingPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                             this.NavigationService.Navigate(endingPage);
-
+#endif
 
                         }
 
@@ -3376,5 +3377,28 @@ namespace KokoroUpTime
             logManager.SaveLog(objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
 
+
+        private void SetData()
+        {
+            string dirPath = $"./Log/{this.initConfig.userName}/Chapter12";
+            LoadManager loadManager = new LoadManager();
+            loadManager.LoadDataChapterFromDB(this.dataChapter12, this.initConfig.dbPath);
+
+            //ToDo 入力方法の記録
+            foreach(var data in this.ITEM_METHOD_STROKE.Values.Select((Value,Index)=>new { Value,Index}))
+            {
+                PropertyInfo propertyInfo = typeof(DataChapter12).GetProperty($"SelectedItem{data.Index+1}");
+                loadManager.ToStroke(data.Value.ItemMethodStroke, $"groupe_activity_item_method_stroke{data.Index+1}");
+                data.Value.SelectedItemImageSource = (string)propertyInfo.GetValue(this.dataChapter12);
+            }
+
+            foreach (var data in this.ITEM_METHOD_TEXT.Values.Select((Value, Index) => new { Value, Index }))
+            {
+                PropertyInfo propertyInfo1 = typeof(Chapter12).GetProperty($"ItemMethodInputText{data.Index + 1}");
+                PropertyInfo propertyInfo2 = typeof(DataChapter12).GetProperty($"SelectedItem{data.Index + 1}");
+                data.Value.ItemMethodText = (string)propertyInfo2.GetValue(this.dataChapter12);
+                data.Value.SelectedItemImageSource = (string)propertyInfo2.GetValue(this.dataChapter12);
+            }
+        }
     }
 }

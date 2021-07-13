@@ -638,6 +638,7 @@ namespace KokoroUpTime
                     //if (this.dataProgress.CurrentScene != null)
                     //{
                     //    this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    //    this.SetData();
                     //}
                     //else
                     //{
@@ -3245,6 +3246,27 @@ namespace KokoroUpTime
             }
 
                         logManager.SaveLog(objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
+        }
+
+        private void SetData()
+        {
+            string dirPath = $"./Log/{this.initConfig.userName}/Chapter10";
+            LoadManager loadManager = new LoadManager();
+            loadManager.LoadDataChapterFromDB(this.dataChapter10, this.initConfig.dbPath);
+
+            //ToDo 入力方法の記録
+            if (true)
+            {
+                loadManager.ToInkCanvas(this.ReasonDifferenceSizeOfFeelingOutputCanvas, $"{dirPath}/challenge_time_input_difference_reason.isf");
+                loadManager.ToInkCanvas(this.AosukeSmallChallengeEventOutputCanvas, $"{dirPath}/groupe_activity_input_aosuke's_small_challenge.isf");
+                loadManager.ToStroke(this.AosukeCahllengeStep1InputStroke, $"{dirPath}/groupe_activity_input_aosuke's_challenge_step_1.isf");
+                loadManager.ToStroke(this.AosukeCahllengeStep2InputStroke, $"{dirPath}/groupe_activity_input_aosuke's_challenge_step_2.isf");
+                loadManager.ToStroke(this.AosukeCahllengeStep3InputStroke, $"{dirPath}/groupe_activity_input_aosuke's_challenge_step_3.isf");
+            }
+            else
+            {
+                
+            }
         }
     }
 }

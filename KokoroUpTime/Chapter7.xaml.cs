@@ -616,6 +616,8 @@ namespace KokoroUpTime
 
                     this.SetInputMethod();
 
+                   
+
                     logManager.StartLog(this.initConfig, this.dataProgress,this.MainGrid);
 
                     this.scenarioCount += 1;
@@ -625,6 +627,7 @@ namespace KokoroUpTime
                     //if (this.dataProgress.CurrentScene != null)
                     //{
                     //    this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    //    this.SetData();
                     //}
                     //else
                     //{
@@ -3301,6 +3304,39 @@ namespace KokoroUpTime
             }
 
             logManager.SaveLog(objName,Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
+        }
+
+        private void SetData()
+        {
+            LoadManager loadManager = new LoadManager();
+            string dirPath = $"./Log/{this.initConfig.userName}/Chapter7";
+            loadManager.LoadDataChapterFromDB(this.dataChapter7, this.initConfig.dbPath);
+
+            //ToDo入力方法を記録する
+            if (this.dataOption.InputMethod==0)
+            {
+                loadManager.ToStroke(this.InputAkamaruThoughtStrokes, $"{dirPath}/groupe_activity_akamaru's_thought.isf");
+                loadManager.ToStroke(this.InputAosukeThoughtStrokes, $"{dirPath}/groupe_activity_aosuke's_thought");
+
+                if (this.dataChapter7.ChallengeTimeSelectedScene == "音楽の発表で、みんなの前で失敗してしまいました。友だちの１人が、こっちを見て笑っていました。")
+                {
+                    loadManager.ToStroke(this.InputYourToughtStrokes1, $"{dirPath}/challenge_time_2_your_thought.isf");
+                }
+                else
+                {
+                    loadManager.ToStroke(this.InputYourToughtStrokes2, $"{dirPath}/challenge_time_2_your_thought.isf");
+                }
+
+                if (this.dataChapter7.GroupeActivitySelectedScene == "音楽の発表で、みんなの前で失敗してしまいました。友だちの１人が、こっちを見て笑っていました。")
+                {
+                    loadManager.ToStroke(this.InputFriendToughtStrokes1, $"{dirPath}/challenge_time_2_your_friend's_thought.isf");
+                }
+                else
+                {
+                    loadManager.ToStroke(this.InputFriendToughtStrokes2, $"{dirPath}/challenge_time_2_your_friend's_thought.isf");
+                }
+            }
+            
         }
     }
 }

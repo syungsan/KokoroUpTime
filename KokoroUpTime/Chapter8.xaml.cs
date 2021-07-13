@@ -3235,5 +3235,21 @@ namespace KokoroUpTime
 
                         logManager.SaveLog(objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
         }
+
+        private void SetData()
+        {
+            LoadManager loadManager = new LoadManager();
+            loadManager.LoadDataChapterFromDB(this.dataChapter8, this.initConfig.dbPath);
+
+            //ToDo 入力方法の記録？？
+            if (true)
+            {
+                loadManager.ToStroke(this.InputStroke["groupe_activity_input1"], "groupe_activity_input_stroke_1.isf");
+                loadManager.ToStroke(this.InputStroke["groupe_activity_input2"], "groupe_activity_input_stroke_2.isf");
+                loadManager.ToStroke(this.InputStroke["groupe_activity_input3"], "groupe_activity_input_stroke_3.isf");
+            }
+           
+
+        }
     }
 }

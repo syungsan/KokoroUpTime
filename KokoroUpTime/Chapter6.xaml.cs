@@ -455,17 +455,8 @@ namespace KokoroUpTime
             {
                 this.scenarios = csv.ReadToEnd();
             }
-            using (var csv = new CsvReader("./Chapter6Log_2021-0625-141249.csv"))
-            {
-                this.log = csv.ReadToEnd();
-            }
-            while (log[logCount][0] != "PlayScene")
-            {
-                logCount++;
-            }
-            logCount++;
+           
             this.ScenarioPlay();
-            this.aaa();
         }
 
 
@@ -497,14 +488,22 @@ namespace KokoroUpTime
                     //if (this.dataProgress.CurrentScene != null)
                     //{
                     //    this.GoTo(this.dataProgress.CurrentScene, "scene");
-                    //}
-                    //else
-                    //{
-                    //    this.scenarioCount += 1;
-                    //    this.ScenarioPlay();
-                    //}
+                          //string dirPath = $"./Log/{this.initConfig.userName}/Chapter6/";
 
-                    this.SetInputMethod();
+                          //LoadManager loadManager = new LoadManager();
+                          //loadManager.LoadDataChapterFromDB(this.dataChapter6, this.initConfig.dbPath);
+                          //loadManager.ToListBox(this.SelectNicePersonalityListBox, this.dataChapter6.SelectedNicePersonality);
+                          //loadManager.ToListViewChapter6(this.NicePesonalityListView,);
+
+
+                     //}
+                     //else
+                     //{
+                     //    this.scenarioCount += 1;
+                     //    this.ScenarioPlay();
+                     //}
+
+                        this.SetInputMethod();
 
                     logManager.StartLog(this.initConfig, this.dataProgress,this.MainGrid);
 

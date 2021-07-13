@@ -23,6 +23,7 @@ using System.Windows.Threading;
 using WMPLib;
 using XamlAnimatedGif;
 using System.Reflection;
+using System.Linq;
 
 namespace KokoroUpTime
 
@@ -157,15 +158,6 @@ namespace KokoroUpTime
             {
                 _notGoodEventData.Add(new NotGoodEventData(keyValuePair.Key, keyValuePair.Value));
             }
-
-            //_notGoodEventData.Add(new NotGoodEventData("学校でのこと", new List<string>() { "学校に行く", "教室に入る", "移動教室に行く", "苦手な教科の授業", "班（グループ）活動", "テストを受ける", "その他の学校でのこと" }));
-            //_notGoodEventData.Add(new NotGoodEventData("友だちとのこと", new List<string>() { "友だちに話しかける", "知らない友だちと仲良くなる", "友だち同士の会話に入っていく", "自分からあいさつする", "友だちに意見を言う", "その他の友だちとの関係" }));
-            //_notGoodEventData.Add(new NotGoodEventData("場所", new List<string>() { "高いところ", "人がたくさんいるところ", "せまいところ", "暗いところ", "うるさいところ", "その他の場所" }));
-            //_notGoodEventData.Add(new NotGoodEventData("動物、虫、自然", new List<string>() { "犬", "ネコ", "ハチ", "ムカデ", "ヘビ", "その他の虫" }));
-            //_notGoodEventData.Add(new NotGoodEventData("大きな音", new List<string>() { "花火", "トイレのエアータオル", "雷", "その他の音" }));
-            //_notGoodEventData.Add(new NotGoodEventData("家でのこと", new List<string>() { "一人で留守番する", "一人で別の部屋にいる\n（二階など）", "お泊りにいく", "その他の家でのこと" }));
-            //_notGoodEventData.Add(new NotGoodEventData("大人とのこと", new List<string>() { "先生に質問する", "店員さんに注文する", "レジで買い物をする", "電話に出る", "親の友だちと話す", "その他の大人との関係" }));
-            //_notGoodEventData.Add(new NotGoodEventData("発表", new List<string>() { "手を挙げて発表する", "自分の意見を言う", "リコーダーや歌のテスト", "体育のテスト", "日直", "音読", "その他の発表" }));
 
             this.AosukeSituationItemControl.ItemsSource = _aosukeSituationTextData;
             this.NotGoodEventItemsControl.ItemsSource = _notGoodEventData;
@@ -644,6 +636,7 @@ namespace KokoroUpTime
                     //if (this.dataProgress.CurrentScene != null)
                     //{
                     //    this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    //    this.SetData();
                     //}
                     //else
                     //{
@@ -2910,5 +2903,32 @@ namespace KokoroUpTime
                 PlaySE($@"{startupPath}/Sounds/Cancel.wav");
             }
         }
+
+        private void SetData() 
+        {
+            string dirPath = $"./Log/{this.initConfig.userName}/Chapter9";
+            LoadManager loadManager = new LoadManager();
+            loadManager.LoadDataChapterFromDB(this.dataChapter9, this.initConfig.dbPath);
+            
+            //ToDo 入力方法の記録
+            if (true)
+            {
+                loadManager.ToStroke(this.InputChallengeCanvasStrokes, $"{dirPath}/challenge_time_input_challege_event.isf");
+            }
+
+            foreach (var lis in this.dataChapter9.CheckedNotGoodEvent.Split(";").Select((Value, Index) => new { Value, Index }))
+            {
+                if(lis.Value.Split(",").Length  > 1)
+                {
+                    var item = this.NotGoodEventItemsControl.ItemContainerGenerator.ContainerFromItem(this._notGoodEventData[lis.Index]);
+                    var listbox = item.GetChildren<ListBox>().First();
+
+                    loadManager.ToListBox(listbox, lis.Value.Split(",").ToList());
+                }
+            }
+
+        }
+
+        
     }
 }

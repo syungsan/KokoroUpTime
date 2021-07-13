@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -660,6 +661,7 @@ namespace KokoroUpTime
                     //if (this.dataProgress.CurrentScene != null)
                     //{
                     //    this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    //    this.SetData();
                     //}
                     //else
                     //{
@@ -3267,169 +3269,7 @@ namespace KokoroUpTime
             }
         }
 
-        //private void InkCanvas_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    var gestureCanvas = (InkCanvas)sender;
-
-        //    gestureCanvas.SetEnabledGestures(new[]
-        //    {
-        //        System.Windows.Ink.ApplicationGesture.Circle,
-        //        System.Windows.Ink.ApplicationGesture.DoubleCircle,
-        //        System.Windows.Ink.ApplicationGesture.Triangle,
-
-        //    });
-        //}
-
-        //private void InkCanvas_Gesture(object sender, InkCanvasGestureEventArgs e)
-        //{
-        //    try
-        //    {
-
-        //        var gestureCanvas = (InkCanvas)sender;
-        //        if (RecognizingCanvasName != gestureCanvas.Name)
-        //        {
-        //            RecognizingCanvasName = gestureCanvas.Name;
-
-        //            DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-        //            timer.Start();
-        //            timer.Tick += (s, args) =>
-        //            {
-        //                // タイマーの停止
-        //                timer.Stop();
-
-        //                // 信頼性 (RecognitionConfidence) を無視したほうが、Circle と Triangle の認識率は上がるようです。
-        //                var gestureResult = e.GetGestureRecognitionResults().FirstOrDefault(r => r.ApplicationGesture != System.Windows.Ink.ApplicationGesture.NoGesture);
-
-        //                if (gestureResult != null)
-        //                {
-        //                    switch (gestureResult.ApplicationGesture)
-        //                    {
-        //                        case System.Windows.Ink.ApplicationGesture.Circle:
-        //                        case System.Windows.Ink.ApplicationGesture.DoubleCircle:
-        //                            break;
-        //                        case System.Windows.Ink.ApplicationGesture.Triangle:
-        //                            break;
-        //                        default:
-        //                            throw new InvalidOperationException();
-        //                    }
-
-        //                    if (gestureResult.ApplicationGesture == System.Windows.Ink.ApplicationGesture.Circle || gestureResult.ApplicationGesture == System.Windows.Ink.ApplicationGesture.DoubleCircle)
-        //                    {
-        //                        foreach (var textBlock in ((Grid)gestureCanvas.Parent).Children)
-        //                        {
-        //                            if (textBlock is TextBlock)
-        //                            {
-        //                                ((TextBlock)textBlock).Text = "〇";
-        //                                gestureCanvas.Strokes.Clear();
-        //                                if (this.scene == "グループアクティビティ")
-        //                                {
-        //                                    this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAosukeMethodListView);
-        //                                }
-        //                                else if (this.scene == "チャレンジタイム！　パート②")
-        //                                {
-        //                                    this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAkamaruMethodListView);
-        //                                }
-        //                            }
-        //                        }
-        //                    }
-        //                    else if (gestureResult.ApplicationGesture == System.Windows.Ink.ApplicationGesture.Triangle)
-        //                    {
-        //                        foreach (var textBlock in ((Grid)gestureCanvas.Parent).Children)
-        //                        {
-        //                            if (textBlock is TextBlock)
-        //                            {
-        //                                ((TextBlock)textBlock).Text = "△";
-        //                                gestureCanvas.Strokes.Clear();
-
-        //                                if (this.EvaluateAosukeMethodListView.IsVisible)
-        //                                {
-        //                                    this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAosukeMethodListView);
-        //                                }
-        //                                else if (this.EvaluateAkamaruMethodListView.IsVisible)
-        //                                {
-        //                                    this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAkamaruMethodListView);
-        //                                }
-        //                            }
-        //                        }
-        //                    }
-
-        //                    RecognizingCanvasName = "";
-        //                }
-        //                else
-        //                {
-        //                    this.CrossMarkRecognize(gestureCanvas);
-        //                    gestureCanvas.Strokes.Clear();
-
-
-        //                }
-        //            };
-        //        }
-        //    }
-        //    catch (Exception e1)
-        //    {
-        //        MessageBox.Show(e1.ToString());
-        //    }
-        //}
-
-        //private void CrossMarkRecognize(InkCanvas inkCanvas)
-        //{
-        //    try
-        //    {
-        //        using (MemoryStream ms = new MemoryStream())
-        //        {
-        //            inkCanvas.Strokes.Save(ms);
-        //            var myInkCollector = new InkCollector();
-        //            var ink = new Ink();
-        //            ink.Load(ms.ToArray());
-
-        //            using (RecognizerContext context = new RecognizerContext())
-        //            {
-        //                if (ink.Strokes.Count > 0)
-        //                {
-        //                    context.Strokes = ink.Strokes;
-        //                    RecognitionStatus status;
-
-        //                    var result = context.Recognize(out status);
-
-        //                    var aaa = result.GetAlternatesFromSelection();
-
-        //                    foreach (var tet in aaa)
-        //                    {
-        //                        if (tet.ToString() == "×" || tet.ToString() == "x" || tet.ToString() == "×")
-        //                        {
-        //                            if (status == RecognitionStatus.NoError)
-        //                            {
-        //                                foreach (var textBlock in ((Grid)inkCanvas.Parent).Children)
-        //                                {
-        //                                    if (textBlock is TextBlock)
-        //                                    {
-        //                                        ((TextBlock)textBlock).Text = "✕";
-
-        //                                        if (this.scene == "グループアクティビティ")
-        //                                        {
-        //                                            this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAosukeMethodListView);
-        //                                        }
-        //                                        else if (this.scene == "チャレンジタイム！　パート②")
-        //                                        {
-        //                                            this.WriteMethodValueData((TextBlock)textBlock, this.EvaluateAkamaruMethodListView);
-        //                                        }
-        //                                    }
-        //                                }
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception e2)
-        //    {
-        //        MessageBox.Show(e2.ToString());
-        //    }
-            
-
-        //    RecognizingCanvasName = "";
-        //}
+    
 
         private void WriteMethodValueData(TextBlock textBlock, ListView listView)
         {
@@ -3819,6 +3659,95 @@ namespace KokoroUpTime
             }
 
                         logManager.SaveLog(objName, Mouse.GetPosition(this).X.ToString(), Mouse.GetPosition(this).Y.ToString(), this.isClickable.ToString());
+        }
+        
+        private void SetData()
+        {
+            string dirPath = $"./Log/{this.initConfig.userName}/Chapter11";
+            LoadManager loadManager = new LoadManager();
+            loadManager.LoadDataChapterFromDB(this.dataChapter11, this.initConfig.dbPath);
+
+            //ToDo 入力方法の記録
+            if (true)
+            {
+                int isfNumber = 1;
+                foreach (KeyValuePair<StrokeCollection, string[]> pair in this.AOSUKE_METHOD_STROKE_VALUES)
+                {
+                    loadManager.ToStroke(pair.Key, $"groupe_activity_input_aosuke's_method_{isfNumber}.isf");
+                    foreach (var evaluation in this.dataChapter11.EvaluationAosukeMethodText.Split(";")[0].Split(",").Select((Value,Index)=> new {Value,Index }))
+                    {
+                        pair.Value[evaluation.Index] = evaluation.Value;
+                    }
+                    isfNumber++;
+                }
+                
+                foreach (var stackPanel in this.EvaluateAkamaruMethodListView.GetChildren<StackPanel>().ToList().Select((Value,Index)=>new { Value,Index}))
+                {
+                    foreach (var textBlock in stackPanel.Value.GetChildren<TextBlock>())
+                    {
+                        if (Regex.IsMatch(textBlock.Name, "AkamaruMethodValueText[1-4]"))
+                        {
+                            int number = int.Parse(textBlock.Name.Substring(textBlock.Name.Length - 1, 1));
+                            PropertyInfo propertyInfo = typeof(DataChapter11).GetProperty($"EvaluationAkamaruMethodText{stackPanel.Index+1}");
+                            textBlock.Text = ((string)propertyInfo.GetValue(this.dataChapter11)).Split(",")[number];
+                        }
+                    }
+                }
+
+                loadManager.ToInkCanvas(this.OutputCanvas1, $"{dirPath}/challenge_time_part_1_input_akamaru_other_solution.isf");
+                for (int i = 0; i < 3; i++)
+                {
+                    loadManager.ToInkCanvas((InkCanvas)this.FindName($"OutputCanvas2_{i+1}"), $"{dirPath}/challenge_time_part_2_input_akamaru_method{i+1}.isf");
+                }
+                for (int i = 0; i < 6; i++)
+                {
+                    loadManager.ToInkCanvas((InkCanvas)this.FindName($"OutputCanvas3_{i + 1}"), $"{dirPath}/groupe_activity_input_aosuke's_method_{i + 1}.isf");
+                    loadManager.ToStroke(this.Step2AosukeMethodInputStrokes[i], $"{dirPath}/challenge_time_input_difference_reason.isf");
+                }
+            }
+            else
+            {
+                int textNumber = 0;
+                foreach (KeyValuePair<string, string[]> pair in this.AOSUKE_METHOD_TEXT_VALUES)
+                {
+                    pair.Key.Replace(pair.Key, this.dataChapter11.AkamaruOtherSolutionUseItemInputText.Split(",")[textNumber]);
+                    foreach (var evaluation in this.dataChapter11.EvaluationAosukeMethodText.Split(";")[0].Split(",").Select((Value, Index) => new { Value, Index }))
+                    {
+                        pair.Value[evaluation.Index] = evaluation.Value;
+                    }
+                    textNumber++;
+                }
+
+                foreach (var stackPanel in this.EvaluateAkamaruMethodListView.GetChildren<StackPanel>().ToList().Select((Value, Index) => new { Value, Index }))
+                {
+                    foreach (var textBlock in stackPanel.Value.GetChildren<TextBlock>())
+                    {
+                        if (Regex.IsMatch(textBlock.Name, "AkamaruMethodValueText[1-4]"))
+                        {
+                            int number = int.Parse(textBlock.Name.Substring(textBlock.Name.Length - 1, 1));
+                            PropertyInfo propertyInfo = typeof(DataChapter11).GetProperty($"EvaluationAkamaruMethodText{stackPanel.Index + 1}");
+                            textBlock.Text = ((string)propertyInfo.GetValue(this.dataChapter11)).Split(",")[number];
+                        }
+                    }
+                }
+
+                loadManager.ToTextBlock(this.OutputText1, this.dataChapter11.AkamaruOtherSolutionUseItemInputText);
+                foreach (var text in this.dataChapter11.Step2AkamaruManyMethodInputText.Split(",").ToList().Select((Value, Index) => new { Value, Index }))
+                {
+                    if (text.Index < this.dataChapter11.Step2AkamaruManyMethodInputText.Split(",").ToList().Count-1)
+                    {
+                        loadManager.ToTextBlock((TextBlock)this.FindName($"OutPuText2_{text.Index + 1}"), text.Value);
+
+                    }
+                }
+                foreach (var text in this.dataChapter11.Step2AosukeManyMethodInputText.Split(",").Select((Value,Index) => new { Value,Index}))
+                {
+                    if (text.Index < this.dataChapter11.Step2AosukeManyMethodInputText.Split(",").ToList().Count - 1)
+                    {
+                        loadManager.ToTextBlock((TextBlock)this.FindName($"OutPuText3_{text.Index + 1}"), text.Value);
+                    }
+                }
+            }
         }
     }
 }

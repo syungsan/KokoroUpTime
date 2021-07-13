@@ -733,7 +733,7 @@ namespace KokoroUpTime
                     //    {
                     //        Chapter1 chapter1 = new Chapter1();
 
-                    //        chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                    //        chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress,false);
 
                     //        this.NavigationService.Navigate(chapter1);
                     //    }
@@ -748,7 +748,7 @@ namespace KokoroUpTime
 
                     //            Chapter1 chapter1 = new Chapter1();
 
-                    //            chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                    //            chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress,true);
 
                     //            this.NavigationService.Navigate(chapter1);
                     //        }
@@ -764,7 +764,7 @@ namespace KokoroUpTime
 
                     //        Chapter1 chapter1 = new Chapter1();
 
-                    //        chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                    //        chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress,true);
 
                     //        this.NavigationService.Navigate(chapter1);
                     //    }
@@ -773,7 +773,7 @@ namespace KokoroUpTime
                     {
                         Chapter1 chapter1 = new Chapter1();
 
-                        chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
+                        chapter1.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress,true);
 
                         this.NavigationService.Navigate(chapter1);
                     }

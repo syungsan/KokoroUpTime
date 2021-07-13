@@ -212,7 +212,7 @@
                             </Grid>
                         </Grid>
                     </Border>
-                    <Border x:Name="BodyImageOfKimiFearBorder" BorderThickness="10,10,10,10" BorderBrush="#FFED7D31" Margin="150,55,150,100" Background="White" CornerRadius="128,128,128,128">
+                    <Border x:Name="BodyImageOfKimiFearBorder" BorderThickness="10,10,10,10" BorderBrush="#FFED7D31" Margin="150,55,150,100" Background="White" CornerRadius="128,128,128,128" d:IsHidden="True">
                         <Grid x:Name="BodyImageOfKimiFearGrid">
                             <Image x:Name="BodyImageOfKimiFearImage" Width="702" Height="839" Source="/Images/body_image_of_kimi_fear.png"/>
                             <Grid x:Name="BodyImageOfKimiBubblesGrid">
@@ -356,10 +356,10 @@
                     </Grid>
                 </Grid>
                 <Grid x:Name="ChallengeTimeGrid">
-                    <Border x:Name="ChallengeTimeTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,50,0,800" RenderTransformOrigin="0.5,0.5" Background="#FFFFC000">
+                    <Border x:Name="ChallengeTimeTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,50,0,800" RenderTransformOrigin="0.5,0.5" Background="#FFFFC000" d:IsHidden="True">
                         <TextBlock x:Name="ChallengeTimeTitleTextBlock" Style="{StaticResource Purple}" Text="TextBlock" TextWrapping="Wrap" FontSize="140" TextAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
-                    <Grid x:Name="ChildrenFeelingGrid">
+                    <Grid x:Name="ChildrenFeelingGrid" d:IsHidden="True">
                         <Image x:Name="ShirojiVerySmallRightUpImage" Source="/Images/shiroji_03.png" RenderTransformOrigin="0.5,0.5" Margin="1338,152,242,560">
                             <Image.RenderTransform>
                                 <TransformGroup>
@@ -388,10 +388,10 @@
                             <Image x:Name="FeelingPrevBackImage" Source="/Images/prev_back_.png"/>
                         </Button>
                     </Grid>
-                    <Border x:Name="Let_sTryTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,131,0,771" Background="#FFED7D31">
+                    <Border x:Name="Let_sTryTitleBorder" BorderThickness="1" BorderBrush="Black" Margin="0,131,0,771" Background="#FFED7D31" d:IsHidden="True">
                         <TextBlock x:Name="Let_sTryTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" Foreground="#FF4472C4" FontWeight="Normal" TextAlignment="Center"/>
                     </Border>
-                    <Grid x:Name="CHotWordKeyButtonGrid">
+                    <Grid x:Name="CHotWordKeyButtonGrid" d:IsHidden="True">
                         <ItemsControl x:Name="CHotWordKeyButtonItemControl" Margin="519,134,519,128" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -405,11 +405,11 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </Grid>
-                    <Grid x:Name="HotWordCommentGrid" Height="216" Margin="41,294,1447,570" Width="432">
+                    <Grid x:Name="HotWordCommentGrid" Height="216" Margin="41,294,1447,570" Width="432" d:IsHidden="True">
                         <Image x:Name="HotWordCommentImage" Source="/Images/small_bubble_center_down.png"/>
                         <TextBlock x:Name="HotWordCommentTextBlock" Text="タップして例を確認するのじゃ！" TextWrapping="Wrap" FontSize="48" Margin="35,13,32,61"/>
                     </Grid>
-                    <Image x:Name="HotWordTitleImage" Height="238" Width="1670" Source="/Images/hot_word_1_title.png" Margin="125,101,125,741"/>
+                    <Image x:Name="HotWordTitleImage" Height="238" Width="1670" Source="/Images/hot_word_1_title.png" Margin="125,101,125,741" d:IsHidden="True"/>
                     <Border x:Name="ChildrenBodyImageTitleBorder" BorderThickness="1" Margin="-10,50,10,740" Background="#FF4472C4" d:IsHidden="True">
                         <TextBlock x:Name="ChildrenBodyImageTitleTextBlock" Text="TextBlock" TextWrapping="Wrap" FontSize="120" VerticalAlignment="Center" TextAlignment="Center"/>
                     </Border>

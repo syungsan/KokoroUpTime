@@ -339,7 +339,7 @@
                     </StackPanel>
                 </Grid>
             </Grid>
-            <Grid x:Name="Step3EvaluateAkamaruMethodGrid" Margin="130,80,130,180" d:IsHidden="True">
+            <Grid x:Name="Step3EvaluateAkamaruMethodGrid" Margin="130,80,130,180">
                     <TextBlock x:Name="EvaluateAkamaruMethodTitleText" Text="他の方法について、一番良い方法を探てみよう！" FontSize="45" FontFamily="Yu Gothic" FontWeight="Bold" d:IsHidden="True"/>
                     <TextBlock x:Name="EvaluateAkamaruMethodText" Text="下のマスをタップして&#10;〇△✕のどれかをつけてみよう！" FontSize="35" Margin="200,50" FontFamily="Yu Gothic" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Top"/>
                     <Grid x:Name="EvaluateAkamaruMethodGrid" Margin="0,100,40,0" VerticalAlignment="Bottom">
@@ -530,7 +530,7 @@
                 <Image x:Name="AkamaruOjamamushiImage" Margin="-160,-200" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="300" Width="300" Source="Images/Ojamamushi_03.png"/>
             </Grid>
             <Border x:Name="LightGreenLeftBorder" Background="#FFC8FAC8" Opacity="0.8" CornerRadius="60" Margin="100,50,700,400" d:IsHidden="True" />
-            <Grid x:Name="MultipleItemsGrid" Margin="130,80,730,430">
+            <Grid x:Name="MultipleItemsGrid" Margin="130,80,730,430" d:IsHidden="True">
                 <Button x:Name="Item03Button" Background="{x:Null}" BorderBrush="{x:Null}" Height="500" Width="350" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Button_Click" Style="{StaticResource ShadowButton}">
                     <Image x:Name="Item03Image" Source="Images/item03_solo.png"/>
                 </Button>
@@ -605,7 +605,7 @@
                     <ItemsControl x:Name="ViewInputAosukeMethodItemsControl" Margin="50,100,30,30"/>
                 </Grid>
             </Border>
-            <Border x:Name="InputButtonBorder" Margin="10,10,10,140" BorderBrush="Black" BorderThickness="5" Background="White" CornerRadius="60">
+            <Border x:Name="InputButtonBorder" Margin="10,10,10,140" BorderBrush="Black" BorderThickness="5" Background="White" CornerRadius="60" d:IsHidden="True">
                 <Grid x:Name="InputButtonBorderGrid">
                     <Button x:Name="InputButton1" Style="{StaticResource BubbleFrame}" Click="Button_Click">
                         <Grid x:Name="InputButton1Grid">
