@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WMPLib;
 using XamlAnimatedGif;
-
+using DataModel;
 
 
 
@@ -46,6 +46,8 @@ namespace KokoroUpTime
 
         // マウスクリックを可能にするかどうかのフラグ
         private bool isClickable = true;
+
+        private int RETUNRN_COUNT = 1;
 
         LogManager logManager;
 
@@ -462,19 +464,19 @@ namespace KokoroUpTime
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
-                   
-                    ////前回のつづきからスタート
-                    //if (this.dataProgress.CurrentScene != null)
-                    //{
-                    //    this.GoTo(this.dataProgress.CurrentScene, "scene");
-                    //    LoadManager loadManager = new LoadManager();
-                    //    loadManager.LoadDataChapterFromDB(this.dataChapter4, this.initConfig.dbPath);
-                    //}
-                    //else
-                    //{
-                    //    this.scenarioCount += 1;
-                    //    this.ScenarioPlay();
-                    //}
+
+                    //前回のつづきからスタート
+                    if (this.dataProgress.CurrentScene != null)
+                    {
+                        this.GoTo(this.dataProgress.CurrentScene, "scene");
+                        LoadManager loadManager = new LoadManager();
+                        loadManager.LoadDataChapterFromDB(this.dataChapter4, this.initConfig.dbPath);
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
 
                     break;
 
@@ -2353,23 +2355,50 @@ namespace KokoroUpTime
 
         private void ScenarioBack()
         {
-            var currentScenarioCount = this.scenarioCount;
-
+            var index = this.scenarioCount;
             int returnCount = 0;
+            bool isSceneChanged = false;
+            string returnedScene = "";
 
-            for (int i = currentScenarioCount; i <= currentScenarioCount; i--)
+            while (index > 0)
             {
-                if (this.scenarios[i][0] == "#")
+                if (this.scenarios[index][0] == "#")
                 {
-                    returnCount += 1;
-
-                    if (returnCount == 2)
+                    if (returnCount >= RETURN_COUNT)
                     {
-                        this.scenarioCount = i;
-                        this.ScenarioPlay();
+                        this.scenarioCount = index;
 
+                        if (isSceneChanged)
+                        {
+                            while (index > 0)
+                            {
+                                if (this.scenarios[index][0] == "scene")
+                                {
+                                    returnedScene = this.scenarios[index][1];
+                                    break;
+                                }
+                                index -= 1;
+                            }
+                        }
+                        this.ScenarioPlay();
                         break;
                     }
+                    returnCount += 1;
+                }
+                else if (this.scenarios[index][0] == "scene")
+                {
+                    isSceneChanged = true;
+                }
+                index -= 1;
+            }
+            if (isSceneChanged)
+            {
+                this.dataProgress.CurrentScene = returnedScene;
+                this.dataProgress.LatestChapter4Scene = returnedScene;
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter4Scene = '{this.dataProgress.LatestChapter4Scene}' WHERE Id = 1;");
                 }
             }
         }

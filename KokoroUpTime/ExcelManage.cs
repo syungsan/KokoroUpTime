@@ -7,6 +7,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using DataModel;
 
 namespace ExcelManage
 {

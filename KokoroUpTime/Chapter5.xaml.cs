@@ -22,6 +22,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WMPLib;
 using XamlAnimatedGif;
+using DataModel;
 
 namespace KokoroUpTime
 {
@@ -2397,6 +2398,8 @@ namespace KokoroUpTime
                 {
                     var index = this.scenarioCount;
                     int returnCount = 0;
+                    bool isSceneChanged = false;
+                    string returnedScene = "";
 
                     while (index > 0)
                     {
@@ -2405,13 +2408,39 @@ namespace KokoroUpTime
                             if (returnCount >= RETURN_COUNT)
                             {
                                 this.scenarioCount = index;
-                                this.ScenarioPlay();
 
+                                if (isSceneChanged)
+                                {
+                                    while (index > 0)
+                                    {
+                                        if (this.scenarios[index][0] == "scene")
+                                        {
+                                            returnedScene = this.scenarios[index][1];
+                                            break;
+                                        }
+                                        index -= 1;
+                                    }
+                                }
+                                this.ScenarioPlay();
                                 break;
                             }
                             returnCount += 1;
                         }
+                        else if (this.scenarios[index][0] == "scene")
+                        {
+                            isSceneChanged = true;
+                        }
                         index -= 1;
+                    }
+                    if (isSceneChanged)
+                    {
+                        this.dataProgress.CurrentScene = returnedScene;
+                        this.dataProgress.LatestChapter5Scene = returnedScene;
+
+                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        {
+                            connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter5Scene = '{this.dataProgress.LatestChapter5Scene}' WHERE Id = 1;");
+                        }
                     }
                 }
 

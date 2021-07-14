@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Ink;
+using DataModel;
 
 namespace KokoroUpTime
 {

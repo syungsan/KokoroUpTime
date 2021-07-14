@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using FileIOUtils;
 using OfficeOpenXml;
+using DataModel;
 
 namespace KokoroUpTime
 {

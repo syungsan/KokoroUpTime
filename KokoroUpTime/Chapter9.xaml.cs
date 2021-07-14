@@ -24,6 +24,7 @@ using WMPLib;
 using XamlAnimatedGif;
 using System.Reflection;
 using System.Linq;
+using DataModel;
 
 namespace KokoroUpTime
 
@@ -43,6 +44,8 @@ namespace KokoroUpTime
         private float THREE_SECOND_RULE_TIME = 3.0f;
 
         LogManager logManager;
+
+        private int RETURN_COUNT = 1;
 
         // ゲームを進行させるシナリオ
         private int scenarioCount = 0;
@@ -2708,23 +2711,50 @@ namespace KokoroUpTime
 
         private void ScenarioBack()
         {
-            var currentScenarioCount = this.scenarioCount;
-
+            var index = this.scenarioCount;
             int returnCount = 0;
+            bool isSceneChanged = false;
+            string returnedScene = "";
 
-            for (int i = currentScenarioCount; i <= currentScenarioCount; i--)
+            while (index > 0)
             {
-                if (this.scenarios[i][0] == "#")
+                if (this.scenarios[index][0] == "#")
                 {
-                    returnCount += 1;
-
-                    if (returnCount == 2)
+                    if (returnCount >= RETURN_COUNT)
                     {
-                        this.scenarioCount = i;
-                        this.ScenarioPlay();
+                        this.scenarioCount = index;
 
+                        if (isSceneChanged)
+                        {
+                            while (index > 0)
+                            {
+                                if (this.scenarios[index][0] == "scene")
+                                {
+                                    returnedScene = this.scenarios[index][1];
+                                    break;
+                                }
+                                index -= 1;
+                            }
+                        }
+                        this.ScenarioPlay();
                         break;
                     }
+                    returnCount += 1;
+                }
+                else if (this.scenarios[index][0] == "scene")
+                {
+                    isSceneChanged = true;
+                }
+                index -= 1;
+            }
+            if (isSceneChanged)
+            {
+                this.dataProgress.CurrentScene = returnedScene;
+                this.dataProgress.LatestChapter9Scene = returnedScene;
+
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter9Scene = '{this.dataProgress.LatestChapter9Scene}' WHERE Id = 1;");
                 }
             }
         }

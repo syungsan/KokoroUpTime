@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace KokoroUpTime
+namespace DataModel
 {
     // 各種初期化変数
     public class InitConfig
@@ -477,15 +477,45 @@ namespace KokoroUpTime
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string SelectedSceneText { get; set; }="";
+        public string SelectedSceneText { get; set; } = "";
 
-        public string SelectedItem1 { get; set; }="";
-        public string SelectedItem2 { get; set; }="";
+        public string SelectedItem1 { get; set; } = "";
+        public string SelectedItem2 { get; set; } = "";
         public string SelectedItem3 { get; set; } = "";
 
-        public string ItemMethodInputText1 { get; set; }="";
-        public string ItemMethodInputText2 { get; set; }="";
-        public string ItemMethodInputText3 { get; set; }="";
+        public string ItemMethodInputText1 { get; set; } = "";
+        public string ItemMethodInputText2 { get; set; } = "";
+        public string ItemMethodInputText3 { get; set; } = "";
+
+        public int Item01NameIsCorrect {get;set;} = 0;
+        public int Item01REviewIsCorrect { get; set; } = 0;
+        public int Item02NameIsCorrect { get; set; } = 0;
+        public int Item02REviewIsCorrect { get; set; } = 0; 
+        public int Item03NameIsCorrect { get; set; } = 0;
+        public int Item03REviewIsCorrect { get; set; } = 0;
+        public int Item04NameIsCorrect { get; set; } = 0;
+        public int Item04REviewIsCorrect { get; set; } = 0;
+        public int Item05NameIsCorrect { get; set; } = 0;
+        public int Item05REviewIsCorrect { get; set; } = 0;
+        public int Item06NameIsCorrect { get; set; } = 0;
+        public int Item06REviewIsCorrect { get; set; } = 0;
+        public int Item07NameIsCorrect { get; set; } = 0;
+        public int Item07REviewIsCorrect { get; set; } = 0;
+        public int Item08NameIsCorrect { get; set; } = 0;
+        public int Item08REviewIsCorrect { get; set; } = 0;
+        public int Item09NameIsCorrect { get; set; } = 0;
+        public int Item09REviewIsCorrect { get; set; } = 0;
+        public int Item10NameIsCorrect { get; set; } = 0;
+        public int Item10REviewIsCorrect { get; set; } = 0;
+        public int Item11NameIsCorrect { get; set; } = 0;
+        public int Item11REviewIsCorrect { get; set; } = 0;
+        public int Item12NameIsCorrect { get; set; } = 0;
+        public int Item12REviewIsCorrect { get; set; } = 0;
+
+
+
+
+
 
         public string CreatedAt { get; set; }
     }

@@ -20,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WMPLib;
 using XamlAnimatedGif;
+using DataModel;
 
 namespace KokoroUpTime
 {
@@ -385,34 +386,34 @@ namespace KokoroUpTime
 
             // 現在時刻を取得
             this.dataChapter1.CreatedAt = DateTime.Now.ToString();
-            //if (isCreateNewTable)
-            //{
-            // データベースのテーブル作成と現在時刻の書き込みを同時に行う
-            using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+            if (isCreateNewTable)
             {
-                // 毎回のアクセス日付を記録
+                //データベースのテーブル作成と現在時刻の書き込みを同時に行う
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                  //  毎回のアクセス日付を記録
                 connection.Insert(this.dataChapter1);
+                }
             }
-            //}
-            //else
-            //{
-            //    string lastCreatedAt=""; 
+            else
+            {
+                string lastCreatedAt = "";
 
-            //    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-            //    {
-            //        var chapter1  = connection.Query<DataChapter1>($"SELECT * FROM DataChapter1 ORDER BY Id DESC LIMIT 1;");
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    var chapter1 = connection.Query<DataChapter1>($"SELECT * FROM DataChapter1 ORDER BY Id DESC LIMIT 1;");
 
-            //        foreach (var row in chapter1)
-            //        {
-            //            lastCreatedAt = row.CreatedAt;
-            //        }
-            //    }
+                    foreach (var row in chapter1)
+                    {
+                        lastCreatedAt = row.CreatedAt;
+                    }
+                }
 
-            //    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-            //    {
-            //        connection.Execute($@"UPDATE DataChapter1 SET CreatedAt = '{this.dataChapter1.CreatedAt}'WHERE CreatedAt = '{lastCreatedAt}';");
-            //    }
-            //}
+                using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                {
+                    connection.Execute($@"UPDATE DataChapter1 SET CreatedAt = '{this.dataChapter1.CreatedAt}'WHERE CreatedAt = '{lastCreatedAt}';");
+                }
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -448,21 +449,21 @@ namespace KokoroUpTime
 
                     logManager.StartLog(this.initConfig, this.dataProgress,this.MainGrid);
 
-                    ////前回のつづきからスタート
-                    //if (this.dataProgress.CurrentScene != null)
-                    //{
-                    //    LoadManager loadManager = new LoadManager();
-                    //    loadManager.LoadDataChapterFromDB(this.dataChapter1, this.initConfig.dbPath);
-                    //    loadManager.ToListBox(this.ChallengeGoodFeelingListBox, this.dataChapter1.MyKindOfGoodFeelings.Split(",").ToList());
-                    //    loadManager.ToListBox(this.ChallengeBadFeelingListBox, this.dataChapter1.MyKindOfBadFeelings.Split(",").ToList());
+                    //前回のつづきからスタート
+                    if (this.dataProgress.CurrentScene != null)
+                    {
+                        LoadManager loadManager = new LoadManager();
+                        loadManager.LoadDataChapterFromDB(this.dataChapter1, this.initConfig.dbPath);
+                        loadManager.ToListBox(this.ChallengeGoodFeelingListBox, this.dataChapter1.MyKindOfGoodFeelings.Split(",").ToList());
+                        loadManager.ToListBox(this.ChallengeBadFeelingListBox, this.dataChapter1.MyKindOfBadFeelings.Split(",").ToList());
 
-                    //    this.GoTo(this.dataProgress.CurrentScene,"scene");
-                    //}
-                    //else
-                    //{
-                    this.scenarioCount += 1;
-                    this.ScenarioPlay();
-                    //}
+                        this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
 
 
                     break;
@@ -1895,8 +1896,8 @@ namespace KokoroUpTime
                 {
                     var index = this.scenarioCount;
                     int returnCount = 0;
-                    //bool isSceneChanged = false;
-                    //string returnedScene = "";
+                    bool isSceneChanged = false;
+                    string returnedScene = "";
 
                     while (index > 0)
                     {
@@ -1906,39 +1907,39 @@ namespace KokoroUpTime
                             {
                                 this.scenarioCount = index;
 
-                                //if (isSceneChanged)
-                                //{
-                                //    while (index>0)
-                                //    {
-                                //        if (this.scenarios[index][0] == "scene")
-                                //        {
-                                //            returnedScene = this.scenarios[index][1];
-                                //            break;
-                                //        }
-                                //        index -= 1;
-                                //    }
-                                //}
+                                if (isSceneChanged)
+                                {
+                                    while (index > 0)
+                                    {
+                                        if (this.scenarios[index][0] == "scene")
+                                        {
+                                            returnedScene = this.scenarios[index][1];
+                                            break;
+                                        }
+                                        index -= 1;
+                                    }
+                                }
                                 this.ScenarioPlay();
                                 break;
                             }
                             returnCount += 1;
                         }
-                        //else if (this.scenarios[index][0] == "scene")
-                        //{
-                        //    isSceneChanged = true;
-                        //}
+                        else if (this.scenarios[index][0] == "scene")
+                        {
+                            isSceneChanged = true;
+                        }
                         index -= 1;
                     }
-                    //if (isSceneChanged)
-                    //{
-                    //    this.dataProgress.CurrentScene = returnedScene;
-                    //    this.dataProgress.LatestChapter1Scene = returnedScene;
+                    if (isSceneChanged)
+                    {
+                        this.dataProgress.CurrentScene = returnedScene;
+                        this.dataProgress.LatestChapter1Scene = returnedScene;
 
-                    //    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
-                    //    {
-                    //        connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter1Scene = '{this.dataProgress.LatestChapter1Scene}' WHERE Id = 1;");
-                    //    }
-                    //}
+                        using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                        {
+                            connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter1Scene = '{this.dataProgress.LatestChapter1Scene}' WHERE Id = 1;");
+                        }
+                    }
                 }
 
                 if (button.Name == "NextPageButton")

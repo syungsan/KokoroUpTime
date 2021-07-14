@@ -21,6 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WMPLib;
 using XamlAnimatedGif;
+using DataModel;
 
 namespace KokoroUpTime
 {
@@ -42,6 +43,8 @@ namespace KokoroUpTime
         private List<List<string>> scenarios = null;
 
         private float THREE_SECOND_RULE_TIME = 3.0f;
+
+        private int RETURN_COUNT = 1;
 
         LogManager logManager;
 
@@ -489,30 +492,30 @@ namespace KokoroUpTime
 
                     logManager.StartLog(this.initConfig,this.dataProgress,this.MainGrid);
 
-                    ////前回のつづきからスタート
-                    //if (this.dataProgress.CurrentScene != null)
-                    //{
-                    //
-                    //    LoadManager loadManager = new LoadManager();
-                    //    loadManager.LoadDataChapterFromDB(this.dataChapter2, this.initConfig.dbPath);
-                    //    loadManager.ToListBox(this.GoodEventSelectListBox1,this.dataChapter2.MySelectGoodEvents);
-                    //    loadManager.ToListBox(this.GoodEventSelectListBox2,this.dataChapter2.MySelectGoodEvents);
-                    //    if (this.dataChapter2.MyALittlleExcitingEvents =="")
-                    //    {
-                    //        string dirPath = $"./Log/{this.initConfig.userName}/Chapter2";
-                    //        loadManager.ToInkCanvas(this.ViewMySmallExcitedCanvas, $"{dirPath}/groupe_activity_exciting_event_stroke.isf");
-                    //    }
-                    //    else
-                    //    {
-                    //        loadManager.ToTextBlock(this.ViewMySmallExcitedText, this.dataChapter2.MyALittlleExcitingEvents);
-                    //    }
-                    //    this.GoTo(this.dataProgress.CurrentScene, "scene");
-                    //}
-                    //else
-                    //{
-                    //    this.scenarioCount += 1;
-                    //    this.ScenarioPlay();
-                    //}
+                    //前回のつづきからスタート
+                    if (this.dataProgress.CurrentScene != null)
+                    {
+
+                        LoadManager loadManager = new LoadManager();
+                        loadManager.LoadDataChapterFromDB(this.dataChapter2, this.initConfig.dbPath);
+                        loadManager.ToListBox(this.GoodEventSelectListBox1, this.dataChapter2.MySelectGoodEvents);
+                        loadManager.ToListBox(this.GoodEventSelectListBox2, this.dataChapter2.MySelectGoodEvents);
+                        if (this.dataOption.InputMethod == 0)
+                        {
+                            string dirPath = $"./Log/{this.initConfig.userName}/Chapter2";
+                            loadManager.ToInkCanvas(this.ViewMySmallExcitedCanvas, $"{dirPath}/groupe_activity_exciting_event_stroke.isf");
+                        }
+                        else
+                        {
+                            loadManager.ToTextBlock(this.ViewMySmallExcitedText, this.dataChapter2.MyALittlleExcitingEvents);
+                        }
+                        this.GoTo(this.dataProgress.CurrentScene, "scene");
+                    }
+                    else
+                    {
+                        this.scenarioCount += 1;
+                        this.ScenarioPlay();
+                    }
 
                     this.scenarioCount += 1;
                     this.ScenarioPlay();
@@ -2312,25 +2315,52 @@ namespace KokoroUpTime
         }
         private void ScenarioBack()
         {
-            var currentScenarioCount = this.scenarioCount;
+                var index = this.scenarioCount;
+                int returnCount = 0;
+                bool isSceneChanged = false;
+                string returnedScene = "";
 
-            int returnCount = 0;
-
-            for (int i = currentScenarioCount; i <= currentScenarioCount; i--)
-            {
-                if (this.scenarios[i][0] == "#")
+                while (index > 0)
                 {
-                    returnCount += 1;
-
-                    if (returnCount == 2)
+                    if (this.scenarios[index][0] == "#")
                     {
-                        this.scenarioCount = i;
-                        this.ScenarioPlay();
+                        if (returnCount >= RETURN_COUNT)
+                        {
+                            this.scenarioCount = index;
 
-                        break;
+                            if (isSceneChanged)
+                            {
+                                while (index > 0)
+                                {
+                                    if (this.scenarios[index][0] == "scene")
+                                    {
+                                        returnedScene = this.scenarios[index][1];
+                                        break;
+                                    }
+                                    index -= 1;
+                                }
+                            }
+                            this.ScenarioPlay();
+                            break;
+                        }
+                        returnCount += 1;
+                    }
+                    else if (this.scenarios[index][0] == "scene")
+                    {
+                        isSceneChanged = true;
+                    }
+                    index -= 1;
+                }
+                if (isSceneChanged)
+                {
+                    this.dataProgress.CurrentScene = returnedScene;
+                    this.dataProgress.LatestChapter2Scene = returnedScene;
+
+                    using (var connection = new SQLiteConnection(this.initConfig.dbPath))
+                    {
+                        connection.Execute($@"UPDATE DataProgress SET CurrentScene = '{this.dataProgress.CurrentScene}', LatestChapter2Scene = '{this.dataProgress.LatestChapter2Scene}' WHERE Id = 1;");
                     }
                 }
-            }
         }
 
         private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
