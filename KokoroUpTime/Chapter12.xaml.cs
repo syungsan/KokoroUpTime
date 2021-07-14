@@ -2103,7 +2103,7 @@ namespace KokoroUpTime
                             {
                                 connection.Execute($@"UPDATE DataProgress SET HasCompletedChapter12 = '{Convert.ToInt32(this.dataProgress.HasCompletedChapter12)}' WHERE Id = 1;");
                             }
-#if DEBUG
+//#if DEBUG
                             this.StopBGM();
 
                             EndingPage endingPage = new EndingPage();
@@ -2111,7 +2111,7 @@ namespace KokoroUpTime
                             endingPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                             this.NavigationService.Navigate(endingPage);
-#endif
+//#endif
 
                         }
 

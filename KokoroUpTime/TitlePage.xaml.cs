@@ -708,13 +708,13 @@ namespace KokoroUpTime
                     break;
 
                 case "AnotherButton":
-#if DEBUG
+// #if DEBUG
                     EndingPage endingPage = new EndingPage();
 
                     endingPage.SetNextPage(this.initConfig, this.dataOption, this.dataItem, this.dataProgress);
 
                     this.NavigationService.Navigate(endingPage);
-#endif
+// #endif
                     break;
             }
 
