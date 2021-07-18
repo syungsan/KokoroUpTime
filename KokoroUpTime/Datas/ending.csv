@@ -1,43 +1,60 @@
 time,110
 bgm,set,bokura_no_tabidachi.mp3,100
 bgm,play
-illust,shiroji_01.png
-illust,shiroji_02.png
-illust,shiroji_03.png
-illust,shiroji_04.png
-illust,relax_female.png
-illust,relax_male.png
+illust,background_01.png,50,0
+illust,shiroji_01.png,50,0
+illust,shiroji_02.png,50,0
+illust,shiroji_03.png,50,0
+illust,shiroji_04.png,50,0
+illust,background_07.png,50,0
+illust,kimi_stand_01.png,250,0
+illust,background_08.png,50,0
+illust,aosuke_stand_01.png,250,0
+illust,background_13.png,50,0
+illust,akamaru_stand_01.png,250,0
+illust,heart_red_full.png,200,0
 margin,100
-text,スタッフ,120,#FF0000,0,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,プログラマー,80,#0000FF,6,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,安達幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,安達幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,安達幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,作成スタッフ,120,#FF0000,0,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,同志社大学研究開発推進機構,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,肥田 乃梨子,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,京都府精神保健福祉総合センター,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,小國 真由子,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,京都府精神保健福祉総合センター,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,村澤 孝子,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,同志社大学心理学部,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,石川 信一,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,Ｕｐ２-Ｄ２プログラム作成メンバー,70,#FF0000,8,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,お茶の水女子大学人間発達教育科学研究所,60,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,国立精神・神経医療研究センター,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,神尾 陽子,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,お茶の水女子大学基幹研究所,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,国立精神・神経医療研究センター,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,斎藤 彩,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,国立精神・神経医療研究センター,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,岡 琢哉,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,京都大学大学院医学研究科,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,渡辺 範雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,国立特別支援教育総合研究所,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,笹森 洋樹,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,同志社大学心理学部,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,石川 信一,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,イラスト,80,#FF0000,8,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,日野 行望,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,プログラマー,80,#FF0000,8,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,島根大学総合理工学研究科,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
 text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,プログラマー,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,システム・コーディング,80,#00FF00,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,多々納 俊治,80,#00FF00,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,BGM,80,#00FF00,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,しゅんじ～こと 多々納 俊治,80,#00FF00,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,ホルン奏者,80,#0000FF,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,安達 幹雄,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
-text,Produced by Adachi Laboratory,80,#FF0000,7,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,システム＆ＢＧＭ,80,#FF0000,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,しゅんじ～こと 多々納 俊治,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,テストプレイ,80,#FF0000,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,島根大学ヒューマンインタフェース研究室の皆さん,50,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,開発責任教官,80,#FF0000,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,島根大学総合理工学部,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,縄手 雅彦,80,#0000FF,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,エンディング曲,80,#00FF00,4,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,「ぼくらの旅立ち」,80,#00FF00,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,作曲・アレンジ,80,#00FF00,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,しゅんじ～,80,#00FF00,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,ホルン奏者,80,#00FF00,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,安達 幹雄,80,#00FF00,1,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
+text,「こころあっぷタイム」作成委員会,70,#FFA500,8,HGRPP1.TTC#HG創英角ﾎﾟｯﾌﾟ体
 run

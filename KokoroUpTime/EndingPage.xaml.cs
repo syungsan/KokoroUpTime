@@ -32,6 +32,8 @@ namespace KokoroUpTime
         private double playTime = 0.0;
         private double margin = 0.0;
 
+        private List<List<double>> illustMargins;
+
         private List<string> endingIllusts;
 
         private double changeIllustTimeSpan = 0.0;
@@ -52,6 +54,8 @@ namespace KokoroUpTime
             this.mediaPlayer = new WindowsMediaPlayer();
 
             this.endingIllusts = new List<string>();
+
+            this.illustMargins = new List<List<double>>();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -178,6 +182,9 @@ namespace KokoroUpTime
 
                     this.endingIllusts.Add(this.staffs[this.contentsCount][1]);
 
+                    List<double> margins = new List<double> { double.Parse(this.staffs[this.contentsCount][2]), double.Parse(this.staffs[this.contentsCount][3])};
+                    this.illustMargins.Add(margins);
+
                     this.contentsCount += 1;
                     this.MakeContents();
 
@@ -239,7 +246,7 @@ namespace KokoroUpTime
 
                     this.Scroll();
 
-                    this.changeIllustTimeSpan = this.playTime / (this.endingIllusts.Count - 1) - 2.0;
+                    this.changeIllustTimeSpan = this.playTime / this.endingIllusts.Count;
 
                     this.ChangeImage();
 
@@ -290,6 +297,8 @@ namespace KokoroUpTime
 
             this.EndingImage.Source = new BitmapImage(new Uri($"./Images/{this.endingIllusts[this.illustNumber]}", UriKind.Relative));
 
+            this.EndingImage.Margin = new Thickness(this.illustMargins[this.illustNumber][0], this.illustMargins[this.illustNumber][1], 0, 0);
+
             Storyboard sb = this.FindResource("image_fade_in_out") as Storyboard;
 
             foreach (Timeline timeline in sb.Children)
@@ -305,15 +314,26 @@ namespace KokoroUpTime
                         //Do something with your keyframe, for example change its KeyTime to control  
                         //speed of animation
 
-                        if (index == 2)
+                        if (index == 2 && this.illustNumber < this.endingIllusts.Count - 1)
                         {
                             keyframe.KeyTime =TimeSpan.FromSeconds(this.changeIllustTimeSpan - 1.0);
                         }
+                        else if (index == 2 && this.illustNumber >= this.endingIllusts.Count - 1)
+                        {
+                            // ending_fadeoutが8秒かかるのでその間は表示
+                            keyframe.KeyTime = TimeSpan.FromSeconds(this.changeIllustTimeSpan + 8.0);
+                        }
 
-                        if (index == 3)
+                        if (index == 3 && this.illustNumber < this.endingIllusts.Count - 1)
                         {
                             keyframe.KeyTime = TimeSpan.FromSeconds(this.changeIllustTimeSpan);
                         }
+                        else if (index == 3 && this.illustNumber >= this.endingIllusts.Count - 1)
+                        {
+                            // ending_fadeoutが8秒かかるのでその間は表示
+                            keyframe.KeyTime = TimeSpan.FromSeconds(this.changeIllustTimeSpan + 8.0);
+                        }
+
                         index += 1;
                     }
                 }

@@ -51,7 +51,7 @@
                         <GradientStop Color="#FFFFE687" Offset="1"/>
                     </LinearGradientBrush>
                 </Grid.Background>
-                <Image x:Name="EndingImage" HorizontalAlignment="Left" Height="1065" Margin="10,10,0,0" VerticalAlignment="Top" Width="950" Source="/Images/shiroji_01.png"/>
+                <Image x:Name="EndingImage" HorizontalAlignment="Left" Height="1080" Margin="0,0,0,0" Width="967" Source="/background_01.png" Stretch="Uniform" StretchDirection="Both"/>
                 <Grid x:Name="StaffRollGrid" Margin="640,0,0,0"/>
                 <Button x:Name="SkipButton" HorizontalAlignment="Left" Margin="10,994,0,0" VerticalAlignment="Top" Height="76" Width="160" Style="{StaticResource ShadowButton}" Click="Button_Click">
                     <Image x:Name="SkipImage" Source="/Images/skip.png" />

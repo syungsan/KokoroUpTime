@@ -226,6 +226,8 @@ click,page,with_back_msg
 #
 scene,修了証書授与
 reset
+bgm,stop
+se,play,nc211089.wav
 image,bg_image,background_mokume2.png
 grid,award_grid,fade_in_slow
 click,page

@@ -21,6 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="background_01.png" />
     <None Remove="badMindSelectFrame.png" />
     <None Remove="bad_words_grid.png" />
     <None Remove="big_heart.png" />
@@ -142,6 +143,7 @@
     <None Remove="Images\green_button_plate.png" />
     <None Remove="Images\group_activity_text.png" />
     <None Remove="Images\group_activity_title01.png" />
+    <None Remove="Images\heart_red_full.png" />
     <None Remove="Images\hot_word_1_title.png" />
     <None Remove="Images\hot_word_2_title.png" />
     <None Remove="Images\hot_word_3_title.png" />
@@ -435,6 +437,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="background_01.png" />
     <Resource Include="Fonts\azuki.ttf" />
     <Resource Include="Fonts\HGRPP1.TTC" />
     <Resource Include="Fonts\JiyunoTsubasa.ttf" />
@@ -548,6 +551,7 @@
     <Resource Include="Images\green_button_plate.png" />
     <Resource Include="Images\group_activity_text.png" />
     <Resource Include="Images\group_activity_title01.png" />
+    <Resource Include="Images\heart_red_full.png" />
     <Resource Include="Images\hot_word_1_title.png" />
     <Resource Include="Images\hot_word_2_title.png" />
     <Resource Include="Images\hot_word_3_title.png" />
